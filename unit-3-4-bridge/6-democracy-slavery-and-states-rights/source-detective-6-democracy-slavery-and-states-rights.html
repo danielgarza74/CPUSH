@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Who Wants the Final Say? · Source Detective 6</title><style>
+:root{--bg:#F1EDF1;--card:#FFFFFF;--cream:#F2EBD1;--ink:#362337;--purple:#5A3B5C;--gold:#6E5A12;
+--purple-soft:#E7DDE8;--gold-soft:#EFE4B5;--line:#CDBFCE;--ok:#2E6B3E}
+@media (prefers-color-scheme:dark){:root{--bg:#1E1520;--card:#2A1E2C;--cream:#33293A;--ink:#F3EAF4;--purple:#D8B8DA;--gold:#E6CF7A;
+--purple-soft:#43304A;--gold-soft:#4A4120;--line:#5A4660;--ok:#8FD3A0}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.5 "Segoe UI",system-ui,-apple-system,Arial,sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px 40px}
+header.hero{background:#5A3B5C;color:#fff;padding:28px 16px 22px;border-bottom:6px solid #C9A92B}
+header.hero .in{max-width:860px;margin:0 auto}
+.eyebrow{letter-spacing:.14em;font-size:13px;font-weight:700;color:#F2EBD1;text-transform:uppercase}
+h1{margin:6px 0 4px;font-size:32px;line-height:1.15;color:#fff}
+.sub{font-size:18px;color:#F2EBD1;margin:0}
+.bridge{background:var(--cream);border-left:6px solid var(--gold);padding:12px 16px;margin:18px 0;border-radius:6px;color:var(--ink)}
+.bridge b{color:var(--purple)}
+.how{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:16px 0}
+.how ol{margin:6px 0 0 20px;padding:0}
+.who{display:grid;grid-template-columns:1fr 1fr 110px 140px;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;margin:16px 0}
+.who label{font-size:13px;font-weight:700;letter-spacing:.06em;color:var(--purple)}
+.who input{width:100%;margin-top:4px;padding:9px 10px;font-size:16px;border:2px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
+.who input.bad{border-color:#B3261E}
+.meter{position:sticky;top:0;z-index:5;background:var(--card);border:2px solid var(--purple);border-radius:12px;padding:10px 14px;margin:12px 0;box-shadow:0 3px 10px rgba(54,35,55,.18)}
+.meter .row{display:flex;justify-content:space-between;font-weight:700;font-size:15px}
+.meter .nat{color:var(--purple)}.meter .sta{color:var(--gold)}
+.rope{height:22px;border-radius:11px;background:var(--line);margin:6px 0;display:flex;overflow:hidden;position:relative}
+.rope i{display:block;height:100%;transition:width .35s}
+.rope .n{background:var(--purple)}.rope .s{background:var(--gold);margin-left:auto}
+.rope .mid{position:absolute;left:50%;top:-3px;bottom:-3px;width:3px;background:var(--ink);opacity:.5}
+.meter .left{font-size:14px;text-align:center}
+h2.part{color:var(--purple);border-bottom:3px solid var(--gold);padding-bottom:4px;margin:30px 0 12px;font-size:23px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:16px 0;box-shadow:0 1px 4px rgba(54,35,55,.08)}
+.card.done{border-left:8px solid var(--purple)}
+.card.done.isS{border-left-color:var(--gold)}
+.chip{display:inline-block;background:var(--purple);color:#fff;font-weight:700;font-size:13px;letter-spacing:.05em;border-radius:20px;padding:3px 12px}
+.card h3{margin:8px 0 4px;font-size:21px;color:var(--purple)}
+.card p{margin:6px 0}
+.wh{font-size:14px;background:var(--cream);padding:6px 10px;border-radius:6px}
+.ask{font-weight:700;margin-top:12px}
+.pick{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:8px 0}
+.opt{font:inherit;font-weight:800;font-size:18px;padding:12px 8px;border-radius:10px;border:3px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer;text-align:center}
+.opt small{display:block;font-weight:500;font-size:13px;margin-top:2px}
+.opt.nat:hover,.opt.nat[aria-pressed=true]{border-color:#5A3B5C;background:#5A3B5C;color:#fff}
+.opt.sta:hover,.opt.sta[aria-pressed=true]{border-color:#6E5A12;background:#6E5A12;color:#fff}
+.opt:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible{outline:3px solid #C9A92B;outline-offset:2px}
+textarea{width:100%;font:inherit;font-size:16px;padding:9px 10px;border:2px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);resize:vertical}
+textarea.bad{border-color:#B3261E}
+.why{display:block;margin-top:8px}
+.why span.p{display:block;font-size:14px;font-weight:600;color:var(--purple);margin-bottom:3px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin:14px 0}
+.box label.t{display:block;font-weight:800;color:var(--purple);margin-bottom:2px}
+.box .hint{font-size:14px;margin:0 0 4px}
+.tally{background:var(--gold-soft);border-radius:8px;padding:8px 12px;font-weight:700;margin:8px 0}
+.checks label{display:block;margin:4px 0}
+.checks input{width:20px;height:20px;vertical-align:middle;margin-right:8px}
+.bar{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 8px}
+.btn{font:inherit;font-weight:700;padding:11px 18px;border-radius:10px;border:2px solid var(--purple);background:var(--card);color:var(--purple);cursor:pointer}
+.btn.primary{background:var(--purple);color:#fff}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.msg{min-height:24px;font-weight:600}.msg.err{color:#B3261E}.msg.ok{color:var(--ok)}
+.status{font-size:14px}
+footer{margin-top:34px;padding:12px 0;border-top:2px solid var(--gold);font-size:12px;letter-spacing:.06em;color:var(--purple);display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
+.key .ans{background:var(--cream);border-left:6px solid var(--gold);padding:8px 12px;border-radius:6px;margin-top:8px}
+.key .badge{display:inline-block;font-weight:800;border-radius:6px;padding:2px 10px;color:#fff;margin-right:6px}
+.key .badge.N{background:#5A3B5C}.key .badge.S{background:#6E5A12}
+.keyflag{background:#B3261E;color:#fff;font-weight:800;padding:6px 14px;text-align:center;letter-spacing:.08em}
+@media(max-width:620px){.who{grid-template-columns:1fr 1fr}h1{font-size:26px}.pick{grid-template-columns:1fr}}
+@media print{.meter,.bar,.msg{display:none}.card{break-inside:avoid}}
+
+.card.done{border-left:1px solid var(--line);border-inline-start:8px solid var(--purple)}
+.card.done.isS{border-inline-start-color:var(--gold)}
+.card.done.isV{border-inline-start-color:#2E6B3E}
+.bridge{border-left:0;border-inline-start:6px solid var(--gold)}
+.meter{direction:ltr}.rope .n{background:var(--purple);border-radius:0 11px 11px 0}
+.pick3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:8px 0}
+.opt.voi:hover,.opt.voi[aria-pressed=true]{border-color:#2E6B3E;background:#2E6B3E;color:#fff}
+.meta{font-size:14px;margin:4px 0 8px}.meta b{color:var(--purple)}
+blockquote.src{margin:8px 0;padding:10px 16px;background:var(--cream);border-inline-start:5px solid var(--gold);border-left-width:5px;font-size:18px;line-height:1.55;font-style:italic;color:var(--ink)}
+.orig{font-size:14px;color:var(--ink);opacity:.85;margin:4px 0 8px;direction:ltr;text-align:left}
+html[lang=en] .orig{display:none}
+.cite{font-size:13px;opacity:.85;direction:ltr;text-align:left}
+.hintp{font-size:14px;font-weight:700;color:var(--gold);margin:6px 0}
+select{width:100%;font:inherit;font-size:16px;padding:10px;border:2px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);margin:6px 0}
+select.bad{border-color:#B3261E}
+.lang-switch{display:inline-flex;gap:2px;padding:3px;border-radius:10px;background:var(--card);border:2px solid #C9A92B;margin:0 0 10px}
+.lang-switch button{border:0;background:transparent;color:var(--ink);font:700 14px/1 inherit;font-family:inherit;padding:8px 12px;border-radius:7px;cursor:pointer}
+.lang-switch button[aria-pressed=true]{background:var(--purple);color:#fff}
+:root[lang=ar] body{font-family:"Noto Sans Arabic","Segoe UI",Tahoma,system-ui,sans-serif;line-height:1.85}
+:root[lang=ar] *{letter-spacing:0!important}
+:root[lang=ar] h1,:root[lang=ar] h2,:root[lang=ar] h3{line-height:1.45}
+textarea,.who input{unicode-bidi:plaintext;text-align:start}
+@media(max-width:620px){.pick3{grid-template-columns:1fr}}
+@media print{.lang-switch{display:none}}
+</style></head><body>
+<header class="hero"><div class="in">
+ <div class="eyebrow" data-t="eyebrow">SOURCE DETECTIVE 6</div>
+ <h1 data-t="title">Who Wants the Final Say?</h1>
+ <p class="sub" data-t="sub">Democracy, Slavery, and States’ Rights · Crack the Case</p>
+</div></header><div class="wrap">
+<div class="lang-switch" role="group" aria-label="Language / Idioma / اللغة"><button type="button" data-lang="en" lang="en" aria-pressed="true">English</button><button type="button" data-lang="es" lang="es" aria-pressed="false">Español</button><button type="button" data-lang="ar" lang="ar" aria-pressed="false">العربية</button></div>
+<div class="bridge"><b data-t="bq">BRIDGE QUESTION:</b> <span data-t="bqtext">Who has the final say: the national government or the states?</span><br>
+<span data-t="job">Your job: crack 5 case files. Each one is a real document from 1820 to 1836.</span></div>
+<div class="how"><b data-t="howt">How to play</b>
+<ol><li data-t="how1">Open a case file. Read the document and the hint.</li>
+<li data-t="how2">Tap your guess: does the author want <b>NATIONAL</b> power, <b>STATE</b> power, or <b>A VOICE</b>?</li>
+<li data-t="how3">Copy the clue words that prove it. Then finish: The author wants…</li>
+<li data-t="how4">Close the case: pick the best source for the bridge question, explain, and answer the Counter-Argument.</li></ol>
+<div class="status" data-t="howst">Use <b>Save Progress</b> any time. Use <b>Load Progress</b> to continue later. The <b>Finished</b> button unlocks when everything is done.</div>
+<div class="status" data-t="anylang">You may answer in English, Spanish, or Arabic.</div></div>
+<div class="who">
+ <div><label for="f_first" data-t="lbl_first">FIRST NAME *</label><input id="f_first" data-meta="first" autocomplete="given-name"></div>
+ <div><label for="f_last" data-t="lbl_last">LAST NAME *</label><input id="f_last" data-meta="last" autocomplete="family-name"></div>
+ <div><label for="f_period" data-t="lbl_period">PERIOD *</label><input id="f_period" data-meta="period" inputmode="numeric" maxlength="12"></div>
+ <div><label for="f_date" data-t="lbl_date">DATE</label><input id="f_date" readonly data-tp="ph_date" placeholder="auto-fills"></div>
+</div>
+<div class="meter" aria-live="polite"><div class="row"><span id="nLeft" class="left" style="width:100%;text-align:center">0 of 5 case files cracked</span></div>
+ <div class="rope"><i class="n" id="rN" style="width:0%"></i></div></div>
+<h2 class="part" data-t="p1">Part 1 · The 5 Case Files</h2>
+
+<section class="card" id="c1" data-i="1">
+ <span class="chip">1820</span>
+ <h3><span data-t="case">Case file</span> 1 <span data-t="of5">of 5</span></h3>
+ <p class="meta"><b data-t="lwho">Who:</b> <span data-t="s1.who">The U.S. Congress</span> · <b data-t="lfrom">From:</b> <span data-t="s1.kind">A law (the Missouri Compromise)</span></p>
+ <p data-t="s1.intro">Congress passed this law in 1820 to settle the fight over Missouri.</p>
+ <blockquote class="src" data-t="s1.quote">“In all that territory ceded by France to the United States, under the name of Louisiana, which lies north of thirty-six degrees and thirty minutes north latitude, . . . slavery and involuntary servitude . . . shall be, and is hereby, forever prohibited.”</blockquote>
+ <div class="orig"><b data-t="orig">English original:</b> <i>“In all that territory ceded by France to the United States, under the name of Louisiana, which lies north of thirty-six degrees and thirty minutes north latitude, . . . slavery and involuntary servitude . . . shall be, and is hereby, forever prohibited.”</i></div>
+ <p class="cite">“An Act to authorize the people of the Missouri territory to form a constitution and state government . . . and to prohibit slavery in certain territories,” March 6, 1820, Section 8.</p>
+ <p class="wh"><b data-t="wh">Word help:</b> <span data-t="s1.help">ceded = given up · prohibited = not allowed · involuntary servitude = forced labor (slavery)</span></p>
+ <p class="hintp"><span data-t="hint">Hint:</span> <span data-t="s1.hint">Who is making this rule, and for how much land?</span></p>
+ <p class="ask" data-t="guess">What does the author want?</p>
+ <div class="pick3" role="group">
+  <button type="button" class="opt nat" data-v="N" aria-pressed="false">★ <span data-t="nat">NATIONAL</span><small data-t="natsmall">wants the national government to decide</small></button>
+  <button type="button" class="opt sta" data-v="S" aria-pressed="false">◆ <span data-t="state">STATE</span><small data-t="statesmall">wants a state to decide</small></button>
+  <button type="button" class="opt voi" data-v="V" aria-pressed="false">● <span data-t="voice">A VOICE</span><small data-t="voicesmall">wants to be heard or to be free (has no power to decide)</small></button>
+ </div>
+ <label class="why"><span class="p" data-t="notelbl">Copy the clue words that prove it. Then finish: The author wants…</span><textarea rows="3" data-id="note1" data-tp="ph_note" placeholder="“clue words” — The author wants…"></textarea></label>
+</section>
+<section class="card" id="c2" data-i="2">
+ <span class="chip">1831</span>
+ <h3><span data-t="case">Case file</span> 2 <span data-t="of5">of 5</span></h3>
+ <p class="meta"><b data-t="lwho">Who:</b> <span data-t="s2.who">William Lloyd Garrison, a White abolitionist</span> · <b data-t="lfrom">From:</b> <span data-t="s2.kind">A newspaper editorial (The Liberator)</span></p>
+ <p data-t="s2.intro">Garrison started a newspaper in Boston to demand an end to slavery.</p>
+ <blockquote class="src" data-t="s2.quote">“I am in earnest — I will not equivocate — I will not excuse — I will not retreat a single inch — AND I WILL BE HEARD.”</blockquote>
+ <div class="orig"><b data-t="orig">English original:</b> <i>“I am in earnest — I will not equivocate — I will not excuse — I will not retreat a single inch — AND I WILL BE HEARD.”</i></div>
+ <p class="cite">William Lloyd Garrison, “To the Public,” <i>The Liberator</i>, Boston, January 1, 1831.</p>
+ <p class="wh"><b data-t="wh">Word help:</b> <span data-t="s2.help">equivocate = speak in a way that is not clear · excuse = give a reason to avoid blame · retreat = go back</span></p>
+ <p class="hintp"><span data-t="hint">Hint:</span> <span data-t="s2.hint">What does Garrison refuse to do, and what does he demand?</span></p>
+ <p class="ask" data-t="guess">What does the author want?</p>
+ <div class="pick3" role="group">
+  <button type="button" class="opt nat" data-v="N" aria-pressed="false">★ <span data-t="nat">NATIONAL</span><small data-t="natsmall">wants the national government to decide</small></button>
+  <button type="button" class="opt sta" data-v="S" aria-pressed="false">◆ <span data-t="state">STATE</span><small data-t="statesmall">wants a state to decide</small></button>
+  <button type="button" class="opt voi" data-v="V" aria-pressed="false">● <span data-t="voice">A VOICE</span><small data-t="voicesmall">wants to be heard or to be free (has no power to decide)</small></button>
+ </div>
+ <label class="why"><span class="p" data-t="notelbl">Copy the clue words that prove it. Then finish: The author wants…</span><textarea rows="3" data-id="note2" data-tp="ph_note" placeholder="“clue words” — The author wants…"></textarea></label>
+</section>
+<section class="card" id="c3" data-i="3">
+ <span class="chip">1832</span>
+ <h3><span data-t="case">Case file</span> 3 <span data-t="of5">of 5</span></h3>
+ <p class="meta"><b data-t="lwho">Who:</b> <span data-t="s3.who">South Carolina (a state convention)</span> · <b data-t="lfrom">From:</b> <span data-t="s3.kind">A state law (the Ordinance of Nullification)</span></p>
+ <p data-t="s3.intro">A South Carolina convention passed this after the tariffs of 1828 and 1832.</p>
+ <blockquote class="src" data-t="s3.quote">“[The tariff acts of 1828 and 1832] . . . are null, void, and no law, nor binding upon this State, its officers or citizens.”</blockquote>
+ <div class="orig"><b data-t="orig">English original:</b> <i>“[The tariff acts of 1828 and 1832] . . . are null, void, and no law, nor binding upon this State, its officers or citizens.”</i></div>
+ <p class="cite">South Carolina, Ordinance of Nullification, November 24, 1832.</p>
+ <p class="wh"><b data-t="wh">Word help:</b> <span data-t="s3.help">null = canceled · void = having no force · binding = forcing someone to obey</span></p>
+ <p class="hintp"><span data-t="hint">Hint:</span> <span data-t="s3.hint">What does the state call the tariff laws?</span></p>
+ <p class="ask" data-t="guess">What does the author want?</p>
+ <div class="pick3" role="group">
+  <button type="button" class="opt nat" data-v="N" aria-pressed="false">★ <span data-t="nat">NATIONAL</span><small data-t="natsmall">wants the national government to decide</small></button>
+  <button type="button" class="opt sta" data-v="S" aria-pressed="false">◆ <span data-t="state">STATE</span><small data-t="statesmall">wants a state to decide</small></button>
+  <button type="button" class="opt voi" data-v="V" aria-pressed="false">● <span data-t="voice">A VOICE</span><small data-t="voicesmall">wants to be heard or to be free (has no power to decide)</small></button>
+ </div>
+ <label class="why"><span class="p" data-t="notelbl">Copy the clue words that prove it. Then finish: The author wants…</span><textarea rows="3" data-id="note3" data-tp="ph_note" placeholder="“clue words” — The author wants…"></textarea></label>
+</section>
+<section class="card" id="c4" data-i="4">
+ <span class="chip">1832</span>
+ <h3><span data-t="case">Case file</span> 4 <span data-t="of5">of 5</span></h3>
+ <p class="meta"><b data-t="lwho">Who:</b> <span data-t="s4.who">President Andrew Jackson</span> · <b data-t="lfrom">From:</b> <span data-t="s4.kind">A public statement (the Proclamation to South Carolina)</span></p>
+ <p data-t="s4.intro">President Jackson answered South Carolina with this public statement.</p>
+ <blockquote class="src" data-t="s4.quote">“I consider, then, the power to annul a law of the United States, assumed by one State, incompatible with the existence of the Union, contradicted expressly by the letter of the Constitution, unauthorized by its spirit, inconsistent with every principle on which it was founded, and destructive of the great object for which it was formed.” . . . “[D]isunion, by armed force, is TREASON.”</blockquote>
+ <div class="orig"><b data-t="orig">English original:</b> <i>“I consider, then, the power to annul a law of the United States, assumed by one State, incompatible with the existence of the Union, contradicted expressly by the letter of the Constitution, unauthorized by its spirit, inconsistent with every principle on which it was founded, and destructive of the great object for which it was formed.” . . . “[D]isunion, by armed force, is TREASON.”</i></div>
+ <p class="cite">Andrew Jackson, Proclamation Regarding Nullification, December 10, 1832.</p>
+ <p class="wh"><b data-t="wh">Word help:</b> <span data-t="s4.help">annul = cancel · incompatible = cannot exist together · disunion = breaking up the Union · treason = betraying your country</span></p>
+ <p class="hintp"><span data-t="hint">Hint:</span> <span data-t="s4.hint">Whose power does Jackson say a state cannot cancel?</span></p>
+ <p class="ask" data-t="guess">What does the author want?</p>
+ <div class="pick3" role="group">
+  <button type="button" class="opt nat" data-v="N" aria-pressed="false">★ <span data-t="nat">NATIONAL</span><small data-t="natsmall">wants the national government to decide</small></button>
+  <button type="button" class="opt sta" data-v="S" aria-pressed="false">◆ <span data-t="state">STATE</span><small data-t="statesmall">wants a state to decide</small></button>
+  <button type="button" class="opt voi" data-v="V" aria-pressed="false">● <span data-t="voice">A VOICE</span><small data-t="voicesmall">wants to be heard or to be free (has no power to decide)</small></button>
+ </div>
+ <label class="why"><span class="p" data-t="notelbl">Copy the clue words that prove it. Then finish: The author wants…</span><textarea rows="3" data-id="note4" data-tp="ph_note" placeholder="“clue words” — The author wants…"></textarea></label>
+</section>
+<section class="card" id="c5" data-i="5">
+ <span class="chip">1836</span>
+ <h3><span data-t="case">Case file</span> 5 <span data-t="of5">of 5</span></h3>
+ <p class="meta"><b data-t="lwho">Who:</b> <span data-t="s5.who">Chief John Ross, leader of the Cherokee Nation</span> · <b data-t="lfrom">From:</b> <span data-t="s5.kind">A letter to Congress</span></p>
+ <p data-t="s5.intro">Ross is writing about the Treaty of New Echota (1835), which was signed by a small group of Cherokee men.</p>
+ <blockquote class="src" data-t="s5.quote">“The instrument in question is not the act of our Nation; we are not parties to its covenants; it has not received the sanction of our people.”</blockquote>
+ <div class="orig"><b data-t="orig">English original:</b> <i>“The instrument in question is not the act of our Nation; we are not parties to its covenants; it has not received the sanction of our people.”</i></div>
+ <p class="cite">John Ross, Letter “To the Senate and House of Representatives,” Red Clay Council Ground, Cherokee Nation, September 28, 1836.</p>
+ <p class="wh"><b data-t="wh">Word help:</b> <span data-t="s5.help">instrument = a formal document · covenants = promises in a treaty · sanction = approval</span></p>
+ <p class="hintp"><span data-t="hint">Hint:</span> <span data-t="s5.hint">Does Ross say the Cherokee people agreed to the treaty?</span></p>
+ <p class="ask" data-t="guess">What does the author want?</p>
+ <div class="pick3" role="group">
+  <button type="button" class="opt nat" data-v="N" aria-pressed="false">★ <span data-t="nat">NATIONAL</span><small data-t="natsmall">wants the national government to decide</small></button>
+  <button type="button" class="opt sta" data-v="S" aria-pressed="false">◆ <span data-t="state">STATE</span><small data-t="statesmall">wants a state to decide</small></button>
+  <button type="button" class="opt voi" data-v="V" aria-pressed="false">● <span data-t="voice">A VOICE</span><small data-t="voicesmall">wants to be heard or to be free (has no power to decide)</small></button>
+ </div>
+ <label class="why"><span class="p" data-t="notelbl">Copy the clue words that prove it. Then finish: The author wants…</span><textarea rows="3" data-id="note5" data-tp="ph_note" placeholder="“clue words” — The author wants…"></textarea></label>
+</section>
+<h2 class="part" data-t="p2">Part 2 · Case Closed</h2>
+<div class="bridge"><b data-t="bq">BRIDGE QUESTION:</b> <span data-t="bq3">From 1819 to 1850, who had the final say more often: the national government or the states?</span></div>
+<div class="box"><label class="t" for="best" data-t="bestlbl">Which source best answers the bridge question? (Who had the final say, 1819–1850)</label>
+<select id="best" data-id="best"><option value="" data-t="choose">Choose a case file…</option><option value="1" data-t="s1.short">Case file 1 · Missouri Compromise Act (1820)</option><option value="2" data-t="s2.short">Case file 2 · Garrison, The Liberator (1831)</option><option value="3" data-t="s3.short">Case file 3 · South Carolina Ordinance (1832)</option><option value="4" data-t="s4.short">Case file 4 · Jackson’s Proclamation (1832)</option><option value="5" data-t="s5.short">Case file 5 · John Ross’s Letter (1836)</option></select>
+<label class="t" for="why" style="margin-top:10px" data-t="whylbl">Why is it the best? Use one fact or quote from that source.</label>
+<textarea id="why" rows="3" data-id="why"></textarea></div>
+<div class="box"><label class="t" for="counter" data-t="counterlbl">Counter-Argument: which other source would someone on the other side pick? What would they say? Then answer them.</label>
+<textarea id="counter" rows="4" data-id="counter"></textarea></div>
+<div class="box checks"><b data-t="chkt">Check your work</b><br>
+<label><input type="checkbox" data-id="chk1"> <span data-t="chk1">I picked a source and gave one fact or quote.</span></label>
+<label><input type="checkbox" data-id="chk2"> <span data-t="chk2">I answered the Counter-Argument.</span></label></div>
+<div class="bar"><button class="btn" id="saveBtn" type="button" data-t="save">Save Progress</button>
+<button class="btn" id="loadBtn" type="button" data-t="load">Load Progress</button>
+<input type="file" id="loadFile" accept=".json,application/json" hidden>
+<button class="btn primary" id="finishBtn" type="button" disabled data-t="finish">Finished — Download File to Submit</button></div>
+<div class="msg" id="msg" role="status"></div>
+<div class="status" id="todo"></div>
+<footer><span>UNITS 3–4 BRIDGE · CONSTITUTION TO RECONSTRUCTION | CPUSH</span><span>DANIEL GARZA, M.A.</span></footer></div><script>
+(function(){
+var PACKET='RP_6_Source_Detective',STORE='cpush_rp6_source_detective',N=5,I18N={"en": {"cracked": "{n} of 5 case files cracked", "allcracked": "All case files cracked!", "m_names": "first name, last name, and period", "m_guesses": "{n} guess(es) to tap", "m_notes": "{n} clue note(s)", "m_best": "best-source choice", "m_why": "explanation", "m_counter": "Counter-Argument", "m_chk": "checklist", "todo": "Still to do: {x}.", "todo_ok": "Everything is done. Press Finished.", "msg_names": "Type your first name, last name, and period at the top before saving.", "msg_saved": "Progress saved. Keep that file. Use Load Progress later. Do not upload it to Canvas until you are finished.", "msg_loaded": "Progress loaded.", "msg_loaderr": "That is not a saved file for this assignment. Choose the .json file you saved from this page.", "msg_fin": "Finished! Your file \"{f}\" downloaded. Upload that file to Canvas.", "msg_notfin": "Not finished yet: {x}.", "ph_note": "“clue words” — The author wants…", "ph_date": "auto-fills"}, "es": {"bq": "PREGUNTA PUENTE:", "bqtext": "¿Quién tiene la última palabra: el gobierno nacional o los estados?", "howt": "Cómo jugar", "howst": "Usa <b>Guardar progreso</b> en cualquier momento. Usa <b>Cargar progreso</b> para continuar después. El botón <b>Terminado</b> se activa cuando todo está completo.", "anylang": "Puedes contestar en inglés, español o árabe.", "lbl_first": "NOMBRE *", "lbl_last": "APELLIDO *", "lbl_period": "PERÍODO *", "lbl_date": "FECHA", "ph_date": "se llena solo", "nat": "NACIONAL", "state": "ESTADO", "p1": "Parte 1 · Los 5 expedientes", "wh": "Ayuda con palabras:", "bq3": "De 1819 a 1850, ¿quién tuvo la última palabra con más frecuencia: el gobierno nacional o los estados?", "chkt": "Revisa tu CER", "save": "Guardar progreso", "load": "Cargar progreso", "finish": "Terminado — Descargar archivo para entregar", "m_names": "nombre, apellido y período", "m_part2": "respuesta de la Parte 2", "m_cer": "{x}", "m_chk": "lista de revisión", "todo": "Falta: {x}.", "todo_ok": "Todo está listo. Presiona Terminado.", "msg_names": "Escribe tu nombre, apellido y período arriba antes de guardar.", "msg_saved": "Progreso guardado. Guarda ese archivo. Usa Cargar progreso después. No lo subas a Canvas hasta que termines.", "msg_loaded": "Progreso cargado.", "msg_loaderr": "Ese no es un archivo guardado de esta tarea. Elige el archivo .json que guardaste de esta página.", "msg_fin": "¡Terminado! Tu archivo \"{f}\" se descargó. Sube ese archivo a Canvas.", "msg_notfin": "Todavía no has terminado: {x}.", "eyebrow": "DETECTIVE DE FUENTES 6", "title": "¿Quién quiere la última palabra?", "sub": "Democracia, esclavitud y derechos de los estados · Resuelve el caso", "job": "Tu tarea: resolver 5 expedientes. Cada uno es un documento real de 1820 a 1836.", "how1": "Abre un expediente. Lee el documento y la pista.", "how2": "Toca tu suposición: ¿el autor quiere poder <b>NACIONAL</b>, poder del <b>ESTADO</b> o <b>UNA VOZ</b>?", "how3": "Copia las palabras clave que lo prueban. Luego completa: El autor quiere…", "how4": "Cierra el caso: elige la mejor fuente para la pregunta puente, explica y responde al contraargumento.", "cracked": "{n} de 5 expedientes resueltos", "allcracked": "¡Todos los expedientes resueltos!", "case": "Expediente", "of5": "de 5", "lwho": "Quién:", "lwhen": "Cuándo:", "lfrom": "De:", "hint": "Pista:", "orig": "Original en inglés:", "guess": "¿Qué quiere el autor?", "voice": "UNA VOZ", "natsmall": "quiere que el gobierno nacional decida", "statesmall": "quiere que un estado decida", "voicesmall": "quiere ser escuchado o ser libre (no tiene poder para decidir)", "notelbl": "Copia las palabras clave que lo prueban. Luego completa: El autor quiere…", "ph_note": "«palabras clave» — El autor quiere…", "p2": "Parte 2 · Caso cerrado", "bestlbl": "¿Qué fuente responde mejor a la pregunta puente? (Quién tuvo la última palabra de 1819 a 1850)", "choose": "Elige un expediente…", "whylbl": "¿Por qué es la mejor? Usa un dato o una cita de esa fuente.", "counterlbl": "Contraargumento: ¿qué otra fuente elegiría alguien del otro lado? ¿Qué diría? Luego respóndele.", "chk1": "Elegí una fuente y di un dato o una cita.", "chk2": "Respondí al contraargumento.", "l_best": "elección de la mejor fuente", "l_why": "explicación", "l_counter": "Contraargumento", "m_guesses": "{n} suposición(es) por tocar", "m_notes": "{n} nota(s) de pistas", "s1.who": "El Congreso de EE. UU.", "s1.kind": "Una ley (el Compromiso de Missouri)", "s1.intro": "El Congreso aprobó esta ley en 1820 para resolver la pelea por Missouri.", "s1.quote": "«En todo aquel territorio cedido por Francia a los Estados Unidos, bajo el nombre de Luisiana, que queda al norte de los treinta y seis grados y treinta minutos de latitud norte, . . . la esclavitud y la servidumbre involuntaria . . . quedan por la presente prohibidas para siempre».", "s1.help": "cedido = entregado · prohibido = no permitido · servidumbre involuntaria = trabajo forzado (esclavitud)", "s1.hint": "¿Quién hace esta regla y para cuánta tierra?", "s1.short": "Ley del Compromiso de Missouri (1820)", "s2.who": "William Lloyd Garrison, un abolicionista blanco", "s2.kind": "Un editorial de periódico (The Liberator)", "s2.intro": "Garrison fundó un periódico en Boston para exigir el fin de la esclavitud.", "s2.quote": "«Hablo en serio — no andaré con rodeos — no pondré excusas — no retrocederé ni una pulgada — Y SERÉ ESCUCHADO».", "s2.help": "andar con rodeos = hablar sin claridad · excusa = una razón para evitar la culpa · retroceder = volver atrás", "s2.hint": "¿Qué se niega a hacer Garrison y qué exige?", "s2.short": "Garrison, The Liberator (1831)", "s3.who": "Carolina del Sur (una convención estatal)", "s3.kind": "Una ley estatal (la Ordenanza de Anulación)", "s3.intro": "Una convención de Carolina del Sur aprobó esto después de los aranceles de 1828 y 1832.", "s3.quote": "«[Las leyes arancelarias de 1828 y 1832] . . . son nulas, sin valor y sin fuerza de ley, y no obligan a este Estado, ni a sus funcionarios ni a sus ciudadanos».", "s3.help": "nulo = cancelado · sin valor = sin fuerza · obligar = hacer que alguien obedezca", "s3.hint": "¿Cómo llama el estado a las leyes del arancel?", "s3.short": "Ordenanza de Carolina del Sur (1832)", "s4.who": "El presidente Andrew Jackson", "s4.kind": "Una declaración pública (la Proclama a Carolina del Sur)", "s4.intro": "El presidente Jackson respondió a Carolina del Sur con esta declaración pública.", "s4.quote": "«Considero, pues, que el poder de anular una ley de los Estados Unidos, que un Estado se atribuye, es incompatible con la existencia de la Unión, está expresamente contradicho por la letra de la Constitución, no está autorizado por su espíritu, es contrario a todo principio sobre el que fue fundada y destruye el gran objetivo para el cual fue creada». . . . «[L]a desunión, por la fuerza de las armas, es TRAICIÓN».", "s4.help": "anular = cancelar · incompatible = no pueden existir juntos · desunión = romper la Unión · traición = traicionar a tu país", "s4.hint": "¿El poder de quién dice Jackson que un estado no puede cancelar?", "s4.short": "Proclama de Jackson (1832)", "s5.who": "El jefe John Ross, líder de la Nación Cheroqui", "s5.kind": "Una carta al Congreso", "s5.intro": "Ross escribe sobre el Tratado de New Echota (1835), que firmó un pequeño grupo de hombres cheroquis.", "s5.quote": "«El documento en cuestión no es un acto de nuestra Nación; no somos parte de sus acuerdos; no ha recibido la aprobación de nuestro pueblo».", "s5.help": "documento = un escrito formal · acuerdos = promesas de un tratado · aprobación = permiso", "s5.hint": "¿Dice Ross que el pueblo cheroqui estuvo de acuerdo con el tratado?", "s5.short": "Carta de John Ross (1836)", "m_best": "elección de la mejor fuente", "m_why": "explicación", "m_counter": "Contraargumento"}, "ar": {"bq": "سؤال الجسر:", "bqtext": "من يملك الكلمة الأخيرة: الحكومة الوطنية أم الولايات؟", "howt": "طريقة اللعب", "howst": "استخدم <b>حفظ التقدم</b> في أي وقت. واستخدم <b>تحميل التقدم</b> للمتابعة لاحقًا. يُفتح زر <b>انتهيت</b> عند اكتمال كل شيء.", "anylang": "يمكنك الإجابة بالإنجليزية أو الإسبانية أو العربية.", "lbl_first": "الاسم الأول *", "lbl_last": "اسم العائلة *", "lbl_period": "الحصة *", "lbl_date": "التاريخ", "ph_date": "يُملأ تلقائيًا", "nat": "وطني", "state": "ولاية", "p1": "الجزء 1 · ملفات القضايا الخمسة", "wh": "مساعدة في الكلمات:", "bq3": "من 1819 إلى 1850، من كانت له الكلمة الأخيرة في أغلب الأحيان: الحكومة الوطنية أم الولايات؟", "chkt": "راجع CER الخاص بك", "save": "حفظ التقدم", "load": "تحميل التقدم", "finish": "انتهيت — تنزيل الملف للتسليم", "m_names": "الاسم الأول واسم العائلة والحصة", "m_part2": "إجابة الجزء 2", "m_cer": "{x}", "m_chk": "قائمة المراجعة", "todo": "المتبقي: {x}.", "todo_ok": "كل شيء مكتمل. اضغط انتهيت.", "msg_names": "اكتب اسمك الأول واسم العائلة والحصة في الأعلى قبل الحفظ.", "msg_saved": "تم حفظ التقدم. احتفظ بهذا الملف. استخدم تحميل التقدم لاحقًا. لا ترفعه إلى Canvas حتى تنتهي.", "msg_loaded": "تم تحميل التقدم.", "msg_loaderr": "هذا ليس ملفًا محفوظًا لهذه المهمة. اختر ملف .json الذي حفظته من هذه الصفحة.", "msg_fin": "انتهيت! تم تنزيل ملفك \"{f}\". ارفع هذا الملف إلى Canvas.", "msg_notfin": "لم تنتهِ بعد: {x}.", "eyebrow": "محقق المصادر 6", "title": "من يريد الكلمة الأخيرة؟", "sub": "الديمقراطية والعبودية وحقوق الولايات · حلّ القضية", "job": "مهمتك: حلّ 5 ملفات قضايا. كل ملف وثيقة حقيقية من 1820 إلى 1836.", "how1": "افتح ملف قضية. اقرأ الوثيقة والتلميح.", "how2": "اضغط تخمينك: هل يريد الكاتب سلطة <b>وطنية</b> أم سلطة <b>الولاية</b> أم <b>صوتًا</b>؟", "how3": "انسخ الكلمات الدليلية التي تثبت ذلك. ثم أكمل: يريد الكاتب…", "how4": "أغلق القضية: اختر أفضل مصدر لسؤال الجسر، واشرح، وردّ على الحجة المضادة.", "cracked": "تم حل {n} من 5 ملفات", "allcracked": "تم حل كل الملفات!", "case": "ملف القضية", "of5": "من 5", "lwho": "من:", "lwhen": "متى:", "lfrom": "المصدر:", "hint": "تلميح:", "orig": "النص الأصلي بالإنجليزية:", "guess": "ماذا يريد الكاتب؟", "voice": "صوت", "natsmall": "يريد أن تقرّر الحكومة الوطنية", "statesmall": "يريد أن تقرّر ولاية", "voicesmall": "يريد أن يُسمَع صوته أو أن يكون حرًّا (لا يملك سلطة القرار)", "notelbl": "انسخ الكلمات الدليلية التي تثبت ذلك. ثم أكمل: يريد الكاتب…", "ph_note": "«الكلمات الدليلية» — يريد الكاتب…", "p2": "الجزء 2 · القضية مغلقة", "bestlbl": "أي مصدر يجيب بأفضل شكل عن سؤال الجسر؟ (من كانت له الكلمة الأخيرة من 1819 إلى 1850)", "choose": "اختر ملف قضية…", "whylbl": "لماذا هو الأفضل؟ استخدم معلومة أو اقتباسًا من ذلك المصدر.", "counterlbl": "الحجة المضادة: أي مصدر آخر سيختاره شخص من الجانب الآخر؟ ماذا سيقول؟ ثم ردّ عليه.", "chk1": "اخترت مصدرًا وذكرت معلومة أو اقتباسًا.", "chk2": "رددت على الحجة المضادة.", "l_best": "اختيار أفضل مصدر", "l_why": "الشرح", "l_counter": "الحجة المضادة", "m_guesses": "{n} تخمين (تخمينات) للضغط", "m_notes": "{n} ملاحظة (ملاحظات) دليلية", "s1.who": "الكونغرس الأمريكي", "s1.kind": "قانون (تسوية ميسوري)", "s1.intro": "أقرّ الكونغرس هذا القانون عام 1820 لحسم الصراع حول ميسوري (Missouri).", "s1.quote": "«في كل ذلك الإقليم الذي تنازلت عنه فرنسا للولايات المتحدة باسم لويزيانا (Louisiana)، والواقع شمال خط العرض 36 درجة و30 دقيقة شمالًا، . . . فإن العبودية والخدمة القسرية . . . تُمنع بموجب هذا القانون إلى الأبد».", "s1.help": "تنازلت = تخلّت · تُمنع = غير مسموح بها · الخدمة القسرية = العمل بالإجبار (العبودية)", "s1.hint": "من يضع هذه القاعدة، وعلى كم من الأرض؟", "s1.short": "قانون تسوية ميسوري (1820)", "s2.who": "ويليام لويد غاريسون (William Lloyd Garrison)، ناشط أبيض مناهض للعبودية", "s2.kind": "افتتاحية صحيفة (The Liberator)", "s2.intro": "أسّس غاريسون صحيفة في بوسطن (Boston) للمطالبة بإنهاء العبودية.", "s2.quote": "«أنا جادّ — لن أراوغ — ولن أبرّر — ولن أتراجع شبرًا واحدًا — وسيُسمَع صوتي (AND I WILL BE HEARD)».", "s2.help": "أراوغ = أتكلم بغموض · أبرّر = أذكر سببًا لتجنّب اللوم · أتراجع = أعود إلى الوراء", "s2.hint": "ماذا يرفض غاريسون أن يفعل، وماذا يطلب؟", "s2.short": "غاريسون، The Liberator (1831)", "s3.who": "كارولاينا الجنوبية (South Carolina) (مؤتمر الولاية)", "s3.kind": "قانون ولاية (مرسوم الإبطال)", "s3.intro": "أقرّ مؤتمر كارولاينا الجنوبية هذا بعد الرسوم الجمركية لعامي 1828 و1832.", "s3.quote": "«[قانونا الرسوم الجمركية لعامي 1828 و1832] . . . لاغيان وباطلان ولا قوة قانونية لهما، ولا يُلزمان هذه الولاية ولا موظفيها ولا مواطنيها».", "s3.help": "لاغٍ = ملغى · باطل = بلا قوة · يُلزم = يجبر أحدًا على الطاعة", "s3.hint": "ماذا تسمّي الولاية قوانين الرسوم الجمركية؟", "s3.short": "مرسوم كارولاينا الجنوبية (1832)", "s4.who": "الرئيس أندرو جاكسون (Andrew Jackson)", "s4.kind": "بيان علني (الإعلان إلى كارولاينا الجنوبية)", "s4.intro": "ردّ الرئيس جاكسون على كارولاينا الجنوبية بهذا البيان العلني.", "s4.quote": "«أرى إذن أن السلطة في إلغاء قانون من قوانين الولايات المتحدة، التي تدّعيها ولاية واحدة، تتعارض مع وجود الاتحاد، وينقضها نصّ الدستور صراحةً، ولا تجيزها روحه، وتخالف كل مبدأ قام عليه، وتهدم الغاية العظمى التي أُنشئ من أجلها». . . . «[إن] الانفصال بالقوة المسلحة هو خيانة عظمى (TREASON)».", "s4.help": "يُلغي = يبطل · يتعارض = لا يمكن أن يجتمعا · الانفصال = تفكيك الاتحاد · الخيانة العظمى = خيانة الوطن", "s4.hint": "سلطة من يقول جاكسون إن الولاية لا تستطيع إلغاءها؟", "s4.short": "إعلان جاكسون (1832)", "s5.who": "الزعيم جون روس (John Ross)، قائد أمة الشيروكي (Cherokee)", "s5.kind": "رسالة إلى الكونغرس", "s5.intro": "يكتب روس عن معاهدة نيو إيكوتا (New Echota) (1835) التي وقّعها عدد صغير من رجال الشيروكي.", "s5.quote": "«الوثيقة المعنية ليست من فعل أمتنا؛ ولسنا أطرافًا في بنودها؛ ولم تنل موافقة شعبنا».", "s5.help": "وثيقة = مستند رسمي · بنود = وعود في معاهدة · موافقة = إذن", "s5.hint": "هل يقول روس إن شعب الشيروكي وافق على المعاهدة؟", "s5.short": "رسالة جون روس (1836)", "m_best": "اختيار أفضل مصدر", "m_why": "الشرح", "m_counter": "الحجة المضادة"}},LANG='en';
+var $=function(i){return document.getElementById(i)};
+function T(k,v){var s=(I18N[LANG]&&I18N[LANG][k])||I18N.en[k]||k;if(v)for(var x in v)s=s.split('{'+x+'}').join(v[x]);return s}
+var data={sides:{}};var meta={first:$('f_first'),last:$('f_last'),period:$('f_period')};
+var sep=function(){return LANG==='ar'?'؛ ':'; '};
+function msg(k,v,c){var m=$('msg');m._k=k;m._v=v;m._c=c;m.textContent=k?T(k,v):'';m.className='msg '+(c||'')}
+function persist(){try{localStorage.setItem(STORE,JSON.stringify(snap(true)))}catch(e){}}
+function tally(){var o={national:0,state:0,voice:0};for(var k in data.sides){var v=data.sides[k];if(v==='N')o.national++;else if(v==='S')o.state++;else if(v==='V')o.voice++}return o}
+function snap(draft){
+ var t={};document.querySelectorAll('textarea[data-id],select[data-id]').forEach(function(x){t[x.dataset.id]=x.value});
+ var c={};document.querySelectorAll('input[data-id]').forEach(function(x){c[x.dataset.id]=x.checked});
+ var done=!draft&&complete().ok;
+ return {packet:PACKET,course:'CPUSH',version:1,saved:new Date().toISOString(),completed:done,
+  student:{first:meta.first.value.trim(),last:meta.last.value.trim(),period:meta.period.value.trim(),date:done?$('f_date').value:''},
+  sides:data.sides,answers:t,checks:c,tally:tally()}}
+function complete(){var miss=[];
+ if(!meta.first.value.trim()||!meta.last.value.trim()||!meta.period.value.trim())miss.push(T('m_names'));
+ var ug=0,un=0;for(var i=1;i<=N;i++){if(!data.sides[i])ug++;if(!document.querySelector('[data-id=note'+i+']').value.trim())un++}
+ if(ug)miss.push(T('m_guesses',{n:ug}));if(un)miss.push(T('m_notes',{n:un}));
+ if(!$('best').value)miss.push(T('m_best'));if(!$('why').value.trim())miss.push(T('m_why'));if(!$('counter').value.trim())miss.push(T('m_counter'));
+ var uc=0;document.querySelectorAll('input[data-id^=chk]').forEach(function(x){if(!x.checked)uc++});if(uc)miss.push(T('m_chk'));
+ return {ok:miss.length===0,miss:miss}}
+function cracked(){var n=0;for(var i=1;i<=N;i++){if(data.sides[i]&&document.querySelector('[data-id=note'+i+']').value.trim())n++}return n}
+function paint(){var n=cracked();
+ $('rN').style.width=(n/N*100)+'%';$('nLeft').textContent=n===N?T('allcracked'):T('cracked',{n:n});
+ document.querySelectorAll('.card').forEach(function(c){var i=c.dataset.i,v=data.sides[i];
+  c.classList.toggle('done',!!v);c.classList.toggle('isS',v==='S');c.classList.toggle('isV',v==='V');
+  c.querySelectorAll('.opt').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.v===v))})});
+ var r=complete();$('finishBtn').disabled=!r.ok;$('todo').textContent=r.ok?T('todo_ok'):T('todo',{x:r.miss.join(sep())})}
+var els=Array.prototype.slice.call(document.querySelectorAll('[data-t]')),orig=els.map(function(el){return el.innerHTML});
+var tps=Array.prototype.slice.call(document.querySelectorAll('[data-tp]'));
+function setLang(l){LANG=l;document.documentElement.lang=l;document.documentElement.dir=(l==='ar'?'rtl':'ltr');
+ els.forEach(function(el,i){el.innerHTML=(l==='en')?orig[i]:(I18N[l][el.dataset.t]||orig[i])});
+ tps.forEach(function(el){el.placeholder=T(el.dataset.tp)});
+ document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.lang===l))});
+ var m=$('msg');if(m._k)m.textContent=T(m._k,m._v);paint();try{localStorage.setItem(STORE+'_lang',l)}catch(e){}}
+document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){setLang(b.dataset.lang)})});
+document.querySelectorAll('.card').forEach(function(c){c.querySelectorAll('.opt').forEach(function(b){
+ b.addEventListener('click',function(){data.sides[c.dataset.i]=b.dataset.v;paint();persist()})})});
+document.addEventListener('input',function(ev){ev.target.classList&&ev.target.classList.remove('bad');paint();persist()});
+document.addEventListener('change',function(ev){ev.target.classList&&ev.target.classList.remove('bad');paint();persist()});
+function who(){return (meta.last.value.trim()+'_'+meta.first.value.trim()).normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^A-Za-z0-9_\-]+/g,'_')}
+function named(){var ok=true;Object.keys(meta).forEach(function(k){if(!meta[k].value.trim()){meta[k].classList.add('bad');ok=false}});return ok}
+function download(name,o){var b=new Blob([JSON.stringify(o,null,2)],{type:'application/json'});var a=document.createElement('a');
+ a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500)}
+function apply(o){var s=o.student||{};meta.first.value=s.first||'';meta.last.value=s.last||'';meta.period.value=s.period||'';
+ $('f_date').value=(o.completed?s.date:'')||'';data.sides=o.sides||{};
+ document.querySelectorAll('textarea[data-id],select[data-id]').forEach(function(x){x.value=(o.answers||{})[x.dataset.id]||''});
+ document.querySelectorAll('input[data-id]').forEach(function(x){x.checked=!!(o.checks||{})[x.dataset.id]});paint()}
+$('saveBtn').addEventListener('click',function(){
+ if(!named()){msg('msg_names',null,'err');meta.first.scrollIntoView({block:'center'});return}
+ download(who()+'-'+PACKET+'-PROGRESS.json',snap(true));msg('msg_saved',null,'ok')});
+$('loadBtn').addEventListener('click',function(){$('loadFile').click()});
+$('loadFile').addEventListener('change',function(){var f=this.files[0];if(!f)return;var r=new FileReader();
+ r.onload=function(){try{var o=JSON.parse(r.result);if(o.packet!==PACKET)throw 0;apply(o);persist();msg('msg_loaded',null,'ok')}catch(e){msg('msg_loaderr',null,'err')}};r.readAsText(f);this.value=''});
+$('finishBtn').addEventListener('click',function(){var r=complete();if(!r.ok){msg('msg_notfin',{x:r.miss.join(sep())},'err');return}
+ var d=new Date();$('f_date').value=(d.getMonth()+1)+'/'+d.getDate()+'/'+d.getFullYear();
+ var o=snap(false),fn=who()+'-'+PACKET+'.json';download(fn,o);msg('msg_fin',{f:fn},'ok');persist()});
+try{var s=localStorage.getItem(STORE);if(s)apply(JSON.parse(s))}catch(e){}
+var q=(location.search.match(/[?&]lang=(en|es|ar)/)||[])[1],sl='en';try{sl=localStorage.getItem(STORE+'_lang')||'en'}catch(e){}
+setLang(q||sl);
+})();
+</script></body></html>
