@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Who Has the Final Say? · Reading Packet 6</title><style>
+:root{--bg:#F1EDF1;--card:#FFFFFF;--cream:#F2EBD1;--ink:#362337;--purple:#5A3B5C;--gold:#6E5A12;
+--purple-soft:#E7DDE8;--gold-soft:#EFE4B5;--line:#CDBFCE;--ok:#2E6B3E}
+@media (prefers-color-scheme:dark){:root{--bg:#1E1520;--card:#2A1E2C;--cream:#33293A;--ink:#F3EAF4;--purple:#D8B8DA;--gold:#E6CF7A;
+--purple-soft:#43304A;--gold-soft:#4A4120;--line:#5A4660;--ok:#8FD3A0}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.5 "Segoe UI",system-ui,-apple-system,Arial,sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px 40px}
+header.hero{background:#5A3B5C;color:#fff;padding:28px 16px 22px;border-bottom:6px solid #C9A92B}
+header.hero .in{max-width:860px;margin:0 auto}
+.eyebrow{letter-spacing:.14em;font-size:13px;font-weight:700;color:#F2EBD1;text-transform:uppercase}
+h1{margin:6px 0 4px;font-size:32px;line-height:1.15;color:#fff}
+.sub{font-size:18px;color:#F2EBD1;margin:0}
+.bridge{background:var(--cream);border-left:6px solid var(--gold);padding:12px 16px;margin:18px 0;border-radius:6px;color:var(--ink)}
+.bridge b{color:var(--purple)}
+.how{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:16px 0}
+.how ol{margin:6px 0 0 20px;padding:0}
+.who{display:grid;grid-template-columns:1fr 1fr 110px 140px;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;margin:16px 0}
+.who label{font-size:13px;font-weight:700;letter-spacing:.06em;color:var(--purple)}
+.who input{width:100%;margin-top:4px;padding:9px 10px;font-size:16px;border:2px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
+.who input.bad{border-color:#B3261E}
+.meter{position:sticky;top:0;z-index:5;background:var(--card);border:2px solid var(--purple);border-radius:12px;padding:10px 14px;margin:12px 0;box-shadow:0 3px 10px rgba(54,35,55,.18)}
+.meter .row{display:flex;justify-content:space-between;font-weight:700;font-size:15px}
+.meter .nat{color:var(--purple)}.meter .sta{color:var(--gold)}
+.rope{height:22px;border-radius:11px;background:var(--line);margin:6px 0;display:flex;overflow:hidden;position:relative}
+.rope i{display:block;height:100%;transition:width .35s}
+.rope .n{background:var(--purple)}.rope .s{background:var(--gold);margin-left:auto}
+.rope .mid{position:absolute;left:50%;top:-3px;bottom:-3px;width:3px;background:var(--ink);opacity:.5}
+.meter .left{font-size:14px;text-align:center}
+h2.part{color:var(--purple);border-bottom:3px solid var(--gold);padding-bottom:4px;margin:30px 0 12px;font-size:23px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:16px 0;box-shadow:0 1px 4px rgba(54,35,55,.08)}
+.card.done{border-left:8px solid var(--purple)}
+.card.done.isS{border-left-color:var(--gold)}
+.chip{display:inline-block;background:var(--purple);color:#fff;font-weight:700;font-size:13px;letter-spacing:.05em;border-radius:20px;padding:3px 12px}
+.card h3{margin:8px 0 4px;font-size:21px;color:var(--purple)}
+.card p{margin:6px 0}
+.wh{font-size:14px;background:var(--cream);padding:6px 10px;border-radius:6px}
+.ask{font-weight:700;margin-top:12px}
+.pick{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:8px 0}
+.opt{font:inherit;font-weight:800;font-size:18px;padding:12px 8px;border-radius:10px;border:3px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer;text-align:center}
+.opt small{display:block;font-weight:500;font-size:13px;margin-top:2px}
+.opt.nat:hover,.opt.nat[aria-pressed=true]{border-color:#5A3B5C;background:#5A3B5C;color:#fff}
+.opt.sta:hover,.opt.sta[aria-pressed=true]{border-color:#6E5A12;background:#6E5A12;color:#fff}
+.opt:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible{outline:3px solid #C9A92B;outline-offset:2px}
+textarea{width:100%;font:inherit;font-size:16px;padding:9px 10px;border:2px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);resize:vertical}
+textarea.bad{border-color:#B3261E}
+.why{display:block;margin-top:8px}
+.why span.p{display:block;font-size:14px;font-weight:600;color:var(--purple);margin-bottom:3px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin:14px 0}
+.box label.t{display:block;font-weight:800;color:var(--purple);margin-bottom:2px}
+.box .hint{font-size:14px;margin:0 0 4px}
+.tally{background:var(--gold-soft);border-radius:8px;padding:8px 12px;font-weight:700;margin:8px 0}
+.checks label{display:block;margin:4px 0}
+.checks input{width:20px;height:20px;vertical-align:middle;margin-right:8px}
+.bar{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 8px}
+.btn{font:inherit;font-weight:700;padding:11px 18px;border-radius:10px;border:2px solid var(--purple);background:var(--card);color:var(--purple);cursor:pointer}
+.btn.primary{background:var(--purple);color:#fff}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.msg{min-height:24px;font-weight:600}.msg.err{color:#B3261E}.msg.ok{color:var(--ok)}
+.status{font-size:14px}
+footer{margin-top:34px;padding:12px 0;border-top:2px solid var(--gold);font-size:12px;letter-spacing:.06em;color:var(--purple);display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
+.key .ans{background:var(--cream);border-left:6px solid var(--gold);padding:8px 12px;border-radius:6px;margin-top:8px}
+.key .badge{display:inline-block;font-weight:800;border-radius:6px;padding:2px 10px;color:#fff;margin-right:6px}
+.key .badge.N{background:#5A3B5C}.key .badge.S{background:#6E5A12}
+.keyflag{background:#B3261E;color:#fff;font-weight:800;padding:6px 14px;text-align:center;letter-spacing:.08em}
+@media(max-width:620px){.who{grid-template-columns:1fr 1fr}h1{font-size:26px}.pick{grid-template-columns:1fr}}
+@media print{.meter,.bar,.msg{display:none}.card{break-inside:avoid}}
+
+.card.done{border-left:1px solid var(--line);border-inline-start:8px solid var(--purple)}
+.card.done.isS{border-inline-start-color:var(--gold)}
+.bridge{border-left:0;border-inline-start:6px solid var(--gold)}
+.meter{direction:ltr}
+.lang-switch{display:inline-flex;gap:2px;padding:3px;border-radius:10px;background:var(--card);border:2px solid #C9A92B;margin:0 0 10px}
+.lang-switch button{border:0;background:transparent;color:var(--ink);font:700 14px/1 inherit;font-family:inherit;padding:8px 12px;border-radius:7px;cursor:pointer}
+.lang-switch button[aria-pressed=true]{background:var(--purple);color:#fff}
+:root[lang=ar] body{font-family:"Noto Sans Arabic","Segoe UI",Tahoma,system-ui,sans-serif;line-height:1.85}
+:root[lang=ar] *{letter-spacing:0!important}
+:root[lang=ar] h1,:root[lang=ar] h2,:root[lang=ar] h3{line-height:1.45}
+textarea,.who input{unicode-bidi:plaintext;text-align:start}
+@media print{.lang-switch{display:none}}
+</style></head><body>
+<header class="hero"><div class="in">
+ <div class="eyebrow" data-t="eyebrow">SORT &amp; DEFEND 6</div>
+ <h1 data-t="title">Who Has the Final Say?</h1>
+ <p class="sub" data-t="sub">Democracy, Slavery, and States’ Rights · Sort the Power</p>
+</div></header><div class="wrap">
+<div class="lang-switch" role="group" aria-label="Language / Idioma / اللغة"><button type="button" data-lang="en" lang="en" aria-pressed="true">English</button><button type="button" data-lang="es" lang="es" aria-pressed="false">Español</button><button type="button" data-lang="ar" lang="ar" aria-pressed="false">العربية</button></div>
+<div class="bridge"><b data-t="bq">BRIDGE QUESTION:</b> <span data-t="bqtext">Who has the final say: the national government or the states?</span><br>
+<span data-t="job">Your job: sort 9 real events from 1819–1850 and find out.</span></div>
+<div class="how"><b data-t="howt">How to play</b>
+<ol><li data-t="how1">Read a card. Use the readings in your packet if you need more.</li>
+<li data-t="how2">Tap <b>NATIONAL</b> or <b>STATE</b> to pick who had the final say.</li>
+<li data-t="how3">Write one short reason. Watch the tug-of-war bar move as you sort.</li>
+<li data-t="how4">Finish with the Final Round: a short CER on the bridge question.</li></ol>
+<div class="status" data-t="howst">Use <b>Save Progress</b> any time. Use <b>Load Progress</b> to continue later. The <b>Finished</b> button unlocks when everything is done.</div>
+<div class="status" data-t="anylang">You may answer in English, Spanish, or Arabic.</div></div>
+<div class="who">
+ <div><label for="f_first" data-t="lbl_first">FIRST NAME *</label><input id="f_first" data-meta="first" autocomplete="given-name"></div>
+ <div><label for="f_last" data-t="lbl_last">LAST NAME *</label><input id="f_last" data-meta="last" autocomplete="family-name"></div>
+ <div><label for="f_period" data-t="lbl_period">PERIOD *</label><input id="f_period" data-meta="period" inputmode="numeric" maxlength="12"></div>
+ <div><label for="f_date" data-t="lbl_date">DATE</label><input id="f_date" readonly data-tp="ph_date" placeholder="auto-fills"></div>
+</div>
+<div class="meter" aria-live="polite">
+ <div class="row"><span class="nat">★ <span data-t="nat">NATIONAL</span> <span id="nN">0</span></span><span id="nLeft" class="left">9 cards left</span><span class="sta"><span id="nS">0</span> <span data-t="state">STATE</span> ◆</span></div>
+ <div class="rope"><i class="n" id="rN" style="width:0%"></i><i class="s" id="rS" style="width:0%"></i><div class="mid"></div></div>
+</div>
+<h2 class="part" data-t="p1">Part 1 · Sort the Power</h2>
+
+<section class="card" id="c1" data-i="1">
+ <span class="chip">1820 · <span data-t="refA">Reading A</span></span>
+ <h3><span data-t="card">Card</span> 1 <span data-t="of9">of 9</span> · <span data-t="c1.title">The Missouri Compromise</span></h3>
+ <p data-t="c1.text">Maine joined as a free state and Missouri as a slave state. Congress also banned slavery in the rest of the Louisiana Purchase north of latitude 36°30′.</p>
+ <p class="wh"><b data-t="wh">Word help:</b> <span data-t="c1.help">exclude = keep out · latitude = an east–west line on a map</span></p>
+ <p class="ask" data-t="who">Who had the final say?</p>
+ <div class="pick" role="group">
+  <button type="button" class="opt nat" data-v="N" aria-pressed="false">★ <span data-t="nat">NATIONAL</span><small data-t="natsmall">Congress, the president, the army, or federal courts</small></button>
+  <button type="button" class="opt sta" data-v="S" aria-pressed="false">◆ <span data-t="state">STATE</span><small data-t="statesmall">a state government or state legislature</small></button>
+ </div>
+ <label class="why"><span class="p" data-t="c1.ask">Who decided where slavery could spread? Name who did it.</span><textarea rows="2" data-id="why1" data-tp="ph_why" placeholder="Write one short sentence or phrase."></textarea></label>
+</section>
+<section class="card" id="c2" data-i="2">
+ <span class="chip">1821 · <span data-t="refB">Reading B</span></span>
+ <h3><span data-t="card">Card</span> 2 <span data-t="of9">of 9</span> · <span data-t="c2.title">New York Limits Black Voting</span></h3>
+ <p data-t="c2.text">New York’s new constitution gave the vote to all White men. At the same time it added new limits on Black voting.</p>
+ <p class="wh"><b data-t="wh">Word help:</b> <span data-t="c2.help">restrictions = limits</span></p>
+ <p class="ask" data-t="who">Who had the final say?</p>
+ <div class="pick" role="group">
+  <button type="button" class="opt nat" data-v="N" aria-pressed="false">★ <span data-t="nat">NATIONAL</span><small data-t="natsmall">Congress, the president, the army, or federal courts</small></button>
+  <button type="button" class="opt sta" data-v="S" aria-pressed="false">◆ <span data-t="state">STATE</span><small data-t="statesmall">a state government or state legislature</small></button>
+ </div>
+ <label class="why"><span class="p" data-t="c2.ask">Who decided who could vote? Name who did it.</span><textarea rows="2" data-id="why2" data-tp="ph_why" placeholder="Write one short sentence or phrase."></textarea></label>
+</section>
+<section class="card" id="c3" data-i="3">
+ <span class="chip">1832–33 · <span data-t="refC">Reading C</span></span>
+ <h3><span data-t="card">Card</span> 3 <span data-t="of9">of 9</span> · <span data-t="c3.title">South Carolina Says “No” to a Tariff</span></h3>
+ <p data-t="c3.text">South Carolina called the tariffs “null, void, and no law.” Jackson sent soldiers and a warship to Charleston. In March 1833 Congress passed a compromise tariff and the Force Bill. Both sides claimed victory.</p>
+ <p class="wh"><b data-t="wh">Word help:</b> <span data-t="c3.help">nullify = cancel · supremacy = being the highest power</span></p>
+ <p class="ask" data-t="who">Who had the final say?</p>
+ <div class="pick" role="group">
+  <button type="button" class="opt nat" data-v="N" aria-pressed="false">★ <span data-t="nat">NATIONAL</span><small data-t="natsmall">Congress, the president, the army, or federal courts</small></button>
+  <button type="button" class="opt sta" data-v="S" aria-pressed="false">◆ <span data-t="state">STATE</span><small data-t="statesmall">a state government or state legislature</small></button>
+ </div>
+ <label class="why"><span class="p" data-t="c3.ask">Both sides claimed victory. Who really had the final say? Explain.</span><textarea rows="2" data-id="why3" data-tp="ph_why" placeholder="Write one short sentence or phrase."></textarea></label>
+</section>
+<section class="card" id="c4" data-i="4">
+ <span class="chip">1830 · <span data-t="refD">Reading D</span></span>
+ <h3><span data-t="card">Card</span> 4 <span data-t="of9">of 9</span> · <span data-t="c4.title">The Indian Removal Act</span></h3>
+ <p data-t="c4.text">Congress let Jackson ignore earlier treaty promises. The law forced nearly 100,000 Native people in the East and South to move west of the Mississippi River.</p>
+ <p class="wh"><b data-t="wh">Word help:</b> <span data-t="c4.help">authorized = gave permission · treaty = a promise between nations</span></p>
+ <p class="ask" data-t="who">Who had the final say?</p>
+ <div class="pick" role="group">
+  <button type="button" class="opt nat" data-v="N" aria-pressed="false">★ <span data-t="nat">NATIONAL</span><small data-t="natsmall">Congress, the president, the army, or federal courts</small></button>
+  <button type="button" class="opt sta" data-v="S" aria-pressed="false">◆ <span data-t="state">STATE</span><small data-t="statesmall">a state government or state legislature</small></button>
+ </div>
+ <label class="why"><span class="p" data-t="c4.ask">Who made this decision? Name who did it.</span><textarea rows="2" data-id="why4" data-tp="ph_why" placeholder="Write one short sentence or phrase."></textarea></label>
+</section>
+<section class="card" id="c5" data-i="5">
+ <span class="chip">1830 · <span data-t="refD">Reading D</span></span>
+ <h3><span data-t="card">Card</span> 5 <span data-t="of9">of 9</span> · <span data-t="c5.title">Georgia Takes Over Cherokee Rights</span></h3>
+ <p data-t="c5.text">Georgia announced that state law now covered the Cherokee. Cherokee people could not vote, own property, or testify against Whites in court.</p>
+ <p class="wh"><b data-t="wh">Word help:</b> <span data-t="c5.help">testify = speak as a witness in court</span></p>
+ <p class="ask" data-t="who">Who had the final say?</p>
+ <div class="pick" role="group">
+  <button type="button" class="opt nat" data-v="N" aria-pressed="false">★ <span data-t="nat">NATIONAL</span><small data-t="natsmall">Congress, the president, the army, or federal courts</small></button>
+  <button type="button" class="opt sta" data-v="S" aria-pressed="false">◆ <span data-t="state">STATE</span><small data-t="statesmall">a state government or state legislature</small></button>
+ </div>
+ <label class="why"><span class="p" data-t="c5.ask">Who made this decision? Name who did it.</span><textarea rows="2" data-id="why5" data-tp="ph_why" placeholder="Write one short sentence or phrase."></textarea></label>
+</section>
+<section class="card" id="c6" data-i="6">
+ <span class="chip">1832 · <span data-t="refD">Reading D</span></span>
+ <h3><span data-t="card">Card</span> 6 <span data-t="of9">of 9</span> · <span data-t="c6.title">Worcester v. Georgia</span></h3>
+ <p data-t="c6.text">The Supreme Court said Georgia’s laws broke the Constitution and U.S. treaties. Chief Justice Marshall said the Cherokee Nation was “a distinct political community” where Georgia law had no force. Jackson, however, forced the Cherokee to obey Georgia’s laws or move west.</p>
+ <p class="wh"><b data-t="wh">Word help:</b> <span data-t="c6.help">distinct = separate · abide by = obey</span></p>
+ <p class="ask" data-t="who">Who had the final say?</p>
+ <div class="pick" role="group">
+  <button type="button" class="opt nat" data-v="N" aria-pressed="false">★ <span data-t="nat">NATIONAL</span><small data-t="natsmall">Congress, the president, the army, or federal courts</small></button>
+  <button type="button" class="opt sta" data-v="S" aria-pressed="false">◆ <span data-t="state">STATE</span><small data-t="statesmall">a state government or state legislature</small></button>
+ </div>
+ <label class="why"><span class="p" data-t="c6.ask">The Court ruled for the Cherokee, but they were still forced out. Who really had the final say, and why?</span><textarea rows="2" data-id="why6" data-tp="ph_why" placeholder="Write one short sentence or phrase."></textarea></label>
+</section>
+<section class="card" id="c7" data-i="7">
+ <span class="chip">1838 · <span data-t="refD">Reading D</span></span>
+ <h3><span data-t="card">Card</span> 7 <span data-t="of9">of 9</span> · <span data-t="c7.title">The Trail of Tears</span></h3>
+ <p data-t="c7.text">While Martin Van Buren was president, 17,000 Cherokee were forced west under military guard. Thousands died from cold, disease, or starvation.</p>
+ <p class="wh"><b data-t="wh">Word help:</b> <span data-t="c7.help">evicted = forced out · exposure = being out in the cold without shelter</span></p>
+ <p class="ask" data-t="who">Who had the final say?</p>
+ <div class="pick" role="group">
+  <button type="button" class="opt nat" data-v="N" aria-pressed="false">★ <span data-t="nat">NATIONAL</span><small data-t="natsmall">Congress, the president, the army, or federal courts</small></button>
+  <button type="button" class="opt sta" data-v="S" aria-pressed="false">◆ <span data-t="state">STATE</span><small data-t="statesmall">a state government or state legislature</small></button>
+ </div>
+ <label class="why"><span class="p" data-t="c7.ask">Who carried out this removal? Name who did it.</span><textarea rows="2" data-id="why7" data-tp="ph_why" placeholder="Write one short sentence or phrase."></textarea></label>
+</section>
+<section class="card" id="c8" data-i="8">
+ <span class="chip">1800s · <span data-t="refE">Reading E</span></span>
+ <h3><span data-t="card">Card</span> 8 <span data-t="of9">of 9</span> · <span data-t="c8.title">Slave Codes</span></h3>
+ <p data-t="c8.text">Each state made its own slave codes. Enslaved people needed a pass to leave, had nightly curfews, and in some places it was a crime for them to learn to read and write.</p>
+ <p class="wh"><b data-t="wh">Word help:</b> <span data-t="c8.help">slave codes = state laws that limited the freedom of enslaved people · curfew = a time you must be inside</span></p>
+ <p class="ask" data-t="who">Who had the final say?</p>
+ <div class="pick" role="group">
+  <button type="button" class="opt nat" data-v="N" aria-pressed="false">★ <span data-t="nat">NATIONAL</span><small data-t="natsmall">Congress, the president, the army, or federal courts</small></button>
+  <button type="button" class="opt sta" data-v="S" aria-pressed="false">◆ <span data-t="state">STATE</span><small data-t="statesmall">a state government or state legislature</small></button>
+ </div>
+ <label class="why"><span class="p" data-t="c8.ask">Who wrote and enforced these rules? Name who did it.</span><textarea rows="2" data-id="why8" data-tp="ph_why" placeholder="Write one short sentence or phrase."></textarea></label>
+</section>
+<section class="card" id="c9" data-i="9">
+ <span class="chip">1831 · <span data-t="refF">Reading F</span></span>
+ <h3><span data-t="card">Card</span> 9 <span data-t="of9">of 9</span> · <span data-t="c9.title">After Nat Turner’s Rebellion</span></h3>
+ <p data-t="c9.text">Virginia’s legislature debated ending slavery and voted it down. Instead it limited reading, writing, and religious meetings. Southern states also set up White patrols to look for freedom seekers.</p>
+ <p class="wh"><b data-t="wh">Word help:</b> <span data-t="c9.help">abolished = ended · vigilante = acting like police without the law’s permission</span></p>
+ <p class="ask" data-t="who">Who had the final say?</p>
+ <div class="pick" role="group">
+  <button type="button" class="opt nat" data-v="N" aria-pressed="false">★ <span data-t="nat">NATIONAL</span><small data-t="natsmall">Congress, the president, the army, or federal courts</small></button>
+  <button type="button" class="opt sta" data-v="S" aria-pressed="false">◆ <span data-t="state">STATE</span><small data-t="statesmall">a state government or state legislature</small></button>
+ </div>
+ <label class="why"><span class="p" data-t="c9.ask">Who decided how to respond to the rebellion? Name who did it.</span><textarea rows="2" data-id="why9" data-tp="ph_why" placeholder="Write one short sentence or phrase."></textarea></label>
+</section>
+<h2 class="part" data-t="p2">Part 2 · Who Had No Say?</h2>
+<div class="box"><p data-t="douglass">Frederick Douglass asked in 1852: “What have I, or those I represent, to do with your national independence?”</p>
+<label class="t" for="nobody" data-t="nobody">Look back at your 9 cards. Some groups never got to decide anything. Name two groups of people who had no say, and tell how you know.</label>
+<textarea id="nobody" rows="3" data-id="nobody"></textarea></div>
+<h2 class="part" data-t="p3">Part 3 · Final Round: CER</h2>
+<div class="bridge"><b data-t="bq">BRIDGE QUESTION:</b> <span data-t="bq3">From 1819 to 1850, who had the final say more often: the national government or the states?</span></div>
+<div class="tally" id="tally">Your tally: sort all 9 cards to see it.</div>
+<div class="box"><label class="t" for="claim" data-t="l_claim">Claim</label><p class="hint" data-t="h_claim">From 1819 to 1850, who had the final say more often: the national government or the states? Write one sentence.</p><textarea id="claim" rows="2" data-id="claim"></textarea></div><div class="box"><label class="t" for="ev1" data-t="l_ev1">Evidence 1</label><p class="hint" data-t="h_ev1">Give one fact from your cards that supports your claim.</p><textarea id="ev1" rows="2" data-id="ev1"></textarea></div><div class="box"><label class="t" for="ev2" data-t="l_ev2">Evidence 2</label><p class="hint" data-t="h_ev2">Give a second fact from a different card.</p><textarea id="ev2" rows="2" data-id="ev2"></textarea></div><div class="box"><label class="t" for="reason" data-t="l_reason">Reasoning</label><p class="hint" data-t="h_reason">Explain how your two facts prove your claim.</p><textarea id="reason" rows="3" data-id="reason"></textarea></div><div class="box"><label class="t" for="counter" data-t="l_counter">Counter-Argument</label><p class="hint" data-t="h_counter">What would someone on the other side say? Then answer them.</p><textarea id="counter" rows="3" data-id="counter"></textarea></div>
+<div class="box checks"><b data-t="chkt">Check your CER</b><br><label><input type="checkbox" data-id="chk1"> <span data-t="chk1">My claim answers the question.</span></label><label><input type="checkbox" data-id="chk2"> <span data-t="chk2">I used two facts.</span></label><label><input type="checkbox" data-id="chk3"> <span data-t="chk3">My reasoning explains how the facts prove my claim.</span></label><label><input type="checkbox" data-id="chk4"> <span data-t="chk4">I answered the Counter-Argument.</span></label></div>
+<div class="bar"><button class="btn" id="saveBtn" type="button" data-t="save">Save Progress</button>
+<button class="btn" id="loadBtn" type="button" data-t="load">Load Progress</button>
+<input type="file" id="loadFile" accept=".json,application/json" hidden>
+<button class="btn primary" id="finishBtn" type="button" disabled data-t="finish">Finished — Download File to Submit</button></div>
+<div class="msg" id="msg" role="status"></div>
+<div class="status" id="todo"></div>
+<footer><span>UNITS 3–4 BRIDGE · CONSTITUTION TO RECONSTRUCTION | CPUSH</span><span>DANIEL GARZA, M.A.</span></footer></div><script>
+(function(){
+var PACKET='RP_6_Who_Has_the_Final_Say',STORE='cpush_rp6_final_say',N=9,I18N={"en": {"left": "{n} cards left", "alldone": "All sorted!", "tally_on": "Your tally: NATIONAL {n} · STATE {s}. Use it, but your CER still needs facts and reasoning.", "tally_off": "Your tally: sort all {n} cards to see it.", "m_names": "first name, last name, and period", "m_cards": "{n} card(s) to sort", "m_reasons": "{n} card reason(s)", "m_part2": "Part 2 answer", "m_cer": "CER: {x}", "m_chk": "CER checklist", "todo": "Still to do: {x}.", "todo_ok": "Everything is done. Press Finished.", "msg_names": "Type your first name, last name, and period at the top before saving.", "msg_saved": "Progress saved. Keep that file. Use Load Progress later. Do not upload it to Canvas until you are finished.", "msg_loaded": "Progress loaded.", "msg_loaderr": "That is not a saved file for this assignment. Choose the .json file you saved from this page.", "msg_fin": "Finished! Your file \"{f}\" downloaded. Upload that file to Canvas.", "msg_notfin": "Not finished yet: {x}.", "l_claim": "Claim", "l_ev1": "Evidence 1", "l_ev2": "Evidence 2", "l_reason": "Reasoning", "l_counter": "Counter-Argument", "ph_why": "Write one short sentence or phrase.", "ph_date": "auto-fills"}, "es": {"eyebrow": "CLASIFICA Y DEFIENDE 6", "title": "¿Quién tiene la última palabra?", "sub": "Democracia, esclavitud y derechos de los estados · Clasifica el poder", "bq": "PREGUNTA PUENTE:", "bqtext": "¿Quién tiene la última palabra: el gobierno nacional o los estados?", "job": "Tu tarea: clasifica 9 hechos reales de 1819–1850 y descúbrelo.", "howt": "Cómo jugar", "how1": "Lee una tarjeta. Usa las lecturas de tu paquete si necesitas más.", "how2": "Toca <b>NACIONAL</b> o <b>ESTADO</b> para elegir quién tuvo la última palabra.", "how3": "Escribe una razón corta. Mira cómo se mueve la barra de tira y afloja mientras clasificas.", "how4": "Termina con la Ronda final: un CER corto sobre la pregunta puente.", "howst": "Usa <b>Guardar progreso</b> en cualquier momento. Usa <b>Cargar progreso</b> para continuar después. El botón <b>Terminado</b> se activa cuando todo está completo.", "anylang": "Puedes contestar en inglés, español o árabe.", "lbl_first": "NOMBRE *", "lbl_last": "APELLIDO *", "lbl_period": "PERÍODO *", "lbl_date": "FECHA", "ph_date": "se llena solo", "nat": "NACIONAL", "state": "ESTADO", "natsmall": "el Congreso, el presidente, el ejército o los tribunales federales", "statesmall": "un gobierno estatal o una legislatura estatal", "p1": "Parte 1 · Clasifica el poder", "p2": "Parte 2 · ¿Quién no tuvo voz?", "p3": "Parte 3 · Ronda final: CER", "card": "Tarjeta", "of9": "de 9", "wh": "Ayuda con palabras:", "who": "¿Quién tuvo la última palabra?", "ph_why": "Escribe una oración o frase corta.", "refA": "Lectura A", "refB": "Lectura B", "refC": "Lectura C", "refD": "Lectura D", "refE": "Lectura E", "refF": "Lectura F", "douglass": "Frederick Douglass preguntó en 1852: «¿Qué tengo yo, o los que represento, que ver con la independencia de ustedes como nación?»", "nobody": "Mira tus 9 tarjetas. Algunos grupos nunca pudieron decidir nada. Nombra dos grupos de personas que no tuvieron voz y explica cómo lo sabes.", "bq3": "De 1819 a 1850, ¿quién tuvo la última palabra con más frecuencia: el gobierno nacional o los estados?", "l_claim": "Afirmación", "l_ev1": "Evidencia 1", "l_ev2": "Evidencia 2", "l_reason": "Razonamiento", "l_counter": "Contraargumento", "h_claim": "De 1819 a 1850, ¿quién tuvo la última palabra con más frecuencia: el gobierno nacional o los estados? Escribe una oración.", "h_ev1": "Da un dato de tus tarjetas que apoye tu afirmación.", "h_ev2": "Da un segundo dato de otra tarjeta.", "h_reason": "Explica cómo tus dos datos prueban tu afirmación.", "h_counter": "¿Qué diría alguien del otro lado? Luego respóndele.", "chkt": "Revisa tu CER", "chk1": "Mi afirmación responde la pregunta.", "chk2": "Usé dos datos.", "chk3": "Mi razonamiento explica cómo los datos prueban mi afirmación.", "chk4": "Respondí al contraargumento.", "save": "Guardar progreso", "load": "Cargar progreso", "finish": "Terminado — Descargar archivo para entregar", "left": "{n} tarjetas por clasificar", "alldone": "¡Todo clasificado!", "tally_on": "Tu conteo: NACIONAL {n} · ESTADO {s}. Úsalo, pero tu CER todavía necesita datos y razonamiento.", "tally_off": "Tu conteo: clasifica las {n} tarjetas para verlo.", "m_names": "nombre, apellido y período", "m_cards": "{n} tarjeta(s) por clasificar", "m_reasons": "{n} razón(es) de tarjetas", "m_part2": "respuesta de la Parte 2", "m_cer": "CER: {x}", "m_chk": "lista de revisión del CER", "todo": "Falta: {x}.", "todo_ok": "Todo está listo. Presiona Terminado.", "msg_names": "Escribe tu nombre, apellido y período arriba antes de guardar.", "msg_saved": "Progreso guardado. Guarda ese archivo. Usa Cargar progreso después. No lo subas a Canvas hasta que termines.", "msg_loaded": "Progreso cargado.", "msg_loaderr": "Ese no es un archivo guardado de esta tarea. Elige el archivo .json que guardaste de esta página.", "msg_fin": "¡Terminado! Tu archivo \"{f}\" se descargó. Sube ese archivo a Canvas.", "msg_notfin": "Todavía no has terminado: {x}.", "c1.title": "El Compromiso de Missouri", "c1.text": "Maine entró como estado libre y Missouri como estado esclavista. El Congreso también prohibió la esclavitud en el resto de la Compra de Luisiana al norte de la latitud 36°30′.", "c1.help": "excluir = dejar fuera · latitud = una línea este–oeste en un mapa", "c1.ask": "¿Quién decidió hasta dónde podía extenderse la esclavitud? Nombra quién lo hizo.", "c2.title": "Nueva York limita el voto de las personas negras", "c2.text": "La nueva constitución de Nueva York dio el voto a todos los hombres blancos. Al mismo tiempo, añadió nuevos límites al voto de las personas negras.", "c2.help": "restricciones = límites", "c2.ask": "¿Quién decidió quién podía votar? Nombra quién lo hizo.", "c3.title": "Carolina del Sur dice «no» a un arancel", "c3.text": "Carolina del Sur declaró que los aranceles eran «nulos, sin valor y sin fuerza de ley». Jackson envió soldados y un buque de guerra a Charleston. En marzo de 1833, el Congreso aprobó un arancel de compromiso y la Ley de Fuerza (Force Bill). Ambos lados dijeron que habían ganado.", "c3.help": "anular = cancelar · supremacía = ser el poder más alto", "c3.ask": "Ambos lados dijeron que ganaron. ¿Quién tuvo realmente la última palabra? Explica.", "c4.title": "La Ley de Remoción de los Indígenas (Indian Removal Act)", "c4.text": "El Congreso permitió que Jackson ignorara promesas de tratados anteriores. La ley obligó a casi 100,000 indígenas del Este y del Sur a mudarse al oeste del río Misisipi.", "c4.help": "autorizó = dio permiso · tratado = una promesa entre naciones", "c4.ask": "¿Quién tomó esta decisión? Nombra quién lo hizo.", "c5.title": "Georgia se apodera de los derechos de los cheroquis", "c5.text": "Georgia anunció que las leyes del estado ahora cubrían a los cheroquis. Los cheroquis no podían votar, tener propiedades ni testificar contra blancos en la corte.", "c5.help": "testificar = hablar como testigo en la corte", "c5.ask": "¿Quién tomó esta decisión? Nombra quién lo hizo.", "c6.title": "Worcester v. Georgia", "c6.text": "La Corte Suprema dijo que las leyes de Georgia violaban la Constitución y los tratados de EE. UU. El presidente de la Corte, Marshall, dijo que la Nación Cheroqui era «una comunidad política distinta» donde las leyes de Georgia no tenían fuerza. Sin embargo, Jackson obligó a los cheroquis a obedecer las leyes de Georgia o mudarse al oeste.", "c6.help": "distinto = separado · obedecer = hacer caso a", "c6.ask": "La Corte falló a favor de los cheroquis, pero aun así los obligaron a irse. ¿Quién tuvo realmente la última palabra y por qué?", "c7.title": "El Sendero de las Lágrimas", "c7.text": "Mientras Martin Van Buren era presidente, 17,000 cheroquis fueron obligados a ir al oeste bajo guardia militar. Miles murieron de frío, enfermedad o hambre.", "c7.help": "desalojados = sacados a la fuerza · exposición = estar en el frío sin refugio", "c7.ask": "¿Quién llevó a cabo esta remoción? Nombra quién lo hizo.", "c8.title": "Códigos de esclavos", "c8.text": "Cada estado hizo sus propios códigos de esclavos. Las personas esclavizadas necesitaban un pase para salir, tenían toque de queda por la noche y, en algunos lugares, era un delito que aprendieran a leer y escribir.", "c8.help": "códigos de esclavos = leyes estatales que limitaban la libertad de las personas esclavizadas · toque de queda = hora en que debes estar adentro", "c8.ask": "¿Quién escribió y aplicó estas reglas? Nombra quién lo hizo.", "c9.title": "Después de la rebelión de Nat Turner", "c9.text": "La legislatura de Virginia debatió poner fin a la esclavitud y lo rechazó con su voto. En cambio, limitó la lectura, la escritura y las reuniones religiosas. Los estados del Sur también crearon patrullas de blancos para buscar a quienes escapaban hacia la libertad.", "c9.help": "abolir = acabar con · vigilante = actuar como policía sin permiso de la ley", "c9.ask": "¿Quién decidió cómo responder a la rebelión? Nombra quién lo hizo."}, "ar": {"eyebrow": "صنّف ودافع 6", "title": "من يملك الكلمة الأخيرة؟", "sub": "الديمقراطية والعبودية وحقوق الولايات · صنّف السلطة", "bq": "سؤال الجسر:", "bqtext": "من يملك الكلمة الأخيرة: الحكومة الوطنية أم الولايات؟", "job": "مهمتك: صنّف 9 أحداث حقيقية من 1819–1850 واكتشف الإجابة.", "howt": "طريقة اللعب", "how1": "اقرأ بطاقة. استخدم القراءات في ملفك إذا احتجت إلى المزيد.", "how2": "اضغط <b>وطني</b> أو <b>ولاية</b> لتختار من كانت له الكلمة الأخيرة.", "how3": "اكتب سببًا قصيرًا. شاهد شريط شدّ الحبل يتحرك أثناء التصنيف.", "how4": "أنهِ بالجولة الأخيرة: CER قصير عن سؤال الجسر.", "howst": "استخدم <b>حفظ التقدم</b> في أي وقت. واستخدم <b>تحميل التقدم</b> للمتابعة لاحقًا. يُفتح زر <b>انتهيت</b> عند اكتمال كل شيء.", "anylang": "يمكنك الإجابة بالإنجليزية أو الإسبانية أو العربية.", "lbl_first": "الاسم الأول *", "lbl_last": "اسم العائلة *", "lbl_period": "الحصة *", "lbl_date": "التاريخ", "ph_date": "يُملأ تلقائيًا", "nat": "وطني", "state": "ولاية", "natsmall": "الكونغرس أو الرئيس أو الجيش أو المحاكم الفيدرالية", "statesmall": "حكومة ولاية أو مجلس تشريعي للولاية", "p1": "الجزء 1 · صنّف السلطة", "p2": "الجزء 2 · من لم يكن له رأي؟", "p3": "الجزء 3 · الجولة الأخيرة: CER", "card": "بطاقة", "of9": "من 9", "wh": "مساعدة في الكلمات:", "who": "من كانت له الكلمة الأخيرة؟", "ph_why": "اكتب جملة أو عبارة قصيرة.", "refA": "القراءة A", "refB": "القراءة B", "refC": "القراءة C", "refD": "القراءة D", "refE": "القراءة E", "refF": "القراءة F", "douglass": "سأل فريدريك دوغلاس (Frederick Douglass) عام 1852: «ما شأني أنا، أو شأن من أمثّلهم، باستقلالكم الوطني؟»", "nobody": "انظر إلى بطاقاتك التسع. بعض الفئات لم تُتَح لها فرصة القرار أبدًا. اذكر فئتين من الناس لم يكن لهما رأي، واشرح كيف عرفت ذلك.", "bq3": "من 1819 إلى 1850، من كانت له الكلمة الأخيرة في أغلب الأحيان: الحكومة الوطنية أم الولايات؟", "l_claim": "الادعاء", "l_ev1": "الدليل 1", "l_ev2": "الدليل 2", "l_reason": "التعليل", "l_counter": "الحجة المضادة", "h_claim": "من 1819 إلى 1850، من كانت له الكلمة الأخيرة في أغلب الأحيان: الحكومة الوطنية أم الولايات؟ اكتب جملة واحدة.", "h_ev1": "اذكر معلومة واحدة من بطاقاتك تدعم ادعاءك.", "h_ev2": "اذكر معلومة ثانية من بطاقة مختلفة.", "h_reason": "اشرح كيف تثبت المعلومتان ادعاءك.", "h_counter": "ماذا سيقول شخص من الجانب الآخر؟ ثم ردّ عليه.", "chkt": "راجع CER الخاص بك", "chk1": "ادعائي يجيب عن السؤال.", "chk2": "استخدمت معلومتين.", "chk3": "تعليلي يشرح كيف تثبت المعلومات ادعائي.", "chk4": "رددت على الحجة المضادة.", "save": "حفظ التقدم", "load": "تحميل التقدم", "finish": "انتهيت — تنزيل الملف للتسليم", "left": "{n} بطاقات متبقية", "alldone": "تم تصنيف الكل!", "tally_on": "مجموعك: وطني {n} · ولاية {s}. استفد منه، لكن CER ما زال يحتاج إلى معلومات وتعليل.", "tally_off": "مجموعك: صنّف البطاقات الـ {n} لتراه.", "m_names": "الاسم الأول واسم العائلة والحصة", "m_cards": "{n} بطاقة (بطاقات) للتصنيف", "m_reasons": "{n} سبب (أسباب) للبطاقات", "m_part2": "إجابة الجزء 2", "m_cer": "CER: {x}", "m_chk": "قائمة مراجعة CER", "todo": "المتبقي: {x}.", "todo_ok": "كل شيء مكتمل. اضغط انتهيت.", "msg_names": "اكتب اسمك الأول واسم العائلة والحصة في الأعلى قبل الحفظ.", "msg_saved": "تم حفظ التقدم. احتفظ بهذا الملف. استخدم تحميل التقدم لاحقًا. لا ترفعه إلى Canvas حتى تنتهي.", "msg_loaded": "تم تحميل التقدم.", "msg_loaderr": "هذا ليس ملفًا محفوظًا لهذه المهمة. اختر ملف .json الذي حفظته من هذه الصفحة.", "msg_fin": "انتهيت! تم تنزيل ملفك \"{f}\". ارفع هذا الملف إلى Canvas.", "msg_notfin": "لم تنتهِ بعد: {x}.", "c1.title": "تسوية ميسوري (Missouri Compromise)", "c1.text": "انضمّت ولاية مين (Maine) كولاية حرة وميسوري (Missouri) كولاية تسمح بالعبودية. كما منع الكونغرس العبودية في بقية أراضي شراء لويزيانا (Louisiana Purchase) شمال خط العرض 36°30′.", "c1.help": "استبعاد = إبقاء خارجًا · خط العرض = خط شرق–غرب على الخريطة", "c1.ask": "من قرّر أين يمكن أن تنتشر العبودية؟ اذكر من فعل ذلك.", "c2.title": "نيويورك (New York) تقيّد تصويت السود", "c2.text": "منح دستور نيويورك (New York) الجديد حق التصويت لجميع الرجال البيض. وفي الوقت نفسه أضاف قيودًا جديدة على تصويت السود.", "c2.help": "قيود = حدود", "c2.ask": "من قرّر من يحق له التصويت؟ اذكر من فعل ذلك.", "c3.title": "كارولاينا الجنوبية (South Carolina) تقول «لا» لرسم جمركي", "c3.text": "أعلنت كارولاينا الجنوبية أن الرسوم الجمركية «لاغية وباطلة ولا قوة قانونية لها». أرسل جاكسون (Jackson) جنودًا وسفينة حربية إلى تشارلستون (Charleston). وفي مارس 1833 أقرّ الكونغرس رسمًا جمركيًا تسوويًا وقانون القوة (Force Bill). وادّعى الطرفان النصر.", "c3.help": "إبطال = إلغاء · السيادة = أن تكون السلطة الأعلى", "c3.ask": "ادّعى الطرفان النصر. من كانت له الكلمة الأخيرة فعلًا؟ اشرح.", "c4.title": "قانون الترحيل الهندي (Indian Removal Act)", "c4.text": "سمح الكونغرس لجاكسون (Jackson) بتجاهل وعود المعاهدات السابقة. وأجبر القانون نحو 100,000 من السكان الأصليين في الشرق والجنوب على الانتقال غرب نهر المسيسيبي (Mississippi River).", "c4.help": "أجاز = أعطى الإذن · معاهدة = وعد بين دولتين أو أمتين", "c4.ask": "من اتخذ هذا القرار؟ اذكر من فعل ذلك.", "c5.title": "جورجيا (Georgia) تسلب حقوق الشيروكي (Cherokee)", "c5.text": "أعلنت جورجيا أن قوانين الولاية تشمل الآن الشيروكي (Cherokee). ولم يكن يحق لهم التصويت أو امتلاك الممتلكات أو الشهادة ضد البيض في المحكمة.", "c5.help": "الشهادة = الكلام كشاهد في المحكمة", "c5.ask": "من اتخذ هذا القرار؟ اذكر من فعل ذلك.", "c6.title": "قضية ورسستر ضد جورجيا (Worcester v. Georgia)", "c6.text": "قالت المحكمة العليا إن قوانين جورجيا (Georgia) تخالف الدستور ومعاهدات الولايات المتحدة. وقال رئيس المحكمة مارشال (Marshall) إن أمة الشيروكي (Cherokee) «مجتمع سياسي متميز» لا قوة فيه لقوانين جورجيا. لكن جاكسون (Jackson) أجبر الشيروكي على الخضوع لقوانين جورجيا أو الانتقال غربًا.", "c6.help": "متميز = منفصل · الخضوع = الطاعة", "c6.ask": "حكمت المحكمة لصالح الشيروكي، ومع ذلك أُجبروا على المغادرة. من كانت له الكلمة الأخيرة فعلًا ولماذا؟", "c7.title": "درب الدموع (Trail of Tears)", "c7.text": "في عهد الرئيس مارتن فان بيورن (Martin Van Buren)، أُجبر 17,000 من الشيروكي على الانتقال غربًا تحت حراسة عسكرية. ومات الآلاف من البرد والمرض والجوع.", "c7.help": "مطرودون = أُخرجوا بالقوة · التعرّض = البقاء في البرد بلا مأوى", "c7.ask": "من نفّذ هذا الترحيل؟ اذكر من فعل ذلك.", "c8.title": "قوانين العبيد (Slave Codes)", "c8.text": "وضعت كل ولاية قوانين العبيد الخاصة بها. كان على المستعبَدين الحصول على تصريح للخروج، وكان عليهم حظر تجول ليلي، وفي بعض الأماكن كان تعلّم القراءة والكتابة جريمة.", "c8.help": "قوانين العبيد = قوانين الولايات التي قيّدت حرية المستعبَدين · حظر التجول = وقت يجب أن تكون فيه في الداخل", "c8.ask": "من كتب هذه القواعد وطبّقها؟ اذكر من فعل ذلك.", "c9.title": "بعد ثورة نات تيرنر (Nat Turner)", "c9.text": "ناقش المجلس التشريعي في فرجينيا (Virginia) إنهاء العبودية ثم صوّت ضده. وبدلًا من ذلك قيّد القراءة والكتابة والاجتماعات الدينية. كما أنشأت ولايات الجنوب دوريات من البيض للبحث عن الباحثين عن الحرية.", "c9.help": "إلغاء = إنهاء · جماعات أهلية = جماعات تتصرف كالشرطة دون إذن القانون", "c9.ask": "من قرّر كيف يُرد على الثورة؟ اذكر من فعل ذلك."}},LANG='en';
+var $=function(i){return document.getElementById(i)};
+function T(k,v){var s=(I18N[LANG]&&I18N[LANG][k])||I18N.en[k]||k;if(v)for(var x in v)s=s.split('{'+x+'}').join(v[x]);return s}
+var data={sides:{},text:{},checks:{}};
+var meta={first:$('f_first'),last:$('f_last'),period:$('f_period')};
+var sep=function(){return LANG==='ar'?'؛ ':'; '};
+function msg(k,v,c){var m=$('msg');m._k=k;m._v=v;m._c=c;m.textContent=k?T(k,v):'';m.className='msg '+(c||'')}
+function persist(){try{localStorage.setItem(STORE,JSON.stringify(snap(true)))}catch(e){}}
+function snap(draft){
+ var t={};document.querySelectorAll('textarea[data-id]').forEach(function(x){t[x.dataset.id]=x.value});
+ var c={};document.querySelectorAll('input[data-id]').forEach(function(x){c[x.dataset.id]=x.checked});
+ var done=!draft&&complete().ok;
+ return {packet:PACKET,course:'CPUSH',version:1,saved:new Date().toISOString(),completed:done,
+  student:{first:meta.first.value.trim(),last:meta.last.value.trim(),period:meta.period.value.trim(),date:done?$('f_date').value:''},
+  sides:data.sides,answers:t,checks:c,tally:tally()}}
+function tally(){var n=0,s=0;for(var k in data.sides){if(data.sides[k]==='N')n++;else if(data.sides[k]==='S')s++}return {national:n,state:s}}
+function complete(){var miss=[];
+ if(!meta.first.value.trim()||!meta.last.value.trim()||!meta.period.value.trim())miss.push(T('m_names'));
+ var us=0,uw=0;
+ for(var i=1;i<=N;i++){if(!data.sides[i])us++;var w=document.querySelector('[data-id=why'+i+']');if(!w.value.trim())uw++}
+ if(us)miss.push(T('m_cards',{n:us}));
+ if(uw)miss.push(T('m_reasons',{n:uw}));
+ ['nobody','claim','ev1','ev2','reason','counter'].forEach(function(k){if(!$(k).value.trim())miss.push(k==='nobody'?T('m_part2'):T('m_cer',{x:T('l_'+k)}))});
+ var un=0;document.querySelectorAll('input[data-id^=chk]').forEach(function(x){if(!x.checked)un++});
+ if(un)miss.push(T('m_chk'));
+ return {ok:miss.length===0,miss:miss}}
+function paint(){
+ var t=tally(),sorted=t.national+t.state;
+ $('nN').textContent=t.national;$('nS').textContent=t.state;
+ $('rN').style.width=(t.national/N*50)+'%';$('rS').style.width=(t.state/N*50)+'%';
+ $('nLeft').textContent=sorted===N?T('alldone'):T('left',{n:N-sorted});
+ $('tally').textContent=sorted===N?T('tally_on',{n:t.national,s:t.state}):T('tally_off',{n:N});
+ document.querySelectorAll('.card').forEach(function(c){var i=c.dataset.i,v=data.sides[i];
+  c.classList.toggle('done',!!v);c.classList.toggle('isS',v==='S');
+  c.querySelectorAll('.opt').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.v===v))})});
+ var r=complete();$('finishBtn').disabled=!r.ok;
+ $('todo').textContent=r.ok?T('todo_ok'):T('todo',{x:r.miss.join(sep())});
+}
+/* ---- language ---- */
+var EN={};document.querySelectorAll('[data-t]').forEach(function(el){EN[el.dataset.t+'|'+Array.prototype.indexOf.call(document.querySelectorAll('[data-t]'),el)]=el.innerHTML});
+var els=Array.prototype.slice.call(document.querySelectorAll('[data-t]')),orig=els.map(function(el){return el.innerHTML});
+var tps=Array.prototype.slice.call(document.querySelectorAll('[data-tp]'));
+function setLang(l,keep){LANG=l;
+ document.documentElement.lang=l;document.documentElement.dir=(l==='ar'?'rtl':'ltr');
+ els.forEach(function(el,i){el.innerHTML=(l==='en')?orig[i]:(I18N[l][el.dataset.t]||orig[i])});
+ tps.forEach(function(el){el.placeholder=T(el.dataset.tp)});
+ document.querySelectorAll('.lang-switch button').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.lang===l))});
+ var m=$('msg');if(m._k)m.textContent=T(m._k,m._v);
+ paint();try{localStorage.setItem(STORE+'_lang',l)}catch(e){}}
+document.querySelectorAll('.lang-switch button').forEach(function(b){b.addEventListener('click',function(){setLang(b.dataset.lang)})});
+document.querySelectorAll('.card').forEach(function(c){c.querySelectorAll('.opt').forEach(function(b){
+ b.addEventListener('click',function(){data.sides[c.dataset.i]=b.dataset.v;paint();persist()})})});
+document.addEventListener('input',function(ev){ev.target.classList&&ev.target.classList.remove('bad');paint();persist()});
+function who(){return (meta.last.value.trim()+'_'+meta.first.value.trim()).normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^A-Za-z0-9_\-]+/g,'_')}
+function named(){var ok=true;Object.keys(meta).forEach(function(k){if(!meta[k].value.trim()){meta[k].classList.add('bad');ok=false}});return ok}
+function download(name,o){var b=new Blob([JSON.stringify(o,null,2)],{type:'application/json'});var a=document.createElement('a');
+ a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500)}
+function apply(o){var s=o.student||{};meta.first.value=s.first||'';meta.last.value=s.last||'';meta.period.value=s.period||'';
+ $('f_date').value=(o.completed?s.date:'')||'';data.sides=o.sides||{};
+ document.querySelectorAll('textarea[data-id]').forEach(function(x){x.value=(o.answers||{})[x.dataset.id]||''});
+ document.querySelectorAll('input[data-id]').forEach(function(x){x.checked=!!(o.checks||{})[x.dataset.id]});paint()}
+$('saveBtn').addEventListener('click',function(){
+ if(!named()){msg('msg_names',null,'err');meta.first.scrollIntoView({block:'center'});return}
+ download(who()+'-'+PACKET+'-PROGRESS.json',snap(true));msg('msg_saved',null,'ok')});
+$('loadBtn').addEventListener('click',function(){$('loadFile').click()});
+$('loadFile').addEventListener('change',function(){var f=this.files[0];if(!f)return;var r=new FileReader();
+ r.onload=function(){try{var o=JSON.parse(r.result);if(o.packet!==PACKET)throw 0;apply(o);persist();msg('msg_loaded',null,'ok')}
+ catch(e){msg('msg_loaderr',null,'err')}};r.readAsText(f);this.value=''});
+$('finishBtn').addEventListener('click',function(){
+ var r=complete();if(!r.ok){msg('msg_notfin',{x:r.miss.join(sep())},'err');return}
+ var d=new Date();$('f_date').value=(d.getMonth()+1)+'/'+d.getDate()+'/'+d.getFullYear();
+ var o=snap(false),fn=who()+'-'+PACKET+'.json';download(fn,o);
+ msg('msg_fin',{f:fn},'ok');persist()});
+try{var s=localStorage.getItem(STORE);if(s)apply(JSON.parse(s))}catch(e){}
+var q=(location.search.match(/[?&]lang=(en|es|ar)/)||[])[1],sl='en';
+try{sl=localStorage.getItem(STORE+'_lang')||'en'}catch(e){}
+setLang(q||sl);
+})();
+</script></body></html>
