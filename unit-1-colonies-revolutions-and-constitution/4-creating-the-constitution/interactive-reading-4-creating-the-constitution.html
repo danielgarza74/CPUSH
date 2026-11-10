@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Interactive Reading 4 · Creating the Constitution</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;0,800;1,400;1,500&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;0,800;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;700;800&display=swap">
+<style>
+:root{
+  --bg:#EEF5F6; --paper:#FBFCFD; --maroon:#1C4B54; --ink:#15383F; --brown:#2C6D7A;
+  --keybg:#F9F7E8; --keyline:#D2C24B; --rule:#CCDADC; --line:#A7BBBF; --ok:#3F6B3A;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Segoe UI",system-ui,-apple-system,Verdana,sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:0 18px 60px}
+header.hero{padding:34px 0 14px;border-bottom:3px solid #D2C24B}
+.eyebrow{font-size:12px;letter-spacing:.14em;font-weight:700;color:#7E742D}
+h1{margin:.15em 0 .05em;font-size:34px;line-height:1.15;color:var(--maroon)}
+.sub{margin:0;font-weight:600;color:var(--brown)}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 4px}
+.meta label{flex:1 1 180px;font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--brown)}
+.meta input[readonly]{background:#DFE8E9;color:var(--brown);cursor:not-allowed}
+.meta input{display:block;width:100%;margin-top:3px;padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--paper);color:var(--ink);font:inherit}
+.bigq,.howto{background:var(--paper);border:1px solid var(--line);border-left:6px solid #D2C24B;border-radius:6px;padding:12px 16px;margin:18px 0}
+.bigq p,.howto p{margin:.3em 0}
+.bigq .how{font-size:14px;color:var(--brown)}
+.howto{font-size:14.5px}
+.bar{position:sticky;top:0;z-index:5;background:var(--bg);padding:8px 0;border-bottom:1px solid var(--rule)}
+.bar .row{display:flex;align-items:center;gap:12px;font-size:13px;font-weight:600;color:var(--brown)}
+.track{flex:1;height:10px;border-radius:6px;background:#D4DEE0;overflow:hidden}
+.fill{height:100%;width:0;background:#D2C24B;transition:width .3s}
+.btn{border:1px solid var(--maroon);background:var(--paper);color:var(--maroon);padding:5px 12px;border-radius:6px;font:inherit;font-size:13px;font-weight:600;cursor:pointer}
+.btn:hover{background:var(--maroon);color:#fff}
+h2.part{margin:38px 0 10px;font-size:21px;color:var(--maroon);border-bottom:1px solid var(--rule);padding-bottom:4px}
+.obj{background:#F6F4E6;border-radius:6px;padding:12px 16px;margin:12px 0;font-size:14.5px}
+.obj p{margin:.35em 0}
+.obj .im{color:var(--maroon)}
+.reading,.source,.visual{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:14px 18px;margin:16px 0}
+.rtitle{font-weight:800;letter-spacing:.04em;color:var(--maroon);font-size:15px;margin-bottom:6px}
+.rtitle span{color:var(--line);margin:0 4px}
+.reading p{margin:.55em 0}
+.sub{font-size:13px;color:var(--brown);margin:8px 0 3px}
+.note{font-size:14px;color:var(--brown);font-style:italic;align-self:center}
+.tintro{margin:18px 0 -6px;font-size:15px}
+.help{font-size:13.5px;color:var(--brown);background:var(--keybg);border-radius:5px;padding:6px 10px}
+.cite{font-size:12.5px;color:var(--brown);font-style:normal;margin:.5em 0 0}
+.intro{font-style:italic;font-size:14.5px}
+blockquote{margin:10px 0;padding:8px 16px;border-left:4px solid var(--maroon);background:#F8F7EF;font-size:16.5px}
+figure{margin:12px 0;text-align:center}
+figure img{max-width:min(100%,600px);height:auto;border:1px solid var(--line);border-radius:4px;cursor:zoom-in}
+figure.zoom img{max-width:100%;cursor:zoom-out}
+figcaption{text-align:left;margin-top:8px}
+.tbl{border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:16px 0;background:var(--paper)}
+.thead{background:var(--maroon);color:#fff;font-weight:700;padding:8px 14px;font-size:14px}
+.trow{display:grid;grid-template-columns:minmax(150px,32%) 1fr;gap:14px;padding:12px 14px;border-top:1px solid var(--rule)}
+.tl .qp{font-size:13.5px;color:var(--brown);margin-top:2px}
+.ask,.cer{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px 16px;margin:16px 0}
+.cer{display:grid;grid-template-columns:minmax(120px,22%) 1fr;gap:14px;margin:10px 0}
+.cl b{display:block;color:var(--maroon)}
+.cl span{font-size:13px;color:var(--brown)}
+textarea{width:100%;min-height:74px;padding:9px 11px;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--ink);font:inherit;resize:vertical;line-height:1.5}
+textarea:focus,input:focus{outline:2px solid var(--maroon);outline-offset:1px}
+textarea.done{border-color:var(--ok);background:#FBFFF8}
+.key{background:var(--keybg);border-left:4px solid var(--keyline);border-radius:4px;padding:8px 12px;margin-top:8px;font-size:14.5px;color:#7E742D}
+.checks{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px 16px;margin:16px 0;display:grid;gap:6px}
+.chk{display:flex;gap:8px;align-items:flex-start;cursor:pointer}
+.chk input{margin-top:6px;accent-color:var(--maroon)}
+.finish{text-align:center;margin:26px 0}
+.status{font-size:14px;font-weight:600;color:var(--brown);margin-bottom:10px}
+.btns{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.btn.primary{background:var(--maroon);color:#fff}
+.btn.primary:disabled{background:#ADBCBF;border-color:#ADBCBF;color:#fff;cursor:not-allowed}
+.btn.primary:disabled:hover{background:#ADBCBF}
+.link{background:none;border:0;color:var(--brown);text-decoration:underline;cursor:pointer;font:inherit;font-size:13px;margin-top:14px}
+input.bad{border-color:#B3261E;background:#FFF1EF}
+.msg{display:none;margin:12px auto;padding:10px 14px;border-radius:6px;background:#EDF5E8;border:1px solid var(--ok);color:var(--ok);font-weight:600;max-width:600px}
+.msg.err{background:#FFF1EF;border-color:#B3261E;color:#8C1D18}
+footer{margin-top:34px;padding-top:10px;border-top:1px solid var(--rule);font-size:12px;letter-spacing:.04em;color:var(--maroon);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+@media (max-width:620px){.trow,.cer{grid-template-columns:1fr;gap:6px}h1{font-size:27px}}
+@media print{
+  body{background:#fff;font-size:12.5px}.bar,.finish,.btn,.msg{display:none!important}
+  .reading,.source,.visual,.tbl,.ask,.cer,.obj,.checks{break-inside:avoid}
+  textarea{border:1px solid #bbb;min-height:60px}
+}
+
+/* ---- paged layout ---- */
+.layout{display:grid;grid-template-columns:270px minmax(0,1fr);max-width:1200px;margin:0 auto}
+.layout .wrap{max-width:900px;width:100%;padding:0 30px 60px}
+.side{position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;padding:26px 16px 30px 18px;background:#F4E4D6;border-right:1px solid var(--rule)}
+.side-head{padding-bottom:12px;margin-bottom:12px;border-bottom:3px solid #0F6B66}
+.side-title{font-size:18px;line-height:1.25;font-weight:800;color:var(--maroon);margin-top:2px}
+.toc,.toc ul{list-style:none;margin:0;padding:0}
+.toc>li{margin:0 0 10px}
+.toc-part{display:grid;grid-template-columns:1fr auto;gap:2px 8px;padding:9px 10px;border-radius:7px;border:1px solid transparent;color:var(--ink);text-decoration:none}
+.toc-part:hover{background:var(--paper);border-color:var(--rule)}
+.toc-part .pn{font-size:11.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--maroon)}
+.toc-part .pt{grid-column:1/2;font-size:14.5px;font-weight:600;line-height:1.3}
+.toc-part .cnt{grid-row:1/3;grid-column:2;align-self:center;font-size:12px;font-weight:700;color:var(--brown);background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:1px 8px;white-space:nowrap}
+.toc li.complete .cnt{background:var(--ok);border-color:var(--ok);color:#fff}
+.toc li.active>.toc-part{background:var(--maroon);border-color:var(--maroon)}
+.toc li.active>.toc-part .pn,.toc li.active>.toc-part .pt{color:#fff}
+.toc-sub{margin:4px 0 0 12px!important;border-left:2px solid var(--rule)}
+.toc-sub a{display:block;padding:4px 8px 4px 12px;font-size:13px;line-height:1.3;color:var(--brown);text-decoration:none;border-radius:0 5px 5px 0}
+.toc-sub a b{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--maroon)}
+.toc-sub a:hover{background:var(--paper)}
+.toc li.active .toc-sub{border-left-color:var(--maroon)}
+section.page{display:none;scroll-margin-top:200px}
+section.page.active{display:block}
+section.page>h2.part:first-child{margin-top:26px}
+.reading,.source,.visual{scroll-margin-top:64px}
+.pager{display:flex;justify-content:space-between;gap:12px;margin:34px 0 0;padding-top:16px;border-top:1px solid var(--rule)}
+.pager a{flex:0 1 48%;display:block;padding:10px 14px;border:1px solid var(--maroon);border-radius:7px;background:var(--paper);color:var(--maroon);text-decoration:none;font-size:14px;font-weight:600;line-height:1.3}
+.pager a small{display:block;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--brown)}
+.pager a:hover{background:var(--maroon);color:#fff}
+.pager a:hover small{color:#fff}
+.pager a.next{margin-left:auto;text-align:right}
+@media (max-width:900px){
+  .layout{display:block}
+  .layout .wrap{padding:0 18px 60px}
+  .side{position:static;height:auto;overflow:visible;padding:14px 18px 10px;border-right:0;border-bottom:1px solid var(--rule)}
+  .side-head{display:none}
+  .toc{display:flex;flex-wrap:wrap;gap:8px}
+  .toc>li{margin:0;flex:1 1 150px}
+  .toc-part{height:100%;background:var(--paper);border-color:var(--rule)}
+  .toc-sub{display:none}
+}
+@media print{
+  .side,.pager{display:none!important}
+  .layout{display:block}
+  section.page{display:block!important}
+}
+/* ---- Interactive Reading design layer ----
+   Layout: sidebar of Parts + one Part per page; readings set like a book (serif),
+   student work set like a workbook (sans, tinted "Your turn" zones). */
+:root{
+  --accent2:#D2C24B;
+  --serif:"Alegreya",Georgia,"Times New Roman",serif;
+  --sans:"Alegreya Sans","Segoe UI",system-ui,-apple-system,sans-serif;
+  --accent-ink:color-mix(in srgb,var(--accent2) 62%,var(--ink));
+  --tint:color-mix(in srgb,var(--accent2) 7%,var(--paper));
+  --tint-line:color-mix(in srgb,var(--accent2) 28%,var(--rule));
+  --soft:color-mix(in srgb,var(--maroon) 5%,var(--bg));
+  --shadow:0 1px 2px color-mix(in srgb,var(--ink) 6%,transparent),0 8px 24px -12px color-mix(in srgb,var(--ink) 22%,transparent);
+}
+body{font:17px/1.6 var(--sans);font-variant-numeric:lining-nums;-webkit-font-smoothing:antialiased}
+.cnt,#pct{font-variant-numeric:lining-nums tabular-nums}
+h1,h2,.side-title,.toc-part .pt,.pager a{font-family:var(--serif)}
+h1,h2{text-wrap:balance}
+
+/* hero */
+header.hero{padding:28px 0 0;border:0}
+.hero-band{position:relative;overflow:hidden;border-radius:16px;padding:34px 34px 30px;color:#fff;
+  background-color:var(--maroon);
+  background-image:linear-gradient(100deg,color-mix(in srgb,var(--maroon) 97%,transparent) 35%,color-mix(in srgb,var(--maroon) 72%,transparent)),var(--hero-img,none);
+  background-size:cover;background-position:center}
+.hero-band .eyebrow{color:color-mix(in srgb,#fff 82%,var(--maroon));font-size:13px;letter-spacing:.18em}
+.hero-band h1{color:#fff;font-size:clamp(32px,5vw,48px);font-weight:700;line-height:1.08;margin:.2em 0 .25em;max-width:15em}
+.hero-band .sub{color:color-mix(in srgb,#fff 88%,var(--maroon));font-size:16px;font-weight:500;margin:0;max-width:40em}
+.hero-num{position:absolute;right:22px;bottom:-34px;font:700 190px/1 var(--serif);color:#fff;opacity:.16;pointer-events:none;user-select:none}
+.meta{gap:14px;margin:18px 0 0;padding:18px 20px;background:var(--paper);border:1px solid var(--rule);border-radius:12px}
+.meta label{font-size:12px;letter-spacing:.1em}
+.meta input{border-radius:8px;padding:9px 11px;margin-top:5px}
+
+/* sticky progress bar */
+.bar{top:0;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:10px 0}
+.track{height:8px;background:color-mix(in srgb,var(--rule) 55%,var(--paper))}
+.fill{background:var(--accent2)}
+.btn{border-radius:8px;font-family:var(--sans);font-size:14px}
+
+/* big question + how to work */
+.bigq{border:0;border-radius:14px;background:var(--tint);padding:20px 24px;margin:22px 0 14px}
+.bigq .eyebrow{color:var(--accent-ink)}
+.bigq>p:not(.how){font:500 22px/1.4 var(--serif);color:var(--ink);margin:.35em 0}
+.bigq .how{font-size:15px}
+.howto{border:1px dashed var(--line);border-radius:12px;background:transparent;font-size:15px;color:var(--brown);padding:12px 18px}
+
+/* part opener */
+.parthead{margin:30px 0 14px;padding-bottom:12px;border-bottom:1px solid var(--rule)}
+section.page>.parthead:first-child{margin-top:26px}
+.pkicker{font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-ink)}
+.pkicker span{color:var(--brown);opacity:.65;font-weight:700}
+h2.part{margin:.1em 0 0;padding:0;border:0;font-size:clamp(28px,4vw,36px);line-height:1.15;color:var(--maroon)}
+.obj{background:var(--soft);border:1px solid var(--rule);border-radius:12px;padding:14px 20px;font-size:15.5px}
+.eyebrow{font-size:12px}
+
+/* readings, sources, visuals: the "book" */
+.reading,.source,.visual{border:1px solid var(--rule);border-radius:14px;padding:24px 30px 20px;margin:22px 0;box-shadow:var(--shadow)}
+.rtitle{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;margin-bottom:12px;letter-spacing:0}
+.rtitle .rlabel{margin:0;font:800 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:#fff;background:var(--maroon);padding:6px 10px 5px;border-radius:999px;transform:translateY(-3px)}
+.source .rtitle .rlabel{background:var(--accent-ink)}
+.visual .rtitle .rlabel{background:transparent;color:var(--maroon);box-shadow:inset 0 0 0 1.5px var(--maroon)}
+.rtitle .rname{margin:0;font:700 24px/1.2 var(--serif);color:var(--ink)}
+.reading p{font:19px/1.68 var(--serif);max-width:68ch}
+.reading p.help{font:14.5px/1.5 var(--sans)}
+.reading p.cite{font:13px/1.5 var(--sans)}
+.reading p,.rname,blockquote,.intro,h1,h2,.bigq>p{font-variant-numeric:lining-nums}
+.intro{font:italic 17px/1.55 var(--serif);color:var(--brown)}
+blockquote{position:relative;margin:16px 0;padding:6px 6px 6px 50px;border:0;background:transparent;font:italic 21px/1.55 var(--serif);color:var(--ink)}
+blockquote::before{content:"\201C";position:absolute;left:0;top:-14px;font:700 76px/1 var(--serif);color:var(--accent2);opacity:.85}
+.help{border-radius:8px;font-size:14.5px;padding:8px 12px}
+.cite{font-size:13px;color:var(--line);color:color-mix(in srgb,var(--brown) 80%,var(--paper))}
+figure img{max-width:100%;border-radius:8px;box-shadow:var(--shadow);border-color:var(--rule)}
+
+/* student work: the "workbook" */
+.tintro{margin:28px 0 -8px;font-size:16px}
+.tintro::before,.ask::before{content:"Your turn";display:block;font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-ink);margin-bottom:4px}
+.tbl{border:1px solid var(--tint-line);border-radius:14px;background:var(--tint);box-shadow:none}
+.thead{background:transparent;color:var(--ink);border-bottom:1px solid var(--tint-line);font-size:15px;padding:12px 18px}
+.trow{padding:14px 18px;border-top:0}
+.trow+.trow{border-top:1px solid color-mix(in srgb,var(--tint-line) 60%,transparent)}
+.tl b{font-size:16px}
+.ask{background:var(--tint);border:1px solid var(--tint-line);border-radius:14px;padding:16px 20px}
+.ask>p{margin:0 0 10px}
+.cer{background:var(--tint);border:1px solid var(--tint-line);border-radius:12px;padding:14px 18px}
+.cl b{font:700 19px/1.2 var(--serif)}
+textarea{border-radius:10px;border-color:color-mix(in srgb,var(--line) 70%,var(--paper));background:#fff;font-size:16.5px;padding:10px 12px;transition:border-color .15s,box-shadow .15s}
+textarea:focus,input:focus{outline:none;border-color:var(--accent2);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent2) 22%,transparent)}
+textarea.done{border-color:color-mix(in srgb,var(--ok) 60%,var(--paper));background:#fff;box-shadow:inset 3px 0 0 var(--ok)}
+.checks{background:var(--tint);border:1px solid var(--tint-line);border-radius:14px;padding:16px 20px}
+.finish{background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:22px 20px;box-shadow:var(--shadow)}
+.btn.primary{padding:8px 16px}
+a:focus-visible,.btn:focus-visible,button:focus-visible{outline:3px solid color-mix(in srgb,var(--accent2) 55%,transparent);outline-offset:2px}
+
+/* sidebar polish */
+.side{background:var(--soft)}
+.side-head{border-bottom-color:var(--accent2)}
+.side-title{font-size:21px}
+.toc-part .pt{font-size:16px;font-weight:700}
+.pager a{font-size:16px}
+.pager a small{font-family:var(--sans)}
+
+@media (max-width:620px){
+  .hero-band{padding:24px 20px 22px;border-radius:12px}
+  .hero-num{font-size:130px;bottom:-22px;right:10px}
+  .reading,.source,.visual{padding:18px 18px 14px;border-radius:12px}
+  .reading p{font-size:18px}
+  .rtitle .rname{font-size:21px}
+  blockquote{padding-left:36px;font-size:19px}
+  blockquote::before{font-size:60px;top:-10px}
+}
+@media (prefers-reduced-motion:reduce){textarea{transition:none}html{scroll-behavior:auto}}
+@media print{
+  .hero-band{background:none!important;color:var(--ink);padding:0}
+  .hero-band h1,.hero-band .eyebrow,.hero-band .sub{color:var(--ink)}
+  .hero-num{display:none}
+  .reading,.source,.visual,.finish{box-shadow:none}
+}
+
+/* ---- glass + depth layer ----
+   A fixed wash of the chapter's colors sits behind everything; panels are frosted
+   glass over it. Reading text stays on a near-solid surface for legibility. */
+:root{
+  --glass:color-mix(in srgb,var(--paper) 62%,transparent);
+  --glass-strong:color-mix(in srgb,var(--paper) 86%,transparent);
+  --glass-tint:color-mix(in srgb,var(--tint) 66%,transparent);
+  --glass-edge:color-mix(in srgb,#fff 70%,transparent);
+  --glass-hi:inset 0 1px 0 color-mix(in srgb,#fff 85%,transparent),inset 0 -1px 0 color-mix(in srgb,var(--ink) 5%,transparent);
+  --depth:0 1px 1px color-mix(in srgb,var(--ink) 5%,transparent),0 3px 6px -2px color-mix(in srgb,var(--ink) 8%,transparent),0 18px 40px -16px color-mix(in srgb,var(--ink) 30%,transparent);
+  --depth-up:0 2px 2px color-mix(in srgb,var(--ink) 6%,transparent),0 8px 14px -4px color-mix(in srgb,var(--ink) 12%,transparent),0 28px 56px -18px color-mix(in srgb,var(--ink) 38%,transparent);
+}
+body{background:var(--bg)}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(42vmax 42vmax at 8% 6%,color-mix(in srgb,var(--maroon) 30%,transparent),transparent 70%),
+    radial-gradient(38vmax 38vmax at 96% 22%,color-mix(in srgb,var(--accent2) 26%,transparent),transparent 70%),
+    radial-gradient(46vmax 40vmax at 70% 104%,color-mix(in srgb,var(--maroon) 20%,transparent),transparent 70%),
+    radial-gradient(30vmax 30vmax at 20% 88%,color-mix(in srgb,var(--accent2) 16%,transparent),transparent 70%)}
+.glassy,.side,.bar,.meta,.reading,.source,.visual,.obj,.howto,.tbl,.ask,.cer,.checks,.finish,.pager a,.bigq{
+  border:1px solid var(--glass-edge)!important}
+.side{background:var(--glass);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);border-width:0 1px 0 0!important;box-shadow:var(--glass-hi)}
+.bar{background:color-mix(in srgb,var(--bg) 55%,transparent);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border-width:0 0 1px!important;border-radius:0 0 14px 14px;padding-inline:14px;margin-inline:-14px}
+.meta,.obj,.howto,.checks,.finish{background:var(--glass);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);box-shadow:var(--glass-hi),var(--depth)}
+.howto{border-style:solid!important}
+.bigq{background:var(--glass-tint);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);box-shadow:var(--glass-hi),var(--depth)}
+.reading,.source,.visual{background:var(--glass-strong);backdrop-filter:blur(20px) saturate(1.2);-webkit-backdrop-filter:blur(20px) saturate(1.2);box-shadow:var(--glass-hi),var(--depth)}
+.tbl,.ask,.cer{background:var(--glass-tint);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);box-shadow:var(--glass-hi),var(--depth)}
+.thead{border-bottom-color:var(--glass-edge)}
+.trow+.trow{border-top-color:var(--glass-edge)}
+/* answer boxes sit "pressed into" the glass */
+textarea,.meta input{background:color-mix(in srgb,#fff 82%,transparent);border-color:color-mix(in srgb,var(--line) 45%,transparent);box-shadow:inset 0 2px 4px color-mix(in srgb,var(--ink) 10%,transparent),inset 0 0 0 1px color-mix(in srgb,#fff 50%,transparent)}
+.meta input[readonly]{background:color-mix(in srgb,var(--rule) 45%,transparent)}
+textarea:focus,.meta input:focus{background:#fff;box-shadow:inset 0 2px 4px color-mix(in srgb,var(--ink) 8%,transparent),0 0 0 3px color-mix(in srgb,var(--accent2) 25%,transparent)}
+textarea.done{background:color-mix(in srgb,#fff 90%,transparent);box-shadow:inset 3px 0 0 var(--ok),inset 0 2px 4px color-mix(in srgb,var(--ink) 8%,transparent)}
+/* raised, tactile controls */
+.toc-part,.pager a,.btn{transition:transform .18s ease,box-shadow .18s ease,background-color .18s ease}
+.toc-part:hover{background:var(--glass-strong);border-color:var(--glass-edge);box-shadow:var(--glass-hi),var(--depth);transform:translateY(-1px)}
+.toc li.active>.toc-part{background:linear-gradient(180deg,color-mix(in srgb,var(--maroon) 88%,#fff),var(--maroon));box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 35%,transparent),0 10px 22px -10px color-mix(in srgb,var(--maroon) 80%,transparent);transform:translateY(-1px)}
+.toc-part .cnt{background:var(--glass-strong);border-color:var(--glass-edge);box-shadow:var(--glass-hi)}
+.pager a{background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:var(--glass-hi),var(--depth)}
+.pager a:hover{transform:translateY(-3px);box-shadow:var(--glass-hi),var(--depth-up)}
+.btn{background:var(--glass-strong);box-shadow:var(--glass-hi),0 2px 6px -2px color-mix(in srgb,var(--ink) 20%,transparent)}
+.btn:hover{transform:translateY(-1px)}
+.btn.primary{background:linear-gradient(180deg,color-mix(in srgb,var(--maroon) 85%,#fff),var(--maroon));box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 35%,transparent),0 8px 18px -8px color-mix(in srgb,var(--maroon) 85%,transparent)}
+.btn:active{transform:translateY(1px)}
+.rtitle .rlabel{box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 35%,transparent),0 3px 8px -3px color-mix(in srgb,var(--ink) 45%,transparent)}
+.visual .rtitle .rlabel{box-shadow:inset 0 0 0 1.5px var(--maroon)}
+.fill{background:linear-gradient(90deg,color-mix(in srgb,var(--accent2) 70%,#fff),var(--accent2));box-shadow:0 0 12px color-mix(in srgb,var(--accent2) 55%,transparent)}
+.track{box-shadow:inset 0 1px 2px color-mix(in srgb,var(--ink) 15%,transparent)}
+/* 3D title band: tilts toward the pointer, with a moving sheen */
+.hero-stage{perspective:1100px}
+.hero-band{transform-style:preserve-3d;transition:transform .5s cubic-bezier(.2,.7,.2,1);box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 30%,transparent),0 2px 4px color-mix(in srgb,var(--ink) 10%,transparent),0 30px 60px -24px color-mix(in srgb,var(--maroon) 75%,transparent);transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))}
+.hero-band::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(600px circle at var(--mx,70%) var(--my,0%),color-mix(in srgb,#fff 22%,transparent),transparent 45%)}
+.hero-band>*{transform:translateZ(36px)}
+.hero-band .hero-num{transform:translateZ(14px);opacity:.2;text-shadow:0 1px 0 color-mix(in srgb,#fff 40%,transparent),0 18px 30px color-mix(in srgb,#000 35%,transparent)}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  :root{--glass:color-mix(in srgb,var(--paper) 94%,transparent);--glass-tint:var(--tint)}
+}
+@media (prefers-reduced-motion:reduce){
+  .hero-band{transform:none!important;transition:none}
+  .toc-part,.pager a,.btn{transition:none}
+  .pager a:hover,.toc-part:hover,.btn:hover{transform:none}
+}
+@media (max-width:900px){.side{border-width:0 0 1px!important}.bar{margin-inline:0;border-radius:0}}
+@media print{
+  body::before{display:none}
+  .side,.bar,.meta,.reading,.source,.visual,.obj,.howto,.tbl,.ask,.cer,.checks,.finish,.bigq{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:#fff!important;box-shadow:none!important;border-color:#ccc!important}
+  .hero-band{transform:none!important;box-shadow:none}
+  .hero-band::after{display:none}
+}
+.msg,.status{overflow-wrap:anywhere}
+
+/* ---- teacher answer key ---- */
+.key{border:0;border-left:4px solid var(--keyline);border-radius:8px;background:color-mix(in srgb,var(--keybg) 85%,transparent);color:var(--ink);font:15px/1.5 var(--sans);padding:9px 13px;margin-top:8px}
+.key b{color:var(--accent-ink);letter-spacing:.06em}
+.key-mode .cnt,.key-mode #pct,.key-mode .track{display:none}
+.key-mode .hero-band .eyebrow{color:#fff}
+.cl span{display:block;line-height:1.4;margin-top:4px}
+
+/* ---- language switch + right-to-left ---- */
+.lang-switch{display:inline-flex;gap:2px;padding:3px;border-radius:10px;background:var(--glass-strong,var(--paper));border:1px solid var(--glass-edge,var(--rule));box-shadow:var(--glass-hi,none)}
+.lang-switch button{border:0;background:transparent;color:var(--brown);font:600 13px/1 var(--sans);padding:6px 10px;border-radius:7px;cursor:pointer}
+.lang-switch button[data-lang="ar"]{font-family:"Noto Sans Arabic",var(--sans);font-size:14px}
+.lang-switch button[aria-pressed="true"]{background:var(--maroon);color:#fff;box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 30%,transparent)}
+.lang-switch button:focus-visible{outline:3px solid color-mix(in srgb,var(--accent2) 55%,transparent);outline-offset:1px}
+.tintro::before,.ask::before{content:var(--your-turn,"Your turn")}
+textarea,.meta input{unicode-bidi:plaintext;text-align:start}
+figcaption{text-align:start}
+:root[lang="ar"]{--serif:"Noto Naskh Arabic","Alegreya",Georgia,serif;--sans:"Noto Sans Arabic","Alegreya Sans","Segoe UI",system-ui,sans-serif}
+:root[lang="ar"] *{letter-spacing:0!important}
+:root[lang="ar"] body{line-height:1.8}
+:root[lang="ar"] .reading p{line-height:1.95;font-size:19px}
+:root[lang="ar"] .hero-band h1{line-height:1.3}
+:root[lang="ar"] h2.part{line-height:1.4}
+:root[lang="ar"] .rtitle .rname{line-height:1.45}
+:root[lang="ar"] blockquote{line-height:1.85}
+[dir="rtl"] blockquote{padding:6px 50px 6px 6px}
+[dir="rtl"] blockquote::before{left:auto;right:0;content:"\201D"}
+[dir="rtl"] .key{border-left:0;border-right:4px solid var(--keyline)}
+[dir="rtl"] .side{border-right:0!important;border-left:1px solid var(--glass-edge,var(--rule))!important}
+[dir="rtl"] .toc-sub{margin:4px 12px 0 0!important;border-left:0;border-right:2px solid var(--rule)}
+[dir="rtl"] .toc li.active .toc-sub{border-right-color:var(--maroon)}
+[dir="rtl"] .toc-sub a{padding:4px 12px 4px 8px;border-radius:5px 0 0 5px}
+[dir="rtl"] textarea.done{box-shadow:inset -3px 0 0 var(--ok),inset 0 2px 4px color-mix(in srgb,var(--ink) 8%,transparent)}
+[dir="rtl"] .pager a.next{margin-left:0;margin-right:auto;text-align:left}
+[dir="rtl"] .pager a.prev{text-align:right}
+@media (max-width:620px){.bar .row{flex-wrap:wrap}.lang-switch{order:3}.lang-switch button{padding:6px 8px}}
+@media print{.lang-switch{display:none}}
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="side" aria-label="Sections">
+<div class="side-head"><div class="eyebrow">INTERACTIVE READING 4</div><div class="side-title">Creating the Constitution</div></div>
+<ol class="toc">
+<li><a class="toc-part" href="#part-1"><span class="pn">Part 1</span><span class="pt">The Articles Fall Short</span><span class="cnt"></span></a><ul class="toc-sub"><li><a href="#reading-a"><b>Reading A</b>A Loose Alliance of States</a></li><li><a href="#reading-b"><b>Reading B</b>The Northwest Ordinance (1787)</a></li><li><a href="#reading-c"><b>Reading C</b>Shays’s Rebellion (1786–1787)</a></li></ul></li>
+<li><a class="toc-part" href="#part-2"><span class="pn">Part 2</span><span class="pt">A New Constitution</span><span class="cnt"></span></a><ul class="toc-sub"><li><a href="#reading-d"><b>Reading D</b>“We the People” and Federalism</a></li><li><a href="#reading-e"><b>Reading E</b>The Great Compromise and Separation of Powers</a></li><li><a href="#reading-f"><b>Reading F</b>The Electoral College and the Courts</a></li><li><a href="#reading-g"><b>Reading G</b>The Limits of the Constitution</a></li></ul></li>
+<li><a class="toc-part" href="#part-3"><span class="pn">Part 3</span><span class="pt">The Fight for Ratification</span><span class="cnt"></span></a><ul class="toc-sub"><li><a href="#reading-h"><b>Reading H</b>Federalists and Anti-Federalists</a></li><li><a href="#reading-i"><b>Reading I</b>The Federalist Papers and the Bill of Rights</a></li><li><a href="#source-1"><b>Source 1</b>Madison on a Bill of Rights (Primary Source)</a></li></ul></li>
+<li><a class="toc-part" href="#part-4"><span class="pn">Part 4</span><span class="pt">Federalists vs. Republicans</span><span class="cnt"></span></a><ul class="toc-sub"><li><a href="#reading-j"><b>Reading J</b>Two Parties</a></li><li><a href="#reading-k"><b>Reading K</b>Who Should Govern?</a></li><li><a href="#reading-l"><b>Reading L</b>The Bank of the United States</a></li></ul></li>
+<li><a class="toc-part" href="#part-5"><span class="pn">Part 5</span><span class="pt">Britain, France, and Party Fights</span><span class="cnt"></span></a><ul class="toc-sub"><li><a href="#reading-m"><b>Reading M</b>The French Revolution Divides Americans</a></li><li><a href="#reading-n"><b>Reading N</b>Jay’s Treaty (1794)</a></li><li><a href="#reading-o"><b>Reading O</b>The Whiskey Rebellion (1794)</a></li><li><a href="#reading-p"><b>Reading P</b>The Alien and Sedition Acts and the Election of 1800</a></li></ul></li>
+<li><a class="toc-part" href="#part-6"><span class="pn">Part 6</span><span class="pt">CER: Did It Protect Liberty?</span><span class="cnt"></span></a></li>
+</ol>
+</nav>
+<div class="wrap">
+<div class="bar"><div class="row"><span id="pct">0 of 0 answered</span><div class="track"><div class="fill" id="fill"></div></div><div class="lang-switch" role="group" aria-label="Language / Idioma / اللغة"><button type="button" data-lang="en" lang="en" aria-pressed="true">English</button><button type="button" data-lang="es" lang="es" aria-pressed="false">Español</button><button type="button" data-lang="ar" lang="ar" aria-pressed="false">العربية</button></div><button class="btn" onclick="window.print()">Print</button></div></div>
+
+<section class="page" id="part-1" aria-label="Part 1">
+<header class="hero">
+  <div class="hero-stage"><div class="hero-band"><div class="eyebrow">INTERACTIVE READING 4</div>
+  <h1>Creating the Constitution</h1>
+  <p class="sub">1781–1800 | Creating the Constitution</p><span class="hero-num" aria-hidden="true">4</span></div></div>
+  <div class="meta">
+    <label>FIRST NAME *<input id="f_first" type="text" autocomplete="given-name"></label>
+    <label>LAST NAME *<input id="f_last" type="text" autocomplete="family-name"></label>
+    <label>PERIOD *<input id="f_period" type="text" inputmode="numeric" maxlength="12" placeholder="e.g. 3"></label>
+    <label>DATE (fills in when you finish)<input id="f_date" type="text" readonly tabindex="-1" placeholder="Automatic"></label>
+  </div>
+</header>
+
+<div class="bigq"><div class="eyebrow">BIG QUESTION</div><p>Did the Constitution and the new national government (1787–1800) protect the people’s liberty?</p></div>
+<div class="howto"><b>How to work:</b> Read each READING box, then answer right below it. Short phrases are fine in the tables; use complete sentences for source questions. The last Part is a CER on the big question. Your work saves on this device as you type. Use <b>Save Progress</b> at the bottom of the last Part to download a backup file, and <b>Load Progress</b> to continue later. Enter your first name, last name, and period; the date fills in by itself when you finish. The <b>Finished</b> button unlocks only when every box, all three required fields, and the CER checklist are done.</div>
+
+<header class="parthead"><div class="pkicker">Part 1 <span>of 6</span></div><h2 class="part">The Articles Fall Short</h2></header>
+<div class="obj"><div class="eyebrow">CORE OBJECTIVE</div><p><b>Core Objective 1:</b> Identify the strengths and weaknesses of the Articles of Confederation and explain how they prompted the creation of a new U.S. constitution in 1787.</p><p class="im"><b>IN MY WORDS:</b> Name one thing the Articles did well and one thing they did badly.</p></div>
+<section class="reading" id="reading-a"><div class="rtitle"><span class="rlabel">Reading A</span><span class="rname">A Loose Alliance of States</span></div><p>The Articles of Confederation, formally approved in 1781, had created a loose alliance (or confederation) of thirteen independent states that were united only in theory. In practice, each state government acted mostly on its own.</p><p>The weak national government under the Articles had only one component, a one-house legislature. There was no executive branch, no national judiciary (court system). State legislatures, not voters, appointed the members of the Confederation Congress, in which each state, regardless of size or population, had one vote. This meant that Rhode Island, with 68,000 people, had the same voting power as Virginia, with more than 747,000 inhabitants. . . . The Confederation Congress had no cash and could not impose taxes to raise needed funds.</p><p class="help"><b>Word help:</b> alliance = a partnership · in theory = on paper, not in real life · component = part · executive branch = a president who carries out laws · judiciary = courts · inhabitants = people who live there</p><p class="cite">Norton, <i>America: The Essential Learning Edition</i>, Ch. 6, “The Confederation Government” (A Loose Alliance of States).</p></section>
+<section class="reading" id="reading-b"><div class="rtitle"><span class="rlabel">Reading B</span><span class="rname">The Northwest Ordinance (1787)</span></div><p>Yet in spite of its limitations, the Confederation Congress did lay important foundations for the new national government. . . . The Congress also formulated the basic principles of land distribution and territorial government that would guide America’s westward expansion. . . . Two years after passage of the Land Ordinance of 1785, the Confederation Congress passed the third major land policy: the Northwest Ordinance of 1787, which set forth two key principles. First, the new territories would eventually become coequal states, as Jefferson had proposed. Second, slavery would be banned from the region north of the Ohio River. . . . The Northwest Ordinance also included a promise, which would be repeatedly broken, that Indigenous lands “shall never be taken from them without their consent.”</p><p class="help"><b>Word help:</b> foundations = a base to build on · formulated = created · territorial = for new lands that are not yet states · coequal = equal to the other states · consent = permission</p><p class="cite">Norton, <i>America: The Essential Learning Edition</i>, Ch. 6, “The Confederation Government” (A Struggling Government; The Northwest Ordinance).</p></section>
+<section class="reading" id="reading-c"><div class="rtitle"><span class="rlabel">Reading C</span><span class="rname">Shays’s Rebellion (1786–1787)</span></div><p>In 1786, when the merchant-dominated Massachusetts legislature refused to lower taxes or issue more paper money, three rural counties revolted. Armed groups of angry farmers, calling themselves Regulators, or “the voice of the people,” banded together to force judges and sheriffs to stop seizing the cattle and farms of “debtors” who could not pay their taxes.</p><p>The situation worsened in the winter of early 1787 when a group of dissatisfied farmers led by thirty-nine-year-old Daniel Shays, a distinguished war veteran, marched on the federal arsenal at Springfield. . . . News of Shays’s Rebellion sent shock waves across the nation. . . . George Washington was equally concerned. America, he said, needed a stronger national “government by which our lives, liberty, and properties will be secured.”</p><p class="help"><b>Word help:</b> merchant-dominated = run mostly by business owners · rural = in the countryside · seizing = taking by force · debtors = people who owe money · arsenal = a place where weapons are stored</p><p class="cite">Norton, <i>America: The Essential Learning Edition</i>, Ch. 6, “The Confederation Government” (Shays’s Rebellion).</p></section>
+<p class="tintro"><b>Strengths and weaknesses</b> | Use Readings A, B, and C. Short phrases are fine.</p><div class="tbl"><div class="thead">Your answer</div><div class="trow"><div class="tl"><b>One weakness of the Articles</b><div class="qp">Reading A</div></div><div class="tr"><textarea id="q1" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div><div class="trow"><div class="tl"><b>One strength of the Articles</b><div class="qp">Reading B</div></div><div class="tr"><textarea id="q2" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div><div class="trow"><div class="tl"><b>Why farmers rebelled in Shays’s Rebellion</b><div class="qp">Reading C</div></div><div class="tr"><textarea id="q3" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div><div class="trow"><div class="tl"><b>What leaders decided after Shays’s Rebellion</b><div class="qp">Reading C</div></div><div class="tr"><textarea id="q4" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div></div>
+<div class="ask"><p><b>Think about it.</b> Reading A says Rhode Island and Virginia each had one vote. Why might people in Virginia think that was unfair?</p><textarea id="q5" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div>
+<nav class="pager" aria-label="Page navigation"><a class="next" href="#part-2"><small>Next &rarr;</small>Part 2 · A New Constitution</a></nav>
+</section>
+<section class="page" id="part-2" aria-label="Part 2">
+<header class="parthead"><div class="pkicker">Part 2 <span>of 6</span></div><h2 class="part">A New Constitution</h2></header>
+<div class="obj"><div class="eyebrow">CORE OBJECTIVE</div><p><b>Core Objective 2:</b> Describe the political innovations that the 1787 Constitutional Convention developed for the new nation.</p><p class="im"><b>IN MY WORDS:</b> An innovation is a new idea. Name one new idea in the Constitution.</p></div>
+<section class="reading" id="reading-d"><div class="rtitle"><span class="rlabel">Reading D</span><span class="rname">“We the People” and Federalism</span></div><p>In 1787, the Confederation Congress responded to the unrest by calling for a special “federal” convention to gather in Philadelphia’s State House (now known as Independence Hall) for the “purpose of revising the Articles of Confederation.” . . . Thus, the final draft of the Constitution begins: “We the people of the United States, in Order to form a more perfect Union, . . . do ordain and establish this Constitution for the United States of America.” The insistence that the voters were “the legitimate source of all authority,” as James Wilson of Pennsylvania stressed, was the most important political innovation since the Declaration of Independence.</p><p>The delegates realized, too, that an effective national government needed authority to collect taxes, borrow and issue money, regulate commerce, fund an army and navy, and make laws. . . . This concept of dividing authority between the national government and the states came to be called federalism.</p><p class="help"><b>Word help:</b> revising = changing and fixing · ordain = officially order · legitimate = lawful, real · authority = power to make decisions · regulate commerce = make rules for trade</p><p class="cite">Norton, <i>America: The Essential Learning Edition</i>, Ch. 6, “The Constitution” (The Constitutional Convention; Guiding Assumptions).</p></section>
+<section class="reading" id="reading-e"><div class="rtitle"><span class="rlabel">Reading E</span><span class="rname">The Great Compromise and Separation of Powers</span></div><p>An intense debate over congressional representation was resolved in mid-July by the so-called Great Compromise . . . Larger states won apportionment (the allocation of delegates to each state) by population in the proposed House of Representatives, while the delegates of smaller states won equality of representation in the Senate, where each state would have two members elected by the legislatures. The Great Compromise embedded the innovative concept of separation of powers into the new Congress. . . . Yet the president’s powers were also limited. The chief executive could neither declare war nor make peace; only Congress could do that. Moreover, the president could be removed from office.</p><p class="help"><b>Word help:</b> representation = having people speak for you in government · apportionment = dividing up seats · embedded = built in · separation of powers = splitting power among branches</p><p class="cite">Norton, <i>America: The Essential Learning Edition</i>, Ch. 6, “The Constitution” (The Great Compromise; The Executive).</p></section>
+<section class="reading" id="reading-f"><div class="rtitle"><span class="rlabel">Reading F</span><span class="rname">The Electoral College and the Courts</span></div><p>To preserve the separation of the three branches of government, the president would be elected every four years by the Electoral College—a group of highly qualified “electors” chosen by “the people” in local elections. The number of each state’s electors would equal the number of its congressional representatives and senators. . . . The new constitution called for a supreme national court headed by a chief justice. The court’s role was not to make laws (a power reserved to Congress) or to execute and enforce the laws (reserved to the presidency), but to interpret the laws and to ensure that every citizen received equal justice under the law.</p><p class="help"><b>Word help:</b> preserve = keep safe · electors = people chosen to vote for president · chief justice = the head judge · execute = carry out · interpret = explain the meaning of</p><p class="cite">Norton, <i>America: The Essential Learning Edition</i>, Ch. 6, “The Constitution” (The Electoral College; The Judiciary).</p></section>
+<section class="reading" id="reading-g"><div class="rtitle"><span class="rlabel">Reading G</span><span class="rname">The Limits of the Constitution</span></div><p>The delegates agreed to a compromise in which three-fifths of “all other persons” (that is, the enslaved) would be included in population counts as a basis for apportioning a state’s congressional representatives. . . . The delegates at the Constitutional Convention refused even to discuss political rights for women. In the new United States, women could not vote, hold elected office, or own property.</p><p class="help"><b>Word help:</b> compromise = a deal where each side gives up something · “all other persons” = the Constitution’s words for enslaved people · political rights = rights such as voting</p><p class="cite">Norton, <i>America: The Essential Learning Edition</i>, Ch. 6, “The Constitution” (The Three-Fifths Compromise; The Absence of Women’s Rights).</p></section>
+<p class="tintro"><b>New ideas</b> | Use Readings D, E, and F. Explain each idea in your own words.</p><div class="tbl"><div class="thead">What does it mean?</div><div class="trow"><div class="tl"><b>“We the people”</b><div class="qp">Reading D</div></div><div class="tr"><textarea id="q6" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div><div class="trow"><div class="tl"><b>Federalism</b><div class="qp">Reading D</div></div><div class="tr"><textarea id="q7" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div><div class="trow"><div class="tl"><b>Great Compromise</b><div class="qp">Reading E</div></div><div class="tr"><textarea id="q8" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div><div class="trow"><div class="tl"><b>Separation of powers</b><div class="qp">Readings E and F</div></div><div class="tr"><textarea id="q9" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div><div class="trow"><div class="tl"><b>Electoral College</b><div class="qp">Reading F</div></div><div class="tr"><textarea id="q10" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div></div>
+<div class="ask"><p><b>Who was left out?</b> Use Reading G. Name two groups the Constitution did not treat equally, and how.</p><textarea id="q11" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div>
+<nav class="pager" aria-label="Page navigation"><a class="prev" href="#part-1"><small>&larr; Previous</small>Part 1 · The Articles Fall Short</a><a class="next" href="#part-3"><small>Next &rarr;</small>Part 3 · The Fight for Ratification</a></nav>
+</section>
+<section class="page" id="part-3" aria-label="Part 3">
+<header class="parthead"><div class="pkicker">Part 3 <span>of 6</span></div><h2 class="part">The Fight for Ratification</h2></header>
+<div class="obj"><div class="eyebrow">CORE OBJECTIVE</div><p><b>Core Objective 3:</b> Summarize the major debates surrounding the ratification of the Constitution. Explain why they arose and how they were resolved.</p><p class="im"><b>IN MY WORDS:</b> What did people argue about before the states approved the Constitution?</p></div>
+<section class="reading" id="reading-h"><div class="rtitle"><span class="rlabel">Reading H</span><span class="rname">Federalists and Anti-Federalists</span></div><p>The Federalists, led by James Madison and Alexander Hamilton, had several advantages. First, they had a concrete proposal—the draft constitution itself; their opponents had nothing to offer but criticism. . . . Anti-Federalists feared that the new national government would eventually grow corrupt and tyrannical. . . . Mason and the other anti-Federalists especially criticized the absence of a “bill of rights” to protect individuals and states from the power of the national government.</p><p class="help"><b>Word help:</b> concrete = real, specific · proposal = a plan · corrupt = dishonest · tyrannical = cruel and too powerful · absence = being missing · Mason = George Mason of Virginia</p><p class="cite">Norton, <i>America: The Essential Learning Edition</i>, Ch. 6, “The Fight for Ratification” (Choosing Sides: Anti-Federalists versus Federalists).</p></section>
+<section class="reading" id="reading-i"><div class="rtitle"><span class="rlabel">Reading I</span><span class="rname">The Federalist Papers and the Bill of Rights</span></div><p>Among the legacies of the debate over the Constitution is what came to be called The Federalist Papers, a collection of eighty-five essays published in New York newspapers in 1787 and 1788. Written by James Madison, Alexander Hamilton, and John Jay, the essays were intended to convince New Yorkers to ratify the new constitution. . . . On June 21, 1788, New Hampshire became the ninth state to ratify the Constitution, thereby reaching the minimum number of states needed for approval. . . . Both states included strong opposition groups that were eventually won over by an agreement to add a bill of rights.</p><p>By the end of 1791, the necessary three-fourths of the states had approved ten of the twelve proposed amendments, now known as the Bill of Rights.</p><p class="help"><b>Word help:</b> legacies = things left behind for the future · ratify = officially approve · minimum = the smallest number needed · Both states = Virginia and New York · amendments = changes added to the Constitution</p><p class="cite">Norton, <i>America: The Essential Learning Edition</i>, Ch. 6, “The Fight for Ratification” (The Federalist Papers; The States Decide). Norton, <i>America: The Essential Learning Edition</i>, Ch. 6, “The Federalist Era” (The Bill of Rights).</p></section>
+<section class="source" id="source-1"><div class="rtitle"><span class="rlabel">Source 1</span><span class="rname">Madison on a Bill of Rights (Primary Source)</span></div><p class="intro">James Madison helped write the Constitution. In 1788 he wrote this letter to Thomas Jefferson about adding a bill of rights.</p><blockquote>“My own opinion has always been in favor of a bill of rights; provided it be so framed as not to imply powers not meant to be included in the enumeration. At the same time I have never thought the omission a material defect, nor been anxious to supply it even by subsequent amendment, for any other reason than that it is anxiously desired by others. I have favored it because I supposed it might be of use, and if properly executed could not be of disservice.”</blockquote><p class="help"><b>Word help:</b> framed = written · enumeration = list · omission = leaving it out · material defect = a serious problem · subsequent amendment = a change added later · anxiously desired by others = other people wanted it very much · disservice = harm</p><p class="cite">James Madison to Thomas Jefferson, October 17, 1788. In Norton, Ch. 6, “The Federalist Era” (Comparing Perspectives: On Rights and Freedoms).</p></section>
+<div class="ask"><p><b>Source 1.</b> Was Madison for or against a bill of rights? Did he think leaving it out was a big problem?</p><textarea id="q12" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div>
+<div class="ask"><p><b>Point of view.</b> Madison says he supported it mostly because “it is anxiously desired by others.” Use Readings H and I: who were those others, and why did Madison need their support?</p><textarea id="q13" data-q="1" rows="4" placeholder="Type your answer here…" aria-label="answer"></textarea></div>
+<p class="tintro"><b>The debate</b> | Use Readings H and I. Short phrases are fine.</p><div class="tbl"><div class="thead">Your answer</div><div class="trow"><div class="tl"><b>What the Federalists wanted</b><div class="qp">Reading H</div></div><div class="tr"><textarea id="q14" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div><div class="trow"><div class="tl"><b>What the anti-Federalists feared</b><div class="qp">Reading H</div></div><div class="tr"><textarea id="q15" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div><div class="trow"><div class="tl"><b>What The Federalist Papers did</b><div class="qp">Reading I</div></div><div class="tr"><textarea id="q16" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div><div class="trow"><div class="tl"><b>How the debate was resolved</b><div class="qp">Reading I</div></div><div class="tr"><textarea id="q17" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div></div>
+<nav class="pager" aria-label="Page navigation"><a class="prev" href="#part-2"><small>&larr; Previous</small>Part 2 · A New Constitution</a><a class="next" href="#part-4"><small>Next &rarr;</small>Part 4 · Federalists vs. Republicans</a></nav>
+</section>
+<section class="page" id="part-4" aria-label="Part 4">
+<header class="parthead"><div class="pkicker">Part 4 <span>of 6</span></div><h2 class="part">Federalists vs. Republicans</h2></header>
+<div class="obj"><div class="eyebrow">CORE OBJECTIVE</div><p><b>Core Objective 4:</b> Compare the Federalists’ vision for the United States with that of their Republican opponents during the 1790s.</p><p class="im"><b>IN MY WORDS:</b> Who led each party? Name one leader of each.</p></div>
+<section class="reading" id="reading-j"><div class="rtitle"><span class="rlabel">Reading J</span><span class="rname">Two Parties</span></div><p>During the 1790s, the federal government would confront rebellions, states threatening to secede, staggering debt, and foreign wars, as well as the formation of competing political parties—Federalists and Democratic Republicans, more commonly known as Jeffersonian Republicans, or simply as Republicans.</p><p>The Republicans were mostly southerners, like Virginians Thomas Jefferson and James Madison, who wanted the country to remain a rural nation of small farmers dedicated to republican values. The Federalists, led by Alexander Hamilton and John Adams, were clustered in New York and New England. They embraced urban culture, industrial development, and commercial growth.</p><p class="help"><b>Word help:</b> confront = face · secede = leave the country · staggering = shockingly large · rural = in the countryside · clustered = grouped together · urban = city · commercial = business and trade</p><p class="cite">Norton, <i>America: The Essential Learning Edition</i>, Ch. 6, “The Federalist Era”.</p></section>
+<section class="reading" id="reading-k"><div class="rtitle"><span class="rlabel">Reading K</span><span class="rname">Who Should Govern?</span></div><p>The Federalists were most numerous in New York and New England and were also powerful among the planter elite in South Carolina. Generally, they feared the excesses of democracy; distrusted what they considered to be the “common people”; and wanted a strong central government led by the wisest leaders, who would be committed to economic growth, social stability, and national defense. . . . By contrast, the Democratic Republicans, led by Thomas Jefferson and James Madison, were most concerned about threats to individual freedoms and states’ rights that would be posed by a strong national government. They trusted the people.</p><p class="help"><b>Word help:</b> planter elite = rich plantation owners · excesses = too much of something · distrusted = did not trust · stability = calm, order · states’ rights = powers kept by the states</p><p class="cite">Norton, <i>America: The Essential Learning Edition</i>, Ch. 6, “The Federalist Era” (The Beginnings of Political Parties).</p></section>
+<section class="reading" id="reading-l"><div class="rtitle"><span class="rlabel">Reading L</span><span class="rname">The Bank of the United States</span></div><p>After securing congressional approval of his debt-funding plan, Hamilton called for a national bank modeled after the Bank of England. Such a bank, Hamilton believed, would foster greater “commerce among individuals” and provide a safe place for the federal government’s revenues. . . . Once again, James Madison and Thomas Jefferson led the opposition to Hamilton’s banking scheme. They maintained that the Constitution said nothing about creating a national bank, so the government could not start one. . . . The new Bank of the United States (B.U.S.) created in 1791, had three primary responsibilities: (1) to hold the government’s revenues and pay its bills, (2) to provide loans to the federal government and to state-chartered banks to promote economic development . . . The lopsided vote illustrated the growing political division between North and South.</p><p class="help"><b>Word help:</b> foster = help grow · commerce = trade · revenues = money the government collects · scheme = plan · maintained = argued · lopsided vote = a very uneven vote in Congress (northern states for the bank, southern states against)</p><p class="cite">Norton, <i>America: The Essential Learning Edition</i>, Ch. 6, “The Federalist Era” (A National Bank).</p></section>
+<p class="tintro"><b>Compare the parties</b> | Use Readings J, K, and L. Short phrases are fine.</p><div class="tbl"><div class="thead">Two visions for America</div><div class="trow"><div class="tl"><b>Federalists</b><div class="qp">Readings J–L</div></div><div class="tr"><div class="sub"><b>Where were they strongest, and what economy did they want?</b></div><textarea id="q18" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea><div class="sub"><b>What did they think about government and the people?</b></div><textarea id="q19" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div><div class="trow"><div class="tl"><b>Republicans</b><div class="qp">Readings J–L</div></div><div class="tr"><div class="sub"><b>Where were they strongest, and what economy did they want?</b></div><textarea id="q20" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea><div class="sub"><b>What did they think about government and the people?</b></div><textarea id="q21" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div></div>
+<div class="ask"><p><b>The bank.</b> Use Reading L. Why did Jefferson and Madison say the government could not start a national bank?</p><textarea id="q22" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div>
+<nav class="pager" aria-label="Page navigation"><a class="prev" href="#part-3"><small>&larr; Previous</small>Part 3 · The Fight for Ratification</a><a class="next" href="#part-5"><small>Next &rarr;</small>Part 5 · Britain, France, and Party Fights</a></nav>
+</section>
+<section class="page" id="part-5" aria-label="Part 5">
+<header class="parthead"><div class="pkicker">Part 5 <span>of 6</span></div><h2 class="part">Britain, France, and Party Fights</h2></header>
+<div class="obj"><div class="eyebrow">CORE OBJECTIVE</div><p><b>Core Objective 5:</b> Assess how attitudes toward Great Britain and France shaped American politics in the late eighteenth century.</p><p class="im"><b>IN MY WORDS:</b> Which party liked France more? Which liked Britain more?</p></div>
+<section class="reading" id="reading-m"><div class="rtitle"><span class="rlabel">Reading M</span><span class="rname">The French Revolution Divides Americans</span></div><p>The French Revolution captured the imagination of many Americans, especially Jefferson and the Democratic Republicans, as France saw royal tyranny being displaced by a democratic republic that gave voting rights to all adult men regardless of how much property they owned. . . . As the French republic plunged into warfare, the French Revolution (1789–1799) entered its vicious phase, the so-called Reign of Terror. . . . By contrast, Alexander Hamilton and John Adams saw the French Revolution as vicious and godless, and they sided with Great Britain and its allies. Such conflicting attitudes transformed the first decade of American politics into one of the most fractious periods in the nation’s history—an “age of passion.”</p><p class="help"><b>Word help:</b> royal tyranny = cruel rule by a king · displaced = replaced · vicious = cruel and violent · Reign of Terror = a time of mass executions in France · fractious = full of fighting</p><p class="cite">Norton, <i>America: The Essential Learning Edition</i>, Ch. 6, “Foreign and Domestic Crises” (Effects of the French Revolution).</p></section>
+<section class="reading" id="reading-n"><div class="rtitle"><span class="rlabel">Reading N</span><span class="rname">Jay’s Treaty (1794)</span></div><p>On April 16, 1794, President Washington sent John Jay to London to settle the major issues between the two nations. . . . The British refused, however, to stop intercepting American merchant ships headed to France and “impressing” their sailors. . . . In return for such concessions, Jay won three important promises. The British would (1) evacuate their six forts along the northwest frontier by 1796, (2) reimburse Americans for the seizures of ships and cargo in 1793–1794, and (3) grant U.S. merchants a limited right to trade again with the island colonies of the British West Indies. . . . When the terms of Jay’s Treaty were disclosed, many Americans, especially Republicans, were outraged.</p><p class="help"><b>Word help:</b> intercepting = stopping on the way · impressing = forcing sailors to serve in the British navy · concessions = things given up · evacuate = leave · reimburse = pay back · disclosed = made public</p><p class="cite">Norton, <i>America: The Essential Learning Edition</i>, Ch. 6, “Foreign and Domestic Crises” (Jay’s Treaty).</p></section>
+<section class="reading" id="reading-o"><div class="rtitle"><span class="rlabel">Reading O</span><span class="rname">The Whiskey Rebellion (1794)</span></div><p>During these turbulent years, the Washington administration faced another challenge in the backcountry when frontier farmers launched the so-called Whiskey Rebellion (1794). Alexander Hamilton’s 1791 tax on distilled spirits had ignited resistance among cash-poor farmers throughout the western frontier. . . . When the rebels failed to respond, 13,000 militiamen began marching to western Pennsylvania. . . . The show of force led the rebels and their sympathizers to change their tactics. Rather than openly defying federal laws, they voted for Republicans, who won decisively in the next Pennsylvania elections.</p><p class="help"><b>Word help:</b> turbulent = full of trouble · backcountry = frontier areas far from cities · distilled spirits = whiskey and other strong liquor · sympathizers = supporters · tactics = methods · defying = openly refusing to obey</p><p class="cite">Norton, <i>America: The Essential Learning Edition</i>, Ch. 6, “Foreign and Domestic Crises” (The Whiskey Rebellion).</p></section>
+<section class="reading" id="reading-p"><div class="rtitle"><span class="rlabel">Reading P</span><span class="rname">The Alien and Sedition Acts and the Election of 1800</span></div><p>As America’s second president, John Adams inherited an undeclared conflict with France, a by-product of French anger over Jay’s Treaty between the United States and Great Britain. . . . At the same time, Federalists worried that immigrants from France, especially, would bring social and political radicalism to the United States. Ultimately, the Alien and Sedition Acts of 1798, passed amid a wave of patriotic war fervor, gave the president extraordinary powers to limit the freedom of “aliens” (immigrants who had not yet gained citizenship). The acts also violated the Bill of Rights, including freedom of speech and of the press, by making it a crime to publicly criticize the government. That part was aimed at the Federalists’ critics, the Republicans.</p><p>In the election of 1800, Jefferson and Burr emerged with 73 electoral votes each. Adams received 65. . . . After thirty-six ballots, a majority of House members chose Jefferson over Burr . . . The election of 1800 further divided the young republic into warring political factions and marked a major turning point in the nation’s history.</p><p class="help"><b>Word help:</b> inherited = received from the person before · radicalism = extreme ideas for big change · fervor = strong feeling · aliens = immigrants who are not citizens · ballots = rounds of voting · factions = groups that disagree</p><p class="cite">Norton, <i>America: The Essential Learning Edition</i>, Ch. 6, “Foreign and Domestic Crises” (War with France; War at Home; Republican Victory in 1800; A New Era).</p></section>
+<p class="tintro"><b>Crises of the 1790s</b> | Use Readings M–P. Short phrases are fine.</p><div class="tbl"><div class="thead">What happened, and how did people react?</div><div class="trow"><div class="tl"><b>French Revolution (1789–1799)</b><div class="qp">Reading M</div></div><div class="tr"><textarea id="q23" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div><div class="trow"><div class="tl"><b>Jay’s Treaty (1794)</b><div class="qp">Reading N</div></div><div class="tr"><textarea id="q24" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div><div class="trow"><div class="tl"><b>Whiskey Rebellion (1794)</b><div class="qp">Reading O</div></div><div class="tr"><textarea id="q25" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div><div class="trow"><div class="tl"><b>Alien and Sedition Acts of 1798</b><div class="qp">Reading P</div></div><div class="tr"><textarea id="q26" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div><div class="trow"><div class="tl"><b>Election of 1800</b><div class="qp">Reading P</div></div><div class="tr"><textarea id="q27" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div></div>
+<div class="ask"><p><b>Connect.</b> Use Readings M and P. How did fear of France lead the Federalists to pass the Alien and Sedition Acts?</p><textarea id="q28" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div>
+<p class="tintro"><b>Lesson Check</b> | Cause and effect. Use the readings in this assignment. Write the effect (what it led to).</p><div class="tbl"><div class="thead">Effect: what did it lead to?</div><div class="trow"><div class="tl"><b>Shays’s Rebellion (1786–1787)</b><div class="qp">Reading C</div></div><div class="tr"><textarea id="q29" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div><div class="trow"><div class="tl"><b>Big and small states disagree about representation</b><div class="qp">Reading E</div></div><div class="tr"><textarea id="q30" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div><div class="trow"><div class="tl"><b>Anti-Federalists demand a bill of rights</b><div class="qp">Reading I</div></div><div class="tr"><textarea id="q31" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div><div class="trow"><div class="tl"><b>Hamilton’s plan for a national bank</b><div class="qp">Reading L</div></div><div class="tr"><textarea id="q32" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div><div class="trow"><div class="tl"><b>Anger at Jay’s Treaty and the Alien and Sedition Acts</b><div class="qp">Readings N and P</div></div><div class="tr"><textarea id="q33" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div></div>
+<nav class="pager" aria-label="Page navigation"><a class="prev" href="#part-4"><small>&larr; Previous</small>Part 4 · Federalists vs. Republicans</a><a class="next" href="#part-6"><small>Next &rarr;</small>Part 6 · CER: Did It Protect Liberty?</a></nav>
+</section>
+<section class="page" id="part-6" aria-label="Part 6">
+<header class="parthead"><div class="pkicker">Part 6 <span>of 6</span></div><h2 class="part">CER: Did It Protect Liberty?</h2></header>
+<div class="bigq"><div class="eyebrow">BIG QUESTION</div><p>Did the Constitution and the new national government (1787–1800) protect the people’s liberty?</p><p class="how">Use the readings and Source 1 in this assignment. Give <b>two pieces of evidence</b>. In the Counter-Argument box, explain what someone on the other side would say, and answer it.</p></div>
+<div class="cer"><div class="cl"><b>Claim</b><span>Answer the question in one sentence.</span></div><div class="cr"><textarea id="cer_claim" data-q="1" rows="4" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div>
+<div class="cer"><div class="cl"><b>Evidence</b><span>Two specific facts (dates, events, numbers).</span></div><div class="cr"><textarea id="cer_evidence" data-q="1" rows="4" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div>
+<div class="cer"><div class="cl"><b>Reasoning</b><span>How do the facts prove your claim?</span></div><div class="cr"><textarea id="cer_reasoning" data-q="1" rows="4" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div>
+<div class="cer"><div class="cl"><b>Counter-Argument</b><span>What would the other side say? Answer it.</span></div><div class="cr"><textarea id="cer_counter" data-q="1" rows="4" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div>
+<div class="checks"><b>Check your CER:</b> <label class="chk"><input type="checkbox" data-c="1" id="ck0"> My claim answers the question.</label><label class="chk"><input type="checkbox" data-c="1" id="ck1"> I used two facts.</label><label class="chk"><input type="checkbox" data-c="1" id="ck2"> My reasoning explains how the facts prove my claim.</label><label class="chk"><input type="checkbox" data-c="1" id="ck3"> I answered the Counter-Argument.</label></div>
+<div class="finish" id="actions">
+  <div class="status" id="status"></div>
+  <div class="btns">
+    <button class="btn" id="saveBtn">Save Progress</button>
+    <button class="btn" id="loadBtn">Load Progress</button>
+    <input type="file" id="loadFile" accept=".json,application/json" hidden>
+    <button class="btn primary" id="finishBtn" disabled>Finished — Download File to Submit</button>
+  </div>
+  <div class="msg" id="msg"></div>
+  <button class="link" id="reset">Clear all my answers</button>
+</div>
+
+<nav class="pager" aria-label="Page navigation"><a class="prev" href="#part-5"><small>&larr; Previous</small>Part 5 · Britain, France, and Party Fights</a></nav>
+</section>
+<footer><span>UNIT 1 · COLONIES, REVOLUTION, AND CONSTITUTION | CPUSH</span><span>DANIEL GARZA, M.A.</span></footer>
+</div>
+</div>
+
+<script type="application/json" id="ir-i18n">{"langs":["en","es","ar"],"default":"en","es":{"6099a637":"Parte 1","6199a7ca":"Parte 2","6299a95d":"Parte 3","5b999e58":"Parte 4","5c999feb":"Parte 5","e8320d28":"Imprimir","101020a6":"NOMBRE *","4cc2989e":"APELLIDO *","bc855c72":"PERÍODO *","cc2eccb1":"FECHA (se llena cuando terminas)","dd4901df":"PREGUNTA CENTRAL","b5f95d39":"<b>Cómo trabajar:<\/b> Lee cada recuadro de LECTURA y luego responde justo debajo. En las tablas bastan frases cortas; usa oraciones completas en las preguntas sobre las fuentes. La última sección es un CER sobre la pregunta central. Tu trabajo se guarda en este dispositivo mientras escribes. Usa <b>Guardar progreso<\/b> al final para descargar una copia de respaldo, y <b>Cargar progreso<\/b> para continuar más tarde. Escribe tu nombre, apellido y período; la fecha se llena sola cuando terminas. El botón <b>Terminé<\/b> se activa solo cuando completas todas las casillas, los tres campos obligatorios y la lista de control del CER.","268a97ab":"<b>Cómo trabajar:<\/b> Lee cada recuadro de lectura corta y luego responde justo debajo. En las tablas bastan frases cortas; usa oraciones completas en las preguntas sobre las fuentes. La última sección es un CER sobre la pregunta central. Tu trabajo se guarda en este dispositivo mientras escribes. Usa <b>Guardar progreso<\/b> al final para descargar una copia de respaldo, y <b>Cargar progreso<\/b> para continuar más tarde. Escribe tu nombre, apellido y período; la fecha se llena sola cuando terminas. El botón <b>Terminé<\/b> se activa solo cuando completas todas las casillas, los tres campos obligatorios y la lista de control del CER.","eff95e40":"Parte 1 <span>de 3<\/span>","8aa8ca01":"Parte 2 <span>de 3<\/span>","dcac4ea6":"Parte 3 <span>de 3<\/span>","74556c5e":"Parte 1 <span>de 5<\/span>","0ad7edaf":"Parte 2 <span>de 5<\/span>","20be02a8":"Parte 3 <span>de 5<\/span>","d4a17249":"Parte 4 <span>de 5<\/span>","d58474f2":"Parte 5 <span>de 5<\/span>","7bcc5d2d":"OBJETIVO PRINCIPAL","60b72d5a":"OBJETIVOS PRINCIPALES","03f0ef60":"Lectura A","06f0f419":"Lectura B","05f0f286":"Lectura C","08f0f73f":"Lectura D","07f0f5ac":"Lectura E","0af0fa65":"Lectura F","09f0f8d2":"Lectura G","0cf0fd8b":"Lectura H","0bf0fbf8":"Lectura I","0ef100b1":"Lectura J","c0ba89eb":"Fuente A","c1ba8b7e":"Fuente B","c2ba8d11":"Fuente C","c24f2ac7":"Mapa","2eed21e6":"Imagen","5bb56f2d":"Fotografía","fce42ac6":"Religión","0ee9a1b8":"Raza","00362020":"Resistencia","9b9784e5":"Límites","7ef89ad4":"Usa las lecturas y fuentes de esta tarea. Da dos pruebas (evidencias). En el recuadro de Contraargumento, explica qué diría alguien del otro lado y respóndele.","6b7f8865":"Usa las lecturas y fuentes de esta tarea. Da dos pruebas (evidencias) de lecturas o fuentes diferentes. En el recuadro de Contraargumento, explica qué diría alguien del otro lado y respóndele.","880d0ccb":"Usa las lecturas y fuentes de esta tarea. Da dos pruebas (evidencias) de las lecturas o fuentes. En el recuadro de Contraargumento, explica qué diría alguien del otro lado y respóndele.","62e0020f":"Afirmación","bf305ffe":"Responde la pregunta en una oración.","f800be44":"Evidencia","e328b529":"Dos datos específicos (fechas, sucesos, números).","e09311b9":"Dos datos específicos de lecturas o fuentes diferentes.","8e2e13e7":"Razonamiento","82e588cc":"¿Cómo prueban los datos tu afirmación?","76d14ba5":"Contraargumento","542842d1":"¿Qué diría el otro lado? Respóndele.","3a097e52":"Revisa tu CER:","21538345":"Mi afirmación responde la pregunta.","aeca2e1a":"Usé dos datos.","fa57ff71":"Mi razonamiento explica cómo los datos prueban mi afirmación.","c419df4e":"Respondí al contraargumento.","087b2bab":"Guardar progreso","284cef34":"Cargar progreso","ccb9431e":"Terminé — Descargar el archivo para entregar","3caa8e96":"Borrar todas mis respuestas","90501fcb":"MEXICANOS · UNA HISTORIA DE LOS MEXICANOS EN ESTADOS UNIDOS | HISTORY B30B","7ec87955":"DANIEL GARZA, M.A.","cb46d1cd":"Secciones","c5994ff6":"p. ej., 3","616a6784":"Automática","87c5718e":"Escribe tu respuesta aquí…","848019df":"respuesta","dea0c208":"Navegación entre páginas","191546a4":"Hecho — ¿Qué pasó y por qué importó?","75192f4a":"Pregunta — Tu respuesta","1b0e0fe6":"Lado — Argumento principal","657f5f00":"Indicación — Tu respuesta","5d99a17e":"Parte 6","c680c3b8":"<b>Cómo trabajar:<\/b> Lee cada cuadro de LECTURA y luego contesta justo debajo. En las tablas puedes usar frases cortas; usa oraciones completas en las preguntas sobre fuentes. La última Parte es un CER sobre la pregunta central. Tu trabajo se guarda en este dispositivo mientras escribes. Usa <b>Guardar progreso<\/b> al final de la última Parte para descargar un archivo de respaldo, y <b>Cargar progreso<\/b> para continuar después. Escribe tu nombre, tu apellido y tu periodo; la fecha se llena sola cuando terminas. El botón <b>Terminado<\/b> se activa solo cuando todos los cuadros, los tres campos obligatorios y la lista de revisión del CER están completos.","b48729b5":"Parte 1 <span>de 6<\/span>","212940e8":"Tu respuesta","77d6f8d4":"Parte 2 <span>de 6<\/span>","68988a6c":"Lecturas E y F","872e2b23":"Parte 3 <span>de 6<\/span>","b0ba70bb":"Fuente 1","7e2c1f92":"Parte 4 <span>de 6<\/span>","0df0ff1e":"Lectura K","10f103d7":"Lectura L","8334d529":"Parte 5 <span>de 6<\/span>","0ff10244":"Lectura M","12f106fd":"Lectura N","11f1056a":"Lectura O","14f10a23":"Lectura P","200fd5cb":"<b>Repaso de la lección<\/b> | Causa y efecto. Usa las lecturas de esta tarea. Escribe el efecto (a qué llevó).","cd862086":"Efecto: ¿a qué llevó?","f13a5108":"Parte 6 <span>de 6<\/span>","b319854d":"Usa las lecturas y la Fuente 1 de esta tarea. Da <b>dos pruebas<\/b>. En el cuadro de Contraargumento, explica lo que diría alguien del otro lado y respóndele.","1528f397":"UNIDAD 1 · COLONIAS, REVOLUCIÓN Y CONSTITUCIÓN | CPUSH","04391acb":"LECTURA INTERACTIVA 4","afffa0ec":"La creación de la Constitución","41fcdd02":"Los Artículos se quedan cortos","094fbcf0":"<b>Lectura A<\/b>Una alianza débil de estados","3eec4fea":"<b>Lectura B<\/b>La Ordenanza del Noroeste (1787)","8fbf6c76":"<b>Lectura C<\/b>La Rebelión de Shays (1786–1787)","11230029":"Una nueva Constitución","ddb154bc":"<b>Lectura D<\/b>“Nosotros, el pueblo” y el federalismo","6bcef863":"<b>Lectura E<\/b>El Gran Compromiso y la separación de poderes","d0904e5b":"<b>Lectura F<\/b>El Colegio Electoral y los tribunales","ccfca129":"<b>Lectura G<\/b>Los límites de la Constitución","5a3a0d36":"La lucha por la ratificación","3be5abf6":"<b>Lectura H<\/b>Federalistas y antifederalistas","dad9c4e3":"<b>Lectura I<\/b>Los Documentos Federalistas y la Declaración de Derechos","0ed75062":"<b>Fuente 1<\/b>Madison sobre una declaración de derechos (Fuente primaria)","f75068d0":"Federalistas contra republicanos","78c408d8":"<b>Lectura J<\/b>Dos partidos","bef0398a":"<b>Lectura K<\/b>¿Quién debe gobernar?","7d2ebd9c":"<b>Lectura L<\/b>El Banco de los Estados Unidos","9dc128af":"Gran Bretaña, Francia y las peleas entre partidos","7c9bb888":"<b>Lectura M<\/b>La Revolución francesa divide a los estadounidenses","4fff82d3":"<b>Lectura N<\/b>El Tratado de Jay (1794)","cbf46e20":"<b>Lectura O<\/b>La Rebelión del Whiskey (1794)","c11f0d5e":"<b>Lectura P<\/b>Las Leyes de Extranjería y Sedición y la elección de 1800","e934b8f6":"CER: ¿Protegió la libertad?","c5aacb21":"1781–1800 | La creación de la Constitución","a52fa002":"¿Protegieron la Constitución y el nuevo gobierno nacional (1787–1800) la libertad del pueblo?","f32f727b":"<b>Objetivo principal 1:<\/b> Identifica las fortalezas y debilidades de los Artículos de la Confederación y explica cómo llevaron a la creación de una nueva constitución de EE. UU. en 1787.","7d1aa5c6":"<b>EN MIS PALABRAS:<\/b> Nombra algo que los Artículos hicieron bien y algo que hicieron mal.","2b5107f6":"Una alianza débil de estados","525706ea":"Los Artículos de la Confederación, aprobados formalmente en 1781, habían creado una alianza débil (o confederación) de trece estados independientes que estaban unidos solo en teoría. En la práctica, cada gobierno estatal actuaba casi siempre por su cuenta.","5d646b51":"El débil gobierno nacional bajo los Artículos tenía solo una parte: una legislatura de una sola cámara. No había poder ejecutivo ni poder judicial nacional (sistema de tribunales). Las legislaturas estatales, no los votantes, nombraban a los miembros del Congreso de la Confederación, en el que cada estado, sin importar su tamaño o población, tenía un voto. Esto significaba que Rhode Island, con 68,000 habitantes, tenía el mismo poder de voto que Virginia, con más de 747,000 habitantes. . . . El Congreso de la Confederación no tenía dinero y no podía cobrar impuestos para reunir los fondos que necesitaba.","ac570c6e":"<b>Ayuda con palabras:<\/b> alianza = asociación · en teoría = en el papel, no en la vida real · parte = componente · poder ejecutivo = un presidente que hace cumplir las leyes · poder judicial = los tribunales · habitantes = personas que viven en un lugar","c7d0d1de":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 6, “The Confederation Government” (A Loose Alliance of States).","1bd9e9b1":"La Ordenanza del Noroeste (1787)","dbec51e4":"Sin embargo, a pesar de sus límites, el Congreso de la Confederación sí puso bases importantes para el nuevo gobierno nacional. . . . El Congreso también creó los principios básicos para repartir la tierra y gobernar los territorios que guiarían la expansión de Estados Unidos hacia el oeste. . . . Dos años después de aprobar la Ordenanza de Tierras de 1785, el Congreso de la Confederación aprobó la tercera gran política de tierras: la Ordenanza del Noroeste de 1787, que estableció dos principios clave. Primero, los nuevos territorios con el tiempo se convertirían en estados iguales a los demás, como había propuesto Jefferson. Segundo, la esclavitud estaría prohibida en la región al norte del río Ohio. . . . La Ordenanza del Noroeste también incluía una promesa, que se rompería muchas veces, de que las tierras indígenas “nunca les serán quitadas sin su consentimiento”.","c7a542be":"<b>Ayuda con palabras:<\/b> bases = cimientos para construir · creó = formuló · territorios = tierras nuevas que todavía no son estados · iguales = con los mismos derechos que los otros estados · consentimiento = permiso","c03cea1c":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 6, “The Confederation Government” (A Struggling Government; The Northwest Ordinance).","7a38b552":"La Rebelión de Shays (1786–1787)","bbc5a097":"En 1786, cuando la legislatura de Massachusetts, dominada por comerciantes, se negó a bajar los impuestos o a emitir más papel moneda, tres condados rurales se rebelaron. Grupos armados de granjeros enojados, que se llamaban a sí mismos Reguladores, o “la voz del pueblo”, se unieron para obligar a los jueces y alguaciles a dejar de quitarles el ganado y las granjas a los “deudores” que no podían pagar sus impuestos.","1ab96e5a":"La situación empeoró a principios del invierno de 1787, cuando un grupo de granjeros descontentos dirigido por Daniel Shays, de treinta y nueve años y destacado veterano de guerra, marchó hacia el arsenal federal de Springfield. . . . La noticia de la Rebelión de Shays sacudió a toda la nación. . . . George Washington también estaba preocupado. Estados Unidos, dijo, necesitaba un “gobierno” nacional más fuerte “que asegure nuestras vidas, nuestra libertad y nuestras propiedades”.","f172ec2c":"<b>Ayuda con palabras:<\/b> dominada por comerciantes = dirigida sobre todo por dueños de negocios · rurales = del campo · quitar = tomar por la fuerza · deudores = personas que deben dinero · arsenal = lugar donde se guardan armas","5edf13a5":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 6, “The Confederation Government” (Shays’s Rebellion).","05c32a29":"<b>Fortalezas y debilidades<\/b> | Usa las Lecturas A, B y C. Las frases cortas están bien.","dc4f4dd3":"Una debilidad de los Artículos","9e397e79":"Una fortaleza de los Artículos","9e0b196d":"Por qué se rebelaron los granjeros en la Rebelión de Shays","a57bf1bb":"Qué decidieron los líderes después de la Rebelión de Shays","fb198efc":"<b>Piénsalo.<\/b> La Lectura A dice que Rhode Island y Virginia tenían un voto cada uno. ¿Por qué la gente de Virginia podría pensar que eso era injusto?","0d975cad":"<small>Siguiente →<\/small>Parte 2 · Una nueva Constitución","c1801d7e":"<b>Objetivo principal 2:<\/b> Describe las innovaciones políticas que desarrolló la Convención Constitucional de 1787 para la nueva nación.","776cd25d":"<b>EN MIS PALABRAS:<\/b> Una innovación es una idea nueva. Nombra una idea nueva de la Constitución.","642826f1":"“Nosotros, el pueblo” y el federalismo","e91071b2":"En 1787, el Congreso de la Confederación respondió a los disturbios convocando una convención “federal” especial que se reuniría en la Casa del Estado de Filadelfia (hoy conocida como el Salón de la Independencia) con el “propósito de revisar los Artículos de la Confederación”. . . . Así, la versión final de la Constitución comienza: “Nosotros, el pueblo de los Estados Unidos, a fin de formar una unión más perfecta, . . . ordenamos y establecemos esta Constitución para los Estados Unidos de América”. La insistencia en que los votantes eran “la fuente legítima de toda autoridad”, como subrayó James Wilson de Pensilvania, fue la innovación política más importante desde la Declaración de Independencia.","ed700830":"Los delegados también se dieron cuenta de que un gobierno nacional eficaz necesitaba autoridad para cobrar impuestos, pedir prestado y emitir dinero, regular el comercio, pagar un ejército y una marina, y hacer leyes. . . . Esta idea de dividir la autoridad entre el gobierno nacional y los estados llegó a llamarse federalismo.","dcba6f45":"<b>Ayuda con palabras:<\/b> revisar = cambiar y arreglar · ordenar = mandar oficialmente · legítima = legal, verdadera · autoridad = poder para tomar decisiones · regular el comercio = hacer reglas para el comercio","2975bcbc":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 6, “The Constitution” (The Constitutional Convention; Guiding Assumptions).","f07bc815":"El Gran Compromiso y la separación de poderes","19075f20":"Un intenso debate sobre la representación en el Congreso se resolvió a mediados de julio con el llamado Gran Compromiso . . . Los estados más grandes lograron que los escaños de la propuesta Cámara de Representantes se repartieran según la población, mientras que los delegados de los estados más pequeños lograron igualdad de representación en el Senado, donde cada estado tendría dos miembros elegidos por las legislaturas. El Gran Compromiso incorporó al nuevo Congreso la idea innovadora de la separación de poderes. . . . Sin embargo, los poderes del presidente también eran limitados. El jefe del ejecutivo no podía declarar la guerra ni hacer la paz; solo el Congreso podía hacerlo. Además, el presidente podía ser destituido de su cargo.","62bca56f":"<b>Ayuda con palabras:<\/b> representación = tener personas que hablen por ti en el gobierno · repartir escaños = dividir los asientos · incorporó = metió dentro · separación de poderes = dividir el poder entre las ramas del gobierno","7562a5ba":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 6, “The Constitution” (The Great Compromise; The Executive).","2ca73e58":"El Colegio Electoral y los tribunales","6d3fae6f":"Para mantener la separación de las tres ramas del gobierno, el presidente sería elegido cada cuatro años por el Colegio Electoral, un grupo de “electores” muy preparados escogidos por “el pueblo” en elecciones locales. El número de electores de cada estado sería igual al número de sus representantes y senadores en el Congreso. . . . La nueva constitución creó una corte suprema nacional encabezada por un presidente de la corte. El papel de la corte no era hacer leyes (un poder reservado al Congreso) ni ejecutar y hacer cumplir las leyes (reservado a la presidencia), sino interpretar las leyes y asegurar que todos los ciudadanos recibieran igual justicia ante la ley.","4ecf7a0b":"<b>Ayuda con palabras:<\/b> mantener = conservar · electores = personas escogidas para votar por el presidente · presidente de la corte = el juez principal · ejecutar = llevar a cabo · interpretar = explicar el significado","a2efbf8d":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 6, “The Constitution” (The Electoral College; The Judiciary).","cd70b611":"Los límites de la Constitución","63545566":"Los delegados acordaron un compromiso en el que tres quintas partes de “todas las demás personas” (es decir, las personas esclavizadas) se incluirían en el conteo de población para repartir los representantes de cada estado en el Congreso. . . . Los delegados de la Convención Constitucional se negaron incluso a hablar de los derechos políticos de las mujeres. En los nuevos Estados Unidos, las mujeres no podían votar, ocupar cargos de elección ni tener propiedades.","719c7d2d":"<b>Ayuda con palabras:<\/b> compromiso = un acuerdo en el que cada lado cede algo · “todas las demás personas” = las palabras de la Constitución para las personas esclavizadas · derechos políticos = derechos como votar","d3e4156d":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 6, “The Constitution” (The Three-Fifths Compromise; The Absence of Women’s Rights).","2ea9bdb0":"<b>Ideas nuevas<\/b> | Usa las Lecturas D, E y F. Explica cada idea con tus propias palabras.","db180147":"¿Qué significa?","a11a0a52":"“Nosotros, el pueblo”","41c7f279":"Federalismo","50235a80":"Gran Compromiso","8ab326fc":"Separación de poderes","2129163d":"Colegio Electoral","630dd9c4":"<b>¿Quién quedó fuera?<\/b> Usa la Lectura G. Nombra dos grupos a los que la Constitución no trató con igualdad, y cómo.","e510850d":"<small>← Anterior<\/small>Parte 1 · Los Artículos se quedan cortos","801a7baf":"<small>Siguiente →<\/small>Parte 3 · La lucha por la ratificación","e579c2aa":"<b>Objetivo principal 3:<\/b> Resume los principales debates sobre la ratificación de la Constitución. Explica por qué surgieron y cómo se resolvieron.","0db1bf63":"<b>EN MIS PALABRAS:<\/b> ¿Sobre qué discutía la gente antes de que los estados aprobaran la Constitución?","1b757103":"Federalistas y antifederalistas","29af75bb":"Los federalistas, dirigidos por James Madison y Alexander Hamilton, tenían varias ventajas. Primero, tenían una propuesta concreta: el borrador de la constitución; sus oponentes no tenían nada que ofrecer más que críticas. . . . Los antifederalistas temían que el nuevo gobierno nacional con el tiempo se volviera corrupto y tiránico. . . . Mason y los demás antifederalistas criticaron sobre todo la falta de una “declaración de derechos” que protegiera a las personas y a los estados del poder del gobierno nacional.","135e658f":"<b>Ayuda con palabras:<\/b> concreta = real, específica · propuesta = un plan · corrupto = deshonesto · tiránico = cruel y con demasiado poder · falta = ausencia · Mason = George Mason de Virginia","8ecc8dbe":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 6, “The Fight for Ratification” (Choosing Sides: Anti-Federalists versus Federalists).","f5f553ad":"Los Documentos Federalistas y la Declaración de Derechos","f678f723":"Entre los legados del debate sobre la Constitución está lo que se llegó a conocer como Los Documentos Federalistas, una colección de ochenta y cinco ensayos publicados en periódicos de Nueva York en 1787 y 1788. Escritos por James Madison, Alexander Hamilton y John Jay, los ensayos buscaban convencer a los neoyorquinos de ratificar la nueva constitución. . . . El 21 de junio de 1788, New Hampshire se convirtió en el noveno estado en ratificar la Constitución, con lo que se alcanzó el número mínimo de estados necesarios para aprobarla. . . . Ambos estados tenían fuertes grupos de oposición que al final fueron convencidos con el acuerdo de añadir una declaración de derechos.","7b6b5c5e":"Para finales de 1791, las tres cuartas partes necesarias de los estados habían aprobado diez de las doce enmiendas propuestas, hoy conocidas como la Declaración de Derechos.","797e46ac":"<b>Ayuda con palabras:<\/b> legados = cosas que se dejan para el futuro · ratificar = aprobar oficialmente · mínimo = el número más pequeño necesario · Ambos estados = Virginia y Nueva York · enmiendas = cambios que se añaden a la Constitución","da12049d":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 6, “The Fight for Ratification” (The Federalist Papers; The States Decide). Norton, <i>America: The Essential Learning Edition<\/i>, cap. 6, “The Federalist Era” (The Bill of Rights).","2e385b3b":"Madison sobre una declaración de derechos (Fuente primaria)","93a05c1d":"James Madison ayudó a escribir la Constitución. En 1788 le escribió esta carta a Thomas Jefferson sobre añadir una declaración de derechos.","e4cdd42d":"“Mi opinión siempre ha sido a favor de una declaración de derechos, siempre que se redacte de modo que no implique poderes que no se pretendía incluir en la lista. Al mismo tiempo, nunca he pensado que su ausencia sea un defecto grave, ni he tenido prisa por añadirla, ni siquiera con una enmienda posterior, por ninguna otra razón que no sea que otros la desean con ansias. La he apoyado porque supuse que podría ser útil y que, bien hecha, no podría hacer daño.”","d3f663f9":"<b>Ayuda con palabras:<\/b> redactar = escribir · lista = enumeración · ausencia = dejarla fuera · defecto grave = un problema serio · enmienda posterior = un cambio que se añade después · otros la desean con ansias = otras personas la querían mucho · hacer daño = perjudicar","cf7a13cc":"James Madison a Thomas Jefferson, 17 de octubre de 1788. En Norton, cap. 6, “The Federalist Era” (Comparing Perspectives: On Rights and Freedoms).","1991b28f":"<b>Fuente 1.<\/b> ¿Madison estaba a favor o en contra de una declaración de derechos? ¿Pensaba que no tenerla era un gran problema?","95fb5977":"<b>Punto de vista.<\/b> Madison dice que la apoyó sobre todo porque “otros la desean con ansias”. Usa las Lecturas H e I: ¿quiénes eran esos otros y por qué Madison necesitaba su apoyo?","d62bc162":"<b>El debate<\/b> | Usa las Lecturas H e I. Las frases cortas están bien.","06dc51c3":"Lo que querían los federalistas","bb7385fc":"Lo que temían los antifederalistas","b664a1f7":"Lo que hicieron Los Documentos Federalistas","26a83cda":"Cómo se resolvió el debate","66c263cb":"<small>← Anterior<\/small>Parte 2 · Una nueva Constitución","cc7d30b6":"<small>Siguiente →<\/small>Parte 4 · Federalistas contra republicanos","debe5d5d":"<b>Objetivo principal 4:<\/b> Compara la visión de los federalistas para Estados Unidos con la de sus oponentes republicanos durante la década de 1790.","b7b8f757":"<b>EN MIS PALABRAS:<\/b> ¿Quién dirigía cada partido? Nombra un líder de cada uno.","aab36be1":"Dos partidos","fd495b75":"Durante la década de 1790, el gobierno federal enfrentaría rebeliones, estados que amenazaban con separarse, una deuda enorme y guerras extranjeras, además de la formación de partidos políticos rivales: los federalistas y los demócrata-republicanos, más conocidos como republicanos jeffersonianos, o simplemente republicanos.","1b8236aa":"Los republicanos eran en su mayoría sureños, como los virginianos Thomas Jefferson y James Madison, que querían que el país siguiera siendo una nación rural de pequeños granjeros dedicada a los valores republicanos. Los federalistas, dirigidos por Alexander Hamilton y John Adams, se concentraban en Nueva York y Nueva Inglaterra. Apoyaban la cultura urbana, el desarrollo industrial y el crecimiento comercial.","07528c5c":"<b>Ayuda con palabras:<\/b> enfrentar = hacer frente · separarse = salirse del país · enorme = increíblemente grande · rural = del campo · se concentraban = estaban agrupados · urbana = de la ciudad · comercial = de negocios y comercio","b3858aad":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 6, “The Federalist Era”.","4d095446":"¿Quién debe gobernar?","2c48b7c8":"Los federalistas eran más numerosos en Nueva York y Nueva Inglaterra y también tenían poder entre la élite de plantadores de Carolina del Sur. En general, temían los excesos de la democracia, desconfiaban de lo que consideraban la “gente común” y querían un gobierno central fuerte dirigido por los líderes más sabios, comprometidos con el crecimiento económico, la estabilidad social y la defensa nacional. . . . En cambio, los demócrata-republicanos, dirigidos por Thomas Jefferson y James Madison, se preocupaban sobre todo por las amenazas que un gobierno nacional fuerte representaría para las libertades individuales y los derechos de los estados. Confiaban en el pueblo.","d319af59":"<b>Ayuda con palabras:<\/b> élite de plantadores = dueños ricos de plantaciones · excesos = demasiado de algo · desconfiaban = no confiaban · estabilidad = calma, orden · derechos de los estados = poderes que conservan los estados","d489c1dd":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 6, “The Federalist Era” (The Beginnings of Political Parties).","5cefd63b":"El Banco de los Estados Unidos","6b508fe1":"Después de conseguir la aprobación del Congreso para su plan de pago de la deuda, Hamilton pidió un banco nacional basado en el Banco de Inglaterra. Hamilton creía que un banco así fomentaría más el “comercio entre las personas” y sería un lugar seguro para los ingresos del gobierno federal. . . . Una vez más, James Madison y Thomas Jefferson dirigieron la oposición al plan bancario de Hamilton. Sostenían que la Constitución no decía nada sobre crear un banco nacional, así que el gobierno no podía fundar uno. . . . El nuevo Banco de los Estados Unidos (B.U.S.), creado en 1791, tenía tres responsabilidades principales: (1) guardar los ingresos del gobierno y pagar sus cuentas, (2) dar préstamos al gobierno federal y a los bancos autorizados por los estados para promover el desarrollo económico . . . La votación tan desigual mostró la creciente división política entre el Norte y el Sur.","69033919":"<b>Ayuda con palabras:<\/b> fomentar = ayudar a crecer · comercio = intercambio de bienes · ingresos = dinero que recauda el gobierno · plan = proyecto · sostenían = argumentaban · votación tan desigual = una votación muy dispareja en el Congreso (los estados del Norte a favor del banco, los del Sur en contra)","4e6de6fb":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 6, “The Federalist Era” (A National Bank).","b6f1d346":"<b>Compara los partidos<\/b> | Usa las Lecturas J, K y L. Las frases cortas están bien.","3bce0ca7":"Dos visiones para Estados Unidos","9ffbfde7":"Federalistas","1c148d99":"Lecturas J–L","394b3be9":"¿Dónde eran más fuertes y qué economía querían?","96649bea":"¿Qué pensaban del gobierno y del pueblo?","5702d93b":"Republicanos","c150030c":"<b>El banco.<\/b> Usa la Lectura L. ¿Por qué Jefferson y Madison decían que el gobierno no podía fundar un banco nacional?","167d2d7d":"<small>← Anterior<\/small>Parte 3 · La lucha por la ratificación","128ffa9a":"<small>Siguiente →<\/small>Parte 5 · Gran Bretaña, Francia y las peleas entre partidos","633b3530":"<b>Objetivo principal 5:<\/b> Evalúa cómo las actitudes hacia Gran Bretaña y Francia influyeron en la política estadounidense a finales del siglo XVIII.","1657c872":"<b>EN MIS PALABRAS:<\/b> ¿Qué partido prefería a Francia? ¿Cuál prefería a Gran Bretaña?","ef4ea7e6":"La Revolución francesa divide a los estadounidenses","2b348896":"La Revolución francesa capturó la imaginación de muchos estadounidenses, sobre todo de Jefferson y los demócrata-republicanos, porque en Francia la tiranía real era reemplazada por una república democrática que daba el derecho al voto a todos los hombres adultos sin importar cuántas propiedades tuvieran. . . . Cuando la república francesa entró en guerra, la Revolución francesa (1789–1799) entró en su etapa más cruel, el llamado Reinado del Terror. . . . En cambio, Alexander Hamilton y John Adams vieron la Revolución francesa como cruel y sin Dios, y se pusieron del lado de Gran Bretaña y sus aliados. Estas actitudes opuestas convirtieron la primera década de la política estadounidense en uno de los periodos más conflictivos de la historia del país: una “era de pasión”.","71471876":"<b>Ayuda con palabras:<\/b> tiranía real = gobierno cruel de un rey · reemplazada = sustituida · cruel = violenta · Reinado del Terror = un tiempo de ejecuciones masivas en Francia · conflictivos = llenos de peleas","97b28421":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 6, “Foreign and Domestic Crises” (Effects of the French Revolution).","fdb31376":"El Tratado de Jay (1794)","be379cd8":"El 16 de abril de 1794, el presidente Washington envió a John Jay a Londres para resolver los principales problemas entre las dos naciones. . . . Sin embargo, los británicos se negaron a dejar de detener los barcos mercantes estadounidenses que iban hacia Francia y de “reclutar a la fuerza” a sus marineros. . . . A cambio de esas concesiones, Jay consiguió tres promesas importantes. Los británicos (1) abandonarían sus seis fuertes en la frontera del noroeste para 1796, (2) pagarían a los estadounidenses por los barcos y cargamentos capturados en 1793–1794, y (3) darían a los comerciantes estadounidenses un derecho limitado para volver a comerciar con las colonias de las Indias Occidentales Británicas. . . . Cuando se dieron a conocer los términos del Tratado de Jay, muchos estadounidenses, sobre todo los republicanos, se indignaron.","eebd1418":"<b>Ayuda con palabras:<\/b> detener = parar en el camino · reclutar a la fuerza = obligar a los marineros a servir en la marina británica · concesiones = cosas que se ceden · abandonar = irse de · pagar = devolver dinero · dar a conocer = hacer público","d2c6c0e1":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 6, “Foreign and Domestic Crises” (Jay’s Treaty).","66e532a0":"La Rebelión del Whiskey (1794)","eae80dab":"Durante esos años agitados, el gobierno de Washington enfrentó otro desafío en el interior del país cuando los granjeros de la frontera iniciaron la llamada Rebelión del Whiskey (1794). El impuesto de Alexander Hamilton de 1791 sobre las bebidas destiladas había provocado resistencia entre los granjeros sin dinero en toda la frontera del oeste. . . . Como los rebeldes no respondieron, 13,000 milicianos empezaron a marchar hacia el oeste de Pensilvania. . . . La demostración de fuerza hizo que los rebeldes y quienes los apoyaban cambiaran de táctica. En lugar de desafiar abiertamente las leyes federales, votaron por los republicanos, que ganaron con claridad las siguientes elecciones de Pensilvania.","5ccada01":"<b>Ayuda con palabras:<\/b> agitados = llenos de problemas · interior del país = zonas de frontera lejos de las ciudades · bebidas destiladas = whiskey y otros licores fuertes · quienes los apoyaban = simpatizantes · táctica = método · desafiar = negarse abiertamente a obedecer","e34c645f":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 6, “Foreign and Domestic Crises” (The Whiskey Rebellion).","049825cf":"Las Leyes de Extranjería y Sedición y la elección de 1800","b43e20ef":"Como segundo presidente de Estados Unidos, John Adams heredó un conflicto no declarado con Francia, una consecuencia del enojo francés por el Tratado de Jay entre Estados Unidos y Gran Bretaña. . . . Al mismo tiempo, los federalistas temían que los inmigrantes, sobre todo los de Francia, trajeran radicalismo social y político a Estados Unidos. Al final, las Leyes de Extranjería y Sedición de 1798, aprobadas en medio de una ola de fervor patriótico de guerra, le dieron al presidente poderes extraordinarios para limitar la libertad de los “extranjeros” (inmigrantes que todavía no eran ciudadanos). Las leyes también violaban la Declaración de Derechos, incluida la libertad de expresión y de prensa, porque convertían en delito criticar públicamente al gobierno. Esa parte estaba dirigida contra los críticos de los federalistas: los republicanos.","c8bc8d92":"En la elección de 1800, Jefferson y Burr obtuvieron 73 votos electorales cada uno. Adams recibió 65. . . . Después de treinta y seis votaciones, una mayoría de los miembros de la Cámara eligió a Jefferson en lugar de Burr . . . La elección de 1800 dividió todavía más a la joven república en facciones políticas enfrentadas y marcó un momento decisivo en la historia del país.","860244c4":"<b>Ayuda con palabras:<\/b> heredó = recibió de la persona anterior · radicalismo = ideas extremas de gran cambio · fervor = sentimiento fuerte · extranjeros = inmigrantes que no son ciudadanos · votaciones = rondas de voto · facciones = grupos que no están de acuerdo","d9f37864":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 6, “Foreign and Domestic Crises” (War with France; War at Home; Republican Victory in 1800; A New Era).","e4c5897d":"<b>Crisis de la década de 1790<\/b> | Usa las Lecturas M–P. Las frases cortas están bien.","d9b1a13f":"¿Qué pasó y cómo reaccionó la gente?","7753f5d9":"Revolución francesa (1789–1799)","52385419":"Rebelión del Whiskey (1794)","68ff4c6d":"Leyes de Extranjería y Sedición de 1798","dddd7bb4":"Elección de 1800","85f37928":"<b>Conecta.<\/b> Usa las Lecturas M y P. ¿Cómo llevó el miedo a Francia a los federalistas a aprobar las Leyes de Extranjería y Sedición?","e2fdea01":"Los estados grandes y pequeños no están de acuerdo sobre la representación","3b4d8375":"Los antifederalistas exigen una declaración de derechos","f97b6a20":"El plan de Hamilton para un banco nacional","d6717e4a":"El enojo por el Tratado de Jay y las Leyes de Extranjería y Sedición","df01c507":"Lecturas N y P","48ba5de4":"<small>← Anterior<\/small>Parte 4 · Federalistas contra republicanos","bc7ee6f6":"<small>Siguiente →<\/small>Parte 6 · CER: ¿Protegió la libertad?","4f50e3d0":"<small>← Anterior<\/small>Parte 5 · Gran Bretaña, Francia y las peleas entre partidos","b35c42c1":"Lectura interactiva 4 · La creación de la Constitución"},"ar":{"6099a637":"الجزء 1","6199a7ca":"الجزء 2","6299a95d":"الجزء 3","5b999e58":"الجزء 4","5c999feb":"الجزء 5","e8320d28":"طباعة","101020a6":"الاسم الأول *","4cc2989e":"اسم العائلة *","bc855c72":"الحصة *","cc2eccb1":"التاريخ (يُكتب تلقائيًا عند الانتهاء)","dd4901df":"السؤال الكبير","b5f95d39":"<b>طريقة العمل:<\/b> اقرأ كل مربع قراءة، ثم أجب تحته مباشرة. العبارات القصيرة تكفي في الجداول؛ واكتب جملًا كاملة في أسئلة المصادر. القسم الأخير هو CER (الادعاء، الدليل، التعليل) عن السؤال الكبير. يُحفظ عملك على هذا الجهاز أثناء الكتابة. استخدم زر <b>حفظ التقدم<\/b> في الأسفل لتنزيل نسخة احتياطية، وزر <b>تحميل التقدم<\/b> لتكمل لاحقًا. اكتب اسمك الأول واسم العائلة والحصة؛ ويُكتب التاريخ تلقائيًا عند الانتهاء. لا يعمل زر <b>انتهيت<\/b> إلا بعد أن تجيب عن كل المربعات، وتملأ الحقول الثلاثة المطلوبة، وتُكمل قائمة التحقق الخاصة بـ CER.","268a97ab":"<b>طريقة العمل:<\/b> اقرأ كل مربع قراءة قصيرة، ثم أجب تحته مباشرة. العبارات القصيرة تكفي في الجداول؛ واكتب جملًا كاملة في أسئلة المصادر. القسم الأخير هو CER (الادعاء، الدليل، التعليل) عن السؤال الكبير. يُحفظ عملك على هذا الجهاز أثناء الكتابة. استخدم زر <b>حفظ التقدم<\/b> في الأسفل لتنزيل نسخة احتياطية، وزر <b>تحميل التقدم<\/b> لتكمل لاحقًا. اكتب اسمك الأول واسم العائلة والحصة؛ ويُكتب التاريخ تلقائيًا عند الانتهاء. لا يعمل زر <b>انتهيت<\/b> إلا بعد أن تجيب عن كل المربعات، وتملأ الحقول الثلاثة المطلوبة، وتُكمل قائمة التحقق الخاصة بـ CER.","eff95e40":"الجزء 1 <span>من 3<\/span>","8aa8ca01":"الجزء 2 <span>من 3<\/span>","dcac4ea6":"الجزء 3 <span>من 3<\/span>","74556c5e":"الجزء 1 <span>من 5<\/span>","0ad7edaf":"الجزء 2 <span>من 5<\/span>","20be02a8":"الجزء 3 <span>من 5<\/span>","d4a17249":"الجزء 4 <span>من 5<\/span>","d58474f2":"الجزء 5 <span>من 5<\/span>","7bcc5d2d":"الهدف الأساسي","60b72d5a":"الأهداف الأساسية","03f0ef60":"القراءة A","06f0f419":"القراءة B","05f0f286":"القراءة C","08f0f73f":"القراءة D","07f0f5ac":"القراءة E","0af0fa65":"القراءة F","09f0f8d2":"القراءة G","0cf0fd8b":"القراءة H","0bf0fbf8":"القراءة I","0ef100b1":"القراءة J","c0ba89eb":"المصدر A","c1ba8b7e":"المصدر B","c2ba8d11":"المصدر C","c24f2ac7":"خريطة","2eed21e6":"صورة","5bb56f2d":"صورة فوتوغرافية","fce42ac6":"الدين","0ee9a1b8":"العِرق","00362020":"المقاومة","9b9784e5":"الحدود والقيود","7ef89ad4":"استخدم القراءات والمصادر في هذه المهمة. قدّم دليلين. في مربع الحجة المضادة، اشرح ماذا سيقول شخص من الرأي الآخر، ثم ردّ عليه.","6b7f8865":"استخدم القراءات والمصادر في هذه المهمة. قدّم دليلين من قراءتين أو مصدرين مختلفين. في مربع الحجة المضادة، اشرح ماذا سيقول شخص من الرأي الآخر، ثم ردّ عليه.","880d0ccb":"استخدم القراءات والمصادر في هذه المهمة. قدّم دليلين من القراءات أو المصادر. في مربع الحجة المضادة، اشرح ماذا سيقول شخص من الرأي الآخر، ثم ردّ عليه.","62e0020f":"الادعاء","bf305ffe":"أجب عن السؤال في جملة واحدة.","f800be44":"الدليل","e328b529":"معلومتان محددتان (تواريخ، أحداث، أرقام).","e09311b9":"معلومتان محددتان من قراءتين أو مصدرين مختلفين.","8e2e13e7":"التعليل","82e588cc":"كيف تُثبت هذه المعلومات ادعاءك؟","76d14ba5":"الحجة المضادة","542842d1":"ماذا سيقول الرأي الآخر؟ ردّ عليه.","3a097e52":"راجع الـ CER الخاص بك:","21538345":"ادعائي يجيب عن السؤال.","aeca2e1a":"استخدمت معلومتين.","fa57ff71":"تعليلي يشرح كيف تُثبت المعلومات ادعائي.","c419df4e":"رددت على الحجة المضادة.","087b2bab":"حفظ التقدم","284cef34":"تحميل التقدم","ccb9431e":"انتهيت — نزّل الملف لتسليمه","3caa8e96":"امسح كل إجاباتي","90501fcb":"MEXICANOS · تاريخ المكسيكيين في الولايات المتحدة | HISTORY B30B","7ec87955":"DANIEL GARZA, M.A.","cb46d1cd":"الأقسام","c5994ff6":"مثال: 3","616a6784":"تلقائي","87c5718e":"اكتب إجابتك هنا…","848019df":"إجابة","dea0c208":"التنقل بين الصفحات","191546a4":"التطور — ماذا حدث، ولماذا كان مهمًا؟","75192f4a":"السؤال — إجابتك","1b0e0fe6":"الطرف — الحجة الرئيسية","657f5f00":"المطلوب — إجابتك","5d99a17e":"الجزء 6","c680c3b8":"<b>طريقة العمل:<\/b> اقرأ كل مربع قراءة، ثم أجب تحته مباشرة. العبارات القصيرة مقبولة في الجداول؛ استخدم جملًا كاملة في أسئلة المصادر. الجزء الأخير هو CER عن السؤال الكبير. يُحفظ عملك على هذا الجهاز أثناء الكتابة. استخدم <b>حفظ التقدم<\/b> في أسفل الجزء الأخير لتنزيل ملف احتياطي، و<b>تحميل التقدم<\/b> لتكمل لاحقًا. اكتب اسمك الأول واسم العائلة والحصة؛ يُكتب التاريخ تلقائيًا عندما تنتهي. لا يعمل زر <b>انتهيت<\/b> إلا بعد إكمال كل المربعات والحقول الثلاثة المطلوبة وقائمة مراجعة CER.","b48729b5":"الجزء 1 <span>من 6<\/span>","212940e8":"إجابتك","77d6f8d4":"الجزء 2 <span>من 6<\/span>","68988a6c":"القراءتان E وF","872e2b23":"الجزء 3 <span>من 6<\/span>","b0ba70bb":"المصدر 1","7e2c1f92":"الجزء 4 <span>من 6<\/span>","0df0ff1e":"القراءة K","10f103d7":"القراءة L","8334d529":"الجزء 5 <span>من 6<\/span>","0ff10244":"القراءة M","12f106fd":"القراءة N","11f1056a":"القراءة O","14f10a23":"القراءة P","200fd5cb":"<b>مراجعة الدرس<\/b> | السبب والنتيجة. استخدم القراءات في هذا الواجب. اكتب النتيجة (إلى ماذا أدّى).","cd862086":"النتيجة: إلى ماذا أدّى؟","f13a5108":"الجزء 6 <span>من 6<\/span>","b319854d":"استخدم القراءات والمصدر 1 في هذا الواجب. قدّم <b>دليلين<\/b>. في خانة الحجة المضادة، اشرح ما سيقوله شخص من الجانب الآخر، ثم ردّ عليه.","1528f397":"الوحدة 1 · المستعمرات والثورة والدستور | CPUSH","04391acb":"القراءة التفاعلية 4","afffa0ec":"صياغة الدستور","41fcdd02":"قصور مواد الكونفدرالية","094fbcf0":"<b>القراءة A<\/b>تحالف ضعيف بين الولايات","3eec4fea":"<b>القراءة B<\/b>مرسوم الشمال الغربي (<bdi>Northwest Ordinance<\/bdi>) (1787)","8fbf6c76":"<b>القراءة C<\/b>تمرّد شايز (<bdi>Shays’s Rebellion<\/bdi>) (1786–1787)","11230029":"دستور جديد","ddb154bc":"<b>القراءة D<\/b>«نحن الشعب» والفيدرالية","6bcef863":"<b>القراءة E<\/b>التسوية الكبرى وفصل السلطات","d0904e5b":"<b>القراءة F<\/b>المجمع الانتخابي (<bdi>Electoral College<\/bdi>) والمحاكم","ccfca129":"<b>القراءة G<\/b>حدود الدستور","5a3a0d36":"معركة التصديق","3be5abf6":"<b>القراءة H<\/b>الفيدراليون ومعارضو الفيدرالية","dad9c4e3":"<b>القراءة I<\/b>الأوراق الفيدرالية (<bdi>The Federalist Papers<\/bdi>) ووثيقة الحقوق (<bdi>Bill of Rights<\/bdi>)","0ed75062":"<b>المصدر 1<\/b>ماديسون (<bdi>Madison<\/bdi>) ووثيقة الحقوق (مصدر أولي)","f75068d0":"الفيدراليون ضد الجمهوريين","78c408d8":"<b>القراءة J<\/b>حزبان","bef0398a":"<b>القراءة K<\/b>مَن يجب أن يحكم؟","7d2ebd9c":"<b>القراءة L<\/b>بنك الولايات المتحدة (<bdi>Bank of the United States<\/bdi>)","9dc128af":"بريطانيا وفرنسا وصراعات الأحزاب","7c9bb888":"<b>القراءة M<\/b>الثورة الفرنسية تقسم الأمريكيين","4fff82d3":"<b>القراءة N<\/b>معاهدة جاي (<bdi>Jay’s Treaty<\/bdi>) (1794)","cbf46e20":"<b>القراءة O<\/b>تمرّد الويسكي (<bdi>Whiskey Rebellion<\/bdi>) (1794)","c11f0d5e":"<b>القراءة P<\/b>قوانين الأجانب والتحريض (<bdi>Alien and Sedition Acts<\/bdi>) وانتخابات 1800","e934b8f6":"CER: هل حمى الحرية؟","c5aacb21":"1781–1800 | صياغة الدستور","a52fa002":"هل حمى الدستور والحكومة الوطنية الجديدة (1787–1800) حرية الشعب؟","f32f727b":"<b>الهدف الأساسي 1:<\/b> حدّد نقاط القوة والضعف في مواد الكونفدرالية، واشرح كيف أدّت إلى وضع دستور أمريكي جديد عام 1787.","7d1aa5c6":"<b>بكلماتي:<\/b> اذكر شيئًا واحدًا نجحت فيه مواد الكونفدرالية وشيئًا واحدًا فشلت فيه.","2b5107f6":"تحالف ضعيف بين الولايات","525706ea":"أنشأت مواد الكونفدرالية (<bdi>Articles of Confederation<\/bdi>)، التي أُقرّت رسميًا عام 1781، تحالفًا ضعيفًا (أو كونفدرالية) بين ثلاث عشرة ولاية مستقلة كانت متحدة نظريًا فقط. أما في الواقع، فكانت حكومة كل ولاية تتصرف غالبًا وحدها.","5d646b51":"كان للحكومة الوطنية الضعيفة في ظل مواد الكونفدرالية جزء واحد فقط، هو مجلس تشريعي من غرفة واحدة. لم تكن هناك سلطة تنفيذية، ولا سلطة قضائية وطنية (نظام محاكم). وكانت المجالس التشريعية في الولايات، لا الناخبون، هي التي تعيّن أعضاء كونغرس الكونفدرالية، وكان لكل ولاية فيه صوت واحد مهما كان حجمها أو عدد سكانها. وهذا يعني أن رود آيلاند (<bdi>Rhode Island<\/bdi>)، التي يسكنها 68,000 شخص، كان لها نفس قوة التصويت التي لفرجينيا (<bdi>Virginia<\/bdi>)، التي يسكنها أكثر من 747,000 نسمة. . . . لم يكن لدى كونغرس الكونفدرالية مال، ولم يكن يستطيع فرض الضرائب لجمع الأموال التي يحتاجها.","ac570c6e":"<b>مساعدة في الكلمات:<\/b> تحالف (<bdi>alliance<\/bdi>) = شراكة · نظريًا (<bdi>in theory<\/bdi>) = على الورق، لا في الواقع · جزء (<bdi>component<\/bdi>) = قسم · السلطة التنفيذية (<bdi>executive branch<\/bdi>) = رئيس ينفّذ القوانين · السلطة القضائية (<bdi>judiciary<\/bdi>) = المحاكم · السكان (<bdi>inhabitants<\/bdi>) = الناس الذين يعيشون في مكان","c7d0d1de":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 6، “The Confederation Government” (<bdi>A Loose Alliance of States<\/bdi>).","1bd9e9b1":"مرسوم الشمال الغربي (<bdi>Northwest Ordinance<\/bdi>) (1787)","dbec51e4":"ومع ذلك، ورغم قيوده، وضع كونغرس الكونفدرالية أسسًا مهمة للحكومة الوطنية الجديدة. . . . ووضع الكونغرس أيضًا المبادئ الأساسية لتوزيع الأراضي وحكم الأقاليم، التي وجّهت توسّع أمريكا نحو الغرب. . . . بعد سنتين من صدور مرسوم الأراضي لعام 1785، أصدر كونغرس الكونفدرالية سياسة الأراضي الكبرى الثالثة: مرسوم الشمال الغربي (<bdi>Northwest Ordinance<\/bdi>) لعام 1787، الذي وضع مبدأين أساسيين. أولًا، ستصبح الأقاليم الجديدة في النهاية ولايات مساوية لغيرها، كما اقترح جيفرسون (<bdi>Jefferson<\/bdi>). ثانيًا، ستُمنع العبودية في المنطقة الواقعة شمال نهر أوهايو (<bdi>Ohio River<\/bdi>). . . . وتضمّن المرسوم أيضًا وعدًا، نُقض مرارًا، بأن أراضي السكان الأصليين «لن تؤخذ منهم أبدًا دون موافقتهم».","c7a542be":"<b>مساعدة في الكلمات:<\/b> أسس (<bdi>foundations<\/bdi>) = قاعدة للبناء عليها · وضع (<bdi>formulated<\/bdi>) = أنشأ · الأقاليم (<bdi>territorial<\/bdi>) = أراضٍ جديدة لم تصبح ولايات بعد · مساوية (<bdi>coequal<\/bdi>) = متساوية مع الولايات الأخرى · موافقة (<bdi>consent<\/bdi>) = إذن","c03cea1c":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 6، “The Confederation Government” (<bdi>A Struggling Government; The Northwest Ordinance<\/bdi>).","7a38b552":"تمرّد شايز (<bdi>Shays’s Rebellion<\/bdi>) (1786–1787)","bbc5a097":"في عام 1786، عندما رفض المجلس التشريعي لماساتشوستس (<bdi>Massachusetts<\/bdi>)، الذي يسيطر عليه التجار، خفض الضرائب أو إصدار المزيد من النقود الورقية، ثارت ثلاث مقاطعات ريفية. واتحدت مجموعات مسلحة من المزارعين الغاضبين، سمّوا أنفسهم «المنظِّمين» (<bdi>Regulators<\/bdi>) أو «صوت الشعب»، لإجبار القضاة ورجال الشرطة على التوقف عن مصادرة ماشية ومزارع «المدينين» الذين لم يستطيعوا دفع ضرائبهم.","1ab96e5a":"ساءت الأوضاع في أوائل شتاء 1787 عندما زحفت مجموعة من المزارعين الساخطين بقيادة دانيال شايز (<bdi>Daniel Shays<\/bdi>)، وهو محارب قديم بارز عمره تسعة وثلاثون عامًا، نحو مستودع الأسلحة الفيدرالي في سبرينغفيلد (<bdi>Springfield<\/bdi>). . . . هزّت أخبار تمرّد شايز الأمة كلها. . . . وكان جورج واشنطن (<bdi>George Washington<\/bdi>) قلقًا أيضًا. قال إن أمريكا تحتاج إلى «حكومة» وطنية أقوى «تُصان بها أرواحنا وحريتنا وممتلكاتنا».","f172ec2c":"<b>مساعدة في الكلمات:<\/b> يسيطر عليه التجار (<bdi>merchant-dominated<\/bdi>) = يديره أصحاب الأعمال غالبًا · ريفية (<bdi>rural<\/bdi>) = في الريف · مصادرة (<bdi>seizing<\/bdi>) = أخذ بالقوة · المدينون (<bdi>debtors<\/bdi>) = أشخاص عليهم ديون · مستودع الأسلحة (<bdi>arsenal<\/bdi>) = مكان تُخزَّن فيه الأسلحة","5edf13a5":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 6، “The Confederation Government” (<bdi>Shays’s Rebellion<\/bdi>).","05c32a29":"<b>نقاط القوة والضعف<\/b> | استخدم القراءات A و B و C. العبارات القصيرة مقبولة.","dc4f4dd3":"نقطة ضعف في مواد الكونفدرالية","9e397e79":"نقطة قوة في مواد الكونفدرالية","9e0b196d":"لماذا تمرّد المزارعون في تمرّد شايز","a57bf1bb":"ماذا قرّر القادة بعد تمرّد شايز","fb198efc":"<b>فكّر في الأمر.<\/b> تقول القراءة A إن لكل من رود آيلاند (<bdi>Rhode Island<\/bdi>) وفرجينيا (<bdi>Virginia<\/bdi>) صوتًا واحدًا. لماذا قد يرى سكان فرجينيا أن هذا غير عادل؟","0d975cad":"<small>التالي ←<\/small>الجزء 2 · دستور جديد","c1801d7e":"<b>الهدف الأساسي 2:<\/b> صِف الابتكارات السياسية التي وضعها المؤتمر الدستوري عام 1787 للأمة الجديدة.","776cd25d":"<b>بكلماتي:<\/b> الابتكار فكرة جديدة. اذكر فكرة جديدة واحدة في الدستور.","642826f1":"«نحن الشعب» والفيدرالية","e91071b2":"في عام 1787، ردّ كونغرس الكونفدرالية على الاضطرابات بالدعوة إلى مؤتمر «فيدرالي» خاص يجتمع في مبنى ولاية فيلادلفيا (<bdi>Philadelphia<\/bdi>) (المعروف اليوم بقاعة الاستقلال (<bdi>Independence Hall<\/bdi>)) بهدف «تعديل مواد الكونفدرالية». . . . وهكذا تبدأ النسخة النهائية من الدستور: «نحن شعب الولايات المتحدة، من أجل تكوين اتحاد أكثر كمالًا، . . . نقرّ ونضع هذا الدستور للولايات المتحدة الأمريكية.» وكان الإصرار على أن الناخبين هم «المصدر الشرعي لكل سلطة»، كما أكّد جيمس ويلسون (<bdi>James Wilson<\/bdi>) من بنسلفانيا، أهم ابتكار سياسي منذ إعلان الاستقلال.","ed700830":"وأدرك المندوبون أيضًا أن الحكومة الوطنية الفعّالة تحتاج إلى سلطة لجمع الضرائب، والاقتراض وإصدار النقود، وتنظيم التجارة، وتمويل جيش وأسطول بحري، ووضع القوانين. . . . وهذه الفكرة القائمة على تقسيم السلطة بين الحكومة الوطنية والولايات صارت تُسمّى الفيدرالية.","dcba6f45":"<b>مساعدة في الكلمات:<\/b> تعديل (<bdi>revising<\/bdi>) = تغيير وإصلاح · نقرّ (<bdi>ordain<\/bdi>) = نأمر رسميًا · الشرعي (<bdi>legitimate<\/bdi>) = القانوني الحقيقي · السلطة (<bdi>authority<\/bdi>) = القدرة على اتخاذ القرارات · تنظيم التجارة (<bdi>regulate commerce<\/bdi>) = وضع قواعد للتجارة","2975bcbc":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 6، “The Constitution” (<bdi>The Constitutional Convention; Guiding Assumptions<\/bdi>).","f07bc815":"التسوية الكبرى وفصل السلطات","19075f20":"حُسم نقاش حادّ حول التمثيل في الكونغرس في منتصف يوليو بما سُمّي التسوية الكبرى (<bdi>Great Compromise<\/bdi>) . . . حصلت الولايات الكبرى على توزيع المقاعد (تحديد عدد المندوبين لكل ولاية) بحسب عدد السكان في مجلس النواب المقترح، بينما حصل مندوبو الولايات الصغرى على المساواة في التمثيل في مجلس الشيوخ، حيث يكون لكل ولاية عضوان تنتخبهما المجالس التشريعية. وأدخلت التسوية الكبرى فكرة فصل السلطات الجديدة في الكونغرس الجديد. . . . ومع ذلك كانت سلطات الرئيس محدودة أيضًا. فلم يكن رئيس السلطة التنفيذية يستطيع إعلان الحرب أو عقد السلام؛ فهذا من حق الكونغرس وحده. كما كان من الممكن عزل الرئيس من منصبه.","62bca56f":"<b>مساعدة في الكلمات:<\/b> التمثيل (<bdi>representation<\/bdi>) = أن يتكلم أشخاص باسمك في الحكومة · توزيع المقاعد (<bdi>apportionment<\/bdi>) = تقسيم المقاعد · أدخلت (<bdi>embedded<\/bdi>) = بنت داخلها · فصل السلطات (<bdi>separation of powers<\/bdi>) = تقسيم السلطة بين فروع الحكومة","7562a5ba":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 6، “The Constitution” (<bdi>The Great Compromise; The Executive<\/bdi>).","2ca73e58":"المجمع الانتخابي والمحاكم","6d3fae6f":"للحفاظ على الفصل بين فروع الحكومة الثلاثة، يُنتخب الرئيس كل أربع سنوات عن طريق المجمع الانتخابي (<bdi>Electoral College<\/bdi>)، وهو مجموعة من «الناخبين الكبار» المؤهَّلين جيدًا يختارهم «الشعب» في انتخابات محلية. ويساوي عدد الناخبين الكبار في كل ولاية عدد نوابها وشيوخها في الكونغرس. . . . ونصّ الدستور الجديد على محكمة وطنية عليا يرأسها رئيس القضاة. ولم يكن دور المحكمة وضع القوانين (وهي سلطة محفوظة للكونغرس) ولا تنفيذ القوانين وفرضها (وهي محفوظة للرئاسة)، بل تفسير القوانين وضمان أن ينال كل مواطن عدالة متساوية أمام القانون.","4ecf7a0b":"<b>مساعدة في الكلمات:<\/b> الحفاظ (<bdi>preserve<\/bdi>) = الإبقاء سالمًا · الناخبون الكبار (<bdi>electors<\/bdi>) = أشخاص يُختارون للتصويت للرئيس · رئيس القضاة (<bdi>chief justice<\/bdi>) = كبير القضاة · تنفيذ (<bdi>execute<\/bdi>) = القيام بالعمل · تفسير (<bdi>interpret<\/bdi>) = شرح المعنى","a2efbf8d":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 6، “The Constitution” (<bdi>The Electoral College; The Judiciary<\/bdi>).","cd70b611":"حدود الدستور","63545566":"اتفق المندوبون على تسوية تقضي بأن يُحسب ثلاثة أخماس «جميع الأشخاص الآخرين» (أي المستعبَدين) في تعداد السكان الذي يُوزَّع على أساسه نواب كل ولاية في الكونغرس. . . . ورفض المندوبون في المؤتمر الدستوري حتى مناقشة الحقوق السياسية للنساء. ففي الولايات المتحدة الجديدة، لم يكن بإمكان النساء التصويت، أو تولّي المناصب المنتخبة، أو امتلاك الأملاك.","719c7d2d":"<b>مساعدة في الكلمات:<\/b> تسوية (<bdi>compromise<\/bdi>) = اتفاق يتنازل فيه كل طرف عن شيء · «جميع الأشخاص الآخرين» (<bdi>all other persons<\/bdi>) = كلمات الدستور للإشارة إلى المستعبَدين · الحقوق السياسية (<bdi>political rights<\/bdi>) = حقوق مثل التصويت","d3e4156d":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 6، “The Constitution” (<bdi>The Three-Fifths Compromise; The Absence of Women’s Rights<\/bdi>).","2ea9bdb0":"<b>أفكار جديدة<\/b> | استخدم القراءات D و E و F. اشرح كل فكرة بكلماتك.","db180147":"ماذا تعني؟","a11a0a52":"«نحن الشعب»","41c7f279":"الفيدرالية","50235a80":"التسوية الكبرى","8ab326fc":"فصل السلطات","2129163d":"المجمع الانتخابي (<bdi>Electoral College<\/bdi>)","630dd9c4":"<b>مَن تُرك خارجًا؟<\/b> استخدم القراءة G. اذكر مجموعتين لم يعاملهما الدستور بالمساواة، وكيف.","e510850d":"<small>→ السابق<\/small>الجزء 1 · قصور مواد الكونفدرالية","801a7baf":"<small>التالي ←<\/small>الجزء 3 · معركة التصديق","e579c2aa":"<b>الهدف الأساسي 3:<\/b> لخّص النقاشات الرئيسية حول التصديق على الدستور. اشرح لماذا ظهرت وكيف حُلّت.","0db1bf63":"<b>بكلماتي:<\/b> حول ماذا تجادل الناس قبل أن توافق الولايات على الدستور؟","1b757103":"الفيدراليون ومعارضو الفيدرالية","29af75bb":"كان للفيدراليين، بقيادة جيمس ماديسون (<bdi>James Madison<\/bdi>) وألكسندر هاملتون (<bdi>Alexander Hamilton<\/bdi>)، عدة مزايا. أولًا، كان لديهم اقتراح محدد —مسودة الدستور نفسها؛ أما خصومهم فلم يكن لديهم ما يقدّمونه سوى الانتقاد. . . . خشي معارضو الفيدرالية (<bdi>anti-Federalists<\/bdi>) أن تصبح الحكومة الوطنية الجديدة في النهاية فاسدة وطاغية. . . . وانتقد ميسون (<bdi>Mason<\/bdi>) وسائر معارضي الفيدرالية بشكل خاص غياب «وثيقة حقوق» تحمي الأفراد والولايات من سلطة الحكومة الوطنية.","135e658f":"<b>مساعدة في الكلمات:<\/b> محدد (<bdi>concrete<\/bdi>) = حقيقي وواضح · اقتراح (<bdi>proposal<\/bdi>) = خطة · فاسدة (<bdi>corrupt<\/bdi>) = غير نزيهة · طاغية (<bdi>tyrannical<\/bdi>) = قاسية وذات سلطة زائدة · غياب (<bdi>absence<\/bdi>) = عدم وجود · ميسون (<bdi>Mason<\/bdi>) = جورج ميسون من فرجينيا","8ecc8dbe":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 6، “The Fight for Ratification” (<bdi>Choosing Sides: Anti-Federalists versus Federalists<\/bdi>).","f5f553ad":"الأوراق الفيدرالية ووثيقة الحقوق","f678f723":"من الآثار التي تركها النقاش حول الدستور ما عُرف باسم الأوراق الفيدرالية (<bdi>The Federalist Papers<\/bdi>)، وهي مجموعة من خمسة وثمانين مقالًا نُشرت في صحف نيويورك عامي 1787 و1788. كتبها جيمس ماديسون (<bdi>James Madison<\/bdi>) وألكسندر هاملتون (<bdi>Alexander Hamilton<\/bdi>) وجون جاي (<bdi>John Jay<\/bdi>)، وكان هدفها إقناع سكان نيويورك بالتصديق على الدستور الجديد. . . . في 21 يونيو 1788، أصبحت نيوهامبشير (<bdi>New Hampshire<\/bdi>) الولاية التاسعة التي تصدّق على الدستور، وبذلك اكتمل الحد الأدنى من الولايات اللازم للموافقة. . . . وكان في كلتا الولايتين مجموعات معارضة قوية، اقتنعت في النهاية بالاتفاق على إضافة وثيقة حقوق.","7b6b5c5e":"وبحلول نهاية عام 1791، كانت ثلاثة أرباع الولايات المطلوبة قد وافقت على عشرة من التعديلات الاثني عشر المقترحة، والتي تُعرف اليوم بوثيقة الحقوق (<bdi>Bill of Rights<\/bdi>).","797e46ac":"<b>مساعدة في الكلمات:<\/b> الآثار (<bdi>legacies<\/bdi>) = أشياء تُترك للمستقبل · التصديق (<bdi>ratify<\/bdi>) = الموافقة الرسمية · الحد الأدنى (<bdi>minimum<\/bdi>) = أصغر عدد مطلوب · كلتا الولايتين (<bdi>Both states<\/bdi>) = فرجينيا ونيويورك · التعديلات (<bdi>amendments<\/bdi>) = تغييرات تُضاف إلى الدستور","da12049d":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 6، “The Fight for Ratification” (<bdi>The Federalist Papers; The States Decide<\/bdi>). Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 6، “The Federalist Era” (<bdi>The Bill of Rights<\/bdi>).","2e385b3b":"ماديسون ووثيقة الحقوق (مصدر أولي)","93a05c1d":"ساعد جيمس ماديسون (<bdi>James Madison<\/bdi>) في كتابة الدستور. وفي عام 1788 كتب هذه الرسالة إلى توماس جيفرسون (<bdi>Thomas Jefferson<\/bdi>) حول إضافة وثيقة حقوق.","e4cdd42d":"«لقد كان رأيي دائمًا في صالح وثيقة حقوق، بشرط أن تُكتب بطريقة لا توحي بسلطات لم يُقصد إدراجها في القائمة. وفي الوقت نفسه، لم أعتبر غيابها عيبًا جوهريًا قط، ولم أكن متلهفًا لإضافتها ولو بتعديل لاحق، إلا لأن غيري يرغبون فيها بشدة. لقد أيّدتها لأنني ظننت أنها قد تكون مفيدة، وإذا نُفّذت جيدًا فلن تكون ضارة.»","d3f663f9":"<b>مساعدة في الكلمات:<\/b> تُكتب (<bdi>framed<\/bdi>) = تُصاغ · القائمة (<bdi>enumeration<\/bdi>) = قائمة · غيابها (<bdi>omission<\/bdi>) = تركها خارجًا · عيب جوهري (<bdi>material defect<\/bdi>) = مشكلة خطيرة · تعديل لاحق (<bdi>subsequent amendment<\/bdi>) = تغيير يُضاف فيما بعد · يرغبون فيها بشدة (<bdi>anxiously desired by others<\/bdi>) = آخرون أرادوها كثيرًا · ضارة (<bdi>disservice<\/bdi>) = مؤذية","cf7a13cc":"جيمس ماديسون (<bdi>James Madison<\/bdi>) إلى توماس جيفرسون (<bdi>Thomas Jefferson<\/bdi>)، 17 أكتوبر 1788. في Norton، الفصل 6، “The Federalist Era” (<bdi>Comparing Perspectives: On Rights and Freedoms<\/bdi>).","1991b28f":"<b>المصدر 1.<\/b> هل كان ماديسون (<bdi>Madison<\/bdi>) مع وثيقة الحقوق أم ضدها؟ هل رأى أن عدم وجودها مشكلة كبيرة؟","95fb5977":"<b>وجهة النظر.<\/b> يقول ماديسون (<bdi>Madison<\/bdi>) إنه أيّدها أساسًا لأن «غيره يرغبون فيها بشدة». استخدم القراءتين H و I: مَن هؤلاء الآخرون، ولماذا احتاج ماديسون إلى دعمهم؟","d62bc162":"<b>النقاش<\/b> | استخدم القراءتين H و I. العبارات القصيرة مقبولة.","06dc51c3":"ما أراده الفيدراليون","bb7385fc":"ما خشيه معارضو الفيدرالية","b664a1f7":"ما فعلته الأوراق الفيدرالية","26a83cda":"كيف حُسم النقاش","66c263cb":"<small>→ السابق<\/small>الجزء 2 · دستور جديد","cc7d30b6":"<small>التالي ←<\/small>الجزء 4 · الفيدراليون ضد الجمهوريين","debe5d5d":"<b>الهدف الأساسي 4:<\/b> قارن رؤية الفيدراليين للولايات المتحدة برؤية خصومهم الجمهوريين خلال تسعينيات القرن الثامن عشر.","b7b8f757":"<b>بكلماتي:<\/b> مَن قاد كل حزب؟ اذكر قائدًا واحدًا لكل حزب.","aab36be1":"حزبان","fd495b75":"خلال تسعينيات القرن الثامن عشر، واجهت الحكومة الفيدرالية تمرّدات، وولايات تهدّد بالانفصال، وديونًا هائلة، وحروبًا خارجية، إضافة إلى ظهور أحزاب سياسية متنافسة —الفيدراليين والجمهوريين الديمقراطيين، المعروفين أكثر باسم الجمهوريين الجيفرسونيين (<bdi>Jeffersonian Republicans<\/bdi>)، أو ببساطة الجمهوريين.","1b8236aa":"كان الجمهوريون في الغالب من الجنوب، مثل توماس جيفرسون (<bdi>Thomas Jefferson<\/bdi>) وجيمس ماديسون (<bdi>James Madison<\/bdi>) من فرجينيا، الذين أرادوا أن تبقى البلاد أمة ريفية من صغار المزارعين ملتزمة بالقيم الجمهورية. أما الفيدراليون، بقيادة ألكسندر هاملتون (<bdi>Alexander Hamilton<\/bdi>) وجون آدامز (<bdi>John Adams<\/bdi>)، فتجمّعوا في نيويورك ونيو إنغلاند (<bdi>New England<\/bdi>). وتبنّوا ثقافة المدن، والتنمية الصناعية، والنمو التجاري.","07528c5c":"<b>مساعدة في الكلمات:<\/b> واجهت (<bdi>confront<\/bdi>) = تصدّت لـ · الانفصال (<bdi>secede<\/bdi>) = الخروج من البلاد · هائلة (<bdi>staggering<\/bdi>) = كبيرة بشكل صادم · ريفية (<bdi>rural<\/bdi>) = في الريف · تجمّعوا (<bdi>clustered<\/bdi>) = اجتمعوا في مكان واحد · المدن (<bdi>urban<\/bdi>) = الحضرية · التجاري (<bdi>commercial<\/bdi>) = الأعمال والتجارة","b3858aad":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 6، “The Federalist Era”.","4d095446":"مَن يجب أن يحكم؟","2c48b7c8":"كان الفيدراليون أكثر عددًا في نيويورك ونيو إنغلاند (<bdi>New England<\/bdi>)، وكانوا أقوياء أيضًا بين نخبة أصحاب المزارع الكبيرة في كارولاينا الجنوبية (<bdi>South Carolina<\/bdi>). وبشكل عام، كانوا يخشون تجاوزات الديمقراطية، ولا يثقون بمن اعتبروهم «عامة الناس»، وأرادوا حكومة مركزية قوية يقودها أحكم القادة، الملتزمون بالنمو الاقتصادي والاستقرار الاجتماعي والدفاع الوطني. . . . في المقابل، كان الجمهوريون الديمقراطيون، بقيادة توماس جيفرسون (<bdi>Thomas Jefferson<\/bdi>) وجيمس ماديسون (<bdi>James Madison<\/bdi>)، أكثر قلقًا من الأخطار التي قد تشكّلها حكومة وطنية قوية على الحريات الفردية وحقوق الولايات. لقد وثقوا بالشعب.","d319af59":"<b>مساعدة في الكلمات:<\/b> نخبة أصحاب المزارع (<bdi>planter elite<\/bdi>) = أصحاب المزارع الكبيرة الأغنياء · تجاوزات (<bdi>excesses<\/bdi>) = الزيادة عن الحد · لا يثقون (<bdi>distrusted<\/bdi>) = لم يثقوا · الاستقرار (<bdi>stability<\/bdi>) = الهدوء والنظام · حقوق الولايات (<bdi>states’ rights<\/bdi>) = السلطات التي تحتفظ بها الولايات","d489c1dd":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 6، “The Federalist Era” (<bdi>The Beginnings of Political Parties<\/bdi>).","5cefd63b":"بنك الولايات المتحدة","6b508fe1":"بعد أن حصل هاملتون (<bdi>Hamilton<\/bdi>) على موافقة الكونغرس على خطته لتمويل الديون، دعا إلى إنشاء بنك وطني على غرار بنك إنجلترا. واعتقد هاملتون أن مثل هذا البنك سيشجّع «التجارة بين الأفراد» بشكل أكبر، ويوفّر مكانًا آمنًا لإيرادات الحكومة الفيدرالية. . . . ومرة أخرى، قاد جيمس ماديسون (<bdi>James Madison<\/bdi>) وتوماس جيفرسون (<bdi>Thomas Jefferson<\/bdi>) المعارضة لخطة هاملتون المصرفية. وأكّدا أن الدستور لم يذكر شيئًا عن إنشاء بنك وطني، ولذلك لا تستطيع الحكومة إنشاء واحد. . . . وكان لبنك الولايات المتحدة (<bdi>Bank of the United States<\/bdi>) الجديد، الذي أُنشئ عام 1791، ثلاث مسؤوليات رئيسية: (1) حفظ إيرادات الحكومة ودفع فواتيرها، (2) تقديم القروض للحكومة الفيدرالية وللبنوك المرخّصة من الولايات لتشجيع التنمية الاقتصادية . . . وأظهر التصويت غير المتوازن الانقسام السياسي المتزايد بين الشمال والجنوب.","69033919":"<b>مساعدة في الكلمات:<\/b> يشجّع (<bdi>foster<\/bdi>) = يساعد على النمو · التجارة (<bdi>commerce<\/bdi>) = تبادل السلع · الإيرادات (<bdi>revenues<\/bdi>) = الأموال التي تجمعها الحكومة · خطة (<bdi>scheme<\/bdi>) = مشروع · أكّدا (<bdi>maintained<\/bdi>) = جادلا · التصويت غير المتوازن (<bdi>lopsided vote<\/bdi>) = تصويت غير متكافئ جدًا في الكونغرس (الولايات الشمالية مع البنك، والجنوبية ضده)","4e6de6fb":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 6، “The Federalist Era” (<bdi>A National Bank<\/bdi>).","b6f1d346":"<b>قارن بين الحزبين<\/b> | استخدم القراءات J و K و L. العبارات القصيرة مقبولة.","3bce0ca7":"رؤيتان لأمريكا","9ffbfde7":"الفيدراليون","1c148d99":"القراءات J–L","394b3be9":"أين كانوا أقوى، وأي اقتصاد أرادوا؟","96649bea":"ما رأيهم في الحكومة وفي الشعب؟","5702d93b":"الجمهوريون","c150030c":"<b>البنك.<\/b> استخدم القراءة L. لماذا قال جيفرسون (<bdi>Jefferson<\/bdi>) وماديسون (<bdi>Madison<\/bdi>) إن الحكومة لا تستطيع إنشاء بنك وطني؟","167d2d7d":"<small>→ السابق<\/small>الجزء 3 · معركة التصديق","128ffa9a":"<small>التالي ←<\/small>الجزء 5 · بريطانيا وفرنسا وصراعات الأحزاب","633b3530":"<b>الهدف الأساسي 5:<\/b> قيّم كيف شكّلت المواقف تجاه بريطانيا العظمى وفرنسا السياسة الأمريكية في أواخر القرن الثامن عشر.","1657c872":"<b>بكلماتي:<\/b> أي حزب كان يفضّل فرنسا أكثر؟ وأيهما كان يفضّل بريطانيا أكثر؟","ef4ea7e6":"الثورة الفرنسية تقسم الأمريكيين","2b348896":"أثارت الثورة الفرنسية خيال كثير من الأمريكيين، وخاصة جيفرسون (<bdi>Jefferson<\/bdi>) والجمهوريين الديمقراطيين، لأن فرنسا شهدت استبدال طغيان الملك بجمهورية ديمقراطية أعطت حق التصويت لجميع الرجال البالغين مهما كانت أملاكهم. . . . وعندما دخلت الجمهورية الفرنسية الحرب، دخلت الثورة الفرنسية (1789–1799) مرحلتها القاسية، المعروفة بعهد الإرهاب. . . . في المقابل، رأى ألكسندر هاملتون (<bdi>Alexander Hamilton<\/bdi>) وجون آدامز (<bdi>John Adams<\/bdi>) أن الثورة الفرنسية قاسية وملحدة، فوقفا مع بريطانيا العظمى وحلفائها. وحوّلت هذه المواقف المتعارضة العقد الأول من السياسة الأمريكية إلى واحدة من أكثر الفترات صراعًا في تاريخ البلاد —«عصر العواطف».","71471876":"<b>مساعدة في الكلمات:<\/b> طغيان الملك (<bdi>royal tyranny<\/bdi>) = حكم قاسٍ لملك · استبدال (<bdi>displaced<\/bdi>) = وضع شيء مكان آخر · قاسية (<bdi>vicious<\/bdi>) = عنيفة · عهد الإرهاب (<bdi>Reign of Terror<\/bdi>) = فترة إعدامات جماعية في فرنسا · صراعًا (<bdi>fractious<\/bdi>) = مليئة بالخلافات","97b28421":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 6، “Foreign and Domestic Crises” (<bdi>Effects of the French Revolution<\/bdi>).","fdb31376":"معاهدة جاي (<bdi>Jay’s Treaty<\/bdi>) (1794)","be379cd8":"في 16 أبريل 1794، أرسل الرئيس واشنطن (<bdi>Washington<\/bdi>) جون جاي (<bdi>John Jay<\/bdi>) إلى لندن لحل القضايا الكبرى بين الدولتين. . . . لكن البريطانيين رفضوا التوقف عن اعتراض السفن التجارية الأمريكية المتجهة إلى فرنسا و«تجنيد» بحّارتها بالقوة. . . . وفي مقابل هذه التنازلات، حصل جاي على ثلاثة وعود مهمة. فالبريطانيون سوف (1) يُخلون حصونهم الستة على الحدود الشمالية الغربية بحلول عام 1796، (2) يعوّضون الأمريكيين عن السفن والبضائع التي صودرت في 1793–1794، (3) يمنحون التجار الأمريكيين حقًا محدودًا في التجارة مرة أخرى مع مستعمرات جزر الهند الغربية البريطانية. . . . وعندما أُعلنت شروط معاهدة جاي، غضب كثير من الأمريكيين، وخاصة الجمهوريين.","eebd1418":"<b>مساعدة في الكلمات:<\/b> اعتراض (<bdi>intercepting<\/bdi>) = الإيقاف في الطريق · تجنيد بالقوة (<bdi>impressing<\/bdi>) = إجبار البحّارة على الخدمة في البحرية البريطانية · تنازلات (<bdi>concessions<\/bdi>) = أشياء يُتخلّى عنها · يُخلون (<bdi>evacuate<\/bdi>) = يغادرون · يعوّضون (<bdi>reimburse<\/bdi>) = يردّون المال · أُعلنت (<bdi>disclosed<\/bdi>) = صارت معروفة","d2c6c0e1":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 6، “Foreign and Domestic Crises” (<bdi>Jay’s Treaty<\/bdi>).","66e532a0":"تمرّد الويسكي (<bdi>Whiskey Rebellion<\/bdi>) (1794)","eae80dab":"خلال تلك السنوات المضطربة، واجهت إدارة واشنطن (<bdi>Washington<\/bdi>) تحديًا آخر في المناطق الداخلية عندما أطلق مزارعو الحدود ما سُمّي تمرّد الويسكي (<bdi>Whiskey Rebellion<\/bdi>) (1794). فقد أثارت ضريبة ألكسندر هاملتون (<bdi>Alexander Hamilton<\/bdi>) لعام 1791 على المشروبات الكحولية المقطّرة مقاومةً بين المزارعين الفقراء في كل الحدود الغربية. . . . وعندما لم يستجب المتمردون، بدأ 13,000 من رجال الميليشيا الزحف إلى غرب بنسلفانيا (<bdi>Pennsylvania<\/bdi>). . . . ودفع استعراض القوة المتمردين ومؤيديهم إلى تغيير أساليبهم. فبدلًا من تحدّي القوانين الفيدرالية علنًا، صوّتوا للجمهوريين، الذين فازوا فوزًا حاسمًا في انتخابات بنسلفانيا التالية.","5ccada01":"<b>مساعدة في الكلمات:<\/b> المضطربة (<bdi>turbulent<\/bdi>) = المليئة بالمشكلات · المناطق الداخلية (<bdi>backcountry<\/bdi>) = مناطق حدودية بعيدة عن المدن · المشروبات المقطّرة (<bdi>distilled spirits<\/bdi>) = الويسكي وغيره من الكحول القوي · مؤيدوهم (<bdi>sympathizers<\/bdi>) = الداعمون · أساليب (<bdi>tactics<\/bdi>) = طرق · تحدّي (<bdi>defying<\/bdi>) = رفض الطاعة علنًا","e34c645f":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 6، “Foreign and Domestic Crises” (<bdi>The Whiskey Rebellion<\/bdi>).","049825cf":"قوانين الأجانب والتحريض وانتخابات 1800","b43e20ef":"بصفته الرئيس الثاني لأمريكا، ورث جون آدامز (<bdi>John Adams<\/bdi>) نزاعًا غير معلن مع فرنسا، نتج عن غضب الفرنسيين من معاهدة جاي (<bdi>Jay’s Treaty<\/bdi>) بين الولايات المتحدة وبريطانيا العظمى. . . . وفي الوقت نفسه، خشي الفيدراليون أن يجلب المهاجرون، وخاصة القادمون من فرنسا، أفكارًا اجتماعية وسياسية متطرفة إلى الولايات المتحدة. وفي النهاية، منحت قوانين الأجانب والتحريض (<bdi>Alien and Sedition Acts<\/bdi>) لعام 1798، التي صدرت وسط موجة من الحماس الوطني للحرب، الرئيسَ سلطات استثنائية لتقييد حرية «الأجانب» (المهاجرين الذين لم يحصلوا على الجنسية بعد). كما انتهكت هذه القوانين وثيقة الحقوق، ومنها حرية التعبير والصحافة، إذ جعلت انتقاد الحكومة علنًا جريمة. وكان هذا الجزء موجّهًا ضد منتقدي الفيدراليين، أي الجمهوريين.","c8bc8d92":"في انتخابات 1800، حصل جيفرسون (<bdi>Jefferson<\/bdi>) وبير (<bdi>Burr<\/bdi>) على 73 صوتًا انتخابيًا لكل منهما. وحصل آدامز (<bdi>Adams<\/bdi>) على 65. . . . وبعد ستٍّ وثلاثين جولة تصويت، اختارت أغلبية أعضاء مجلس النواب جيفرسون بدلًا من بير . . . وزادت انتخابات 1800 من انقسام الجمهورية الفتية إلى جماعات سياسية متصارعة، وكانت نقطة تحول كبرى في تاريخ البلاد.","860244c4":"<b>مساعدة في الكلمات:<\/b> ورث (<bdi>inherited<\/bdi>) = تسلّم ممّن قبله · التطرف (<bdi>radicalism<\/bdi>) = أفكار متشددة لتغيير كبير · الحماس (<bdi>fervor<\/bdi>) = شعور قوي · الأجانب (<bdi>aliens<\/bdi>) = مهاجرون ليسوا مواطنين · جولات التصويت (<bdi>ballots<\/bdi>) = مرات التصويت · الجماعات (<bdi>factions<\/bdi>) = مجموعات مختلفة في الرأي","d9f37864":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 6، “Foreign and Domestic Crises” (<bdi>War with France; War at Home; Republican Victory in 1800; A New Era<\/bdi>).","e4c5897d":"<b>أزمات تسعينيات القرن الثامن عشر<\/b> | استخدم القراءات M–P. العبارات القصيرة مقبولة.","d9b1a13f":"ماذا حدث، وكيف ردّ الناس؟","7753f5d9":"الثورة الفرنسية (<bdi>French Revolution<\/bdi>) (1789–1799)","52385419":"تمرّد الويسكي (<bdi>Whiskey Rebellion<\/bdi>) (1794)","68ff4c6d":"قوانين الأجانب والتحريض لعام 1798 (<bdi>Alien and Sedition Acts of 1798<\/bdi>)","dddd7bb4":"انتخابات 1800","85f37928":"<b>اربط.<\/b> استخدم القراءتين M و P. كيف دفع الخوف من فرنسا الفيدراليين إلى إصدار قوانين الأجانب والتحريض؟","e2fdea01":"الولايات الكبيرة والصغيرة تختلف حول التمثيل","3b4d8375":"معارضو الفيدرالية يطالبون بوثيقة حقوق","f97b6a20":"خطة هاملتون (<bdi>Hamilton<\/bdi>) لبنك وطني","d6717e4a":"الغضب من معاهدة جاي وقوانين الأجانب والتحريض","df01c507":"القراءتان N و P","48ba5de4":"<small>→ السابق<\/small>الجزء 4 · الفيدراليون ضد الجمهوريين","bc7ee6f6":"<small>التالي ←<\/small>الجزء 6 · CER: هل حمى الحرية؟","4f50e3d0":"<small>→ السابق<\/small>الجزء 5 · بريطانيا وفرنسا وصراعات الأحزاب","b35c42c1":"القراءة التفاعلية 4 · صياغة الدستور"},"ui_en":{"answered":"{n} of {t} answered","need_names":"first name, last name, and period","unanswered_1":"{n} unanswered box","unanswered_n":"{n} unanswered boxes","cer_checklist":"CER checklist","complete":"Everything is complete. You can submit now.","still_needed":"Still needed: {list}.","list_sep":", ","names_first":"Type your first name, last name, and period at the top before saving.","saved":"Progress saved. Keep that file. Use Load Progress later to continue. Do not upload it to Canvas until you are finished.","loaded":"Progress loaded. Pick up where you left off.","bad_file":"That file is not a saved progress file for this assignment. Choose the .json file you saved from this assignment.","read_error":"Could not read that file. Try again.","finished":"Finished! Your file \"{file}\" downloaded. Upload that file to Canvas.","confirm_clear":"Clear everything you typed? This cannot be undone.","your_turn":"Your turn"},"ui":{"es":{"answered":"{n} de {t} respondidas","need_names":"nombre, apellido y período","unanswered_1":"{n} casilla sin responder","unanswered_n":"{n} casillas sin responder","cer_checklist":"la lista de control del CER","complete":"Todo está completo. Ya puedes entregar.","still_needed":"Todavía falta: {list}.","list_sep":", ","names_first":"Escribe tu nombre, apellido y período arriba antes de guardar.","saved":"Progreso guardado. Guarda ese archivo. Usa «Cargar progreso» más tarde para continuar. No lo subas a Canvas hasta que termines.","loaded":"Progreso cargado. Sigue donde lo dejaste.","bad_file":"Ese archivo no es un archivo de progreso de esta tarea. Elige el archivo .json que guardaste de esta tarea.","read_error":"No se pudo leer ese archivo. Inténtalo de nuevo.","finished":"¡Terminaste! Se descargó tu archivo \"{file}\". Sube ese archivo a Canvas.","confirm_clear":"¿Borrar todo lo que escribiste? No se puede deshacer.","your_turn":"Tu turno"},"ar":{"answered":"أجبت عن {n} من {t}","need_names":"الاسم الأول واسم العائلة والحصة","unanswered_1":"مربع واحد بلا إجابة","unanswered_n":"عدد المربعات بلا إجابة: {n}","cer_checklist":"قائمة التحقق الخاصة بالادعاء والدليل والتعليل","complete":"اكتمل كل شيء. يمكنك التسليم الآن.","still_needed":"ما زال ناقصًا: {list}.","list_sep":"، ","names_first":"اكتب اسمك الأول واسم العائلة والحصة في الأعلى قبل الحفظ.","saved":"تم حفظ تقدمك. احتفظ بهذا الملف. استخدم «تحميل التقدم» لاحقًا لتكمل. لا ترفعه إلى Canvas حتى تنتهي.","loaded":"تم تحميل تقدمك. أكمل من حيث توقفت.","bad_file":"هذا الملف ليس ملف تقدم محفوظًا لهذه المهمة. اختر ملف ‎.json‎ الذي حفظته من هذه المهمة.","read_error":"تعذّرت قراءة هذا الملف. حاول مرة أخرى.","finished":"أحسنت! تم تنزيل ملفك ‎\"{file}\"‎. ارفع هذا الملف إلى Canvas.","confirm_clear":"هل تريد مسح كل ما كتبته؟ لا يمكن التراجع عن ذلك.","your_turn":"دورك"}}}</script>
+<script>
+/* Interactive Reading language switch (English / Español / العربية).
+   Text is matched by a hash of its English HTML, so translations survive rebuilds that do not change
+   the English. Data lives in <script type="application/json" id="ir-i18n">:
+     {"langs":["en","es","ar"], "es":{key:html,...}, "ar":{...}, "ui":{"es":{...},"ar":{...}}}
+   Exposes window.irCollect() (used offline to list the strings to translate), window.irT(key,vars),
+   and window.irSetLang(lang). */
+(function () {
+  var INLINE = { B: 1, I: 1, EM: 1, STRONG: 1, SPAN: 1, A: 1, BR: 1, SMALL: 1, SUP: 1, SUB: 1, U: 1 };
+  var SKIP = 'script,style,textarea,input,select,.cnt,.hero-num,#pct,#status,#msg,.lang-switch';
+  var LETTER = /[A-Za-zÀ-ɏ]/;
+  function norm(s) { return String(s).replace(/\s+/g, ' ').trim(); }
+  function hash(s) {
+    var h = 0x811c9dc5;
+    for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
+    return ('0000000' + h.toString(16)).slice(-8);
+  }
+  function inlineOnly(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling) {
+      if (c.nodeType === 1 && (!INLINE[c.tagName] || c.matches(SKIP))) return false;
+    }
+    return true;
+  }
+  function directText(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling) if (c.nodeType === 3 && LETTER.test(c.nodeValue)) return true;
+    return false;
+  }
+  function collect() {
+    var segs = [], root = document.querySelector('.layout') || document.body;
+    (function walk(el) {
+      if (el.matches(SKIP)) return;
+      if (el !== root && directText(el) && inlineOnly(el)) {
+        var src = norm(el.innerHTML);
+        segs.push({ kind: 'html', el: el, src: src, key: hash(src) });
+        return;
+      }
+      for (var c = el.firstChild; c; c = c.nextSibling) {
+        if (c.nodeType === 1) walk(c);
+        else if (c.nodeType === 3 && LETTER.test(c.nodeValue)) {
+          var t = norm(c.nodeValue);
+          segs.push({ kind: 'text', node: c, src: t, key: hash(t), pre: c.nodeValue.match(/^\s*/)[0], post: c.nodeValue.match(/\s*$/)[0] });
+        }
+      }
+    })(root);
+    root.querySelectorAll('textarea[placeholder],input[placeholder],img[alt],[aria-label]').forEach(function (el) {
+      ['placeholder', 'alt', 'aria-label'].forEach(function (a) {
+        var v = el.getAttribute(a);
+        if (v && LETTER.test(v)) segs.push({ kind: 'attr', el: el, attr: a, src: norm(v), key: hash(norm(v)) });
+      });
+    });
+    var title = norm(document.title);
+    segs.push({ kind: 'title', src: title, key: hash(title) });
+    return segs;
+  }
+  // Plain-ASCII version of a name for download file names (José -> Jose, ليلى -> lyla).
+  var AR = { 'ا': 'a', 'أ': 'a', 'إ': 'i', 'آ': 'a', 'ب': 'b', 'ت': 't', 'ث': 'th', 'ج': 'j', 'ح': 'h', 'خ': 'kh',
+    'د': 'd', 'ذ': 'dh', 'ر': 'r', 'ز': 'z', 'س': 's', 'ش': 'sh', 'ص': 's', 'ض': 'd', 'ط': 't', 'ظ': 'z', 'ع': 'a',
+    'غ': 'gh', 'ف': 'f', 'ق': 'q', 'ك': 'k', 'ل': 'l', 'م': 'm', 'ن': 'n', 'ه': 'h', 'و': 'w', 'ي': 'y', 'ى': 'a',
+    'ة': 'a', 'ء': '', 'ئ': 'y', 'ؤ': 'w' };
+  window.irAscii = function (s) {
+    s = String(s).normalize ? String(s).normalize('NFD').replace(/[\u0300-\u036f\u064B-\u065F\u0670]/g, '') : String(s);
+    return s.replace(/[\u0621-\u064A]/g, function (c) { return AR[c] !== undefined ? AR[c] : ''; })
+      .replace(/ñ/g, 'n').replace(/Ñ/g, 'N');
+  };
+  window.irCollect = function () {
+    var seen = {}, out = [];
+    collect().forEach(function (s) { if (!seen[s.key]) { seen[s.key] = 1; out.push({ key: s.key, kind: s.kind, src: s.src }); } });
+    return out;
+  };
+
+  var node = document.getElementById('ir-i18n');
+  if (!node) return;
+  var DATA = JSON.parse(node.textContent);
+  var SEGS = collect();
+  var LANG = 'en';
+  var UI_EN = DATA.ui_en || {};
+
+  window.irT = function (k, v) {
+    var s = (LANG !== 'en' && DATA.ui && DATA.ui[LANG] && DATA.ui[LANG][k]) || UI_EN[k] || k;
+    if (v) for (var n in v) s = s.split('{' + n + '}').join(v[n]);
+    return s;
+  };
+
+  function apply(lang) {
+    var tr = lang === 'en' ? null : (DATA[lang] || {});
+    SEGS.forEach(function (s) {
+      var t = tr && tr[s.key];
+      if (s.kind === 'html') {
+        s.el.innerHTML = t || s.src;
+        // In Arabic, a block still in a Latin script (a name, a citation) keeps left-to-right order.
+        if (lang === 'ar') s.el.setAttribute('dir', 'auto'); else s.el.removeAttribute('dir');
+      }
+      else if (s.kind === 'text') s.node.nodeValue = s.pre + (t || s.src) + s.post;
+      else if (s.kind === 'attr') s.el.setAttribute(s.attr, t || s.src);
+      else if (s.kind === 'title') document.title = t || s.src;
+    });
+  }
+
+  window.irSetLang = function (lang) {
+    if (DATA.langs.indexOf(lang) < 0) lang = 'en';
+    LANG = lang;
+    var html = document.documentElement;
+    html.lang = lang;
+    html.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    apply(lang);
+    html.style.setProperty('--your-turn', JSON.stringify(window.irT('your_turn')));
+    document.querySelectorAll('.lang-switch button').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === lang));
+    });
+    try { localStorage.setItem('ir_lang:' + location.pathname, lang); } catch (e) {}
+    try {
+      var u = new URL(location.href);
+      if (lang === 'en') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang);
+      history.replaceState(null, '', u.toString());
+    } catch (e) {}
+    if (window.irRefresh) window.irRefresh();
+    if (window.rpCount) window.rpCount();
+  };
+
+  document.querySelectorAll('.lang-switch button').forEach(function (b) {
+    b.addEventListener('click', function () { window.irSetLang(b.getAttribute('data-lang')); });
+  });
+  // Link (?lang=) first, then the language this student last chose on this page, then the page's own default.
+  var start = DATA['default'] || 'en';
+  try { start = new URL(location.href).searchParams.get('lang') || localStorage.getItem('ir_lang:' + location.pathname) || start; } catch (e) {}
+  window.irSetLang(start);
+})();
+
+</script>
+<script>
+(function(){
+  var pages=[].slice.call(document.querySelectorAll('section.page'));
+  var items=[].slice.call(document.querySelectorAll('.toc>li'));
+  var KEY='rp_page_'+location.pathname;
+  var current=-1;
+  function show(i,targetId){
+    i=Math.max(0,Math.min(pages.length-1,i|0));
+    var changed=i!==current;
+    if(changed){
+      pages.forEach(function(p,n){p.classList.toggle('active',n===i)});
+      items.forEach(function(li,n){
+        li.classList.toggle('active',n===i);
+        var a=li.querySelector('.toc-part');
+        if(n===i)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');
+      });
+      current=i;
+      try{localStorage.setItem(KEY,String(i))}catch(e){}
+    }
+    var h='';try{h=decodeURIComponent(location.hash.slice(1))}catch(e){}
+    var he=h&&document.getElementById(h);
+    if(!he||!pages[i].contains(he)){try{history.replaceState(null,'','#'+pages[i].id)}catch(e){}}
+    var el=targetId&&document.getElementById(targetId);
+    if(el)el.scrollIntoView({block:'start',behavior:changed?'instant':'smooth'});
+    else window.scrollTo({top:0,left:0,behavior:'instant'});
+  }
+  window.rpShow=show;
+  function route(){
+    var h='';try{h=decodeURIComponent(location.hash.slice(1))}catch(e){}
+    var el=h&&document.getElementById(h);
+    var page=el&&el.closest('section.page');
+    if(page){show(pages.indexOf(page),el===page?null:h);return}
+    var saved=0;try{saved=parseInt(localStorage.getItem(KEY),10)||0}catch(e){}
+    show(saved);
+  }
+  window.addEventListener('hashchange',route);
+  function count(){
+    pages.forEach(function(p,n){
+      var t=[].slice.call(p.querySelectorAll('textarea[data-q]'));
+      var d=t.filter(function(x){return x.value.trim().length>=3}).length;
+      var c=items[n]&&items[n].querySelector('.cnt');
+      if(c)c.textContent=d+'/'+t.length;
+      if(items[n])items[n].classList.toggle('complete',t.length>0&&d===t.length);
+    });
+  }
+  window.rpCount=count;
+  var band=document.querySelector('.hero-band'),pic=document.querySelector('figure img');
+  if(band&&pic)band.style.setProperty('--hero-img','url("'+pic.src+'")');
+  if(band&&window.matchMedia&&matchMedia('(hover:hover) and (pointer:fine)').matches&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
+    band.addEventListener('pointermove',function(e){
+      var r=band.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
+      band.style.setProperty('--ry',((x-.5)*7).toFixed(2)+'deg');band.style.setProperty('--rx',((.5-y)*6).toFixed(2)+'deg');
+      band.style.setProperty('--mx',(x*100).toFixed(1)+'%');band.style.setProperty('--my',(y*100).toFixed(1)+'%');
+    });
+    band.addEventListener('pointerleave',function(){['--rx','--ry','--mx','--my'].forEach(function(k){band.style.removeProperty(k)})});
+  }
+  document.addEventListener('input',count);
+  route();
+  setTimeout(count,0);
+})();
+</script>
+<script>
+(function(){
+  var KEY_MODE=false;
+  var PACKET='CPUSH_L4_IR';
+  var STORE='cpush_l_ir4_'+(KEY_MODE?'key':'student');
+  var qs=[].slice.call(document.querySelectorAll('textarea[data-q]'));
+  var cks=[].slice.call(document.querySelectorAll('input[data-c]'));
+  var metaIds=['f_first','f_last','f_period','f_date'];
+  var meta=metaIds.map(function(i){return document.getElementById(i)});
+  var first=document.getElementById('f_first'), last=document.getElementById('f_last');
+  var data={};
+  var $=function(i){return document.getElementById(i)};
+  function load(){try{data=JSON.parse(localStorage.getItem(STORE)||'{}')}catch(e){data={}}}
+  function persist(){try{localStorage.setItem(STORE,JSON.stringify(data))}catch(e){}}
+  function msg(t,err){var m=$('msg');m.textContent=t;m.className='msg'+(err?' err':'');m.style.display='block'}
+  function clean(n){return irAscii(n).trim().replace(/\s+/g,'_').replace(/[^A-Za-z0-9_-]/g,'')}
+  function state(){
+    var answered=0;qs.forEach(function(t){var d=t.value.trim().length>=3;t.classList.toggle('done',d);if(d)answered++});
+    var checked=cks.filter(function(c){return c.checked}).length;
+    var named=first.value.trim()&&last.value.trim()&&$('f_period').value.trim();
+    var all=answered===qs.length&&checked===cks.length&&!!named;
+    return {answered:answered,checked:checked,named:!!named,all:all};
+  }
+  function refresh(){
+    var s=state(),tot=qs.length;
+    $('pct').textContent=irT('answered',{n:s.answered,t:tot});
+    $('fill').style.width=(100*s.answered/tot)+'%';
+    var missing=[];
+    if(!s.named)missing.push(irT('need_names'));
+    if(s.answered<tot)missing.push(irT(tot-s.answered===1?'unanswered_1':'unanswered_n',{n:tot-s.answered}));
+    if(s.checked<cks.length)missing.push(irT('cer_checklist'));
+    $('status').textContent=s.all?irT('complete'):irT('still_needed',{list:missing.join(irT('list_sep'))});
+    $('finishBtn').disabled=!s.all;
+  }
+  function snapshot(){
+    var o={packet:PACKET,course:'CPUSH',version:1,saved:new Date().toISOString(),
+      student:{first:first.value.trim(),last:last.value.trim(),period:$('f_period').value.trim(),date:KEY_MODE?'':$('f_date').value.trim()},
+      answers:{},checklist:{}};
+    qs.forEach(function(t){o.answers[t.id]=t.value});
+    cks.forEach(function(c){o.checklist[c.id]=c.checked});
+    return o;
+  }
+  function download(name,obj){
+    var blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;
+    document.body.appendChild(a);a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);
+  }
+  function who(){return (clean(last.value)||'Last')+'_'+(clean(first.value)||'First')}
+  function apply(o){
+    var st=o.student||{};
+    first.value=st.first||'';last.value=st.last||'';$('f_period').value=st.period||'';$('f_date').value=(o.completed?st.date:'')||'';
+    qs.forEach(function(t){t.value=(o.answers&&o.answers[t.id])||''});
+    cks.forEach(function(c){c.checked=!!(o.checklist&&o.checklist[c.id])});
+    sync();
+  }
+  function sync(){
+    metaIds.forEach(function(id,i){data[id]=meta[i].value});
+    qs.forEach(function(t){data[t.id]=t.value});
+    cks.forEach(function(c){data[c.id]=c.checked});
+    persist();refresh();if(window.rpCount)rpCount();
+  }
+  load();
+  meta.forEach(function(m){if(data[m.id])m.value=data[m.id];m.addEventListener('input',function(){m.classList.remove('bad');sync()})});
+  qs.forEach(function(t){if(data[t.id])t.value=data[t.id];t.addEventListener('input',sync)});
+  cks.forEach(function(c){if(data[c.id])c.checked=true;c.addEventListener('change',sync)});
+
+  $('saveBtn').addEventListener('click',function(){
+    if(!first.value.trim()||!last.value.trim()||!$('f_period').value.trim()){
+      [first,last,$('f_period')].forEach(function(f){if(!f.value.trim())f.classList.add('bad')});
+      msg(irT('names_first'),true);(window.rpShow&&rpShow(0)),first.scrollIntoView({block:'center'});return}
+    download(who()+'-'+PACKET+'-PROGRESS.json',snapshot());
+    msg(irT('saved'));
+  });
+  $('loadBtn').addEventListener('click',function(){$('loadFile').click()});
+  $('loadFile').addEventListener('change',function(e){
+    var f=e.target.files[0];if(!f)return;
+    var r=new FileReader();
+    r.onload=function(){
+      try{
+        var o=JSON.parse(r.result);
+        if(!o||o.packet!==PACKET||typeof o.answers!=='object')throw new Error('wrong');
+        apply(o);msg(irT('loaded'));
+      }catch(err){msg(irT('bad_file'),true)}
+      e.target.value='';
+    };
+    r.onerror=function(){msg(irT('read_error'),true)};
+    r.readAsText(f);
+  });
+  $('finishBtn').addEventListener('click',function(){
+    var s=state();
+    if(!s.all){refresh();return}
+    var now=new Date();$('f_date').value=now.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});sync();
+    var o=snapshot();o.completed=true;o.submitted=now.toISOString();
+    download(who()+'-'+PACKET+'.json',o);
+    msg(irT('finished',{file:who()+'-'+PACKET+'.json'}));
+  });
+  $('reset').addEventListener('click',function(){
+    if(!confirm(irT('confirm_clear')))return;
+    qs.forEach(function(t){t.value=''});cks.forEach(function(c){c.checked=false});meta.forEach(function(m){m.value=''});
+    data={};sync();
+  });
+  [].forEach.call(document.querySelectorAll('figure'),function(fig){var im=fig.querySelector('img');if(im)im.addEventListener('click',function(){fig.classList.toggle('zoom')})});
+  if(KEY_MODE)$('actions').style.display='none';
+  window.irRefresh=refresh;refresh();if(window.rpCount)rpCount();
+})();
+</script>
+</body>
+</html>

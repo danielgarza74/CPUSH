@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Interactive Reading 3 · The American Revolution and Its Ideas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;0,800;1,400;1,500&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;0,800;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;700&family=Noto+Sans+Arabic:wght@400;500;700;800&display=swap">
+<style>
+:root{
+  --bg:#EEF6F4; --paper:#FBFDFC; --maroon:#13392F; --ink:#0E2B23; --brown:#2A755F;
+  --keybg:#F9F3E8; --keyline:#D29E4B; --rule:#CBD8D4; --line:#A4B6B1; --ok:#3F6B3A;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Segoe UI",system-ui,-apple-system,Verdana,sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:0 18px 60px}
+header.hero{padding:34px 0 14px;border-bottom:3px solid #D29E4B}
+.eyebrow{font-size:12px;letter-spacing:.14em;font-weight:700;color:#936F34}
+h1{margin:.15em 0 .05em;font-size:34px;line-height:1.15;color:var(--maroon)}
+.sub{margin:0;font-weight:600;color:var(--brown)}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 4px}
+.meta label{flex:1 1 180px;font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--brown)}
+.meta input[readonly]{background:#DEE8E5;color:var(--brown);cursor:not-allowed}
+.meta input{display:block;width:100%;margin-top:3px;padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--paper);color:var(--ink);font:inherit}
+.bigq,.howto{background:var(--paper);border:1px solid var(--line);border-left:6px solid #D29E4B;border-radius:6px;padding:12px 16px;margin:18px 0}
+.bigq p,.howto p{margin:.3em 0}
+.bigq .how{font-size:14px;color:var(--brown)}
+.howto{font-size:14.5px}
+.bar{position:sticky;top:0;z-index:5;background:var(--bg);padding:8px 0;border-bottom:1px solid var(--rule)}
+.bar .row{display:flex;align-items:center;gap:12px;font-size:13px;font-weight:600;color:var(--brown)}
+.track{flex:1;height:10px;border-radius:6px;background:#D3DEDB;overflow:hidden}
+.fill{height:100%;width:0;background:#D29E4B;transition:width .3s}
+.btn{border:1px solid var(--maroon);background:var(--paper);color:var(--maroon);padding:5px 12px;border-radius:6px;font:inherit;font-size:13px;font-weight:600;cursor:pointer}
+.btn:hover{background:var(--maroon);color:#fff}
+h2.part{margin:38px 0 10px;font-size:21px;color:var(--maroon);border-bottom:1px solid var(--rule);padding-bottom:4px}
+.obj{background:#F6F1E5;border-radius:6px;padding:12px 16px;margin:12px 0;font-size:14.5px}
+.obj p{margin:.35em 0}
+.obj .im{color:var(--maroon)}
+.reading,.source,.visual{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:14px 18px;margin:16px 0}
+.rtitle{font-weight:800;letter-spacing:.04em;color:var(--maroon);font-size:15px;margin-bottom:6px}
+.rtitle span{color:var(--line);margin:0 4px}
+.reading p{margin:.55em 0}
+.sub{font-size:13px;color:var(--brown);margin:8px 0 3px}
+.note{font-size:14px;color:var(--brown);font-style:italic;align-self:center}
+.tintro{margin:18px 0 -6px;font-size:15px}
+.help{font-size:13.5px;color:var(--brown);background:var(--keybg);border-radius:5px;padding:6px 10px}
+.cite{font-size:12.5px;color:var(--brown);font-style:normal;margin:.5em 0 0}
+.intro{font-style:italic;font-size:14.5px}
+blockquote{margin:10px 0;padding:8px 16px;border-left:4px solid var(--maroon);background:#F8F5EE;font-size:16.5px}
+figure{margin:12px 0;text-align:center}
+figure img{max-width:min(100%,600px);height:auto;border:1px solid var(--line);border-radius:4px;cursor:zoom-in}
+figure.zoom img{max-width:100%;cursor:zoom-out}
+figcaption{text-align:left;margin-top:8px}
+.tbl{border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:16px 0;background:var(--paper)}
+.thead{background:var(--maroon);color:#fff;font-weight:700;padding:8px 14px;font-size:14px}
+.trow{display:grid;grid-template-columns:minmax(150px,32%) 1fr;gap:14px;padding:12px 14px;border-top:1px solid var(--rule)}
+.tl .qp{font-size:13.5px;color:var(--brown);margin-top:2px}
+.ask,.cer{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px 16px;margin:16px 0}
+.cer{display:grid;grid-template-columns:minmax(120px,22%) 1fr;gap:14px;margin:10px 0}
+.cl b{display:block;color:var(--maroon)}
+.cl span{font-size:13px;color:var(--brown)}
+textarea{width:100%;min-height:74px;padding:9px 11px;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--ink);font:inherit;resize:vertical;line-height:1.5}
+textarea:focus,input:focus{outline:2px solid var(--maroon);outline-offset:1px}
+textarea.done{border-color:var(--ok);background:#FBFFF8}
+.key{background:var(--keybg);border-left:4px solid var(--keyline);border-radius:4px;padding:8px 12px;margin-top:8px;font-size:14.5px;color:#936F34}
+.checks{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px 16px;margin:16px 0;display:grid;gap:6px}
+.chk{display:flex;gap:8px;align-items:flex-start;cursor:pointer}
+.chk input{margin-top:6px;accent-color:var(--maroon)}
+.finish{text-align:center;margin:26px 0}
+.status{font-size:14px;font-weight:600;color:var(--brown);margin-bottom:10px}
+.btns{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.btn.primary{background:var(--maroon);color:#fff}
+.btn.primary:disabled{background:#ABB9B5;border-color:#ABB9B5;color:#fff;cursor:not-allowed}
+.btn.primary:disabled:hover{background:#ABB9B5}
+.link{background:none;border:0;color:var(--brown);text-decoration:underline;cursor:pointer;font:inherit;font-size:13px;margin-top:14px}
+input.bad{border-color:#B3261E;background:#FFF1EF}
+.msg{display:none;margin:12px auto;padding:10px 14px;border-radius:6px;background:#EDF5E8;border:1px solid var(--ok);color:var(--ok);font-weight:600;max-width:600px}
+.msg.err{background:#FFF1EF;border-color:#B3261E;color:#8C1D18}
+footer{margin-top:34px;padding-top:10px;border-top:1px solid var(--rule);font-size:12px;letter-spacing:.04em;color:var(--maroon);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+@media (max-width:620px){.trow,.cer{grid-template-columns:1fr;gap:6px}h1{font-size:27px}}
+@media print{
+  body{background:#fff;font-size:12.5px}.bar,.finish,.btn,.msg{display:none!important}
+  .reading,.source,.visual,.tbl,.ask,.cer,.obj,.checks{break-inside:avoid}
+  textarea{border:1px solid #bbb;min-height:60px}
+}
+
+/* ---- paged layout ---- */
+.layout{display:grid;grid-template-columns:270px minmax(0,1fr);max-width:1200px;margin:0 auto}
+.layout .wrap{max-width:900px;width:100%;padding:0 30px 60px}
+.side{position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;padding:26px 16px 30px 18px;background:#F4E4D6;border-right:1px solid var(--rule)}
+.side-head{padding-bottom:12px;margin-bottom:12px;border-bottom:3px solid #0F6B66}
+.side-title{font-size:18px;line-height:1.25;font-weight:800;color:var(--maroon);margin-top:2px}
+.toc,.toc ul{list-style:none;margin:0;padding:0}
+.toc>li{margin:0 0 10px}
+.toc-part{display:grid;grid-template-columns:1fr auto;gap:2px 8px;padding:9px 10px;border-radius:7px;border:1px solid transparent;color:var(--ink);text-decoration:none}
+.toc-part:hover{background:var(--paper);border-color:var(--rule)}
+.toc-part .pn{font-size:11.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--maroon)}
+.toc-part .pt{grid-column:1/2;font-size:14.5px;font-weight:600;line-height:1.3}
+.toc-part .cnt{grid-row:1/3;grid-column:2;align-self:center;font-size:12px;font-weight:700;color:var(--brown);background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:1px 8px;white-space:nowrap}
+.toc li.complete .cnt{background:var(--ok);border-color:var(--ok);color:#fff}
+.toc li.active>.toc-part{background:var(--maroon);border-color:var(--maroon)}
+.toc li.active>.toc-part .pn,.toc li.active>.toc-part .pt{color:#fff}
+.toc-sub{margin:4px 0 0 12px!important;border-left:2px solid var(--rule)}
+.toc-sub a{display:block;padding:4px 8px 4px 12px;font-size:13px;line-height:1.3;color:var(--brown);text-decoration:none;border-radius:0 5px 5px 0}
+.toc-sub a b{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--maroon)}
+.toc-sub a:hover{background:var(--paper)}
+.toc li.active .toc-sub{border-left-color:var(--maroon)}
+section.page{display:none;scroll-margin-top:200px}
+section.page.active{display:block}
+section.page>h2.part:first-child{margin-top:26px}
+.reading,.source,.visual{scroll-margin-top:64px}
+.pager{display:flex;justify-content:space-between;gap:12px;margin:34px 0 0;padding-top:16px;border-top:1px solid var(--rule)}
+.pager a{flex:0 1 48%;display:block;padding:10px 14px;border:1px solid var(--maroon);border-radius:7px;background:var(--paper);color:var(--maroon);text-decoration:none;font-size:14px;font-weight:600;line-height:1.3}
+.pager a small{display:block;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--brown)}
+.pager a:hover{background:var(--maroon);color:#fff}
+.pager a:hover small{color:#fff}
+.pager a.next{margin-left:auto;text-align:right}
+@media (max-width:900px){
+  .layout{display:block}
+  .layout .wrap{padding:0 18px 60px}
+  .side{position:static;height:auto;overflow:visible;padding:14px 18px 10px;border-right:0;border-bottom:1px solid var(--rule)}
+  .side-head{display:none}
+  .toc{display:flex;flex-wrap:wrap;gap:8px}
+  .toc>li{margin:0;flex:1 1 150px}
+  .toc-part{height:100%;background:var(--paper);border-color:var(--rule)}
+  .toc-sub{display:none}
+}
+@media print{
+  .side,.pager{display:none!important}
+  .layout{display:block}
+  section.page{display:block!important}
+}
+/* ---- Interactive Reading design layer ----
+   Layout: sidebar of Parts + one Part per page; readings set like a book (serif),
+   student work set like a workbook (sans, tinted "Your turn" zones). */
+:root{
+  --accent2:#D29E4B;
+  --serif:"Alegreya",Georgia,"Times New Roman",serif;
+  --sans:"Alegreya Sans","Segoe UI",system-ui,-apple-system,sans-serif;
+  --accent-ink:color-mix(in srgb,var(--accent2) 62%,var(--ink));
+  --tint:color-mix(in srgb,var(--accent2) 7%,var(--paper));
+  --tint-line:color-mix(in srgb,var(--accent2) 28%,var(--rule));
+  --soft:color-mix(in srgb,var(--maroon) 5%,var(--bg));
+  --shadow:0 1px 2px color-mix(in srgb,var(--ink) 6%,transparent),0 8px 24px -12px color-mix(in srgb,var(--ink) 22%,transparent);
+}
+body{font:17px/1.6 var(--sans);font-variant-numeric:lining-nums;-webkit-font-smoothing:antialiased}
+.cnt,#pct{font-variant-numeric:lining-nums tabular-nums}
+h1,h2,.side-title,.toc-part .pt,.pager a{font-family:var(--serif)}
+h1,h2{text-wrap:balance}
+
+/* hero */
+header.hero{padding:28px 0 0;border:0}
+.hero-band{position:relative;overflow:hidden;border-radius:16px;padding:34px 34px 30px;color:#fff;
+  background-color:var(--maroon);
+  background-image:linear-gradient(100deg,color-mix(in srgb,var(--maroon) 97%,transparent) 35%,color-mix(in srgb,var(--maroon) 72%,transparent)),var(--hero-img,none);
+  background-size:cover;background-position:center}
+.hero-band .eyebrow{color:color-mix(in srgb,#fff 82%,var(--maroon));font-size:13px;letter-spacing:.18em}
+.hero-band h1{color:#fff;font-size:clamp(32px,5vw,48px);font-weight:700;line-height:1.08;margin:.2em 0 .25em;max-width:15em}
+.hero-band .sub{color:color-mix(in srgb,#fff 88%,var(--maroon));font-size:16px;font-weight:500;margin:0;max-width:40em}
+.hero-num{position:absolute;right:22px;bottom:-34px;font:700 190px/1 var(--serif);color:#fff;opacity:.16;pointer-events:none;user-select:none}
+.meta{gap:14px;margin:18px 0 0;padding:18px 20px;background:var(--paper);border:1px solid var(--rule);border-radius:12px}
+.meta label{font-size:12px;letter-spacing:.1em}
+.meta input{border-radius:8px;padding:9px 11px;margin-top:5px}
+
+/* sticky progress bar */
+.bar{top:0;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:10px 0}
+.track{height:8px;background:color-mix(in srgb,var(--rule) 55%,var(--paper))}
+.fill{background:var(--accent2)}
+.btn{border-radius:8px;font-family:var(--sans);font-size:14px}
+
+/* big question + how to work */
+.bigq{border:0;border-radius:14px;background:var(--tint);padding:20px 24px;margin:22px 0 14px}
+.bigq .eyebrow{color:var(--accent-ink)}
+.bigq>p:not(.how){font:500 22px/1.4 var(--serif);color:var(--ink);margin:.35em 0}
+.bigq .how{font-size:15px}
+.howto{border:1px dashed var(--line);border-radius:12px;background:transparent;font-size:15px;color:var(--brown);padding:12px 18px}
+
+/* part opener */
+.parthead{margin:30px 0 14px;padding-bottom:12px;border-bottom:1px solid var(--rule)}
+section.page>.parthead:first-child{margin-top:26px}
+.pkicker{font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-ink)}
+.pkicker span{color:var(--brown);opacity:.65;font-weight:700}
+h2.part{margin:.1em 0 0;padding:0;border:0;font-size:clamp(28px,4vw,36px);line-height:1.15;color:var(--maroon)}
+.obj{background:var(--soft);border:1px solid var(--rule);border-radius:12px;padding:14px 20px;font-size:15.5px}
+.eyebrow{font-size:12px}
+
+/* readings, sources, visuals: the "book" */
+.reading,.source,.visual{border:1px solid var(--rule);border-radius:14px;padding:24px 30px 20px;margin:22px 0;box-shadow:var(--shadow)}
+.rtitle{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;margin-bottom:12px;letter-spacing:0}
+.rtitle .rlabel{margin:0;font:800 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:#fff;background:var(--maroon);padding:6px 10px 5px;border-radius:999px;transform:translateY(-3px)}
+.source .rtitle .rlabel{background:var(--accent-ink)}
+.visual .rtitle .rlabel{background:transparent;color:var(--maroon);box-shadow:inset 0 0 0 1.5px var(--maroon)}
+.rtitle .rname{margin:0;font:700 24px/1.2 var(--serif);color:var(--ink)}
+.reading p{font:19px/1.68 var(--serif);max-width:68ch}
+.reading p.help{font:14.5px/1.5 var(--sans)}
+.reading p.cite{font:13px/1.5 var(--sans)}
+.reading p,.rname,blockquote,.intro,h1,h2,.bigq>p{font-variant-numeric:lining-nums}
+.intro{font:italic 17px/1.55 var(--serif);color:var(--brown)}
+blockquote{position:relative;margin:16px 0;padding:6px 6px 6px 50px;border:0;background:transparent;font:italic 21px/1.55 var(--serif);color:var(--ink)}
+blockquote::before{content:"\201C";position:absolute;left:0;top:-14px;font:700 76px/1 var(--serif);color:var(--accent2);opacity:.85}
+.help{border-radius:8px;font-size:14.5px;padding:8px 12px}
+.cite{font-size:13px;color:var(--line);color:color-mix(in srgb,var(--brown) 80%,var(--paper))}
+figure img{max-width:100%;border-radius:8px;box-shadow:var(--shadow);border-color:var(--rule)}
+
+/* student work: the "workbook" */
+.tintro{margin:28px 0 -8px;font-size:16px}
+.tintro::before,.ask::before{content:"Your turn";display:block;font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-ink);margin-bottom:4px}
+.tbl{border:1px solid var(--tint-line);border-radius:14px;background:var(--tint);box-shadow:none}
+.thead{background:transparent;color:var(--ink);border-bottom:1px solid var(--tint-line);font-size:15px;padding:12px 18px}
+.trow{padding:14px 18px;border-top:0}
+.trow+.trow{border-top:1px solid color-mix(in srgb,var(--tint-line) 60%,transparent)}
+.tl b{font-size:16px}
+.ask{background:var(--tint);border:1px solid var(--tint-line);border-radius:14px;padding:16px 20px}
+.ask>p{margin:0 0 10px}
+.cer{background:var(--tint);border:1px solid var(--tint-line);border-radius:12px;padding:14px 18px}
+.cl b{font:700 19px/1.2 var(--serif)}
+textarea{border-radius:10px;border-color:color-mix(in srgb,var(--line) 70%,var(--paper));background:#fff;font-size:16.5px;padding:10px 12px;transition:border-color .15s,box-shadow .15s}
+textarea:focus,input:focus{outline:none;border-color:var(--accent2);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent2) 22%,transparent)}
+textarea.done{border-color:color-mix(in srgb,var(--ok) 60%,var(--paper));background:#fff;box-shadow:inset 3px 0 0 var(--ok)}
+.checks{background:var(--tint);border:1px solid var(--tint-line);border-radius:14px;padding:16px 20px}
+.finish{background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:22px 20px;box-shadow:var(--shadow)}
+.btn.primary{padding:8px 16px}
+a:focus-visible,.btn:focus-visible,button:focus-visible{outline:3px solid color-mix(in srgb,var(--accent2) 55%,transparent);outline-offset:2px}
+
+/* sidebar polish */
+.side{background:var(--soft)}
+.side-head{border-bottom-color:var(--accent2)}
+.side-title{font-size:21px}
+.toc-part .pt{font-size:16px;font-weight:700}
+.pager a{font-size:16px}
+.pager a small{font-family:var(--sans)}
+
+@media (max-width:620px){
+  .hero-band{padding:24px 20px 22px;border-radius:12px}
+  .hero-num{font-size:130px;bottom:-22px;right:10px}
+  .reading,.source,.visual{padding:18px 18px 14px;border-radius:12px}
+  .reading p{font-size:18px}
+  .rtitle .rname{font-size:21px}
+  blockquote{padding-left:36px;font-size:19px}
+  blockquote::before{font-size:60px;top:-10px}
+}
+@media (prefers-reduced-motion:reduce){textarea{transition:none}html{scroll-behavior:auto}}
+@media print{
+  .hero-band{background:none!important;color:var(--ink);padding:0}
+  .hero-band h1,.hero-band .eyebrow,.hero-band .sub{color:var(--ink)}
+  .hero-num{display:none}
+  .reading,.source,.visual,.finish{box-shadow:none}
+}
+
+/* ---- glass + depth layer ----
+   A fixed wash of the chapter's colors sits behind everything; panels are frosted
+   glass over it. Reading text stays on a near-solid surface for legibility. */
+:root{
+  --glass:color-mix(in srgb,var(--paper) 62%,transparent);
+  --glass-strong:color-mix(in srgb,var(--paper) 86%,transparent);
+  --glass-tint:color-mix(in srgb,var(--tint) 66%,transparent);
+  --glass-edge:color-mix(in srgb,#fff 70%,transparent);
+  --glass-hi:inset 0 1px 0 color-mix(in srgb,#fff 85%,transparent),inset 0 -1px 0 color-mix(in srgb,var(--ink) 5%,transparent);
+  --depth:0 1px 1px color-mix(in srgb,var(--ink) 5%,transparent),0 3px 6px -2px color-mix(in srgb,var(--ink) 8%,transparent),0 18px 40px -16px color-mix(in srgb,var(--ink) 30%,transparent);
+  --depth-up:0 2px 2px color-mix(in srgb,var(--ink) 6%,transparent),0 8px 14px -4px color-mix(in srgb,var(--ink) 12%,transparent),0 28px 56px -18px color-mix(in srgb,var(--ink) 38%,transparent);
+}
+body{background:var(--bg)}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(42vmax 42vmax at 8% 6%,color-mix(in srgb,var(--maroon) 30%,transparent),transparent 70%),
+    radial-gradient(38vmax 38vmax at 96% 22%,color-mix(in srgb,var(--accent2) 26%,transparent),transparent 70%),
+    radial-gradient(46vmax 40vmax at 70% 104%,color-mix(in srgb,var(--maroon) 20%,transparent),transparent 70%),
+    radial-gradient(30vmax 30vmax at 20% 88%,color-mix(in srgb,var(--accent2) 16%,transparent),transparent 70%)}
+.glassy,.side,.bar,.meta,.reading,.source,.visual,.obj,.howto,.tbl,.ask,.cer,.checks,.finish,.pager a,.bigq{
+  border:1px solid var(--glass-edge)!important}
+.side{background:var(--glass);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);border-width:0 1px 0 0!important;box-shadow:var(--glass-hi)}
+.bar{background:color-mix(in srgb,var(--bg) 55%,transparent);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border-width:0 0 1px!important;border-radius:0 0 14px 14px;padding-inline:14px;margin-inline:-14px}
+.meta,.obj,.howto,.checks,.finish{background:var(--glass);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);box-shadow:var(--glass-hi),var(--depth)}
+.howto{border-style:solid!important}
+.bigq{background:var(--glass-tint);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);box-shadow:var(--glass-hi),var(--depth)}
+.reading,.source,.visual{background:var(--glass-strong);backdrop-filter:blur(20px) saturate(1.2);-webkit-backdrop-filter:blur(20px) saturate(1.2);box-shadow:var(--glass-hi),var(--depth)}
+.tbl,.ask,.cer{background:var(--glass-tint);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);box-shadow:var(--glass-hi),var(--depth)}
+.thead{border-bottom-color:var(--glass-edge)}
+.trow+.trow{border-top-color:var(--glass-edge)}
+/* answer boxes sit "pressed into" the glass */
+textarea,.meta input{background:color-mix(in srgb,#fff 82%,transparent);border-color:color-mix(in srgb,var(--line) 45%,transparent);box-shadow:inset 0 2px 4px color-mix(in srgb,var(--ink) 10%,transparent),inset 0 0 0 1px color-mix(in srgb,#fff 50%,transparent)}
+.meta input[readonly]{background:color-mix(in srgb,var(--rule) 45%,transparent)}
+textarea:focus,.meta input:focus{background:#fff;box-shadow:inset 0 2px 4px color-mix(in srgb,var(--ink) 8%,transparent),0 0 0 3px color-mix(in srgb,var(--accent2) 25%,transparent)}
+textarea.done{background:color-mix(in srgb,#fff 90%,transparent);box-shadow:inset 3px 0 0 var(--ok),inset 0 2px 4px color-mix(in srgb,var(--ink) 8%,transparent)}
+/* raised, tactile controls */
+.toc-part,.pager a,.btn{transition:transform .18s ease,box-shadow .18s ease,background-color .18s ease}
+.toc-part:hover{background:var(--glass-strong);border-color:var(--glass-edge);box-shadow:var(--glass-hi),var(--depth);transform:translateY(-1px)}
+.toc li.active>.toc-part{background:linear-gradient(180deg,color-mix(in srgb,var(--maroon) 88%,#fff),var(--maroon));box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 35%,transparent),0 10px 22px -10px color-mix(in srgb,var(--maroon) 80%,transparent);transform:translateY(-1px)}
+.toc-part .cnt{background:var(--glass-strong);border-color:var(--glass-edge);box-shadow:var(--glass-hi)}
+.pager a{background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:var(--glass-hi),var(--depth)}
+.pager a:hover{transform:translateY(-3px);box-shadow:var(--glass-hi),var(--depth-up)}
+.btn{background:var(--glass-strong);box-shadow:var(--glass-hi),0 2px 6px -2px color-mix(in srgb,var(--ink) 20%,transparent)}
+.btn:hover{transform:translateY(-1px)}
+.btn.primary{background:linear-gradient(180deg,color-mix(in srgb,var(--maroon) 85%,#fff),var(--maroon));box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 35%,transparent),0 8px 18px -8px color-mix(in srgb,var(--maroon) 85%,transparent)}
+.btn:active{transform:translateY(1px)}
+.rtitle .rlabel{box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 35%,transparent),0 3px 8px -3px color-mix(in srgb,var(--ink) 45%,transparent)}
+.visual .rtitle .rlabel{box-shadow:inset 0 0 0 1.5px var(--maroon)}
+.fill{background:linear-gradient(90deg,color-mix(in srgb,var(--accent2) 70%,#fff),var(--accent2));box-shadow:0 0 12px color-mix(in srgb,var(--accent2) 55%,transparent)}
+.track{box-shadow:inset 0 1px 2px color-mix(in srgb,var(--ink) 15%,transparent)}
+/* 3D title band: tilts toward the pointer, with a moving sheen */
+.hero-stage{perspective:1100px}
+.hero-band{transform-style:preserve-3d;transition:transform .5s cubic-bezier(.2,.7,.2,1);box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 30%,transparent),0 2px 4px color-mix(in srgb,var(--ink) 10%,transparent),0 30px 60px -24px color-mix(in srgb,var(--maroon) 75%,transparent);transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))}
+.hero-band::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(600px circle at var(--mx,70%) var(--my,0%),color-mix(in srgb,#fff 22%,transparent),transparent 45%)}
+.hero-band>*{transform:translateZ(36px)}
+.hero-band .hero-num{transform:translateZ(14px);opacity:.2;text-shadow:0 1px 0 color-mix(in srgb,#fff 40%,transparent),0 18px 30px color-mix(in srgb,#000 35%,transparent)}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  :root{--glass:color-mix(in srgb,var(--paper) 94%,transparent);--glass-tint:var(--tint)}
+}
+@media (prefers-reduced-motion:reduce){
+  .hero-band{transform:none!important;transition:none}
+  .toc-part,.pager a,.btn{transition:none}
+  .pager a:hover,.toc-part:hover,.btn:hover{transform:none}
+}
+@media (max-width:900px){.side{border-width:0 0 1px!important}.bar{margin-inline:0;border-radius:0}}
+@media print{
+  body::before{display:none}
+  .side,.bar,.meta,.reading,.source,.visual,.obj,.howto,.tbl,.ask,.cer,.checks,.finish,.bigq{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:#fff!important;box-shadow:none!important;border-color:#ccc!important}
+  .hero-band{transform:none!important;box-shadow:none}
+  .hero-band::after{display:none}
+}
+.msg,.status{overflow-wrap:anywhere}
+
+/* ---- teacher answer key ---- */
+.key{border:0;border-left:4px solid var(--keyline);border-radius:8px;background:color-mix(in srgb,var(--keybg) 85%,transparent);color:var(--ink);font:15px/1.5 var(--sans);padding:9px 13px;margin-top:8px}
+.key b{color:var(--accent-ink);letter-spacing:.06em}
+.key-mode .cnt,.key-mode #pct,.key-mode .track{display:none}
+.key-mode .hero-band .eyebrow{color:#fff}
+.cl span{display:block;line-height:1.4;margin-top:4px}
+
+/* ---- language switch + right-to-left ---- */
+.lang-switch{display:inline-flex;gap:2px;padding:3px;border-radius:10px;background:var(--glass-strong,var(--paper));border:1px solid var(--glass-edge,var(--rule));box-shadow:var(--glass-hi,none)}
+.lang-switch button{border:0;background:transparent;color:var(--brown);font:600 13px/1 var(--sans);padding:6px 10px;border-radius:7px;cursor:pointer}
+.lang-switch button[data-lang="ar"]{font-family:"Noto Sans Arabic",var(--sans);font-size:14px}
+.lang-switch button[aria-pressed="true"]{background:var(--maroon);color:#fff;box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 30%,transparent)}
+.lang-switch button:focus-visible{outline:3px solid color-mix(in srgb,var(--accent2) 55%,transparent);outline-offset:1px}
+.tintro::before,.ask::before{content:var(--your-turn,"Your turn")}
+textarea,.meta input{unicode-bidi:plaintext;text-align:start}
+figcaption{text-align:start}
+:root[lang="ar"]{--serif:"Noto Naskh Arabic","Alegreya",Georgia,serif;--sans:"Noto Sans Arabic","Alegreya Sans","Segoe UI",system-ui,sans-serif}
+:root[lang="ar"] *{letter-spacing:0!important}
+:root[lang="ar"] body{line-height:1.8}
+:root[lang="ar"] .reading p{line-height:1.95;font-size:19px}
+:root[lang="ar"] .hero-band h1{line-height:1.3}
+:root[lang="ar"] h2.part{line-height:1.4}
+:root[lang="ar"] .rtitle .rname{line-height:1.45}
+:root[lang="ar"] blockquote{line-height:1.85}
+[dir="rtl"] blockquote{padding:6px 50px 6px 6px}
+[dir="rtl"] blockquote::before{left:auto;right:0;content:"\201D"}
+[dir="rtl"] .key{border-left:0;border-right:4px solid var(--keyline)}
+[dir="rtl"] .side{border-right:0!important;border-left:1px solid var(--glass-edge,var(--rule))!important}
+[dir="rtl"] .toc-sub{margin:4px 12px 0 0!important;border-left:0;border-right:2px solid var(--rule)}
+[dir="rtl"] .toc li.active .toc-sub{border-right-color:var(--maroon)}
+[dir="rtl"] .toc-sub a{padding:4px 12px 4px 8px;border-radius:5px 0 0 5px}
+[dir="rtl"] textarea.done{box-shadow:inset -3px 0 0 var(--ok),inset 0 2px 4px color-mix(in srgb,var(--ink) 8%,transparent)}
+[dir="rtl"] .pager a.next{margin-left:0;margin-right:auto;text-align:left}
+[dir="rtl"] .pager a.prev{text-align:right}
+@media (max-width:620px){.bar .row{flex-wrap:wrap}.lang-switch{order:3}.lang-switch button{padding:6px 8px}}
+@media print{.lang-switch{display:none}}
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="side" aria-label="Sections">
+<div class="side-head"><div class="eyebrow">INTERACTIVE READING 3</div><div class="side-title">The American Revolution and Its Ideas</div></div>
+<ol class="toc">
+<li><a class="toc-part" href="#part-1"><span class="pn">Part 1</span><span class="pt">A Revolution and a Civil War</span><span class="cnt"></span></a><ul class="toc-sub"><li><a href="#reading-a"><b>Reading A</b>Loyalists and Patriots</a></li></ul></li>
+<li><a class="toc-part" href="#part-2"><span class="pn">Part 2</span><span class="pt">Fighting the War</span><span class="cnt"></span></a><ul class="toc-sub"><li><a href="#reading-b"><b>Reading B</b>British Military Power</a></li><li><a href="#reading-c"><b>Reading C</b>The Continental Army</a></li><li><a href="#source-1"><b>Source 1</b>“The Times That Try Men’s Souls” (Primary Source)</a></li></ul></li>
+<li><a class="toc-part" href="#part-3"><span class="pn">Part 3</span><span class="pt">Turning Points</span><span class="cnt"></span></a><ul class="toc-sub"><li><a href="#reading-d"><b>Reading D</b>Trenton (1776)</a></li><li><a href="#reading-e"><b>Reading E</b>Saratoga and the French Alliance (1777–1778)</a></li><li><a href="#reading-f"><b>Reading F</b>Valley Forge (1777–1778)</a></li><li><a href="#reading-g"><b>Reading G</b>Spain Helps, and Yorktown (1781)</a></li><li><a href="#reading-h"><b>Reading H</b>The Treaty of Paris (1783)</a></li></ul></li>
+<li><a class="toc-part" href="#part-4"><span class="pn">Part 4</span><span class="pt">An Engine of Change</span><span class="cnt"></span></a><ul class="toc-sub"><li><a href="#reading-i"><b>Reading I</b>An Engine of Change</a></li><li><a href="#reading-j"><b>Reading J</b>State Constitutions and Voting</a></li><li><a href="#reading-k"><b>Reading K</b>The Articles of Confederation</a></li><li><a href="#reading-l"><b>Reading L</b>Freedom of Religion</a></li></ul></li>
+<li><a class="toc-part" href="#part-5"><span class="pn">Part 5</span><span class="pt">Equality and Its Limits</span><span class="cnt"></span></a><ul class="toc-sub"><li><a href="#reading-m"><b>Reading M</b>The Paradox of Slavery</a></li><li><a href="#reading-n"><b>Reading N</b>The Status of Women</a></li><li><a href="#reading-o"><b>Reading O</b>Indigenous Americans Are Besieged</a></li></ul></li>
+<li><a class="toc-part" href="#part-6"><span class="pn">Part 6</span><span class="pt">CER: Freedom for Whom?</span><span class="cnt"></span></a></li>
+</ol>
+</nav>
+<div class="wrap">
+<div class="bar"><div class="row"><span id="pct">0 of 0 answered</span><div class="track"><div class="fill" id="fill"></div></div><div class="lang-switch" role="group" aria-label="Language / Idioma / اللغة"><button type="button" data-lang="en" lang="en" aria-pressed="true">English</button><button type="button" data-lang="es" lang="es" aria-pressed="false">Español</button><button type="button" data-lang="ar" lang="ar" aria-pressed="false">العربية</button></div><button class="btn" onclick="window.print()">Print</button></div></div>
+
+<section class="page" id="part-1" aria-label="Part 1">
+<header class="hero">
+  <div class="hero-stage"><div class="hero-band"><div class="eyebrow">INTERACTIVE READING 3</div>
+  <h1>The American Revolution and Its Ideas</h1>
+  <p class="sub">1776–1786 | The American Revolution and Its Ideas</p><span class="hero-num" aria-hidden="true">3</span></div></div>
+  <div class="meta">
+    <label>FIRST NAME *<input id="f_first" type="text" autocomplete="given-name"></label>
+    <label>LAST NAME *<input id="f_last" type="text" autocomplete="family-name"></label>
+    <label>PERIOD *<input id="f_period" type="text" inputmode="numeric" maxlength="12" placeholder="e.g. 3"></label>
+    <label>DATE (fills in when you finish)<input id="f_date" type="text" readonly tabindex="-1" placeholder="Automatic"></label>
+  </div>
+</header>
+
+<div class="bigq"><div class="eyebrow">BIG QUESTION</div><p>Was the American Revolution a war for everyone’s freedom—or mostly a war for some people’s freedom?</p></div>
+<div class="howto"><b>How to work:</b> Read each READING box, then answer right below it. Short phrases are fine in the tables; use complete sentences for source questions. The last Part is a CER on the big question. Your work saves on this device as you type. Use <b>Save Progress</b> at the bottom of the last Part to download a backup file, and <b>Load Progress</b> to continue later. Enter your first name, last name, and period; the date fills in by itself when you finish. The <b>Finished</b> button unlocks only when every box, all three required fields, and the CER checklist are done.</div>
+
+<header class="parthead"><div class="pkicker">Part 1 <span>of 6</span></div><h2 class="part">A Revolution and a Civil War</h2></header>
+<div class="obj"><div class="eyebrow">CORE OBJECTIVE</div><p><b>Core Objective 1:</b> Describe the ways in which the American Revolution was also a civil war.</p><p class="im"><b>IN MY WORDS:</b> How could a war against Britain also be a war of Americans against Americans?</p></div>
+<section class="reading" id="reading-a"><div class="rtitle"><span class="rlabel">Reading A</span><span class="rname">Loyalists and Patriots</span></div><p>The Revolution was as much a deeply divisive civil war among bitterly opposed American factions (including the Indigenous peoples allied with both sides) as it was a struggle against Great Britain. It sundered families and friends, towns and cities. . . . The colonists were divided into three groups: (1) Patriots, who formed the Continental Army and fought in state militias; (2) Loyalists, or Tories, siding with Britain; and (3) a middle group that sought to remain neutral but were eventually swayed by the Patriots.</p><p>The Loyalists viewed the Revolution as an act of treason. They were most numerous in the seaport cities and the Carolinas, and they came from all walks of life. . . . The Patriots supported the war because they realized that the only way to protect their liberty was to separate themselves from British control. They also wanted to establish an American republic that would convert them from being <i>subjects</i> of a king to being <i>citizens</i> with the power to elect their own government and pursue their own interests.</p><p class="help"><b>Word help:</b> militias = local groups of citizen-soldiers · neutral = not taking a side · divisive = splitting people apart · factions = groups that disagree · sundered = tore apart · treason = betraying your country · republic = a government run by elected leaders</p><p class="cite">Norton, <i>America: The Essential Learning Edition</i>, Ch. 5, “American Society at War” (Loyalists; Patriots).</p></section>
+<p class="tintro"><b>Two sides</b> | Use Reading A. Short phrases are fine.</p><div class="tbl"><div class="thead">Loyalists and Patriots</div><div class="trow"><div class="tl"><b>Loyalists</b><div class="qp">Reading A</div></div><div class="tr"><div class="sub"><b>What did they think of the Revolution?</b></div><textarea id="q1" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea><div class="sub"><b>Who were they, or where did they live?</b></div><textarea id="q2" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div><div class="trow"><div class="tl"><b>Patriots</b><div class="qp">Reading A</div></div><div class="tr"><div class="sub"><b>What did they think of the Revolution?</b></div><textarea id="q3" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea><div class="sub"><b>Who were they, or where did they live?</b></div><textarea id="q4" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div></div>
+<nav class="pager" aria-label="Page navigation"><a class="next" href="#part-2"><small>Next &rarr;</small>Part 2 · Fighting the War</a></nav>
+</section>
+<section class="page" id="part-2" aria-label="Part 2">
+<header class="parthead"><div class="pkicker">Part 2 <span>of 6</span></div><h2 class="part">Fighting the War</h2></header>
+<div class="obj"><div class="eyebrow">CORE OBJECTIVE</div><p><b>Core Objective 2:</b> Explain the challenges faced by both British and American military leaders in fighting the Revolutionary War.</p><p class="im"><b>IN MY WORDS:</b> Name one problem the British army had and one problem the American army had.</p></div>
+<section class="reading" id="reading-b"><div class="rtitle"><span class="rlabel">Reading B</span><span class="rname">British Military Power</span></div><p>The British Empire sent 35,000 soldiers and half of its huge navy to suppress the American rebellion. The British also hired foreign soldiers (mercenaries), as evidenced by the 30,000 German soldiers who served in the British armies. Most were from the German state of Hesse-Cassel; thus, Americans called them Hessians. . . . The war’s increasing costs—in human lives and war debt—demoralized the British. Another problem facing the British was that its government in the colonies under Lord Frederick North lacked a consistent war strategy.</p><p class="help"><b>Word help:</b> suppress = stop by force · mercenaries = soldiers paid to fight for another country · demoralized = took away hope · consistent = steady, the same</p><p class="cite">Norton, <i>America: The Essential Learning Edition</i>, Ch. 5, “Mobilizing for War” (British Military Power).</p></section>
+<section class="reading" id="reading-c"><div class="rtitle"><span class="rlabel">Reading C</span><span class="rname">The Continental Army</span></div><p>Before the war, citizen-soldiers (militiamen) were civilians summoned as needed from their farms and shops. During the Revolution, however, militiamen were at times unreliable and ungovernable. . . . Washington knew that militiamen alone could not win the war. He therefore convinced the Continental Congress to create a Continental Army with full-time, well-trained soldiers. . . . Some 5,000 people of African descent, virtually all formerly enslaved, also served.</p><p>Financing the Revolution was much harder for the Americans than it was for Great Britain. Lacking the power to impose taxes, Congress could only <i>ask</i> the states to provide funds for the national government. . . . Both the British and the Americans recruited Indigenous people to fight. But the British were far more successful at it, largely because they had long-standing relationships with chieftains and promised to protect ancestral Indigenous lands.</p><p class="help"><b>Word help:</b> civilians = people who are not soldiers · summoned = called · unreliable = could not be trusted · financing = paying for · impose = force on people</p><p class="cite">Norton, <i>America: The Essential Learning Edition</i>, Ch. 5, “Mobilizing for War” (The Continental Army; Problems of Finance and Supply; Indigenous Americans and the Revolution).</p></section>
+<section class="source" id="source-1"><div class="rtitle"><span class="rlabel">Source 1</span><span class="rname">“The Times That Try Men’s Souls” (Primary Source)</span></div><p class="intro">By December 1776, Washington had only 3,000 soldiers left. Thomas Paine wrote <i>The American Crisis</i> to keep Americans fighting.</p><blockquote>“These are the times that try men’s souls: The summer soldier and the sunshine patriot will, in this crisis, shrink from the service of his country; but he that stands it NOW deserves the love and thanks of man and woman. Tyranny, like Hell, is not easily conquered. Yet we have this consolation with us, that the harder the conflict, the more glorious the triumph.”</blockquote><p class="help"><b>Word help:</b> try = test · summer soldier = someone who fights only when it is easy · shrink from = back away from · tyranny = cruel rule · consolation = comfort · triumph = victory</p><p class="cite">Thomas Paine, <i>The American Crisis</i>, December 1776. In Norton, Ch. 5, “Mobilizing for War” (Thomas Paine: “The Times That Try Men’s Souls”).</p></section>
+<div class="ask"><p><b>Source 1.</b> What is a “summer soldier”? What does Paine want soldiers to do instead?</p><textarea id="q5" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div>
+<div class="ask"><p><b>Purpose.</b> Why did Washington order <i>The American Crisis</i> read aloud to his army? Use the context line.</p><textarea id="q6" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div>
+<p class="tintro"><b>Challenges for both sides</b> | Use Readings B and C. Short phrases are fine.</p><div class="tbl"><div class="thead">One challenge</div><div class="trow"><div class="tl"><b>British leaders</b><div class="qp">Reading B</div></div><div class="tr"><textarea id="q7" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div><div class="trow"><div class="tl"><b>American leaders</b><div class="qp">Reading C</div></div><div class="tr"><textarea id="q8" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div></div>
+<nav class="pager" aria-label="Page navigation"><a class="prev" href="#part-1"><small>&larr; Previous</small>Part 1 · A Revolution and a Civil War</a><a class="next" href="#part-3"><small>Next &rarr;</small>Part 3 · Turning Points</a></nav>
+</section>
+<section class="page" id="part-3" aria-label="Part 3">
+<header class="parthead"><div class="pkicker">Part 3 <span>of 6</span></div><h2 class="part">Turning Points</h2></header>
+<div class="obj"><div class="eyebrow">CORE OBJECTIVE</div><p><b>Core Objective 3:</b> Identify key turning points in the Revolutionary War, and explain how they changed the direction of the war.</p><p class="im"><b>IN MY WORDS:</b> What is a turning point in a war?</p></div>
+<section class="reading" id="reading-d"><div class="rtitle"><span class="rlabel">Reading D</span><span class="rname">Trenton (1776)</span></div><p>On a “fearfully cold and raw” Christmas night in 1776, Washington secretly led some 2,400 men—including ten men of African descent—packed into forty-foot-long boats and maintaining a “profound silence,” across the ice-clogged Delaware River into New Jersey. Near sunrise at Trenton, the Americans surprised 1,500 sleeping Hessians. The Battle of Trenton . . . was a total rout. . . . The victories at Princeton and Trenton saved the cause of independence and shifted the war’s momentum.</p><p class="help"><b>Word help:</b> profound = deep · rout = a total defeat · momentum = the force that keeps something moving forward</p><p class="cite">Norton, <i>America: The Essential Learning Edition</i>, Ch. 5, “Mobilizing for War” (A Desperate Gamble).</p></section>
+<section class="reading" id="reading-e"><div class="rtitle"><span class="rlabel">Reading E</span><span class="rname">Saratoga and the French Alliance (1777–1778)</span></div><p>On October 17, 1777, Burgoyne surrendered, turning over 5,800 troops, 7,000 muskets, and 42 cannons. . . . The surprising victory at Saratoga was a strategic turning point for the new nation because it enabled a Treaty of Alliance with France, which was hungry for revenge after losing four wars to the British in the previous eighty years.</p><p class="help"><b>Word help:</b> Burgoyne = the British general who led an army from Canada · surrendered = gave up · strategic = important for winning · alliance = partnership</p><p class="cite">Norton, <i>America: The Essential Learning Edition</i>, Ch. 5, “Setbacks for the British (1777–1781)” (The Campaign of 1777; The Crucial Alliance with France).</p></section>
+<section class="reading" id="reading-f"><div class="rtitle"><span class="rlabel">Reading F</span><span class="rname">Valley Forge (1777–1778)</span></div><p>For the American army at Valley Forge, near Philadelphia, the winter of 1777–1778 was a time of intense suffering. . . . They were hungry, and their 900 log-and-mud huts offered little protection from the icy winds. . . . More than 2,500 soldiers died at Valley Forge, another 1,000 deserted . . . For that he turned to an energetic Prussian soldier of fortune, Friedrich Wilhelm, Baron von Steuben, who taught the Americans how to march, shoot, and attack in formation, and educated them on basic hygiene.</p><p class="help"><b>Word help:</b> intense = very strong · deserted = ran away from the army · Prussian = from Prussia, a German state · formation = an organized group shape · hygiene = keeping clean to stay healthy</p><p class="cite">Norton, <i>America: The Essential Learning Edition</i>, Ch. 5, “Setbacks for the British (1777–1781)” (Valley Forge and Stalemate).</p></section>
+<section class="reading" id="reading-g"><div class="rtitle"><span class="rlabel">Reading G</span><span class="rname">Spain Helps, and Yorktown (1781)</span></div><p>In 1779, Spain, like France, had forged an alliance with the United States. . . . Bernardo de Gálvez, a Spanish army general who was the new governor of the Spanish-controlled Louisiana Territory, provided weapons and supplies to the American Revolutionaries. He then organized a multicultural force of Spanish soldiers, including Creole militiamen, Indigenous Americans, free Blacks, American volunteers—and a Venezuelan revolutionary named Francisco de Miranda, who opposed the British and supported independence in the Spanish American colonies.</p><p>The climactic Battle of Yorktown . . . began on September 28, 1781. The American and French troops closed off Cornwallis’s last escape route and began bombarding the British with cannons. Cornwallis held out for three weeks, but on October 17, 1781—the anniversary of the American victory at Saratoga—he surrendered.</p><p class="help"><b>Word help:</b> forged = made · multicultural = made of many cultures · Creole = born in the Americas to Spanish or French families · climactic = the most important, final · Cornwallis = the British general in the South · bombarding = attacking with many shots</p><p class="cite">Norton, <i>America: The Essential Learning Edition</i>, Ch. 5, “Setbacks for the British (1777–1781)” (The Spanish Alliance; Yorktown and the Final Campaigns).</p></section>
+<section class="reading" id="reading-h"><div class="rtitle"><span class="rlabel">Reading H</span><span class="rname">The Treaty of Paris (1783)</span></div><p>Those negotiations took almost six months. On September 3, 1783, the warring nations signed the Treaty of Paris. Its provisions were surprisingly favorable to the United States. Great Britain recognized the independence of the thirteen former colonies and agreed that the Mississippi River was America’s western boundary, making the new United States larger in size than any European nation . . . Indigenous Americans had no role in the peace negotiations, and they were by far the biggest losers, as the English gave the Americans something that was not theirs to give: vast parcels of ancestral Indigenous lands. Florida, as it turned out, passed back to Spain.</p><p class="help"><b>Word help:</b> negotiations = talks to reach an agreement · provisions = the rules in a treaty · favorable = good for · recognized = officially accepted · ancestral = handed down from long-ago family</p><p class="cite">Norton, <i>America: The Essential Learning Edition</i>, Ch. 5, “Setbacks for the British (1777–1781)” (The Treaty of Paris (1783)).</p></section>
+<p class="tintro"><b>Turning points</b> | Use Readings D–H. Tell how each event changed the war.</p><div class="tbl"><div class="thead">How did it change the war?</div><div class="trow"><div class="tl"><b>Battle of Trenton (1776)</b><div class="qp">Reading D</div></div><div class="tr"><textarea id="q9" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div><div class="trow"><div class="tl"><b>Battles of Saratoga (1777)</b><div class="qp">Reading E</div></div><div class="tr"><textarea id="q10" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div><div class="trow"><div class="tl"><b>Valley Forge (1777–1778)</b><div class="qp">Reading F</div></div><div class="tr"><textarea id="q11" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div><div class="trow"><div class="tl"><b>Battle of Yorktown (1781)</b><div class="qp">Reading G</div></div><div class="tr"><textarea id="q12" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div><div class="trow"><div class="tl"><b>Treaty of Paris (1783)</b><div class="qp">Reading H</div></div><div class="tr"><textarea id="q13" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div></div>
+<div class="ask"><p><b>Who lost?</b> Reading H says one group was “by far the biggest losers” of the Treaty of Paris. Who were they, and why?</p><textarea id="q14" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div>
+<nav class="pager" aria-label="Page navigation"><a class="prev" href="#part-2"><small>&larr; Previous</small>Part 2 · Fighting the War</a><a class="next" href="#part-4"><small>Next &rarr;</small>Part 4 · An Engine of Change</a></nav>
+</section>
+<section class="page" id="part-4" aria-label="Part 4">
+<header class="parthead"><div class="pkicker">Part 4 <span>of 6</span></div><h2 class="part">An Engine of Change</h2></header>
+<div class="obj"><div class="eyebrow">CORE OBJECTIVE</div><p><b>Core Objective 4:</b> Examine how the Revolutionary War was an “engine” for political and social change.</p><p class="im"><b>IN MY WORDS:</b> An engine makes things move. What did the war make change?</p></div>
+<section class="reading" id="reading-i"><div class="rtitle"><span class="rlabel">Reading I</span><span class="rname">An Engine of Change</span></div><p>Like all major wars, the American fight for independence had unexpected effects on political, economic, and social life. It upset traditional social relationships and affected the lives of people who had long been discriminated against—African Americans, women, and Indigenous Americans. . . . In important ways, then, the Revolution was an engine for political experimentation and social change</p><p>American Revolutionaries embraced a republican ideology instead of the aristocratic or monarchical outlook that had long dominated Europe. . . . The United States, however, was technically a representative democracy, in which property-holding White men governed themselves through the concept of republicanism—they elected representatives, or legislators, to make decisions on their behalf.</p><p class="help"><b>Word help:</b> experimentation = trying new things · ideology = a set of ideas · aristocratic = ruled by nobles · monarchical = ruled by a king or queen · representatives = people elected to speak for others</p><p class="cite">Norton, <i>America: The Essential Learning Edition</i>, Ch. 5, “War as an Engine of Change” (Republican Ideology).</p></section>
+<section class="reading" id="reading-j"><div class="rtitle"><span class="rlabel">Reading J</span><span class="rname">State Constitutions and Voting</span></div><p>The war for independence thus sparked the crafting of state constitutions to support the new governments, all of which were designed to reflect the principles of the republican ideology and protect the rights of the people. . . . Most of the constitutions also included a bill of rights that protected freedom of speech, trial by jury, and freedom from self-incrimination, while limiting the powers of governors and strengthening the powers of the legislatures.</p><p>The new state governments enabled more citizens to participate in self-governance than ever before. Property qualifications for voting, which already allowed an overwhelming majority of White men to vote, were lowered after 1776. . . . As broader voting rights led to a more representative group of government officials, farmers, tradesmen, and shopkeepers were elected to state legislatures.</p><p class="help"><b>Word help:</b> sparked = started · constitutions = written plans of government · self-incrimination = being forced to speak against yourself in court · legislatures = groups that make laws · property qualifications = rules that you must own land to vote</p><p class="cite">Norton, <i>America: The Essential Learning Edition</i>, Ch. 5, “War as an Engine of Change” (Republican Ideology; Expansion of Political Participation).</p></section>
+<section class="reading" id="reading-k"><div class="rtitle"><span class="rlabel">Reading K</span><span class="rname">The Articles of Confederation</span></div><p>Once the colonies had declared their independence in 1776, the new thirteen states needed some form of national government. . . . But it took five years for the squabbling states to ratify the Articles of Confederation (March 1781) . . . The Articles reflected the long-standing fears of monarchy by not allowing for a president or chief executive. The Confederation government also had no national courts and no power to enforce its resolutions and ordinances. The Congress had full power over foreign affairs and disputes between the states; but it could not levy taxes . . . The states were in no mood to create a strong central government.</p><p class="help"><b>Word help:</b> squabbling = arguing · ratify = officially approve · chief executive = a leader like a president · enforce = make people obey · levy taxes = collect taxes</p><p class="cite">Norton, <i>America: The Essential Learning Edition</i>, Ch. 5, “War as an Engine of Change” (The Articles of Confederation).</p></section>
+<section class="reading" id="reading-l"><div class="rtitle"><span class="rlabel">Reading L</span><span class="rname">Freedom of Religion</span></div><p>Before the Revolution, Americans tolerated religious dissent; after the Revolution, they insisted on complete freedom of religion as embodied in the principle of separation of church and state. . . . Ten years later, the Virginia Statute of Religious Freedom (written by Thomas Jefferson) declared that “no man shall be compelled to frequent or support any religious worship, place or ministry whatsoever” and “that all men shall be free to profess, and by argument to maintain, their opinions in matters of religion.”</p><p class="help"><b>Word help:</b> tolerated = put up with · dissent = disagreement · compelled = forced · frequent = go to often · profess = say openly what you believe</p><p class="cite">Norton, <i>America: The Essential Learning Edition</i>, Ch. 5, “War as an Engine of Change” (Freedom of Religion).</p></section>
+<p class="tintro"><b>What changed?</b> | Use Readings I–L. Short phrases are fine.</p><div class="tbl"><div class="thead">What it did or changed</div><div class="trow"><div class="tl"><b>Republican ideology</b><div class="qp">Reading I</div></div><div class="tr"><textarea id="q15" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div><div class="trow"><div class="tl"><b>State constitutions</b><div class="qp">Reading J</div></div><div class="tr"><textarea id="q16" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div><div class="trow"><div class="tl"><b>Voting rules</b><div class="qp">Reading J</div></div><div class="tr"><textarea id="q17" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div><div class="trow"><div class="tl"><b>Articles of Confederation</b><div class="qp">Reading K</div></div><div class="tr"><textarea id="q18" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div><div class="trow"><div class="tl"><b>Virginia Statute of Religious Freedom (1786)</b><div class="qp">Reading L</div></div><div class="tr"><textarea id="q19" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div></div>
+<div class="ask"><p><b>Think about it.</b> Reading K says the states were “in no mood to create a strong central government.” Why would people who just fought a king fear a strong government?</p><textarea id="q20" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div>
+<nav class="pager" aria-label="Page navigation"><a class="prev" href="#part-3"><small>&larr; Previous</small>Part 3 · Turning Points</a><a class="next" href="#part-5"><small>Next &rarr;</small>Part 5 · Equality and Its Limits</a></nav>
+</section>
+<section class="page" id="part-5" aria-label="Part 5">
+<header class="parthead"><div class="pkicker">Part 5 <span>of 6</span></div><h2 class="part">Equality and Its Limits</h2></header>
+<div class="obj"><div class="eyebrow">CORE OBJECTIVE</div><p><b>Core Objective 5:</b> Compare the impact of the Revolutionary War on people of African descent, women, people of Hispanic descent, and Indigenous Americans.</p><p class="im"><b>IN MY WORDS:</b> Did the Revolution bring freedom to every group? Name one group it did not free.</p></div>
+<section class="reading" id="reading-m"><div class="rtitle"><span class="rlabel">Reading M</span><span class="rname">The Paradox of Slavery</span></div><p>The sharpest irony of the American Revolution was that Great Britain offered enslaved people more opportunities for freedom than did the United States. In November 1775, the royal governor of Virginia, John Murray (Lord Dunmore), himself the owner of fifty-seven enslaved people, announced that all enslaved people and indentured servants would gain their freedom if they joined “Her Majesty’s troops.”</p><p>About 5,000 African Americans fought on the Patriot side, while the British and their allies had 15,000 to 20,000 people of African descent. . . . In the North, which had far fewer enslaved people than the South, the ideals of liberty and freedom led most states to legally abolish slavery, either during the war or shortly afterward . . . But those same ideals had little impact in the southern states.</p><p class="help"><b>Word help:</b> irony = the opposite of what you expect · royal governor = the king’s leader of a colony · indentured servants = workers bound to work for years · abolish = end by law</p><p class="cite">Norton, <i>America: The Essential Learning Edition</i>, Ch. 5, “Equality and Its Limits” (The Paradox of Slavery; Southern Backlash).</p></section>
+<section class="reading" id="reading-n"><div class="rtitle"><span class="rlabel">Reading N</span><span class="rname">The Status of Women</span></div><p>The legal status of women was governed by British common law, which essentially limited their roles to child-rearing and maintaining the household. Women could not vote or hold office, and few had access to formal education.</p><p>Yet the Revolution allowed all women, free and enslaved, opportunities to broaden their social roles and to support the armies in various ways. They handled supplies, served as messengers or spies, and worked as “camp followers” who supported soldiers in exchange for daily rations. . . . They responded to wartime needs by managing farms; publishing newspapers; and serving as soldiers, sometimes as spies.</p><p class="help"><b>Word help:</b> legal status = rights under the law · common law = old laws based on court decisions · broaden = make wider · rations = daily food for soldiers</p><p class="cite">Norton, <i>America: The Essential Learning Edition</i>, Ch. 5, “Equality and Its Limits” (The Status of Women).</p></section>
+<section class="reading" id="reading-o"><div class="rtitle"><span class="rlabel">Reading O</span><span class="rname">Indigenous Americans Are Besieged</span></div><p>Most Indigenous people sought to remain neutral in the war, but both British and American agents urged Indigenous peoples to fight on their side. . . . During and after the war, the new U.S. government assured its Indigenous allies that it would respect their lands and their rights. But many White Americans used the disruptions of war to destroy and displace Indigenous people. Once the war ended and independence was secured, there was no peace for the Indigenous people and their lands were given away by the Treaty of Paris.</p><p class="help"><b>Word help:</b> besieged = surrounded and attacked · neutral = not taking a side · assured = promised · disruptions = disorder, confusion · displace = force out of their homes</p><p class="cite">Norton, <i>America: The Essential Learning Edition</i>, Ch. 5, “Equality and Its Limits” (Indigenous Americans Are Besieged).</p></section>
+<p class="tintro"><b>Compare the groups</b> | Use Readings G, M, N, and O. Short phrases are fine.</p><div class="tbl"><div class="thead">Four groups in the Revolution</div><div class="trow"><div class="tl"><b>People of African descent</b><div class="qp">Reading M</div></div><div class="tr"><div class="sub"><b>How did they take part in the war?</b></div><textarea id="q21" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea><div class="sub"><b>Did the Revolution bring them more freedom?</b></div><textarea id="q22" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div><div class="trow"><div class="tl"><b>Women</b><div class="qp">Reading N</div></div><div class="tr"><div class="sub"><b>How did they take part in the war?</b></div><textarea id="q23" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea><div class="sub"><b>Did the Revolution bring them more freedom?</b></div><textarea id="q24" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div><div class="trow"><div class="tl"><b>People of Hispanic descent</b><div class="qp">Reading G</div></div><div class="tr"><div class="sub"><b>How did they take part in the war?</b></div><textarea id="q25" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea><div class="sub"><b>Did the Revolution bring them more freedom?</b></div><textarea id="q26" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div><div class="trow"><div class="tl"><b>Indigenous Americans</b><div class="qp">Readings H and O</div></div><div class="tr"><div class="sub"><b>How did they take part in the war?</b></div><textarea id="q27" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea><div class="sub"><b>Did the Revolution bring them more freedom?</b></div><textarea id="q28" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div></div>
+<div class="ask"><p><b>Compare.</b> Which group do you think the Revolution helped the <b>least</b>? Use one fact from the readings.</p><textarea id="q29" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div>
+<p class="tintro"><b>Lesson Check</b> | Cause and effect. Use the readings in this assignment. Write the effect (what it led to).</p><div class="tbl"><div class="thead">Effect: what did it lead to?</div><div class="trow"><div class="tl"><b>Washington’s surprise attack at Trenton</b><div class="qp">Reading D</div></div><div class="tr"><textarea id="q30" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div><div class="trow"><div class="tl"><b>The American victory at Saratoga</b><div class="qp">Reading E</div></div><div class="tr"><textarea id="q31" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div><div class="trow"><div class="tl"><b>The Treaty of Paris (1783)</b><div class="qp">Reading H</div></div><div class="tr"><textarea id="q32" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div><div class="trow"><div class="tl"><b>Fear of a strong central government</b><div class="qp">Reading K</div></div><div class="tr"><textarea id="q33" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div><div class="trow"><div class="tl"><b>The ideals of liberty in the North</b><div class="qp">Reading M</div></div><div class="tr"><textarea id="q34" data-q="1" rows="3" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div></div>
+<nav class="pager" aria-label="Page navigation"><a class="prev" href="#part-4"><small>&larr; Previous</small>Part 4 · An Engine of Change</a><a class="next" href="#part-6"><small>Next &rarr;</small>Part 6 · CER: Freedom for Whom?</a></nav>
+</section>
+<section class="page" id="part-6" aria-label="Part 6">
+<header class="parthead"><div class="pkicker">Part 6 <span>of 6</span></div><h2 class="part">CER: Freedom for Whom?</h2></header>
+<div class="bigq"><div class="eyebrow">BIG QUESTION</div><p>Was the American Revolution a war for everyone’s freedom—or mostly a war for some people’s freedom?</p><p class="how">Use the readings and Source 1 in this assignment. Give <b>two pieces of evidence</b>. In the Counter-Argument box, explain what someone on the other side would say, and answer it.</p></div>
+<div class="cer"><div class="cl"><b>Claim</b><span>Answer the question in one sentence.</span></div><div class="cr"><textarea id="cer_claim" data-q="1" rows="4" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div>
+<div class="cer"><div class="cl"><b>Evidence</b><span>Two specific facts (dates, events, numbers).</span></div><div class="cr"><textarea id="cer_evidence" data-q="1" rows="4" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div>
+<div class="cer"><div class="cl"><b>Reasoning</b><span>How do the facts prove your claim?</span></div><div class="cr"><textarea id="cer_reasoning" data-q="1" rows="4" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div>
+<div class="cer"><div class="cl"><b>Counter-Argument</b><span>What would the other side say? Answer it.</span></div><div class="cr"><textarea id="cer_counter" data-q="1" rows="4" placeholder="Type your answer here…" aria-label="answer"></textarea></div></div>
+<div class="checks"><b>Check your CER:</b> <label class="chk"><input type="checkbox" data-c="1" id="ck0"> My claim answers the question.</label><label class="chk"><input type="checkbox" data-c="1" id="ck1"> I used two facts.</label><label class="chk"><input type="checkbox" data-c="1" id="ck2"> My reasoning explains how the facts prove my claim.</label><label class="chk"><input type="checkbox" data-c="1" id="ck3"> I answered the Counter-Argument.</label></div>
+<div class="finish" id="actions">
+  <div class="status" id="status"></div>
+  <div class="btns">
+    <button class="btn" id="saveBtn">Save Progress</button>
+    <button class="btn" id="loadBtn">Load Progress</button>
+    <input type="file" id="loadFile" accept=".json,application/json" hidden>
+    <button class="btn primary" id="finishBtn" disabled>Finished — Download File to Submit</button>
+  </div>
+  <div class="msg" id="msg"></div>
+  <button class="link" id="reset">Clear all my answers</button>
+</div>
+
+<nav class="pager" aria-label="Page navigation"><a class="prev" href="#part-5"><small>&larr; Previous</small>Part 5 · Equality and Its Limits</a></nav>
+</section>
+<footer><span>UNIT 1 · COLONIES, REVOLUTION, AND CONSTITUTION | CPUSH</span><span>DANIEL GARZA, M.A.</span></footer>
+</div>
+</div>
+
+<script type="application/json" id="ir-i18n">{"langs":["en","es","ar"],"default":"en","es":{"6099a637":"Parte 1","6199a7ca":"Parte 2","6299a95d":"Parte 3","5b999e58":"Parte 4","5c999feb":"Parte 5","e8320d28":"Imprimir","101020a6":"NOMBRE *","4cc2989e":"APELLIDO *","bc855c72":"PERÍODO *","cc2eccb1":"FECHA (se llena cuando terminas)","dd4901df":"PREGUNTA CENTRAL","b5f95d39":"<b>Cómo trabajar:<\/b> Lee cada recuadro de LECTURA y luego responde justo debajo. En las tablas bastan frases cortas; usa oraciones completas en las preguntas sobre las fuentes. La última sección es un CER sobre la pregunta central. Tu trabajo se guarda en este dispositivo mientras escribes. Usa <b>Guardar progreso<\/b> al final para descargar una copia de respaldo, y <b>Cargar progreso<\/b> para continuar más tarde. Escribe tu nombre, apellido y período; la fecha se llena sola cuando terminas. El botón <b>Terminé<\/b> se activa solo cuando completas todas las casillas, los tres campos obligatorios y la lista de control del CER.","268a97ab":"<b>Cómo trabajar:<\/b> Lee cada recuadro de lectura corta y luego responde justo debajo. En las tablas bastan frases cortas; usa oraciones completas en las preguntas sobre las fuentes. La última sección es un CER sobre la pregunta central. Tu trabajo se guarda en este dispositivo mientras escribes. Usa <b>Guardar progreso<\/b> al final para descargar una copia de respaldo, y <b>Cargar progreso<\/b> para continuar más tarde. Escribe tu nombre, apellido y período; la fecha se llena sola cuando terminas. El botón <b>Terminé<\/b> se activa solo cuando completas todas las casillas, los tres campos obligatorios y la lista de control del CER.","eff95e40":"Parte 1 <span>de 3<\/span>","8aa8ca01":"Parte 2 <span>de 3<\/span>","dcac4ea6":"Parte 3 <span>de 3<\/span>","74556c5e":"Parte 1 <span>de 5<\/span>","0ad7edaf":"Parte 2 <span>de 5<\/span>","20be02a8":"Parte 3 <span>de 5<\/span>","d4a17249":"Parte 4 <span>de 5<\/span>","d58474f2":"Parte 5 <span>de 5<\/span>","7bcc5d2d":"OBJETIVO PRINCIPAL","60b72d5a":"OBJETIVOS PRINCIPALES","03f0ef60":"Lectura A","06f0f419":"Lectura B","05f0f286":"Lectura C","08f0f73f":"Lectura D","07f0f5ac":"Lectura E","0af0fa65":"Lectura F","09f0f8d2":"Lectura G","0cf0fd8b":"Lectura H","0bf0fbf8":"Lectura I","0ef100b1":"Lectura J","c0ba89eb":"Fuente A","c1ba8b7e":"Fuente B","c2ba8d11":"Fuente C","c24f2ac7":"Mapa","2eed21e6":"Imagen","5bb56f2d":"Fotografía","fce42ac6":"Religión","0ee9a1b8":"Raza","00362020":"Resistencia","9b9784e5":"Límites","7ef89ad4":"Usa las lecturas y fuentes de esta tarea. Da dos pruebas (evidencias). En el recuadro de Contraargumento, explica qué diría alguien del otro lado y respóndele.","6b7f8865":"Usa las lecturas y fuentes de esta tarea. Da dos pruebas (evidencias) de lecturas o fuentes diferentes. En el recuadro de Contraargumento, explica qué diría alguien del otro lado y respóndele.","880d0ccb":"Usa las lecturas y fuentes de esta tarea. Da dos pruebas (evidencias) de las lecturas o fuentes. En el recuadro de Contraargumento, explica qué diría alguien del otro lado y respóndele.","62e0020f":"Afirmación","bf305ffe":"Responde la pregunta en una oración.","f800be44":"Evidencia","e328b529":"Dos datos específicos (fechas, sucesos, números).","e09311b9":"Dos datos específicos de lecturas o fuentes diferentes.","8e2e13e7":"Razonamiento","82e588cc":"¿Cómo prueban los datos tu afirmación?","76d14ba5":"Contraargumento","542842d1":"¿Qué diría el otro lado? Respóndele.","3a097e52":"Revisa tu CER:","21538345":"Mi afirmación responde la pregunta.","aeca2e1a":"Usé dos datos.","fa57ff71":"Mi razonamiento explica cómo los datos prueban mi afirmación.","c419df4e":"Respondí al contraargumento.","087b2bab":"Guardar progreso","284cef34":"Cargar progreso","ccb9431e":"Terminé — Descargar el archivo para entregar","3caa8e96":"Borrar todas mis respuestas","90501fcb":"MEXICANOS · UNA HISTORIA DE LOS MEXICANOS EN ESTADOS UNIDOS | HISTORY B30B","7ec87955":"DANIEL GARZA, M.A.","cb46d1cd":"Secciones","c5994ff6":"p. ej., 3","616a6784":"Automática","87c5718e":"Escribe tu respuesta aquí…","848019df":"respuesta","dea0c208":"Navegación entre páginas","191546a4":"Hecho — ¿Qué pasó y por qué importó?","75192f4a":"Pregunta — Tu respuesta","1b0e0fe6":"Lado — Argumento principal","657f5f00":"Indicación — Tu respuesta","5d99a17e":"Parte 6","c369dfd4":"CER: ¿Libertad para quién?","c680c3b8":"<b>Cómo trabajar:<\/b> Lee cada cuadro de LECTURA y luego contesta justo debajo. En las tablas puedes usar frases cortas; usa oraciones completas en las preguntas sobre fuentes. La última Parte es un CER sobre la pregunta central. Tu trabajo se guarda en este dispositivo mientras escribes. Usa <b>Guardar progreso<\/b> al final de la última Parte para descargar un archivo de respaldo, y <b>Cargar progreso<\/b> para continuar después. Escribe tu nombre, tu apellido y tu periodo; la fecha se llena sola cuando terminas. El botón <b>Terminado<\/b> se activa solo cuando todos los cuadros, los tres campos obligatorios y la lista de revisión del CER están completos.","b48729b5":"Parte 1 <span>de 6<\/span>","77d6f8d4":"Parte 2 <span>de 6<\/span>","b0ba70bb":"Fuente 1","872e2b23":"Parte 3 <span>de 6<\/span>","7e2c1f92":"Parte 4 <span>de 6<\/span>","0df0ff1e":"Lectura K","10f103d7":"Lectura L","8334d529":"Parte 5 <span>de 6<\/span>","0ff10244":"Lectura M","12f106fd":"Lectura N","11f1056a":"Lectura O","6f2e6571":"Mujeres","200fd5cb":"<b>Repaso de la lección<\/b> | Causa y efecto. Usa las lecturas de esta tarea. Escribe el efecto (a qué llevó).","cd862086":"Efecto: ¿a qué llevó?","f13a5108":"Parte 6 <span>de 6<\/span>","1528f397":"UNIDAD 1 · COLONIAS, REVOLUCIÓN Y CONSTITUCIÓN | CPUSH","093922aa":"LECTURA INTERACTIVA 3","b36ff82e":"La Revolución estadounidense y sus ideas","e6a70ccc":"Una revolución y una guerra civil","24e89db4":"<b>Lectura A<\/b>Leales y patriotas","6bb0921e":"Luchar en la guerra","1e72e83d":"<b>Lectura B<\/b>El poder militar británico","30b0b1be":"<b>Lectura C<\/b>El Ejército Continental","b385e6e4":"<b>Fuente 1<\/b>“Estos son los tiempos que ponen a prueba el alma de los hombres” (Fuente primaria)","0208c7b5":"Momentos decisivos","4ef318d6":"<b>Lectura D<\/b>Trenton (1776)","fa621a07":"<b>Lectura E<\/b>Saratoga y la alianza con Francia (1777–1778)","6adae911":"<b>Lectura F<\/b>Valley Forge (1777–1778)","d9af2328":"<b>Lectura G<\/b>España ayuda, y Yorktown (1781)","7e20cc94":"<b>Lectura H<\/b>El Tratado de París (1783)","2c18244f":"Un motor de cambio","dafe75fd":"<b>Lectura I<\/b>Un motor de cambio","178ced91":"<b>Lectura J<\/b>Las constituciones estatales y el voto","19b4b35d":"<b>Lectura K<\/b>Los Artículos de la Confederación","900d25c6":"<b>Lectura L<\/b>Libertad de religión","79025136":"La igualdad y sus límites","9f082512":"<b>Lectura M<\/b>La paradoja de la esclavitud","d9dbbd48":"<b>Lectura N<\/b>La situación de las mujeres","a9446a81":"<b>Lectura O<\/b>Los indígenas americanos, bajo ataque","2f26beca":"1776–1786 | La Revolución estadounidense y sus ideas","6e0ecfb2":"¿Fue la Revolución estadounidense una guerra por la libertad de todos, o sobre todo una guerra por la libertad de algunas personas?","2633d307":"<b>Objetivo principal 1:<\/b> Describe de qué maneras la Revolución estadounidense también fue una guerra civil.","159099da":"<b>EN MIS PALABRAS:<\/b> ¿Cómo podía una guerra contra Gran Bretaña ser también una guerra de estadounidenses contra estadounidenses?","39bca23a":"Leales y patriotas","1c1c95c7":"La Revolución fue tanto una guerra civil que dividió profundamente a facciones estadounidenses amargamente opuestas (incluidos los pueblos indígenas aliados con ambos bandos) como una lucha contra Gran Bretaña. Separó a familias y amigos, pueblos y ciudades. . . . Los colonos se dividieron en tres grupos: (1) los patriotas, que formaron el Ejército Continental y lucharon en las milicias estatales; (2) los leales, o tories, que se pusieron del lado de Gran Bretaña; y (3) un grupo intermedio que trató de mantenerse neutral, pero que al final fue convencido por los patriotas.","51171cfa":"Los leales veían la Revolución como un acto de traición. Eran más numerosos en las ciudades portuarias y en las Carolinas, y venían de todos los grupos sociales. . . . Los patriotas apoyaron la guerra porque se dieron cuenta de que la única manera de proteger su libertad era separarse del control británico. También querían establecer una república estadounidense que los convirtiera de <i>súbditos<\/i> de un rey en <i>ciudadanos<\/i> con el poder de elegir su propio gobierno y buscar sus propios intereses.","a668d2c2":"<b>Ayuda con palabras:<\/b> milicias = grupos locales de ciudadanos-soldados · neutral = que no toma partido · que divide = que separa a la gente · facciones = grupos que no están de acuerdo · separó = rompió, dividió · traición = traicionar a tu país · república = un gobierno dirigido por líderes elegidos","79ec8fa9":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 5, “American Society at War” (Loyalists; Patriots).","5dab9814":"<b>Dos bandos<\/b> | Usa la Lectura A. Las frases cortas están bien.","499578af":"Leales","55bf039a":"¿Qué pensaban de la Revolución?","053897ea":"¿Quiénes eran o dónde vivían?","697077f9":"Patriotas","672629fa":"<small>Siguiente →<\/small>Parte 2 · Luchar en la guerra","d1ea4059":"<b>Objetivo principal 2:<\/b> Explica los desafíos que enfrentaron los líderes militares británicos y estadounidenses al pelear la Guerra de Independencia.","c0aefaad":"<b>EN MIS PALABRAS:<\/b> Nombra un problema que tuvo el ejército británico y un problema que tuvo el ejército estadounidense.","f95ee08a":"El poder militar británico","02e767b5":"El Imperio británico envió 35,000 soldados y la mitad de su enorme marina para aplastar la rebelión estadounidense. Los británicos también contrataron soldados extranjeros (mercenarios), como lo muestran los 30,000 soldados alemanes que sirvieron en los ejércitos británicos. La mayoría venía del estado alemán de Hesse-Cassel; por eso, los estadounidenses los llamaban hessianos. . . . Los costos cada vez mayores de la guerra —en vidas humanas y en deuda de guerra— desanimaron a los británicos. Otro problema de los británicos era que su gobierno en las colonias, bajo Lord Frederick North, no tenía una estrategia de guerra constante.","4086e43b":"<b>Ayuda con palabras:<\/b> aplastar = detener por la fuerza · mercenarios = soldados a los que se les paga para pelear por otro país · desanimaron = les quitaron la esperanza · constante = firme, siempre igual","f881c09b":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 5, “Mobilizing for War” (British Military Power).","4312c02a":"El Ejército Continental","75904ccf":"Antes de la guerra, los ciudadanos-soldados (milicianos) eran civiles a quienes se llamaba de sus granjas y tiendas cuando hacía falta. Sin embargo, durante la Revolución, los milicianos a veces no eran confiables y eran difíciles de controlar. . . . Washington sabía que los milicianos solos no podían ganar la guerra. Por eso convenció al Congreso Continental de crear un Ejército Continental con soldados de tiempo completo y bien entrenados. . . . Unas 5,000 personas de ascendencia africana, casi todas antes esclavizadas, también sirvieron.","f683b895":"Pagar la Revolución fue mucho más difícil para los estadounidenses que para Gran Bretaña. Como no tenía el poder de cobrar impuestos, el Congreso solo podía <i>pedir<\/i> a los estados que dieran dinero para el gobierno nacional. . . . Tanto los británicos como los estadounidenses reclutaron a indígenas para pelear. Pero los británicos tuvieron mucho más éxito, sobre todo porque tenían relaciones de mucho tiempo con los jefes y prometieron proteger las tierras ancestrales indígenas.","62b003cd":"<b>Ayuda con palabras:<\/b> civiles = personas que no son soldados · llamados = convocados · no confiables = en quienes no se podía confiar · financiar = pagar · imponer = obligar a la gente","b99c5415":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 5, “Mobilizing for War” (The Continental Army; Problems of Finance and Supply; Indigenous Americans and the Revolution).","14f10527":"“Estos son los tiempos que ponen a prueba el alma de los hombres” (Fuente primaria)","5f5e8450":"Para diciembre de 1776, a Washington solo le quedaban 3,000 soldados. Thomas Paine escribió <i>La crisis americana<\/i> para que los estadounidenses siguieran luchando.","08e66f51":"“Estos son los tiempos que ponen a prueba el alma de los hombres: el soldado de verano y el patriota de días soleados, en esta crisis, se alejarán del servicio a su país; pero el que resista AHORA merece el amor y el agradecimiento de hombres y mujeres. La tiranía, como el infierno, no se vence fácilmente. Pero tenemos este consuelo: cuanto más duro es el conflicto, más glorioso es el triunfo.”","43871614":"<b>Ayuda con palabras:<\/b> poner a prueba = examinar · soldado de verano = alguien que pelea solo cuando es fácil · alejarse de = retirarse de · tiranía = gobierno cruel · consuelo = alivio · triunfo = victoria","a99cbd72":"Thomas Paine, <i>The American Crisis<\/i>, diciembre de 1776. En Norton, cap. 5, “Mobilizing for War” (Thomas Paine: “The Times That Try Men’s Souls”).","e7d85d58":"<b>Fuente 1.<\/b> ¿Qué es un “soldado de verano”? ¿Qué quiere Paine que hagan los soldados en su lugar?","3dc8d211":"<b>Propósito.<\/b> ¿Por qué Washington ordenó que <i>La crisis americana<\/i> se leyera en voz alta a su ejército? Usa la línea de contexto.","40ec4878":"<b>Desafíos para ambos bandos<\/b> | Usa las Lecturas B y C. Las frases cortas están bien.","6cb846e6":"Un desafío","3f16be96":"Líderes británicos","8e52b0bd":"Líderes estadounidenses","464f397d":"<small>← Anterior<\/small>Parte 1 · Una revolución y una guerra civil","b65a0000":"<small>Siguiente →<\/small>Parte 3 · Momentos decisivos","179a1057":"<b>Objetivo principal 3:<\/b> Identifica los momentos decisivos clave de la Guerra de Independencia y explica cómo cambiaron la dirección de la guerra.","c52a4c7f":"<b>EN MIS PALABRAS:<\/b> ¿Qué es un momento decisivo en una guerra?","04f164c3":"Trenton (1776)","a9b4ec15":"En una noche de Navidad “terriblemente fría y cruda” de 1776, Washington llevó en secreto a unos 2,400 hombres —entre ellos diez hombres de ascendencia africana—, apretados en botes de cuarenta pies de largo y guardando un “profundo silencio”, a través del río Delaware lleno de hielo hasta Nueva Jersey. Cerca del amanecer en Trenton, los estadounidenses sorprendieron a 1,500 hessianos que dormían. La batalla de Trenton . . . fue una derrota total. . . . Las victorias en Princeton y Trenton salvaron la causa de la independencia y cambiaron el impulso de la guerra.","92c14695":"<b>Ayuda con palabras:<\/b> profundo = hondo · derrota total = cuando un ejército pierde por completo · impulso = la fuerza que hace que algo siga avanzando","d03dec16":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 5, “Mobilizing for War” (A Desperate Gamble).","4c11a7b1":"Saratoga y la alianza con Francia (1777–1778)","cc18e74d":"El 17 de octubre de 1777, Burgoyne se rindió y entregó 5,800 soldados, 7,000 mosquetes y 42 cañones. . . . La sorprendente victoria en Saratoga fue un momento decisivo estratégico para la nueva nación porque hizo posible un Tratado de Alianza con Francia, que tenía hambre de venganza después de perder cuatro guerras contra los británicos en los ochenta años anteriores.","436bad57":"<b>Ayuda con palabras:<\/b> Burgoyne = el general británico que dirigió un ejército desde Canadá · se rindió = dejó de pelear · estratégico = importante para ganar · alianza = asociación","a5c09bba":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 5, “Setbacks for the British (1777–1781)” (The Campaign of 1777; The Crucial Alliance with France).","eb224dd6":"Valley Forge (1777–1778)","3c41e637":"Para el ejército estadounidense en Valley Forge, cerca de Filadelfia, el invierno de 1777–1778 fue un tiempo de sufrimiento intenso. . . . Tenían hambre, y sus 900 cabañas de troncos y lodo los protegían poco de los vientos helados. . . . Más de 2,500 soldados murieron en Valley Forge, otros 1,000 desertaron . . . Para eso recurrió a un enérgico soldado prusiano, Friedrich Wilhelm, barón von Steuben, quien enseñó a los estadounidenses a marchar, disparar y atacar en formación, y les enseñó higiene básica.","8136b517":"<b>Ayuda con palabras:<\/b> intenso = muy fuerte · desertaron = huyeron del ejército · prusiano = de Prusia, un estado alemán · formación = un grupo organizado en filas · higiene = mantenerse limpio para estar sano","9c648aae":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 5, “Setbacks for the British (1777–1781)” (Valley Forge and Stalemate).","b8d16140":"España ayuda, y Yorktown (1781)","d50a3e07":"En 1779, España, como Francia, había formado una alianza con los Estados Unidos. . . . Bernardo de Gálvez, un general del ejército español que era el nuevo gobernador del Territorio de Luisiana, controlado por España, dio armas y provisiones a los revolucionarios estadounidenses. Luego organizó una fuerza multicultural de soldados españoles, que incluía milicianos criollos, indígenas americanos, negros libres, voluntarios estadounidenses y un revolucionario venezolano llamado Francisco de Miranda, que se oponía a los británicos y apoyaba la independencia de las colonias españolas en América.","f1ef22a8":"La batalla culminante de Yorktown . . . comenzó el 28 de septiembre de 1781. Las tropas estadounidenses y francesas cerraron la última ruta de escape de Cornwallis y empezaron a bombardear a los británicos con cañones. Cornwallis resistió tres semanas, pero el 17 de octubre de 1781 —el aniversario de la victoria estadounidense en Saratoga— se rindió.","2965ed34":"<b>Ayuda con palabras:<\/b> formado = hecho · multicultural = formado por muchas culturas · criollo = nacido en América en una familia española o francesa · culminante = la más importante, la final · Cornwallis = el general británico en el Sur · bombardear = atacar con muchos disparos","07db8142":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 5, “Setbacks for the British (1777–1781)” (The Spanish Alliance; Yorktown and the Final Campaigns).","f2b8d639":"El Tratado de París (1783)","cbbdb88b":"Esas negociaciones duraron casi seis meses. El 3 de septiembre de 1783, las naciones en guerra firmaron el Tratado de París. Sus condiciones fueron sorprendentemente favorables para los Estados Unidos. Gran Bretaña reconoció la independencia de las trece antiguas colonias y aceptó que el río Misisipi fuera la frontera oeste de Estados Unidos, lo que hizo que la nueva nación fuera más grande que cualquier país europeo . . . Los indígenas americanos no tuvieron ningún papel en las negociaciones de paz, y fueron, por mucho, los mayores perdedores, porque los ingleses les dieron a los estadounidenses algo que no era suyo para dar: enormes extensiones de tierras ancestrales indígenas. Florida, al final, volvió a manos de España.","2200c829":"<b>Ayuda con palabras:<\/b> negociaciones = pláticas para llegar a un acuerdo · condiciones = las reglas de un tratado · favorables = buenas para alguien · reconoció = aceptó oficialmente · ancestral = heredado de la familia de hace mucho tiempo","59ae2f43":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 5, “Setbacks for the British (1777–1781)” (The Treaty of Paris (1783)).","26838858":"<b>Momentos decisivos<\/b> | Usa las Lecturas D–H. Di cómo cada evento cambió la guerra.","c64b13ab":"¿Cómo cambió la guerra?","bbd0ac2e":"Batalla de Trenton (1776)","9944b588":"Batallas de Saratoga (1777)","28f3bc3f":"Batalla de Yorktown (1781)","dfb6596c":"Tratado de París (1783)","069a0034":"<b>¿Quién perdió?<\/b> La Lectura H dice que un grupo fue “por mucho, los mayores perdedores” del Tratado de París. ¿Quiénes fueron y por qué?","0c61da08":"<small>← Anterior<\/small>Parte 2 · Luchar en la guerra","41b09dd9":"<small>Siguiente →<\/small>Parte 4 · Un motor de cambio","b6d8fa2e":"<b>Objetivo principal 4:<\/b> Examina cómo la Guerra de Independencia fue un “motor” de cambio político y social.","b4fec7ff":"<b>EN MIS PALABRAS:<\/b> Un motor hace que las cosas se muevan. ¿Qué hizo cambiar la guerra?","bef8034a":"Como todas las grandes guerras, la lucha estadounidense por la independencia tuvo efectos inesperados en la vida política, económica y social. Alteró las relaciones sociales tradicionales y afectó la vida de personas que por mucho tiempo habían sufrido discriminación: los afroamericanos, las mujeres y los indígenas americanos. . . . De maneras importantes, entonces, la Revolución fue un motor de experimentación política y de cambio social","5336fb35":"Los revolucionarios estadounidenses adoptaron una ideología republicana en lugar de la visión aristocrática o monárquica que por mucho tiempo había dominado Europa. . . . Sin embargo, Estados Unidos era técnicamente una democracia representativa, en la que los hombres blancos dueños de propiedades se gobernaban a sí mismos mediante el concepto del republicanismo: elegían representantes, o legisladores, para que tomaran decisiones en su nombre.","5b926983":"<b>Ayuda con palabras:<\/b> experimentación = probar cosas nuevas · ideología = un conjunto de ideas · aristocrática = gobernada por nobles · monárquica = gobernada por un rey o una reina · representantes = personas elegidas para hablar por otros","d1f7e574":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 5, “War as an Engine of Change” (Republican Ideology).","e86621c6":"Las constituciones estatales y el voto","049b1522":"Así, la guerra de independencia impulsó la redacción de constituciones estatales para apoyar a los nuevos gobiernos, y todas fueron diseñadas para reflejar los principios de la ideología republicana y proteger los derechos del pueblo. . . . La mayoría de las constituciones también incluían una declaración de derechos que protegía la libertad de expresión, el juicio con jurado y el derecho a no declarar contra uno mismo, y a la vez limitaban los poderes de los gobernadores y fortalecían los poderes de las legislaturas.","153a511e":"Los nuevos gobiernos estatales permitieron que más ciudadanos que nunca participaran en el autogobierno. Los requisitos de propiedad para votar, que ya permitían votar a la gran mayoría de los hombres blancos, se redujeron después de 1776. . . . Como el derecho al voto más amplio produjo un grupo de funcionarios más representativo, se eligió a granjeros, artesanos y comerciantes para las legislaturas estatales.","ffe3abc5":"<b>Ayuda con palabras:<\/b> impulsó = comenzó · constituciones = planes de gobierno por escrito · declarar contra uno mismo = ser obligado a hablar en tu contra en un juicio · legislaturas = grupos que hacen las leyes · requisitos de propiedad = reglas de que debes tener tierras para votar","a53ea9f3":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 5, “War as an Engine of Change” (Republican Ideology; Expansion of Political Participation).","14b48b31":"Los Artículos de la Confederación","f485c39e":"Una vez que las colonias declararon su independencia en 1776, los nuevos trece estados necesitaban algún tipo de gobierno nacional. . . . Pero los estados, que discutían entre sí, tardaron cinco años en ratificar los Artículos de la Confederación (marzo de 1781) . . . Los Artículos reflejaban el viejo miedo a la monarquía, porque no permitían un presidente ni un jefe del ejecutivo. El gobierno de la Confederación tampoco tenía tribunales nacionales ni poder para hacer cumplir sus resoluciones y ordenanzas. El Congreso tenía pleno poder sobre los asuntos exteriores y las disputas entre los estados; pero no podía cobrar impuestos . . . Los estados no tenían ningún deseo de crear un gobierno central fuerte.","1615fa10":"<b>Ayuda con palabras:<\/b> que discutían = que peleaban con palabras · ratificar = aprobar oficialmente · jefe del ejecutivo = un líder como un presidente · hacer cumplir = obligar a la gente a obedecer · cobrar impuestos = recaudar impuestos","58b86ba7":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 5, “War as an Engine of Change” (The Articles of Confederation).","efe53aad":"Libertad de religión","0513dd75":"Antes de la Revolución, los estadounidenses toleraban la disidencia religiosa; después de la Revolución, exigieron libertad religiosa completa, expresada en el principio de la separación de la iglesia y el estado. . . . Diez años después, el Estatuto de Virginia para la Libertad Religiosa (escrito por Thomas Jefferson) declaró que “ningún hombre será obligado a asistir ni a apoyar ningún culto, lugar o ministerio religioso, sea cual sea” y “que todos los hombres serán libres de profesar, y de defender con argumentos, sus opiniones en asuntos de religión”.","7f6f01b2":"<b>Ayuda con palabras:<\/b> toleraban = aceptaban aunque no les gustara · disidencia = desacuerdo · obligado = forzado · asistir = ir con frecuencia · profesar = decir abiertamente lo que crees","d44d2c4f":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 5, “War as an Engine of Change” (Freedom of Religion).","bd90c029":"<b>¿Qué cambió?<\/b> | Usa las Lecturas I–L. Las frases cortas están bien.","caad57da":"Qué hizo o qué cambió","0e80e9da":"Ideología republicana","f4062732":"Constituciones estatales","f177e4bd":"Reglas para votar","6967c8c6":"Artículos de la Confederación","e2aed951":"Estatuto de Virginia para la Libertad Religiosa (1786)","e50bdf71":"<b>Piénsalo.<\/b> La Lectura K dice que los estados “no tenían ningún deseo de crear un gobierno central fuerte”. ¿Por qué temerían a un gobierno fuerte personas que acababan de pelear contra un rey?","69fca802":"<small>← Anterior<\/small>Parte 3 · Momentos decisivos","4305f5af":"<small>Siguiente →<\/small>Parte 5 · La igualdad y sus límites","7ffea607":"<b>Objetivo principal 5:<\/b> Compara el impacto de la Guerra de Independencia en las personas de ascendencia africana, las mujeres, las personas de ascendencia hispana y los indígenas americanos.","ca40bf6e":"<b>EN MIS PALABRAS:<\/b> ¿Trajo la Revolución libertad a todos los grupos? Nombra un grupo al que no liberó.","620bfa8c":"La paradoja de la esclavitud","4d978ff8":"La ironía más grande de la Revolución estadounidense fue que Gran Bretaña les ofreció a las personas esclavizadas más oportunidades de libertad que los Estados Unidos. En noviembre de 1775, el gobernador real de Virginia, John Murray (Lord Dunmore), que era dueño de cincuenta y siete personas esclavizadas, anunció que todas las personas esclavizadas y los sirvientes por contrato ganarían su libertad si se unían a “las tropas de Su Majestad”.","4b217c37":"Unos 5,000 afroamericanos pelearon del lado patriota, mientras que los británicos y sus aliados tenían de 15,000 a 20,000 personas de ascendencia africana. . . . En el Norte, que tenía muchas menos personas esclavizadas que el Sur, los ideales de libertad llevaron a la mayoría de los estados a abolir legalmente la esclavitud, durante la guerra o poco después . . . Pero esos mismos ideales tuvieron poco impacto en los estados del Sur.","83b7720c":"<b>Ayuda con palabras:<\/b> ironía = lo contrario de lo que esperas · gobernador real = el líder de una colonia nombrado por el rey · sirvientes por contrato = trabajadores obligados a trabajar por varios años · abolir = terminar por ley","7a06a9ad":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 5, “Equality and Its Limits” (The Paradox of Slavery; Southern Backlash).","de4ec5bd":"La situación de las mujeres","3816e9cf":"La situación legal de las mujeres se regía por el derecho común británico, que básicamente limitaba su papel a criar a los hijos y mantener el hogar. Las mujeres no podían votar ni ocupar cargos públicos, y pocas tenían acceso a una educación formal.","17f69fe7":"Sin embargo, la Revolución dio a todas las mujeres, libres y esclavizadas, oportunidades para ampliar sus papeles sociales y apoyar a los ejércitos de varias maneras. Se encargaban de las provisiones, servían como mensajeras o espías y trabajaban como “acompañantes del campamento” que ayudaban a los soldados a cambio de raciones diarias. . . . Respondieron a las necesidades de la guerra administrando granjas, publicando periódicos y sirviendo como soldados, a veces como espías.","e118c4cf":"<b>Ayuda con palabras:<\/b> situación legal = derechos según la ley · derecho común = leyes antiguas basadas en decisiones de los tribunales · ampliar = hacer más amplio · raciones = la comida diaria de los soldados","ab140f7a":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 5, “Equality and Its Limits” (The Status of Women).","a4a99801":"Los indígenas americanos, bajo ataque","c2cd0f5c":"La mayoría de los indígenas trataron de mantenerse neutrales en la guerra, pero agentes británicos y estadounidenses presionaron a los pueblos indígenas para que pelearan de su lado. . . . Durante y después de la guerra, el nuevo gobierno de Estados Unidos aseguró a sus aliados indígenas que respetaría sus tierras y sus derechos. Pero muchos estadounidenses blancos aprovecharon el desorden de la guerra para destruir y desplazar a los indígenas. Cuando terminó la guerra y se aseguró la independencia, no hubo paz para los indígenas, y sus tierras fueron entregadas en el Tratado de París.","e814f97e":"<b>Ayuda con palabras:<\/b> bajo ataque = rodeados y atacados · neutrales = que no toman partido · aseguró = prometió · desorden = confusión · desplazar = obligar a salir de sus hogares","ff25a526":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 5, “Equality and Its Limits” (Indigenous Americans Are Besieged).","18126cf2":"<b>Compara los grupos<\/b> | Usa las Lecturas G, M, N y O. Las frases cortas están bien.","d29e3040":"Cuatro grupos en la Revolución","2734d58d":"Personas de ascendencia africana","914677cd":"¿Cómo participaron en la guerra?","f89b185e":"¿Les trajo la Revolución más libertad?","1831fd44":"Personas de ascendencia hispana","a620e71d":"Indígenas americanos","3f52259c":"Lecturas H y O","7e5ae52e":"<b>Compara.<\/b> ¿A qué grupo crees que la Revolución ayudó <b>menos<\/b>? Usa un dato de las lecturas.","5a5dc735":"El ataque sorpresa de Washington en Trenton","cac20ecb":"La victoria estadounidense en Saratoga","5707fe1a":"El miedo a un gobierno central fuerte","11630a67":"Los ideales de libertad en el Norte","322a963b":"<small>← Anterior<\/small>Parte 4 · Un motor de cambio","923cfdd4":"<small>Siguiente →<\/small>Parte 6 · CER: ¿Libertad para quién?","b319854d":"Usa las lecturas y la Fuente 1 de esta tarea. Da <b>dos pruebas<\/b>. En el cuadro de Contraargumento, explica lo que diría alguien del otro lado y respóndele.","ea8b3f89":"<small>← Anterior<\/small>Parte 5 · La igualdad y sus límites","a73a8872":"Lectura interactiva 3 · La Revolución estadounidense y sus ideas"},"ar":{"6099a637":"الجزء 1","6199a7ca":"الجزء 2","6299a95d":"الجزء 3","5b999e58":"الجزء 4","5c999feb":"الجزء 5","e8320d28":"طباعة","101020a6":"الاسم الأول *","4cc2989e":"اسم العائلة *","bc855c72":"الحصة *","cc2eccb1":"التاريخ (يُكتب تلقائيًا عند الانتهاء)","dd4901df":"السؤال الكبير","b5f95d39":"<b>طريقة العمل:<\/b> اقرأ كل مربع قراءة، ثم أجب تحته مباشرة. العبارات القصيرة تكفي في الجداول؛ واكتب جملًا كاملة في أسئلة المصادر. القسم الأخير هو CER (الادعاء، الدليل، التعليل) عن السؤال الكبير. يُحفظ عملك على هذا الجهاز أثناء الكتابة. استخدم زر <b>حفظ التقدم<\/b> في الأسفل لتنزيل نسخة احتياطية، وزر <b>تحميل التقدم<\/b> لتكمل لاحقًا. اكتب اسمك الأول واسم العائلة والحصة؛ ويُكتب التاريخ تلقائيًا عند الانتهاء. لا يعمل زر <b>انتهيت<\/b> إلا بعد أن تجيب عن كل المربعات، وتملأ الحقول الثلاثة المطلوبة، وتُكمل قائمة التحقق الخاصة بـ CER.","268a97ab":"<b>طريقة العمل:<\/b> اقرأ كل مربع قراءة قصيرة، ثم أجب تحته مباشرة. العبارات القصيرة تكفي في الجداول؛ واكتب جملًا كاملة في أسئلة المصادر. القسم الأخير هو CER (الادعاء، الدليل، التعليل) عن السؤال الكبير. يُحفظ عملك على هذا الجهاز أثناء الكتابة. استخدم زر <b>حفظ التقدم<\/b> في الأسفل لتنزيل نسخة احتياطية، وزر <b>تحميل التقدم<\/b> لتكمل لاحقًا. اكتب اسمك الأول واسم العائلة والحصة؛ ويُكتب التاريخ تلقائيًا عند الانتهاء. لا يعمل زر <b>انتهيت<\/b> إلا بعد أن تجيب عن كل المربعات، وتملأ الحقول الثلاثة المطلوبة، وتُكمل قائمة التحقق الخاصة بـ CER.","eff95e40":"الجزء 1 <span>من 3<\/span>","8aa8ca01":"الجزء 2 <span>من 3<\/span>","dcac4ea6":"الجزء 3 <span>من 3<\/span>","74556c5e":"الجزء 1 <span>من 5<\/span>","0ad7edaf":"الجزء 2 <span>من 5<\/span>","20be02a8":"الجزء 3 <span>من 5<\/span>","d4a17249":"الجزء 4 <span>من 5<\/span>","d58474f2":"الجزء 5 <span>من 5<\/span>","7bcc5d2d":"الهدف الأساسي","60b72d5a":"الأهداف الأساسية","03f0ef60":"القراءة A","06f0f419":"القراءة B","05f0f286":"القراءة C","08f0f73f":"القراءة D","07f0f5ac":"القراءة E","0af0fa65":"القراءة F","09f0f8d2":"القراءة G","0cf0fd8b":"القراءة H","0bf0fbf8":"القراءة I","0ef100b1":"القراءة J","c0ba89eb":"المصدر A","c1ba8b7e":"المصدر B","c2ba8d11":"المصدر C","c24f2ac7":"خريطة","2eed21e6":"صورة","5bb56f2d":"صورة فوتوغرافية","fce42ac6":"الدين","0ee9a1b8":"العِرق","00362020":"المقاومة","9b9784e5":"الحدود والقيود","7ef89ad4":"استخدم القراءات والمصادر في هذه المهمة. قدّم دليلين. في مربع الحجة المضادة، اشرح ماذا سيقول شخص من الرأي الآخر، ثم ردّ عليه.","6b7f8865":"استخدم القراءات والمصادر في هذه المهمة. قدّم دليلين من قراءتين أو مصدرين مختلفين. في مربع الحجة المضادة، اشرح ماذا سيقول شخص من الرأي الآخر، ثم ردّ عليه.","880d0ccb":"استخدم القراءات والمصادر في هذه المهمة. قدّم دليلين من القراءات أو المصادر. في مربع الحجة المضادة، اشرح ماذا سيقول شخص من الرأي الآخر، ثم ردّ عليه.","62e0020f":"الادعاء","bf305ffe":"أجب عن السؤال في جملة واحدة.","f800be44":"الدليل","e328b529":"معلومتان محددتان (تواريخ، أحداث، أرقام).","e09311b9":"معلومتان محددتان من قراءتين أو مصدرين مختلفين.","8e2e13e7":"التعليل","82e588cc":"كيف تُثبت هذه المعلومات ادعاءك؟","76d14ba5":"الحجة المضادة","542842d1":"ماذا سيقول الرأي الآخر؟ ردّ عليه.","3a097e52":"راجع الـ CER الخاص بك:","21538345":"ادعائي يجيب عن السؤال.","aeca2e1a":"استخدمت معلومتين.","fa57ff71":"تعليلي يشرح كيف تُثبت المعلومات ادعائي.","c419df4e":"رددت على الحجة المضادة.","087b2bab":"حفظ التقدم","284cef34":"تحميل التقدم","ccb9431e":"انتهيت — نزّل الملف لتسليمه","3caa8e96":"امسح كل إجاباتي","90501fcb":"MEXICANOS · تاريخ المكسيكيين في الولايات المتحدة | HISTORY B30B","7ec87955":"DANIEL GARZA, M.A.","cb46d1cd":"الأقسام","c5994ff6":"مثال: 3","616a6784":"تلقائي","87c5718e":"اكتب إجابتك هنا…","848019df":"إجابة","dea0c208":"التنقل بين الصفحات","191546a4":"التطور — ماذا حدث، ولماذا كان مهمًا؟","75192f4a":"السؤال — إجابتك","1b0e0fe6":"الطرف — الحجة الرئيسية","657f5f00":"المطلوب — إجابتك","5d99a17e":"الجزء 6","c369dfd4":"CER (الادعاء، الدليل، التعليل): الحرية لمن؟","c680c3b8":"<b>طريقة العمل:<\/b> اقرأ كل مربع قراءة، ثم أجب تحته مباشرة. العبارات القصيرة مقبولة في الجداول؛ استخدم جملًا كاملة في أسئلة المصادر. الجزء الأخير هو CER عن السؤال الكبير. يُحفظ عملك على هذا الجهاز أثناء الكتابة. استخدم <b>حفظ التقدم<\/b> في أسفل الجزء الأخير لتنزيل ملف احتياطي، و<b>تحميل التقدم<\/b> لتكمل لاحقًا. اكتب اسمك الأول واسم العائلة والحصة؛ يُكتب التاريخ تلقائيًا عندما تنتهي. لا يعمل زر <b>انتهيت<\/b> إلا بعد إكمال كل المربعات والحقول الثلاثة المطلوبة وقائمة مراجعة CER.","b48729b5":"الجزء 1 <span>من 6<\/span>","77d6f8d4":"الجزء 2 <span>من 6<\/span>","b0ba70bb":"المصدر 1","872e2b23":"الجزء 3 <span>من 6<\/span>","7e2c1f92":"الجزء 4 <span>من 6<\/span>","0df0ff1e":"القراءة K","10f103d7":"القراءة L","8334d529":"الجزء 5 <span>من 6<\/span>","0ff10244":"القراءة M","12f106fd":"القراءة N","11f1056a":"القراءة O","6f2e6571":"النساء","200fd5cb":"<b>مراجعة الدرس<\/b> | السبب والنتيجة. استخدم القراءات في هذا الواجب. اكتب النتيجة (إلى ماذا أدّى).","cd862086":"النتيجة: إلى ماذا أدّى؟","f13a5108":"الجزء 6 <span>من 6<\/span>","1528f397":"الوحدة 1 · المستعمرات والثورة والدستور | CPUSH","093922aa":"القراءة التفاعلية 3","b36ff82e":"الثورة الأمريكية وأفكارها","e6a70ccc":"ثورة وحرب أهلية","24e89db4":"<b>القراءة A<\/b>الموالون والوطنيون","6bb0921e":"خوض الحرب","1e72e83d":"<b>القراءة B<\/b>القوة العسكرية البريطانية","30b0b1be":"<b>القراءة C<\/b>الجيش القاري","b385e6e4":"<b>المصدر 1<\/b>«هذه هي الأوقات التي تختبر أرواح الرجال» (مصدر أولي)","0208c7b5":"نقاط التحول","4ef318d6":"<b>القراءة D<\/b>ترينتون (<bdi>Trenton<\/bdi>) (1776)","fa621a07":"<b>القراءة E<\/b>ساراتوغا (<bdi>Saratoga<\/bdi>) والتحالف مع فرنسا (1777–1778)","6adae911":"<b>القراءة F<\/b>فالي فورج (<bdi>Valley Forge<\/bdi>) (1777–1778)","d9af2328":"<b>القراءة G<\/b>إسبانيا تساعد، ويوركتاون (<bdi>Yorktown<\/bdi>) (1781)","7e20cc94":"<b>القراءة H<\/b>معاهدة باريس (<bdi>Treaty of Paris<\/bdi>) (1783)","2c18244f":"محرّك للتغيير","dafe75fd":"<b>القراءة I<\/b>محرّك للتغيير","178ced91":"<b>القراءة J<\/b>دساتير الولايات والتصويت","19b4b35d":"<b>القراءة K<\/b>مواد الكونفدرالية (<bdi>Articles of Confederation<\/bdi>)","900d25c6":"<b>القراءة L<\/b>حرية الدين","79025136":"المساواة وحدودها","9f082512":"<b>القراءة M<\/b>مفارقة العبودية","d9dbbd48":"<b>القراءة N<\/b>وضع النساء","a9446a81":"<b>القراءة O<\/b>السكان الأصليون الأمريكيون تحت الحصار","2f26beca":"1776–1786 | الثورة الأمريكية وأفكارها","6e0ecfb2":"هل كانت الثورة الأمريكية حربًا من أجل حرية الجميع، أم كانت في الغالب حربًا من أجل حرية بعض الناس؟","2633d307":"<b>الهدف الأساسي 1:<\/b> صِف الطرق التي كانت بها الثورة الأمريكية حربًا أهلية أيضًا.","159099da":"<b>بكلماتي:<\/b> كيف يمكن لحرب ضد بريطانيا أن تكون أيضًا حربًا بين الأمريكيين أنفسهم؟","39bca23a":"الموالون والوطنيون","1c1c95c7":"كانت الثورة حربًا أهلية عميقة الانقسام بين جماعات أمريكية متعادية بشدة (ومنها الشعوب الأصلية المتحالفة مع الطرفين)، بقدر ما كانت صراعًا ضد بريطانيا العظمى. لقد فرّقت بين العائلات والأصدقاء، وبين البلدات والمدن. . . . انقسم المستعمرون إلى ثلاث مجموعات: (1) الوطنيون (<bdi>Patriots<\/bdi>)، الذين كوّنوا الجيش القاري وقاتلوا في ميليشيات الولايات؛ (2) الموالون (<bdi>Loyalists<\/bdi>)، أو التوريون (<bdi>Tories<\/bdi>)، الذين وقفوا مع بريطانيا؛ (3) مجموعة وسطى حاولت أن تبقى محايدة، لكن الوطنيين أقنعوها في النهاية.","51171cfa":"رأى الموالون الثورة خيانةً. وكانوا أكثر عددًا في المدن الساحلية وفي ولايتي كارولاينا (<bdi>Carolinas<\/bdi>)، وجاؤوا من كل فئات المجتمع. . . . أيّد الوطنيون الحرب لأنهم أدركوا أن الطريقة الوحيدة لحماية حريتهم هي الانفصال عن السيطرة البريطانية. وأرادوا أيضًا إقامة جمهورية أمريكية تحوّلهم من <i>رعايا<\/i> لملك إلى <i>مواطنين<\/i> لهم سلطة انتخاب حكومتهم والسعي وراء مصالحهم.","a668d2c2":"<b>مساعدة في الكلمات:<\/b> الميليشيات (<bdi>militias<\/bdi>) = مجموعات محلية من المواطنين الجنود · محايد (<bdi>neutral<\/bdi>) = لا يقف مع أي طرف · مُقسِّم (<bdi>divisive<\/bdi>) = يفرّق بين الناس · الجماعات (<bdi>factions<\/bdi>) = مجموعات مختلفة في الرأي · فرّقت (<bdi>sundered<\/bdi>) = مزّقت · الخيانة (<bdi>treason<\/bdi>) = خيانة وطنك · الجمهورية (<bdi>republic<\/bdi>) = حكومة يديرها قادة منتخبون","79ec8fa9":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 5، “American Society at War” (<bdi>Loyalists; Patriots<\/bdi>).","5dab9814":"<b>طرفان<\/b> | استخدم القراءة A. العبارات القصيرة مقبولة.","499578af":"الموالون","55bf039a":"ماذا كان رأيهم في الثورة؟","053897ea":"مَن كانوا، أو أين عاشوا؟","697077f9":"الوطنيون","672629fa":"<small>التالي ←<\/small>الجزء 2 · خوض الحرب","d1ea4059":"<b>الهدف الأساسي 2:<\/b> اشرح التحديات التي واجهها القادة العسكريون البريطانيون والأمريكيون في خوض الحرب الثورية.","c0aefaad":"<b>بكلماتي:<\/b> اذكر مشكلة واحدة واجهها الجيش البريطاني ومشكلة واحدة واجهها الجيش الأمريكي.","f95ee08a":"القوة العسكرية البريطانية","02e767b5":"أرسلت الإمبراطورية البريطانية 35,000 جندي ونصف أسطولها البحري الضخم لقمع التمرد الأمريكي. واستأجر البريطانيون أيضًا جنودًا أجانب (مرتزقة)، والدليل على ذلك 30,000 جندي ألماني خدموا في الجيوش البريطانية. وجاء معظمهم من ولاية هيسن-كاسل (<bdi>Hesse-Cassel<\/bdi>) الألمانية؛ لذلك سمّاهم الأمريكيون الهيسيين (<bdi>Hessians<\/bdi>). . . . أحبطت تكاليف الحرب المتزايدة —في الأرواح وفي ديون الحرب— معنويات البريطانيين. ومن المشكلات الأخرى أن حكومتهم في المستعمرات بقيادة اللورد فريدريك نورث (<bdi>Lord Frederick North<\/bdi>) لم تكن لديها خطة حرب ثابتة.","4086e43b":"<b>مساعدة في الكلمات:<\/b> قمع (<bdi>suppress<\/bdi>) = إيقاف بالقوة · المرتزقة (<bdi>mercenaries<\/bdi>) = جنود يُدفع لهم ليقاتلوا من أجل بلد آخر · أحبط المعنويات (<bdi>demoralized<\/bdi>) = أفقد الأمل · ثابتة (<bdi>consistent<\/bdi>) = مستقرة، لا تتغير","f881c09b":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 5، “Mobilizing for War” (<bdi>British Military Power<\/bdi>).","4312c02a":"الجيش القاري","75904ccf":"قبل الحرب، كان المواطنون الجنود (رجال الميليشيا) مدنيين يُستدعَون عند الحاجة من مزارعهم ومتاجرهم. لكن خلال الثورة، كان رجال الميليشيا أحيانًا غير موثوقين ويصعب التحكم فيهم. . . . عرف واشنطن (<bdi>Washington<\/bdi>) أن رجال الميليشيا وحدهم لا يستطيعون كسب الحرب. لذلك أقنع الكونغرس القاري بإنشاء جيش قاري من جنود متفرغين ومدرَّبين جيدًا. . . . وخدم أيضًا نحو 5,000 شخص من أصل أفريقي، كانوا جميعهم تقريبًا مستعبَدين سابقًا.","f683b895":"كان تمويل الثورة أصعب بكثير على الأمريكيين منه على بريطانيا العظمى. فبما أن الكونغرس لم يكن يملك سلطة فرض الضرائب، كان يستطيع فقط أن <i>يطلب<\/i> من الولايات تقديم الأموال للحكومة الوطنية. . . . جنّد البريطانيون والأمريكيون كلاهما السكان الأصليين للقتال. لكن البريطانيين كانوا أنجح بكثير، ويرجع ذلك أساسًا إلى علاقاتهم القديمة مع زعماء القبائل ووعدهم بحماية أراضي الأجداد للسكان الأصليين.","62b003cd":"<b>مساعدة في الكلمات:<\/b> المدنيون (<bdi>civilians<\/bdi>) = أشخاص ليسوا جنودًا · يُستدعَون (<bdi>summoned<\/bdi>) = يُطلَبون · غير موثوقين (<bdi>unreliable<\/bdi>) = لا يمكن الاعتماد عليهم · التمويل (<bdi>financing<\/bdi>) = دفع التكاليف · فرض (<bdi>impose<\/bdi>) = إجبار الناس على شيء","b99c5415":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 5، “Mobilizing for War” (<bdi>The Continental Army; Problems of Finance and Supply; Indigenous Americans and the Revolution<\/bdi>).","14f10527":"«هذه هي الأوقات التي تختبر أرواح الرجال» (مصدر أولي)","5f5e8450":"بحلول ديسمبر 1776، لم يبقَ مع واشنطن (<bdi>Washington<\/bdi>) سوى 3,000 جندي. كتب توماس باين (<bdi>Thomas Paine<\/bdi>) <i>الأزمة الأمريكية<\/i> ليجعل الأمريكيين يواصلون القتال.","08e66f51":"«هذه هي الأوقات التي تختبر أرواح الرجال: إن جندي الصيف ووطني الأيام المشمسة سيتراجعان في هذه الأزمة عن خدمة وطنهما؛ أما من يصمد الآن فيستحق حب الرجال والنساء وشكرهم. إن الطغيان، مثل الجحيم، لا يُهزم بسهولة. ومع ذلك لدينا هذا العزاء: كلما كان الصراع أصعب، كان النصر أعظم مجدًا.»","43871614":"<b>مساعدة في الكلمات:<\/b> تختبر (<bdi>try<\/bdi>) = تمتحن · جندي الصيف (<bdi>summer soldier<\/bdi>) = من يقاتل فقط عندما يكون الأمر سهلًا · يتراجع عن (<bdi>shrink from<\/bdi>) = يبتعد عن · الطغيان (<bdi>tyranny<\/bdi>) = حكم قاسٍ · العزاء (<bdi>consolation<\/bdi>) = الراحة والتخفيف · النصر (<bdi>triumph<\/bdi>) = الفوز","a99cbd72":"توماس باين (<bdi>Thomas Paine<\/bdi>)، <i>The American Crisis<\/i>، ديسمبر 1776. في Norton، الفصل 5، “Mobilizing for War” (<bdi>Thomas Paine: “The Times That Try Men’s Souls”<\/bdi>).","e7d85d58":"<b>المصدر 1.<\/b> ما هو «جندي الصيف»؟ ماذا يريد باين (<bdi>Paine<\/bdi>) من الجنود أن يفعلوا بدلًا من ذلك؟","3dc8d211":"<b>الغرض.<\/b> لماذا أمر واشنطن (<bdi>Washington<\/bdi>) بقراءة <i>الأزمة الأمريكية<\/i> بصوت عالٍ على جيشه؟ استخدم سطر السياق.","40ec4878":"<b>تحديات أمام الطرفين<\/b> | استخدم القراءتين B و C. العبارات القصيرة مقبولة.","6cb846e6":"تحدٍّ واحد","3f16be96":"القادة البريطانيون","8e52b0bd":"القادة الأمريكيون","464f397d":"<small>→ السابق<\/small>الجزء 1 · ثورة وحرب أهلية","b65a0000":"<small>التالي ←<\/small>الجزء 3 · نقاط التحول","179a1057":"<b>الهدف الأساسي 3:<\/b> حدّد نقاط التحول الرئيسية في الحرب الثورية، واشرح كيف غيّرت اتجاه الحرب.","c52a4c7f":"<b>بكلماتي:<\/b> ما هي نقطة التحول في الحرب؟","04f164c3":"ترينتون (<bdi>Trenton<\/bdi>) (1776)","a9b4ec15":"في ليلة عيد الميلاد عام 1776، وكانت ليلة «باردة وقاسية بشكل مخيف»، قاد واشنطن (<bdi>Washington<\/bdi>) سرًّا نحو 2,400 رجل —منهم عشرة رجال من أصل أفريقي— محشورين في قوارب طولها أربعون قدمًا، وهم يلتزمون «صمتًا عميقًا»، عبر نهر ديلاوير (<bdi>Delaware River<\/bdi>) المليء بالجليد إلى نيوجيرسي (<bdi>New Jersey<\/bdi>). وقرب شروق الشمس في ترينتون (<bdi>Trenton<\/bdi>)، فاجأ الأمريكيون 1,500 جندي هيسي نائمين. كانت معركة ترينتون . . . هزيمة ساحقة. . . . أنقذ النصران في برينستون (<bdi>Princeton<\/bdi>) وترينتون قضية الاستقلال وغيّرا زخم الحرب.","92c14695":"<b>مساعدة في الكلمات:<\/b> عميق (<bdi>profound<\/bdi>) = شديد · هزيمة ساحقة (<bdi>rout<\/bdi>) = هزيمة كاملة · الزخم (<bdi>momentum<\/bdi>) = القوة التي تجعل الشيء يستمر في التقدم","d03dec16":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 5، “Mobilizing for War” (<bdi>A Desperate Gamble<\/bdi>).","4c11a7b1":"ساراتوغا (<bdi>Saratoga<\/bdi>) والتحالف مع فرنسا (1777–1778)","cc18e74d":"في 17 أكتوبر 1777، استسلم بيرغوين (<bdi>Burgoyne<\/bdi>) وسلّم 5,800 جندي و7,000 بندقية و42 مدفعًا. . . . كان النصر المفاجئ في ساراتوغا (<bdi>Saratoga<\/bdi>) نقطة تحول استراتيجية للأمة الجديدة، لأنه جعل معاهدة التحالف (<bdi>Treaty of Alliance<\/bdi>) مع فرنسا ممكنة، وكانت فرنسا متعطشة للانتقام بعد أن خسرت أربع حروب أمام البريطانيين في الثمانين سنة السابقة.","436bad57":"<b>مساعدة في الكلمات:<\/b> بيرغوين (<bdi>Burgoyne<\/bdi>) = الجنرال البريطاني الذي قاد جيشًا من كندا · استسلم (<bdi>surrendered<\/bdi>) = توقف عن القتال · استراتيجي (<bdi>strategic<\/bdi>) = مهم للفوز · تحالف (<bdi>alliance<\/bdi>) = شراكة","a5c09bba":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 5، “Setbacks for the British (1777–1781)” (<bdi>The Campaign of 1777; The Crucial Alliance with France<\/bdi>).","eb224dd6":"فالي فورج (<bdi>Valley Forge<\/bdi>) (1777–1778)","3c41e637":"بالنسبة للجيش الأمريكي في فالي فورج (<bdi>Valley Forge<\/bdi>)، قرب فيلادلفيا (<bdi>Philadelphia<\/bdi>)، كان شتاء 1777–1778 وقتًا من المعاناة الشديدة. . . . كانوا جائعين، ولم تحمِهم أكواخهم الـ900 المصنوعة من الخشب والطين إلا قليلًا من الرياح الجليدية. . . . مات أكثر من 2,500 جندي في فالي فورج، وهرب 1,000 آخرون من الجيش . . . ولذلك لجأ إلى جندي بروسي نشيط يبحث عن الثروة، هو فريدريش فيلهلم، البارون فون شتويبن (<bdi>Baron von Steuben<\/bdi>)، الذي علّم الأمريكيين كيف يسيرون ويطلقون النار ويهاجمون في تشكيل منظم، وعلّمهم أساسيات النظافة الصحية.","8136b517":"<b>مساعدة في الكلمات:<\/b> شديدة (<bdi>intense<\/bdi>) = قوية جدًا · هربوا من الجيش (<bdi>deserted<\/bdi>) = تركوا الجيش دون إذن · بروسي (<bdi>Prussian<\/bdi>) = من بروسيا، وهي ولاية ألمانية · تشكيل (<bdi>formation<\/bdi>) = مجموعة منظمة في صفوف · النظافة الصحية (<bdi>hygiene<\/bdi>) = البقاء نظيفًا للحفاظ على الصحة","9c648aae":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 5، “Setbacks for the British (1777–1781)” (<bdi>Valley Forge and Stalemate<\/bdi>).","b8d16140":"إسبانيا تساعد، ويوركتاون (<bdi>Yorktown<\/bdi>) (1781)","d50a3e07":"في عام 1779، كانت إسبانيا، مثل فرنسا، قد عقدت تحالفًا مع الولايات المتحدة. . . . قدّم برناردو دي غالفيز (<bdi>Bernardo de Gálvez<\/bdi>)، وهو جنرال في الجيش الإسباني وكان الحاكم الجديد لإقليم لويزيانا (<bdi>Louisiana<\/bdi>) الخاضع لإسبانيا، أسلحة وإمدادات للثوار الأمريكيين. ثم نظّم قوة متعددة الثقافات من الجنود الإسبان، ضمّت رجال ميليشيا من الكريول (<bdi>Creole<\/bdi>)، وأمريكيين أصليين، وسودًا أحرارًا، ومتطوعين أمريكيين، وثائرًا فنزويليًا اسمه فرانسيسكو دي ميراندا (<bdi>Francisco de Miranda<\/bdi>)، كان يعارض البريطانيين ويؤيد استقلال المستعمرات الإسبانية في أمريكا.","f1ef22a8":"بدأت معركة يوركتاون (<bdi>Yorktown<\/bdi>) الحاسمة . . . في 28 سبتمبر 1781. أغلقت القوات الأمريكية والفرنسية آخر طريق لهروب كورنواليس (<bdi>Cornwallis<\/bdi>) وبدأت تقصف البريطانيين بالمدافع. صمد كورنواليس ثلاثة أسابيع، لكنه استسلم في 17 أكتوبر 1781 —في ذكرى النصر الأمريكي في ساراتوغا (<bdi>Saratoga<\/bdi>).","2965ed34":"<b>مساعدة في الكلمات:<\/b> عقدت (<bdi>forged<\/bdi>) = صنعت · متعددة الثقافات (<bdi>multicultural<\/bdi>) = مكوّنة من ثقافات كثيرة · الكريول (<bdi>Creole<\/bdi>) = المولودون في الأمريكتين لعائلات إسبانية أو فرنسية · الحاسمة (<bdi>climactic<\/bdi>) = الأهم والأخيرة · كورنواليس (<bdi>Cornwallis<\/bdi>) = الجنرال البريطاني في الجنوب · تقصف (<bdi>bombarding<\/bdi>) = تهاجم بطلقات كثيرة","07db8142":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 5، “Setbacks for the British (1777–1781)” (<bdi>The Spanish Alliance; Yorktown and the Final Campaigns<\/bdi>).","f2b8d639":"معاهدة باريس (<bdi>Treaty of Paris<\/bdi>) (1783)","cbbdb88b":"استمرت تلك المفاوضات نحو ستة أشهر. وفي 3 سبتمبر 1783، وقّعت الدول المتحاربة معاهدة باريس (<bdi>Treaty of Paris<\/bdi>). وكانت شروطها في صالح الولايات المتحدة بشكل مفاجئ. اعترفت بريطانيا العظمى باستقلال المستعمرات الثلاث عشرة السابقة، ووافقت على أن يكون نهر المسيسيبي (<bdi>Mississippi River<\/bdi>) الحدود الغربية لأمريكا، مما جعل الولايات المتحدة الجديدة أكبر مساحةً من أي دولة أوروبية . . . لم يكن للأمريكيين الأصليين أي دور في مفاوضات السلام، وكانوا أكبر الخاسرين بفارق كبير، لأن الإنجليز أعطوا الأمريكيين شيئًا لم يكن من حقهم أن يعطوه: مساحات واسعة من أراضي أجداد السكان الأصليين. أما فلوريدا (<bdi>Florida<\/bdi>) فقد عادت في النهاية إلى إسبانيا.","2200c829":"<b>مساعدة في الكلمات:<\/b> المفاوضات (<bdi>negotiations<\/bdi>) = محادثات للوصول إلى اتفاق · الشروط (<bdi>provisions<\/bdi>) = قواعد المعاهدة · في صالح (<bdi>favorable<\/bdi>) = مفيد لـ · اعترفت (<bdi>recognized<\/bdi>) = قبلت رسميًا · أراضي الأجداد (<bdi>ancestral<\/bdi>) = موروثة من العائلة منذ زمن بعيد","59ae2f43":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 5، “Setbacks for the British (1777–1781)” (The Treaty of Paris (1783)).","26838858":"<b>نقاط التحول<\/b> | استخدم القراءات D–H. قل كيف غيّر كل حدث الحرب.","c64b13ab":"كيف غيّر الحرب؟","bbd0ac2e":"معركة ترينتون (<bdi>Battle of Trenton<\/bdi>) (1776)","9944b588":"معارك ساراتوغا (<bdi>Battles of Saratoga<\/bdi>) (1777)","28f3bc3f":"معركة يوركتاون (<bdi>Battle of Yorktown<\/bdi>) (1781)","dfb6596c":"معاهدة باريس (<bdi>Treaty of Paris<\/bdi>) (1783)","069a0034":"<b>مَن خسر؟<\/b> تقول القراءة H إن مجموعة واحدة كانت «أكبر الخاسرين بفارق كبير» من معاهدة باريس. مَن هم، ولماذا؟","0c61da08":"<small>→ السابق<\/small>الجزء 2 · خوض الحرب","41b09dd9":"<small>التالي ←<\/small>الجزء 4 · محرّك للتغيير","b6d8fa2e":"<b>الهدف الأساسي 4:<\/b> افحص كيف كانت الحرب الثورية «محرّكًا» للتغيير السياسي والاجتماعي.","b4fec7ff":"<b>بكلماتي:<\/b> المحرّك يجعل الأشياء تتحرك. ما الذي جعلته الحرب يتغير؟","bef8034a":"مثل كل الحروب الكبرى، كان لكفاح الأمريكيين من أجل الاستقلال آثار غير متوقعة على الحياة السياسية والاقتصادية والاجتماعية. فقد هزّ العلاقات الاجتماعية التقليدية وأثّر في حياة أناس عانوا طويلًا من التمييز —الأمريكيين من أصل أفريقي، والنساء، والأمريكيين الأصليين. . . . وهكذا، كانت الثورة من نواحٍ مهمة محرّكًا للتجريب السياسي والتغيير الاجتماعي","5336fb35":"تبنّى الثوار الأمريكيون أيديولوجيا جمهورية بدلًا من النظرة الأرستقراطية أو الملكية التي سيطرت على أوروبا طويلًا. . . . لكن الولايات المتحدة كانت، من الناحية الرسمية، ديمقراطية تمثيلية، يحكم فيها الرجال البيض المالكون للأراضي أنفسهم من خلال فكرة الجمهورية —فكانوا ينتخبون ممثلين، أو مشرّعين، ليتخذوا القرارات نيابةً عنهم.","5b926983":"<b>مساعدة في الكلمات:<\/b> التجريب (<bdi>experimentation<\/bdi>) = تجربة أشياء جديدة · أيديولوجيا (<bdi>ideology<\/bdi>) = مجموعة من الأفكار · أرستقراطية (<bdi>aristocratic<\/bdi>) = يحكمها النبلاء · ملكية (<bdi>monarchical<\/bdi>) = يحكمها ملك أو ملكة · ممثلون (<bdi>representatives<\/bdi>) = أشخاص منتخبون ليتكلموا باسم غيرهم","d1f7e574":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 5، “War as an Engine of Change” (<bdi>Republican Ideology<\/bdi>).","e86621c6":"دساتير الولايات والتصويت","049b1522":"وهكذا أطلقت حرب الاستقلال كتابة دساتير الولايات لدعم الحكومات الجديدة، وصُمّمت كلها لتعكس مبادئ الأيديولوجيا الجمهورية وتحمي حقوق الشعب. . . . وشملت معظم الدساتير أيضًا وثيقة حقوق تحمي حرية التعبير، والمحاكمة أمام هيئة محلفين، وعدم إجبار الشخص على الشهادة ضد نفسه، مع تقييد سلطات الحكام وتقوية سلطات المجالس التشريعية.","153a511e":"سمحت حكومات الولايات الجديدة لعدد من المواطنين أكبر من أي وقت مضى بالمشاركة في الحكم الذاتي. وخُفّضت شروط الملكية للتصويت بعد عام 1776، وهي شروط كانت تسمح أصلًا لأغلبية كبيرة جدًا من الرجال البيض بالتصويت. . . . ولما أدّت حقوق التصويت الأوسع إلى مسؤولين حكوميين يمثلون الناس بشكل أفضل، انتُخب مزارعون وحرفيون وأصحاب متاجر في المجالس التشريعية للولايات.","ffe3abc5":"<b>مساعدة في الكلمات:<\/b> أطلقت (<bdi>sparked<\/bdi>) = بدأت · الدساتير (<bdi>constitutions<\/bdi>) = خطط مكتوبة للحكم · الشهادة ضد النفس (<bdi>self-incrimination<\/bdi>) = إجبارك على الكلام ضد نفسك في المحكمة · المجالس التشريعية (<bdi>legislatures<\/bdi>) = مجموعات تضع القوانين · شروط الملكية (<bdi>property qualifications<\/bdi>) = قواعد تشترط امتلاك أرض للتصويت","a53ea9f3":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 5، “War as an Engine of Change” (<bdi>Republican Ideology; Expansion of Political Participation<\/bdi>).","14b48b31":"مواد الكونفدرالية (<bdi>Articles of Confederation<\/bdi>)","f485c39e":"بعد أن أعلنت المستعمرات استقلالها عام 1776، احتاجت الولايات الثلاث عشرة الجديدة إلى شكل من أشكال الحكومة الوطنية. . . . لكن الولايات المتخاصمة احتاجت خمس سنوات للتصديق على مواد الكونفدرالية (<bdi>Articles of Confederation<\/bdi>) (مارس 1781) . . . عكست المواد خوفًا قديمًا من الملكية، إذ لم تسمح بوجود رئيس أو رئيس للسلطة التنفيذية. ولم يكن لحكومة الكونفدرالية أيضًا محاكم وطنية ولا سلطة لفرض قراراتها وأنظمتها. وكان للكونغرس سلطة كاملة على الشؤون الخارجية والنزاعات بين الولايات؛ لكنه لم يستطع فرض الضرائب . . . لم تكن الولايات راغبة في إنشاء حكومة مركزية قوية.","1615fa10":"<b>مساعدة في الكلمات:<\/b> المتخاصمة (<bdi>squabbling<\/bdi>) = المتجادلة · التصديق (<bdi>ratify<\/bdi>) = الموافقة الرسمية · رئيس السلطة التنفيذية (<bdi>chief executive<\/bdi>) = قائد مثل الرئيس · فرض (<bdi>enforce<\/bdi>) = إجبار الناس على الطاعة · فرض الضرائب (<bdi>levy taxes<\/bdi>) = جمع الضرائب","58b86ba7":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 5، “War as an Engine of Change” (<bdi>The Articles of Confederation<\/bdi>).","efe53aad":"حرية الدين","0513dd75":"قبل الثورة، كان الأمريكيون يتسامحون مع الاختلاف الديني؛ وبعد الثورة، أصرّوا على الحرية الدينية الكاملة كما يجسّدها مبدأ فصل الكنيسة عن الدولة. . . . وبعد عشر سنوات، أعلن قانون فرجينيا للحرية الدينية (<bdi>Virginia Statute of Religious Freedom<\/bdi>) (الذي كتبه توماس جيفرسون (<bdi>Thomas Jefferson<\/bdi>)) أنه «لا يُجبَر أي إنسان على حضور أو دعم أي عبادة أو مكان أو خدمة دينية مهما كانت» و«أن جميع الناس أحرار في إعلان آرائهم في أمور الدين والدفاع عنها بالحجة.»","7f6f01b2":"<b>مساعدة في الكلمات:<\/b> يتسامحون (<bdi>tolerated<\/bdi>) = يقبلون رغم عدم الرضا · الاختلاف (<bdi>dissent<\/bdi>) = عدم الموافقة · يُجبَر (<bdi>compelled<\/bdi>) = يُرغَم · يحضر (<bdi>frequent<\/bdi>) = يذهب كثيرًا · يعلن (<bdi>profess<\/bdi>) = يقول علنًا ما يؤمن به","d44d2c4f":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 5، “War as an Engine of Change” (<bdi>Freedom of Religion<\/bdi>).","bd90c029":"<b>ما الذي تغيّر؟<\/b> | استخدم القراءات I–L. العبارات القصيرة مقبولة.","caad57da":"ماذا فعل أو ماذا غيّر","0e80e9da":"الأيديولوجيا الجمهورية","f4062732":"دساتير الولايات","f177e4bd":"قواعد التصويت","6967c8c6":"مواد الكونفدرالية (<bdi>Articles of Confederation<\/bdi>)","e2aed951":"قانون فرجينيا للحرية الدينية (<bdi>Virginia Statute of Religious Freedom<\/bdi>) (1786)","e50bdf71":"<b>فكّر في الأمر.<\/b> تقول القراءة K إن الولايات «لم تكن راغبة في إنشاء حكومة مركزية قوية». لماذا يخاف من حكومة قوية أناسٌ حاربوا ملكًا للتو؟","69fca802":"<small>→ السابق<\/small>الجزء 3 · نقاط التحول","4305f5af":"<small>التالي ←<\/small>الجزء 5 · المساواة وحدودها","7ffea607":"<b>الهدف الأساسي 5:<\/b> قارن أثر الحرب الثورية على الناس من أصل أفريقي، والنساء، والناس من أصل إسباني (هسباني)، والأمريكيين الأصليين.","ca40bf6e":"<b>بكلماتي:<\/b> هل جلبت الثورة الحرية لكل مجموعة؟ اذكر مجموعة واحدة لم تحرّرها.","620bfa8c":"مفارقة العبودية","4d978ff8":"كانت أشد مفارقة في الثورة الأمريكية أن بريطانيا العظمى قدّمت للمستعبَدين فرصًا للحرية أكثر مما قدّمته الولايات المتحدة. ففي نوفمبر 1775، أعلن الحاكم الملكي لفرجينيا (<bdi>Virginia<\/bdi>)، جون موراي (<bdi>John Murray<\/bdi>) (اللورد دنمور (<bdi>Lord Dunmore<\/bdi>))، وهو نفسه مالك لسبعة وخمسين شخصًا مستعبَدًا، أن جميع المستعبَدين والخدم المتعاقدين سينالون حريتهم إذا انضموا إلى «قوات جلالتها».","4b217c37":"قاتل نحو 5,000 أمريكي من أصل أفريقي في صف الوطنيين، بينما كان لدى البريطانيين وحلفائهم من 15,000 إلى 20,000 شخص من أصل أفريقي. . . . وفي الشمال، الذي كان فيه عدد المستعبَدين أقل بكثير من الجنوب، دفعت مُثُل الحرية معظم الولايات إلى إلغاء العبودية قانونيًا، إما أثناء الحرب أو بعدها بقليل . . . لكن تلك المُثُل نفسها كان أثرها قليلًا في الولايات الجنوبية.","83b7720c":"<b>مساعدة في الكلمات:<\/b> مفارقة (<bdi>irony<\/bdi>) = عكس ما تتوقعه · الحاكم الملكي (<bdi>royal governor<\/bdi>) = قائد المستعمرة الذي يعيّنه الملك · الخدم المتعاقدون (<bdi>indentured servants<\/bdi>) = عمّال ملزَمون بالعمل لسنوات · إلغاء (<bdi>abolish<\/bdi>) = إنهاء بالقانون","7a06a9ad":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 5، “Equality and Its Limits” (<bdi>The Paradox of Slavery; Southern Backlash<\/bdi>).","de4ec5bd":"وضع النساء","3816e9cf":"كان الوضع القانوني للنساء يخضع للقانون العام البريطاني، الذي حصر أدوارهن أساسًا في تربية الأطفال وإدارة المنزل. ولم يكن بإمكان النساء التصويت أو تولّي المناصب، وقليلات منهن حصلن على تعليم رسمي.","17f69fe7":"ومع ذلك، أتاحت الثورة لجميع النساء، الحرائر والمستعبَدات، فرصًا لتوسيع أدوارهن الاجتماعية ودعم الجيوش بطرق مختلفة. فقد تولّين الإمدادات، وعملن رسولات أو جاسوسات، وعملن «تابعات للمعسكر» يساعدن الجنود مقابل حصص الطعام اليومية. . . . واستجبن لاحتياجات الحرب بإدارة المزارع، ونشر الصحف، والخدمة جنديات، وأحيانًا جاسوسات.","e118c4cf":"<b>مساعدة في الكلمات:<\/b> الوضع القانوني (<bdi>legal status<\/bdi>) = الحقوق بحسب القانون · القانون العام (<bdi>common law<\/bdi>) = قوانين قديمة مبنية على أحكام المحاكم · توسيع (<bdi>broaden<\/bdi>) = جعل الشيء أوسع · حصص الطعام (<bdi>rations<\/bdi>) = الطعام اليومي للجنود","ab140f7a":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 5، “Equality and Its Limits” (<bdi>The Status of Women<\/bdi>).","a4a99801":"السكان الأصليون الأمريكيون تحت الحصار","c2cd0f5c":"حاول معظم السكان الأصليين أن يبقوا محايدين في الحرب، لكن عملاء بريطانيين وأمريكيين ضغطوا على الشعوب الأصلية لتقاتل في صفهم. . . . وأثناء الحرب وبعدها، أكّدت الحكومة الأمريكية الجديدة لحلفائها من السكان الأصليين أنها ستحترم أراضيهم وحقوقهم. لكن كثيرًا من الأمريكيين البيض استغلّوا فوضى الحرب لتدمير السكان الأصليين وتهجيرهم. وبعد أن انتهت الحرب وتحقق الاستقلال، لم يكن هناك سلام للسكان الأصليين، وأُعطيت أراضيهم بموجب معاهدة باريس (<bdi>Treaty of Paris<\/bdi>).","e814f97e":"<b>مساعدة في الكلمات:<\/b> تحت الحصار (<bdi>besieged<\/bdi>) = محاطون ومهاجَمون · محايدون (<bdi>neutral<\/bdi>) = لا يقفون مع أي طرف · أكّدت (<bdi>assured<\/bdi>) = وعدت · الفوضى (<bdi>disruptions<\/bdi>) = الاضطراب والارتباك · تهجير (<bdi>displace<\/bdi>) = إجبار الناس على ترك بيوتهم","ff25a526":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 5، “Equality and Its Limits” (<bdi>Indigenous Americans Are Besieged<\/bdi>).","18126cf2":"<b>قارن بين المجموعات<\/b> | استخدم القراءات G و M و N و O. العبارات القصيرة مقبولة.","d29e3040":"أربع مجموعات في الثورة","2734d58d":"الناس من أصل أفريقي","914677cd":"كيف شاركوا في الحرب؟","f89b185e":"هل جلبت لهم الثورة حرية أكبر؟","1831fd44":"الناس من أصل إسباني (هسباني)","a620e71d":"الأمريكيون الأصليون","3f52259c":"القراءتان H و O","7e5ae52e":"<b>قارن.<\/b> أي مجموعة تظن أن الثورة ساعدتها <b>أقل<\/b> من غيرها؟ استخدم معلومة واحدة من القراءات.","5a5dc735":"هجوم واشنطن (<bdi>Washington<\/bdi>) المفاجئ في ترينتون (<bdi>Trenton<\/bdi>)","cac20ecb":"النصر الأمريكي في ساراتوغا (<bdi>Saratoga<\/bdi>)","5707fe1a":"الخوف من حكومة مركزية قوية","11630a67":"مُثُل الحرية في الشمال","322a963b":"<small>→ السابق<\/small>الجزء 4 · محرّك للتغيير","923cfdd4":"<small>التالي ←<\/small>الجزء 6 · CER: الحرية لمَن؟","b319854d":"استخدم القراءات والمصدر 1 في هذا الواجب. قدّم <b>دليلين<\/b>. في خانة الحجة المضادة، اشرح ما سيقوله شخص من الجانب الآخر، ثم ردّ عليه.","ea8b3f89":"<small>→ السابق<\/small>الجزء 5 · المساواة وحدودها","a73a8872":"القراءة التفاعلية 3 · الثورة الأمريكية وأفكارها"},"ui_en":{"answered":"{n} of {t} answered","need_names":"first name, last name, and period","unanswered_1":"{n} unanswered box","unanswered_n":"{n} unanswered boxes","cer_checklist":"CER checklist","complete":"Everything is complete. You can submit now.","still_needed":"Still needed: {list}.","list_sep":", ","names_first":"Type your first name, last name, and period at the top before saving.","saved":"Progress saved. Keep that file. Use Load Progress later to continue. Do not upload it to Canvas until you are finished.","loaded":"Progress loaded. Pick up where you left off.","bad_file":"That file is not a saved progress file for this assignment. Choose the .json file you saved from this assignment.","read_error":"Could not read that file. Try again.","finished":"Finished! Your file \"{file}\" downloaded. Upload that file to Canvas.","confirm_clear":"Clear everything you typed? This cannot be undone.","your_turn":"Your turn"},"ui":{"es":{"answered":"{n} de {t} respondidas","need_names":"nombre, apellido y período","unanswered_1":"{n} casilla sin responder","unanswered_n":"{n} casillas sin responder","cer_checklist":"la lista de control del CER","complete":"Todo está completo. Ya puedes entregar.","still_needed":"Todavía falta: {list}.","list_sep":", ","names_first":"Escribe tu nombre, apellido y período arriba antes de guardar.","saved":"Progreso guardado. Guarda ese archivo. Usa «Cargar progreso» más tarde para continuar. No lo subas a Canvas hasta que termines.","loaded":"Progreso cargado. Sigue donde lo dejaste.","bad_file":"Ese archivo no es un archivo de progreso de esta tarea. Elige el archivo .json que guardaste de esta tarea.","read_error":"No se pudo leer ese archivo. Inténtalo de nuevo.","finished":"¡Terminaste! Se descargó tu archivo \"{file}\". Sube ese archivo a Canvas.","confirm_clear":"¿Borrar todo lo que escribiste? No se puede deshacer.","your_turn":"Tu turno"},"ar":{"answered":"أجبت عن {n} من {t}","need_names":"الاسم الأول واسم العائلة والحصة","unanswered_1":"مربع واحد بلا إجابة","unanswered_n":"عدد المربعات بلا إجابة: {n}","cer_checklist":"قائمة التحقق الخاصة بالادعاء والدليل والتعليل","complete":"اكتمل كل شيء. يمكنك التسليم الآن.","still_needed":"ما زال ناقصًا: {list}.","list_sep":"، ","names_first":"اكتب اسمك الأول واسم العائلة والحصة في الأعلى قبل الحفظ.","saved":"تم حفظ تقدمك. احتفظ بهذا الملف. استخدم «تحميل التقدم» لاحقًا لتكمل. لا ترفعه إلى Canvas حتى تنتهي.","loaded":"تم تحميل تقدمك. أكمل من حيث توقفت.","bad_file":"هذا الملف ليس ملف تقدم محفوظًا لهذه المهمة. اختر ملف ‎.json‎ الذي حفظته من هذه المهمة.","read_error":"تعذّرت قراءة هذا الملف. حاول مرة أخرى.","finished":"أحسنت! تم تنزيل ملفك ‎\"{file}\"‎. ارفع هذا الملف إلى Canvas.","confirm_clear":"هل تريد مسح كل ما كتبته؟ لا يمكن التراجع عن ذلك.","your_turn":"دورك"}}}</script>
+<script>
+/* Interactive Reading language switch (English / Español / العربية).
+   Text is matched by a hash of its English HTML, so translations survive rebuilds that do not change
+   the English. Data lives in <script type="application/json" id="ir-i18n">:
+     {"langs":["en","es","ar"], "es":{key:html,...}, "ar":{...}, "ui":{"es":{...},"ar":{...}}}
+   Exposes window.irCollect() (used offline to list the strings to translate), window.irT(key,vars),
+   and window.irSetLang(lang). */
+(function () {
+  var INLINE = { B: 1, I: 1, EM: 1, STRONG: 1, SPAN: 1, A: 1, BR: 1, SMALL: 1, SUP: 1, SUB: 1, U: 1 };
+  var SKIP = 'script,style,textarea,input,select,.cnt,.hero-num,#pct,#status,#msg,.lang-switch';
+  var LETTER = /[A-Za-zÀ-ɏ]/;
+  function norm(s) { return String(s).replace(/\s+/g, ' ').trim(); }
+  function hash(s) {
+    var h = 0x811c9dc5;
+    for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
+    return ('0000000' + h.toString(16)).slice(-8);
+  }
+  function inlineOnly(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling) {
+      if (c.nodeType === 1 && (!INLINE[c.tagName] || c.matches(SKIP))) return false;
+    }
+    return true;
+  }
+  function directText(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling) if (c.nodeType === 3 && LETTER.test(c.nodeValue)) return true;
+    return false;
+  }
+  function collect() {
+    var segs = [], root = document.querySelector('.layout') || document.body;
+    (function walk(el) {
+      if (el.matches(SKIP)) return;
+      if (el !== root && directText(el) && inlineOnly(el)) {
+        var src = norm(el.innerHTML);
+        segs.push({ kind: 'html', el: el, src: src, key: hash(src) });
+        return;
+      }
+      for (var c = el.firstChild; c; c = c.nextSibling) {
+        if (c.nodeType === 1) walk(c);
+        else if (c.nodeType === 3 && LETTER.test(c.nodeValue)) {
+          var t = norm(c.nodeValue);
+          segs.push({ kind: 'text', node: c, src: t, key: hash(t), pre: c.nodeValue.match(/^\s*/)[0], post: c.nodeValue.match(/\s*$/)[0] });
+        }
+      }
+    })(root);
+    root.querySelectorAll('textarea[placeholder],input[placeholder],img[alt],[aria-label]').forEach(function (el) {
+      ['placeholder', 'alt', 'aria-label'].forEach(function (a) {
+        var v = el.getAttribute(a);
+        if (v && LETTER.test(v)) segs.push({ kind: 'attr', el: el, attr: a, src: norm(v), key: hash(norm(v)) });
+      });
+    });
+    var title = norm(document.title);
+    segs.push({ kind: 'title', src: title, key: hash(title) });
+    return segs;
+  }
+  // Plain-ASCII version of a name for download file names (José -> Jose, ليلى -> lyla).
+  var AR = { 'ا': 'a', 'أ': 'a', 'إ': 'i', 'آ': 'a', 'ب': 'b', 'ت': 't', 'ث': 'th', 'ج': 'j', 'ح': 'h', 'خ': 'kh',
+    'د': 'd', 'ذ': 'dh', 'ر': 'r', 'ز': 'z', 'س': 's', 'ش': 'sh', 'ص': 's', 'ض': 'd', 'ط': 't', 'ظ': 'z', 'ع': 'a',
+    'غ': 'gh', 'ف': 'f', 'ق': 'q', 'ك': 'k', 'ل': 'l', 'م': 'm', 'ن': 'n', 'ه': 'h', 'و': 'w', 'ي': 'y', 'ى': 'a',
+    'ة': 'a', 'ء': '', 'ئ': 'y', 'ؤ': 'w' };
+  window.irAscii = function (s) {
+    s = String(s).normalize ? String(s).normalize('NFD').replace(/[\u0300-\u036f\u064B-\u065F\u0670]/g, '') : String(s);
+    return s.replace(/[\u0621-\u064A]/g, function (c) { return AR[c] !== undefined ? AR[c] : ''; })
+      .replace(/ñ/g, 'n').replace(/Ñ/g, 'N');
+  };
+  window.irCollect = function () {
+    var seen = {}, out = [];
+    collect().forEach(function (s) { if (!seen[s.key]) { seen[s.key] = 1; out.push({ key: s.key, kind: s.kind, src: s.src }); } });
+    return out;
+  };
+
+  var node = document.getElementById('ir-i18n');
+  if (!node) return;
+  var DATA = JSON.parse(node.textContent);
+  var SEGS = collect();
+  var LANG = 'en';
+  var UI_EN = DATA.ui_en || {};
+
+  window.irT = function (k, v) {
+    var s = (LANG !== 'en' && DATA.ui && DATA.ui[LANG] && DATA.ui[LANG][k]) || UI_EN[k] || k;
+    if (v) for (var n in v) s = s.split('{' + n + '}').join(v[n]);
+    return s;
+  };
+
+  function apply(lang) {
+    var tr = lang === 'en' ? null : (DATA[lang] || {});
+    SEGS.forEach(function (s) {
+      var t = tr && tr[s.key];
+      if (s.kind === 'html') {
+        s.el.innerHTML = t || s.src;
+        // In Arabic, a block still in a Latin script (a name, a citation) keeps left-to-right order.
+        if (lang === 'ar') s.el.setAttribute('dir', 'auto'); else s.el.removeAttribute('dir');
+      }
+      else if (s.kind === 'text') s.node.nodeValue = s.pre + (t || s.src) + s.post;
+      else if (s.kind === 'attr') s.el.setAttribute(s.attr, t || s.src);
+      else if (s.kind === 'title') document.title = t || s.src;
+    });
+  }
+
+  window.irSetLang = function (lang) {
+    if (DATA.langs.indexOf(lang) < 0) lang = 'en';
+    LANG = lang;
+    var html = document.documentElement;
+    html.lang = lang;
+    html.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    apply(lang);
+    html.style.setProperty('--your-turn', JSON.stringify(window.irT('your_turn')));
+    document.querySelectorAll('.lang-switch button').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === lang));
+    });
+    try { localStorage.setItem('ir_lang:' + location.pathname, lang); } catch (e) {}
+    try {
+      var u = new URL(location.href);
+      if (lang === 'en') u.searchParams.delete('lang'); else u.searchParams.set('lang', lang);
+      history.replaceState(null, '', u.toString());
+    } catch (e) {}
+    if (window.irRefresh) window.irRefresh();
+    if (window.rpCount) window.rpCount();
+  };
+
+  document.querySelectorAll('.lang-switch button').forEach(function (b) {
+    b.addEventListener('click', function () { window.irSetLang(b.getAttribute('data-lang')); });
+  });
+  // Link (?lang=) first, then the language this student last chose on this page, then the page's own default.
+  var start = DATA['default'] || 'en';
+  try { start = new URL(location.href).searchParams.get('lang') || localStorage.getItem('ir_lang:' + location.pathname) || start; } catch (e) {}
+  window.irSetLang(start);
+})();
+
+</script>
+<script>
+(function(){
+  var pages=[].slice.call(document.querySelectorAll('section.page'));
+  var items=[].slice.call(document.querySelectorAll('.toc>li'));
+  var KEY='rp_page_'+location.pathname;
+  var current=-1;
+  function show(i,targetId){
+    i=Math.max(0,Math.min(pages.length-1,i|0));
+    var changed=i!==current;
+    if(changed){
+      pages.forEach(function(p,n){p.classList.toggle('active',n===i)});
+      items.forEach(function(li,n){
+        li.classList.toggle('active',n===i);
+        var a=li.querySelector('.toc-part');
+        if(n===i)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');
+      });
+      current=i;
+      try{localStorage.setItem(KEY,String(i))}catch(e){}
+    }
+    var h='';try{h=decodeURIComponent(location.hash.slice(1))}catch(e){}
+    var he=h&&document.getElementById(h);
+    if(!he||!pages[i].contains(he)){try{history.replaceState(null,'','#'+pages[i].id)}catch(e){}}
+    var el=targetId&&document.getElementById(targetId);
+    if(el)el.scrollIntoView({block:'start',behavior:changed?'instant':'smooth'});
+    else window.scrollTo({top:0,left:0,behavior:'instant'});
+  }
+  window.rpShow=show;
+  function route(){
+    var h='';try{h=decodeURIComponent(location.hash.slice(1))}catch(e){}
+    var el=h&&document.getElementById(h);
+    var page=el&&el.closest('section.page');
+    if(page){show(pages.indexOf(page),el===page?null:h);return}
+    var saved=0;try{saved=parseInt(localStorage.getItem(KEY),10)||0}catch(e){}
+    show(saved);
+  }
+  window.addEventListener('hashchange',route);
+  function count(){
+    pages.forEach(function(p,n){
+      var t=[].slice.call(p.querySelectorAll('textarea[data-q]'));
+      var d=t.filter(function(x){return x.value.trim().length>=3}).length;
+      var c=items[n]&&items[n].querySelector('.cnt');
+      if(c)c.textContent=d+'/'+t.length;
+      if(items[n])items[n].classList.toggle('complete',t.length>0&&d===t.length);
+    });
+  }
+  window.rpCount=count;
+  var band=document.querySelector('.hero-band'),pic=document.querySelector('figure img');
+  if(band&&pic)band.style.setProperty('--hero-img','url("'+pic.src+'")');
+  if(band&&window.matchMedia&&matchMedia('(hover:hover) and (pointer:fine)').matches&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
+    band.addEventListener('pointermove',function(e){
+      var r=band.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
+      band.style.setProperty('--ry',((x-.5)*7).toFixed(2)+'deg');band.style.setProperty('--rx',((.5-y)*6).toFixed(2)+'deg');
+      band.style.setProperty('--mx',(x*100).toFixed(1)+'%');band.style.setProperty('--my',(y*100).toFixed(1)+'%');
+    });
+    band.addEventListener('pointerleave',function(){['--rx','--ry','--mx','--my'].forEach(function(k){band.style.removeProperty(k)})});
+  }
+  document.addEventListener('input',count);
+  route();
+  setTimeout(count,0);
+})();
+</script>
+<script>
+(function(){
+  var KEY_MODE=false;
+  var PACKET='CPUSH_L3_IR';
+  var STORE='cpush_l_ir3_'+(KEY_MODE?'key':'student');
+  var qs=[].slice.call(document.querySelectorAll('textarea[data-q]'));
+  var cks=[].slice.call(document.querySelectorAll('input[data-c]'));
+  var metaIds=['f_first','f_last','f_period','f_date'];
+  var meta=metaIds.map(function(i){return document.getElementById(i)});
+  var first=document.getElementById('f_first'), last=document.getElementById('f_last');
+  var data={};
+  var $=function(i){return document.getElementById(i)};
+  function load(){try{data=JSON.parse(localStorage.getItem(STORE)||'{}')}catch(e){data={}}}
+  function persist(){try{localStorage.setItem(STORE,JSON.stringify(data))}catch(e){}}
+  function msg(t,err){var m=$('msg');m.textContent=t;m.className='msg'+(err?' err':'');m.style.display='block'}
+  function clean(n){return irAscii(n).trim().replace(/\s+/g,'_').replace(/[^A-Za-z0-9_-]/g,'')}
+  function state(){
+    var answered=0;qs.forEach(function(t){var d=t.value.trim().length>=3;t.classList.toggle('done',d);if(d)answered++});
+    var checked=cks.filter(function(c){return c.checked}).length;
+    var named=first.value.trim()&&last.value.trim()&&$('f_period').value.trim();
+    var all=answered===qs.length&&checked===cks.length&&!!named;
+    return {answered:answered,checked:checked,named:!!named,all:all};
+  }
+  function refresh(){
+    var s=state(),tot=qs.length;
+    $('pct').textContent=irT('answered',{n:s.answered,t:tot});
+    $('fill').style.width=(100*s.answered/tot)+'%';
+    var missing=[];
+    if(!s.named)missing.push(irT('need_names'));
+    if(s.answered<tot)missing.push(irT(tot-s.answered===1?'unanswered_1':'unanswered_n',{n:tot-s.answered}));
+    if(s.checked<cks.length)missing.push(irT('cer_checklist'));
+    $('status').textContent=s.all?irT('complete'):irT('still_needed',{list:missing.join(irT('list_sep'))});
+    $('finishBtn').disabled=!s.all;
+  }
+  function snapshot(){
+    var o={packet:PACKET,course:'CPUSH',version:1,saved:new Date().toISOString(),
+      student:{first:first.value.trim(),last:last.value.trim(),period:$('f_period').value.trim(),date:KEY_MODE?'':$('f_date').value.trim()},
+      answers:{},checklist:{}};
+    qs.forEach(function(t){o.answers[t.id]=t.value});
+    cks.forEach(function(c){o.checklist[c.id]=c.checked});
+    return o;
+  }
+  function download(name,obj){
+    var blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;
+    document.body.appendChild(a);a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);
+  }
+  function who(){return (clean(last.value)||'Last')+'_'+(clean(first.value)||'First')}
+  function apply(o){
+    var st=o.student||{};
+    first.value=st.first||'';last.value=st.last||'';$('f_period').value=st.period||'';$('f_date').value=(o.completed?st.date:'')||'';
+    qs.forEach(function(t){t.value=(o.answers&&o.answers[t.id])||''});
+    cks.forEach(function(c){c.checked=!!(o.checklist&&o.checklist[c.id])});
+    sync();
+  }
+  function sync(){
+    metaIds.forEach(function(id,i){data[id]=meta[i].value});
+    qs.forEach(function(t){data[t.id]=t.value});
+    cks.forEach(function(c){data[c.id]=c.checked});
+    persist();refresh();if(window.rpCount)rpCount();
+  }
+  load();
+  meta.forEach(function(m){if(data[m.id])m.value=data[m.id];m.addEventListener('input',function(){m.classList.remove('bad');sync()})});
+  qs.forEach(function(t){if(data[t.id])t.value=data[t.id];t.addEventListener('input',sync)});
+  cks.forEach(function(c){if(data[c.id])c.checked=true;c.addEventListener('change',sync)});
+
+  $('saveBtn').addEventListener('click',function(){
+    if(!first.value.trim()||!last.value.trim()||!$('f_period').value.trim()){
+      [first,last,$('f_period')].forEach(function(f){if(!f.value.trim())f.classList.add('bad')});
+      msg(irT('names_first'),true);(window.rpShow&&rpShow(0)),first.scrollIntoView({block:'center'});return}
+    download(who()+'-'+PACKET+'-PROGRESS.json',snapshot());
+    msg(irT('saved'));
+  });
+  $('loadBtn').addEventListener('click',function(){$('loadFile').click()});
+  $('loadFile').addEventListener('change',function(e){
+    var f=e.target.files[0];if(!f)return;
+    var r=new FileReader();
+    r.onload=function(){
+      try{
+        var o=JSON.parse(r.result);
+        if(!o||o.packet!==PACKET||typeof o.answers!=='object')throw new Error('wrong');
+        apply(o);msg(irT('loaded'));
+      }catch(err){msg(irT('bad_file'),true)}
+      e.target.value='';
+    };
+    r.onerror=function(){msg(irT('read_error'),true)};
+    r.readAsText(f);
+  });
+  $('finishBtn').addEventListener('click',function(){
+    var s=state();
+    if(!s.all){refresh();return}
+    var now=new Date();$('f_date').value=now.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});sync();
+    var o=snapshot();o.completed=true;o.submitted=now.toISOString();
+    download(who()+'-'+PACKET+'.json',o);
+    msg(irT('finished',{file:who()+'-'+PACKET+'.json'}));
+  });
+  $('reset').addEventListener('click',function(){
+    if(!confirm(irT('confirm_clear')))return;
+    qs.forEach(function(t){t.value=''});cks.forEach(function(c){c.checked=false});meta.forEach(function(m){m.value=''});
+    data={};sync();
+  });
+  [].forEach.call(document.querySelectorAll('figure'),function(fig){var im=fig.querySelector('img');if(im)im.addEventListener('click',function(){fig.classList.toggle('zoom')})});
+  if(KEY_MODE)$('actions').style.display='none';
+  window.irRefresh=refresh;refresh();if(window.rpCount)rpCount();
+})();
+</script>
+</body>
+</html>
