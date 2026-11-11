@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Would You Rather 7 · The South, Slavery, and Reform</title>
+<style>
+:root{--bg:#F3F6EE;--paper:#FCFDFB;--maroon:#2C3617;--ink:#212811;--brown:#5A6D31;--red:#D25F4B;--rose:#E19A8E;
+--redink:#B25140;--rule:#D3D7CC;--line:#AFB5A5;--ok:#3F6B3A;--frost:#F1F4EB;
+--serif:Georgia,"Times New Roman",serif;--sans:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
+--glass:color-mix(in srgb,var(--paper) 70%,transparent);--glass-strong:color-mix(in srgb,var(--paper) 90%,transparent);
+--edge:color-mix(in srgb,#fff 70%,transparent);
+--hi:inset 0 1px 0 color-mix(in srgb,#fff 85%,transparent);
+--depth:0 1px 1px rgba(33,40,17,.05),0 3px 6px -2px rgba(33,40,17,.08),0 18px 40px -16px rgba(33,40,17,.30)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:
+radial-gradient(42vmax 42vmax at 8% 6%,rgba(44,54,23,.28),transparent 70%),
+radial-gradient(38vmax 38vmax at 96% 22%,rgba(210,95,75,.22),transparent 70%),
+radial-gradient(46vmax 40vmax at 70% 104%,rgba(44,54,23,.18),transparent 70%),
+radial-gradient(30vmax 30vmax at 20% 88%,rgba(225,154,142,.22),transparent 70%)}
+.wrap{max-width:860px;margin:0 auto;padding:0 18px 60px}
+h1,h2,h3{font-family:var(--serif);text-wrap:balance}
+.eyebrow{font-size:12.5px;letter-spacing:.16em;font-weight:700;text-transform:uppercase}
+header.hero{padding:26px 0 0}
+.hero-band{position:relative;overflow:hidden;border-radius:16px;padding:34px 34px 30px;color:var(--frost);background:linear-gradient(110deg,#2C3617 40%,#5A6D31);
+box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 30px 60px -24px rgba(44,54,23,.75)}
+.hero-band::before{content:"";position:absolute;left:0;top:0;bottom:0;width:8px;background:var(--red)}
+.hero-band .eyebrow{color:var(--rose)}
+.hero-band h1{color:#fff;font-size:clamp(32px,6vw,50px);line-height:1.08;margin:.2em 0 .2em}
+.hero-band .sub{margin:0;font-size:17px;color:var(--frost);font-weight:600}
+.hero-num{position:absolute;right:20px;bottom:-30px;font:700 180px/1 var(--serif);color:#fff;opacity:.12;pointer-events:none}
+.panel{background:var(--glass);border:1px solid var(--edge);border-radius:14px;box-shadow:var(--hi),var(--depth);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3)}
+.meta{display:flex;flex-wrap:wrap;gap:14px;margin:18px 0 0;padding:16px 20px}
+.meta label{flex:1 1 170px;font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--brown)}
+.meta input{display:block;width:100%;margin-top:5px;padding:12px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);font:inherit;font-size:17px;min-height:48px}
+.meta input[readonly]{background:#E5E9DC;color:var(--brown)}
+.howto{margin:16px 0;padding:14px 20px;font-size:16px}
+.howto ol{margin:.4em 0 .2em 1.2em;padding:0}
+.howto li{margin:.2em 0}
+.bar{position:sticky;top:0;z-index:5;padding:9px 14px;margin:0 -14px;background:rgba(243,246,238,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--rule)}
+.bar .row{display:flex;align-items:center;gap:12px;font-size:14px;font-weight:700;color:var(--brown)}
+.track{flex:1;height:10px;border-radius:6px;background:#D6DACB;overflow:hidden}
+.fill{height:100%;width:0;background:linear-gradient(90deg,var(--rose),var(--red));transition:width .3s}
+.card{margin:26px 0;padding:22px 24px 24px;scroll-margin-top:70px}
+.kick{font-size:12.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--redink)}
+.kick span{color:var(--brown)}
+.card h2{margin:.15em 0 .4em;font-size:clamp(24px,4.5vw,32px);line-height:1.15;color:var(--maroon)}
+.there{background:var(--glass-strong);border:1px solid var(--edge);border-radius:12px;padding:6px 20px 8px;margin:10px 0 18px;border-left:6px solid var(--red)}
+.there .lab{display:inline-block;margin:12px 0 0;font:800 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:#fff;background:var(--maroon);padding:6px 11px 5px;border-radius:999px}
+.there p{font:18.5px/1.65 var(--serif);margin:.7em 0}
+.rather{font:700 22px/1.2 var(--serif);color:var(--maroon);margin:4px 0 12px}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.choice{display:flex;align-items:center;gap:14px;text-align:left;width:100%;min-height:84px;padding:16px 18px;border-radius:14px;border:2px solid var(--maroon);background:#fff;color:var(--maroon);font:700 19px/1.3 var(--sans);cursor:pointer;touch-action:manipulation;transition:transform .15s,box-shadow .15s,background-color .15s}
+.choice .ltr{flex:0 0 auto;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--maroon);color:#fff;font:800 20px/1 var(--serif)}
+.choice:hover{transform:translateY(-2px);box-shadow:0 10px 20px -10px rgba(44,54,23,.5)}
+.choice[aria-pressed="true"]{background:var(--maroon);color:#fff;border-color:var(--maroon);box-shadow:0 0 0 4px rgba(210,95,75,.55)}
+.choice[aria-pressed="true"] .ltr{background:var(--red);color:#fff}
+.choice[aria-pressed="true"]::after{content:"\2713";margin-left:auto;font-size:26px;color:#fff}
+.choice:disabled{cursor:default;transform:none;box-shadow:none}
+.choice:disabled[aria-pressed="false"]{opacity:.55}
+.choice:disabled[aria-pressed="true"]{box-shadow:0 0 0 4px rgba(210,95,75,.55)}
+.choice:focus-visible,.btn:focus-visible,textarea:focus-visible,input:focus-visible,.link:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.work{display:none;margin-top:20px}
+.card.chosen .work{display:block}
+.field{background:color-mix(in srgb,var(--rose) 14%,var(--paper));border:1px solid color-mix(in srgb,var(--red) 28%,var(--rule));border-radius:12px;padding:14px 18px;margin:12px 0}
+.field label{display:block;font:700 19px/1.25 var(--serif);color:var(--maroon)}
+.field .hint{display:block;font:400 14.5px/1.4 var(--sans);color:var(--brown);margin:3px 0 8px}
+textarea{width:100%;min-height:96px;padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);font:inherit;font-size:17px;line-height:1.5;resize:vertical}
+textarea:read-only{background:#EEF1E8;color:#2a3317}
+.row2{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:12px}
+.btn{border:2px solid var(--maroon);background:#fff;color:var(--maroon);padding:12px 20px;border-radius:10px;font:700 16px/1.2 var(--sans);cursor:pointer;min-height:48px;touch-action:manipulation}
+.btn:hover:not(:disabled){background:var(--maroon);color:#fff}
+.btn.primary{background:var(--maroon);color:#fff}
+.btn.primary:disabled{background:#4E5F2B;border-color:#4E5F2B;color:#fff;cursor:not-allowed;opacity:.8}
+.cstat{font-size:14.5px;font-weight:600;color:var(--brown)}
+.reveal{display:none;margin-top:16px;background:#fff;border:1px solid var(--rule);border-left:6px solid var(--maroon);border-radius:12px;padding:6px 20px 10px}
+.card.locked .reveal{display:block}
+.reveal .lab{display:inline-block;margin:12px 0 0;font:800 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--maroon);box-shadow:inset 0 0 0 1.5px var(--maroon);padding:6px 11px 5px;border-radius:999px}
+.reveal p{font:18px/1.62 var(--serif);margin:.7em 0}
+.reveal .cite{font:13px/1.5 var(--sans);color:var(--brown)}
+.link{background:none;border:0;color:var(--brown);text-decoration:underline;cursor:pointer;font:inherit;font-size:15px;padding:10px 4px;min-height:44px}
+.card.locked .lockBtn{display:none}
+.card:not(.locked) .editBtn{display:none}
+.tally{padding:20px 24px;margin:26px 0}
+.tally h2{margin:.1em 0 .3em;font-size:28px;color:var(--maroon)}
+.tally ol{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:8px}
+.tally li{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;background:#fff;border:1px solid var(--rule);border-radius:10px;padding:10px 14px}
+.tally .tn{grid-row:1/3;align-self:center;width:34px;height:34px;border-radius:50%;background:var(--maroon);color:#fff;display:grid;place-items:center;font:800 16px/1 var(--serif)}
+.tally .tq{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--brown)}
+.tally .ta{font-weight:700;color:var(--maroon);overflow-wrap:anywhere}
+.tally li.none .ta{color:#4B5A2A;font-weight:600;font-style:italic}
+.tally li.none .tn{background:#5E6E3C}
+.tally .sum{margin:12px 0 0;font-weight:600;color:var(--brown)}
+.finish{text-align:center;margin:26px 0;padding:22px 20px}
+.status{font-size:15px;font-weight:700;color:var(--brown);margin-bottom:12px;overflow-wrap:anywhere}
+.btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.msg{display:none;margin:14px auto 0;padding:10px 14px;border-radius:8px;background:#EAF3E6;border:1px solid var(--ok);color:var(--ok);font-weight:700;max-width:620px;overflow-wrap:anywhere}
+.msg.err{background:#FDEDEB;border-color:#B3261E;color:#8C1D18}
+input.bad{border-color:#B3261E;background:#FFF1EF}
+footer{margin-top:34px;padding-top:12px;border-top:1px solid var(--rule);font-size:12px;letter-spacing:.05em;color:var(--maroon);font-weight:600}
+@media (max-width:720px){.choices{grid-template-columns:1fr}.hero-band{padding:26px 20px 24px}.hero-num{font-size:120px}.card{padding:18px 16px 20px}.there{padding:4px 14px 6px}.there p{font-size:18px}.btn.primary,.btns .btn{width:100%}.bar{margin:0 -18px;padding:9px 18px}}
+html[dir=rtl] .hero-band::before{left:auto;right:0}
+html[dir=rtl] .hero-num{right:auto;left:20px}
+html[dir=rtl] .there{border-left:1px solid var(--edge);border-right:6px solid var(--red)}
+html[dir=rtl] .reveal{border-left:1px solid var(--rule);border-right:6px solid var(--maroon)}
+html[dir=rtl] .choice{text-align:right}
+html[dir=rtl] .choice[aria-pressed="true"]::after{margin-left:0;margin-right:auto}
+html[dir=rtl] .howto ol{margin:.4em 1.2em .2em 0}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+@media print{body::before{display:none}.bar,.finish,.btn,.msg,.choice:disabled[aria-pressed=false]{display:none!important}.panel{backdrop-filter:none;box-shadow:none;background:#fff}.card{break-inside:avoid}}
+/*sp-i18n-css*/
+.sp-lang-bar{display:flex;justify-content:flex-end;padding:8px 12px 0;position:relative;z-index:5}
+.sp-lang{display:inline-flex;gap:2px;padding:3px;border-radius:10px;background:rgba(255,255,255,.88);border:1px solid rgba(0,0,0,.18);font-family:system-ui,"Segoe UI",Tahoma,Arial,sans-serif}
+.sp-lang button{border:0;background:transparent;color:#222;font:600 13px/1 system-ui,"Segoe UI",Tahoma,Arial,sans-serif;padding:7px 11px;border-radius:7px;cursor:pointer}
+.sp-lang button[aria-pressed="true"]{background:#222;color:#fff}
+.sp-lang button:focus-visible{outline:3px solid #2a6df4;outline-offset:1px}
+textarea,input,select{unicode-bidi:plaintext}
+html[lang="ar"] body,html[lang="ar"] button,html[lang="ar"] textarea,html[lang="ar"] input,html[lang="ar"] select{font-family:"Segoe UI",Tahoma,"Noto Sans Arabic","Arial",system-ui,sans-serif}
+html[lang="ar"] body{line-height:1.8}
+html[lang="ar"] *{letter-spacing:0!important}
+html[dir="rtl"] textarea,html[dir="rtl"] input{text-align:start}
+@media print{.sp-lang-bar{display:none}}
+/*/sp-i18n-css*/
+</style></head><body>
+<!--sp-bar--><div class="sp-lang-bar"><div class="sp-lang" role="group" aria-label="Language / Idioma / اللغة"><button type="button" data-lang="en" lang="en" aria-pressed="true">English</button><button type="button" data-lang="es" lang="es" aria-pressed="false">Español</button><button type="button" data-lang="ar" lang="ar" aria-pressed="false">العربية</button></div></div><!--/sp-bar-->
+<div class="wrap">
+<header class="hero"><div class="hero-band"><div class="eyebrow">1790-1860</div>
+<h1>Would You Rather</h1><p class="sub">The South, Slavery, and Reform</p><span class="hero-num" aria-hidden="true">7</span></div>
+<div class="meta panel">
+<label>FIRST NAME *<input id="f_first" type="text" autocomplete="given-name"></label>
+<label>LAST NAME *<input id="f_last" type="text" autocomplete="family-name"></label>
+<label>PERIOD *<input id="f_period" type="text" inputmode="numeric" maxlength="12" placeholder="Example: 3"></label>
+<label>DATE (fills in when you finish)<input id="f_date" type="text" readonly tabindex="-1" placeholder="Automatic"></label>
+</div></header>
+<div class="howto panel"><div><b>How to work.</b> People in history faced hard choices. Here are five. There is no right or wrong choice. Your job is to understand why people chose what they did.</div>
+<ol><li>Read “You are there.”</li><li>Tap the choice you would make.</li><li>Write your reason. Use at least one fact from the lesson.</li><li>Write a Counter-Argument: the best reason someone on the other side would give.</li><li>Tap <b>Lock in my answer</b> to see what really happened.</li></ol>
+<div>Your work saves on this device as you type. Use <b>Save Progress</b> at the bottom to download a backup file, and <b>Load Progress</b> to continue later.</div></div>
+<div class="bar"><div class="row"><span id="pct">0 of 5 dilemmas locked in</span><div class="track"><div class="fill" id="fill"></div></div></div></div>
+
+<section class="card panel" id="d1" data-n="1" data-a="Join the revivals and camp meetings" data-b="Stay with a calmer church that stresses reason" data-short="Revival or quiet church" aria-labelledby="h1">
+<div class="kick">Dilemma 1 <span>of 5</span> · Early 1800s</div>
+<h2 id="h1">Revival Tent or Quiet Church?</h2>
+<div class="there"><span class="lab">You are there</span><p>It is the early 1800s. A huge wave of religious revivals is spreading across the country. It is called the Second Great Awakening.</p><p>On the frontier, the revivals bring tremendous excitement. People gather at camp meetings to hear traveling preachers. The message is simple: salvation is available to anyone who repents and embraces the teachings of Christ.</p><p>Other Americans prefer a calmer path. Unitarians say people are not born sinful. They say that by following the teachings of Jesus and trusting their own consciences, all people can be saved. Universalists tell believers to use their own God-given reasoning.</p><p>You have to decide where to worship.</p></div>
+<p class="rather">Would you rather...</p>
+<div class="choices" role="group" aria-label="Choose one">
+<button type="button" class="choice" data-o="A" aria-pressed="false"><span class="ltr">A</span><span>Join the revivals and camp meetings</span></button>
+<button type="button" class="choice" data-o="B" aria-pressed="false"><span class="ltr">B</span><span>Stay with a calmer church that stresses reason</span></button>
+</div>
+<div class="work">
+<div class="field"><label for="d1_reason">Your reason</label><span class="hint">Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”</span>
+<textarea id="d1_reason" data-k="reason" placeholder="Type your reason here..."></textarea></div>
+<div class="field"><label for="d1_counter">Counter-Argument</label><span class="hint">What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”</span>
+<textarea id="d1_counter" data-k="counter" placeholder="Type the other side’s best reason here..."></textarea></div>
+<div class="row2"><button type="button" class="btn primary lockBtn" disabled>Lock in my answer</button>
+<button type="button" class="btn editBtn">Edit my answer</button><span class="cstat" aria-live="polite"></span></div>
+<div class="reveal" aria-live="polite"><span class="lab">What really happened</span><p>The revivals grew very fast. Baptists, Methodists, and Presbyterians became hugely popular. In 1780, the nation had only 50 Methodist churches. By 1860, there were 20,000, far more than any other denomination.</p><p>Norton says the frontier revivals brought “tremendous excitement and emotional excesses.” Western New York had so much revival activity that it was called the burned-over district. The revivals gave energy to the reform movements that came next, and new groups such as the Mormon Church grew out of them. Churches that stressed reason also drew followers. Unitarian churches were popular with educated people in cities like Boston. Universalists attracted a much larger group of working poor.</p><p class="cite">Source: Norton Ch. 12, “A More Democratic Religion”.</p></div>
+</div>
+</section>
+<section class="card panel" id="d2" data-n="2" data-a="Support gradual change and the American Colonization Society" data-b="Join Garrison’s call for immediate abolition" data-short="Slow or immediate end to slavery" aria-labelledby="h2">
+<div class="kick">Dilemma 2 <span>of 5</span> · 1831</div>
+<h2 id="h2">End Slavery Slowly or Right Now?</h2>
+<div class="there"><span class="lab">You are there</span><p>It is 1831. You live in the North. You have doubts about slavery and want to do something about it.</p><p>One path is gradual change. In 1816, the American Colonization Society was formed in Washington, D.C. It raises money to send free Black people back to Africa. James Madison, Andrew Jackson, and Daniel Webster support it.</p><p>Another path is new. William Lloyd Garrison is launching an anti-slavery newspaper called The Liberator. In the first issue, he condemns “the popular but pernicious doctrine of gradual emancipation.” He wants slavery to end immediately.</p><p>Which path do you choose?</p></div>
+<p class="rather">Would you rather...</p>
+<div class="choices" role="group" aria-label="Choose one">
+<button type="button" class="choice" data-o="A" aria-pressed="false"><span class="ltr">A</span><span>Support gradual change and the American Colonization Society</span></button>
+<button type="button" class="choice" data-o="B" aria-pressed="false"><span class="ltr">B</span><span>Join Garrison’s call for immediate abolition</span></button>
+</div>
+<div class="work">
+<div class="field"><label for="d2_reason">Your reason</label><span class="hint">Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”</span>
+<textarea id="d2_reason" data-k="reason" placeholder="Type your reason here..."></textarea></div>
+<div class="field"><label for="d2_counter">Counter-Argument</label><span class="hint">What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”</span>
+<textarea id="d2_counter" data-k="counter" placeholder="Type the other side’s best reason here..."></textarea></div>
+<div class="row2"><button type="button" class="btn primary lockBtn" disabled>Lock in my answer</button>
+<button type="button" class="btn editBtn">Edit my answer</button><span class="cstat" aria-live="polite"></span></div>
+<div class="reveal" aria-live="polite"><span class="lab">What really happened</span><p>The 1830s were a turning point. More and more Americans decided that gradual approaches were not enough, and they called for immediate abolition everywhere. They saw slavery as a sin that Christians had to remove. By 1840, about 160,000 people in more than 200 local branches belonged to the American Anti-Slavery Society.</p><p>Norton says some White Americans backed colonization because they opposed slavery, but others saw it as a way to get rid of free Black people. Most leaders of the free Black community rejected the idea. They said the United States was their native land, and they had as much right to citizenship as anyone. Of the first 500 subscribers to The Liberator, 450 were free Black people.</p><p>Meanwhile, slavery kept growing in the South. The enslaved population went from fewer than 700,000 in 1790 to more than 2 million in 1830, and to 4 million by 1860. Norton says most White Southerners were fiercely loyal to slavery.</p><p class="cite">Source: Norton Ch. 12, “Anti-Slavery and Women’s Rights Movements”.</p></div>
+</div>
+</section>
+<section class="card panel" id="d3" data-n="3" data-a="Support tax-funded public schools" data-b="Oppose tax-funded public schools" data-short="Public schools" aria-labelledby="h3">
+<div class="kick">Dilemma 3 <span>of 5</span> · 1830s-1840s</div>
+<h2 id="h3">Tax-Funded Public Schools: Support or Oppose?</h2>
+<div class="there"><span class="lab">You are there</span><p>It is the 1830s. You live in Massachusetts. Many people agree that a republic needs well-informed citizens, because the people hold the political power. But no state has a public school system yet.</p><p>State legislator Horace Mann has a plan. He wants statewide, tax-supported public schools. They would be free to all children, no matter their gender, class, race, or ethnicity. That includes immigrant children.</p><p>Mann says universal education would be “the great equalizer of the conditions of men—the balance-wheel of the social machinery.” He also says schools would teach values such as hard work and clean living.</p><p>But schools cost money, and the money would come from taxes. Do you support the plan?</p></div>
+<p class="rather">Would you rather...</p>
+<div class="choices" role="group" aria-label="Choose one">
+<button type="button" class="choice" data-o="A" aria-pressed="false"><span class="ltr">A</span><span>Support tax-funded public schools</span></button>
+<button type="button" class="choice" data-o="B" aria-pressed="false"><span class="ltr">B</span><span>Oppose tax-funded public schools</span></button>
+</div>
+<div class="work">
+<div class="field"><label for="d3_reason">Your reason</label><span class="hint">Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”</span>
+<textarea id="d3_reason" data-k="reason" placeholder="Type your reason here..."></textarea></div>
+<div class="field"><label for="d3_counter">Counter-Argument</label><span class="hint">What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”</span>
+<textarea id="d3_counter" data-k="counter" placeholder="Type the other side’s best reason here..."></textarea></div>
+<div class="row2"><button type="button" class="btn primary lockBtn" disabled>Lock in my answer</button>
+<button type="button" class="btn editBtn">Edit my answer</button><span class="cstat" aria-live="polite"></span></div>
+<div class="reveal" aria-live="polite"><span class="lab">What really happened</span><p>Mann led the early drive for statewide, tax-supported public schools. By the 1840s, most states in the North and Midwest had joined the public school movement.</p><p>But the schools had real problems. Norton says funds for buildings, books, and equipment were limited. Teachers were poorly paid and often poorly prepared.</p><p class="cite">Source: Norton Ch. 12, “The Reform Impulse”.</p></div>
+</div>
+</section>
+<section class="card panel" id="d4" data-n="4" data-a="Stay with moral persuasion" data-b="Join the Liberty Party and use political action" data-short="Moral persuasion or politics" aria-labelledby="h4">
+<div class="kick">Dilemma 4 <span>of 5</span> · 1840</div>
+<h2 id="h4">Change Hearts or Change Laws?</h2>
+<div class="there"><span class="lab">You are there</span><p>It is 1840. You belong to the American Anti-Slavery Society. It has about 160,000 members in more than 200 local branches. It says slaveholding is “a heinous crime in the sight of God.”</p><p>William Lloyd Garrison’s plan is “moral suasion.” That means peaceful persuasion that tells people slavery is a sin. Norton calls it a moral crusade rather than a political movement.</p><p>Now some members doubt that moral suasion will ever end slavery. They say political action would work best. In 1840, they form the Liberty Party. Its goal is to elect a president who would restrict the spread of slavery.</p><p>Where do you put your effort?</p></div>
+<p class="rather">Would you rather...</p>
+<div class="choices" role="group" aria-label="Choose one">
+<button type="button" class="choice" data-o="A" aria-pressed="false"><span class="ltr">A</span><span>Stay with moral persuasion</span></button>
+<button type="button" class="choice" data-o="B" aria-pressed="false"><span class="ltr">B</span><span>Join the Liberty Party and use political action</span></button>
+</div>
+<div class="work">
+<div class="field"><label for="d4_reason">Your reason</label><span class="hint">Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”</span>
+<textarea id="d4_reason" data-k="reason" placeholder="Type your reason here..."></textarea></div>
+<div class="field"><label for="d4_counter">Counter-Argument</label><span class="hint">What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”</span>
+<textarea id="d4_counter" data-k="counter" placeholder="Type the other side’s best reason here..."></textarea></div>
+<div class="row2"><button type="button" class="btn primary lockBtn" disabled>Lock in my answer</button>
+<button type="button" class="btn editBtn">Edit my answer</button><span class="cstat" aria-live="polite"></span></div>
+<div class="reveal" aria-live="polite"><span class="lab">What really happened</span><p>The anti-slavery movement split over this question. Norton says one faction of the American Anti-Slavery Society decided that political action would be the most effective way to reach its goal, so it formed the Liberty Party in 1840.</p><p>All abolitionists faced hard opposition. Racism was widespread in the North, especially among the working poor. Abolitionist speakers faced hostile White crowds, and sometimes the clashes turned violent. Black people were barred from public places in the North, such as churches, schools, hotels, railroad stations, and cemeteries. Free African Americans helped turn the struggle into a fight against racial discrimination.</p><p>In the South, after Nat Turner’s Rebellion in 1831, the Virginia legislature debated whether slavery should be abolished. The proposal was defeated. Instead, lawmakers restricted the ability of enslaved people to learn to read and write and to gather for religious meetings.</p><p class="cite">Source: Norton Ch. 12, “Anti-Slavery and Women’s Rights Movements”.</p></div>
+</div>
+</section>
+<section class="card panel" id="d5" data-n="5" data-a="Sign the Declaration of Rights and Sentiments" data-b="Stay out and keep to the idea of separate spheres" data-short="Seneca Falls" aria-labelledby="h5">
+<div class="kick">Dilemma 5 <span>of 5</span> · 1848</div>
+<h2 id="h5">Seneca Falls: Sign or Stay Out?</h2>
+<div class="there"><span class="lab">You are there</span><p>It is 1848. You live in western New York. Women cannot vote or serve on juries. They are barred from the ministry and most other professions, and college is rarely an option.</p><p>Many people believe in the “cult of domesticity.” Catharine Beecher’s 1842 book promotes it. Women should manage the household and raise the children, separate from the man’s sphere of work outside the home.</p><p>Now Lucretia Mott and Elizabeth Cady Stanton have called a convention in Seneca Falls. It will discuss “the social, civil, and religious condition and rights of women.” People are asked to sign a Declaration of Rights and Sentiments. It is a revision of the Declaration of Independence. It says “all men and women are created equal.” Its most controversial demand is the right to vote.</p><p>Would you sign?</p></div>
+<p class="rather">Would you rather...</p>
+<div class="choices" role="group" aria-label="Choose one">
+<button type="button" class="choice" data-o="A" aria-pressed="false"><span class="ltr">A</span><span>Sign the Declaration of Rights and Sentiments</span></button>
+<button type="button" class="choice" data-o="B" aria-pressed="false"><span class="ltr">B</span><span>Stay out and keep to the idea of separate spheres</span></button>
+</div>
+<div class="work">
+<div class="field"><label for="d5_reason">Your reason</label><span class="hint">Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”</span>
+<textarea id="d5_reason" data-k="reason" placeholder="Type your reason here..."></textarea></div>
+<div class="field"><label for="d5_counter">Counter-Argument</label><span class="hint">What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”</span>
+<textarea id="d5_counter" data-k="counter" placeholder="Type the other side’s best reason here..."></textarea></div>
+<div class="row2"><button type="button" class="btn primary lockBtn" disabled>Lock in my answer</button>
+<button type="button" class="btn editBtn">Edit my answer</button><span class="cstat" aria-live="polite"></span></div>
+<div class="reveal" aria-live="polite"><span class="lab">What really happened</span><p>Norton says the goals and strong language were too radical for many of the 300 delegates, and for most Americans. Even so, the gathering was an important first step in the campaign for women’s rights.</p><p>Thirty-two men joined the women in signing the Declaration. One of them was Frederick Douglass, who became a forceful supporter of women’s rights. As abolition gained momentum, women’s rights was debated more widely. Some anti-slavery activists, like Sojourner Truth, said the fight against slavery needed a wider fight for freedom for all people, including women. Women in the 1840s were not all of one mind about how to proceed.</p><p class="cite">Source: Norton Ch. 12, “Anti-Slavery and Women’s Rights Movements”.</p></div>
+</div>
+</section>
+<section class="tally panel" id="tally"><div class="kick">The end</div><h2>Your choices</h2><p style="margin:0">Here is a summary of the choices you made.</p>
+<ol id="tallyList"></ol><p class="sum" id="tallySum"></p></section>
+<div class="finish panel" id="actions"><div class="status" id="status"></div>
+<div class="btns"><button class="btn" id="saveBtn" type="button">Save Progress</button><button class="btn" id="loadBtn" type="button">Load Progress</button>
+<input type="file" id="loadFile" accept=".json,application/json" hidden>
+<button class="btn primary" id="finishBtn" type="button" disabled>Finished — Download File to Submit</button></div>
+<div class="msg" id="msg" role="status"></div><button class="link" id="reset" type="button">Clear all my answers</button></div>
+<footer>UNIT 2 · AN EXPANDING NATION | CPUSH | DANIEL GARZA, M.A.</footer>
+</div>
+<script>
+(function(){
+  var PACKET='CPUSH_L7_WYR';
+  var STORE='cpush_l7_wyr_student';
+  var $=function(i){return document.getElementById(i)};
+  var first=$('f_first'),last=$('f_last'),period=$('f_period'),dateF=$('f_date');
+  var cards=[].slice.call(document.querySelectorAll('.card'));
+  var MIN=15;
+  var data={meta:{},cards:{}};
+  function load(){try{var d=JSON.parse(localStorage.getItem(STORE)||'null');if(d&&d.cards)data=d}catch(e){}}
+  function persist(){try{localStorage.setItem(STORE,JSON.stringify(data))}catch(e){}}
+  function cs(n){return data.cards[n]||(data.cards[n]={choice:'',reason:'',counter:'',locked:false})}
+  function msg(t,err){var m=$('msg');m.textContent=t;m.className='msg'+(err?' err':'');m.style.display='block'}
+  function clean(n){n=window.spAscii?spAscii(n):n;return String(n).normalize('NFD').replace(/[̀-ͯ]/g,'').trim().replace(/\s+/g,'_').replace(/[^A-Za-z0-9_-]/g,'')}
+  function who(){return (clean(last.value)||'Last')+'_'+(clean(first.value)||'First')}
+  function named(){return !!(first.value.trim()&&last.value.trim()&&period.value.trim())}
+  function optText(c,o){return o==='A'?c.getAttribute('data-a'):o==='B'?c.getAttribute('data-b'):''}
+  function render(){
+    var locked=0;
+    cards.forEach(function(c){
+      var n=c.getAttribute('data-n'),s=cs(n);
+      c.classList.toggle('chosen',!!s.choice);
+      c.classList.toggle('locked',!!s.locked);
+      [].forEach.call(c.querySelectorAll('.choice'),function(b){
+        b.setAttribute('aria-pressed',b.getAttribute('data-o')===s.choice?'true':'false');
+        b.disabled=!!s.locked;
+      });
+      var r=c.querySelector('[data-k=reason]'),k=c.querySelector('[data-k=counter]');
+      if(r.value!==s.reason)r.value=s.reason;
+      if(k.value!==s.counter)k.value=s.counter;
+      r.readOnly=k.readOnly=!!s.locked;
+      var ok=s.choice&&s.reason.trim().length>=MIN&&s.counter.trim().length>=MIN;
+      c.querySelector('.lockBtn').disabled=!ok;
+      var st=c.querySelector('.cstat');
+      st.textContent=s.locked?'Locked in. Read what really happened below.':(ok?'Ready. Tap Lock in to see what happened.':'Fill in both boxes to unlock the next step.');
+      if(s.locked)locked++;
+    });
+    var tot=cards.length;
+    $('pct').textContent=locked+' of '+tot+' dilemmas locked in';
+    $('fill').style.width=(100*locked/tot)+'%';
+    var ol=$('tallyList');ol.innerHTML='';
+    cards.forEach(function(c){
+      var n=c.getAttribute('data-n'),s=cs(n),li=document.createElement('li');
+      var txt=s.choice?optText(c,s.choice):'';
+      li.className=(s.locked&&s.choice)?'':'none';
+      li.innerHTML='<span class="tn"></span><span class="tq"></span><span class="ta"></span>';
+      li.querySelector('.tn').textContent=n;
+      li.querySelector('.tq').textContent=c.getAttribute('data-short');
+      li.querySelector('.ta').textContent=(s.locked&&s.choice)?('You chose: '+txt):(s.choice?('Chosen, not locked in yet: '+txt):'Not answered yet');
+      ol.appendChild(li);
+    });
+    $('tallySum').textContent=locked===tot?'All five dilemmas are locked in. Nice work.':'Lock in all five dilemmas to finish.';
+    var miss=[];
+    if(!named())miss.push('first name, last name, and period');
+    if(locked<tot)miss.push((tot-locked)+' dilemma'+(tot-locked===1?'':'s')+' to lock in');
+    var all=named()&&locked===tot;
+    $('status').textContent=all?'Everything is done. Tap Finished to download your file.':'Still needed: '+miss.join('; ')+'.';
+    $('finishBtn').disabled=!all;
+    return all;
+  }
+  function sync(){
+    data.meta={first:first.value,last:last.value,period:period.value,date:dateF.value};
+    persist();render();
+  }
+  function snapshot(){
+    var o={packet:PACKET,course:'CPUSH',lesson:7,assignment:'Would You Rather',version:1,saved:new Date().toISOString(),
+      student:{first:first.value.trim(),last:last.value.trim(),period:period.value.trim(),date:dateF.value.trim()},answers:{}};
+    cards.forEach(function(c){
+      var n=c.getAttribute('data-n'),s=cs(n),p='dilemma_'+n+'_';
+      o.answers[p+'topic']=c.getAttribute('data-short');
+      o.answers[p+'choice']=s.choice;
+      o.answers[p+'choice_text']=optText(c,s.choice);
+      o.answers[p+'reason']=s.reason;
+      o.answers[p+'counter_argument']=s.counter;
+      o.answers[p+'locked_in']=!!s.locked;
+    });
+    return o;
+  }
+  function download(name,obj){
+    var blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;
+    document.body.appendChild(a);a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);
+  }
+  load();
+  var m=data.meta||{};first.value=m.first||'';last.value=m.last||'';period.value=m.period||'';dateF.value=m.date||'';
+  [first,last,period].forEach(function(f){f.addEventListener('input',function(){f.classList.remove('bad');sync()})});
+  cards.forEach(function(c){
+    var n=c.getAttribute('data-n');
+    [].forEach.call(c.querySelectorAll('.choice'),function(b){b.addEventListener('click',function(){var s=cs(n);if(s.locked)return;s.choice=b.getAttribute('data-o');sync()})});
+    c.querySelector('[data-k=reason]').addEventListener('input',function(e){cs(n).reason=e.target.value;sync()});
+    c.querySelector('[data-k=counter]').addEventListener('input',function(e){cs(n).counter=e.target.value;sync()});
+    c.querySelector('.lockBtn').addEventListener('click',function(){var s=cs(n);if(!s.choice||s.reason.trim().length<MIN||s.counter.trim().length<MIN)return;s.locked=true;sync();var r=c.querySelector('.reveal');if(r.scrollIntoView)r.scrollIntoView({block:'nearest',behavior:'smooth'})});
+    c.querySelector('.editBtn').addEventListener('click',function(){cs(n).locked=false;sync()});
+  });
+  $('saveBtn').addEventListener('click',function(){
+    if(!named()){[first,last,period].forEach(function(f){if(!f.value.trim())f.classList.add('bad')});msg('Please type your first name, last name, and period first.',true);first.scrollIntoView({block:'center'});return}
+    download(who()+'-'+PACKET+'-PROGRESS.json',snapshot());msg('Progress file downloaded. Keep it safe. Use Load Progress to continue later.');
+  });
+  $('loadBtn').addEventListener('click',function(){$('loadFile').click()});
+  $('loadFile').addEventListener('change',function(ev){
+    var f=ev.target.files[0];if(!f)return;
+    var r=new FileReader();
+    r.onload=function(){
+      try{
+        var o=JSON.parse(r.result);
+        if(!o||o.packet!==PACKET||typeof o.answers!=='object')throw new Error('wrong');
+        var st=o.student||{};first.value=st.first||'';last.value=st.last||'';period.value=st.period||'';dateF.value=(o.completed?st.date:'')||'';
+        data.cards={};
+        cards.forEach(function(c){var n=c.getAttribute('data-n'),p='dilemma_'+n+'_',a=o.answers;
+          data.cards[n]={choice:(a[p+'choice']==='A'||a[p+'choice']==='B')?a[p+'choice']:'',reason:String(a[p+'reason']||''),counter:String(a[p+'counter_argument']||''),locked:!!a[p+'locked_in']};});
+        sync();msg('Progress loaded.');
+      }catch(err){msg('That file does not look like a Would You Rather progress file. Try again.',true)}
+      ev.target.value='';
+    };
+    r.onerror=function(){msg('Could not read that file.',true)};
+    r.readAsText(f);
+  });
+  $('finishBtn').addEventListener('click',function(){
+    if(!render())return;
+    var now=new Date();dateF.value=now.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});sync();
+    var o=snapshot();o.completed=true;o.submitted=now.toISOString();
+    var fn=who()+'-'+PACKET+'.json';download(fn,o);
+    msg('Done! Your file '+fn+' downloaded. Upload it to Canvas.');
+  });
+  $('reset').addEventListener('click',function(){
+    if(!confirm('Clear all of your answers on this page?'))return;
+    data={meta:{},cards:{}};first.value=last.value=period.value=dateF.value='';persist();render();
+  });
+  render();
+})();
+</script><!--sp-i18n--><script type="application/json" id="sp-i18n">{"langs":["en","es","ar"],"default":"en","es":{"Save Progress":"Guardar progreso","Load Progress":"Cargar progreso","Finished — Download File to Submit":"Terminé — Descargar el archivo para entregar","Clear all my answers":"Borrar todas mis respuestas","FIRST NAME *":"NOMBRE *","LAST NAME *":"APELLIDO *","PERIOD *":"PERÍODO *","DATE (fills in when you finish)":"FECHA (se llena cuando terminas)","e.g. 3":"p. ej., 3","Automatic":"Automática","Please type your first name, last name, and period first.":"Primero escribe tu nombre, apellido y período.","Western Expansion and Southern Secession":"Expansión hacia el oeste y secesión del sur","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — La Ley de Esclavos Fugitivos","Bleeding Kansas":"Bleeding Kansas — Kansas sangriento","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"Se descargó tu archivo de progreso. Guárdalo bien. Usa «Cargar progreso» para continuar más tarde.","Progress loaded.":"Progreso cargado.","Could not read that file.":"No se pudo leer ese archivo.","Treaty of Guadalupe Hidalgo":"Tratado de Guadalupe Hidalgo","Would You Rather 7 · The South, Slavery, and Reform":"¿Qué preferirías? 7 · El Sur, la esclavitud y la reforma","The South, Slavery, and Reform":"El Sur, la esclavitud y la reforma","UNIT 2 · AN EXPANDING NATION | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 2 · UNA NACIÓN EN EXPANSIÓN | CPUSH | DANIEL GARZA, M.A.","Dilemma 1 <span>of 5<\/span> · Early 1800s":"Dilema 1 <span>de 5<\/span> · principios del siglo XIX","Dilemma 2 <span>of 5<\/span> · 1831":"Dilema 2 <span>de 5<\/span> · 1831","Dilemma 3 <span>of 5<\/span> · 1830s-1840s":"Dilema 3 <span>de 5<\/span> · décadas de 1830 y 1840","Dilemma 4 <span>of 5<\/span> · 1840":"Dilema 4 <span>de 5<\/span> · 1840","Dilemma 5 <span>of 5<\/span> · 1848":"Dilema 5 <span>de 5<\/span> · 1848","Revival or quiet church":"Avivamiento o iglesia tranquila","Slow or immediate end to slavery":"Fin lento o inmediato de la esclavitud","Moral persuasion or politics":"Persuasión moral o política","Public schools":"Escuelas públicas","Seneca Falls":"Seneca Falls","Revival Tent or Quiet Church?":"¿Carpa de avivamiento o iglesia tranquila?","End Slavery Slowly or Right Now?":"¿Terminar con la esclavitud poco a poco o ahora mismo?","Change Hearts or Change Laws?":"¿Cambiar corazones o cambiar leyes?","Tax-Funded Public Schools: Support or Oppose?":"Escuelas públicas pagadas con impuestos: ¿apoyar u oponerse?","Seneca Falls: Sign or Stay Out?":"Seneca Falls: ¿firmar o quedarte fuera?","Which path do you choose?":"¿Qué camino eliges?","Where do you put your effort?":"¿Dónde pones tu esfuerzo?","Would you sign?":"¿Firmarías?","You have to decide where to worship.":"Tienes que decidir dónde rendir culto.","But schools cost money, and the money would come from taxes. Do you support the plan?":"Pero las escuelas cuestan dinero, y el dinero saldría de los impuestos. ¿Apoyas el plan?","Join the revivals and camp meetings":"Unirte a los avivamientos y a las reuniones de campamento","Stay with a calmer church that stresses reason":"Quedarte en una iglesia más tranquila que destaca la razón","Support gradual change and the American Colonization Society":"Apoyar el cambio gradual y la Sociedad Americana de Colonización","Join Garrison’s call for immediate abolition":"Unirte al llamado de Garrison a la abolición inmediata","Stay with moral persuasion":"Seguir con la persuasión moral","Join the Liberty Party and use political action":"Unirte al Partido de la Libertad y usar la acción política","Support tax-funded public schools":"Apoyar las escuelas públicas pagadas con impuestos","Oppose tax-funded public schools":"Oponerte a las escuelas públicas pagadas con impuestos","Sign the Declaration of Rights and Sentiments":"Firmar la Declaración de Derechos y Sentimientos","Stay out and keep to the idea of separate spheres":"Quedarte fuera y mantener la idea de las esferas separadas","Source: Norton Ch. 12, “A More Democratic Religion”.":"Fuente: Norton, cap. 12, “A More Democratic Religion”.","Source: Norton Ch. 12, “Anti-Slavery and Women’s Rights Movements”.":"Fuente: Norton, cap. 12, “Anti-Slavery and Women’s Rights Movements”.","Source: Norton Ch. 12, “The Reform Impulse”.":"Fuente: Norton, cap. 12, “The Reform Impulse”.","It is the early 1800s. A huge wave of religious revivals is spreading across the country. It is called the Second Great Awakening.":"Es a principios del siglo XIX. Una enorme ola de avivamientos religiosos se extiende por el país. Se llama el Segundo Gran Despertar.","On the frontier, the revivals bring tremendous excitement. People gather at camp meetings to hear traveling preachers. The message is simple: salvation is available to anyone who repents and embraces the teachings of Christ.":"En la frontera, los avivamientos causan una gran emoción. La gente se reúne en reuniones de campamento para escuchar a predicadores que viajan de lugar en lugar. El mensaje es sencillo: la salvación está al alcance de cualquiera que se arrepienta y acepte las enseñanzas de Cristo.","Other Americans prefer a calmer path. Unitarians say people are not born sinful. They say that by following the teachings of Jesus and trusting their own consciences, all people can be saved. Universalists tell believers to use their own God-given reasoning.":"Otros estadounidenses prefieren un camino más tranquilo. Los unitarios dicen que las personas no nacen pecadoras. Dicen que, si siguen las enseñanzas de Jesús y confían en su propia conciencia, todas las personas pueden salvarse. Los universalistas dicen a los creyentes que usen la razón que Dios les dio.","The revivals grew very fast. Baptists, Methodists, and Presbyterians became hugely popular. In 1780, the nation had only 50 Methodist churches. By 1860, there were 20,000, far more than any other denomination.":"Los avivamientos crecieron muy rápido. Los bautistas, los metodistas y los presbiterianos se hicieron muy populares. En 1780, el país tenía solo 50 iglesias metodistas. Para 1860, había 20,000, muchas más que cualquier otra denominación.","Norton says the frontier revivals brought “tremendous excitement and emotional excesses.” Western New York had so much revival activity that it was called the burned-over district. The revivals gave energy to the reform movements that came next, and new groups such as the Mormon Church grew out of them. Churches that stressed reason also drew followers. Unitarian churches were popular with educated people in cities like Boston. Universalists attracted a much larger group of working poor.":"Norton dice que los avivamientos de la frontera trajeron «gran emoción y excesos emocionales». En el oeste de Nueva York hubo tantos avivamientos que se le llamó el «distrito quemado» (burned-over district). Los avivamientos dieron energía a los movimientos de reforma que siguieron, y de ellos surgieron nuevos grupos, como la Iglesia mormona. Las iglesias que destacaban la razón también atrajeron seguidores. Las iglesias unitarias eran populares entre las personas educadas de ciudades como Boston. Los universalistas atrajeron a un grupo mucho más grande de trabajadores pobres.","It is 1831. You live in the North. You have doubts about slavery and want to do something about it.":"Es 1831. Vives en el Norte. Tienes dudas sobre la esclavitud y quieres hacer algo al respecto.","One path is gradual change. In 1816, the American Colonization Society was formed in Washington, D.C. It raises money to send free Black people back to Africa. James Madison, Andrew Jackson, and Daniel Webster support it.":"Un camino es el cambio gradual. En 1816 se formó en Washington, D. C., la Sociedad Americana de Colonización. Reúne dinero para enviar de regreso a África a las personas negras libres. James Madison, Andrew Jackson y Daniel Webster la apoyan.","Another path is new. William Lloyd Garrison is launching an anti-slavery newspaper called The Liberator. In the first issue, he condemns “the popular but pernicious doctrine of gradual emancipation.” He wants slavery to end immediately.":"Otro camino es nuevo. William Lloyd Garrison está lanzando un periódico contra la esclavitud llamado The Liberator. En el primer número, condena «la doctrina popular pero perniciosa de la emancipación gradual». Quiere que la esclavitud termine de inmediato.","In the South, after Nat Turner’s Rebellion in 1831, the Virginia legislature debated whether slavery should be abolished. The proposal was defeated. Instead, lawmakers restricted the ability of enslaved people to learn to read and write and to gather for religious meetings.":"En el Sur, después de la rebelión de Nat Turner en 1831, la legislatura de Virginia debatió si se debía abolir la esclavitud. La propuesta fue rechazada. En cambio, los legisladores limitaron la posibilidad de que las personas esclavizadas aprendieran a leer y escribir y se reunieran para actos religiosos.","Meanwhile, slavery kept growing in the South. The enslaved population went from fewer than 700,000 in 1790 to more than 2 million in 1830, and to 4 million by 1860. Norton says most White Southerners were fiercely loyal to slavery.":"Mientras tanto, la esclavitud siguió creciendo en el Sur. La población esclavizada pasó de menos de 700,000 en 1790 a más de 2 millones en 1830, y a 4 millones para 1860. Norton dice que la mayoría de los sureños blancos eran muy leales a la esclavitud.","Norton says some White Americans backed colonization because they opposed slavery, but others saw it as a way to get rid of free Black people. Most leaders of the free Black community rejected the idea. They said the United States was their native land, and they had as much right to citizenship as anyone. Of the first 500 subscribers to The Liberator, 450 were free Black people.":"Norton dice que algunos estadounidenses blancos apoyaban la colonización porque se oponían a la esclavitud, pero otros la veían como una manera de deshacerse de las personas negras libres. La mayoría de los líderes de la comunidad negra libre rechazó la idea. Dijeron que Estados Unidos era su tierra natal y que tenían tanto derecho a la ciudadanía como cualquiera. De los primeros 500 suscriptores de The Liberator, 450 eran personas negras libres.","It is 1840. You belong to the American Anti-Slavery Society. It has about 160,000 members in more than 200 local branches. It says slaveholding is “a heinous crime in the sight of God.”":"Es 1840. Perteneces a la Sociedad Americana contra la Esclavitud. Tiene unos 160,000 miembros en más de 200 sucursales locales. Dice que tener esclavos es «un crimen atroz a los ojos de Dios».","William Lloyd Garrison’s plan is “moral suasion.” That means peaceful persuasion that tells people slavery is a sin. Norton calls it a moral crusade rather than a political movement.":"El plan de William Lloyd Garrison es la «persuasión moral». Eso significa una persuasión pacífica que le dice a la gente que la esclavitud es un pecado. Norton lo llama una cruzada moral y no un movimiento político.","Now some members doubt that moral suasion will ever end slavery. They say political action would work best. In 1840, they form the Liberty Party. Its goal is to elect a president who would restrict the spread of slavery.":"Ahora algunos miembros dudan de que la persuasión moral termine algún día con la esclavitud. Dicen que la acción política funcionaría mejor. En 1840 forman el Partido de la Libertad. Su meta es elegir a un presidente que limite la expansión de la esclavitud.","The anti-slavery movement split over this question. Norton says one faction of the American Anti-Slavery Society decided that political action would be the most effective way to reach its goal, so it formed the Liberty Party in 1840.":"El movimiento contra la esclavitud se dividió por esta pregunta. Norton dice que una facción de la Sociedad Americana contra la Esclavitud decidió que la acción política sería la manera más eficaz de lograr su meta, y por eso formó el Partido de la Libertad en 1840.","The 1830s were a turning point. More and more Americans decided that gradual approaches were not enough, and they called for immediate abolition everywhere. They saw slavery as a sin that Christians had to remove. By 1840, about 160,000 people in more than 200 local branches belonged to the American Anti-Slavery Society.":"La década de 1830 fue un punto de inflexión. Cada vez más estadounidenses decidieron que los métodos graduales no bastaban, y pidieron la abolición inmediata en todas partes. Veían la esclavitud como un pecado que los cristianos debían eliminar. Para 1840, unas 160,000 personas, en más de 200 sucursales locales, pertenecían a la Sociedad Americana contra la Esclavitud.","All abolitionists faced hard opposition. Racism was widespread in the North, especially among the working poor. Abolitionist speakers faced hostile White crowds, and sometimes the clashes turned violent. Black people were barred from public places in the North, such as churches, schools, hotels, railroad stations, and cemeteries. Free African Americans helped turn the struggle into a fight against racial discrimination.":"Todos los abolicionistas enfrentaron una fuerte oposición. El racismo estaba muy extendido en el Norte, sobre todo entre los trabajadores pobres. Los oradores abolicionistas enfrentaron multitudes blancas hostiles, y a veces los enfrentamientos se volvían violentos. A las personas negras se les prohibía la entrada a lugares públicos del Norte, como iglesias, escuelas, hoteles, estaciones de tren y cementerios. Los afroamericanos libres ayudaron a convertir la lucha en una lucha contra la discriminación racial.","It is the 1830s. You live in Massachusetts. Many people agree that a republic needs well-informed citizens, because the people hold the political power. But no state has a public school system yet.":"Es la década de 1830. Vives en Massachusetts. Muchas personas están de acuerdo en que una república necesita ciudadanos bien informados, porque el pueblo tiene el poder político. Pero ningún estado tiene todavía un sistema de escuelas públicas.","State legislator Horace Mann has a plan. He wants statewide, tax-supported public schools. They would be free to all children, no matter their gender, class, race, or ethnicity. That includes immigrant children.":"El legislador estatal Horace Mann tiene un plan. Quiere escuelas públicas en todo el estado, sostenidas con impuestos. Serían gratuitas para todos los niños, sin importar su género, clase, raza o etnia. Eso incluye a los niños inmigrantes.","Mann says universal education would be “the great equalizer of the conditions of men—the balance-wheel of the social machinery.” He also says schools would teach values such as hard work and clean living.":"Mann dice que la educación universal sería «el gran igualador de las condiciones de los hombres, el volante de equilibrio de la maquinaria social». También dice que las escuelas enseñarían valores como el trabajo duro y la vida limpia.","Mann led the early drive for statewide, tax-supported public schools. By the 1840s, most states in the North and Midwest had joined the public school movement.":"Mann encabezó el impulso inicial por escuelas públicas estatales sostenidas con impuestos. Para la década de 1840, la mayoría de los estados del Norte y del Medio Oeste se habían unido al movimiento de escuelas públicas.","But the schools had real problems. Norton says funds for buildings, books, and equipment were limited. Teachers were poorly paid and often poorly prepared.":"Pero las escuelas tenían problemas reales. Norton dice que los fondos para edificios, libros y equipo eran limitados. A los maestros se les pagaba mal y muchas veces estaban mal preparados.","It is 1848. You live in western New York. Women cannot vote or serve on juries. They are barred from the ministry and most other professions, and college is rarely an option.":"Es 1848. Vives en el oeste del estado de Nueva York. Las mujeres no pueden votar ni ser parte de un jurado. Se les prohíbe el ministerio religioso y la mayoría de las demás profesiones, y la universidad casi nunca es una opción.","Many people believe in the “cult of domesticity.” Catharine Beecher’s 1842 book promotes it. Women should manage the household and raise the children, separate from the man’s sphere of work outside the home.":"Muchas personas creen en el «culto a la domesticidad». El libro de Catharine Beecher de 1842 lo promueve. Las mujeres deben dirigir el hogar y criar a los hijos, separadas del ámbito del hombre: el trabajo fuera de casa.","Now Lucretia Mott and Elizabeth Cady Stanton have called a convention in Seneca Falls. It will discuss “the social, civil, and religious condition and rights of women.” People are asked to sign a Declaration of Rights and Sentiments. It is a revision of the Declaration of Independence. It says “all men and women are created equal.” Its most controversial demand is the right to vote.":"Ahora Lucretia Mott y Elizabeth Cady Stanton han convocado una convención en Seneca Falls. Se hablará de «la condición social, civil y religiosa y los derechos de las mujeres». Se pide a la gente que firme una Declaración de Derechos y Sentimientos. Es una revisión de la Declaración de Independencia. Dice que «todos los hombres y mujeres son creados iguales». Su exigencia más polémica es el derecho al voto.","Norton says the goals and strong language were too radical for many of the 300 delegates, and for most Americans. Even so, the gathering was an important first step in the campaign for women’s rights.":"Norton dice que las metas y el lenguaje fuerte eran demasiado radicales para muchos de los 300 delegados y para la mayoría de los estadounidenses. Aun así, la reunión fue un primer paso importante en la campaña por los derechos de las mujeres.","Thirty-two men joined the women in signing the Declaration. One of them was Frederick Douglass, who became a forceful supporter of women’s rights. As abolition gained momentum, women’s rights was debated more widely. Some anti-slavery activists, like Sojourner Truth, said the fight against slavery needed a wider fight for freedom for all people, including women. Women in the 1840s were not all of one mind about how to proceed.":"Treinta y dos hombres se unieron a las mujeres para firmar la Declaración. Uno de ellos fue Frederick Douglass, quien se convirtió en un firme defensor de los derechos de las mujeres. A medida que la abolición ganaba fuerza, los derechos de las mujeres se debatieron más ampliamente. Algunos activistas contra la esclavitud, como Sojourner Truth, dijeron que la lucha contra la esclavitud necesitaba una lucha más amplia por la libertad de todas las personas, incluidas las mujeres. Las mujeres de la década de 1840 no tenían todas la misma opinión sobre cómo avanzar.","You chose: Join the revivals and camp meetings":"Elegiste: Unirte a los avivamientos y a las reuniones de campamento","Chosen, not locked in yet: Join the revivals and camp meetings":"Elegida, aún sin confirmar: Unirte a los avivamientos y a las reuniones de campamento","You chose: Stay with a calmer church that stresses reason":"Elegiste: Quedarte en una iglesia más tranquila que destaca la razón","Chosen, not locked in yet: Stay with a calmer church that stresses reason":"Elegida, aún sin confirmar: Quedarte en una iglesia más tranquila que destaca la razón","You chose: Support gradual change and the American Colonization Society":"Elegiste: Apoyar el cambio gradual y la Sociedad Americana de Colonización","Chosen, not locked in yet: Support gradual change and the American Colonization Society":"Elegida, aún sin confirmar: Apoyar el cambio gradual y la Sociedad Americana de Colonización","You chose: Join Garrison’s call for immediate abolition":"Elegiste: Unirte al llamado de Garrison a la abolición inmediata","Chosen, not locked in yet: Join Garrison’s call for immediate abolition":"Elegida, aún sin confirmar: Unirte al llamado de Garrison a la abolición inmediata","You chose: Stay with moral persuasion":"Elegiste: Seguir con la persuasión moral","Chosen, not locked in yet: Stay with moral persuasion":"Elegida, aún sin confirmar: Seguir con la persuasión moral","You chose: Join the Liberty Party and use political action":"Elegiste: Unirte al Partido de la Libertad y usar la acción política","Chosen, not locked in yet: Join the Liberty Party and use political action":"Elegida, aún sin confirmar: Unirte al Partido de la Libertad y usar la acción política","You chose: Support tax-funded public schools":"Elegiste: Apoyar las escuelas públicas pagadas con impuestos","Chosen, not locked in yet: Support tax-funded public schools":"Elegida, aún sin confirmar: Apoyar las escuelas públicas pagadas con impuestos","You chose: Oppose tax-funded public schools":"Elegiste: Oponerte a las escuelas públicas pagadas con impuestos","Chosen, not locked in yet: Oppose tax-funded public schools":"Elegida, aún sin confirmar: Oponerte a las escuelas públicas pagadas con impuestos","You chose: Sign the Declaration of Rights and Sentiments":"Elegiste: Firmar la Declaración de Derechos y Sentimientos","Chosen, not locked in yet: Sign the Declaration of Rights and Sentiments":"Elegida, aún sin confirmar: Firmar la Declaración de Derechos y Sentimientos","You chose: Stay out and keep to the idea of separate spheres":"Elegiste: Quedarte fuera y mantener la idea de las esferas separadas","Chosen, not locked in yet: Stay out and keep to the idea of separate spheres":"Elegida, aún sin confirmar: Quedarte fuera y mantener la idea de las esferas separadas","<b>How to work.<\/b> People in history faced hard choices. Here are five. There is no right or wrong choice. Your job is to understand why people chose what they did.":"<b>Cómo trabajar.<\/b> Las personas en la historia enfrentaron decisiones difíciles. Aquí hay cinco. No hay una opción correcta ni incorrecta. Tu trabajo es entender por qué las personas eligieron lo que eligieron.","All five dilemmas are locked in. Nice work.":"Las cinco decisiones están confirmadas. Buen trabajo.","Choose one":"Elige uno","Counter-Argument":"Contraargumento","Edit my answer":"Cambiar mi respuesta","Everything is done. Tap Finished to download your file.":"Todo está listo. Toca «Terminé» para descargar tu archivo.","Example: 3":"Ejemplo: 3","Fill in both boxes to unlock the next step.":"Llena las dos casillas para pasar al siguiente paso.","Here is a summary of the choices you made.":"Este es un resumen de las elecciones que hiciste.","Lock in all five dilemmas to finish.":"Confirma las cinco decisiones para terminar.","Lock in my answer":"Confirmar mi respuesta","Locked in. Read what really happened below.":"Confirmada. Lee abajo lo que realmente pasó.","Not answered yet":"Aún sin responder","Read “You are there.”":"Lee «Tú estás allí».","Ready. Tap Lock in to see what happened.":"Listo. Toca «Confirmar» para ver lo que pasó.","Tap <b>Lock in my answer<\/b> to see what really happened.":"Toca <b>Confirmar mi respuesta<\/b> para ver lo que realmente pasó.","Tap the choice you would make.":"Toca la opción que tú elegirías.","That file does not look like a Would You Rather progress file. Try again.":"Ese archivo no parece un archivo de progreso de «¿Qué preferirías?». Inténtalo de nuevo.","The end":"El final","Type the other side’s best reason here...":"Escribe aquí la mejor razón del otro lado...","Type your reason here...":"Escribe tu razón aquí...","What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”":"¿Cuál es la mejor razón que daría alguien del OTRO lado? Escríbela como la diría esa persona. Prueba: «Alguien que eligió el otro lado diría...»","What really happened":"Lo que realmente pasó","Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”":"¿Por qué elegiste esto? Usa al menos un dato de la lección. Prueba: «Elegí esto porque... Un dato es...»","Would You Rather":"¿Qué preferirías?","Would you rather...":"¿Qué preferirías?...","Write a Counter-Argument: the best reason someone on the other side would give.":"Escribe un contraargumento: la mejor razón que daría alguien del otro lado.","Write your reason. Use at least one fact from the lesson.":"Escribe tu razón. Usa al menos un dato de la lección.","You are there":"Tú estás allí","Your choices":"Tus elecciones","Your reason":"Tu razón","Your work saves on this device as you type. Use <b>Save Progress<\/b> at the bottom to download a backup file, and <b>Load Progress<\/b> to continue later.":"Tu trabajo se guarda en este dispositivo mientras escribes. Usa <b>Guardar progreso<\/b> al final para descargar una copia de respaldo, y <b>Cargar progreso<\/b> para continuar más tarde.","Clear all of your answers on this page?":"¿Borrar todas tus respuestas en esta página?","Your family has to decide.":"Tu familia tiene que decidir."},"ar":{"Save Progress":"حفظ التقدم","Load Progress":"تحميل التقدم","Finished — Download File to Submit":"انتهيت — نزّل الملف لتسليمه","Clear all my answers":"امسح كل إجاباتي","FIRST NAME *":"الاسم الأول *","LAST NAME *":"اسم العائلة *","PERIOD *":"الحصة *","DATE (fills in when you finish)":"التاريخ (يُكتب تلقائيًا عند الانتهاء)","e.g. 3":"مثال: 3","Automatic":"تلقائي","Please type your first name, last name, and period first.":"اكتب أولًا اسمك الأول واسم العائلة والحصة.","Western Expansion and Southern Secession":"التوسع غربًا وانفصال الجنوب","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"الوحدة 3 · بيت منقسم وأُعيد بناؤه | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — قانون العبيد الهاربين","Bleeding Kansas":"Bleeding Kansas — كانساس النازفة","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"الوحدة 3 · بيت منقسم وأعيد بناؤه | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"تم تنزيل ملف التقدم. احتفظ به في مكان آمن. استخدم «تحميل التقدم» لتكمل لاحقًا.","Progress loaded.":"تم تحميل التقدم.","Could not read that file.":"تعذّرت قراءة هذا الملف.","Treaty of Guadalupe Hidalgo":"معاهدة غوادالوبي هيدالغو (Treaty of Guadalupe Hidalgo)","Would You Rather 7 · The South, Slavery, and Reform":"ماذا تفضّل؟ 7 · الجنوب والعبودية والإصلاح","The South, Slavery, and Reform":"الجنوب والعبودية والإصلاح","UNIT 2 · AN EXPANDING NATION | CPUSH | DANIEL GARZA, M.A.":"الوحدة 2 · أمة في توسع | CPUSH | DANIEL GARZA, M.A.","Dilemma 1 <span>of 5<\/span> · Early 1800s":"المعضلة 1 <span>من 5<\/span> · أوائل القرن التاسع عشر","Dilemma 2 <span>of 5<\/span> · 1831":"المعضلة 2 <span>من 5<\/span> · 1831","Dilemma 3 <span>of 5<\/span> · 1830s-1840s":"المعضلة 3 <span>من 5<\/span> · ثلاثينيات وأربعينيات القرن التاسع عشر","Dilemma 4 <span>of 5<\/span> · 1840":"المعضلة 4 <span>من 5<\/span> · 1840","Dilemma 5 <span>of 5<\/span> · 1848":"المعضلة 5 <span>من 5<\/span> · 1848","Revival or quiet church":"الإحياء الديني أو الكنيسة الهادئة","Slow or immediate end to slavery":"إنهاء العبودية تدريجيًا أو فورًا","Moral persuasion or politics":"الإقناع الأخلاقي أو السياسة","Public schools":"المدارس العامة","Seneca Falls":"سينيكا فولز (Seneca Falls)","Revival Tent or Quiet Church?":"خيمة الإحياء الديني أم الكنيسة الهادئة؟","End Slavery Slowly or Right Now?":"إنهاء العبودية تدريجيًا أم فورًا؟","Change Hearts or Change Laws?":"تغيير القلوب أم تغيير القوانين؟","Tax-Funded Public Schools: Support or Oppose?":"المدارس العامة الممولة من الضرائب: التأييد أم المعارضة؟","Seneca Falls: Sign or Stay Out?":"سينيكا فولز (Seneca Falls): التوقيع أم البقاء خارجًا؟","Which path do you choose?":"أي طريق تختار؟","Where do you put your effort?":"أين تضع جهدك؟","Would you sign?":"هل ستوقّع؟","You have to decide where to worship.":"عليك أن تقرر أين ستؤدي العبادة.","But schools cost money, and the money would come from taxes. Do you support the plan?":"لكن المدارس تكلّف مالًا، وسيأتي المال من الضرائب. هل تؤيد الخطة؟","Join the revivals and camp meetings":"الانضمام إلى حركات الإحياء الديني واجتماعات المخيمات","Stay with a calmer church that stresses reason":"البقاء في كنيسة أهدأ تؤكد على العقل","Support gradual change and the American Colonization Society":"تأييد التغيير التدريجي والجمعية الأمريكية للتوطين (American Colonization Society)","Join Garrison’s call for immediate abolition":"الانضمام إلى دعوة غاريسون (Garrison) إلى الإلغاء الفوري للعبودية","Stay with moral persuasion":"البقاء على الإقناع الأخلاقي","Join the Liberty Party and use political action":"الانضمام إلى حزب الحرية (Liberty Party) واستخدام العمل السياسي","Support tax-funded public schools":"تأييد المدارس العامة الممولة من الضرائب","Oppose tax-funded public schools":"معارضة المدارس العامة الممولة من الضرائب","Sign the Declaration of Rights and Sentiments":"التوقيع على إعلان الحقوق والمشاعر (Declaration of Rights and Sentiments)","Stay out and keep to the idea of separate spheres":"البقاء خارجًا والتمسك بفكرة الدوائر المنفصلة","Source: Norton Ch. 12, “A More Democratic Religion”.":"المصدر: Norton، الفصل 12، “A More Democratic Religion”.","Source: Norton Ch. 12, “Anti-Slavery and Women’s Rights Movements”.":"المصدر: Norton، الفصل 12، “Anti-Slavery and Women’s Rights Movements”.","Source: Norton Ch. 12, “The Reform Impulse”.":"المصدر: Norton، الفصل 12، “The Reform Impulse”.","It is the early 1800s. A huge wave of religious revivals is spreading across the country. It is called the Second Great Awakening.":"نحن في أوائل القرن التاسع عشر. موجة كبيرة من حركات الإحياء الديني تنتشر في أنحاء البلاد. تسمى الصحوة الكبرى الثانية (Second Great Awakening).","On the frontier, the revivals bring tremendous excitement. People gather at camp meetings to hear traveling preachers. The message is simple: salvation is available to anyone who repents and embraces the teachings of Christ.":"على الحدود الغربية تثير حركات الإحياء حماسًا كبيرًا. يجتمع الناس في اجتماعات المخيمات ليسمعوا وعّاظًا متنقلين. الرسالة بسيطة: الخلاص متاح لكل من يتوب ويعتنق تعاليم المسيح.","Other Americans prefer a calmer path. Unitarians say people are not born sinful. They say that by following the teachings of Jesus and trusting their own consciences, all people can be saved. Universalists tell believers to use their own God-given reasoning.":"يفضّل أمريكيون آخرون طريقًا أهدأ. يقول اليونيتاريون (Unitarians) إن الناس لا يولدون خطاة. ويقولون إنه باتباع تعاليم يسوع والثقة بضمائرهم، يمكن أن يخلص جميع الناس. ويطلب اليونيفرساليون (Universalists) من المؤمنين أن يستخدموا عقولهم التي منحهم الله إياها.","The revivals grew very fast. Baptists, Methodists, and Presbyterians became hugely popular. In 1780, the nation had only 50 Methodist churches. By 1860, there were 20,000, far more than any other denomination.":"نمت حركات الإحياء بسرعة كبيرة. أصبح المعمدانيون (Baptists) والميثوديون (Methodists) والمشيخيون (Presbyterians) محبوبين جدًا. في عام 1780، لم يكن في البلاد سوى 50 كنيسة ميثودية. وبحلول عام 1860، صار عددها 20,000، أي أكثر بكثير من أي طائفة أخرى.","Norton says the frontier revivals brought “tremendous excitement and emotional excesses.” Western New York had so much revival activity that it was called the burned-over district. The revivals gave energy to the reform movements that came next, and new groups such as the Mormon Church grew out of them. Churches that stressed reason also drew followers. Unitarian churches were popular with educated people in cities like Boston. Universalists attracted a much larger group of working poor.":"يقول كتاب نورتن (Norton) إن حركات الإحياء على الحدود جلبت «حماسًا كبيرًا وتجاوزات عاطفية». وكان في غرب نيويورك (New York) نشاط إحيائي كثير حتى سُمّيت «المنطقة المحترقة» (burned-over district). أعطت حركات الإحياء طاقة لحركات الإصلاح التي جاءت بعدها، ونشأت منها جماعات جديدة مثل الكنيسة المورمونية (Mormon Church). كما جذبت الكنائس التي تؤكد على العقل أتباعًا. وكانت الكنائس اليونيتارية محبوبة لدى المتعلمين في مدن مثل بوسطن (Boston). وجذب اليونيفرساليون مجموعة أكبر بكثير من الفقراء العاملين.","It is 1831. You live in the North. You have doubts about slavery and want to do something about it.":"نحن في عام 1831. تعيش في الشمال. لديك شكوك حول العبودية وتريد أن تفعل شيئًا حيالها.","One path is gradual change. In 1816, the American Colonization Society was formed in Washington, D.C. It raises money to send free Black people back to Africa. James Madison, Andrew Jackson, and Daniel Webster support it.":"أحد الطرق هو التغيير التدريجي. في عام 1816 تأسست الجمعية الأمريكية للتوطين (American Colonization Society) في واشنطن العاصمة (Washington, D.C.). وهي تجمع المال لإرسال السود الأحرار إلى أفريقيا. ويؤيدها جيمس ماديسون (James Madison) وأندرو جاكسون (Andrew Jackson) ودانيال ويبستر (Daniel Webster).","Another path is new. William Lloyd Garrison is launching an anti-slavery newspaper called The Liberator. In the first issue, he condemns “the popular but pernicious doctrine of gradual emancipation.” He wants slavery to end immediately.":"وهناك طريق آخر جديد. يطلق ويليام لويد غاريسون (William Lloyd Garrison) صحيفة مناهضة للعبودية اسمها «ذي ليبراتور» (The Liberator). وفي العدد الأول، يدين «العقيدة الشائعة لكنها ضارة، وهي التحرير التدريجي». ويريد أن تنتهي العبودية فورًا.","In the South, after Nat Turner’s Rebellion in 1831, the Virginia legislature debated whether slavery should be abolished. The proposal was defeated. Instead, lawmakers restricted the ability of enslaved people to learn to read and write and to gather for religious meetings.":"في الجنوب، بعد ثورة نات تيرنر (Nat Turner) عام 1831، ناقش المجلس التشريعي في فرجينيا (Virginia) هل يجب إلغاء العبودية. هُزم الاقتراح. وبدلًا من ذلك، قيّد المشرّعون قدرة المستعبَدين على تعلم القراءة والكتابة وعلى الاجتماع للعبادة.","Meanwhile, slavery kept growing in the South. The enslaved population went from fewer than 700,000 in 1790 to more than 2 million in 1830, and to 4 million by 1860. Norton says most White Southerners were fiercely loyal to slavery.":"وفي هذه الأثناء، استمرت العبودية في النمو في الجنوب. ارتفع عدد المستعبَدين من أقل من 700,000 في عام 1790 إلى أكثر من 2 مليون في عام 1830، ثم إلى 4 ملايين بحلول عام 1860. ويقول كتاب نورتن (Norton) إن معظم البيض في الجنوب كانوا شديدي الولاء للعبودية.","Norton says some White Americans backed colonization because they opposed slavery, but others saw it as a way to get rid of free Black people. Most leaders of the free Black community rejected the idea. They said the United States was their native land, and they had as much right to citizenship as anyone. Of the first 500 subscribers to The Liberator, 450 were free Black people.":"يقول كتاب نورتن (Norton) إن بعض الأمريكيين البيض أيدوا التوطين لأنهم عارضوا العبودية، بينما رآه آخرون وسيلة للتخلص من السود الأحرار. ورفض معظم قادة المجتمع الأسود الحر هذه الفكرة. قالوا إن الولايات المتحدة هي وطنهم الأصلي، وإن لهم من الحق في المواطنة مثل أي شخص. ومن بين أول 500 مشترك في «ذي ليبراتور» (The Liberator)، كان 450 من السود الأحرار.","It is 1840. You belong to the American Anti-Slavery Society. It has about 160,000 members in more than 200 local branches. It says slaveholding is “a heinous crime in the sight of God.”":"نحن في عام 1840. أنت عضو في الجمعية الأمريكية لمناهضة العبودية (American Anti-Slavery Society). لها نحو 160,000 عضو في أكثر من 200 فرع محلي. وتقول إن امتلاك العبيد «جريمة شنيعة في نظر الله».","William Lloyd Garrison’s plan is “moral suasion.” That means peaceful persuasion that tells people slavery is a sin. Norton calls it a moral crusade rather than a political movement.":"خطة ويليام لويد غاريسون (William Lloyd Garrison) هي «الإقناع الأخلاقي» (moral suasion). ويعني ذلك إقناعًا سلميًا يخبر الناس أن العبودية خطيئة. ويصفها كتاب نورتن (Norton) بأنها حملة أخلاقية وليست حركة سياسية.","Now some members doubt that moral suasion will ever end slavery. They say political action would work best. In 1840, they form the Liberty Party. Its goal is to elect a president who would restrict the spread of slavery.":"الآن يشك بعض الأعضاء في أن الإقناع الأخلاقي سينهي العبودية يومًا ما. ويقولون إن العمل السياسي هو الأفضل. وفي عام 1840 يؤسسون حزب الحرية (Liberty Party). وهدفه انتخاب رئيس يقيّد انتشار العبودية.","The anti-slavery movement split over this question. Norton says one faction of the American Anti-Slavery Society decided that political action would be the most effective way to reach its goal, so it formed the Liberty Party in 1840.":"انقسمت الحركة المناهضة للعبودية بسبب هذا السؤال. ويقول كتاب نورتن (Norton) إن فصيلًا من الجمعية الأمريكية لمناهضة العبودية (American Anti-Slavery Society) قرر أن العمل السياسي هو أكثر الطرق فعالية لتحقيق هدفه، فشكّل حزب الحرية (Liberty Party) عام 1840.","The 1830s were a turning point. More and more Americans decided that gradual approaches were not enough, and they called for immediate abolition everywhere. They saw slavery as a sin that Christians had to remove. By 1840, about 160,000 people in more than 200 local branches belonged to the American Anti-Slavery Society.":"كانت ثلاثينيات القرن التاسع عشر نقطة تحول. قرر عدد متزايد من الأمريكيين أن الأساليب التدريجية لا تكفي، فطالبوا بالإلغاء الفوري للعبودية في كل مكان. رأوا أن العبودية خطيئة يجب على المسيحيين إزالتها. وبحلول عام 1840، كان نحو 160,000 شخص في أكثر من 200 فرع محلي أعضاء في الجمعية الأمريكية لمناهضة العبودية (American Anti-Slavery Society).","All abolitionists faced hard opposition. Racism was widespread in the North, especially among the working poor. Abolitionist speakers faced hostile White crowds, and sometimes the clashes turned violent. Black people were barred from public places in the North, such as churches, schools, hotels, railroad stations, and cemeteries. Free African Americans helped turn the struggle into a fight against racial discrimination.":"واجه جميع دعاة إلغاء العبودية معارضة شديدة. كانت العنصرية منتشرة في الشمال، خاصة بين الفقراء العاملين. وواجه خطباء الإلغاء حشودًا بيضاء معادية، وأحيانًا تحولت المواجهات إلى عنف. وكان السود ممنوعين من الأماكن العامة في الشمال، مثل الكنائس والمدارس والفنادق ومحطات القطار والمقابر. وساعد الأمريكيون الأفارقة الأحرار على تحويل النضال إلى كفاح ضد التمييز العنصري.","It is the 1830s. You live in Massachusetts. Many people agree that a republic needs well-informed citizens, because the people hold the political power. But no state has a public school system yet.":"نحن في ثلاثينيات القرن التاسع عشر. تعيش في ماساتشوستس (Massachusetts). يتفق كثير من الناس على أن الجمهورية تحتاج إلى مواطنين مطلعين جيدًا، لأن الشعب هو صاحب السلطة السياسية. لكن لا توجد ولاية لديها نظام مدارس عامة بعد.","State legislator Horace Mann has a plan. He wants statewide, tax-supported public schools. They would be free to all children, no matter their gender, class, race, or ethnicity. That includes immigrant children.":"لدى عضو المجلس التشريعي للولاية هوراس مان (Horace Mann) خطة. يريد مدارس عامة في الولاية كلها تُموَّل من الضرائب. وتكون مجانية لجميع الأطفال، مهما كان جنسهم أو طبقتهم أو عرقهم أو أصلهم الإثني. ويشمل ذلك أطفال المهاجرين.","Mann says universal education would be “the great equalizer of the conditions of men—the balance-wheel of the social machinery.” He also says schools would teach values such as hard work and clean living.":"يقول مان (Mann) إن التعليم للجميع سيكون «الأداة الكبرى للمساواة بين أحوال الناس، وعجلة الاتزان في الآلة الاجتماعية». ويقول أيضًا إن المدارس ستعلّم قيمًا مثل العمل الجاد والحياة النظيفة.","Mann led the early drive for statewide, tax-supported public schools. By the 1840s, most states in the North and Midwest had joined the public school movement.":"قاد مان (Mann) الحملة الأولى لإنشاء مدارس عامة على مستوى الولاية تُموَّل من الضرائب. وبحلول أربعينيات القرن التاسع عشر، كانت معظم ولايات الشمال والغرب الأوسط قد انضمت إلى حركة المدارس العامة.","But the schools had real problems. Norton says funds for buildings, books, and equipment were limited. Teachers were poorly paid and often poorly prepared.":"لكن المدارس كانت تعاني من مشكلات حقيقية. ويقول كتاب نورتن (Norton) إن الأموال المخصصة للمباني والكتب والمعدات كانت محدودة. وكان المعلمون يتقاضون أجورًا ضعيفة وغالبًا ما كانوا غير مؤهلين جيدًا.","It is 1848. You live in western New York. Women cannot vote or serve on juries. They are barred from the ministry and most other professions, and college is rarely an option.":"نحن في عام 1848. تعيش في غرب ولاية نيويورك (New York). لا تستطيع النساء التصويت ولا العمل في هيئات المحلفين. وهن ممنوعات من الخدمة الدينية ومن معظم المهن الأخرى، ونادرًا ما تكون الجامعة خيارًا متاحًا.","Many people believe in the “cult of domesticity.” Catharine Beecher’s 1842 book promotes it. Women should manage the household and raise the children, separate from the man’s sphere of work outside the home.":"يؤمن كثير من الناس بما يسمى «تقديس الحياة المنزلية» (cult of domesticity). ويروّج له كتاب كاثرين بيتشر (Catharine Beecher) الصادر عام 1842. يجب على النساء إدارة المنزل وتربية الأطفال، بمعزل عن مجال الرجل، وهو العمل خارج المنزل.","Now Lucretia Mott and Elizabeth Cady Stanton have called a convention in Seneca Falls. It will discuss “the social, civil, and religious condition and rights of women.” People are asked to sign a Declaration of Rights and Sentiments. It is a revision of the Declaration of Independence. It says “all men and women are created equal.” Its most controversial demand is the right to vote.":"الآن دعت لوكريشيا موت (Lucretia Mott) وإليزابيث كادي ستانتون (Elizabeth Cady Stanton) إلى مؤتمر في سينيكا فولز (Seneca Falls). سيناقش «الوضع الاجتماعي والمدني والديني للمرأة وحقوقها». ويُطلب من الناس التوقيع على إعلان الحقوق والمشاعر (Declaration of Rights and Sentiments). وهو نسخة معدّلة من إعلان الاستقلال (Declaration of Independence). ويقول: «جميع الرجال والنساء خُلقوا متساوين». وأكثر مطالبه إثارة للجدل هو حق التصويت.","Norton says the goals and strong language were too radical for many of the 300 delegates, and for most Americans. Even so, the gathering was an important first step in the campaign for women’s rights.":"يقول كتاب نورتن (Norton) إن الأهداف واللغة القوية كانت متطرفة جدًا بالنسبة لكثير من المندوبين البالغ عددهم 300، ولمعظم الأمريكيين. ومع ذلك، كان الاجتماع خطوة أولى مهمة في حملة حقوق المرأة.","Thirty-two men joined the women in signing the Declaration. One of them was Frederick Douglass, who became a forceful supporter of women’s rights. As abolition gained momentum, women’s rights was debated more widely. Some anti-slavery activists, like Sojourner Truth, said the fight against slavery needed a wider fight for freedom for all people, including women. Women in the 1840s were not all of one mind about how to proceed.":"انضم اثنان وثلاثون رجلًا إلى النساء في التوقيع على الإعلان. وكان من بينهم فريدريك دوغلاس (Frederick Douglass)، الذي أصبح مؤيدًا قويًا لحقوق المرأة. ومع تزايد زخم حركة إلغاء العبودية، نوقشت حقوق المرأة على نطاق أوسع. وقال بعض النشطاء المناهضين للعبودية، مثل سوجورنر تروث (Sojourner Truth)، إن مكافحة العبودية تحتاج إلى نضال أوسع من أجل حرية جميع الناس، بمن فيهم النساء. ولم تكن النساء في أربعينيات القرن التاسع عشر على رأي واحد بشأن كيفية المضي قدمًا.","You chose: Join the revivals and camp meetings":"اخترت: الانضمام إلى حركات الإحياء الديني واجتماعات المخيمات","Chosen, not locked in yet: Join the revivals and camp meetings":"تم الاختيار ولم يتم التثبيت بعد: الانضمام إلى حركات الإحياء الديني واجتماعات المخيمات","You chose: Stay with a calmer church that stresses reason":"اخترت: البقاء في كنيسة أهدأ تؤكد على العقل","Chosen, not locked in yet: Stay with a calmer church that stresses reason":"تم الاختيار ولم يتم التثبيت بعد: البقاء في كنيسة أهدأ تؤكد على العقل","You chose: Support gradual change and the American Colonization Society":"اخترت: تأييد التغيير التدريجي والجمعية الأمريكية للتوطين (American Colonization Society)","Chosen, not locked in yet: Support gradual change and the American Colonization Society":"تم الاختيار ولم يتم التثبيت بعد: تأييد التغيير التدريجي والجمعية الأمريكية للتوطين (American Colonization Society)","You chose: Join Garrison’s call for immediate abolition":"اخترت: الانضمام إلى دعوة غاريسون (Garrison) إلى الإلغاء الفوري للعبودية","Chosen, not locked in yet: Join Garrison’s call for immediate abolition":"تم الاختيار ولم يتم التثبيت بعد: الانضمام إلى دعوة غاريسون (Garrison) إلى الإلغاء الفوري للعبودية","You chose: Stay with moral persuasion":"اخترت: البقاء على الإقناع الأخلاقي","Chosen, not locked in yet: Stay with moral persuasion":"تم الاختيار ولم يتم التثبيت بعد: البقاء على الإقناع الأخلاقي","You chose: Join the Liberty Party and use political action":"اخترت: الانضمام إلى حزب الحرية (Liberty Party) واستخدام العمل السياسي","Chosen, not locked in yet: Join the Liberty Party and use political action":"تم الاختيار ولم يتم التثبيت بعد: الانضمام إلى حزب الحرية (Liberty Party) واستخدام العمل السياسي","You chose: Support tax-funded public schools":"اخترت: تأييد المدارس العامة الممولة من الضرائب","Chosen, not locked in yet: Support tax-funded public schools":"تم الاختيار ولم يتم التثبيت بعد: تأييد المدارس العامة الممولة من الضرائب","You chose: Oppose tax-funded public schools":"اخترت: معارضة المدارس العامة الممولة من الضرائب","Chosen, not locked in yet: Oppose tax-funded public schools":"تم الاختيار ولم يتم التثبيت بعد: معارضة المدارس العامة الممولة من الضرائب","You chose: Sign the Declaration of Rights and Sentiments":"اخترت: التوقيع على إعلان الحقوق والمشاعر (Declaration of Rights and Sentiments)","Chosen, not locked in yet: Sign the Declaration of Rights and Sentiments":"تم الاختيار ولم يتم التثبيت بعد: التوقيع على إعلان الحقوق والمشاعر (Declaration of Rights and Sentiments)","You chose: Stay out and keep to the idea of separate spheres":"اخترت: البقاء خارجًا والتمسك بفكرة الدوائر المنفصلة","Chosen, not locked in yet: Stay out and keep to the idea of separate spheres":"تم الاختيار ولم يتم التثبيت بعد: البقاء خارجًا والتمسك بفكرة الدوائر المنفصلة","<b>How to work.<\/b> People in history faced hard choices. Here are five. There is no right or wrong choice. Your job is to understand why people chose what they did.":"<b>طريقة العمل.<\/b> واجه الناس في التاريخ خيارات صعبة. هنا خمسة منها. لا يوجد خيار صحيح أو خاطئ. مهمتك أن تفهم لماذا اختار الناس ما اختاروه.","All five dilemmas are locked in. Nice work.":"تم تثبيت المعضلات الخمس. عمل جيد.","Choose one":"اختر واحدًا","Counter-Argument":"حجة مضادة","Edit my answer":"تعديل إجابتي","Everything is done. Tap Finished to download your file.":"اكتمل كل شيء. اضغط «انتهيت» لتنزيل ملفك.","Example: 3":"مثال: 3","Fill in both boxes to unlock the next step.":"املأ المربعين للانتقال إلى الخطوة التالية.","Here is a summary of the choices you made.":"هذا ملخص للخيارات التي اخترتها.","Lock in all five dilemmas to finish.":"ثبّت إجابات المعضلات الخمس لتنهي.","Lock in my answer":"تثبيت إجابتي","Locked in. Read what really happened below.":"تم التثبيت. اقرأ في الأسفل ما حدث فعلًا.","Not answered yet":"لم تتم الإجابة بعد","Read “You are there.”":"اقرأ «أنت هناك».","Ready. Tap Lock in to see what happened.":"جاهز. اضغط «تثبيت» لترى ما حدث.","Tap <b>Lock in my answer<\/b> to see what really happened.":"اضغط <b>تثبيت إجابتي<\/b> لترى ما حدث فعلًا.","Tap the choice you would make.":"اضغط على الخيار الذي ستختاره.","That file does not look like a Would You Rather progress file. Try again.":"هذا الملف لا يبدو ملف تقدم لنشاط «ماذا تفضّل؟». حاول مرة أخرى.","The end":"النهاية","Type the other side’s best reason here...":"اكتب هنا أفضل سبب للطرف الآخر...","Type your reason here...":"اكتب سببك هنا...","What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”":"ما أفضل سبب قد يقدّمه شخص من الطرف الآخر؟ اكتبه كما سيقوله هو. جرّب: «شخص اختار الطرف الآخر سيقول...»","What really happened":"ما حدث فعلًا","Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”":"لماذا اخترت هذا؟ استخدم معلومة واحدة على الأقل من الدرس. جرّب: «اخترت هذا لأن... ومن المعلومات...»","Would You Rather":"ماذا تفضّل؟","Would you rather...":"ماذا تفضّل؟...","Write a Counter-Argument: the best reason someone on the other side would give.":"اكتب حجة مضادة: أفضل سبب قد يقدّمه شخص من الطرف الآخر.","Write your reason. Use at least one fact from the lesson.":"اكتب سببك. استخدم معلومة واحدة على الأقل من الدرس.","You are there":"أنت هناك","Your choices":"اختياراتك","Your reason":"سببك","Your work saves on this device as you type. Use <b>Save Progress<\/b> at the bottom to download a backup file, and <b>Load Progress<\/b> to continue later.":"يُحفظ عملك على هذا الجهاز أثناء الكتابة. استخدم زر <b>حفظ التقدم<\/b> في الأسفل لتنزيل نسخة احتياطية، وزر <b>تحميل التقدم<\/b> لتكمل لاحقًا.","Clear all of your answers on this page?":"هل تريد مسح كل إجاباتك في هذه الصفحة؟","Your family has to decide.":"على عائلتك أن تقرر."},"patterns":[{"re":"^Still needed: first name, last name, and period\\.$","es":"Todavía falta: nombre, apellido y período.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة."},{"re":"^(\\d+) of (\\d+) dilemmas locked in$","es":"$1 de $2 decisiones confirmadas","ar":"عدد المعضلات المثبّتة: $1 من $2"},{"re":"^Still needed: first name, last name, and period; 1 dilemma to lock in\\.$","es":"Todavía falta: nombre, apellido y período; 1 decisión por confirmar.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة؛ معضلة واحدة تحتاج إلى تثبيت."},{"re":"^Still needed: first name, last name, and period; (\\d+) dilemmas to lock in\\.$","es":"Todavía falta: nombre, apellido y período; $1 decisiones por confirmar.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة؛ عدد المعضلات التي تحتاج إلى تثبيت: $1."},{"re":"^Still needed: first name, last name, and period\\.$","es":"Todavía falta: nombre, apellido y período.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة."},{"re":"^Still needed: 1 dilemma to lock in\\.$","es":"Todavía falta: 1 decisión por confirmar.","ar":"ما زال ناقصًا: معضلة واحدة تحتاج إلى تثبيت."},{"re":"^Still needed: (\\d+) dilemmas to lock in\\.$","es":"Todavía falta: $1 decisiones por confirmar.","ar":"ما زال ناقصًا: عدد المعضلات التي تحتاج إلى تثبيت: $1."},{"re":"^Done! Your file (\\S+) downloaded\\. Upload it to Canvas\\.$","es":"¡Listo! Se descargó tu archivo $1. Súbelo a Canvas.","ar":"أحسنت! تم تنزيل هذا الملف: <bdi dir=\"ltr\" style=\"display:block\">$1<\/bdi> ارفع هذا الملف إلى Canvas."}]}</script>
+<script>
+/* Supplement language switch (English / Espanol / Arabic). Works on pages whose text is rendered by JS:
+   a MutationObserver translates text as it appears. Data: <script type="application/json" id="sp-i18n">
+   {"langs":["en","es","ar"],"default":"en","es":{englishHTML:translation},"ar":{...},"patterns":[{"re":"^(\\d+) of (\\d+)$","es":"$1 de $2","ar":"..."}]}
+   Keys are the English text exactly as it sits in the page (innerHTML, spaces collapsed).
+   Helpers: spSeen() english strings seen so far; spMissing() strings with no translation in the current language;
+   spSetLang(l); spTr(s) translate a string (used for confirm/alert); spAscii(s) plain-ASCII name for file names. */
+(function () {
+  var node = document.getElementById('sp-i18n');
+  var D = node ? JSON.parse(node.textContent) : { langs: ['en'], patterns: [] };
+  var INLINE = { B:1,I:1,EM:1,STRONG:1,SPAN:1,A:1,BR:1,SMALL:1,SUP:1,SUB:1,U:1,MARK:1,BDI:1,TSPAN:1,CODE:1 };
+  var SKIP = 'script,style,textarea,input,.sp-lang,.sp-nt,[translate="no"]';
+  var WORD = /[A-Za-z\u00C0-\u024F\u0600-\u06FF]{2}|e\.g\./;
+  var LANG = 'en', REC = new WeakMap(), SEEN = {}, MISS = {};
+  (D.patterns || []).forEach(function (p) { try { p._re = new RegExp(p.re); } catch (e) {} });
+  function norm(s) { return String(s).replace(/\s+/g, ' ').trim(); }
+  function tr(src) {
+    if (LANG === 'en') return null;
+    var t = D[LANG] && D[LANG][src];
+    if (t) return t;
+    var P = D.patterns || [];
+    for (var i = 0; i < P.length; i++) {
+      var m = P[i]._re && P[i]._re.exec(src);
+      if (m && P[i][LANG]) return P[i][LANG].replace(/\$(\d+)/g, function (_, n) { return m[+n] || ''; });
+    }
+    return null;
+  }
+  window.spTr = function (s) { var t = tr(norm(s)); return t ? t.replace(/<[^>]+>/g, '') : s; };
+  function isInline(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling)
+      if (c.nodeType === 1 && (!INLINE[c.tagName.toUpperCase()] || c.matches(SKIP))) return false;
+    return true;
+  }
+  function directText(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling) if (c.nodeType === 3 && WORD.test(c.nodeValue)) return true;
+    return false;
+  }
+  function cur(s) { return s.nodeType === 1 ? s.innerHTML : s.nodeValue; }
+  function put(s, v) { if (s.nodeType === 1) s.innerHTML = v; else s.nodeValue = v; }
+  function handle(s) {
+    var r = REC.get(s), c = cur(s);
+    if (!(r && c === r.wrote)) { r = { en: c, wrote: c }; REC.set(s, r); }
+    var src = norm(r.en), target = r.en;
+    if (WORD.test(src)) {
+      SEEN[src] = 1;
+      if (LANG !== 'en') {
+        var t = tr(src);
+        if (t) {
+          target = s.nodeType === 1 ? t : (r.en.match(/^\s*/)[0] + t + r.en.match(/\s*$/)[0]);
+          delete MISS[src];
+        } else MISS[src] = 1;
+      }
+    }
+    if (c !== target) put(s, target);
+    r.wrote = cur(s);
+  }
+  var ATTRS = ['placeholder', 'alt', 'aria-label', 'title'];
+  function attrs(root) {
+    var els = root.querySelectorAll ? root.querySelectorAll('[placeholder],[alt],[aria-label],[title]') : [];
+    var list = [].slice.call(els); if (root.matches && root.matches('[placeholder],[alt],[aria-label],[title]')) list.push(root);
+    list.forEach(function (el) {
+      if (el.closest && el.closest('.sp-lang,.sp-nt,[translate="no"],script,style')) return;
+      var rec = el.__spa || (el.__spa = {});
+      ATTRS.forEach(function (a) {
+        var v = el.getAttribute(a); if (v == null) return;
+        var r = rec[a];
+        if (!(r && v === r.wrote)) { r = rec[a] = { en: v, wrote: v }; }
+        var src = norm(r.en); if (!WORD.test(src)) return;
+        SEEN[src] = 1;
+        var t = LANG === 'en' ? null : tr(src);
+        if (LANG !== 'en' && !t) MISS[src] = 1;
+        var target = t ? t.replace(/<[^>]+>/g, '') : r.en;
+        if (v !== target) el.setAttribute(a, target);
+        r.wrote = el.getAttribute(a);
+      });
+    });
+  }
+  function walk(root) {
+    if (root.nodeType === 3) { if (WORD.test(root.nodeValue) && !(root.parentNode && root.parentNode.closest && root.parentNode.closest(SKIP))) handle(root); return; }
+    if (root.nodeType !== 1) return;
+    (function w(el) {
+      if (el.matches(SKIP)) return;
+      if (el !== document.body && directText(el) && isInline(el)) { handle(el); return; }
+      for (var c = el.firstChild; c; c = c.nextSibling) {
+        if (c.nodeType === 1) w(c); else if (c.nodeType === 3 && WORD.test(c.nodeValue)) handle(c);
+      }
+    })(root);
+    attrs(root);
+  }
+  var TITLE = { en: document.title, wrote: document.title };
+  function title() {
+    if (document.title !== TITLE.wrote) TITLE = { en: document.title, wrote: document.title };
+    var t = LANG === 'en' ? null : tr(norm(TITLE.en));
+    document.title = t ? t.replace(/<[^>]+>/g, '') : TITLE.en; TITLE.wrote = document.title;
+  }
+  function inl(e) { return e.nodeType === 1 && !!INLINE[e.tagName.toUpperCase()]; }
+  var mo = new MutationObserver(function (muts) {
+    var todo = [];
+    muts.forEach(function (m) {
+      if (m.type === 'childList') { for (var i = 0; i < m.addedNodes.length; i++) todo.push(m.addedNodes[i]); todo.push(m.target); }
+      else todo.push(m.target);
+    });
+    todo.forEach(function (n) {
+      var el = n.nodeType === 1 ? n : n.parentNode;
+      if (!el || el.nodeType !== 1 || !document.body.contains(el)) return;
+      while (el !== document.body && el.parentNode && el.parentNode.nodeType === 1 && inl(el) && inl(el.parentNode)) el = el.parentNode;
+      if (el.parentNode && el.parentNode.nodeType === 1 && inl(el.parentNode) && el.parentNode !== document.body) el = el.parentNode;
+      walk(el);
+    });
+    mo.takeRecords();
+  });
+  var AR = { 'ا':'a','أ':'a','إ':'i','آ':'a','ب':'b','ت':'t','ث':'th','ج':'j','ح':'h','خ':'kh','د':'d','ذ':'dh','ر':'r','ز':'z','س':'s','ش':'sh','ص':'s','ض':'d','ط':'t','ظ':'z','ع':'a','غ':'gh','ف':'f','ق':'q','ك':'k','ل':'l','م':'m','ن':'n','ه':'h','و':'w','ي':'y','ى':'a','ة':'a','ئ':'y','ؤ':'w' };
+  window.spAscii = function (s) {
+    s = String(s); if (s.normalize) s = s.normalize('NFD').replace(/[̀-ًͯ-ٰٟ]/g, '');
+    return s.replace(/[ء-ي]/g, function (c) { return AR[c] !== undefined ? AR[c] : ''; }).replace(/ñ/g, 'n').replace(/Ñ/g, 'N');
+  };
+  window.spSeen = function () { return Object.keys(SEEN); };
+  window.spMissing = function () { return Object.keys(MISS); };
+  window.spLang = function () { return LANG; };
+  window.spSetLang = function (l) {
+    if ((D.langs || ['en']).indexOf(l) < 0) l = 'en';
+    LANG = l; MISS = {};
+    var h = document.documentElement; h.lang = l; h.dir = l === 'ar' ? 'rtl' : 'ltr';
+    mo.disconnect(); walk(document.body); title(); mo.takeRecords();
+    mo.observe(document.body, { childList: true, subtree: true, characterData: true });
+    document.querySelectorAll('.sp-lang button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === l)); });
+    try { localStorage.setItem('sp_lang', l); } catch (e) {}
+    try { var u = new URL(location.href); if (l === 'en') u.searchParams.delete('lang'); else u.searchParams.set('lang', l); history.replaceState(null, '', u.toString()); } catch (e) {}
+    try { document.dispatchEvent(new CustomEvent('splangchange', { detail: l })); } catch (e) {}
+  };
+  var _c = window.confirm, _a = window.alert;
+  window.confirm = function (m) { return _c.call(window, window.spTr(m)); };
+  window.alert = function (m) { return _a.call(window, window.spTr(m)); };
+  document.querySelectorAll('.sp-lang button').forEach(function (b) { b.addEventListener('click', function () { window.spSetLang(b.getAttribute('data-lang')); }); });
+  var start = D['default'] || 'en';
+  try { start = new URL(location.href).searchParams.get('lang') || localStorage.getItem('sp_lang') || start; } catch (e) {}
+  window.spSetLang(start);
+})();
+
+</script><!--/sp-i18n-->
+</body></html>

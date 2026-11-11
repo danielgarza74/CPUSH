@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Would You Rather 4 · Creating the Constitution</title>
+<style>
+:root{--bg:#EEF5F6;--paper:#FBFCFD;--maroon:#1C4B54;--ink:#15383F;--brown:#2C6D7A;--red:#D2C24B;--rose:#E1D78E;
+--redink:#6E6526;--rule:#CCDADC;--line:#A7BBBF;--ok:#3F6B3A;--frost:#EBF3F4;
+--serif:Georgia,"Times New Roman",serif;--sans:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
+--glass:color-mix(in srgb,var(--paper) 70%,transparent);--glass-strong:color-mix(in srgb,var(--paper) 90%,transparent);
+--edge:color-mix(in srgb,#fff 70%,transparent);
+--hi:inset 0 1px 0 color-mix(in srgb,#fff 85%,transparent);
+--depth:0 1px 1px rgba(28,75,84,.05),0 3px 6px -2px rgba(28,75,84,.08),0 18px 40px -16px rgba(28,75,84,.30)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:
+radial-gradient(42vmax 42vmax at 8% 6%,rgba(28,75,84,.28),transparent 70%),
+radial-gradient(38vmax 38vmax at 96% 22%,rgba(210,194,75,.22),transparent 70%),
+radial-gradient(46vmax 40vmax at 70% 104%,rgba(28,75,84,.18),transparent 70%),
+radial-gradient(30vmax 30vmax at 20% 88%,rgba(225,215,142,.22),transparent 70%)}
+.wrap{max-width:860px;margin:0 auto;padding:0 18px 60px}
+h1,h2,h3{font-family:var(--serif);text-wrap:balance}
+.eyebrow{font-size:12.5px;letter-spacing:.16em;font-weight:700;text-transform:uppercase}
+header.hero{padding:26px 0 0}
+.hero-band{position:relative;overflow:hidden;border-radius:16px;padding:34px 34px 30px;color:var(--frost);background:linear-gradient(110deg,#1C4B54 40%,#2C6D7A);
+box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 30px 60px -24px rgba(28,75,84,.75)}
+.hero-band::before{content:"";position:absolute;left:0;top:0;bottom:0;width:8px;background:var(--red)}
+.hero-band .eyebrow{color:var(--rose)}
+.hero-band h1{color:#fff;font-size:clamp(32px,6vw,50px);line-height:1.08;margin:.2em 0 .2em}
+.nb{white-space:nowrap}
+.hero-band .sub{text-wrap:balance;margin:0;font-size:17px;color:var(--frost);font-weight:600}
+.hero-num{position:absolute;right:20px;bottom:-30px;font:700 180px/1 var(--serif);color:#fff;opacity:.12;pointer-events:none}
+.panel{background:var(--glass);border:1px solid var(--edge);border-radius:14px;box-shadow:var(--hi),var(--depth);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3)}
+.meta{display:flex;flex-wrap:wrap;gap:14px;margin:18px 0 0;padding:16px 20px}
+.meta label{flex:1 1 170px;font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--brown)}
+.meta input{display:block;width:100%;margin-top:5px;padding:12px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);font:inherit;font-size:17px;min-height:48px}
+.meta input[readonly]{background:#DFEAEC;color:var(--brown)}
+.howto{margin:16px 0;padding:14px 20px;font-size:16px}
+.howto ol{margin:.4em 0 .2em 1.2em;padding:0}
+.howto li{margin:.2em 0}
+.bar{position:sticky;top:0;z-index:5;padding:9px 14px;margin:0 -14px;background:rgba(238,245,246,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--rule)}
+.bar .row{display:flex;align-items:center;gap:12px;font-size:14px;font-weight:700;color:var(--brown)}
+.track{flex:1;height:10px;border-radius:6px;background:#D3E1E3;overflow:hidden}
+.fill{height:100%;width:0;background:linear-gradient(90deg,var(--rose),var(--red));transition:width .3s}
+.card{margin:26px 0;padding:22px 24px 24px;scroll-margin-top:70px}
+.kick{font-size:12.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--redink)}
+.kick span{color:var(--brown)}
+.card h2{margin:.15em 0 .4em;font-size:clamp(24px,4.5vw,32px);line-height:1.15;color:var(--maroon)}
+.there{background:var(--glass-strong);border:1px solid var(--edge);border-radius:12px;padding:6px 20px 8px;margin:10px 0 18px;border-left:6px solid var(--red)}
+.there .lab{display:inline-block;margin:12px 0 0;font:800 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:#fff;background:var(--maroon);padding:6px 11px 5px;border-radius:999px}
+.there p{font:18.5px/1.65 var(--serif);margin:.7em 0}
+.rather{font:700 22px/1.2 var(--serif);color:var(--maroon);margin:4px 0 12px}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.choice{display:flex;align-items:center;gap:14px;text-align:left;width:100%;min-height:84px;padding:16px 18px;border-radius:14px;border:2px solid var(--maroon);background:#fff;color:var(--maroon);font:700 19px/1.3 var(--sans);cursor:pointer;touch-action:manipulation;transition:transform .15s,box-shadow .15s,background-color .15s}
+.choice .ltr{flex:0 0 auto;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--maroon);color:#fff;font:800 20px/1 var(--serif)}
+.choice:hover{transform:translateY(-2px);box-shadow:0 10px 20px -10px rgba(28,75,84,.5)}
+.choice[aria-pressed="true"]{background:var(--maroon);color:#fff;border-color:var(--maroon);box-shadow:0 0 0 4px rgba(210,194,75,.55)}
+.choice[aria-pressed="true"] .ltr{background:var(--red);color:var(--maroon)}
+.choice[aria-pressed="true"]::after{content:"\2713";margin-left:auto;font-size:26px;color:#fff}
+.choice:disabled{cursor:default;transform:none;box-shadow:none}
+.choice:disabled[aria-pressed="false"]{opacity:.55}
+.choice:disabled[aria-pressed="true"]{box-shadow:0 0 0 4px rgba(210,194,75,.55)}
+.choice:focus-visible,.btn:focus-visible,textarea:focus-visible,input:focus-visible,.link:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.work{display:none;margin-top:20px}
+.card.chosen .work{display:block}
+.field{background:color-mix(in srgb,var(--rose) 14%,var(--paper));border:1px solid color-mix(in srgb,var(--red) 28%,var(--rule));border-radius:12px;padding:14px 18px;margin:12px 0}
+.field label{display:block;font:700 19px/1.25 var(--serif);color:var(--maroon)}
+.field .hint{display:block;font:400 14.5px/1.4 var(--sans);color:var(--brown);margin:3px 0 8px}
+textarea{width:100%;min-height:96px;padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);font:inherit;font-size:17px;line-height:1.5;resize:vertical}
+textarea:read-only{background:#EBF3F4;color:#1C4B54}
+.row2{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:12px}
+.btn{border:2px solid var(--maroon);background:#fff;color:var(--maroon);padding:12px 20px;border-radius:10px;font:700 16px/1.2 var(--sans);cursor:pointer;min-height:48px;touch-action:manipulation}
+.btn:hover:not(:disabled){background:var(--maroon);color:#fff}
+.btn.primary{background:var(--maroon);color:#fff}
+.btn.primary:disabled{background:#3F7480;border-color:#3F6B78;color:#fff;cursor:not-allowed;opacity:.8}
+.cstat{font-size:14.5px;font-weight:600;color:var(--brown)}
+.reveal{display:none;margin-top:16px;background:#fff;border:1px solid var(--rule);border-left:6px solid var(--maroon);border-radius:12px;padding:6px 20px 10px}
+.card.locked .reveal{display:block}
+.reveal .lab{display:inline-block;margin:12px 0 0;font:800 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--maroon);box-shadow:inset 0 0 0 1.5px var(--maroon);padding:6px 11px 5px;border-radius:999px}
+.reveal p{font:18px/1.62 var(--serif);margin:.7em 0}
+.reveal .cite{font:13px/1.5 var(--sans);color:var(--brown)}
+.link{background:none;border:0;color:var(--brown);text-decoration:underline;cursor:pointer;font:inherit;font-size:15px;padding:10px 4px;min-height:44px}
+.card.locked .lockBtn{display:none}
+.card:not(.locked) .editBtn{display:none}
+.tally{padding:20px 24px;margin:26px 0}
+.tally h2{margin:.1em 0 .3em;font-size:28px;color:var(--maroon)}
+.tally ol{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:8px}
+.tally li{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;background:#fff;border:1px solid var(--rule);border-radius:10px;padding:10px 14px}
+.tally .tn{grid-row:1/3;align-self:center;width:34px;height:34px;border-radius:50%;background:var(--maroon);color:#fff;display:grid;place-items:center;font:800 16px/1 var(--serif)}
+.tally .tq{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--brown)}
+.tally .ta{font-weight:700;color:var(--maroon);overflow-wrap:anywhere}
+.tally li.none .ta{color:#2C6D7A;font-weight:600;font-style:italic}
+.tally li.none .tn{background:#4F7F8A}
+.tally .sum{margin:12px 0 0;font-weight:600;color:var(--brown)}
+.finish{text-align:center;margin:26px 0;padding:22px 20px}
+.status{font-size:15px;font-weight:700;color:var(--brown);margin-bottom:12px;overflow-wrap:anywhere}
+.btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.msg{display:none;margin:14px auto 0;padding:10px 14px;border-radius:8px;background:#EAF3E6;border:1px solid var(--ok);color:var(--ok);font-weight:700;max-width:620px;overflow-wrap:anywhere}
+.msg.err{background:#FDEDEB;border-color:#B3261E;color:#8C1D18}
+input.bad{border-color:#B3261E;background:#FFF1EF}
+footer{text-wrap:balance;margin-top:34px;padding-top:12px;border-top:1px solid var(--rule);font-size:12px;letter-spacing:.05em;color:var(--maroon);font-weight:600}
+@media (max-width:720px){.choices{grid-template-columns:1fr}.hero-band{padding:26px 20px 24px}.hero-num{font-size:120px}.card{padding:18px 16px 20px}.there{padding:4px 14px 6px}.there p{font-size:18px}.btn.primary,.btns .btn{width:100%}.bar{margin:0 -18px;padding:9px 18px}}
+html[dir=rtl] .hero-band::before{left:auto;right:0}
+html[dir=rtl] .hero-num{right:auto;left:20px}
+html[dir=rtl] .there{border-left:1px solid var(--edge);border-right:6px solid var(--red)}
+html[dir=rtl] .reveal{border-left:1px solid var(--rule);border-right:6px solid var(--maroon)}
+html[dir=rtl] .choice{text-align:right}
+html[dir=rtl] .choice[aria-pressed="true"]::after{margin-left:0;margin-right:auto}
+html[dir=rtl] .howto ol{margin:.4em 1.2em .2em 0}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+@media print{body::before{display:none}.bar,.finish,.btn,.msg,.choice:disabled[aria-pressed=false]{display:none!important}.panel{backdrop-filter:none;box-shadow:none;background:#fff}.card{break-inside:avoid}}
+/*sp-i18n-css*/
+.sp-lang-bar{display:flex;justify-content:flex-end;padding:8px 12px 0;position:relative;z-index:5}
+.sp-lang{display:inline-flex;gap:2px;padding:3px;border-radius:10px;background:rgba(255,255,255,.88);border:1px solid rgba(0,0,0,.18);font-family:system-ui,"Segoe UI",Tahoma,Arial,sans-serif}
+.sp-lang button{border:0;background:transparent;color:#222;font:600 13px/1 system-ui,"Segoe UI",Tahoma,Arial,sans-serif;padding:7px 11px;border-radius:7px;cursor:pointer}
+.sp-lang button[aria-pressed="true"]{background:#222;color:#fff}
+.sp-lang button:focus-visible{outline:3px solid #2a6df4;outline-offset:1px}
+textarea,input,select{unicode-bidi:plaintext}
+html[lang="ar"] body,html[lang="ar"] button,html[lang="ar"] textarea,html[lang="ar"] input,html[lang="ar"] select{font-family:"Segoe UI",Tahoma,"Noto Sans Arabic","Arial",system-ui,sans-serif}
+html[lang="ar"] body{line-height:1.8}
+html[lang="ar"] *{letter-spacing:0!important}
+html[dir="rtl"] textarea,html[dir="rtl"] input{text-align:start}
+@media print{.sp-lang-bar{display:none}}
+/*/sp-i18n-css*/
+</style></head><body>
+<!--sp-bar--><div class="sp-lang-bar"><div class="sp-lang" role="group" aria-label="Language / Idioma / اللغة"><button type="button" data-lang="en" lang="en" aria-pressed="true">English</button><button type="button" data-lang="es" lang="es" aria-pressed="false">Español</button><button type="button" data-lang="ar" lang="ar" aria-pressed="false">العربية</button></div></div><!--/sp-bar--><div class="wrap">
+<header class="hero"><div class="hero-band"><div class="eyebrow">1781-1800</div>
+<h1>Would You Rather</h1><p class="sub">Creating the Constitution</p><span class="hero-num" aria-hidden="true">4</span></div>
+<div class="meta panel">
+<label>FIRST NAME *<input id="f_first" type="text" autocomplete="given-name"></label>
+<label>LAST NAME *<input id="f_last" type="text" autocomplete="family-name"></label>
+<label>PERIOD *<input id="f_period" type="text" inputmode="numeric" maxlength="12" placeholder="e.g. 3"></label>
+<label>DATE (fills in when you finish)<input id="f_date" type="text" readonly tabindex="-1" placeholder="Automatic"></label>
+</div></header>
+<div class="howto panel"><div><b>How to work.</b> People in history faced hard choices. Here are five. There is no right or wrong choice. Your job is to understand why people chose what they did.</div>
+<ol><li>Read “You are there.”</li><li>Tap the choice you would make.</li><li>Write your reason. Use at least one fact from the lesson.</li><li>Write a Counter-Argument: the best reason someone on the other side would give.</li><li>Tap <b>Lock in my answer</b> to see what really happened.</li></ol>
+<div>Your work saves on this device as you type. Use <b>Save Progress</b> at the bottom to download a backup file, and <b>Load Progress</b> to continue later.</div></div>
+<div class="bar"><div class="row"><span id="pct">0 of 5 dilemmas locked in</span><div class="track"><div class="fill" id="fill"></div></div></div></div>
+
+<section class="card panel" id="d1" data-n="1" data-a="Send delegates: the nation needs a stronger government" data-b="Stay home: keep the Articles of Confederation as they are" data-short="Send Delegates" aria-labelledby="h1">
+<div class="kick">Dilemma 1 <span>of 5</span> · 1787</div>
+<h2 id="h1">1787: Send Delegates to Philadelphia, or Stay Home?</h2>
+<div class="there"><span class="lab">You are there</span><p>It is early 1787, and you are a leader in your state’s legislature. The United States is run under the Articles of Confederation. The Articles made a loose alliance of thirteen states. There is only one house of Congress. There is no president and no national court. Each state gets one vote. Rhode Island has 68,000 people and Virginia has more than 747,000, but they have the same voting power.</p><p>Congress has no cash and cannot make people pay taxes. Farmers in western Massachusetts have rebelled over debts and taxes, and the state sent 4,400 militiamen to break up their army. George Washington says the country needs a stronger national government to keep people’s lives, liberty, and property safe.</p><p>Now Congress has called a special convention to meet in Philadelphia. Its purpose is “revising the Articles of Confederation.” Your state must decide whether to send delegates. Some leaders want a stronger national government. Others want to keep power with the states.</p><p>What would you choose?</p></div>
+<p class="rather">Would you rather...</p>
+<div class="choices" role="group" aria-label="Choose one">
+<button type="button" class="choice" data-o="A" aria-pressed="false"><span class="ltr">A</span><span>Send delegates: the nation needs a stronger government</span></button>
+<button type="button" class="choice" data-o="B" aria-pressed="false"><span class="ltr">B</span><span>Stay home: keep the Articles of Confederation as they are</span></button>
+</div>
+<div class="work">
+<div class="field"><label for="d1_reason">Your reason</label><span class="hint">Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”</span>
+<textarea id="d1_reason" data-k="reason" placeholder="Type your reason here..."></textarea></div>
+<div class="field"><label for="d1_counter">Counter-Argument</label><span class="hint">What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”</span>
+<textarea id="d1_counter" data-k="counter" placeholder="Type the other side’s best reason here..."></textarea></div>
+<div class="row2"><button type="button" class="btn primary lockBtn" disabled>Lock in my answer</button>
+<button type="button" class="btn editBtn">Edit my answer</button><span class="cstat" aria-live="polite"></span></div>
+<div class="reveal" aria-live="polite"><span class="lab">What really happened</span><p>The convention met in Philadelphia’s State House, now called Independence Hall. Only Rhode Island refused to take part. All the other states did.</p><p>Congress had asked the delegates to revise the Articles. The final draft was a new Constitution. It begins with the words “We the people of the United States.” Norton says the idea that the voters are the source of all authority was the most important political innovation since the Declaration of Independence.</p><p>Norton also says the Articles left some good work behind. Congress set the basic rules for dividing western land and for governing new territories. The Northwest Ordinance of 1787 said new territories would someday become equal states.</p><p class="cite">Source: Norton Ch. 6, “The Confederation Government” and “The Constitution” (The Constitutional Convention).</p></div>
+</div>
+</section>
+<section class="card panel" id="d2" data-n="2" data-a="Seats by population: more people, more votes" data-b="Equal votes: every state gets the same say" data-short="Representation" aria-labelledby="h2">
+<div class="kick">Dilemma 2 <span>of 5</span> · 1787</div>
+<h2 id="h2">1787: Seats by Population, or One Vote per State?</h2>
+<div class="there"><span class="lab">You are there</span><p>It is the summer of 1787, and you are a delegate at the Constitutional Convention in Philadelphia. You and the other delegates are writing a plan for a new Congress. The big question is how the states should be represented.</p><p>Under the Articles of Confederation, every state had one vote. That meant Rhode Island, with 68,000 people, had the same voting power as Virginia, with more than 747,000.</p><p>Delegates from larger states want seats in Congress based on population. Delegates from smaller states want every state to have an equal vote. The debate over this is intense.</p><p>What would you choose?</p></div>
+<p class="rather">Would you rather...</p>
+<div class="choices" role="group" aria-label="Choose one">
+<button type="button" class="choice" data-o="A" aria-pressed="false"><span class="ltr">A</span><span>Seats by population: more people, more votes</span></button>
+<button type="button" class="choice" data-o="B" aria-pressed="false"><span class="ltr">B</span><span>Equal votes: every state gets the same say</span></button>
+</div>
+<div class="work">
+<div class="field"><label for="d2_reason">Your reason</label><span class="hint">Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”</span>
+<textarea id="d2_reason" data-k="reason" placeholder="Type your reason here..."></textarea></div>
+<div class="field"><label for="d2_counter">Counter-Argument</label><span class="hint">What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”</span>
+<textarea id="d2_counter" data-k="counter" placeholder="Type the other side’s best reason here..."></textarea></div>
+<div class="row2"><button type="button" class="btn primary lockBtn" disabled>Lock in my answer</button>
+<button type="button" class="btn editBtn">Edit my answer</button><span class="cstat" aria-live="polite"></span></div>
+<div class="reveal" aria-live="polite"><span class="lab">What really happened</span><p>In mid-July the delegates settled the debate with a deal called the Great Compromise. It used both ideas.</p><p>In the House of Representatives, seats are given by population. Larger states win more seats. In the Senate, each state has two members, so every state is equal. At first, state legislatures chose the senators.</p><p>Norton says this compromise also built the idea of separation of powers into Congress. A separate agreement, the Three-Fifths Compromise, counted three-fifths of “all other persons” (the enslaved) when seats were divided. It was not part of the choice above.</p><p class="cite">Source: Norton Ch. 6, “The Constitution” (The Constitutional Convention; The Three-Fifths Compromise) and “The Confederation Government” (A Loose Alliance of States).</p></div>
+</div>
+</section>
+<section class="card panel" id="d3" data-n="3" data-a="Vote yes: approve the Constitution as it is written" data-b="Vote no: do not approve it without a bill of rights" data-short="Ratify or Not" aria-labelledby="h3">
+<div class="kick">Dilemma 3 <span>of 5</span> · 1788</div>
+<h2 id="h3">1788: Ratify the Constitution, or Say No Without a Bill of Rights?</h2>
+<div class="there"><span class="lab">You are there</span><p>It is 1788, and you are a delegate to your state’s convention. Your job is to vote on the new Constitution. The Constitution can take effect only if at least nine states approve it.</p><p>The Federalists, led by James Madison and Alexander Hamilton, support it. They have a real plan on the table: the draft itself. They say the country needs the stronger government it creates.</p><p>The Anti-Federalists are afraid. They fear the new national government will grow corrupt and tyrannical. George Mason of Virginia and others also point out that the draft has no bill of rights to protect people and states from the national government.</p><p>What would you choose?</p></div>
+<p class="rather">Would you rather...</p>
+<div class="choices" role="group" aria-label="Choose one">
+<button type="button" class="choice" data-o="A" aria-pressed="false"><span class="ltr">A</span><span>Vote yes: approve the Constitution as it is written</span></button>
+<button type="button" class="choice" data-o="B" aria-pressed="false"><span class="ltr">B</span><span>Vote no: do not approve it without a bill of rights</span></button>
+</div>
+<div class="work">
+<div class="field"><label for="d3_reason">Your reason</label><span class="hint">Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”</span>
+<textarea id="d3_reason" data-k="reason" placeholder="Type your reason here..."></textarea></div>
+<div class="field"><label for="d3_counter">Counter-Argument</label><span class="hint">What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”</span>
+<textarea id="d3_counter" data-k="counter" placeholder="Type the other side’s best reason here..."></textarea></div>
+<div class="row2"><button type="button" class="btn primary lockBtn" disabled>Lock in my answer</button>
+<button type="button" class="btn editBtn">Edit my answer</button><span class="cstat" aria-live="polite"></span></div>
+<div class="reveal" aria-live="polite"><span class="lab">What really happened</span><p>On June 21, 1788, New Hampshire became the ninth state to ratify the Constitution. That was the minimum needed for it to take effect.</p><p>Madison, Hamilton, and John Jay also wrote eighty-five essays, now called The Federalist Papers. They were printed in New York newspapers in 1787 and 1788 to convince New Yorkers to ratify. Norton says that in Virginia and New York, strong opposition groups were won over by an agreement to add a bill of rights.</p><p>Madison, now a congressman, wrote a set of amendments to protect individual rights. By the end of 1791, three-fourths of the states had approved ten of the twelve proposed amendments. We call them the Bill of Rights. Norton adds that, like the Constitution, the Bill of Rights gave no protections to enslaved or Indigenous Americans.</p><p class="cite">Source: Norton Ch. 6, “The Fight for Ratification” (The Federalist Papers; The States Decide) and “The Federalist Era” (The Bill of Rights).</p></div>
+</div>
+</section>
+<section class="card panel" id="d4" data-n="4" data-a="Create the bank: it would help business and the government" data-b="No bank: the Constitution does not say Congress can create one" data-short="National Bank" aria-labelledby="h4">
+<div class="kick">Dilemma 4 <span>of 5</span> · 1791</div>
+<h2 id="h4">1791: Create a National Bank, or Say No?</h2>
+<div class="there"><span class="lab">You are there</span><p>It is 1791, and you are an adviser to President George Washington. Alexander Hamilton, a top adviser in Washington’s government, wants a national bank, like the Bank of England. He says it would help business among individuals. It would also give the government a safe place to keep its money.</p><p>Thomas Jefferson and James Madison lead the opposition. They say the Constitution says nothing about creating a national bank, so the government cannot start one.</p><p>The two sides are also two kinds of leaders. Hamilton and his Federalists are strongest in New York and New England. They like cities, industry, and business growth. Jefferson, Madison, and the Republicans are mostly Southerners. They want a nation of small farmers.</p><p>What would you advise?</p></div>
+<p class="rather">Would you rather...</p>
+<div class="choices" role="group" aria-label="Choose one">
+<button type="button" class="choice" data-o="A" aria-pressed="false"><span class="ltr">A</span><span>Create the bank: it would help business and the government</span></button>
+<button type="button" class="choice" data-o="B" aria-pressed="false"><span class="ltr">B</span><span>No bank: the Constitution does not say Congress can create one</span></button>
+</div>
+<div class="work">
+<div class="field"><label for="d4_reason">Your reason</label><span class="hint">Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”</span>
+<textarea id="d4_reason" data-k="reason" placeholder="Type your reason here..."></textarea></div>
+<div class="field"><label for="d4_counter">Counter-Argument</label><span class="hint">What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”</span>
+<textarea id="d4_counter" data-k="counter" placeholder="Type the other side’s best reason here..."></textarea></div>
+<div class="row2"><button type="button" class="btn primary lockBtn" disabled>Lock in my answer</button>
+<button type="button" class="btn editBtn">Edit my answer</button><span class="cstat" aria-live="polite"></span></div>
+<div class="reveal" aria-live="polite"><span class="lab">What really happened</span><p>The Bank of the United States was created in 1791. Norton says it had three main jobs. One was to hold the government’s money and pay its bills. Another was to make loans to the federal government and to state-chartered banks to help the economy grow.</p><p>Norton says the vote in Congress was lopsided. It showed the growing political split between North and South.</p><p>Norton says the Federalists and the Republicans saw the country in different ways. Federalists wanted a strong central government led by wise leaders who cared about economic growth and national defense. Republicans feared that a strong national government would threaten freedom and states’ rights. They trusted the people.</p><p class="cite">Source: Norton Ch. 6, “The Federalist Era” (A National Bank; Federalists and Republicans).</p></div>
+</div>
+</section>
+<section class="card panel" id="d5" data-n="5" data-a="Accept the treaty: it wins real promises from Britain" data-b="Reject the treaty: it gives in to Britain and does not end impressment" data-short="Jay’s Treaty" aria-labelledby="h5">
+<div class="kick">Dilemma 5 <span>of 5</span> · 1795</div>
+<h2 id="h5">1795: Accept Jay’s Treaty, or Reject It?</h2>
+<div class="there"><span class="lab">You are there</span><p>It is 1795, and you are an adviser to President George Washington. Great Britain and France are at war, and Americans are split. Thomas Jefferson and the Republicans love the French Revolution and its democratic ideals. Alexander Hamilton and John Adams see it as vicious and godless. They side with Great Britain.</p><p>Last year, Washington sent John Jay to London to settle the big problems with Britain. Jay agreed that America would not sell products to France for building warships. But the British refused to stop intercepting American ships headed for France and “impressing” their sailors. That means forcing them to serve in the British navy.</p><p>In return, Jay won three promises. Britain would give up its six forts on the northwest frontier by 1796. Britain would pay Americans for ships and cargo seized in 1793 and 1794. And U.S. merchants could trade again, in a limited way, with the British West Indies.</p><p>Now the terms are public, and many Americans, especially Republicans, are outraged. What would you advise?</p></div>
+<p class="rather">Would you rather...</p>
+<div class="choices" role="group" aria-label="Choose one">
+<button type="button" class="choice" data-o="A" aria-pressed="false"><span class="ltr">A</span><span>Accept the treaty: it wins real promises from Britain</span></button>
+<button type="button" class="choice" data-o="B" aria-pressed="false"><span class="ltr">B</span><span>Reject the treaty: it gives in to Britain and does not end impressment</span></button>
+</div>
+<div class="work">
+<div class="field"><label for="d5_reason">Your reason</label><span class="hint">Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”</span>
+<textarea id="d5_reason" data-k="reason" placeholder="Type your reason here..."></textarea></div>
+<div class="field"><label for="d5_counter">Counter-Argument</label><span class="hint">What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”</span>
+<textarea id="d5_counter" data-k="counter" placeholder="Type the other side’s best reason here..."></textarea></div>
+<div class="row2"><button type="button" class="btn primary lockBtn" disabled>Lock in my answer</button>
+<button type="button" class="btn editBtn">Edit my answer</button><span class="cstat" aria-live="polite"></span></div>
+<div class="reveal" aria-live="polite"><span class="lab">What really happened</span><p>The treaty was approved. In June 1795 the Senate voted 20 to 10, exactly the two-thirds needed.</p><p>Norton says France was angry about the treaty. As the second president, John Adams inherited an undeclared conflict with France that came from that anger.</p><p>Norton says these clashing attitudes about Britain and France made the 1790s one of the most fractious periods in American history. Norton calls it an “age of passion.”</p><p class="cite">Source: Norton Ch. 6, “Foreign and Domestic Crises” (Effects of the French Revolution; Jay’s Treaty; War with France). Senate vote: Library of Congress, “Jay’s Treaty”.</p></div>
+</div>
+</section>
+<section class="tally panel" id="tally"><div class="kick">The end</div><h2>Your choices</h2><p style="margin:0">Here is a summary of the choices you made.</p>
+<ol id="tallyList"></ol><p class="sum" id="tallySum"></p></section>
+<div class="finish panel" id="actions"><div class="status" id="status"></div>
+<div class="btns"><button class="btn" id="saveBtn" type="button">Save Progress</button><button class="btn" id="loadBtn" type="button">Load Progress</button>
+<input type="file" id="loadFile" accept=".json,application/json" hidden>
+<button class="btn primary" id="finishBtn" type="button" disabled>Finished — Download File to Submit</button></div>
+<div class="msg" id="msg" role="status"></div><button class="link" id="reset" type="button">Clear all my answers</button></div>
+<footer>UNIT 1 · COLONIES, REVOLUTION, AND CONSTITUTION | CPUSH | DANIEL GARZA, M.A.</footer>
+</div>
+<script>
+(function(){
+  var PACKET='CPUSH_L4_WYR';
+  var STORE='cpush_l4_would-you-rather_student';
+  var $=function(i){return document.getElementById(i)};
+  var first=$('f_first'),last=$('f_last'),period=$('f_period'),dateF=$('f_date');
+  var cards=[].slice.call(document.querySelectorAll('.card'));
+  var MIN=15;
+  var data={meta:{},cards:{}};
+  function load(){try{var d=JSON.parse(localStorage.getItem(STORE)||'null');if(d&&d.cards)data=d}catch(e){}}
+  function persist(){try{localStorage.setItem(STORE,JSON.stringify(data))}catch(e){}}
+  function cs(n){return data.cards[n]||(data.cards[n]={choice:'',reason:'',counter:'',locked:false})}
+  function msg(t,err){var m=$('msg');m.textContent=t;m.className='msg'+(err?' err':'');m.style.display='block'}
+  function clean(n){n=window.spAscii?spAscii(n):n;return String(n).normalize('NFD').replace(/[̀-ͯ]/g,'').trim().replace(/\s+/g,'_').replace(/[^A-Za-z0-9_-]/g,'')}
+  function who(){return (clean(last.value)||'Last')+'_'+(clean(first.value)||'First')}
+  function named(){return !!(first.value.trim()&&last.value.trim()&&period.value.trim())}
+  function optText(c,o){return o==='A'?c.getAttribute('data-a'):o==='B'?c.getAttribute('data-b'):''}
+  function render(){
+    var locked=0;
+    cards.forEach(function(c){
+      var n=c.getAttribute('data-n'),s=cs(n);
+      c.classList.toggle('chosen',!!s.choice);
+      c.classList.toggle('locked',!!s.locked);
+      [].forEach.call(c.querySelectorAll('.choice'),function(b){
+        b.setAttribute('aria-pressed',b.getAttribute('data-o')===s.choice?'true':'false');
+        b.disabled=!!s.locked;
+      });
+      var r=c.querySelector('[data-k=reason]'),k=c.querySelector('[data-k=counter]');
+      if(r.value!==s.reason)r.value=s.reason;
+      if(k.value!==s.counter)k.value=s.counter;
+      r.readOnly=k.readOnly=!!s.locked;
+      var ok=s.choice&&s.reason.trim().length>=MIN&&s.counter.trim().length>=MIN;
+      c.querySelector('.lockBtn').disabled=!ok;
+      var st=c.querySelector('.cstat');
+      st.textContent=s.locked?'Locked in. Read what really happened below.':(ok?'Ready. Tap Lock in to see what happened.':'Fill in both boxes to unlock the next step.');
+      if(s.locked)locked++;
+    });
+    var tot=cards.length;
+    $('pct').textContent=locked+' of '+tot+' dilemmas locked in';
+    $('fill').style.width=(100*locked/tot)+'%';
+    var ol=$('tallyList');ol.innerHTML='';
+    cards.forEach(function(c){
+      var n=c.getAttribute('data-n'),s=cs(n),li=document.createElement('li');
+      var txt=s.choice?optText(c,s.choice):'';
+      li.className=(s.locked&&s.choice)?'':'none';
+      li.innerHTML='<span class="tn"></span><span class="tq"></span><span class="ta"></span>';
+      li.querySelector('.tn').textContent=n;
+      li.querySelector('.tq').textContent=c.getAttribute('data-short');
+      li.querySelector('.ta').textContent=(s.locked&&s.choice)?('You chose: '+txt):(s.choice?('Chosen, not locked in yet: '+txt):'Not answered yet');
+      ol.appendChild(li);
+    });
+    $('tallySum').textContent=locked===tot?'All five dilemmas are locked in. Nice work.':'Lock in all five dilemmas to finish.';
+    var miss=[];
+    if(!named())miss.push('first name, last name, and period');
+    if(locked<tot)miss.push((tot-locked)+' dilemma'+(tot-locked===1?'':'s')+' to lock in');
+    var all=named()&&locked===tot;
+    $('status').textContent=all?'Everything is done. Tap Finished to download your file.':'Still needed: '+miss.join('; ')+'.';
+    $('finishBtn').disabled=!all;
+    return all;
+  }
+  function sync(){
+    data.meta={first:first.value,last:last.value,period:period.value,date:dateF.value};
+    persist();render();
+  }
+  function snapshot(){
+    var o={packet:PACKET,course:'CPUSH',lesson:4,assignment:'Would You Rather',version:1,saved:new Date().toISOString(),
+      student:{first:first.value.trim(),last:last.value.trim(),period:period.value.trim(),date:dateF.value.trim()},answers:{}};
+    cards.forEach(function(c){
+      var n=c.getAttribute('data-n'),s=cs(n),p='dilemma_'+n+'_';
+      o.answers[p+'topic']=c.getAttribute('data-short');
+      o.answers[p+'choice']=s.choice;
+      o.answers[p+'choice_text']=optText(c,s.choice);
+      o.answers[p+'reason']=s.reason;
+      o.answers[p+'counter_argument']=s.counter;
+      o.answers[p+'locked_in']=!!s.locked;
+    });
+    return o;
+  }
+  function download(name,obj){
+    var blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;
+    document.body.appendChild(a);a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);
+  }
+  load();
+  var m=data.meta||{};first.value=m.first||'';last.value=m.last||'';period.value=m.period||'';dateF.value=m.date||'';
+  [first,last,period].forEach(function(f){f.addEventListener('input',function(){f.classList.remove('bad');sync()})});
+  cards.forEach(function(c){
+    var n=c.getAttribute('data-n');
+    [].forEach.call(c.querySelectorAll('.choice'),function(b){b.addEventListener('click',function(){var s=cs(n);if(s.locked)return;s.choice=b.getAttribute('data-o');sync()})});
+    c.querySelector('[data-k=reason]').addEventListener('input',function(e){cs(n).reason=e.target.value;sync()});
+    c.querySelector('[data-k=counter]').addEventListener('input',function(e){cs(n).counter=e.target.value;sync()});
+    c.querySelector('.lockBtn').addEventListener('click',function(){var s=cs(n);if(!s.choice||s.reason.trim().length<MIN||s.counter.trim().length<MIN)return;s.locked=true;sync();var r=c.querySelector('.reveal');if(r.scrollIntoView)r.scrollIntoView({block:'nearest',behavior:'smooth'})});
+    c.querySelector('.editBtn').addEventListener('click',function(){cs(n).locked=false;sync()});
+  });
+  $('saveBtn').addEventListener('click',function(){
+    if(!named()){[first,last,period].forEach(function(f){if(!f.value.trim())f.classList.add('bad')});msg('Please type your first name, last name, and period first.',true);first.scrollIntoView({block:'center'});return}
+    download(who()+'-'+PACKET+'-PROGRESS.json',snapshot());msg('Progress file downloaded. Keep it safe. Use Load Progress to continue later.');
+  });
+  $('loadBtn').addEventListener('click',function(){$('loadFile').click()});
+  $('loadFile').addEventListener('change',function(ev){
+    var f=ev.target.files[0];if(!f)return;
+    var r=new FileReader();
+    r.onload=function(){
+      try{
+        var o=JSON.parse(r.result);
+        if(!o||o.packet!==PACKET||typeof o.answers!=='object')throw new Error('wrong');
+        var st=o.student||{};first.value=st.first||'';last.value=st.last||'';period.value=st.period||'';dateF.value=(o.completed?st.date:'')||'';
+        data.cards={};
+        cards.forEach(function(c){var n=c.getAttribute('data-n'),p='dilemma_'+n+'_',a=o.answers;
+          data.cards[n]={choice:(a[p+'choice']==='A'||a[p+'choice']==='B')?a[p+'choice']:'',reason:String(a[p+'reason']||''),counter:String(a[p+'counter_argument']||''),locked:!!a[p+'locked_in']};});
+        sync();msg('Progress loaded.');
+      }catch(err){msg('That file does not look like a Would You Rather progress file. Try again.',true)}
+      ev.target.value='';
+    };
+    r.onerror=function(){msg('Could not read that file.',true)};
+    r.readAsText(f);
+  });
+  $('finishBtn').addEventListener('click',function(){
+    if(!render())return;
+    var now=new Date();dateF.value=now.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});sync();
+    var o=snapshot();o.completed=true;o.submitted=now.toISOString();
+    var fn=who()+'-'+PACKET+'.json';download(fn,o);
+    msg('Done! Your file '+fn+' downloaded. Upload it to Canvas.');
+  });
+  $('reset').addEventListener('click',function(){
+    if(!confirm('Clear all of your answers on this page?'))return;
+    data={meta:{},cards:{}};first.value=last.value=period.value=dateF.value='';persist();render();
+  });
+  render();
+})();
+</script><!--sp-i18n--><script type="application/json" id="sp-i18n">{"langs":["en","es","ar"],"default":"en","es":{"Save Progress":"Guardar progreso","Load Progress":"Cargar progreso","Finished — Download File to Submit":"Terminé — Descargar el archivo para entregar","Clear all my answers":"Borrar todas mis respuestas","FIRST NAME *":"NOMBRE *","LAST NAME *":"APELLIDO *","PERIOD *":"PERÍODO *","DATE (fills in when you finish)":"FECHA (se llena cuando terminas)","e.g. 3":"p. ej., 3","Automatic":"Automática","Please type your first name, last name, and period first.":"Primero escribe tu nombre, apellido y período.","Western Expansion and Southern Secession":"Expansión hacia el oeste y secesión del sur","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — La Ley de Esclavos Fugitivos","Bleeding Kansas":"Bleeding Kansas — Kansas sangriento","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"Se descargó tu archivo de progreso. Guárdalo bien. Usa «Cargar progreso» para continuar más tarde.","Progress loaded.":"Progreso cargado.","Could not read that file.":"No se pudo leer ese archivo.","Treaty of Guadalupe Hidalgo":"Tratado de Guadalupe Hidalgo","Creating the Constitution":"La creación de la Constitución","Would You Rather 4 · Creating the Constitution":"¿Qué preferirías? 4 · La creación de la Constitución","UNIT 1 · COLONIES, REVOLUTION, AND CONSTITUTION | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 1 · COLONIAS, REVOLUCIÓN Y CONSTITUCIÓN | CPUSH | DANIEL GARZA, M.A.","Dilemma 1 <span>of 5<\/span> · 1787":"Dilema 1 <span>de 5<\/span> · 1787","Dilemma 2 <span>of 5<\/span> · 1787":"Dilema 2 <span>de 5<\/span> · 1787","Dilemma 3 <span>of 5<\/span> · 1788":"Dilema 3 <span>de 5<\/span> · 1788","Dilemma 4 <span>of 5<\/span> · 1791":"Dilema 4 <span>de 5<\/span> · 1791","Dilemma 5 <span>of 5<\/span> · 1795":"Dilema 5 <span>de 5<\/span> · 1795","Send Delegates":"Enviar delegados","Representation":"Representación","Ratify or Not":"Ratificar o no","National Bank":"Banco nacional","Jay’s Treaty":"El Tratado de Jay","1787: Send Delegates to Philadelphia, or Stay Home?":"1787: ¿Enviar delegados a Filadelfia o quedarse en casa?","It is early 1787, and you are a leader in your state’s legislature. The United States is run under the Articles of Confederation. The Articles made a loose alliance of thirteen states. There is only one house of Congress. There is no president and no national court. Each state gets one vote. Rhode Island has 68,000 people and Virginia has more than 747,000, but they have the same voting power.":"Es principios de 1787 y eres líder en la legislatura de tu estado. Estados Unidos se gobierna con los Artículos de la Confederación. Los Artículos crearon una alianza débil de trece estados. Solo hay una cámara del Congreso. No hay presidente ni tribunal nacional. Cada estado tiene un voto. Rhode Island tiene 68,000 habitantes y Virginia tiene más de 747,000, pero tienen el mismo poder de voto.","Congress has no cash and cannot make people pay taxes. Farmers in western Massachusetts have rebelled over debts and taxes, and the state sent 4,400 militiamen to break up their army. George Washington says the country needs a stronger national government to keep people’s lives, liberty, and property safe.":"El Congreso no tiene dinero y no puede obligar a la gente a pagar impuestos. Los granjeros del oeste de Massachusetts se han rebelado por deudas e impuestos, y el estado envió a 4,400 soldados de la milicia para disolver su ejército. George Washington dice que el país necesita un gobierno nacional más fuerte para proteger la vida, la libertad y las propiedades de las personas.","Now Congress has called a special convention to meet in Philadelphia. Its purpose is “revising the Articles of Confederation.” Your state must decide whether to send delegates. Some leaders want a stronger national government. Others want to keep power with the states.":"Ahora el Congreso ha convocado una convención especial en Filadelfia. Su propósito es “revisar los Artículos de la Confederación”. Tu estado debe decidir si envía delegados. Algunos líderes quieren un gobierno nacional más fuerte. Otros quieren que el poder se quede en los estados.","Send delegates: the nation needs a stronger government":"Enviar delegados: la nación necesita un gobierno más fuerte","Stay home: keep the Articles of Confederation as they are":"Quedarse en casa: mantener los Artículos de la Confederación como están","The convention met in Philadelphia’s State House, now called Independence Hall. Only Rhode Island refused to take part. All the other states did.":"La convención se reunió en la Casa del Estado de Filadelfia, hoy llamada Salón de la Independencia. Solo Rhode Island se negó a participar. Todos los demás estados participaron.","Congress had asked the delegates to revise the Articles. The final draft was a new Constitution. It begins with the words “We the people of the United States.” Norton says the idea that the voters are the source of all authority was the most important political innovation since the Declaration of Independence.":"El Congreso había pedido a los delegados que revisaran los Artículos. La versión final fue una nueva Constitución. Comienza con las palabras “Nosotros, el pueblo de los Estados Unidos”. Norton dice que la idea de que los votantes son la fuente de toda autoridad fue la innovación política más importante desde la Declaración de Independencia.","Norton also says the Articles left some good work behind. Congress set the basic rules for dividing western land and for governing new territories. The Northwest Ordinance of 1787 said new territories would someday become equal states.":"Norton también dice que los Artículos dejaron algo de buen trabajo. El Congreso fijó las reglas básicas para repartir las tierras del oeste y para gobernar los nuevos territorios. La Ordenanza del Noroeste de 1787 dijo que los nuevos territorios algún día serían estados iguales.","Source: Norton Ch. 6, “The Confederation Government” and “The Constitution” (The Constitutional Convention).":"Fuente: Norton, cap. 6, “The Confederation Government” y “The Constitution” (The Constitutional Convention).","1787: Seats by Population, or One Vote per State?":"1787: ¿Escaños por población o un voto por estado?","It is the summer of 1787, and you are a delegate at the Constitutional Convention in Philadelphia. You and the other delegates are writing a plan for a new Congress. The big question is how the states should be represented.":"Es el verano de 1787 y eres delegado en la Convención Constitucional en Filadelfia. Tú y los demás delegados están escribiendo un plan para un nuevo Congreso. La gran pregunta es cómo deben estar representados los estados.","Under the Articles of Confederation, every state had one vote. That meant Rhode Island, with 68,000 people, had the same voting power as Virginia, with more than 747,000.":"Bajo los Artículos de la Confederación, cada estado tenía un voto. Eso significaba que Rhode Island, con 68,000 habitantes, tenía el mismo poder de voto que Virginia, con más de 747,000.","Delegates from larger states want seats in Congress based on population. Delegates from smaller states want every state to have an equal vote. The debate over this is intense.":"Los delegados de los estados más grandes quieren que los escaños en el Congreso se basen en la población. Los delegados de los estados más pequeños quieren que cada estado tenga un voto igual. El debate sobre esto es intenso.","Seats by population: more people, more votes":"Escaños por población: más gente, más votos","Equal votes: every state gets the same say":"Votos iguales: cada estado tiene el mismo peso","In mid-July the delegates settled the debate with a deal called the Great Compromise. It used both ideas.":"A mediados de julio, los delegados resolvieron el debate con un acuerdo llamado el Gran Compromiso. Usó las dos ideas.","In the House of Representatives, seats are given by population. Larger states win more seats. In the Senate, each state has two members, so every state is equal. At first, state legislatures chose the senators.":"En la Cámara de Representantes, los escaños se dan según la población. Los estados más grandes obtienen más escaños. En el Senado, cada estado tiene dos miembros, así que todos los estados son iguales. Al principio, las legislaturas estatales elegían a los senadores.","Norton says this compromise also built the idea of separation of powers into Congress. A separate agreement, the Three-Fifths Compromise, counted three-fifths of “all other persons” (the enslaved) when seats were divided. It was not part of the choice above.":"Norton dice que este compromiso también incorporó al Congreso la idea de la separación de poderes. Un acuerdo aparte, el Compromiso de las Tres Quintas Partes, contó tres quintas partes de “todas las demás personas” (las personas esclavizadas) cuando se repartieron los escaños. No era parte de la elección de arriba.","Source: Norton Ch. 6, “The Constitution” (The Constitutional Convention; The Three-Fifths Compromise) and “The Confederation Government” (A Loose Alliance of States).":"Fuente: Norton, cap. 6, “The Constitution” (The Constitutional Convention; The Three-Fifths Compromise) y “The Confederation Government” (A Loose Alliance of States).","1788: Ratify the Constitution, or Say No Without a Bill of Rights?":"1788: ¿Ratificar la Constitución o decir que no sin una declaración de derechos?","It is 1788, and you are a delegate to your state’s convention. Your job is to vote on the new Constitution. The Constitution can take effect only if at least nine states approve it.":"Es 1788 y eres delegado a la convención de tu estado. Tu trabajo es votar sobre la nueva Constitución. La Constitución solo puede entrar en vigor si al menos nueve estados la aprueban.","The Federalists, led by James Madison and Alexander Hamilton, support it. They have a real plan on the table: the draft itself. They say the country needs the stronger government it creates.":"Los federalistas, dirigidos por James Madison y Alexander Hamilton, lo apoyan. Tienen un plan real sobre la mesa: el borrador mismo. Dicen que el país necesita el gobierno más fuerte que crea.","The Anti-Federalists are afraid. They fear the new national government will grow corrupt and tyrannical. George Mason of Virginia and others also point out that the draft has no bill of rights to protect people and states from the national government.":"Los antifederalistas tienen miedo. Temen que el nuevo gobierno nacional se vuelva corrupto y tiránico. George Mason de Virginia y otros también señalan que el borrador no tiene una declaración de derechos que proteja a las personas y a los estados del gobierno nacional.","Vote yes: approve the Constitution as it is written":"Votar sí: aprobar la Constitución tal como está escrita","Vote no: do not approve it without a bill of rights":"Votar no: no aprobarla sin una declaración de derechos","On June 21, 1788, New Hampshire became the ninth state to ratify the Constitution. That was the minimum needed for it to take effect.":"El 21 de junio de 1788, New Hampshire se convirtió en el noveno estado en ratificar la Constitución. Ese era el mínimo necesario para que entrara en vigor.","Madison, Hamilton, and John Jay also wrote eighty-five essays, now called The Federalist Papers. They were printed in New York newspapers in 1787 and 1788 to convince New Yorkers to ratify. Norton says that in Virginia and New York, strong opposition groups were won over by an agreement to add a bill of rights.":"Madison, Hamilton y John Jay también escribieron ochenta y cinco ensayos, llamados hoy Los Documentos Federalistas. Se publicaron en periódicos de Nueva York en 1787 y 1788 para convencer a los neoyorquinos de ratificar. Norton dice que en Virginia y Nueva York, grupos de oposición fuertes fueron convencidos con el acuerdo de añadir una declaración de derechos.","Madison, now a congressman, wrote a set of amendments to protect individual rights. By the end of 1791, three-fourths of the states had approved ten of the twelve proposed amendments. We call them the Bill of Rights. Norton adds that, like the Constitution, the Bill of Rights gave no protections to enslaved or Indigenous Americans.":"Madison, ya congresista, escribió una serie de enmiendas para proteger los derechos individuales. Para finales de 1791, las tres cuartas partes de los estados habían aprobado diez de las doce enmiendas propuestas. Las llamamos la Declaración de Derechos. Norton agrega que, igual que la Constitución, la Declaración de Derechos no dio protecciones a los estadounidenses esclavizados ni a los indígenas.","Source: Norton Ch. 6, “The Fight for Ratification” (The Federalist Papers; The States Decide) and “The Federalist Era” (The Bill of Rights).":"Fuente: Norton, cap. 6, “The Fight for Ratification” (The Federalist Papers; The States Decide) y “The Federalist Era” (The Bill of Rights).","1791: Create a National Bank, or Say No?":"1791: ¿Crear un banco nacional o decir que no?","It is 1791, and you are an adviser to President George Washington. Alexander Hamilton, a top adviser in Washington’s government, wants a national bank, like the Bank of England. He says it would help business among individuals. It would also give the government a safe place to keep its money.":"Es 1791 y eres asesor del presidente George Washington. Alexander Hamilton, un alto asesor del gobierno de Washington, quiere un banco nacional, como el Banco de Inglaterra. Dice que ayudaría a los negocios entre particulares. También le daría al gobierno un lugar seguro para guardar su dinero.","Thomas Jefferson and James Madison lead the opposition. They say the Constitution says nothing about creating a national bank, so the government cannot start one.":"Thomas Jefferson y James Madison lideran la oposición. Dicen que la Constitución no dice nada sobre crear un banco nacional, así que el gobierno no puede fundar uno.","The two sides are also two kinds of leaders. Hamilton and his Federalists are strongest in New York and New England. They like cities, industry, and business growth. Jefferson, Madison, and the Republicans are mostly Southerners. They want a nation of small farmers.":"Los dos lados también son dos tipos de líderes. Hamilton y sus federalistas son más fuertes en Nueva York y Nueva Inglaterra. Les gustan las ciudades, la industria y el crecimiento de los negocios. Jefferson, Madison y los republicanos son en su mayoría sureños. Quieren una nación de pequeños granjeros.","Create the bank: it would help business and the government":"Crear el banco: ayudaría a los negocios y al gobierno","No bank: the Constitution does not say Congress can create one":"Sin banco: la Constitución no dice que el Congreso pueda crear uno","The Bank of the United States was created in 1791. Norton says it had three main jobs. One was to hold the government’s money and pay its bills. Another was to make loans to the federal government and to state-chartered banks to help the economy grow.":"El Banco de los Estados Unidos se creó en 1791. Norton dice que tenía tres trabajos principales. Uno era guardar el dinero del gobierno y pagar sus cuentas. Otro era dar préstamos al gobierno federal y a los bancos autorizados por los estados para ayudar a que la economía creciera.","Norton says the vote in Congress was lopsided. It showed the growing political split between North and South.":"Norton dice que la votación en el Congreso fue muy desigual. Mostró la división política cada vez mayor entre el Norte y el Sur.","Norton says the Federalists and the Republicans saw the country in different ways. Federalists wanted a strong central government led by wise leaders who cared about economic growth and national defense. Republicans feared that a strong national government would threaten freedom and states’ rights. They trusted the people.":"Norton dice que los federalistas y los republicanos veían el país de maneras diferentes. Los federalistas querían un gobierno central fuerte, dirigido por líderes sabios que se preocuparan por el crecimiento económico y la defensa nacional. Los republicanos temían que un gobierno nacional fuerte amenazara la libertad y los derechos de los estados. Confiaban en el pueblo.","Source: Norton Ch. 6, “The Federalist Era” (A National Bank; Federalists and Republicans).":"Fuente: Norton, cap. 6, “The Federalist Era” (A National Bank; Federalists and Republicans).","1795: Accept Jay’s Treaty, or Reject It?":"1795: ¿Aceptar el Tratado de Jay o rechazarlo?","It is 1795, and you are an adviser to President George Washington. Great Britain and France are at war, and Americans are split. Thomas Jefferson and the Republicans love the French Revolution and its democratic ideals. Alexander Hamilton and John Adams see it as vicious and godless. They side with Great Britain.":"Es 1795 y eres asesor del presidente George Washington. Gran Bretaña y Francia están en guerra, y los estadounidenses están divididos. Thomas Jefferson y los republicanos aman la Revolución francesa y sus ideales democráticos. Alexander Hamilton y John Adams la ven como cruel y sin Dios. Se ponen del lado de Gran Bretaña.","Last year, Washington sent John Jay to London to settle the big problems with Britain. Jay agreed that America would not sell products to France for building warships. But the British refused to stop intercepting American ships headed for France and “impressing” their sailors. That means forcing them to serve in the British navy.":"El año pasado, Washington envió a John Jay a Londres para resolver los grandes problemas con Gran Bretaña. Jay aceptó que Estados Unidos no vendería productos a Francia para construir barcos de guerra. Pero los británicos se negaron a dejar de interceptar los barcos estadounidenses que iban hacia Francia y de “reclutar a la fuerza” a sus marineros. Eso significa obligarlos a servir en la armada británica.","In return, Jay won three promises. Britain would give up its six forts on the northwest frontier by 1796. Britain would pay Americans for ships and cargo seized in 1793 and 1794. And U.S. merchants could trade again, in a limited way, with the British West Indies.":"A cambio, Jay consiguió tres promesas. Gran Bretaña abandonaría sus seis fuertes en la frontera del noroeste para 1796. Gran Bretaña pagaría a los estadounidenses por los barcos y cargamentos capturados en 1793 y 1794. Y los comerciantes estadounidenses podrían volver a comerciar, de forma limitada, con las Indias Occidentales Británicas.","Now the terms are public, and many Americans, especially Republicans, are outraged. What would you advise?":"Ahora los términos son públicos, y muchos estadounidenses, sobre todo los republicanos, están indignados. ¿Qué aconsejarías?","Accept the treaty: it wins real promises from Britain":"Aceptar el tratado: consigue promesas reales de Gran Bretaña","Reject the treaty: it gives in to Britain and does not end impressment":"Rechazar el tratado: cede ante Gran Bretaña y no acaba con el reclutamiento forzoso","The treaty was approved. In June 1795 the Senate voted 20 to 10, exactly the two-thirds needed.":"El tratado fue aprobado. En junio de 1795, el Senado votó 20 a 10, exactamente los dos tercios necesarios.","Norton says France was angry about the treaty. As the second president, John Adams inherited an undeclared conflict with France that came from that anger.":"Norton dice que Francia se enojó por el tratado. Como segundo presidente, John Adams heredó un conflicto no declarado con Francia que surgió de ese enojo.","Norton says these clashing attitudes about Britain and France made the 1790s one of the most fractious periods in American history. Norton calls it an “age of passion.”":"Norton dice que estas actitudes opuestas sobre Gran Bretaña y Francia hicieron de la década de 1790 uno de los períodos más conflictivos de la historia de Estados Unidos. Norton lo llama una “era de pasión”.","Source: Norton Ch. 6, “Foreign and Domestic Crises” (Effects of the French Revolution; Jay’s Treaty; War with France). Senate vote: Library of Congress, “Jay’s Treaty”.":"Fuente: Norton, cap. 6, “Foreign and Domestic Crises” (Effects of the French Revolution; Jay’s Treaty; War with France). Voto del Senado: Library of Congress, “Jay’s Treaty”.","You chose: Send delegates: the nation needs a stronger government":"Elegiste: Enviar delegados: la nación necesita un gobierno más fuerte","Chosen, not locked in yet: Send delegates: the nation needs a stronger government":"Elegida, aún sin confirmar: Enviar delegados: la nación necesita un gobierno más fuerte","You chose: Stay home: keep the Articles of Confederation as they are":"Elegiste: Quedarse en casa: mantener los Artículos de la Confederación como están","Chosen, not locked in yet: Stay home: keep the Articles of Confederation as they are":"Elegida, aún sin confirmar: Quedarse en casa: mantener los Artículos de la Confederación como están","You chose: Seats by population: more people, more votes":"Elegiste: Escaños por población: más gente, más votos","Chosen, not locked in yet: Seats by population: more people, more votes":"Elegida, aún sin confirmar: Escaños por población: más gente, más votos","You chose: Equal votes: every state gets the same say":"Elegiste: Votos iguales: cada estado tiene el mismo peso","Chosen, not locked in yet: Equal votes: every state gets the same say":"Elegida, aún sin confirmar: Votos iguales: cada estado tiene el mismo peso","You chose: Vote yes: approve the Constitution as it is written":"Elegiste: Votar sí: aprobar la Constitución tal como está escrita","Chosen, not locked in yet: Vote yes: approve the Constitution as it is written":"Elegida, aún sin confirmar: Votar sí: aprobar la Constitución tal como está escrita","You chose: Vote no: do not approve it without a bill of rights":"Elegiste: Votar no: no aprobarla sin una declaración de derechos","Chosen, not locked in yet: Vote no: do not approve it without a bill of rights":"Elegida, aún sin confirmar: Votar no: no aprobarla sin una declaración de derechos","You chose: Create the bank: it would help business and the government":"Elegiste: Crear el banco: ayudaría a los negocios y al gobierno","Chosen, not locked in yet: Create the bank: it would help business and the government":"Elegida, aún sin confirmar: Crear el banco: ayudaría a los negocios y al gobierno","You chose: No bank: the Constitution does not say Congress can create one":"Elegiste: Sin banco: la Constitución no dice que el Congreso pueda crear uno","Chosen, not locked in yet: No bank: the Constitution does not say Congress can create one":"Elegida, aún sin confirmar: Sin banco: la Constitución no dice que el Congreso pueda crear uno","You chose: Accept the treaty: it wins real promises from Britain":"Elegiste: Aceptar el tratado: consigue promesas reales de Gran Bretaña","Chosen, not locked in yet: Accept the treaty: it wins real promises from Britain":"Elegida, aún sin confirmar: Aceptar el tratado: consigue promesas reales de Gran Bretaña","You chose: Reject the treaty: it gives in to Britain and does not end impressment":"Elegiste: Rechazar el tratado: cede ante Gran Bretaña y no acaba con el reclutamiento forzoso","Chosen, not locked in yet: Reject the treaty: it gives in to Britain and does not end impressment":"Elegida, aún sin confirmar: Rechazar el tratado: cede ante Gran Bretaña y no acaba con el reclutamiento forzoso","<b>How to work.<\/b> People in history faced hard choices. Here are five. There is no right or wrong choice. Your job is to understand why people chose what they did.":"<b>Cómo trabajar.<\/b> Las personas en la historia enfrentaron decisiones difíciles. Aquí hay cinco. No hay una opción correcta ni incorrecta. Tu trabajo es entender por qué las personas eligieron lo que eligieron.","All five dilemmas are locked in. Nice work.":"Las cinco decisiones están confirmadas. Buen trabajo.","Lock in all five dilemmas to finish.":"Confirma las cinco decisiones para terminar.","What would you choose?":"¿Qué elegirías?","What would you advise?":"¿Qué aconsejarías?","Would you rather...":"¿Qué preferirías?...","Read “You are there.”":"Lee «Tú estás allí».","Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”":"¿Por qué elegiste esto? Usa al menos un dato de la lección. Prueba: «Elegí esto porque... Un dato es...»","Your choices":"Tus elecciones","Ready. Tap Lock in to see what happened.":"Listo. Toca «Confirmar» para ver lo que pasó.","Everything is done. Tap Finished to download your file.":"Todo está listo. Toca «Terminé» para descargar tu archivo.","Tap the choice you would make.":"Toca la opción que tú elegirías.","Lock in my answer":"Confirmar mi respuesta","Type the other side’s best reason here...":"Escribe aquí la mejor razón del otro lado...","Counter-Argument":"Contraargumento","What really happened":"Lo que realmente pasó","What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”":"¿Cuál es la mejor razón que daría alguien del OTRO lado? Escríbela como la diría esa persona. Prueba: «Alguien que eligió el otro lado diría...»","Type your reason here...":"Escribe tu razón aquí...","Write your reason. Use at least one fact from the lesson.":"Escribe tu razón. Usa al menos un dato de la lección.","That file does not look like a Would You Rather progress file. Try again.":"Ese archivo no parece un archivo de progreso de «¿Qué preferirías?». Inténtalo de nuevo.","Would You Rather":"¿Qué preferirías?","Locked in. Read what really happened below.":"Confirmada. Lee abajo lo que realmente pasó.","You are there":"Tú estás allí","Choose one":"Elige uno","Tap <b>Lock in my answer<\/b> to see what really happened.":"Toca <b>Confirmar mi respuesta<\/b> para ver lo que realmente pasó.","Fill in both boxes to unlock the next step.":"Llena las dos casillas para pasar al siguiente paso.","Edit my answer":"Cambiar mi respuesta","The end":"El final","Write a Counter-Argument: the best reason someone on the other side would give.":"Escribe un contraargumento: la mejor razón que daría alguien del otro lado.","Your work saves on this device as you type. Use <b>Save Progress<\/b> at the bottom to download a backup file, and <b>Load Progress<\/b> to continue later.":"Tu trabajo se guarda en este dispositivo mientras escribes. Usa <b>Guardar progreso<\/b> al final para descargar una copia de respaldo, y <b>Cargar progreso<\/b> para continuar más tarde.","Not answered yet":"Aún sin responder","Here is a summary of the choices you made.":"Este es un resumen de las elecciones que hiciste.","Your reason":"Tu razón"},"ar":{"Save Progress":"حفظ التقدم","Load Progress":"تحميل التقدم","Finished — Download File to Submit":"انتهيت — نزّل الملف لتسليمه","Clear all my answers":"امسح كل إجاباتي","FIRST NAME *":"الاسم الأول *","LAST NAME *":"اسم العائلة *","PERIOD *":"الحصة *","DATE (fills in when you finish)":"التاريخ (يُكتب تلقائيًا عند الانتهاء)","e.g. 3":"مثال: 3","Automatic":"تلقائي","Please type your first name, last name, and period first.":"اكتب أولًا اسمك الأول واسم العائلة والحصة.","Western Expansion and Southern Secession":"التوسع غربًا وانفصال الجنوب","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"الوحدة 3 · بيت منقسم وأُعيد بناؤه | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — قانون العبيد الهاربين","Bleeding Kansas":"Bleeding Kansas — كانساس النازفة","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"الوحدة 3 · بيت منقسم وأعيد بناؤه | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"تم تنزيل ملف التقدم. احتفظ به في مكان آمن. استخدم «تحميل التقدم» لتكمل لاحقًا.","Progress loaded.":"تم تحميل التقدم.","Could not read that file.":"تعذّرت قراءة هذا الملف.","Treaty of Guadalupe Hidalgo":"معاهدة غوادالوبي هيدالغو (Treaty of Guadalupe Hidalgo)","Creating the Constitution":"صياغة الدستور","Would You Rather 4 · Creating the Constitution":"ماذا تفضّل؟ 4 · صياغة الدستور","UNIT 1 · COLONIES, REVOLUTION, AND CONSTITUTION | CPUSH | DANIEL GARZA, M.A.":"الوحدة 1 · المستعمرات والثورة والدستور | CPUSH | DANIEL GARZA, M.A.","Dilemma 1 <span>of 5<\/span> · 1787":"المعضلة 1 <span>من 5<\/span> · 1787","Dilemma 2 <span>of 5<\/span> · 1787":"المعضلة 2 <span>من 5<\/span> · 1787","Dilemma 3 <span>of 5<\/span> · 1788":"المعضلة 3 <span>من 5<\/span> · 1788","Dilemma 4 <span>of 5<\/span> · 1791":"المعضلة 4 <span>من 5<\/span> · 1791","Dilemma 5 <span>of 5<\/span> · 1795":"المعضلة 5 <span>من 5<\/span> · 1795","Send Delegates":"إرسال المندوبين","Representation":"التمثيل","Ratify or Not":"التصديق أم لا","National Bank":"البنك الوطني","Jay’s Treaty":"معاهدة جاي (Jay’s Treaty)","1787: Send Delegates to Philadelphia, or Stay Home?":"1787: هل ترسل مندوبين إلى فيلادلفيا (Philadelphia) أم تبقى في بيتك؟","It is early 1787, and you are a leader in your state’s legislature. The United States is run under the Articles of Confederation. The Articles made a loose alliance of thirteen states. There is only one house of Congress. There is no president and no national court. Each state gets one vote. Rhode Island has 68,000 people and Virginia has more than 747,000, but they have the same voting power.":"نحن في أوائل عام 1787، وأنت قائد في المجلس التشريعي لولايتك. تُحكم الولايات المتحدة بموجب مواد الكونفدرالية (Articles of Confederation). وقد أنشأت هذه المواد تحالفًا ضعيفًا من ثلاث عشرة ولاية. وللكونغرس مجلس واحد فقط. ولا يوجد رئيس ولا محكمة وطنية. ولكل ولاية صوت واحد. وعدد سكان رود آيلاند (Rhode Island) 68,000 نسمة، وعدد سكان فرجينيا (Virginia) أكثر من 747,000، لكن لهما القوة التصويتية نفسها.","Congress has no cash and cannot make people pay taxes. Farmers in western Massachusetts have rebelled over debts and taxes, and the state sent 4,400 militiamen to break up their army. George Washington says the country needs a stronger national government to keep people’s lives, liberty, and property safe.":"ليس لدى الكونغرس مال، ولا يستطيع إجبار الناس على دفع الضرائب. وقد تمرّد مزارعو غرب ماساتشوستس (Massachusetts) بسبب الديون والضرائب، وأرسلت الولاية 4,400 جندي من الميليشيا لتفريق جيشهم. ويقول جورج واشنطن (George Washington) إن البلاد تحتاج إلى حكومة وطنية أقوى لحماية أرواح الناس وحريتهم وممتلكاتهم.","Now Congress has called a special convention to meet in Philadelphia. Its purpose is “revising the Articles of Confederation.” Your state must decide whether to send delegates. Some leaders want a stronger national government. Others want to keep power with the states.":"والآن دعا الكونغرس إلى مؤتمر خاص يُعقد في فيلادلفيا (Philadelphia). وهدفه «تعديل مواد الكونفدرالية». وعلى ولايتك أن تقرر هل ترسل مندوبين. بعض القادة يريدون حكومة وطنية أقوى. وآخرون يريدون أن تبقى السلطة في يد الولايات.","Send delegates: the nation needs a stronger government":"أرسل مندوبين: فالأمة تحتاج إلى حكومة أقوى","Stay home: keep the Articles of Confederation as they are":"ابقَ في بيتك: أبقِ على مواد الكونفدرالية (Articles of Confederation) كما هي","The convention met in Philadelphia’s State House, now called Independence Hall. Only Rhode Island refused to take part. All the other states did.":"اجتمع المؤتمر في مبنى ولاية فيلادلفيا (Philadelphia)، الذي يسمى اليوم قاعة الاستقلال (Independence Hall). ورفضت رود آيلاند (Rhode Island) وحدها المشاركة. أما بقية الولايات فشاركت كلها.","Congress had asked the delegates to revise the Articles. The final draft was a new Constitution. It begins with the words “We the people of the United States.” Norton says the idea that the voters are the source of all authority was the most important political innovation since the Declaration of Independence.":"كان الكونغرس قد طلب من المندوبين تعديل المواد. أما المسودة النهائية فكانت دستورًا جديدًا. وهو يبدأ بعبارة «نحن شعب الولايات المتحدة». ويقول نورتن (Norton) إن فكرة أن الناخبين هم مصدر كل سلطة كانت أهم ابتكار سياسي منذ إعلان الاستقلال (Declaration of Independence).","Norton also says the Articles left some good work behind. Congress set the basic rules for dividing western land and for governing new territories. The Northwest Ordinance of 1787 said new territories would someday become equal states.":"ويقول نورتن (Norton) أيضًا إن مواد الكونفدرالية تركت وراءها بعض العمل الجيد. فقد وضع الكونغرس القواعد الأساسية لتوزيع أراضي الغرب ولحكم الأقاليم الجديدة. ونص مرسوم الشمال الغربي (Northwest Ordinance) لعام 1787 على أن الأقاليم الجديدة ستصبح يومًا ما ولايات متساوية.","Source: Norton Ch. 6, “The Confederation Government” and “The Constitution” (The Constitutional Convention).":"المصدر: Norton، الفصل 6، <bdi dir=\"ltr\">“The Confederation Government”<\/bdi> و<bdi dir=\"ltr\">“The Constitution”<\/bdi> (<bdi dir=\"ltr\">The Constitutional Convention<\/bdi>).","1787: Seats by Population, or One Vote per State?":"1787: هل تكون المقاعد بحسب عدد السكان أم صوت واحد لكل ولاية؟","It is the summer of 1787, and you are a delegate at the Constitutional Convention in Philadelphia. You and the other delegates are writing a plan for a new Congress. The big question is how the states should be represented.":"نحن في صيف عام 1787، وأنت مندوب في المؤتمر الدستوري (Constitutional Convention) في فيلادلفيا (Philadelphia). وأنت وبقية المندوبين تكتبون خطة لكونغرس جديد. والسؤال الكبير هو كيف تُمثَّل الولايات.","Under the Articles of Confederation, every state had one vote. That meant Rhode Island, with 68,000 people, had the same voting power as Virginia, with more than 747,000.":"في ظل مواد الكونفدرالية (Articles of Confederation)، كان لكل ولاية صوت واحد. وهذا يعني أن رود آيلاند (Rhode Island)، وعدد سكانها 68,000 نسمة، كان لها القوة التصويتية نفسها التي لفرجينيا (Virginia)، وعدد سكانها أكثر من 747,000.","Delegates from larger states want seats in Congress based on population. Delegates from smaller states want every state to have an equal vote. The debate over this is intense.":"يريد مندوبو الولايات الأكبر أن تُحدَّد المقاعد في الكونغرس بحسب عدد السكان. ويريد مندوبو الولايات الأصغر أن يكون لكل ولاية صوت متساوٍ. والنقاش حول هذا الأمر حادّ.","Seats by population: more people, more votes":"المقاعد بحسب عدد السكان: كلما زاد الناس زادت الأصوات","Equal votes: every state gets the same say":"أصوات متساوية: لكل ولاية الكلمة نفسها","In mid-July the delegates settled the debate with a deal called the Great Compromise. It used both ideas.":"في منتصف يوليو، حسم المندوبون النقاش باتفاق سُمّي التسوية الكبرى (Great Compromise). وقد جمع بين الفكرتين.","In the House of Representatives, seats are given by population. Larger states win more seats. In the Senate, each state has two members, so every state is equal. At first, state legislatures chose the senators.":"في مجلس النواب (House of Representatives) تُوزَّع المقاعد بحسب عدد السكان. وتحصل الولايات الأكبر على مقاعد أكثر. وفي مجلس الشيوخ (Senate) يكون لكل ولاية عضوان، فتتساوى جميع الولايات. وفي البداية كانت المجالس التشريعية للولايات هي التي تختار الشيوخ.","Norton says this compromise also built the idea of separation of powers into Congress. A separate agreement, the Three-Fifths Compromise, counted three-fifths of “all other persons” (the enslaved) when seats were divided. It was not part of the choice above.":"ويقول نورتن (Norton) إن هذه التسوية أدخلت أيضًا فكرة فصل السلطات في الكونغرس. وهناك اتفاق منفصل، هو تسوية ثلاثة أخماس (Three-Fifths Compromise)، حسب ثلاثة أخماس «جميع الأشخاص الآخرين» (أي المستعبَدين) عند توزيع المقاعد. ولم يكن جزءًا من الاختيار أعلاه.","Source: Norton Ch. 6, “The Constitution” (The Constitutional Convention; The Three-Fifths Compromise) and “The Confederation Government” (A Loose Alliance of States).":"المصدر: Norton، الفصل 6، <bdi dir=\"ltr\">“The Constitution”<\/bdi> (<bdi dir=\"ltr\">The Constitutional Convention; The Three-Fifths Compromise<\/bdi>) و<bdi dir=\"ltr\">“The Confederation Government”<\/bdi> (<bdi dir=\"ltr\">A Loose Alliance of States<\/bdi>).","1788: Ratify the Constitution, or Say No Without a Bill of Rights?":"1788: هل تصدّق على الدستور أم ترفضه ما لم تكن فيه وثيقة حقوق؟","It is 1788, and you are a delegate to your state’s convention. Your job is to vote on the new Constitution. The Constitution can take effect only if at least nine states approve it.":"نحن في عام 1788، وأنت مندوب في مؤتمر ولايتك. ومهمتك أن تصوّت على الدستور الجديد. ولا يمكن أن يبدأ العمل بالدستور إلا إذا وافقت عليه تسع ولايات على الأقل.","The Federalists, led by James Madison and Alexander Hamilton, support it. They have a real plan on the table: the draft itself. They say the country needs the stronger government it creates.":"ويؤيده الفيدراليون بقيادة جيمس ماديسون (James Madison) وألكسندر هاملتون (Alexander Hamilton). ولديهم خطة حقيقية على الطاولة: المسودة نفسها. ويقولون إن البلاد تحتاج إلى الحكومة الأقوى التي ينشئها.","The Anti-Federalists are afraid. They fear the new national government will grow corrupt and tyrannical. George Mason of Virginia and others also point out that the draft has no bill of rights to protect people and states from the national government.":"أما معارضو الفيدرالية (<bdi dir=\"ltr\" style=\"white-space:nowrap\">Anti-Federalists<\/bdi>) فهم خائفون. فهم يخشون أن تصبح الحكومة الوطنية الجديدة فاسدة وطاغية. ويشير جورج ميسون (George Mason) من فرجينيا (Virginia) وآخرون أيضًا إلى أن المسودة ليس فيها وثيقة حقوق تحمي الناس والولايات من الحكومة الوطنية.","Vote yes: approve the Constitution as it is written":"صوّت بنعم: وافق على الدستور كما كُتب","Vote no: do not approve it without a bill of rights":"صوّت بلا: لا توافق عليه بدون وثيقة حقوق","On June 21, 1788, New Hampshire became the ninth state to ratify the Constitution. That was the minimum needed for it to take effect.":"في 21 يونيو 1788، أصبحت نيوهامبشير (New Hampshire) الولاية التاسعة التي تصدّق على الدستور. وكان ذلك هو الحد الأدنى اللازم لبدء العمل به.","Madison, Hamilton, and John Jay also wrote eighty-five essays, now called The Federalist Papers. They were printed in New York newspapers in 1787 and 1788 to convince New Yorkers to ratify. Norton says that in Virginia and New York, strong opposition groups were won over by an agreement to add a bill of rights.":"وكتب ماديسون (Madison) وهاملتون (Hamilton) وجون جاي (John Jay) أيضًا خمسة وثمانين مقالًا تُسمّى اليوم الأوراق الفيدرالية (The Federalist Papers). ونُشرت في صحف نيويورك (New York) عامي 1787 و1788 لإقناع سكان نيويورك بالتصديق. ويقول نورتن (Norton) إنه في فرجينيا (Virginia) ونيويورك اقتنعت مجموعات المعارضة القوية بالاتفاق على إضافة وثيقة حقوق.","Madison, now a congressman, wrote a set of amendments to protect individual rights. By the end of 1791, three-fourths of the states had approved ten of the twelve proposed amendments. We call them the Bill of Rights. Norton adds that, like the Constitution, the Bill of Rights gave no protections to enslaved or Indigenous Americans.":"وكتب ماديسون (Madison)، وقد صار عضوًا في الكونغرس، مجموعة من التعديلات لحماية حقوق الأفراد. وبحلول نهاية عام 1791، كانت ثلاثة أرباع الولايات قد وافقت على عشرة من التعديلات الاثني عشر المقترحة. ونسميها وثيقة الحقوق (Bill of Rights). ويضيف نورتن (Norton) أن وثيقة الحقوق، مثل الدستور، لم تمنح أي حماية للأمريكيين المستعبَدين أو الأمريكيين من السكان الأصليين.","Source: Norton Ch. 6, “The Fight for Ratification” (The Federalist Papers; The States Decide) and “The Federalist Era” (The Bill of Rights).":"المصدر: Norton، الفصل 6، <bdi dir=\"ltr\">“The Fight for Ratification”<\/bdi> (<bdi dir=\"ltr\">The Federalist Papers; The States Decide<\/bdi>) و<bdi dir=\"ltr\">“The Federalist Era”<\/bdi> (<bdi dir=\"ltr\">The Bill of Rights<\/bdi>).","1791: Create a National Bank, or Say No?":"1791: هل تنشئ بنكًا وطنيًا أم ترفض؟","It is 1791, and you are an adviser to President George Washington. Alexander Hamilton, a top adviser in Washington’s government, wants a national bank, like the Bank of England. He says it would help business among individuals. It would also give the government a safe place to keep its money.":"نحن في عام 1791، وأنت مستشار للرئيس جورج واشنطن (George Washington). ويريد ألكسندر هاملتون (Alexander Hamilton)، وهو مستشار كبير في حكومة واشنطن، إنشاء بنك وطني، مثل بنك إنجلترا (Bank of England). ويقول إنه سيساعد الأعمال التجارية بين الأفراد. كما سيمنح الحكومة مكانًا آمنًا لحفظ أموالها.","Thomas Jefferson and James Madison lead the opposition. They say the Constitution says nothing about creating a national bank, so the government cannot start one.":"ويقود توماس جيفرسون (Thomas Jefferson) وجيمس ماديسون (James Madison) المعارضة. ويقولان إن الدستور لا يذكر شيئًا عن إنشاء بنك وطني، ولذلك لا تستطيع الحكومة إنشاء واحد.","The two sides are also two kinds of leaders. Hamilton and his Federalists are strongest in New York and New England. They like cities, industry, and business growth. Jefferson, Madison, and the Republicans are mostly Southerners. They want a nation of small farmers.":"والطرفان أيضًا نوعان من القادة. فهاملتون (Hamilton) والفيدراليون أقوى في نيويورك (New York) ونيو إنغلاند (New England). وهم يحبون المدن والصناعة ونمو الأعمال. أما جيفرسون (Jefferson) وماديسون (Madison) والجمهوريون فمعظمهم من الجنوب. وهم يريدون أمة من صغار المزارعين.","Create the bank: it would help business and the government":"أنشئ البنك: فهو سيساعد الأعمال والحكومة","No bank: the Constitution does not say Congress can create one":"لا بنك: الدستور لا يقول إن للكونغرس أن ينشئ بنكًا","The Bank of the United States was created in 1791. Norton says it had three main jobs. One was to hold the government’s money and pay its bills. Another was to make loans to the federal government and to state-chartered banks to help the economy grow.":"أُنشئ بنك الولايات المتحدة (Bank of the United States) عام 1791. ويقول نورتن (Norton) إن له ثلاث مهام رئيسية. إحداها حفظ أموال الحكومة ودفع فواتيرها. والأخرى تقديم القروض للحكومة الفيدرالية وللبنوك المرخّصة من الولايات للمساعدة على نمو الاقتصاد.","Norton says the vote in Congress was lopsided. It showed the growing political split between North and South.":"يقول نورتن (Norton) إن التصويت في الكونغرس كان غير متوازن بشدة. وأظهر الانقسام السياسي المتزايد بين الشمال والجنوب.","Norton says the Federalists and the Republicans saw the country in different ways. Federalists wanted a strong central government led by wise leaders who cared about economic growth and national defense. Republicans feared that a strong national government would threaten freedom and states’ rights. They trusted the people.":"ويقول نورتن (Norton) إن الفيدراليين والجمهوريين رأوا البلاد بطريقتين مختلفتين. فقد أراد الفيدراليون حكومة مركزية قوية يقودها قادة حكماء يهتمون بالنمو الاقتصادي والدفاع الوطني. أما الجمهوريون فخشوا أن تهدد الحكومة الوطنية القوية الحرية وحقوق الولايات. وكانوا يثقون بالشعب.","Source: Norton Ch. 6, “The Federalist Era” (A National Bank; Federalists and Republicans).":"المصدر: Norton، الفصل 6، <bdi dir=\"ltr\">“The Federalist Era”<\/bdi> (<bdi dir=\"ltr\">A National Bank; Federalists and Republicans<\/bdi>).","1795: Accept Jay’s Treaty, or Reject It?":"1795: هل تقبل معاهدة جاي (Jay’s Treaty) أم ترفضها؟","It is 1795, and you are an adviser to President George Washington. Great Britain and France are at war, and Americans are split. Thomas Jefferson and the Republicans love the French Revolution and its democratic ideals. Alexander Hamilton and John Adams see it as vicious and godless. They side with Great Britain.":"نحن في عام 1795، وأنت مستشار للرئيس جورج واشنطن (George Washington). بريطانيا العظمى (Great Britain) وفرنسا (France) في حرب، والأمريكيون منقسمون. ويحب توماس جيفرسون (Thomas Jefferson) والجمهوريون الثورة الفرنسية ومبادئها الديمقراطية. أما ألكسندر هاملتون (Alexander Hamilton) وجون آدامز (John Adams) فيرونها قاسية وملحدة. ويقفان مع بريطانيا.","Last year, Washington sent John Jay to London to settle the big problems with Britain. Jay agreed that America would not sell products to France for building warships. But the British refused to stop intercepting American ships headed for France and “impressing” their sailors. That means forcing them to serve in the British navy.":"في العام الماضي أرسل واشنطن (Washington) جون جاي (John Jay) إلى لندن (London) لحل المشكلات الكبرى مع بريطانيا. ووافق جاي على ألا تبيع أمريكا منتجات إلى فرنسا لبناء سفن حربية. لكن البريطانيين رفضوا التوقف عن اعتراض السفن الأمريكية المتجهة إلى فرنسا و«تجنيد» بحّارتها بالقوة. ويعني ذلك إجبارهم على الخدمة في البحرية البريطانية.","In return, Jay won three promises. Britain would give up its six forts on the northwest frontier by 1796. Britain would pay Americans for ships and cargo seized in 1793 and 1794. And U.S. merchants could trade again, in a limited way, with the British West Indies.":"وفي المقابل، حصل جاي على ثلاثة وعود. فستُخلي بريطانيا حصونها الستة على الحدود الشمالية الغربية بحلول عام 1796. وستعوّض بريطانيا الأمريكيين عن السفن والبضائع التي صودرت عامي 1793 و1794. وسيستطيع التجار الأمريكيون التجارة من جديد، بشكل محدود، مع جزر الهند الغربية البريطانية (British West Indies).","Now the terms are public, and many Americans, especially Republicans, are outraged. What would you advise?":"والآن أصبحت الشروط معلنة، وكثير من الأمريكيين، وخاصة الجمهوريين، غاضبون. بماذا تنصح؟","Accept the treaty: it wins real promises from Britain":"اقبل المعاهدة: فهي تنتزع وعودًا حقيقية من بريطانيا (Britain)","Reject the treaty: it gives in to Britain and does not end impressment":"ارفض المعاهدة: فهي تتنازل لبريطانيا (Britain) ولا تنهي التجنيد بالقوة","The treaty was approved. In June 1795 the Senate voted 20 to 10, exactly the two-thirds needed.":"تمت الموافقة على المعاهدة. وفي يونيو 1795 صوّت مجلس الشيوخ (Senate) بأغلبية 20 صوتًا مقابل 10، وهي بالضبط أغلبية الثلثين اللازمة.","Norton says France was angry about the treaty. As the second president, John Adams inherited an undeclared conflict with France that came from that anger.":"يقول نورتن (Norton) إن فرنسا (France) غضبت من المعاهدة. وبصفته الرئيس الثاني، ورث جون آدامز (John Adams) نزاعًا غير معلن مع فرنسا نتج عن ذلك الغضب.","Norton says these clashing attitudes about Britain and France made the 1790s one of the most fractious periods in American history. Norton calls it an “age of passion.”":"يقول نورتن (Norton) إن هذه المواقف المتعارضة تجاه بريطانيا (Britain) وفرنسا (France) جعلت تسعينيات القرن الثامن عشر واحدة من أكثر الفترات صراعًا في تاريخ أمريكا. ويسميها نورتن «عصر العواطف».","Source: Norton Ch. 6, “Foreign and Domestic Crises” (Effects of the French Revolution; Jay’s Treaty; War with France). Senate vote: Library of Congress, “Jay’s Treaty”.":"المصدر: Norton، الفصل 6، <bdi dir=\"ltr\">“Foreign and Domestic Crises”<\/bdi> (<bdi dir=\"ltr\">Effects of the French Revolution; Jay’s Treaty; War with France<\/bdi>). تصويت مجلس الشيوخ: <bdi dir=\"ltr\">Library of Congress, “Jay’s Treaty”<\/bdi>.","You chose: Send delegates: the nation needs a stronger government":"اخترت: أرسل مندوبين: فالأمة تحتاج إلى حكومة أقوى","Chosen, not locked in yet: Send delegates: the nation needs a stronger government":"تم الاختيار ولم يتم التثبيت بعد: أرسل مندوبين: فالأمة تحتاج إلى حكومة أقوى","You chose: Stay home: keep the Articles of Confederation as they are":"اخترت: ابقَ في بيتك: أبقِ على مواد الكونفدرالية (Articles of Confederation) كما هي","Chosen, not locked in yet: Stay home: keep the Articles of Confederation as they are":"تم الاختيار ولم يتم التثبيت بعد: ابقَ في بيتك: أبقِ على مواد الكونفدرالية (Articles of Confederation) كما هي","You chose: Seats by population: more people, more votes":"اخترت: المقاعد بحسب عدد السكان: كلما زاد الناس زادت الأصوات","Chosen, not locked in yet: Seats by population: more people, more votes":"تم الاختيار ولم يتم التثبيت بعد: المقاعد بحسب عدد السكان: كلما زاد الناس زادت الأصوات","You chose: Equal votes: every state gets the same say":"اخترت: أصوات متساوية: لكل ولاية الكلمة نفسها","Chosen, not locked in yet: Equal votes: every state gets the same say":"تم الاختيار ولم يتم التثبيت بعد: أصوات متساوية: لكل ولاية الكلمة نفسها","You chose: Vote yes: approve the Constitution as it is written":"اخترت: صوّت بنعم: وافق على الدستور كما كُتب","Chosen, not locked in yet: Vote yes: approve the Constitution as it is written":"تم الاختيار ولم يتم التثبيت بعد: صوّت بنعم: وافق على الدستور كما كُتب","You chose: Vote no: do not approve it without a bill of rights":"اخترت: صوّت بلا: لا توافق عليه بدون وثيقة حقوق","Chosen, not locked in yet: Vote no: do not approve it without a bill of rights":"تم الاختيار ولم يتم التثبيت بعد: صوّت بلا: لا توافق عليه بدون وثيقة حقوق","You chose: Create the bank: it would help business and the government":"اخترت: أنشئ البنك: فهو سيساعد الأعمال والحكومة","Chosen, not locked in yet: Create the bank: it would help business and the government":"تم الاختيار ولم يتم التثبيت بعد: أنشئ البنك: فهو سيساعد الأعمال والحكومة","You chose: No bank: the Constitution does not say Congress can create one":"اخترت: لا بنك: الدستور لا يقول إن للكونغرس أن ينشئ بنكًا","Chosen, not locked in yet: No bank: the Constitution does not say Congress can create one":"تم الاختيار ولم يتم التثبيت بعد: لا بنك: الدستور لا يقول إن للكونغرس أن ينشئ بنكًا","You chose: Accept the treaty: it wins real promises from Britain":"اخترت: اقبل المعاهدة: فهي تنتزع وعودًا حقيقية من بريطانيا (Britain)","Chosen, not locked in yet: Accept the treaty: it wins real promises from Britain":"تم الاختيار ولم يتم التثبيت بعد: اقبل المعاهدة: فهي تنتزع وعودًا حقيقية من بريطانيا (Britain)","You chose: Reject the treaty: it gives in to Britain and does not end impressment":"اخترت: ارفض المعاهدة: فهي تتنازل لبريطانيا (Britain) ولا تنهي التجنيد بالقوة","Chosen, not locked in yet: Reject the treaty: it gives in to Britain and does not end impressment":"تم الاختيار ولم يتم التثبيت بعد: ارفض المعاهدة: فهي تتنازل لبريطانيا (Britain) ولا تنهي التجنيد بالقوة","<b>How to work.<\/b> People in history faced hard choices. Here are five. There is no right or wrong choice. Your job is to understand why people chose what they did.":"<b>طريقة العمل.<\/b> واجه الناس في التاريخ خيارات صعبة. وهذه خمسة منها. لا يوجد خيار صحيح أو خاطئ. مهمتك أن تفهم لماذا اختار الناس ما اختاروه.","All five dilemmas are locked in. Nice work.":"تم تثبيت المعضلات الخمس. عمل جيد.","Lock in all five dilemmas to finish.":"ثبّت إجابات المعضلات الخمس لتنهي.","What would you choose?":"ماذا ستختار؟","What would you advise?":"بماذا تنصح؟","Would you rather...":"ماذا تفضّل؟...","Read “You are there.”":"اقرأ «أنت هناك».","Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”":"لماذا اخترت هذا؟ استخدم معلومة واحدة على الأقل من الدرس. جرّب: «اخترت هذا لأن... ومن المعلومات...»","Your choices":"اختياراتك","Ready. Tap Lock in to see what happened.":"جاهز. اضغط «تثبيت» لترى ما حدث.","Everything is done. Tap Finished to download your file.":"اكتمل كل شيء. اضغط «انتهيت» لتنزيل ملفك.","Tap the choice you would make.":"اضغط على الخيار الذي ستختاره.","Lock in my answer":"تثبيت إجابتي","Type the other side’s best reason here...":"اكتب هنا أفضل سبب للطرف الآخر...","Counter-Argument":"حجة مضادة","What really happened":"ما حدث فعلًا","What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”":"ما أفضل سبب قد يقدّمه شخص من الطرف الآخر؟ اكتبه كما سيقوله هو. جرّب: «شخص اختار الطرف الآخر سيقول...»","Type your reason here...":"اكتب سببك هنا...","Write your reason. Use at least one fact from the lesson.":"اكتب سببك. استخدم معلومة واحدة على الأقل من الدرس.","That file does not look like a Would You Rather progress file. Try again.":"هذا الملف لا يبدو ملف تقدم لنشاط «ماذا تفضّل؟». حاول مرة أخرى.","Would You Rather":"ماذا تفضّل؟","Locked in. Read what really happened below.":"تم التثبيت. اقرأ في الأسفل ما حدث فعلًا.","You are there":"أنت هناك","Choose one":"اختر واحدًا","Tap <b>Lock in my answer<\/b> to see what really happened.":"اضغط <b>تثبيت إجابتي<\/b> لترى ما حدث فعلًا.","Fill in both boxes to unlock the next step.":"املأ المربعين للانتقال إلى الخطوة التالية.","Edit my answer":"تعديل إجابتي","The end":"النهاية","Write a Counter-Argument: the best reason someone on the other side would give.":"اكتب حجة مضادة: أفضل سبب قد يقدّمه شخص من الطرف الآخر.","Your work saves on this device as you type. Use <b>Save Progress<\/b> at the bottom to download a backup file, and <b>Load Progress<\/b> to continue later.":"يُحفظ عملك على هذا الجهاز أثناء الكتابة. استخدم زر <b>حفظ التقدم<\/b> في الأسفل لتنزيل نسخة احتياطية، وزر <b>تحميل التقدم<\/b> لتكمل لاحقًا.","Not answered yet":"لم تتم الإجابة بعد","Here is a summary of the choices you made.":"هذا ملخص للخيارات التي اخترتها.","Your reason":"سببك"},"patterns":[{"re":"^Still needed: first name, last name, and period\\.$","es":"Todavía falta: nombre, apellido y período.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة."},{"re":"^(\\d+) of (\\d+) dilemmas locked in$","es":"$1 de $2 decisiones confirmadas","ar":"عدد المعضلات المثبّتة: $1 من $2"},{"re":"^Still needed: first name, last name, and period; 1 dilemma to lock in\\.$","es":"Todavía falta: nombre, apellido y período; 1 decisión por confirmar.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة؛ معضلة واحدة تحتاج إلى تثبيت."},{"re":"^Still needed: first name, last name, and period; (\\d+) dilemmas to lock in\\.$","es":"Todavía falta: nombre, apellido y período; $1 decisiones por confirmar.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة؛ عدد المعضلات التي تحتاج إلى تثبيت: $1."},{"re":"^Still needed: first name, last name, and period\\.$","es":"Todavía falta: nombre, apellido y período.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة."},{"re":"^Still needed: 1 dilemma to lock in\\.$","es":"Todavía falta: 1 decisión por confirmar.","ar":"ما زال ناقصًا: معضلة واحدة تحتاج إلى تثبيت."},{"re":"^Still needed: (\\d+) dilemmas to lock in\\.$","es":"Todavía falta: $1 decisiones por confirmar.","ar":"ما زال ناقصًا: عدد المعضلات التي تحتاج إلى تثبيت: $1."},{"re":"^Done! Your file (\\S+) downloaded\\. Upload it to Canvas\\.$","es":"¡Listo! Se descargó tu archivo $1. Súbelo a Canvas.","ar":"أحسنت! تم تنزيل هذا الملف: <bdi dir=\"ltr\" style=\"display:block\">$1<\/bdi> ارفع هذا الملف إلى Canvas."}]}</script>
+<script>
+/* Supplement language switch (English / Espanol / Arabic). Works on pages whose text is rendered by JS:
+   a MutationObserver translates text as it appears. Data: <script type="application/json" id="sp-i18n">
+   {"langs":["en","es","ar"],"default":"en","es":{englishHTML:translation},"ar":{...},"patterns":[{"re":"^(\\d+) of (\\d+)$","es":"$1 de $2","ar":"..."}]}
+   Keys are the English text exactly as it sits in the page (innerHTML, spaces collapsed).
+   Helpers: spSeen() english strings seen so far; spMissing() strings with no translation in the current language;
+   spSetLang(l); spTr(s) translate a string (used for confirm/alert); spAscii(s) plain-ASCII name for file names. */
+(function () {
+  var node = document.getElementById('sp-i18n');
+  var D = node ? JSON.parse(node.textContent) : { langs: ['en'], patterns: [] };
+  var INLINE = { B:1,I:1,EM:1,STRONG:1,SPAN:1,A:1,BR:1,SMALL:1,SUP:1,SUB:1,U:1,MARK:1,BDI:1,TSPAN:1,CODE:1 };
+  var SKIP = 'script,style,textarea,input,.sp-lang,.sp-nt,[translate="no"]';
+  var WORD = /[A-Za-z\u00C0-\u024F\u0600-\u06FF]{2}|e\.g\./;
+  var LANG = 'en', REC = new WeakMap(), SEEN = {}, MISS = {};
+  (D.patterns || []).forEach(function (p) { try { p._re = new RegExp(p.re); } catch (e) {} });
+  function norm(s) { return String(s).replace(/\s+/g, ' ').trim(); }
+  function tr(src) {
+    if (LANG === 'en') return null;
+    var t = D[LANG] && D[LANG][src];
+    if (t) return t;
+    var P = D.patterns || [];
+    for (var i = 0; i < P.length; i++) {
+      var m = P[i]._re && P[i]._re.exec(src);
+      if (m && P[i][LANG]) return P[i][LANG].replace(/\$(\d+)/g, function (_, n) { return m[+n] || ''; });
+    }
+    return null;
+  }
+  window.spTr = function (s) { var t = tr(norm(s)); return t ? t.replace(/<[^>]+>/g, '') : s; };
+  function isInline(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling)
+      if (c.nodeType === 1 && (!INLINE[c.tagName.toUpperCase()] || c.matches(SKIP))) return false;
+    return true;
+  }
+  function directText(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling) if (c.nodeType === 3 && WORD.test(c.nodeValue)) return true;
+    return false;
+  }
+  function cur(s) { return s.nodeType === 1 ? s.innerHTML : s.nodeValue; }
+  function put(s, v) { if (s.nodeType === 1) s.innerHTML = v; else s.nodeValue = v; }
+  function handle(s) {
+    var r = REC.get(s), c = cur(s);
+    if (!(r && c === r.wrote)) { r = { en: c, wrote: c }; REC.set(s, r); }
+    var src = norm(r.en), target = r.en;
+    if (WORD.test(src)) {
+      SEEN[src] = 1;
+      if (LANG !== 'en') {
+        var t = tr(src);
+        if (t) {
+          target = s.nodeType === 1 ? t : (r.en.match(/^\s*/)[0] + t + r.en.match(/\s*$/)[0]);
+          delete MISS[src];
+        } else MISS[src] = 1;
+      }
+    }
+    if (c !== target) put(s, target);
+    r.wrote = cur(s);
+  }
+  var ATTRS = ['placeholder', 'alt', 'aria-label', 'title'];
+  function attrs(root) {
+    var els = root.querySelectorAll ? root.querySelectorAll('[placeholder],[alt],[aria-label],[title]') : [];
+    var list = [].slice.call(els); if (root.matches && root.matches('[placeholder],[alt],[aria-label],[title]')) list.push(root);
+    list.forEach(function (el) {
+      if (el.closest && el.closest('.sp-lang,.sp-nt,[translate="no"],script,style')) return;
+      var rec = el.__spa || (el.__spa = {});
+      ATTRS.forEach(function (a) {
+        var v = el.getAttribute(a); if (v == null) return;
+        var r = rec[a];
+        if (!(r && v === r.wrote)) { r = rec[a] = { en: v, wrote: v }; }
+        var src = norm(r.en); if (!WORD.test(src)) return;
+        SEEN[src] = 1;
+        var t = LANG === 'en' ? null : tr(src);
+        if (LANG !== 'en' && !t) MISS[src] = 1;
+        var target = t ? t.replace(/<[^>]+>/g, '') : r.en;
+        if (v !== target) el.setAttribute(a, target);
+        r.wrote = el.getAttribute(a);
+      });
+    });
+  }
+  function walk(root) {
+    if (root.nodeType === 3) { if (WORD.test(root.nodeValue) && !(root.parentNode && root.parentNode.closest && root.parentNode.closest(SKIP))) handle(root); return; }
+    if (root.nodeType !== 1) return;
+    (function w(el) {
+      if (el.matches(SKIP)) return;
+      if (el !== document.body && directText(el) && isInline(el)) { handle(el); return; }
+      for (var c = el.firstChild; c; c = c.nextSibling) {
+        if (c.nodeType === 1) w(c); else if (c.nodeType === 3 && WORD.test(c.nodeValue)) handle(c);
+      }
+    })(root);
+    attrs(root);
+  }
+  var TITLE = { en: document.title, wrote: document.title };
+  function title() {
+    if (document.title !== TITLE.wrote) TITLE = { en: document.title, wrote: document.title };
+    var t = LANG === 'en' ? null : tr(norm(TITLE.en));
+    document.title = t ? t.replace(/<[^>]+>/g, '') : TITLE.en; TITLE.wrote = document.title;
+  }
+  function inl(e) { return e.nodeType === 1 && !!INLINE[e.tagName.toUpperCase()]; }
+  var mo = new MutationObserver(function (muts) {
+    var todo = [];
+    muts.forEach(function (m) {
+      if (m.type === 'childList') { for (var i = 0; i < m.addedNodes.length; i++) todo.push(m.addedNodes[i]); todo.push(m.target); }
+      else todo.push(m.target);
+    });
+    todo.forEach(function (n) {
+      var el = n.nodeType === 1 ? n : n.parentNode;
+      if (!el || el.nodeType !== 1 || !document.body.contains(el)) return;
+      while (el !== document.body && el.parentNode && el.parentNode.nodeType === 1 && inl(el) && inl(el.parentNode)) el = el.parentNode;
+      if (el.parentNode && el.parentNode.nodeType === 1 && inl(el.parentNode) && el.parentNode !== document.body) el = el.parentNode;
+      walk(el);
+    });
+    mo.takeRecords();
+  });
+  var AR = { 'ا':'a','أ':'a','إ':'i','آ':'a','ب':'b','ت':'t','ث':'th','ج':'j','ح':'h','خ':'kh','د':'d','ذ':'dh','ر':'r','ز':'z','س':'s','ش':'sh','ص':'s','ض':'d','ط':'t','ظ':'z','ع':'a','غ':'gh','ف':'f','ق':'q','ك':'k','ل':'l','م':'m','ن':'n','ه':'h','و':'w','ي':'y','ى':'a','ة':'a','ئ':'y','ؤ':'w' };
+  window.spAscii = function (s) {
+    s = String(s); if (s.normalize) s = s.normalize('NFD').replace(/[̀-ًͯ-ٰٟ]/g, '');
+    return s.replace(/[ء-ي]/g, function (c) { return AR[c] !== undefined ? AR[c] : ''; }).replace(/ñ/g, 'n').replace(/Ñ/g, 'N');
+  };
+  window.spSeen = function () { return Object.keys(SEEN); };
+  window.spMissing = function () { return Object.keys(MISS); };
+  window.spLang = function () { return LANG; };
+  window.spSetLang = function (l) {
+    if ((D.langs || ['en']).indexOf(l) < 0) l = 'en';
+    LANG = l; MISS = {};
+    var h = document.documentElement; h.lang = l; h.dir = l === 'ar' ? 'rtl' : 'ltr';
+    mo.disconnect(); walk(document.body); title(); mo.takeRecords();
+    mo.observe(document.body, { childList: true, subtree: true, characterData: true });
+    document.querySelectorAll('.sp-lang button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === l)); });
+    try { localStorage.setItem('sp_lang', l); } catch (e) {}
+    try { var u = new URL(location.href); if (l === 'en') u.searchParams.delete('lang'); else u.searchParams.set('lang', l); history.replaceState(null, '', u.toString()); } catch (e) {}
+    try { document.dispatchEvent(new CustomEvent('splangchange', { detail: l })); } catch (e) {}
+  };
+  var _c = window.confirm, _a = window.alert;
+  window.confirm = function (m) { return _c.call(window, window.spTr(m)); };
+  window.alert = function (m) { return _a.call(window, window.spTr(m)); };
+  document.querySelectorAll('.sp-lang button').forEach(function (b) { b.addEventListener('click', function () { window.spSetLang(b.getAttribute('data-lang')); }); });
+  var start = D['default'] || 'en';
+  try { start = new URL(location.href).searchParams.get('lang') || localStorage.getItem('sp_lang') || start; } catch (e) {}
+  window.spSetLang(start);
+})();
+
+</script><!--/sp-i18n-->
+</body></html>

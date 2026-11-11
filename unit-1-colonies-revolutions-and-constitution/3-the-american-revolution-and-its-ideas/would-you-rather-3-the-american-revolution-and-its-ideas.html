@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Would You Rather 3 · The American Revolution and Its Ideas</title>
+<style>
+:root{--bg:#EBF4F2;--paper:#FAFCFB;--maroon:#13392F;--ink:#0F2D25;--brown:#2A755F;--red:#D29E4B;--rose:#E1C18E;
+--redink:#6E4F17;--rule:#C9DBD6;--line:#A4BDB6;--ok:#3F6B3A;--frost:#EBF4F2;
+--serif:Georgia,"Times New Roman",serif;--sans:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
+--glass:color-mix(in srgb,var(--paper) 70%,transparent);--glass-strong:color-mix(in srgb,var(--paper) 90%,transparent);
+--edge:color-mix(in srgb,#fff 70%,transparent);
+--hi:inset 0 1px 0 color-mix(in srgb,#fff 85%,transparent);
+--depth:0 1px 1px rgba(19,57,47,.05),0 3px 6px -2px rgba(19,57,47,.08),0 18px 40px -16px rgba(19,57,47,.30)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:
+radial-gradient(42vmax 42vmax at 8% 6%,rgba(19,57,47,.28),transparent 70%),
+radial-gradient(38vmax 38vmax at 96% 22%,rgba(210,158,75,.22),transparent 70%),
+radial-gradient(46vmax 40vmax at 70% 104%,rgba(19,57,47,.18),transparent 70%),
+radial-gradient(30vmax 30vmax at 20% 88%,rgba(225,193,142,.22),transparent 70%)}
+.wrap{max-width:860px;margin:0 auto;padding:0 18px 60px}
+h1,h2,h3{font-family:var(--serif);text-wrap:balance}
+.eyebrow{font-size:12.5px;letter-spacing:.16em;font-weight:700;text-transform:uppercase}
+header.hero{padding:26px 0 0}
+.hero-band{position:relative;overflow:hidden;border-radius:16px;padding:34px 34px 30px;color:var(--frost);background:linear-gradient(110deg,#13392F 40%,#2A755F);
+box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 30px 60px -24px rgba(19,57,47,.75)}
+.hero-band::before{content:"";position:absolute;left:0;top:0;bottom:0;width:8px;background:var(--red)}
+.hero-band .eyebrow{color:var(--rose)}
+.hero-band h1{color:#fff;font-size:clamp(32px,6vw,50px);line-height:1.08;margin:.2em 0 .2em}
+.nb{white-space:nowrap}
+.hero-band .sub{text-wrap:balance;margin:0;font-size:17px;color:var(--frost);font-weight:600}
+.hero-num{position:absolute;right:20px;bottom:-30px;font:700 180px/1 var(--serif);color:#fff;opacity:.12;pointer-events:none}
+.panel{background:var(--glass);border:1px solid var(--edge);border-radius:14px;box-shadow:var(--hi),var(--depth);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3)}
+.meta{display:flex;flex-wrap:wrap;gap:14px;margin:18px 0 0;padding:16px 20px}
+.meta label{flex:1 1 170px;font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--brown)}
+.meta input{display:block;width:100%;margin-top:5px;padding:12px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);font:inherit;font-size:17px;min-height:48px}
+.meta input[readonly]{background:#DDEBE7;color:var(--brown)}
+.howto{margin:16px 0;padding:14px 20px;font-size:16px}
+.howto ol{margin:.4em 0 .2em 1.2em;padding:0}
+.howto li{margin:.2em 0}
+.bar{position:sticky;top:0;z-index:5;padding:9px 14px;margin:0 -14px;background:rgba(235,244,242,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--rule)}
+.bar .row{display:flex;align-items:center;gap:12px;font-size:14px;font-weight:700;color:var(--brown)}
+.track{flex:1;height:10px;border-radius:6px;background:#D0E2DC;overflow:hidden}
+.fill{height:100%;width:0;background:linear-gradient(90deg,var(--rose),var(--red));transition:width .3s}
+.card{margin:26px 0;padding:22px 24px 24px;scroll-margin-top:70px}
+.kick{font-size:12.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--redink)}
+.kick span{color:var(--brown)}
+.card h2{margin:.15em 0 .4em;font-size:clamp(24px,4.5vw,32px);line-height:1.15;color:var(--maroon)}
+.there{background:var(--glass-strong);border:1px solid var(--edge);border-radius:12px;padding:6px 20px 8px;margin:10px 0 18px;border-left:6px solid var(--red)}
+.there .lab{display:inline-block;margin:12px 0 0;font:800 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:#fff;background:var(--maroon);padding:6px 11px 5px;border-radius:999px}
+.there p{font:18.5px/1.65 var(--serif);margin:.7em 0}
+.rather{font:700 22px/1.2 var(--serif);color:var(--maroon);margin:4px 0 12px}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.choice{display:flex;align-items:center;gap:14px;text-align:left;width:100%;min-height:84px;padding:16px 18px;border-radius:14px;border:2px solid var(--maroon);background:#fff;color:var(--maroon);font:700 19px/1.3 var(--sans);cursor:pointer;touch-action:manipulation;transition:transform .15s,box-shadow .15s,background-color .15s}
+.choice .ltr{flex:0 0 auto;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--maroon);color:#fff;font:800 20px/1 var(--serif)}
+.choice:hover{transform:translateY(-2px);box-shadow:0 10px 20px -10px rgba(19,57,47,.5)}
+.choice[aria-pressed="true"]{background:var(--maroon);color:#fff;border-color:var(--maroon);box-shadow:0 0 0 4px rgba(210,158,75,.55)}
+.choice[aria-pressed="true"] .ltr{background:var(--red);color:var(--maroon)}
+.choice[aria-pressed="true"]::after{content:"\2713";margin-left:auto;font-size:26px;color:#fff}
+.choice:disabled{cursor:default;transform:none;box-shadow:none}
+.choice:disabled[aria-pressed="false"]{opacity:.55}
+.choice:disabled[aria-pressed="true"]{box-shadow:0 0 0 4px rgba(210,158,75,.55)}
+.choice:focus-visible,.btn:focus-visible,textarea:focus-visible,input:focus-visible,.link:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.work{display:none;margin-top:20px}
+.card.chosen .work{display:block}
+.field{background:color-mix(in srgb,var(--rose) 14%,var(--paper));border:1px solid color-mix(in srgb,var(--red) 28%,var(--rule));border-radius:12px;padding:14px 18px;margin:12px 0}
+.field label{display:block;font:700 19px/1.25 var(--serif);color:var(--maroon)}
+.field .hint{display:block;font:400 14.5px/1.4 var(--sans);color:var(--brown);margin:3px 0 8px}
+textarea{width:100%;min-height:96px;padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);font:inherit;font-size:17px;line-height:1.5;resize:vertical}
+textarea:read-only{background:#EBF4F2;color:#13392F}
+.row2{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:12px}
+.btn{border:2px solid var(--maroon);background:#fff;color:var(--maroon);padding:12px 20px;border-radius:10px;font:700 16px/1.2 var(--sans);cursor:pointer;min-height:48px;touch-action:manipulation}
+.btn:hover:not(:disabled){background:var(--maroon);color:#fff}
+.btn.primary{background:var(--maroon);color:#fff}
+.btn.primary:disabled{background:#3D7B69;border-color:#386F5E;color:#fff;cursor:not-allowed;opacity:.8}
+.cstat{font-size:14.5px;font-weight:600;color:var(--brown)}
+.reveal{display:none;margin-top:16px;background:#fff;border:1px solid var(--rule);border-left:6px solid var(--maroon);border-radius:12px;padding:6px 20px 10px}
+.card.locked .reveal{display:block}
+.reveal .lab{display:inline-block;margin:12px 0 0;font:800 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--maroon);box-shadow:inset 0 0 0 1.5px var(--maroon);padding:6px 11px 5px;border-radius:999px}
+.reveal p{font:18px/1.62 var(--serif);margin:.7em 0}
+.reveal .cite{font:13px/1.5 var(--sans);color:var(--brown)}
+.link{background:none;border:0;color:var(--brown);text-decoration:underline;cursor:pointer;font:inherit;font-size:15px;padding:10px 4px;min-height:44px}
+.card.locked .lockBtn{display:none}
+.card:not(.locked) .editBtn{display:none}
+.tally{padding:20px 24px;margin:26px 0}
+.tally h2{margin:.1em 0 .3em;font-size:28px;color:var(--maroon)}
+.tally ol{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:8px}
+.tally li{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;background:#fff;border:1px solid var(--rule);border-radius:10px;padding:10px 14px}
+.tally .tn{grid-row:1/3;align-self:center;width:34px;height:34px;border-radius:50%;background:var(--maroon);color:#fff;display:grid;place-items:center;font:800 16px/1 var(--serif)}
+.tally .tq{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--brown)}
+.tally .ta{font-weight:700;color:var(--maroon);overflow-wrap:anywhere}
+.tally li.none .ta{color:#2A755F;font-weight:600;font-style:italic}
+.tally li.none .tn{background:#4C8472}
+.tally .sum{margin:12px 0 0;font-weight:600;color:var(--brown)}
+.finish{text-align:center;margin:26px 0;padding:22px 20px}
+.status{font-size:15px;font-weight:700;color:var(--brown);margin-bottom:12px;overflow-wrap:anywhere}
+.btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.msg{display:none;margin:14px auto 0;padding:10px 14px;border-radius:8px;background:#EAF3E6;border:1px solid var(--ok);color:var(--ok);font-weight:700;max-width:620px;overflow-wrap:anywhere}
+.msg.err{background:#FDEDEB;border-color:#B3261E;color:#8C1D18}
+input.bad{border-color:#B3261E;background:#FFF1EF}
+footer{text-wrap:balance;margin-top:34px;padding-top:12px;border-top:1px solid var(--rule);font-size:12px;letter-spacing:.05em;color:var(--maroon);font-weight:600}
+@media (max-width:720px){.choices{grid-template-columns:1fr}.hero-band{padding:26px 20px 24px}.hero-num{font-size:120px}.card{padding:18px 16px 20px}.there{padding:4px 14px 6px}.there p{font-size:18px}.btn.primary,.btns .btn{width:100%}.bar{margin:0 -18px;padding:9px 18px}}
+html[dir=rtl] .hero-band::before{left:auto;right:0}
+html[dir=rtl] .hero-num{right:auto;left:20px}
+html[dir=rtl] .there{border-left:1px solid var(--edge);border-right:6px solid var(--red)}
+html[dir=rtl] .reveal{border-left:1px solid var(--rule);border-right:6px solid var(--maroon)}
+html[dir=rtl] .choice{text-align:right}
+html[dir=rtl] .choice[aria-pressed="true"]::after{margin-left:0;margin-right:auto}
+html[dir=rtl] .howto ol{margin:.4em 1.2em .2em 0}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+@media print{body::before{display:none}.bar,.finish,.btn,.msg,.choice:disabled[aria-pressed=false]{display:none!important}.panel{backdrop-filter:none;box-shadow:none;background:#fff}.card{break-inside:avoid}}
+/*sp-i18n-css*/
+.sp-lang-bar{display:flex;justify-content:flex-end;padding:8px 12px 0;position:relative;z-index:5}
+.sp-lang{display:inline-flex;gap:2px;padding:3px;border-radius:10px;background:rgba(255,255,255,.88);border:1px solid rgba(0,0,0,.18);font-family:system-ui,"Segoe UI",Tahoma,Arial,sans-serif}
+.sp-lang button{border:0;background:transparent;color:#222;font:600 13px/1 system-ui,"Segoe UI",Tahoma,Arial,sans-serif;padding:7px 11px;border-radius:7px;cursor:pointer}
+.sp-lang button[aria-pressed="true"]{background:#222;color:#fff}
+.sp-lang button:focus-visible{outline:3px solid #2a6df4;outline-offset:1px}
+textarea,input,select{unicode-bidi:plaintext}
+html[lang="ar"] body,html[lang="ar"] button,html[lang="ar"] textarea,html[lang="ar"] input,html[lang="ar"] select{font-family:"Segoe UI",Tahoma,"Noto Sans Arabic","Arial",system-ui,sans-serif}
+html[lang="ar"] body{line-height:1.8}
+html[lang="ar"] *{letter-spacing:0!important}
+html[dir="rtl"] textarea,html[dir="rtl"] input{text-align:start}
+@media print{.sp-lang-bar{display:none}}
+/*/sp-i18n-css*/
+</style></head><body>
+<!--sp-bar--><div class="sp-lang-bar"><div class="sp-lang" role="group" aria-label="Language / Idioma / اللغة"><button type="button" data-lang="en" lang="en" aria-pressed="true">English</button><button type="button" data-lang="es" lang="es" aria-pressed="false">Español</button><button type="button" data-lang="ar" lang="ar" aria-pressed="false">العربية</button></div></div><!--/sp-bar--><div class="wrap">
+<header class="hero"><div class="hero-band"><div class="eyebrow">1776-1786</div>
+<h1>Would You Rather</h1><p class="sub">The American Revolution and Its Ideas</p><span class="hero-num" aria-hidden="true">3</span></div>
+<div class="meta panel">
+<label>FIRST NAME *<input id="f_first" type="text" autocomplete="given-name"></label>
+<label>LAST NAME *<input id="f_last" type="text" autocomplete="family-name"></label>
+<label>PERIOD *<input id="f_period" type="text" inputmode="numeric" maxlength="12" placeholder="e.g. 3"></label>
+<label>DATE (fills in when you finish)<input id="f_date" type="text" readonly tabindex="-1" placeholder="Automatic"></label>
+</div></header>
+<div class="howto panel"><div><b>How to work.</b> People in history faced hard choices. Here are five. There is no right or wrong choice. Your job is to understand why people chose what they did.</div>
+<ol><li>Read “You are there.”</li><li>Tap the choice you would make.</li><li>Write your reason. Use at least one fact from the lesson.</li><li>Write a Counter-Argument: the best reason someone on the other side would give.</li><li>Tap <b>Lock in my answer</b> to see what really happened.</li></ol>
+<div>Your work saves on this device as you type. Use <b>Save Progress</b> at the bottom to download a backup file, and <b>Load Progress</b> to continue later.</div></div>
+<div class="bar"><div class="row"><span id="pct">0 of 5 dilemmas locked in</span><div class="track"><div class="fill" id="fill"></div></div></div></div>
+
+<section class="card panel" id="d1" data-n="1" data-a="Join the Patriots: break away from Britain to protect liberty" data-b="Stay loyal: remain under the king and Britain" data-short="Patriot or Loyalist" aria-labelledby="h1">
+<div class="kick">Dilemma 1 <span>of 5</span> · 1776</div>
+<h2 id="h1">1776: Join the Patriots, or Stay Loyal to Britain?</h2>
+<div class="there"><span class="lab">You are there</span><p>It is 1776, and you are an adult living in a busy port city in the colonies. Fighting with Britain has started. Some of your neighbors say it is time to break away from the king. Others say that would be treason.</p><p>Governors, judges, and other royal officials are mostly on the side of Britain. So are most Anglican ministers. Many small farmers are too. Other people say the only way to protect their liberty is to separate from British control. They want to be citizens who elect their own government, not subjects of a king.</p><p>Families and friends are splitting up over this. Your choice may cost you relatives and neighbors. What would you choose?</p></div>
+<p class="rather">Would you rather...</p>
+<div class="choices" role="group" aria-label="Choose one">
+<button type="button" class="choice" data-o="A" aria-pressed="false"><span class="ltr">A</span><span>Join the Patriots: break away from Britain to protect liberty</span></button>
+<button type="button" class="choice" data-o="B" aria-pressed="false"><span class="ltr">B</span><span>Stay loyal: remain under the king and Britain</span></button>
+</div>
+<div class="work">
+<div class="field"><label for="d1_reason">Your reason</label><span class="hint">Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”</span>
+<textarea id="d1_reason" data-k="reason" placeholder="Type your reason here..."></textarea></div>
+<div class="field"><label for="d1_counter">Counter-Argument</label><span class="hint">What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”</span>
+<textarea id="d1_counter" data-k="counter" placeholder="Type the other side’s best reason here..."></textarea></div>
+<div class="row2"><button type="button" class="btn primary lockBtn" disabled>Lock in my answer</button>
+<button type="button" class="btn editBtn">Edit my answer</button><span class="cstat" aria-live="polite"></span></div>
+<div class="reveal" aria-live="polite"><span class="lab">What really happened</span><p>The Revolution turned into a civil war among Americans as well as a war against Britain. Colonists divided into three groups: Patriots, Loyalists, and a middle group that wanted to stay neutral. Even most of the neutral people were eventually forced to choose.</p><p>Families were torn apart. Benjamin Franklin’s son William was the royal governor of New Jersey and a Loyalist. His Patriot father removed William from his will and cut off communication.</p><p>Many people changed sides during the war. Some switched as many as four or five times. More New York men joined Loyalist regiments than enlisted in the Continental Army.</p><p class="cite">Source: Norton Ch. 5, “American Society at War” (Loyalists; Patriots).</p></div>
+</div>
+</section>
+<section class="card panel" id="d2" data-n="2" data-a="Attack: cross the icy Delaware River and surprise the enemy at Trenton" data-b="Stay defensive: protect the small army and wait for a safer chance" data-short="Trenton" aria-labelledby="h2">
+<div class="kick">Dilemma 2 <span>of 5</span> · 1776</div>
+<h2 id="h2">December 1776: Cross the Delaware, or Keep the Army Safe?</h2>
+<div class="there"><span class="lab">You are there</span><p>It is December 1776, and you are an officer in General Washington’s army. The Revolution is close to falling apart. Washington has only about 3,000 soldiers left. Sickness and desertion have wrecked the army.</p><p>The Americans cannot beat the veteran British soldiers in big battles. Washington has said the war should be defensive. He wants to avoid risky fights and keep his small army alive, so that he can outlast the British. The British have hired thousands of German soldiers, whom Americans call Hessians.</p><p>Washington asks his officers whether to stay on the defensive or to risk a surprise attack. He believes the cause needs some “stroke” of good news. What would you advise?</p></div>
+<p class="rather">Would you rather...</p>
+<div class="choices" role="group" aria-label="Choose one">
+<button type="button" class="choice" data-o="A" aria-pressed="false"><span class="ltr">A</span><span>Attack: cross the icy Delaware River and surprise the enemy at Trenton</span></button>
+<button type="button" class="choice" data-o="B" aria-pressed="false"><span class="ltr">B</span><span>Stay defensive: protect the small army and wait for a safer chance</span></button>
+</div>
+<div class="work">
+<div class="field"><label for="d2_reason">Your reason</label><span class="hint">Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”</span>
+<textarea id="d2_reason" data-k="reason" placeholder="Type your reason here..."></textarea></div>
+<div class="field"><label for="d2_counter">Counter-Argument</label><span class="hint">What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”</span>
+<textarea id="d2_counter" data-k="counter" placeholder="Type the other side’s best reason here..."></textarea></div>
+<div class="row2"><button type="button" class="btn primary lockBtn" disabled>Lock in my answer</button>
+<button type="button" class="btn editBtn">Edit my answer</button><span class="cstat" aria-live="polite"></span></div>
+<div class="reveal" aria-live="polite"><span class="lab">What really happened</span><p>Washington chose the attack. On a cold, raw Christmas night in 1776, he led about 2,400 men across the ice-clogged Delaware River into New Jersey. They crossed in forty-foot-long boats and stayed almost silent. Ten of the men were of African descent.</p><p>Near sunrise at Trenton, the Americans surprised 1,500 sleeping Hessians. The battle was a rout. Just two Americans were killed and four wounded.</p><p>Norton says the victories at Trenton and Princeton saved the cause of independence and shifted the war’s momentum. A fresh wave of Patriots signed up to serve, and Washington regained the confidence of his men.</p><p class="cite">Source: Norton Ch. 5, “Mobilizing for War” (War: A Stern Teacher; A Desperate Gamble).</p></div>
+</div>
+</section>
+<section class="card panel" id="d3" data-n="3" data-a="Make the alliance: ask France to join the war" data-b="No alliance: keep fighting with our own army" data-short="French Alliance" aria-labelledby="h3">
+<div class="kick">Dilemma 3 <span>of 5</span> · 1778</div>
+<h2 id="h3">1778: Make an Alliance With France, or Fight On Alone?</h2>
+<div class="there"><span class="lab">You are there</span><p>It is early 1778, and you are a member of the Continental Congress. The British have taken Philadelphia, the largest American city, and Congress had to flee. Washington’s army is spending the winter at Valley Forge, hungry and short of coats, shoes, and blankets.</p><p>But there is also big news. In October 1777, the Americans surrounded the British army at Saratoga, New York. The British general, Burgoyne, surrendered 5,800 troops, 7,000 muskets, and 42 cannons. William Pitt, a former British prime minister, told Parliament, “You cannot conquer America.”</p><p>The victory at Saratoga has made a Treaty of Alliance with France possible. France lost four wars to Britain in the last eighty years and is hungry for revenge. Congress must decide whether to ally with France. What would you choose?</p></div>
+<p class="rather">Would you rather...</p>
+<div class="choices" role="group" aria-label="Choose one">
+<button type="button" class="choice" data-o="A" aria-pressed="false"><span class="ltr">A</span><span>Make the alliance: ask France to join the war</span></button>
+<button type="button" class="choice" data-o="B" aria-pressed="false"><span class="ltr">B</span><span>No alliance: keep fighting with our own army</span></button>
+</div>
+<div class="work">
+<div class="field"><label for="d3_reason">Your reason</label><span class="hint">Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”</span>
+<textarea id="d3_reason" data-k="reason" placeholder="Type your reason here..."></textarea></div>
+<div class="field"><label for="d3_counter">Counter-Argument</label><span class="hint">What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”</span>
+<textarea id="d3_counter" data-k="counter" placeholder="Type the other side’s best reason here..."></textarea></div>
+<div class="row2"><button type="button" class="btn primary lockBtn" disabled>Lock in my answer</button>
+<button type="button" class="btn editBtn">Edit my answer</button><span class="cstat" aria-live="polite"></span></div>
+<div class="reveal" aria-live="polite"><span class="lab">What really happened</span><p>The Treaty of Alliance with France was made in 1778. Norton calls the victory at Saratoga a strategic turning point because it made this treaty possible.</p><p>In 1779, Spain also joined the war against Britain. Spain was not a great friend of the Americans, but it wanted to hurt Great Britain. Spain’s help was much smaller than France’s.</p><p>At Yorktown in 1781, French warships under Admiral de Grasse forced the British navy to leave. That cut off Cornwallis’s army from food and supplies. French troops joined the Americans. On October 17, 1781, Cornwallis surrendered. Some 7,000 British soldiers laid down their weapons.</p><p class="cite">Source: Norton Ch. 5, “Setbacks for the British (1777–1781)” (The Crucial Alliance with France; Yorktown and the Final Campaigns).</p></div>
+</div>
+</section>
+<section class="card panel" id="d4" data-n="4" data-a="Pass the bill: make religion completely free, with no one forced to support a church" data-b="Keep the old way: tolerate other beliefs, but stop short of complete freedom" data-short="Religious Freedom" aria-labelledby="h4">
+<div class="kick">Dilemma 4 <span>of 5</span> · 1786</div>
+<h2 id="h4">1786: Make Religion Completely Free, or Keep the Old Way?</h2>
+<div class="there"><span class="lab">You are there</span><p>It is 1786, and you are a leader in Virginia’s government. Before the Revolution, Americans tolerated people with other religious beliefs. They did not yet insist on complete freedom. In 1776 Virginia’s Declaration of Rights guaranteed the free exercise of religion.</p><p>Now Thomas Jefferson has written a bill for the state. It says that “no man shall be compelled” to attend or support any religious worship. It also says that all men shall be free to hold and argue for their own religious opinions.</p><p>Some people say this is the next step in building a free republic. Others want to keep the old way. You must decide how to vote. What would you choose?</p></div>
+<p class="rather">Would you rather...</p>
+<div class="choices" role="group" aria-label="Choose one">
+<button type="button" class="choice" data-o="A" aria-pressed="false"><span class="ltr">A</span><span>Pass the bill: make religion completely free, with no one forced to support a church</span></button>
+<button type="button" class="choice" data-o="B" aria-pressed="false"><span class="ltr">B</span><span>Keep the old way: tolerate other beliefs, but stop short of complete freedom</span></button>
+</div>
+<div class="work">
+<div class="field"><label for="d4_reason">Your reason</label><span class="hint">Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”</span>
+<textarea id="d4_reason" data-k="reason" placeholder="Type your reason here..."></textarea></div>
+<div class="field"><label for="d4_counter">Counter-Argument</label><span class="hint">What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”</span>
+<textarea id="d4_counter" data-k="counter" placeholder="Type the other side’s best reason here..."></textarea></div>
+<div class="row2"><button type="button" class="btn primary lockBtn" disabled>Lock in my answer</button>
+<button type="button" class="btn editBtn">Edit my answer</button><span class="cstat" aria-live="polite"></span></div>
+<div class="reveal" aria-live="polite"><span class="lab">What really happened</span><p>Virginia’s Statute of Religious Freedom (1786) was written by Thomas Jefferson. It said that “no man shall be compelled” to attend or support any religious worship. It also said that all men shall be free to hold and argue for their own opinions in matters of religion.</p><p>Norton says that before the Revolution Americans tolerated religious dissent, but after the Revolution they insisted on complete freedom of religion. This is the principle of separation of church and state.</p><p>Norton lists religious freedom, representative democracy, and an expanded right to vote for White men as dramatic changes. But Norton also says the war did not significantly change the social or political status of enslaved Black people or of Indigenous Americans.</p><p class="cite">Source: Norton Ch. 5, “War as an Engine of Change” (Freedom of Religion).</p></div>
+</div>
+</section>
+<section class="card panel" id="d5" data-n="5" data-a="Stay home: run the farm or business and keep the family going" data-b="Support the army: handle supplies, carry messages, or help soldiers in camp" data-short="Women at War" aria-labelledby="h5">
+<div class="kick">Dilemma 5 <span>of 5</span> · 1775-1783</div>
+<h2 id="h5">The War Years: Run the Farm at Home, or Support the Army?</h2>
+<div class="there"><span class="lab">You are there</span><p>It is during the war, and you are a woman living in the colonies. By law, women cannot vote or hold office. Few women have a chance to go to school. When a woman marries, her property becomes her husband’s.</p><p>Many men are away fighting, and the war has changed what women are needed to do. Some women manage farms and shops at home. Some publish newspapers. Others help the army. They handle supplies, carry messages, or work as “camp followers.” Camp followers support soldiers in exchange for daily rations.</p><p>At Valley Forge, some twelve-year-old soldiers were with their mothers. The army needs help, and so does your family. What would you choose?</p></div>
+<p class="rather">Would you rather...</p>
+<div class="choices" role="group" aria-label="Choose one">
+<button type="button" class="choice" data-o="A" aria-pressed="false"><span class="ltr">A</span><span>Stay home: run the farm or business and keep the family going</span></button>
+<button type="button" class="choice" data-o="B" aria-pressed="false"><span class="ltr">B</span><span>Support the army: handle supplies, carry messages, or help soldiers in camp</span></button>
+</div>
+<div class="work">
+<div class="field"><label for="d5_reason">Your reason</label><span class="hint">Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”</span>
+<textarea id="d5_reason" data-k="reason" placeholder="Type your reason here..."></textarea></div>
+<div class="field"><label for="d5_counter">Counter-Argument</label><span class="hint">What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”</span>
+<textarea id="d5_counter" data-k="counter" placeholder="Type the other side’s best reason here..."></textarea></div>
+<div class="row2"><button type="button" class="btn primary lockBtn" disabled>Lock in my answer</button>
+<button type="button" class="btn editBtn">Edit my answer</button><span class="cstat" aria-live="polite"></span></div>
+<div class="reveal" aria-live="polite"><span class="lab">What really happened</span><p>Women did both. Norton says the Revolution gave women, free and enslaved, chances to broaden their social roles. They handled supplies, served as messengers or spies, and worked as camp followers. White women in particular managed farms, published newspapers, and sometimes served as soldiers or spies.</p><p>But the changes had limits. Norton says women could not vote or hold office, few had a formal education, and a married woman’s property became her husband’s. Norton also says the limits of equality became even more evident after the war.</p><p>The war affected other groups in different ways. About 5,000 African Americans fought on the Patriot side. The British and their allies had 15,000 to 20,000 people of African descent. Several hundred thousand enslaved people, mostly in the South, used the war’s disruption to seize their freedom. Indigenous people had no role in the peace talks, and the Treaty of Paris gave away their lands.</p><p class="cite">Source: Norton Ch. 5, “Equality and Its Limits” (The Status of Women; Southern Backlash; Indigenous Americans Are Besieged).</p></div>
+</div>
+</section>
+<section class="tally panel" id="tally"><div class="kick">The end</div><h2>Your choices</h2><p style="margin:0">Here is a summary of the choices you made.</p>
+<ol id="tallyList"></ol><p class="sum" id="tallySum"></p></section>
+<div class="finish panel" id="actions"><div class="status" id="status"></div>
+<div class="btns"><button class="btn" id="saveBtn" type="button">Save Progress</button><button class="btn" id="loadBtn" type="button">Load Progress</button>
+<input type="file" id="loadFile" accept=".json,application/json" hidden>
+<button class="btn primary" id="finishBtn" type="button" disabled>Finished — Download File to Submit</button></div>
+<div class="msg" id="msg" role="status"></div><button class="link" id="reset" type="button">Clear all my answers</button></div>
+<footer>UNIT 1 · COLONIES, REVOLUTION, AND CONSTITUTION | CPUSH | DANIEL GARZA, M.A.</footer>
+</div>
+<script>
+(function(){
+  var PACKET='CPUSH_L3_WYR';
+  var STORE='cpush_l3_would-you-rather_student';
+  var $=function(i){return document.getElementById(i)};
+  var first=$('f_first'),last=$('f_last'),period=$('f_period'),dateF=$('f_date');
+  var cards=[].slice.call(document.querySelectorAll('.card'));
+  var MIN=15;
+  var data={meta:{},cards:{}};
+  function load(){try{var d=JSON.parse(localStorage.getItem(STORE)||'null');if(d&&d.cards)data=d}catch(e){}}
+  function persist(){try{localStorage.setItem(STORE,JSON.stringify(data))}catch(e){}}
+  function cs(n){return data.cards[n]||(data.cards[n]={choice:'',reason:'',counter:'',locked:false})}
+  function msg(t,err){var m=$('msg');m.textContent=t;m.className='msg'+(err?' err':'');m.style.display='block'}
+  function clean(n){n=window.spAscii?spAscii(n):n;return String(n).normalize('NFD').replace(/[̀-ͯ]/g,'').trim().replace(/\s+/g,'_').replace(/[^A-Za-z0-9_-]/g,'')}
+  function who(){return (clean(last.value)||'Last')+'_'+(clean(first.value)||'First')}
+  function named(){return !!(first.value.trim()&&last.value.trim()&&period.value.trim())}
+  function optText(c,o){return o==='A'?c.getAttribute('data-a'):o==='B'?c.getAttribute('data-b'):''}
+  function render(){
+    var locked=0;
+    cards.forEach(function(c){
+      var n=c.getAttribute('data-n'),s=cs(n);
+      c.classList.toggle('chosen',!!s.choice);
+      c.classList.toggle('locked',!!s.locked);
+      [].forEach.call(c.querySelectorAll('.choice'),function(b){
+        b.setAttribute('aria-pressed',b.getAttribute('data-o')===s.choice?'true':'false');
+        b.disabled=!!s.locked;
+      });
+      var r=c.querySelector('[data-k=reason]'),k=c.querySelector('[data-k=counter]');
+      if(r.value!==s.reason)r.value=s.reason;
+      if(k.value!==s.counter)k.value=s.counter;
+      r.readOnly=k.readOnly=!!s.locked;
+      var ok=s.choice&&s.reason.trim().length>=MIN&&s.counter.trim().length>=MIN;
+      c.querySelector('.lockBtn').disabled=!ok;
+      var st=c.querySelector('.cstat');
+      st.textContent=s.locked?'Locked in. Read what really happened below.':(ok?'Ready. Tap Lock in to see what happened.':'Fill in both boxes to unlock the next step.');
+      if(s.locked)locked++;
+    });
+    var tot=cards.length;
+    $('pct').textContent=locked+' of '+tot+' dilemmas locked in';
+    $('fill').style.width=(100*locked/tot)+'%';
+    var ol=$('tallyList');ol.innerHTML='';
+    cards.forEach(function(c){
+      var n=c.getAttribute('data-n'),s=cs(n),li=document.createElement('li');
+      var txt=s.choice?optText(c,s.choice):'';
+      li.className=(s.locked&&s.choice)?'':'none';
+      li.innerHTML='<span class="tn"></span><span class="tq"></span><span class="ta"></span>';
+      li.querySelector('.tn').textContent=n;
+      li.querySelector('.tq').textContent=c.getAttribute('data-short');
+      li.querySelector('.ta').textContent=(s.locked&&s.choice)?('You chose: '+txt):(s.choice?('Chosen, not locked in yet: '+txt):'Not answered yet');
+      ol.appendChild(li);
+    });
+    $('tallySum').textContent=locked===tot?'All five dilemmas are locked in. Nice work.':'Lock in all five dilemmas to finish.';
+    var miss=[];
+    if(!named())miss.push('first name, last name, and period');
+    if(locked<tot)miss.push((tot-locked)+' dilemma'+(tot-locked===1?'':'s')+' to lock in');
+    var all=named()&&locked===tot;
+    $('status').textContent=all?'Everything is done. Tap Finished to download your file.':'Still needed: '+miss.join('; ')+'.';
+    $('finishBtn').disabled=!all;
+    return all;
+  }
+  function sync(){
+    data.meta={first:first.value,last:last.value,period:period.value,date:dateF.value};
+    persist();render();
+  }
+  function snapshot(){
+    var o={packet:PACKET,course:'CPUSH',lesson:3,assignment:'Would You Rather',version:1,saved:new Date().toISOString(),
+      student:{first:first.value.trim(),last:last.value.trim(),period:period.value.trim(),date:dateF.value.trim()},answers:{}};
+    cards.forEach(function(c){
+      var n=c.getAttribute('data-n'),s=cs(n),p='dilemma_'+n+'_';
+      o.answers[p+'topic']=c.getAttribute('data-short');
+      o.answers[p+'choice']=s.choice;
+      o.answers[p+'choice_text']=optText(c,s.choice);
+      o.answers[p+'reason']=s.reason;
+      o.answers[p+'counter_argument']=s.counter;
+      o.answers[p+'locked_in']=!!s.locked;
+    });
+    return o;
+  }
+  function download(name,obj){
+    var blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;
+    document.body.appendChild(a);a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);
+  }
+  load();
+  var m=data.meta||{};first.value=m.first||'';last.value=m.last||'';period.value=m.period||'';dateF.value=m.date||'';
+  [first,last,period].forEach(function(f){f.addEventListener('input',function(){f.classList.remove('bad');sync()})});
+  cards.forEach(function(c){
+    var n=c.getAttribute('data-n');
+    [].forEach.call(c.querySelectorAll('.choice'),function(b){b.addEventListener('click',function(){var s=cs(n);if(s.locked)return;s.choice=b.getAttribute('data-o');sync()})});
+    c.querySelector('[data-k=reason]').addEventListener('input',function(e){cs(n).reason=e.target.value;sync()});
+    c.querySelector('[data-k=counter]').addEventListener('input',function(e){cs(n).counter=e.target.value;sync()});
+    c.querySelector('.lockBtn').addEventListener('click',function(){var s=cs(n);if(!s.choice||s.reason.trim().length<MIN||s.counter.trim().length<MIN)return;s.locked=true;sync();var r=c.querySelector('.reveal');if(r.scrollIntoView)r.scrollIntoView({block:'nearest',behavior:'smooth'})});
+    c.querySelector('.editBtn').addEventListener('click',function(){cs(n).locked=false;sync()});
+  });
+  $('saveBtn').addEventListener('click',function(){
+    if(!named()){[first,last,period].forEach(function(f){if(!f.value.trim())f.classList.add('bad')});msg('Please type your first name, last name, and period first.',true);first.scrollIntoView({block:'center'});return}
+    download(who()+'-'+PACKET+'-PROGRESS.json',snapshot());msg('Progress file downloaded. Keep it safe. Use Load Progress to continue later.');
+  });
+  $('loadBtn').addEventListener('click',function(){$('loadFile').click()});
+  $('loadFile').addEventListener('change',function(ev){
+    var f=ev.target.files[0];if(!f)return;
+    var r=new FileReader();
+    r.onload=function(){
+      try{
+        var o=JSON.parse(r.result);
+        if(!o||o.packet!==PACKET||typeof o.answers!=='object')throw new Error('wrong');
+        var st=o.student||{};first.value=st.first||'';last.value=st.last||'';period.value=st.period||'';dateF.value=(o.completed?st.date:'')||'';
+        data.cards={};
+        cards.forEach(function(c){var n=c.getAttribute('data-n'),p='dilemma_'+n+'_',a=o.answers;
+          data.cards[n]={choice:(a[p+'choice']==='A'||a[p+'choice']==='B')?a[p+'choice']:'',reason:String(a[p+'reason']||''),counter:String(a[p+'counter_argument']||''),locked:!!a[p+'locked_in']};});
+        sync();msg('Progress loaded.');
+      }catch(err){msg('That file does not look like a Would You Rather progress file. Try again.',true)}
+      ev.target.value='';
+    };
+    r.onerror=function(){msg('Could not read that file.',true)};
+    r.readAsText(f);
+  });
+  $('finishBtn').addEventListener('click',function(){
+    if(!render())return;
+    var now=new Date();dateF.value=now.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});sync();
+    var o=snapshot();o.completed=true;o.submitted=now.toISOString();
+    var fn=who()+'-'+PACKET+'.json';download(fn,o);
+    msg('Done! Your file '+fn+' downloaded. Upload it to Canvas.');
+  });
+  $('reset').addEventListener('click',function(){
+    if(!confirm('Clear all of your answers on this page?'))return;
+    data={meta:{},cards:{}};first.value=last.value=period.value=dateF.value='';persist();render();
+  });
+  render();
+})();
+</script><!--sp-i18n--><script type="application/json" id="sp-i18n">{"langs":["en","es","ar"],"default":"en","es":{"Save Progress":"Guardar progreso","Load Progress":"Cargar progreso","Finished — Download File to Submit":"Terminé — Descargar el archivo para entregar","Clear all my answers":"Borrar todas mis respuestas","FIRST NAME *":"NOMBRE *","LAST NAME *":"APELLIDO *","PERIOD *":"PERÍODO *","DATE (fills in when you finish)":"FECHA (se llena cuando terminas)","e.g. 3":"p. ej., 3","Automatic":"Automática","Please type your first name, last name, and period first.":"Primero escribe tu nombre, apellido y período.","Western Expansion and Southern Secession":"Expansión hacia el oeste y secesión del sur","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — La Ley de Esclavos Fugitivos","Bleeding Kansas":"Bleeding Kansas — Kansas sangriento","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"Se descargó tu archivo de progreso. Guárdalo bien. Usa «Cargar progreso» para continuar más tarde.","Progress loaded.":"Progreso cargado.","Could not read that file.":"No se pudo leer ese archivo.","Treaty of Guadalupe Hidalgo":"Tratado de Guadalupe Hidalgo","The American Revolution and Its Ideas":"La Revolución Estadounidense y sus ideas","Would You Rather 3 · The American Revolution and Its Ideas":"¿Qué preferirías? 3 · La Revolución Estadounidense y sus ideas","Dilemma 1 <span>of 5<\/span> · 1776":"Dilema 1 <span>de 5<\/span> · 1776","Dilemma 2 <span>of 5<\/span> · 1776":"Dilema 2 <span>de 5<\/span> · 1776","Dilemma 3 <span>of 5<\/span> · 1778":"Dilema 3 <span>de 5<\/span> · 1778","Dilemma 4 <span>of 5<\/span> · 1786":"Dilema 4 <span>de 5<\/span> · 1786","Dilemma 5 <span>of 5<\/span> · 1775-1783":"Dilema 5 <span>de 5<\/span> · 1775-1783","Patriot or Loyalist":"Patriota o leal","Trenton":"Trenton","French Alliance":"Alianza con Francia","Religious Freedom":"Libertad religiosa","Women at War":"Las mujeres en la guerra","Clear all of your answers on this page?":"¿Borrar todas tus respuestas en esta página?","1776: Join the Patriots, or Stay Loyal to Britain?":"1776: ¿Unirte a los patriotas o seguir siendo leal a Gran Bretaña?","It is 1776, and you are an adult living in a busy port city in the colonies. Fighting with Britain has started. Some of your neighbors say it is time to break away from the king. Others say that would be treason.":"Es 1776 y eres un adulto que vive en una ciudad portuaria muy activa de las colonias. Ya empezó la lucha con Gran Bretaña. Algunos de tus vecinos dicen que es hora de separarse del rey. Otros dicen que eso sería traición.","Governors, judges, and other royal officials are mostly on the side of Britain. So are most Anglican ministers. Many small farmers are too. Other people say the only way to protect their liberty is to separate from British control. They want to be citizens who elect their own government, not subjects of a king.":"Los gobernadores, los jueces y otros funcionarios del rey están casi todos del lado de Gran Bretaña. También lo están la mayoría de los ministros anglicanos. Muchos pequeños agricultores también. Otras personas dicen que la única manera de proteger su libertad es separarse del control británico. Quieren ser ciudadanos que eligen a su propio gobierno, no súbditos de un rey.","Families and friends are splitting up over this. Your choice may cost you relatives and neighbors. What would you choose?":"Las familias y los amigos se están separando por esto. Tu decisión puede costarte parientes y vecinos. ¿Qué elegirías?","Join the Patriots: break away from Britain to protect liberty":"Unirte a los patriotas: separarte de Gran Bretaña para proteger la libertad","Stay loyal: remain under the king and Britain":"Seguir siendo leal: permanecer bajo el rey y Gran Bretaña","The Revolution turned into a civil war among Americans as well as a war against Britain. Colonists divided into three groups: Patriots, Loyalists, and a middle group that wanted to stay neutral. Even most of the neutral people were eventually forced to choose.":"La Revolución se convirtió en una guerra civil entre estadounidenses y también en una guerra contra Gran Bretaña. Los colonos se dividieron en tres grupos: patriotas, leales y un grupo intermedio que quería ser neutral. Incluso la mayoría de los neutrales terminaron obligados a elegir.","Families were torn apart. Benjamin Franklin’s son William was the royal governor of New Jersey and a Loyalist. His Patriot father removed William from his will and cut off communication.":"Las familias se rompieron. William, el hijo de Benjamin Franklin, era el gobernador real de Nueva Jersey y era leal. Su padre, que era patriota, lo quitó de su testamento y cortó toda comunicación con él.","Many people changed sides during the war. Some switched as many as four or five times. More New York men joined Loyalist regiments than enlisted in the Continental Army.":"Muchas personas cambiaron de bando durante la guerra. Algunas cambiaron hasta cuatro o cinco veces. Más hombres de Nueva York se unieron a regimientos leales que los que se alistaron en el Ejército Continental.","Source: Norton Ch. 5, “American Society at War” (Loyalists; Patriots).":"Fuente: Norton, cap. 5, “American Society at War” (Loyalists; Patriots).","December 1776: Cross the Delaware, or Keep the Army Safe?":"Diciembre de 1776: ¿Cruzar el Delaware o mantener a salvo al ejército?","It is December 1776, and you are an officer in General Washington’s army. The Revolution is close to falling apart. Washington has only about 3,000 soldiers left. Sickness and desertion have wrecked the army.":"Es diciembre de 1776 y eres oficial en el ejército del general Washington. La Revolución está a punto de derrumbarse. Washington tiene solo unos 3,000 soldados. La enfermedad y las deserciones han destrozado al ejército.","The Americans cannot beat the veteran British soldiers in big battles. Washington has said the war should be defensive. He wants to avoid risky fights and keep his small army alive, so that he can outlast the British. The British have hired thousands of German soldiers, whom Americans call Hessians.":"Los estadounidenses no pueden vencer a los soldados británicos con experiencia en las grandes batallas. Washington ha dicho que la guerra debe ser defensiva. Quiere evitar peleas arriesgadas y mantener vivo a su pequeño ejército para poder resistir más que los británicos. Los británicos han contratado a miles de soldados alemanes, a quienes los estadounidenses llaman hesianos.","Washington asks his officers whether to stay on the defensive or to risk a surprise attack. He believes the cause needs some “stroke” of good news. What would you advise?":"Washington les pregunta a sus oficiales si deben seguir a la defensiva o arriesgar un ataque sorpresa. Él cree que la causa necesita alguna “jugada” con buenas noticias. ¿Qué aconsejarías?","Attack: cross the icy Delaware River and surprise the enemy at Trenton":"Atacar: cruzar el río Delaware helado y sorprender al enemigo en Trenton","Stay defensive: protect the small army and wait for a safer chance":"Seguir a la defensiva: proteger al pequeño ejército y esperar una oportunidad más segura","Washington chose the attack. On a cold, raw Christmas night in 1776, he led about 2,400 men across the ice-clogged Delaware River into New Jersey. They crossed in forty-foot-long boats and stayed almost silent. Ten of the men were of African descent.":"Washington eligió el ataque. En una fría y cruda noche de Navidad de 1776, llevó a unos 2,400 hombres a través del río Delaware, lleno de hielo, hasta Nueva Jersey. Cruzaron en botes de cuarenta pies de largo y casi sin hacer ruido. Diez de los hombres eran de ascendencia africana.","Near sunrise at Trenton, the Americans surprised 1,500 sleeping Hessians. The battle was a rout. Just two Americans were killed and four wounded.":"Cerca del amanecer, en Trenton, los estadounidenses sorprendieron a 1,500 hesianos que dormían. La batalla fue una derrota total para ellos. Solo murieron dos estadounidenses y cuatro resultaron heridos.","Norton says the victories at Trenton and Princeton saved the cause of independence and shifted the war’s momentum. A fresh wave of Patriots signed up to serve, and Washington regained the confidence of his men.":"Norton dice que las victorias de Trenton y Princeton salvaron la causa de la independencia y cambiaron el impulso de la guerra. Una nueva ola de patriotas se alistó para servir, y Washington recuperó la confianza de sus hombres.","Source: Norton Ch. 5, “Mobilizing for War” (War: A Stern Teacher; A Desperate Gamble).":"Fuente: Norton, cap. 5, “Mobilizing for War” (War: A Stern Teacher; A Desperate Gamble).","1778: Make an Alliance With France, or Fight On Alone?":"1778: ¿Hacer una alianza con Francia o seguir luchando solos?","It is early 1778, and you are a member of the Continental Congress. The British have taken Philadelphia, the largest American city, and Congress had to flee. Washington’s army is spending the winter at Valley Forge, hungry and short of coats, shoes, and blankets.":"Es principios de 1778 y eres miembro del Congreso Continental. Los británicos tomaron Filadelfia, la ciudad más grande de Estados Unidos, y el Congreso tuvo que huir. El ejército de Washington pasa el invierno en Valley Forge, con hambre y sin suficientes abrigos, zapatos ni mantas.","But there is also big news. In October 1777, the Americans surrounded the British army at Saratoga, New York. The British general, Burgoyne, surrendered 5,800 troops, 7,000 muskets, and 42 cannons. William Pitt, a former British prime minister, told Parliament, “You cannot conquer America.”":"Pero también hay una gran noticia. En octubre de 1777, los estadounidenses rodearon al ejército británico en Saratoga, Nueva York. El general británico, Burgoyne, se rindió y entregó 5,800 soldados, 7,000 mosquetes y 42 cañones. William Pitt, un ex primer ministro británico, le dijo al Parlamento: “No pueden conquistar América”.","The victory at Saratoga has made a Treaty of Alliance with France possible. France lost four wars to Britain in the last eighty years and is hungry for revenge. Congress must decide whether to ally with France. What would you choose?":"La victoria en Saratoga ha hecho posible un Tratado de Alianza con Francia. Francia perdió cuatro guerras contra Gran Bretaña en los últimos ochenta años y tiene muchas ganas de vengarse. El Congreso debe decidir si se alía con Francia. ¿Qué elegirías?","Make the alliance: ask France to join the war":"Hacer la alianza: pedirle a Francia que se una a la guerra","No alliance: keep fighting with our own army":"Sin alianza: seguir luchando con nuestro propio ejército","The Treaty of Alliance with France was made in 1778. Norton calls the victory at Saratoga a strategic turning point because it made this treaty possible.":"El Tratado de Alianza con Francia se firmó en 1778. Norton llama a la victoria de Saratoga un punto de inflexión estratégico porque hizo posible este tratado.","In 1779, Spain also joined the war against Britain. Spain was not a great friend of the Americans, but it wanted to hurt Great Britain. Spain’s help was much smaller than France’s.":"En 1779, España también se unió a la guerra contra Gran Bretaña. España no era una gran amiga de los estadounidenses, pero quería debilitar a Gran Bretaña. La ayuda de España fue mucho menor que la de Francia.","At Yorktown in 1781, French warships under Admiral de Grasse forced the British navy to leave. That cut off Cornwallis’s army from food and supplies. French troops joined the Americans. On October 17, 1781, Cornwallis surrendered. Some 7,000 British soldiers laid down their weapons.":"En Yorktown, en 1781, los barcos de guerra franceses del almirante de Grasse obligaron a la armada británica a retirarse. Eso dejó al ejército de Cornwallis sin comida ni suministros. Las tropas francesas se unieron a los estadounidenses. El 17 de octubre de 1781, Cornwallis se rindió. Unos 7,000 soldados británicos dejaron sus armas.","Source: Norton Ch. 5, “Setbacks for the British (1777–1781)” (The Crucial Alliance with France; Yorktown and the Final Campaigns).":"Fuente: Norton, cap. 5, “Setbacks for the British (1777–1781)” (The Crucial Alliance with France; Yorktown and the Final Campaigns).","1786: Make Religion Completely Free, or Keep the Old Way?":"1786: ¿Hacer que la religión sea totalmente libre o mantener la costumbre de antes?","It is 1786, and you are a leader in Virginia’s government. Before the Revolution, Americans tolerated people with other religious beliefs. They did not yet insist on complete freedom. In 1776 Virginia’s Declaration of Rights guaranteed the free exercise of religion.":"Es 1786 y eres líder en el gobierno de Virginia. Antes de la Revolución, los estadounidenses toleraban a las personas con otras creencias religiosas. Todavía no exigían una libertad completa. En 1776, la Declaración de Derechos de Virginia garantizó el libre ejercicio de la religión.","Now Thomas Jefferson has written a bill for the state. It says that “no man shall be compelled” to attend or support any religious worship. It also says that all men shall be free to hold and argue for their own religious opinions.":"Ahora Thomas Jefferson ha escrito un proyecto de ley para el estado. Dice que “ningún hombre será obligado” a asistir a ningún culto religioso ni a apoyarlo. También dice que todos los hombres serán libres para tener y defender sus propias opiniones religiosas.","Some people say this is the next step in building a free republic. Others want to keep the old way. You must decide how to vote. What would you choose?":"Algunas personas dicen que este es el siguiente paso para construir una república libre. Otras quieren mantener la costumbre de antes. Tú debes decidir cómo votar. ¿Qué elegirías?","Pass the bill: make religion completely free, with no one forced to support a church":"Aprobar la ley: hacer la religión totalmente libre, sin que nadie esté obligado a apoyar una iglesia","Keep the old way: tolerate other beliefs, but stop short of complete freedom":"Mantener la costumbre de antes: tolerar otras creencias, pero sin llegar a la libertad completa","Virginia’s Statute of Religious Freedom (1786) was written by Thomas Jefferson. It said that “no man shall be compelled” to attend or support any religious worship. It also said that all men shall be free to hold and argue for their own opinions in matters of religion.":"El Estatuto de Virginia para la Libertad Religiosa (1786) fue escrito por Thomas Jefferson. Decía que “ningún hombre será obligado” a asistir a ningún culto religioso ni a apoyarlo. También decía que todos los hombres serán libres para tener y defender sus propias opiniones en asuntos de religión.","Norton says that before the Revolution Americans tolerated religious dissent, but after the Revolution they insisted on complete freedom of religion. This is the principle of separation of church and state.":"Norton dice que antes de la Revolución los estadounidenses toleraban la disidencia religiosa, pero después de la Revolución exigieron libertad religiosa completa. Este es el principio de la separación entre la iglesia y el estado.","Norton lists religious freedom, representative democracy, and an expanded right to vote for White men as dramatic changes. But Norton also says the war did not significantly change the social or political status of enslaved Black people or of Indigenous Americans.":"Norton enumera la libertad religiosa, la democracia representativa y el voto ampliado para los hombres blancos como cambios dramáticos. Pero Norton también dice que la guerra no cambió de manera significativa la situación social ni política de las personas negras esclavizadas ni de los indígenas estadounidenses.","Source: Norton Ch. 5, “War as an Engine of Change” (Freedom of Religion).":"Fuente: Norton, cap. 5, “War as an Engine of Change” (Freedom of Religion).","The War Years: Run the Farm at Home, or Support the Army?":"Los años de guerra: ¿Atender la granja en casa o apoyar al ejército?","It is during the war, and you are a woman living in the colonies. By law, women cannot vote or hold office. Few women have a chance to go to school. When a woman marries, her property becomes her husband’s.":"Es durante la guerra y eres una mujer que vive en las colonias. Por ley, las mujeres no pueden votar ni ocupar cargos. Pocas mujeres tienen la oportunidad de ir a la escuela. Cuando una mujer se casa, sus bienes pasan a ser de su esposo.","Many men are away fighting, and the war has changed what women are needed to do. Some women manage farms and shops at home. Some publish newspapers. Others help the army. They handle supplies, carry messages, or work as “camp followers.” Camp followers support soldiers in exchange for daily rations.":"Muchos hombres están lejos, luchando, y la guerra ha cambiado lo que se necesita de las mujeres. Algunas mujeres manejan granjas y negocios en casa. Algunas publican periódicos. Otras ayudan al ejército. Se encargan de los suministros, llevan mensajes o trabajan como “seguidoras del campamento”. Las seguidoras del campamento apoyan a los soldados a cambio de raciones diarias de comida.","At Valley Forge, some twelve-year-old soldiers were with their mothers. The army needs help, and so does your family. What would you choose?":"En Valley Forge, algunos soldados de doce años estaban con sus madres. El ejército necesita ayuda, y tu familia también. ¿Qué elegirías?","Stay home: run the farm or business and keep the family going":"Quedarte en casa: atender la granja o el negocio y sacar adelante a la familia","Support the army: handle supplies, carry messages, or help soldiers in camp":"Apoyar al ejército: encargarte de los suministros, llevar mensajes o ayudar a los soldados en el campamento","Women did both. Norton says the Revolution gave women, free and enslaved, chances to broaden their social roles. They handled supplies, served as messengers or spies, and worked as camp followers. White women in particular managed farms, published newspapers, and sometimes served as soldiers or spies.":"Las mujeres hicieron las dos cosas. Norton dice que la Revolución les dio a las mujeres, libres y esclavizadas, oportunidades de ampliar su papel en la sociedad. Se encargaron de los suministros, fueron mensajeras o espías y trabajaron como seguidoras del campamento. Las mujeres blancas en particular manejaron granjas, publicaron periódicos y a veces sirvieron como soldados o espías.","But the changes had limits. Norton says women could not vote or hold office, few had a formal education, and a married woman’s property became her husband’s. Norton also says the limits of equality became even more evident after the war.":"Pero los cambios tuvieron límites. Norton dice que las mujeres no podían votar ni ocupar cargos, pocas tenían educación formal y los bienes de una mujer casada pasaban a ser de su esposo. Norton también dice que los límites de la igualdad se hicieron aún más claros después de la guerra.","The war affected other groups in different ways. About 5,000 African Americans fought on the Patriot side. The British and their allies had 15,000 to 20,000 people of African descent. Several hundred thousand enslaved people, mostly in the South, used the war’s disruption to seize their freedom. Indigenous people had no role in the peace talks, and the Treaty of Paris gave away their lands.":"La guerra afectó a otros grupos de maneras distintas. Unos 5,000 afroamericanos lucharon del lado patriota. Los británicos y sus aliados tenían entre 15,000 y 20,000 personas de ascendencia africana. Varios cientos de miles de personas esclavizadas, sobre todo en el Sur, aprovecharon el desorden de la guerra para conseguir su libertad. Los pueblos indígenas no participaron en las conversaciones de paz, y el Tratado de París entregó sus tierras.","Source: Norton Ch. 5, “Equality and Its Limits” (The Status of Women; Southern Backlash; Indigenous Americans Are Besieged).":"Fuente: Norton, cap. 5, “Equality and Its Limits” (The Status of Women; Southern Backlash; Indigenous Americans Are Besieged).","You chose: Join the Patriots: break away from Britain to protect liberty":"Elegiste: Unirte a los patriotas: separarte de Gran Bretaña para proteger la libertad","Chosen, not locked in yet: Join the Patriots: break away from Britain to protect liberty":"Elegida, aún sin confirmar: Unirte a los patriotas: separarte de Gran Bretaña para proteger la libertad","You chose: Stay loyal: remain under the king and Britain":"Elegiste: Seguir siendo leal: permanecer bajo el rey y Gran Bretaña","Chosen, not locked in yet: Stay loyal: remain under the king and Britain":"Elegida, aún sin confirmar: Seguir siendo leal: permanecer bajo el rey y Gran Bretaña","You chose: Attack: cross the icy Delaware River and surprise the enemy at Trenton":"Elegiste: Atacar: cruzar el río Delaware helado y sorprender al enemigo en Trenton","Chosen, not locked in yet: Attack: cross the icy Delaware River and surprise the enemy at Trenton":"Elegida, aún sin confirmar: Atacar: cruzar el río Delaware helado y sorprender al enemigo en Trenton","You chose: Stay defensive: protect the small army and wait for a safer chance":"Elegiste: Seguir a la defensiva: proteger al pequeño ejército y esperar una oportunidad más segura","Chosen, not locked in yet: Stay defensive: protect the small army and wait for a safer chance":"Elegida, aún sin confirmar: Seguir a la defensiva: proteger al pequeño ejército y esperar una oportunidad más segura","You chose: Make the alliance: ask France to join the war":"Elegiste: Hacer la alianza: pedirle a Francia que se una a la guerra","Chosen, not locked in yet: Make the alliance: ask France to join the war":"Elegida, aún sin confirmar: Hacer la alianza: pedirle a Francia que se una a la guerra","You chose: No alliance: keep fighting with our own army":"Elegiste: Sin alianza: seguir luchando con nuestro propio ejército","Chosen, not locked in yet: No alliance: keep fighting with our own army":"Elegida, aún sin confirmar: Sin alianza: seguir luchando con nuestro propio ejército","You chose: Pass the bill: make religion completely free, with no one forced to support a church":"Elegiste: Aprobar la ley: hacer la religión totalmente libre, sin que nadie esté obligado a apoyar una iglesia","Chosen, not locked in yet: Pass the bill: make religion completely free, with no one forced to support a church":"Elegida, aún sin confirmar: Aprobar la ley: hacer la religión totalmente libre, sin que nadie esté obligado a apoyar una iglesia","You chose: Keep the old way: tolerate other beliefs, but stop short of complete freedom":"Elegiste: Mantener la costumbre de antes: tolerar otras creencias, pero sin llegar a la libertad completa","Chosen, not locked in yet: Keep the old way: tolerate other beliefs, but stop short of complete freedom":"Elegida, aún sin confirmar: Mantener la costumbre de antes: tolerar otras creencias, pero sin llegar a la libertad completa","You chose: Stay home: run the farm or business and keep the family going":"Elegiste: Quedarte en casa: atender la granja o el negocio y sacar adelante a la familia","Chosen, not locked in yet: Stay home: run the farm or business and keep the family going":"Elegida, aún sin confirmar: Quedarte en casa: atender la granja o el negocio y sacar adelante a la familia","You chose: Support the army: handle supplies, carry messages, or help soldiers in camp":"Elegiste: Apoyar al ejército: encargarte de los suministros, llevar mensajes o ayudar a los soldados en el campamento","Chosen, not locked in yet: Support the army: handle supplies, carry messages, or help soldiers in camp":"Elegida, aún sin confirmar: Apoyar al ejército: encargarte de los suministros, llevar mensajes o ayudar a los soldados en el campamento","UNIT 1 · COLONIES, REVOLUTION, AND CONSTITUTION | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 1 · COLONIAS, REVOLUCIÓN Y CONSTITUCIÓN | CPUSH | DANIEL GARZA, M.A.","<b>How to work.<\/b> People in history faced hard choices. Here are five. There is no right or wrong choice. Your job is to understand why people chose what they did.":"<b>Cómo trabajar.<\/b> Las personas en la historia enfrentaron decisiones difíciles. Aquí hay cinco. No hay una opción correcta ni incorrecta. Tu trabajo es entender por qué las personas eligieron lo que eligieron.","All five dilemmas are locked in. Nice work.":"Las cinco decisiones están confirmadas. Buen trabajo.","Lock in all five dilemmas to finish.":"Confirma las cinco decisiones para terminar.","Would you rather...":"¿Qué preferirías?...","Read “You are there.”":"Lee «Tú estás allí».","Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”":"¿Por qué elegiste esto? Usa al menos un dato de la lección. Prueba: «Elegí esto porque... Un dato es...»","Your choices":"Tus elecciones","Ready. Tap Lock in to see what happened.":"Listo. Toca «Confirmar» para ver lo que pasó.","Everything is done. Tap Finished to download your file.":"Todo está listo. Toca «Terminé» para descargar tu archivo.","Tap the choice you would make.":"Toca la opción que tú elegirías.","Lock in my answer":"Confirmar mi respuesta","Type the other side’s best reason here...":"Escribe aquí la mejor razón del otro lado...","Counter-Argument":"Contraargumento","What really happened":"Lo que realmente pasó","What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”":"¿Cuál es la mejor razón que daría alguien del OTRO lado? Escríbela como la diría esa persona. Prueba: «Alguien que eligió el otro lado diría...»","Type your reason here...":"Escribe tu razón aquí...","Write your reason. Use at least one fact from the lesson.":"Escribe tu razón. Usa al menos un dato de la lección.","That file does not look like a Would You Rather progress file. Try again.":"Ese archivo no parece un archivo de progreso de «¿Qué preferirías?». Inténtalo de nuevo.","Would You Rather":"¿Qué preferirías?","Locked in. Read what really happened below.":"Confirmada. Lee abajo lo que realmente pasó.","You are there":"Tú estás allí","Choose one":"Elige uno","Tap <b>Lock in my answer<\/b> to see what really happened.":"Toca <b>Confirmar mi respuesta<\/b> para ver lo que realmente pasó.","Fill in both boxes to unlock the next step.":"Llena las dos casillas para pasar al siguiente paso.","Edit my answer":"Cambiar mi respuesta","The end":"El final","Write a Counter-Argument: the best reason someone on the other side would give.":"Escribe un contraargumento: la mejor razón que daría alguien del otro lado.","Your work saves on this device as you type. Use <b>Save Progress<\/b> at the bottom to download a backup file, and <b>Load Progress<\/b> to continue later.":"Tu trabajo se guarda en este dispositivo mientras escribes. Usa <b>Guardar progreso<\/b> al final para descargar una copia de respaldo, y <b>Cargar progreso<\/b> para continuar más tarde.","Not answered yet":"Aún sin responder","Here is a summary of the choices you made.":"Este es un resumen de las elecciones que hiciste.","Your reason":"Tu razón"},"ar":{"Save Progress":"حفظ التقدم","Load Progress":"تحميل التقدم","Finished — Download File to Submit":"انتهيت — نزّل الملف لتسليمه","Clear all my answers":"امسح كل إجاباتي","FIRST NAME *":"الاسم الأول *","LAST NAME *":"اسم العائلة *","PERIOD *":"الحصة *","DATE (fills in when you finish)":"التاريخ (يُكتب تلقائيًا عند الانتهاء)","e.g. 3":"مثال: 3","Automatic":"تلقائي","Please type your first name, last name, and period first.":"اكتب أولًا اسمك الأول واسم العائلة والحصة.","Western Expansion and Southern Secession":"التوسع غربًا وانفصال الجنوب","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"الوحدة 3 · بيت منقسم وأُعيد بناؤه | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — قانون العبيد الهاربين","Bleeding Kansas":"Bleeding Kansas — كانساس النازفة","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"الوحدة 3 · بيت منقسم وأعيد بناؤه | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"تم تنزيل ملف التقدم. احتفظ به في مكان آمن. استخدم «تحميل التقدم» لتكمل لاحقًا.","Progress loaded.":"تم تحميل التقدم.","Could not read that file.":"تعذّرت قراءة هذا الملف.","Treaty of Guadalupe Hidalgo":"معاهدة غوادالوبي هيدالغو (Treaty of Guadalupe Hidalgo)","The American Revolution and Its Ideas":"الثورة الأمريكية وأفكارها","Would You Rather 3 · The American Revolution and Its Ideas":"ماذا تفضّل؟ 3 · الثورة الأمريكية وأفكارها","Dilemma 1 <span>of 5<\/span> · 1776":"المعضلة 1 <span>من 5<\/span> · 1776","Dilemma 2 <span>of 5<\/span> · 1776":"المعضلة 2 <span>من 5<\/span> · 1776","Dilemma 3 <span>of 5<\/span> · 1778":"المعضلة 3 <span>من 5<\/span> · 1778","Dilemma 4 <span>of 5<\/span> · 1786":"المعضلة 4 <span>من 5<\/span> · 1786","Dilemma 5 <span>of 5<\/span> · 1775-1783":"المعضلة 5 <span>من 5<\/span> · 1775-1783","Patriot or Loyalist":"وطني أم موالٍ","Trenton":"ترينتون (Trenton)","French Alliance":"التحالف مع فرنسا","Religious Freedom":"الحرية الدينية","Women at War":"النساء في الحرب","Clear all of your answers on this page?":"هل تريد مسح جميع إجاباتك في هذه الصفحة؟","1776: Join the Patriots, or Stay Loyal to Britain?":"1776: هل تنضم إلى الوطنيين أم تبقى وفيًّا لبريطانيا (Britain)؟","It is 1776, and you are an adult living in a busy port city in the colonies. Fighting with Britain has started. Some of your neighbors say it is time to break away from the king. Others say that would be treason.":"نحن في عام 1776، وأنت شخص بالغ تعيش في مدينة ميناء مزدحمة في المستعمرات. وقد بدأ القتال مع بريطانيا (Britain). يقول بعض جيرانك إن الوقت قد حان للانفصال عن الملك. ويقول آخرون إن هذا خيانة.","Governors, judges, and other royal officials are mostly on the side of Britain. So are most Anglican ministers. Many small farmers are too. Other people say the only way to protect their liberty is to separate from British control. They want to be citizens who elect their own government, not subjects of a king.":"معظم الحكام والقضاة وغيرهم من موظفي الملك في صف بريطانيا (Britain). وكذلك معظم رجال الدين الأنجليكان. وكثير من صغار المزارعين أيضًا. ويقول آخرون إن الطريقة الوحيدة لحماية حريتهم هي الانفصال عن السيطرة البريطانية. فهم يريدون أن يكونوا مواطنين ينتخبون حكومتهم بأنفسهم، لا رعايا لملك.","Families and friends are splitting up over this. Your choice may cost you relatives and neighbors. What would you choose?":"العائلات والأصدقاء ينقسمون بسبب هذا. وقد يكلفك قرارك أقاربك وجيرانك. ماذا ستختار؟","Join the Patriots: break away from Britain to protect liberty":"انضم إلى الوطنيين: انفصل عن بريطانيا لحماية الحرية","Stay loyal: remain under the king and Britain":"ابقَ وفيًّا: ابقَ تحت حكم الملك وبريطانيا","The Revolution turned into a civil war among Americans as well as a war against Britain. Colonists divided into three groups: Patriots, Loyalists, and a middle group that wanted to stay neutral. Even most of the neutral people were eventually forced to choose.":"تحولت الثورة إلى حرب أهلية بين الأمريكيين، كما كانت حربًا ضد بريطانيا (Britain). وانقسم المستعمرون إلى ثلاث مجموعات: الوطنيين (Patriots)، والموالين (Loyalists)، ومجموعة وسطى أرادت أن تبقى على الحياد. وحتى معظم المحايدين أُجبروا في النهاية على الاختيار.","Families were torn apart. Benjamin Franklin’s son William was the royal governor of New Jersey and a Loyalist. His Patriot father removed William from his will and cut off communication.":"تفككت العائلات. فقد كان ويليام (William)، ابن بنجامين فرانكلين (Benjamin Franklin)، حاكم نيوجيرسي (New Jersey) الملكي، وكان موالياً. وأزال والده الوطني اسمه من وصيته وقطع الاتصال به.","Many people changed sides during the war. Some switched as many as four or five times. More New York men joined Loyalist regiments than enlisted in the Continental Army.":"غيّر كثير من الناس موقفهم خلال الحرب. وغيّر بعضهم موقفه أربع مرات أو خمس. وانضم إلى الأفواج الموالية رجال من نيويورك (New York) أكثر ممن التحقوا بالجيش القاري (Continental Army).","Source: Norton Ch. 5, “American Society at War” (Loyalists; Patriots).":"المصدر: Norton، الفصل 5، <bdi dir=\"ltr\">“American Society at War”<\/bdi> (<bdi dir=\"ltr\">Loyalists; Patriots<\/bdi>).","December 1776: Cross the Delaware, or Keep the Army Safe?":"ديسمبر 1776: هل تعبر نهر ديلاوير (Delaware) أم تحافظ على سلامة الجيش؟","It is December 1776, and you are an officer in General Washington’s army. The Revolution is close to falling apart. Washington has only about 3,000 soldiers left. Sickness and desertion have wrecked the army.":"نحن في ديسمبر 1776، وأنت ضابط في جيش الجنرال واشنطن (Washington). والثورة على وشك الانهيار. ولم يبقَ لدى واشنطن سوى نحو 3,000 جندي. وقد أنهك المرضُ والهروبُ الجيش.","The Americans cannot beat the veteran British soldiers in big battles. Washington has said the war should be defensive. He wants to avoid risky fights and keep his small army alive, so that he can outlast the British. The British have hired thousands of German soldiers, whom Americans call Hessians.":"لا يستطيع الأمريكيون هزيمة الجنود البريطانيين المحنكين في المعارك الكبيرة. وقد قال واشنطن (Washington) إن الحرب يجب أن تكون دفاعية. وهو يريد تجنب المعارك الخطيرة والمحافظة على جيشه الصغير حيًّا، حتى يصمد أطول من البريطانيين. وقد استأجر البريطانيون آلاف الجنود الألمان، ويسميهم الأمريكيون الهيسيين (Hessians).","Washington asks his officers whether to stay on the defensive or to risk a surprise attack. He believes the cause needs some “stroke” of good news. What would you advise?":"يسأل واشنطن (Washington) ضباطه هل يبقون في موقف الدفاع أم يخاطرون بهجوم مفاجئ. وهو يعتقد أن القضية تحتاج إلى «ضربة» تحمل أخبارًا سارة. ماذا ستنصح؟","Attack: cross the icy Delaware River and surprise the enemy at Trenton":"هاجم: اعبر نهر ديلاوير (Delaware) المتجمد وفاجئ العدو في ترينتون (Trenton)","Stay defensive: protect the small army and wait for a safer chance":"ابقَ في الدفاع: احمِ الجيش الصغير وانتظر فرصة أكثر أمانًا","Washington chose the attack. On a cold, raw Christmas night in 1776, he led about 2,400 men across the ice-clogged Delaware River into New Jersey. They crossed in forty-foot-long boats and stayed almost silent. Ten of the men were of African descent.":"اختار واشنطن (Washington) الهجوم. ففي ليلة عيد الميلاد عام 1776، وكانت باردة وقاسية، قاد نحو 2,400 رجل عبر نهر ديلاوير (Delaware) المليء بالجليد إلى نيوجيرسي (New Jersey). وعبروا في قوارب طولها أربعون قدمًا وكادوا لا يصدرون صوتًا. وكان عشرة من الرجال من أصل أفريقي.","Near sunrise at Trenton, the Americans surprised 1,500 sleeping Hessians. The battle was a rout. Just two Americans were killed and four wounded.":"قرب الفجر في ترينتون (Trenton)، فاجأ الأمريكيون 1,500 جندي هيسي (Hessians) كانوا نائمين. وكانت المعركة هزيمة ساحقة لهم. ولم يُقتل من الأمريكيين سوى اثنين وجُرح أربعة.","Norton says the victories at Trenton and Princeton saved the cause of independence and shifted the war’s momentum. A fresh wave of Patriots signed up to serve, and Washington regained the confidence of his men.":"يقول نورتن (Norton) إن الانتصارين في ترينتون (Trenton) وبرينستون (Princeton) أنقذا قضية الاستقلال وغيّرا زخم الحرب. فقد تطوع موجة جديدة من الوطنيين للخدمة، واستعاد واشنطن (Washington) ثقة رجاله.","Source: Norton Ch. 5, “Mobilizing for War” (War: A Stern Teacher; A Desperate Gamble).":"المصدر: Norton، الفصل 5، <bdi dir=\"ltr\">“Mobilizing for War”<\/bdi> (<bdi dir=\"ltr\">War: A Stern Teacher; A Desperate Gamble<\/bdi>).","1778: Make an Alliance With France, or Fight On Alone?":"1778: هل تعقد تحالفًا مع فرنسا (France) أم تواصل القتال وحدك؟","It is early 1778, and you are a member of the Continental Congress. The British have taken Philadelphia, the largest American city, and Congress had to flee. Washington’s army is spending the winter at Valley Forge, hungry and short of coats, shoes, and blankets.":"نحن في أوائل عام 1778، وأنت عضو في الكونغرس القاري (Continental Congress). وقد استولى البريطانيون على فيلادلفيا (Philadelphia)، أكبر مدينة أمريكية، واضطر الكونغرس إلى الفرار. ويقضي جيش واشنطن (Washington) الشتاء في فالي فورج (Valley Forge)، جائعًا ويفتقر إلى المعاطف والأحذية والبطانيات.","But there is also big news. In October 1777, the Americans surrounded the British army at Saratoga, New York. The British general, Burgoyne, surrendered 5,800 troops, 7,000 muskets, and 42 cannons. William Pitt, a former British prime minister, told Parliament, “You cannot conquer America.”":"لكن هناك أيضًا خبر كبير. ففي أكتوبر 1777، حاصر الأمريكيون الجيش البريطاني في ساراتوغا (Saratoga) بولاية نيويورك (New York). واستسلم القائد البريطاني بيرغوين (Burgoyne) وسلّم 5,800 جندي و7,000 بندقية و42 مدفعًا. وقال ويليام بيت (William Pitt)، رئيس وزراء بريطانيا السابق، للبرلمان: «لا يمكنكم إخضاع أمريكا».","The victory at Saratoga has made a Treaty of Alliance with France possible. France lost four wars to Britain in the last eighty years and is hungry for revenge. Congress must decide whether to ally with France. What would you choose?":"جعل النصر في ساراتوغا (Saratoga) معاهدة تحالف (Treaty of Alliance) مع فرنسا (France) ممكنة. فقد خسرت فرنسا أربع حروب أمام بريطانيا (Britain) في الثمانين سنة الماضية، وهي متعطشة للانتقام. ويجب على الكونغرس أن يقرر هل يتحالف مع فرنسا. ماذا ستختار؟","Make the alliance: ask France to join the war":"اعقد التحالف: اطلب من فرنسا أن تنضم إلى الحرب","No alliance: keep fighting with our own army":"لا تحالف: واصل القتال بجيشنا وحده","The Treaty of Alliance with France was made in 1778. Norton calls the victory at Saratoga a strategic turning point because it made this treaty possible.":"عُقدت معاهدة التحالف (Treaty of Alliance) مع فرنسا (France) عام 1778. ويصف نورتن (Norton) النصر في ساراتوغا (Saratoga) بأنه نقطة تحول استراتيجية لأنه جعل هذه المعاهدة ممكنة.","In 1779, Spain also joined the war against Britain. Spain was not a great friend of the Americans, but it wanted to hurt Great Britain. Spain’s help was much smaller than France’s.":"وفي عام 1779، انضمت إسبانيا (Spain) أيضًا إلى الحرب ضد بريطانيا (Great Britain). ولم تكن إسبانيا صديقة كبيرة للأمريكيين، لكنها أرادت إضعاف بريطانيا. وكانت مساعدة إسبانيا أقل بكثير من مساعدة فرنسا.","At Yorktown in 1781, French warships under Admiral de Grasse forced the British navy to leave. That cut off Cornwallis’s army from food and supplies. French troops joined the Americans. On October 17, 1781, Cornwallis surrendered. Some 7,000 British soldiers laid down their weapons.":"وفي يوركتاون (Yorktown) عام 1781، أجبرت السفن الحربية الفرنسية بقيادة الأدميرال دي غراس (de Grasse) البحرية البريطانية على الانسحاب. فانقطع عن جيش كورنواليس (Cornwallis) الطعام والإمدادات. وانضمت القوات الفرنسية إلى الأمريكيين. وفي 17 أكتوبر 1781، استسلم كورنواليس. وألقى نحو 7,000 جندي بريطاني أسلحتهم.","Source: Norton Ch. 5, “Setbacks for the British (1777–1781)” (The Crucial Alliance with France; Yorktown and the Final Campaigns).":"المصدر: Norton، الفصل 5، <bdi dir=\"ltr\">“Setbacks for the British (1777–1781)”<\/bdi> (<bdi dir=\"ltr\">The Crucial Alliance with France; Yorktown and the Final Campaigns<\/bdi>).","1786: Make Religion Completely Free, or Keep the Old Way?":"1786: هل تجعل الدين حرًّا تمامًا أم تُبقي على الطريقة القديمة؟","It is 1786, and you are a leader in Virginia’s government. Before the Revolution, Americans tolerated people with other religious beliefs. They did not yet insist on complete freedom. In 1776 Virginia’s Declaration of Rights guaranteed the free exercise of religion.":"نحن في عام 1786، وأنت قائد في حكومة ولاية فرجينيا (Virginia). قبل الثورة، كان الأمريكيون يتسامحون مع أصحاب المعتقدات الدينية الأخرى. لكنهم لم يكونوا يصرّون بعد على حرية كاملة. وفي عام 1776، ضمن إعلان الحقوق في فرجينيا (Virginia Declaration of Rights) حرية ممارسة الدين.","Now Thomas Jefferson has written a bill for the state. It says that “no man shall be compelled” to attend or support any religious worship. It also says that all men shall be free to hold and argue for their own religious opinions.":"والآن كتب توماس جيفرسون (Thomas Jefferson) مشروع قانون للولاية. وهو ينص على أنه «لا يُجبَر أي إنسان» على حضور أي عبادة دينية أو دعمها. وينص أيضًا على أن جميع الناس أحرار في اعتناق آرائهم الدينية والدفاع عنها.","Some people say this is the next step in building a free republic. Others want to keep the old way. You must decide how to vote. What would you choose?":"يقول بعض الناس إن هذه هي الخطوة التالية في بناء جمهورية حرة. ويريد آخرون إبقاء الطريقة القديمة. وعليك أن تقرر كيف تصوّت. ماذا ستختار؟","Pass the bill: make religion completely free, with no one forced to support a church":"أقِرّ مشروع القانون: اجعل الدين حرًّا تمامًا، دون إجبار أحد على دعم كنيسة","Keep the old way: tolerate other beliefs, but stop short of complete freedom":"أبقِ على الطريقة القديمة: تسامح مع المعتقدات الأخرى، لكن دون الوصول إلى الحرية الكاملة","Virginia’s Statute of Religious Freedom (1786) was written by Thomas Jefferson. It said that “no man shall be compelled” to attend or support any religious worship. It also said that all men shall be free to hold and argue for their own opinions in matters of religion.":"كتب توماس جيفرسون (Thomas Jefferson) قانون فرجينيا للحرية الدينية (Virginia Statute of Religious Freedom) عام 1786. وجاء فيه أنه «لا يُجبَر أي إنسان» على حضور أي عبادة دينية أو دعمها. وجاء فيه أيضًا أن جميع الناس أحرار في اعتناق آرائهم في أمور الدين والدفاع عنها.","Norton says that before the Revolution Americans tolerated religious dissent, but after the Revolution they insisted on complete freedom of religion. This is the principle of separation of church and state.":"يقول نورتن (Norton) إنه قبل الثورة كان الأمريكيون يتسامحون مع الاختلاف الديني، لكنهم بعد الثورة أصروا على حرية دينية كاملة. وهذا هو مبدأ فصل الكنيسة عن الدولة.","Norton lists religious freedom, representative democracy, and an expanded right to vote for White men as dramatic changes. But Norton also says the war did not significantly change the social or political status of enslaved Black people or of Indigenous Americans.":"يعدّ نورتن (Norton) الحرية الدينية والديمقراطية التمثيلية وتوسيع حق التصويت للرجال البيض تغييرات كبيرة. لكنه يقول أيضًا إن الحرب لم تغيّر كثيرًا الوضع الاجتماعي أو السياسي للسود المستعبَدين أو للأمريكيين الأصليين.","Source: Norton Ch. 5, “War as an Engine of Change” (Freedom of Religion).":"المصدر: Norton، الفصل 5، <bdi dir=\"ltr\">“War as an Engine of Change”<\/bdi> (<bdi dir=\"ltr\">Freedom of Religion<\/bdi>).","The War Years: Run the Farm at Home, or Support the Army?":"سنوات الحرب: هل تدير المزرعة في البيت أم تدعم الجيش؟","It is during the war, and you are a woman living in the colonies. By law, women cannot vote or hold office. Few women have a chance to go to school. When a woman marries, her property becomes her husband’s.":"نحن في زمن الحرب، وأنت امرأة تعيشين في المستعمرات. بحسب القانون، لا يحق للنساء التصويت ولا تولي المناصب. وقليل من النساء تتاح لهن فرصة الذهاب إلى المدرسة. وحين تتزوج المرأة، تصبح ممتلكاتها ملكًا لزوجها.","Many men are away fighting, and the war has changed what women are needed to do. Some women manage farms and shops at home. Some publish newspapers. Others help the army. They handle supplies, carry messages, or work as “camp followers.” Camp followers support soldiers in exchange for daily rations.":"كثير من الرجال بعيدون يقاتلون، وقد غيّرت الحرب ما يُطلب من النساء. فبعض النساء يدرن المزارع والمتاجر في البيت. وبعضهن ينشرن الصحف. وأخريات يساعدن الجيش. فهن يتولين الإمدادات، أو ينقلن الرسائل، أو يعملن «تابعات للمعسكر» (camp followers). والتابعات للمعسكر يساعدن الجنود مقابل حصص غذائية يومية.","At Valley Forge, some twelve-year-old soldiers were with their mothers. The army needs help, and so does your family. What would you choose?":"وفي فالي فورج (Valley Forge)، كان بعض الجنود الذين بعمر اثنتي عشرة سنة مع أمهاتهم. فالجيش يحتاج إلى مساعدة، وأسرتك كذلك. ماذا ستختارين؟","Stay home: run the farm or business and keep the family going":"ابقَي في البيت: أدِيري المزرعة أو العمل وأبقي الأسرة قائمة","Support the army: handle supplies, carry messages, or help soldiers in camp":"ادعمي الجيش: تولَّي الإمدادات، أو انقلي الرسائل، أو ساعدي الجنود في المعسكر","Women did both. Norton says the Revolution gave women, free and enslaved, chances to broaden their social roles. They handled supplies, served as messengers or spies, and worked as camp followers. White women in particular managed farms, published newspapers, and sometimes served as soldiers or spies.":"قامت النساء بالأمرين معًا. يقول نورتن (Norton) إن الثورة أتاحت للنساء، الحرائر والمستعبَدات، فرصًا لتوسيع أدوارهن في المجتمع. فقد تولين الإمدادات، وعملن رسولات أو جاسوسات، وعملن تابعات للمعسكر (camp followers). وعلى وجه الخصوص، أدارت النساء البيضاوات المزارع، ونشرن الصحف، وخدمن أحيانًا جنديات أو جاسوسات.","But the changes had limits. Norton says women could not vote or hold office, few had a formal education, and a married woman’s property became her husband’s. Norton also says the limits of equality became even more evident after the war.":"لكن التغييرات كانت لها حدود. يقول نورتن (Norton) إن النساء لم يكن يحق لهن التصويت ولا تولي المناصب، وقليل منهن حصل على تعليم رسمي، وصارت ممتلكات المرأة المتزوجة ملكًا لزوجها. ويقول نورتن أيضًا إن حدود المساواة ازدادت وضوحًا بعد الحرب.","The war affected other groups in different ways. About 5,000 African Americans fought on the Patriot side. The British and their allies had 15,000 to 20,000 people of African descent. Several hundred thousand enslaved people, mostly in the South, used the war’s disruption to seize their freedom. Indigenous people had no role in the peace talks, and the Treaty of Paris gave away their lands.":"أثرت الحرب في الجماعات الأخرى بطرق مختلفة. فقد قاتل نحو 5,000 أمريكي من أصل أفريقي في صف الوطنيين. وكان لدى البريطانيين وحلفائهم من 15,000 إلى 20,000 شخص من أصل أفريقي. واستغل عدة مئات الآلاف من المستعبَدين، ومعظمهم في الجنوب، اضطراب الحرب لينالوا حريتهم. ولم يكن للشعوب الأصلية أي دور في محادثات السلام، وقد تنازلت معاهدة باريس (Treaty of Paris) عن أراضيهم.","Source: Norton Ch. 5, “Equality and Its Limits” (The Status of Women; Southern Backlash; Indigenous Americans Are Besieged).":"المصدر: Norton، الفصل 5، <bdi dir=\"ltr\">“Equality and Its Limits”<\/bdi> (<bdi dir=\"ltr\">The Status of Women; Southern Backlash; Indigenous Americans Are Besieged<\/bdi>).","You chose: Join the Patriots: break away from Britain to protect liberty":"اخترت: انضم إلى الوطنيين: انفصل عن بريطانيا لحماية الحرية","Chosen, not locked in yet: Join the Patriots: break away from Britain to protect liberty":"تم الاختيار ولم يتم التثبيت بعد: انضم إلى الوطنيين: انفصل عن بريطانيا لحماية الحرية","You chose: Stay loyal: remain under the king and Britain":"اخترت: ابقَ وفيًّا: ابقَ تحت حكم الملك وبريطانيا","Chosen, not locked in yet: Stay loyal: remain under the king and Britain":"تم الاختيار ولم يتم التثبيت بعد: ابقَ وفيًّا: ابقَ تحت حكم الملك وبريطانيا","You chose: Attack: cross the icy Delaware River and surprise the enemy at Trenton":"اخترت: هاجم: اعبر نهر ديلاوير (Delaware) المتجمد وفاجئ العدو في ترينتون (Trenton)","Chosen, not locked in yet: Attack: cross the icy Delaware River and surprise the enemy at Trenton":"تم الاختيار ولم يتم التثبيت بعد: هاجم: اعبر نهر ديلاوير (Delaware) المتجمد وفاجئ العدو في ترينتون (Trenton)","You chose: Stay defensive: protect the small army and wait for a safer chance":"اخترت: ابقَ في الدفاع: احمِ الجيش الصغير وانتظر فرصة أكثر أمانًا","Chosen, not locked in yet: Stay defensive: protect the small army and wait for a safer chance":"تم الاختيار ولم يتم التثبيت بعد: ابقَ في الدفاع: احمِ الجيش الصغير وانتظر فرصة أكثر أمانًا","You chose: Make the alliance: ask France to join the war":"اخترت: اعقد التحالف: اطلب من فرنسا أن تنضم إلى الحرب","Chosen, not locked in yet: Make the alliance: ask France to join the war":"تم الاختيار ولم يتم التثبيت بعد: اعقد التحالف: اطلب من فرنسا أن تنضم إلى الحرب","You chose: No alliance: keep fighting with our own army":"اخترت: لا تحالف: واصل القتال بجيشنا وحده","Chosen, not locked in yet: No alliance: keep fighting with our own army":"تم الاختيار ولم يتم التثبيت بعد: لا تحالف: واصل القتال بجيشنا وحده","You chose: Pass the bill: make religion completely free, with no one forced to support a church":"اخترت: أقِرّ مشروع القانون: اجعل الدين حرًّا تمامًا، دون إجبار أحد على دعم كنيسة","Chosen, not locked in yet: Pass the bill: make religion completely free, with no one forced to support a church":"تم الاختيار ولم يتم التثبيت بعد: أقِرّ مشروع القانون: اجعل الدين حرًّا تمامًا، دون إجبار أحد على دعم كنيسة","You chose: Keep the old way: tolerate other beliefs, but stop short of complete freedom":"اخترت: أبقِ على الطريقة القديمة: تسامح مع المعتقدات الأخرى، لكن دون الوصول إلى الحرية الكاملة","Chosen, not locked in yet: Keep the old way: tolerate other beliefs, but stop short of complete freedom":"تم الاختيار ولم يتم التثبيت بعد: أبقِ على الطريقة القديمة: تسامح مع المعتقدات الأخرى، لكن دون الوصول إلى الحرية الكاملة","You chose: Stay home: run the farm or business and keep the family going":"اخترت: ابقَي في البيت: أدِيري المزرعة أو العمل وأبقي الأسرة قائمة","Chosen, not locked in yet: Stay home: run the farm or business and keep the family going":"تم الاختيار ولم يتم التثبيت بعد: ابقَي في البيت: أدِيري المزرعة أو العمل وأبقي الأسرة قائمة","You chose: Support the army: handle supplies, carry messages, or help soldiers in camp":"اخترت: ادعمي الجيش: تولَّي الإمدادات، أو انقلي الرسائل، أو ساعدي الجنود في المعسكر","Chosen, not locked in yet: Support the army: handle supplies, carry messages, or help soldiers in camp":"تم الاختيار ولم يتم التثبيت بعد: ادعمي الجيش: تولَّي الإمدادات، أو انقلي الرسائل، أو ساعدي الجنود في المعسكر","UNIT 1 · COLONIES, REVOLUTION, AND CONSTITUTION | CPUSH | DANIEL GARZA, M.A.":"الوحدة 1 · المستعمرات والثورة والدستور | CPUSH | DANIEL GARZA, M.A.","<b>How to work.<\/b> People in history faced hard choices. Here are five. There is no right or wrong choice. Your job is to understand why people chose what they did.":"<b>طريقة العمل.<\/b> واجه الناس في التاريخ خيارات صعبة. وهذه خمسة منها. لا يوجد خيار صحيح أو خاطئ. مهمتك أن تفهم لماذا اختار الناس ما اختاروه.","All five dilemmas are locked in. Nice work.":"تم تثبيت المعضلات الخمس. عمل جيد.","Lock in all five dilemmas to finish.":"ثبّت إجابات المعضلات الخمس لتنهي.","Would you rather...":"ماذا تفضّل؟...","Read “You are there.”":"اقرأ «أنت هناك».","Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”":"لماذا اخترت هذا؟ استخدم معلومة واحدة على الأقل من الدرس. جرّب: «اخترت هذا لأن... ومن المعلومات...»","Your choices":"اختياراتك","Ready. Tap Lock in to see what happened.":"جاهز. اضغط «تثبيت» لترى ما حدث.","Everything is done. Tap Finished to download your file.":"اكتمل كل شيء. اضغط «انتهيت» لتنزيل ملفك.","Tap the choice you would make.":"اضغط على الخيار الذي ستختاره.","Lock in my answer":"تثبيت إجابتي","Type the other side’s best reason here...":"اكتب هنا أفضل سبب للطرف الآخر...","Counter-Argument":"حجة مضادة","What really happened":"ما حدث فعلًا","What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”":"ما أفضل سبب قد يقدّمه شخص من الطرف الآخر؟ اكتبه كما سيقوله هو. جرّب: «شخص اختار الطرف الآخر سيقول...»","Type your reason here...":"اكتب سببك هنا...","Write your reason. Use at least one fact from the lesson.":"اكتب سببك. استخدم معلومة واحدة على الأقل من الدرس.","That file does not look like a Would You Rather progress file. Try again.":"هذا الملف لا يبدو ملف تقدم لنشاط «ماذا تفضّل؟». حاول مرة أخرى.","Would You Rather":"ماذا تفضّل؟","Locked in. Read what really happened below.":"تم التثبيت. اقرأ في الأسفل ما حدث فعلًا.","You are there":"أنت هناك","Choose one":"اختر واحدًا","Tap <b>Lock in my answer<\/b> to see what really happened.":"اضغط <b>تثبيت إجابتي<\/b> لترى ما حدث فعلًا.","Fill in both boxes to unlock the next step.":"املأ المربعين للانتقال إلى الخطوة التالية.","Edit my answer":"تعديل إجابتي","The end":"النهاية","Write a Counter-Argument: the best reason someone on the other side would give.":"اكتب حجة مضادة: أفضل سبب قد يقدّمه شخص من الطرف الآخر.","Your work saves on this device as you type. Use <b>Save Progress<\/b> at the bottom to download a backup file, and <b>Load Progress<\/b> to continue later.":"يُحفظ عملك على هذا الجهاز أثناء الكتابة. استخدم زر <b>حفظ التقدم<\/b> في الأسفل لتنزيل نسخة احتياطية، وزر <b>تحميل التقدم<\/b> لتكمل لاحقًا.","Not answered yet":"لم تتم الإجابة بعد","Here is a summary of the choices you made.":"هذا ملخص للخيارات التي اخترتها.","Your reason":"سببك"},"patterns":[{"re":"^Still needed: first name, last name, and period\\.$","es":"Todavía falta: nombre, apellido y período.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة."},{"re":"^(\\d+) of (\\d+) dilemmas locked in$","es":"$1 de $2 decisiones confirmadas","ar":"عدد المعضلات المثبّتة: $1 من $2"},{"re":"^Still needed: first name, last name, and period; 1 dilemma to lock in\\.$","es":"Todavía falta: nombre, apellido y período; 1 decisión por confirmar.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة؛ معضلة واحدة تحتاج إلى تثبيت."},{"re":"^Still needed: first name, last name, and period; (\\d+) dilemmas to lock in\\.$","es":"Todavía falta: nombre, apellido y período; $1 decisiones por confirmar.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة؛ عدد المعضلات التي تحتاج إلى تثبيت: $1."},{"re":"^Still needed: first name, last name, and period\\.$","es":"Todavía falta: nombre, apellido y período.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة."},{"re":"^Still needed: 1 dilemma to lock in\\.$","es":"Todavía falta: 1 decisión por confirmar.","ar":"ما زال ناقصًا: معضلة واحدة تحتاج إلى تثبيت."},{"re":"^Still needed: (\\d+) dilemmas to lock in\\.$","es":"Todavía falta: $1 decisiones por confirmar.","ar":"ما زال ناقصًا: عدد المعضلات التي تحتاج إلى تثبيت: $1."},{"re":"^Done! Your file (\\S+) downloaded\\. Upload it to Canvas\\.$","es":"¡Listo! Se descargó tu archivo $1. Súbelo a Canvas.","ar":"أحسنت! تم تنزيل هذا الملف: <bdi dir=\"ltr\" style=\"display:block\">$1<\/bdi> ارفع هذا الملف إلى Canvas."}]}</script>
+<script>
+/* Supplement language switch (English / Espanol / Arabic). Works on pages whose text is rendered by JS:
+   a MutationObserver translates text as it appears. Data: <script type="application/json" id="sp-i18n">
+   {"langs":["en","es","ar"],"default":"en","es":{englishHTML:translation},"ar":{...},"patterns":[{"re":"^(\\d+) of (\\d+)$","es":"$1 de $2","ar":"..."}]}
+   Keys are the English text exactly as it sits in the page (innerHTML, spaces collapsed).
+   Helpers: spSeen() english strings seen so far; spMissing() strings with no translation in the current language;
+   spSetLang(l); spTr(s) translate a string (used for confirm/alert); spAscii(s) plain-ASCII name for file names. */
+(function () {
+  var node = document.getElementById('sp-i18n');
+  var D = node ? JSON.parse(node.textContent) : { langs: ['en'], patterns: [] };
+  var INLINE = { B:1,I:1,EM:1,STRONG:1,SPAN:1,A:1,BR:1,SMALL:1,SUP:1,SUB:1,U:1,MARK:1,BDI:1,TSPAN:1,CODE:1 };
+  var SKIP = 'script,style,textarea,input,.sp-lang,.sp-nt,[translate="no"]';
+  var WORD = /[A-Za-z\u00C0-\u024F\u0600-\u06FF]{2}|e\.g\./;
+  var LANG = 'en', REC = new WeakMap(), SEEN = {}, MISS = {};
+  (D.patterns || []).forEach(function (p) { try { p._re = new RegExp(p.re); } catch (e) {} });
+  function norm(s) { return String(s).replace(/\s+/g, ' ').trim(); }
+  function tr(src) {
+    if (LANG === 'en') return null;
+    var t = D[LANG] && D[LANG][src];
+    if (t) return t;
+    var P = D.patterns || [];
+    for (var i = 0; i < P.length; i++) {
+      var m = P[i]._re && P[i]._re.exec(src);
+      if (m && P[i][LANG]) return P[i][LANG].replace(/\$(\d+)/g, function (_, n) { return m[+n] || ''; });
+    }
+    return null;
+  }
+  window.spTr = function (s) { var t = tr(norm(s)); return t ? t.replace(/<[^>]+>/g, '') : s; };
+  function isInline(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling)
+      if (c.nodeType === 1 && (!INLINE[c.tagName.toUpperCase()] || c.matches(SKIP))) return false;
+    return true;
+  }
+  function directText(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling) if (c.nodeType === 3 && WORD.test(c.nodeValue)) return true;
+    return false;
+  }
+  function cur(s) { return s.nodeType === 1 ? s.innerHTML : s.nodeValue; }
+  function put(s, v) { if (s.nodeType === 1) s.innerHTML = v; else s.nodeValue = v; }
+  function handle(s) {
+    var r = REC.get(s), c = cur(s);
+    if (!(r && c === r.wrote)) { r = { en: c, wrote: c }; REC.set(s, r); }
+    var src = norm(r.en), target = r.en;
+    if (WORD.test(src)) {
+      SEEN[src] = 1;
+      if (LANG !== 'en') {
+        var t = tr(src);
+        if (t) {
+          target = s.nodeType === 1 ? t : (r.en.match(/^\s*/)[0] + t + r.en.match(/\s*$/)[0]);
+          delete MISS[src];
+        } else MISS[src] = 1;
+      }
+    }
+    if (c !== target) put(s, target);
+    r.wrote = cur(s);
+  }
+  var ATTRS = ['placeholder', 'alt', 'aria-label', 'title'];
+  function attrs(root) {
+    var els = root.querySelectorAll ? root.querySelectorAll('[placeholder],[alt],[aria-label],[title]') : [];
+    var list = [].slice.call(els); if (root.matches && root.matches('[placeholder],[alt],[aria-label],[title]')) list.push(root);
+    list.forEach(function (el) {
+      if (el.closest && el.closest('.sp-lang,.sp-nt,[translate="no"],script,style')) return;
+      var rec = el.__spa || (el.__spa = {});
+      ATTRS.forEach(function (a) {
+        var v = el.getAttribute(a); if (v == null) return;
+        var r = rec[a];
+        if (!(r && v === r.wrote)) { r = rec[a] = { en: v, wrote: v }; }
+        var src = norm(r.en); if (!WORD.test(src)) return;
+        SEEN[src] = 1;
+        var t = LANG === 'en' ? null : tr(src);
+        if (LANG !== 'en' && !t) MISS[src] = 1;
+        var target = t ? t.replace(/<[^>]+>/g, '') : r.en;
+        if (v !== target) el.setAttribute(a, target);
+        r.wrote = el.getAttribute(a);
+      });
+    });
+  }
+  function walk(root) {
+    if (root.nodeType === 3) { if (WORD.test(root.nodeValue) && !(root.parentNode && root.parentNode.closest && root.parentNode.closest(SKIP))) handle(root); return; }
+    if (root.nodeType !== 1) return;
+    (function w(el) {
+      if (el.matches(SKIP)) return;
+      if (el !== document.body && directText(el) && isInline(el)) { handle(el); return; }
+      for (var c = el.firstChild; c; c = c.nextSibling) {
+        if (c.nodeType === 1) w(c); else if (c.nodeType === 3 && WORD.test(c.nodeValue)) handle(c);
+      }
+    })(root);
+    attrs(root);
+  }
+  var TITLE = { en: document.title, wrote: document.title };
+  function title() {
+    if (document.title !== TITLE.wrote) TITLE = { en: document.title, wrote: document.title };
+    var t = LANG === 'en' ? null : tr(norm(TITLE.en));
+    document.title = t ? t.replace(/<[^>]+>/g, '') : TITLE.en; TITLE.wrote = document.title;
+  }
+  function inl(e) { return e.nodeType === 1 && !!INLINE[e.tagName.toUpperCase()]; }
+  var mo = new MutationObserver(function (muts) {
+    var todo = [];
+    muts.forEach(function (m) {
+      if (m.type === 'childList') { for (var i = 0; i < m.addedNodes.length; i++) todo.push(m.addedNodes[i]); todo.push(m.target); }
+      else todo.push(m.target);
+    });
+    todo.forEach(function (n) {
+      var el = n.nodeType === 1 ? n : n.parentNode;
+      if (!el || el.nodeType !== 1 || !document.body.contains(el)) return;
+      while (el !== document.body && el.parentNode && el.parentNode.nodeType === 1 && inl(el) && inl(el.parentNode)) el = el.parentNode;
+      if (el.parentNode && el.parentNode.nodeType === 1 && inl(el.parentNode) && el.parentNode !== document.body) el = el.parentNode;
+      walk(el);
+    });
+    mo.takeRecords();
+  });
+  var AR = { 'ا':'a','أ':'a','إ':'i','آ':'a','ب':'b','ت':'t','ث':'th','ج':'j','ح':'h','خ':'kh','د':'d','ذ':'dh','ر':'r','ز':'z','س':'s','ش':'sh','ص':'s','ض':'d','ط':'t','ظ':'z','ع':'a','غ':'gh','ف':'f','ق':'q','ك':'k','ل':'l','م':'m','ن':'n','ه':'h','و':'w','ي':'y','ى':'a','ة':'a','ئ':'y','ؤ':'w' };
+  window.spAscii = function (s) {
+    s = String(s); if (s.normalize) s = s.normalize('NFD').replace(/[̀-ًͯ-ٰٟ]/g, '');
+    return s.replace(/[ء-ي]/g, function (c) { return AR[c] !== undefined ? AR[c] : ''; }).replace(/ñ/g, 'n').replace(/Ñ/g, 'N');
+  };
+  window.spSeen = function () { return Object.keys(SEEN); };
+  window.spMissing = function () { return Object.keys(MISS); };
+  window.spLang = function () { return LANG; };
+  window.spSetLang = function (l) {
+    if ((D.langs || ['en']).indexOf(l) < 0) l = 'en';
+    LANG = l; MISS = {};
+    var h = document.documentElement; h.lang = l; h.dir = l === 'ar' ? 'rtl' : 'ltr';
+    mo.disconnect(); walk(document.body); title(); mo.takeRecords();
+    mo.observe(document.body, { childList: true, subtree: true, characterData: true });
+    document.querySelectorAll('.sp-lang button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === l)); });
+    try { localStorage.setItem('sp_lang', l); } catch (e) {}
+    try { var u = new URL(location.href); if (l === 'en') u.searchParams.delete('lang'); else u.searchParams.set('lang', l); history.replaceState(null, '', u.toString()); } catch (e) {}
+    try { document.dispatchEvent(new CustomEvent('splangchange', { detail: l })); } catch (e) {}
+  };
+  var _c = window.confirm, _a = window.alert;
+  window.confirm = function (m) { return _c.call(window, window.spTr(m)); };
+  window.alert = function (m) { return _a.call(window, window.spTr(m)); };
+  document.querySelectorAll('.sp-lang button').forEach(function (b) { b.addEventListener('click', function () { window.spSetLang(b.getAttribute('data-lang')); }); });
+  var start = D['default'] || 'en';
+  try { start = new URL(location.href).searchParams.get('lang') || localStorage.getItem('sp_lang') || start; } catch (e) {}
+  window.spSetLang(start);
+})();
+
+</script><!--/sp-i18n-->
+</body></html>

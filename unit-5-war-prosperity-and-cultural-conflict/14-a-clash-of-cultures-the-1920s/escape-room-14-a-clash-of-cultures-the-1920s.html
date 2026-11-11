@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Escape Room 14 · A Clash of Cultures - The 1920s</title>
+<style>
+:root{--bg:#481E27;--txt:#F4EBED;--a1:#692D3A;--a2:#4BCAD2;--hl:#8EDCE1;--glass:rgba(244,235,237,.07);--glassb:rgba(244,235,237,.2);--dim:#D9C3C8;--ok:#8FD3A8}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#58283A 0%,#481E27 60%) fixed;background-color:var(--bg);color:var(--txt);font:17px/1.55 "Segoe UI",system-ui,-apple-system,Verdana,sans-serif;min-height:100vh}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px 40px}
+.glass{background:var(--glass);border:1px solid var(--glassb);border-radius:16px;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+header.hero{padding:30px 0 12px;border-bottom:3px solid var(--a2)}
+.eyebrow{font-size:13px;letter-spacing:.16em;font-weight:700;color:var(--hl)}
+h1{margin:.15em 0 .05em;font-size:clamp(28px,6vw,40px);line-height:1.12}
+.sub{margin:0;font-weight:600;color:var(--dim)}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 4px}
+.meta label{flex:1 1 170px;font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--dim)}
+input[type=text],textarea,select{display:block;width:100%;margin-top:4px;padding:10px 12px;border:1px solid var(--glassb);border-radius:10px;background:rgba(36,15,20,.55);color:var(--txt);font:inherit;font-size:16px}
+input[type=text]:focus,textarea:focus,select:focus,button:focus-visible{outline:3px solid var(--hl);outline-offset:1px}
+input.bad{border-color:var(--a2);box-shadow:0 0 0 2px var(--a2)}
+textarea{min-height:120px;resize:vertical}
+.howto{margin:14px 0;padding:14px 16px;font-size:16px}
+.howto ol{margin:6px 0 0;padding-left:22px}
+.scene{margin:14px 0;padding:8px;text-align:center}
+.scene svg{width:100%;height:auto;display:block;border-radius:12px}
+.bar{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;padding:8px 12px;margin:10px 0;font-weight:700;font-size:15px;background:rgba(72,30,39,.92);border:1px solid var(--glassb);border-radius:12px}
+.bar span b{color:var(--hl)}
+.btn{font:inherit;font-size:16px;font-weight:700;padding:11px 18px;border-radius:12px;border:2px solid var(--hl);background:transparent;color:var(--txt);cursor:pointer;min-height:44px}
+.btn:hover{background:rgba(142,220,225,.18)}
+.btn.primary{background:var(--hl);color:#481E27;border-color:var(--hl)}
+.btn.primary:hover{background:#B6EBEF}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.btn.small{padding:8px 14px;font-size:15px;min-height:40px}
+.intro{padding:20px;text-align:center}
+.intro p{margin:.4em 0}
+.lock{margin:12px 0;overflow:hidden}
+.lock>button.lh{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:12px;width:100%;padding:14px 16px;cursor:pointer}
+.lock>button.lh:focus-visible{outline:3px solid var(--hl);outline-offset:-3px}
+.lock.locked>button.lh{cursor:not-allowed;opacity:.55}
+.lk{flex:none;width:44px;height:44px}
+.lk .sh{transition:transform .5s cubic-bezier(.3,1.6,.5,1);transform-origin:center}
+.lock.solved .lk .sh{transform:translateY(-6px) rotate(-30deg);transform-origin:10px 14px}
+.lock.solved .lk .bd{fill:var(--hl)}
+.lt{flex:1}
+.lt small{display:block;font-size:12px;letter-spacing:.12em;font-weight:700;color:var(--hl)}
+.lt strong{font-size:19px}
+.dg{flex:none;min-width:42px;height:42px;border-radius:10px;border:2px solid var(--hl);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;background:rgba(36,15,20,.55)}
+.lb{padding:0 16px 16px;display:none}
+.lock.open .lb{display:block}
+.objline{font-size:14px;color:var(--dim);margin:0 0 10px}
+.card{background:rgba(244,235,237,.1);border-left:6px solid var(--a2);border-radius:10px;padding:12px 14px;margin:8px 0 12px}
+.card h4{margin:0 0 4px;font-size:13px;letter-spacing:.12em;color:var(--hl)}
+.card p{margin:.3em 0}
+.card .src{font-size:13px;color:var(--dim)}
+.prompt{font-weight:700;margin:10px 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0}
+.chip{font:inherit;font-size:16px;padding:10px 14px;border-radius:12px;border:2px solid var(--glassb);background:rgba(36,15,20,.55);color:var(--txt);cursor:pointer;min-height:44px;text-align:left}
+.chip.sel{border-color:var(--hl);background:rgba(142,220,225,.2)}
+.chip .n{display:inline-block;min-width:24px;height:24px;line-height:24px;border-radius:12px;background:var(--hl);color:#481E27;font-weight:800;text-align:center;margin-right:8px}
+.mrow{margin:8px 0}
+.mrow label{font-weight:700;display:block}
+fieldset{border:1px solid var(--glassb);border-radius:10px;margin:8px 0;padding:8px 12px}
+legend{font-weight:700;padding:0 6px}
+.opt{display:flex;align-items:center;gap:10px;padding:6px 0;min-height:40px;cursor:pointer}
+.opt input{width:22px;height:22px;accent-color:#8EDCE1;flex:none}
+.cipher{font:700 24px/1.3 "Courier New",monospace;letter-spacing:.14em;background:rgba(36,15,20,.65);padding:12px;border-radius:10px;border:1px dashed var(--hl);word-break:break-word;text-align:center}
+.key{display:grid;grid-template-columns:repeat(13,1fr);gap:2px;margin:10px 0;font:700 14px/1.2 "Courier New",monospace;text-align:center}
+.key div{padding:3px 0;border-radius:4px;background:rgba(244,235,237,.08)}
+.key .c{color:var(--hl)}
+.scr{font:800 30px/1.2 "Courier New",monospace;letter-spacing:.3em;text-align:center;background:rgba(36,15,20,.65);padding:10px;border-radius:10px;border:1px dashed var(--hl)}
+.row{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0;align-items:center}
+.fb{margin:8px 0;padding:10px 12px;border-radius:10px;display:none;font-weight:600}
+.fb.show{display:block}
+.fb.nudge{background:rgba(75,202,210,.18);border:1px solid var(--a2)}
+.fb.good{background:rgba(143,211,168,.16);border:1px solid var(--ok);color:#DDF5E6}
+.hints{margin:6px 0}
+.hint{background:rgba(142,220,225,.14);border:1px dashed var(--hl);border-radius:10px;padding:8px 12px;margin:6px 0;font-size:16px}
+.hint b{color:var(--hl)}
+.exit{margin:16px 0;padding:18px;text-align:center}
+.exit.locked{opacity:.55}
+.exit h2,.esc h2,.debrief h2{margin:.1em 0 .3em}
+.codebox{display:flex;justify-content:center;gap:8px;margin:12px 0}
+.codebox input{width:52px;height:60px;text-align:center;font:800 30px "Courier New",monospace;padding:0;margin:0}
+.esc{margin:16px 0;padding:22px;text-align:center;display:none;border:2px solid var(--hl)}
+.esc.show{display:block}
+.esc .big{overflow-wrap:anywhere;font-size:clamp(30px,9vw,64px);font-weight:900;letter-spacing:.14em;color:var(--hl);text-shadow:0 0 24px rgba(142,220,225,.6);animation:pop .8s cubic-bezier(.3,1.6,.5,1)}
+.esc .time{font-size:26px;font-weight:800}
+.debrief{margin:16px 0;padding:16px}
+.actions{margin:16px 0;padding:16px}
+.status{font-weight:700;margin-bottom:10px}
+.msg{display:none;margin-top:10px;padding:10px 12px;border-radius:10px;background:rgba(143,211,168,.16);border:1px solid var(--ok)}
+.msg.err{background:rgba(75,202,210,.2);border-color:var(--a2)}
+.link{all:unset;cursor:pointer;color:var(--dim);text-decoration:underline;font-size:14px;margin-top:10px;display:inline-block}
+.link:focus-visible{outline:3px solid var(--hl)}
+footer{text-align:center;font-size:12px;letter-spacing:.1em;font-weight:700;color:var(--dim);padding:20px 8px 30px;border-top:1px solid var(--glassb);margin-top:20px}
+.ennote{margin:.4em 0 0;font-size:14px;font-weight:700;color:var(--dim)}
+.exit .ennote{text-align:center}
+.hidden{display:none!important}.lock,.exit,.esc{scroll-margin-top:64px}
+.pop{animation:pop .7s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pop{0%{transform:scale(.2);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes tap{0%,100%{transform:rotate(0)}50%{transform:rotate(9deg)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.shake{animation:shake .35s}
+.wheel{transform-box:view-box;transform-origin:276px 86px}
+.wheel.spin{animation:tap .5s ease-in-out 3}
+.plock .sh{transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
+.plock.open .sh{transform:translateY(-7px)}
+.plock.open .bd{fill:#8EDCE1}
+#door{transform-origin:150px 20px;transition:transform 1.4s ease-in-out}
+.escaped #door{transform:scaleX(.1)}
+#glow{opacity:.15;transition:opacity 1.4s}
+.escaped #glow{opacity:1}
+html[dir="rtl"] .chip{text-align:right}
+html[dir="rtl"] .chip .n{margin-right:0;margin-left:8px}
+html[dir="rtl"] .card{border-left:0;border-right:6px solid var(--a2)}
+html[dir="rtl"] .howto ol{padding-left:0;padding-right:22px}
+html[dir="rtl"] .esc,html[dir="rtl"] .exit,html[dir="rtl"] .intro{text-align:center}
+html[dir="rtl"] .cipher,html[dir="rtl"] .scr,html[dir="rtl"] .key{direction:ltr}
+html[dir="rtl"] .scr{letter-spacing:.3em!important}
+html[dir="rtl"] .cipher{letter-spacing:.14em!important}
+html[dir="rtl"] .key{letter-spacing:0!important}
+html[dir="rtl"] .card .src{direction:ltr;text-align:left}
+html[dir="rtl"] .hint,html[dir="rtl"] .fb,html[dir="rtl"] .msg,html[dir="rtl"] .objline{text-align:start}
+html[dir="rtl"] .lock>button.lh{text-align:start}
+html[dir="rtl"] .lb,html[dir="rtl"] .actions{text-align:start}
+html[dir="rtl"] .bar{direction:rtl}
+html[dir="rtl"] .tt{unicode-bidi:plaintext}
+@media(max-width:520px){body{font-size:16px}.chip{width:100%}.key{font-size:12px;gap:1px}.codebox input{width:46px;height:54px}.dg{min-width:38px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{.bar,.actions button{display:none}}
+/*sp-i18n-css*/
+.sp-lang-bar{display:flex;justify-content:flex-end;padding:8px 12px 0;position:relative;z-index:5}
+.sp-lang{display:inline-flex;gap:2px;padding:3px;border-radius:10px;background:rgba(255,255,255,.88);border:1px solid rgba(0,0,0,.18);font-family:system-ui,"Segoe UI",Tahoma,Arial,sans-serif}
+.sp-lang button{border:0;background:transparent;color:#222;font:600 13px/1 system-ui,"Segoe UI",Tahoma,Arial,sans-serif;padding:7px 11px;border-radius:7px;cursor:pointer}
+.sp-lang button[aria-pressed="true"]{background:#222;color:#fff}
+.sp-lang button:focus-visible{outline:3px solid #2a6df4;outline-offset:1px}
+textarea,input,select{unicode-bidi:plaintext}
+html[lang="ar"] body,html[lang="ar"] button,html[lang="ar"] textarea,html[lang="ar"] input,html[lang="ar"] select{font-family:"Segoe UI",Tahoma,"Noto Sans Arabic","Arial",system-ui,sans-serif}
+html[lang="ar"] body{line-height:1.8}
+html[lang="ar"] *{letter-spacing:0!important}
+html[dir="rtl"] textarea,html[dir="rtl"] input{text-align:start}
+@media print{.sp-lang-bar{display:none}}
+/*/sp-i18n-css*/
+</style>
+</head>
+<body>
+<!--sp-bar--><div class="sp-lang-bar"><div class="sp-lang" role="group" aria-label="Language / Idioma / اللغة"><button type="button" data-lang="en" lang="en" aria-pressed="true">English</button><button type="button" data-lang="es" lang="es" aria-pressed="false">Español</button><button type="button" data-lang="ar" lang="ar" aria-pressed="false">العربية</button></div></div><!--/sp-bar-->
+
+<div class="wrap">
+<header class="hero">
+  <div class="eyebrow">1903-1928</div>
+  <h1>Escape the Radio Studio</h1>
+  <p class="sub">A Clash of Cultures - The 1920s</p>
+  <div class="meta">
+    <label>FIRST NAME *<input id="f_first" type="text" autocomplete="given-name"></label>
+    <label>LAST NAME *<input id="f_last" type="text" autocomplete="family-name"></label>
+    <label>PERIOD *<input id="f_period" type="text" inputmode="numeric" maxlength="12" placeholder="e.g. 3"></label>
+  </div>
+</header>
+
+<div class="howto glass"><b>How to escape:</b>
+<ol>
+<li>Open each lock in order. Read the <b>Clue Card</b>. The answer is in the card.</li>
+<li>Solve the puzzle to open the lock and reveal one digit.</li>
+<li>If you get stuck, press <b>Hint</b>. Hints are free, but your teacher can see how many you used.</li>
+<li>Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.</li>
+</ol></div>
+
+<div class="scene glass" id="scene">
+<svg viewBox="0 0 600 270" role="img" aria-label="A 1920s radio studio at night. On the left, a standing microphone and a record player on a table, with sound-proofing panels on the wall behind. On the right, a clock hangs above a tube radio on a table, with signal waves above the radio. The studio door has an ON AIR sign and five padlocks in a row. Under each padlock is a window for one digit of the exit code.">
+<defs>
+<pattern id="brick" width="40" height="270" patternUnits="userSpaceOnUse"><rect width="40" height="270" fill="#35161D"/><path d="M0 0V270" stroke="#F4EBED" stroke-opacity=".12" fill="none"/><path d="M20 0V270" stroke="#F4EBED" stroke-opacity=".05" fill="none"/></pattern>
+<radialGradient id="glowg" cx="50%" cy="50%" r="60%"><stop offset="0" stop-color="#F4EBED"/><stop offset="1" stop-color="#8EDCE1"/></radialGradient>
+</defs>
+<rect width="600" height="270" fill="url(#brick)"/>
+<rect y="236" width="600" height="34" fill="#2A1117"/>
+<g stroke="#D9C3C8" stroke-opacity=".35" stroke-width="2"><path d="M0 248H600M0 260H600"/><path d="M60 236V248M180 236V248M300 236V248M420 236V248M540 236V248M120 248V260M240 248V260M360 248V260M480 248V260M600 248V260"/></g>
+<g stroke="#D9C3C8" stroke-opacity=".5" stroke-width="2" fill="none"><path d="M0 14Q75 30 150 18"/><path d="M450 18Q525 30 600 14"/></g>
+<g fill="#2A1117" stroke="#D9C3C8" stroke-opacity=".35"><rect x="12" y="44" width="36" height="52" rx="3"/><rect x="56" y="44" width="36" height="52" rx="3"/><rect x="100" y="44" width="36" height="52" rx="3"/></g>
+<g stroke="#8EDCE1" stroke-opacity=".3" stroke-width="2"><path d="M18 54H42M18 62H42M18 70H42M18 78H42M18 86H42M62 54H86M62 62H86M62 70H86M62 78H86M62 86H86M106 54H130M106 62H130M106 70H130M106 78H130M106 86H130"/></g>
+<g><rect x="30" y="196" width="108" height="10" rx="3" fill="#8EDCE1"/><path d="M40 206V236M128 206V236" stroke="#8EDCE1" stroke-width="6"/>
+<rect x="42" y="176" width="84" height="20" rx="3" fill="#692D3A" stroke="#8EDCE1" stroke-width="2"/><ellipse cx="80" cy="176" rx="34" ry="7" fill="#240F14" stroke="#F4EBED" stroke-opacity=".7"/><ellipse cx="80" cy="176" rx="11" ry="2.6" fill="#4BCAD2"/><path d="M108 168L92 175" stroke="#F4EBED" stroke-width="3" stroke-linecap="round"/><circle cx="110" cy="167" r="3.5" fill="#8EDCE1"/>
+<circle cx="52" cy="188" r="3" fill="#4BCAD2"/><circle cx="62" cy="188" r="3" fill="#F4EBED"/></g>
+<g><ellipse cx="38" cy="233" rx="18" ry="4" fill="#8EDCE1"/><path d="M38 233V150" stroke="#8EDCE1" stroke-width="5"/><path d="M26 150Q26 168 38 168Q50 168 50 150" fill="none" stroke="#8EDCE1" stroke-width="3"/>
+<rect x="26" y="108" width="24" height="42" rx="12" fill="#35161D" stroke="#F4EBED" stroke-width="3"/><path d="M30 118H46M30 126H46M30 134H46M30 142H46" stroke="#F4EBED" stroke-opacity=".55" stroke-width="2"/></g>
+<g><circle cx="500" cy="62" r="22" fill="#240F14" stroke="#8EDCE1" stroke-width="3"/><circle cx="500" cy="62" r="16" fill="#F4EBED" fill-opacity=".1"/>
+<path d="M500 48V52M500 72V76M486 62H490M510 62H514" stroke="#F4EBED" stroke-width="2"/><path d="M500 62V52M500 62L508 66" stroke="#4BCAD2" stroke-width="3" stroke-linecap="round"/><circle cx="500" cy="62" r="2.5" fill="#8EDCE1"/></g>
+<g stroke="#4BCAD2" stroke-width="3" stroke-linecap="round" fill="none"><path d="M505 116Q520 104 535 116"/><path d="M497 108Q520 90 543 108"/><path d="M489 100Q520 76 551 100" stroke-opacity=".6"/></g>
+<g><rect x="468" y="206" width="108" height="10" rx="3" fill="#8EDCE1"/><path d="M478 216V236M566 216V236" stroke="#8EDCE1" stroke-width="6"/>
+<path d="M476 206V160Q476 128 522 128Q568 128 568 160V206Z" fill="#35161D" stroke="#8EDCE1" stroke-width="3"/>
+<path d="M492 190V150Q492 140 522 140Q552 140 552 150V190Z" fill="#692D3A" stroke="#F4EBED" stroke-opacity=".5"/><path d="M500 150V190M508 146V190M516 144V190M524 144V190M532 144V190M540 146V190M548 150V190" stroke="#F4EBED" stroke-opacity=".25" stroke-width="2"/>
+<circle cx="500" cy="198" r="4" fill="#4BCAD2"/><circle cx="522" cy="198" r="4" fill="#F4EBED"/><circle cx="544" cy="198" r="4" fill="#4BCAD2"/></g>
+<rect id="glow" x="150" y="20" width="300" height="216" rx="10" fill="url(#glowg)"/>
+<g id="door">
+<rect x="150" y="20" width="300" height="216" rx="10" fill="#692D3A" stroke="#8EDCE1" stroke-width="3"/>
+<circle cx="164" cy="34" r="4" fill="#8EDCE1"/><circle cx="436" cy="34" r="4" fill="#8EDCE1"/><circle cx="164" cy="222" r="4" fill="#8EDCE1"/><circle cx="436" cy="222" r="4" fill="#8EDCE1"/>
+<rect x="210" y="30" width="180" height="26" rx="4" fill="#240F14" stroke="#F4EBED" stroke-opacity=".7"/>
+<text x="300" y="48" text-anchor="middle" font-size="13" letter-spacing="3" font-weight="700" fill="#F4EBED">ON AIR</text>
+<rect x="262" y="90" width="76" height="8" rx="3" fill="#481E27"/>
+<circle cx="276" cy="86" r="4" fill="#F4EBED"/>
+<g class="wheel" id="wheel"><path d="M276 86L328 80" stroke="#F4EBED" stroke-width="4" stroke-linecap="round"/><circle cx="330" cy="80" r="6" fill="#4BCAD2"/></g>
+<rect x="170" y="106" width="260" height="8" rx="3" fill="#481E27"/>
+<g id="plocks"></g>
+<text x="300" y="228" text-anchor="middle" direction="ltr" font-size="11" letter-spacing="3" font-weight="700" fill="#F4EBED">1920 - 1929</text>
+</g>
+</svg>
+</div>
+
+<div class="intro glass" id="intro">
+  <h2 style="margin:.1em 0">You are locked in the radio studio.</h2>
+  <p>The radio station went off the air for the night and the engineer locked up the studio. Old microphones and records from the 1920s sit in the room. The door has <b>5 locks</b>. Each lock matches one big idea from Lesson 14. Solve them all to find the <b>5-digit exit code</b>.</p>
+  <p>The clock starts when you press the button. Most students finish in about 20 minutes.</p>
+  <p><button class="btn primary" id="startBtn">Enter the Radio Studio</button></p>
+</div>
+
+<div id="game" class="hidden">
+  <div class="bar" id="bar" aria-live="off"><span><span>Time</span> <b id="tm">00:00</b></span><span><span>Locks</span> <b id="lc">0</b>/5</span><span><span>Hints used</span> <b id="hc">0</b></span></div>
+  <div id="locks"></div>
+
+  <section class="exit glass locked" id="exit" aria-label="Exit door">
+    <div class="eyebrow">THE EXIT DOOR</div>
+    <h2>Type the exit code</h2>
+    <p id="exitNote">Open all 5 locks first. The digits go in order: Lock 1 first.</p>
+    <div class="codebox" id="codebox" dir="ltr"></div>
+    <p class="ennote">Type the answer in English. Use the digits 0-9.</p>
+    <div class="row" style="justify-content:center"><button class="btn primary" id="codeBtn" disabled>Open the Door</button></div>
+    <div class="fb" id="codefb"></div>
+  </section>
+
+  <section class="esc glass" id="esc" aria-live="polite">
+    <div class="big">ESCAPED</div>
+    <p class="time"><span>Your time:</span> <span id="escTime">00:00</span></p>
+    <p id="escSum"></p>
+    <p>One last step: write your Debrief below.</p>
+  </section>
+
+  <section class="debrief glass" id="debrief">
+    <div class="eyebrow">DEBRIEF</div>
+    <h2>Which lock was hardest, and what did you learn that you did not know before?</h2>
+    <p style="margin:.2em 0;color:var(--dim)">Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.</p>
+    <textarea id="debriefText" aria-label="Debrief" placeholder="Type your answer here..."></textarea>
+  </section>
+
+  <section class="actions glass" id="actions">
+    <div class="status" id="status"></div>
+    <div class="row">
+      <button class="btn" id="saveBtn">Save Progress</button>
+      <button class="btn" id="loadBtn">Load Progress</button>
+      <input type="file" id="loadFile" accept=".json,application/json" hidden>
+      <button class="btn primary" id="finishBtn">Finished — Download File to Submit</button>
+    </div>
+    <div class="msg" id="msg" role="status"></div>
+    <button class="link" id="reset">Clear all my work and start over</button>
+  </section>
+</div>
+
+<div class="actions glass hidden" id="loadOnly" style="margin-top:12px"><button class="btn" id="loadBtn0">Load Progress</button> <span style="color:var(--dim)">Have a saved file? Load it to continue.</span></div>
+
+<footer>UNIT 5 · WAR, PROSPERITY, AND CULTURAL CONFLICT | CPUSH | DANIEL GARZA, M.A.</footer>
+</div>
+
+<script type="application/json" id="er-data">{"salt": "L14esc:", "exitHash": "e00fb2b8d1b9e1b43c50", "locks": [{"n": 1, "key": "lock1_radio_cabinet", "title": "The Radio Cabinet", "obj": "1", "objLabel": "CORE OBJECTIVE 1", "objText": "Core Objective 1: Assess the impact of the consumer culture that emerged in America during the 1920s and explain the factors that contributed to its growth.", "type": "pick", "card": "<p>After a short recession in 1920–1921, Americans enjoyed the fastest economic growth in history, and a powerful “consumer culture” took hold. Advertising grew, and installment buying let people “buy now, pay later,” so consumer debt almost tripled. Electricity spread: in 1920 only 35 percent of homes had it, but by 1930, 68 percent did. The number of families with a radio jumped from 60,000 in 1922 to nearly 14 million in 1930, and movie attendance averaged 80 million people a week. Ford cut the price of the Model T from $850 in 1908 to $290 in 1924, and by 1929 there were more than 23 million cars. Mostly urban middle- and upper-class families enjoyed these new conveniences.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 22, “A “New Era” of Consumption” (pp. 948-952).", "prompt": "Pick the correct answer for all three questions.", "qs": [{"id": "i", "q": "Which new way of paying helped people buy more products in the 1920s?", "opts": [{"id": "a", "label": "Higher tariffs on imported goods"}, {"id": "b", "label": "Installment buying (“buy now, pay later”)"}, {"id": "c", "label": "Rationing"}, {"id": "d", "label": "Union contracts"}]}, {"id": "e", "q": "In 1930, what share of homes had electricity?", "opts": [{"id": "a", "label": "35 percent"}, {"id": "b", "label": "50 percent"}, {"id": "c", "label": "68 percent"}, {"id": "d", "label": "90 percent"}]}, {"id": "m", "q": "What happened to the price of Ford’s Model T between 1908 and 1924?", "opts": [{"id": "a", "label": "It rose from $290 to $850"}, {"id": "b", "label": "It stayed at $850"}, {"id": "c", "label": "It fell from $850 to $290"}, {"id": "d", "label": "It fell from $850 to $85"}]}], "hints": ["Each answer is in the Clue Card. Look for “buy now, pay later,” for the share of homes with electricity in 1930, and for the Model T prices.", "Installment buying let people pay over time. In 1930, 68 percent of homes had electricity. The Model T price fell from $850 to $290."], "nudge": "Not quite. At least one answer is off. Re-read the Clue Card for how people paid, how many homes had electricity in 1930, and the Model T price.", "entries": ["9b49cc918370a2af0c828"], "id": "lock1_radio_cabinet"}, {"n": 2, "key": "lock2_record_player", "title": "The Record Player", "obj": "2", "objLabel": "CORE OBJECTIVE 2", "objText": "Core Objective 2: Describe other major new social and cultural trends and movements that became prominent during the 1920s and explain how they challenged traditional standards and customs.", "type": "match", "card": "<p>Writer F. Scott Fitzgerald called the 1920s the “Jazz Age,” a rebellious and spontaneous decade, and jazz spread from New Orleans to Harlem in New York City and to Chicago’s South Side. Young women called flappers bobbed their hair, wore short skirts, and drove cars, and critics were furious. As the Great Migration continued, African Americans found new freedoms in northern cities, and the Harlem Renaissance, the nation’s first Black literary and artistic movement, was a powerful assertion of Black creativity and dignity. Racially restrictive covenants, which were legal agreements not to sell homes to poor or non-White buyers, were still common. When the Sweet family moved into a Detroit neighborhood in September 1925, a mob of White residents greeted them, and the NAACP hired Clarence Darrow to defend them. The Sweets won, but housing discrimination continued for decades.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 22, “The “Jazz Age”” (pp. 954-957, 960, 964-965).", "prompt": "Match each term to the best description. Use the Clue Card.", "terms": [{"id": "ja", "label": "Jazz Age"}, {"id": "fl", "label": "Flappers"}, {"id": "rc", "label": "Restrictive covenants"}, {"id": "hr", "label": "Harlem Renaissance"}], "descs": [{"id": "b", "label": "Young women who bobbed their hair, wore shorter skirts, and defied the usual standards"}, {"id": "d", "label": "Agreements in which neighbors promised not to sell their homes to poor or non-White buyers"}, {"id": "c", "label": "The nation’s first Black literary and artistic movement"}, {"id": "a", "label": "The name F. Scott Fitzgerald gave to the rebellious, spontaneous 1920s"}], "hints": ["Two terms name movements or eras (Jazz Age, Harlem Renaissance). One names a group of young women. One names a kind of housing agreement.", "Fitzgerald named the Jazz Age. Flappers bobbed their hair. The Harlem Renaissance was Black literary and artistic. Restrictive covenants were about who could buy homes."], "nudge": "Not quite. Check each match against the Clue Card. Which one are you least sure about?", "entries": ["ea035b8ecaddaad2b4e28"], "id": "lock2_record_player"}, {"n": 3, "key": "lock3_code_book", "title": "The Code Book", "obj": "3", "objLabel": "CORE OBJECTIVE 3", "objText": "Core Objective 3: Explain what “modernism” means in intellectual and artistic terms and how the modernist movement influenced American culture in the early twentieth century.", "type": "decode", "shift": 5, "cipher": "RTIJWSNXR", "card": "<p>This movement began in the 1890s in the capitals of Europe, such as London, Paris, Berlin, and Vienna. By the 1910s it had spread to the United States, especially New York City and Chicago. Its artists and writers rebelled against what they saw as a repressive, conventional Christian morality and searched for new ways to express themselves. Albert Einstein’s discoveries led many people to believe there were no absolute standards or fixed points of reference. Poet Ezra Pound gave the movement its slogan: “Make It New!” The Armory Show of 1913 was the most controversial event in the history of American art, and one critic said the movement was “nothing else than the total destruction of the art of painting.”<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 22, “The Modernist Revolt” (pp. 965-969).", "prompt": "The Clue Card describes a movement without naming it. A secret message names it. Each letter in the message was moved 5 steps forward in the alphabet. Decode it to name the movement.", "hints": ["The Clue Card describes the movement but does not name it. Use the decoder key to spell the name, one letter at a time.", "In the message, the letter R is really M, and the letter T is really O. The word has 9 letters and starts with M."], "nudge": "Not quite. Decode one letter at a time with the key, then check your spelling.", "entries": ["018305468ea96e1cdf710", "01b558fe68d94f4ea79f3", "01c352db2cae46fca2880", "027d8444cf6b1c0f4fe98", "0295459bac0a63fcee064", "03789b52716c80b81c812", "038de2290645851c040b2", "04021ee3f41fe558a15c4", "0431713ff298c74005de7", "0477dcaeb7fbdd3162746", "0598539e5afe9c3eadb05", "05f06c9789e162ce8e690", "05f522936c5c183bc7946", "060b3dd6cc442000447d0", "06a44cb217ce67fa4cd38", "0704088937596cd9ed403", "072c79681eeda7c8bd8e0", "077a4a23166d95fa99a78", "092e4cba86fe9f01fb349", "09e69ad2eee33b20d9544", "0a067b261a37e8f954fe0", "0a3321c7ea3013361eca3", "0a42ef9906c8272624ed3", "0ba70efd47fbffd4657d4", "0bc49677ebcbdb44e9a78", "0c0ecd5277e9c8890e2a0", "0d4d70e7df2b5bbf18037", "0d873ab052fd94a752122", "0e973329b745180782458", "0f013d47d371d8929ae00", "0fd1a80a8ae4dbc8ac108", "10e22cd727b3324a24ae2", "10f3afcb5f663a51df511", "116b4c33588c72bc1d582", "12696206b264cfd0a96d5", "13381f40a91b4e34d30f5", "138c3faec2984e1604387", "13bf9b79c6e20d1901858", "13f4640cb386bdfa0d092", "14cd1c0d88df4f09dfa54", "14d2c37cae4d2672a25b1", "155175df8d2b68501d992", "156cc2959b814c142ca02", "16ebc10d1063919c1a7e5", "1770870601559e1d5ca78", "17de313f415faec47a321", "1869983bc0ef671a7dc55", "18eea51249ae6c8ed4322", "199316216b82eec54e281", "1a5a5b9e492db3d2be6b6", "1a9fe8ec3237a76fc4295", "1aa1262d68336d2745618", "1bd3768aeb57216059673", "1bfdf6ced7fbe821fcfa3", "1c831554af20c4c719764", "1c8cce646eea3d8f54988", "1c9ff4f2aab359d2cc355", "1cb8207c8bf37fcd2f5e2", "1db01edb30b8e61dccc01", "1e85b8ab052ebe6c80c12", "1eb21293b0cc63979a681", "1ff5982cebfc68eaebfd6", "20cab74b3d25e1b64f201", "218edb11410f7152f0e17", "21ab30f186a66ed3f7f20", "2241ec462879efc1cb837", "226010e22b270621a70e9", "2331aaf9e7a8c77062b28", "239a3d66560e679abf228", "23f3aa2eaefbb4efa6263", "241e7eb2779a1ef43caf9", "25095d90a175f04dfeeb7", "25738d5456f005beffa71", "258f7ae1ce2b6ba20cdb5", "25a8ae46ff9e287367ad4", "261e8596fa1406bd9c179", "268d0a986630895831097", "273cfa81f96e3d22291c5", "276aaf73df4dba33bfcd9", "283a2f8fb581590d00a43", "29a908fa67dd6ef22e451", "2a6265f07160b35ba95e3", "2ac04babc8a856f2dc213", "2accc0af49759764346b2", "2b58cf6e1bb740d464599", "2c289b5af4e9f1eae1584", "2ca166052963bbca6b014", "2d61ccf412a48cfe8f375", "2e900a206abd957d33130", "2fab97a5aa788e5ffbc79", "300cfa066d53162ad8869", "3073a91578557ab03f5a6", "30c876d0801d382c6a558", "31e83dc06adaef90ef990", "31f4bb8c889b16ec9b083", "325b2e57517eb1212f330", "3294bc556150166d4b713", "32bbf719393b01da8c767", "333afe423366788f29ca9", "3359af98bf9551e931114", "33a9ee06fb5cd353c54e5", "340337b469455f0ad5bb2", "348cff5d0fc54a6fee9d0", "349dae231e1c933f0bf77", "35ab2467bcf7193bcacd3", "35efa08a0e30e305ab4c0", "36231ce8ca4d224b50ba6", "374e069216152b74f8b16", "38a95aa1e0baa9d456665", "3a01e132a70677c6a92a7", "3a51ac3f6c931a0677523", "3acbc5f4beec401e4f9c4", "3b2dae2de13920aa5a4f6", "3ba329fd437a1e2ae7415", "3baac773dd53695638ce3", "3bdf870f3097efee34721", "3ee596429e2053dde9d79", "3f6fff645d23e5b143e81", "40e93f191eb4baa0f0a27", "415087411c470f9b54649", "417f3aef38bda2de8b719", "426b847629384f7247b67", "42824ebc14c1d61a192f6", "4408e54515f191c4a2cb5", "44a0e98ddcb8e5425e594", "4529d0f8590e3abd6c5f6", "467716e222a9d473aa116", "467a53fa754373e67c8b9", "46a5482efa706aa5f6ba7", "46b1ea33c13d9e351b5b7", "474e57f2b05d6e097e316", "47c5d2b07b34c18e7a007", "47fee9f637194b9857249", "499cf388c18bc0279f4c9", "49a4e1099aae76eb85a48", "4ab6f6fa8096d9fc0ed04", "4aea17a454a9e74205056", "4b8c0bfa96d5f842010a6", "4b9b519bb6d6986175047", "4c272d87fa9a73ad023c4", "4c680866b643f68936326", "4ca8d23a73fa061760845", "4ce1bf4c77fe78566d730", "4d1288662f43188cc5780", "4e36b5fdcf5652ec2bfc8", "50f0c9a0b44552e800358", "515e6f10744b64f6be1b5", "51aa31a6d122005511221", "5202ac1b1ae8fb7b4b119", "52343023f045a04167997", "52975739c4f8de3be5611", "5341bfae6014df56a1617", "534b33410f81d391d7200", "53a85a7792221da6320a5", "53dd76701ef79205e8f63", "5421981e5b72622990f76", "556821b651f16108b7170", "55b0123da2b8938fdbb17", "560bde87c47290574c0f4", "563263333aa3f8439cc58", "56e104910172873b9de16", "56f161414b5279b303221", "57c0570f96ba4f1ad4d99", "57f2f4c88534a7b6c9a23", "58dbc4baebf5f9377a400", "595e19adae968f9e37785", "5a4b0b3398728823c8c84", "5a9d6e17cf448ec2a9ab8", "5bf0b7c16ce11508a1a31", "5c453eb673ac2c3284174", "5c4cf0233ee0832741a01", "5ce2efddb6e331382a5f3", "5d6e725fb95a0541df2f1", "5de00f1ff9169f7911ea2", "5dfd68b083186176c4bb0", "5e56a65a331feb35e8e51", "5eb94b75865571cecec22", "617443a4758b803881ac2", "61b963fa46e2757d7c250", "6253078dcbe59a84e7081", "6332c432480f207b7eb37", "637f0e8d6b3978b10eff6", "6392fa94ed33ebe4c04e3", "639cfb5619052d0ccc373", "63f4e6d32b942a00d3c94", "6452d73dbc56e8689fd25", "66af61eb8a900c14aa044", "66e5f386c76a092c6da09", "66f0081f9fc2deeeb0d27", "6728a542016e4be63be66", "68611e798c870ca018ec9", "68d1bf07108205bb98213", "69714e801a5a72feff3d4", "6a5239d5115426bd0c228", "6ad0343f7512597b0e772", "6b3c63074bcae691edd48", "6cca7c4425635a6b532c1", "6d508d8dfd95c925796e1", "6d79ad5110212e85610c5", "6ddf69d8d60d10d9d6c80", "6e2cacf8ca38773b5be97", "6e8e68fbf60797e0ab790", "6e98da844b6483bfa55f6", "6ea22a5d91baea858bb21", "6eb8bbda1d52ce7eefa43", "6edacd0083c9307686962", "6ee52e9abfdb9f4fe9fe6", "6f5001f6b20240bf44745", "6f7f198fa088cc2c41bc3", "6fcb8fcadf9fba4742ba3", "6ff97f90945e59a49ac11", "7074e2818bc59c4980421", "70a6982f4faf687ce1f85", "70ffda4edc3bbfc4e8745", "711f0ba7da92c1f4b5274", "713d1de9a87f1c5e399f8", "7199d632bcb951bd39be6", "7248e2bb9def7fe255037", "72ffd4c65a0d76f9e6204", "73eea91dd6e73ea58d554", "74196e7d752012c1c4ea5", "7443a804ca58136587029", "74bb421a2ce1838cfd621", "75a5aa8e06df2783fd607", "75cc29c44d02a762623c0", "75d1cd632e5aad949cf01", "76314e910ead127baf887", "768f484de58d24b997895", "77192a0a19d91c0bb27d8", "77870e029876aec3adc43", "78424101b0beb010abd78", "7892dab1870ac5d2706e9", "7970c0702692caa54f9b7", "7982c572a04c5f8141e40", "79e0acccc249f14a6ac34", "7a283e59d219f72fa99d1", "7b5626e39384884c48e44", "7b9dd6f68939c5aa97812", "7bc1e22ab17ddf973ab10", "7c37b3675ddff8cf62308", "7c457c66bbfef4ea55b95", "7ca565a58abb94ac34fd8", "7caab7f7f82e55820e0a9", "7cd0820bf2a7dc6ffb047", "7d71eda5a6933f68812b5", "7df16f1fc92858532a610", "7e6a7ee1102cc875d63d0", "7eb881cc1179ea7dab8a7", "807ba8bf2a69d17b6e133", "811c5ddf1c86d90161e19", "8125fac84c473fcc05b18", "82060328ca335d14ee123", "82286f2de7704dc3b8117", "82ca86dc69ea62c6aed50", "83bd8f8d5bf65f6eb4229", "8432a71c348289d48b830", "85cebda17a3c341b65f32", "867fe9f9a1c0fa2a1cd45", "86d497c5a12bed0820123", "879ae5aa2238a934f9513", "87deaaa1c106c7cbaa534", "8864d9135a5d6921a3870", "8908d5e77d61266520ca9", "89224bc684b473ff59278", "8a430621eeb7aafc0a529", "8be2732acb43129013cd2", "8bf5db278bbd8fd6d48d5", "8bfd15d4c2fde8d0d9d38", "8bfe7ae6a2aa249f0ed02", "8cb80b802d1e428e96343", "8d0e1f1a4b0cb5621bea8", "8e515ab5a95deed95e189", "8ed4660ab704572e16799", "8fbcb395b740db7a9a861", "8fe2912912cab42db0b04", "8fee02533b5dfb7b99a72", "9006a9d2f1f59554a5884", "90291de241a3ee941e7d8", "904ad524cd118124d91a7", "908e6d3ba3a814891fc05", "909dea5fc34fd8ebd5270", "91385d07fb5291db129b9", "9253e92c717387fc28231", "92bb4976ac730a6fe1ef0", "93641417480cd7d550339", "93967895eda60ed1f3861", "940994cde910e25e13fd7", "952f478b3f399b29b11b3", "96081b2ccf745c394c009", "960c1d4096ed916666a20", "9656a94f2e8771cde9ba2", "9705076cd2b2f83c2a887", "97250c74451cc9e30f841", "97ca58b21407516694d76", "98217d662579b21c973b4", "98a3e307e5eb180aeeba0", "98c87c34c5ba432681225", "98e21627d8ef1bb12a326", "990a94317b5a5d2ed4a35", "995713c20a15d71c00317", "9991298e0e97a73b9d2a7", "9996d3b717157c90dd889", "9bcb4475ecfc32c502e45", "9c875ddc9a686ba8baaf8", "9d4f8851f70a7c3f39032", "9d58322c10303658b5267", "9d63d9fe97b3bb12a2889", "9dfdd5654778d140ae206", "9e4f69f6d8aa1c4f31614", "9e9143372c7c5ad497e20", "9eec21e9c12acbc7cc628", "9ff2feec44bdc5b33e410", "9ffdb355b8c26c88e5f82", "a048d98d3912bbeeee579", "a07fb95c96579bcb8aff5", "a1960e8947b8b53c42b38", "a401464e49e20ab19bdb0", "a40a09d0c052b9ae08316", "a449c5d2f8ade6458a687", "a453bd4a1ebf5c58dba33", "a4d1f2ff6069617f93644", "a5bb72451fb72869136e8", "a645971e226a3e4d23456", "a671bb07a35b422d09275", "a6a0b3c322ce2751a1738", "a6f6a3619d7a77eb689a8", "a704aa252ec4a96dde123", "a76504b44b73ebc55dce8", "a935bb568617680e34f07", "a980ad17d844912732bd4", "aa747cfcf08744cb996b2", "aa8309070f3226c09e347", "aaa78aaeb890d42a2ea14", "ac80c52f6b03ccdfc3d44", "adb5f9af446bbc47a0058", "ae210a5118ea750aa8a33", "ae5f6098b4cd557bc19d6", "ae7fda2975fcbf444eb45", "aecc14671e9953648d650", "af07b1ae49059e98de455", "af980f23db1a4f6102cb7", "afdf9721e77af40261e98", "b004695f028c97a0ec2b4", "b20abc5a680ba61254680", "b25cb7f8bfd648d251806", "b2ef9561278b631198f23", "b31c8e1004117ecb2d739", "b38689e87918b33ed2c59", "b3c40cb9a78782803c502", "b587b6272963f9814b137", "b67df5313cf3a9d062432", "b69559dc5a9c76a2d6da3", "b825ad2513b79de78cc95", "b896f176c584ba257b604", "b8e4789dc4564ebc8f2b4", "b98086e1a894d45bb32e9", "b9de51053900d0b287412", "baf0587414034d237e242", "bbfce6d153c46725bf545", "bc639fef955651109e880", "bd05c88205897464ee8e3", "bdefbfe7411195d8d5168", "be0529cbb156abfad2517", "bf1951046ca40e3190f16", "c0395c0e410755d8028a3", "c05d497ee62d2c3f6eee2", "c0a5faf5fe313c27cb103", "c189f43faff0379fe1fa1", "c1a7a818d992dbf73a701", "c1d628732ae465a12e008", "c201db5c0dfc1797ad665", "c24cbd0919e1a65711607", "c2b1bf39814fc846cae23", "c2e29cf263af81a1add95", "c62c6768f1c18af96c221", "c7116edfe4d4fa9cd30d1", "c7276762bcada61604db3", "c7f6b8d1fe2cf513fb381", "c80d08628208049ca8ba4", "c828ee926774ac8c979e0", "c86c2649bae046364c124", "c888b95206fa11a817572", "c8f8c54793f9d950f5433", "c97705c6528ed5465ee54", "c99e7cc344a483ff0c8e3", "caf12837263f353e9e847", "cb51210b62a8097b898f4", "cba518094953c9890ce03", "cbb36cf35425ef5a14a88", "cc45f2d15a50526b59a75", "ccff4f63069a5ede3adb0", "cd88d0ac0069235f72081", "cda3d9031a5ad118c8744", "cdc7519759ba00c3470a5", "ce1207db6f5b3f3ad24c0", "ce8d8dc77a78aae232fb4", "cf8047f82138f14ad42f0", "cfa6d7a9944159260b294", "d0209d4a46c639d504ee1", "d06340f2e898739122a81", "d065bb795ce94d0105ef3", "d07dde936af1895d56753", "d0ff699ba3f0df1dd3241", "d46ed126012bfb917ed51", "d54810860b50ba74ce270", "d5c6297ea2dfba4d58c19", "d629f505cf108d9481701", "d62f53e93c2e885c05517", "d648f4ae509f23c85eef3", "d6534fdc36bde37bf42e8", "d72425b439b158d7d8b65", "d73511c13622f9a896851", "d75f1cb6489e665b9df36", "d89f2ff0f5f937ddc63f5", "d90dccb36913c43622478", "da268e198b8134ad94527", "da3fb58b60813a5e13906", "da9dd3f9ee59115fe0b13", "daa8dd6e5ee9bd1ae6af7", "db09fcffe26327cec7e05", "db640533da040b9ef8538", "db7a9ffefefa80fa98234", "dbc7de119b1db1bb6f574", "dcda86233e8e6c518aab1", "dcfc0b7cd8f4bfee9d016", "dd3045edaf6b8479b9089", "dd801327a9fb5ad3b2a45", "df0f1848a290b2c38d707", "df9d77e0e799d1937e406", "e0299193cb4a04ee68e63", "e061b122158dd5444d5a2", "e07de7b4f46721875f3b2", "e0fc30ea1bf845007cb61", "e1029d0e6b43304032eb3", "e2803a31d70f82685e542", "e2a9726c484686c83f7c7", "e2ccb55cff19b2e75b6a3", "e3425754a0c79926bf9e3", "e362279f6592bcf95f951", "e5520e29e5c50294454d6", "e59ca14e5c878b162bd73", "e62a620a28a33314cb470", "e64928eddc7f34dc1a372", "e69f8b5562b46512ceab8", "e72dc295b0ad835eab985", "e76b7319278b4b9a6b8e1", "e8814c9ef6af930bb05e0", "e8d90277e12524fe173b1", "ea73032665be3ea76af97", "ea8a78ac1af43d9b2f725", "eabf30110eb9ac2f1da84", "ec961e1716ecfb7c0e9e5", "ecfac7642a519d10641a8", "edf806e7dbe0bbfae9287", "ef25b4a2f457355f727f3", "ef7a43daa2dd7a243ac91", "f072f5d29952d6e1eb3a3", "f075b961db3e651da58c0", "f0ee856d17691a0764ca7", "f16a572b0a3507a859354", "f18b5a45aeb21934c75f9", "f1f1394fecb4830420235", "f2b591556a9f632d23817", "f2e4dba153e707c245566", "f31b8be307ba99b04a1c8", "f36245a3f948ff44244b7", "f3a32d990466374836475", "f44614036fe5286f55528", "f50dcded790ce3b81df41", "f51be8f364b2973ee11e9", "f622f2e9fd77beb540628", "f6eadee635428f380f749", "f6f31b865f7d748f6d3d2", "f7ba7da5238bba72ac297", "f7e7c8bbc544d9703faa1", "f884fcc6a035e2d988dd4", "f898a9c77293461caae94", "f9006f9b2c1033c452b11", "f91bfce51ca74260c4b98", "fa1b499976af3d254a136", "fa3f9e6bdfcc0a8578e33", "fa4dd9b4b778734853bd3", "fabb290ede1535e048377", "fb0c8e81e0ef415413ce6", "fc25ac69847d38bd22cf7", "fc2d54fb4c01ae762aa65", "fc4db81276ab237b718b0", "fc7430c37733bf1c4d456", "fda1179c62ad23f393006", "fdb2227cefa9518659f39", "fdd6fbab4bbbf3a9d7752", "fe963d73d5164b88d5e69", "ff3b2cdecb6c4477bc395", "ffcfcb7ea29f5228ff7e6"], "id": "lock3_code_book"}, {"n": 4, "key": "lock4_program_schedule", "title": "The Program Schedule", "obj": "4", "objLabel": "CORE OBJECTIVE 4", "objText": "Core Objective 4: Identify notable examples of reactionary conservatism during the decade and analyze their impact on government policies.", "type": "order", "card": "<p>Many Americans found the changes of the 1920s shocking, and nativism, which is prejudice against people who are not native-born, targeted Catholic and Jewish immigrants from southern and eastern Europe. The most violent reactionary movement was a revived Ku Klux Klan, which let only native-born White Protestants join. The Eighteenth Amendment, ratified on January 16, 1919, banned the manufacture, sale, and transportation of liquor, but Prohibition was not widely followed and it boosted police corruption and organized crime. On May 5, 1920, police arrested Italian immigrants Nicola Sacco and Bartolomeo Vanzetti, who called themselves anarchists, and they were executed in 1927, although people still debate their guilt. The Immigration Act of 1924 cut the quota to 2 percent of each nationality in the 1890 census and banned almost all immigrants from Asia. Fundamentalists insisted on the literal truth of the Bible and were troubled by the theory of evolution; in 1925, Tennessee outlawed teaching evolution in public schools, and teacher John Scopes was arrested.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 22, “The Reactionary Twenties” (pp. 972-980).", "prompt": "Tap the four events in the order they happened. Tap an event again to take it back.", "items": [{"id": "c", "label": "Congress passes the Immigration Act of 1924"}, {"id": "a", "label": "The Eighteenth Amendment is ratified"}, {"id": "d", "label": "John Scopes is arrested for teaching evolution"}, {"id": "b", "label": "Sacco and Vanzetti are arrested"}], "hints": ["Look for the years in the Clue Card: 1919, 1920, 1924, and 1925. Each event has its own year.", "The order is the Eighteenth Amendment, the arrest of Sacco and Vanzetti, the Immigration Act of 1924, then the arrest of John Scopes."], "nudge": "Not quite. Re-read the Clue Card and match each event to its year.", "entries": ["fe50926dc1f18b0a913e8"], "id": "lock4_program_schedule"}, {"n": 5, "key": "lock5_microphone", "title": "The Microphone", "obj": "5", "objLabel": "CORE OBJECTIVE 5", "objText": "Core Objective 5: Trace the Republican Party’s dominance of the federal government during the 1920s and analyze the extent to which its policies were a rejection of progressivism.", "type": "fill", "card": "<p>After the Great War, progressivism lost momentum at the national level, and conservative Republicans returned to power. Warren Harding promised the country a return to “normalcy,” and he won 16 million votes to 9 million for his Democratic opponent. Treasury Secretary Andrew Mellon convinced Congress to cut the top tax rate from 73 percent in 1921 to 24 percent by 1929, and the Supreme Court struck down a federal child-labor law and a minimum-wage law for women. Union membership fell from about 5 million in 1920 to 3.5 million in 1929. In the Teapot Dome Scandal, Interior Secretary Albert Fall secretly sold government oil and took huge bribes, and he became the first former cabinet official to go to prison for misconduct in office. President Calvin Coolidge said, “The chief business of the American people is business,” and Herbert Hoover won the 1928 election in a landslide.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 22, “Republican Resurgence” (pp. 983-994).", "prompt": "Fill in the blank using the Clue Card.", "sentence": "Warren Harding won the presidency by promising a return to “________.”", "scramble": "N  R  M  Y  C  L  A  O", "hints": ["Read the second sentence of the Clue Card. The missing word is in quotation marks.", "The word starts with N and ends with Y. It has 8 letters."], "nudge": "Not quite. Re-read the second sentence of the Clue Card. Use the scrambled letters to check your spelling.", "entries": ["01fc693674e329cca5fc2", "0394006712abe5e8a3ab5", "03f43a7612d6cb6ffc4e0", "05754635d0ab6e60db7c6", "05e412387e30a6d38e012", "06f8a6237c5c6d32fe732", "0705f291c34ff7aaeb5a5", "073b0698ab47c16df7d25", "0782e84a5071db2233c44", "0858c7db0d58f7bac1e27", "08afefa0f303cd7f42024", "08edc7154f67cace12a69", "0ba15306ec63e0ebd4fe1", "0bb23a068ee87555eb771", "0c7237ae6d93328776754", "0d647b666cacd97cb22e4", "0d66645c0157c73f52508", "0d837d91f39078b2c7a22", "0ee4d73e1f27402e595a7", "0f0cb6ec5a415de6ea3a3", "0f410f7f2467238ca2f00", "0fb7f04658dc73dc98ea6", "0ff193554be12338a1b36", "10abef839d0e0580a5e66", "111ce2dfab81939b02916", "1209dfac40fa25f648e96", "123e37472655fd1bcf1e0", "12f1a1daaedd74ac55262", "13a3468c97963fc9b3c46", "15037ab94103a3e0f0563", "154c6ebd1de6945ee0a35", "16115a4104549058eb858", "162026a0b5f2f8fc9a785", "17fa4e732881e8422b7c7", "185fee2572a6cd9058c46", "18d2af322055e8a8bde29", "1a7ba18090089132c2e01", "1acd21174bba34b4e07f0", "1acf830f6abf49d53a866", "1ca89821afd11e8afa423", "1cda7ac1e995fec271054", "1d6166865aaef2772dbb2", "1de205fb27e39ada061c6", "1e36168433869de609915", "1ebbaff6d4fa3db6d70c7", "1ef295375d39b7c961338", "1f6d689d80da1a1f247f1", "1fae9af5d5827aeccfdd9", "1fb39b25cd72bcafeaee2", "21c062060feae61850940", "2213e2ecd9201aab58567", "226718b88df53301d04c2", "23183b454a53a483f48e5", "25282aeba9aefc9f03d62", "25fd1fa415de6e7da4861", "262d5a569777c5fd4ac39", "266000b5a16a16777b7d3", "26b6f64cc0c9d24015171", "26eb6820d880429a1ae16", "26ec43502fdebfff15c98", "2760ca52cd9d8911116d6", "28443901dbb9708944370", "29129c89624b2aa134b29", "291dc38356d566905e4c3", "2a8924b53b285b1508a29", "2b3ff7a8964644d4d15b9", "2bc8515fa3dca4fe7dcb2", "2c6d8687ca023b4123f91", "2db91642c40554cad49d6", "2eb4142d4fd86c2023028", "2f086f2fa68d3ab366523", "30c9d806cb9c6a73af5a1", "31185dc80b1643089ba41", "31fbe2b2b49a16f0be340", "320949f039454cfc1a830", "3231d33a1fac866e793e8", "3320428d918e38bc9b6b2", "333817ea48cad3af7b6f3", "334008f0011bb2ea59064", "34f7d5b27c9d11cfd9031", "355027cafda8dc7cee1c1", "35e08ef774eeb4301cd41", "361fb61d306f30bbbcdd5", "375471d25f8ff744bb690", "37695f81389e17c8f3c33", "37f63393063a743736971", "38235e16706fc21ebf625", "3870cc74e9117f40f01d0", "395dd0ae308c454360681", "3a2953ba0a2b79c637261", "3a5a3d8f3d45a1ec82ac9", "3a5dbedda095e2d67ef89", "3ab1455f527c136c9a232", "3d90ccc1d734842371f04", "3de9b62537bb719576c06", "3f582dd48702c535f9965", "3fa12bb6c1c1c48a67626", "402f6bb8d5430fd93d797", "4103c0c44c81e270a6838", "410db76e7d963cf9aca47", "4175ffa3e04bd4d7ebdc1", "41f7da939c2c7933bbba3", "4236b222b2616e83fee18", "4292c291b9673bd866904", "430dd1d658ddef4f921a3", "435656ee67d8a12fb3f53", "43c0442b7c3399887e8a5", "44f36e94be5ef74826f99", "459d0fc8506ef4d8af761", "46fc89716eec4436df408", "474b30faac753ca3e7328", "47c9dc053af5e868b6775", "48c1966e3772c67402651", "498b75919a41a8f06f259", "49de7a723f325afa28dc6", "4aabec59d289235d12bc2", "4bcec00d52b36af1859e7", "4be6f3be48d74daec0b63", "4c165115ac0634093e3b6", "4c648d245d9e2856a93e3", "4cc9c978052fb42c46339", "4d7f8c679b27c7a9d8904", "4d9facdddd8180e9a7a50", "4fba46cc47497f0b25d91", "4fd4e89fca8cf67056c37", "50139cd964b314e163145", "50a01bce0022bcf037c87", "52db0189fc83786d90d94", "53821e8afd25efc42c7e5", "53d5c826347ff06cb2638", "54a26c821cbb3212c8f40", "54e8f481b629d3db8c0a7", "55ceefadeae2a6ecfa7c7", "56c2ff9c6002e208ec830", "574abf01e4a91df458ff9", "57caa764f89ca05dd9543", "58cbde142502efe555e09", "59068b6ce50b161f86813", "59bed2522108276b30811", "5a6c063bcb4abbc300f58", "5b9ea25e2301bd90a3114", "5cb86830f91e3932094e5", "5d25bc20e4fc4987f6bb7", "5d304718b4ffc0ae68e48", "5d9a7ee868d5dce1b3b78", "5ddbef90eae279d9506c0", "5ee8b9307234b8d228363", "6129f9c083149bae4c389", "6177363234c8e9c1b44b7", "62403917af1a503982726", "62cf9a11a7ed52f7ad159", "62f298c413bd6d313d4e3", "6305197e2b53fd0f5a686", "6348ac440e4c0bd9cdf86", "6501991b12c2eb083de76", "660bc240f4d16fe6230e0", "66649a49639897d0255d9", "6687ff93f91f28002b249", "66f498d6a74986aeed0c4", "6785bc9257e4194e76f54", "67af665a0ddbb06b2afc4", "67dc5c8197cac3f968331", "68795647dc60f57fc1909", "689dbf736f900fd38cba8", "68e2d5d9ce5bc994b1c80", "69a84c4fa383cd7718c49", "69b8b879a6ad5400c30e4", "6a5a2fcc9b883355cac96", "6b727db596958a16f1ee4", "6b73c246e0d6d43b5fcc4", "6b9dc782e880a8678e739", "6bdf5c62381cb08b706d3", "6c85dfd136886fdd44084", "6ca047c7265f8f3b10ba5", "6d16f0e8fb3d46d2b1785", "6e1ddb7870d806cb5c729", "6f7f1fb8845043b5a9a92", "700e20a8482cf1bc9b8c3", "702ad94c35f0987f8a223", "71b7619f31ba0a08a1314", "72fa82655744ce14263f0", "73017a042a750ae5e4596", "732013254cc86d9ebe4e6", "73f1f9d163a8cd07ee2a2", "73fabd69e747a29567741", "747d1dc856cfd9f624668", "74dcdf577cbfe80be9ee2", "75750c72a4f01883c9045", "7606c91342b46647b1bb3", "7629752c45e4d8a4c0d72", "768d62bca93b64bb04da6", "769aa4674d9967733d9f2", "77ac662815c3ea3d2fd94", "785f61b6eabda6f0e6341", "78a4436b44559d89fb2c2", "79b40aa56baea5d5648e2", "79ccc939e276ac6032f35", "7a4f6f0fe65c0585d29f3", "7adc33dac17c77c35abf0", "7d21a7a6020216fb2f059", "7d2cf8e268dc893a8e2c8", "7d3f6bc6d0a76e8723327", "7d5d5919486048b821835", "7d6ee1a919c696df404a0", "7d79968e514ce2c91bb91", "7e00088a21894a3ded242", "7f095689abd05a0fbd5f0", "7f94b098f8577aca3fa34", "7f9f59f7956af9c4a11e4", "7ff5315c4df692ea6df61", "8007c8391efd4b9106945", "804b30decde1fc7d2b617", "8131ebf7952b426df6619", "8323a47cbf7de6e616139", "83ac8ecc4e81eecb680f1", "848125f78de82baab32a1", "8558d42b458db62aaca35", "85cda2ab925134ce242a4", "870b6d7bcd3da016dc235", "88d77fb0f030220a3bec5", "8a2f36464b460cbf61ab8", "8a6ee3d95d908648bd3f2", "8a8c3948d97670267f981", "8ac891b6e0d67bc9acc20", "8adf488b55030dd493207", "8b213d32058a622add883", "8b9ea5178c7a7c18dad68", "8c08f106ff0e0a27c3e12", "8c1974d1745c2fbf9e836", "8c36c1d01f3483ae5c166", "8c931781ae83868456269", "8daa3faac14fb37ee3d86", "8df03e73d93057c9a50a7", "8e2a411444d7e4b616df4", "903a5947e88b43bc57c61", "903c78ff48136793b0966", "90a2efac37e491fcb53b9", "90f746c0261c5eb87c437", "911c82dd5cf14ea339288", "914f19a4a7f9cf60aade9", "91a684b3c44953102b7b9", "92440d406f0382868f667", "92cb0bfa68a910b8920c3", "9344c09828e47c567d1b6", "93b372e7cfe1830cf7369", "94323ce4f2607f006da60", "94fdb7a4e57ddf9bf6363", "951df2f900ddddead6af0", "9550d7f70b519c34ab183", "9572f0019a4b4b97bb4c1", "95fda85fd0686cbaa1463", "971fbffab2267e4549d37", "976560182693073a8e347", "97f38bc1008dec86b3d89", "98221020180e4efa1fd14", "991b1621d2849826066e8", "99c9319aca51305cb1841", "99cdbde368653f9f4ca58", "99f0ad050c02bb7b55df8", "9a2f0282238a44f4ed280", "9a9ba8241914ff06c4f96", "9ab57598526f0cdc99614", "9ade0399ec74b9818d751", "9c94d01c2a9d5cf20b8a2", "9c968769f39b116a78871", "9c9f902440c2f6a5d2e42", "9d6d6816031008b94de77", "9d882419e576aa189d330", "9f0127c5673ab3a4e0282", "9f07ab9019453a64f9128", "9f0c9797171657d0b2223", "9f3a6cae1b8c97ec0dec0", "a03281f4596d7875f6312", "a0d7db4f585cdf3d2d260", "a0e0a4d8078afe4b10cb8", "a164af304755cc8c62a58", "a28800c24ebb7c9ea3c35", "a3f0b958a2c3943d09c14", "a408e47e0fc049bc90159", "a4dd1416c7ce5f69cc433", "a83f0e6d3bfa23db60b03", "a8d3a98b9ed01b2524c34", "a9302b8bcc038d034e031", "a98155fb85b865ced4dc4", "a9b0957096da0cc31e643", "aaafbd22e844bf8195e89", "ab87564151071b809f854", "ab9d0b9a79eb140852463", "ac23a0e1b0e1bbb175bb9", "ac367e668af5b68ebaab5", "ac4896372c942a07658b8", "adb2b9306f5ed683a9634", "ae20064a72ba5c23b43e1", "b1d41801283784c7421f6", "b1f97bd84401f98e84c85", "b24e4f83ba4880cb8da88", "b3512adf7f99f82c65671", "b5aab84c6c83ea30b1742", "b7275ee9fc675387c5311", "b7416d6f62b423acd35c1", "b755440139a2e6e8d6458", "b84d86dca89331e5db614", "b8b86d3971a06527a5fa7", "b968999e75be8f6c7e1e1", "b9715a9667f9f161c02b4", "b9be3e971aa3d23c54019", "bda6034bbba0c16779f24", "bf14a10b3cf8b8f468466", "bf8beac644bb8ae7f2578", "bfad153346ccd0b27bed2", "c0378c07fc7309a93bdc4", "c082319723f7bde0e83c5", "c1038c4d93c52c86d3a00", "c26da21a75ecda2b16578", "c28e6650992d0b7891f36", "c2e02933694f22f6346c4", "c304305e703530d21cee8", "c3f1197b1b7d26be49366", "c47498bb8560635edcf76", "c5d736b5371708bb4bac2", "c6d7061fae873b10ce416", "c76905edba4e868094e08", "ca2be00d286e8b0695d19", "caddb62682b0fcdd8b7d2", "cb0320d3d95616463a5a9", "cbef40ae66ef32ac1a9a1", "ccba16e0eab13b1ddd014", "ccd2ee387723cbf39df43", "cd5505a322e4071046e43", "cdda33583d1c518ac0261", "ce22d2448e8e0ecea9c27", "cf1a36d8968657cae55a2", "cf5f436040c681d5e0ad6", "cfca87319a05a2326b125", "d0055cea4bb7d60905b21", "d01423d8f739bd2e5d704", "d0abcb8a4323543158441", "d0d428b95830e2e712fb1", "d2867eb67ae2b36c96bf7", "d367fafd471e527924449", "d3b44d2cf657150722f49", "d4508437699482b49b244", "d46e50356ba0baa6d78b9", "d5798d3fd6f441dc91c03", "d57e027b256027c2c2258", "d6b2d51abac110f3d4224", "d6fef1fd2872e4b1acc68", "d78311b08f2d4a1d12f21", "d7f7de1a8f73d0f3e1ff3", "d8263bbf7cd115391afa4", "d8cc4e0a9aab5138fc8b9", "d9123ef4b1928a2d8f3c9", "d953685ea3446535f64d6", "d954afea4161bbdf6e041", "d9eaddba1e3bac2e85a26", "da0300a1f7422e000c8f2", "dac08a2d73efdf1455bf4", "dad55d98ad34aea34a713", "db06df32fbdee79877a47", "db1665fc30bcf2b13d980", "dca3ea60a91ec01ce4ec9", "dcb1cd16664b63ac205e0", "dcc430a3340ae274e2006", "dcfab816ece1c186c32a9", "dea8ec84489559c5f71e4", "df3b946ca72cd6413d6a0", "df4148ad704d9b4c42750", "df5ee66ebce119d5061c7", "e000a6010133d9f2ea2a2", "e05f71db7e47ac60ccbe2", "e17be6d32f4fe156c3588", "e1875ce0a3336156b9c18", "e2f0690df200d34f254b8", "e450ca214569a26c48b59", "e45ee39f1c9c263182513", "e487a4218fa261e82d848", "e50eb53ed15ec6021eab9", "e5601af34dc4ff529e8a7", "e5eaaf1a16eb9a57446a4", "e693f682fffcabfa07fb0", "e6dce090ae09c8cf93e39", "e6ea7cefafa43beece374", "e86d4b2ae529363b277f6", "e8da69f194d3bf5bc9db6", "e906645b4d8302a8af9a4", "e9188eb0696042904bc37", "e951651b1c7b3699579e3", "e9a2987f33f7ae681f765", "e9e41e6e8368c030cfaa6", "ea22cbab90a0069099106", "ea35eeb0b178c54a5bf71", "ea9fb482122790b927af3", "eac555c332e664f12b6d1", "eb58d90476c33b9e20e96", "eb7b979be4fec28892277", "ec09cc0a226061f61cb73", "ec417be798e10e356fae2", "ed5fa5d3976998efaac81", "ed8a0e0f482482b8647e8", "edf821120c4ff893ebe70", "edf8a5309e86abc439297", "ee45076c02379cf427873", "ee49a0696c747f55bea64", "eedc4103cf91f8ea68661", "ef0b8648931a5f43bf9e1", "ef8bd479db5b252a0aa59", "efac08b1048ea1400d578", "f005a0e806757cf144a98", "f03cb4f7bd6a5e1ab9c30", "f1605bba9654eef7d4f38", "f1a5a6137cfce548497d9", "f21458294695618e551e3", "f315992c2813222ac02c3", "f3e15756078a301a7b868", "f3e246f2adc67692d71e2", "f4211208edc6087eeb0a0", "f45498d0d8dba2f6223a4", "f49dd8ddfa49af63490a0", "f50ffccf8204318683736", "f585bcaa1b1bbfbc06be5", "f5b4106ef9d30487a20d5", "f5e9dbbd6f1484a34e4b7", "f68a8f38e96f4f5205f53", "f7d68da39cd492b8b79b3", "f829df141ff458e0035d7", "f98a7f7bc180b0f257535", "f9c7545873265e51e2c02", "f9de44475e9896331ba59", "fab4d628764fb7bb795c6", "fb242c5ddbebaf2372cf6", "fc18f0cef0a8656322139", "fc3ea61583977494df950", "fd45ee3323ae3d40230a3", "fd5a3b2879ff5c5c78769", "fdc16e11b534ce2810053", "fdd31fa1432f57f873d17", "fdeda72ef919a658fa159", "fe3152a9032d2bc6f9884", "ff51b0e990feb8eeb8db1", "ff8dd4d0eb6f79c488970", "ffbfbd3fca3559b39e746", "fff6eb24524d4a751f535"], "id": "lock5_microphone"}]}</script>
+<script>
+function sha256(ascii){
+  function rightRotate(v,a){return (v>>>a)|(v<<(32-a))}
+  var mathPow=Math.pow,maxWord=mathPow(2,32),i,j,result='',words=[],bitLen=ascii.length*8;
+  var hash=sha256.h=sha256.h||[],k=sha256.k=sha256.k||[],pc=k.length,comp={};
+  for(var c=2;pc<64;c++){if(!comp[c]){for(i=0;i<313;i+=c)comp[i]=c;hash[pc]=(mathPow(c,.5)*maxWord)|0;k[pc++]=(mathPow(c,1/3)*maxWord)|0}}
+  ascii+='\x80';while(ascii.length%64-56)ascii+='\x00';
+  for(i=0;i<ascii.length;i++){j=ascii.charCodeAt(i);words[i>>2]|=j<<((3-i)%4)*8}
+  words[words.length]=((bitLen/maxWord)|0);words[words.length]=(bitLen);
+  for(j=0;j<words.length;){
+    var w=words.slice(j,j+=16),old=hash;hash=hash.slice(0,8);
+    for(i=0;i<64;i++){
+      var w15=w[i-15],w2=w[i-2],a=hash[0],e=hash[4];
+      var t1=hash[7]+(rightRotate(e,6)^rightRotate(e,11)^rightRotate(e,25))+((e&hash[5])^((~e)&hash[6]))+k[i]+(w[i]=(i<16)?w[i]:(w[i-16]+(rightRotate(w15,7)^rightRotate(w15,18)^(w15>>>3))+w[i-7]+(rightRotate(w2,17)^rightRotate(w2,19)^(w2>>>10)))|0);
+      var t2=(rightRotate(a,2)^rightRotate(a,13)^rightRotate(a,22))+((a&hash[1])^(a&hash[2])^(hash[1]&hash[2]));
+      hash=[(t1+t2)|0].concat(hash);hash[4]=(hash[4]+t1)|0;
+    }
+    for(i=0;i<8;i++)hash[i]=(hash[i]+old[i])|0;
+  }
+  for(i=0;i<8;i++)for(j=3;j+1;j--){var b=(hash[i]>>(j*8))&255;result+=((b<16)?0:'')+b.toString(16)}
+  return result;
+}
+function sha256u(s){return sha256(unescape(encodeURIComponent(s)))}
+
+(function(){
+  var PACKET='CPUSH_L14_ESCAPE';
+  var STORE='cpush_l14_escape-room_';
+  var D=JSON.parse(document.getElementById('er-data').textContent);
+  var $=function(i){return document.getElementById(i)};
+  var S;
+  var digits={};            // runtime only: lock n -> digit
+  var entries={};           // lock id -> {h20: maskedDigit}
+  var expanded={};
+  var lastTick=0,timer=null;
+
+  function squash(t){return String(t).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'')}
+  function h20(s){return sha256u(s).slice(0,20)}
+  D.locks.forEach(function(L){var m={};L.entries.forEach(function(e){m[e.slice(0,20)]=+e.slice(20)});entries[L.id]=m});
+
+  function checkLock(L,canon){
+    var salt=D.salt+L.n+':';
+    var h=h20(salt+canon),mk=entries[L.id][h];
+    if(mk===undefined)return null;
+    var m=parseInt(sha256u('m:'+salt+canon).slice(0,2),16)%10;
+    return (mk-m+10)%10;
+  }
+  function fresh(){
+    var o={first:'',last:'',period:'',started:false,elapsed:0,escaped:false,escapeMs:0,debrief:'',codeTries:0,locks:{}};
+    D.locks.forEach(function(L){o.locks[L.id]={solved:false,attempts:0,hints:0,guess:'',readable:''}});
+    return o;
+  }
+  function loadLocal(){var o=fresh();try{var r=JSON.parse(localStorage.getItem(STORE+'state')||'null');if(r)restore(o,r)}catch(e){}return o}
+  function persist(){try{localStorage.setItem(STORE+'state',JSON.stringify(snapshot()))}catch(e){}}
+
+  function totals(){
+    var t={locksSolved:0,attempts:0,hintsUsed:0,exitCodeAttempts:S.codeTries};
+    D.locks.forEach(function(L){var l=S.locks[L.id];if(l.solved)t.locksSolved++;t.attempts+=l.attempts;t.hintsUsed+=l.hints});
+    return t;
+  }
+  function fmt(ms){var s=Math.round(ms/1000),m=Math.floor(s/60);s=s%60;return (m<10?'0':'')+m+':'+(s<10?'0':'')+s}
+  function snapshot(){
+    var o={packet:PACKET,course:'CPUSH',lesson:14,assignment:'Escape Room (Lite)',version:1,saved:new Date().toISOString(),
+      student:{first:$('f_first').value.trim(),last:$('f_last').value.trim(),period:$('f_period').value.trim()},
+      status:S.escaped?'ESCAPED':'INCOMPLETE',escaped:S.escaped,
+      escapeTime:S.escaped?{ms:S.escapeMs,text:fmt(S.escapeMs)}:null,
+      totals:totals(),elapsedMs:Math.round(S.elapsed),started:S.started,locks:{},debrief:$('debriefText')?$('debriefText').value:S.debrief};
+    D.locks.forEach(function(L){var l=S.locks[L.id];
+      o.locks[L.key]={objective:L.obj,puzzleType:L.type,solved:l.solved,attempts:l.attempts,hintsUsed:l.hints,solvedWith:l.readable,solvedGuess:l.guess}});
+    return o;
+  }
+  function restore(o,r){
+    if(!r||typeof r!=='object')return false;
+    var st=r.student||{};
+    o.first=st.first||'';o.last=st.last||'';o.period=st.period||'';
+    o.started=!!r.started;o.elapsed=+r.elapsedMs||0;o.debrief=typeof r.debrief==='string'?r.debrief:'';
+    o.codeTries=(r.totals&&+r.totals.exitCodeAttempts)||0;
+    var allOk=true;
+    D.locks.forEach(function(L){
+      var src=(r.locks&&r.locks[L.key])||{},l=o.locks[L.id];
+      l.attempts=+src.attempts||0;l.hints=Math.min(+src.hintsUsed||0,L.hints.length+0);
+      if(src.hintsUsed>L.hints.length)l.hints=L.hints.length;
+      if(src.solved&&typeof src.solvedGuess==='string'){
+        var d=checkLock(L,src.solvedGuess);
+        if(d!==null){l.solved=true;l.guess=src.solvedGuess;l.readable=String(src.solvedWith||'');digits[L.n]=d}else allOk=false;
+      }else allOk=false;
+    });
+    if(r.escaped&&allOk&&r.escapeTime){o.escaped=true;o.escapeMs=+r.escapeTime.ms||0}
+    return true;
+  }
+
+  /* ---------- scene ---------- */
+  var NS='http://www.w3.org/2000/svg';
+  var XS=[210,255,300,345,390];
+  (function(){
+    var g=$('plocks'),h='';
+    XS.forEach(function(x,i){
+      h+='<g class="plock" id="pl'+(i+1)+'"><path class="sh" d="M'+(x-8)+' 124V114a8 8 0 0 1 16 0V124" fill="none" stroke="#F4EBED" stroke-width="4"/><rect class="bd" x="'+(x-15)+'" y="124" width="30" height="24" rx="4" fill="#4BCAD2"/><circle cx="'+x+'" cy="135" r="3" fill="#481E27"/></g>'+
+      '<rect x="'+(x-16)+'" y="158" width="32" height="36" rx="5" fill="#240F14" stroke="#8EDCE1"/><text id="dw'+(i+1)+'" x="'+x+'" y="184" text-anchor="middle" font-size="24" font-weight="800" fill="#F4EBED">?</text><text x="'+x+'" y="208" text-anchor="middle" font-size="11" font-weight="700" fill="#D9C3C8">LOCK '+(i+1)+'</text>';
+    });
+    g.innerHTML=h;
+  })();
+  function sceneUpdate(){
+    D.locks.forEach(function(L){
+      var open=S.locks[L.id].solved;
+      $('pl'+L.n).setAttribute('class','plock'+(open?' open':''));
+      $('dw'+L.n).textContent=open?digits[L.n]:'?';
+    });
+    $('scene').classList.toggle('escaped',S.escaped);
+  }
+
+  /* ---------- build lock cards ---------- */
+  var W={};   // widget state per lock
+  var LOCKSVG='<svg class="lk" viewBox="0 0 44 44" aria-hidden="true"><path class="sh" d="M13 20V14a9 9 0 0 1 18 0V20" fill="none" stroke="#F4EBED" stroke-width="4"/><rect class="bd" x="8" y="20" width="28" height="20" rx="4" fill="#4BCAD2"/><circle cx="22" cy="30" r="3" fill="#481E27"/></svg>';
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+  function buildLock(L){
+    var sec=document.createElement('section');sec.className='lock glass locked';sec.id='lock'+L.n;
+    var head='<button class="lh" type="button" id="lh'+L.n+'" aria-expanded="false">'+LOCKSVG+'<span class="lt"><small>LOCK '+L.n+' · '+L.objLabel+'</small><strong>'+esc(L.title)+'</strong></span><span class="dg" id="dg'+L.n+'" aria-label="digit">?</span></button>';
+    var body='<div class="lb" id="lb'+L.n+'"><p class="objline">'+esc(L.objText)+'</p>'+
+      '<div class="card"><h4>CLUE CARD</h4>'+L.card+'<p class="src">'+L.src+'</p></div>'+
+      '<div class="prompt">'+L.prompt+'</div><div id="pz'+L.n+'"></div>'+
+      '<div class="row"><button class="btn primary" type="button" id="ck'+L.n+'">Check</button><button class="btn small" type="button" id="hb'+L.n+'">Hint</button><button class="btn small" type="button" id="rs'+L.n+'">Clear</button></div>'+
+      '<div class="hints" id="hs'+L.n+'"></div><div class="fb" id="fb'+L.n+'" role="status"></div></div>';
+    sec.innerHTML=head+body;
+    $('locks').appendChild(sec);
+    buildPuzzle(L);
+    $('lh'+L.n).addEventListener('click',function(){
+      var st=lockState(L);if(st==='locked')return;
+      expanded[L.n]=!expanded[L.n];updateLocks();
+    });
+    $('ck'+L.n).addEventListener('click',function(){submit(L)});
+    $('hb'+L.n).addEventListener('click',function(){hint(L)});
+    $('rs'+L.n).addEventListener('click',function(){clearPuzzle(L)});
+  }
+  function labelOf(list,id){for(var i=0;i<list.length;i++)if(list[i].id===id)return list[i].label;return id}
+
+  function buildPuzzle(L){
+    var el=$('pz'+L.n),w=W[L.n]={};
+    if(L.type==='order'){
+      w.sel=[];el.innerHTML='<div class="chips" id="ch'+L.n+'"></div>';
+      renderOrder(L);
+    }else if(L.type==='match'){
+      var h='';
+      L.terms.forEach(function(t){
+        h+='<div class="mrow"><label for="m'+L.n+t.id+'">'+esc(t.label)+'</label><select id="m'+L.n+t.id+'"><option value="">Choose a description...</option>';
+        L.descs.forEach(function(d){h+='<option value="'+d.id+'">'+esc(d.label)+'</option>'});
+        h+='</select></div>';
+      });
+      el.innerHTML=h;
+    }else if(L.type==='pick'){
+      var h2='';
+      L.qs.forEach(function(q){
+        h2+='<fieldset><legend>'+esc(q.q)+'</legend>';
+        q.opts.forEach(function(o){h2+='<label class="opt"><input type="radio" name="q'+L.n+q.id+'" value="'+o.id+'"> <span>'+esc(o.label)+'</span></label>'});
+        h2+='</fieldset>';
+      });
+      el.innerHTML=h2;
+    }else if(L.type==='decode'){
+      var k1='',k2='';
+      for(var i=0;i<26;i++){var p=String.fromCharCode(65+i),c=String.fromCharCode(65+(i+L.shift)%26);k1+='<div class="c">'+c+'</div>';k2+='<div>'+p+'</div>'}
+      // build key in two rows of 13
+      var key='';
+      for(var r=0;r<2;r++){for(var j=0;j<13;j++){var idx=r*13+j;key+='<div class="c">'+String.fromCharCode(65+(idx+L.shift)%26)+'</div>'}for(var j2=0;j2<13;j2++){key+='<div>'+String.fromCharCode(65+r*13+j2)+'</div>'}}
+      el.innerHTML='<div class="cipher" translate="no" aria-label="Coded message">'+esc(L.cipher)+'</div><p style="margin:.6em 0 0;font-size:15px;color:var(--dim)">Decoder key: the <span style="color:var(--hl);font-weight:700">aqua</span> letter is in the message. The white letter under it is the real letter.</p><div class="key" aria-hidden="true">'+key+'</div><label>Decoded answer<input type="text" id="tx'+L.n+'" autocomplete="off" autocapitalize="none" spellcheck="false"></label><p class="ennote">Type the answer in English.</p>';
+    }else if(L.type==='fill'){
+      el.innerHTML='<p style="font-size:18px;margin:.2em 0">'+esc(L.sentence)+'</p><div class="scr" translate="no" aria-label="Scrambled letters">'+esc(L.scramble)+'</div><p style="margin:.4em 0;font-size:14px;color:var(--dim)">Unscramble the letters to fill the blank.</p><label>Your answer<input type="text" id="tx'+L.n+'" autocomplete="off" autocapitalize="none" spellcheck="false"></label><p class="ennote">Type the answer in English.</p>';
+    }
+    var t=$('tx'+L.n);
+    if(t)t.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();submit(L)}});
+  }
+  function renderOrder(L){
+    var w=W[L.n],ch=$('ch'+L.n),h='';
+    L.items.forEach(function(it){
+      var pos=w.sel.indexOf(it.id);
+      h+='<button type="button" class="chip'+(pos>=0?' sel':'')+'" data-id="'+it.id+'" aria-pressed="'+(pos>=0)+'">'+(pos>=0?'<span class="n">'+(pos+1)+'</span>':'')+'<span>'+esc(it.label)+'</span></button>';
+    });
+    ch.innerHTML=h;
+    [].forEach.call(ch.querySelectorAll('.chip'),function(b){
+      b.addEventListener('click',function(){
+        if(S.locks[L.id].solved)return;
+        var id=b.getAttribute('data-id'),p=w.sel.indexOf(id);
+        if(p>=0)w.sel.splice(p,1);else w.sel.push(id);
+        renderOrder(L);
+      });
+    });
+  }
+  function clearPuzzle(L){
+    if(S.locks[L.id].solved)return;
+    var w=W[L.n];
+    if(L.type==='order'){w.sel=[];renderOrder(L)}
+    else if(L.type==='match'){L.terms.forEach(function(t){$('m'+L.n+t.id).value=''})}
+    else if(L.type==='pick'){L.qs.forEach(function(q){[].forEach.call(document.getElementsByName('q'+L.n+q.id),function(r){r.checked=false})})}
+    else{$('tx'+L.n).value=''}
+    fb(L,'','');
+  }
+  function guessOf(L){
+    // returns {canon, readable} or {err}
+    if(L.type==='order'){
+      var w=W[L.n];
+      if(w.sel.length<L.items.length)return {err:'Tap all '+L.items.length+' places first, in order.'};
+      return {canon:w.sel.join('|'),readable:w.sel.map(function(i){return labelOf(L.items,i)}).join(' > ')};
+    }
+    if(L.type==='match'){
+      var c=[],r=[];
+      for(var i=0;i<L.terms.length;i++){var t=L.terms[i],v=$('m'+L.n+t.id).value;if(!v)return {err:'Match every term first.'};c.push(v);r.push(t.label+' = '+labelOf(L.descs,v))}
+      return {canon:c.join('|'),readable:r.join('; ')};
+    }
+    if(L.type==='pick'){
+      var c2=[],r2=[];
+      for(var j=0;j<L.qs.length;j++){var q=L.qs[j],v2='';[].forEach.call(document.getElementsByName('q'+L.n+q.id),function(x){if(x.checked)v2=x.value});if(!v2)return {err:'Answer every question first.'};c2.push(v2);r2.push(labelOf(q.opts,v2))}
+      return {canon:c2.join('|'),readable:r2.join('; ')};
+    }
+    var raw=$('tx'+L.n).value.trim();
+    if(!raw)return {err:'Type your answer first.'};
+    return {canon:squash(raw),readable:raw.slice(0,80)};
+  }
+  function fb(L,cls,text){var e=$('fb'+L.n);e.className='fb'+(cls?' show '+cls:'');e.textContent=text}
+  function submit(L){
+    var l=S.locks[L.id];if(l.solved)return;
+    var g=guessOf(L);
+    if(g.err){fb(L,'nudge',g.err);return}
+    l.attempts++;
+    var d=checkLock(L,g.canon);
+    if(d===null){
+      fb(L,'nudge',L.nudge);
+      var s=$('lock'+L.n);s.classList.remove('shake');void s.offsetWidth;s.classList.add('shake');
+      persist();updateBar();return;
+    }
+    l.solved=true;l.guess=g.canon;l.readable=g.readable;digits[L.n]=d;
+    fb(L,'good','Click! Lock '+L.n+' is open. Your digit is '+d+'.');
+    var wh=$('wheel');wh.classList.remove('spin');void wh.getBoundingClientRect();wh.classList.add('spin');
+    $('dw'+L.n).classList.add('pop');
+    persist();updateAll();
+    setTimeout(function(){
+      expanded[L.n]=false;
+      var nx=nextOpen();if(nx)expanded[nx]=true;
+      updateLocks();
+      var tgt=nx?$('lock'+nx):$('exit');
+      if(tgt&&tgt.scrollIntoView)tgt.scrollIntoView({behavior:'smooth',block:'start'});
+    },1600);
+  }
+  function hint(L){
+    var l=S.locks[L.id];
+    if(l.solved)return;
+    if(l.hints<L.hints.length){l.hints++;persist();updateHints(L);updateBar()}
+    else{fb(L,'nudge','That was the last hint. Read the Clue Card slowly and try again.')}
+  }
+  function updateHints(L){
+    var l=S.locks[L.id],h='';
+    for(var i=0;i<l.hints;i++)h+='<div class="hint"><b>Hint '+(i+1)+':</b> <span>'+esc(L.hints[i])+'</span></div>';
+    $('hs'+L.n).innerHTML=h;
+  }
+  function nextOpen(){for(var i=0;i<D.locks.length;i++)if(!S.locks[D.locks[i].id].solved)return D.locks[i].n;return 0}
+  function lockState(L){
+    if(S.locks[L.id].solved)return 'solved';
+    return L.n===nextOpen()?'current':'locked';
+  }
+  function updateLocks(){
+    var cur=nextOpen();
+    D.locks.forEach(function(L){
+      var st=lockState(L),sec=$('lock'+L.n);
+      if(st==='current'&&expanded[L.n]===undefined)expanded[L.n]=true;
+      var open=(st!=='locked')&&!!expanded[L.n];
+      sec.className='lock glass '+st+(open?' open':'');
+      $('lh'+L.n).setAttribute('aria-expanded',open?'true':'false');
+      $('dg'+L.n).textContent=S.locks[L.id].solved?digits[L.n]:'?';
+      if(S.locks[L.id].solved){
+        [].forEach.call(sec.querySelectorAll('input,select,button.chip,#ck'+L.n+',#hb'+L.n+',#rs'+L.n),function(x){x.disabled=true});
+        var f=$('fb'+L.n);if(!f.classList.contains('good'))fb(L,'good','Unlocked. Your digit is '+digits[L.n]+'.'+(S.locks[L.id].readable?' Your answer: '+S.locks[L.id].readable:''));
+      }
+      updateHints(L);
+    });
+  }
+  function codeStr(){var s='';for(var i=1;i<=5;i++)s+=(digits[i]===undefined?'':digits[i]);return s}
+  function allSolved(){return D.locks.every(function(L){return S.locks[L.id].solved})}
+  function updateExit(){
+    var ok=allSolved();
+    $('exit').classList.toggle('locked',!ok);
+    $('codeBtn').disabled=!ok||S.escaped;
+    [].forEach.call($('codebox').querySelectorAll('input'),function(i){i.disabled=!ok||S.escaped});
+    $('exitNote').textContent=S.escaped?'The door is open!':(ok?'All 5 locks are open. Type the 5 digits in order, Lock 1 first.':'Open all 5 locks first. The digits go in order: Lock 1 first.');
+  }
+  function updateBar(){
+    var t=totals();
+    $('lc').textContent=t.locksSolved;$('hc').textContent=t.hintsUsed;
+    $('tm').textContent=fmt(S.escaped?S.escapeMs:S.elapsed);
+  }
+  function updateStatus(){
+    var el=$('status'),db=($('debriefText').value.trim().length);
+    if(S.escaped)el.textContent=db>=40?'You escaped and wrote your Debrief. Ready to submit.':'You escaped! Write your Debrief, then download your file to submit.';
+    else el.textContent='Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.';
+  }
+  function updateEsc(){
+    $('esc').classList.toggle('show',S.escaped);
+    if(S.escaped){var t=totals();$('escTime').textContent=fmt(S.escapeMs);$('escSum').textContent='5 of 5 locks opened with '+t.attempts+' tries and '+t.hintsUsed+' hint'+(t.hintsUsed===1?'':'s')+'.'}
+  }
+  function updateAll(){sceneUpdate();updateLocks();updateExit();updateBar();updateEsc();updateStatus();
+    $('intro').classList.toggle('hidden',S.started);$('game').classList.toggle('hidden',!S.started);$('loadOnly').classList.toggle('hidden',S.started);
+  }
+
+  /* ---------- exit code ---------- */
+  (function(){
+    var cb=$('codebox');
+    for(var i=0;i<5;i++){
+      var inp=document.createElement('input');inp.type='text';inp.inputMode='numeric';inp.maxLength=1;inp.setAttribute('aria-label','Exit code digit '+(i+1));inp.disabled=true;
+      (function(i,inp){
+        inp.addEventListener('input',function(){inp.value=inp.value.replace(/[٠-٩]/g,function(c){return c.charCodeAt(0)-1632}).replace(/[۰-۹]/g,function(c){return c.charCodeAt(0)-1776}).replace(/[^0-9]/g,'');if(inp.value&&i<4)cb.children[i+1].focus()});
+        inp.addEventListener('keydown',function(e){
+          if(e.key==='Backspace'&&!inp.value&&i>0)cb.children[i-1].focus();
+          if(e.key==='Enter'){e.preventDefault();tryCode()}
+        });
+        inp.addEventListener('paste',function(e){
+          var t=(e.clipboardData||window.clipboardData).getData('text').replace(/[٠-٩]/g,function(c){return c.charCodeAt(0)-1632}).replace(/[۰-۹]/g,function(c){return c.charCodeAt(0)-1776}).replace(/[^0-9]/g,'');
+          if(t.length>1){e.preventDefault();for(var k=0;k<5;k++)cb.children[k].value=t[k]||''}
+        });
+      })(i,inp);
+      cb.appendChild(inp);
+    }
+  })();
+  function tryCode(){
+    if(!allSolved()||S.escaped)return;
+    var v='';[].forEach.call($('codebox').querySelectorAll('input'),function(i){v+=i.value});
+    var f=$('codefb');
+    if(v.length<5){f.className='fb show nudge';f.textContent='The code has 5 digits. Fill every box.';return}
+    S.codeTries++;
+    if(h20('exit:'+D.salt+v)!==D.exitHash){
+      f.className='fb show nudge';f.textContent='The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.';
+      var ex=$('exit');ex.classList.remove('shake');void ex.offsetWidth;ex.classList.add('shake');
+      persist();return;
+    }
+    S.escaped=true;S.escapeMs=S.elapsed;
+    f.className='fb show good';f.textContent='The door swings open!';
+    persist();updateAll();
+    setTimeout(function(){$('esc').scrollIntoView({behavior:'smooth',block:'start'})},900);
+  }
+  $('codeBtn').addEventListener('click',tryCode);
+
+  /* ---------- timer ---------- */
+  function tick(){
+    var n=Date.now();
+    if(S.started&&!S.escaped){S.elapsed+=Math.min(n-lastTick,5000);$('tm').textContent=fmt(S.elapsed)}
+    lastTick=n;
+  }
+  function startTimer(){lastTick=Date.now();if(!timer)timer=setInterval(function(){tick();if(Math.round(S.elapsed/1000)%10===0)persist()},1000)}
+
+  /* ---------- files ---------- */
+  function msg(t,err){var m=$('msg');m.textContent=t;m.className='msg'+(err?' err':'');m.style.display='block'}
+  function ascii(n){return String(n).normalize('NFD').replace(/[̀-ͯ]/g,'')}
+  function clean(n){n=window.spAscii?spAscii(n):n;return ascii(n).trim().replace(/\s+/g,'_').replace(/[^A-Za-z0-9_-]/g,'')}
+  function who(){return (clean($('f_last').value)||'Last')+'_'+(clean($('f_first').value)||'First')}
+  function download(name,obj){
+    var blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;
+    document.body.appendChild(a);a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);
+  }
+  function namesOk(){
+    var ids=['f_first','f_last','f_period'],ok=true;
+    ids.forEach(function(i){var f=$(i);if(!f.value.trim()){f.classList.add('bad');ok=false}});
+    if(!ok){msg('Enter your first name, last name, and period at the top first.',true);$('f_first').scrollIntoView({block:'center'})}
+    return ok;
+  }
+  ['f_first','f_last','f_period'].forEach(function(i){$(i).addEventListener('input',function(){$(i).classList.remove('bad');S[i.slice(2)]=$(i).value;persist()})});
+  $('debriefText').addEventListener('input',function(){S.debrief=$('debriefText').value;persist();updateStatus()});
+  $('saveBtn').addEventListener('click',function(){
+    if(!namesOk())return;tick();
+    download(who()+'-'+PACKET+'-PROGRESS.json',snapshot());
+    msg('Progress file downloaded. Use Load Progress to continue later.');
+  });
+  $('finishBtn').addEventListener('click',function(){
+    if(!namesOk())return;tick();
+    var now=new Date(),o=snapshot();o.completed=S.escaped;o.submitted=now.toISOString();
+    o.student.date=now.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+    download(who()+'-'+PACKET+'.json',o);
+    msg(S.escaped?('Done! File downloaded: '+who()+'-'+PACKET+'.json. Upload it to Canvas.'):('Your file downloaded and is marked INCOMPLETE (you have not escaped). Upload it to Canvas: '+who()+'-'+PACKET+'.json'));
+  });
+  function openLoad(){$('loadFile').click()}
+  $('loadBtn').addEventListener('click',openLoad);$('loadBtn0').addEventListener('click',openLoad);
+  $('loadFile').addEventListener('change',function(e){
+    var f=e.target.files[0];if(!f)return;
+    var r=new FileReader();
+    r.onload=function(){
+      try{
+        var o=JSON.parse(r.result);
+        if(!o||o.packet!==PACKET||typeof o.locks!=='object')throw new Error('wrong');
+        digits={};var n=fresh();restore(n,o);S=n;applyToDom();
+        msg('Progress loaded. Welcome back.');
+      }catch(err){msg('That file did not work. Choose a progress file saved from this Escape Room.',true)}
+      e.target.value='';
+    };
+    r.onerror=function(){msg('The file could not be read.',true)};
+    r.readAsText(f);
+  });
+  $('reset').addEventListener('click',function(){
+    if(!confirm('Clear all your work and start over? This cannot be undone.'))return;
+    digits={};expanded={};S=fresh();
+    try{localStorage.removeItem(STORE+'state')}catch(e){}
+    $('locks').innerHTML='';D.locks.forEach(buildLock);
+    $('f_first').value=$('f_last').value=$('f_period').value='';$('debriefText').value='';
+    [].forEach.call($('codebox').querySelectorAll('input'),function(i){i.value=''});$('codefb').className='fb';
+    applyToDom();
+  });
+  function applyToDom(){
+    $('f_first').value=S.first;$('f_last').value=S.last;$('f_period').value=S.period;$('debriefText').value=S.debrief;
+    // rebuild lock widgets, then pre-fill solved ones with readable note
+    $('locks').innerHTML='';D.locks.forEach(buildLock);
+    expanded={};
+    updateAll();
+    if(S.started)startTimer();
+  }
+  $('startBtn').addEventListener('click',function(){S.started=true;persist();startTimer();updateAll();$('game').scrollIntoView({behavior:'smooth'})});
+  window.addEventListener('beforeunload',function(){tick();persist()});
+
+  S=loadLocal();
+  D.locks.forEach(buildLock);
+  applyToDom();
+})();
+</script>
+<!--sp-i18n--><script type="application/json" id="sp-i18n">{"langs":["en","es","ar"],"default":"en","es":{"Save Progress":"Guardar progreso","Load Progress":"Cargar progreso","Finished — Download File to Submit":"Terminé — Descargar el archivo para entregar","Clear all my answers":"Borrar todas mis respuestas","FIRST NAME *":"NOMBRE *","LAST NAME *":"APELLIDO *","PERIOD *":"PERÍODO *","DATE (fills in when you finish)":"FECHA (se llena cuando terminas)","e.g. 3":"p. ej., 3","Automatic":"Automática","Please type your first name, last name, and period first.":"Primero escribe tu nombre, apellido y período.","Western Expansion and Southern Secession":"Expansión hacia el oeste y secesión del sur","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — La Ley de Esclavos Fugitivos","Bleeding Kansas":"Bleeding Kansas — Kansas sangriento","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"Se descargó tu archivo de progreso. Guárdalo bien. Usa «Cargar progreso» para continuar más tarde.","Progress loaded.":"Progreso cargado.","Could not read that file.":"No se pudo leer ese archivo.","Treaty of Guadalupe Hidalgo":"Tratado de Guadalupe Hidalgo","All 5 locks are open. Type the 5 digits in order, Lock 1 first.":"Los 5 candados están abiertos. Escribe los 5 dígitos en orden, primero el del Candado 1.","Answer every question first.":"Primero responde todas las preguntas.","CLUE CARD":"TARJETA DE INDICIOS","Check":"Comprobar","Choose a description...":"Elige una descripción...","Clear":"Borrar","Clear all my work and start over":"Borrar todo mi trabajo y empezar de nuevo","DEBRIEF":"INFORME FINAL","Debrief":"Informe final","Decoded answer":"Respuesta decodificada","Decoder key: the <span style=\"color:var(--hl);font-weight:700\">aqua<\/span> letter is in the message. The white letter under it is the real letter.":"Clave del decodificador: la letra <span style=\"color:var(--hl);font-weight:700\">turquesa<\/span> está en el mensaje. La letra blanca que está debajo es la letra verdadera.","ESCAPED":"¡ESCAPASTE!","Enter your first name, last name, and period at the top first.":"Primero escribe tu nombre, apellido y período arriba.","Exit code digit 1":"Dígito 1 del código de salida","Exit door":"Puerta de salida","Fill in the blank using the Clue Card.":"Llena el espacio en blanco con la tarjeta de indicios.","Have a saved file? Load it to continue.":"¿Tienes un archivo guardado? Cárgalo para continuar.","Hint":"Pista","Hints used":"Pistas usadas","How to escape:":"Cómo escapar:","If you get stuck, press <b>Hint<\/b>. Hints are free, but your teacher can see how many you used.":"Si te atoras, oprime <b>Pista<\/b>. Las pistas son gratis, pero tu maestro puede ver cuántas usaste.","Locks":"Candados","Match each term to the best description. Use the Clue Card.":"Relaciona cada término con la mejor descripción. Usa la tarjeta de indicios.","Match every term first.":"Primero relaciona todos los términos.","Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.":"Todavía no escapas (se marca INCOMPLETO). Aun así puedes descargar tu archivo y entregarlo.","Not quite. Check each match against the Clue Card. Which one are you least sure about?":"Casi. Revisa cada pareja con la tarjeta de indicios. ¿De cuál estás menos seguro?","Not quite. Decode one letter at a time with the key, then check your spelling.":"Casi. Decodifica una letra a la vez con la clave y luego revisa tu ortografía.","Not quite. Re-read the second sentence of the Clue Card. Use the scrambled letters to check your spelling.":"Casi. Vuelve a leer la segunda oración de la tarjeta de indicios. Usa las letras desordenadas para revisar tu ortografía.","One last step: write your Debrief below.":"Un último paso: escribe tu Informe final abajo.","Open all 5 locks first. The digits go in order: Lock 1 first.":"Primero abre los 5 candados. Los dígitos van en orden: primero el del Candado 1.","Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.":"Abre los 5 candados y luego escribe el código de salida de 5 dígitos. Termina con el Informe final.","Open each lock in order. Read the <b>Clue Card<\/b>. The answer is in the card.":"Abre cada candado en orden. Lee la <b>tarjeta de indicios<\/b>. La respuesta está en la tarjeta.","Open the Door":"Abrir la puerta","Pick the correct answer for all three questions.":"Elige la respuesta correcta para las tres preguntas.","Progress file downloaded. Use Load Progress to continue later.":"Se descargó el archivo de progreso. Usa «Cargar progreso» para continuar más tarde.","Progress loaded. Welcome back.":"Progreso cargado. Bienvenido de nuevo.","Solve the puzzle to open the lock and reveal one digit.":"Resuelve el acertijo para abrir el candado y descubrir un dígito.","THE EXIT DOOR":"LA PUERTA DE SALIDA","Tap all 4 places first, in order.":"Primero toca los 4 lugares, en orden.","Tap the four events in the order they happened. Tap an event again to take it back.":"Toca los cuatro sucesos en el orden en que ocurrieron. Toca un suceso otra vez para quitarlo.","That file did not work. Choose a progress file saved from this Escape Room.":"Ese archivo no funcionó. Elige un archivo de progreso guardado de esta sala de escape.","That was the last hint. Read the Clue Card slowly and try again.":"Esa fue la última pista. Lee la tarjeta de indicios despacio y vuelve a intentarlo.","The Code Book":"El libro de códigos","The clock starts when you press the button. Most students finish in about 20 minutes.":"El reloj empieza cuando oprimes el botón. La mayoría de los estudiantes termina en unos 20 minutos.","The code has 5 digits. Fill every box.":"El código tiene 5 dígitos. Llena todas las casillas.","The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.":"La puerta no se abrió. Revisa los dígitos debajo de cada candado y escríbelos en orden: primero el del Candado 1.","The door is open!":"¡La puerta está abierta!","The door swings open!":"¡La puerta se abre de golpe!","Time":"Tiempo","Type the answer in English.":"Escribe la respuesta en inglés.","Type the answer in English. Use the digits 0-9.":"Escribe la respuesta en inglés. Usa los dígitos 0-9.","Type the exit code":"Escribe el código de salida","Type your answer first.":"Primero escribe tu respuesta.","Type your answer here...":"Escribe tu respuesta aquí...","UNIT 5 · WAR, PROSPERITY, AND CULTURAL CONFLICT | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 5 · GUERRA, PROSPERIDAD Y CONFLICTO CULTURAL | CPUSH | DANIEL GARZA, M.A.","Unscramble the letters to fill the blank.":"Ordena las letras para llenar el espacio en blanco.","Which lock was hardest, and what did you learn that you did not know before?":"¿Qué candado fue el más difícil y qué aprendiste que antes no sabías?","Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.":"Escribe de 3 a 4 oraciones. Nombra el candado y usa un dato de su tarjeta de indicios. Puedes escribirlo aunque no hayas escapado.","You escaped and wrote your Debrief. Ready to submit.":"Escapaste y escribiste tu Informe final. Listo para entregar.","You escaped! Write your Debrief, then download your file to submit.":"¡Escapaste! Escribe tu Informe final y luego descarga tu archivo para entregarlo.","Your answer":"Tu respuesta","Your time:":"Tu tiempo:","digit":"dígito","Core Objective 1: Assess the impact of the consumer culture that emerged in America during the 1920s and explain the factors that contributed to its growth.":"Objetivo principal 1: Evaluar el impacto de la cultura de consumo que surgió en Estados Unidos durante los años veinte y explicar los factores que contribuyeron a su crecimiento.","Core Objective 2: Describe other major new social and cultural trends and movements that became prominent during the 1920s and explain how they challenged traditional standards and customs.":"Objetivo principal 2: Describir otras tendencias y movimientos sociales y culturales importantes que se destacaron en los años veinte y explicar cómo desafiaron las normas y costumbres tradicionales.","Core Objective 3: Explain what “modernism” means in intellectual and artistic terms and how the modernist movement influenced American culture in the early twentieth century.":"Objetivo principal 3: Explicar qué significa el “modernismo” en términos intelectuales y artísticos y cómo el movimiento modernista influyó en la cultura estadounidense a principios del siglo veinte.","Core Objective 4: Identify notable examples of reactionary conservatism during the decade and analyze their impact on government policies.":"Objetivo principal 4: Identificar ejemplos notables del conservadurismo reaccionario durante la década y analizar su impacto en las políticas del gobierno.","Core Objective 5: Trace the Republican Party’s dominance of the federal government during the 1920s and analyze the extent to which its policies were a rejection of progressivism.":"Objetivo principal 5: Seguir el dominio del Partido Republicano sobre el gobierno federal durante los años veinte y analizar hasta qué punto sus políticas fueron un rechazo del progresismo.","A Clash of Cultures - The 1920s":"Un choque de culturas - Los años veinte","Escape Room 14 · A Clash of Cultures - The 1920s":"Sala de escape 14 · Un choque de culturas - Los años veinte","Escape the Radio Studio":"Escapa del estudio de radio","Enter the Radio Studio":"Entrar al estudio de radio","You are locked in the radio studio.":"Estás encerrado en el estudio de radio.","ON AIR":"AL AIRE","A 1920s radio studio at night. On the left, a standing microphone and a record player on a table, with sound-proofing panels on the wall behind. On the right, a clock hangs above a tube radio on a table, with signal waves above the radio. The studio door has an ON AIR sign and five padlocks in a row. Under each padlock is a window for one digit of the exit code.":"Un estudio de radio de los años veinte, de noche. A la izquierda, un micrófono de pie y un tocadiscos sobre una mesa, con paneles que aíslan el sonido en la pared de atrás. A la derecha, un reloj cuelga sobre una radio de tubos que está sobre una mesa, con ondas de señal arriba de la radio. La puerta del estudio tiene un letrero de AL AIRE y cinco candados en fila. Debajo de cada candado hay una ventanita para un dígito del código de salida.","The radio station went off the air for the night and the engineer locked up the studio. Old microphones and records from the 1920s sit in the room. The door has <b>5 locks<\/b>. Each lock matches one big idea from Lesson 14. Solve them all to find the <b>5-digit exit code<\/b>.":"La estación de radio salió del aire por la noche y el ingeniero cerró con llave el estudio. En el cuarto hay micrófonos y discos antiguos de los años veinte. La puerta tiene <b>5 candados<\/b>. Cada candado corresponde a una idea importante de la Lección 14. Resuélvelos todos para encontrar el <b>código de salida de 5 dígitos<\/b>.","The Radio Cabinet":"El mueble de la radio","The Record Player":"El tocadiscos","The Program Schedule":"El horario de programas","The Microphone":"El micrófono","35 percent":"35 por ciento","50 percent":"50 por ciento","68 percent":"68 por ciento","90 percent":"90 por ciento","Which new way of paying helped people buy more products in the 1920s?":"¿Qué nueva forma de pagar ayudó a la gente a comprar más productos en los años veinte?","Higher tariffs on imported goods":"Aranceles más altos a los productos importados","Installment buying (“buy now, pay later”)":"Compras a plazos (“comprar ahora, pagar después”)","Rationing":"El racionamiento","Union contracts":"Contratos sindicales","In 1930, what share of homes had electricity?":"¿Qué porcentaje de los hogares tenía electricidad en 1930?","What happened to the price of Ford’s Model T between 1908 and 1924?":"¿Qué pasó con el precio del Modelo T de Ford entre 1908 y 1924?","It rose from $290 to $850":"Subió de $290 a $850","It stayed at $850":"Se quedó en $850","It fell from $850 to $290":"Bajó de $850 a $290","It fell from $850 to $85":"Bajó de $850 a $85","After a short recession in 1920–1921, Americans enjoyed the fastest economic growth in history, and a powerful “consumer culture” took hold. Advertising grew, and installment buying let people “buy now, pay later,” so consumer debt almost tripled. Electricity spread: in 1920 only 35 percent of homes had it, but by 1930, 68 percent did. The number of families with a radio jumped from 60,000 in 1922 to nearly 14 million in 1930, and movie attendance averaged 80 million people a week. Ford cut the price of the Model T from $850 in 1908 to $290 in 1924, and by 1929 there were more than 23 million cars. Mostly urban middle- and upper-class families enjoyed these new conveniences.":"Después de una breve recesión en 1920–1921, los estadounidenses disfrutaron del crecimiento económico más rápido de la historia, y surgió una poderosa “cultura de consumo”. La publicidad creció, y las compras a plazos permitían “comprar ahora, pagar después”, así que la deuda de los consumidores casi se triplicó. La electricidad se extendió: en 1920 solo el 35 por ciento de los hogares la tenía, pero en 1930 ya la tenía el 68 por ciento. El número de familias con radio pasó de 60,000 en 1922 a casi 14 millones en 1930, y la asistencia al cine fue en promedio de 80 millones de personas por semana. Ford bajó el precio del Modelo T de $850 en 1908 a $290 en 1924, y para 1929 había más de 23 millones de autos. Estas nuevas comodidades las disfrutaban sobre todo las familias urbanas de clase media y alta.","Each answer is in the Clue Card. Look for “buy now, pay later,” for the share of homes with electricity in 1930, and for the Model T prices.":"Cada respuesta está en la tarjeta de indicios. Busca “comprar ahora, pagar después”, el porcentaje de hogares con electricidad en 1930 y los precios del Modelo T.","Installment buying let people pay over time. In 1930, 68 percent of homes had electricity. The Model T price fell from $850 to $290.":"Las compras a plazos permitían pagar con el tiempo. En 1930, el 68 por ciento de los hogares tenía electricidad. El precio del Modelo T bajó de $850 a $290.","Not quite. At least one answer is off. Re-read the Clue Card for how people paid, how many homes had electricity in 1930, and the Model T price.":"Casi. Al menos una respuesta no es correcta. Vuelve a leer la tarjeta de indicios para ver cómo pagaba la gente, cuántos hogares tenían electricidad en 1930 y el precio del Modelo T.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 22, “A “New Era” of Consumption” (pp. 948-952).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 22, “A “New Era” of Consumption” (págs. 948-952).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 22, “The “Jazz Age”” (pp. 954-957, 960, 964-965).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 22, “The “Jazz Age”” (págs. 954-957, 960, 964-965).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 22, “The Modernist Revolt” (pp. 965-969).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 22, “The Modernist Revolt” (págs. 965-969).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 22, “The Reactionary Twenties” (pp. 972-980).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 22, “The Reactionary Twenties” (págs. 972-980).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 22, “Republican Resurgence” (pp. 983-994).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 22, “Republican Resurgence” (págs. 983-994).","Jazz Age":"Era del Jazz","Flappers":"Las flappers","Harlem Renaissance":"Renacimiento de Harlem","Restrictive covenants":"Convenios restrictivos","The name F. Scott Fitzgerald gave to the rebellious, spontaneous 1920s":"El nombre que F. Scott Fitzgerald le dio a los años veinte, rebeldes y espontáneos","Young women who bobbed their hair, wore shorter skirts, and defied the usual standards":"Mujeres jóvenes que se cortaron el pelo corto, usaron faldas más cortas y desafiaron las normas de siempre","The nation’s first Black literary and artistic movement":"El primer movimiento literario y artístico negro del país","Agreements in which neighbors promised not to sell their homes to poor or non-White buyers":"Acuerdos en los que los vecinos prometían no vender sus casas a compradores pobres o que no fueran blancos","Writer F. Scott Fitzgerald called the 1920s the “Jazz Age,” a rebellious and spontaneous decade, and jazz spread from New Orleans to Harlem in New York City and to Chicago’s South Side. Young women called flappers bobbed their hair, wore short skirts, and drove cars, and critics were furious. As the Great Migration continued, African Americans found new freedoms in northern cities, and the Harlem Renaissance, the nation’s first Black literary and artistic movement, was a powerful assertion of Black creativity and dignity. Racially restrictive covenants, which were legal agreements not to sell homes to poor or non-White buyers, were still common. When the Sweet family moved into a Detroit neighborhood in September 1925, a mob of White residents greeted them, and the NAACP hired Clarence Darrow to defend them. The Sweets won, but housing discrimination continued for decades.":"El escritor F. Scott Fitzgerald llamó a los años veinte la “Era del Jazz”, una década rebelde y espontánea, y el jazz se extendió desde Nueva Orleans hasta Harlem, en la ciudad de Nueva York, y hasta el South Side de Chicago. Las jóvenes llamadas flappers se cortaban el pelo, usaban faldas cortas y manejaban autos, y los críticos estaban furiosos. Mientras continuaba la Gran Migración, los afroamericanos encontraron nuevas libertades en las ciudades del Norte, y el Renacimiento de Harlem, el primer movimiento literario y artístico negro del país, fue una poderosa afirmación de la creatividad y la dignidad de los negros. Los convenios restrictivos raciales, que eran acuerdos legales para no vender casas a compradores pobres o que no fueran blancos, todavía eran comunes. Cuando la familia Sweet se mudó a un vecindario de Detroit en septiembre de 1925, una turba de residentes blancos los recibió, y la NAACP contrató a Clarence Darrow para defenderlos. Los Sweet ganaron, pero la discriminación en la vivienda continuó durante décadas.","Two terms name movements or eras (Jazz Age, Harlem Renaissance). One names a group of young women. One names a kind of housing agreement.":"Dos términos nombran movimientos o épocas (Era del Jazz, Renacimiento de Harlem). Uno nombra a un grupo de mujeres jóvenes. Otro nombra un tipo de acuerdo de vivienda.","Fitzgerald named the Jazz Age. Flappers bobbed their hair. The Harlem Renaissance was Black literary and artistic. Restrictive covenants were about who could buy homes.":"Fitzgerald le puso nombre a la Era del Jazz. Las flappers se cortaban el pelo. El Renacimiento de Harlem fue un movimiento literario y artístico negro. Los convenios restrictivos trataban de quién podía comprar casas.","This movement began in the 1890s in the capitals of Europe, such as London, Paris, Berlin, and Vienna. By the 1910s it had spread to the United States, especially New York City and Chicago. Its artists and writers rebelled against what they saw as a repressive, conventional Christian morality and searched for new ways to express themselves. Albert Einstein’s discoveries led many people to believe there were no absolute standards or fixed points of reference. Poet Ezra Pound gave the movement its slogan: “Make It New!” The Armory Show of 1913 was the most controversial event in the history of American art, and one critic said the movement was “nothing else than the total destruction of the art of painting.”":"Este movimiento empezó en la década de 1890 en las capitales de Europa, como Londres, París, Berlín y Viena. Para la década de 1910 ya se había extendido a Estados Unidos, sobre todo a la ciudad de Nueva York y a Chicago. Sus artistas y escritores se rebelaron contra lo que veían como una moral cristiana convencional y represiva, y buscaron nuevas formas de expresarse. Los descubrimientos de Albert Einstein llevaron a mucha gente a creer que no había normas absolutas ni puntos de referencia fijos. El poeta Ezra Pound le dio al movimiento su lema: “¡Hazlo nuevo!”. El Armory Show de 1913 fue el acontecimiento más polémico en la historia del arte estadounidense, y un crítico dijo que el movimiento no era “nada más que la destrucción total del arte de la pintura”.","The Clue Card describes a movement without naming it. A secret message names it. Each letter in the message was moved 5 steps forward in the alphabet. Decode it to name the movement.":"La tarjeta de indicios describe un movimiento sin nombrarlo. Un mensaje secreto lo nombra. Cada letra del mensaje se movió 5 pasos hacia adelante en el alfabeto. Decodifícalo para escribir el nombre del movimiento.","The Clue Card describes the movement but does not name it. Use the decoder key to spell the name, one letter at a time.":"La tarjeta de indicios describe el movimiento, pero no lo nombra. Usa la clave del decodificador para escribir el nombre, una letra a la vez.","In the message, the letter R is really M, and the letter T is really O. The word has 9 letters and starts with M.":"En el mensaje, la letra R en realidad es M, y la letra T en realidad es O. La palabra tiene 9 letras y empieza con M.","The Eighteenth Amendment is ratified":"Se ratifica la Decimoctava Enmienda","Sacco and Vanzetti are arrested":"Arrestan a Sacco y Vanzetti","Congress passes the Immigration Act of 1924":"El Congreso aprueba la Ley de Inmigración de 1924","John Scopes is arrested for teaching evolution":"Arrestan a John Scopes por enseñar la evolución","Many Americans found the changes of the 1920s shocking, and nativism, which is prejudice against people who are not native-born, targeted Catholic and Jewish immigrants from southern and eastern Europe. The most violent reactionary movement was a revived Ku Klux Klan, which let only native-born White Protestants join. The Eighteenth Amendment, ratified on January 16, 1919, banned the manufacture, sale, and transportation of liquor, but Prohibition was not widely followed and it boosted police corruption and organized crime. On May 5, 1920, police arrested Italian immigrants Nicola Sacco and Bartolomeo Vanzetti, who called themselves anarchists, and they were executed in 1927, although people still debate their guilt. The Immigration Act of 1924 cut the quota to 2 percent of each nationality in the 1890 census and banned almost all immigrants from Asia. Fundamentalists insisted on the literal truth of the Bible and were troubled by the theory of evolution; in 1925, Tennessee outlawed teaching evolution in public schools, and teacher John Scopes was arrested.":"Muchos estadounidenses encontraron impactantes los cambios de los años veinte, y el nativismo, que es el prejuicio contra las personas que no nacieron en el país, se dirigió contra los inmigrantes católicos y judíos del sur y el este de Europa. El movimiento reaccionario más violento fue un Ku Klux Klan renacido, que solo dejaba entrar a protestantes blancos nacidos en el país. La Decimoctava Enmienda, ratificada el 16 de enero de 1919, prohibió la fabricación, venta y transporte de licor, pero la Prohibición no se cumplía mucho y aumentó la corrupción policial y el crimen organizado. El 5 de mayo de 1920, la policía arrestó a los inmigrantes italianos Nicola Sacco y Bartolomeo Vanzetti, que se describían como anarquistas, y fueron ejecutados en 1927, aunque todavía se debate si eran culpables. La Ley de Inmigración de 1924 redujo la cuota al 2 por ciento de cada nacionalidad en el censo de 1890 y prohibió casi toda la inmigración de Asia. Los fundamentalistas insistían en la verdad literal de la Biblia y les preocupaba la teoría de la evolución; en 1925, Tennessee prohibió enseñar la evolución en las escuelas públicas, y el maestro John Scopes fue arrestado.","Look for the years in the Clue Card: 1919, 1920, 1924, and 1925. Each event has its own year.":"Busca los años en la tarjeta de indicios: 1919, 1920, 1924 y 1925. Cada hecho tiene su propio año.","The order is the Eighteenth Amendment, the arrest of Sacco and Vanzetti, the Immigration Act of 1924, then the arrest of John Scopes.":"El orden es la Decimoctava Enmienda, el arresto de Sacco y Vanzetti, la Ley de Inmigración de 1924 y luego el arresto de John Scopes.","Not quite. Re-read the Clue Card and match each event to its year.":"Casi. Vuelve a leer la tarjeta de indicios y relaciona cada hecho con su año.","Warren Harding won the presidency by promising a return to “________.”":"Warren Harding ganó la presidencia al prometer un regreso a la “________”.","After the Great War, progressivism lost momentum at the national level, and conservative Republicans returned to power. Warren Harding promised the country a return to “normalcy,” and he won 16 million votes to 9 million for his Democratic opponent. Treasury Secretary Andrew Mellon convinced Congress to cut the top tax rate from 73 percent in 1921 to 24 percent by 1929, and the Supreme Court struck down a federal child-labor law and a minimum-wage law for women. Union membership fell from about 5 million in 1920 to 3.5 million in 1929. In the Teapot Dome Scandal, Interior Secretary Albert Fall secretly sold government oil and took huge bribes, and he became the first former cabinet official to go to prison for misconduct in office. President Calvin Coolidge said, “The chief business of the American people is business,” and Herbert Hoover won the 1928 election in a landslide.":"Después de la Gran Guerra, el progresismo perdió fuerza a nivel nacional y los republicanos conservadores volvieron al poder. Warren Harding le prometió al país un regreso a la “normalidad”, y obtuvo 16 millones de votos contra 9 millones de su oponente demócrata. El secretario del Tesoro, Andrew Mellon, convenció al Congreso de bajar la tasa máxima de impuestos de 73 por ciento en 1921 a 24 por ciento para 1929, y la Corte Suprema anuló una ley federal contra el trabajo infantil y una ley de salario mínimo para mujeres. La afiliación a los sindicatos bajó de unos 5 millones en 1920 a 3.5 millones en 1929. En el escándalo de Teapot Dome, el secretario del Interior Albert Fall vendió petróleo del gobierno en secreto y recibió enormes sobornos, y se convirtió en el primer ex miembro del gabinete en ir a la cárcel por mala conducta en el cargo. El presidente Calvin Coolidge dijo: “El negocio principal del pueblo estadounidense son los negocios”, y Herbert Hoover ganó la elección de 1928 por una gran mayoría.","Read the second sentence of the Clue Card. The missing word is in quotation marks.":"Lee la segunda oración de la tarjeta de indicios. La palabra que falta está entre comillas.","The word starts with N and ends with Y. It has 8 letters.":"La palabra empieza con N y termina con Y. Tiene 8 letras.","Unlocked. Your digit is 5. Your answer: Installment buying (“buy now, pay later”); 68 percent; It fell from $850 to $290":"Desbloqueado. Tu dígito es 5. Tu respuesta: Compras a plazos (“comprar ahora, pagar después”); 68 por ciento; Bajó de $850 a $290","Unlocked. Your digit is 8. Your answer: Jazz Age = The name F. Scott Fitzgerald gave to the rebellious, spontaneous 1920s; Flappers = Young women who bobbed their hair, wore shorter skirts, and defied the usual standards; Restrictive covenants = Agreements in which neighbors promised not to sell their homes to poor or non-White buyers; Harlem Renaissance = The nation’s first Black literary and artistic movement":"Desbloqueado. Tu dígito es 8. Tu respuesta: Era del Jazz = El nombre que F. Scott Fitzgerald le dio a los años veinte, rebeldes y espontáneos; Las flappers = Mujeres jóvenes que se cortaron el pelo corto, usaron faldas más cortas y desafiaron las normas de siempre; Convenios restrictivos = Acuerdos en los que los vecinos prometían no vender sus casas a compradores pobres o que no fueran blancos; Renacimiento de Harlem = El primer movimiento literario y artístico negro del país","Unlocked. Your digit is 0. Your answer: The Eighteenth Amendment is ratified &gt; Sacco and Vanzetti are arrested &gt; Congress passes the Immigration Act of 1924 &gt; John Scopes is arrested for teaching evolution":"Desbloqueado. Tu dígito es 0. Tu respuesta: Se ratifica la Decimoctava Enmienda &gt; Arrestan a Sacco y Vanzetti &gt; El Congreso aprueba la Ley de Inmigración de 1924 &gt; Arrestan a John Scopes por enseñar la evolución"},"ar":{"Save Progress":"حفظ التقدم","Load Progress":"تحميل التقدم","Finished — Download File to Submit":"انتهيت — نزّل الملف لتسليمه","Clear all my answers":"امسح كل إجاباتي","FIRST NAME *":"الاسم الأول *","LAST NAME *":"اسم العائلة *","PERIOD *":"الحصة *","DATE (fills in when you finish)":"التاريخ (يُكتب تلقائيًا عند الانتهاء)","e.g. 3":"مثال: 3","Automatic":"تلقائي","Please type your first name, last name, and period first.":"اكتب أولًا اسمك الأول واسم العائلة والحصة.","Western Expansion and Southern Secession":"التوسع غربًا وانفصال الجنوب","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"الوحدة 3 · بيت منقسم وأُعيد بناؤه | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — قانون العبيد الهاربين","Bleeding Kansas":"Bleeding Kansas — كانساس النازفة","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"الوحدة 3 · بيت منقسم وأعيد بناؤه | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"تم تنزيل ملف التقدم. احتفظ به في مكان آمن. استخدم «تحميل التقدم» لتكمل لاحقًا.","Progress loaded.":"تم تحميل التقدم.","Could not read that file.":"تعذّرت قراءة هذا الملف.","Treaty of Guadalupe Hidalgo":"معاهدة غوادالوبي هيدالغو (Treaty of Guadalupe Hidalgo)","All 5 locks are open. Type the 5 digits in order, Lock 1 first.":"الأقفال الخمسة مفتوحة. اكتب الأرقام الخمسة بالترتيب: رقم القفل 1 أولًا.","Answer every question first.":"أجب عن كل الأسئلة أولًا.","CLUE CARD":"بطاقة القرائن","Check":"تحقق","Choose a description...":"اختر وصفًا...","Clear":"مسح","Clear all my work and start over":"امسح كل عملي وابدأ من جديد","DEBRIEF":"الملخص الختامي","Debrief":"الملخص الختامي","Decoded answer":"الإجابة بعد فك التشفير","Decoder key: the <span style=\"color:var(--hl);font-weight:700\">aqua<\/span> letter is in the message. The white letter under it is the real letter.":"مفتاح فك التشفير: الحرف <span style=\"color:var(--hl);font-weight:700\">الفيروزي<\/span> هو الحرف الموجود في الرسالة. والحرف الأبيض تحته هو الحرف الحقيقي.","ESCAPED":"لقد هربت!","Enter your first name, last name, and period at the top first.":"اكتب اسمك الأول واسم العائلة والحصة في الأعلى أولًا.","Exit code digit 1":"رقم رمز الخروج 1","Exit door":"باب الخروج","Fill in the blank using the Clue Card.":"املأ الفراغ باستخدام بطاقة القرائن.","Have a saved file? Load it to continue.":"هل لديك ملف محفوظ؟ حمّله لتكمل.","Hint":"تلميح","Hints used":"التلميحات المستخدمة","How to escape:":"كيف تهرب:","If you get stuck, press <b>Hint<\/b>. Hints are free, but your teacher can see how many you used.":"إذا تعثرت، اضغط <b>تلميح<\/b>. التلميحات مجانية، لكن معلمك يستطيع أن يرى كم تلميحًا استخدمت.","Locks":"الأقفال","Match each term to the best description. Use the Clue Card.":"طابق كل مصطلح مع أفضل وصف له. استخدم بطاقة القرائن.","Match every term first.":"طابق كل المصطلحات أولًا.","Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.":"لم تهرب بعد (يُسجَّل «غير مكتمل» INCOMPLETE). ما زال بإمكانك تنزيل ملفك وتسليمه.","Not quite. Check each match against the Clue Card. Which one are you least sure about?":"ليس تمامًا. تحقق من كل مطابقة باستخدام بطاقة القرائن. أي مطابقة أنت أقل تأكدًا منها؟","Not quite. Decode one letter at a time with the key, then check your spelling.":"ليس تمامًا. فُكّ تشفير حرف واحد في كل مرة باستخدام المفتاح، ثم تحقق من تهجئتك.","Not quite. Re-read the second sentence of the Clue Card. Use the scrambled letters to check your spelling.":"ليس تمامًا. أعد قراءة الجملة الثانية في بطاقة القرائن. استخدم الحروف المبعثرة للتحقق من تهجئتك.","One last step: write your Debrief below.":"خطوة أخيرة: اكتب ملخصك الختامي أدناه.","Open all 5 locks first. The digits go in order: Lock 1 first.":"افتح الأقفال الخمسة أولًا. تُكتب الأرقام بالترتيب: رقم القفل 1 أولًا.","Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.":"افتح الأقفال الخمسة، ثم اكتب رمز الخروج المكوّن من 5 أرقام. أنهِ بالملخص الختامي.","Open each lock in order. Read the <b>Clue Card<\/b>. The answer is in the card.":"افتح كل قفل بالترتيب. اقرأ <b>بطاقة القرائن<\/b>. الإجابة موجودة في البطاقة.","Open the Door":"افتح الباب","Pick the correct answer for all three questions.":"اختر الإجابة الصحيحة للأسئلة الثلاثة.","Progress file downloaded. Use Load Progress to continue later.":"تم تنزيل ملف التقدم. استخدم «تحميل التقدم» لتكمل لاحقًا.","Progress loaded. Welcome back.":"تم تحميل التقدم. أهلًا بعودتك.","Solve the puzzle to open the lock and reveal one digit.":"حلّ اللغز لتفتح القفل وتكشف رقمًا واحدًا.","THE EXIT DOOR":"باب الخروج","Tap all 4 places first, in order.":"المس الأماكن الأربعة أولًا، بالترتيب.","Tap the four events in the order they happened. Tap an event again to take it back.":"المس الأحداث الأربعة بالترتيب الذي وقعت به. المس الحدث مرة أخرى للتراجع عنه.","That file did not work. Choose a progress file saved from this Escape Room.":"لم يعمل هذا الملف. اختر ملف تقدم محفوظًا من غرفة الهروب هذه.","That was the last hint. Read the Clue Card slowly and try again.":"كان هذا آخر تلميح. اقرأ بطاقة القرائن ببطء وحاول مرة أخرى.","The Code Book":"كتاب الشيفرة","The clock starts when you press the button. Most students finish in about 20 minutes.":"يبدأ العدّاد عندما تضغط الزر. يُنهي معظم الطلاب في نحو 20 دقيقة.","The code has 5 digits. Fill every box.":"الرمز مكوّن من 5 أرقام. املأ كل المربعات.","The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.":"لم يُفتح الباب. تحقق من الأرقام تحت كل قفل، واكتبها بالترتيب: رقم القفل 1 أولًا.","The door is open!":"الباب مفتوح!","The door swings open!":"ينفتح الباب على مصراعيه!","Time":"الوقت","Type the answer in English.":"اكتب الإجابة بالإنجليزية.","Type the answer in English. Use the digits 0-9.":"اكتب الإجابة بالإنجليزية. استخدم الأرقام 0-9.","Type the exit code":"اكتب رمز الخروج","Type your answer first.":"اكتب إجابتك أولًا.","Type your answer here...":"اكتب إجابتك هنا...","UNIT 5 · WAR, PROSPERITY, AND CULTURAL CONFLICT | CPUSH | DANIEL GARZA, M.A.":"الوحدة 5 · الحرب والازدهار والصراع الثقافي | CPUSH | DANIEL GARZA, M.A.","Unscramble the letters to fill the blank.":"رتّب الأحرف لتملأ الفراغ.","Which lock was hardest, and what did you learn that you did not know before?":"أي قفل كان الأصعب، وماذا تعلمت ولم تكن تعرفه من قبل؟","Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.":"اكتب من 3 إلى 4 جمل. اذكر القفل واستخدم معلومة واحدة من بطاقة القرائن الخاصة به. يمكنك كتابة هذا حتى لو لم تهرب.","You escaped and wrote your Debrief. Ready to submit.":"لقد هربت وكتبت ملخصك الختامي. أنت جاهز للتسليم.","You escaped! Write your Debrief, then download your file to submit.":"لقد هربت! اكتب ملخصك الختامي، ثم نزّل ملفك لتسليمه.","Your answer":"إجابتك","Your time:":"وقتك:","digit":"رقم","Core Objective 1: Assess the impact of the consumer culture that emerged in America during the 1920s and explain the factors that contributed to its growth.":"الهدف الأساسي 1: تقييم أثر ثقافة الاستهلاك التي ظهرت في أمريكا خلال عشرينيات القرن العشرين، وشرح العوامل التي ساهمت في نموها.","Core Objective 2: Describe other major new social and cultural trends and movements that became prominent during the 1920s and explain how they challenged traditional standards and customs.":"الهدف الأساسي 2: وصف اتجاهات وحركات اجتماعية وثقافية جديدة كبرى برزت في العشرينيات، وشرح كيف تحدّت المعايير والعادات التقليدية.","Core Objective 3: Explain what “modernism” means in intellectual and artistic terms and how the modernist movement influenced American culture in the early twentieth century.":"الهدف الأساسي 3: شرح معنى «الحداثة» من الناحيتين الفكرية والفنية، وكيف أثّرت حركة الحداثة في الثقافة الأمريكية في أوائل القرن العشرين.","Core Objective 4: Identify notable examples of reactionary conservatism during the decade and analyze their impact on government policies.":"الهدف الأساسي 4: تحديد أمثلة بارزة على المحافظة الرجعية خلال العقد، وتحليل أثرها في سياسات الحكومة.","Core Objective 5: Trace the Republican Party’s dominance of the federal government during the 1920s and analyze the extent to which its policies were a rejection of progressivism.":"الهدف الأساسي 5: تتبّع هيمنة الحزب الجمهوري على الحكومة الفيدرالية خلال العشرينيات، وتحليل إلى أي مدى كانت سياساته رفضًا للتقدمية.","A Clash of Cultures - The 1920s":"صدام الثقافات - عشرينيات القرن العشرين","Escape Room 14 · A Clash of Cultures - The 1920s":"غرفة الهروب 14 · صدام الثقافات - عشرينيات القرن العشرين","Escape the Radio Studio":"اهرب من استوديو الإذاعة","Enter the Radio Studio":"ادخل استوديو الإذاعة","You are locked in the radio studio.":"أنت محبوس في استوديو الإذاعة.","ON AIR":"على الهواء","A 1920s radio studio at night. On the left, a standing microphone and a record player on a table, with sound-proofing panels on the wall behind. On the right, a clock hangs above a tube radio on a table, with signal waves above the radio. The studio door has an ON AIR sign and five padlocks in a row. Under each padlock is a window for one digit of the exit code.":"استوديو إذاعة من عشرينيات القرن الماضي ليلًا. على اليسار، ميكروفون قائم ومشغّل أسطوانات على طاولة، وخلفهما ألواح عازلة للصوت على الجدار. وعلى اليمين، ساعة معلّقة فوق راديو بالأنابيب على طاولة، وفوق الراديو موجات إشارة. وعلى باب الاستوديو لافتة «على الهواء» وخمسة أقفال في صف واحد. وتحت كل قفل نافذة صغيرة لرقم واحد من رمز الخروج.","The radio station went off the air for the night and the engineer locked up the studio. Old microphones and records from the 1920s sit in the room. The door has <b>5 locks<\/b>. Each lock matches one big idea from Lesson 14. Solve them all to find the <b>5-digit exit code<\/b>.":"خرجت محطة الإذاعة من البث لهذه الليلة، وأقفل المهندس الاستوديو. وفي الغرفة ميكروفونات وأسطوانات قديمة من العشرينيات. وللباب <b>5 أقفال<\/b>. كل قفل يرتبط بفكرة كبيرة من الدرس 14. حُلّها كلها لتجد <b>رمز الخروج المكوّن من 5 أرقام<\/b>.","The Radio Cabinet":"خزانة الراديو","The Record Player":"مشغّل الأسطوانات","The Program Schedule":"جدول البرامج","The Microphone":"الميكروفون","35 percent":"35 بالمئة","50 percent":"50 بالمئة","68 percent":"68 بالمئة","90 percent":"90 بالمئة","Which new way of paying helped people buy more products in the 1920s?":"ما طريقة الدفع الجديدة التي ساعدت الناس على شراء منتجات أكثر في العشرينيات؟","Higher tariffs on imported goods":"رسوم جمركية أعلى على السلع المستوردة","Installment buying (“buy now, pay later”)":"الشراء بالتقسيط («اشتر الآن وادفع لاحقًا»)","Rationing":"التقنين","Union contracts":"عقود النقابات","In 1930, what share of homes had electricity?":"ما نسبة البيوت التي كان فيها كهرباء عام 1930؟","What happened to the price of Ford’s Model T between 1908 and 1924?":"ماذا حدث لسعر سيارة فورد (Ford) موديل T (Model T) بين عام 1908 وعام 1924؟","It rose from $290 to $850":"ارتفع من 290 دولارًا إلى 850 دولارًا","It stayed at $850":"بقي عند 850 دولارًا","It fell from $850 to $290":"انخفض من 850 دولارًا إلى 290 دولارًا","It fell from $850 to $85":"انخفض من 850 دولارًا إلى 85 دولارًا","After a short recession in 1920–1921, Americans enjoyed the fastest economic growth in history, and a powerful “consumer culture” took hold. Advertising grew, and installment buying let people “buy now, pay later,” so consumer debt almost tripled. Electricity spread: in 1920 only 35 percent of homes had it, but by 1930, 68 percent did. The number of families with a radio jumped from 60,000 in 1922 to nearly 14 million in 1930, and movie attendance averaged 80 million people a week. Ford cut the price of the Model T from $850 in 1908 to $290 in 1924, and by 1929 there were more than 23 million cars. Mostly urban middle- and upper-class families enjoyed these new conveniences.":"بعد ركود قصير في 1920–1921، تمتّع الأمريكيون بأسرع نمو اقتصادي في التاريخ، وظهرت «ثقافة استهلاكية» (consumer culture) قوية. ازداد الإعلان، وأتاح الشراء بالتقسيط للناس أن «يشتروا الآن ويدفعوا لاحقًا»، فكادت ديون المستهلكين تتضاعف ثلاث مرات. وانتشرت الكهرباء: ففي عام 1920 كان 35 بالمئة فقط من البيوت فيها كهرباء، لكن بحلول عام 1930 صارت في 68 بالمئة منها. وقفز عدد الأسر التي لديها راديو من 60,000 عام 1922 إلى نحو 14 مليونًا عام 1930، وبلغ متوسط حضور السينما 80 مليون شخص في الأسبوع. وخفّضت شركة فورد (Ford) سعر سيارة موديل T (Model T) من 850 دولارًا عام 1908 إلى 290 دولارًا عام 1924، وبحلول عام 1929 كان هناك أكثر من 23 مليون سيارة. وكانت الأسر الحضرية من الطبقة الوسطى والعليا هي التي تتمتع بمعظم هذه الراحة الجديدة.","Each answer is in the Clue Card. Look for “buy now, pay later,” for the share of homes with electricity in 1930, and for the Model T prices.":"كل إجابة موجودة في بطاقة القرائن. ابحث عن «اشتر الآن وادفع لاحقًا»، وعن نسبة البيوت التي فيها كهرباء عام 1930، وعن أسعار سيارة موديل T (Model T).","Installment buying let people pay over time. In 1930, 68 percent of homes had electricity. The Model T price fell from $850 to $290.":"الشراء بالتقسيط يتيح للناس الدفع على مدى الوقت. في عام 1930 كان 68 بالمئة من البيوت فيها كهرباء. وانخفض سعر سيارة موديل T (Model T) من 850 دولارًا إلى 290 دولارًا.","Not quite. At least one answer is off. Re-read the Clue Card for how people paid, how many homes had electricity in 1930, and the Model T price.":"ليس تمامًا. إجابة واحدة على الأقل غير صحيحة. أعد قراءة بطاقة القرائن لمعرفة كيف كان الناس يدفعون، وكم بيتًا كان فيه كهرباء عام 1930، وسعر سيارة موديل T (Model T).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 22, “A “New Era” of Consumption” (pp. 948-952).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 22، “A “New Era” of Consumption” (ص. 948-952).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 22, “The “Jazz Age”” (pp. 954-957, 960, 964-965).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 22، “The “Jazz Age”” (ص. 954-957، 960، 964-965).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 22, “The Modernist Revolt” (pp. 965-969).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 22، “The Modernist Revolt” (ص. 965-969).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 22, “The Reactionary Twenties” (pp. 972-980).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 22، “The Reactionary Twenties” (ص. 972-980).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 22, “Republican Resurgence” (pp. 983-994).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 22، “Republican Resurgence” (ص. 983-994).","Jazz Age":"عصر الجاز (Jazz Age)","Flappers":"الفلابرز (Flappers)","Harlem Renaissance":"نهضة هارلم (Harlem Renaissance)","Restrictive covenants":"العهود التقييدية (Restrictive covenants)","The name F. Scott Fitzgerald gave to the rebellious, spontaneous 1920s":"الاسم الذي أطلقه ف. سكوت فيتزجيرالد (F. Scott Fitzgerald) على العشرينيات المتمردة والعفوية","Young women who bobbed their hair, wore shorter skirts, and defied the usual standards":"شابات قصصن شعرهن قصيرًا ولبسن تنانير أقصر وتحدّين المعايير المعتادة","The nation’s first Black literary and artistic movement":"أول حركة أدبية وفنية سوداء في البلاد","Agreements in which neighbors promised not to sell their homes to poor or non-White buyers":"اتفاقات يتعهد فيها الجيران بعدم بيع بيوتهم للمشترين الفقراء أو غير البيض","Writer F. Scott Fitzgerald called the 1920s the “Jazz Age,” a rebellious and spontaneous decade, and jazz spread from New Orleans to Harlem in New York City and to Chicago’s South Side. Young women called flappers bobbed their hair, wore short skirts, and drove cars, and critics were furious. As the Great Migration continued, African Americans found new freedoms in northern cities, and the Harlem Renaissance, the nation’s first Black literary and artistic movement, was a powerful assertion of Black creativity and dignity. Racially restrictive covenants, which were legal agreements not to sell homes to poor or non-White buyers, were still common. When the Sweet family moved into a Detroit neighborhood in September 1925, a mob of White residents greeted them, and the NAACP hired Clarence Darrow to defend them. The Sweets won, but housing discrimination continued for decades.":"أطلق الكاتب ف. سكوت فيتزجيرالد (F. Scott Fitzgerald) على العشرينيات اسم «عصر الجاز» (Jazz Age)، وهو عقد متمرد وعفوي، وانتشر الجاز من نيو أورلينز (New Orleans) إلى هارلم (Harlem) في مدينة نيويورك (New York City) وإلى الحي الجنوبي (South Side) في شيكاغو (Chicago). وكانت الشابات اللواتي يُسمَّين الفلابرز (flappers) يقصصن شعرهن ويلبسن تنانير قصيرة ويقدن السيارات، وكان النقاد غاضبين. ومع استمرار الهجرة الكبرى (Great Migration)، وجد الأمريكيون من أصل أفريقي حريات جديدة في مدن الشمال، وكانت نهضة هارلم (Harlem Renaissance)، أول حركة أدبية وفنية سوداء في البلاد، تأكيدًا قويًا لإبداع السود وكرامتهم. وظلّت العهود التقييدية العرقية (restrictive covenants)، وهي اتفاقات قانونية بعدم بيع البيوت للمشترين الفقراء أو غير البيض، شائعة. وعندما انتقلت عائلة سويت (Sweet) إلى حي في ديترويت (Detroit) في سبتمبر 1925، استقبلها حشد من السكان البيض، واستأجرت الجمعية الوطنية للنهوض بالملونين (NAACP) المحامي كلارنس دارو (Clarence Darrow) للدفاع عنها. وفازت عائلة سويت، لكن التمييز في السكن استمر عقودًا.","Two terms name movements or eras (Jazz Age, Harlem Renaissance). One names a group of young women. One names a kind of housing agreement.":"مصطلحان يسميان حركتين أو عصرين (عصر الجاز (Jazz Age)، نهضة هارلم (Harlem Renaissance)). وأحدهما يسمي مجموعة من الشابات. والآخر يسمي نوعًا من اتفاقات السكن.","Fitzgerald named the Jazz Age. Flappers bobbed their hair. The Harlem Renaissance was Black literary and artistic. Restrictive covenants were about who could buy homes.":"فيتزجيرالد (Fitzgerald) هو من سمّى عصر الجاز. والفلابرز قصصن شعرهن. ونهضة هارلم كانت أدبية وفنية سوداء. أما العهود التقييدية فكانت تتعلق بمن يستطيع شراء البيوت.","This movement began in the 1890s in the capitals of Europe, such as London, Paris, Berlin, and Vienna. By the 1910s it had spread to the United States, especially New York City and Chicago. Its artists and writers rebelled against what they saw as a repressive, conventional Christian morality and searched for new ways to express themselves. Albert Einstein’s discoveries led many people to believe there were no absolute standards or fixed points of reference. Poet Ezra Pound gave the movement its slogan: “Make It New!” The Armory Show of 1913 was the most controversial event in the history of American art, and one critic said the movement was “nothing else than the total destruction of the art of painting.”":"بدأت هذه الحركة في تسعينيات القرن التاسع عشر في عواصم أوروبا، مثل لندن (London) وباريس (Paris) وبرلين (Berlin) وفيينا (Vienna). وبحلول عقد 1910 كانت قد انتشرت في الولايات المتحدة، وخاصة في مدينة نيويورك (New York City) وشيكاغو (Chicago). تمرّد فنانوها وكتّابها على ما رأوه أخلاقًا مسيحية تقليدية قمعية، وبحثوا عن طرق جديدة للتعبير عن أنفسهم. وقادت اكتشافات ألبرت أينشتاين (Albert Einstein) كثيرًا من الناس إلى الاعتقاد بأنه لا توجد معايير مطلقة ولا نقاط مرجعية ثابتة. وأعطى الشاعر إزرا باوند (Ezra Pound) الحركة شعارها: «اجعله جديدًا!». وكان معرض أرموري (Armory Show) عام 1913 أكثر الأحداث إثارة للجدل في تاريخ الفن الأمريكي، وقال أحد النقاد إن الحركة «ليست سوى التدمير الكامل لفن الرسم».","The Clue Card describes a movement without naming it. A secret message names it. Each letter in the message was moved 5 steps forward in the alphabet. Decode it to name the movement.":"تصف بطاقة القرائن حركة دون أن تذكر اسمها. رسالة سرية تذكر اسمها. تم تحريك كل حرف في الرسالة 5 خطوات إلى الأمام في الأبجدية. فُكّ تشفيرها لتعرف اسم الحركة.","The Clue Card describes the movement but does not name it. Use the decoder key to spell the name, one letter at a time.":"تصف بطاقة القرائن الحركة لكنها لا تذكر اسمها. استخدم مفتاح فك التشفير لتهجئة الاسم حرفًا حرفًا.","In the message, the letter R is really M, and the letter T is really O. The word has 9 letters and starts with M.":"في الرسالة، الحرف R هو في الحقيقة M، والحرف T هو في الحقيقة O. الكلمة من 9 أحرف وتبدأ بالحرف M.","The Eighteenth Amendment is ratified":"يُصادق على التعديل الثامن عشر (Eighteenth Amendment)","Sacco and Vanzetti are arrested":"يُعتقل ساكو (Sacco) وفانزيتي (Vanzetti)","Congress passes the Immigration Act of 1924":"يُقرّ الكونغرس قانون الهجرة لعام 1924 (Immigration Act of 1924)","John Scopes is arrested for teaching evolution":"يُعتقل جون سكوبس (John Scopes) بسبب تدريس التطور","Many Americans found the changes of the 1920s shocking, and nativism, which is prejudice against people who are not native-born, targeted Catholic and Jewish immigrants from southern and eastern Europe. The most violent reactionary movement was a revived Ku Klux Klan, which let only native-born White Protestants join. The Eighteenth Amendment, ratified on January 16, 1919, banned the manufacture, sale, and transportation of liquor, but Prohibition was not widely followed and it boosted police corruption and organized crime. On May 5, 1920, police arrested Italian immigrants Nicola Sacco and Bartolomeo Vanzetti, who called themselves anarchists, and they were executed in 1927, although people still debate their guilt. The Immigration Act of 1924 cut the quota to 2 percent of each nationality in the 1890 census and banned almost all immigrants from Asia. Fundamentalists insisted on the literal truth of the Bible and were troubled by the theory of evolution; in 1925, Tennessee outlawed teaching evolution in public schools, and teacher John Scopes was arrested.":"وجد كثير من الأمريكيين تغيرات العشرينيات صادمة، واستهدفت النزعة الأهلانية (nativism)، وهي التحيز ضد الأشخاص الذين لم يولدوا في البلاد، المهاجرين الكاثوليك واليهود من جنوب أوروبا وشرقها. وكانت أعنف حركة رجعية جماعة كو كلوكس كلان (Ku Klux Klan) بعد إحيائها، التي لم تسمح بالانضمام إلا للبروتستانت البيض المولودين في البلاد. ومنع التعديل الثامن عشر (Eighteenth Amendment)، الذي صودق عليه في 16 يناير 1919، صناعة المشروبات الكحولية وبيعها ونقلها، لكن الحظر (Prohibition) لم يكن يُطبَّق على نطاق واسع، وزاد من فساد الشرطة والجريمة المنظمة. وفي 5 مايو 1920، اعتقلت الشرطة المهاجرين الإيطاليين نيكولا ساكو (Nicola Sacco) وبارتولوميو فانزيتي (Bartolomeo Vanzetti)، اللذين وصفا نفسيهما بأنهما فوضويان، وأُعدما عام 1927، مع أن الناس ما زالوا يتجادلون في مدى ذنبهما. وخفّض قانون الهجرة لعام 1924 (Immigration Act of 1924) الحصة إلى 2 بالمئة من كل جنسية في تعداد 1890، ومنع تقريبًا كل المهاجرين من آسيا. وأصرّ الأصوليون (fundamentalists) على الصدق الحرفي للكتاب المقدس وأزعجتهم نظرية التطور؛ وفي عام 1925 منعت ولاية تينيسي (Tennessee) تدريس التطور في المدارس العامة، واعتُقل المعلم جون سكوبس (John Scopes).","Look for the years in the Clue Card: 1919, 1920, 1924, and 1925. Each event has its own year.":"ابحث في بطاقة القرائن عن السنوات: 1919 و1920 و1924 و1925. لكل حدث سنته الخاصة.","The order is the Eighteenth Amendment, the arrest of Sacco and Vanzetti, the Immigration Act of 1924, then the arrest of John Scopes.":"الترتيب هو: التعديل الثامن عشر (Eighteenth Amendment)، ثم اعتقال ساكو (Sacco) وفانزيتي (Vanzetti)، ثم قانون الهجرة لعام 1924 (Immigration Act of 1924)، ثم اعتقال جون سكوبس (John Scopes).","Not quite. Re-read the Clue Card and match each event to its year.":"ليس تمامًا. أعد قراءة بطاقة القرائن واربط كل حدث بسنته.","Warren Harding won the presidency by promising a return to “________.”":"فاز وارن هاردينغ (Warren Harding) بالرئاسة بعد أن وعد بالعودة إلى «________».","After the Great War, progressivism lost momentum at the national level, and conservative Republicans returned to power. Warren Harding promised the country a return to “normalcy,” and he won 16 million votes to 9 million for his Democratic opponent. Treasury Secretary Andrew Mellon convinced Congress to cut the top tax rate from 73 percent in 1921 to 24 percent by 1929, and the Supreme Court struck down a federal child-labor law and a minimum-wage law for women. Union membership fell from about 5 million in 1920 to 3.5 million in 1929. In the Teapot Dome Scandal, Interior Secretary Albert Fall secretly sold government oil and took huge bribes, and he became the first former cabinet official to go to prison for misconduct in office. President Calvin Coolidge said, “The chief business of the American people is business,” and Herbert Hoover won the 1928 election in a landslide.":"بعد الحرب العظمى، فقدت التقدمية زخمها على المستوى الوطني، وعاد الجمهوريون المحافظون إلى السلطة. ووعد وارن هاردينغ (Warren Harding) البلاد بالعودة إلى «الحياة الطبيعية» (normalcy)، ونال 16 مليون صوت مقابل 9 ملايين لمنافسه الديمقراطي. وأقنع وزير الخزانة أندرو ميلون (Andrew Mellon) الكونغرس بخفض أعلى معدل ضريبي من 73 بالمئة عام 1921 إلى 24 بالمئة بحلول عام 1929، وألغت المحكمة العليا قانونًا اتحاديًا بشأن عمل الأطفال وقانونًا للحد الأدنى للأجور خاصًا بالنساء. وانخفض عدد أعضاء النقابات من نحو 5 ملايين عام 1920 إلى 3.5 مليون عام 1929. وفي فضيحة تيبوت دوم (Teapot Dome Scandal)، باع وزير الداخلية ألبرت فول (Albert Fall) نفطًا حكوميًا سرًّا وأخذ رشاوى ضخمة، وصار أول وزير سابق في الحكومة يدخل السجن بسبب سوء السلوك في منصبه. وقال الرئيس كالفن كوليدج (Calvin Coolidge): «الشغل الأساسي للشعب الأمريكي هو الأعمال التجارية»، وفاز هربرت هوفر (Herbert Hoover) في انتخابات 1928 بفوز ساحق.","Read the second sentence of the Clue Card. The missing word is in quotation marks.":"اقرأ الجملة الثانية في بطاقة القرائن. الكلمة الناقصة بين علامتي تنصيص.","The word starts with N and ends with Y. It has 8 letters.":"الكلمة تبدأ بالحرف N وتنتهي بالحرف Y. وهي من 8 أحرف.","Unlocked. Your digit is 5. Your answer: Installment buying (“buy now, pay later”); 68 percent; It fell from $850 to $290":"تم الفتح. رقمك هو 5. إجابتك: الشراء بالتقسيط («اشتر الآن وادفع لاحقًا»)؛ 68 بالمئة؛ انخفض من 850 دولارًا إلى 290 دولارًا","Unlocked. Your digit is 8. Your answer: Jazz Age = The name F. Scott Fitzgerald gave to the rebellious, spontaneous 1920s; Flappers = Young women who bobbed their hair, wore shorter skirts, and defied the usual standards; Restrictive covenants = Agreements in which neighbors promised not to sell their homes to poor or non-White buyers; Harlem Renaissance = The nation’s first Black literary and artistic movement":"تم الفتح. رقمك هو 8. إجابتك: عصر الجاز (Jazz Age) = الاسم الذي أطلقه ف. سكوت فيتزجيرالد (F. Scott Fitzgerald) على العشرينيات المتمردة والعفوية؛ الفلابرز (Flappers) = شابات قصصن شعرهن قصيرًا ولبسن تنانير أقصر وتحدّين المعايير المعتادة؛ العهود التقييدية (Restrictive covenants) = اتفاقات يتعهد فيها الجيران بعدم بيع بيوتهم للمشترين الفقراء أو غير البيض؛ نهضة هارلم (Harlem Renaissance) = أول حركة أدبية وفنية سوداء في البلاد","Unlocked. Your digit is 0. Your answer: The Eighteenth Amendment is ratified &gt; Sacco and Vanzetti are arrested &gt; Congress passes the Immigration Act of 1924 &gt; John Scopes is arrested for teaching evolution":"تم الفتح. رقمك هو 0. إجابتك: يُصادق على التعديل الثامن عشر (Eighteenth Amendment) &gt; يُعتقل ساكو (Sacco) وفانزيتي (Vanzetti) &gt; يُقرّ الكونغرس قانون الهجرة لعام 1924 (Immigration Act of 1924) &gt; يُعتقل جون سكوبس (John Scopes) بسبب تدريس التطور"},"patterns":[{"re":"^Still needed: first name, last name, and period\\.$","es":"Todavía falta: nombre, apellido y período.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة."},{"re":"^LOCK (\\d)$","es":"Cand. $1","ar":"القفل $1"},{"re":"^LOCK (\\d) · CORE OBJECTIVE (\\d+)$","es":"CANDADO $1 · OBJETIVO PRINCIPAL $2","ar":"القفل $1 · الهدف الأساسي $2"},{"re":"^Hint (\\d):$","es":"Pista $1:","ar":"تلميح $1:"},{"re":"^Exit code digit (\\d)$","es":"Dígito $1 del código de salida","ar":"رقم رمز الخروج $1"},{"re":"^Click! Lock (\\d) is open\\. Your digit is (\\d)\\.$","es":"¡Clic! El Candado $1 está abierto. Tu dígito es $2.","ar":"نقرة! القفل $1 مفتوح. رقمك هو $2."},{"re":"^5 of 5 locks opened with (\\d+) tries and (\\d+) hints\\.$","es":"Abriste 5 de 5 candados con $1 intentos y $2 pistas.","ar":"فتحت 5 أقفال من 5 بعد $1 محاولة و$2 تلميحات."},{"re":"^Tap all (\\d) places first, in order\\.$","es":"Primero toca los $1 lugares, en orden.","ar":"المس الأماكن الـ $1 أولًا، بالترتيب."},{"re":"^Done! File downloaded: (.*)\\. Upload it to Canvas\\.$","es":"¡Listo! Se descargó el archivo: $1. Súbelo a Canvas.","ar":"تم! تم تنزيل الملف: $1. ارفعه إلى Canvas."},{"re":"^Your file downloaded and is marked INCOMPLETE \\(you have not escaped\\)\\. Upload it to Canvas: (.*)$","es":"Tu archivo se descargó y está marcado INCOMPLETO (todavía no escapas). Súbelo a Canvas: $1","ar":"تم تنزيل ملفك وهو مُسجَّل «غير مكتمل» INCOMPLETE (لم تهرب بعد). ارفعه إلى Canvas: $1"},{"re":"^Unlocked\\. Your digit is (\\d)\\. Your answer: (.*)$","es":"Desbloqueado. Tu dígito es $1. Tu respuesta: $2","ar":"تم الفتح. رقمك هو $1. إجابتك: $2"}]}</script>
+<script>
+/* Supplement language switch (English / Espanol / Arabic). Works on pages whose text is rendered by JS:
+   a MutationObserver translates text as it appears. Data: <script type="application/json" id="sp-i18n">
+   {"langs":["en","es","ar"],"default":"en","es":{englishHTML:translation},"ar":{...},"patterns":[{"re":"^(\\d+) of (\\d+)$","es":"$1 de $2","ar":"..."}]}
+   Keys are the English text exactly as it sits in the page (innerHTML, spaces collapsed).
+   Helpers: spSeen() english strings seen so far; spMissing() strings with no translation in the current language;
+   spSetLang(l); spTr(s) translate a string (used for confirm/alert); spAscii(s) plain-ASCII name for file names. */
+(function () {
+  var node = document.getElementById('sp-i18n');
+  var D = node ? JSON.parse(node.textContent) : { langs: ['en'], patterns: [] };
+  var INLINE = { B:1,I:1,EM:1,STRONG:1,SPAN:1,A:1,BR:1,SMALL:1,SUP:1,SUB:1,U:1,MARK:1,BDI:1,TSPAN:1,CODE:1 };
+  var SKIP = 'script,style,textarea,input,.sp-lang,.sp-nt,[translate="no"]';
+  var WORD = /[A-Za-z\u00C0-\u024F\u0600-\u06FF]{2}|e\.g\./;
+  var LANG = 'en', REC = new WeakMap(), SEEN = {}, MISS = {};
+  (D.patterns || []).forEach(function (p) { try { p._re = new RegExp(p.re); } catch (e) {} });
+  function norm(s) { return String(s).replace(/\s+/g, ' ').trim(); }
+  function tr(src) {
+    if (LANG === 'en') return null;
+    var t = D[LANG] && D[LANG][src];
+    if (t) return t;
+    var P = D.patterns || [];
+    for (var i = 0; i < P.length; i++) {
+      var m = P[i]._re && P[i]._re.exec(src);
+      if (m && P[i][LANG]) return P[i][LANG].replace(/\$(\d+)/g, function (_, n) { return m[+n] || ''; });
+    }
+    return null;
+  }
+  window.spTr = function (s) { var t = tr(norm(s)); return t ? t.replace(/<[^>]+>/g, '') : s; };
+  function isInline(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling)
+      if (c.nodeType === 1 && (!INLINE[c.tagName.toUpperCase()] || c.matches(SKIP))) return false;
+    return true;
+  }
+  function directText(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling) if (c.nodeType === 3 && WORD.test(c.nodeValue)) return true;
+    return false;
+  }
+  function cur(s) { return s.nodeType === 1 ? s.innerHTML : s.nodeValue; }
+  function put(s, v) { if (s.nodeType === 1) s.innerHTML = v; else s.nodeValue = v; }
+  function handle(s) {
+    var r = REC.get(s), c = cur(s);
+    if (!(r && c === r.wrote)) { r = { en: c, wrote: c }; REC.set(s, r); }
+    var src = norm(r.en), target = r.en;
+    if (WORD.test(src)) {
+      SEEN[src] = 1;
+      if (LANG !== 'en') {
+        var t = tr(src);
+        if (t) {
+          target = s.nodeType === 1 ? t : (r.en.match(/^\s*/)[0] + t + r.en.match(/\s*$/)[0]);
+          delete MISS[src];
+        } else MISS[src] = 1;
+      }
+    }
+    if (c !== target) put(s, target);
+    r.wrote = cur(s);
+  }
+  var ATTRS = ['placeholder', 'alt', 'aria-label', 'title'];
+  function attrs(root) {
+    var els = root.querySelectorAll ? root.querySelectorAll('[placeholder],[alt],[aria-label],[title]') : [];
+    var list = [].slice.call(els); if (root.matches && root.matches('[placeholder],[alt],[aria-label],[title]')) list.push(root);
+    list.forEach(function (el) {
+      if (el.closest && el.closest('.sp-lang,.sp-nt,[translate="no"],script,style')) return;
+      var rec = el.__spa || (el.__spa = {});
+      ATTRS.forEach(function (a) {
+        var v = el.getAttribute(a); if (v == null) return;
+        var r = rec[a];
+        if (!(r && v === r.wrote)) { r = rec[a] = { en: v, wrote: v }; }
+        var src = norm(r.en); if (!WORD.test(src)) return;
+        SEEN[src] = 1;
+        var t = LANG === 'en' ? null : tr(src);
+        if (LANG !== 'en' && !t) MISS[src] = 1;
+        var target = t ? t.replace(/<[^>]+>/g, '') : r.en;
+        if (v !== target) el.setAttribute(a, target);
+        r.wrote = el.getAttribute(a);
+      });
+    });
+  }
+  function walk(root) {
+    if (root.nodeType === 3) { if (WORD.test(root.nodeValue) && !(root.parentNode && root.parentNode.closest && root.parentNode.closest(SKIP))) handle(root); return; }
+    if (root.nodeType !== 1) return;
+    (function w(el) {
+      if (el.matches(SKIP)) return;
+      if (el !== document.body && directText(el) && isInline(el)) { handle(el); return; }
+      for (var c = el.firstChild; c; c = c.nextSibling) {
+        if (c.nodeType === 1) w(c); else if (c.nodeType === 3 && WORD.test(c.nodeValue)) handle(c);
+      }
+    })(root);
+    attrs(root);
+  }
+  var TITLE = { en: document.title, wrote: document.title };
+  function title() {
+    if (document.title !== TITLE.wrote) TITLE = { en: document.title, wrote: document.title };
+    var t = LANG === 'en' ? null : tr(norm(TITLE.en));
+    document.title = t ? t.replace(/<[^>]+>/g, '') : TITLE.en; TITLE.wrote = document.title;
+  }
+  function inl(e) { return e.nodeType === 1 && !!INLINE[e.tagName.toUpperCase()]; }
+  var mo = new MutationObserver(function (muts) {
+    var todo = [];
+    muts.forEach(function (m) {
+      if (m.type === 'childList') { for (var i = 0; i < m.addedNodes.length; i++) todo.push(m.addedNodes[i]); todo.push(m.target); }
+      else todo.push(m.target);
+    });
+    todo.forEach(function (n) {
+      var el = n.nodeType === 1 ? n : n.parentNode;
+      if (!el || el.nodeType !== 1 || !document.body.contains(el)) return;
+      while (el !== document.body && el.parentNode && el.parentNode.nodeType === 1 && inl(el) && inl(el.parentNode)) el = el.parentNode;
+      if (el.parentNode && el.parentNode.nodeType === 1 && inl(el.parentNode) && el.parentNode !== document.body) el = el.parentNode;
+      walk(el);
+    });
+    mo.takeRecords();
+  });
+  var AR = { 'ا':'a','أ':'a','إ':'i','آ':'a','ب':'b','ت':'t','ث':'th','ج':'j','ح':'h','خ':'kh','د':'d','ذ':'dh','ر':'r','ز':'z','س':'s','ش':'sh','ص':'s','ض':'d','ط':'t','ظ':'z','ع':'a','غ':'gh','ف':'f','ق':'q','ك':'k','ل':'l','م':'m','ن':'n','ه':'h','و':'w','ي':'y','ى':'a','ة':'a','ئ':'y','ؤ':'w' };
+  window.spAscii = function (s) {
+    s = String(s); if (s.normalize) s = s.normalize('NFD').replace(/[̀-ًͯ-ٰٟ]/g, '');
+    return s.replace(/[ء-ي]/g, function (c) { return AR[c] !== undefined ? AR[c] : ''; }).replace(/ñ/g, 'n').replace(/Ñ/g, 'N');
+  };
+  window.spSeen = function () { return Object.keys(SEEN); };
+  window.spMissing = function () { return Object.keys(MISS); };
+  window.spLang = function () { return LANG; };
+  window.spSetLang = function (l) {
+    if ((D.langs || ['en']).indexOf(l) < 0) l = 'en';
+    LANG = l; MISS = {};
+    var h = document.documentElement; h.lang = l; h.dir = l === 'ar' ? 'rtl' : 'ltr';
+    mo.disconnect(); walk(document.body); title(); mo.takeRecords();
+    mo.observe(document.body, { childList: true, subtree: true, characterData: true });
+    document.querySelectorAll('.sp-lang button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === l)); });
+    try { localStorage.setItem('sp_lang', l); } catch (e) {}
+    try { var u = new URL(location.href); if (l === 'en') u.searchParams.delete('lang'); else u.searchParams.set('lang', l); history.replaceState(null, '', u.toString()); } catch (e) {}
+    try { document.dispatchEvent(new CustomEvent('splangchange', { detail: l })); } catch (e) {}
+  };
+  var _c = window.confirm, _a = window.alert;
+  window.confirm = function (m) { return _c.call(window, window.spTr(m)); };
+  window.alert = function (m) { return _a.call(window, window.spTr(m)); };
+  document.querySelectorAll('.sp-lang button').forEach(function (b) { b.addEventListener('click', function () { window.spSetLang(b.getAttribute('data-lang')); }); });
+  var start = D['default'] || 'en';
+  try { start = new URL(location.href).searchParams.get('lang') || localStorage.getItem('sp_lang') || start; } catch (e) {}
+  window.spSetLang(start);
+})();
+
+</script><!--/sp-i18n-->
+</body>
+</html>

@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Escape Room 11 · Politics, Populism, and Empire</title>
+<style>
+:root{--bg:#392244;--txt:#F1EBF4;--a1:#543364;--a2:#D2AD4B;--hl:#E1CA8E;--glass:rgba(241,235,244,.07);--glassb:rgba(241,235,244,.2);--dim:#C6BAD0;--ok:#8FD3A8}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#4B2F5C 0%,#392244 60%) fixed;background-color:var(--bg);color:var(--txt);font:17px/1.55 "Segoe UI",system-ui,-apple-system,Verdana,sans-serif;min-height:100vh}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px 40px}
+.glass{background:var(--glass);border:1px solid var(--glassb);border-radius:16px;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+header.hero{padding:30px 0 12px;border-bottom:3px solid var(--a2)}
+.eyebrow{font-size:13px;letter-spacing:.16em;font-weight:700;color:var(--hl)}
+h1{margin:.15em 0 .05em;font-size:clamp(28px,6vw,40px);line-height:1.12}
+.sub{margin:0;font-weight:600;color:var(--dim)}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 4px}
+.meta label{flex:1 1 170px;font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--dim)}
+input[type=text],textarea,select{display:block;width:100%;margin-top:4px;padding:10px 12px;border:1px solid var(--glassb);border-radius:10px;background:rgba(20,10,28,.55);color:var(--txt);font:inherit;font-size:16px}
+input[type=text]:focus,textarea:focus,select:focus,button:focus-visible{outline:3px solid var(--hl);outline-offset:1px}
+input.bad{border-color:var(--a2);box-shadow:0 0 0 2px var(--a2)}
+textarea{min-height:120px;resize:vertical}
+.howto{margin:14px 0;padding:14px 16px;font-size:16px}
+.howto ol{margin:6px 0 0;padding-left:22px}
+.scene{margin:14px 0;padding:8px;text-align:center}
+.scene svg{width:100%;height:auto;display:block;border-radius:12px}
+.bar{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;padding:8px 12px;margin:10px 0;font-weight:700;font-size:15px;background:rgba(57,34,68,.92);border:1px solid var(--glassb);border-radius:12px}
+.bar span b{color:var(--hl)}
+.btn{font:inherit;font-size:16px;font-weight:700;padding:11px 18px;border-radius:12px;border:2px solid var(--hl);background:transparent;color:var(--txt);cursor:pointer;min-height:44px}
+.btn:hover{background:rgba(225,202,142,.18)}
+.btn.primary{background:var(--hl);color:#392244;border-color:var(--hl)}
+.btn.primary:hover{background:#EBDDAE}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.btn.small{padding:8px 14px;font-size:15px;min-height:40px}
+.intro{padding:20px;text-align:center}
+.intro p{margin:.4em 0}
+.lock{margin:12px 0;overflow:hidden}
+.lock>button.lh{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:12px;width:100%;padding:14px 16px;cursor:pointer}
+.lock>button.lh:focus-visible{outline:3px solid var(--hl);outline-offset:-3px}
+.lock.locked>button.lh{cursor:not-allowed;opacity:.55}
+.lk{flex:none;width:44px;height:44px}
+.lk .sh{transition:transform .5s cubic-bezier(.3,1.6,.5,1);transform-origin:center}
+.lock.solved .lk .sh{transform:translateY(-6px) rotate(-30deg);transform-origin:10px 14px}
+.lock.solved .lk .bd{fill:var(--hl)}
+.lt{flex:1}
+.lt small{display:block;font-size:12px;letter-spacing:.12em;font-weight:700;color:var(--hl)}
+.lt strong{font-size:19px}
+.dg{flex:none;min-width:42px;height:42px;border-radius:10px;border:2px solid var(--hl);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;background:rgba(20,10,28,.55)}
+.lb{padding:0 16px 16px;display:none}
+.lock.open .lb{display:block}
+.objline{font-size:14px;color:var(--dim);margin:0 0 10px}
+.card{background:rgba(241,235,244,.1);border-left:6px solid var(--a2);border-radius:10px;padding:12px 14px;margin:8px 0 12px}
+.card h4{margin:0 0 4px;font-size:13px;letter-spacing:.12em;color:var(--hl)}
+.card p{margin:.3em 0}
+.card .src{font-size:13px;color:var(--dim)}
+.prompt{font-weight:700;margin:10px 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0}
+.chip{font:inherit;font-size:16px;padding:10px 14px;border-radius:12px;border:2px solid var(--glassb);background:rgba(20,10,28,.55);color:var(--txt);cursor:pointer;min-height:44px;text-align:left}
+.chip.sel{border-color:var(--hl);background:rgba(225,202,142,.2)}
+.chip .n{display:inline-block;min-width:24px;height:24px;line-height:24px;border-radius:12px;background:var(--hl);color:#392244;font-weight:800;text-align:center;margin-right:8px}
+.mrow{margin:8px 0}
+.mrow label{font-weight:700;display:block}
+fieldset{border:1px solid var(--glassb);border-radius:10px;margin:8px 0;padding:8px 12px}
+legend{font-weight:700;padding:0 6px}
+.opt{display:flex;align-items:center;gap:10px;padding:6px 0;min-height:40px;cursor:pointer}
+.opt input{width:22px;height:22px;accent-color:#E1CA8E;flex:none}
+.cipher{font:700 24px/1.3 "Courier New",monospace;letter-spacing:.14em;background:rgba(20,10,28,.65);padding:12px;border-radius:10px;border:1px dashed var(--hl);word-break:break-word;text-align:center}
+.key{display:grid;grid-template-columns:repeat(13,1fr);gap:2px;margin:10px 0;font:700 14px/1.2 "Courier New",monospace;text-align:center}
+.key div{padding:3px 0;border-radius:4px;background:rgba(241,235,244,.08)}
+.key .c{color:var(--hl)}
+.scr{font:800 30px/1.2 "Courier New",monospace;letter-spacing:.3em;text-align:center;background:rgba(20,10,28,.65);padding:10px;border-radius:10px;border:1px dashed var(--hl)}
+.row{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0;align-items:center}
+.fb{margin:8px 0;padding:10px 12px;border-radius:10px;display:none;font-weight:600}
+.fb.show{display:block}
+.fb.nudge{background:rgba(210,173,75,.18);border:1px solid var(--a2)}
+.fb.good{background:rgba(143,211,168,.16);border:1px solid var(--ok);color:#DDF5E6}
+.hints{margin:6px 0}
+.hint{background:rgba(225,202,142,.14);border:1px dashed var(--hl);border-radius:10px;padding:8px 12px;margin:6px 0;font-size:16px}
+.hint b{color:var(--hl)}
+.exit{margin:16px 0;padding:18px;text-align:center}
+.exit.locked{opacity:.55}
+.exit h2,.esc h2,.debrief h2{margin:.1em 0 .3em}
+.codebox{display:flex;justify-content:center;gap:8px;margin:12px 0}
+.codebox input{width:52px;height:60px;text-align:center;font:800 30px "Courier New",monospace;padding:0;margin:0}
+.esc{margin:16px 0;padding:22px;text-align:center;display:none;border:2px solid var(--hl)}
+.esc.show{display:block}
+.esc .big{overflow-wrap:anywhere;font-size:clamp(30px,9vw,64px);font-weight:900;letter-spacing:.14em;color:var(--hl);text-shadow:0 0 24px rgba(225,202,142,.6);animation:pop .8s cubic-bezier(.3,1.6,.5,1)}
+.esc .time{font-size:26px;font-weight:800}
+.debrief{margin:16px 0;padding:16px}
+.actions{margin:16px 0;padding:16px}
+.status{font-weight:700;margin-bottom:10px}
+.msg{display:none;margin-top:10px;padding:10px 12px;border-radius:10px;background:rgba(143,211,168,.16);border:1px solid var(--ok)}
+.msg.err{background:rgba(210,173,75,.2);border-color:var(--a2)}
+.link{all:unset;cursor:pointer;color:var(--dim);text-decoration:underline;font-size:14px;margin-top:10px;display:inline-block}
+.link:focus-visible{outline:3px solid var(--hl)}
+footer{text-align:center;font-size:12px;letter-spacing:.1em;font-weight:700;color:var(--dim);padding:20px 8px 30px;border-top:1px solid var(--glassb);margin-top:20px}
+.ennote{margin:.4em 0 0;font-size:14px;font-weight:700;color:var(--dim)}
+.exit .ennote{text-align:center}
+.hidden{display:none!important}.lock,.exit,.esc{scroll-margin-top:64px}
+.pop{animation:pop .7s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pop{0%{transform:scale(.2);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes tap{0%,100%{transform:rotate(0)}50%{transform:rotate(9deg)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.shake{animation:shake .35s}
+.wheel{transform-box:view-box;transform-origin:276px 86px}
+.wheel.spin{animation:tap .5s ease-in-out 3}
+.plock .sh{transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
+.plock.open .sh{transform:translateY(-7px)}
+.plock.open .bd{fill:#E1CA8E}
+#door{transform-origin:150px 20px;transition:transform 1.4s ease-in-out}
+.escaped #door{transform:scaleX(.1)}
+#glow{opacity:.15;transition:opacity 1.4s}
+.escaped #glow{opacity:1}
+html[dir="rtl"] .chip{text-align:right}
+html[dir="rtl"] .chip .n{margin-right:0;margin-left:8px}
+html[dir="rtl"] .card{border-left:0;border-right:6px solid var(--a2)}
+html[dir="rtl"] .howto ol{padding-left:0;padding-right:22px}
+html[dir="rtl"] .esc,html[dir="rtl"] .exit,html[dir="rtl"] .intro{text-align:center}
+html[dir="rtl"] .cipher,html[dir="rtl"] .scr,html[dir="rtl"] .key{direction:ltr}
+html[dir="rtl"] .scr{letter-spacing:.3em!important}
+html[dir="rtl"] .cipher{letter-spacing:.14em!important}
+html[dir="rtl"] .key{letter-spacing:0!important}
+html[dir="rtl"] .card .src{direction:ltr;text-align:left}
+html[dir="rtl"] .hint,html[dir="rtl"] .fb,html[dir="rtl"] .msg,html[dir="rtl"] .objline{text-align:start}
+html[dir="rtl"] .lock>button.lh{text-align:start}
+html[dir="rtl"] .lb,html[dir="rtl"] .actions{text-align:start}
+html[dir="rtl"] .bar{direction:rtl}
+html[dir="rtl"] .tt{unicode-bidi:plaintext}
+@media(max-width:520px){body{font-size:16px}.chip{width:100%}.key{font-size:12px;gap:1px}.codebox input{width:46px;height:54px}.dg{min-width:38px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{.bar,.actions button{display:none}}
+/*sp-i18n-css*/
+.sp-lang-bar{display:flex;justify-content:flex-end;padding:8px 12px 0;position:relative;z-index:5}
+.sp-lang{display:inline-flex;gap:2px;padding:3px;border-radius:10px;background:rgba(255,255,255,.88);border:1px solid rgba(0,0,0,.18);font-family:system-ui,"Segoe UI",Tahoma,Arial,sans-serif}
+.sp-lang button{border:0;background:transparent;color:#222;font:600 13px/1 system-ui,"Segoe UI",Tahoma,Arial,sans-serif;padding:7px 11px;border-radius:7px;cursor:pointer}
+.sp-lang button[aria-pressed="true"]{background:#222;color:#fff}
+.sp-lang button:focus-visible{outline:3px solid #2a6df4;outline-offset:1px}
+textarea,input,select{unicode-bidi:plaintext}
+html[lang="ar"] body,html[lang="ar"] button,html[lang="ar"] textarea,html[lang="ar"] input,html[lang="ar"] select{font-family:"Segoe UI",Tahoma,"Noto Sans Arabic","Arial",system-ui,sans-serif}
+html[lang="ar"] body{line-height:1.8}
+html[lang="ar"] *{letter-spacing:0!important}
+html[dir="rtl"] textarea,html[dir="rtl"] input{text-align:start}
+@media print{.sp-lang-bar{display:none}}
+/*/sp-i18n-css*/
+</style>
+</head>
+<body>
+<!--sp-bar--><div class="sp-lang-bar"><div class="sp-lang" role="group" aria-label="Language / Idioma / اللغة"><button type="button" data-lang="en" lang="en" aria-pressed="true">English</button><button type="button" data-lang="es" lang="es" aria-pressed="false">Español</button><button type="button" data-lang="ar" lang="ar" aria-pressed="false">العربية</button></div></div><!--/sp-bar-->
+<div class="wrap">
+<header class="hero">
+  <div class="eyebrow">1859-1917</div>
+  <h1>Escape the Press Room</h1>
+  <p class="sub">Politics, Populism, and Empire</p>
+  <div class="meta">
+    <label>FIRST NAME *<input id="f_first" type="text" autocomplete="given-name"></label>
+    <label>LAST NAME *<input id="f_last" type="text" autocomplete="family-name"></label>
+    <label>PERIOD *<input id="f_period" type="text" inputmode="numeric" maxlength="12" placeholder="e.g. 3"></label>
+  </div>
+</header>
+
+<div class="howto glass"><b>How to escape:</b>
+<ol>
+<li>Open each lock in order. Read the <b>Clue Card</b>. The answer is in the card.</li>
+<li>Solve the puzzle to open the lock and reveal one digit.</li>
+<li>If you get stuck, press <b>Hint</b>. Hints are free, but your teacher can see how many you used.</li>
+<li>Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.</li>
+</ol></div>
+
+<div class="scene glass" id="scene">
+<svg viewBox="0 0 600 270" role="img" aria-label="A newspaper press room at night. Newspaper pages hang on lines on both walls, a wooden type case with small compartments hangs on the left wall, a hand printing press stands on the right, and a stack of paper sits in the lower left. The press room door has five padlocks in a row. Under each padlock is a window for one digit of the exit code.">
+<defs>
+<pattern id="brick" width="40" height="270" patternUnits="userSpaceOnUse"><rect width="40" height="270" fill="#2E1A39"/><path d="M0 0V270M20 0V270" stroke="#F1EBF4" stroke-opacity=".07" fill="none"/><path d="M0 0V270" stroke="#F1EBF4" stroke-opacity=".12"/></pattern>
+<radialGradient id="glowg" cx="50%" cy="50%" r="60%"><stop offset="0" stop-color="#F1EBF4"/><stop offset="1" stop-color="#E1CA8E"/></radialGradient>
+</defs>
+<rect width="600" height="270" fill="url(#brick)"/>
+<rect y="236" width="600" height="34" fill="#24142D"/>
+<g stroke="#C6BAD0" stroke-opacity=".35" stroke-width="2"><path d="M0 248H600M0 260H600"/><path d="M60 236V248M180 236V248M300 236V248M420 236V248M540 236V248M120 248V260M240 248V260M360 248V260M480 248V260M600 248V260"/></g>
+<g stroke="#C6BAD0" stroke-opacity=".6" stroke-width="2" fill="none"><path d="M0 22Q75 34 150 22"/><path d="M450 22Q525 34 600 22"/></g>
+<g fill="#F1EBF4" fill-opacity=".88"><rect x="14" y="30" width="34" height="46" rx="2"/><rect x="60" y="32" width="34" height="46" rx="2"/><rect x="106" y="30" width="30" height="46" rx="2"/><rect x="466" y="30" width="34" height="46" rx="2"/><rect x="512" y="32" width="34" height="46" rx="2"/><rect x="556" y="30" width="30" height="46" rx="2"/></g>
+<g stroke="#543364" stroke-width="3" stroke-opacity=".75"><path d="M19 38H43M65 40H89M111 38H131M471 38H495M517 40H541M561 38H581"/></g>
+<g stroke="#543364" stroke-width="2" stroke-opacity=".6"><path d="M19 48H43M19 55H43M19 62H43M65 50H89M65 57H89M65 64H89M111 48H131M111 55H131M111 62H131M471 48H495M471 55H495M471 62H495M517 50H541M517 57H541M517 64H541M561 48H581M561 55H581M561 62H581"/></g>
+<g><rect x="24" y="96" width="112" height="76" rx="4" fill="#190D24" stroke="#E1CA8E" stroke-width="3"/>
+<path d="M24 114H136M24 132H136M24 150H136M52 96V172M80 96V172M108 96V172" stroke="#C6BAD0" stroke-opacity=".6" stroke-width="2" fill="none"/>
+<circle cx="38" cy="105" r="3" fill="#D2AD4B"/><circle cx="94" cy="123" r="3" fill="#E1CA8E"/><circle cx="66" cy="141" r="3" fill="#D2AD4B"/><circle cx="122" cy="159" r="3" fill="#E1CA8E"/><circle cx="38" cy="159" r="3" fill="#E1CA8E"/></g>
+<g><rect x="24" y="196" width="108" height="14" rx="2" fill="#F1EBF4" fill-opacity=".85"/><rect x="20" y="210" width="116" height="14" rx="2" fill="#E1CA8E" fill-opacity=".8"/><rect x="28" y="224" width="100" height="12" rx="2" fill="#F1EBF4" fill-opacity=".85"/><path d="M24 203H132M30 217H130M32 230H124" stroke="#543364" stroke-opacity=".5" stroke-width="2"/></g>
+<g><rect x="462" y="206" width="110" height="30" rx="3" fill="#543364" stroke="#E1CA8E" stroke-width="3"/><rect x="472" y="150" width="9" height="56" fill="#543364"/><rect x="553" y="150" width="9" height="56" fill="#543364"/><rect x="466" y="138" width="102" height="14" rx="3" fill="#E1CA8E"/><rect x="490" y="196" width="56" height="10" rx="2" fill="#F1EBF4" fill-opacity=".9"/><path d="M562 144L588 112" stroke="#D2AD4B" stroke-width="8" stroke-linecap="round"/><circle cx="590" cy="110" r="7" fill="#D2AD4B"/></g>
+<g><rect x="478" y="100" width="22" height="24" rx="3" fill="#190D24" stroke="#E1CA8E" stroke-width="2"/><rect x="508" y="104" width="14" height="20" rx="2" fill="#D2AD4B"/></g>
+<rect id="glow" x="150" y="20" width="300" height="216" rx="10" fill="url(#glowg)"/>
+<g id="door">
+<rect x="150" y="20" width="300" height="216" rx="10" fill="#543364" stroke="#E1CA8E" stroke-width="3"/>
+<circle cx="164" cy="34" r="4" fill="#E1CA8E"/><circle cx="436" cy="34" r="4" fill="#E1CA8E"/><circle cx="164" cy="222" r="4" fill="#E1CA8E"/><circle cx="436" cy="222" r="4" fill="#E1CA8E"/>
+<rect x="220" y="30" width="160" height="26" rx="4" fill="#190D24" stroke="#F1EBF4" stroke-opacity=".7"/>
+<text x="300" y="48" text-anchor="middle" font-size="13" letter-spacing="3" font-weight="700" fill="#F1EBF4">PRESS ROOM</text>
+<rect x="262" y="90" width="76" height="8" rx="3" fill="#392244"/>
+<circle cx="276" cy="86" r="4" fill="#F1EBF4"/>
+<g class="wheel" id="wheel"><path d="M276 86L328 80" stroke="#F1EBF4" stroke-width="4" stroke-linecap="round"/><circle cx="330" cy="80" r="6" fill="#D2AD4B"/></g>
+<rect x="170" y="106" width="260" height="8" rx="3" fill="#392244"/>
+<g id="plocks"></g>
+<text x="300" y="228" text-anchor="middle" direction="ltr" font-size="11" letter-spacing="3" font-weight="700" fill="#F1EBF4">1859 - 1917</text>
+</g>
+</svg>
+</div>
+
+<div class="intro glass" id="intro">
+  <h2 style="margin:.1em 0">You are locked in the press room.</h2>
+  <p>The newspaper office closed for the night and the pressman locked up the press room. Old front pages from 1859 to 1917 hang on the wall. The door has <b>5 locks</b>. Each lock matches one big idea from Lesson 11. Solve them all to find the <b>5-digit exit code</b>.</p>
+  <p>The clock starts when you press the button. Most students finish in about 20 minutes.</p>
+  <p><button class="btn primary" id="startBtn">Enter the Press Room</button></p>
+</div>
+
+<div id="game" class="hidden">
+  <div class="bar" id="bar" aria-live="off"><span><span>Time</span> <b id="tm">00:00</b></span><span><span>Locks</span> <b id="lc">0</b>/5</span><span><span>Hints used</span> <b id="hc">0</b></span></div>
+  <div id="locks"></div>
+
+  <section class="exit glass locked" id="exit" aria-label="Exit door">
+    <div class="eyebrow">THE EXIT DOOR</div>
+    <h2>Type the exit code</h2>
+    <p id="exitNote">Open all 5 locks first. The digits go in order: Lock 1 first.</p>
+    <div class="codebox" id="codebox" dir="ltr"></div>
+    <p class="ennote">Type the answer in English. Use the digits 0-9.</p>
+    <div class="row" style="justify-content:center"><button class="btn primary" id="codeBtn" disabled>Open the Door</button></div>
+    <div class="fb" id="codefb"></div>
+  </section>
+
+  <section class="esc glass" id="esc" aria-live="polite">
+    <div class="big">ESCAPED</div>
+    <p class="time"><span>Your time:</span> <span id="escTime">00:00</span></p>
+    <p id="escSum"></p>
+    <p>One last step: write your Debrief below.</p>
+  </section>
+
+  <section class="debrief glass" id="debrief">
+    <div class="eyebrow">DEBRIEF</div>
+    <h2>Which lock was hardest, and what did you learn that you did not know before?</h2>
+    <p style="margin:.2em 0;color:var(--dim)">Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.</p>
+    <textarea id="debriefText" aria-label="Debrief" placeholder="Type your answer here..."></textarea>
+  </section>
+
+  <section class="actions glass" id="actions">
+    <div class="status" id="status"></div>
+    <div class="row">
+      <button class="btn" id="saveBtn">Save Progress</button>
+      <button class="btn" id="loadBtn">Load Progress</button>
+      <input type="file" id="loadFile" accept=".json,application/json" hidden>
+      <button class="btn primary" id="finishBtn">Finished — Download File to Submit</button>
+    </div>
+    <div class="msg" id="msg" role="status"></div>
+    <button class="link" id="reset">Clear all my work and start over</button>
+  </section>
+</div>
+
+<div class="actions glass hidden" id="loadOnly" style="margin-top:12px"><button class="btn" id="loadBtn0">Load Progress</button> <span style="color:var(--dim)">Have a saved file? Load it to continue.</span></div>
+
+<footer>UNIT 4 · INDUSTRY, EMPIRE, AND REFORM | CPUSH | DANIEL GARZA, M.A.</footer>
+</div>
+
+<script type="application/json" id="er-data">{"salt": "L11esc:", "exitHash": "ae29a46f5b9d5a5c5567", "locks": [{"n": 1, "key": "lock1_type_case", "title": "The Type Case", "obj": "1-3", "objLabel": "CORE OBJECTIVES 1-3", "objText": "Core Objectives 1-3: Understand the effects of urban growth during the Gilded Age, including the problems it created; describe the “new immigrants” of the late nineteenth century and how they were viewed by American society; and explain how urban growth and the increasingly important role of science influenced leisure activities, cultural life, and social policy.", "type": "pick", "card": "<p>In 1900, some 2.3 million people, or two-thirds of New York City’s population, lived in overcrowded tenements with little light or fresh air. After 1890, the “new immigrants,” mostly from southern and eastern Europe, such as Russia, Poland, Greece, and Italy, were the majority of newcomers. Many nativists believed that people of British or Germanic background were superior, and the prejudice was especially harsh against the Chinese: the Chinese Exclusion Act of 1882 barred Chinese laborers from entering for ten years and denied citizenship to Chinese immigrants. Big cities also created new mass entertainment, such as college football, basketball, and professional baseball. Herbert Spencer’s social Darwinism used the phrase “survival of the fittest” to say that competition drives human progress, but Lester Frank Ward’s reform Darwinism praised cooperation and compassion instead.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 18, “America’s Move to Town” (“Crowds, Dirt, and Disease,” p. 780), “The New Immigration” (“A Surge of Newcomers,” p. 781; “The Nativist Response” and “Chinese Exclusion,” pp. 783-785), and “Changes in Culture and Thought” (“Urban Leisure and Entertainment,” p. 789; “Social Darwinism”; “Reform Darwinism,” p. 792).", "prompt": "Pick the correct answer for all three questions.", "qs": [{"id": "t", "q": "In 1900, about how much of New York City’s population lived in overcrowded tenements?", "opts": [{"id": "a", "label": "About one-tenth"}, {"id": "b", "label": "About one-third"}, {"id": "c", "label": "About two-thirds"}, {"id": "d", "label": "Almost no one"}]}, {"id": "n", "q": "After 1890, where did most of the “new immigrants” come from?", "opts": [{"id": "a", "label": "Northern and western Europe"}, {"id": "b", "label": "Canada and Australia"}, {"id": "c", "label": "South America"}, {"id": "d", "label": "Southern and eastern Europe"}]}, {"id": "s", "q": "Which phrase did Herbert Spencer use for his idea that competition drives human progress?", "opts": [{"id": "a", "label": "“Equal rights for all”"}, {"id": "b", "label": "“Survival of the fittest”"}, {"id": "c", "label": "“Government by the people”"}, {"id": "d", "label": "“Liberty and justice for all”"}]}], "hints": ["Each answer is in the Clue Card. Look for a share of New York City, the part of Europe the new immigrants came from, and a short phrase by Spencer.", "The share is a fraction of the whole city. The region is in the south and east. The phrase ends with the word “fittest.”"], "nudge": "Not quite. At least one answer is off. Re-read the Clue Card for the tenement share, where the new immigrants came from, and Spencer’s phrase.", "entries": ["a9e8239c7fe1b7825fd19"], "id": "lock1_type_case"}, {"n": 2, "key": "lock2_editors_desk", "title": "The Editor’s Desk", "obj": "4-5", "objLabel": "CORE OBJECTIVES 4-5", "objText": "Core Objectives 4-5: Assess how the nature of politics during the Gilded Age contributed to intense political partisanship and political corruption; and evaluate the effectiveness of the reforms enacted during this period in promoting “clean” government and limiting the power and political influence of Big Business.", "type": "match", "card": "<p>In cities full of new immigrant voters, politics was often run by “rings” led by a party “boss,” who used a “machine” of loyal neighborhood workers; William “Boss” Tweed of New York used the Tammany Hall ring to hand out contracts and jobs until his arrest in 1871. Nationally, party loyalty was intense, voter turnout was commonly 70 to 80 percent, and neither party was dominant, so both avoided bold new ideas. In 1883, after Garfield’s assassination, Congress passed the Pendleton Act and created the Civil Service Commission, so at least 15 percent of federal jobs would be filled by competitive tests instead of favoritism; Norton calls it a limited first step. The Mugwumps, mostly professors, editors, and writers, wanted all federal jobs filled on merit. In 1887, Congress created the Interstate Commerce Commission (ICC), the first federal agency to regulate business, but over time it was ignored, and the railroads kept charging high rates.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 18, “Gilded Age Politics” (“Local Politics and Party Loyalties,” p. 793; “Partisan Politics at the National Level,” p. 794) and “Corruption and Reform: Hayes to Harrison” (“The Civil Service Commission,” p. 798; Mugwumps, p. 799; “Railroad Regulation,” p. 800).", "prompt": "Match each term to the best description. Use the Clue Card.", "terms": [{"id": "pa", "label": "Pendleton Act"}, {"id": "pb", "label": "Party “boss”"}, {"id": "mu", "label": "Mugwumps"}, {"id": "ic", "label": "Interstate Commerce Commission"}], "descs": [{"id": "a", "label": "The leader of a political ring who ran a machine of loyal neighborhood workers"}, {"id": "b", "label": "The 1883 law that set up the Civil Service Commission, so some federal jobs went to people who passed tests"}, {"id": "c", "label": "Reformers, mostly professors, editors, and writers, who wanted all federal jobs filled on merit"}, {"id": "d", "label": "The first federal agency to regulate business; it watched railroad rates"}], "hints": ["Two terms are about people (a boss and the reformers called Mugwumps). Two are about government: a law about jobs and an agency about railroads.", "The Pendleton Act is about federal jobs and tests. The ICC is about railroads. The boss ran a machine in a city."], "nudge": "Not quite. Check each match against the Clue Card. Which one are you least sure about?", "entries": ["ccdcce351d3dbb4222e12"], "id": "lock2_editors_desk"}, {"n": 3, "key": "lock3_copy_wire", "title": "The Copy Wire", "obj": "6", "objLabel": "CORE OBJECTIVE 6", "objText": "Core Objective 6: Analyze why the money supply became a major political issue during the Gilded Age, especially among small farmers, and describe its impact on politics.", "type": "decode", "shift": 4, "cipher": "WMPZIV", "card": "<p>After the Civil War, crop prices fell and small farmers sank into debt; Southern cotton dropped from 31 cents a pound in 1866 to 6 cents in 1893. Farmers blamed an inadequate money supply. In 1873, Congress had said that only gold, not silver, could be used for minting coins, and farmers wanted much more of the other metal coined to put more money in circulation and raise crop prices. The Grange and then the Farmers’ Alliances organized farm families, and in 1892 they and others formed the People’s Party (Populists), which called for unlimited coinage of that metal, a progressive income tax, and federal ownership of the railroads and telegraph systems. After the Panic of 1893, more than 600 banks closed and 15,000 businesses failed. In 1896, William Jennings Bryan won 6.5 million votes with his “Cross of Gold” speech, but McKinley won 7.1 million.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 18, “Unhappy Farmers and the ‘Money Question’” (section starts p. 803; “A Vicious Cycle of Depressed Prices and Debt” and “Silver and Inflation,” pp. 803-804; “The Granger Movement,” pp. 804-805; “Farmers’ Alliances,” p. 806; “The 1892 Election,” about p. 810; “The Panic of 1893,” pp. 810-811; “William Jennings Bryan,” pp. 811-812; “The Election of 1896,” p. 813).", "prompt": "The Clue Card describes a metal without naming it. A secret message names it. Each letter in the message was moved 4 steps forward in the alphabet. Decode it to name the metal.", "hints": ["The metal is the one farmers wanted Congress to coin in much larger amounts. The Clue Card says the 1873 law allowed only gold. Use the decoder key to spell the name of the other metal.", "In the message, the letter W is really S, and the letter Z is really V. The word has 6 letters and starts with S."], "nudge": "Not quite. Decode one letter at a time with the key, then check your spelling.", "entries": ["00efc80b99b9f343e2403", "01b3fced964704b3d0c90", "0248481a136c38d9c0990", "0272769f29e8538578b02", "02908810395963ac6f590", "03ab159b4ac3f61101777", "047957b61b87c8209a863", "04e039ed782d11298bd14", "05f804afaa58c59f7b3a3", "060c536eb7af8f91f7443", "06baebdfdc38aec9a9c30", "072a0d8139bd103b2eeb7", "0776c5ad2d46bfb8437f7", "07c4e60b9b6a2ae878084", "093606daf135b9d617582", "0ade61e734096bd86e165", "0b3185e0572cc1b93db17", "0b7b6b8fca36bac0e0a04", "0c38f5264e5e38f5b4326", "0c466db7f050f467e6af8", "0ccc04c2991574fef2403", "0fb7294ee8c8198cf0751", "0fc732317809872702901", "12e95d366e776b4b8a6a7", "1549694f1089ac8f29814", "15b5fbabc2c72f638e7d5", "163fd7e0159f9a1ca3892", "17b46fcd80c1dc7b6ba77", "17c4048368196d2ce3c84", "18a408e24b86081b7b031", "18daf111e004053ba6f67", "1920935dabf316116c7c2", "1a22929c4ea5d91deaa75", "1ae770e4ca650b81328a3", "1b8d6cec0091c6fe556c9", "1bec9bf554601ab90d9e6", "1bf7eed9b41e20b4b3088", "1dcb0002d1cc380783431", "1e26580420af4ee9fa547", "1e300f90d046763359ff2", "1ec3fc98a48ffc8a60c12", "1f6bf01f0704707343516", "1f8fb2a385cef757dcb52", "2008103b893e1e01507e1", "21d5689a5f4298d900126", "21ea5a592af0c4e9cf411", "22f08ecab4f2811ef2811", "236415732f47bb5cf6c29", "2458302ff83dc753d4012", "24aa9e93954478c104bd6", "263a84a5f0b05cbcafeb9", "26a5928f8d961c16aede4", "27b3b7dcf2f7a85ba74c2", "27c3a167b61b80b3f9531", "284c840488379dabf2440", "28a52276229e9142f5862", "28c34b94fcdd10cb53ea2", "28dda7da8905246edc986", "292e7df5e98b98edd4544", "29492e4d6d14417523f09", "299e0f62dd72d1ec9bd13", "29ca9cb6f31d2c2fbfb39", "2ad05cc65ecc393e70d48", "2b075ceabf6db7a6ac242", "2b509af4816fb3464d4b8", "2bc2f10cfa6ba15c42880", "2c80c2ea6edda9bcb8dc1", "2de45ee5bc31a6bf2c3b8", "2ec2110322dacb62622f8", "2ec882b446369a34aa292", "2ecf47f2404885a7e5415", "2ee23b159647ecfc95bf3", "30dd2262925f84b5a0590", "31f499c70993bd4361429", "323e1e556a49d8557e344", "3597fc25d3031f2202ac2", "35e28b7439e73fdec1c48", "3682c458a8eb6b5f9e003", "3763b148467660d047085", "3766bcef82c72e765bf43", "390cda54add53a604a4e0", "396ca80f1f38dc5268a33", "39c9a9baf1a895a859549", "3b005e6f23ad856020b22", "3b99942e91b0d413a5966", "3c45d13b9c459c6d5e548", "3dc0d75478ee0aef26b10", "3e8507e9d3dff2acd35b2", "3f384342d96c88a295832", "3f4012ee9bb2df029de55", "3fef5bc26dce8f24be390", "404662dcf892193022ae7", "40a80b00ab6999d08e246", "40f8e2678ade3aee4f906", "4107baa6493085e3815e3", "41d4cc8ed7c1294a0b3d6", "41e4da33edf348bfa5424", "42201b7300aa303e5b3b8", "4236f88ea955e28011130", "42cd7edf6299671d902d1", "44b0de491201eeea3ead4", "454744b02c64f62bf0a10", "456cad89927cae2dcca30", "491015d8f9c02e3642889", "49568081f00cc80ff9174", "4bdfb24d7d80841772b33", "4ca1372da0f7648ce2542", "4d2b92e94382eaacc4848", "4ec9f2e695bfefaf420b4", "4f0f6f561c578dd932980", "50e8761c18e4241e39a76", "515ddaf9f11c5fb37b747", "5161f454db074f0be8b61", "5233237837744a5b414a9", "523bbef4fb7c2b7fd90d4", "5277d931469bf7dcde550", "52cf1cc364eac40732b43", "53809d66789cbb7902334", "53ed2853bc78c8e904544", "575ccd09ef0097ad27e18", "5780e58eafd8d399cf034", "57f6b83750c47c2dd6340", "5827139ef80831fedb336", "59573b1a2aa3bc0ba8fb5", "5a5c338c7247b6da83057", "5d3c72eeec067f4e00516", "5fc4eca9d3f6195e6be19", "6022e091769535f273be2", "61d172f38c1a498ba6b74", "679626670da033e42ac20", "67a2880d91819232e6c90", "69cf88c91cae89b3c2ca7", "6b3a5b8231e1a1ea68922", "6dce3a7302362e9d16742", "6e7623e24306b3f1babc5", "6e8908947ac37decf5561", "6f1f598430507f86df494", "6f730229cd2557d847ea5", "6f8d350255fb7adc30b41", "6fbcb80a4fb831b92eb15", "6fc9051ebfb6f2fdf6620", "7077bfd40c05181efc879", "708321cf7376597125bc3", "71295fe5f6d20b2342e44", "735010e7435f62319ab92", "737cc87acca9c23965c21", "7405e0da1c7be2ece5b00", "7505bdb922d36d4356937", "752ece90868ec9db7daa7", "753baa36fba192a748d74", "7548fa179841d1a4f4af2", "7571a81cbe0c6d85fa139", "75cc7139ab6cd9c454769", "7665eb1a22dd1d8c215b5", "774d58076ca4c561a3616", "778b01000c505b33f88f0", "7853252708cdb40000521", "7909d03d1546c253d4e15", "791f92ee9fc9899b68505", "79e22f7dbd143cc4158c1", "79fef79f4136b48df9e03", "7a7c303366f0059375ac8", "7ae632b034900b6527437", "7b5338f1dc5ae4d046e13", "7c38983102cb858f11781", "7c6917630b5bf2ca26a32", "7e984e06cfd4f54b560e6", "7f01d1433a5e250c64e40", "800c8e708222ca0260943", "8016ff73acd1d5c2200f6", "816e179d623ead1f9ff18", "81d960ef3eaca09d808f0", "81e1b630f775f482756e2", "832fc2856d5ddf0b66e09", "83dfa952df163742cbaf7", "84cb302d893d1a4c32de3", "861b99da597c03dd72cc4", "86ee39fa4bc7b81d0dca2", "89a040b92a8c18fb85776", "8b11a11b544efbf765854", "8b3f69e5eacc5ae0d10b3", "8c9de9b8e2b484c3be073", "8d7cb02bd613465b0acc2", "8d87e6dabbe0b4f2a83b7", "8debd553bd6e413f16a79", "8f50b1fce8d97210ccfd3", "909df135813387f5e1034", "91a37d079056d3612c530", "91be0a08108e810058f90", "9262406c1ca8f13216392", "932bb27057b832e599391", "935d3ac04029d223f0180", "957fef73e11ab757ce1b0", "95b8817f2f6d00c7bb5e1", "95bcc182b1917ee54c508", "95f26766d50b01d9cd542", "96fd416ed4ec6977160c4", "9713662078a38dcf0a6b1", "988843fd4894035e57c84", "9a4dcc5d73afbd7760696", "9b9e483899e308c32eb05", "9d5452af82b51cae58992", "9dcfefd77b2fa69eb00b6", "9df2b04de622d67c5ffe7", "9f341a6aea5d0acb67f26", "9ff450f87ab52757a0888", "9fffe30361af9f6525300", "a37d070ed6cdb03371594", "a4edfab428e3cd59ac4a4", "a58f52851f1fec0675f73", "a6196033a086d50b63105", "a66edb719185e4a8f6d10", "a717afbb8c57110273f12", "a8347c03b519772783b79", "a841da61c4203ba4c6888", "a9356faa3f1634edee619", "a9d19496fc2cbb40aa061", "aa98b45e5af0236fb9210", "aaa276d837c00d2b446f5", "aac7ab20502853c883d12", "ab0cdd0450e7606501f65", "ace1a67f482f3caed6064", "acf3f33f95b68461eff91", "af5d3e43d392664c6be12", "af75597e1544e059b90d5", "b27ea28b862b52a32cab6", "b2c322fec03139217c416", "b2eb6fd42d9c776c8cde0", "b3457940d744562381ed5", "b3676d5789bc36c323460", "b3ebdf57b8e650923f527", "b661d58be48e38975e035", "b7dc68f37eaf894a0a158", "b90cf27d4886014ba7cd7", "b93618b73dc0be97b6621", "b9929c27377895c74ae66", "b9d546e59f8d79ae35416", "ba9847c0bb1deee01c4a5", "bade869be68aaf081bd99", "bb24c4b86f94d8015bb61", "bb4829e719a923a877138", "bbec9afcdd3a442d143c8", "bc697c5d19a155c095dc0", "bc9df67a98dbe172cb898", "bd8b49bcd9f5c0185ae67", "beb2b6276748721b8e626", "c0f24e5f29038f9f71960", "c207d650431997d44fb12", "c42ef081fe0350d393585", "c537a85ce2cb0f8a1b423", "c56d2cb9c408934cba152", "c57f928df8bd839ed4a83", "c5bf5a69644517c398154", "c5d4a4309833c0ae14ea3", "c5d685f43a0e62c01d322", "c66f22ea13e8628861b39", "c6e94c705b8a9bf233370", "c7606d3eeb4de148798d5", "c8c053c236dd7e87d7603", "c8cc7cb4d624a1b70b814", "c99dfd98ced4435b03eb2", "ca894e2761d3b39396b90", "cc66806f4b7922175ff07", "cefdff008aa27c69ca8e7", "d0834e03b9e26877fd985", "d2278e1e270408cafb933", "d2b0b61bbaacdd794e430", "d2e2e84d4cb2b5f7e0037", "d4c8dd5e2c2b9a23fe646", "d52a04d8ffc9c79de6d91", "d582aa475a7856f9fdd22", "d6dbeac78066c817bbb76", "d7332a9b5b145cf51a529", "d84aa5e4b0828ae131705", "d8a5b2513cb99cfd81308", "d98b0e21f5a2627ce1d31", "d9f56af4968286b0c8eb7", "da37baf5e4f5428453680", "dab79dbe2ad3f2e614939", "dc4bb08509ab53172a8a8", "de4da3373230fe7424956", "de55742b430cd43586ed4", "de82c5783ca57abf53d89", "df57ca36d6dc9c827f474", "dfac8dd8b2dc91d666c98", "e088889e0b96ab4749269", "e17420598ec8f1ecc1887", "e318f28705a4fd8f6f733", "e357df79b3e0fbf548083", "e36693f9942df1b2acd61", "e39020dd288d75f335498", "e43ecb212fc90f9389856", "e57eca37764d03ab3dbe4", "e5b34bfb081532ed95232", "e6020f95663a816d4f8a3", "e6501dd0ed886263c8225", "e6812ab6c339cbb6e6999", "e6bd4bb578e79de313f17", "e713276ee96842ddcc917", "e77a69af630b112ffa8d8", "e783249a0f9658882fa97", "e7d8e9ceb927549bd8197", "e7e01994d7f7200215e50", "e840e982f5e9a0deef1d7", "e8c492da9f91f93bf7af1", "e98dfd4b4b845f8ab8506", "ea0ca8e6bdf7f2bc0c770", "ea44c0f58626d14aec117", "eae0d4b05b2cd2c5da8f4", "eb827ab4258a610ddb158", "ec2467827781b5b21c183", "ec28e52bd0401d1c27483", "ec638da759d254dc19b00", "ee39f837e74ed4d19e115", "ef7039f437f8637fc03c9", "f0a5847d49ffb06a12ca4", "f0c507691fe23b530d5b6", "f0d148f78afdbc8156468", "f19f1c1252e4c2f46aea3", "f1e5364a47519fe584392", "f2c63be5c3b353e7212a2", "f2fcea1989bc599ef4fc3", "f307846378a056fa53333", "f32ec3cfb30fad168f585", "f37cc9e5f07dc8a6d3e50", "f68dd8ef2f2e4fb883314", "f79b44786bfe2d57c6cb6", "f7bd97029339d6a73b827", "f82260fb5f2560b9b0928", "f869b6106f7d84711f261", "f88fe0c1eb01dba613200", "fb6f9c62dc7b77d732ed7", "fd62078d983738ef69e05", "fdd58786cfad6334ef4b9", "fe6fa0fe2256dede390c6", "fea9a1385ad35e156b902", "feaa026d341d05442c927", "ff35c74d0fd45fa465dd4"], "id": "lock3_copy_wire"}, {"n": 4, "key": "lock4_map_wall", "title": "The Map Wall", "obj": "7-8", "objLabel": "CORE OBJECTIVES 7-8", "objText": "Core Objectives 7-8: Describe the factors that motivated America’s new imperialism after the Civil War; and explain why and how America expanded its influence in the Pacific before the Spanish-American War.", "type": "order", "card": "<p>By the 1880s, European nations had conquered most of Africa and Asia, and many Americans wanted colonies too. Many Americans also assumed that the White “race” was superior to others, and this idea reinforced imperialism. In 1866, Secretary of State William Seward predicted that the United States would impose its economic power over the Pacific Ocean. In 1875, Hawaii signed a trade agreement that let its sugar enter the United States duty-free, and American sugar planters became a powerful elite there. In 1890, Mahan published <i>The Influence of Sea Power upon History, 1660-1783<\/i>, which argued that a strong nation needed a powerful navy, overseas bases, trade, and colonies; by 1900, the United States had added eleven new steel battleships. In 1893, Hawaii’s White population overthrew Queen Lili‘uokalani’s monarchy after the U.S. ambassador brought in Marines, and in 1898 the United States seized control of Hawaii over the protests of Indigenous Hawaiians.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 19, “Toward the New Imperialism” (Mahan, battleships, and racial superiority, pp. 820-821) and “Expansion in the Pacific” (Seward, pp. 821-822; Hawaii: the 1875 agreement and Queen Lili‘uokalani, p. 823; McKinley and annexation, p. 824).", "prompt": "Tap the four events in the order they happened. Tap an event again to take it back.", "items": [{"id": "c", "label": "Mahan publishes his book on sea power"}, {"id": "a", "label": "Seward predicts that the United States will gain economic power over the Pacific"}, {"id": "d", "label": "Hawaii’s monarchy is overthrown after U.S. Marines come ashore"}, {"id": "b", "label": "Hawaii and the United States sign a trade agreement for sugar"}], "hints": ["Look for the years in the Clue Card: 1866, 1875, 1890, and 1893. Match each event to its year.", "The order is Seward’s prediction, the Hawaii sugar agreement, Mahan’s book, then the overthrow of Hawaii’s monarchy."], "nudge": "Not quite. Re-read the Clue Card and match each event to its year.", "entries": ["260b0098a43246f61a1c4"], "id": "lock4_map_wall"}, {"n": 5, "key": "lock5_front_page", "title": "The Front Page", "obj": "9-11", "objLabel": "CORE OBJECTIVES 9-11", "objText": "Core Objectives 9-11: Identify the causes of the Spanish-American War and its major events; analyze the consequences of the Spanish-American War for American foreign policy; and describe the reasons for Theodore Roosevelt’s rapid rise to the presidency and evaluate the main elements of his foreign policies.", "type": "fill", "card": "<p>Some newspapers used “yellow journalism”: editors told reporters to distort, exaggerate, or even invent stories, and this shaped public opinion about Cuba’s fight for independence from Spain. On February 15, 1898, the battleship <i>Maine<\/i> exploded and sank in Havana Harbor with a loss of 266 sailors; years later, the sinking was ruled an accident, but in 1898 many blamed Spain, and Congress declared war in April. In the Treaty of Paris, Cuba became independent, the United States annexed Puerto Rico and Guam, and the United States insisted on governing the Philippines. The Philippine-American War (1899-1902) followed; Norton reports that it took the lives of hundreds of thousands of Filipinos, most of them civilians, and 4,234 American soldiers, and the American Anti-Imperialist League opposed annexing the Philippines and Puerto Rico.<\/p><p>When McKinley died in September 1901 after being shot, Theodore Roosevelt became president. He aided the Panamanian rebels and signed a treaty to extend the Canal Zone. In 1904, after a crisis over the Dominican Republic’s debts, Roosevelt said that “chronic wrongdoing” would justify the United States acting as “an international police power” in Latin America; this idea is called the Roosevelt Corollary to the Monroe Doctrine.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 19, “The Spanish-American War” (yellow journalism, the <i>Maine<\/i>, and the declaration of war, pp. 826-828; Treaty of Paris, p. 830), “Consequences of Victory” (Philippine-American War, p. 837; American Anti-Imperialist League, pp. 837-838), and “Roosevelt’s ‘Big-Stick’ Diplomacy” (McKinley’s death, p. 843; Panama Canal, pp. 844-845; Roosevelt Corollary, p. 846).", "prompt": "Fill in the blank using the Clue Card.", "sentence": "In 1904, President Roosevelt said the United States could act as “an international police power” in Latin America. This idea is called the Roosevelt ________.", "scramble": "R  A  C  O  L  L  O  Y  R", "hints": ["Read the last sentence of the Clue Card. The missing word is in it.", "The word starts with C and ends with Y. It has 9 letters."], "nudge": "Not quite. Re-read the last sentence of the Clue Card. Use the scrambled letters to check your spelling.", "entries": ["0033ad7f26cfcd78d0e74", "004045decc735bd3c94c6", "00698db84bd40ae670a46", "00a943ec4f9ba409591e4", "00c7514d40fce21d53258", "0146ef5d6fd08e4aed551", "017532912513b37aaa8b0", "02aac772f167dae5bf581", "02f56c6b25c7670c3c3d8", "034bdf010d5a8107b6de4", "03d20497c596c1da44bb8", "0453f8853eff4c45c3b14", "04986d53011fe50733897", "04efceaf78ddfa036fd00", "0554215fed94de76bfaf2", "05c0d95a21e50d5620149", "0694d3a91951c2e5c03a1", "06955ea3bbc659a4af449", "0753f96889c9693c84f14", "0798eebcc273e9410d308", "07cae48981afdbd2dd564", "081afac0042eef57151c9", "09a621b16b173bc88b490", "09ac2b7bdac33e539c5d0", "09c11608794873cf192d9", "09d03f5deada783f47b47", "09e0db7352cd2fa6ddab6", "0ab6a4f812ef7eb26d349", "0ac8cc2575b6fb3526643", "0b145d856dc7db551ca15", "0c86c1debc5a318f09601", "0caf4d824e5c9ba742e77", "0cd3eed6a4a91429230d2", "0cd54e24c9a0f9db3aaa5", "0ce2783eb7ab553505025", "0d604f3f706864cc069b6", "0e0d7f90c50c500bc1935", "0ea8ac42710e24f8e4068", "10499b88d3122c66338c2", "10d237b66d328fca51878", "113026297ed6149c41c62", "11502f25f9a099b088ce6", "119c09181c86de07720d3", "11b7ec3a048508dc377a2", "11d80658da50e047f23a6", "131c961af7bf2fa262011", "13f22439b16d3fcd4ec69", "147775c2951e7fecd2e79", "1584d376cf321dfb1efd3", "15ddca456ddb76d8a4111", "15f690ac0397cc88c1629", "1844fffc8d837018173e3", "1857be2f9d051fceae6d7", "18abf482c1a536c2e2544", "18d20ded99838c93fba50", "19522b33a41eceb056c69", "197453e736a030069d722", "19d1676ad31e7f7f95237", "1a0a5c472349e5c5aece9", "1a11ae380e105ae097252", "1a19327879bdc74af17a3", "1bffe783acac41a7a9eb7", "1c9e0b5f5b914423b58b4", "1cffa8cbffcc55eb87c20", "1d4fa79bf974d3242ee79", "1d9b49d5ad7500cbe7855", "1e6039db3a16f9e60d616", "1eb26d4ed40e0d40a4f76", "1f26a1f9776d1fb180813", "1f534afa187ca07b21ea7", "205ee4e76438fe0f92d95", "20655f9e60fb6d7442aa4", "2206b8ed26a5d27ea6f92", "223eeda1458e3adf14b63", "23005c7434ff1ddf945f8", "2329bf987bf5329f03017", "24f4e5bbf24a41954f9f4", "251ba368381e46f365718", "25628c2799f95869d4ae9", "257a67eef86b488a286d4", "25ff50eff53e7b93eef49", "267dfb405c622c6a60367", "26f86c04320b0fd1a14c8", "27a3629659a9a0a907499", "280015f96e9b484fc41f2", "287507e55e73eddbb1c86", "29a83ab50ba697c25b855", "29e34b040cd91063b0085", "29ee49f53930501a4ef89", "2a1a12d7c8233c39e2b01", "2ae78b29afcb6b0e4d311", "2b2dd52e5e94683a298a7", "2b38e17a02b83f550a787", "2b56603c64577adf4fc69", "2bd91c302b501769b0375", "2c3a01ee4d709e2c315f0", "2c9b4a875e5fa1792f0b6", "2d91f0e6b9deccf6ebc51", "2db84a965ae719e3b3634", "2dd0e887d79824456cbf6", "2f3a10f5e58055c516078", "2f8396191ff7c8f8be4f2", "3001e8c8ca86e0d216e73", "300f411afd9bdc33facc6", "30546df09852a0bf0bbb7", "3152193d2cc338bcbb5f7", "31dfb10b0cd1a9115cc50", "31e1ea5d4271bcd1893e4", "323f770258a31c7ac3aa3", "327bd44f107918668add3", "332248b7861273a4c5143", "33418af77088419d2bcf4", "334c8c1821d20b0dedb83", "33c534dfc055ad6d41792", "343bde91597eedd82f041", "3495ff7546588677414f8", "3581b9e9c80844c0d8b76", "35b11d0751711060def70", "35d4a19e7ee28fbb1c798", "371f457f50e4af9f2ca63", "378bad6e9089667628885", "389e5de72402fa1ceec15", "38abe876fcda4e760f147", "38eb489ed5e280174c9c2", "395f5c8c39d1599b5fe72", "39a32c60a15e32ca9f540", "39e5dc30e97a5bc1d6fa0", "3a008bbc4d25541560618", "3ada5f9edf6948292cbb4", "3b360695ea47ef8d90375", "3c73b1f60d2ca5d6a37e5", "3d23d24a6fa0544023bf1", "3d3910fce70434177a113", "3d42549099d224b303379", "3d54d91344fc57b6f1607", "3e0dde028872ca3472f31", "3e6732e3150f09e9630f4", "3e86d807129a8ee6d2c43", "3ea56f639052790e78ea6", "3ee0477bac961b61adb99", "3f99385107a3fed5f8556", "3fbb9aee75569f067ee61", "407ee961ca87fc8746009", "410aae2cb0ae6eae8c531", "41664ddbc35f5a69af002", "416b36c0f5c7ad18fbf04", "41df12142f68e5a460042", "4213ebf6f5c2a53280a19", "42a08c4033162a2688fe4", "42fc31287ab8d2176dbc5", "433ce55e87a8087492d36", "44e42a221dcfbf3520225", "44f674e8a5737d558acc2", "460257bc54e59c563cdc5", "4799eb4804e182e362540", "47aeef4f73ec5aa218f47", "483a809f979f171cd0815", "494db848c2d33f84fa694", "4acd15be162e097d777b6", "4c9cbadfa95331e1fc693", "4d3a3cb55d707c1deeac6", "4db95ef247d77904e8335", "4e5d8104f9ca999ccdb36", "4e80960c352bb44e429f4", "4e8cbce6d1559e1ce7813", "4efc5b74529ab5e89c141", "4faaca20ee46c6388dea7", "50ad1bf1f4919047881f4", "5164b0cac75606cefa848", "528833f7087b080599681", "52e83f9b608f2484ef2f4", "547bdfd84c8d2ad29c654", "55b485be1d456536b8244", "55c08bb6e43ad3f48f868", "55f8df5c87d279f3fe007", "56647e77f33bcbd4eee24", "566d8526bf91d21dd7556", "567711568cc27ef4cfd70", "569465a29cd39f57a3b54", "578dc38d30bf81ec6c621", "5857ac39b40912fc97628", "598915ac23b1cbae31e58", "59ee56d6bf91399648de7", "59ff447463c79f74d9b47", "5a5e22c43005287a6f398", "5a8274597df8a0c2e55f8", "5af29f781145416999ec4", "5b42497b384095defbd06", "5bb965aedcc3fe9a42928", "5bdde763483107fc1c356", "5c17130c15b25ba6bb225", "5d96ad153dba8914957d5", "5e12790baeedcc8420f48", "5e13ffd81f01d01d85259", "5e449a5f17319559a5ca6", "5edb1ec453b24de263939", "5f586de2475c599779710", "5f88fe13b819d94e72b49", "60152997a7defff0a0874", "60834d0aee2b66ba15949", "611b84c961624b086ed67", "6126fee51bb7e6ba88602", "6129d752e6d305789a8b3", "622bfe98a4431d85d5844", "631ac1ee5131d3d3b9ef2", "632459528cd617f55a7b8", "63cf9a9cb27f6116864a1", "63fcfef55fcc0d45075b1", "6492bde14f0d291e365f7", "64ab09778c5c526d547e6", "657030c0c58fe69ffd6b9", "6653f88adacea8d339b31", "6693306d51cc06ce56ad1", "672c94cd673e32d0ea013", "67cdd338180ca44768c64", "67fdeacdf1eeb50fe0ec4", "6829cf5fb1057bcd97422", "687f228c8c1ba6eaeabb0", "689ae3c97f7b9a428ff86", "6906d627cf340f4e8ca44", "69a74255fb35c4fc8cf35", "6a0056ec1d5ab644a46f1", "6a3033339cf9b9aa28ac0", "6ad9a325914f8235d9ed4", "6b0540fcbd1e5eb419db2", "6b151ea24e4b3a0afc000", "6bb3b2c21e69f6eb507a1", "6bfefd29c30d15759d707", "6cacee656f85adacca6f1", "6d9b54749bd32798c8497", "6e273ecd0bb3e0ba4c2e0", "6e500691d3b7904e1e941", "6eb589a9a11ecc038cec5", "6fabf1611b3d18c5c9e79", "711bb8257d52d29fd4460", "71d8c49722b777bad8405", "71f74e750e0f59318b938", "71f9ad16a8f33e517f858", "736bb31786104a99935b1", "740f43950d3a9def744c2", "74235d2b9b8c4e242bbe3", "7485e75e1db6871232682", "76297bf13720ae2dee3d2", "763807ebe70b820101b12", "7642427a44af0a4f1c9e2", "76863a2b0c4582ab805d7", "7855731be5043d881be88", "79b3a186cb62b0d095f43", "79e0ecff70fb5fe3dc6c6", "7a140b0dae7688d604584", "7a87fb5929602b1b16824", "7adc3e17eee82a0546be2", "7aefd2e6978417367e5b2", "7b67fb23a4baf9609cb13", "7b73b6f9de8a84eab05a6", "7bc81cd7c9bbed35cae44", "7c2cc734ab2fd320cdd11", "7d8f3a45a5a2dbb921871", "7e3615c9ffb796c4820a1", "7ebe50a0fcad3b2a53ed9", "7f5335fe6f053812321f9", "7fccfd9ae6d3fa570a1c7", "800e9fd3ad0f0f0f23c42", "81fab93a5545121d2a485", "8379a21bc64e3a3c8cee6", "83a93dbe417fa53ff1a21", "83badcca6508a2df364e6", "8413d9951aa6ebb9ae104", "84e49f128ed4888a802d2", "851dc659d87874a7cc456", "85210bdfa393f60da2cb8", "856d39f199a4d331e2614", "85ff6ff1aa6d4850fb9e9", "861a05e9ed320b42f0626", "8640510a1927fa991b078", "86a34c2c0d783bdb2c5f1", "87cfc08978904a2fd8c23", "87e85d64c8b97f56d8f78", "87f5342a1ef2bee7775d6", "88aa1e3e8efcb1bc8cda0", "8968440fa6ceb71326859", "897f04adc2be526b09e13", "8a1d3606d18520b4b2a00", "8a44541677027ff4f88b0", "8b1445ca3dbaa881a93f0", "8b2ec2a5acc6288cef0c9", "8b37d9cda2e96c4ec0006", "8c06bdc344f610eeb6444", "8c2f557bb05c6e16e0b13", "8d8153f7bfec3208a83b6", "8dcd2b9de733cd1f74be2", "8e45c9220bf3c0d3be5d7", "8eefd58e0505d48c7fb29", "8f6823d7b23200558fc84", "9073b7efee4051a07ab98", "90e7eaef33882d0536c96", "917757c3df938599878b7", "91a2d2e9dc062f00c6991", "921b6ba8db67811f2e0b0", "930f4907012b5e5a79ac7", "9373b4fd7c5fa1361c3c0", "93a269ef4daf5a49382c3", "94227f0f3f4ca7265cec9", "94383cb9583ad5ef72f34", "94bcc23441a8794e75722", "951776dd26fd524303383", "96575eefdccf1f50ff672", "9673af1a56dbcfabf9e64", "96a4c2b08ac5c0b32e428", "96d0d7123a4bb62afb165", "97568125cc73b0f2170e9", "9850dc2d45d95b2e2ba36", "9856a13d4d91bf6bfdc29", "98d6ee566a11393214f28", "99d2fc6a93a5a92e0d2e8", "99f4ce9c0b1d53ca6b5f7", "9a242ac40ff271beab261", "9a2c73fd8cd2bb5728403", "9a62eeb88c80d2fb6ece4", "9b0d1838a8ceb854e0e84", "9b4aefab01603d8b49aa1", "9b8e499c2c41ade452698", "9b9227dafb8bc895a18c8", "9be1b91c7b2a56e2b72a6", "9d89796cb7d9261b1f1b9", "a0a4a4b395b66dd624af5", "a12207ecae6e72aa6a468", "a1b62a09ddf5c7b7e1c47", "a1c2a3c2398838a588105", "a20c6ddcb9c2a41d72910", "a22ab06bbcd6a60703464", "a233f5ce102ed456e24d7", "a2fc0d3179eea327b72d9", "a31b1858b1b01354003e7", "a334a9f3191d9a6316c24", "a567fd4ac3979812a88d2", "a61cf4f8746a9cb6356a6", "a67652a9822d3478bd0a6", "a68e78a38306801e35984", "a718f8765f3eaa60d2710", "a761bda3ead69a6595d69", "a84893eaf053beabd2c54", "a88908e3a204fd1fd09f8", "a95f09f47d962dc750ef9", "aa67bf6a511e3475fe212", "abcf21326ecd0e20e50c2", "aca506c32c101d805e0f9", "ad0b3782b8c60fac72368", "add1727cb0fad26a89172", "ae119199a908f58704f65", "ae228a4b5cc264d9ed065", "ae38aa930a7dfbb5647e6", "ae473344b4f145070cc21", "afb5fff618d3f012443e0", "aff21834c2b436f459f70", "b208bb2c07d864dc772c3", "b328fb1f97858642ccc40", "b356f0d09295c6752c455", "b365baa121ad5590ac231", "b3ae40d2b8f6dd77190b9", "b41179d1c21f005862470", "b4205e74fd92d0e30e2b5", "b46d5b67f44081d7ad498", "b4af28e1fa983b962dad6", "b51e4956d33e85321d342", "b521f6c791b2a1e0ade38", "b5665905a05eb4838c1d0", "b5fff373ac9346ad482a2", "b64885b7f52604348f4a6", "b660727eed16cfebdd2a3", "b72ffaa6698b81a165081", "b7fafcc444436dc0b4574", "b85421666ba8eded4f7b8", "b85b1315b7ee995502b97", "b8b5c4d4843ec080b0482", "b8d31387690333a635d77", "b9d69efa54c2b4c4a60e0", "ba8bfe241709be538dc44", "bb0e4cef5031680f74333", "bbd2697f362aab4455cf7", "bc777da72d719f8372bb0", "be9dd59d9c3c2a71a8b14", "bed0eb45c6042267a3ca7", "bf87fbb159b3a58c6bad4", "bfc617af496bd36b98c69", "bfe08e6360a58077659f2", "c0393e5d260f61413ed30", "c14502215d49425e613d5", "c2304aa328a949189cbd1", "c2e0e6bc0b2fadc159326", "c2ff0ffd654c62971e5d9", "c3007dae27a6af7744c83", "c366d7b449a5e43228b85", "c3f3b885ec1d89ea3ae16", "c404cb7cb2ad7d3d16491", "c5ebc6fc4f9e03593ff62", "c6fc853a333e1c0b83130", "c74bcfb9c1e4f955c3fe3", "c74d5fd86fc815ad6c247", "c7944a9842ae1ccd21a79", "c958ce16dff8f6a5334a8", "c985c05eeffc701523412", "c9ce10ef2abfd2119c0b2", "c9d53bca10c6fd78afda7", "ca2d9dc282622e5e1a9f0", "ca7adb2c6e7d34c53e026", "ccf2c823d3fe52952feb4", "cd26f4c6c3591a14fb2c9", "cdb44b9429170e60c7939", "cdc6f41ae8baed3910b07", "ced1f39f0364fb0f987b7", "cf1cbc207bbbfa77c61f7", "d00404e45bb2bd952a9a3", "d013686172f9e5ff7c700", "d0608d3ae32f5588c3c31", "d061dffdea40a454089e3", "d0ff2ac677fb0e643e5b4", "d1d01f3c098633b3bc5c4", "d50d24dbf614353607f92", "d54194ab627b6e9845579", "d56465c8c2d726d710be8", "d5e45adddabb063109f92", "d7150fa3dcf6bc4fb6d18", "d775c0e7066798ab95dd2", "d7fe2ecfd37b8e3ffe235", "d82f5e360341118653461", "d982130dcd4d5f765ab72", "d9b0ada3d947d9c9ba910", "d9fb845a95d2b9101d365", "da0eaa54fa848bb181da2", "db98158110973db1c6093", "dd82ab61b5f3dfcae5155", "ddbef7eb0aaecfdb72be5", "de55bcc21c57615429cf1", "df76f59d174953967a593", "dfca7a433bb1ea8a66399", "e02bd82f174b23a5dd173", "e043e6470e2d5c59b27d1", "e1f66b62df2d3084ef6e5", "e24e9ecbaa725a2dfc627", "e32b0aacfe88990b07f40", "e3395927f0688fbb32bc9", "e37287c3bed1790c175b8", "e3a9d9ee530c4e071b379", "e4803268bb55affbdf392", "e49847d458a7ef5b23768", "e59be9a0afb57a6532430", "e5cfe75c86d18ef4f1042", "e63a9b26945ef445e1387", "e6468957aa5a84d592886", "e64b30096c7c304c95eb2", "e67b8091b1be6acc862b8", "e870e6b7911e6353c6455", "e89f4e94142a13bbfe985", "e9d71df8d2c0168c65654", "e9f1bc3b1c4e6ee0d92c9", "ea6ad4b0d9c0ba74b0264", "eb50388e9106669db8151", "ec75a2cbed8dbdd1cbb98", "ed2396891099283154594", "ed54015f0d7218f42b764", "edda8022e048ea993a787", "f07754976685e21da3096", "f1263c5365e4c99bdeba1", "f1b508a690bb05626d760", "f1cac08663a5432783418", "f21868a2597835a32ea58", "f25c4fec85849cc1e6da1", "f2be99586b4c3b3a05885", "f2e4f4374d6d6d71dad21", "f32719af19e2fd63c34e9", "f3405c68d89bef906e5b6", "f4768f7fbae45e4efe181", "f4e1806c125d6493871a2", "f5197e48c727bce93d591", "f556af35628b97bc58540", "f55d1f7434007894555b2", "f59e9e002f8c88b94a934", "f698df0d15bfd66c86e80", "f69cb324e021899302f93", "f7524a32ef945573a2790", "f77c9dd54e14094fd1170", "f824d63ae7f629887a954", "fa0bb85c9bd1afed39ca4", "fa53dca93b20637a342b7", "fa8d3cddcccec54cd5707", "fad2c2e7b7c77e84ced18", "fb0cc57eb01e36c2e7369", "fb526f95a3e8e2eb5cd38", "fb96e4921dd7b6fbc1441", "fbf7c4a58ce642143d941", "fc01abb0da75f09a03743", "fcf1f01359dc7bf203565", "fcff83a75c2d39534d788", "fd30af6df2b63d6feced0"], "id": "lock5_front_page"}]}</script>
+<script>
+function sha256(ascii){
+  function rightRotate(v,a){return (v>>>a)|(v<<(32-a))}
+  var mathPow=Math.pow,maxWord=mathPow(2,32),i,j,result='',words=[],bitLen=ascii.length*8;
+  var hash=sha256.h=sha256.h||[],k=sha256.k=sha256.k||[],pc=k.length,comp={};
+  for(var c=2;pc<64;c++){if(!comp[c]){for(i=0;i<313;i+=c)comp[i]=c;hash[pc]=(mathPow(c,.5)*maxWord)|0;k[pc++]=(mathPow(c,1/3)*maxWord)|0}}
+  ascii+='\x80';while(ascii.length%64-56)ascii+='\x00';
+  for(i=0;i<ascii.length;i++){j=ascii.charCodeAt(i);words[i>>2]|=j<<((3-i)%4)*8}
+  words[words.length]=((bitLen/maxWord)|0);words[words.length]=(bitLen);
+  for(j=0;j<words.length;){
+    var w=words.slice(j,j+=16),old=hash;hash=hash.slice(0,8);
+    for(i=0;i<64;i++){
+      var w15=w[i-15],w2=w[i-2],a=hash[0],e=hash[4];
+      var t1=hash[7]+(rightRotate(e,6)^rightRotate(e,11)^rightRotate(e,25))+((e&hash[5])^((~e)&hash[6]))+k[i]+(w[i]=(i<16)?w[i]:(w[i-16]+(rightRotate(w15,7)^rightRotate(w15,18)^(w15>>>3))+w[i-7]+(rightRotate(w2,17)^rightRotate(w2,19)^(w2>>>10)))|0);
+      var t2=(rightRotate(a,2)^rightRotate(a,13)^rightRotate(a,22))+((a&hash[1])^(a&hash[2])^(hash[1]&hash[2]));
+      hash=[(t1+t2)|0].concat(hash);hash[4]=(hash[4]+t1)|0;
+    }
+    for(i=0;i<8;i++)hash[i]=(hash[i]+old[i])|0;
+  }
+  for(i=0;i<8;i++)for(j=3;j+1;j--){var b=(hash[i]>>(j*8))&255;result+=((b<16)?0:'')+b.toString(16)}
+  return result;
+}
+function sha256u(s){return sha256(unescape(encodeURIComponent(s)))}
+
+(function(){
+  var PACKET='CPUSH_L11_ESCAPE';
+  var STORE='cpush_l11_escape-room_';
+  var D=JSON.parse(document.getElementById('er-data').textContent);
+  var $=function(i){return document.getElementById(i)};
+  var S;
+  var digits={};            // runtime only: lock n -> digit
+  var entries={};           // lock id -> {h20: maskedDigit}
+  var expanded={};
+  var lastTick=0,timer=null;
+
+  function squash(t){return String(t).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'')}
+  function h20(s){return sha256u(s).slice(0,20)}
+  D.locks.forEach(function(L){var m={};L.entries.forEach(function(e){m[e.slice(0,20)]=+e.slice(20)});entries[L.id]=m});
+
+  function checkLock(L,canon){
+    var salt=D.salt+L.n+':';
+    var h=h20(salt+canon),mk=entries[L.id][h];
+    if(mk===undefined)return null;
+    var m=parseInt(sha256u('m:'+salt+canon).slice(0,2),16)%10;
+    return (mk-m+10)%10;
+  }
+  function fresh(){
+    var o={first:'',last:'',period:'',started:false,elapsed:0,escaped:false,escapeMs:0,debrief:'',codeTries:0,locks:{}};
+    D.locks.forEach(function(L){o.locks[L.id]={solved:false,attempts:0,hints:0,guess:'',readable:''}});
+    return o;
+  }
+  function loadLocal(){var o=fresh();try{var r=JSON.parse(localStorage.getItem(STORE+'state')||'null');if(r)restore(o,r)}catch(e){}return o}
+  function persist(){try{localStorage.setItem(STORE+'state',JSON.stringify(snapshot()))}catch(e){}}
+
+  function totals(){
+    var t={locksSolved:0,attempts:0,hintsUsed:0,exitCodeAttempts:S.codeTries};
+    D.locks.forEach(function(L){var l=S.locks[L.id];if(l.solved)t.locksSolved++;t.attempts+=l.attempts;t.hintsUsed+=l.hints});
+    return t;
+  }
+  function fmt(ms){var s=Math.round(ms/1000),m=Math.floor(s/60);s=s%60;return (m<10?'0':'')+m+':'+(s<10?'0':'')+s}
+  function snapshot(){
+    var o={packet:PACKET,course:'CPUSH',lesson:11,assignment:'Escape Room (Lite)',version:1,saved:new Date().toISOString(),
+      student:{first:$('f_first').value.trim(),last:$('f_last').value.trim(),period:$('f_period').value.trim()},
+      status:S.escaped?'ESCAPED':'INCOMPLETE',escaped:S.escaped,
+      escapeTime:S.escaped?{ms:S.escapeMs,text:fmt(S.escapeMs)}:null,
+      totals:totals(),elapsedMs:Math.round(S.elapsed),started:S.started,locks:{},debrief:$('debriefText')?$('debriefText').value:S.debrief};
+    D.locks.forEach(function(L){var l=S.locks[L.id];
+      o.locks[L.key]={objective:L.obj,puzzleType:L.type,solved:l.solved,attempts:l.attempts,hintsUsed:l.hints,solvedWith:l.readable,solvedGuess:l.guess}});
+    return o;
+  }
+  function restore(o,r){
+    if(!r||typeof r!=='object')return false;
+    var st=r.student||{};
+    o.first=st.first||'';o.last=st.last||'';o.period=st.period||'';
+    o.started=!!r.started;o.elapsed=+r.elapsedMs||0;o.debrief=typeof r.debrief==='string'?r.debrief:'';
+    o.codeTries=(r.totals&&+r.totals.exitCodeAttempts)||0;
+    var allOk=true;
+    D.locks.forEach(function(L){
+      var src=(r.locks&&r.locks[L.key])||{},l=o.locks[L.id];
+      l.attempts=+src.attempts||0;l.hints=Math.min(+src.hintsUsed||0,L.hints.length+0);
+      if(src.hintsUsed>L.hints.length)l.hints=L.hints.length;
+      if(src.solved&&typeof src.solvedGuess==='string'){
+        var d=checkLock(L,src.solvedGuess);
+        if(d!==null){l.solved=true;l.guess=src.solvedGuess;l.readable=String(src.solvedWith||'');digits[L.n]=d}else allOk=false;
+      }else allOk=false;
+    });
+    if(r.escaped&&allOk&&r.escapeTime){o.escaped=true;o.escapeMs=+r.escapeTime.ms||0}
+    return true;
+  }
+
+  /* ---------- scene ---------- */
+  var NS='http://www.w3.org/2000/svg';
+  var XS=[210,255,300,345,390];
+  (function(){
+    var g=$('plocks'),h='';
+    XS.forEach(function(x,i){
+      h+='<g class="plock" id="pl'+(i+1)+'"><path class="sh" d="M'+(x-8)+' 124V114a8 8 0 0 1 16 0V124" fill="none" stroke="#F1EBF4" stroke-width="4"/><rect class="bd" x="'+(x-15)+'" y="124" width="30" height="24" rx="4" fill="#D2AD4B"/><circle cx="'+x+'" cy="135" r="3" fill="#392244"/></g>'+
+      '<rect x="'+(x-16)+'" y="158" width="32" height="36" rx="5" fill="#190D24" stroke="#E1CA8E"/><text id="dw'+(i+1)+'" x="'+x+'" y="184" text-anchor="middle" font-size="24" font-weight="800" fill="#F1EBF4">?</text><text x="'+x+'" y="208" text-anchor="middle" font-size="11" font-weight="700" fill="#C6BAD0">LOCK '+(i+1)+'</text>';
+    });
+    g.innerHTML=h;
+  })();
+  function sceneUpdate(){
+    D.locks.forEach(function(L){
+      var open=S.locks[L.id].solved;
+      $('pl'+L.n).setAttribute('class','plock'+(open?' open':''));
+      $('dw'+L.n).textContent=open?digits[L.n]:'?';
+    });
+    $('scene').classList.toggle('escaped',S.escaped);
+  }
+
+  /* ---------- build lock cards ---------- */
+  var W={};   // widget state per lock
+  var LOCKSVG='<svg class="lk" viewBox="0 0 44 44" aria-hidden="true"><path class="sh" d="M13 20V14a9 9 0 0 1 18 0V20" fill="none" stroke="#F1EBF4" stroke-width="4"/><rect class="bd" x="8" y="20" width="28" height="20" rx="4" fill="#D2AD4B"/><circle cx="22" cy="30" r="3" fill="#392244"/></svg>';
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+  function buildLock(L){
+    var sec=document.createElement('section');sec.className='lock glass locked';sec.id='lock'+L.n;
+    var head='<button class="lh" type="button" id="lh'+L.n+'" aria-expanded="false">'+LOCKSVG+'<span class="lt"><small>LOCK '+L.n+' · '+L.objLabel+'</small><strong>'+esc(L.title)+'</strong></span><span class="dg" id="dg'+L.n+'" aria-label="digit">?</span></button>';
+    var body='<div class="lb" id="lb'+L.n+'"><p class="objline">'+esc(L.objText)+'</p>'+
+      '<div class="card"><h4>CLUE CARD</h4>'+L.card+'<p class="src">'+L.src+'</p></div>'+
+      '<div class="prompt">'+L.prompt+'</div><div id="pz'+L.n+'"></div>'+
+      '<div class="row"><button class="btn primary" type="button" id="ck'+L.n+'">Check</button><button class="btn small" type="button" id="hb'+L.n+'">Hint</button><button class="btn small" type="button" id="rs'+L.n+'">Clear</button></div>'+
+      '<div class="hints" id="hs'+L.n+'"></div><div class="fb" id="fb'+L.n+'" role="status"></div></div>';
+    sec.innerHTML=head+body;
+    $('locks').appendChild(sec);
+    buildPuzzle(L);
+    $('lh'+L.n).addEventListener('click',function(){
+      var st=lockState(L);if(st==='locked')return;
+      expanded[L.n]=!expanded[L.n];updateLocks();
+    });
+    $('ck'+L.n).addEventListener('click',function(){submit(L)});
+    $('hb'+L.n).addEventListener('click',function(){hint(L)});
+    $('rs'+L.n).addEventListener('click',function(){clearPuzzle(L)});
+  }
+  function labelOf(list,id){for(var i=0;i<list.length;i++)if(list[i].id===id)return list[i].label;return id}
+
+  function buildPuzzle(L){
+    var el=$('pz'+L.n),w=W[L.n]={};
+    if(L.type==='order'){
+      w.sel=[];el.innerHTML='<div class="chips" id="ch'+L.n+'"></div>';
+      renderOrder(L);
+    }else if(L.type==='match'){
+      var h='';
+      L.terms.forEach(function(t){
+        h+='<div class="mrow"><label for="m'+L.n+t.id+'">'+esc(t.label)+'</label><select id="m'+L.n+t.id+'"><option value="">Choose a description...</option>';
+        L.descs.forEach(function(d){h+='<option value="'+d.id+'">'+esc(d.label)+'</option>'});
+        h+='</select></div>';
+      });
+      el.innerHTML=h;
+    }else if(L.type==='pick'){
+      var h2='';
+      L.qs.forEach(function(q){
+        h2+='<fieldset><legend>'+esc(q.q)+'</legend>';
+        q.opts.forEach(function(o){h2+='<label class="opt"><input type="radio" name="q'+L.n+q.id+'" value="'+o.id+'"> <span>'+esc(o.label)+'</span></label>'});
+        h2+='</fieldset>';
+      });
+      el.innerHTML=h2;
+    }else if(L.type==='decode'){
+      var k1='',k2='';
+      for(var i=0;i<26;i++){var p=String.fromCharCode(65+i),c=String.fromCharCode(65+(i+L.shift)%26);k1+='<div class="c">'+c+'</div>';k2+='<div>'+p+'</div>'}
+      // build key in two rows of 13
+      var key='';
+      for(var r=0;r<2;r++){for(var j=0;j<13;j++){var idx=r*13+j;key+='<div class="c">'+String.fromCharCode(65+(idx+L.shift)%26)+'</div>'}for(var j2=0;j2<13;j2++){key+='<div>'+String.fromCharCode(65+r*13+j2)+'</div>'}}
+      el.innerHTML='<div class="cipher" translate="no" aria-label="Coded message">'+esc(L.cipher)+'</div><p style="margin:.6em 0 0;font-size:15px;color:var(--dim)">Decoder key: the <span style="color:var(--hl);font-weight:700">pink</span> letter is in the message. The white letter under it is the real letter.</p><div class="key" aria-hidden="true">'+key+'</div><label>Decoded answer<input type="text" id="tx'+L.n+'" autocomplete="off" autocapitalize="none" spellcheck="false"></label><p class="ennote">Type the answer in English.</p>';
+    }else if(L.type==='fill'){
+      el.innerHTML='<p style="font-size:18px;margin:.2em 0">'+esc(L.sentence)+'</p><div class="scr" translate="no" aria-label="Scrambled letters">'+esc(L.scramble)+'</div><p style="margin:.4em 0;font-size:14px;color:var(--dim)">Unscramble the letters to fill the blank.</p><label>Your answer<input type="text" id="tx'+L.n+'" autocomplete="off" autocapitalize="none" spellcheck="false"></label><p class="ennote">Type the answer in English.</p>';
+    }
+    var t=$('tx'+L.n);
+    if(t)t.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();submit(L)}});
+  }
+  function renderOrder(L){
+    var w=W[L.n],ch=$('ch'+L.n),h='';
+    L.items.forEach(function(it){
+      var pos=w.sel.indexOf(it.id);
+      h+='<button type="button" class="chip'+(pos>=0?' sel':'')+'" data-id="'+it.id+'" aria-pressed="'+(pos>=0)+'">'+(pos>=0?'<span class="n">'+(pos+1)+'</span>':'')+'<span>'+esc(it.label)+'</span></button>';
+    });
+    ch.innerHTML=h;
+    [].forEach.call(ch.querySelectorAll('.chip'),function(b){
+      b.addEventListener('click',function(){
+        if(S.locks[L.id].solved)return;
+        var id=b.getAttribute('data-id'),p=w.sel.indexOf(id);
+        if(p>=0)w.sel.splice(p,1);else w.sel.push(id);
+        renderOrder(L);
+      });
+    });
+  }
+  function clearPuzzle(L){
+    if(S.locks[L.id].solved)return;
+    var w=W[L.n];
+    if(L.type==='order'){w.sel=[];renderOrder(L)}
+    else if(L.type==='match'){L.terms.forEach(function(t){$('m'+L.n+t.id).value=''})}
+    else if(L.type==='pick'){L.qs.forEach(function(q){[].forEach.call(document.getElementsByName('q'+L.n+q.id),function(r){r.checked=false})})}
+    else{$('tx'+L.n).value=''}
+    fb(L,'','');
+  }
+  function guessOf(L){
+    // returns {canon, readable} or {err}
+    if(L.type==='order'){
+      var w=W[L.n];
+      if(w.sel.length<L.items.length)return {err:'Tap all '+L.items.length+' places first, in order.'};
+      return {canon:w.sel.join('|'),readable:w.sel.map(function(i){return labelOf(L.items,i)}).join(' > ')};
+    }
+    if(L.type==='match'){
+      var c=[],r=[];
+      for(var i=0;i<L.terms.length;i++){var t=L.terms[i],v=$('m'+L.n+t.id).value;if(!v)return {err:'Match every term first.'};c.push(v);r.push(t.label+' = '+labelOf(L.descs,v))}
+      return {canon:c.join('|'),readable:r.join('; ')};
+    }
+    if(L.type==='pick'){
+      var c2=[],r2=[];
+      for(var j=0;j<L.qs.length;j++){var q=L.qs[j],v2='';[].forEach.call(document.getElementsByName('q'+L.n+q.id),function(x){if(x.checked)v2=x.value});if(!v2)return {err:'Answer every question first.'};c2.push(v2);r2.push(labelOf(q.opts,v2))}
+      return {canon:c2.join('|'),readable:r2.join('; ')};
+    }
+    var raw=$('tx'+L.n).value.trim();
+    if(!raw)return {err:'Type your answer first.'};
+    return {canon:squash(raw),readable:raw.slice(0,80)};
+  }
+  function fb(L,cls,text){var e=$('fb'+L.n);e.className='fb'+(cls?' show '+cls:'');e.textContent=text}
+  function submit(L){
+    var l=S.locks[L.id];if(l.solved)return;
+    var g=guessOf(L);
+    if(g.err){fb(L,'nudge',g.err);return}
+    l.attempts++;
+    var d=checkLock(L,g.canon);
+    if(d===null){
+      fb(L,'nudge',L.nudge);
+      var s=$('lock'+L.n);s.classList.remove('shake');void s.offsetWidth;s.classList.add('shake');
+      persist();updateBar();return;
+    }
+    l.solved=true;l.guess=g.canon;l.readable=g.readable;digits[L.n]=d;
+    fb(L,'good','Click! Lock '+L.n+' is open. Your digit is '+d+'.');
+    var wh=$('wheel');wh.classList.remove('spin');void wh.getBoundingClientRect();wh.classList.add('spin');
+    $('dw'+L.n).classList.add('pop');
+    persist();updateAll();
+    setTimeout(function(){
+      expanded[L.n]=false;
+      var nx=nextOpen();if(nx)expanded[nx]=true;
+      updateLocks();
+      var tgt=nx?$('lock'+nx):$('exit');
+      if(tgt&&tgt.scrollIntoView)tgt.scrollIntoView({behavior:'smooth',block:'start'});
+    },1600);
+  }
+  function hint(L){
+    var l=S.locks[L.id];
+    if(l.solved)return;
+    if(l.hints<L.hints.length){l.hints++;persist();updateHints(L);updateBar()}
+    else{fb(L,'nudge','That was the last hint. Read the Clue Card slowly and try again.')}
+  }
+  function updateHints(L){
+    var l=S.locks[L.id],h='';
+    for(var i=0;i<l.hints;i++)h+='<div class="hint"><b>Hint '+(i+1)+':</b> <span>'+esc(L.hints[i])+'</span></div>';
+    $('hs'+L.n).innerHTML=h;
+  }
+  function nextOpen(){for(var i=0;i<D.locks.length;i++)if(!S.locks[D.locks[i].id].solved)return D.locks[i].n;return 0}
+  function lockState(L){
+    if(S.locks[L.id].solved)return 'solved';
+    return L.n===nextOpen()?'current':'locked';
+  }
+  function updateLocks(){
+    var cur=nextOpen();
+    D.locks.forEach(function(L){
+      var st=lockState(L),sec=$('lock'+L.n);
+      if(st==='current'&&expanded[L.n]===undefined)expanded[L.n]=true;
+      var open=(st!=='locked')&&!!expanded[L.n];
+      sec.className='lock glass '+st+(open?' open':'');
+      $('lh'+L.n).setAttribute('aria-expanded',open?'true':'false');
+      $('dg'+L.n).textContent=S.locks[L.id].solved?digits[L.n]:'?';
+      if(S.locks[L.id].solved){
+        [].forEach.call(sec.querySelectorAll('input,select,button.chip,#ck'+L.n+',#hb'+L.n+',#rs'+L.n),function(x){x.disabled=true});
+        var f=$('fb'+L.n);if(!f.classList.contains('good'))fb(L,'good','Unlocked. Your digit is '+digits[L.n]+'.'+(S.locks[L.id].readable?' Your answer: '+S.locks[L.id].readable:''));
+      }
+      updateHints(L);
+    });
+  }
+  function codeStr(){var s='';for(var i=1;i<=5;i++)s+=(digits[i]===undefined?'':digits[i]);return s}
+  function allSolved(){return D.locks.every(function(L){return S.locks[L.id].solved})}
+  function updateExit(){
+    var ok=allSolved();
+    $('exit').classList.toggle('locked',!ok);
+    $('codeBtn').disabled=!ok||S.escaped;
+    [].forEach.call($('codebox').querySelectorAll('input'),function(i){i.disabled=!ok||S.escaped});
+    $('exitNote').textContent=S.escaped?'The door is open!':(ok?'All 5 locks are open. Type the 5 digits in order, Lock 1 first.':'Open all 5 locks first. The digits go in order: Lock 1 first.');
+  }
+  function updateBar(){
+    var t=totals();
+    $('lc').textContent=t.locksSolved;$('hc').textContent=t.hintsUsed;
+    $('tm').textContent=fmt(S.escaped?S.escapeMs:S.elapsed);
+  }
+  function updateStatus(){
+    var el=$('status'),db=($('debriefText').value.trim().length);
+    if(S.escaped)el.textContent=db>=40?'You escaped and wrote your Debrief. Ready to submit.':'You escaped! Write your Debrief, then download your file to submit.';
+    else el.textContent='Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.';
+  }
+  function updateEsc(){
+    $('esc').classList.toggle('show',S.escaped);
+    if(S.escaped){var t=totals();$('escTime').textContent=fmt(S.escapeMs);$('escSum').textContent='5 of 5 locks opened with '+t.attempts+' tries and '+t.hintsUsed+' hint'+(t.hintsUsed===1?'':'s')+'.'}
+  }
+  function updateAll(){sceneUpdate();updateLocks();updateExit();updateBar();updateEsc();updateStatus();
+    $('intro').classList.toggle('hidden',S.started);$('game').classList.toggle('hidden',!S.started);$('loadOnly').classList.toggle('hidden',S.started);
+  }
+
+  /* ---------- exit code ---------- */
+  (function(){
+    var cb=$('codebox');
+    for(var i=0;i<5;i++){
+      var inp=document.createElement('input');inp.type='text';inp.inputMode='numeric';inp.maxLength=1;inp.setAttribute('aria-label','Exit code digit '+(i+1));inp.disabled=true;
+      (function(i,inp){
+        inp.addEventListener('input',function(){inp.value=inp.value.replace(/[٠-٩]/g,function(c){return c.charCodeAt(0)-1632}).replace(/[۰-۹]/g,function(c){return c.charCodeAt(0)-1776}).replace(/[^0-9]/g,'');if(inp.value&&i<4)cb.children[i+1].focus()});
+        inp.addEventListener('keydown',function(e){
+          if(e.key==='Backspace'&&!inp.value&&i>0)cb.children[i-1].focus();
+          if(e.key==='Enter'){e.preventDefault();tryCode()}
+        });
+        inp.addEventListener('paste',function(e){
+          var t=(e.clipboardData||window.clipboardData).getData('text').replace(/[٠-٩]/g,function(c){return c.charCodeAt(0)-1632}).replace(/[۰-۹]/g,function(c){return c.charCodeAt(0)-1776}).replace(/[^0-9]/g,'');
+          if(t.length>1){e.preventDefault();for(var k=0;k<5;k++)cb.children[k].value=t[k]||''}
+        });
+      })(i,inp);
+      cb.appendChild(inp);
+    }
+  })();
+  function tryCode(){
+    if(!allSolved()||S.escaped)return;
+    var v='';[].forEach.call($('codebox').querySelectorAll('input'),function(i){v+=i.value});
+    var f=$('codefb');
+    if(v.length<5){f.className='fb show nudge';f.textContent='The code has 5 digits. Fill every box.';return}
+    S.codeTries++;
+    if(h20('exit:'+D.salt+v)!==D.exitHash){
+      f.className='fb show nudge';f.textContent='The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.';
+      var ex=$('exit');ex.classList.remove('shake');void ex.offsetWidth;ex.classList.add('shake');
+      persist();return;
+    }
+    S.escaped=true;S.escapeMs=S.elapsed;
+    f.className='fb show good';f.textContent='The door swings open!';
+    persist();updateAll();
+    setTimeout(function(){$('esc').scrollIntoView({behavior:'smooth',block:'start'})},900);
+  }
+  $('codeBtn').addEventListener('click',tryCode);
+
+  /* ---------- timer ---------- */
+  function tick(){
+    var n=Date.now();
+    if(S.started&&!S.escaped){S.elapsed+=Math.min(n-lastTick,5000);$('tm').textContent=fmt(S.elapsed)}
+    lastTick=n;
+  }
+  function startTimer(){lastTick=Date.now();if(!timer)timer=setInterval(function(){tick();if(Math.round(S.elapsed/1000)%10===0)persist()},1000)}
+
+  /* ---------- files ---------- */
+  function msg(t,err){var m=$('msg');m.textContent=t;m.className='msg'+(err?' err':'');m.style.display='block'}
+  function ascii(n){return String(n).normalize('NFD').replace(/[̀-ͯ]/g,'')}
+  function clean(n){n=window.spAscii?spAscii(n):n;return ascii(n).trim().replace(/\s+/g,'_').replace(/[^A-Za-z0-9_-]/g,'')}
+  function who(){return (clean($('f_last').value)||'Last')+'_'+(clean($('f_first').value)||'First')}
+  function download(name,obj){
+    var blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;
+    document.body.appendChild(a);a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);
+  }
+  function namesOk(){
+    var ids=['f_first','f_last','f_period'],ok=true;
+    ids.forEach(function(i){var f=$(i);if(!f.value.trim()){f.classList.add('bad');ok=false}});
+    if(!ok){msg('Enter your first name, last name, and period at the top first.',true);$('f_first').scrollIntoView({block:'center'})}
+    return ok;
+  }
+  ['f_first','f_last','f_period'].forEach(function(i){$(i).addEventListener('input',function(){$(i).classList.remove('bad');S[i.slice(2)]=$(i).value;persist()})});
+  $('debriefText').addEventListener('input',function(){S.debrief=$('debriefText').value;persist();updateStatus()});
+  $('saveBtn').addEventListener('click',function(){
+    if(!namesOk())return;tick();
+    download(who()+'-'+PACKET+'-PROGRESS.json',snapshot());
+    msg('Progress file downloaded. Use Load Progress to continue later.');
+  });
+  $('finishBtn').addEventListener('click',function(){
+    if(!namesOk())return;tick();
+    var now=new Date(),o=snapshot();o.completed=S.escaped;o.submitted=now.toISOString();
+    o.student.date=now.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+    download(who()+'-'+PACKET+'.json',o);
+    msg(S.escaped?('Done! File downloaded: '+who()+'-'+PACKET+'.json. Upload it to Canvas.'):('Your file downloaded and is marked INCOMPLETE (you have not escaped). Upload it to Canvas: '+who()+'-'+PACKET+'.json'));
+  });
+  function openLoad(){$('loadFile').click()}
+  $('loadBtn').addEventListener('click',openLoad);$('loadBtn0').addEventListener('click',openLoad);
+  $('loadFile').addEventListener('change',function(e){
+    var f=e.target.files[0];if(!f)return;
+    var r=new FileReader();
+    r.onload=function(){
+      try{
+        var o=JSON.parse(r.result);
+        if(!o||o.packet!==PACKET||typeof o.locks!=='object')throw new Error('wrong');
+        digits={};var n=fresh();restore(n,o);S=n;applyToDom();
+        msg('Progress loaded. Welcome back.');
+      }catch(err){msg('That file did not work. Choose a progress file saved from this Escape Room.',true)}
+      e.target.value='';
+    };
+    r.onerror=function(){msg('The file could not be read.',true)};
+    r.readAsText(f);
+  });
+  $('reset').addEventListener('click',function(){
+    if(!confirm('Clear all your work and start over? This cannot be undone.'))return;
+    digits={};expanded={};S=fresh();
+    try{localStorage.removeItem(STORE+'state')}catch(e){}
+    $('locks').innerHTML='';D.locks.forEach(buildLock);
+    $('f_first').value=$('f_last').value=$('f_period').value='';$('debriefText').value='';
+    [].forEach.call($('codebox').querySelectorAll('input'),function(i){i.value=''});$('codefb').className='fb';
+    applyToDom();
+  });
+  function applyToDom(){
+    $('f_first').value=S.first;$('f_last').value=S.last;$('f_period').value=S.period;$('debriefText').value=S.debrief;
+    // rebuild lock widgets, then pre-fill solved ones with readable note
+    $('locks').innerHTML='';D.locks.forEach(buildLock);
+    expanded={};
+    updateAll();
+    if(S.started)startTimer();
+  }
+  $('startBtn').addEventListener('click',function(){S.started=true;persist();startTimer();updateAll();$('game').scrollIntoView({behavior:'smooth'})});
+  window.addEventListener('beforeunload',function(){tick();persist()});
+
+  S=loadLocal();
+  D.locks.forEach(buildLock);
+  applyToDom();
+})();
+</script>
+<!--sp-i18n--><script type="application/json" id="sp-i18n">{"langs":["en","es","ar"],"default":"en","es":{"Save Progress":"Guardar progreso","Load Progress":"Cargar progreso","Finished — Download File to Submit":"Terminé — Descargar el archivo para entregar","Clear all my answers":"Borrar todas mis respuestas","FIRST NAME *":"NOMBRE *","LAST NAME *":"APELLIDO *","PERIOD *":"PERÍODO *","DATE (fills in when you finish)":"FECHA (se llena cuando terminas)","e.g. 3":"p. ej., 3","Automatic":"Automática","Please type your first name, last name, and period first.":"Primero escribe tu nombre, apellido y período.","Western Expansion and Southern Secession":"Expansión hacia el oeste y secesión del sur","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — La Ley de Esclavos Fugitivos","Bleeding Kansas":"Bleeding Kansas — Kansas sangriento","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"Se descargó tu archivo de progreso. Guárdalo bien. Usa «Cargar progreso» para continuar más tarde.","Progress loaded.":"Progreso cargado.","Could not read that file.":"No se pudo leer ese archivo.","Treaty of Guadalupe Hidalgo":"Tratado de Guadalupe Hidalgo","Politics, Populism, and Empire":"Política, populismo e imperio","Escape Room 11 · Politics, Populism, and Empire":"Sala de escape 11 · Política, populismo e imperio","Escape the Press Room":"Escapa de la sala de imprenta","You are locked in the press room.":"Estás encerrado en la sala de imprenta.","The newspaper office closed for the night and the pressman locked up the press room. Old front pages from 1859 to 1917 hang on the wall. The door has <b>5 locks<\/b>. Each lock matches one big idea from Lesson 11. Solve them all to find the <b>5-digit exit code<\/b>.":"La oficina del periódico cerró por la noche y el impresor cerró con llave la sala de imprenta. Todavía hay portadas antiguas de 1859 a 1917 colgadas en la pared. La puerta tiene <b>5 candados<\/b>. Cada candado corresponde a una idea importante de la Lección 11. Resuélvelos todos para encontrar el <b>código de salida de 5 dígitos<\/b>.","Enter the Press Room":"Entrar a la sala de imprenta","PRESS ROOM":"SALA DE IMPRENTA","A newspaper press room at night. Newspaper pages hang on lines on both walls, a wooden type case with small compartments hangs on the left wall, a hand printing press stands on the right, and a stack of paper sits in the lower left. The press room door has five padlocks in a row. Under each padlock is a window for one digit of the exit code.":"Una sala de imprenta de un periódico de noche. Hojas de periódico cuelgan de cuerdas en las dos paredes, una caja de tipos de madera con casilleros pequeños cuelga de la pared izquierda, una prensa de mano está a la derecha y una pila de papel está abajo a la izquierda. La puerta de la sala tiene cinco candados en fila. Debajo de cada candado hay una ventanita para un dígito del código de salida.","The Type Case":"La caja de tipos","The Editor’s Desk":"El escritorio del editor","The Copy Wire":"El cable de noticias","The Map Wall":"La pared del mapa","The Front Page":"La primera plana","Core Objectives 1-3: Understand the effects of urban growth during the Gilded Age, including the problems it created; describe the “new immigrants” of the late nineteenth century and how they were viewed by American society; and explain how urban growth and the increasingly important role of science influenced leisure activities, cultural life, and social policy.":"Objetivos principales 1-3: Comprender los efectos del crecimiento urbano durante la Edad Dorada, incluidos los problemas que creó; describir a los “nuevos inmigrantes” de finales del siglo XIX y cómo los veía la sociedad estadounidense; y explicar cómo el crecimiento urbano y el papel cada vez más importante de la ciencia influyeron en las actividades de ocio, la vida cultural y la política social.","Core Objectives 4-5: Assess how the nature of politics during the Gilded Age contributed to intense political partisanship and political corruption; and evaluate the effectiveness of the reforms enacted during this period in promoting “clean” government and limiting the power and political influence of Big Business.":"Objetivos principales 4-5: Evaluar cómo la naturaleza de la política durante la Edad Dorada contribuyó a un partidismo intenso y a la corrupción política; y evaluar la eficacia de las reformas aprobadas durante este período para lograr un gobierno “limpio” y limitar el poder y la influencia política de las grandes empresas.","Core Objective 6: Analyze why the money supply became a major political issue during the Gilded Age, especially among small farmers, and describe its impact on politics.":"Objetivo principal 6: Analizar por qué la cantidad de dinero en circulación se convirtió en un gran tema político durante la Edad Dorada, sobre todo entre los pequeños granjeros, y describir su impacto en la política.","Core Objectives 7-8: Describe the factors that motivated America’s new imperialism after the Civil War; and explain why and how America expanded its influence in the Pacific before the Spanish-American War.":"Objetivos principales 7-8: Describir los factores que motivaron el nuevo imperialismo de Estados Unidos después de la Guerra Civil; y explicar por qué y cómo Estados Unidos extendió su influencia en el Pacífico antes de la Guerra Hispano-Estadounidense.","Core Objectives 9-11: Identify the causes of the Spanish-American War and its major events; analyze the consequences of the Spanish-American War for American foreign policy; and describe the reasons for Theodore Roosevelt’s rapid rise to the presidency and evaluate the main elements of his foreign policies.":"Objetivos principales 9-11: Identificar las causas de la Guerra Hispano-Estadounidense y sus sucesos principales; analizar las consecuencias de la Guerra Hispano-Estadounidense para la política exterior de Estados Unidos; y describir las razones del rápido ascenso de Theodore Roosevelt a la presidencia y evaluar los elementos principales de sus políticas exteriores.","In 1900, some 2.3 million people, or two-thirds of New York City’s population, lived in overcrowded tenements with little light or fresh air. After 1890, the “new immigrants,” mostly from southern and eastern Europe, such as Russia, Poland, Greece, and Italy, were the majority of newcomers. Many nativists believed that people of British or Germanic background were superior, and the prejudice was especially harsh against the Chinese: the Chinese Exclusion Act of 1882 barred Chinese laborers from entering for ten years and denied citizenship to Chinese immigrants. Big cities also created new mass entertainment, such as college football, basketball, and professional baseball. Herbert Spencer’s social Darwinism used the phrase “survival of the fittest” to say that competition drives human progress, but Lester Frank Ward’s reform Darwinism praised cooperation and compassion instead.":"En 1900, unos 2.3 millones de personas, es decir, dos tercios de la población de la ciudad de Nueva York, vivían en viviendas de vecindad (tenements) sobrepobladas, con poca luz y poco aire fresco. Después de 1890, los “nuevos inmigrantes”, en su mayoría del sur y el este de Europa, como Rusia, Polonia, Grecia e Italia, eran la mayoría de los recién llegados. Muchos nativistas creían que las personas de origen británico o germánico eran superiores, y el prejuicio era especialmente duro contra los chinos: la Ley de Exclusión China de 1882 prohibió la entrada de trabajadores chinos por diez años y negó la ciudadanía a los inmigrantes chinos. Las grandes ciudades también crearon nuevas formas de entretenimiento masivo, como el fútbol americano y el básquetbol universitarios y el béisbol profesional. El darwinismo social de Herbert Spencer usó la frase “supervivencia del más apto” para decir que la competencia impulsa el progreso humano, pero el darwinismo reformista de Lester Frank Ward elogió, en cambio, la cooperación y la compasión.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 18, “America’s Move to Town” (“Crowds, Dirt, and Disease,” p. 780), “The New Immigration” (“A Surge of Newcomers,” p. 781; “The Nativist Response” and “Chinese Exclusion,” pp. 783-785), and “Changes in Culture and Thought” (“Urban Leisure and Entertainment,” p. 789; “Social Darwinism”; “Reform Darwinism,” p. 792).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 18, “America’s Move to Town” (“Crowds, Dirt, and Disease,” pág. 780), “The New Immigration” (“A Surge of Newcomers,” pág. 781; “The Nativist Response” y “Chinese Exclusion,” págs. 783-785) y “Changes in Culture and Thought” (“Urban Leisure and Entertainment,” pág. 789; “Social Darwinism”; “Reform Darwinism,” pág. 792).","In 1900, about how much of New York City’s population lived in overcrowded tenements?":"En 1900, ¿aproximadamente qué parte de la población de la ciudad de Nueva York vivía en viviendas de vecindad (tenements) sobrepobladas?","About one-tenth":"Cerca de una décima parte","About one-third":"Cerca de un tercio","About two-thirds":"Cerca de dos tercios","Almost no one":"Casi nadie","After 1890, where did most of the “new immigrants” come from?":"Después de 1890, ¿de dónde venían la mayoría de los “nuevos inmigrantes”?","Northern and western Europe":"Del norte y el oeste de Europa","Canada and Australia":"De Canadá y Australia","South America":"De América del Sur","Southern and eastern Europe":"Del sur y el este de Europa","Which phrase did Herbert Spencer use for his idea that competition drives human progress?":"¿Qué frase usó Herbert Spencer para su idea de que la competencia impulsa el progreso humano?","“Equal rights for all”":"“Derechos iguales para todos”","“Survival of the fittest”":"“Supervivencia del más apto”","“Government by the people”":"“Gobierno del pueblo”","“Liberty and justice for all”":"“Libertad y justicia para todos”","Each answer is in the Clue Card. Look for a share of New York City, the part of Europe the new immigrants came from, and a short phrase by Spencer.":"Cada respuesta está en la tarjeta de indicios. Busca una parte de la ciudad de Nueva York, la parte de Europa de donde venían los nuevos inmigrantes y una frase corta de Spencer.","The share is a fraction of the whole city. The region is in the south and east. The phrase ends with the word “fittest.”":"La parte es una fracción de toda la ciudad. La región queda en el sur y el este. La frase termina con la palabra “fittest” (“más apto”).","Not quite. At least one answer is off. Re-read the Clue Card for the tenement share, where the new immigrants came from, and Spencer’s phrase.":"Casi. Al menos una respuesta está mal. Vuelve a leer la tarjeta de indicios para ver la parte de la población en viviendas de vecindad, de dónde venían los nuevos inmigrantes y la frase de Spencer.","In cities full of new immigrant voters, politics was often run by “rings” led by a party “boss,” who used a “machine” of loyal neighborhood workers; William “Boss” Tweed of New York used the Tammany Hall ring to hand out contracts and jobs until his arrest in 1871. Nationally, party loyalty was intense, voter turnout was commonly 70 to 80 percent, and neither party was dominant, so both avoided bold new ideas. In 1883, after Garfield’s assassination, Congress passed the Pendleton Act and created the Civil Service Commission, so at least 15 percent of federal jobs would be filled by competitive tests instead of favoritism; Norton calls it a limited first step. The Mugwumps, mostly professors, editors, and writers, wanted all federal jobs filled on merit. In 1887, Congress created the Interstate Commerce Commission (ICC), the first federal agency to regulate business, but over time it was ignored, and the railroads kept charging high rates.":"En las ciudades llenas de nuevos votantes inmigrantes, la política solía estar controlada por “anillos” dirigidos por un “jefe” del partido, que usaba una “maquinaria” de trabajadores leales del barrio; William “Boss” Tweed, de Nueva York, usó el anillo de Tammany Hall para repartir contratos y empleos hasta su arresto en 1871. A nivel nacional, la lealtad al partido era intensa, la participación de los votantes solía ser del 70 al 80 por ciento y ningún partido dominaba, así que los dos evitaban las ideas atrevidas. En 1883, después del asesinato de Garfield, el Congreso aprobó la Ley Pendleton (Pendleton Act) y creó la Comisión del Servicio Civil, de modo que al menos el 15 por ciento de los empleos federales se llenaría con exámenes competitivos en lugar de favoritismo; Norton la llama un primer paso limitado. Los Mugwumps, en su mayoría profesores, editores y escritores, querían que todos los empleos federales se llenaran por mérito. En 1887, el Congreso creó la Comisión de Comercio Interestatal (ICC), la primera agencia federal para regular las empresas, pero con el tiempo fue ignorada y los ferrocarriles siguieron cobrando tarifas altas.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 18, “Gilded Age Politics” (“Local Politics and Party Loyalties,” p. 793; “Partisan Politics at the National Level,” p. 794) and “Corruption and Reform: Hayes to Harrison” (“The Civil Service Commission,” p. 798; Mugwumps, p. 799; “Railroad Regulation,” p. 800).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 18, “Gilded Age Politics” (“Local Politics and Party Loyalties,” pág. 793; “Partisan Politics at the National Level,” pág. 794) y “Corruption and Reform: Hayes to Harrison” (“The Civil Service Commission,” pág. 798; Mugwumps, pág. 799; “Railroad Regulation,” pág. 800).","Party “boss”":"“Jefe” del partido","Pendleton Act":"Ley Pendleton","Mugwumps":"Mugwumps","Interstate Commerce Commission":"Comisión de Comercio Interestatal","The leader of a political ring who ran a machine of loyal neighborhood workers":"El líder de un anillo político que dirigía una maquinaria de trabajadores leales del barrio","The 1883 law that set up the Civil Service Commission, so some federal jobs went to people who passed tests":"La ley de 1883 que creó la Comisión del Servicio Civil, para que algunos empleos federales fueran para quienes pasaban exámenes","Reformers, mostly professors, editors, and writers, who wanted all federal jobs filled on merit":"Reformadores, en su mayoría profesores, editores y escritores, que querían que todos los empleos federales se llenaran por mérito","The first federal agency to regulate business; it watched railroad rates":"La primera agencia federal para regular las empresas; vigilaba las tarifas de los ferrocarriles","Two terms are about people (a boss and the reformers called Mugwumps). Two are about government: a law about jobs and an agency about railroads.":"Dos términos tratan de personas (un jefe y los reformadores llamados Mugwumps). Otros dos tratan del gobierno: una ley sobre empleos y una agencia sobre ferrocarriles.","The Pendleton Act is about federal jobs and tests. The ICC is about railroads. The boss ran a machine in a city.":"La Ley Pendleton trata de los empleos federales y los exámenes. La ICC trata de los ferrocarriles. El jefe dirigía una maquinaria en una ciudad.","After the Civil War, crop prices fell and small farmers sank into debt; Southern cotton dropped from 31 cents a pound in 1866 to 6 cents in 1893. Farmers blamed an inadequate money supply. In 1873, Congress had said that only gold, not silver, could be used for minting coins, and farmers wanted much more of the other metal coined to put more money in circulation and raise crop prices. The Grange and then the Farmers’ Alliances organized farm families, and in 1892 they and others formed the People’s Party (Populists), which called for unlimited coinage of that metal, a progressive income tax, and federal ownership of the railroads and telegraph systems. After the Panic of 1893, more than 600 banks closed and 15,000 businesses failed. In 1896, William Jennings Bryan won 6.5 million votes with his “Cross of Gold” speech, but McKinley won 7.1 million.":"Después de la Guerra Civil, los precios de las cosechas cayeron y los pequeños granjeros se hundieron en deudas; el algodón del Sur bajó de 31 centavos por libra en 1866 a 6 centavos en 1893. Los granjeros culparon a una cantidad insuficiente de dinero en circulación. En 1873, el Congreso había dicho que solo el oro, no la plata, podía usarse para acuñar monedas, y los granjeros querían que se acuñara mucho más del otro metal para poner más dinero en circulación y subir los precios de las cosechas. La Grange y luego las Alianzas de Granjeros organizaron a las familias del campo, y en 1892 ellos y otros formaron el Partido del Pueblo (populistas), que pidió la acuñación ilimitada de ese metal, un impuesto sobre la renta progresivo y que el gobierno federal fuera dueño de los ferrocarriles y los sistemas de telégrafo. Después del Pánico de 1893, más de 600 bancos cerraron y 15,000 negocios quebraron. En 1896, William Jennings Bryan obtuvo 6.5 millones de votos con su discurso de la “Cruz de Oro”, pero McKinley obtuvo 7.1 millones.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 18, “Unhappy Farmers and the ‘Money Question’” (section starts p. 803; “A Vicious Cycle of Depressed Prices and Debt” and “Silver and Inflation,” pp. 803-804; “The Granger Movement,” pp. 804-805; “Farmers’ Alliances,” p. 806; “The 1892 Election,” about p. 810; “The Panic of 1893,” pp. 810-811; “William Jennings Bryan,” pp. 811-812; “The Election of 1896,” p. 813).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 18, “Unhappy Farmers and the ‘Money Question’” (la sección empieza en la pág. 803; “A Vicious Cycle of Depressed Prices and Debt” y “Silver and Inflation,” págs. 803-804; “The Granger Movement,” págs. 804-805; “Farmers’ Alliances,” pág. 806; “The 1892 Election,” aprox. pág. 810; “The Panic of 1893,” págs. 810-811; “William Jennings Bryan,” págs. 811-812; “The Election of 1896,” pág. 813).","The Clue Card describes a metal without naming it. A secret message names it. Each letter in the message was moved 4 steps forward in the alphabet. Decode it to name the metal.":"La tarjeta de indicios describe un metal sin decir su nombre. Un mensaje secreto lo nombra. Cada letra del mensaje se movió 4 pasos hacia adelante en el alfabeto. Decodifícalo para nombrar el metal.","The metal is the one farmers wanted Congress to coin in much larger amounts. The Clue Card says the 1873 law allowed only gold. Use the decoder key to spell the name of the other metal.":"El metal es el que los granjeros querían que el Congreso acuñara en cantidades mucho mayores. La tarjeta de indicios dice que la ley de 1873 solo permitía el oro. Usa la clave del decodificador para escribir el nombre del otro metal.","In the message, the letter W is really S, and the letter Z is really V. The word has 6 letters and starts with S.":"En el mensaje, la letra W es en realidad S, y la letra Z es en realidad V. La palabra (en inglés) tiene 6 letras y empieza con S.","By the 1880s, European nations had conquered most of Africa and Asia, and many Americans wanted colonies too. Many Americans also assumed that the White “race” was superior to others, and this idea reinforced imperialism. In 1866, Secretary of State William Seward predicted that the United States would impose its economic power over the Pacific Ocean. In 1875, Hawaii signed a trade agreement that let its sugar enter the United States duty-free, and American sugar planters became a powerful elite there. In 1890, Mahan published <i>The Influence of Sea Power upon History, 1660-1783<\/i>, which argued that a strong nation needed a powerful navy, overseas bases, trade, and colonies; by 1900, the United States had added eleven new steel battleships. In 1893, Hawaii’s White population overthrew Queen Lili‘uokalani’s monarchy after the U.S. ambassador brought in Marines, and in 1898 the United States seized control of Hawaii over the protests of Indigenous Hawaiians.":"Para la década de 1880, las naciones europeas habían conquistado la mayor parte de África y Asia, y muchos estadounidenses también querían colonias. Muchos estadounidenses también suponían que la “raza” blanca era superior a las demás, y esa idea reforzó el imperialismo. En 1866, el secretario de Estado William Seward predijo que Estados Unidos impondría su dominio económico sobre el océano Pacífico. En 1875, Hawái firmó un acuerdo comercial que permitía que su azúcar entrara a Estados Unidos sin impuestos, y los plantadores estadounidenses de azúcar se convirtieron allí en una élite poderosa. En 1890, Mahan publicó <i>The Influence of Sea Power upon History, 1660-1783<\/i> (La influencia del poder naval en la historia), que sostenía que una nación fuerte necesitaba una marina poderosa, bases en el extranjero, comercio y colonias; para 1900, Estados Unidos había añadido once nuevos acorazados de acero. En 1893, la población blanca de Hawái derrocó la monarquía de la reina Lili‘uokalani después de que el embajador de EE. UU. trajo marines, y en 1898 Estados Unidos tomó el control de Hawái a pesar de las protestas de los hawaianos indígenas.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 19, “Toward the New Imperialism” (Mahan, battleships, and racial superiority, pp. 820-821) and “Expansion in the Pacific” (Seward, pp. 821-822; Hawaii: the 1875 agreement and Queen Lili‘uokalani, p. 823; McKinley and annexation, p. 824).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 19, “Toward the New Imperialism” (Mahan, acorazados y superioridad racial, págs. 820-821) y “Expansion in the Pacific” (Seward, págs. 821-822; Hawái: el acuerdo de 1875 y la reina Lili‘uokalani, pág. 823; McKinley y la anexión, pág. 824).","Seward predicts that the United States will gain economic power over the Pacific":"Seward predice que Estados Unidos ganará poder económico sobre el Pacífico","Hawaii and the United States sign a trade agreement for sugar":"Hawái y Estados Unidos firman un acuerdo comercial sobre el azúcar","Mahan publishes his book on sea power":"Mahan publica su libro sobre el poder naval","Hawaii’s monarchy is overthrown after U.S. Marines come ashore":"La monarquía de Hawái es derrocada después de que los marines de EE. UU. desembarcan","Look for the years in the Clue Card: 1866, 1875, 1890, and 1893. Match each event to its year.":"Busca los años en la tarjeta de indicios: 1866, 1875, 1890 y 1893. Relaciona cada suceso con su año.","The order is Seward’s prediction, the Hawaii sugar agreement, Mahan’s book, then the overthrow of Hawaii’s monarchy.":"El orden es la predicción de Seward, el acuerdo del azúcar de Hawái, el libro de Mahan y luego el derrocamiento de la monarquía de Hawái.","Some newspapers used “yellow journalism”: editors told reporters to distort, exaggerate, or even invent stories, and this shaped public opinion about Cuba’s fight for independence from Spain. On February 15, 1898, the battleship <i>Maine<\/i> exploded and sank in Havana Harbor with a loss of 266 sailors; years later, the sinking was ruled an accident, but in 1898 many blamed Spain, and Congress declared war in April. In the Treaty of Paris, Cuba became independent, the United States annexed Puerto Rico and Guam, and the United States insisted on governing the Philippines. The Philippine-American War (1899-1902) followed; Norton reports that it took the lives of hundreds of thousands of Filipinos, most of them civilians, and 4,234 American soldiers, and the American Anti-Imperialist League opposed annexing the Philippines and Puerto Rico.":"Algunos periódicos usaban la “prensa amarilla” (yellow journalism): los editores les decían a los reporteros que torcieran, exageraran o incluso inventaran historias, y esto influyó en la opinión pública sobre la lucha de Cuba por independizarse de España. El 15 de febrero de 1898, el acorazado <i>Maine<\/i> explotó y se hundió en el puerto de La Habana con la pérdida de 266 marineros; años después, se determinó que el hundimiento fue un accidente, pero en 1898 muchos culparon a España, y el Congreso declaró la guerra en abril. En el Tratado de París, Cuba se volvió independiente, Estados Unidos anexó Puerto Rico y Guam, y Estados Unidos insistió en gobernar Filipinas. Siguió la Guerra Filipino-Estadounidense (1899-1902); Norton informa que costó la vida de cientos de miles de filipinos, la mayoría civiles, y de 4,234 soldados estadounidenses, y la Liga Antiimperialista Estadounidense se opuso a anexar Filipinas y Puerto Rico.","When McKinley died in September 1901 after being shot, Theodore Roosevelt became president. He aided the Panamanian rebels and signed a treaty to extend the Canal Zone. In 1904, after a crisis over the Dominican Republic’s debts, Roosevelt said that “chronic wrongdoing” would justify the United States acting as “an international police power” in Latin America; this idea is called the Roosevelt Corollary to the Monroe Doctrine.":"Cuando McKinley murió en septiembre de 1901 después de recibir un disparo, Theodore Roosevelt se convirtió en presidente. Ayudó a los rebeldes panameños y firmó un tratado para ampliar la Zona del Canal. En 1904, después de una crisis por las deudas de la República Dominicana, Roosevelt dijo que la “mala conducta crónica” justificaría que Estados Unidos actuara como “un poder policial internacional” en América Latina; esta idea se llama el Corolario Roosevelt a la Doctrina Monroe.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 19, “The Spanish-American War” (yellow journalism, the <i>Maine<\/i>, and the declaration of war, pp. 826-828; Treaty of Paris, p. 830), “Consequences of Victory” (Philippine-American War, p. 837; American Anti-Imperialist League, pp. 837-838), and “Roosevelt’s ‘Big-Stick’ Diplomacy” (McKinley’s death, p. 843; Panama Canal, pp. 844-845; Roosevelt Corollary, p. 846).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 19, “The Spanish-American War” (prensa amarilla, el <i>Maine<\/i> y la declaración de guerra, págs. 826-828; Tratado de París, pág. 830), “Consequences of Victory” (Guerra Filipino-Estadounidense, pág. 837; Liga Antiimperialista Estadounidense, págs. 837-838) y “Roosevelt’s ‘Big-Stick’ Diplomacy” (la muerte de McKinley, pág. 843; Canal de Panamá, págs. 844-845; Corolario Roosevelt, pág. 846).","In 1904, President Roosevelt said the United States could act as “an international police power” in Latin America. This idea is called the Roosevelt ________.":"En 1904, el presidente Roosevelt dijo que Estados Unidos podía actuar como “un poder policial internacional” en América Latina. Esta idea se llama el Roosevelt ________ (palabra en inglés).","Read the last sentence of the Clue Card. The missing word is in it.":"Lee la última oración de la tarjeta de indicios. La palabra que falta está ahí.","The word starts with C and ends with Y. It has 9 letters.":"La palabra (en inglés) empieza con C y termina con Y. Tiene 9 letras.","Not quite. Re-read the last sentence of the Clue Card. Use the scrambled letters to check your spelling.":"Casi. Vuelve a leer la última oración de la tarjeta de indicios. Usa las letras desordenadas para revisar tu ortografía.","Unlocked. Your digit is 5. Your answer: About two-thirds; Southern and eastern Europe; “Survival of the fittest”":"Desbloqueado. Tu dígito es 5. Tu respuesta: Cerca de dos tercios; Del sur y el este de Europa; “Supervivencia del más apto”","Unlocked. Your digit is 2. Your answer: Pendleton Act = The 1883 law that set up the Civil Service Commission, so some federal jobs went to people who passed tests; Party “boss” = The leader of a political ring who ran a machine of loyal neighborhood workers; Mugwumps = Reformers, mostly professors, editors, and writers, who wanted all federal jobs filled on merit; Interstate Commerce Commission = The first federal agency to regulate business; it watched railroad rates":"Desbloqueado. Tu dígito es 2. Tu respuesta: Ley Pendleton = La ley de 1883 que creó la Comisión del Servicio Civil, para que algunos empleos federales fueran para quienes pasaban exámenes; “Jefe” del partido = El líder de un anillo político que dirigía una maquinaria de trabajadores leales del barrio; Mugwumps = Reformadores, en su mayoría profesores, editores y escritores, que querían que todos los empleos federales se llenaran por mérito; Comisión de Comercio Interestatal = La primera agencia federal para regular las empresas; vigilaba las tarifas de los ferrocarriles","Unlocked. Your digit is 7. Your answer: Seward predicts that the United States will gain economic power over the Pacific &gt; Hawaii and the United States sign a trade agreement for sugar &gt; Mahan publishes his book on sea power &gt; Hawaii’s monarchy is overthrown after U.S. Marines come ashore":"Desbloqueado. Tu dígito es 7. Tu respuesta: Seward predice que Estados Unidos ganará poder económico sobre el Pacífico &gt; Hawái y Estados Unidos firman un acuerdo comercial sobre el azúcar &gt; Mahan publica su libro sobre el poder naval &gt; La monarquía de Hawái es derrocada después de que los marines de EE. UU. desembarcan","All 5 locks are open. Type the 5 digits in order, Lock 1 first.":"Los 5 candados están abiertos. Escribe los 5 dígitos en orden, primero el del Candado 1.","Answer every question first.":"Primero responde todas las preguntas.","CLUE CARD":"TARJETA DE INDICIOS","Check":"Comprobar","Choose a description...":"Elige una descripción...","Clear":"Borrar","Clear all my work and start over":"Borrar todo mi trabajo y empezar de nuevo","DEBRIEF":"INFORME FINAL","Debrief":"Informe final","Decoded answer":"Respuesta decodificada","Decoder key: the <span style=\"color:var(--hl);font-weight:700\">pink<\/span> letter is in the message. The white letter under it is the real letter.":"Clave del decodificador: la letra <span style=\"color:var(--hl);font-weight:700\">rosa<\/span> está en el mensaje. La letra blanca que está debajo es la letra verdadera.","ESCAPED":"¡ESCAPASTE!","Enter your first name, last name, and period at the top first.":"Primero escribe tu nombre, apellido y período arriba.","Exit code digit 1":"Dígito 1 del código de salida","Exit door":"Puerta de salida","Fill in the blank using the Clue Card.":"Llena el espacio en blanco con la tarjeta de indicios.","Have a saved file? Load it to continue.":"¿Tienes un archivo guardado? Cárgalo para continuar.","Hint":"Pista","Hints used":"Pistas usadas","How to escape:":"Cómo escapar:","If you get stuck, press <b>Hint<\/b>. Hints are free, but your teacher can see how many you used.":"Si te atoras, oprime <b>Pista<\/b>. Las pistas son gratis, pero tu maestro puede ver cuántas usaste.","Locks":"Candados","Match each term to the best description. Use the Clue Card.":"Relaciona cada término con la mejor descripción. Usa la tarjeta de indicios.","Match every term first.":"Primero relaciona todos los términos.","Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.":"Todavía no escapas (se marca INCOMPLETO). Aun así puedes descargar tu archivo y entregarlo.","Not quite. Check each match against the Clue Card. Which one are you least sure about?":"Casi. Revisa cada pareja con la tarjeta de indicios. ¿De cuál estás menos seguro?","Not quite. Decode one letter at a time with the key, then check your spelling.":"Casi. Decodifica una letra a la vez con la clave y luego revisa tu ortografía.","Not quite. Re-read the Clue Card and match each event to its year.":"Casi. Vuelve a leer la tarjeta de indicios y relaciona cada suceso con su año.","One last step: write your Debrief below.":"Un último paso: escribe tu Informe final abajo.","Open all 5 locks first. The digits go in order: Lock 1 first.":"Primero abre los 5 candados. Los dígitos van en orden: primero el del Candado 1.","Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.":"Abre los 5 candados y luego escribe el código de salida de 5 dígitos. Termina con el Informe final.","Open each lock in order. Read the <b>Clue Card<\/b>. The answer is in the card.":"Abre cada candado en orden. Lee la <b>tarjeta de indicios<\/b>. La respuesta está en la tarjeta.","Open the Door":"Abrir la puerta","Pick the correct answer for all three questions.":"Elige la respuesta correcta para las tres preguntas.","Progress file downloaded. Use Load Progress to continue later.":"Se descargó el archivo de progreso. Usa «Cargar progreso» para continuar más tarde.","Progress loaded. Welcome back.":"Progreso cargado. Bienvenido de nuevo.","Solve the puzzle to open the lock and reveal one digit.":"Resuelve el acertijo para abrir el candado y descubrir un dígito.","THE EXIT DOOR":"LA PUERTA DE SALIDA","Tap all 4 places first, in order.":"Primero toca los 4 lugares, en orden.","Tap the four events in the order they happened. Tap an event again to take it back.":"Toca los cuatro sucesos en el orden en que ocurrieron. Toca un suceso otra vez para quitarlo.","That file did not work. Choose a progress file saved from this Escape Room.":"Ese archivo no funcionó. Elige un archivo de progreso guardado de esta sala de escape.","That was the last hint. Read the Clue Card slowly and try again.":"Esa fue la última pista. Lee la tarjeta de indicios despacio y vuelve a intentarlo.","The clock starts when you press the button. Most students finish in about 20 minutes.":"El reloj empieza cuando oprimes el botón. La mayoría de los estudiantes termina en unos 20 minutos.","The code has 5 digits. Fill every box.":"El código tiene 5 dígitos. Llena todas las casillas.","The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.":"La puerta no se abrió. Revisa los dígitos debajo de cada candado y escríbelos en orden: primero el del Candado 1.","The door is open!":"¡La puerta está abierta!","The door swings open!":"¡La puerta se abre de golpe!","Time":"Tiempo","Type the answer in English.":"Escribe la respuesta en inglés.","Type the answer in English. Use the digits 0-9.":"Escribe la respuesta en inglés. Usa los dígitos 0-9.","Type the exit code":"Escribe el código de salida","Type your answer first.":"Primero escribe tu respuesta.","Type your answer here...":"Escribe tu respuesta aquí...","UNIT 4 · INDUSTRY, EMPIRE, AND REFORM | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 4 · INDUSTRIA, IMPERIO Y REFORMA | CPUSH | DANIEL GARZA, M.A.","Unscramble the letters to fill the blank.":"Ordena las letras para llenar el espacio en blanco.","Which lock was hardest, and what did you learn that you did not know before?":"¿Qué candado fue el más difícil y qué aprendiste que antes no sabías?","Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.":"Escribe de 3 a 4 oraciones. Nombra el candado y usa un dato de su tarjeta de indicios. Puedes escribirlo aunque no hayas escapado.","You escaped and wrote your Debrief. Ready to submit.":"Escapaste y escribiste tu Informe final. Listo para entregar.","You escaped! Write your Debrief, then download your file to submit.":"¡Escapaste! Escribe tu Informe final y luego descarga tu archivo para entregarlo.","Your answer":"Tu respuesta","Your time:":"Tu tiempo:","digit":"dígito"},"ar":{"Save Progress":"حفظ التقدم","Load Progress":"تحميل التقدم","Finished — Download File to Submit":"انتهيت — نزّل الملف لتسليمه","Clear all my answers":"امسح كل إجاباتي","FIRST NAME *":"الاسم الأول *","LAST NAME *":"اسم العائلة *","PERIOD *":"الحصة *","DATE (fills in when you finish)":"التاريخ (يُكتب تلقائيًا عند الانتهاء)","e.g. 3":"مثال: 3","Automatic":"تلقائي","Please type your first name, last name, and period first.":"اكتب أولًا اسمك الأول واسم العائلة والحصة.","Western Expansion and Southern Secession":"التوسع غربًا وانفصال الجنوب","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"الوحدة 3 · بيت منقسم وأُعيد بناؤه | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — قانون العبيد الهاربين","Bleeding Kansas":"Bleeding Kansas — كانساس النازفة","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"الوحدة 3 · بيت منقسم وأعيد بناؤه | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"تم تنزيل ملف التقدم. احتفظ به في مكان آمن. استخدم «تحميل التقدم» لتكمل لاحقًا.","Progress loaded.":"تم تحميل التقدم.","Could not read that file.":"تعذّرت قراءة هذا الملف.","Treaty of Guadalupe Hidalgo":"معاهدة غوادالوبي هيدالغو (Treaty of Guadalupe Hidalgo)","Politics, Populism, and Empire":"السياسة والشعبوية والإمبراطورية","Escape Room 11 · Politics, Populism, and Empire":"غرفة الهروب 11 · السياسة والشعبوية والإمبراطورية","Escape the Press Room":"اهرب من غرفة المطبعة","You are locked in the press room.":"أنت محبوس في غرفة المطبعة.","The newspaper office closed for the night and the pressman locked up the press room. Old front pages from 1859 to 1917 hang on the wall. The door has <b>5 locks<\/b>. Each lock matches one big idea from Lesson 11. Solve them all to find the <b>5-digit exit code<\/b>.":"أُغلقت مكاتب الصحيفة في الليل وأقفل عامل المطبعة غرفة المطبعة. ما زالت صفحات أولى قديمة من عام 1859 إلى عام 1917 معلّقة على الجدار. في الباب <b>5 أقفال<\/b>. كل قفل يرتبط بفكرة كبيرة واحدة من الدرس 11. حلّها كلها لتجد <b>رمز الخروج المكوّن من 5 أرقام<\/b>.","Enter the Press Room":"ادخل غرفة المطبعة","PRESS ROOM":"غرفة المطبعة","A newspaper press room at night. Newspaper pages hang on lines on both walls, a wooden type case with small compartments hangs on the left wall, a hand printing press stands on the right, and a stack of paper sits in the lower left. The press room door has five padlocks in a row. Under each padlock is a window for one digit of the exit code.":"غرفة مطبعة صحيفة في الليل. تتدلى صفحات الصحف من حبال على الجدارين، ويتدلى صندوق حروف خشبي ذو خانات صغيرة على الجدار الأيسر، وتقف مطبعة يدوية على اليمين، وتوجد كومة من الورق في أسفل اليسار. في باب الغرفة خمسة أقفال في صف واحد. تحت كل قفل نافذة صغيرة لرقم واحد من رمز الخروج.","The Type Case":"صندوق الحروف","The Editor’s Desk":"مكتب المحرر","The Copy Wire":"سلك الأخبار","The Map Wall":"جدار الخريطة","The Front Page":"الصفحة الأولى","Core Objectives 1-3: Understand the effects of urban growth during the Gilded Age, including the problems it created; describe the “new immigrants” of the late nineteenth century and how they were viewed by American society; and explain how urban growth and the increasingly important role of science influenced leisure activities, cultural life, and social policy.":"الأهداف الأساسية 1-3: افهم آثار نمو المدن خلال العصر المذهب (Gilded Age)، بما في ذلك المشكلات التي سبّبها؛ وصِف «المهاجرين الجدد» في أواخر القرن التاسع عشر وكيف نظر إليهم المجتمع الأمريكي؛ واشرح كيف أثّر نمو المدن والدور المتزايد للعلم في أنشطة الترفيه والحياة الثقافية والسياسة الاجتماعية.","Core Objectives 4-5: Assess how the nature of politics during the Gilded Age contributed to intense political partisanship and political corruption; and evaluate the effectiveness of the reforms enacted during this period in promoting “clean” government and limiting the power and political influence of Big Business.":"الأهداف الأساسية 4-5: قيّم كيف أسهمت طبيعة السياسة في العصر المذهب (Gilded Age) في تعصّب حزبي شديد وفساد سياسي؛ وقيّم مدى فعالية الإصلاحات التي أُقرّت في هذه الفترة في تعزيز حكومة «نظيفة» والحد من قوة الشركات الكبرى ونفوذها السياسي.","Core Objective 6: Analyze why the money supply became a major political issue during the Gilded Age, especially among small farmers, and describe its impact on politics.":"الهدف الأساسي 6: حلّل لماذا أصبحت كمية النقود المتداولة قضية سياسية كبرى خلال العصر المذهب (Gilded Age)، خاصة بين صغار المزارعين، وصِف أثرها في السياسة.","Core Objectives 7-8: Describe the factors that motivated America’s new imperialism after the Civil War; and explain why and how America expanded its influence in the Pacific before the Spanish-American War.":"الأهداف الأساسية 7-8: صِف العوامل التي دفعت إلى الإمبريالية الأمريكية الجديدة بعد الحرب الأهلية (Civil War)؛ واشرح لماذا وكيف وسّعت أمريكا نفوذها في المحيط الهادئ قبل الحرب الإسبانية الأمريكية (Spanish-American War).","Core Objectives 9-11: Identify the causes of the Spanish-American War and its major events; analyze the consequences of the Spanish-American War for American foreign policy; and describe the reasons for Theodore Roosevelt’s rapid rise to the presidency and evaluate the main elements of his foreign policies.":"الأهداف الأساسية 9-11: حدّد أسباب الحرب الإسبانية الأمريكية (Spanish-American War) وأحداثها الرئيسية؛ وحلّل نتائج الحرب الإسبانية الأمريكية على السياسة الخارجية الأمريكية؛ وصِف أسباب صعود ثيودور روزفلت (Theodore Roosevelt) السريع إلى الرئاسة وقيّم العناصر الرئيسية لسياساته الخارجية.","In 1900, some 2.3 million people, or two-thirds of New York City’s population, lived in overcrowded tenements with little light or fresh air. After 1890, the “new immigrants,” mostly from southern and eastern Europe, such as Russia, Poland, Greece, and Italy, were the majority of newcomers. Many nativists believed that people of British or Germanic background were superior, and the prejudice was especially harsh against the Chinese: the Chinese Exclusion Act of 1882 barred Chinese laborers from entering for ten years and denied citizenship to Chinese immigrants. Big cities also created new mass entertainment, such as college football, basketball, and professional baseball. Herbert Spencer’s social Darwinism used the phrase “survival of the fittest” to say that competition drives human progress, but Lester Frank Ward’s reform Darwinism praised cooperation and compassion instead.":"في عام 1900، كان نحو 2.3 مليون شخص، أي ثلثا سكان مدينة نيويورك (New York City)، يعيشون في مساكن «تينمنت» (tenements) مكتظة قليلة الضوء والهواء النقي. وبعد 1890، كان «المهاجرون الجدد»، ومعظمهم من جنوب أوروبا وشرقها، مثل روسيا وبولندا واليونان وإيطاليا، أغلبية القادمين. واعتقد كثير من المناهضين للمهاجرين (nativists) أن أصحاب الأصول البريطانية أو الجرمانية أفضل من غيرهم، وكان التحيّز شديدًا خاصة ضد الصينيين: فقد منع «قانون استبعاد الصينيين» (Chinese Exclusion Act) لعام 1882 العمال الصينيين من دخول البلاد لمدة عشر سنوات، وحرم المهاجرين الصينيين من الجنسية. كما أوجدت المدن الكبيرة أشكالًا جديدة من الترفيه الجماهيري، مثل كرة القدم الأمريكية وكرة السلة في الجامعات والبيسبول الاحترافي. واستخدمت «الداروينية الاجتماعية» (social Darwinism) عند هربرت سبنسر (Herbert Spencer) عبارة «البقاء للأصلح» لتقول إن المنافسة تدفع التقدم البشري، لكن «الداروينية الإصلاحية» عند ليستر فرانك وارد (Lester Frank Ward) أشادت بدل ذلك بالتعاون والرحمة.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 18, “America’s Move to Town” (“Crowds, Dirt, and Disease,” p. 780), “The New Immigration” (“A Surge of Newcomers,” p. 781; “The Nativist Response” and “Chinese Exclusion,” pp. 783-785), and “Changes in Culture and Thought” (“Urban Leisure and Entertainment,” p. 789; “Social Darwinism”; “Reform Darwinism,” p. 792).":"Norton, <i>America: The Essential Learning Edition<\/i>، الفصل 18، “America’s Move to Town” (“Crowds, Dirt, and Disease,” ص. 780)، و“The New Immigration” (“A Surge of Newcomers,” ص. 781; “The Nativist Response” و“Chinese Exclusion,” ص. 783-785)، و“Changes in Culture and Thought” (“Urban Leisure and Entertainment,” ص. 789; “Social Darwinism”; “Reform Darwinism,” ص. 792).","In 1900, about how much of New York City’s population lived in overcrowded tenements?":"في عام 1900، كم كانت نسبة سكان مدينة نيويورك (New York City) الذين يعيشون في مساكن «تينمنت» (tenements) مكتظة تقريبًا؟","About one-tenth":"نحو عُشر السكان","About one-third":"نحو ثلث السكان","About two-thirds":"نحو ثلثي السكان","Almost no one":"تقريبًا لا أحد","After 1890, where did most of the “new immigrants” come from?":"بعد 1890، من أين جاء معظم «المهاجرين الجدد»؟","Northern and western Europe":"من شمال أوروبا وغربها","Canada and Australia":"من كندا وأستراليا","South America":"من أمريكا الجنوبية","Southern and eastern Europe":"من جنوب أوروبا وشرقها","Which phrase did Herbert Spencer use for his idea that competition drives human progress?":"ما العبارة التي استخدمها هربرت سبنسر (Herbert Spencer) لفكرته القائلة إن المنافسة تدفع التقدم البشري؟","“Equal rights for all”":"«حقوق متساوية للجميع»","“Survival of the fittest”":"«البقاء للأصلح»","“Government by the people”":"«حكم الشعب»","“Liberty and justice for all”":"«الحرية والعدالة للجميع»","Each answer is in the Clue Card. Look for a share of New York City, the part of Europe the new immigrants came from, and a short phrase by Spencer.":"كل إجابة موجودة في بطاقة القرائن. ابحث عن حصة من سكان مدينة نيويورك، والجزء من أوروبا الذي جاء منه المهاجرون الجدد، وعبارة قصيرة لسبنسر.","The share is a fraction of the whole city. The region is in the south and east. The phrase ends with the word “fittest.”":"الحصة هي جزء من سكان المدينة كلها. والمنطقة تقع في الجنوب والشرق. وتنتهي العبارة بكلمة “fittest” (الأصلح).","Not quite. At least one answer is off. Re-read the Clue Card for the tenement share, where the new immigrants came from, and Spencer’s phrase.":"ليس تمامًا. إجابة واحدة على الأقل خاطئة. أعد قراءة بطاقة القرائن لتجد حصة السكان في مساكن «تينمنت»، ومن أين جاء المهاجرون الجدد، وعبارة سبنسر.","In cities full of new immigrant voters, politics was often run by “rings” led by a party “boss,” who used a “machine” of loyal neighborhood workers; William “Boss” Tweed of New York used the Tammany Hall ring to hand out contracts and jobs until his arrest in 1871. Nationally, party loyalty was intense, voter turnout was commonly 70 to 80 percent, and neither party was dominant, so both avoided bold new ideas. In 1883, after Garfield’s assassination, Congress passed the Pendleton Act and created the Civil Service Commission, so at least 15 percent of federal jobs would be filled by competitive tests instead of favoritism; Norton calls it a limited first step. The Mugwumps, mostly professors, editors, and writers, wanted all federal jobs filled on merit. In 1887, Congress created the Interstate Commerce Commission (ICC), the first federal agency to regulate business, but over time it was ignored, and the railroads kept charging high rates.":"في المدن المزدحمة بالناخبين المهاجرين الجدد، كانت السياسة غالبًا تحت سيطرة «حلقات» يقودها «زعيم» حزبي يستخدم «آلة» من العاملين المخلصين في الأحياء؛ فقد استخدم ويليام «الزعيم» تويد (William “Boss” Tweed) من نيويورك حلقة تاماني هول (Tammany Hall) لتوزيع العقود والوظائف حتى اعتقاله عام 1871. وعلى المستوى الوطني، كان الولاء الحزبي شديدًا، وكانت نسبة مشاركة الناخبين عادة بين 70 و80 بالمئة، ولم يكن أي حزب مسيطرًا، فتجنّب الحزبان الأفكار الجريئة. وفي عام 1883، بعد اغتيال غارفيلد (Garfield)، أقرّ الكونغرس قانون بندلتون (Pendleton Act) وأنشأ «لجنة الخدمة المدنية»، فصار ما لا يقل عن 15 بالمئة من الوظائف الفيدرالية يُملأ عبر امتحانات تنافسية بدل المحاباة؛ ويصفه Norton بأنه خطوة أولى محدودة. أما «المغومبس» (Mugwumps)، ومعظمهم أساتذة ومحررون وكتّاب، فأرادوا أن تُملأ كل الوظائف الفيدرالية على أساس الجدارة. وفي عام 1887، أنشأ الكونغرس «لجنة التجارة بين الولايات» (Interstate Commerce Commission - ICC)، أول وكالة فيدرالية لتنظيم الشركات، لكنها تم تجاهلها مع الوقت، واستمرت السكك الحديدية في فرض أسعار عالية.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 18, “Gilded Age Politics” (“Local Politics and Party Loyalties,” p. 793; “Partisan Politics at the National Level,” p. 794) and “Corruption and Reform: Hayes to Harrison” (“The Civil Service Commission,” p. 798; Mugwumps, p. 799; “Railroad Regulation,” p. 800).":"Norton, <i>America: The Essential Learning Edition<\/i>، الفصل 18، “Gilded Age Politics” (“Local Politics and Party Loyalties,” ص. 793; “Partisan Politics at the National Level,” ص. 794)، و“Corruption and Reform: Hayes to Harrison” (“The Civil Service Commission,” ص. 798; Mugwumps، ص. 799; “Railroad Regulation,” ص. 800).","Party “boss”":"«زعيم» الحزب","Pendleton Act":"قانون بندلتون (Pendleton Act)","Mugwumps":"المغومبس (Mugwumps)","Interstate Commerce Commission":"لجنة التجارة بين الولايات (Interstate Commerce Commission)","The leader of a political ring who ran a machine of loyal neighborhood workers":"قائد حلقة سياسية كان يدير «آلة» من العاملين المخلصين في الأحياء","The 1883 law that set up the Civil Service Commission, so some federal jobs went to people who passed tests":"القانون الصادر عام 1883 الذي أنشأ «لجنة الخدمة المدنية»، فصارت بعض الوظائف الفيدرالية تذهب لمن ينجحون في الامتحانات","Reformers, mostly professors, editors, and writers, who wanted all federal jobs filled on merit":"مصلحون، معظمهم أساتذة ومحررون وكتّاب، أرادوا أن تُملأ كل الوظائف الفيدرالية على أساس الجدارة","The first federal agency to regulate business; it watched railroad rates":"أول وكالة فيدرالية لتنظيم الشركات؛ وكانت تراقب أسعار السكك الحديدية","Two terms are about people (a boss and the reformers called Mugwumps). Two are about government: a law about jobs and an agency about railroads.":"مصطلحان يتعلقان بأشخاص («زعيم» والمصلحون الذين سُمّوا المغومبس (Mugwumps)). ومصطلحان يتعلقان بالحكومة: قانون عن الوظائف ووكالة عن السكك الحديدية.","The Pendleton Act is about federal jobs and tests. The ICC is about railroads. The boss ran a machine in a city.":"قانون بندلتون (Pendleton Act) عن الوظائف الفيدرالية والامتحانات. أما لجنة التجارة بين الولايات (ICC) فعن السكك الحديدية. وكان الزعيم يدير «آلة» في مدينة.","After the Civil War, crop prices fell and small farmers sank into debt; Southern cotton dropped from 31 cents a pound in 1866 to 6 cents in 1893. Farmers blamed an inadequate money supply. In 1873, Congress had said that only gold, not silver, could be used for minting coins, and farmers wanted much more of the other metal coined to put more money in circulation and raise crop prices. The Grange and then the Farmers’ Alliances organized farm families, and in 1892 they and others formed the People’s Party (Populists), which called for unlimited coinage of that metal, a progressive income tax, and federal ownership of the railroads and telegraph systems. After the Panic of 1893, more than 600 banks closed and 15,000 businesses failed. In 1896, William Jennings Bryan won 6.5 million votes with his “Cross of Gold” speech, but McKinley won 7.1 million.":"بعد الحرب الأهلية (Civil War)، انخفضت أسعار المحاصيل وغرق صغار المزارعين في الديون؛ فقد هبط سعر قطن الجنوب من 31 سنتًا للرطل عام 1866 إلى 6 سنتات عام 1893. ولام المزارعون عدم كفاية النقود المتداولة. وفي عام 1873، كان الكونغرس قد أعلن أن الذهب وحده، لا الفضة، يمكن استخدامه لسكّ النقود، وأراد المزارعون سكّ كمية أكبر بكثير من المعدن الآخر لزيادة النقود المتداولة ورفع أسعار المحاصيل. ونظّمت «الغرانج» (Grange) ثم «تحالفات المزارعين» (Farmers’ Alliances) العائلات الزراعية، وفي عام 1892 أسّسوا مع آخرين «حزب الشعب» (People’s Party - الشعبويون)، الذي طالب بسكّ غير محدود لذلك المعدن، وبضريبة دخل تصاعدية، وبملكية الحكومة الفيدرالية للسكك الحديدية وأنظمة التلغراف. وبعد «ذعر 1893» (Panic of 1893)، أُغلق أكثر من 600 بنك وفشلت 15,000 شركة. وفي عام 1896، حصل ويليام جينينغز برايان (William Jennings Bryan) على 6.5 مليون صوت بخطابه «صليب الذهب»، لكن ماكينلي (McKinley) حصل على 7.1 مليون.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 18, “Unhappy Farmers and the ‘Money Question’” (section starts p. 803; “A Vicious Cycle of Depressed Prices and Debt” and “Silver and Inflation,” pp. 803-804; “The Granger Movement,” pp. 804-805; “Farmers’ Alliances,” p. 806; “The 1892 Election,” about p. 810; “The Panic of 1893,” pp. 810-811; “William Jennings Bryan,” pp. 811-812; “The Election of 1896,” p. 813).":"Norton, <i>America: The Essential Learning Edition<\/i>، الفصل 18، “Unhappy Farmers and the ‘Money Question’” (يبدأ القسم في ص. 803; “A Vicious Cycle of Depressed Prices and Debt” و“Silver and Inflation,” ص. 803-804; “The Granger Movement,” ص. 804-805; “Farmers’ Alliances,” ص. 806; “The 1892 Election,” نحو ص. 810; “The Panic of 1893,” ص. 810-811; “William Jennings Bryan,” ص. 811-812; “The Election of 1896,” ص. 813).","The Clue Card describes a metal without naming it. A secret message names it. Each letter in the message was moved 4 steps forward in the alphabet. Decode it to name the metal.":"تصف بطاقة القرائن معدنًا دون أن تذكر اسمه. ورسالة سرية تذكر اسمه. كل حرف في الرسالة نُقل 4 خطوات إلى الأمام في الأبجدية. فكّ شفرتها لتعرف اسم المعدن.","The metal is the one farmers wanted Congress to coin in much larger amounts. The Clue Card says the 1873 law allowed only gold. Use the decoder key to spell the name of the other metal.":"المعدن هو الذي أراد المزارعون أن يسكّه الكونغرس بكميات أكبر بكثير. تقول بطاقة القرائن إن قانون 1873 سمح بالذهب فقط. استخدم مفتاح فك الشفرة لتهجئة اسم المعدن الآخر.","In the message, the letter W is really S, and the letter Z is really V. The word has 6 letters and starts with S.":"في الرسالة، الحرف W هو في الحقيقة S، والحرف Z هو في الحقيقة V. تتكوّن الكلمة (بالإنجليزية) من 6 أحرف وتبدأ بالحرف S.","By the 1880s, European nations had conquered most of Africa and Asia, and many Americans wanted colonies too. Many Americans also assumed that the White “race” was superior to others, and this idea reinforced imperialism. In 1866, Secretary of State William Seward predicted that the United States would impose its economic power over the Pacific Ocean. In 1875, Hawaii signed a trade agreement that let its sugar enter the United States duty-free, and American sugar planters became a powerful elite there. In 1890, Mahan published <i>The Influence of Sea Power upon History, 1660-1783<\/i>, which argued that a strong nation needed a powerful navy, overseas bases, trade, and colonies; by 1900, the United States had added eleven new steel battleships. In 1893, Hawaii’s White population overthrew Queen Lili‘uokalani’s monarchy after the U.S. ambassador brought in Marines, and in 1898 the United States seized control of Hawaii over the protests of Indigenous Hawaiians.":"بحلول ثمانينيات القرن التاسع عشر، كانت الدول الأوروبية قد غزت معظم أفريقيا وآسيا، وأراد كثير من الأمريكيين مستعمرات أيضًا. وافترض كثير من الأمريكيين أيضًا أن «العرق» الأبيض أفضل من غيره، وعزّزت هذه الفكرة الإمبريالية. وفي عام 1866، توقّع وزير الخارجية ويليام سيوارد (William Seward) أن الولايات المتحدة ستفرض هيمنتها الاقتصادية على المحيط الهادئ. وفي عام 1875، وقّعت هاواي اتفاقية تجارية سمحت لسكرها بدخول الولايات المتحدة بلا رسوم جمركية، وصار مزارعو السكر الأمريكيون هناك نخبة قوية. وفي عام 1890، نشر ماهان (Mahan) كتاب <i>The Influence of Sea Power upon History, 1660-1783<\/i> (تأثير القوة البحرية في التاريخ)، الذي رأى أن الأمة القوية تحتاج إلى بحرية قوية وقواعد في الخارج وتجارة ومستعمرات؛ وبحلول عام 1900، أضافت الولايات المتحدة إحدى عشرة بارجة فولاذية جديدة. وفي عام 1893، أطاح السكان البيض في هاواي بملكية الملكة ليليؤوكالاني (Lili‘uokalani) بعد أن جلب السفير الأمريكي مشاة البحرية، وفي عام 1898 استولت الولايات المتحدة على هاواي رغم احتجاجات سكان هاواي الأصليين.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 19, “Toward the New Imperialism” (Mahan, battleships, and racial superiority, pp. 820-821) and “Expansion in the Pacific” (Seward, pp. 821-822; Hawaii: the 1875 agreement and Queen Lili‘uokalani, p. 823; McKinley and annexation, p. 824).":"Norton, <i>America: The Essential Learning Edition<\/i>، الفصل 19، “Toward the New Imperialism” (ماهان والبوارج والتفوق العرقي، ص. 820-821)، و“Expansion in the Pacific” (سيوارد، ص. 821-822; هاواي: اتفاقية 1875 والملكة ليليؤوكالاني، ص. 823; ماكينلي والضم، ص. 824).","Seward predicts that the United States will gain economic power over the Pacific":"يتوقّع سيوارد (Seward) أن تكتسب الولايات المتحدة قوة اقتصادية على المحيط الهادئ","Hawaii and the United States sign a trade agreement for sugar":"توقّع هاواي والولايات المتحدة اتفاقية تجارية للسكر","Mahan publishes his book on sea power":"ينشر ماهان (Mahan) كتابه عن القوة البحرية","Hawaii’s monarchy is overthrown after U.S. Marines come ashore":"تُطاح ملكية هاواي بعد أن ينزل مشاة البحرية الأمريكية إلى البر","Look for the years in the Clue Card: 1866, 1875, 1890, and 1893. Match each event to its year.":"ابحث عن السنوات في بطاقة القرائن: 1866 و1875 و1890 و1893. اربط كل حدث بسنته.","The order is Seward’s prediction, the Hawaii sugar agreement, Mahan’s book, then the overthrow of Hawaii’s monarchy.":"الترتيب هو: توقّع سيوارد (Seward)، ثم اتفاقية السكر مع هاواي، ثم كتاب ماهان (Mahan)، ثم الإطاحة بملكية هاواي.","Some newspapers used “yellow journalism”: editors told reporters to distort, exaggerate, or even invent stories, and this shaped public opinion about Cuba’s fight for independence from Spain. On February 15, 1898, the battleship <i>Maine<\/i> exploded and sank in Havana Harbor with a loss of 266 sailors; years later, the sinking was ruled an accident, but in 1898 many blamed Spain, and Congress declared war in April. In the Treaty of Paris, Cuba became independent, the United States annexed Puerto Rico and Guam, and the United States insisted on governing the Philippines. The Philippine-American War (1899-1902) followed; Norton reports that it took the lives of hundreds of thousands of Filipinos, most of them civilians, and 4,234 American soldiers, and the American Anti-Imperialist League opposed annexing the Philippines and Puerto Rico.":"استخدمت بعض الصحف «الصحافة الصفراء» (yellow journalism): فقد طلب المحررون من المراسلين تحريف القصص أو تضخيمها أو حتى اختلاقها، وشكّل ذلك الرأي العام بشأن نضال كوبا من أجل الاستقلال عن إسبانيا. وفي 15 فبراير 1898، انفجرت البارجة <i>مين<\/i> (Maine) وغرقت في ميناء هافانا (Havana) وقُتل 266 بحارًا؛ وبعد سنوات، تقرر أن الغرق كان حادثًا، لكن في 1898 لام كثيرون إسبانيا، وأعلن الكونغرس الحرب في أبريل. وفي «معاهدة باريس» (Treaty of Paris)، صارت كوبا مستقلة، وضمّت الولايات المتحدة بورتوريكو وغوام، وأصرّت الولايات المتحدة على حكم الفلبين. ثم جاءت الحرب الفلبينية الأمريكية (1899-1902)؛ وتذكر Norton أنها أودت بحياة مئات الآلاف من الفلبينيين، معظمهم مدنيون، و4,234 جنديًا أمريكيًا، وعارضت «الرابطة الأمريكية المعادية للإمبريالية» (American Anti-Imperialist League) ضم الفلبين وبورتوريكو.","When McKinley died in September 1901 after being shot, Theodore Roosevelt became president. He aided the Panamanian rebels and signed a treaty to extend the Canal Zone. In 1904, after a crisis over the Dominican Republic’s debts, Roosevelt said that “chronic wrongdoing” would justify the United States acting as “an international police power” in Latin America; this idea is called the Roosevelt Corollary to the Monroe Doctrine.":"عندما توفي ماكينلي (McKinley) في سبتمبر 1901 بعد إطلاق النار عليه، أصبح ثيودور روزفلت (Theodore Roosevelt) رئيسًا. وقد ساعد الثوار البنميين ووقّع معاهدة لتوسيع «منطقة القناة». وفي عام 1904، بعد أزمة حول ديون جمهورية الدومينيكان، قال روزفلت إن «السلوك الخاطئ المزمن» يبرر أن تعمل الولايات المتحدة بصفتها «قوة شرطة دولية» في أمريكا اللاتينية؛ وتسمى هذه الفكرة «ملحق روزفلت» (Roosevelt Corollary) لمبدأ مونرو (Monroe Doctrine).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 19, “The Spanish-American War” (yellow journalism, the <i>Maine<\/i>, and the declaration of war, pp. 826-828; Treaty of Paris, p. 830), “Consequences of Victory” (Philippine-American War, p. 837; American Anti-Imperialist League, pp. 837-838), and “Roosevelt’s ‘Big-Stick’ Diplomacy” (McKinley’s death, p. 843; Panama Canal, pp. 844-845; Roosevelt Corollary, p. 846).":"Norton, <i>America: The Essential Learning Edition<\/i>، الفصل 19، “The Spanish-American War” (الصحافة الصفراء والبارجة <i>مين<\/i> وإعلان الحرب، ص. 826-828; معاهدة باريس، ص. 830)، و“Consequences of Victory” (الحرب الفلبينية الأمريكية، ص. 837; الرابطة الأمريكية المعادية للإمبريالية، ص. 837-838)، و“Roosevelt’s ‘Big-Stick’ Diplomacy” (وفاة ماكينلي، ص. 843; قناة بنما، ص. 844-845; ملحق روزفلت، ص. 846).","In 1904, President Roosevelt said the United States could act as “an international police power” in Latin America. This idea is called the Roosevelt ________.":"في عام 1904، قال الرئيس روزفلت (Roosevelt) إن الولايات المتحدة يمكن أن تعمل بصفتها «قوة شرطة دولية» في أمريكا اللاتينية. وتسمى هذه الفكرة روزفلت ________ (كلمة بالإنجليزية).","Read the last sentence of the Clue Card. The missing word is in it.":"اقرأ الجملة الأخيرة في بطاقة القرائن. الكلمة الناقصة فيها.","The word starts with C and ends with Y. It has 9 letters.":"تبدأ الكلمة (بالإنجليزية) بالحرف C وتنتهي بالحرف Y. وهي مكوّنة من 9 أحرف.","Not quite. Re-read the last sentence of the Clue Card. Use the scrambled letters to check your spelling.":"ليس تمامًا. أعد قراءة الجملة الأخيرة في بطاقة القرائن. استخدم الحروف المبعثرة للتحقق من تهجئتك.","Unlocked. Your digit is 5. Your answer: About two-thirds; Southern and eastern Europe; “Survival of the fittest”":"تم الفتح. رقمك هو 5. إجابتك: نحو ثلثي السكان؛ من جنوب أوروبا وشرقها؛ «البقاء للأصلح»","Unlocked. Your digit is 2. Your answer: Pendleton Act = The 1883 law that set up the Civil Service Commission, so some federal jobs went to people who passed tests; Party “boss” = The leader of a political ring who ran a machine of loyal neighborhood workers; Mugwumps = Reformers, mostly professors, editors, and writers, who wanted all federal jobs filled on merit; Interstate Commerce Commission = The first federal agency to regulate business; it watched railroad rates":"تم الفتح. رقمك هو 2. إجابتك: قانون بندلتون (Pendleton Act) = القانون الصادر عام 1883 الذي أنشأ «لجنة الخدمة المدنية»، فصارت بعض الوظائف الفيدرالية تذهب لمن ينجحون في الامتحانات؛ «زعيم» الحزب = قائد حلقة سياسية كان يدير «آلة» من العاملين المخلصين في الأحياء؛ المغومبس (Mugwumps) = مصلحون، معظمهم أساتذة ومحررون وكتّاب، أرادوا أن تُملأ كل الوظائف الفيدرالية على أساس الجدارة؛ لجنة التجارة بين الولايات (Interstate Commerce Commission) = أول وكالة فيدرالية لتنظيم الشركات؛ وكانت تراقب أسعار السكك الحديدية","Unlocked. Your digit is 7. Your answer: Seward predicts that the United States will gain economic power over the Pacific &gt; Hawaii and the United States sign a trade agreement for sugar &gt; Mahan publishes his book on sea power &gt; Hawaii’s monarchy is overthrown after U.S. Marines come ashore":"تم الفتح. رقمك هو 7. إجابتك: يتوقّع سيوارد (Seward) أن تكتسب الولايات المتحدة قوة اقتصادية على المحيط الهادئ &gt; توقّع هاواي والولايات المتحدة اتفاقية تجارية للسكر &gt; ينشر ماهان (Mahan) كتابه عن القوة البحرية &gt; تُطاح ملكية هاواي بعد أن ينزل مشاة البحرية الأمريكية إلى البر","All 5 locks are open. Type the 5 digits in order, Lock 1 first.":"الأقفال الخمسة مفتوحة. اكتب الأرقام الخمسة بالترتيب: رقم القفل 1 أولًا.","Answer every question first.":"أجب عن كل الأسئلة أولًا.","CLUE CARD":"بطاقة القرائن","Check":"تحقق","Choose a description...":"اختر وصفًا...","Clear":"مسح","Clear all my work and start over":"امسح كل عملي وابدأ من جديد","DEBRIEF":"الملخص الختامي","Debrief":"الملخص الختامي","Decoded answer":"الإجابة بعد فك التشفير","Decoder key: the <span style=\"color:var(--hl);font-weight:700\">pink<\/span> letter is in the message. The white letter under it is the real letter.":"مفتاح فك التشفير: الحرف <span style=\"color:var(--hl);font-weight:700\">الوردي<\/span> هو الحرف الموجود في الرسالة. والحرف الأبيض تحته هو الحرف الحقيقي.","ESCAPED":"لقد هربت!","Enter your first name, last name, and period at the top first.":"اكتب اسمك الأول واسم العائلة والحصة في الأعلى أولًا.","Exit code digit 1":"رقم رمز الخروج 1","Exit door":"باب الخروج","Fill in the blank using the Clue Card.":"املأ الفراغ باستخدام بطاقة القرائن.","Have a saved file? Load it to continue.":"هل لديك ملف محفوظ؟ حمّله لتكمل.","Hint":"تلميح","Hints used":"التلميحات المستخدمة","How to escape:":"كيف تهرب:","If you get stuck, press <b>Hint<\/b>. Hints are free, but your teacher can see how many you used.":"إذا تعثرت، اضغط <b>تلميح<\/b>. التلميحات مجانية، لكن معلمك يستطيع أن يرى كم تلميحًا استخدمت.","Locks":"الأقفال","Match each term to the best description. Use the Clue Card.":"طابق كل مصطلح مع أفضل وصف له. استخدم بطاقة القرائن.","Match every term first.":"طابق كل المصطلحات أولًا.","Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.":"لم تهرب بعد (يُسجَّل «غير مكتمل» INCOMPLETE). ما زال بإمكانك تنزيل ملفك وتسليمه.","Not quite. Check each match against the Clue Card. Which one are you least sure about?":"ليس تمامًا. تحقق من كل مطابقة باستخدام بطاقة القرائن. أي مطابقة أنت أقل تأكدًا منها؟","Not quite. Decode one letter at a time with the key, then check your spelling.":"ليس تمامًا. فُكّ تشفير حرف واحد في كل مرة باستخدام المفتاح، ثم تحقق من تهجئتك.","Not quite. Re-read the Clue Card and match each event to its year.":"ليس تمامًا. أعد قراءة بطاقة القرائن واربط كل حدث بسنته.","One last step: write your Debrief below.":"خطوة أخيرة: اكتب ملخصك الختامي أدناه.","Open all 5 locks first. The digits go in order: Lock 1 first.":"افتح الأقفال الخمسة أولًا. تُكتب الأرقام بالترتيب: رقم القفل 1 أولًا.","Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.":"افتح الأقفال الخمسة، ثم اكتب رمز الخروج المكوّن من 5 أرقام. أنهِ بالملخص الختامي.","Open each lock in order. Read the <b>Clue Card<\/b>. The answer is in the card.":"افتح كل قفل بالترتيب. اقرأ <b>بطاقة القرائن<\/b>. الإجابة موجودة في البطاقة.","Open the Door":"افتح الباب","Pick the correct answer for all three questions.":"اختر الإجابة الصحيحة للأسئلة الثلاثة.","Progress file downloaded. Use Load Progress to continue later.":"تم تنزيل ملف التقدم. استخدم «تحميل التقدم» لتكمل لاحقًا.","Progress loaded. Welcome back.":"تم تحميل التقدم. أهلًا بعودتك.","Solve the puzzle to open the lock and reveal one digit.":"حلّ اللغز لتفتح القفل وتكشف رقمًا واحدًا.","THE EXIT DOOR":"باب الخروج","Tap all 4 places first, in order.":"المس الأماكن الأربعة أولًا، بالترتيب.","Tap the four events in the order they happened. Tap an event again to take it back.":"المس الأحداث الأربعة بالترتيب الذي وقعت به. المس الحدث مرة أخرى للتراجع عنه.","That file did not work. Choose a progress file saved from this Escape Room.":"لم يعمل هذا الملف. اختر ملف تقدم محفوظًا من غرفة الهروب هذه.","That was the last hint. Read the Clue Card slowly and try again.":"كان هذا آخر تلميح. اقرأ بطاقة القرائن ببطء وحاول مرة أخرى.","The clock starts when you press the button. Most students finish in about 20 minutes.":"يبدأ العدّاد عندما تضغط الزر. يُنهي معظم الطلاب في نحو 20 دقيقة.","The code has 5 digits. Fill every box.":"الرمز مكوّن من 5 أرقام. املأ كل المربعات.","The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.":"لم يُفتح الباب. تحقق من الأرقام تحت كل قفل، واكتبها بالترتيب: رقم القفل 1 أولًا.","The door is open!":"الباب مفتوح!","The door swings open!":"ينفتح الباب على مصراعيه!","Time":"الوقت","Type the answer in English.":"اكتب الإجابة بالإنجليزية.","Type the answer in English. Use the digits 0-9.":"اكتب الإجابة بالإنجليزية. استخدم الأرقام 0-9.","Type the exit code":"اكتب رمز الخروج","Type your answer first.":"اكتب إجابتك أولًا.","Type your answer here...":"اكتب إجابتك هنا...","UNIT 4 · INDUSTRY, EMPIRE, AND REFORM | CPUSH | DANIEL GARZA, M.A.":"الوحدة 4 · الصناعة والإمبراطورية والإصلاح | CPUSH | DANIEL GARZA, M.A.","Unscramble the letters to fill the blank.":"رتّب الأحرف لتملأ الفراغ.","Which lock was hardest, and what did you learn that you did not know before?":"أي قفل كان الأصعب، وماذا تعلمت ولم تكن تعرفه من قبل؟","Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.":"اكتب من 3 إلى 4 جمل. اذكر القفل واستخدم معلومة واحدة من بطاقة القرائن الخاصة به. يمكنك كتابة هذا حتى لو لم تهرب.","You escaped and wrote your Debrief. Ready to submit.":"لقد هربت وكتبت ملخصك الختامي. أنت جاهز للتسليم.","You escaped! Write your Debrief, then download your file to submit.":"لقد هربت! اكتب ملخصك الختامي، ثم نزّل ملفك لتسليمه.","Your answer":"إجابتك","Your time:":"وقتك:","digit":"رقم"},"patterns":[{"re":"^Still needed: first name, last name, and period\\.$","es":"Todavía falta: nombre, apellido y período.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة."},{"re":"^LOCK (\\d)$","es":"Cand. $1","ar":"القفل $1"},{"re":"^LOCK (\\d) · CORE OBJECTIVE (\\d+)$","es":"CANDADO $1 · OBJETIVO PRINCIPAL $2","ar":"القفل $1 · الهدف الأساسي $2"},{"re":"^LOCK (\\d) · CORE OBJECTIVES (\\d+)-(\\d+)$","es":"CANDADO $1 · OBJETIVOS PRINCIPALES $2-$3","ar":"القفل $1 · الأهداف الأساسية $2-$3"},{"re":"^LOCK (\\d) · CORE OBJECTIVES (\\d+) AND (\\d+)$","es":"CANDADO $1 · OBJETIVOS PRINCIPALES $2 Y $3","ar":"القفل $1 · الأهداف الأساسية $2 و$3"},{"re":"^Hint (\\d):$","es":"Pista $1:","ar":"تلميح $1:"},{"re":"^Exit code digit (\\d)$","es":"Dígito $1 del código de salida","ar":"رقم رمز الخروج $1"},{"re":"^Click! Lock (\\d) is open\\. Your digit is (\\d)\\.$","es":"¡Clic! El Candado $1 está abierto. Tu dígito es $2.","ar":"نقرة! القفل $1 مفتوح. رقمك هو $2."},{"re":"^5 of 5 locks opened with (\\d+) tries and 1 hint\\.$","es":"Abriste 5 de 5 candados con $1 intentos y 1 pista.","ar":"فتحت 5 أقفال من 5 بعد $1 محاولة وتلميح واحد."},{"re":"^5 of 5 locks opened with (\\d+) tries and (\\d+) hints\\.$","es":"Abriste 5 de 5 candados con $1 intentos y $2 pistas.","ar":"فتحت 5 أقفال من 5 بعد $1 محاولة و$2 تلميحات."},{"re":"^Tap all (\\d) places first, in order\\.$","es":"Primero toca los $1 lugares, en orden.","ar":"المس الأماكن الـ $1 أولًا، بالترتيب."},{"re":"^Done! File downloaded: (.*)\\. Upload it to Canvas\\.$","es":"¡Listo! Se descargó el archivo: $1. Súbelo a Canvas.","ar":"تم! تم تنزيل الملف: $1. ارفعه إلى Canvas."},{"re":"^Your file downloaded and is marked INCOMPLETE \\(you have not escaped\\)\\. Upload it to Canvas: (.*)$","es":"Tu archivo se descargó y está marcado INCOMPLETO (todavía no escapas). Súbelo a Canvas: $1","ar":"تم تنزيل ملفك وهو مُسجَّل «غير مكتمل» INCOMPLETE (لم تهرب بعد). ارفعه إلى Canvas: $1"},{"re":"^Unlocked\\. Your digit is (\\d)\\. Your answer: (.*)$","es":"Desbloqueado. Tu dígito es $1. Tu respuesta: $2","ar":"تم الفتح. رقمك هو $1. إجابتك: $2"},{"re":"^Unlocked\\. Your digit is (\\d)\\.$","es":"Desbloqueado. Tu dígito es $1.","ar":"تم الفتح. رقمك هو $1."}]}</script>
+<script>
+/* Supplement language switch (English / Espanol / Arabic). Works on pages whose text is rendered by JS:
+   a MutationObserver translates text as it appears. Data: <script type="application/json" id="sp-i18n">
+   {"langs":["en","es","ar"],"default":"en","es":{englishHTML:translation},"ar":{...},"patterns":[{"re":"^(\\d+) of (\\d+)$","es":"$1 de $2","ar":"..."}]}
+   Keys are the English text exactly as it sits in the page (innerHTML, spaces collapsed).
+   Helpers: spSeen() english strings seen so far; spMissing() strings with no translation in the current language;
+   spSetLang(l); spTr(s) translate a string (used for confirm/alert); spAscii(s) plain-ASCII name for file names. */
+(function () {
+  var node = document.getElementById('sp-i18n');
+  var D = node ? JSON.parse(node.textContent) : { langs: ['en'], patterns: [] };
+  var INLINE = { B:1,I:1,EM:1,STRONG:1,SPAN:1,A:1,BR:1,SMALL:1,SUP:1,SUB:1,U:1,MARK:1,BDI:1,TSPAN:1,CODE:1 };
+  var SKIP = 'script,style,textarea,input,.sp-lang,.sp-nt,[translate="no"]';
+  var WORD = /[A-Za-z\u00C0-\u024F\u0600-\u06FF]{2}|e\.g\./;
+  var LANG = 'en', REC = new WeakMap(), SEEN = {}, MISS = {};
+  (D.patterns || []).forEach(function (p) { try { p._re = new RegExp(p.re); } catch (e) {} });
+  function norm(s) { return String(s).replace(/\s+/g, ' ').trim(); }
+  function tr(src) {
+    if (LANG === 'en') return null;
+    var t = D[LANG] && D[LANG][src];
+    if (t) return t;
+    var P = D.patterns || [];
+    for (var i = 0; i < P.length; i++) {
+      var m = P[i]._re && P[i]._re.exec(src);
+      if (m && P[i][LANG]) return P[i][LANG].replace(/\$(\d+)/g, function (_, n) { return m[+n] || ''; });
+    }
+    return null;
+  }
+  window.spTr = function (s) { var t = tr(norm(s)); return t ? t.replace(/<[^>]+>/g, '') : s; };
+  function isInline(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling)
+      if (c.nodeType === 1 && (!INLINE[c.tagName.toUpperCase()] || c.matches(SKIP))) return false;
+    return true;
+  }
+  function directText(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling) if (c.nodeType === 3 && WORD.test(c.nodeValue)) return true;
+    return false;
+  }
+  function cur(s) { return s.nodeType === 1 ? s.innerHTML : s.nodeValue; }
+  function put(s, v) { if (s.nodeType === 1) s.innerHTML = v; else s.nodeValue = v; }
+  function handle(s) {
+    var r = REC.get(s), c = cur(s);
+    if (!(r && c === r.wrote)) { r = { en: c, wrote: c }; REC.set(s, r); }
+    var src = norm(r.en), target = r.en;
+    if (WORD.test(src)) {
+      SEEN[src] = 1;
+      if (LANG !== 'en') {
+        var t = tr(src);
+        if (t) {
+          target = s.nodeType === 1 ? t : (r.en.match(/^\s*/)[0] + t + r.en.match(/\s*$/)[0]);
+          delete MISS[src];
+        } else MISS[src] = 1;
+      }
+    }
+    if (c !== target) put(s, target);
+    r.wrote = cur(s);
+  }
+  var ATTRS = ['placeholder', 'alt', 'aria-label', 'title'];
+  function attrs(root) {
+    var els = root.querySelectorAll ? root.querySelectorAll('[placeholder],[alt],[aria-label],[title]') : [];
+    var list = [].slice.call(els); if (root.matches && root.matches('[placeholder],[alt],[aria-label],[title]')) list.push(root);
+    list.forEach(function (el) {
+      if (el.closest && el.closest('.sp-lang,.sp-nt,[translate="no"],script,style')) return;
+      var rec = el.__spa || (el.__spa = {});
+      ATTRS.forEach(function (a) {
+        var v = el.getAttribute(a); if (v == null) return;
+        var r = rec[a];
+        if (!(r && v === r.wrote)) { r = rec[a] = { en: v, wrote: v }; }
+        var src = norm(r.en); if (!WORD.test(src)) return;
+        SEEN[src] = 1;
+        var t = LANG === 'en' ? null : tr(src);
+        if (LANG !== 'en' && !t) MISS[src] = 1;
+        var target = t ? t.replace(/<[^>]+>/g, '') : r.en;
+        if (v !== target) el.setAttribute(a, target);
+        r.wrote = el.getAttribute(a);
+      });
+    });
+  }
+  function walk(root) {
+    if (root.nodeType === 3) { if (WORD.test(root.nodeValue) && !(root.parentNode && root.parentNode.closest && root.parentNode.closest(SKIP))) handle(root); return; }
+    if (root.nodeType !== 1) return;
+    (function w(el) {
+      if (el.matches(SKIP)) return;
+      if (el !== document.body && directText(el) && isInline(el)) { handle(el); return; }
+      for (var c = el.firstChild; c; c = c.nextSibling) {
+        if (c.nodeType === 1) w(c); else if (c.nodeType === 3 && WORD.test(c.nodeValue)) handle(c);
+      }
+    })(root);
+    attrs(root);
+  }
+  var TITLE = { en: document.title, wrote: document.title };
+  function title() {
+    if (document.title !== TITLE.wrote) TITLE = { en: document.title, wrote: document.title };
+    var t = LANG === 'en' ? null : tr(norm(TITLE.en));
+    document.title = t ? t.replace(/<[^>]+>/g, '') : TITLE.en; TITLE.wrote = document.title;
+  }
+  function inl(e) { return e.nodeType === 1 && !!INLINE[e.tagName.toUpperCase()]; }
+  var mo = new MutationObserver(function (muts) {
+    var todo = [];
+    muts.forEach(function (m) {
+      if (m.type === 'childList') { for (var i = 0; i < m.addedNodes.length; i++) todo.push(m.addedNodes[i]); todo.push(m.target); }
+      else todo.push(m.target);
+    });
+    todo.forEach(function (n) {
+      var el = n.nodeType === 1 ? n : n.parentNode;
+      if (!el || el.nodeType !== 1 || !document.body.contains(el)) return;
+      while (el !== document.body && el.parentNode && el.parentNode.nodeType === 1 && inl(el) && inl(el.parentNode)) el = el.parentNode;
+      if (el.parentNode && el.parentNode.nodeType === 1 && inl(el.parentNode) && el.parentNode !== document.body) el = el.parentNode;
+      walk(el);
+    });
+    mo.takeRecords();
+  });
+  var AR = { 'ا':'a','أ':'a','إ':'i','آ':'a','ب':'b','ت':'t','ث':'th','ج':'j','ح':'h','خ':'kh','د':'d','ذ':'dh','ر':'r','ز':'z','س':'s','ش':'sh','ص':'s','ض':'d','ط':'t','ظ':'z','ع':'a','غ':'gh','ف':'f','ق':'q','ك':'k','ل':'l','م':'m','ن':'n','ه':'h','و':'w','ي':'y','ى':'a','ة':'a','ئ':'y','ؤ':'w' };
+  window.spAscii = function (s) {
+    s = String(s); if (s.normalize) s = s.normalize('NFD').replace(/[̀-ًͯ-ٰٟ]/g, '');
+    return s.replace(/[ء-ي]/g, function (c) { return AR[c] !== undefined ? AR[c] : ''; }).replace(/ñ/g, 'n').replace(/Ñ/g, 'N');
+  };
+  window.spSeen = function () { return Object.keys(SEEN); };
+  window.spMissing = function () { return Object.keys(MISS); };
+  window.spLang = function () { return LANG; };
+  window.spSetLang = function (l) {
+    if ((D.langs || ['en']).indexOf(l) < 0) l = 'en';
+    LANG = l; MISS = {};
+    var h = document.documentElement; h.lang = l; h.dir = l === 'ar' ? 'rtl' : 'ltr';
+    mo.disconnect(); walk(document.body); title(); mo.takeRecords();
+    mo.observe(document.body, { childList: true, subtree: true, characterData: true });
+    document.querySelectorAll('.sp-lang button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === l)); });
+    try { localStorage.setItem('sp_lang', l); } catch (e) {}
+    try { var u = new URL(location.href); if (l === 'en') u.searchParams.delete('lang'); else u.searchParams.set('lang', l); history.replaceState(null, '', u.toString()); } catch (e) {}
+    try { document.dispatchEvent(new CustomEvent('splangchange', { detail: l })); } catch (e) {}
+  };
+  var _c = window.confirm, _a = window.alert;
+  window.confirm = function (m) { return _c.call(window, window.spTr(m)); };
+  window.alert = function (m) { return _a.call(window, window.spTr(m)); };
+  document.querySelectorAll('.sp-lang button').forEach(function (b) { b.addEventListener('click', function () { window.spSetLang(b.getAttribute('data-lang')); }); });
+  var start = D['default'] || 'en';
+  try { start = new URL(location.href).searchParams.get('lang') || localStorage.getItem('sp_lang') || start; } catch (e) {}
+  window.spSetLang(start);
+})();
+
+</script><!--/sp-i18n-->
+</body>
+</html>

@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Would You Rather 2 · Colonial Society and the Road to Independence</title>
+<style>
+:root{--bg:#EBF4F4;--paper:#FAFCFC;--maroon:#194C4D;--ink:#0F3334;--brown:#276E6F;--red:#D2B64B;--rose:#E1D08E;
+--redink:#6B5A12;--rule:#C9DEDE;--line:#A4BFBF;--ok:#3F6B3A;--frost:#EBF4F4;
+--serif:Georgia,"Times New Roman",serif;--sans:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
+--glass:color-mix(in srgb,var(--paper) 70%,transparent);--glass-strong:color-mix(in srgb,var(--paper) 90%,transparent);
+--edge:color-mix(in srgb,#fff 70%,transparent);
+--hi:inset 0 1px 0 color-mix(in srgb,#fff 85%,transparent);
+--depth:0 1px 1px rgba(25,76,77,.05),0 3px 6px -2px rgba(25,76,77,.08),0 18px 40px -16px rgba(25,76,77,.30)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:
+radial-gradient(42vmax 42vmax at 8% 6%,rgba(25,76,77,.28),transparent 70%),
+radial-gradient(38vmax 38vmax at 96% 22%,rgba(210,182,75,.22),transparent 70%),
+radial-gradient(46vmax 40vmax at 70% 104%,rgba(25,76,77,.18),transparent 70%),
+radial-gradient(30vmax 30vmax at 20% 88%,rgba(225,208,142,.22),transparent 70%)}
+.wrap{max-width:860px;margin:0 auto;padding:0 18px 60px}
+h1,h2,h3{font-family:var(--serif);text-wrap:balance}
+.eyebrow{font-size:12.5px;letter-spacing:.16em;font-weight:700;text-transform:uppercase}
+header.hero{padding:26px 0 0}
+.hero-band{position:relative;overflow:hidden;border-radius:16px;padding:34px 34px 30px;color:var(--frost);background:linear-gradient(110deg,#194C4D 40%,#276E6F);
+box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 30px 60px -24px rgba(25,76,77,.75)}
+.hero-band::before{content:"";position:absolute;left:0;top:0;bottom:0;width:8px;background:var(--red)}
+.hero-band .eyebrow{color:var(--rose)}
+.hero-band h1{color:#fff;font-size:clamp(32px,6vw,50px);line-height:1.08;margin:.2em 0 .2em}
+.nb{white-space:nowrap}
+.hero-band .sub{text-wrap:balance;margin:0;font-size:17px;color:var(--frost);font-weight:600}
+.hero-num{position:absolute;right:20px;bottom:-30px;font:700 180px/1 var(--serif);color:#fff;opacity:.12;pointer-events:none}
+.panel{background:var(--glass);border:1px solid var(--edge);border-radius:14px;box-shadow:var(--hi),var(--depth);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3)}
+.meta{display:flex;flex-wrap:wrap;gap:14px;margin:18px 0 0;padding:16px 20px}
+.meta label{flex:1 1 170px;font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--brown)}
+.meta input{display:block;width:100%;margin-top:5px;padding:12px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);font:inherit;font-size:17px;min-height:48px}
+.meta input[readonly]{background:#DDECEC;color:var(--brown)}
+.howto{margin:16px 0;padding:14px 20px;font-size:16px}
+.howto ol{margin:.4em 0 .2em 1.2em;padding:0}
+.howto li{margin:.2em 0}
+.bar{position:sticky;top:0;z-index:5;padding:9px 14px;margin:0 -14px;background:rgba(235,244,244,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--rule)}
+.bar .row{display:flex;align-items:center;gap:12px;font-size:14px;font-weight:700;color:var(--brown)}
+.track{flex:1;height:10px;border-radius:6px;background:#D0E4E4;overflow:hidden}
+.fill{height:100%;width:0;background:linear-gradient(90deg,var(--rose),var(--red));transition:width .3s}
+.card{margin:26px 0;padding:22px 24px 24px;scroll-margin-top:70px}
+.kick{font-size:12.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--redink)}
+.kick span{color:var(--brown)}
+.card h2{margin:.15em 0 .4em;font-size:clamp(24px,4.5vw,32px);line-height:1.15;color:var(--maroon)}
+.there{background:var(--glass-strong);border:1px solid var(--edge);border-radius:12px;padding:6px 20px 8px;margin:10px 0 18px;border-left:6px solid var(--red)}
+.there .lab{display:inline-block;margin:12px 0 0;font:800 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:#fff;background:var(--maroon);padding:6px 11px 5px;border-radius:999px}
+.there p{font:18.5px/1.65 var(--serif);margin:.7em 0}
+.rather{font:700 22px/1.2 var(--serif);color:var(--maroon);margin:4px 0 12px}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.choice{display:flex;align-items:center;gap:14px;text-align:left;width:100%;min-height:84px;padding:16px 18px;border-radius:14px;border:2px solid var(--maroon);background:#fff;color:var(--maroon);font:700 19px/1.3 var(--sans);cursor:pointer;touch-action:manipulation;transition:transform .15s,box-shadow .15s,background-color .15s}
+.choice .ltr{flex:0 0 auto;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--maroon);color:#fff;font:800 20px/1 var(--serif)}
+.choice:hover{transform:translateY(-2px);box-shadow:0 10px 20px -10px rgba(25,76,77,.5)}
+.choice[aria-pressed="true"]{background:var(--maroon);color:#fff;border-color:var(--maroon);box-shadow:0 0 0 4px rgba(210,182,75,.55)}
+.choice[aria-pressed="true"] .ltr{background:var(--red);color:var(--maroon)}
+.choice[aria-pressed="true"]::after{content:"\2713";margin-left:auto;font-size:26px;color:#fff}
+.choice:disabled{cursor:default;transform:none;box-shadow:none}
+.choice:disabled[aria-pressed="false"]{opacity:.55}
+.choice:disabled[aria-pressed="true"]{box-shadow:0 0 0 4px rgba(210,182,75,.55)}
+.choice:focus-visible,.btn:focus-visible,textarea:focus-visible,input:focus-visible,.link:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.work{display:none;margin-top:20px}
+.card.chosen .work{display:block}
+.field{background:color-mix(in srgb,var(--rose) 14%,var(--paper));border:1px solid color-mix(in srgb,var(--red) 28%,var(--rule));border-radius:12px;padding:14px 18px;margin:12px 0}
+.field label{display:block;font:700 19px/1.25 var(--serif);color:var(--maroon)}
+.field .hint{display:block;font:400 14.5px/1.4 var(--sans);color:var(--brown);margin:3px 0 8px}
+textarea{width:100%;min-height:96px;padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);font:inherit;font-size:17px;line-height:1.5;resize:vertical}
+textarea:read-only{background:#EBF4F4;color:#194C4D}
+.row2{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:12px}
+.btn{border:2px solid var(--maroon);background:#fff;color:var(--maroon);padding:12px 20px;border-radius:10px;font:700 16px/1.2 var(--sans);cursor:pointer;min-height:48px;touch-action:manipulation}
+.btn:hover:not(:disabled){background:var(--maroon);color:#fff}
+.btn.primary{background:var(--maroon);color:#fff}
+.btn.primary:disabled{background:#2F6B6C;border-color:#285E5F;color:#fff;cursor:not-allowed;opacity:.8}
+.cstat{font-size:14.5px;font-weight:600;color:var(--brown)}
+.reveal{display:none;margin-top:16px;background:#fff;border:1px solid var(--rule);border-left:6px solid var(--maroon);border-radius:12px;padding:6px 20px 10px}
+.card.locked .reveal{display:block}
+.reveal .lab{display:inline-block;margin:12px 0 0;font:800 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--maroon);box-shadow:inset 0 0 0 1.5px var(--maroon);padding:6px 11px 5px;border-radius:999px}
+.reveal p{font:18px/1.62 var(--serif);margin:.7em 0}
+.reveal .cite{font:13px/1.5 var(--sans);color:var(--brown)}
+.link{background:none;border:0;color:var(--brown);text-decoration:underline;cursor:pointer;font:inherit;font-size:15px;padding:10px 4px;min-height:44px}
+.card.locked .lockBtn{display:none}
+.card:not(.locked) .editBtn{display:none}
+.tally{padding:20px 24px;margin:26px 0}
+.tally h2{margin:.1em 0 .3em;font-size:28px;color:var(--maroon)}
+.tally ol{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:8px}
+.tally li{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;background:#fff;border:1px solid var(--rule);border-radius:10px;padding:10px 14px}
+.tally .tn{grid-row:1/3;align-self:center;width:34px;height:34px;border-radius:50%;background:var(--maroon);color:#fff;display:grid;place-items:center;font:800 16px/1 var(--serif)}
+.tally .tq{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--brown)}
+.tally .ta{font-weight:700;color:var(--maroon);overflow-wrap:anywhere}
+.tally li.none .ta{color:#276E6F;font-weight:600;font-style:italic}
+.tally li.none .tn{background:#4A8586}
+.tally .sum{margin:12px 0 0;font-weight:600;color:var(--brown)}
+.finish{text-align:center;margin:26px 0;padding:22px 20px}
+.status{font-size:15px;font-weight:700;color:var(--brown);margin-bottom:12px;overflow-wrap:anywhere}
+.btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.msg{display:none;margin:14px auto 0;padding:10px 14px;border-radius:8px;background:#EAF3E6;border:1px solid var(--ok);color:var(--ok);font-weight:700;max-width:620px;overflow-wrap:anywhere}
+.msg.err{background:#FDEDEB;border-color:#B3261E;color:#8C1D18}
+input.bad{border-color:#B3261E;background:#FFF1EF}
+footer{text-wrap:balance;margin-top:34px;padding-top:12px;border-top:1px solid var(--rule);font-size:12px;letter-spacing:.05em;color:var(--maroon);font-weight:600}
+@media (max-width:720px){.choices{grid-template-columns:1fr}.hero-band{padding:26px 20px 24px}.hero-num{font-size:120px}.card{padding:18px 16px 20px}.there{padding:4px 14px 6px}.there p{font-size:18px}.btn.primary,.btns .btn{width:100%}.bar{margin:0 -18px;padding:9px 18px}}
+html[dir=rtl] .hero-band::before{left:auto;right:0}
+html[dir=rtl] .hero-num{right:auto;left:20px}
+html[dir=rtl] .there{border-left:1px solid var(--edge);border-right:6px solid var(--red)}
+html[dir=rtl] .reveal{border-left:1px solid var(--rule);border-right:6px solid var(--maroon)}
+html[dir=rtl] .choice{text-align:right}
+html[dir=rtl] .choice[aria-pressed="true"]::after{margin-left:0;margin-right:auto}
+html[dir=rtl] .howto ol{margin:.4em 1.2em .2em 0}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+@media print{body::before{display:none}.bar,.finish,.btn,.msg,.choice:disabled[aria-pressed=false]{display:none!important}.panel{backdrop-filter:none;box-shadow:none;background:#fff}.card{break-inside:avoid}}
+/*sp-i18n-css*/
+.sp-lang-bar{display:flex;justify-content:flex-end;padding:8px 12px 0;position:relative;z-index:5}
+.sp-lang{display:inline-flex;gap:2px;padding:3px;border-radius:10px;background:rgba(255,255,255,.88);border:1px solid rgba(0,0,0,.18);font-family:system-ui,"Segoe UI",Tahoma,Arial,sans-serif}
+.sp-lang button{border:0;background:transparent;color:#222;font:600 13px/1 system-ui,"Segoe UI",Tahoma,Arial,sans-serif;padding:7px 11px;border-radius:7px;cursor:pointer}
+.sp-lang button[aria-pressed="true"]{background:#222;color:#fff}
+.sp-lang button:focus-visible{outline:3px solid #2a6df4;outline-offset:1px}
+textarea,input,select{unicode-bidi:plaintext}
+html[lang="ar"] body,html[lang="ar"] button,html[lang="ar"] textarea,html[lang="ar"] input,html[lang="ar"] select{font-family:"Segoe UI",Tahoma,"Noto Sans Arabic","Arial",system-ui,sans-serif}
+html[lang="ar"] body{line-height:1.8}
+html[lang="ar"] *{letter-spacing:0!important}
+html[dir="rtl"] textarea,html[dir="rtl"] input{text-align:start}
+@media print{.sp-lang-bar{display:none}}
+/*/sp-i18n-css*/
+</style></head><body>
+<!--sp-bar--><div class="sp-lang-bar"><div class="sp-lang" role="group" aria-label="Language / Idioma / اللغة"><button type="button" data-lang="en" lang="en" aria-pressed="true">English</button><button type="button" data-lang="es" lang="es" aria-pressed="false">Español</button><button type="button" data-lang="ar" lang="ar" aria-pressed="false">العربية</button></div></div><!--/sp-bar--><div class="wrap">
+<header class="hero"><div class="hero-band"><div class="eyebrow">1651-1776</div>
+<h1>Would You Rather</h1><p class="sub">Colonial Society and the Road to Independence</p><span class="hero-num" aria-hidden="true">2</span></div>
+<div class="meta panel">
+<label>FIRST NAME *<input id="f_first" type="text" autocomplete="given-name"></label>
+<label>LAST NAME *<input id="f_last" type="text" autocomplete="family-name"></label>
+<label>PERIOD *<input id="f_period" type="text" inputmode="numeric" maxlength="12" placeholder="e.g. 3"></label>
+<label>DATE (fills in when you finish)<input id="f_date" type="text" readonly tabindex="-1" placeholder="Automatic"></label>
+</div></header>
+<div class="howto panel"><div><b>How to work.</b> People in history faced hard choices. Here are five. There is no right or wrong choice. Your job is to understand why people chose what they did.</div>
+<ol><li>Read “You are there.”</li><li>Tap the choice you would make.</li><li>Write your reason. Use at least one fact from the lesson.</li><li>Write a Counter-Argument: the best reason someone on the other side would give.</li><li>Tap <b>Lock in my answer</b> to see what really happened.</li></ol>
+<div>Your work saves on this device as you type. Use <b>Save Progress</b> at the bottom to download a backup file, and <b>Load Progress</b> to continue later.</div></div>
+<div class="bar"><div class="row"><span id="pct">0 of 5 dilemmas locked in</span><div class="track"><div class="fill" id="fill"></div></div></div></div>
+
+<section class="card panel" id="d1" data-n="1" data-a="Sign the indenture and sail to America" data-b="Stay in Europe and keep looking for work at home" data-short="Sign an indenture" aria-labelledby="h1">
+<div class="kick">Dilemma 1 <span>of 5</span> · 1700s</div>
+<h2 id="h1">The 1700s: Sign an Indenture to Go to America?</h2>
+<div class="there"><span class="lab">You are there</span><p>It is the early 1700s. You are a poor worker in England, Ireland, or Scotland. Land in Europe is crowded and expensive. You cannot save enough money to buy a farm, and you cannot pay for a ticket to America.</p><p>A ship’s captain offers you a deal called an indenture. It is a contract. He pays for your trip. In return, you promise to work for a fixed number of years, usually three to seven. In America, land is cheap and workers are scarce.</p><p>But you have heard that life for servants is hard, and that servants have few rights. Many do not live to finish their contracts. What would you choose?</p></div>
+<p class="rather">Would you rather...</p>
+<div class="choices" role="group" aria-label="Choose one">
+<button type="button" class="choice" data-o="A" aria-pressed="false"><span class="ltr">A</span><span>Sign the indenture and sail to America</span></button>
+<button type="button" class="choice" data-o="B" aria-pressed="false"><span class="ltr">B</span><span>Stay in Europe and keep looking for work at home</span></button>
+</div>
+<div class="work">
+<div class="field"><label for="d1_reason">Your reason</label><span class="hint">Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”</span>
+<textarea id="d1_reason" data-k="reason" placeholder="Type your reason here..."></textarea></div>
+<div class="field"><label for="d1_counter">Counter-Argument</label><span class="hint">What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”</span>
+<textarea id="d1_counter" data-k="counter" placeholder="Type the other side’s best reason here..."></textarea></div>
+<div class="row2"><button type="button" class="btn primary lockBtn" disabled>Lock in my answer</button>
+<button type="button" class="btn editBtn">Edit my answer</button><span class="cstat" aria-live="polite"></span></div>
+<div class="reveal" aria-live="polite"><span class="lab">What really happened</span><p>Many people signed. Of about 500,000 English immigrants who came to America between 1610 and 1775, about 350,000 came as indentured servants.</p><p>Norton says life was harsh. Servants got food and a bed, but they had few rights, and many died before their contracts ended. Still, the contract ended. When it did, a servant could claim “freedom dues,” such as a little money, tools, clothing, and food, and sometimes a small piece of land. Some former servants did very well. By 1637, fifteen former servants sat in the Maryland Assembly.</p><p>Not everyone chose. Norton also says that some servants did not come willingly. Some homeless children in London were kidnapped and sold into servitude. Parliament also sent about 50,000 convicted criminals to the colonies.</p><p class="cite">Source: Norton Ch. 3, “Society and Economy in the Colonies” (Indentured Servitude) and “The Demography of the Early Colonies” (Population Growth).</p></div>
+</div>
+</section>
+<section class="card panel" id="d2" data-n="2" data-a="Go hear the traveling preacher: faith should touch the heart" data-b="Stay with your local minister: faith should be orderly and reasoned" data-short="The traveling preacher" aria-labelledby="h2">
+<div class="kick">Dilemma 2 <span>of 5</span> · 1740</div>
+<h2 id="h2">1740: Go to the Revival, or Stay With Your Minister?</h2>
+<div class="there"><span class="lab">You are there</span><p>It is 1740. You live in a colonial town. Your local church has a minister, and most families go every week. Where you live, the government supports one official church with taxes.</p><p>A traveling preacher has come to the area. These preachers are called itinerants. He says that many local ministers are not good enough. He says that people must be “reborn” in their beliefs and in how they live. Big crowds are gathering in barns and open fields.</p><p>At the same time, many educated people are talking about a new way of thinking called the Enlightenment. It celebrates reason and science. Your neighbors are arguing, and the argument is dividing families. Where would you rather be on Sunday?</p></div>
+<p class="rather">Would you rather...</p>
+<div class="choices" role="group" aria-label="Choose one">
+<button type="button" class="choice" data-o="A" aria-pressed="false"><span class="ltr">A</span><span>Go hear the traveling preacher: faith should touch the heart</span></button>
+<button type="button" class="choice" data-o="B" aria-pressed="false"><span class="ltr">B</span><span>Stay with your local minister: faith should be orderly and reasoned</span></button>
+</div>
+<div class="work">
+<div class="field"><label for="d2_reason">Your reason</label><span class="hint">Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”</span>
+<textarea id="d2_reason" data-k="reason" placeholder="Type your reason here..."></textarea></div>
+<div class="field"><label for="d2_counter">Counter-Argument</label><span class="hint">What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”</span>
+<textarea id="d2_counter" data-k="counter" placeholder="Type the other side’s best reason here..."></textarea></div>
+<div class="row2"><button type="button" class="btn primary lockBtn" disabled>Lock in my answer</button>
+<button type="button" class="btn editBtn">Edit my answer</button><span class="cstat" aria-live="polite"></span></div>
+<div class="reveal" aria-live="polite"><span class="lab">What really happened</span><p>The revival, called the Great Awakening, spread up and down the Atlantic coast. Jonathan Edwards said people needed to have their “hearts touched,” not just their heads filled with new knowledge. George Whitefield visited the colonies seven times between 1738 and 1748 and preached to huge crowds.</p><p>Norton says the highly emotional gatherings divided congregations, towns, and families. They also helped build new groups, especially Baptists and Methodists. Even Benjamin Franklin, who was skeptical, admitted that people were willing to attend sermons as never before.</p><p>Both movements changed American thinking. Enlightenment ideas about reason, natural rights, and consent of the governed later helped colonial leaders justify a revolution.</p><p class="cite">Source: Norton Ch. 3, “First Stirrings of a Common Colonial Culture” (The Enlightenment; The Great Awakening).</p></div>
+</div>
+</section>
+<section class="card panel" id="d3" data-n="3" data-a="Support the Albany Plan: unite the colonies under one government" data-b="Reject it: keep each colony separate and only join in a military alliance" data-short="The Albany Plan" aria-labelledby="h3">
+<div class="kick">Dilemma 3 <span>of 5</span> · 1754</div>
+<h2 id="h3">1754: Unite the Colonies, or Keep Them Separate?</h2>
+<div class="there"><span class="lab">You are there</span><p>It is the summer of 1754. You are a delegate at a meeting in Albany, New York. The French and the British are fighting for the lands of the Ohio valley, and fighting has already started on the frontier. Whoever controls that land could control the whole continent.</p><p>Benjamin Franklin has a plan. The colonies would band together. The king would appoint a president. Each colony’s assembly would send two to seven delegates to a “grand council” that could make laws. The union would handle dealings with Indigenous nations.</p><p>Other delegates and many colonial legislatures like their own powers just as they are. They want only a military alliance against attacks. What would you support?</p></div>
+<p class="rather">Would you rather...</p>
+<div class="choices" role="group" aria-label="Choose one">
+<button type="button" class="choice" data-o="A" aria-pressed="false"><span class="ltr">A</span><span>Support the Albany Plan: unite the colonies under one government</span></button>
+<button type="button" class="choice" data-o="B" aria-pressed="false"><span class="ltr">B</span><span>Reject it: keep each colony separate and only join in a military alliance</span></button>
+</div>
+<div class="work">
+<div class="field"><label for="d3_reason">Your reason</label><span class="hint">Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”</span>
+<textarea id="d3_reason" data-k="reason" placeholder="Type your reason here..."></textarea></div>
+<div class="field"><label for="d3_counter">Counter-Argument</label><span class="hint">What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”</span>
+<textarea id="d3_counter" data-k="counter" placeholder="Type the other side’s best reason here..."></textarea></div>
+<div class="row2"><button type="button" class="btn primary lockBtn" disabled>Lock in my answer</button>
+<button type="button" class="btn editBtn">Edit my answer</button><span class="cstat" aria-live="polite"></span></div>
+<div class="reveal" aria-live="polite"><span class="lab">What really happened</span><p>The Albany Congress approved the Albany Plan of Union in 1754. But it did not become law. Norton says the plan was “too radical.” British officials and the colonial legislatures wanted to keep their own powers, so they rejected it.</p><p>Franklin also drew a famous cartoon in 1754 urging the colonies to unite. It was printed on May 9, 1754, in the Pennsylvania Gazette.</p><p>War came anyway. In 1755 Britain sent 1,000 soldiers to the colonies. Norton says the colonists favored using force against the French, but later opposed using British soldiers to enforce rules on the colonies. Twenty years later, in 1774, representatives from twelve colonies met in the First Continental Congress. Norton says that never before had so many colonies met to coordinate joint resistance.</p><p class="cite">Source: Norton Ch. 4, “Warfare in the Colonies” (The Albany Plan; War in North America) and “The Road to the American Revolution” (The First Continental Congress).</p></div>
+</div>
+</section>
+<section class="card panel" id="d4" data-n="4" data-a="Pay the tax: Parliament governs the whole empire and the colonies should help pay" data-b="Protest and boycott: no tax without a voice in Parliament" data-short="The Stamp Act" aria-labelledby="h4">
+<div class="kick">Dilemma 4 <span>of 5</span> · 1765</div>
+<h2 id="h4">1765: Pay the Stamp Tax, or Protest and Boycott?</h2>
+<div class="there"><span class="lab">You are there</span><p>It is 1765. You are a printer in a colonial port city. Britain won the French and Indian War, but the war left it with huge debts. It is also keeping troops in America. Prime Minister George Grenville says Americans should help pay for the soldiers who defend them.</p><p>Parliament has passed the Stamp Act. You must buy special paper from London with a government stamp on it. You must use that paper for newspapers, pamphlets, legal papers, licenses, insurance policies, college diplomas, even playing cards.</p><p>British officials say Parliament’s power over the colonies is complete. Many colonists say they have no elected representatives in Parliament, so Parliament cannot tax them. What would you do?</p></div>
+<p class="rather">Would you rather...</p>
+<div class="choices" role="group" aria-label="Choose one">
+<button type="button" class="choice" data-o="A" aria-pressed="false"><span class="ltr">A</span><span>Pay the tax: Parliament governs the whole empire and the colonies should help pay</span></button>
+<button type="button" class="choice" data-o="B" aria-pressed="false"><span class="ltr">B</span><span>Protest and boycott: no tax without a voice in Parliament</span></button>
+</div>
+<div class="work">
+<div class="field"><label for="d4_reason">Your reason</label><span class="hint">Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”</span>
+<textarea id="d4_reason" data-k="reason" placeholder="Type your reason here..."></textarea></div>
+<div class="field"><label for="d4_counter">Counter-Argument</label><span class="hint">What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”</span>
+<textarea id="d4_counter" data-k="counter" placeholder="Type the other side’s best reason here..."></textarea></div>
+<div class="row2"><button type="button" class="btn primary lockBtn" disabled>Lock in my answer</button>
+<button type="button" class="btn editBtn">Edit my answer</button><span class="cstat" aria-live="polite"></span></div>
+<div class="reveal" aria-live="polite"><span class="lab">What really happened</span><p>Many colonists chose protest. Norton says the Stamp Act aroused intense resentment and resistance, and that critics repeated the slogan “No taxation without representation.” Groups called Sons of Liberty formed in every colony. Thousands signed agreements not to buy British goods. Women called the Daughters of Liberty stopped buying British cloth and tea.</p><p>The boycott worked. Imports of British goods fell by 40 percent, and thousands of English workers lost their jobs. In February 1766 Parliament repealed the Stamp Act.</p><p>But Parliament also passed the Declaratory Act, which claimed the power to govern the colonies “in all cases whatsoever.” In 1767 it passed the Townshend Acts, with new taxes on glass, lead, paint, paper, and tea.</p><p class="cite">Source: Norton Ch. 4, “Tightening of Control over the British Colonies” (The Stamp Act; The Whig Point of View; Protests in the Colonies; Colonial Unity; Repeal of the Stamp Act).</p></div>
+</div>
+</section>
+<section class="card panel" id="d5" data-n="5" data-a="Declare independence: break away from the king and Parliament" data-b="Keep seeking peace: stay loyal to the king and try to work things out" data-short="Independence" aria-labelledby="h5">
+<div class="kick">Dilemma 5 <span>of 5</span> · 1776</div>
+<h2 id="h5">Early 1776: Seek Peace With the King, or Declare Independence?</h2>
+<div class="there"><span class="lab">You are there</span><p>It is early 1776. You are a delegate in Philadelphia. Fighting started at Lexington and Concord last April. Until then, both sides thought the other would back down. Now it is a war.</p><p>Last summer, Congress sent the king the Olive Branch Petition. It asked him to negotiate. He refused to read it. He called the Americans “traitorous” and said they were “open and avowed” enemies.</p><p>A new pamphlet called Common Sense says it is time to break away. Many colonists still hope to stay under the king. And the king now calls the Americans traitors. What would you choose?</p></div>
+<p class="rather">Would you rather...</p>
+<div class="choices" role="group" aria-label="Choose one">
+<button type="button" class="choice" data-o="A" aria-pressed="false"><span class="ltr">A</span><span>Declare independence: break away from the king and Parliament</span></button>
+<button type="button" class="choice" data-o="B" aria-pressed="false"><span class="ltr">B</span><span>Keep seeking peace: stay loyal to the king and try to work things out</span></button>
+</div>
+<div class="work">
+<div class="field"><label for="d5_reason">Your reason</label><span class="hint">Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”</span>
+<textarea id="d5_reason" data-k="reason" placeholder="Type your reason here..."></textarea></div>
+<div class="field"><label for="d5_counter">Counter-Argument</label><span class="hint">What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”</span>
+<textarea id="d5_counter" data-k="counter" placeholder="Type the other side’s best reason here..."></textarea></div>
+<div class="row2"><button type="button" class="btn primary lockBtn" disabled>Lock in my answer</button>
+<button type="button" class="btn editBtn">Edit my answer</button><span class="cstat" aria-live="polite"></span></div>
+<div class="reveal" aria-live="polite"><span class="lab">What really happened</span><p>Congress chose independence. In January 1776, Thomas Paine published Common Sense. It attacked the king directly, and more than 150,000 copies were circulating within three months. Norton says it convinced many anxious Americans that independence was necessary.</p><p>On July 4, 1776, fifty-six members of Congress adopted the Declaration of Independence. Thomas Jefferson, age thirty-three, wrote the main draft. It said that governments get their power from “the consent of the governed.” The delegates knew they were likely to be hanged if captured.</p><p>Norton also points out a contradiction. The Declaration said that “all men are created equal,” but that idea did not apply to the many enslaved people in the colonies.</p><p class="cite">Source: Norton Ch. 4, “The Road to the American Revolution” (Open and Avowed Enemies; Independence; Breaking the Bonds of Empire; Jefferson’s Declaration).</p></div>
+</div>
+</section>
+<section class="tally panel" id="tally"><div class="kick">The end</div><h2>Your choices</h2><p style="margin:0">Here is a summary of the choices you made.</p>
+<ol id="tallyList"></ol><p class="sum" id="tallySum"></p></section>
+<div class="finish panel" id="actions"><div class="status" id="status"></div>
+<div class="btns"><button class="btn" id="saveBtn" type="button">Save Progress</button><button class="btn" id="loadBtn" type="button">Load Progress</button>
+<input type="file" id="loadFile" accept=".json,application/json" hidden>
+<button class="btn primary" id="finishBtn" type="button" disabled>Finished — Download File to Submit</button></div>
+<div class="msg" id="msg" role="status"></div><button class="link" id="reset" type="button">Clear all my answers</button></div>
+<footer>UNIT 1 · COLONIES, REVOLUTION, AND CONSTITUTION | CPUSH | DANIEL GARZA, M.A.</footer>
+</div>
+<script>
+(function(){
+  var PACKET='CPUSH_L2_WYR';
+  var STORE='cpush_l2_would-you-rather_student';
+  var $=function(i){return document.getElementById(i)};
+  var first=$('f_first'),last=$('f_last'),period=$('f_period'),dateF=$('f_date');
+  var cards=[].slice.call(document.querySelectorAll('.card'));
+  var MIN=15;
+  var data={meta:{},cards:{}};
+  function load(){try{var d=JSON.parse(localStorage.getItem(STORE)||'null');if(d&&d.cards)data=d}catch(e){}}
+  function persist(){try{localStorage.setItem(STORE,JSON.stringify(data))}catch(e){}}
+  function cs(n){return data.cards[n]||(data.cards[n]={choice:'',reason:'',counter:'',locked:false})}
+  function msg(t,err){var m=$('msg');m.textContent=t;m.className='msg'+(err?' err':'');m.style.display='block'}
+  function clean(n){n=window.spAscii?spAscii(n):n;return String(n).normalize('NFD').replace(/[̀-ͯ]/g,'').trim().replace(/\s+/g,'_').replace(/[^A-Za-z0-9_-]/g,'')}
+  function who(){return (clean(last.value)||'Last')+'_'+(clean(first.value)||'First')}
+  function named(){return !!(first.value.trim()&&last.value.trim()&&period.value.trim())}
+  function optText(c,o){return o==='A'?c.getAttribute('data-a'):o==='B'?c.getAttribute('data-b'):''}
+  function render(){
+    var locked=0;
+    cards.forEach(function(c){
+      var n=c.getAttribute('data-n'),s=cs(n);
+      c.classList.toggle('chosen',!!s.choice);
+      c.classList.toggle('locked',!!s.locked);
+      [].forEach.call(c.querySelectorAll('.choice'),function(b){
+        b.setAttribute('aria-pressed',b.getAttribute('data-o')===s.choice?'true':'false');
+        b.disabled=!!s.locked;
+      });
+      var r=c.querySelector('[data-k=reason]'),k=c.querySelector('[data-k=counter]');
+      if(r.value!==s.reason)r.value=s.reason;
+      if(k.value!==s.counter)k.value=s.counter;
+      r.readOnly=k.readOnly=!!s.locked;
+      var ok=s.choice&&s.reason.trim().length>=MIN&&s.counter.trim().length>=MIN;
+      c.querySelector('.lockBtn').disabled=!ok;
+      var st=c.querySelector('.cstat');
+      st.textContent=s.locked?'Locked in. Read what really happened below.':(ok?'Ready. Tap Lock in to see what happened.':'Fill in both boxes to unlock the next step.');
+      if(s.locked)locked++;
+    });
+    var tot=cards.length;
+    $('pct').textContent=locked+' of '+tot+' dilemmas locked in';
+    $('fill').style.width=(100*locked/tot)+'%';
+    var ol=$('tallyList');ol.innerHTML='';
+    cards.forEach(function(c){
+      var n=c.getAttribute('data-n'),s=cs(n),li=document.createElement('li');
+      var txt=s.choice?optText(c,s.choice):'';
+      li.className=(s.locked&&s.choice)?'':'none';
+      li.innerHTML='<span class="tn"></span><span class="tq"></span><span class="ta"></span>';
+      li.querySelector('.tn').textContent=n;
+      li.querySelector('.tq').textContent=c.getAttribute('data-short');
+      li.querySelector('.ta').textContent=(s.locked&&s.choice)?('You chose: '+txt):(s.choice?('Chosen, not locked in yet: '+txt):'Not answered yet');
+      ol.appendChild(li);
+    });
+    $('tallySum').textContent=locked===tot?'All five dilemmas are locked in. Nice work.':'Lock in all five dilemmas to finish.';
+    var miss=[];
+    if(!named())miss.push('first name, last name, and period');
+    if(locked<tot)miss.push((tot-locked)+' dilemma'+(tot-locked===1?'':'s')+' to lock in');
+    var all=named()&&locked===tot;
+    $('status').textContent=all?'Everything is done. Tap Finished to download your file.':'Still needed: '+miss.join('; ')+'.';
+    $('finishBtn').disabled=!all;
+    return all;
+  }
+  function sync(){
+    data.meta={first:first.value,last:last.value,period:period.value,date:dateF.value};
+    persist();render();
+  }
+  function snapshot(){
+    var o={packet:PACKET,course:'CPUSH',lesson:2,assignment:'Would You Rather',version:1,saved:new Date().toISOString(),
+      student:{first:first.value.trim(),last:last.value.trim(),period:period.value.trim(),date:dateF.value.trim()},answers:{}};
+    cards.forEach(function(c){
+      var n=c.getAttribute('data-n'),s=cs(n),p='dilemma_'+n+'_';
+      o.answers[p+'topic']=c.getAttribute('data-short');
+      o.answers[p+'choice']=s.choice;
+      o.answers[p+'choice_text']=optText(c,s.choice);
+      o.answers[p+'reason']=s.reason;
+      o.answers[p+'counter_argument']=s.counter;
+      o.answers[p+'locked_in']=!!s.locked;
+    });
+    return o;
+  }
+  function download(name,obj){
+    var blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;
+    document.body.appendChild(a);a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);
+  }
+  load();
+  var m=data.meta||{};first.value=m.first||'';last.value=m.last||'';period.value=m.period||'';dateF.value=m.date||'';
+  [first,last,period].forEach(function(f){f.addEventListener('input',function(){f.classList.remove('bad');sync()})});
+  cards.forEach(function(c){
+    var n=c.getAttribute('data-n');
+    [].forEach.call(c.querySelectorAll('.choice'),function(b){b.addEventListener('click',function(){var s=cs(n);if(s.locked)return;s.choice=b.getAttribute('data-o');sync()})});
+    c.querySelector('[data-k=reason]').addEventListener('input',function(e){cs(n).reason=e.target.value;sync()});
+    c.querySelector('[data-k=counter]').addEventListener('input',function(e){cs(n).counter=e.target.value;sync()});
+    c.querySelector('.lockBtn').addEventListener('click',function(){var s=cs(n);if(!s.choice||s.reason.trim().length<MIN||s.counter.trim().length<MIN)return;s.locked=true;sync();var r=c.querySelector('.reveal');if(r.scrollIntoView)r.scrollIntoView({block:'nearest',behavior:'smooth'})});
+    c.querySelector('.editBtn').addEventListener('click',function(){cs(n).locked=false;sync()});
+  });
+  $('saveBtn').addEventListener('click',function(){
+    if(!named()){[first,last,period].forEach(function(f){if(!f.value.trim())f.classList.add('bad')});msg('Please type your first name, last name, and period first.',true);first.scrollIntoView({block:'center'});return}
+    download(who()+'-'+PACKET+'-PROGRESS.json',snapshot());msg('Progress file downloaded. Keep it safe. Use Load Progress to continue later.');
+  });
+  $('loadBtn').addEventListener('click',function(){$('loadFile').click()});
+  $('loadFile').addEventListener('change',function(ev){
+    var f=ev.target.files[0];if(!f)return;
+    var r=new FileReader();
+    r.onload=function(){
+      try{
+        var o=JSON.parse(r.result);
+        if(!o||o.packet!==PACKET||typeof o.answers!=='object')throw new Error('wrong');
+        var st=o.student||{};first.value=st.first||'';last.value=st.last||'';period.value=st.period||'';dateF.value=(o.completed?st.date:'')||'';
+        data.cards={};
+        cards.forEach(function(c){var n=c.getAttribute('data-n'),p='dilemma_'+n+'_',a=o.answers;
+          data.cards[n]={choice:(a[p+'choice']==='A'||a[p+'choice']==='B')?a[p+'choice']:'',reason:String(a[p+'reason']||''),counter:String(a[p+'counter_argument']||''),locked:!!a[p+'locked_in']};});
+        sync();msg('Progress loaded.');
+      }catch(err){msg('That file does not look like a Would You Rather progress file. Try again.',true)}
+      ev.target.value='';
+    };
+    r.onerror=function(){msg('Could not read that file.',true)};
+    r.readAsText(f);
+  });
+  $('finishBtn').addEventListener('click',function(){
+    if(!render())return;
+    var now=new Date();dateF.value=now.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});sync();
+    var o=snapshot();o.completed=true;o.submitted=now.toISOString();
+    var fn=who()+'-'+PACKET+'.json';download(fn,o);
+    msg('Done! Your file '+fn+' downloaded. Upload it to Canvas.');
+  });
+  $('reset').addEventListener('click',function(){
+    if(!confirm('Clear all of your answers on this page?'))return;
+    data={meta:{},cards:{}};first.value=last.value=period.value=dateF.value='';persist();render();
+  });
+  render();
+})();
+</script><!--sp-i18n--><script type="application/json" id="sp-i18n">{"langs":["en","es","ar"],"default":"en","es":{"Save Progress":"Guardar progreso","Load Progress":"Cargar progreso","Finished — Download File to Submit":"Terminé — Descargar el archivo para entregar","Clear all my answers":"Borrar todas mis respuestas","FIRST NAME *":"NOMBRE *","LAST NAME *":"APELLIDO *","PERIOD *":"PERÍODO *","DATE (fills in when you finish)":"FECHA (se llena cuando terminas)","e.g. 3":"p. ej., 3","Automatic":"Automática","Please type your first name, last name, and period first.":"Primero escribe tu nombre, apellido y período.","Western Expansion and Southern Secession":"Expansión hacia el oeste y secesión del sur","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — La Ley de Esclavos Fugitivos","Bleeding Kansas":"Bleeding Kansas — Kansas sangriento","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"Se descargó tu archivo de progreso. Guárdalo bien. Usa «Cargar progreso» para continuar más tarde.","Progress loaded.":"Progreso cargado.","Could not read that file.":"No se pudo leer ese archivo.","Treaty of Guadalupe Hidalgo":"Tratado de Guadalupe Hidalgo","Colonial Society and the Road to Independence":"La sociedad colonial y el camino a la independencia","Would You Rather 2 · Colonial Society and the Road to Independence":"¿Qué preferirías? 2 · La sociedad colonial y el camino a la independencia","1651-1776":"1651-1776","Dilemma 1 <span>of 5<\/span> · 1700s":"Dilema 1 <span>de 5<\/span> · los años 1700","The 1700s: Sign an Indenture to Go to America?":"Los años 1700: ¿Firmar un contrato de servidumbre para ir a América?","Sign an indenture":"Firmar un contrato de servidumbre","It is the early 1700s. You are a poor worker in England, Ireland, or Scotland. Land in Europe is crowded and expensive. You cannot save enough money to buy a farm, and you cannot pay for a ticket to America.":"Es a principios de los años 1700. Eres un trabajador pobre en Inglaterra, Irlanda o Escocia. La tierra en Europa está llena de gente y es cara. No puedes ahorrar lo suficiente para comprar una granja, y no puedes pagar un pasaje a América.","A ship’s captain offers you a deal called an indenture. It is a contract. He pays for your trip. In return, you promise to work for a fixed number of years, usually three to seven. In America, land is cheap and workers are scarce.":"El capitán de un barco te ofrece un trato llamado indenture. Es un contrato. Él paga tu viaje. A cambio, prometes trabajar un número fijo de años, por lo general de tres a siete. En América la tierra es barata y faltan trabajadores.","But you have heard that life for servants is hard, and that servants have few rights. Many do not live to finish their contracts. What would you choose?":"Pero has oído que la vida de los sirvientes es dura y que tienen pocos derechos. Muchos no viven para terminar sus contratos. ¿Qué elegirías?","Many people signed. Of about 500,000 English immigrants who came to America between 1610 and 1775, about 350,000 came as indentured servants.":"Mucha gente firmó. De unos 500,000 inmigrantes ingleses que llegaron a América entre 1610 y 1775, unos 350,000 llegaron como sirvientes por contrato.","Norton says life was harsh. Servants got food and a bed, but they had few rights, and many died before their contracts ended. Still, the contract ended. When it did, a servant could claim “freedom dues,” such as a little money, tools, clothing, and food, and sometimes a small piece of land. Some former servants did very well. By 1637, fifteen former servants sat in the Maryland Assembly.":"Norton dice que la vida era dura. Los sirvientes recibían comida y una cama, pero tenían pocos derechos, y muchos murieron antes de que terminaran sus contratos. Aun así, el contrato terminaba. Cuando terminaba, el sirviente podía reclamar sus “pagos de libertad” (“freedom dues”), como un poco de dinero, herramientas, ropa y comida, y a veces un pequeño terreno. A algunos antiguos sirvientes les fue muy bien. Para 1637, quince antiguos sirvientes eran miembros de la Asamblea de Maryland.","Not everyone chose. Norton also says that some servants did not come willingly. Some homeless children in London were kidnapped and sold into servitude. Parliament also sent about 50,000 convicted criminals to the colonies.":"No todos pudieron elegir. Norton también dice que algunos sirvientes no vinieron por voluntad propia. Algunos niños sin hogar de Londres fueron secuestrados y vendidos como sirvientes. El Parlamento también envió a unos 50,000 criminales condenados a las colonias.","Sign the indenture and sail to America":"Firmar el contrato y navegar a América","You chose: Sign the indenture and sail to America":"Elegiste: Firmar el contrato y navegar a América","Chosen, not locked in yet: Sign the indenture and sail to America":"Elegida, aún sin confirmar: Firmar el contrato y navegar a América","Stay in Europe and keep looking for work at home":"Quedarte en Europa y seguir buscando trabajo en casa","You chose: Stay in Europe and keep looking for work at home":"Elegiste: Quedarte en Europa y seguir buscando trabajo en casa","Chosen, not locked in yet: Stay in Europe and keep looking for work at home":"Elegida, aún sin confirmar: Quedarte en Europa y seguir buscando trabajo en casa","Source: Norton Ch. 3, “Society and Economy in the Colonies” (Indentured Servitude) and “The Demography of the Early Colonies” (Population Growth).":"Fuente: Norton, cap. 3, “Society and Economy in the Colonies” (Indentured Servitude) y “The Demography of the Early Colonies” (Population Growth).","Dilemma 2 <span>of 5<\/span> · 1740":"Dilema 2 <span>de 5<\/span> · 1740","1740: Go to the Revival, or Stay With Your Minister?":"1740: ¿Ir al avivamiento o quedarte con tu pastor?","The traveling preacher":"El predicador viajero","It is 1740. You live in a colonial town. Your local church has a minister, and most families go every week. Where you live, the government supports one official church with taxes.":"Es 1740. Vives en un pueblo colonial. Tu iglesia local tiene un pastor, y la mayoría de las familias van cada semana. En el lugar donde vives, el gobierno apoya con impuestos a una sola iglesia oficial.","A traveling preacher has come to the area. These preachers are called itinerants. He says that many local ministers are not good enough. He says that people must be “reborn” in their beliefs and in how they live. Big crowds are gathering in barns and open fields.":"Ha llegado a la zona un predicador viajero. A estos predicadores se les llama itinerantes. Él dice que muchos pastores locales no son lo bastante buenos. Dice que las personas deben “nacer de nuevo” en sus creencias y en su manera de vivir. Se están reuniendo grandes multitudes en graneros y campos abiertos.","At the same time, many educated people are talking about a new way of thinking called the Enlightenment. It celebrates reason and science. Your neighbors are arguing, and the argument is dividing families. Where would you rather be on Sunday?":"Al mismo tiempo, muchas personas educadas hablan de una nueva forma de pensar llamada la Ilustración. Celebra la razón y la ciencia. Tus vecinos están discutiendo, y la discusión está dividiendo a las familias. ¿Dónde preferirías estar el domingo?","The revival, called the Great Awakening, spread up and down the Atlantic coast. Jonathan Edwards said people needed to have their “hearts touched,” not just their heads filled with new knowledge. George Whitefield visited the colonies seven times between 1738 and 1748 and preached to huge crowds.":"El avivamiento, llamado el Gran Despertar, se extendió por toda la costa del Atlántico. Jonathan Edwards decía que las personas necesitaban “tener el corazón tocado”, no solo llenarse la cabeza de conocimientos nuevos. George Whitefield visitó las colonias siete veces entre 1738 y 1748 y predicó ante enormes multitudes.","Norton says the highly emotional gatherings divided congregations, towns, and families. They also helped build new groups, especially Baptists and Methodists. Even Benjamin Franklin, who was skeptical, admitted that people were willing to attend sermons as never before.":"Norton dice que estas reuniones tan emotivas dividieron congregaciones, pueblos y familias. También ayudaron a formar grupos nuevos, sobre todo bautistas y metodistas. Hasta Benjamin Franklin, que era escéptico, admitió que la gente tenía más ganas de asistir a los sermones que nunca.","Both movements changed American thinking. Enlightenment ideas about reason, natural rights, and consent of the governed later helped colonial leaders justify a revolution.":"Los dos movimientos cambiaron el pensamiento de los estadounidenses. Las ideas de la Ilustración sobre la razón, los derechos naturales y el consentimiento de los gobernados ayudaron después a los líderes coloniales a justificar una revolución.","Go hear the traveling preacher: faith should touch the heart":"Ir a escuchar al predicador viajero: la fe debe tocar el corazón","You chose: Go hear the traveling preacher: faith should touch the heart":"Elegiste: Ir a escuchar al predicador viajero: la fe debe tocar el corazón","Chosen, not locked in yet: Go hear the traveling preacher: faith should touch the heart":"Elegida, aún sin confirmar: Ir a escuchar al predicador viajero: la fe debe tocar el corazón","Stay with your local minister: faith should be orderly and reasoned":"Quedarte con tu pastor local: la fe debe ser ordenada y razonada","You chose: Stay with your local minister: faith should be orderly and reasoned":"Elegiste: Quedarte con tu pastor local: la fe debe ser ordenada y razonada","Chosen, not locked in yet: Stay with your local minister: faith should be orderly and reasoned":"Elegida, aún sin confirmar: Quedarte con tu pastor local: la fe debe ser ordenada y razonada","Source: Norton Ch. 3, “First Stirrings of a Common Colonial Culture” (The Enlightenment; The Great Awakening).":"Fuente: Norton, cap. 3, “First Stirrings of a Common Colonial Culture” (The Enlightenment; The Great Awakening).","Dilemma 3 <span>of 5<\/span> · 1754":"Dilema 3 <span>de 5<\/span> · 1754","1754: Unite the Colonies, or Keep Them Separate?":"1754: ¿Unir las colonias o mantenerlas separadas?","The Albany Plan":"El Plan de Albany","It is the summer of 1754. You are a delegate at a meeting in Albany, New York. The French and the British are fighting for the lands of the Ohio valley, and fighting has already started on the frontier. Whoever controls that land could control the whole continent.":"Es el verano de 1754. Eres delegado en una reunión en Albany, Nueva York. Los franceses y los británicos pelean por las tierras del valle del Ohio, y ya empezaron los combates en la frontera. Quien controle esa tierra podría controlar todo el continente.","Benjamin Franklin has a plan. The colonies would band together. The king would appoint a president. Each colony’s assembly would send two to seven delegates to a “grand council” that could make laws. The union would handle dealings with Indigenous nations.":"Benjamin Franklin tiene un plan. Las colonias se unirían. El rey nombraría a un presidente. La asamblea de cada colonia enviaría de dos a siete delegados a un “gran consejo” que podría hacer leyes. La Unión se encargaría de los asuntos con las naciones indígenas.","Other delegates and many colonial legislatures like their own powers just as they are. They want only a military alliance against attacks. What would you support?":"Otros delegados y muchas legislaturas coloniales quieren sus propios poderes tal como están. Solo quieren una alianza militar contra los ataques. ¿A qué apoyarías?","The Albany Congress approved the Albany Plan of Union in 1754. But it did not become law. Norton says the plan was “too radical.” British officials and the colonial legislatures wanted to keep their own powers, so they rejected it.":"El Congreso de Albany aprobó el Plan de Unión de Albany en 1754. Pero no se convirtió en ley. Norton dice que el plan era “demasiado radical”. Los funcionarios británicos y las legislaturas coloniales querían conservar sus propios poderes, así que lo rechazaron.","Franklin also drew a famous cartoon in 1754 urging the colonies to unite. It was printed on May 9, 1754, in the Pennsylvania Gazette.":"Franklin también dibujó una caricatura famosa en 1754 para pedir que las colonias se unieran. Se imprimió el 9 de mayo de 1754 en la Pennsylvania Gazette.","War came anyway. In 1755 Britain sent 1,000 soldiers to the colonies. Norton says the colonists favored using force against the French, but later opposed using British soldiers to enforce rules on the colonies. Twenty years later, in 1774, representatives from twelve colonies met in the First Continental Congress. Norton says that never before had so many colonies met to coordinate joint resistance.":"Aun así llegó la guerra. En 1755 Gran Bretaña envió a 1,000 soldados a las colonias. Norton dice que los colonos estaban a favor de usar la fuerza contra los franceses, pero después se opusieron a que soldados británicos hicieran cumplir las reglas en las colonias. Veinte años después, en 1774, representantes de doce colonias se reunieron en el Primer Congreso Continental. Norton dice que nunca antes se habían reunido tantas colonias para coordinar una resistencia conjunta.","Support the Albany Plan: unite the colonies under one government":"Apoyar el Plan de Albany: unir las colonias bajo un solo gobierno","You chose: Support the Albany Plan: unite the colonies under one government":"Elegiste: Apoyar el Plan de Albany: unir las colonias bajo un solo gobierno","Chosen, not locked in yet: Support the Albany Plan: unite the colonies under one government":"Elegida, aún sin confirmar: Apoyar el Plan de Albany: unir las colonias bajo un solo gobierno","Reject it: keep each colony separate and only join in a military alliance":"Rechazarlo: mantener cada colonia separada y solo unirse en una alianza militar","You chose: Reject it: keep each colony separate and only join in a military alliance":"Elegiste: Rechazarlo: mantener cada colonia separada y solo unirse en una alianza militar","Chosen, not locked in yet: Reject it: keep each colony separate and only join in a military alliance":"Elegida, aún sin confirmar: Rechazarlo: mantener cada colonia separada y solo unirse en una alianza militar","Source: Norton Ch. 4, “Warfare in the Colonies” (The Albany Plan; War in North America) and “The Road to the American Revolution” (The First Continental Congress).":"Fuente: Norton, cap. 4, “Warfare in the Colonies” (The Albany Plan; War in North America) y “The Road to the American Revolution” (The First Continental Congress).","Dilemma 4 <span>of 5<\/span> · 1765":"Dilema 4 <span>de 5<\/span> · 1765","1765: Pay the Stamp Tax, or Protest and Boycott?":"1765: ¿Pagar el impuesto del timbre o protestar y boicotear?","The Stamp Act":"La Ley del Timbre","It is 1765. You are a printer in a colonial port city. Britain won the French and Indian War, but the war left it with huge debts. It is also keeping troops in America. Prime Minister George Grenville says Americans should help pay for the soldiers who defend them.":"Es 1765. Eres impresor en una ciudad portuaria colonial. Gran Bretaña ganó la Guerra Franco-India, pero la guerra le dejó enormes deudas. También mantiene tropas en América. El primer ministro George Grenville dice que los estadounidenses deben ayudar a pagar a los soldados que los defienden.","Parliament has passed the Stamp Act. You must buy special paper from London with a government stamp on it. You must use that paper for newspapers, pamphlets, legal papers, licenses, insurance policies, college diplomas, even playing cards.":"El Parlamento aprobó la Ley del Timbre. Tienes que comprar papel especial de Londres con un sello del gobierno. Tienes que usar ese papel para periódicos, folletos, documentos legales, licencias, pólizas de seguro, diplomas universitarios, incluso naipes.","British officials say Parliament’s power over the colonies is complete. Many colonists say they have no elected representatives in Parliament, so Parliament cannot tax them. What would you do?":"Los funcionarios británicos dicen que el poder del Parlamento sobre las colonias es total. Muchos colonos dicen que no tienen representantes elegidos en el Parlamento, así que el Parlamento no puede cobrarles impuestos. ¿Qué harías?","Many colonists chose protest. Norton says the Stamp Act aroused intense resentment and resistance, and that critics repeated the slogan “No taxation without representation.” Groups called Sons of Liberty formed in every colony. Thousands signed agreements not to buy British goods. Women called the Daughters of Liberty stopped buying British cloth and tea.":"Muchos colonos eligieron protestar. Norton dice que la Ley del Timbre causó un enorme resentimiento y resistencia, y que los críticos repetían el lema “No taxation without representation” (No hay impuestos sin representación). En cada colonia se formaron grupos llamados Hijos de la Libertad. Miles de personas firmaron acuerdos para no comprar productos británicos. Mujeres que se llamaban las Hijas de la Libertad dejaron de comprar tela y té británicos.","The boycott worked. Imports of British goods fell by 40 percent, and thousands of English workers lost their jobs. In February 1766 Parliament repealed the Stamp Act.":"El boicot funcionó. Las importaciones de productos británicos cayeron un 40 por ciento, y miles de trabajadores ingleses perdieron sus empleos. En febrero de 1766 el Parlamento derogó la Ley del Timbre.","But Parliament also passed the Declaratory Act, which claimed the power to govern the colonies “in all cases whatsoever.” In 1767 it passed the Townshend Acts, with new taxes on glass, lead, paint, paper, and tea.":"Pero el Parlamento también aprobó la Ley Declaratoria, que afirmaba su poder para gobernar las colonias “en todos los casos”. En 1767 aprobó las Leyes Townshend, con nuevos impuestos sobre el vidrio, el plomo, la pintura, el papel y el té.","Pay the tax: Parliament governs the whole empire and the colonies should help pay":"Pagar el impuesto: el Parlamento gobierna todo el imperio y las colonias deben ayudar a pagar","You chose: Pay the tax: Parliament governs the whole empire and the colonies should help pay":"Elegiste: Pagar el impuesto: el Parlamento gobierna todo el imperio y las colonias deben ayudar a pagar","Chosen, not locked in yet: Pay the tax: Parliament governs the whole empire and the colonies should help pay":"Elegida, aún sin confirmar: Pagar el impuesto: el Parlamento gobierna todo el imperio y las colonias deben ayudar a pagar","Protest and boycott: no tax without a voice in Parliament":"Protestar y boicotear: no hay impuestos sin voz en el Parlamento","You chose: Protest and boycott: no tax without a voice in Parliament":"Elegiste: Protestar y boicotear: no hay impuestos sin voz en el Parlamento","Chosen, not locked in yet: Protest and boycott: no tax without a voice in Parliament":"Elegida, aún sin confirmar: Protestar y boicotear: no hay impuestos sin voz en el Parlamento","Source: Norton Ch. 4, “Tightening of Control over the British Colonies” (The Stamp Act; The Whig Point of View; Protests in the Colonies; Colonial Unity; Repeal of the Stamp Act).":"Fuente: Norton, cap. 4, “Tightening of Control over the British Colonies” (The Stamp Act; The Whig Point of View; Protests in the Colonies; Colonial Unity; Repeal of the Stamp Act).","Dilemma 5 <span>of 5<\/span> · 1776":"Dilema 5 <span>de 5<\/span> · 1776","Early 1776: Seek Peace With the King, or Declare Independence?":"Principios de 1776: ¿Buscar la paz con el rey o declarar la independencia?","Independence":"La independencia","It is early 1776. You are a delegate in Philadelphia. Fighting started at Lexington and Concord last April. Until then, both sides thought the other would back down. Now it is a war.":"Es a principios de 1776. Eres delegado en Filadelfia. Los combates empezaron en Lexington y Concord el abril pasado. Hasta entonces, los dos bandos pensaban que el otro cedería. Ahora es una guerra.","Last summer, Congress sent the king the Olive Branch Petition. It asked him to negotiate. He refused to read it. He called the Americans “traitorous” and said they were “open and avowed” enemies.":"El verano pasado, el Congreso envió al rey la Petición de la Rama de Olivo. Le pedía que negociara. Él se negó a leerla. Llamó a los estadounidenses “traidores” y dijo que eran enemigos “abiertos y declarados”.","A new pamphlet called Common Sense says it is time to break away. Many colonists still hope to stay under the king. And the king now calls the Americans traitors. What would you choose?":"Un nuevo folleto llamado Sentido común dice que es hora de separarse. Muchos colonos todavía esperan seguir bajo el rey. Y ahora el rey llama traidores a los estadounidenses. ¿Qué elegirías?","Congress chose independence. In January 1776, Thomas Paine published Common Sense. It attacked the king directly, and more than 150,000 copies were circulating within three months. Norton says it convinced many anxious Americans that independence was necessary.":"El Congreso eligió la independencia. En enero de 1776, Thomas Paine publicó Sentido común. Atacaba directamente al rey, y en tres meses ya circulaban más de 150,000 copias. Norton dice que convenció a muchos estadounidenses preocupados de que la independencia era necesaria.","On July 4, 1776, fifty-six members of Congress adopted the Declaration of Independence. Thomas Jefferson, age thirty-three, wrote the main draft. It said that governments get their power from “the consent of the governed.” The delegates knew they were likely to be hanged if captured.":"El 4 de julio de 1776, cincuenta y seis miembros del Congreso adoptaron la Declaración de Independencia. Thomas Jefferson, de treinta y tres años, escribió el borrador principal. Decía que los gobiernos reciben su poder “del consentimiento de los gobernados”. Los delegados sabían que probablemente los ahorcarían si los capturaban.","Norton also points out a contradiction. The Declaration said that “all men are created equal,” but that idea did not apply to the many enslaved people in the colonies.":"Norton también señala una contradicción. La Declaración decía que “todos los hombres son creados iguales”, pero esa idea no se aplicaba a las muchas personas esclavizadas en las colonias.","Declare independence: break away from the king and Parliament":"Declarar la independencia: separarse del rey y del Parlamento","You chose: Declare independence: break away from the king and Parliament":"Elegiste: Declarar la independencia: separarse del rey y del Parlamento","Chosen, not locked in yet: Declare independence: break away from the king and Parliament":"Elegida, aún sin confirmar: Declarar la independencia: separarse del rey y del Parlamento","Keep seeking peace: stay loyal to the king and try to work things out":"Seguir buscando la paz: ser leal al rey y tratar de arreglar las cosas","You chose: Keep seeking peace: stay loyal to the king and try to work things out":"Elegiste: Seguir buscando la paz: ser leal al rey y tratar de arreglar las cosas","Chosen, not locked in yet: Keep seeking peace: stay loyal to the king and try to work things out":"Elegida, aún sin confirmar: Seguir buscando la paz: ser leal al rey y tratar de arreglar las cosas","Source: Norton Ch. 4, “The Road to the American Revolution” (Open and Avowed Enemies; Independence; Breaking the Bonds of Empire; Jefferson’s Declaration).":"Fuente: Norton, cap. 4, “The Road to the American Revolution” (Open and Avowed Enemies; Independence; Breaking the Bonds of Empire; Jefferson’s Declaration).","<b>How to work.<\/b> People in history faced hard choices. Here are five. There is no right or wrong choice. Your job is to understand why people chose what they did.":"<b>Cómo trabajar.<\/b> Las personas en la historia enfrentaron decisiones difíciles. Aquí hay cinco. No hay una opción correcta ni incorrecta. Tu trabajo es entender por qué las personas eligieron lo que eligieron.","All five dilemmas are locked in. Nice work.":"Las cinco decisiones están confirmadas. Buen trabajo.","Choose one":"Elige uno","Counter-Argument":"Contraargumento","Edit my answer":"Cambiar mi respuesta","Everything is done. Tap Finished to download your file.":"Todo está listo. Toca «Terminé» para descargar tu archivo.","Fill in both boxes to unlock the next step.":"Llena las dos casillas para pasar al siguiente paso.","Here is a summary of the choices you made.":"Este es un resumen de las elecciones que hiciste.","Lock in all five dilemmas to finish.":"Confirma las cinco decisiones para terminar.","Lock in my answer":"Confirmar mi respuesta","Locked in. Read what really happened below.":"Confirmada. Lee abajo lo que realmente pasó.","Not answered yet":"Aún sin responder","Read “You are there.”":"Lee «Tú estás allí».","Ready. Tap Lock in to see what happened.":"Listo. Toca «Confirmar» para ver lo que pasó.","Tap <b>Lock in my answer<\/b> to see what really happened.":"Toca <b>Confirmar mi respuesta<\/b> para ver lo que realmente pasó.","Tap the choice you would make.":"Toca la opción que tú elegirías.","That file does not look like a Would You Rather progress file. Try again.":"Ese archivo no parece un archivo de progreso de «¿Qué preferirías?». Inténtalo de nuevo.","The end":"El final","Type the other side’s best reason here...":"Escribe aquí la mejor razón del otro lado...","Type your reason here...":"Escribe tu razón aquí...","UNIT 1 · COLONIES, REVOLUTION, AND CONSTITUTION | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 1 · COLONIAS, REVOLUCIÓN Y CONSTITUCIÓN | CPUSH | DANIEL GARZA, M.A.","What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”":"¿Cuál es la mejor razón que daría alguien del OTRO lado? Escríbela como la diría esa persona. Prueba: «Alguien que eligió el otro lado diría...»","What really happened":"Lo que realmente pasó","Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”":"¿Por qué elegiste esto? Usa al menos un dato de la lección. Prueba: «Elegí esto porque... Un dato es...»","Would You Rather":"¿Qué preferirías?","Would you rather...":"¿Qué preferirías?...","Write a Counter-Argument: the best reason someone on the other side would give.":"Escribe un contraargumento: la mejor razón que daría alguien del otro lado.","Write your reason. Use at least one fact from the lesson.":"Escribe tu razón. Usa al menos un dato de la lección.","You are there":"Tú estás allí","Your choices":"Tus elecciones","Your reason":"Tu razón","Your work saves on this device as you type. Use <b>Save Progress<\/b> at the bottom to download a backup file, and <b>Load Progress<\/b> to continue later.":"Tu trabajo se guarda en este dispositivo mientras escribes. Usa <b>Guardar progreso<\/b> al final para descargar una copia de respaldo, y <b>Cargar progreso<\/b> para continuar más tarde.","Clear all of your answers on this page?":"¿Borrar todas tus respuestas en esta página?"},"ar":{"Save Progress":"حفظ التقدم","Load Progress":"تحميل التقدم","Finished — Download File to Submit":"انتهيت — نزّل الملف لتسليمه","Clear all my answers":"امسح كل إجاباتي","FIRST NAME *":"الاسم الأول *","LAST NAME *":"اسم العائلة *","PERIOD *":"الحصة *","DATE (fills in when you finish)":"التاريخ (يُكتب تلقائيًا عند الانتهاء)","e.g. 3":"مثال: 3","Automatic":"تلقائي","Please type your first name, last name, and period first.":"اكتب أولًا اسمك الأول واسم العائلة والحصة.","Western Expansion and Southern Secession":"التوسع غربًا وانفصال الجنوب","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"الوحدة 3 · بيت منقسم وأُعيد بناؤه | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — قانون العبيد الهاربين","Bleeding Kansas":"Bleeding Kansas — كانساس النازفة","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"الوحدة 3 · بيت منقسم وأعيد بناؤه | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"تم تنزيل ملف التقدم. احتفظ به في مكان آمن. استخدم «تحميل التقدم» لتكمل لاحقًا.","Progress loaded.":"تم تحميل التقدم.","Could not read that file.":"تعذّرت قراءة هذا الملف.","Treaty of Guadalupe Hidalgo":"معاهدة غوادالوبي هيدالغو (Treaty of Guadalupe Hidalgo)","Colonial Society and the Road to Independence":"المجتمع الاستعماري والطريق إلى الاستقلال","Would You Rather 2 · Colonial Society and the Road to Independence":"ماذا تفضّل؟ 2 · المجتمع الاستعماري والطريق إلى الاستقلال","1651-1776":"1651-1776","Dilemma 1 <span>of 5<\/span> · 1700s":"المعضلة 1 <span>من 5<\/span> · القرن الثامن عشر","The 1700s: Sign an Indenture to Go to America?":"القرن الثامن عشر: هل توقّع عقد خدمة للذهاب إلى أمريكا؟","Sign an indenture":"توقيع عقد خدمة","It is the early 1700s. You are a poor worker in England, Ireland, or Scotland. Land in Europe is crowded and expensive. You cannot save enough money to buy a farm, and you cannot pay for a ticket to America.":"نحن في أوائل القرن الثامن عشر. أنت عامل فقير في إنجلترا (England) أو أيرلندا (Ireland) أو اسكتلندا (Scotland). الأرض في أوروبا مزدحمة وغالية. لا تستطيع أن توفّر ما يكفي من المال لشراء مزرعة، ولا تستطيع دفع ثمن تذكرة إلى أمريكا.","A ship’s captain offers you a deal called an indenture. It is a contract. He pays for your trip. In return, you promise to work for a fixed number of years, usually three to seven. In America, land is cheap and workers are scarce.":"يعرض عليك قبطان سفينة صفقة تُسمّى العقد (indenture). إنه عقد مكتوب. هو يدفع تكلفة رحلتك. وفي المقابل تَعِد بالعمل عددًا محددًا من السنوات، وعادةً ما بين ثلاث وسبع. وفي أمريكا الأرض رخيصة والعمال قليلون.","But you have heard that life for servants is hard, and that servants have few rights. Many do not live to finish their contracts. What would you choose?":"لكنك سمعت أن حياة الخدم قاسية، وأن حقوقهم قليلة. كثيرون منهم لا يعيشون حتى ينتهي عقدهم. ماذا ستختار؟","Many people signed. Of about 500,000 English immigrants who came to America between 1610 and 1775, about 350,000 came as indentured servants.":"وقّع كثيرون. فمن بين نحو 500,000 مهاجر إنجليزي جاؤوا إلى أمريكا بين 1610 و1775، جاء نحو 350,000 منهم خدمًا بعقود.","Norton says life was harsh. Servants got food and a bed, but they had few rights, and many died before their contracts ended. Still, the contract ended. When it did, a servant could claim “freedom dues,” such as a little money, tools, clothing, and food, and sometimes a small piece of land. Some former servants did very well. By 1637, fifteen former servants sat in the Maryland Assembly.":"يقول Norton إن الحياة كانت قاسية. كان الخدم يحصلون على الطعام وسرير، لكن حقوقهم كانت قليلة، ومات كثيرون منهم قبل أن تنتهي عقودهم. ومع ذلك كان العقد ينتهي. وعندما ينتهي، كان يمكن للخادم أن يطالب بـ«مستحقات الحرية» (freedom dues)، مثل قليل من المال وبعض الأدوات والملابس والطعام، وفي بعض الأحيان قطعة أرض صغيرة. ونجح بعض الخدم السابقين نجاحًا كبيرًا. وبحلول عام 1637 كان خمسة عشر خادمًا سابقًا أعضاء في مجلس ماريلاند (Maryland).","Not everyone chose. Norton also says that some servants did not come willingly. Some homeless children in London were kidnapped and sold into servitude. Parliament also sent about 50,000 convicted criminals to the colonies.":"لم يستطع الجميع الاختيار. ويقول Norton أيضًا إن بعض الخدم لم يأتوا بإرادتهم. فقد خُطف بعض الأطفال المشردين في لندن (London) وبيعوا للخدمة. كما أرسل البرلمان نحو 50,000 مجرم محكوم عليه إلى المستعمرات.","Sign the indenture and sail to America":"وقّع العقد وسافر بالسفينة إلى أمريكا","You chose: Sign the indenture and sail to America":"اخترت: وقّع العقد وسافر بالسفينة إلى أمريكا","Chosen, not locked in yet: Sign the indenture and sail to America":"تم الاختيار ولم يتم التثبيت بعد: وقّع العقد وسافر بالسفينة إلى أمريكا","Stay in Europe and keep looking for work at home":"ابقَ في أوروبا وواصل البحث عن عمل في بلدك","You chose: Stay in Europe and keep looking for work at home":"اخترت: ابقَ في أوروبا وواصل البحث عن عمل في بلدك","Chosen, not locked in yet: Stay in Europe and keep looking for work at home":"تم الاختيار ولم يتم التثبيت بعد: ابقَ في أوروبا وواصل البحث عن عمل في بلدك","Source: Norton Ch. 3, “Society and Economy in the Colonies” (Indentured Servitude) and “The Demography of the Early Colonies” (Population Growth).":"المصدر: Norton، الفصل 3، <bdi dir=\"ltr\">“Society and Economy in the Colonies”<\/bdi> (<bdi dir=\"ltr\">Indentured Servitude<\/bdi>) و<bdi dir=\"ltr\">“The Demography of the Early Colonies”<\/bdi> (<bdi dir=\"ltr\">Population Growth<\/bdi>).","Dilemma 2 <span>of 5<\/span> · 1740":"المعضلة 2 <span>من 5<\/span> · 1740","1740: Go to the Revival, or Stay With Your Minister?":"1740: هل تذهب إلى الاجتماع الديني الحماسي أم تبقى مع قسّك؟","The traveling preacher":"الواعظ المتجوّل","It is 1740. You live in a colonial town. Your local church has a minister, and most families go every week. Where you live, the government supports one official church with taxes.":"نحن في عام 1740. أنت تعيش في بلدة استعمارية. في كنيستك المحلية قسّ، ومعظم العائلات تذهب إليها كل أسبوع. وفي المكان الذي تعيش فيه تدعم الحكومة كنيسة رسمية واحدة بالضرائب.","A traveling preacher has come to the area. These preachers are called itinerants. He says that many local ministers are not good enough. He says that people must be “reborn” in their beliefs and in how they live. Big crowds are gathering in barns and open fields.":"وصل إلى المنطقة واعظ متجوّل. يُسمّى هؤلاء الوعاظ «المتنقّلين» (itinerants). يقول إن كثيرًا من القساوسة المحليين ليسوا جيدين بما يكفي. ويقول إن على الناس أن «يولدوا من جديد» في معتقداتهم وفي طريقة حياتهم. وتتجمّع حشود كبيرة في الحظائر والحقول المفتوحة.","At the same time, many educated people are talking about a new way of thinking called the Enlightenment. It celebrates reason and science. Your neighbors are arguing, and the argument is dividing families. Where would you rather be on Sunday?":"وفي الوقت نفسه يتحدث كثير من المتعلمين عن طريقة جديدة في التفكير تُسمّى عصر التنوير (Enlightenment). إنه يمجّد العقل والعلم. وجيرانك يتجادلون، والجدال يفرّق العائلات. أين تفضّل أن تكون يوم الأحد؟","The revival, called the Great Awakening, spread up and down the Atlantic coast. Jonathan Edwards said people needed to have their “hearts touched,” not just their heads filled with new knowledge. George Whitefield visited the colonies seven times between 1738 and 1748 and preached to huge crowds.":"انتشرت هذه الحركة الدينية، وتُسمّى الصحوة الكبرى (Great Awakening)، على طول ساحل الأطلسي. وقال جوناثان إدواردز (Jonathan Edwards) إن الناس يحتاجون إلى «أن تُلمس قلوبهم»، وليس فقط إلى ملء رؤوسهم بمعرفة جديدة. وزار جورج ويتفيلد (George Whitefield) المستعمرات سبع مرات بين 1738 و1748، ووعظ أمام حشود ضخمة.","Norton says the highly emotional gatherings divided congregations, towns, and families. They also helped build new groups, especially Baptists and Methodists. Even Benjamin Franklin, who was skeptical, admitted that people were willing to attend sermons as never before.":"يقول Norton إن هذه الاجتماعات الشديدة الحماس فرّقت الجماعات الدينية والبلدات والعائلات. كما ساعدت على ظهور جماعات جديدة، خاصة المعمدانيين والميثوديين. حتى بنجامين فرانكلين (Benjamin Franklin)، الذي كان متشككًا، اعترف بأن الناس صاروا أكثر استعدادًا لحضور العظات من أي وقت مضى.","Both movements changed American thinking. Enlightenment ideas about reason, natural rights, and consent of the governed later helped colonial leaders justify a revolution.":"غيّرت الحركتان طريقة تفكير الأمريكيين. وساعدت أفكار عصر التنوير عن العقل والحقوق الطبيعية وموافقة المحكومين قادة المستعمرات لاحقًا على تبرير ثورة.","Go hear the traveling preacher: faith should touch the heart":"اذهب لتسمع الواعظ المتجوّل: يجب أن يمسّ الإيمان القلب","You chose: Go hear the traveling preacher: faith should touch the heart":"اخترت: اذهب لتسمع الواعظ المتجوّل: يجب أن يمسّ الإيمان القلب","Chosen, not locked in yet: Go hear the traveling preacher: faith should touch the heart":"تم الاختيار ولم يتم التثبيت بعد: اذهب لتسمع الواعظ المتجوّل: يجب أن يمسّ الإيمان القلب","Stay with your local minister: faith should be orderly and reasoned":"ابقَ مع قسّك المحلي: يجب أن يكون الإيمان منظّمًا ومبنيًّا على العقل","You chose: Stay with your local minister: faith should be orderly and reasoned":"اخترت: ابقَ مع قسّك المحلي: يجب أن يكون الإيمان منظّمًا ومبنيًّا على العقل","Chosen, not locked in yet: Stay with your local minister: faith should be orderly and reasoned":"تم الاختيار ولم يتم التثبيت بعد: ابقَ مع قسّك المحلي: يجب أن يكون الإيمان منظّمًا ومبنيًّا على العقل","Source: Norton Ch. 3, “First Stirrings of a Common Colonial Culture” (The Enlightenment; The Great Awakening).":"المصدر: Norton، الفصل 3، <bdi dir=\"ltr\">“First Stirrings of a Common Colonial Culture”<\/bdi> (<bdi dir=\"ltr\">The Enlightenment; The Great Awakening<\/bdi>).","Dilemma 3 <span>of 5<\/span> · 1754":"المعضلة 3 <span>من 5<\/span> · 1754","1754: Unite the Colonies, or Keep Them Separate?":"1754: هل توحّد المستعمرات أم تُبقيها منفصلة؟","The Albany Plan":"خطة ألباني","It is the summer of 1754. You are a delegate at a meeting in Albany, New York. The French and the British are fighting for the lands of the Ohio valley, and fighting has already started on the frontier. Whoever controls that land could control the whole continent.":"نحن في صيف عام 1754. أنت مندوب في اجتماع في ألباني (Albany) بولاية نيويورك (New York). الفرنسيون والبريطانيون يتنازعون على أراضي وادي أوهايو (Ohio)، وقد بدأ القتال فعلًا على الحدود. ومن يسيطر على تلك الأرض قد يسيطر على القارة كلها.","Benjamin Franklin has a plan. The colonies would band together. The king would appoint a president. Each colony’s assembly would send two to seven delegates to a “grand council” that could make laws. The union would handle dealings with Indigenous nations.":"لدى بنجامين فرانكلين (Benjamin Franklin) خطة. تتّحد المستعمرات. ويعيّن الملك رئيسًا. وترسل جمعية كل مستعمرة من اثنين إلى سبعة مندوبين إلى «مجلس كبير» يستطيع سنّ القوانين. ويتولى الاتحاد شؤون الأمم الأصلية.","Other delegates and many colonial legislatures like their own powers just as they are. They want only a military alliance against attacks. What would you support?":"يريد مندوبون آخرون وكثير من المجالس التشريعية في المستعمرات أن تبقى سلطاتهم كما هي. إنهم يريدون فقط تحالفًا عسكريًّا ضد الهجمات. ماذا ستدعم؟","The Albany Congress approved the Albany Plan of Union in 1754. But it did not become law. Norton says the plan was “too radical.” British officials and the colonial legislatures wanted to keep their own powers, so they rejected it.":"وافق مؤتمر ألباني (Albany Congress) على خطة اتحاد ألباني (Albany Plan of Union) عام 1754. لكنها لم تصبح قانونًا. يقول Norton إن الخطة كانت «متطرفة أكثر من اللازم». أما المسؤولون البريطانيون والمجالس التشريعية في المستعمرات فأرادوا الاحتفاظ بسلطاتهم الخاصة، فرفضوها.","Franklin also drew a famous cartoon in 1754 urging the colonies to unite. It was printed on May 9, 1754, in the Pennsylvania Gazette.":"ورسم فرانكلين أيضًا في عام 1754 رسمًا كاريكاتوريًّا مشهورًا يدعو المستعمرات إلى الاتحاد. وطُبع في 9 مايو 1754 في صحيفة بنسلفانيا غازيت (Pennsylvania Gazette).","War came anyway. In 1755 Britain sent 1,000 soldiers to the colonies. Norton says the colonists favored using force against the French, but later opposed using British soldiers to enforce rules on the colonies. Twenty years later, in 1774, representatives from twelve colonies met in the First Continental Congress. Norton says that never before had so many colonies met to coordinate joint resistance.":"ومع ذلك جاءت الحرب. ففي عام 1755 أرسلت بريطانيا 1,000 جندي إلى المستعمرات. يقول Norton إن المستعمرين أيّدوا استخدام القوة ضد الفرنسيين، لكنهم عارضوا لاحقًا استخدام الجنود البريطانيين لفرض القواعد على المستعمرات. وبعد عشرين عامًا، في عام 1774، اجتمع ممثلون عن اثنتي عشرة مستعمرة في المؤتمر القاري الأول (First Continental Congress). ويقول Norton إن هذا لم يحدث من قبل: لم تجتمع مستعمرات كثيرة هكذا لتنسيق مقاومة مشتركة.","Support the Albany Plan: unite the colonies under one government":"أيّد خطة ألباني: وحّد المستعمرات تحت حكومة واحدة","You chose: Support the Albany Plan: unite the colonies under one government":"اخترت: أيّد خطة ألباني: وحّد المستعمرات تحت حكومة واحدة","Chosen, not locked in yet: Support the Albany Plan: unite the colonies under one government":"تم الاختيار ولم يتم التثبيت بعد: أيّد خطة ألباني: وحّد المستعمرات تحت حكومة واحدة","Reject it: keep each colony separate and only join in a military alliance":"ارفضها: أبقِ كل مستعمرة منفصلة وانضمّ فقط إلى تحالف عسكري","You chose: Reject it: keep each colony separate and only join in a military alliance":"اخترت: ارفضها: أبقِ كل مستعمرة منفصلة وانضمّ فقط إلى تحالف عسكري","Chosen, not locked in yet: Reject it: keep each colony separate and only join in a military alliance":"تم الاختيار ولم يتم التثبيت بعد: ارفضها: أبقِ كل مستعمرة منفصلة وانضمّ فقط إلى تحالف عسكري","Source: Norton Ch. 4, “Warfare in the Colonies” (The Albany Plan; War in North America) and “The Road to the American Revolution” (The First Continental Congress).":"المصدر: Norton، الفصل 4، <bdi dir=\"ltr\">“Warfare in the Colonies”<\/bdi> (<bdi dir=\"ltr\">The Albany Plan; War in North America<\/bdi>) و<bdi dir=\"ltr\">“The Road to the American Revolution”<\/bdi> (<bdi dir=\"ltr\">The First Continental Congress<\/bdi>).","Dilemma 4 <span>of 5<\/span> · 1765":"المعضلة 4 <span>من 5<\/span> · 1765","1765: Pay the Stamp Tax, or Protest and Boycott?":"1765: هل تدفع ضريبة الطوابع أم تحتج وتقاطع؟","The Stamp Act":"قانون الطوابع","It is 1765. You are a printer in a colonial port city. Britain won the French and Indian War, but the war left it with huge debts. It is also keeping troops in America. Prime Minister George Grenville says Americans should help pay for the soldiers who defend them.":"نحن في عام 1765. أنت طابع في مدينة ساحلية استعمارية. ربحت بريطانيا الحرب الفرنسية والهندية (French and Indian War)، لكنها خرجت منها بديون ضخمة. وهي تُبقي أيضًا جنودًا في أمريكا. يقول رئيس الوزراء جورج غرينفيل (George Grenville) إن على الأمريكيين أن يساعدوا في دفع تكاليف الجنود الذين يدافعون عنهم.","Parliament has passed the Stamp Act. You must buy special paper from London with a government stamp on it. You must use that paper for newspapers, pamphlets, legal papers, licenses, insurance policies, college diplomas, even playing cards.":"أصدر البرلمان قانون الطوابع (Stamp Act). عليك أن تشتري ورقًا خاصًّا من لندن عليه ختم حكومي. وعليك أن تستخدم هذا الورق للصحف والكتيبات والأوراق القانونية والرخص ووثائق التأمين والشهادات الجامعية، وحتى لأوراق اللعب.","British officials say Parliament’s power over the colonies is complete. Many colonists say they have no elected representatives in Parliament, so Parliament cannot tax them. What would you do?":"يقول المسؤولون البريطانيون إن سلطة البرلمان على المستعمرات كاملة. ويقول كثير من المستعمرين إنه ليس لهم ممثلون منتخبون في البرلمان، وإنه لا يحق للبرلمان أن يفرض عليهم ضرائب. ماذا ستفعل؟","Many colonists chose protest. Norton says the Stamp Act aroused intense resentment and resistance, and that critics repeated the slogan “No taxation without representation.” Groups called Sons of Liberty formed in every colony. Thousands signed agreements not to buy British goods. Women called the Daughters of Liberty stopped buying British cloth and tea.":"اختار كثير من المستعمرين الاحتجاج. يقول Norton إن قانون الطوابع أثار استياءً ومقاومة شديدين، وإن المنتقدين كرّروا الشعار «لا ضرائب بدون تمثيل» (No taxation without representation). وظهرت في كل مستعمرة جماعات سمّت نفسها أبناء الحرية (Sons of Liberty). ووقّع الآلاف اتفاقيات بعدم شراء البضائع البريطانية. وتوقفت نساء سمّين أنفسهن بنات الحرية (Daughters of Liberty) عن شراء القماش والشاي البريطانيين.","The boycott worked. Imports of British goods fell by 40 percent, and thousands of English workers lost their jobs. In February 1766 Parliament repealed the Stamp Act.":"نجحت المقاطعة. فقد انخفضت واردات البضائع البريطانية بنسبة 40 بالمئة، وفقد آلاف العمال الإنجليز وظائفهم. وفي فبراير 1766 ألغى البرلمان قانون الطوابع.","But Parliament also passed the Declaratory Act, which claimed the power to govern the colonies “in all cases whatsoever.” In 1767 it passed the Townshend Acts, with new taxes on glass, lead, paint, paper, and tea.":"لكن البرلمان أصدر أيضًا قانون الإعلان (Declaratory Act)، الذي ادّعى سلطة حكم المستعمرات «في جميع الحالات». وفي عام 1767 أصدر قوانين تاونزند (Townshend Acts)، التي فرضت ضرائب جديدة على الزجاج والرصاص والطلاء والورق والشاي.","Pay the tax: Parliament governs the whole empire and the colonies should help pay":"ادفع الضريبة: البرلمان يحكم الإمبراطورية كلها، وعلى المستعمرات أن تساعد في الدفع","You chose: Pay the tax: Parliament governs the whole empire and the colonies should help pay":"اخترت: ادفع الضريبة: البرلمان يحكم الإمبراطورية كلها، وعلى المستعمرات أن تساعد في الدفع","Chosen, not locked in yet: Pay the tax: Parliament governs the whole empire and the colonies should help pay":"تم الاختيار ولم يتم التثبيت بعد: ادفع الضريبة: البرلمان يحكم الإمبراطورية كلها، وعلى المستعمرات أن تساعد في الدفع","Protest and boycott: no tax without a voice in Parliament":"احتجّ وقاطع: لا ضريبة بلا صوت في البرلمان","You chose: Protest and boycott: no tax without a voice in Parliament":"اخترت: احتجّ وقاطع: لا ضريبة بلا صوت في البرلمان","Chosen, not locked in yet: Protest and boycott: no tax without a voice in Parliament":"تم الاختيار ولم يتم التثبيت بعد: احتجّ وقاطع: لا ضريبة بلا صوت في البرلمان","Source: Norton Ch. 4, “Tightening of Control over the British Colonies” (The Stamp Act; The Whig Point of View; Protests in the Colonies; Colonial Unity; Repeal of the Stamp Act).":"المصدر: Norton، الفصل 4، <bdi dir=\"ltr\">“Tightening of Control over the British Colonies”<\/bdi> (<bdi dir=\"ltr\">The Stamp Act; The Whig Point of View; Protests in the Colonies; Colonial Unity; Repeal of the Stamp Act<\/bdi>).","Dilemma 5 <span>of 5<\/span> · 1776":"المعضلة 5 <span>من 5<\/span> · 1776","Early 1776: Seek Peace With the King, or Declare Independence?":"أوائل عام 1776: هل تسعى إلى السلام مع الملك أم تعلن الاستقلال؟","Independence":"الاستقلال","It is early 1776. You are a delegate in Philadelphia. Fighting started at Lexington and Concord last April. Until then, both sides thought the other would back down. Now it is a war.":"نحن في أوائل عام 1776. أنت مندوب في فيلادلفيا (Philadelphia). بدأ القتال في ليكسينغتون (Lexington) وكونكورد (Concord) في أبريل الماضي. وحتى ذلك الوقت كان كل طرف يظن أن الطرف الآخر سيتراجع. والآن صارت حربًا.","Last summer, Congress sent the king the Olive Branch Petition. It asked him to negotiate. He refused to read it. He called the Americans “traitorous” and said they were “open and avowed” enemies.":"في الصيف الماضي أرسل الكونغرس إلى الملك عريضة غصن الزيتون (Olive Branch Petition). كانت تطلب منه أن يتفاوض. فرفض أن يقرأها. ووصف الأمريكيين بأنهم «خونة» وقال إنهم أعداء «معلنون وصريحون».","A new pamphlet called Common Sense says it is time to break away. Many colonists still hope to stay under the king. And the king now calls the Americans traitors. What would you choose?":"يقول كتيّب جديد اسمه الحسّ السليم (Common Sense) إن الوقت قد حان للانفصال. ولا يزال كثير من المستعمرين يأملون في البقاء تحت حكم الملك. والآن يصف الملك الأمريكيين بأنهم خونة. ماذا ستختار؟","Congress chose independence. In January 1776, Thomas Paine published Common Sense. It attacked the king directly, and more than 150,000 copies were circulating within three months. Norton says it convinced many anxious Americans that independence was necessary.":"اختار الكونغرس الاستقلال. وفي يناير 1776 نشر توماس بين (Thomas Paine) كتيّب الحسّ السليم. وقد هاجم الملك مباشرة، ووصل عدد النسخ المتداولة منه إلى أكثر من 150,000 نسخة في ثلاثة أشهر. يقول Norton إنه أقنع كثيرًا من الأمريكيين القلقين بأن الاستقلال ضروري.","On July 4, 1776, fifty-six members of Congress adopted the Declaration of Independence. Thomas Jefferson, age thirty-three, wrote the main draft. It said that governments get their power from “the consent of the governed.” The delegates knew they were likely to be hanged if captured.":"وفي 4 يوليو 1776 أقرّ ستة وخمسون عضوًا في الكونغرس إعلان الاستقلال (Declaration of Independence). وكتب توماس جيفرسون (Thomas Jefferson)، وعمره ثلاث وثلاثون سنة، المسودة الرئيسية. وقال الإعلان إن الحكومات تستمد سلطتها من «موافقة المحكومين». وكان المندوبون يعلمون أنهم على الأرجح سيُشنقون إذا أُسروا.","Norton also points out a contradiction. The Declaration said that “all men are created equal,” but that idea did not apply to the many enslaved people in the colonies.":"ويشير Norton أيضًا إلى تناقض. فقد قال الإعلان إن «جميع الناس خُلقوا متساوين»، لكن هذه الفكرة لم تنطبق على الأشخاص المستعبَدين الكثيرين في المستعمرات.","Declare independence: break away from the king and Parliament":"أعلن الاستقلال: انفصل عن الملك والبرلمان","You chose: Declare independence: break away from the king and Parliament":"اخترت: أعلن الاستقلال: انفصل عن الملك والبرلمان","Chosen, not locked in yet: Declare independence: break away from the king and Parliament":"تم الاختيار ولم يتم التثبيت بعد: أعلن الاستقلال: انفصل عن الملك والبرلمان","Keep seeking peace: stay loyal to the king and try to work things out":"واصل السعي إلى السلام: ابقَ وفيًّا للملك وحاول حل الأمور","You chose: Keep seeking peace: stay loyal to the king and try to work things out":"اخترت: واصل السعي إلى السلام: ابقَ وفيًّا للملك وحاول حل الأمور","Chosen, not locked in yet: Keep seeking peace: stay loyal to the king and try to work things out":"تم الاختيار ولم يتم التثبيت بعد: واصل السعي إلى السلام: ابقَ وفيًّا للملك وحاول حل الأمور","Source: Norton Ch. 4, “The Road to the American Revolution” (Open and Avowed Enemies; Independence; Breaking the Bonds of Empire; Jefferson’s Declaration).":"المصدر: Norton، الفصل 4، <bdi dir=\"ltr\">“The Road to the American Revolution”<\/bdi> (<bdi dir=\"ltr\">Open and Avowed Enemies; Independence; Breaking the Bonds of Empire; Jefferson’s Declaration<\/bdi>).","<b>How to work.<\/b> People in history faced hard choices. Here are five. There is no right or wrong choice. Your job is to understand why people chose what they did.":"<b>طريقة العمل.<\/b> واجه الناس في التاريخ خيارات صعبة. وهذه خمسة منها. لا يوجد خيار صحيح أو خاطئ. مهمتك أن تفهم لماذا اختار الناس ما اختاروه.","All five dilemmas are locked in. Nice work.":"تم تثبيت المعضلات الخمس. عمل جيد.","Choose one":"اختر واحدًا","Counter-Argument":"حجة مضادة","Edit my answer":"تعديل إجابتي","Everything is done. Tap Finished to download your file.":"اكتمل كل شيء. اضغط «انتهيت» لتنزيل ملفك.","Fill in both boxes to unlock the next step.":"املأ المربعين للانتقال إلى الخطوة التالية.","Here is a summary of the choices you made.":"هذا ملخص للخيارات التي اخترتها.","Lock in all five dilemmas to finish.":"ثبّت إجابات المعضلات الخمس لتنهي.","Lock in my answer":"تثبيت إجابتي","Locked in. Read what really happened below.":"تم التثبيت. اقرأ في الأسفل ما حدث فعلًا.","Not answered yet":"لم تتم الإجابة بعد","Read “You are there.”":"اقرأ «أنت هناك».","Ready. Tap Lock in to see what happened.":"جاهز. اضغط «تثبيت» لترى ما حدث.","Tap <b>Lock in my answer<\/b> to see what really happened.":"اضغط <b>تثبيت إجابتي<\/b> لترى ما حدث فعلًا.","Tap the choice you would make.":"اضغط على الخيار الذي ستختاره.","That file does not look like a Would You Rather progress file. Try again.":"هذا الملف لا يبدو ملف تقدم لنشاط «ماذا تفضّل؟». حاول مرة أخرى.","The end":"النهاية","Type the other side’s best reason here...":"اكتب هنا أفضل سبب للطرف الآخر...","Type your reason here...":"اكتب سببك هنا...","UNIT 1 · COLONIES, REVOLUTION, AND CONSTITUTION | CPUSH | DANIEL GARZA, M.A.":"الوحدة 1 · المستعمرات والثورة والدستور | CPUSH | DANIEL GARZA, M.A.","What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”":"ما أفضل سبب قد يقدّمه شخص من الطرف الآخر؟ اكتبه كما سيقوله هو. جرّب: «شخص اختار الطرف الآخر سيقول...»","What really happened":"ما حدث فعلًا","Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”":"لماذا اخترت هذا؟ استخدم معلومة واحدة على الأقل من الدرس. جرّب: «اخترت هذا لأن... ومن المعلومات...»","Would You Rather":"ماذا تفضّل؟","Would you rather...":"ماذا تفضّل؟...","Write a Counter-Argument: the best reason someone on the other side would give.":"اكتب حجة مضادة: أفضل سبب قد يقدّمه شخص من الطرف الآخر.","Write your reason. Use at least one fact from the lesson.":"اكتب سببك. استخدم معلومة واحدة على الأقل من الدرس.","You are there":"أنت هناك","Your choices":"اختياراتك","Your reason":"سببك","Your work saves on this device as you type. Use <b>Save Progress<\/b> at the bottom to download a backup file, and <b>Load Progress<\/b> to continue later.":"يُحفظ عملك على هذا الجهاز أثناء الكتابة. استخدم زر <b>حفظ التقدم<\/b> في الأسفل لتنزيل نسخة احتياطية، وزر <b>تحميل التقدم<\/b> لتكمل لاحقًا.","Clear all of your answers on this page?":"هل تريد مسح جميع إجاباتك في هذه الصفحة؟"},"patterns":[{"re":"^Still needed: first name, last name, and period\\.$","es":"Todavía falta: nombre, apellido y período.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة."},{"re":"^(\\d+) of (\\d+) dilemmas locked in$","es":"$1 de $2 decisiones confirmadas","ar":"عدد المعضلات المثبّتة: $1 من $2"},{"re":"^Still needed: first name, last name, and period; 1 dilemma to lock in\\.$","es":"Todavía falta: nombre, apellido y período; 1 decisión por confirmar.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة؛ معضلة واحدة تحتاج إلى تثبيت."},{"re":"^Still needed: first name, last name, and period; (\\d+) dilemmas to lock in\\.$","es":"Todavía falta: nombre, apellido y período; $1 decisiones por confirmar.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة؛ عدد المعضلات التي تحتاج إلى تثبيت: $1."},{"re":"^Still needed: first name, last name, and period\\.$","es":"Todavía falta: nombre, apellido y período.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة."},{"re":"^Still needed: 1 dilemma to lock in\\.$","es":"Todavía falta: 1 decisión por confirmar.","ar":"ما زال ناقصًا: معضلة واحدة تحتاج إلى تثبيت."},{"re":"^Still needed: (\\d+) dilemmas to lock in\\.$","es":"Todavía falta: $1 decisiones por confirmar.","ar":"ما زال ناقصًا: عدد المعضلات التي تحتاج إلى تثبيت: $1."},{"re":"^Done! Your file (\\S+) downloaded\\. Upload it to Canvas\\.$","es":"¡Listo! Se descargó tu archivo $1. Súbelo a Canvas.","ar":"أحسنت! تم تنزيل هذا الملف: <bdi dir=\"ltr\" style=\"display:block\">$1<\/bdi> ارفع هذا الملف إلى Canvas."}]}</script>
+<script>
+/* Supplement language switch (English / Espanol / Arabic). Works on pages whose text is rendered by JS:
+   a MutationObserver translates text as it appears. Data: <script type="application/json" id="sp-i18n">
+   {"langs":["en","es","ar"],"default":"en","es":{englishHTML:translation},"ar":{...},"patterns":[{"re":"^(\\d+) of (\\d+)$","es":"$1 de $2","ar":"..."}]}
+   Keys are the English text exactly as it sits in the page (innerHTML, spaces collapsed).
+   Helpers: spSeen() english strings seen so far; spMissing() strings with no translation in the current language;
+   spSetLang(l); spTr(s) translate a string (used for confirm/alert); spAscii(s) plain-ASCII name for file names. */
+(function () {
+  var node = document.getElementById('sp-i18n');
+  var D = node ? JSON.parse(node.textContent) : { langs: ['en'], patterns: [] };
+  var INLINE = { B:1,I:1,EM:1,STRONG:1,SPAN:1,A:1,BR:1,SMALL:1,SUP:1,SUB:1,U:1,MARK:1,BDI:1,TSPAN:1,CODE:1 };
+  var SKIP = 'script,style,textarea,input,.sp-lang,.sp-nt,[translate="no"]';
+  var WORD = /[A-Za-z\u00C0-\u024F\u0600-\u06FF]{2}|e\.g\./;
+  var LANG = 'en', REC = new WeakMap(), SEEN = {}, MISS = {};
+  (D.patterns || []).forEach(function (p) { try { p._re = new RegExp(p.re); } catch (e) {} });
+  function norm(s) { return String(s).replace(/\s+/g, ' ').trim(); }
+  function tr(src) {
+    if (LANG === 'en') return null;
+    var t = D[LANG] && D[LANG][src];
+    if (t) return t;
+    var P = D.patterns || [];
+    for (var i = 0; i < P.length; i++) {
+      var m = P[i]._re && P[i]._re.exec(src);
+      if (m && P[i][LANG]) return P[i][LANG].replace(/\$(\d+)/g, function (_, n) { return m[+n] || ''; });
+    }
+    return null;
+  }
+  window.spTr = function (s) { var t = tr(norm(s)); return t ? t.replace(/<[^>]+>/g, '') : s; };
+  function isInline(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling)
+      if (c.nodeType === 1 && (!INLINE[c.tagName.toUpperCase()] || c.matches(SKIP))) return false;
+    return true;
+  }
+  function directText(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling) if (c.nodeType === 3 && WORD.test(c.nodeValue)) return true;
+    return false;
+  }
+  function cur(s) { return s.nodeType === 1 ? s.innerHTML : s.nodeValue; }
+  function put(s, v) { if (s.nodeType === 1) s.innerHTML = v; else s.nodeValue = v; }
+  function handle(s) {
+    var r = REC.get(s), c = cur(s);
+    if (!(r && c === r.wrote)) { r = { en: c, wrote: c }; REC.set(s, r); }
+    var src = norm(r.en), target = r.en;
+    if (WORD.test(src)) {
+      SEEN[src] = 1;
+      if (LANG !== 'en') {
+        var t = tr(src);
+        if (t) {
+          target = s.nodeType === 1 ? t : (r.en.match(/^\s*/)[0] + t + r.en.match(/\s*$/)[0]);
+          delete MISS[src];
+        } else MISS[src] = 1;
+      }
+    }
+    if (c !== target) put(s, target);
+    r.wrote = cur(s);
+  }
+  var ATTRS = ['placeholder', 'alt', 'aria-label', 'title'];
+  function attrs(root) {
+    var els = root.querySelectorAll ? root.querySelectorAll('[placeholder],[alt],[aria-label],[title]') : [];
+    var list = [].slice.call(els); if (root.matches && root.matches('[placeholder],[alt],[aria-label],[title]')) list.push(root);
+    list.forEach(function (el) {
+      if (el.closest && el.closest('.sp-lang,.sp-nt,[translate="no"],script,style')) return;
+      var rec = el.__spa || (el.__spa = {});
+      ATTRS.forEach(function (a) {
+        var v = el.getAttribute(a); if (v == null) return;
+        var r = rec[a];
+        if (!(r && v === r.wrote)) { r = rec[a] = { en: v, wrote: v }; }
+        var src = norm(r.en); if (!WORD.test(src)) return;
+        SEEN[src] = 1;
+        var t = LANG === 'en' ? null : tr(src);
+        if (LANG !== 'en' && !t) MISS[src] = 1;
+        var target = t ? t.replace(/<[^>]+>/g, '') : r.en;
+        if (v !== target) el.setAttribute(a, target);
+        r.wrote = el.getAttribute(a);
+      });
+    });
+  }
+  function walk(root) {
+    if (root.nodeType === 3) { if (WORD.test(root.nodeValue) && !(root.parentNode && root.parentNode.closest && root.parentNode.closest(SKIP))) handle(root); return; }
+    if (root.nodeType !== 1) return;
+    (function w(el) {
+      if (el.matches(SKIP)) return;
+      if (el !== document.body && directText(el) && isInline(el)) { handle(el); return; }
+      for (var c = el.firstChild; c; c = c.nextSibling) {
+        if (c.nodeType === 1) w(c); else if (c.nodeType === 3 && WORD.test(c.nodeValue)) handle(c);
+      }
+    })(root);
+    attrs(root);
+  }
+  var TITLE = { en: document.title, wrote: document.title };
+  function title() {
+    if (document.title !== TITLE.wrote) TITLE = { en: document.title, wrote: document.title };
+    var t = LANG === 'en' ? null : tr(norm(TITLE.en));
+    document.title = t ? t.replace(/<[^>]+>/g, '') : TITLE.en; TITLE.wrote = document.title;
+  }
+  function inl(e) { return e.nodeType === 1 && !!INLINE[e.tagName.toUpperCase()]; }
+  var mo = new MutationObserver(function (muts) {
+    var todo = [];
+    muts.forEach(function (m) {
+      if (m.type === 'childList') { for (var i = 0; i < m.addedNodes.length; i++) todo.push(m.addedNodes[i]); todo.push(m.target); }
+      else todo.push(m.target);
+    });
+    todo.forEach(function (n) {
+      var el = n.nodeType === 1 ? n : n.parentNode;
+      if (!el || el.nodeType !== 1 || !document.body.contains(el)) return;
+      while (el !== document.body && el.parentNode && el.parentNode.nodeType === 1 && inl(el) && inl(el.parentNode)) el = el.parentNode;
+      if (el.parentNode && el.parentNode.nodeType === 1 && inl(el.parentNode) && el.parentNode !== document.body) el = el.parentNode;
+      walk(el);
+    });
+    mo.takeRecords();
+  });
+  var AR = { 'ا':'a','أ':'a','إ':'i','آ':'a','ب':'b','ت':'t','ث':'th','ج':'j','ح':'h','خ':'kh','د':'d','ذ':'dh','ر':'r','ز':'z','س':'s','ش':'sh','ص':'s','ض':'d','ط':'t','ظ':'z','ع':'a','غ':'gh','ف':'f','ق':'q','ك':'k','ل':'l','م':'m','ن':'n','ه':'h','و':'w','ي':'y','ى':'a','ة':'a','ئ':'y','ؤ':'w' };
+  window.spAscii = function (s) {
+    s = String(s); if (s.normalize) s = s.normalize('NFD').replace(/[̀-ًͯ-ٰٟ]/g, '');
+    return s.replace(/[ء-ي]/g, function (c) { return AR[c] !== undefined ? AR[c] : ''; }).replace(/ñ/g, 'n').replace(/Ñ/g, 'N');
+  };
+  window.spSeen = function () { return Object.keys(SEEN); };
+  window.spMissing = function () { return Object.keys(MISS); };
+  window.spLang = function () { return LANG; };
+  window.spSetLang = function (l) {
+    if ((D.langs || ['en']).indexOf(l) < 0) l = 'en';
+    LANG = l; MISS = {};
+    var h = document.documentElement; h.lang = l; h.dir = l === 'ar' ? 'rtl' : 'ltr';
+    mo.disconnect(); walk(document.body); title(); mo.takeRecords();
+    mo.observe(document.body, { childList: true, subtree: true, characterData: true });
+    document.querySelectorAll('.sp-lang button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === l)); });
+    try { localStorage.setItem('sp_lang', l); } catch (e) {}
+    try { var u = new URL(location.href); if (l === 'en') u.searchParams.delete('lang'); else u.searchParams.set('lang', l); history.replaceState(null, '', u.toString()); } catch (e) {}
+    try { document.dispatchEvent(new CustomEvent('splangchange', { detail: l })); } catch (e) {}
+  };
+  var _c = window.confirm, _a = window.alert;
+  window.confirm = function (m) { return _c.call(window, window.spTr(m)); };
+  window.alert = function (m) { return _a.call(window, window.spTr(m)); };
+  document.querySelectorAll('.sp-lang button').forEach(function (b) { b.addEventListener('click', function () { window.spSetLang(b.getAttribute('data-lang')); }); });
+  var start = D['default'] || 'en';
+  try { start = new URL(location.href).searchParams.get('lang') || localStorage.getItem('sp_lang') || start; } catch (e) {}
+  window.spSetLang(start);
+})();
+
+</script><!--/sp-i18n-->
+</body></html>

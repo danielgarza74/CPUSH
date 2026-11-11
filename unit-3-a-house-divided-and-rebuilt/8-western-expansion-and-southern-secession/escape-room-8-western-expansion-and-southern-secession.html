@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Escape Room 8 · Western Expansion and Southern Secession</title>
+<style>
+:root{--bg:#1B283C;--txt:#EBEFF4;--a1:#2E4261;--a2:#D24B54;--hl:#E18E94;--glass:rgba(235,239,244,.07);--glassb:rgba(235,239,244,.2);--dim:#B9C3D1;--ok:#8FD3A8}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#2E4261 0%,#1B283C 60%) fixed;background-color:var(--bg);color:var(--txt);font:17px/1.55 "Segoe UI",system-ui,-apple-system,Verdana,sans-serif;min-height:100vh}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px 40px}
+.glass{background:var(--glass);border:1px solid var(--glassb);border-radius:16px;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+header.hero{padding:30px 0 12px;border-bottom:3px solid var(--a2)}
+.eyebrow{font-size:13px;letter-spacing:.16em;font-weight:700;color:var(--hl)}
+h1{margin:.15em 0 .05em;font-size:clamp(28px,6vw,40px);line-height:1.12}
+.sub{margin:0;font-weight:600;color:var(--dim)}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 4px}
+.meta label{flex:1 1 170px;font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--dim)}
+input[type=text],textarea,select{display:block;width:100%;margin-top:4px;padding:10px 12px;border:1px solid var(--glassb);border-radius:10px;background:rgba(10,18,32,.55);color:var(--txt);font:inherit;font-size:16px}
+input[type=text]:focus,textarea:focus,select:focus,button:focus-visible{outline:3px solid var(--hl);outline-offset:1px}
+input.bad{border-color:var(--a2);box-shadow:0 0 0 2px var(--a2)}
+textarea{min-height:120px;resize:vertical}
+.howto{margin:14px 0;padding:14px 16px;font-size:16px}
+.howto ol{margin:6px 0 0;padding-left:22px}
+.scene{margin:14px 0;padding:8px;text-align:center}
+.scene svg{width:100%;height:auto;display:block;border-radius:12px}
+.bar{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;padding:8px 12px;margin:10px 0;font-weight:700;font-size:15px;background:rgba(27,40,60,.92);border:1px solid var(--glassb);border-radius:12px}
+.bar span b{color:var(--hl)}
+.btn{font:inherit;font-size:16px;font-weight:700;padding:11px 18px;border-radius:12px;border:2px solid var(--hl);background:transparent;color:var(--txt);cursor:pointer;min-height:44px}
+.btn:hover{background:rgba(225,142,148,.18)}
+.btn.primary{background:var(--hl);color:#1B283C;border-color:var(--hl)}
+.btn.primary:hover{background:#EBA5AA}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.btn.small{padding:8px 14px;font-size:15px;min-height:40px}
+.intro{padding:20px;text-align:center}
+.intro p{margin:.4em 0}
+.lock{margin:12px 0;overflow:hidden}
+.lock>button.lh{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:12px;width:100%;padding:14px 16px;cursor:pointer}
+.lock>button.lh:focus-visible{outline:3px solid var(--hl);outline-offset:-3px}
+.lock.locked>button.lh{cursor:not-allowed;opacity:.55}
+.lk{flex:none;width:44px;height:44px}
+.lk .sh{transition:transform .5s cubic-bezier(.3,1.6,.5,1);transform-origin:center}
+.lock.solved .lk .sh{transform:translateY(-6px) rotate(-30deg);transform-origin:10px 14px}
+.lock.solved .lk .bd{fill:var(--hl)}
+.lt{flex:1}
+.lt small{display:block;font-size:12px;letter-spacing:.12em;font-weight:700;color:var(--hl)}
+.lt strong{font-size:19px}
+.dg{flex:none;min-width:42px;height:42px;border-radius:10px;border:2px solid var(--hl);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;background:rgba(10,18,32,.55)}
+.lb{padding:0 16px 16px;display:none}
+.lock.open .lb{display:block}
+.objline{font-size:14px;color:var(--dim);margin:0 0 10px}
+.card{background:rgba(235,239,244,.1);border-left:6px solid var(--a2);border-radius:10px;padding:12px 14px;margin:8px 0 12px}
+.card h4{margin:0 0 4px;font-size:13px;letter-spacing:.12em;color:var(--hl)}
+.card p{margin:.3em 0}
+.card .src{font-size:13px;color:var(--dim)}
+.prompt{font-weight:700;margin:10px 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0}
+.chip{font:inherit;font-size:16px;padding:10px 14px;border-radius:12px;border:2px solid var(--glassb);background:rgba(10,18,32,.55);color:var(--txt);cursor:pointer;min-height:44px;text-align:left}
+.chip.sel{border-color:var(--hl);background:rgba(225,142,148,.2)}
+.chip .n{display:inline-block;min-width:24px;height:24px;line-height:24px;border-radius:12px;background:var(--hl);color:#1B283C;font-weight:800;text-align:center;margin-right:8px}
+.mrow{margin:8px 0}
+.mrow label{font-weight:700;display:block}
+fieldset{border:1px solid var(--glassb);border-radius:10px;margin:8px 0;padding:8px 12px}
+legend{font-weight:700;padding:0 6px}
+.opt{display:flex;align-items:center;gap:10px;padding:6px 0;min-height:40px;cursor:pointer}
+.opt input{width:22px;height:22px;accent-color:#E18E94;flex:none}
+.cipher{font:700 24px/1.3 "Courier New",monospace;letter-spacing:.14em;background:rgba(10,18,32,.65);padding:12px;border-radius:10px;border:1px dashed var(--hl);word-break:break-word;text-align:center}
+.key{display:grid;grid-template-columns:repeat(13,1fr);gap:2px;margin:10px 0;font:700 14px/1.2 "Courier New",monospace;text-align:center}
+.key div{padding:3px 0;border-radius:4px;background:rgba(235,239,244,.08)}
+.key .c{color:var(--hl)}
+.scr{font:800 30px/1.2 "Courier New",monospace;letter-spacing:.3em;text-align:center;background:rgba(10,18,32,.65);padding:10px;border-radius:10px;border:1px dashed var(--hl)}
+.row{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0;align-items:center}
+.fb{margin:8px 0;padding:10px 12px;border-radius:10px;display:none;font-weight:600}
+.fb.show{display:block}
+.fb.nudge{background:rgba(210,75,84,.18);border:1px solid var(--a2)}
+.fb.good{background:rgba(143,211,168,.16);border:1px solid var(--ok);color:#DDF5E6}
+.hints{margin:6px 0}
+.hint{background:rgba(225,142,148,.14);border:1px dashed var(--hl);border-radius:10px;padding:8px 12px;margin:6px 0;font-size:16px}
+.hint b{color:var(--hl)}
+.exit{margin:16px 0;padding:18px;text-align:center}
+.exit.locked{opacity:.55}
+.exit h2,.esc h2,.debrief h2{margin:.1em 0 .3em}
+.codebox{display:flex;justify-content:center;gap:8px;margin:12px 0}
+.codebox input{width:52px;height:60px;text-align:center;font:800 30px "Courier New",monospace;padding:0;margin:0}
+.esc{margin:16px 0;padding:22px;text-align:center;display:none;border:2px solid var(--hl)}
+.esc.show{display:block}
+.esc .big{overflow-wrap:anywhere;font-size:clamp(30px,9vw,64px);font-weight:900;letter-spacing:.14em;color:var(--hl);text-shadow:0 0 24px rgba(225,142,148,.6);animation:pop .8s cubic-bezier(.3,1.6,.5,1)}
+.esc .time{font-size:26px;font-weight:800}
+.debrief{margin:16px 0;padding:16px}
+.actions{margin:16px 0;padding:16px}
+.status{font-weight:700;margin-bottom:10px}
+.msg{display:none;margin-top:10px;padding:10px 12px;border-radius:10px;background:rgba(143,211,168,.16);border:1px solid var(--ok)}
+.msg.err{background:rgba(210,75,84,.2);border-color:var(--a2)}
+.link{all:unset;cursor:pointer;color:var(--dim);text-decoration:underline;font-size:14px;margin-top:10px;display:inline-block}
+.link:focus-visible{outline:3px solid var(--hl)}
+footer{text-align:center;font-size:12px;letter-spacing:.1em;font-weight:700;color:var(--dim);padding:20px 8px 30px;border-top:1px solid var(--glassb);margin-top:20px}
+.ennote{margin:.4em 0 0;font-size:14px;font-weight:700;color:var(--dim)}
+.exit .ennote{text-align:center}
+.hidden{display:none!important}.lock,.exit,.esc{scroll-margin-top:64px}
+.pop{animation:pop .7s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pop{0%{transform:scale(.2);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes flick{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.2)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.shake{animation:shake .35s}
+.flame{transform-origin:center bottom;transform-box:fill-box;animation:flick 1s infinite}
+.wheel{transform-origin:300px 62px}
+.wheel.spin{animation:spin 1s ease-in-out}
+.plock .sh{transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
+.plock.open .sh{transform:translateY(-7px)}
+.plock.open .bd{fill:#E18E94}
+#door{transform-origin:150px 20px;transition:transform 1.4s ease-in-out}
+.escaped #door{transform:scaleX(.1)}
+#glow{opacity:.15;transition:opacity 1.4s}
+.escaped #glow{opacity:1}
+html[dir="rtl"] .chip{text-align:right}
+html[dir="rtl"] .chip .n{margin-right:0;margin-left:8px}
+html[dir="rtl"] .card{border-left:0;border-right:6px solid var(--a2)}
+html[dir="rtl"] .howto ol{padding-left:0;padding-right:22px}
+html[dir="rtl"] .esc,html[dir="rtl"] .exit,html[dir="rtl"] .intro{text-align:center}
+html[dir="rtl"] .cipher,html[dir="rtl"] .scr,html[dir="rtl"] .key{direction:ltr}
+html[dir="rtl"] .scr{letter-spacing:.3em!important}
+html[dir="rtl"] .cipher{letter-spacing:.14em!important}
+html[dir="rtl"] .key{letter-spacing:0!important}
+html[dir="rtl"] .card .src{direction:ltr;text-align:left}
+html[dir="rtl"] .hint,html[dir="rtl"] .fb,html[dir="rtl"] .msg,html[dir="rtl"] .objline{text-align:start}
+html[dir="rtl"] .lock>button.lh{text-align:start}
+html[dir="rtl"] .lb,html[dir="rtl"] .actions{text-align:start}
+html[dir="rtl"] .bar{direction:rtl}
+html[dir="rtl"] .tt{unicode-bidi:plaintext}
+@media(max-width:520px){body{font-size:16px}.chip{width:100%}.key{font-size:12px;gap:1px}.codebox input{width:46px;height:54px}.dg{min-width:38px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{.bar,.actions button{display:none}}
+/*sp-i18n-css*/
+.sp-lang-bar{display:flex;justify-content:flex-end;padding:8px 12px 0;position:relative;z-index:5}
+.sp-lang{display:inline-flex;gap:2px;padding:3px;border-radius:10px;background:rgba(255,255,255,.88);border:1px solid rgba(0,0,0,.18);font-family:system-ui,"Segoe UI",Tahoma,Arial,sans-serif}
+.sp-lang button{border:0;background:transparent;color:#222;font:600 13px/1 system-ui,"Segoe UI",Tahoma,Arial,sans-serif;padding:7px 11px;border-radius:7px;cursor:pointer}
+.sp-lang button[aria-pressed="true"]{background:#222;color:#fff}
+.sp-lang button:focus-visible{outline:3px solid #2a6df4;outline-offset:1px}
+textarea,input,select{unicode-bidi:plaintext}
+html[lang="ar"] body,html[lang="ar"] button,html[lang="ar"] textarea,html[lang="ar"] input,html[lang="ar"] select{font-family:"Segoe UI",Tahoma,"Noto Sans Arabic","Arial",system-ui,sans-serif}
+html[lang="ar"] body{line-height:1.8}
+html[lang="ar"] *{letter-spacing:0!important}
+html[dir="rtl"] textarea,html[dir="rtl"] input{text-align:start}
+@media print{.sp-lang-bar{display:none}}
+/*/sp-i18n-css*/
+</style>
+</head>
+<body>
+<!--sp-bar--><div class="sp-lang-bar"><div class="sp-lang" role="group" aria-label="Language / Idioma / اللغة"><button type="button" data-lang="en" lang="en" aria-pressed="true">English</button><button type="button" data-lang="es" lang="es" aria-pressed="false">Español</button><button type="button" data-lang="ar" lang="ar" aria-pressed="false">العربية</button></div></div><!--/sp-bar-->
+
+
+
+<div class="wrap">
+<header class="hero">
+  <div class="eyebrow">1750-1861</div>
+  <h1>Escape the Compromise Vault</h1>
+  <p class="sub">Western Expansion and Southern Secession</p>
+  <div class="meta">
+    <label>FIRST NAME *<input id="f_first" type="text" autocomplete="given-name"></label>
+    <label>LAST NAME *<input id="f_last" type="text" autocomplete="family-name"></label>
+    <label>PERIOD *<input id="f_period" type="text" inputmode="numeric" maxlength="12" placeholder="e.g. 3"></label>
+  </div>
+</header>
+
+<div class="howto glass"><b>How to escape:</b>
+<ol>
+<li>Open each lock in order. Read the <b>Clue Card</b>. The answer is in the card.</li>
+<li>Solve the puzzle to open the lock and reveal one digit.</li>
+<li>If you get stuck, press <b>Hint</b>. Hints are free, but your teacher can see how many you used.</li>
+<li>Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.</li>
+</ol></div>
+
+<div class="scene glass" id="scene">
+<svg viewBox="0 0 600 270" role="img" aria-label="A stone vault room. A big steel door has five padlocks in a row. Under each padlock is a window for one digit of the exit code.">
+<defs>
+<pattern id="brick" width="60" height="30" patternUnits="userSpaceOnUse"><rect width="60" height="30" fill="#17223A"/><path d="M0 0H60M0 15H60M0 0V15M30 15V30" stroke="#EBEFF4" stroke-opacity=".07" fill="none"/></pattern>
+<radialGradient id="glowg" cx="50%" cy="50%" r="60%"><stop offset="0" stop-color="#EBEFF4"/><stop offset="1" stop-color="#E18E94"/></radialGradient>
+</defs>
+<rect width="600" height="270" fill="url(#brick)"/>
+<rect y="236" width="600" height="34" fill="#0F1829"/>
+<rect id="glow" x="150" y="20" width="300" height="216" rx="10" fill="url(#glowg)"/>
+<g id="door">
+<rect x="150" y="20" width="300" height="216" rx="10" fill="#2E4261" stroke="#E18E94" stroke-width="3"/>
+<circle cx="164" cy="34" r="4" fill="#E18E94"/><circle cx="436" cy="34" r="4" fill="#E18E94"/><circle cx="164" cy="222" r="4" fill="#E18E94"/><circle cx="436" cy="222" r="4" fill="#E18E94"/>
+<g class="wheel" id="wheel"><circle cx="300" cy="62" r="30" fill="none" stroke="#EBEFF4" stroke-width="4"/><path d="M300 32V92M270 62H330M279 41L321 83M321 41L279 83" stroke="#EBEFF4" stroke-width="3"/><circle cx="300" cy="62" r="7" fill="#D24B54"/></g>
+<rect x="170" y="106" width="260" height="8" rx="3" fill="#1B283C"/>
+<g id="plocks"></g>
+<text x="300" y="228" text-anchor="middle" font-size="11" letter-spacing="3" font-weight="700" fill="#EBEFF4">COMPROMISE VAULT</text>
+</g>
+<g><rect x="60" y="120" width="6" height="40" fill="#EBEFF4" fill-opacity=".5"/><ellipse class="flame" cx="63" cy="112" rx="8" ry="13" fill="#E18E94"/></g>
+<g><rect x="534" y="120" width="6" height="40" fill="#EBEFF4" fill-opacity=".5"/><ellipse class="flame" cx="537" cy="112" rx="8" ry="13" fill="#E18E94" style="animation-delay:.4s"/></g>
+</svg>
+</div>
+
+<div class="intro glass" id="intro">
+  <h2 style="margin:.1em 0">You are locked in.</h2>
+  <p>The Compromise Vault has <b>5 locks</b>. Each lock matches one Core Objective of Lesson 8. Solve them all to find the <b>5-digit exit code</b>.</p>
+  <p>The clock starts when you press the button. Most students finish in about 20 minutes.</p>
+  <p><button class="btn primary" id="startBtn">Enter the Vault</button></p>
+</div>
+
+<div id="game" class="hidden">
+  <div class="bar" id="bar" aria-live="off"><span><span>Time</span> <b id="tm">00:00</b></span><span><span>Locks</span> <b id="lc">0</b>/5</span><span><span>Hints used</span> <b id="hc">0</b></span></div>
+  <div id="locks"></div>
+
+  <section class="exit glass locked" id="exit" aria-label="Exit door">
+    <div class="eyebrow">THE EXIT DOOR</div>
+    <h2>Type the exit code</h2>
+    <p id="exitNote">Open all 5 locks first. The digits go in order: Lock 1 first.</p>
+    <div class="codebox" id="codebox" dir="ltr"></div>
+    <p class="ennote">Type the answer in English. Use the digits 0-9.</p>
+    <div class="row" style="justify-content:center"><button class="btn primary" id="codeBtn" disabled>Open the Door</button></div>
+    <div class="fb" id="codefb"></div>
+  </section>
+
+  <section class="esc glass" id="esc" aria-live="polite">
+    <div class="big">ESCAPED</div>
+    <p class="time"><span>Your time:</span> <span id="escTime">00:00</span></p>
+    <p id="escSum"></p>
+    <p>One last step: write your Debrief below.</p>
+  </section>
+
+  <section class="debrief glass" id="debrief">
+    <div class="eyebrow">DEBRIEF</div>
+    <h2>Which lock was hardest, and what did you learn that you did not know before?</h2>
+    <p style="margin:.2em 0;color:var(--dim)">Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.</p>
+    <textarea id="debriefText" aria-label="Debrief" placeholder="Type your answer here..."></textarea>
+  </section>
+
+  <section class="actions glass" id="actions">
+    <div class="status" id="status"></div>
+    <div class="row">
+      <button class="btn" id="saveBtn">Save Progress</button>
+      <button class="btn" id="loadBtn">Load Progress</button>
+      <input type="file" id="loadFile" accept=".json,application/json" hidden>
+      <button class="btn primary" id="finishBtn">Finished — Download File to Submit</button>
+    </div>
+    <div class="msg" id="msg" role="status"></div>
+    <button class="link" id="reset">Clear all my work and start over</button>
+  </section>
+</div>
+
+<div class="actions glass hidden" id="loadOnly" style="margin-top:12px"><button class="btn" id="loadBtn0">Load Progress</button> <span style="color:var(--dim)">Have a saved file? Load it to continue.</span></div>
+
+<footer>UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.</footer>
+</div>
+
+<script>
+(function(){
+  function fix(){
+    if(!window.spTr)return;
+    var els=document.querySelectorAll('input[placeholder],textarea[placeholder],input[aria-label],textarea[aria-label]');
+    [].forEach.call(els,function(el){
+      ['placeholder','aria-label'].forEach(function(a){
+        var v=el.getAttribute(a);if(v===null)return;
+        var k='_en_'+a;if(el[k]===undefined||(el[k+'w']!==v))el[k]=v;
+        var out=(window.spLang&&spLang()==='en')?el[k]:spTr(el[k]);
+        el.setAttribute(a,out);el[k+'w']=out;
+      });
+    });
+  }
+  document.addEventListener('splangchange',fix);
+  new MutationObserver(function(){fix()}).observe(document.documentElement,{subtree:true,childList:true});
+})();
+</script>
+<script type="application/json" id="er-data">{"salt": "L8esc:", "exitHash": "f7e40c8f82ddcbeb6fc9", "locks": [{"n": 1, "key": "lock1_trail_west", "title": "The Trail West", "obj": 1, "objText": "Core Objective 1: Explain how, why, and where Americans moved west of the Mississippi River during the 1830s and 1840s.", "type": "order", "card": "<p>Oregon Fever swept the nation in the early 1840s, and most people walked more than 2,000 miles. Wagon trains left <b>Independence, Missouri<\/b>, and followed the <b>North Platte River<\/b> into what is now Wyoming. Next they went down the <b>Snake River<\/b> through what is now Idaho. After crossing the Cascade Mountains, they reached Oregon’s fertile <b>Willamette Valley<\/b>, where about 5,000 people had settled by 1845.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 13, “Moving West” (Mountains and Oregon Country).", "prompt": "Tap the four places in the order a wagon train reached them. Tap a place again to take it back.", "items": [{"id": "c", "label": "Snake River"}, {"id": "d", "label": "Willamette Valley"}, {"id": "a", "label": "Independence, Missouri"}, {"id": "b", "label": "North Platte River"}], "hints": ["Start with the town in Missouri where the trip began.", "The North Platte River comes before the Snake River. The trip ends in the fertile valley."], "nudge": "Not quite. Re-read the Clue Card and follow the wagon train from start to finish.", "entries": ["dd67519eb043cf3015581"], "id": "lock1_trail_west"}, {"n": 2, "key": "lock2_border_war", "title": "The Border War", "obj": 2, "objText": "Core Objective 2: Examine the causes of the Mexican-American War and its impact on national politics.", "type": "match", "card": "<p>President Polk sent U.S. troops to the <b>Rio Grande<\/b>, about 150 miles south of the <b>Nueces River<\/b>, which both sides had recognized as the border. Mexican troops attacked and 11 Americans were killed, but former president <b>John Quincy Adams<\/b> called it “a most unrighteous war.” In the <b>Treaty of Guadalupe Hidalgo<\/b> (February 1848), Mexico gave up half its territory, and the United States paid $15 million.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 13, “The Mexican-American War” (Opposition to the War; The Treaty of Guadalupe Hidalgo).", "prompt": "Match each term to the best description. Use the Clue Card.", "terms": [{"id": "j", "label": "John Quincy Adams"}, {"id": "v", "label": "Treaty of Guadalupe Hidalgo"}, {"id": "n", "label": "Nueces River"}, {"id": "g", "label": "Rio Grande"}], "descs": [{"id": "k", "label": "The river both sides had recognized as the border before the war"}, {"id": "t", "label": "Mexico gave up half its territory and the U.S. paid $15 million"}, {"id": "q", "label": "A former president who called the war “a most unrighteous war”"}, {"id": "r", "label": "Polk sent troops here, about 150 miles south of that river"}], "hints": ["Two of the descriptions are about rivers. The Nueces was the border BEFORE Polk sent troops farther south.", "The treaty is the one with the money: $15 million. The person is the one who spoke against the war."], "nudge": "Not quite. Check each match against the Clue Card. Which one are you least sure about?", "entries": ["ecc31faadcec0bcd3f229"], "id": "lock2_border_war"}, {"n": 3, "key": "lock3_secret_law", "title": "The Secret Law", "obj": 3, "objText": "Core Objective 3: Describe how the federal government tried to resolve the issue of slavery in the western territories during the 1850s.", "type": "decode", "shift": 3, "cipher": "IXJLWLYH VODYH DFW", "card": "<p>The Compromise of 1850 had five parts. The most controversial part required the federal government and the northern states to help capture and return freedom seekers to the South. There was no jury, and freedom seekers could not testify. The officials who decided each case were paid $10 to return a person to slavery, but only $5 to set the person free.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 13, “Slavery in the Territories” (The Compromise of 1850; The Fugitive Slave Act).", "prompt": "The Clue Card describes a law without naming it. A secret message names it. Each letter in the message was moved 3 steps forward in the alphabet. Decode it to name the law.", "hints": ["Use the decoder key. In the message, the letter I is really F, and the letter X is really U.", "The name starts with FUG and ends with a three-letter word. It is the law about people who escaped slavery."], "nudge": "Not quite. Decode one letter at a time with the key, then check your spelling.", "entries": ["00064033a83c578adf155", "000cbbbc6df5a378ce816", "0061f1d192269b4c8bf34", "009fdbc294f08270a7608", "00d0f89ca59b3e5216b44", "01edeed3715179ff60d96", "02126b4911b6cb00a0823", "022123aee8648bee0d683", "024b0d03d9aab0defa235", "0274ffba3ad4b852860f7", "03145aea5acab668a9590", "0322ebcfaf95ec27304c8", "033d3e059f361f94e2691", "041230948c63e5bd62a14", "044a10943ee2b402ada85", "051de0e66f9d614caeb84", "052080b4a5c8eb8b1ed62", "05bb3fc83844b17bb2c40", "06e3ad2ab0eb59c1ebf73", "07091cbb2c7731c5a9df9", "0715247b2001f12df3341", "07b09440d6406d3d54a57", "08324e640899d4742bac2", "08a55f69d8d6d9e7d18a5", "08d639dcc5499cb1b57e4", "0918c20090a38cc11e203", "096c2529d67b6c8352b23", "09b5cd01aab270c5051f0", "09e0a52a97f60af5f2787", "0a5dc2a9b9eacb2453451", "0a7e9f6bbacbe90ea3114", "0ad499aba34c4025a0b82", "0ae1593d839627614c3b8", "0b2c28cab8dbe77ccf3a5", "0b628081ddb84457f7d00", "0b71e281280e5b2e291c3", "0ba3029aa05be7a1e9d25", "0c02ec2904339831e07e7", "0c2ec454b8e22814e65e2", "0d54d2a522480bf75fff4", "0d717beee104556dea7b4", "0dd4570d83f9e473a6777", "0e670137d8e79ae624aa2", "0ea4fcc5c39b924f52809", "0ea5567e11a73a1d1fab7", "0f12156abfd684f154b37", "0f21ffe3e025d35cafaf1", "0f476b2dc331466063ac5", "0f6b571b77f6d9d893e23", "0fa7335c276a32e496cd7", "0fe2d9396f50e4c3d72b9", "10105470a7b763f581773", "10b6fa89369269c47afd8", "10ba2ad1b53fd49f63453", "129530231bc2a429d0c92", "1295b8068bebd5e006934", "12fa93d58ce5fefe01d30", "130097e1b54466ba6b1d5", "1308c58bfcdbd0b076770", "132621ab6259eadee4007", "133b214ca0ce6e5d83548", "13a15d97fe42e2f2e06d9", "1407b57897262a71da172", "14a1f2e168e96179669e3", "14b187a715e5ce5b9b882", "14ead4b98f3d165780c92", "14eeb8d1aac0297d13177", "14efecd6e31450bbb4277", "1506cd98673a768cab642", "1556d52e522a9514b9e88", "16086bd98843e5ac3ef53", "1611ac5a56b56ece68c58", "161a7eac355740d5424c0", "16531b17382a9de6795a2", "16dd281f6ac391f33adc0", "16eab27a46db0911f2a70", "16fb57bcf0f37911df772", "174e267954e41830e9db9", "17fe619aa35cd610300c0", "185617b1c1b32640d2fc5", "18b08c5d9c11b1e696913", "18b9229c22808a2a3e0b5", "18d13d43cd63a12ad2d70", "199c4efb0d1b05464b5e4", "19aea9d15c752c89285c6", "19cb703fc7fd8a2aa64f7", "19d84b2c33e08ae32f078", "19e18f022d5cee89bf571", "1a7bc4241f03ef1aa0dc3", "1a9e2f4c8451599c55cf0", "1aaceb9d2ab156adcfa97", "1b8041e4c1b13639970b5", "1be32a1a1280aea971f50", "1cb2a5dbe3ef3a5e044b7", "1cbeadad219fee22bef55", "1d056db38f51bcbbd4af5", "1d24448e9b6c10281f859", "1d25c50eda38b3a7d9da5", "1d89114cac95abae0ba37", "1e802ff53280eabfc12d4", "1e9d9246f2ddd01ab2c09", "1eb20e3408b9c4f18b0e7", "1f01d9758fe9290b55f55", "1f5f059a6a6f8b8d32f46", "2122b83618f429f0c2256", "215369d8cb701fd323f26", "217e6eaba1217a02ba929", "21b47f338a10f2feb4712", "21cb6f82f75e785757394", "21d2dbc0fdbc526b9ad04", "21f2ae39f6fd50de36585", "2210fdfa353aef2ff8d18", "2227fdd4180dd65e0be99", "22c9a8c0e7c48c8b2d083", "22cc9510eb3ce7a90d142", "22d85e4434661f28eb797", "22e7ceda2ff2bde4982f8", "23191f33cdfddeb42ca59", "23551b7e91181a81dc064", "2406efa52f2a2a1fe0d45", "241ed4470fa13f76b5118", "248263331a44f90eb8832", "24855fc0e5f44dcdd3e65", "248f1c6fb4cff8215f2d0", "24fbd6dc1270471549728", "25564c63e0e6d65ba1016", "2578a5d93578931d70944", "257da207306d502db4bc1", "259150d4e04bcd8059a92", "25b8c59a391e6c6afd233", "26136b23434693d1d8356", "267a799f815b2cf0f0785", "268282379289b30fa00b3", "268ddd49d21ccbb61d5d0", "27466d270597c7a61cf05", "282b7284ae70419dba050", "283b0e68a2afbd08dfd28", "285d4f3cd0861ff752916", "28b573a5575de8e437a19", "29695a4b010605b4c5315", "29a8ee4c7b2f1a0132ca2", "29e9fb076026b3f571f67", "29f189b3ad6d65fc19003", "2a54ed1ddd47dd17ee217", "2ab5fe65af19fcda159c4", "2acde2128d8ebfd01aae4", "2b045f411400856c17127", "2b18aeb62ed67b8591d73", "2b1b5a81a976de4d28ee5", "2b3e37df6e5003cfe8440", "2bb084c9f87a4bf4fab60", "2bb7dbdcc50be56cd7019", "2c0aaa2a6483172cfacc1", "2cb5373c449cae9ab5353", "2d4bcb59bfb7b464ac6f2", "2dcd741f9dc24f9324552", "2dd72f2e2a7919068d110", "2e2de4937f4711f3f76d7", "2e352b8bfaf4624a56680", "2e5fa2c271a85adcaad58", "2eaf8a91588b8617d0736", "2ece7b3dc04bcaa89b6e9", "2ee76e011339a70bec075", "2f11a97fab8fbebe2c768", "2f780a1623cab7d695bf0", "2f97523569bf797570ae4", "2faf705c418f03e1cd4e5", "306bfa35c466fe146b2c3", "3091d9824a2b3c6d742d9", "314f605b3154effa70928", "316d64791b34efd459f17", "31dbba18f810d96bf2b38", "33058c6398636d86c9448", "337aef8077a4963aae900", "337e300d04e089bfdb5f1", "33ad53261188fb37dbb68", "33cc7470b61b19c506398", "349c76d357079b5670be5", "34db75b45f68dc3630572", "3535385c8bfad0d971284", "35385d89990280d69c982", "3577d253a8736d37a0a86", "359ef895ab3ba4ec4bff4", "35b810bba5c077a1f4291", "361fdb3c98d3d70725150", "3669ead4b890445382db5", "367b8d4cbee7c68228578", "369e81c625c7686a7bd84", "36f02efba040c10bdc828", "36fa0686689a3a3028a42", "36fa71da9537c50c915c7", "376103ea3245958c17034", "37b54d84def388a006865", "3810a890b93d20d821592", "385dc15f04e6ae6f5c4b4", "38e55a37f0121315e75c1", "398b3dccf4eb41ce00397", "3991472097a95689b0fe6", "39bc930b0d6891db05f46", "39eea180120b69cc37e58", "39f78415f7d5d10a5a3c3", "3a6624af6f4a7fd5413e5", "3a6f7b0d54f8c90532169", "3a8c391e12bf25d5ab286", "3b3c9186ab7f18981a539", "3c4422b811fff3f213e52", "3c6cf3e9e5634a7ce1175", "3c8c720f5c5adbab991a9", "3c9fea5bfd0d3c5570158", "3caa7087b4e889fc28e44", "3d4ca298bdb5f1fccb495", "3e1d8c61fc3e21b8e9673", "3e2b8e1556c11ca59d3a9", "3e91b38ab3b140f6ec1b9", "3ecb93a6ee8dcd31f5873", "3f450c4decec8cab06f42", "3fcf8ea719af49b231017", "400590a4c609252d23d88", "403dc4ea15ace16be4501", "4054a8a3400837e0b48b2", "408742772f2a0ef9635f0", "412f1e78242e4d3d30574", "41339b9ef0af34413a175", "4168934eb02c389fba9d9", "4175e07d6d87a572c60b0", "417a1f24305ab9fb5dfc8", "419c2ef4b4bbf4be8f113", "41d6c929084f64991a243", "42213704cb6c9640ada37", "423d857bb7d3e2df40126", "425818f2a721327c15ca8", "430b41143d60034815a04", "44078653ef917c2b6ed02", "45356973791e8f4d1a468", "4579c8c26091873c5a7e3", "45a2f95587e1130cf3c26", "45a9ac6ae39d38dc0af26", "460f697edcc90885b4493", "466e99d629fbf3e4f7470", "46f183450cc2f27a84986", "474d12188a99a5bd126e4", "47c64c51a7a3d634c67c7", "484253d7cd06b04b88160", "4851cc332017e8f4d9f67", "486a579daf821a5ba6ea2", "48bf5ca2fcf8614bb7079", "48d691abd19d505d71bf3", "48f78343222ee645bb3f1", "49227e3a44aa099282b27", "49501599cd1b689ea5ae6", "49ea37cabd33557a9a995", "4a7a84d22ca768c22b507", "4acd2833db5d540899e96", "4b449a2e9660773c819c0", "4b6f499b3abe16e480d89", "4ba0a28404daad1f92189", "4bbb76aa8ae42e15804b1", "4c0f3fe8d03acb14225b0", "4c4cf752ccbe81829da71", "4c81edc12047f2d3dcf89", "4ce1019207696bc6aa898", "4cef6359846e1ad9ea6e1", "4d22e91b8a2e2bcc338a9", "4d4a74d69f960fc7b9bb9", "4f0a074266c9849b069c6", "4fbb4f8a9ea5955e9fe84", "5071733e453a694c8c9c9", "510569e36893e315b6912", "51401c0c0cf83b4cd6b33", "51978dac3c8d1953f1501", "51f722e9531c699c62e94", "523ad0b6f70637a051599", "5292be5a82064bd824f38", "534ab59169d2893f95b91", "53692786d609ee141d2c9", "537830e325815ad56f731", "538006bfa3de2d9c395a0", "5390393d7135d68c06150", "5402b597ce822c1dd7fe7", "544f5ae548344eda95a08", "54af67c3d65f01f7eb269", "54d0d3a1b00eb57beed46", "54d43e22711c24567bbd1", "554977d8b9ed77aa40187", "563352712882fff864060", "56a2934ae417da1cfad67", "56bb7f9b9f9b0fa74c096", "56e1e4f52255414c71d47", "56f793192c1df2d1c8d35", "5711e9ad0720ff39d7ab1", "57cce8a054160332c5908", "5895007fdf120aee0f4b0", "5935ba3a0f921c41b7095", "593b64fc1abef6deba135", "59c0a3d773a55010285f7", "5a03637e0e93dfb319566", "5a5a3bccddac15c7faab4", "5a8602265af2f7d563f98", "5a96126870286f8237283", "5afd9a9393431f41c64c5", "5b5f44aaf58d8b273d722", "5b7208ff3947be8334498", "5b750e87d5a814956f906", "5b7c21fa7559136030651", "5b8c448fdac55b00b79d8", "5c58271323b9976a78796", "5c9a99609fcce41abe650", "5cdbb85b7f4896eee39c1", "5cecce3f90826454faca9", "5d081cd54bf199a26a677", "5d312d0943ad231f98240", "5d569cfab4be0d93bd635", "5d74f1dd12557a6112632", "5dd27f647693bba22ff12", "5e687b0e6ca030df2f065", "5f7f2b4fd03a960ca03c9", "5fff35d6fbc3f19965928", "60720e3e8eddf646016a8", "6076e1d5f6b078e74f284", "609948dfee80a318e18e0", "609b131b033dc689b8f42", "60a4eb1c6366d324a1fd9", "60b4dbf9ad05a69c6c536", "60b55771098e820a669e6", "60f1dfea80309efe87892", "612d7c3bb4069a33a0501", "6134bec3619eb451216c9", "617baedd071c63e131496", "619e41f0df7292101cdf1", "61b0d402d2e9dcca3b646", "61dd97236ca3531af3887", "61e4b8abda159c04dcd60", "6204b95e9acbe13ce01b3", "6217fdbe0eaf9d6c0c168", "627ee63fc84770e08a267", "62b5436baccf6c5012943", "62bf90bb1317e403168b4", "62e33d0bab374c6fda6e7", "63b7a35ae4b0935bcb7a8", "63f2d81c59be2b1543da9", "6400c3caa71b1c3b51bf4", "644e5650eb817d29fd309", "64534b62ff3ccac462621", "651bc57cdc8ef005cd269", "659cd67c1178ed9e275f1", "66d23b3d039a949802f65", "66f1c47b0da44aff87875", "66fd1c6b3a9c63993a7f1", "67137d83608a5ba6c61d8", "672dbf057cae8547ec277", "6747ba066ebc3283548a1", "67c3ec9c3e40390ee6166", "67d9507b19e7883394006", "67e7b68dd28a9204fc199", "68ab56a65f3d1dae05f62", "699c262b84e1ee473b1d8", "69f966c27140128510b64", "6a2cd27ee5088cb4875d8", "6a5b9b85c7e771afa8cb6", "6a5f393aed62bc3891f15", "6a7464409660e91624d67", "6b12f0056ca9c0763f895", "6b463aa2fe62f0bc6b4d7", "6b5e022d8ab6fec6d2202", "6b98afe2872bf3f179ce6", "6ba98fb34f650d538e397", "6c0812b1ef3b6713eb030", "6c718b0b2d4560dc21706", "6ce307875c9256d5e02d8", "6d3e3ab61f973e2c94046", "6db1be3993b47887e8ec1", "6dc171a360ca9e0507c01", "6dc818234e3823aa266f7", "6de80a511cab796b174b5", "6e76ecb23148759b146f4", "6e814be90e8f386be3a01", "6e9fa1d7b1310928fb2b0", "6ea2ef4fa3f3ae5b13ac1", "6eb5957c35b21a16c6870", "6f65e421b20908d4dc813", "6f66a390097ca8c979065", "6fb2477676d143b6b07a2", "6fdf08e33d4ec59f7ae69", "6fe950122bcf95539bb92", "70320a0f1e97592180f48", "705928e3b381c9614a210", "70d04e64a0dff8cbc3b60", "70ea452b3e50e63d289e1", "714fb96858f222b5bb2f4", "720999a7cdb73d03a6b23", "722074fa71e981d498dc8", "7286d447bd357cda678a0", "72baf20477d4917bb2b18", "72bf43446034bcee02227", "7347372443031d0c22037", "73fbd50eaf46b3b73cad7", "7498eacc737171371ff11", "74c132c86cfc6925c80a6", "74e0a44c73fda48a41469", "750efcef1b3442df736c6", "752ad8905c08da976cfb8", "7580e47f42435f9810f10", "76237e938bffe1a5ae7f1", "767e9ce162a15fc702437", "7686d258c126ab81b8054", "7758f6eea01ba71586fb5", "7783aeed860410a6bbce6", "7852072e5a96dcd03d8e9", "787c6430f98df04498f83", "79236ebbed53844b1dd83", "799175cb5a52d4d0f2f78", "7992879984b28772c6870", "79dc9317d91c6c5a92443", "7a0f595fd1e6fcc71e369", "7a291c2508efdfc813b35", "7a689eac7b401c12c71b1", "7b8ef43ef770fb1a497c5", "7bcda3cef7f9cf529d6a9", "7c67a7bbda05c2651dea9", "7c89042e6f63d389b4987", "7c971af1337819102de01", "7cd7ab079d5daa7c3a421", "7d746fed80acd0472e820", "7e0db928d9531c7b7c807", "7e19ff78280fefe027505", "7e4de40dbd77566dadd03", "7ef815c47aa6420d36043", "7f3a043d1b81bdf74dbc8", "7faee66d34fe5650e6be3", "7fbe8816a00d7a92d8961", "80e8fa95f72cdf18cf6b0", "811ee8ac520bd66423257", "81378f0314b5538e0ed87", "817a19513a104f7206ca1", "81880c906b9ea826f8432", "81b22aa43112b97a2f0c4", "81b628ed8aba7ac6822e4", "81bb7a173a9ee9e05c2b8", "822e04b35017295df1505", "82718fbae470cb3b57ed3", "8279f5a138044ef7ac9a5", "829ce076996c2611c34c3", "82e9da2195528723cf425", "836cfed282be5df0b94e6", "838d4953c1602a8ea9f08", "83b1b54b179c4b7811677", "83bb6fc40d19663be2f48", "8418f543fa85c2ac7faf1", "84652b50e3a29a33cecf0", "84961c5d667394c44c129", "84e03c82a759a8c8b9293", "85358bf2baf10eca17d29", "8548fecb165a4059a9fd6", "8560451a2a7834468e661", "85c51290a08e39ac97f81", "8636d476b3861eab94662", "8647c864cf981a3e1d1a4", "868e40976feb18c8d0b04", "86fb8f761229374f32147", "874ac221b7e3ab0179a48", "890425397e08d600787f3", "891d80945b04aa43e5074", "8990414987f22d3927819", "8a47b3820b0bec2622b29", "8a5168ffcc23233088ec6", "8b56808be5bb063848259", "8b95a7a9350e9e0c571f2", "8be8af25c1c732e38b658", "8c0c66e6182081ef96da5", "8c1e121d74187722d58a8", "8c3747239d04a78f21254", "8c4e5ab0a5d491f5f2162", "8cb87e35f254686fafa82", "8cc667c1ab2ae5d2b45a7", "8cce775d95a4e821e5186", "8d16533d72aa17f981155", "8d2604fb9e59722cc8072", "8d593f6984ce491f34326", "8dadcb7ca189c6bd95e57", "8db1e4b9734b361fcc7f1", "8e4346486b232529ee443", "8eb77edd0b93d14b04ff8", "8eb9fb581c693eaa50993", "8ef0094945a660a7e5bd4", "8f1f051299aee41328dc3", "8f79f44bf2f0840b84767", "8f9e859d942673ca94f01", "904b322963d79b565e651", "91a04aea9095981f0b021", "92be2d3bd6b8646383801", "92c714d0d020aea9c0fb6", "938588a559948bdda7c19", "93af3f878c3385c3973e7", "93ba9971740976f799f57", "94473bbdd433485e76be6", "94895774506789b443780", "957b4f30b4a7204307510", "95800ec48e4761f1a32e6", "96202fa9d7c1e8008fa60", "9620ce3a5c008571d3289", "964d25c066030191bf7b8", "966967c9d2397e964c131", "96bfe584eba3cb75e25d7", "9790871bb1edf9ddd26e7", "98356e3231ff61f468e10", "989131a7da2ebcd8a3801", "98db1da4104fcd8bc6110", "98e355733c5506447ef78", "992194efc9e11fd995291", "99b7177e13a06893178c4", "99e0d5ade429924710bb1", "9ac8cb1349e0e0508ed90", "9b0904ae2056a4042f316", "9b51fe47423cfe9c78a60", "9bc96f04cba93656a5551", "9c1ce1273b6a03778b968", "9c2862eba450710830939", "9c59206dd8487f520d6f5", "9cd14219a3471dab05ab2", "9cfa6410303ac6108a6e2", "9d5621efe343b1f769a59", "9d75dc4f3819fefd651b1", "9dbdf569f1a10ab1be014", "9de32b6fe8a0b96b1a437", "9de77d7560ac8dca372b5", "9df82f77761fa701c6224", "9e4c5d4f59c1947d75e05", "9e62138e8b111f240bee5", "9e9f6f5fd69c89de57454", "9edc11ce7c3d8c76f1500", "9f02342b164915252aaa7", "9f749285b310cf367be13", "9fd6f0f4cb33ecc3a6250", "a00109bfeeb1bc46b3af5", "a042b3729d363bf80f048", "a0b801eed3b0eb72f6911", "a0d15925e48c9b810a041", "a0f2d744e24d9f0c16e51", "a14e57642abfbc0751417", "a161cf2eaf448873390a6", "a1779358566733e599878", "a179326b5935b37477059", "a18594bf4250ba74fda52", "a1a854844345c3da21044", "a1cd59292b30c9c3a2e52", "a223a21cba4509b03ad17", "a2abc46bfb26f488397d5", "a2de066a9a3efd786cec5", "a3335cdfdb81a1a558ea3", "a34e3f6f3a17a3c935042", "a37a34856fd35c545b6b2", "a47abaa860b5d3243fd13", "a49fcb26a9ee17b0c0923", "a4bfbe971e9d84b044ad9", "a4e65dac72221fb1f91d3", "a5fc817f58412be8266e7", "a63709ce832e194d50a24", "a663960ede8f826cf1739", "a66d85d27c4183981c670", "a677a5a174feb5d805548", "a6b255fc6b9012491e4a7", "a6f4563a2f1b8acb6d177", "a820513d791df7f651c23", "a85576263aa2e2af87010", "a8b5f2466e1c65150b008", "a8c6bb7b8d59f929be5c9", "a8ed884e669a366308021", "a8fdec5c626ea302cec81", "a9392fba12107f890b465", "a98e29f0ecafa15e31047", "a9b8f16a52e75a6fea698", "a9d2b4368876f11cb1f75", "a9ed897da49060e208a57", "aa363f6569f526c914353", "aa4924a458efc88a59ec3", "aa5931d29b4bcef662278", "aa5b979607c1095892af3", "ab0b3c0f8733fdf68ada6", "ab6829ab6519d30d30d59", "ac11b9e29121212f24a45", "ac203da43414941a77be5", "ac2d8576c159b65033ed4", "ac49c8ed1339933b5f0a0", "ad52fd81a0ee8f5ae4133", "ad7394ad992b3540ec850", "ad960b040dc49f43c3eb5", "ada15c9448bac3899bcc5", "adcdff97e3051248dfbd9", "ade1996159807fbc617c9", "ae5c28fac9c1ac49cbbc7", "ae8335f085539284e32b2", "af6728653bad12ea7d189", "afd66f66f9366e51082c9", "afe77817e419bee459042", "b01b6c151d012e404ca23", "b024e72e95d79bbd05126", "b02b6c985082ba4c6c4b2", "b02cbb6c04e625b92c9d9", "b0312c07640a8d219a2c3", "b052b303d38af5bd4de82", "b090831c5157e6ef37ca6", "b0ae700bad38a93f051a5", "b112b89f14e5428429146", "b11e46ec1aed9b6ed66b1", "b17110cfecd941f6518f9", "b17718f743065f333eeb8", "b1acd8e1560da27c63703", "b1b84f73f36196be796b7", "b1e603ed30ca931d23757", "b2b45768bd8bfab9d5511", "b33efa155de301b4903d5", "b380af254a3192d363d61", "b381fa4624edecfb31542", "b3ee7158f2bbc75de8585", "b40d2a931887f86a41420", "b429a22b23b0b21fbdd31", "b45ae0e13683a49e20e38", "b48e8b5637009e7ad9a91", "b4a08a89d90fabccc9dc1", "b4a6338a04eaea79db468", "b4dec953d947141c0fe06", "b50e0b3f7e0e2555c7576", "b534acc05cc65ffa69859", "b60c9ce13dde48317f014", "b688aef6bcef763d17875", "b6a47297940ae5ffe4001", "b6dfc879218e0897d9693", "b6e658f01d3c062d0b8c5", "b70b6306c162ef2023a68", "b76cbe8287df91aa27972", "b7982d38565048ffdde69", "b7d3c523e63e37c08cb32", "b8745323c8999321945f4", "b879edbdf34f76cbbb4d1", "b89c467aa4c41353dfed7", "b939a9b61bbf47ea67e04", "b966be48fa9322294e056", "b9a18b6fa45db97bc7401", "b9b479c6a602695600966", "b9dd8cbf34b21725f5a06", "baf12724818e5b495caa8", "bbc410425e50598cefb63", "bc014c9143643d5d8fba1", "bc27ee3131843e4940949", "bd3e95711d5cc87ab1df6", "bd94d82a1d07f123853c5", "bdb152be7f42a7906f758", "bdd58a4a5b747f83b56a9", "be856639c21a015dcc755", "bf0e3fa9f096906f07bc5", "bf4eb008ed2d314366d47", "bf758abc7efd7e590d370", "bfb3a634134bb3b4b7738", "c032f8d247dc704cac4b3", "c09c66fd45a1170bd3f56", "c0ae00b2197e130e1c430", "c1a046d7d5ce63cf54920", "c1cb0ab0cc6ad81e64848", "c31c9b6262c59c2bcb6d1", "c3751b19a2fd9bb7d4a69", "c3b1b07b80ce5226e9501", "c3ddfe9fb51d503e93a58", "c4326ccbc15138ee6e9e2", "c46294530aefe2a3fd185", "c53a0be184f8311338c61", "c5ac0914afea58b9e6995", "c5d2bc5bef98bf41efe16", "c5ef543678e4c0fe32a05", "c5f3d7fba7f186d88b8a5", "c608b1d9de06f1f638c08", "c6738ec784ee70b911532", "c6a38837f00f42504a914", "c6a95245917c6222795f7", "c6c85ec271c3ec6d11090", "c6d455737e5266eedbc78", "c6f0e42736bf3e6a5e423", "c70ee274d7f891ef9dd70", "c732d644a483cab217a52", "c7c187a7682a6b5c689b3", "c7d838b85d0887865b4b6", "c7e7cdd7ab4a9b4ed4ec1", "c824193bda23a4f80d0b8", "c853c3ce0bd2140b140f7", "c8ca54d38415230e9fad0", "c8d90a6111f809b248c26", "c986657d060de1951ec46", "c9b4c20bb2089f0d12d49", "c9cb056d9b66f86694a34", "ca264c6b70fa0b40a0c03", "ca968f159f7a58b6f9650", "cb2d834f08167810e8100", "cb7b5c6f81e39e0ad3869", "cc0bf0004aa6e66c70804", "cc19c435047f2247f0ae0", "ccc905f593754a9de1700", "cdc066037832978ac1fc3", "ce703ba8ce9173f7deb42", "ce8f2979d0f1a57085138", "cec20003c6afee7e62cb0", "d009e9d1f29710646b4f6", "d09d4719637b78045a6c9", "d09e4a13559ef20b9cb23", "d0c04383a5e79925be534", "d10a80408b67e17e6eab5", "d14b360212b0f08c9a0c6", "d1829a912f8afdba8cf94", "d1ac33db18021153010c5", "d1e7d37d63a5fb5c0e612", "d1ea2b8cf956bce3cdab7", "d21298116b91a3aaa2cf8", "d264950c94933655912b2", "d26644bf33f12692fb976", "d28334974095362b68f46", "d2909ddea1d166d1ecbd6", "d2b32f7e54b77f3328d08", "d2ec603c7637124a17ec7", "d303a876d56de34a5ea26", "d32b8b50d4ba151f76189", "d37ff7c8c6d6d78d552f5", "d38a3a76f22bcbdcddd12", "d414a4b269d02f6170861", "d4310d621c3a5615dc603", "d48fd2c90ed87c6f1e401", "d4aac43fbd0b1afcd2f04", "d4c4f375d19272e78de79", "d583384a9271e372b1410", "d5a54d117b1059779d754", "d5a8d600350618d5184d7", "d62ce1e2f75834bda8023", "d6a9b6f36438ec84e7fa8", "d6ce3462d2b0e28661df4", "d6d21f74c84afeb95c813", "d7aea4c610a2b82b585e5", "d7b652b8beda28efe95a9", "d7bb2fa85ad5fb51b1a61", "d810a27fb03bc18caef83", "d833be92f78a901e84458", "d88c99ef4a31fe8443b63", "d8b93af7551c3b2b1cac8", "d9388b8863cab3a5775c5", "d983cdf6dbddb2e478da5", "d99a9da4373f37a962e34", "d9dad1f31ef6e1b3a92d5", "da347488dce9b459d7d47", "da5354ad95dd578fc2ef1", "da6533ffd5e1fdfc4d225", "daec12f9f6a2fafe2c275", "daf48e0ac8e78953ac193", "db02c06bdb20d9394f452", "db6ac65213476ae17d3a1", "db77a5eceb4b7ece86089", "db789cd99c7a20abef082", "dbb26228c4443358decb9", "dc2d2df8d5f04a737fb91", "dc529e0d963dd8c698756", "dc738e24ea242aac5b600", "dc88a2833f71f2aa1f5d7", "dccb1149c43f35e8c8416", "dd11d32d3489ffea6e836", "dd1cf685d7a894120f046", "dd4038b8f7aaa8a36c447", "ddb04d3e707dd6444d988", "ddc12630694ca8e5b7742", "ddf427208899e36c1d218", "de2d83cb253023746bb85", "de38cc86d98333b79f484", "de53bfe9cba5466c0e6a9", "de60baee7016d341f5cd1", "de8d7531d43215bcb8284", "deadd023e9713450a1a27", "df26de27de7df6590a975", "df3d9f30b5b1624b47a64", "df8341e556c384d09ee36", "dfc77605758edfdf38979", "e04de781998cac47d8084", "e08309eacb2cde73c57c2", "e08bbd88570e590310ac3", "e0b68276dc4c7793264f3", "e1b0f97fc9bb43a4e9f64", "e1e11af7f2cc89b72d3f3", "e1e9b471cdd04717714c6", "e1f77a1bed2e6d55ae800", "e1fe3277911f6d7d33150", "e2655b088aeeae0af9389", "e267e43f8bbf1074dc3e2", "e26806d65b32f48f862e6", "e2b82775edc4cf8d29fd0", "e30f8b68d139df1835e42", "e3d398c9d08b3f081c3e2", "e3de69cb378c99bded449", "e41a1626d075aa8358be9", "e4c0272c0a8e6567f6736", "e5690bdc45d82dc744ff3", "e612381f620f6f7a3b9e5", "e670811bc61da553ac837", "e6877970a696b4e5d8c09", "e6a48a6eeebc4472bbd97", "e6bf227c219c9c6286519", "e6ec2c372c2aae3417227", "e76108c6cf6a70231cbc9", "e89b53b0f9cda10d0ad70", "e8d4bbe189776d4e43361", "e8ee7958869ff5b166ca3", "e8f457d65a1f246aa8508", "ead344d6842f3831da618", "ebdf1b790bf2ab71bbe98", "ecd4ef1aa538194bcbce4", "ed2ba0ebc033ed3c4cae0", "ee7d1a04aaf7e969ba891", "f01168d347cd0777499d0", "f015a9472b00afd008e76", "f02e6ed5bbd6ea1e913b5", "f06dfbca42c9aafe942e4", "f0e57e63af48fb78bf190", "f0e809b99762e7ae65722", "f10bbea5f641d89c81e33", "f1dc9f21a7e1a232fa214", "f240ab78687bed3e16398", "f24a08c6a025e0ada5376", "f262f3c28e5f421e00a20", "f2d8df0fdabaa5a91b6d3", "f333fd25cf30fcf2aa051", "f34f9bd2b7bb625d9d878", "f3d53424dba6f7ac3e853", "f3d8715dabe6ce250a8e7", "f489a3776c7689a304f45", "f58e9f2828347f4181307", "f5ee14f16eba98d024495", "f605da910a8ccebbbecb7", "f63849736760b95938eb1", "f6c1f99d4a174125c71b3", "f726aa845f15f8d1d87f2", "f79805c987c9350b49c87", "f7be8ea12f92629a8abe5", "f852fbf3d9f5079e732f0", "f899fedb1564002a57455", "f89ab5bde769590e7d594", "f8a5856acf7c77aec6e51", "f8df5f06f7bcd6ce9a956", "f8ffaada79a3fdc5a1dc5", "f90c314a6918713c522f7", "f9d3c46b52fd17cd78e29", "f9fb1984a37e926ba58f7", "fa408d8bbe51a0d7cc315", "fa4b74134f9c0e2445671", "fad55ecffa3a816e79283", "fb6df3078a674501a6094", "fb9d2b21df59a55f33308", "fba262eb99a8e6fe4d702", "fbea696ad96312485bac2", "fc3e71e80f63ce789c137", "fc55c5183aadfa1d1c6a6", "fc7d3e493b24d97cfbe74", "fc8a714580e710ccf0084", "fc9da4e6d9d60b1bc7645", "fce0443d43b1346cf45c8", "fd41dae668a763eecfe19", "fd5d7c366c734ca6669f7", "fdae1266840f26c439dd8", "fdec34e9e5cd9137d4bf8", "ff0771a1d544cd0d547a0", "ffb859a2654c449ca4205", "ffc117c3e08f6c7811d32"], "id": "lock3_secret_law"}, {"n": 4, "key": "lock4_new_party", "title": "The New Party", "obj": 4, "objText": "Core Objective 4: Analyze the appeal of the Republican Party to northern voters and how it led to Abraham Lincoln’s victory in the 1860 presidential contest.", "type": "pick", "card": "<p>In 1858, Abraham Lincoln and Stephen Douglas held seven debates in a Senate race, and Lincoln warned that the nation could not “endure, permanently half slave and half free.” In 1857, Chief Justice Roger B. Taney wrote that Dred Scott was property, not a citizen. In 1860, Lincoln won the presidency with only 39 percent of the popular vote. He carried all eighteen free states but none of the slave states.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 13, “The Emergence of the Republican Party” (Douglas versus Lincoln; The Dred Scott Case; Lincoln’s Election).", "prompt": "Pick the correct answer for all three questions.", "qs": [{"id": "y", "q": "In what year were the Lincoln-Douglas debates?", "opts": [{"id": "a", "label": "1848"}, {"id": "b", "label": "1858"}, {"id": "c", "label": "1860"}, {"id": "d", "label": "1861"}]}, {"id": "p", "q": "Who wrote the Supreme Court’s Dred Scott decision?", "opts": [{"id": "a", "label": "Stephen Douglas"}, {"id": "b", "label": "Roger B. Taney"}, {"id": "c", "label": "Abraham Lincoln"}, {"id": "d", "label": "John C. Frémont"}]}, {"id": "v", "q": "What part of the popular vote did Lincoln win in 1860?", "opts": [{"id": "a", "label": "About 39 percent"}, {"id": "b", "label": "About 51 percent"}, {"id": "c", "label": "About 60 percent"}, {"id": "d", "label": "About 75 percent"}]}], "hints": ["Each answer is in the Clue Card. Look for the year, the name, and the percent.", "Taney is called the Chief Justice in the card. The debates happened two years before the election of 1860."], "nudge": "Not quite. At least one answer is off. Re-read the Clue Card for the year, the name, and the percent.", "entries": ["fa2dcd02411538a516743"], "id": "lock4_new_party"}, {"n": 5, "key": "lock5_the_south_leaves", "title": "The South Leaves", "obj": 5, "objText": "Core Objective 5: Explain why seven southern states seceded from the Union shortly after Lincoln’s election in 1860.", "type": "fill", "card": "<p>South Carolina’s convention met in Charleston and voted on December 20, 1860, to leave the Union. By February 1, 1861, Florida, Georgia, Louisiana, and Texas had also seceded. Their secession papers listed many complaints, but the main reason was their determination to preserve slavery. President Buchanan said secession was illegal, then said, “I can do nothing.”<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 13, “The Southern Response” (Secession of the Lower South; President Buchanan’s Waiting Game).", "prompt": "Fill in the blank using the Clue Card.", "sentence": "The southern states left the Union mainly to preserve ________.", "scramble": "V  A  R  E  Y  L  S", "hints": ["Read the third sentence of the Clue Card. It tells the main reason.", "The word starts with S and ends with Y. It has 7 letters."], "nudge": "Not quite. Re-read the Clue Card for the main reason the states left. Use the scrambled letters to check your spelling.", "entries": ["004622717b38db28c91b1", "0098eb297dabadeb77f16", "00acedeb1e81e26ebc5b1", "01111cbc867f2f7bc9148", "012abed8a8af7ee265dd5", "013b4f229286dc7185801", "015f58604f15e105bd844", "022d830806f9bcacd4cc2", "0257c867bf2d8e12d0199", "0290da50759a5d8e166a6", "02d1133a0278965f69855", "0329c4ccac4604bbd9c67", "036788209d44885fdb151", "038f81bd3fa4e3e0b3973", "04e27f3f7d660c01b9181", "068e506c96b7e9c06d496", "06dc9aa16886e046e6f52", "06f87362792c4457f6af9", "0796d4dfbf4257b429b33", "08ef7612b3d80513817a7", "09bf5d16734a9d0aedcb1", "09e81fe3366ac885d8195", "09f7549bdb560168861f8", "0a382fd45c7316fc987c3", "0a79e1b05efe6b05e9b12", "0c0c5c4876da2f3a7b298", "0d0298666bee1582f0d72", "0d2fae2bca786681e8b67", "0d57594a44d646d2dec45", "101033079daa903271e10", "11508317365e1b7126f82", "11b4171fa6a2960ecc047", "11d0c2b8df577facd43e9", "1216aa899fe9e3df19109", "12a6db51f076c59ee3516", "131788183efc7671cabf8", "1355b6941e1dbb9172920", "135e044ac74e76b2db007", "1386c3e1457418f3f6ae4", "140b07b71083d7e5d1c62", "147154472e20e22587373", "16d783cb070a8c87bf933", "16f56101d2badb93a1839", "17277b8e5901d48aa37d0", "1751e500729a99b2b8b56", "17ee0908899c8ac7adb97", "181810ce08418ef4bc583", "189c694df355841d557f7", "1931e6a8daf436c38cf66", "19325733efe861c2885d1", "194f6cff404bd1805a342", "19d189ddea0f720397fe3", "19f460dce95130f69d445", "1a04a819008be1e87ad78", "1aee13da45be83547d820", "1b43eca14baafe9e59200", "1b68802abe2aecd333ff3", "1bd391dfd35aa3c4f2479", "1c5eee4a4b703db4e4584", "1caa5dbea137fe483d846", "1db50845590e6e4640e79", "1db80c12e07f5073cc534", "1faf52d10b1e333c86145", "2026a95f8123d6a12d7f3", "2071108d89afbf60f1f43", "225c91133540f8d49e0d2", "22875353946a6f8dc69b4", "237f63767f265d7718bc5", "2532a6febf0208dadee45", "254aca97a37ed4617e334", "25a65a446d698246862d5", "2667702c3ba88a6c5f5a0", "27baa48d8888395ff3581", "28426421c6267553ce876", "28dfd0f647fd7af3aa8d7", "2959c6a16cd107abe3672", "29ece783951ffc45c74c1", "2a1cca19d5a1254e76a65", "2b03420f47f7efd143052", "2b43b99dca7065d486867", "2cf0627013d05608c2470", "2d0aea6587c1622327ad7", "2dee6bcd60818a66f67c7", "2ef6e1129a3745aae65d5", "2f7c60dc22ec84f1317b6", "2f9acf48673212e9ee1e2", "2fba9e14685cec906a5b9", "30b86c9dc0a340d0604a2", "30d559b613eca8d0450c8", "30ee1e4d6706cdc5e3c59", "32278a778534762b05942", "3238593e312b608b31c37", "331f288e491c95efc1258", "336996de33f8dc45c62a4", "33843cf9d9041114c0d22", "33ca6aa07e4fcb3cf30b4", "3418ed630a97a4a414d18", "3436c1cfd2043b8079bf1", "34ea4d1719c7b3459d684", "36093b42ff491a8ea6983", "3614a30649bac2b2b6352", "3666261e1c94666295a46", "37080ba68ca80147b1901", "3784fb09cd8c899fbaed9", "37b5bee71d532a12a07a9", "384c507d795878358fcf6", "389f3061e92e02228b282", "38d507aecfff03c19e5a2", "38e03d8c5f629608995a2", "396278c18475576e1aa58", "397f342f82ab376e6bd87", "39ba2edcfa90ea8a56516", "3a57d34497cdbbd947be6", "3b0d7c1944f905449c4f0", "3b62aa2a210cf295c69e7", "3bfda81d4adbec2e6fc07", "3d19ecc72dcac423e1c86", "3e122cba5fc3408b013f3", "3ef317308ba42ef7a5567", "3f536a5d091ccb42abc26", "3f5417f3abb8e318c3cc4", "3f8005513e4ff1794a6c6", "40006e0a056e357354232", "404055832ae567c56ae29", "4051217640688e618b295", "40ee461edc414a98c0e74", "4158ef9843679c501adc2", "415f4c4bc732d6badb833", "41659a5a7a8224f8cc114", "41b16833c12809a03de41", "43eb28ed7ad45940085a6", "44779dad9f6757a7b8755", "4485063ee06dad4958909", "454c785f15bb072c7e4e3", "45aaec85b240fedb89d48", "45ddf53efd0ae8335dda6", "46c65b156e550a4346f82", "46fdf8ca3c6630da99e47", "46ff95e384c0174c1c602", "47757ebd0463855728018", "48032be15c49c5f1cf905", "48076c9f9c7c26156a7e1", "480bad95f470fea642900", "4901e89c0f1e597ad7778", "49551d08390e039e106a0", "4a84acf00d946bc0655e2", "4b266a62b0f483526d5f3", "4c364f1cc777e7bef4091", "4c4838a12dee10c93dc82", "4e1308a3e2b4912895022", "4e740b424441d4f0036b1", "4ecfe0956379dc8de6a71", "4f2d39e1689d37c56e5b0", "5092209100ab393d7df39", "53ecb4681b7bfe4b07cd7", "54080c7c4063ac3f26c19", "5437daea285740c14dac6", "5487537480893321e9948", "55571ce25a5754e9eb047", "55abbc2d9f62a1eb55fb3", "56b8b0e9e2bdadcf9a2b7", "56d1b9587b92c8a3a07f7", "57cbce5df8ca716a1ea39", "58c325cb86ec5822fdc44", "596facdbea60e94d9e9d6", "5c4385ec43ac4a5c0cea9", "5c7fd5efb9cbc376e97e5", "5d28c44de7cd811ec27d9", "5d49c8b323880292ce327", "5def189efa6998285aef9", "5ee8ccff595ff0a916090", "6054c22be12ac4d4dbd52", "6108328611c645e74c302", "614647ef37fc5c70ff208", "6187bbc29341b269ccfc8", "64074a13a7d6f98030e29", "66aebb2b0a46772e88e94", "68921838b3dea1c886626", "68f8b73f69bfab913b224", "6ab6ed0a4dd9ca3fcc1e4", "6b339a05dcd42b002ebf1", "6b6d0fefc66f86bfc07a4", "6c6e3e70e514d45c8d221", "6d7c7e80e917af08f4d48", "6d8023b618c5e67d3ee77", "6dc4ea00f1f16756622e9", "6ee2dcdc5ef1cb945e473", "6f1e9d812885105dae012", "70e9e71d86624babc2ba3", "72b8a37cd45f9eb7b01a2", "73bd4573d3e7f275ca5d0", "74bf719986b4bec727ff2", "75583be5dfa30ca753187", "761beae474da85d9182c6", "76ad646433e01fdfb28a7", "76d64645bc8a0514cba59", "77188c24d3710e4efb615", "773d1200105ce992987d3", "7882893d6cf2a04b61a41", "7890ae71ad892087a8623", "7a9e8444bcde81a512bf4", "7af4972db2eef26aeb268", "7b49472bff42783ecef00", "7b4dfb14d33257d58b400", "7b500ece28e3efc861305", "7bfa18bdca1126d644a94", "7c1e5c1339e2f039fdd73", "7dbeabdc815ecfce2feb0", "7e68ffa19ee681a66b6b8", "7ec0ab209c9e15887ca77", "7f93103742afcfab976c3", "819c3a26586dc7bab7098", "83f89afc7834ccb1fd578", "854fc38856060c68c13f1", "85674510a072e0c0393f7", "86298a6687ba52ccf5ba6", "86c4a31744a49cf5f3299", "88cf5a6c3d9e693acb4e4", "8934db1d84e47621332d8", "89715badff4c9db799ad5", "89af675fcdfab2a97a1f4", "8b559c2d548f2b69bf170", "8c7bcd7dea9e2282a7477", "8cf693360eb593f0efd37", "8d79b3c68e87243ec6584", "8f04edf4d42ba4935b906", "9184dac27718f5b7c0059", "9349bf45a904f93700451", "95dcc8eb639cd1a886b95", "9611c9166fabed88b26d9", "96719e8b14c26c5361279", "97b6811dc06153cbc5447", "981877a5874c16c72ae36", "98288f8135dd843da99c8", "9894353767a82adf70371", "98a3342204dcaf699f519", "992515ff7d9fb9f8ef371", "9abc2b3511fb76998d7b1", "9ae5ca128e0761ed2c3b6", "9b8de3551ef4336b1ce74", "9df944874dff00494f036", "9ff1facdc315503b791b8", "a0084898526b914fd11b1", "a158d1122df32695caf99", "a2280706acc52c72eee37", "a30b71cd7ada14d98cd28", "a5a6229cbbdc26dcf1ca6", "a5b734308a193cdd177a3", "a5cc0b1fe3152ef2bdb30", "a68a403378f7360d2cc32", "a69f2dbd9213027144291", "a75893699c56898c34175", "a77b5496591095e00c886", "a7af4a27f371a9055de86", "a7ea7f6316bd3de74cb08", "a942eee9d55c6d0f45bc2", "a94b4172a574efdce8171", "a9d8f5654c304d0262bd5", "ab108c9b2adac9ce56b22", "ab7161bf9807e4afc6796", "abc44125378653a4d2229", "ac850d4d8de4464680415", "acbd13c6c1bbc96fce658", "ad36fb8a8b1fac1579100", "ad5b83c31d39383f4c799", "aeb4d7f39a3fc5d95e025", "aee49229e778a3423d544", "af4789ed9446fab41c007", "b0b5bced3c4a59afff332", "b0c16cad06000fb659341", "b123ca000c79e6d8d2ed9", "b195983341bdfa61eb124", "b1b8b8b1b633412d0c683", "b238223fdf25ad78ce398", "b26b74ba32e8a69fea986", "b2fd3a7646542f25ce177", "b3778f25db9bfe7f33bd4", "b380a7d10da99debf0ec1", "b39dcf18b9bf249eb6ff1", "b40ece7290e1562253622", "b48a04eab32f6477607e7", "b79183bfbea92730850f9", "b7ce9f216e402bc52d310", "b8b55f19487ff6765ed91", "b9a964f866d0e652a41a6", "b9ac608ae86c039d71cc0", "ba7abefcf58e9ed3ba486", "bbc7499e46b1b602f0134", "bcc7227ff0be4d026d3e6", "beaf703ce9dbfc4fc34a1", "c2184fe39f4e6deab3c35", "c28912f121a4b0d17e8c6", "c296c575d4a3cd4efaad9", "c2ca5e2393d3dc6910671", "c2fd2e3ff546b04d6e1f8", "c5b680cbe50aaabd88ba4", "c6684011d76badf6af221", "c68d968ccab43dbdb38a5", "c6fa9ca1d71a809ca73d1", "c7002e1acb97dcd66ed65", "c70d484654c6d49edfd12", "c7f6032a41c96915fefa4", "c831b67377e01d5e49160", "c83f4b0d8786a9e76c6d8", "c97ccd195aedc73273e62", "ca30c8409935ff02df6c8", "cb06d579049304f0fca15", "cbb8da0a65a56891dfb61", "cde773c422d4f12ba3aa6", "ce08a4b88a9989c08b967", "ce64d8da115f5418187d8", "cf2430ae754428a2f3867", "d03b191c599b33dd1b471", "d07f4237cc3c29f5c4561", "d097d578cbe82c684dfd5", "d0b7a957a5d30130febd9", "d0bc5a08f7f7c23360980", "d1546ec17cb116189d9c8", "d258c36225be511bf9725", "d2d02ed41481e47698192", "d4b4131f7853c27c9e336", "d4cd30721b4e3b67c6a34", "d6bdab638af6061648951", "d6d14cec274d99665da19", "d7cd63895aaa044daad15", "d8127941798f6182c0680", "d9247449231bbc34ed3a2", "da187c674011622daad41", "da9c7193bb56956421603", "db2aed2d6bf6806ac4b42", "db6d06c51699848096db2", "db9f72d06139b8e2d75f1", "dbe7f38a657ce0fd037b4", "dc11f60c596eea4c4cf35", "df2091634518beda68b73", "e006469dad4156f8841a1", "e00d1478a8167aee2a8c2", "e0ce8f76ed2599d212315", "e19ccd02c3a37f4c821d9", "e1b037cf14b39a1abccc6", "e1f25146ce8b2c59f30a7", "e2dd834b1dd709b3b0f27", "e330ea1ff99d5ddfabb44", "e42cae94c70548b47d3d6", "e47170e77b05d2f9c2fa1", "e4b09a787125979ff99d5", "e4bf5876023ac69419016", "e5905ada5a092b2f3f221", "e59b8b1d1e3197b682222", "e65275ae24bd5abd3feb4", "e68792ea82b65ba5372c8", "e6b3ccf4c5ce3f943bee5", "e7937499ceb11542fce99", "e955f5227f79ba7d3d072", "ea9cc73b22290b725af06", "eac680617e8b2cd61f3f9", "eb2c36aba0760b03263e5", "eb9741ce44a663fdc8701", "ec3a521ee2475fabe20d5", "eced800448c0bb2558a01", "ed4898f1c91257d99a8c1", "ed9fecacce3f914ecf758", "edae59bf0d7e9c1667fd1", "edbffb73fd23580925fe1", "ee971b7e4af52e05c3cd2", "eec851c6548f1d38bf637", "eeee27e4772d2ccf0a3b1", "eeef0049c1c356042aed3", "ef0330cd5f706eee54b84", "f05ba5e64209f25d3ddf7", "f08486af810be8dde8bf1", "f1e6dcd5f2075a55acc41", "f256f277ee7770cf04937", "f289abd2dfaf631373946", "f320154f398cf5137d1a2", "f337dc53948998192d0d8", "f47dddab58144e0bce181", "f4d106d56831f9b53e374", "f50253f0e34c44b1bcf93", "f7a0edbb328b42b00e720", "f7d2778ceeb6cabcaaaa6", "f82613025cd35ee92ce50", "f884a20d4d12bd99e47f1", "f93180f835ecbb9cf4a28", "f9cf78927dbcaf5da6528", "fa310f1e900a40e2265e2", "fadc8518b5c3bcb2e03b4", "fb1ac0fe224e23091e7b2", "fb575c63ef0678d91fbd7", "fcc98186a7752363ed2c3", "fce7cae43a5df176b4353", "fe7a7951523fef219d6e0"], "id": "lock5_the_south_leaves"}]}</script>
+<script>
+function sha256(ascii){
+  function rightRotate(v,a){return (v>>>a)|(v<<(32-a))}
+  var mathPow=Math.pow,maxWord=mathPow(2,32),i,j,result='',words=[],bitLen=ascii.length*8;
+  var hash=sha256.h=sha256.h||[],k=sha256.k=sha256.k||[],pc=k.length,comp={};
+  for(var c=2;pc<64;c++){if(!comp[c]){for(i=0;i<313;i+=c)comp[i]=c;hash[pc]=(mathPow(c,.5)*maxWord)|0;k[pc++]=(mathPow(c,1/3)*maxWord)|0}}
+  ascii+='\x80';while(ascii.length%64-56)ascii+='\x00';
+  for(i=0;i<ascii.length;i++){j=ascii.charCodeAt(i);words[i>>2]|=j<<((3-i)%4)*8}
+  words[words.length]=((bitLen/maxWord)|0);words[words.length]=(bitLen);
+  for(j=0;j<words.length;){
+    var w=words.slice(j,j+=16),old=hash;hash=hash.slice(0,8);
+    for(i=0;i<64;i++){
+      var w15=w[i-15],w2=w[i-2],a=hash[0],e=hash[4];
+      var t1=hash[7]+(rightRotate(e,6)^rightRotate(e,11)^rightRotate(e,25))+((e&hash[5])^((~e)&hash[6]))+k[i]+(w[i]=(i<16)?w[i]:(w[i-16]+(rightRotate(w15,7)^rightRotate(w15,18)^(w15>>>3))+w[i-7]+(rightRotate(w2,17)^rightRotate(w2,19)^(w2>>>10)))|0);
+      var t2=(rightRotate(a,2)^rightRotate(a,13)^rightRotate(a,22))+((a&hash[1])^(a&hash[2])^(hash[1]&hash[2]));
+      hash=[(t1+t2)|0].concat(hash);hash[4]=(hash[4]+t1)|0;
+    }
+    for(i=0;i<8;i++)hash[i]=(hash[i]+old[i])|0;
+  }
+  for(i=0;i<8;i++)for(j=3;j+1;j--){var b=(hash[i]>>(j*8))&255;result+=((b<16)?0:'')+b.toString(16)}
+  return result;
+}
+function sha256u(s){return sha256(unescape(encodeURIComponent(s)))}
+
+(function(){
+  var PACKET='CPUSH_L8_ESCAPE';
+  var STORE='cpush_l8_escape_';
+  var D=JSON.parse(document.getElementById('er-data').textContent);
+  var $=function(i){return document.getElementById(i)};
+  var S;
+  var digits={};            // runtime only: lock n -> digit
+  var entries={};           // lock id -> {h20: maskedDigit}
+  var expanded={};
+  var lastTick=0,timer=null;
+
+  function squash(t){return String(t).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'')}
+  function h20(s){return sha256u(s).slice(0,20)}
+  D.locks.forEach(function(L){var m={};L.entries.forEach(function(e){m[e.slice(0,20)]=+e.slice(20)});entries[L.id]=m});
+
+  function checkLock(L,canon){
+    var salt=D.salt+L.n+':';
+    var h=h20(salt+canon),mk=entries[L.id][h];
+    if(mk===undefined)return null;
+    var m=parseInt(sha256u('m:'+salt+canon).slice(0,2),16)%10;
+    return (mk-m+10)%10;
+  }
+  function fresh(){
+    var o={first:'',last:'',period:'',started:false,elapsed:0,escaped:false,escapeMs:0,debrief:'',codeTries:0,locks:{}};
+    D.locks.forEach(function(L){o.locks[L.id]={solved:false,attempts:0,hints:0,guess:'',readable:''}});
+    return o;
+  }
+  function loadLocal(){var o=fresh();try{var r=JSON.parse(localStorage.getItem(STORE+'state')||'null');if(r)restore(o,r)}catch(e){}return o}
+  function persist(){try{localStorage.setItem(STORE+'state',JSON.stringify(snapshot()))}catch(e){}}
+
+  function totals(){
+    var t={locksSolved:0,attempts:0,hintsUsed:0,exitCodeAttempts:S.codeTries};
+    D.locks.forEach(function(L){var l=S.locks[L.id];if(l.solved)t.locksSolved++;t.attempts+=l.attempts;t.hintsUsed+=l.hints});
+    return t;
+  }
+  function fmt(ms){var s=Math.round(ms/1000),m=Math.floor(s/60);s=s%60;return (m<10?'0':'')+m+':'+(s<10?'0':'')+s}
+  function snapshot(){
+    var o={packet:PACKET,course:'CPUSH',lesson:8,assignment:'Escape Room (Lite)',version:1,saved:new Date().toISOString(),
+      student:{first:$('f_first').value.trim(),last:$('f_last').value.trim(),period:$('f_period').value.trim()},
+      status:S.escaped?'ESCAPED':'INCOMPLETE',escaped:S.escaped,
+      escapeTime:S.escaped?{ms:S.escapeMs,text:fmt(S.escapeMs)}:null,
+      totals:totals(),elapsedMs:Math.round(S.elapsed),started:S.started,locks:{},debrief:$('debriefText')?$('debriefText').value:S.debrief};
+    D.locks.forEach(function(L){var l=S.locks[L.id];
+      o.locks[L.key]={objective:L.obj,puzzleType:L.type,solved:l.solved,attempts:l.attempts,hintsUsed:l.hints,solvedWith:l.readable,solvedGuess:l.guess}});
+    return o;
+  }
+  function restore(o,r){
+    if(!r||typeof r!=='object')return false;
+    var st=r.student||{};
+    o.first=st.first||'';o.last=st.last||'';o.period=st.period||'';
+    o.started=!!r.started;o.elapsed=+r.elapsedMs||0;o.debrief=typeof r.debrief==='string'?r.debrief:'';
+    o.codeTries=(r.totals&&+r.totals.exitCodeAttempts)||0;
+    var allOk=true;
+    D.locks.forEach(function(L){
+      var src=(r.locks&&r.locks[L.key])||{},l=o.locks[L.id];
+      l.attempts=+src.attempts||0;l.hints=Math.min(+src.hintsUsed||0,L.hints.length+0);
+      if(src.hintsUsed>L.hints.length)l.hints=L.hints.length;
+      if(src.solved&&typeof src.solvedGuess==='string'){
+        var d=checkLock(L,src.solvedGuess);
+        if(d!==null){l.solved=true;l.guess=src.solvedGuess;l.readable=String(src.solvedWith||'');digits[L.n]=d}else allOk=false;
+      }else allOk=false;
+    });
+    if(r.escaped&&allOk&&r.escapeTime){o.escaped=true;o.escapeMs=+r.escapeTime.ms||0}
+    return true;
+  }
+
+  /* ---------- scene ---------- */
+  var NS='http://www.w3.org/2000/svg';
+  var XS=[210,255,300,345,390];
+  (function(){
+    var g=$('plocks'),h='';
+    XS.forEach(function(x,i){
+      h+='<g class="plock" id="pl'+(i+1)+'"><path class="sh" d="M'+(x-8)+' 124V114a8 8 0 0 1 16 0V124" fill="none" stroke="#EBEFF4" stroke-width="4"/><rect class="bd" x="'+(x-15)+'" y="124" width="30" height="24" rx="4" fill="#D24B54"/><circle cx="'+x+'" cy="135" r="3" fill="#1B283C"/></g>'+
+      '<rect x="'+(x-16)+'" y="158" width="32" height="36" rx="5" fill="#0E1726" stroke="#E18E94"/><text id="dw'+(i+1)+'" x="'+x+'" y="184" text-anchor="middle" font-size="24" font-weight="800" fill="#EBEFF4">?</text><text x="'+x+'" y="208" text-anchor="middle" font-size="11" font-weight="700" fill="#B9C3D1">LOCK '+(i+1)+'</text>';
+    });
+    g.innerHTML=h;
+  })();
+  function sceneUpdate(){
+    D.locks.forEach(function(L){
+      var open=S.locks[L.id].solved;
+      $('pl'+L.n).setAttribute('class','plock'+(open?' open':''));
+      $('dw'+L.n).textContent=open?digits[L.n]:'?';
+    });
+    $('scene').classList.toggle('escaped',S.escaped);
+  }
+
+  /* ---------- build lock cards ---------- */
+  var W={};   // widget state per lock
+  var LOCKSVG='<svg class="lk" viewBox="0 0 44 44" aria-hidden="true"><path class="sh" d="M13 20V14a9 9 0 0 1 18 0V20" fill="none" stroke="#EBEFF4" stroke-width="4"/><rect class="bd" x="8" y="20" width="28" height="20" rx="4" fill="#D24B54"/><circle cx="22" cy="30" r="3" fill="#1B283C"/></svg>';
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+  function buildLock(L){
+    var sec=document.createElement('section');sec.className='lock glass locked';sec.id='lock'+L.n;
+    var head='<button class="lh" type="button" id="lh'+L.n+'" aria-expanded="false">'+LOCKSVG+'<span class="lt"><small>LOCK '+L.n+' · CORE OBJECTIVE '+L.obj+'</small><strong>'+esc(L.title)+'</strong></span><span class="dg" id="dg'+L.n+'" aria-label="digit">?</span></button>';
+    var body='<div class="lb" id="lb'+L.n+'"><p class="objline">'+esc(L.objText)+'</p>'+
+      '<div class="card"><h4>CLUE CARD</h4>'+L.card+'<p class="src">'+L.src+'</p></div>'+
+      '<div class="prompt">'+L.prompt+'</div><div id="pz'+L.n+'"></div>'+
+      '<div class="row"><button class="btn primary" type="button" id="ck'+L.n+'">Check</button><button class="btn small" type="button" id="hb'+L.n+'">Hint</button><button class="btn small" type="button" id="rs'+L.n+'">Clear</button></div>'+
+      '<div class="hints" id="hs'+L.n+'"></div><div class="fb" id="fb'+L.n+'" role="status"></div></div>';
+    sec.innerHTML=head+body;
+    $('locks').appendChild(sec);
+    buildPuzzle(L);
+    $('lh'+L.n).addEventListener('click',function(){
+      var st=lockState(L);if(st==='locked')return;
+      expanded[L.n]=!expanded[L.n];updateLocks();
+    });
+    $('ck'+L.n).addEventListener('click',function(){submit(L)});
+    $('hb'+L.n).addEventListener('click',function(){hint(L)});
+    $('rs'+L.n).addEventListener('click',function(){clearPuzzle(L)});
+  }
+  function labelOf(list,id){for(var i=0;i<list.length;i++)if(list[i].id===id)return list[i].label;return id}
+
+  function buildPuzzle(L){
+    var el=$('pz'+L.n),w=W[L.n]={};
+    if(L.type==='order'){
+      w.sel=[];el.innerHTML='<div class="chips" id="ch'+L.n+'"></div>';
+      renderOrder(L);
+    }else if(L.type==='match'){
+      var h='';
+      L.terms.forEach(function(t){
+        h+='<div class="mrow"><label for="m'+L.n+t.id+'">'+esc(t.label)+'</label><select id="m'+L.n+t.id+'"><option value="">Choose a description...</option>';
+        L.descs.forEach(function(d){h+='<option value="'+d.id+'">'+esc(d.label)+'</option>'});
+        h+='</select></div>';
+      });
+      el.innerHTML=h;
+    }else if(L.type==='pick'){
+      var h2='';
+      L.qs.forEach(function(q){
+        h2+='<fieldset><legend>'+esc(q.q)+'</legend>';
+        q.opts.forEach(function(o){h2+='<label class="opt"><input type="radio" name="q'+L.n+q.id+'" value="'+o.id+'"> <span>'+esc(o.label)+'</span></label>'});
+        h2+='</fieldset>';
+      });
+      el.innerHTML=h2;
+    }else if(L.type==='decode'){
+      var k1='',k2='';
+      for(var i=0;i<26;i++){var p=String.fromCharCode(65+i),c=String.fromCharCode(65+(i+L.shift)%26);k1+='<div class="c">'+c+'</div>';k2+='<div>'+p+'</div>'}
+      // build key in two rows of 13
+      var key='';
+      for(var r=0;r<2;r++){for(var j=0;j<13;j++){var idx=r*13+j;key+='<div class="c">'+String.fromCharCode(65+(idx+L.shift)%26)+'</div>'}for(var j2=0;j2<13;j2++){key+='<div>'+String.fromCharCode(65+r*13+j2)+'</div>'}}
+      el.innerHTML='<div class="cipher" translate="no" aria-label="Coded message">'+esc(L.cipher)+'</div><p style="margin:.6em 0 0;font-size:15px;color:var(--dim)">Decoder key: the <span style="color:var(--hl);font-weight:700">pink</span> letter is in the message. The white letter under it is the real letter.</p><div class="key" aria-hidden="true">'+key+'</div><label>Decoded answer<input type="text" id="tx'+L.n+'" autocomplete="off" autocapitalize="none" spellcheck="false"></label><p class="ennote">Type the answer in English.</p>';
+    }else if(L.type==='fill'){
+      el.innerHTML='<p style="font-size:18px;margin:.2em 0">'+esc(L.sentence)+'</p><div class="scr" translate="no" aria-label="Scrambled letters">'+esc(L.scramble)+'</div><p style="margin:.4em 0;font-size:14px;color:var(--dim)">Unscramble the letters to fill the blank.</p><label>Your answer<input type="text" id="tx'+L.n+'" autocomplete="off" autocapitalize="none" spellcheck="false"></label><p class="ennote">Type the answer in English.</p>';
+    }
+    var t=$('tx'+L.n);
+    if(t)t.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();submit(L)}});
+  }
+  function renderOrder(L){
+    var w=W[L.n],ch=$('ch'+L.n),h='';
+    L.items.forEach(function(it){
+      var pos=w.sel.indexOf(it.id);
+      h+='<button type="button" class="chip'+(pos>=0?' sel':'')+'" data-id="'+it.id+'" aria-pressed="'+(pos>=0)+'">'+(pos>=0?'<span class="n">'+(pos+1)+'</span>':'')+'<span>'+esc(it.label)+'</span></button>';
+    });
+    ch.innerHTML=h;
+    [].forEach.call(ch.querySelectorAll('.chip'),function(b){
+      b.addEventListener('click',function(){
+        if(S.locks[L.id].solved)return;
+        var id=b.getAttribute('data-id'),p=w.sel.indexOf(id);
+        if(p>=0)w.sel.splice(p,1);else w.sel.push(id);
+        renderOrder(L);
+      });
+    });
+  }
+  function clearPuzzle(L){
+    if(S.locks[L.id].solved)return;
+    var w=W[L.n];
+    if(L.type==='order'){w.sel=[];renderOrder(L)}
+    else if(L.type==='match'){L.terms.forEach(function(t){$('m'+L.n+t.id).value=''})}
+    else if(L.type==='pick'){L.qs.forEach(function(q){[].forEach.call(document.getElementsByName('q'+L.n+q.id),function(r){r.checked=false})})}
+    else{$('tx'+L.n).value=''}
+    fb(L,'','');
+  }
+  function guessOf(L){
+    // returns {canon, readable} or {err}
+    if(L.type==='order'){
+      var w=W[L.n];
+      if(w.sel.length<L.items.length)return {err:'Tap all '+L.items.length+' places first, in order.'};
+      return {canon:w.sel.join('|'),readable:w.sel.map(function(i){return labelOf(L.items,i)}).join(' > ')};
+    }
+    if(L.type==='match'){
+      var c=[],r=[];
+      for(var i=0;i<L.terms.length;i++){var t=L.terms[i],v=$('m'+L.n+t.id).value;if(!v)return {err:'Match every term first.'};c.push(v);r.push(t.label+' = '+labelOf(L.descs,v))}
+      return {canon:c.join('|'),readable:r.join('; ')};
+    }
+    if(L.type==='pick'){
+      var c2=[],r2=[];
+      for(var j=0;j<L.qs.length;j++){var q=L.qs[j],v2='';[].forEach.call(document.getElementsByName('q'+L.n+q.id),function(x){if(x.checked)v2=x.value});if(!v2)return {err:'Answer every question first.'};c2.push(v2);r2.push(labelOf(q.opts,v2))}
+      return {canon:c2.join('|'),readable:r2.join('; ')};
+    }
+    var raw=$('tx'+L.n).value.trim();
+    if(!raw)return {err:'Type your answer first.'};
+    return {canon:squash(raw),readable:raw.slice(0,80)};
+  }
+  function fb(L,cls,text){var e=$('fb'+L.n);e.className='fb'+(cls?' show '+cls:'');e.textContent=text}
+  function submit(L){
+    var l=S.locks[L.id];if(l.solved)return;
+    var g=guessOf(L);
+    if(g.err){fb(L,'nudge',g.err);return}
+    l.attempts++;
+    var d=checkLock(L,g.canon);
+    if(d===null){
+      fb(L,'nudge',L.nudge);
+      var s=$('lock'+L.n);s.classList.remove('shake');void s.offsetWidth;s.classList.add('shake');
+      persist();updateBar();return;
+    }
+    l.solved=true;l.guess=g.canon;l.readable=g.readable;digits[L.n]=d;
+    fb(L,'good','Click! Lock '+L.n+' is open. Your digit is '+d+'.');
+    var wh=$('wheel');wh.classList.remove('spin');void wh.getBoundingClientRect();wh.classList.add('spin');
+    $('dw'+L.n).classList.add('pop');
+    persist();updateAll();
+    setTimeout(function(){
+      expanded[L.n]=false;
+      var nx=nextOpen();if(nx)expanded[nx]=true;
+      updateLocks();
+      var tgt=nx?$('lock'+nx):$('exit');
+      if(tgt&&tgt.scrollIntoView)tgt.scrollIntoView({behavior:'smooth',block:'start'});
+    },1600);
+  }
+  function hint(L){
+    var l=S.locks[L.id];
+    if(l.solved)return;
+    if(l.hints<L.hints.length){l.hints++;persist();updateHints(L);updateBar()}
+    else{fb(L,'nudge','That was the last hint. Read the Clue Card slowly and try again.')}
+  }
+  function updateHints(L){
+    var l=S.locks[L.id],h='';
+    for(var i=0;i<l.hints;i++)h+='<div class="hint"><b>Hint '+(i+1)+':</b> <span>'+esc(L.hints[i])+'</span></div>';
+    $('hs'+L.n).innerHTML=h;
+  }
+  function nextOpen(){for(var i=0;i<D.locks.length;i++)if(!S.locks[D.locks[i].id].solved)return D.locks[i].n;return 0}
+  function lockState(L){
+    if(S.locks[L.id].solved)return 'solved';
+    return L.n===nextOpen()?'current':'locked';
+  }
+  function updateLocks(){
+    var cur=nextOpen();
+    D.locks.forEach(function(L){
+      var st=lockState(L),sec=$('lock'+L.n);
+      if(st==='current'&&expanded[L.n]===undefined)expanded[L.n]=true;
+      var open=(st!=='locked')&&!!expanded[L.n];
+      sec.className='lock glass '+st+(open?' open':'');
+      $('lh'+L.n).setAttribute('aria-expanded',open?'true':'false');
+      $('dg'+L.n).textContent=S.locks[L.id].solved?digits[L.n]:'?';
+      if(S.locks[L.id].solved){
+        [].forEach.call(sec.querySelectorAll('input,select,button.chip,#ck'+L.n+',#hb'+L.n+',#rs'+L.n),function(x){x.disabled=true});
+        var f=$('fb'+L.n);if(!f.classList.contains('good'))fb(L,'good','Unlocked. Your digit is '+digits[L.n]+'.'+(S.locks[L.id].readable?' Your answer: '+S.locks[L.id].readable:''));
+      }
+      updateHints(L);
+    });
+  }
+  function codeStr(){var s='';for(var i=1;i<=5;i++)s+=(digits[i]===undefined?'':digits[i]);return s}
+  function allSolved(){return D.locks.every(function(L){return S.locks[L.id].solved})}
+  function updateExit(){
+    var ok=allSolved();
+    $('exit').classList.toggle('locked',!ok);
+    $('codeBtn').disabled=!ok||S.escaped;
+    [].forEach.call($('codebox').querySelectorAll('input'),function(i){i.disabled=!ok||S.escaped});
+    $('exitNote').textContent=S.escaped?'The door is open!':(ok?'All 5 locks are open. Type the 5 digits in order, Lock 1 first.':'Open all 5 locks first. The digits go in order: Lock 1 first.');
+  }
+  function updateBar(){
+    var t=totals();
+    $('lc').textContent=t.locksSolved;$('hc').textContent=t.hintsUsed;
+    $('tm').textContent=fmt(S.escaped?S.escapeMs:S.elapsed);
+  }
+  function updateStatus(){
+    var el=$('status'),db=($('debriefText').value.trim().length);
+    if(S.escaped)el.textContent=db>=40?'You escaped and wrote your Debrief. Ready to submit.':'You escaped! Write your Debrief, then download your file to submit.';
+    else el.textContent='Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.';
+  }
+  function updateEsc(){
+    $('esc').classList.toggle('show',S.escaped);
+    if(S.escaped){var t=totals();$('escTime').textContent=fmt(S.escapeMs);$('escSum').textContent='5 of 5 locks opened with '+t.attempts+' tries and '+t.hintsUsed+' hint'+(t.hintsUsed===1?'':'s')+'.'}
+  }
+  function updateAll(){sceneUpdate();updateLocks();updateExit();updateBar();updateEsc();updateStatus();
+    $('intro').classList.toggle('hidden',S.started);$('game').classList.toggle('hidden',!S.started);$('loadOnly').classList.toggle('hidden',S.started);
+  }
+
+  /* ---------- exit code ---------- */
+  (function(){
+    var cb=$('codebox');
+    for(var i=0;i<5;i++){
+      var inp=document.createElement('input');inp.type='text';inp.inputMode='numeric';inp.maxLength=1;inp.setAttribute('aria-label','Exit code digit '+(i+1));inp.disabled=true;
+      (function(i,inp){
+        inp.addEventListener('input',function(){inp.value=inp.value.replace(/[\u0660-\u0669]/g,function(c){return c.charCodeAt(0)-1632}).replace(/[\u06F0-\u06F9]/g,function(c){return c.charCodeAt(0)-1776}).replace(/[^0-9]/g,'');if(inp.value&&i<4)cb.children[i+1].focus()});
+        inp.addEventListener('keydown',function(e){
+          if(e.key==='Backspace'&&!inp.value&&i>0)cb.children[i-1].focus();
+          if(e.key==='Enter'){e.preventDefault();tryCode()}
+        });
+        inp.addEventListener('paste',function(e){
+          var t=(e.clipboardData||window.clipboardData).getData('text').replace(/[\u0660-\u0669]/g,function(c){return c.charCodeAt(0)-1632}).replace(/[\u06F0-\u06F9]/g,function(c){return c.charCodeAt(0)-1776}).replace(/[^0-9]/g,'');
+          if(t.length>1){e.preventDefault();for(var k=0;k<5;k++)cb.children[k].value=t[k]||''}
+        });
+      })(i,inp);
+      cb.appendChild(inp);
+    }
+  })();
+  function tryCode(){
+    if(!allSolved()||S.escaped)return;
+    var v='';[].forEach.call($('codebox').querySelectorAll('input'),function(i){v+=i.value});
+    var f=$('codefb');
+    if(v.length<5){f.className='fb show nudge';f.textContent='The code has 5 digits. Fill every box.';return}
+    S.codeTries++;
+    if(h20('exit:'+D.salt+v)!==D.exitHash){
+      f.className='fb show nudge';f.textContent='The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.';
+      var ex=$('exit');ex.classList.remove('shake');void ex.offsetWidth;ex.classList.add('shake');
+      persist();return;
+    }
+    S.escaped=true;S.escapeMs=S.elapsed;
+    f.className='fb show good';f.textContent='The door swings open!';
+    persist();updateAll();
+    setTimeout(function(){$('esc').scrollIntoView({behavior:'smooth',block:'start'})},900);
+  }
+  $('codeBtn').addEventListener('click',tryCode);
+
+  /* ---------- timer ---------- */
+  function tick(){
+    var n=Date.now();
+    if(S.started&&!S.escaped){S.elapsed+=Math.min(n-lastTick,5000);$('tm').textContent=fmt(S.elapsed)}
+    lastTick=n;
+  }
+  function startTimer(){lastTick=Date.now();if(!timer)timer=setInterval(function(){tick();if(Math.round(S.elapsed/1000)%10===0)persist()},1000)}
+
+  /* ---------- files ---------- */
+  function msg(t,err){var m=$('msg');m.textContent=t;m.className='msg'+(err?' err':'');m.style.display='block'}
+  function ascii(n){return String(n).normalize('NFD').replace(/[̀-ͯ]/g,'')}
+  function clean(n){n=window.spAscii?spAscii(n):n;return ascii(n).trim().replace(/\s+/g,'_').replace(/[^A-Za-z0-9_-]/g,'')}
+  function who(){return (clean($('f_last').value)||'Last')+'_'+(clean($('f_first').value)||'First')}
+  function download(name,obj){
+    var blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;
+    document.body.appendChild(a);a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);
+  }
+  function namesOk(){
+    var ids=['f_first','f_last','f_period'],ok=true;
+    ids.forEach(function(i){var f=$(i);if(!f.value.trim()){f.classList.add('bad');ok=false}});
+    if(!ok){msg('Enter your first name, last name, and period at the top first.',true);$('f_first').scrollIntoView({block:'center'})}
+    return ok;
+  }
+  ['f_first','f_last','f_period'].forEach(function(i){$(i).addEventListener('input',function(){$(i).classList.remove('bad');S[i.slice(2)]=$(i).value;persist()})});
+  $('debriefText').addEventListener('input',function(){S.debrief=$('debriefText').value;persist();updateStatus()});
+  $('saveBtn').addEventListener('click',function(){
+    if(!namesOk())return;tick();
+    download(who()+'-'+PACKET+'-PROGRESS.json',snapshot());
+    msg('Progress file downloaded. Use Load Progress to continue later.');
+  });
+  $('finishBtn').addEventListener('click',function(){
+    if(!namesOk())return;tick();
+    var now=new Date(),o=snapshot();o.completed=S.escaped;o.submitted=now.toISOString();
+    o.student.date=now.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+    download(who()+'-'+PACKET+'.json',o);
+    msg(S.escaped?('Done! File downloaded: '+who()+'-'+PACKET+'.json. Upload it to Canvas.'):('Your file downloaded and is marked INCOMPLETE (you have not escaped). Upload it to Canvas: '+who()+'-'+PACKET+'.json'));
+  });
+  function openLoad(){$('loadFile').click()}
+  $('loadBtn').addEventListener('click',openLoad);$('loadBtn0').addEventListener('click',openLoad);
+  $('loadFile').addEventListener('change',function(e){
+    var f=e.target.files[0];if(!f)return;
+    var r=new FileReader();
+    r.onload=function(){
+      try{
+        var o=JSON.parse(r.result);
+        if(!o||o.packet!==PACKET||typeof o.locks!=='object')throw new Error('wrong');
+        digits={};var n=fresh();restore(n,o);S=n;applyToDom();
+        msg('Progress loaded. Welcome back.');
+      }catch(err){msg('That file did not work. Choose a progress file saved from this Escape Room.',true)}
+      e.target.value='';
+    };
+    r.onerror=function(){msg('The file could not be read.',true)};
+    r.readAsText(f);
+  });
+  $('reset').addEventListener('click',function(){
+    if(!confirm('Clear all your work and start over? This cannot be undone.'))return;
+    digits={};expanded={};S=fresh();
+    try{localStorage.removeItem(STORE+'state')}catch(e){}
+    $('locks').innerHTML='';D.locks.forEach(buildLock);
+    $('f_first').value=$('f_last').value=$('f_period').value='';$('debriefText').value='';
+    [].forEach.call($('codebox').querySelectorAll('input'),function(i){i.value=''});$('codefb').className='fb';
+    applyToDom();
+  });
+  function applyToDom(){
+    $('f_first').value=S.first;$('f_last').value=S.last;$('f_period').value=S.period;$('debriefText').value=S.debrief;
+    // rebuild lock widgets, then pre-fill solved ones with readable note
+    $('locks').innerHTML='';D.locks.forEach(buildLock);
+    expanded={};
+    updateAll();
+    if(S.started)startTimer();
+  }
+  $('startBtn').addEventListener('click',function(){S.started=true;persist();startTimer();updateAll();$('game').scrollIntoView({behavior:'smooth'})});
+  window.addEventListener('beforeunload',function(){tick();persist()});
+
+  S=loadLocal();
+  D.locks.forEach(buildLock);
+  applyToDom();
+})();
+</script>
+<!--sp-i18n--><script type="application/json" id="sp-i18n">{"langs":["en","es","ar"],"default":"en","es":{"Save Progress":"Guardar progreso","Load Progress":"Cargar progreso","Finished — Download File to Submit":"Terminé — Descargar el archivo para entregar","Clear all my answers":"Borrar todas mis respuestas","FIRST NAME *":"NOMBRE *","LAST NAME *":"APELLIDO *","PERIOD *":"PERÍODO *","DATE (fills in when you finish)":"FECHA (se llena cuando terminas)","e.g. 3":"p. ej. 3","Automatic":"Automática","Please type your first name, last name, and period first.":"Primero escribe tu nombre, apellido y período.","Western Expansion and Southern Secession":"Expansión hacia el oeste y secesión del sur","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — La Ley de Esclavos Fugitivos","Bleeding Kansas":"Bleeding Kansas — Kansas sangriento","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"Se descargó tu archivo de progreso. Guárdalo bien. Usa «Cargar progreso» para continuar más tarde.","Progress loaded.":"Progreso cargado.","Could not read that file.":"No se pudo leer ese archivo.","Treaty of Guadalupe Hidalgo":"Tratado de Guadalupe Hidalgo","Escape the Compromise Vault":"Escapa de la bóveda del Compromiso","Escape Room 8 · Western Expansion and Southern Secession":"Sala de escape 8 · Expansión hacia el oeste y secesión del sur","How to escape:":"Cómo escapar:","Open each lock in order. Read the <b>Clue Card<\/b>. The answer is in the card.":"Abre cada candado en orden. Lee la <b>tarjeta de indicios<\/b>. La respuesta está en la tarjeta.","Solve the puzzle to open the lock and reveal one digit.":"Resuelve el acertijo para abrir el candado y descubrir un dígito.","If you get stuck, press <b>Hint<\/b>. Hints are free, but your teacher can see how many you used.":"Si te atoras, oprime <b>Pista<\/b>. Las pistas son gratis, pero tu maestro puede ver cuántas usaste.","Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.":"Abre los 5 candados y luego escribe el código de salida de 5 dígitos. Termina con el Informe final.","A stone vault room. A big steel door has five padlocks in a row. Under each padlock is a window for one digit of the exit code.":"Una sala de bóveda de piedra. Una gran puerta de acero tiene cinco candados en fila. Debajo de cada candado hay una ventanita para un dígito del código de salida.","COMPROMISE VAULT":"BÓVEDA DEL COMPROMISO","You are locked in.":"Estás encerrado.","The Compromise Vault has <b>5 locks<\/b>. Each lock matches one Core Objective of Lesson 8. Solve them all to find the <b>5-digit exit code<\/b>.":"La bóveda del Compromiso tiene <b>5 candados<\/b>. Cada candado corresponde a un Objetivo principal de la Lección 8. Resuélvelos todos para encontrar el <b>código de salida de 5 dígitos<\/b>.","The clock starts when you press the button. Most students finish in about 20 minutes.":"El reloj empieza cuando oprimes el botón. La mayoría de los estudiantes termina en unos 20 minutos.","Enter the Vault":"Entrar a la bóveda","Time":"Tiempo","Locks":"Candados","Hints used":"Pistas usadas","CLUE CARD":"TARJETA DE INDICIOS","Check":"Comprobar","Hint":"Pista","Clear":"Borrar","THE EXIT DOOR":"LA PUERTA DE SALIDA","Exit door":"Puerta de salida","Type the exit code":"Escribe el código de salida","Open all 5 locks first. The digits go in order: Lock 1 first.":"Primero abre los 5 candados. Los dígitos van en orden: primero el del Candado 1.","All 5 locks are open. Type the 5 digits in order, Lock 1 first.":"Los 5 candados están abiertos. Escribe los 5 dígitos en orden, primero el del Candado 1.","The door is open!":"¡La puerta está abierta!","Open the Door":"Abrir la puerta","The code has 5 digits. Fill every box.":"El código tiene 5 dígitos. Llena todas las casillas.","The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.":"La puerta no se abrió. Revisa los dígitos debajo de cada candado y escríbelos en orden: primero el del Candado 1.","The door swings open!":"¡La puerta se abre de golpe!","Type the answer in English.":"Escribe la respuesta en inglés.","Type the answer in English. Use the digits 0-9.":"Escribe la respuesta en inglés. Usa los dígitos 0-9.","ESCAPED":"¡ESCAPASTE!","Your time:":"Tu tiempo:","One last step: write your Debrief below.":"Un último paso: escribe tu Informe final abajo.","DEBRIEF":"INFORME FINAL","Which lock was hardest, and what did you learn that you did not know before?":"¿Qué candado fue el más difícil y qué aprendiste que antes no sabías?","Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.":"Escribe de 3 a 4 oraciones. Nombra el candado y usa un dato de su tarjeta de indicios. Puedes escribirlo aunque no hayas escapado.","Type your answer here...":"Escribe tu respuesta aquí...","Debrief":"Informe final","Clear all my work and start over":"Borrar todo mi trabajo y empezar de nuevo","Have a saved file? Load it to continue.":"¿Tienes un archivo guardado? Cárgalo para continuar.","Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.":"Todavía no escapas (se marca INCOMPLETO). Aun así puedes descargar tu archivo y entregarlo.","You escaped! Write your Debrief, then download your file to submit.":"¡Escapaste! Escribe tu Informe final y luego descarga tu archivo para entregarlo.","You escaped and wrote your Debrief. Ready to submit.":"Escapaste y escribiste tu Informe final. Listo para entregar.","Progress file downloaded. Use Load Progress to continue later.":"Se descargó el archivo de progreso. Usa «Cargar progreso» para continuar más tarde.","Progress loaded. Welcome back.":"Progreso cargado. Bienvenido de nuevo.","That file did not work. Choose a progress file saved from this Escape Room.":"Ese archivo no funcionó. Elige un archivo de progreso guardado de esta sala de escape.","Enter your first name, last name, and period at the top first.":"Primero escribe tu nombre, apellido y período arriba.","Tap all 4 places first, in order.":"Primero toca los 4 lugares, en orden.","Match every term first.":"Primero relaciona todos los términos.","Answer every question first.":"Primero responde todas las preguntas.","Type your answer first.":"Primero escribe tu respuesta.","That was the last hint. Read the Clue Card slowly and try again.":"Esa fue la última pista. Lee la tarjeta de indicios despacio y vuelve a intentarlo.","digit":"dígito","Exit code digit 1":"Dígito 1 del código de salida","Coded message":"Mensaje en código","Scrambled letters":"Letras desordenadas","Decoded answer":"Respuesta decodificada","Your answer":"Tu respuesta","Choose a description...":"Elige una descripción...","Unscramble the letters to fill the blank.":"Ordena las letras para llenar el espacio en blanco.","Decoder key: the <span style=\"color:var(--hl);font-weight:700\">pink<\/span> letter is in the message. The white letter under it is the real letter.":"Clave del decodificador: la letra <span style=\"color:var(--hl);font-weight:700\">rosa<\/span> está en el mensaje. La letra blanca que está debajo es la letra verdadera.","Use the decoder key. In the message, the letter I is really F, and the letter X is really U.":"Usa la clave del decodificador. En el mensaje, la letra I es en realidad F, y la letra X es en realidad U.","Fill in the blank using the Clue Card.":"Llena el espacio en blanco con la tarjeta de indicios.","Pick the correct answer for all three questions.":"Elige la respuesta correcta para las tres preguntas.","Match each term to the best description. Use the Clue Card.":"Relaciona cada término con la mejor descripción. Usa la tarjeta de indicios.","Tap the four places in the order a wagon train reached them. Tap a place again to take it back.":"Toca los cuatro lugares en el orden en que los alcanzó una caravana de carretas. Toca un lugar otra vez para quitarlo.","The Clue Card describes a law without naming it. A secret message names it. Each letter in the message was moved 3 steps forward in the alphabet. Decode it to name the law.":"La tarjeta de indicios describe una ley sin decir su nombre. Un mensaje secreto la nombra. Cada letra del mensaje se movió 3 pasos hacia adelante en el alfabeto. Decodifícalo para nombrar la ley.","The southern states left the Union mainly to preserve ________.":"Los estados del sur dejaron la Unión principalmente para preservar ________.","Not quite. Re-read the Clue Card and follow the wagon train from start to finish.":"Casi. Vuelve a leer la tarjeta de indicios y sigue la caravana de carretas de principio a fin.","Not quite. Check each match against the Clue Card. Which one are you least sure about?":"Casi. Revisa cada pareja con la tarjeta de indicios. ¿De cuál estás menos seguro?","Not quite. Decode one letter at a time with the key, then check your spelling.":"Casi. Decodifica una letra a la vez con la clave y luego revisa tu ortografía.","Not quite. At least one answer is off. Re-read the Clue Card for the year, the name, and the percent.":"Casi. Al menos una respuesta está mal. Vuelve a leer la tarjeta de indicios para ver el año, el nombre y el porcentaje.","Not quite. Re-read the Clue Card for the main reason the states left. Use the scrambled letters to check your spelling.":"Casi. Vuelve a leer la tarjeta de indicios para ver la razón principal por la que los estados se fueron. Usa las letras desordenadas para revisar tu ortografía.","Start with the town in Missouri where the trip began.":"Empieza con el pueblo de Missouri donde comenzó el viaje.","The North Platte River comes before the Snake River. The trip ends in the fertile valley.":"El río North Platte va antes del río Snake. El viaje termina en el valle fértil.","Two of the descriptions are about rivers. The Nueces was the border BEFORE Polk sent troops farther south.":"Dos de las descripciones son sobre ríos. El Nueces era la frontera ANTES de que Polk enviara tropas más al sur.","The treaty is the one with the money: $15 million. The person is the one who spoke against the war.":"El tratado es el que tiene el dinero: $15 millones. La persona es quien habló en contra de la guerra.","The name starts with FUG and ends with a three-letter word. It is the law about people who escaped slavery.":"El nombre empieza con FUG y termina con una palabra de tres letras. Es la ley sobre las personas que escaparon de la esclavitud.","Each answer is in the Clue Card. Look for the year, the name, and the percent.":"Cada respuesta está en la tarjeta de indicios. Busca el año, el nombre y el porcentaje.","Taney is called the Chief Justice in the card. The debates happened two years before the election of 1860.":"En la tarjeta, a Taney se le llama presidente de la Corte Suprema (Chief Justice). Los debates ocurrieron dos años antes de la elección de 1860.","Read the third sentence of the Clue Card. It tells the main reason.":"Lee la tercera oración de la tarjeta de indicios. Dice la razón principal.","The word starts with S and ends with Y. It has 7 letters.":"La palabra (en inglés) empieza con S y termina con Y. Tiene 7 letras.","The Trail West":"El camino al oeste","The Border War":"La guerra de la frontera","The Secret Law":"La ley secreta","The New Party":"El nuevo partido","The South Leaves":"El sur se va","Core Objective 1: Explain how, why, and where Americans moved west of the Mississippi River during the 1830s and 1840s.":"Objetivo principal 1: Explica cómo, por qué y dónde los estadounidenses se mudaron al oeste del río Misisipi durante las décadas de 1830 y 1840.","Core Objective 2: Examine the causes of the Mexican-American War and its impact on national politics.":"Objetivo principal 2: Examina las causas de la Guerra México-Estados Unidos y su impacto en la política nacional.","Core Objective 3: Describe how the federal government tried to resolve the issue of slavery in the western territories during the 1850s.":"Objetivo principal 3: Describe cómo trató el gobierno federal de resolver el asunto de la esclavitud en los territorios del oeste durante la década de 1850.","Core Objective 4: Analyze the appeal of the Republican Party to northern voters and how it led to Abraham Lincoln’s victory in the 1860 presidential contest.":"Objetivo principal 4: Analiza el atractivo del Partido Republicano para los votantes del norte y cómo llevó a la victoria de Abraham Lincoln en la elección presidencial de 1860.","Core Objective 5: Explain why seven southern states seceded from the Union shortly after Lincoln’s election in 1860.":"Objetivo principal 5: Explica por qué siete estados del sur se separaron de la Unión poco después de la elección de Lincoln en 1860.","Oregon Fever swept the nation in the early 1840s, and most people walked more than 2,000 miles. Wagon trains left <b>Independence, Missouri<\/b>, and followed the <b>North Platte River<\/b> into what is now Wyoming. Next they went down the <b>Snake River<\/b> through what is now Idaho. After crossing the Cascade Mountains, they reached Oregon’s fertile <b>Willamette Valley<\/b>, where about 5,000 people had settled by 1845.":"La fiebre de Oregón se extendió por el país a principios de la década de 1840, y la mayoría de la gente caminó más de 2,000 millas. Las caravanas de carretas salían de <b>Independence, Missouri<\/b>, y seguían el <b>río North Platte<\/b> hasta lo que hoy es Wyoming. Después bajaban por el <b>río Snake<\/b> a través de lo que hoy es Idaho. Al cruzar las montañas Cascade, llegaban al fértil <b>valle de Willamette<\/b>, en Oregón, donde unas 5,000 personas se habían establecido para 1845.","President Polk sent U.S. troops to the <b>Rio Grande<\/b>, about 150 miles south of the <b>Nueces River<\/b>, which both sides had recognized as the border. Mexican troops attacked and 11 Americans were killed, but former president <b>John Quincy Adams<\/b> called it “a most unrighteous war.” In the <b>Treaty of Guadalupe Hidalgo<\/b> (February 1848), Mexico gave up half its territory, and the United States paid $15 million.":"El presidente Polk envió tropas estadounidenses al <b>río Grande<\/b>, a unas 150 millas al sur del <b>río Nueces<\/b>, que ambos lados habían reconocido como la frontera. Tropas mexicanas atacaron y murieron 11 estadounidenses, pero el expresidente <b>John Quincy Adams<\/b> la llamó “una guerra muy injusta”. En el <b>Tratado de Guadalupe Hidalgo<\/b> (febrero de 1848), México cedió la mitad de su territorio, y Estados Unidos pagó $15 millones.","The Compromise of 1850 had five parts. The most controversial part required the federal government and the northern states to help capture and return freedom seekers to the South. There was no jury, and freedom seekers could not testify. The officials who decided each case were paid $10 to return a person to slavery, but only $5 to set the person free.":"El Compromiso de 1850 tuvo cinco partes. La parte más polémica exigía que el gobierno federal y los estados del norte ayudaran a capturar y devolver al sur a las personas que buscaban su libertad. No había jurado, y esas personas no podían testificar. A los funcionarios que decidían cada caso se les pagaban $10 por devolver a una persona a la esclavitud, pero solo $5 por dejarla libre.","In 1858, Abraham Lincoln and Stephen Douglas held seven debates in a Senate race, and Lincoln warned that the nation could not “endure, permanently half slave and half free.” In 1857, Chief Justice Roger B. Taney wrote that Dred Scott was property, not a citizen. In 1860, Lincoln won the presidency with only 39 percent of the popular vote. He carried all eighteen free states but none of the slave states.":"En 1858, Abraham Lincoln y Stephen Douglas sostuvieron siete debates en una contienda por el Senado, y Lincoln advirtió que la nación no podía “perdurar, permanentemente mitad esclavista y mitad libre”. En 1857, el presidente de la Corte Suprema, Roger B. Taney, escribió que Dred Scott era propiedad, no un ciudadano. En 1860, Lincoln ganó la presidencia con solo el 39 por ciento del voto popular. Ganó en los dieciocho estados libres, pero en ninguno de los estados esclavistas.","South Carolina’s convention met in Charleston and voted on December 20, 1860, to leave the Union. By February 1, 1861, Florida, Georgia, Louisiana, and Texas had also seceded. Their secession papers listed many complaints, but the main reason was their determination to preserve slavery. President Buchanan said secession was illegal, then said, “I can do nothing.”":"La convención de Carolina del Sur se reunió en Charleston y votó el 20 de diciembre de 1860 para dejar la Unión. Para el 1 de febrero de 1861, Florida, Georgia, Luisiana y Texas también se habían separado. Sus documentos de secesión enumeraban muchas quejas, pero la razón principal era su determinación de preservar la esclavitud. El presidente Buchanan dijo que la secesión era ilegal y luego dijo: “No puedo hacer nada”.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 13, “Moving West” (Mountains and Oregon Country).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 13, “Moving West” (Mountains and Oregon Country).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 13, “The Mexican-American War” (Opposition to the War; The Treaty of Guadalupe Hidalgo).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 13, “The Mexican-American War” (Opposition to the War; The Treaty of Guadalupe Hidalgo).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 13, “Slavery in the Territories” (The Compromise of 1850; The Fugitive Slave Act).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 13, “Slavery in the Territories” (The Compromise of 1850; The Fugitive Slave Act).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 13, “The Emergence of the Republican Party” (Douglas versus Lincoln; The Dred Scott Case; Lincoln’s Election).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 13, “The Emergence of the Republican Party” (Douglas versus Lincoln; The Dred Scott Case; Lincoln’s Election).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 13, “The Southern Response” (Secession of the Lower South; President Buchanan’s Waiting Game).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 13, “The Southern Response” (Secession of the Lower South; President Buchanan’s Waiting Game).","Independence, Missouri":"Independence, Missouri","North Platte River":"Río North Platte","Snake River":"Río Snake","Willamette Valley":"Valle de Willamette","Nueces River":"Río Nueces","Rio Grande":"Río Grande","John Quincy Adams":"John Quincy Adams","The river both sides had recognized as the border before the war":"El río que ambos lados habían reconocido como la frontera antes de la guerra","Polk sent troops here, about 150 miles south of that river":"Polk envió tropas aquí, a unas 150 millas al sur de ese río","Mexico gave up half its territory and the U.S. paid $15 million":"México cedió la mitad de su territorio y Estados Unidos pagó $15 millones","A former president who called the war “a most unrighteous war”":"Un expresidente que llamó a la guerra “una guerra muy injusta”","In what year were the Lincoln-Douglas debates?":"¿En qué año fueron los debates Lincoln-Douglas?","Who wrote the Supreme Court’s Dred Scott decision?":"¿Quién escribió la decisión de la Corte Suprema en el caso Dred Scott?","What part of the popular vote did Lincoln win in 1860?":"¿Qué parte del voto popular ganó Lincoln en 1860?","Stephen Douglas":"Stephen Douglas","Roger B. Taney":"Roger B. Taney","Abraham Lincoln":"Abraham Lincoln","John C. Frémont":"John C. Frémont","About 39 percent":"Alrededor del 39 por ciento","About 51 percent":"Alrededor del 51 por ciento","About 60 percent":"Alrededor del 60 por ciento","About 75 percent":"Alrededor del 75 por ciento","Unlocked. Your digit is 7. Your answer: Independence, Missouri &gt; North Platte River &gt; Snake River &gt; Willamette Valley":"Desbloqueado. Tu dígito es 7. Tu respuesta: Independence, Missouri &gt; Río North Platte &gt; Río Snake &gt; Valle de Willamette","Unlocked. Your digit is 3. Your answer: John Quincy Adams = A former president who called the war “a most unrighteous war”; Treaty of Guadalupe Hidalgo = Mexico gave up half its territory and the U.S. paid $15 million; Nueces River = The river both sides had recognized as the border before the war; Rio Grande = Polk sent troops here, about 150 miles south of that river":"Desbloqueado. Tu dígito es 3. Tu respuesta: John Quincy Adams = Un expresidente que llamó a la guerra “una guerra muy injusta”; Tratado de Guadalupe Hidalgo = México cedió la mitad de su territorio y Estados Unidos pagó $15 millones; Río Nueces = El río que ambos lados habían reconocido como la frontera antes de la guerra; Río Grande = Polk envió tropas aquí, a unas 150 millas al sur de ese río","Unlocked. Your digit is 1. Your answer: 1858; Roger B. Taney; About 39 percent":"Desbloqueado. Tu dígito es 1. Tu respuesta: 1858; Roger B. Taney; Alrededor del 39 por ciento","Clear all your work and start over? This cannot be undone.":"¿Borrar todo tu trabajo y empezar de nuevo? No se puede deshacer."},"ar":{"Save Progress":"حفظ التقدم","Load Progress":"تحميل التقدم","Finished — Download File to Submit":"انتهيت — نزّل الملف لتسليمه","Clear all my answers":"امسح كل إجاباتي","FIRST NAME *":"الاسم الأول *","LAST NAME *":"اسم العائلة *","PERIOD *":"الحصة *","DATE (fills in when you finish)":"التاريخ (يُكتب تلقائيًا عند الانتهاء)","e.g. 3":"مثال: 3","Automatic":"تلقائي","Please type your first name, last name, and period first.":"اكتب أولًا اسمك الأول واسم العائلة والحصة.","Western Expansion and Southern Secession":"التوسع غربًا وانفصال الجنوب","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"الوحدة 3 · بيت منقسم وأُعيد بناؤه | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — قانون العبيد الهاربين","Bleeding Kansas":"Bleeding Kansas — كانساس النازفة","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"الوحدة 3 · بيت منقسم أُعيد بناؤه | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"تم تنزيل ملف التقدم. احتفظ به في مكان آمن. استخدم «تحميل التقدم» لتكمل لاحقًا.","Progress loaded.":"تم تحميل التقدم.","Could not read that file.":"تعذّرت قراءة هذا الملف.","Treaty of Guadalupe Hidalgo":"معاهدة غوادالوبي هيدالغو (Treaty of Guadalupe Hidalgo)","Escape the Compromise Vault":"اهرب من خزنة التسوية (Compromise Vault)","Escape Room 8 · Western Expansion and Southern Secession":"غرفة الهروب 8 · التوسع غربًا وانفصال الجنوب","How to escape:":"كيف تهرب:","Open each lock in order. Read the <b>Clue Card<\/b>. The answer is in the card.":"افتح كل قفل بالترتيب. اقرأ <b>بطاقة القرائن<\/b>. الإجابة موجودة في البطاقة.","Solve the puzzle to open the lock and reveal one digit.":"حلّ اللغز لتفتح القفل وتكشف رقمًا واحدًا.","If you get stuck, press <b>Hint<\/b>. Hints are free, but your teacher can see how many you used.":"إذا تعثرت، اضغط <b>تلميح<\/b>. التلميحات مجانية، لكن معلمك يستطيع أن يرى كم تلميحًا استخدمت.","Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.":"افتح الأقفال الخمسة، ثم اكتب رمز الخروج المكوّن من 5 أرقام. أنهِ بالملخص الختامي.","A stone vault room. A big steel door has five padlocks in a row. Under each padlock is a window for one digit of the exit code.":"غرفة خزنة من الحجر. على باب فولاذي كبير خمسة أقفال في صف واحد. تحت كل قفل نافذة صغيرة لرقم واحد من رمز الخروج.","COMPROMISE VAULT":"خزنة التسوية","You are locked in.":"أنت محبوس في الداخل.","The Compromise Vault has <b>5 locks<\/b>. Each lock matches one Core Objective of Lesson 8. Solve them all to find the <b>5-digit exit code<\/b>.":"في خزنة التسوية <b>5 أقفال<\/b>. كل قفل يرتبط بهدف أساسي واحد من الدرس 8. حلّها كلها لتجد <b>رمز الخروج المكوّن من 5 أرقام<\/b>.","The clock starts when you press the button. Most students finish in about 20 minutes.":"يبدأ العدّاد عندما تضغط الزر. يُنهي معظم الطلاب في نحو 20 دقيقة.","Enter the Vault":"ادخل الخزنة","Time":"الوقت","Locks":"الأقفال","Hints used":"التلميحات المستخدمة","CLUE CARD":"بطاقة القرائن","Check":"تحقق","Hint":"تلميح","Clear":"مسح","THE EXIT DOOR":"باب الخروج","Exit door":"باب الخروج","Type the exit code":"اكتب رمز الخروج","Open all 5 locks first. The digits go in order: Lock 1 first.":"افتح الأقفال الخمسة أولًا. تُكتب الأرقام بالترتيب: رقم القفل 1 أولًا.","All 5 locks are open. Type the 5 digits in order, Lock 1 first.":"الأقفال الخمسة مفتوحة. اكتب الأرقام الخمسة بالترتيب: رقم القفل 1 أولًا.","The door is open!":"الباب مفتوح!","Open the Door":"افتح الباب","The code has 5 digits. Fill every box.":"الرمز مكوّن من 5 أرقام. املأ كل المربعات.","The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.":"لم يُفتح الباب. تحقق من الأرقام تحت كل قفل، واكتبها بالترتيب: رقم القفل 1 أولًا.","The door swings open!":"ينفتح الباب على مصراعيه!","Type the answer in English.":"اكتب الإجابة بالإنجليزية.","Type the answer in English. Use the digits 0-9.":"اكتب الإجابة بالإنجليزية. استخدم الأرقام 0-9.","ESCAPED":"لقد هربت!","Your time:":"وقتك:","One last step: write your Debrief below.":"خطوة أخيرة: اكتب ملخصك الختامي أدناه.","DEBRIEF":"الملخص الختامي","Which lock was hardest, and what did you learn that you did not know before?":"أي قفل كان الأصعب، وماذا تعلمت ولم تكن تعرفه من قبل؟","Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.":"اكتب من 3 إلى 4 جمل. اذكر القفل واستخدم معلومة واحدة من بطاقة القرائن الخاصة به. يمكنك كتابة هذا حتى لو لم تهرب.","Type your answer here...":"اكتب إجابتك هنا...","Debrief":"الملخص الختامي","Clear all my work and start over":"امسح كل عملي وابدأ من جديد","Have a saved file? Load it to continue.":"هل لديك ملف محفوظ؟ حمّله لتكمل.","Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.":"لم تهرب بعد (يُسجَّل «غير مكتمل» INCOMPLETE). ما زال بإمكانك تنزيل ملفك وتسليمه.","You escaped! Write your Debrief, then download your file to submit.":"لقد هربت! اكتب ملخصك الختامي، ثم نزّل ملفك لتسليمه.","You escaped and wrote your Debrief. Ready to submit.":"لقد هربت وكتبت ملخصك الختامي. أنت جاهز للتسليم.","Progress file downloaded. Use Load Progress to continue later.":"تم تنزيل ملف التقدم. استخدم «تحميل التقدم» لتكمل لاحقًا.","Progress loaded. Welcome back.":"تم تحميل التقدم. أهلًا بعودتك.","That file did not work. Choose a progress file saved from this Escape Room.":"لم يعمل هذا الملف. اختر ملف تقدم محفوظًا من غرفة الهروب هذه.","Enter your first name, last name, and period at the top first.":"اكتب اسمك الأول واسم العائلة والحصة في الأعلى أولًا.","Tap all 4 places first, in order.":"المس الأماكن الأربعة أولًا، بالترتيب.","Match every term first.":"طابق كل المصطلحات أولًا.","Answer every question first.":"أجب عن كل الأسئلة أولًا.","Type your answer first.":"اكتب إجابتك أولًا.","That was the last hint. Read the Clue Card slowly and try again.":"كان هذا آخر تلميح. اقرأ بطاقة القرائن ببطء وحاول مرة أخرى.","digit":"رقم","Exit code digit 1":"رقم رمز الخروج 1","Coded message":"الرسالة المشفرة","Scrambled letters":"أحرف مبعثرة","Decoded answer":"الإجابة بعد فك التشفير","Your answer":"إجابتك","Choose a description...":"اختر وصفًا...","Unscramble the letters to fill the blank.":"رتّب الأحرف لتملأ الفراغ.","Decoder key: the <span style=\"color:var(--hl);font-weight:700\">pink<\/span> letter is in the message. The white letter under it is the real letter.":"مفتاح فك التشفير: الحرف <span style=\"color:var(--hl);font-weight:700\">الوردي<\/span> هو الحرف الموجود في الرسالة. والحرف الأبيض تحته هو الحرف الحقيقي.","Use the decoder key. In the message, the letter I is really F, and the letter X is really U.":"استخدم مفتاح فك التشفير. في الرسالة، الحرف I هو في الحقيقة F، والحرف X هو في الحقيقة U.","Fill in the blank using the Clue Card.":"املأ الفراغ باستخدام بطاقة القرائن.","Pick the correct answer for all three questions.":"اختر الإجابة الصحيحة للأسئلة الثلاثة.","Match each term to the best description. Use the Clue Card.":"طابق كل مصطلح مع أفضل وصف له. استخدم بطاقة القرائن.","Tap the four places in the order a wagon train reached them. Tap a place again to take it back.":"المس الأماكن الأربعة بالترتيب الذي وصلت به قافلة العربات إليها. المس المكان مرة أخرى للتراجع عنه.","The Clue Card describes a law without naming it. A secret message names it. Each letter in the message was moved 3 steps forward in the alphabet. Decode it to name the law.":"تصف بطاقة القرائن قانونًا دون أن تذكر اسمه. ورسالة سرية تذكر اسمه. كل حرف في الرسالة تحرّك 3 خطوات إلى الأمام في الأبجدية. فُكّ تشفيرها لتعرف اسم القانون.","The southern states left the Union mainly to preserve ________.":"تركت الولايات الجنوبية الاتحاد بشكل أساسي من أجل الحفاظ على ________.","Not quite. Re-read the Clue Card and follow the wagon train from start to finish.":"ليس تمامًا. أعد قراءة بطاقة القرائن وتتبّع قافلة العربات من البداية إلى النهاية.","Not quite. Check each match against the Clue Card. Which one are you least sure about?":"ليس تمامًا. تحقق من كل مطابقة باستخدام بطاقة القرائن. أي مطابقة أنت أقل تأكدًا منها؟","Not quite. Decode one letter at a time with the key, then check your spelling.":"ليس تمامًا. فُكّ تشفير حرف واحد في كل مرة باستخدام المفتاح، ثم تحقق من تهجئتك.","Not quite. At least one answer is off. Re-read the Clue Card for the year, the name, and the percent.":"ليس تمامًا. إجابة واحدة على الأقل خاطئة. أعد قراءة بطاقة القرائن لتجد السنة والاسم والنسبة المئوية.","Not quite. Re-read the Clue Card for the main reason the states left. Use the scrambled letters to check your spelling.":"ليس تمامًا. أعد قراءة بطاقة القرائن لتعرف السبب الرئيسي لترك الولايات الاتحاد. استخدم الأحرف المبعثرة لتتحقق من تهجئتك.","Start with the town in Missouri where the trip began.":"ابدأ بالبلدة في ولاية ميسوري (Missouri) التي بدأت منها الرحلة.","The North Platte River comes before the Snake River. The trip ends in the fertile valley.":"نهر نورث بلات (North Platte River) يأتي قبل نهر سنيك (Snake River). وتنتهي الرحلة في الوادي الخصب.","Two of the descriptions are about rivers. The Nueces was the border BEFORE Polk sent troops farther south.":"وصفان من الأوصاف يتحدثان عن الأنهار. كان نهر نويسيس (Nueces) هو الحدود قبل أن يرسل بولك (Polk) القوات إلى مكان أبعد في الجنوب.","The treaty is the one with the money: $15 million. The person is the one who spoke against the war.":"المعاهدة هي التي فيها المال: 15 مليون دولار. والشخص هو من تحدث ضد الحرب.","The name starts with FUG and ends with a three-letter word. It is the law about people who escaped slavery.":"يبدأ الاسم بـ FUG وينتهي بكلمة من ثلاثة أحرف. إنه القانون الخاص بالأشخاص الذين هربوا من العبودية.","Each answer is in the Clue Card. Look for the year, the name, and the percent.":"كل إجابة موجودة في بطاقة القرائن. ابحث عن السنة والاسم والنسبة المئوية.","Taney is called the Chief Justice in the card. The debates happened two years before the election of 1860.":"تُسمّي البطاقة تاني (Taney) رئيس المحكمة العليا (Chief Justice). حدثت المناظرات قبل انتخابات عام 1860 بسنتين.","Read the third sentence of the Clue Card. It tells the main reason.":"اقرأ الجملة الثالثة في بطاقة القرائن. إنها تذكر السبب الرئيسي.","The word starts with S and ends with Y. It has 7 letters.":"تبدأ الكلمة (بالإنجليزية) بالحرف S وتنتهي بالحرف Y. وهي مكوّنة من 7 أحرف.","The Trail West":"الطريق إلى الغرب","The Border War":"حرب الحدود","The Secret Law":"القانون السري","The New Party":"الحزب الجديد","The South Leaves":"الجنوب يغادر","Core Objective 1: Explain how, why, and where Americans moved west of the Mississippi River during the 1830s and 1840s.":"الهدف الأساسي 1: اشرح كيف انتقل الأمريكيون إلى غرب نهر المسيسيبي (Mississippi River) ولماذا وإلى أين خلال ثلاثينيات وأربعينيات القرن التاسع عشر.","Core Objective 2: Examine the causes of the Mexican-American War and its impact on national politics.":"الهدف الأساسي 2: افحص أسباب الحرب المكسيكية الأمريكية (Mexican-American War) وتأثيرها في السياسة الوطنية.","Core Objective 3: Describe how the federal government tried to resolve the issue of slavery in the western territories during the 1850s.":"الهدف الأساسي 3: صف كيف حاولت الحكومة الاتحادية حل مسألة العبودية في الأقاليم الغربية خلال خمسينيات القرن التاسع عشر.","Core Objective 4: Analyze the appeal of the Republican Party to northern voters and how it led to Abraham Lincoln’s victory in the 1860 presidential contest.":"الهدف الأساسي 4: حلّل جاذبية الحزب الجمهوري (Republican Party) لدى ناخبي الشمال، وكيف أدى إلى فوز أبراهام لينكولن (Abraham Lincoln) في انتخابات الرئاسة عام 1860.","Core Objective 5: Explain why seven southern states seceded from the Union shortly after Lincoln’s election in 1860.":"الهدف الأساسي 5: اشرح لماذا انفصلت سبع ولايات جنوبية عن الاتحاد بعد وقت قصير من انتخاب لينكولن (Lincoln) عام 1860.","Oregon Fever swept the nation in the early 1840s, and most people walked more than 2,000 miles. Wagon trains left <b>Independence, Missouri<\/b>, and followed the <b>North Platte River<\/b> into what is now Wyoming. Next they went down the <b>Snake River<\/b> through what is now Idaho. After crossing the Cascade Mountains, they reached Oregon’s fertile <b>Willamette Valley<\/b>, where about 5,000 people had settled by 1845.":"اجتاحت «حمى أوريغون» (Oregon Fever) البلاد في أوائل أربعينيات القرن التاسع عشر، وسار معظم الناس أكثر من 2,000 ميل. انطلقت قوافل العربات من <b>إندبندنس، ميسوري (Independence, Missouri)<\/b>، وسارت على طول <b>نهر نورث بلات (North Platte River)<\/b> إلى ما يُعرف اليوم بولاية وايومنغ (Wyoming). بعد ذلك نزلت عبر <b>نهر سنيك (Snake River)<\/b> في ما يُعرف اليوم بولاية أيداهو (Idaho). وبعد عبور جبال الكاسكيد (Cascade Mountains) وصلت إلى <b>وادي ويلاميت (Willamette Valley)<\/b> الخصب في أوريغون (Oregon)، حيث استقر نحو 5,000 شخص بحلول عام 1845.","President Polk sent U.S. troops to the <b>Rio Grande<\/b>, about 150 miles south of the <b>Nueces River<\/b>, which both sides had recognized as the border. Mexican troops attacked and 11 Americans were killed, but former president <b>John Quincy Adams<\/b> called it “a most unrighteous war.” In the <b>Treaty of Guadalupe Hidalgo<\/b> (February 1848), Mexico gave up half its territory, and the United States paid $15 million.":"أرسل الرئيس بولك (Polk) القوات الأمريكية إلى <b>ريو غراندي (Rio Grande)<\/b>، على بعد نحو 150 ميلًا جنوب <b>نهر نويسيس (Nueces River)<\/b> الذي اعترف به الطرفان حدودًا. هاجمت القوات المكسيكية وقُتل 11 أمريكيًا، لكن الرئيس السابق <b>جون كوينسي آدامز (John Quincy Adams)<\/b> وصفها بأنها «حرب ظالمة جدًا». وفي <b>معاهدة غوادالوبي هيدالغو (Treaty of Guadalupe Hidalgo)<\/b> (فبراير 1848)، تنازلت المكسيك عن نصف أراضيها، ودفعت الولايات المتحدة 15 مليون دولار.","The Compromise of 1850 had five parts. The most controversial part required the federal government and the northern states to help capture and return freedom seekers to the South. There was no jury, and freedom seekers could not testify. The officials who decided each case were paid $10 to return a person to slavery, but only $5 to set the person free.":"تألفت تسوية عام 1850 (Compromise of 1850) من خمسة أجزاء. وكان الجزء الأكثر إثارة للجدل يُلزم الحكومة الاتحادية وولايات الشمال بالمساعدة في القبض على الباحثين عن الحرية وإعادتهم إلى الجنوب. لم تكن هناك هيئة محلفين، ولم يكن يحق للباحثين عن الحرية الإدلاء بشهادتهم. وكان المسؤولون الذين يحكمون في كل قضية يتقاضون 10 دولارات مقابل إعادة شخص إلى العبودية، لكن 5 دولارات فقط مقابل تحريره.","In 1858, Abraham Lincoln and Stephen Douglas held seven debates in a Senate race, and Lincoln warned that the nation could not “endure, permanently half slave and half free.” In 1857, Chief Justice Roger B. Taney wrote that Dred Scott was property, not a citizen. In 1860, Lincoln won the presidency with only 39 percent of the popular vote. He carried all eighteen free states but none of the slave states.":"في عام 1858، أجرى أبراهام لينكولن (Abraham Lincoln) وستيفن دوغلاس (Stephen Douglas) سبع مناظرات في سباق على مقعد في مجلس الشيوخ، وحذّر لينكولن من أن الأمة لا تستطيع أن «تبقى إلى الأبد نصفها عبيد ونصفها أحرار». وفي عام 1857، كتب رئيس المحكمة العليا روجر ب. تاني (Roger B. Taney) أن دريد سكوت (Dred Scott) ملكية وليس مواطنًا. وفي عام 1860، فاز لينكولن بالرئاسة بـ 39 بالمئة فقط من الأصوات الشعبية. وفاز في جميع الولايات الحرة الثماني عشرة، ولم يفز في أي ولاية من ولايات العبيد.","South Carolina’s convention met in Charleston and voted on December 20, 1860, to leave the Union. By February 1, 1861, Florida, Georgia, Louisiana, and Texas had also seceded. Their secession papers listed many complaints, but the main reason was their determination to preserve slavery. President Buchanan said secession was illegal, then said, “I can do nothing.”":"اجتمع مؤتمر ولاية كارولاينا الجنوبية (South Carolina) في تشارلستون (Charleston) وصوّت في 20 ديسمبر 1860 على ترك الاتحاد. وبحلول 1 فبراير 1861، كانت فلوريدا (Florida) وجورجيا (Georgia) ولويزيانا (Louisiana) وتكساس (Texas) قد انفصلت أيضًا. ذكرت وثائق انفصالها شكاوى كثيرة، لكن السبب الرئيسي كان إصرارها على الحفاظ على العبودية. وقال الرئيس بيوكانان (Buchanan) إن الانفصال غير قانوني، ثم قال: «لا أستطيع أن أفعل شيئًا».","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 13, “Moving West” (Mountains and Oregon Country).":"Norton, <i>America: The Essential Learning Edition<\/i>, الفصل 13, “Moving West” (Mountains and Oregon Country).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 13, “The Mexican-American War” (Opposition to the War; The Treaty of Guadalupe Hidalgo).":"Norton, <i>America: The Essential Learning Edition<\/i>, الفصل 13, “The Mexican-American War” (Opposition to the War; The Treaty of Guadalupe Hidalgo).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 13, “Slavery in the Territories” (The Compromise of 1850; The Fugitive Slave Act).":"Norton, <i>America: The Essential Learning Edition<\/i>, الفصل 13, “Slavery in the Territories” (The Compromise of 1850; The Fugitive Slave Act).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 13, “The Emergence of the Republican Party” (Douglas versus Lincoln; The Dred Scott Case; Lincoln’s Election).":"Norton, <i>America: The Essential Learning Edition<\/i>, الفصل 13, “The Emergence of the Republican Party” (Douglas versus Lincoln; The Dred Scott Case; Lincoln’s Election).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 13, “The Southern Response” (Secession of the Lower South; President Buchanan’s Waiting Game).":"Norton, <i>America: The Essential Learning Edition<\/i>, الفصل 13, “The Southern Response” (Secession of the Lower South; President Buchanan’s Waiting Game).","Independence, Missouri":"إندبندنس، ميسوري (Independence, Missouri)","North Platte River":"نهر نورث بلات (North Platte River)","Snake River":"نهر سنيك (Snake River)","Willamette Valley":"وادي ويلاميت (Willamette Valley)","Nueces River":"نهر نويسيس (Nueces River)","Rio Grande":"ريو غراندي (Rio Grande)","John Quincy Adams":"جون كوينسي آدامز (John Quincy Adams)","The river both sides had recognized as the border before the war":"النهر الذي اعترف به الطرفان حدودًا قبل الحرب","Polk sent troops here, about 150 miles south of that river":"أرسل بولك (Polk) القوات إلى هنا، على بعد نحو 150 ميلًا جنوب ذلك النهر","Mexico gave up half its territory and the U.S. paid $15 million":"تنازلت المكسيك عن نصف أراضيها ودفعت الولايات المتحدة 15 مليون دولار","A former president who called the war “a most unrighteous war”":"رئيس سابق وصف الحرب بأنها «حرب ظالمة جدًا»","In what year were the Lincoln-Douglas debates?":"في أي سنة جرت مناظرات لينكولن ودوغلاس (Lincoln-Douglas)؟","Who wrote the Supreme Court’s Dred Scott decision?":"من كتب قرار المحكمة العليا في قضية دريد سكوت (Dred Scott)؟","What part of the popular vote did Lincoln win in 1860?":"ما نسبة الأصوات الشعبية التي فاز بها لينكولن (Lincoln) عام 1860؟","Stephen Douglas":"ستيفن دوغلاس (Stephen Douglas)","Roger B. Taney":"روجر ب. تاني (Roger B. Taney)","Abraham Lincoln":"أبراهام لينكولن (Abraham Lincoln)","John C. Frémont":"جون س. فريمونت (John C. Frémont)","About 39 percent":"نحو 39 بالمئة","About 51 percent":"نحو 51 بالمئة","About 60 percent":"نحو 60 بالمئة","About 75 percent":"نحو 75 بالمئة","Unlocked. Your digit is 7. Your answer: Independence, Missouri &gt; North Platte River &gt; Snake River &gt; Willamette Valley":"تم الفتح. رقمك هو 7. إجابتك: إندبندنس، ميسوري (Independence, Missouri) &gt; نهر نورث بلات (North Platte River) &gt; نهر سنيك (Snake River) &gt; وادي ويلاميت (Willamette Valley)","Unlocked. Your digit is 3. Your answer: John Quincy Adams = A former president who called the war “a most unrighteous war”; Treaty of Guadalupe Hidalgo = Mexico gave up half its territory and the U.S. paid $15 million; Nueces River = The river both sides had recognized as the border before the war; Rio Grande = Polk sent troops here, about 150 miles south of that river":"تم الفتح. رقمك هو 3. إجابتك: جون كوينسي آدامز (John Quincy Adams) = رئيس سابق وصف الحرب بأنها «حرب ظالمة جدًا»؛ معاهدة غوادالوبي هيدالغو (Treaty of Guadalupe Hidalgo) = تنازلت المكسيك عن نصف أراضيها ودفعت الولايات المتحدة 15 مليون دولار؛ نهر نويسيس (Nueces River) = النهر الذي اعترف به الطرفان حدودًا قبل الحرب؛ ريو غراندي (Rio Grande) = أرسل بولك (Polk) القوات إلى هنا، على بعد نحو 150 ميلًا جنوب ذلك النهر","Unlocked. Your digit is 1. Your answer: 1858; Roger B. Taney; About 39 percent":"تم الفتح. رقمك هو 1. إجابتك: 1858؛ روجر ب. تاني (Roger B. Taney)؛ نحو 39 بالمئة","Clear all your work and start over? This cannot be undone.":"هل تريد مسح كل عملك والبدء من جديد؟ لا يمكن التراجع عن ذلك."},"patterns":[{"re":"^Still needed: first name, last name, and period\\.$","es":"Todavía falta: nombre, apellido y período.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة."},{"re":"^LOCK (\\d)$","es":"Cand. $1","ar":"القفل $1"},{"re":"^LOCK (\\d) · CORE OBJECTIVE (\\d)$","es":"CANDADO $1 · OBJETIVO PRINCIPAL $2","ar":"القفل $1 · الهدف الأساسي $2"},{"re":"^Hint (\\d):$","es":"Pista $1:","ar":"تلميح $1:"},{"re":"^Exit code digit (\\d)$","es":"Dígito $1 del código de salida","ar":"رقم رمز الخروج $1"},{"re":"^Click! Lock (\\d) is open\\. Your digit is (\\d)\\.$","es":"¡Clic! El Candado $1 está abierto. Tu dígito es $2.","ar":"نقرة! القفل $1 مفتوح. رقمك هو $2."},{"re":"^5 of 5 locks opened with (\\d+) tries and 1 hint\\.$","es":"Abriste 5 de 5 candados con $1 intentos y 1 pista.","ar":"فتحت 5 أقفال من 5 بعد $1 محاولة وتلميح واحد."},{"re":"^5 of 5 locks opened with (\\d+) tries and (\\d+) hints\\.$","es":"Abriste 5 de 5 candados con $1 intentos y $2 pistas.","ar":"فتحت 5 أقفال من 5 بعد $1 محاولة و$2 تلميحات."},{"re":"^Tap all (\\d) places first, in order\\.$","es":"Primero toca los $1 lugares, en orden.","ar":"المس الأماكن الـ $1 أولًا، بالترتيب."},{"re":"^Done! File downloaded: (.*)\\. Upload it to Canvas\\.$","es":"¡Listo! Se descargó el archivo: $1. Súbelo a Canvas.","ar":"تم! تم تنزيل الملف: $1. ارفعه إلى Canvas."},{"re":"^Your file downloaded and is marked INCOMPLETE \\(you have not escaped\\)\\. Upload it to Canvas: (.*)$","es":"Tu archivo se descargó y está marcado INCOMPLETO (todavía no escapas). Súbelo a Canvas: $1","ar":"تم تنزيل ملفك وهو مُسجَّل «غير مكتمل» INCOMPLETE (لم تهرب بعد). ارفعه إلى Canvas: $1"},{"re":"^Unlocked\\. Your digit is (\\d)\\. Your answer: (.*)$","es":"Desbloqueado. Tu dígito es $1. Tu respuesta: $2","ar":"تم الفتح. رقمك هو $1. إجابتك: $2"},{"re":"^Unlocked\\. Your digit is (\\d)\\.$","es":"Desbloqueado. Tu dígito es $1.","ar":"تم الفتح. رقمك هو $1."}]}</script>
+<script>
+/* Supplement language switch (English / Espanol / Arabic). Works on pages whose text is rendered by JS:
+   a MutationObserver translates text as it appears. Data: <script type="application/json" id="sp-i18n">
+   {"langs":["en","es","ar"],"default":"en","es":{englishHTML:translation},"ar":{...},"patterns":[{"re":"^(\\d+) of (\\d+)$","es":"$1 de $2","ar":"..."}]}
+   Keys are the English text exactly as it sits in the page (innerHTML, spaces collapsed).
+   Helpers: spSeen() english strings seen so far; spMissing() strings with no translation in the current language;
+   spSetLang(l); spTr(s) translate a string (used for confirm/alert); spAscii(s) plain-ASCII name for file names. */
+(function () {
+  var node = document.getElementById('sp-i18n');
+  var D = node ? JSON.parse(node.textContent) : { langs: ['en'], patterns: [] };
+  var INLINE = { B:1,I:1,EM:1,STRONG:1,SPAN:1,A:1,BR:1,SMALL:1,SUP:1,SUB:1,U:1,MARK:1,BDI:1,TSPAN:1,CODE:1 };
+  var SKIP = 'script,style,textarea,input,.sp-lang,.sp-nt,[translate="no"]';
+  var WORD = /[A-Za-z\u00C0-\u024F\u0600-\u06FF]{2}|e\.g\./;
+  var LANG = 'en', REC = new WeakMap(), SEEN = {}, MISS = {};
+  (D.patterns || []).forEach(function (p) { try { p._re = new RegExp(p.re); } catch (e) {} });
+  function norm(s) { return String(s).replace(/\s+/g, ' ').trim(); }
+  function tr(src) {
+    if (LANG === 'en') return null;
+    var t = D[LANG] && D[LANG][src];
+    if (t) return t;
+    var P = D.patterns || [];
+    for (var i = 0; i < P.length; i++) {
+      var m = P[i]._re && P[i]._re.exec(src);
+      if (m && P[i][LANG]) return P[i][LANG].replace(/\$(\d+)/g, function (_, n) { return m[+n] || ''; });
+    }
+    return null;
+  }
+  window.spTr = function (s) { var t = tr(norm(s)); return t ? t.replace(/<[^>]+>/g, '') : s; };
+  function isInline(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling)
+      if (c.nodeType === 1 && (!INLINE[c.tagName.toUpperCase()] || c.matches(SKIP))) return false;
+    return true;
+  }
+  function directText(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling) if (c.nodeType === 3 && WORD.test(c.nodeValue)) return true;
+    return false;
+  }
+  function cur(s) { return s.nodeType === 1 ? s.innerHTML : s.nodeValue; }
+  function put(s, v) { if (s.nodeType === 1) s.innerHTML = v; else s.nodeValue = v; }
+  function handle(s) {
+    var r = REC.get(s), c = cur(s);
+    if (!(r && c === r.wrote)) { r = { en: c, wrote: c }; REC.set(s, r); }
+    var src = norm(r.en), target = r.en;
+    if (WORD.test(src)) {
+      SEEN[src] = 1;
+      if (LANG !== 'en') {
+        var t = tr(src);
+        if (t) {
+          target = s.nodeType === 1 ? t : (r.en.match(/^\s*/)[0] + t + r.en.match(/\s*$/)[0]);
+          delete MISS[src];
+        } else MISS[src] = 1;
+      }
+    }
+    if (c !== target) put(s, target);
+    r.wrote = cur(s);
+  }
+  var ATTRS = ['placeholder', 'alt', 'aria-label', 'title'];
+  function attrs(root) {
+    var els = root.querySelectorAll ? root.querySelectorAll('[placeholder],[alt],[aria-label],[title]') : [];
+    var list = [].slice.call(els); if (root.matches && root.matches('[placeholder],[alt],[aria-label],[title]')) list.push(root);
+    list.forEach(function (el) {
+      if (el.closest && el.closest('.sp-lang,.sp-nt,[translate="no"],script,style')) return;
+      var rec = el.__spa || (el.__spa = {});
+      ATTRS.forEach(function (a) {
+        var v = el.getAttribute(a); if (v == null) return;
+        var r = rec[a];
+        if (!(r && v === r.wrote)) { r = rec[a] = { en: v, wrote: v }; }
+        var src = norm(r.en); if (!WORD.test(src)) return;
+        SEEN[src] = 1;
+        var t = LANG === 'en' ? null : tr(src);
+        if (LANG !== 'en' && !t) MISS[src] = 1;
+        var target = t ? t.replace(/<[^>]+>/g, '') : r.en;
+        if (v !== target) el.setAttribute(a, target);
+        r.wrote = el.getAttribute(a);
+      });
+    });
+  }
+  function walk(root) {
+    if (root.nodeType === 3) { if (WORD.test(root.nodeValue) && !(root.parentNode && root.parentNode.closest && root.parentNode.closest(SKIP))) handle(root); return; }
+    if (root.nodeType !== 1) return;
+    (function w(el) {
+      if (el.matches(SKIP)) return;
+      if (el !== document.body && directText(el) && isInline(el)) { handle(el); return; }
+      for (var c = el.firstChild; c; c = c.nextSibling) {
+        if (c.nodeType === 1) w(c); else if (c.nodeType === 3 && WORD.test(c.nodeValue)) handle(c);
+      }
+    })(root);
+    attrs(root);
+  }
+  var TITLE = { en: document.title, wrote: document.title };
+  function title() {
+    if (document.title !== TITLE.wrote) TITLE = { en: document.title, wrote: document.title };
+    var t = LANG === 'en' ? null : tr(norm(TITLE.en));
+    document.title = t ? t.replace(/<[^>]+>/g, '') : TITLE.en; TITLE.wrote = document.title;
+  }
+  function inl(e) { return e.nodeType === 1 && !!INLINE[e.tagName.toUpperCase()]; }
+  var mo = new MutationObserver(function (muts) {
+    var todo = [];
+    muts.forEach(function (m) {
+      if (m.type === 'childList') { for (var i = 0; i < m.addedNodes.length; i++) todo.push(m.addedNodes[i]); todo.push(m.target); }
+      else todo.push(m.target);
+    });
+    todo.forEach(function (n) {
+      var el = n.nodeType === 1 ? n : n.parentNode;
+      if (!el || el.nodeType !== 1 || !document.body.contains(el)) return;
+      while (el !== document.body && el.parentNode && el.parentNode.nodeType === 1 && inl(el) && inl(el.parentNode)) el = el.parentNode;
+      if (el.parentNode && el.parentNode.nodeType === 1 && inl(el.parentNode) && el.parentNode !== document.body) el = el.parentNode;
+      walk(el);
+    });
+    mo.takeRecords();
+  });
+  var AR = { 'ا':'a','أ':'a','إ':'i','آ':'a','ب':'b','ت':'t','ث':'th','ج':'j','ح':'h','خ':'kh','د':'d','ذ':'dh','ر':'r','ز':'z','س':'s','ش':'sh','ص':'s','ض':'d','ط':'t','ظ':'z','ع':'a','غ':'gh','ف':'f','ق':'q','ك':'k','ل':'l','م':'m','ن':'n','ه':'h','و':'w','ي':'y','ى':'a','ة':'a','ئ':'y','ؤ':'w' };
+  window.spAscii = function (s) {
+    s = String(s); if (s.normalize) s = s.normalize('NFD').replace(/[̀-ًͯ-ٰٟ]/g, '');
+    return s.replace(/[ء-ي]/g, function (c) { return AR[c] !== undefined ? AR[c] : ''; }).replace(/ñ/g, 'n').replace(/Ñ/g, 'N');
+  };
+  window.spSeen = function () { return Object.keys(SEEN); };
+  window.spMissing = function () { return Object.keys(MISS); };
+  window.spLang = function () { return LANG; };
+  window.spSetLang = function (l) {
+    if ((D.langs || ['en']).indexOf(l) < 0) l = 'en';
+    LANG = l; MISS = {};
+    var h = document.documentElement; h.lang = l; h.dir = l === 'ar' ? 'rtl' : 'ltr';
+    mo.disconnect(); walk(document.body); title(); mo.takeRecords();
+    mo.observe(document.body, { childList: true, subtree: true, characterData: true });
+    document.querySelectorAll('.sp-lang button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === l)); });
+    try { localStorage.setItem('sp_lang', l); } catch (e) {}
+    try { var u = new URL(location.href); if (l === 'en') u.searchParams.delete('lang'); else u.searchParams.set('lang', l); history.replaceState(null, '', u.toString()); } catch (e) {}
+    try { document.dispatchEvent(new CustomEvent('splangchange', { detail: l })); } catch (e) {}
+  };
+  var _c = window.confirm, _a = window.alert;
+  window.confirm = function (m) { return _c.call(window, window.spTr(m)); };
+  window.alert = function (m) { return _a.call(window, window.spTr(m)); };
+  document.querySelectorAll('.sp-lang button').forEach(function (b) { b.addEventListener('click', function () { window.spSetLang(b.getAttribute('data-lang')); }); });
+  var start = D['default'] || 'en';
+  try { start = new URL(location.href).searchParams.get('lang') || localStorage.getItem('sp_lang') || start; } catch (e) {}
+  window.spSetLang(start);
+})();
+
+</script><!--/sp-i18n-->
+</body>
+</html>

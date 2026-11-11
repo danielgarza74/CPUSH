@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Escape Room 1 · Founding the English Colonies</title>
+<style>
+:root{--bg:#16413B;--txt:#EBF4F3;--a1:#256960;--a2:#D2AA4B;--hl:#E1C88E;--glass:rgba(235,244,243,.07);--glassb:rgba(235,244,243,.2);--dim:#D4E3E1;--ok:#8FD3A8}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#246B60 0%,#16413B 60%) fixed;background-color:var(--bg);color:var(--txt);font:17px/1.55 "Segoe UI",system-ui,-apple-system,Verdana,sans-serif;min-height:100vh}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px 40px}
+.glass{background:var(--glass);border:1px solid var(--glassb);border-radius:16px;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+header.hero{padding:30px 0 12px;border-bottom:3px solid var(--a2)}
+.eyebrow{font-size:13px;letter-spacing:.16em;font-weight:700;color:var(--hl)}
+h1{margin:.15em 0 .05em;font-size:clamp(28px,6vw,40px);line-height:1.12}
+.sub{margin:0;font-weight:600;color:var(--dim)}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 4px}
+.meta label{flex:1 1 170px;font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--dim)}
+input[type=text],textarea,select{display:block;width:100%;margin-top:4px;padding:10px 12px;border:1px solid var(--glassb);border-radius:10px;background:rgba(14,42,39,.55);color:var(--txt);font:inherit;font-size:16px}
+input[type=text]:focus,textarea:focus,select:focus,button:focus-visible{outline:3px solid var(--hl);outline-offset:1px}
+input.bad{border-color:var(--a2);box-shadow:0 0 0 2px var(--a2)}
+textarea{min-height:120px;resize:vertical}
+.howto{margin:14px 0;padding:14px 16px;font-size:16px}
+.howto ol{margin:6px 0 0;padding-left:22px}
+.scene{margin:14px 0;padding:8px;text-align:center}
+.scene svg{width:100%;height:auto;display:block;border-radius:12px}
+.bar{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;padding:8px 12px;margin:10px 0;font-weight:700;font-size:15px;background:rgba(22,65,59,.92);border:1px solid var(--glassb);border-radius:12px}
+.bar span b{color:var(--hl)}
+.btn{font:inherit;font-size:16px;font-weight:700;padding:11px 18px;border-radius:12px;border:2px solid var(--hl);background:transparent;color:var(--txt);cursor:pointer;min-height:44px}
+.btn:hover{background:rgba(225,200,142,.18)}
+.btn.primary{background:var(--hl);color:#16413B;border-color:var(--hl)}
+.btn.primary:hover{background:#EFE2B8}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.btn.small{padding:8px 14px;font-size:15px;min-height:40px}
+.intro{padding:20px;text-align:center}
+.intro p{margin:.4em 0}
+.lock{margin:12px 0;overflow:hidden}
+.lock>button.lh{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:12px;width:100%;padding:14px 16px;cursor:pointer}
+.lock>button.lh:focus-visible{outline:3px solid var(--hl);outline-offset:-3px}
+.lock.locked>button.lh{cursor:not-allowed;opacity:.55}
+.lk{flex:none;width:44px;height:44px}
+.lk .sh{transition:transform .5s cubic-bezier(.3,1.6,.5,1);transform-origin:center}
+.lock.solved .lk .sh{transform:translateY(-6px) rotate(-30deg);transform-origin:10px 14px}
+.lock.solved .lk .bd{fill:var(--hl)}
+.lt{flex:1}
+.lt small{display:block;font-size:12px;letter-spacing:.12em;font-weight:700;color:var(--hl)}
+.lt strong{font-size:19px}
+.dg{flex:none;min-width:42px;height:42px;border-radius:10px;border:2px solid var(--hl);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;background:rgba(14,42,39,.55)}
+.lb{padding:0 16px 16px;display:none}
+.lock.open .lb{display:block}
+.objline{font-size:14px;color:var(--dim);margin:0 0 10px}
+.card{background:rgba(235,244,243,.1);border-left:6px solid var(--a2);border-radius:10px;padding:12px 14px;margin:8px 0 12px}
+.card h4{margin:0 0 4px;font-size:13px;letter-spacing:.12em;color:var(--hl)}
+.card p{margin:.3em 0}
+.card .src{font-size:13px;color:var(--dim)}
+.prompt{font-weight:700;margin:10px 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0}
+.chip{font:inherit;font-size:16px;padding:10px 14px;border-radius:12px;border:2px solid var(--glassb);background:rgba(14,42,39,.55);color:var(--txt);cursor:pointer;min-height:44px;text-align:left}
+.chip.sel{border-color:var(--hl);background:rgba(225,200,142,.2)}
+.chip .n{display:inline-block;min-width:24px;height:24px;line-height:24px;border-radius:12px;background:var(--hl);color:#16413B;font-weight:800;text-align:center;margin-right:8px}
+.mrow{margin:8px 0}
+.mrow label{font-weight:700;display:block}
+fieldset{border:1px solid var(--glassb);border-radius:10px;margin:8px 0;padding:8px 12px}
+legend{font-weight:700;padding:0 6px}
+.opt{display:flex;align-items:center;gap:10px;padding:6px 0;min-height:40px;cursor:pointer}
+.opt input{width:22px;height:22px;accent-color:#E1C88E;flex:none}
+.cipher{font:700 24px/1.3 "Courier New",monospace;letter-spacing:.14em;background:rgba(14,42,39,.65);padding:12px;border-radius:10px;border:1px dashed var(--hl);word-break:break-word;text-align:center}
+.key{display:grid;grid-template-columns:repeat(13,1fr);gap:2px;margin:10px 0;font:700 14px/1.2 "Courier New",monospace;text-align:center}
+.key div{padding:3px 0;border-radius:4px;background:rgba(235,244,243,.08)}
+.key .c{color:var(--hl)}
+.scr{font:800 30px/1.2 "Courier New",monospace;letter-spacing:.3em;text-align:center;background:rgba(14,42,39,.65);padding:10px;border-radius:10px;border:1px dashed var(--hl)}
+.row{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0;align-items:center}
+.fb{margin:8px 0;padding:10px 12px;border-radius:10px;display:none;font-weight:600}
+.fb.show{display:block}
+.fb.nudge{background:rgba(210,170,75,.18);border:1px solid var(--a2)}
+.fb.good{background:rgba(143,211,168,.16);border:1px solid var(--ok);color:#DDF5E6}
+.hints{margin:6px 0}
+.hint{background:rgba(225,200,142,.14);border:1px dashed var(--hl);border-radius:10px;padding:8px 12px;margin:6px 0;font-size:16px}
+.hint b{color:var(--hl)}
+.exit{margin:16px 0;padding:18px;text-align:center}
+.exit.locked{opacity:.55}
+.exit h2,.esc h2,.debrief h2{margin:.1em 0 .3em}
+.codebox{display:flex;justify-content:center;gap:8px;margin:12px 0}
+.codebox input{width:52px;height:60px;text-align:center;font:800 30px "Courier New",monospace;padding:0;margin:0}
+.esc{margin:16px 0;padding:22px;text-align:center;display:none;border:2px solid var(--hl)}
+.esc.show{display:block}
+.esc .big{overflow-wrap:anywhere;font-size:clamp(30px,9vw,64px);font-weight:900;letter-spacing:.14em;color:var(--hl);text-shadow:0 0 24px rgba(225,200,142,.6);animation:pop .8s cubic-bezier(.3,1.6,.5,1)}
+.esc .time{font-size:26px;font-weight:800}
+.debrief{margin:16px 0;padding:16px}
+.actions{margin:16px 0;padding:16px}
+.status{font-weight:700;margin-bottom:10px}
+.msg{display:none;margin-top:10px;padding:10px 12px;border-radius:10px;background:rgba(143,211,168,.16);border:1px solid var(--ok)}
+.msg.err{background:rgba(210,170,75,.2);border-color:var(--a2)}
+.link{all:unset;cursor:pointer;color:var(--dim);text-decoration:underline;font-size:14px;margin-top:10px;display:inline-block}
+.link:focus-visible{outline:3px solid var(--hl)}
+footer{text-wrap:balance;text-align:center;font-size:12px;letter-spacing:.1em;font-weight:700;color:var(--dim);padding:20px 8px 30px;border-top:1px solid var(--glassb);margin-top:20px}
+.ennote{margin:.4em 0 0;font-size:14px;font-weight:700;color:var(--dim)}
+.exit .ennote{text-align:center}
+.hidden{display:none!important}.lock,.exit,.esc{scroll-margin-top:64px}
+.pop{animation:pop .7s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pop{0%{transform:scale(.2);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes tap{0%,100%{transform:rotate(0)}50%{transform:rotate(9deg)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.shake{animation:shake .35s}
+.wheel{transform-box:view-box;transform-origin:276px 86px}
+.wheel.spin{animation:tap .5s ease-in-out 3}
+.plock .sh{transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
+.plock.open .sh{transform:translateY(-7px)}
+.plock.open .bd{fill:#E1C88E}
+#door{transform-origin:150px 20px;transition:transform 1.4s ease-in-out}
+.escaped #door{transform:scaleX(.1)}
+#glow{opacity:.15;transition:opacity 1.4s}
+.escaped #glow{opacity:1}
+html[dir="rtl"] .chip{text-align:right}
+html[dir="rtl"] .chip .n{margin-right:0;margin-left:8px}
+html[dir="rtl"] .card{border-left:0;border-right:6px solid var(--a2)}
+html[dir="rtl"] .howto ol{padding-left:0;padding-right:22px}
+html[dir="rtl"] .esc,html[dir="rtl"] .exit,html[dir="rtl"] .intro{text-align:center}
+html[dir="rtl"] .cipher,html[dir="rtl"] .scr,html[dir="rtl"] .key{direction:ltr}
+html[dir="rtl"] .scr{letter-spacing:.3em!important}
+html[dir="rtl"] .cipher{letter-spacing:.14em!important}
+html[dir="rtl"] .key{letter-spacing:0!important}
+html[dir="rtl"] .card .src{direction:ltr;text-align:left}
+html[dir="rtl"] .hint,html[dir="rtl"] .fb,html[dir="rtl"] .msg,html[dir="rtl"] .objline{text-align:start}
+html[dir="rtl"] .lock>button.lh{text-align:start}
+html[dir="rtl"] .lb,html[dir="rtl"] .actions{text-align:start}
+html[dir="rtl"] .bar{direction:rtl}
+html[dir="rtl"] .tt{unicode-bidi:plaintext}
+@media(max-width:520px){body{font-size:16px}.chip{width:100%}.key{font-size:12px;gap:1px}.codebox input{width:46px;height:54px}.dg{min-width:38px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{.bar,.actions button{display:none}}
+/*sp-i18n-css*/
+.sp-lang-bar{display:flex;justify-content:flex-end;padding:8px 12px 0;position:relative;z-index:5}
+.sp-lang{display:inline-flex;gap:2px;padding:3px;border-radius:10px;background:rgba(255,255,255,.88);border:1px solid rgba(0,0,0,.18);font-family:system-ui,"Segoe UI",Tahoma,Arial,sans-serif}
+.sp-lang button{border:0;background:transparent;color:#222;font:600 13px/1 system-ui,"Segoe UI",Tahoma,Arial,sans-serif;padding:7px 11px;border-radius:7px;cursor:pointer}
+.sp-lang button[aria-pressed="true"]{background:#222;color:#fff}
+.sp-lang button:focus-visible{outline:3px solid #2a6df4;outline-offset:1px}
+textarea,input,select{unicode-bidi:plaintext}
+html[lang="ar"] body,html[lang="ar"] button,html[lang="ar"] textarea,html[lang="ar"] input,html[lang="ar"] select{font-family:"Segoe UI",Tahoma,"Noto Sans Arabic","Arial",system-ui,sans-serif}
+html[lang="ar"] body{line-height:1.8}
+html[lang="ar"] *{letter-spacing:0!important}
+html[dir="rtl"] textarea,html[dir="rtl"] input{text-align:start}
+@media print{.sp-lang-bar{display:none}}
+/*/sp-i18n-css*/
+</style>
+</head>
+<body>
+<!--sp-bar--><div class="sp-lang-bar"><div class="sp-lang" role="group" aria-label="Language / Idioma / اللغة"><button type="button" data-lang="en" lang="en" aria-pressed="true">English</button><button type="button" data-lang="es" lang="es" aria-pressed="false">Español</button><button type="button" data-lang="ar" lang="ar" aria-pressed="false">العربية</button></div></div><!--/sp-bar-->
+<div class="wrap">
+<header class="hero">
+  <div class="eyebrow">1603-1733</div>
+  <h1>Escape the Meetinghouse Loft</h1>
+  <p class="sub">Founding the English Colonies</p>
+  <div class="meta">
+    <label>FIRST NAME *<input id="f_first" type="text" autocomplete="given-name"></label>
+    <label>LAST NAME *<input id="f_last" type="text" autocomplete="family-name"></label>
+    <label>PERIOD *<input id="f_period" type="text" inputmode="numeric" maxlength="12" placeholder="e.g. 3"></label>
+  </div>
+</header>
+
+<div class="howto glass"><b>How to escape:</b>
+<ol>
+<li>Open each lock in order. Read the <b>Clue Card</b>. The answer is in the card.</li>
+<li>Solve the puzzle to open the lock and reveal one digit.</li>
+<li>If you get stuck, press <b>Hint</b>. Hints are free, but your teacher can see how many you used.</li>
+<li>Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.</li>
+</ol></div>
+
+<div class="scene glass" id="scene">
+<svg viewBox="0 0 600 270" role="img" aria-label="A meetinghouse loft at night. On the left, a round window showing the moon, the sea, and a sailing ship, and an hourglass on a small table. On the right, a bell hanging from a beam, a rack of rolled scrolls, and a shelf of ledger books. The door has a MEETINGHOUSE LOFT sign and five padlocks in a row. Under each padlock is a window for one digit of the exit code.">
+<defs>
+<pattern id="brick" width="40" height="270" patternUnits="userSpaceOnUse"><rect width="40" height="270" fill="#12332D"/><path d="M0 0V270" stroke="#EBF4F3" stroke-opacity=".12" fill="none"/><path d="M20 0V270" stroke="#EBF4F3" stroke-opacity=".05" fill="none"/></pattern>
+<radialGradient id="glowg" cx="50%" cy="50%" r="60%"><stop offset="0" stop-color="#EBF4F3"/><stop offset="1" stop-color="#E1C88E"/></radialGradient>
+</defs>
+<rect width="600" height="270" fill="url(#brick)"/>
+<rect y="236" width="600" height="34" fill="#123833"/>
+<g stroke="#D4E3E1" stroke-opacity=".35" stroke-width="2"><path d="M0 248H600M0 260H600"/><path d="M60 236V248M180 236V248M300 236V248M420 236V248M540 236V248M120 248V260M240 248V260M360 248V260M480 248V260M600 248V260"/></g>
+<g>
+<defs><clipPath id="rw"><circle cx="70" cy="66" r="36"/></clipPath></defs>
+<circle cx="70" cy="66" r="42" fill="#0E2A27" stroke="#E1C88E" stroke-width="5"/>
+<g clip-path="url(#rw)"><rect x="30" y="30" width="80" height="72" fill="#0B2522"/>
+<circle cx="52" cy="48" r="8" fill="#E1C88E"/><circle cx="56" cy="45" r="7" fill="#0B2522"/>
+<g fill="#EBF4F3"><circle cx="84" cy="44" r="1.6"/><circle cx="98" cy="56" r="1.3"/><circle cx="76" cy="58" r="1.2"/><circle cx="40" cy="64" r="1.3"/></g>
+<rect x="30" y="76" width="80" height="30" fill="#256960" fill-opacity=".85"/>
+<path d="M32 86Q40 82 48 86T64 86T80 86T96 86T112 86M40 98Q48 94 56 98T72 98T88 98T104 98" stroke="#EBF4F3" stroke-opacity=".7" stroke-width="2" fill="none" stroke-linecap="round"/>
+<path d="M66 78H94L89 86H71Z" fill="#D2AA4B" stroke="#E1C88E" stroke-width="1.5" stroke-linejoin="round"/><path d="M80 78V58" stroke="#E1C88E" stroke-width="2"/><path d="M82 60L94 76H82Z" fill="#EBF4F3" fill-opacity=".85"/><path d="M78 62L68 76H78Z" fill="#EBF4F3" fill-opacity=".6"/></g>
+<path d="M70 24V108M28 66H112" stroke="#E1C88E" stroke-width="3"/>
+<rect x="22" y="110" width="96" height="7" rx="3" fill="#E1C88E"/></g>
+<g><circle cx="70" cy="172" r="32" fill="#E1C88E" fill-opacity=".12"/>
+<rect x="20" y="198" width="100" height="8" rx="3" fill="#E1C88E"/><rect x="28" y="206" width="6" height="30" fill="#E1C88E"/><rect x="106" y="206" width="6" height="30" fill="#E1C88E"/>
+<rect x="48" y="190" width="44" height="8" rx="3" fill="#D2AA4B" stroke="#E1C88E" stroke-width="2"/>
+<rect x="48" y="144" width="44" height="8" rx="3" fill="#D2AA4B" stroke="#E1C88E" stroke-width="2"/>
+<path d="M54 152H86L74 171L86 190H54L66 171Z" fill="#EBF4F3" fill-opacity=".16" stroke="#E1C88E" stroke-width="2.5" stroke-linejoin="round"/>
+<path d="M60 188H80L70 176Z" fill="#E1C88E"/><path d="M68 160H72V176H68Z" fill="#E1C88E"/>
+<path d="M52 152V190M88 152V190" stroke="#D2AA4B" stroke-width="3"/></g>
+<g><rect x="458" y="224" width="46" height="12" rx="3" fill="#D2AA4B" stroke="#E1C88E" stroke-width="2"/>
+<rect x="462" y="132" width="11" height="92" rx="5" fill="#E1C88E" fill-opacity=".9" stroke="#D2AA4B" stroke-width="2"/><rect x="462" y="168" width="11" height="6" fill="#D2AA4B"/>
+<rect x="477" y="112" width="11" height="112" rx="5" fill="#E1C88E" fill-opacity=".9" stroke="#D2AA4B" stroke-width="2"/><rect x="477" y="160" width="11" height="6" fill="#D2AA4B"/>
+<rect x="492" y="146" width="11" height="78" rx="5" fill="#E1C88E" fill-opacity=".9" stroke="#D2AA4B" stroke-width="2"/><rect x="492" y="180" width="11" height="6" fill="#D2AA4B"/></g>
+<g><rect x="498" y="26" width="86" height="7" rx="3" fill="#E1C88E"/><path d="M541 33V52" stroke="#E1C88E" stroke-width="3"/>
+<path d="M518 96Q522 56 541 52Q560 56 564 96Z" fill="#D2AA4B" stroke="#E1C88E" stroke-width="2.5" stroke-linejoin="round"/>
+<rect x="514" y="94" width="54" height="6" rx="3" fill="#E1C88E"/><circle cx="541" cy="106" r="5" fill="#0E2A27" stroke="#E1C88E" stroke-width="2.5"/>
+<path d="M530 78Q535 62 541 60" stroke="#EBF4F3" stroke-opacity=".6" stroke-width="2" fill="none"/></g>
+<g><rect x="508" y="152" width="82" height="6" rx="2" fill="#E1C88E"/><rect x="508" y="208" width="82" height="6" rx="2" fill="#E1C88E"/>
+<g stroke="#E1C88E" stroke-width="2"><rect x="512" y="120" width="10" height="32" fill="#256960"/><rect x="524" y="114" width="12" height="38" fill="#D2AA4B"/><rect x="538" y="122" width="10" height="30" fill="#0E2A27"/><rect x="550" y="116" width="12" height="36" fill="#256960"/><rect x="564" y="124" width="10" height="28" fill="#D2AA4B"/>
+<rect x="512" y="176" width="12" height="32" fill="#D2AA4B"/><rect x="526" y="170" width="10" height="38" fill="#0E2A27"/><rect x="538" y="178" width="12" height="30" fill="#256960"/><rect x="552" y="172" width="10" height="36" fill="#D2AA4B"/><rect x="564" y="168" width="12" height="40" fill="#256960"/></g>
+<g stroke="#EBF4F3" stroke-opacity=".6" stroke-width="1.5"><path d="M517 130H517M517 134H517"/><path d="M512 136H522M524 130H536M550 132H562M512 190H524M526 186H536M552 188H562"/></g></g>
+<rect id="glow" x="150" y="20" width="300" height="216" rx="10" fill="url(#glowg)"/>
+<g id="door">
+<rect x="150" y="20" width="300" height="216" rx="10" fill="#256960" stroke="#E1C88E" stroke-width="3"/>
+<circle cx="164" cy="34" r="4" fill="#E1C88E"/><circle cx="436" cy="34" r="4" fill="#E1C88E"/><circle cx="164" cy="222" r="4" fill="#E1C88E"/><circle cx="436" cy="222" r="4" fill="#E1C88E"/>
+<rect x="210" y="30" width="180" height="26" rx="4" fill="#0E2A27" stroke="#EBF4F3" stroke-opacity=".7"/>
+<text x="300" y="48" text-anchor="middle" font-size="11" letter-spacing="1.5" font-weight="700" fill="#EBF4F3">MEETINGHOUSE LOFT</text>
+<rect x="262" y="90" width="76" height="8" rx="3" fill="#16413B"/>
+<circle cx="276" cy="86" r="4" fill="#EBF4F3"/>
+<g class="wheel" id="wheel"><path d="M276 86L328 80" stroke="#EBF4F3" stroke-width="4" stroke-linecap="round"/><circle cx="330" cy="80" r="6" fill="#D2AA4B"/></g>
+<rect x="170" y="106" width="260" height="8" rx="3" fill="#16413B"/>
+<g id="plocks"></g>
+<text x="300" y="228" text-anchor="middle" direction="ltr" font-size="11" letter-spacing="3" font-weight="700" fill="#EBF4F3">1603 - 1733</text>
+</g>
+</svg>
+</div>
+
+<div class="intro glass" id="intro">
+  <h2 style="margin:.1em 0">You are locked in the meetinghouse loft.</h2>
+  <p>The caretaker locked the meetinghouse loft for the night. A round window, an hourglass, a bell, a rack of scrolls, and a shelf of ledgers are in the room. The door has <b>5 locks</b>. Each lock matches one big idea from Lesson 1. Solve them all to find the <b>5-digit exit code</b>.</p>
+  <p>The clock starts when you press the button. Most students finish in about 20 minutes.</p>
+  <p><button class="btn primary" id="startBtn">Enter the Loft</button></p>
+</div>
+
+<div id="game" class="hidden">
+  <div class="bar" id="bar" aria-live="off"><span><span>Time</span> <b id="tm">00:00</b></span><span><span>Locks</span> <b id="lc">0</b>/5</span><span><span>Hints used</span> <b id="hc">0</b></span></div>
+  <div id="locks"></div>
+
+  <section class="exit glass locked" id="exit" aria-label="Exit door">
+    <div class="eyebrow">THE EXIT DOOR</div>
+    <h2>Type the exit code</h2>
+    <p id="exitNote">Open all 5 locks first. The digits go in order: Lock 1 first.</p>
+    <div class="codebox" id="codebox" dir="ltr"></div>
+    <p class="ennote">Type the answer in English. Use the digits 0-9.</p>
+    <div class="row" style="justify-content:center"><button class="btn primary" id="codeBtn" disabled>Open the Door</button></div>
+    <div class="fb" id="codefb"></div>
+  </section>
+
+  <section class="esc glass" id="esc" aria-live="polite">
+    <div class="big">ESCAPED</div>
+    <p class="time"><span>Your time:</span> <span id="escTime">00:00</span></p>
+    <p id="escSum"></p>
+    <p>One last step: write your Debrief below.</p>
+  </section>
+
+  <section class="debrief glass" id="debrief">
+    <div class="eyebrow">DEBRIEF</div>
+    <h2>Which lock was hardest, and what did you learn that you did not know before?</h2>
+    <p style="margin:.2em 0;color:var(--dim)">Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.</p>
+    <textarea id="debriefText" aria-label="Debrief" placeholder="Type your answer here..."></textarea>
+  </section>
+
+  <section class="actions glass" id="actions">
+    <div class="status" id="status"></div>
+    <div class="row">
+      <button class="btn" id="saveBtn">Save Progress</button>
+      <button class="btn" id="loadBtn">Load Progress</button>
+      <input type="file" id="loadFile" accept=".json,application/json" hidden>
+      <button class="btn primary" id="finishBtn">Finished — Download File to Submit</button>
+    </div>
+    <div class="msg" id="msg" role="status"></div>
+    <button class="link" id="reset">Clear all my work and start over</button>
+  </section>
+</div>
+
+<div class="actions glass hidden" id="loadOnly" style="margin-top:12px"><button class="btn" id="loadBtn0">Load Progress</button> <span style="color:var(--dim)">Have a saved file? Load it to continue.</span></div>
+
+<footer>UNIT 1 · COLONIES, REVOLUTION, AND CONSTITUTION | CPUSH | DANIEL GARZA, M.A.</footer>
+</div>
+
+<script type="application/json" id="er-data">{"salt": "L1esc:", "exitHash": "5ec534cd03185d143b99", "locks": [{"n": 1, "key": "lock1_window", "title": "The Round Window", "obj": "1", "objLabel": "CORE OBJECTIVE 1", "objText": "Core Objective 1: Identify the economic, political, and religious motivations of English monarchs and investors for the establishment of American colonies.", "type": "match", "card": "<p>English colonies were private business ventures or religious experiments, or both. Few people were rich enough to pay for a colony alone. So investors bought shares of stock and formed <b>joint-stock companies<\/b>. This shared the risk and the profits. The government wanted colonies to send home raw materials such as timber, tobacco, and furs. It also wanted colonists to buy English goods.<\/p><p>English kings shared power with <b>Parliament<\/b>, which could tax the people. James I and his son Charles I claimed great power and clashed with Parliament. The <b>Puritans<\/b> wanted to “purify” the Church of England of Catholic-style ceremonies. James I tried to jail or banish them, and many Puritans left England.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 2, “The English Background” (People and Profits, p. 56; Political Traditions; Religious Conflict and War).", "prompt": "Match each idea to the best description. Use the Clue Card.", "hints": ["Look for the bold words in the Clue Card: joint-stock companies, Parliament, and Puritans. Then find what England wanted from its colonies.", "Joint-stock companies shared risk and profits. Parliament could tax the people. The Puritans wanted to purify the church. England wanted raw materials."], "nudge": "Not quite. Check each match against the Clue Card. Which one are you least sure about?", "terms": [{"id": "raw", "label": "Raw materials"}, {"id": "par", "label": "Parliament"}, {"id": "jsc", "label": "Joint-stock company"}, {"id": "pur", "label": "The Puritans"}], "descs": [{"id": "d", "label": "Goods such as timber, tobacco, and furs that England wanted"}, {"id": "a", "label": "Investors buy shares so they share the cost, risk, and profits"}, {"id": "c", "label": "Reformers who wanted to “purify” the Church of England"}, {"id": "b", "label": "The English lawmaking body that could tax the people"}], "entries": ["28b37e25d0f95c71dde89"], "id": "lock1_window"}, {"n": 2, "key": "lock2_hourglass", "title": "The Hourglass", "obj": "2", "objLabel": "CORE OBJECTIVE 2 (CHESAPEAKE)", "objText": "Core Objective 2: Describe the political, economic, social, and religious characteristics of English colonies in the Chesapeake region, New England, the Carolinas, and the middle colonies—Pennsylvania, New York, New Jersey, and Delaware—before 1700. This lock covers the Chesapeake region.", "type": "order", "card": "<p>In 1606, King James I approved the Virginia Company, a joint-stock company. In 1607, 104 colonists reached Chesapeake Bay and built Jamestown. The <b>Powhatan Confederacy<\/b>, led by Wahunsunacock, ruled about 14,000 Indigenous people nearby. Jamestown nearly failed from hunger and disease. In 1612, settlers began growing <b>tobacco<\/b> to sell in England. It became very profitable, but it needed more land and more workers.<\/p><p>In 1618, the company began the <b>headright<\/b> policy: a person who paid his way to Virginia got 50 acres, plus 50 more for each servant he brought. In 1619, the House of Burgesses, the first elected assembly in the colonies, began to meet. In that same year, a ship landed about 20 Africans in Virginia, the start of about 250 years of slavery in British North America. In 1634, Maryland was founded. Its owner hoped it would be a refuge for English Catholics.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 2, “Settling the American Colonies” (The Chesapeake Region, p. 61; Jamestown; The Powhatan Confederacy; Tobacco; Governance; Slavery in British North America; Maryland).", "prompt": "Tap the four events in the order they happened. Tap an event again to take it back.", "items": [{"id": "c", "label": "The House of Burgesses is created"}, {"id": "a", "label": "Colonists reach Chesapeake Bay and found Jamestown"}, {"id": "d", "label": "Maryland is founded"}, {"id": "b", "label": "Settlers begin growing tobacco to sell in England"}], "hints": ["Look for the years in the Clue Card: 1607, 1612, 1619, and 1634.", "The order is Jamestown (1607), tobacco (1612), the House of Burgesses (1619), then Maryland (1634)."], "nudge": "Not quite. Re-read the Clue Card and match each event to its year.", "entries": ["9aba7cf0728f770fe44b2"], "id": "lock2_hourglass"}, {"n": 3, "key": "lock3_bell", "title": "The Bell", "obj": "2", "objLabel": "CORE OBJECTIVE 2 (NEW ENGLAND)", "objText": "Core Objective 2: Describe the political, economic, social, and religious characteristics of English colonies in the Chesapeake region, New England, the Carolinas, and the middle colonies—Pennsylvania, New York, New Jersey, and Delaware—before 1700. This lock covers New England.", "type": "fill", "card": "<p>Puritan families settled New England to build self-governing religious communities. In 1620, 102 people sailed on the <i>Mayflower<\/i> and landed at Cape Cod. Forty-one men there signed the <b>Mayflower Compact<\/b>, a promise to rule themselves by “just and civil laws.” Only the male church members could vote and hold office.<\/p><p>In 1630, John Winthrop led about 700 Puritans to found the <b>Massachusetts Bay Colony<\/b>. It grew much larger than Plymouth. Puritan leaders did not want democracy or religious toleration, and they punished people of other faiths. Rhode Island began after Puritan leaders banished a dissenter, and it welcomed all who fled religious persecution. In 1692–1693, the <b>witchcraft hysteria<\/b> in Salem Village led to 19 people being hanged.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 2, “Settling the American Colonies” (New England; Plymouth; Massachusetts Bay; Rhode Island; Witches in Salem).", "prompt": "Fill in the blank using the Clue Card.", "sentence": "The 1620 promise to rule by “just and civil laws” is called the ________ Compact.", "scramble": "A  O  W  M  R  L  E  Y  F", "hints": ["Look for the bold words in the first paragraph of the Clue Card. The word before “Compact” is also the name of the ship.", "The word starts with M and has 9 letters. It ends with “flower.”"], "nudge": "Not quite. Re-read the Clue Card. Use the scrambled letters to check your spelling.", "entries": ["0028dee1739dec6a59ed2", "01dc4d535c8b535f1c913", "0238f246e6f8a6df6a082", "03bb1c8f18683185dee81", "04188d1f1956736e611a8", "04a65901b55c614cb1006", "04cad52405c1df34a53e6", "04ce27679635367505822", "0753b2cb06467e90cbc66", "077b28adcae6f4841f498", "08b79b60c12dca7ee1f14", "092895fde99d0028e9d36", "09e455a8ea2f337333853", "0a36cd0e1b5a9c0e05d39", "0a5177ef38be8578f7839", "0a84f4afda9e5e17fcb89", "0af24998ae6df5c528957", "0c60bda51ce7586adb291", "0c70d19bcfde9c4d16eb1", "0c71a225fba1d4542d352", "0c81069879464226cfc28", "0c953172533bb3201b3e5", "0ce06ac82574be6c77f52", "0d3c8e91a34038df22ce0", "0d720fdfb8d02c5b4a079", "0dbb3e1f50fa44ab48d72", "0de84926639c153a206e2", "0e2320b96d3c00d41e4a2", "0e65974ebca2716097e84", "0f865e71603c182651fd4", "0fa7fb346680b36be9ec0", "0fc4d49c4c3046d368b53", "0fc8f819c3f9f5d7cd946", "0fd500561e26a14eaf486", "105be91f28f7ccc950c99", "10d7903e035a9aa2c9081", "11c07f34421b9baaae4b0", "120a7c3cd6f4735036621", "1226cf4db8c90f2ce3597", "128a5d5de43549be6d283", "130f960dbf41966dd79a0", "132c4ed163b89628c1163", "13b56c94233aaf9994f13", "15222c2b8c24cf42cec94", "152936c9e7fb676b69cb6", "159c66524d76044e0cdc8", "15a00fbf748c81236a174", "162fb96f8d5ec65ebb5c2", "171db8937ee3a917f4618", "176ac29d5144047b6f238", "177a171b44ae6fd38e848", "188e58767929ab5352ba1", "18d9104dac4745b11bdb4", "19826eaeaa8a5420da239", "19b37eefc9b1d6d68fe91", "1aa020af7d2c59085d0a2", "1cf7efb605167724e5ca5", "1d039bfa0af44676d7b02", "1d443cdec2ea3dc275e29", "1d89e38f6f2eb6e4d6f10", "1d9e9331e3d5bd9044746", "1dce9c62ae16273c06299", "1dcfbee279578fc027984", "1dd880d6d50e584ee5e76", "1e9b3218deb83271ace30", "1f487758c5e8a0670a876", "205550040e2a942a657b5", "206d886efea1028c38a80", "207769c7202c17e791cf8", "210031ea44db72459d545", "21133e7e99dbd9240e403", "2170539af12a7475f7f30", "21d60c9c7e65f4eb03562", "21f0f7cb00b6e31e2d405", "2280b3b0f6ed8846f6782", "22930c788a018bf901372", "22cd29afaff8e4c79a8e1", "22e2cd0a32f7a82a5b9c6", "22e60c29776b5d513f3d8", "23bf9c9259616b2380231", "240fc5b594eea3ab0f448", "2420dedb1024d2ddfbb15", "246109fd148a40296bc14", "246815e3ccd58084ba8b5", "254809e0c8ca4d1ec3452", "2567ca55c8bf080be6d49", "261a7362f3f9cdac8d9c5", "269ea6bf1a36698cf8d28", "26c7097067468e82b4f06", "27353a29a9fddf033e0c9", "27991a38f76994def7787", "279a9a95eb7b089bff179", "27c89db381d081650e181", "28c215ed4487ce65693c4", "28f910dba33a5cabd0688", "293d15053fdf402d7edf7", "29b96663c2ca1b6dac3f4", "29f247b9fc783edcfe607", "2a8c6c43a32c49a3afef9", "2b6aff0b3eff29267b866", "2b8ff47b5856d45845647", "2d0fbbcb78d56f147d3c0", "2d55be865b2e858691fe2", "2e9b2fdafcf7653138eb1", "2ed6b99f9caa153fa4e19", "2f26bce2ecf4f82296951", "2f86d12be6ff5071b2de7", "2fbff64d6dcf5734bbdf2", "30248275c92cae3304165", "30686c52fdeccf9dd8383", "309c9f383bee483861312", "317c59a87e4a395a16230", "323b6fb83c9de2c2f1fe3", "32bbb03f8ceccdf606453", "3316c8dea64dc3c0e1397", "341c4ed0b79616de045e5", "34ae788b64f55f8121ff7", "35c161dee6151d6b950a4", "35c6b782a66c95164d054", "35e39a4561e52bcc98670", "36f3553044d5352eaea88", "36ffb5357216f930c14b0", "37252596e3be45c55be86", "3756e1baf5e7ab7076eb0", "37599f8fdd0e30c264585", "376e2de0b2d83d32dac91", "37977f57c780e4a3fe282", "37e67a00118fda08ac123", "37e77595615f52e328c22", "382f766d1e4f1d8071225", "383c6ecf94fc52ba7b2e7", "3859287dd2e96cc847ab4", "3949821f6645ff78512d5", "3971720058299de248577", "3a7a840dd1e5952453995", "3af12898d5b16248041a0", "3b2858fdf63ff0835eb93", "3b33c1fa5b94f157518d0", "3b3be977163e1ae6e6724", "3b8ca61e31c9c0e8efe96", "3c03f5418c3570118ece3", "3c3a04c59ee5a4bc9efc4", "3c41458ed91551f518b74", "3c780489b11df2c400413", "3cc6d49ae73b43ae53ce4", "3ccc63055ce6865d45a65", "3ce9fbed00449b840fad7", "3d2838d234231aebf7363", "3d2c16fff5e12ff90b4c0", "3d75b5f623145bda0b2d5", "3d8a21e8e39550596b482", "3e64f2bdfb885cc11ee19", "3fb049de9bc45d022adc3", "3fca8fe7e9b43fae98a86", "3fe35a32425cf1e284a41", "402fd953d082c70c2d0f5", "4066e03ca159e6598a631", "40bb7fbafc566adf49214", "40db0585bed65359e7cb4", "41723f4f91c21302aa360", "430908578ba2869190f40", "45305c26e3fa2a6a95b44", "4537e028d02d6c98438d3", "45650a1a747c11427a212", "45b26f3b190958a2b5ae8", "45b440e25f4d2d0a75f49", "46170adaf69f3f8a4d205", "466718b8e32124bc51167", "4828c07ebada11e0a7389", "4bb402ea7b322c4ffb737", "4bd581ca59ed414edfc79", "4c482f5fd93d13153b376", "4d217d3629070bd11af00", "4d3288b57eae3b5e10880", "4d53b00172afa414c0e82", "4d9e7b678aad517a57937", "4e1c5da54d5bcd3ce5e31", "4e21f10fe3645e13382c7", "4eb6c2608830ea9017ac1", "4f6d8dbf8015e6afe8b08", "4f882b1535552d4b33179", "5085c9222ccf7b5fb8150", "51b3ad519c9c8fd0ef564", "51db381398c4a7f201a38", "5261d1624c66a45daa7d2", "5270ad5497f856f4d8088", "54c42abc38b42fde8f325", "54e85f70fe3fe797d1e23", "55db40e1537ae83ce0d84", "56519831a78c81f1e4488", "569e72f1b2774120bb903", "572c87bbaf27cb3e05009", "57cc524162092d540b0c0", "57f4baaf53123cb321212", "584d923034b4c9291a3b9", "58f8e3ffe0b7b4d632e52", "58ff3a9a3ead25e1b45b8", "59bf465a02c7ebcba9782", "59d0295c0823560f01506", "5a037c01b47c408ba3590", "5a06b5f58e51ef1ce9894", "5a318e2b13e4b0501b066", "5a4a0dd4f189773a16d08", "5b47f25cd70291a808425", "5b6c3096ce4c8ed721810", "5b824670d8d545f9c4682", "5bbc5407c48aaeb84d663", "5bdee689e4ab65d254bf3", "5be55dff552071e5f8d01", "5d040f7ea07ced424cf40", "5d5e0f63864f128f2dc13", "5d76ff18326b9560828e7", "5de8e071274d6f4fe8775", "5e5f75392e69d79d13d03", "5ec73fc3668356fa621f4", "5ee8a21358903e68a0f66", "5f9a50798285570df2167", "6066ed500bd26f77d48a8", "607a6b6f4e734c8e2cc79", "614567b0ccc77cb3d9551", "6164c2a968481ce5fdac4", "628aac62f823d7195dda3", "6370e9ced010d2ffff314", "6380620dd92bad0522c60", "646862cf7f253c1ce0194", "651fe671afe010a9b1354", "6579747aa26ddc5867b97", "670c709f67f5a250f8041", "670f4863306e20cdf7cb1", "673de911ec0f29489fd22", "6775c58a18b997c9e0e03", "67b8346d74a3eb2d32f10", "681f5d39a29afff137a28", "6840c60b54ba7eb8d7767", "687b1c4ca8a4b5513eb51", "688ace06c9c95b9e2a1e2", "68de131b464cb298be911", "692ff6bb7b99d19982c33", "69535c0f2e46ef0e819c7", "6a308795a7e5e69024294", "6a354ed5deaa5a9689764", "6b184ef640fd2340a7113", "6b7cec6d7b7228e9a3216", "6cd71468e1553e8aa1b75", "6da3bf613a833f170ef30", "6faab038d4413ffd2ed14", "6fdab5216c43e272ff679", "70fa266f0e5c62ecffcd9", "71e66722bfad15e136427", "720be86ab69003731f864", "73133b2139a098dad24e6", "73438f67d00e5674ba264", "7381b2d7d2b772ca7a831", "73a0ba477a55fe160f3f3", "7453c4e297f2552ea3bf4", "7722ee860b657f6d1f533", "7834d240b6299dfb56f45", "78817487fc304ec275a14", "78b9ce32c95198f22aa41", "7965297f62e5456067311", "798e1a666254f1d7328d5", "79ebb2f1430e1cadcf920", "7c13349a3711a52b0a758", "7ca84c83f9b2a5abc4a76", "7caed8b07fe2365a6edb8", "7cb411cafe6aa29cc8266", "7de8f733dc1731e80c523", "800ba6d0fba43adc74427", "800f1cbbf64096a6f3413", "80b8e74764a6864f58618", "80cff6a6ad717c0203206", "80d79da3d24f92bc497b3", "817c74392d5f6ea0de547", "8180c1843a9e84b6a7321", "8188eeef763ef2bb5f1c8", "81e7cd9f1ac1fec17bfa5", "8283c9f4415da5d999448", "829218768ec2a0fe4b8d8", "82be69ee7e29681eb38d6", "831928f50c10c18479981", "832c85e684ec6667bdbf3", "841f9b3524a4b22b72652", "85b74288a86287de84010", "8663aaaf6a8beda3acc89", "86e4be479f16786958836", "884c964a5aa50e8a7d361", "89fa402d0d9620a315cc9", "8a0291638cacd3aad3a98", "8a14ddb31c67d0cb33625", "8b0091df595498b816fe6", "8b243963ee6a8fe2c84e9", "8b532454ee8b1b1444da7", "8b710f728fba7650a44e8", "8bb24df7f259f5be2b596", "8cb00067deb05770844f8", "8cdb9638799319168a2b2", "8ce7cc10961a512251385", "8d4eb5f297d5ca42fb4f1", "8dcaaeb2eb72cafba1b48", "8ec0ecbe7c1113398c841", "8fef4b83b7aa6188fd156", "90428031230310c1e8e11", "907c1203c71b13b3e2c55", "91189eb1f41e27ff16433", "913ecb3d216a663262a95", "914047e2c41c434385943", "92d2a7756f4c110d5f225", "930893513f59de653bbb1", "938930a215e468053cd90", "946ed99f32d4f5cf25d18", "95e86d68a9f99fbef06b4", "961739840997785775237", "97d9210189980a7ea4687", "98ebdcd684253f7e1cee3", "9b4c319e02f5a981ff2c7", "9b67fe51e646687530dd7", "9ba6a1c942f109f79f5c2", "9bd5cf2ff9c7a9e6c94a5", "9cf15d580f5c25c9e6cd7", "9e2629566e4ed4294b553", "9e273939cd2f618883779", "9e2958aca2cb3fc637cf4", "a0514e06669b04f4beb97", "a0e2ef668817a82f92a71", "a0f1d0975c676bc5480b7", "a10cd4524d67cb9b83ae1", "a1265a842855b6077d2f8", "a12f41baf4cb299d6edb6", "a13729d943eb72c51cbb3", "a235f6490863bca438246", "a2b7ba674e828079ef8c4", "a2d3b9939be7843adf074", "a35a14f2cf85725f65f58", "a363fa799a392349b8616", "a3eaf1ebb11be263b9be8", "a41527e809fd877ceedd9", "a4173c9b96f7dcd1b4472", "a446287b58afbdc58e158", "a5767c03201b6627cf428", "a5d70a8c6d13036638b75", "a62fe7050d18e0e1be8b6", "a672feb02da5329045770", "a6f949226d339b96b6fa6", "a708b3b1dfbf4aaed5ca8", "a7a1e7edbf559c72da820", "a8a5cdb9b5a700b767e45", "a91c5565b9a1844f9fa44", "a96f658d88b36c1b78790", "a9e5d7f2cd9580c42ec03", "aa0f0c86f79c3aa682c79", "aa9dbb02becdeaff03b37", "abc994159ba1e8e2ea337", "aecf52344918ed119a952", "af4f683caed70c2d3aed8", "b0a009a315930c174a492", "b0ca5d41619f0cabdb278", "b1e24489b7822c71cc5b8", "b235baf536e18e6361b95", "b318b065a3ff6b4da5210", "b38d260ced85a4458ae17", "b39166100e9ece64b25d4", "b3c0db5c138874461a790", "b40aa577dee537c5f5017", "b445e919710bce751f408", "b4690e7c98c8399e720b2", "b499d1a7dbb5019650995", "b51d549704d3a1259e9d4", "b54ca4eed7d231e471bc0", "b7afbebea97ba1738e617", "b7e6361a8a1e577bf2971", "b8675eca3e6b7daafbb83", "b984208c5f95df4f94080", "ba9c54c0f6344aa348d51", "bb2047247c95eb7467312", "bb37cc701a5c077f82eb5", "bb608de8aa07d621fe181", "bb6effef50c19f628b784", "bc645b7cf18f6874cde75", "bcbe6fbd3f63510161cd6", "bcfd22bd1beab8540a399", "bd3885f3892a8db47a6b8", "bd389ed28cb58507dfac8", "bd4d3fc4e312eee9966f5", "bd55deeccba3ad6d2fc77", "bd5a9fef19758cb5769b3", "bde9135f89bc5ef1485e2", "be47f0dd8ce095b81c962", "be76149be265479608510", "be9c63a96bb314194e6b9", "be9f2efdb4b5bd8c35af9", "bee3b9a744c8d62f797b5", "bf12f37d1b34a718f90e8", "c03412a549febe5af3bf7", "c07773d19e531e88f7418", "c1a40ef147217bd78ce14", "c24aacb936759fe550730", "c29b25680c4ce8a513225", "c43c638c1b1e2d2677122", "c4efa33c9f0aedda32945", "c51201bdd69c4197663c8", "c5793fc2e8233a061c192", "c57bca2ba02c7e226b682", "c6ef6eb8988082ae11df5", "c71425691ff750d2c8cd3", "c81be81cc64298d83ac48", "c8822fc13acc4c2f6f9f7", "c9b8319eb6ff507be8127", "ca04485c164636187eaa7", "caf4be25948e75aef3545", "cb07a23d2844d589439d5", "cbc361411f23c95ca8f49", "cbfc5d38f35c2cebd3061", "cc25dfe6cd2dac5d90671", "cd04e49ea25f2a57bfc69", "cd3283bfe958b7e63e1b6", "ce3b35a54ac048de10ef9", "cebcde4cde4e49616fc67", "cf8d935d2f6145ddb45c3", "d05eec81774e1780e96e4", "d0a9a0922177d4dab8b49", "d0c70b283c1a9fab2df84", "d157fc770582b5b717637", "d15815f203fe90e06c7a3", "d1e14a33ded1bead3e820", "d21f43ccfb06bcc905f64", "d23d77ed3879904a36c73", "d25a968835f76f04beaf3", "d3235da5d106262e22fc9", "d3f76328b9c810a4c7bc8", "d4b7b34de5dfb5a0d3b13", "d6c1d1669ad26783c6426", "d72ad6f5d647ea5de61c9", "d74664bdc2b414aa7c296", "d77119538d4a6068a77e8", "d7c3b53f1e68230df4686", "d932d68ba998e29eb9866", "d944a0589c78ae7be0958", "d98a56b4b2ce5e009d0f9", "d9f322163ac033dd37b81", "da92a74157c19d78a6878", "dab575e107d8d2555fb58", "dac3f6d060b6d00c29728", "dd7761ccbf5ea5add15b3", "ddaea26f23cdbd5923069", "ddfdc3eb31fe04225af02", "df21aed2c7bf47ceba988", "df6d58f6350915eeb1ab7", "e117d690d8736f67c8f75", "e14b41ef31ff19ad94c60", "e1d68bd7c5333de0941c2", "e2001ac914ee9ed98bec7", "e22e108ebd2c63e3b5696", "e2486d7f0192b8690de87", "e4386e232dad99154f304", "e45a0648a2e8f02e41ef9", "e5057e0888e0a4cb35b64", "e515fc2b3094ad3180df4", "e53a3cf66a7ecad004ce8", "e683096a88375ca82a825", "e7a976df34b983feaebf9", "e7ecea1d2ce0e50a55502", "e83dc017b15f97c02c850", "e86d3a1cf1ff072c600c4", "e88698ebc9a40f1e5b458", "e92ceafe6da22a116e4a1", "e984f36e6592342196990", "e9876104c1d56f2f13de9", "ea578db1f8d83aab342b4", "eac6bcfe02fce80595495", "ecbbe305d567292955d42", "ee5facfa7422f7de1ac17", "efab0a5c326bb52db5624", "f06c9de39fd61f32bbbc9", "f123220c478d148402723", "f142ebfa97d8d718acba2", "f25bf9df6b9347e1d1d58", "f3902ae75276933e219c2", "f3caa29b6c84ac1d192e7", "f41f387ccee745253a993", "f48245c55b8468f3da697", "f4e33c580322ea272d0c4", "f4fefd4ad6bc3bd0f07e4", "f53b957a19372605aad04", "f5b4fc62f360d93f07987", "f6336a1a135b66f37a446", "f66c1c7ad97a0b425c575", "f72a51e46d5862cb54c36", "f87f66218ba93feb7bb22", "f8a11b78cb47355dc1d32", "fa1a74c4c260d22b875e2", "fc56163a182073468bec9", "fde4e3f0bf346ccb39146", "fe1fee1e907fe79a81093", "feff3bdee1b9d3afd82c3"], "id": "lock3_bell"}, {"n": 4, "key": "lock4_ledgers", "title": "The Ledger Shelf", "obj": "2", "objLabel": "CORE OBJECTIVE 2 (CAROLINAS AND MIDDLE COLONIES)", "objText": "Core Objective 2: Describe the political, economic, social, and religious characteristics of English colonies in the Chesapeake region, New England, the Carolinas, and the middle colonies—Pennsylvania, New York, New Jersey, and Delaware—before 1700. This lock covers the Carolinas and the middle colonies.", "type": "decode", "shift": 3, "cipher": "EDUEDGRV", "card": "<p>In 1669, the first 145 English colonists in South Carolina reached Charles Town. Many planters came from <b>Barbados<\/b>, a Caribbean island known for its brutal treatment of enslaved Africans on sugar plantations. These planters depended on the <b>transatlantic slave trade<\/b>, which carried enslaved Africans across the Atlantic. They brought that system to Carolina. Rice became South Carolina’s main crop, and enslavers forced Africans to grow it partly because West Africans already knew how. In 1712, the colony was divided into <b>North and South Carolina<\/b>.<\/p><p>The middle colonies were New York, New Jersey, Pennsylvania, and Delaware. The Dutch began <b>New Netherland<\/b> as a fur-trading business and welcomed people of many faiths. England took it in 1664 and renamed New Amsterdam as New York. William Penn made Pennsylvania a Quaker colony open to people of all faiths, and he bought land from Indigenous Americans. The middle colonies sold grain and flour to other colonies.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 2, “Settling the American Colonies” (The Carolinas; The Barbados Connection; Charles Town; Profitable Colonies; The Middle Colonies and Georgia; The Dutch Republic and Trade; New Jersey; Pennsylvania; Delaware).", "prompt": "The Clue Card names a Caribbean island whose planters brought their sugar and slavery system to Carolina. A secret message gives its name. Each letter in the message was moved 3 steps forward in the alphabet. Decode it.", "hints": ["The secret message is the name of the island in bold in the Clue Card. Use the decoder key to spell it, one letter at a time.", "In the message, the letter E is really B, and the letter U is really R. The word has 8 letters and starts with B."], "nudge": "Not quite. Decode one letter at a time with the key, then check your spelling.", "entries": ["0006b7848212b00db17d2", "004a100de9796f8f482b5", "00d31d259d37d69983747", "01a42ec991bc02cd75f10", "01b62c8de353feeff34d7", "04797a821e1016cad5c92", "04c3d6027e6c464a2e589", "04fdfdf4ec419a3a42914", "050c5343abdd8fb6ddf04", "054a6ebca11cd00106110", "05626d9a6e9f483f04e61", "05db0e6f1da0bf92da0d6", "06be0d25bddcea617ebc0", "06be436d61837118e5468", "0711c57f71bca951fcca9", "073e6cbf4c3605b670d42", "07bb594650c7224b8d908", "099c65ecd4f9d85f76cd6", "09e63c2563b10473a3077", "0ad083ee4eb0ffb954350", "0ad801fab4ebcd3df8de1", "0ae8c108b5728b4795304", "0b5786f3619ff2aacb847", "0c71ae608d7d55292a881", "0c736f0ca26757be54560", "0c84755a291a1d173fc50", "0cc59b0ce62aa2dd990a8", "0e4d230955f96aba4aba2", "0e75f914c069f39b47670", "0ea714fad9aa53bb4a364", "0efd3ec5774d1a097b493", "0fdd798c8069349a20870", "10f50f265f2f31cfad7a7", "119ba2e09592d3ecb5d06", "11e15a819a262775f1bf5", "121be9aba27d03e332995", "12d712c80d543065ff0f6", "135449f5ca05dac91bec9", "1398e40c938e404b7a197", "13effa10097e22f2a8b47", "141cc1be1422cbf751717", "14cd67b7ca047ef4c66b2", "153bab959104c4a0d18c2", "160773855984e1910a3a1", "16284aabbaea53550a7e7", "172ac7c2254c9faf50b63", "195006654fac00cf9c749", "1a18031ed9e7d3ffddcd9", "1bac0f7ef7ef826a10232", "1c0d2a481c44229420d12", "1c3998ab993fbe311c0d9", "1c503f3cee46e433939c5", "1c6bc397114651db61586", "1cba8c7bf79639533a8e0", "1cbdc6094b7c97b5e8736", "1de38e513b5d7aa616fc4", "1e408e30a2f250f2f8dc7", "1e46262f244ca20ad5a11", "1e6dc3f317d4ad6ce2e89", "1e765c715ec493b64e092", "1ec53eea8f0003d7fcc20", "1f0b0a776b8f4e469dee0", "1fcd4bf4c6a4504b42553", "2052a1a5b80d551e13b37", "20b1f8b2fc129515ae228", "2115494191039ae9174d2", "22011542d0652c736aa58", "2263f4eb6bbf9801d1c74", "2271a3eea717f2092f596", "227b0733f9da87067d700", "238755fc33d19b6bfbc65", "2390adde95712c21a7e93", "23a3487f68214f86468b8", "245448d3d5c0db338dd22", "24cfc9a2725b361d73053", "251e353766a7505438b82", "268d9681a1e4328b586e6", "272caea21644cb76b72c5", "27bba722e9e1ee6a41de7", "2815f551125ed31b47467", "28f0ba75b9cd361cb2c58", "2981ba441018f7c5c29b1", "29c7b12f7d74599ee0560", "2c43b0601ed6ee2e11c70", "2c89dcfe65bcf25574783", "2db0fe7a0855fcfc54310", "2ddd693a78548f89aa008", "2e59a3af47850e96aefd9", "2ee36be0573576dc73779", "2ee6a13fb47fa7a801b84", "2effbb94fffa2a164f9b2", "2f45ac5654b1a679bc2d1", "301e0d637b879f11de242", "3272f05e4f206dddb23e1", "32b2bed11c79e1bd94259", "3308de1b7d611fa3d05d6", "333deaf37ecb21087baf0", "33943b8fdb4fb23d21d79", "3553bf8747524c10940d6", "3577308ee352d00b03fd3", "36194e1037178503324f5", "36458e016b570b06615c3", "3715e7a4795014d27a948", "3b1a2094cab79e82a9073", "3be9517bc71619eb3a665", "3c379aa2d5d877ebb86a7", "3cb421073d451063b0193", "3cf64dd93dffb23d90429", "3e1a6ff512741c8b40893", "3e88a8de6cda8bdb9a789", "3f48d68d8d4a536973718", "4047dc225c118e082f756", "409da41a62f8fec2d7776", "40c67fdd29f4a33d5f845", "4197a4ee7dda89af74c00", "41ddccd23bc0dbd9e9541", "42074e635b293402ba2b0", "4276f58591a7a52ab7b85", "4296eb979907f75b087c4", "42bf0500ec941c2ac8878", "42fc4fbd598901f19b093", "4306133ab4929d434b5f6", "437f8d79ad5b6b95ff277", "43d9a304eb189f816f584", "4405eed5a2269d44e0bd2", "4453eb4c819d49de0d9b5", "44de8d23956f02b77a663", "454ed3d008f49a449f4f7", "46a59a99f76c29c32f997", "46acbb250cdd4ee899314", "4745d42a7d4a4f8620913", "4847bb61057e1c7206894", "486abd0211ecc1ab86833", "48bb457330386cb6a60e6", "48c44feb76bd106509318", "48cd1d3bdaf272216fe42", "48efc94498face2b96779", "492a7786b969f423dc772", "4a8b1bd8007f68f949650", "4ad22d4d678280c89edc7", "4b7fb0392bcc1a84cd906", "4d5fd1f976e9d065725f7", "4df4879f82f59f58b0716", "4e5c2eb0a92bc2e77af65", "4ec6e3ada3ad7f1754199", "4ef5794ede097c1aca3c9", "4f741992d72fad16771f5", "4fc023ae0543f724deae2", "509e33c6472f8f0d623a3", "510fe054b3c60d8218b72", "52604ca023edadc458b89", "5378405e11021973d01b1", "53a4c6ffccde4e2680929", "53ac31e66bf740e8831b6", "54353eeb722da042ecd72", "543bb3748cd749cb5bd82", "54575dfabcfe1e06dacc8", "54a7e1255459ce248f267", "54f3a8e4445dd3249aab2", "552d5e21d6d4821552908", "55cefb332f3027b331b18", "56073ac61f7e8bc8708f8", "5699c9162ba1e552553a2", "5782bb920e4b4e6599439", "5868a1998ff669238ed33", "58bba175b68d2d9ff8a02", "5900a3b3bac1ba15d37e6", "599bcf122e26daf84b7d1", "5a00caa49c2b287ba7556", "5a19569e5bc19756d88a6", "5a513c5a153d7f3cef5b7", "5a5fe6572831c933751b1", "5c8c4cb9e76ca9b3f8b05", "5d17f41a11fe02ae8de30", "5d60910b948ce7ee1c8d4", "5dff43937e262d9ff1ec0", "5f6593d29320638e026b6", "5fa9f7c016120a87f5225", "5ff08056ff799d7d66782", "60eaacba8d4267ac40e28", "610cc772a040e221d6f05", "6117601cb0d5c58cc34e4", "624f4f49003c2e3cf37c9", "6326da670ea62d08f81a8", "632799a12ea895017f763", "6436c48d1439d10fb7b43", "65350df163d2452981e75", "656b0a4077ca8e486cde1", "65f6542d3f9a235157297", "66079e7e02fef2a5f7307", "662c285515aa555360d03", "667aee430f6d0aa866676", "67ccb23dfdb58a6fd8297", "67e21b69d0cb91c8d48c9", "67e45f1df1249033b8c31", "68e7bbf3a948ad9885bc6", "694372b6d0cc37c2ffc16", "6a0ef5ddaf884f92c2cf8", "6a7fe71a12b4972ec0812", "6ab6e16f668148c7e6fc3", "6ace4ca5918a504215c56", "6b8a26f494af0bac997e0", "6bcac076de311ce64ae05", "6cb907a1f11f5d4e92906", "6cf63f0be851b3c0d88a4", "6d7ce07f73e447588cff1", "6d973a3058767f10575d1", "6eeaa05be49dfea2b9f59", "6fbf9a88c383d8d064c08", "6ff1e596c8b746c113169", "7080055157a9e12a0a464", "70d5bb63fde411c5e0567", "7195c912422af071f6f63", "71cfaebbeeebf851bf739", "723f43ab9eaf374221eb4", "724959c2314216d9cdca4", "72e1389e84f317cc94223", "7329caae54b92fdf7c474", "733193a5b9400e81ae895", "74378292390001ec90524", "750358893ef1dc6273cd1", "75bdaf8834f4de8321d23", "76b85ba65056e2be9eb60", "76e22181c9c32ba519883", "77211228d2ce2dcedcdb5", "78a58fd39637d8974bb08", "78d4ce0c59bba22f98459", "79fc2f740c7861bd8bf26", "7a9915ced145686f6e304", "7a9fc34b55ef683f67606", "7c1fa42ec26db3dc9d665", "7c4632ef7ebc918bb9da5", "7c79da9804064c9651d37", "7cd54d14eca837d0b4f72", "7d5a5aaee8100dbfba838", "7e05f17aff119b089f9a5", "7ed1b5ced7903b3b706b0", "7f292dce66189c8fa8116", "7f3712dd5672111504e18", "7fa1c934c91a40c6243e0", "818274bc75850b2827ca3", "81e1dba837b25a47860d2", "81e5f397ea44cf280bc61", "82187e35535bea90fdb20", "826edd7aff233d017ffa0", "84264c710e492f02eaa04", "85a111502aeb3d19a0535", "85bc96be25b6b9b757d44", "86256068543eee5be4f56", "86c71e87b1ed9113275c3", "86c9292eebda7f649d926", "8730a0b1d13904d0ac364", "875640a801b5a98c71633", "8826accdab9b4d7340f44", "8870e3f05ad507f281b83", "889ba6a5fdd4c8984b7a4", "890731ee7390d488bdef2", "899b4968c78022fd712d6", "89db64d518784fd8e7438", "8c1a50aa5739b7f19cc47", "8cd78a911c58b72cb23d4", "8df5c7d4ca06333fc4435", "8e0e061a93a017f427201", "8e6c862e353f8461c7a28", "8f79c874f85e7554bb208", "8fb5ab3bfeef569adb3b2", "8fe6ac9ae018df317e030", "902428eeceec25d85ecc8", "90710f577224dab177110", "90b05d4d2e2ee1cce4239", "90fa0b0b5ef953bd5a4d8", "91716db06af212a8c9c77", "92b17d24ae7ce473fb5d6", "95b2accf3b3a6276f7de2", "9623d3968e5eaa2fe67c5", "96f5b8b71da3bd9c0bcf5", "97473c00ba0da210ae1e9", "9762622ab1806f90f9a25", "97b82442c4a652d4881f8", "97bf7d7698fbacd2b5634", "97eb5da8a90542b985af8", "9828f477913d7440555a6", "982febe46020130d810d4", "98f24216088cf96b1d815", "99bdf24bef28e3e3bc476", "99c0731c510f65429c995", "99d138caf3fca270e6da5", "99ea30bef6e5dafe9b2d1", "9a00c62e706c115e71c57", "9bae543b5f465112da056", "9dd57a40045e019dcf3e6", "9e372577315960528a114", "9e54e5246605a4e1cebf6", "9ea615d1469747bd892a6", "9ea819c508117bc014f09", "9f890a8890bb3af15efa9", "a1598f3730b989b64d081", "a1fb991d63f0f3440fd68", "a2403c7af2e2581cfa706", "a284fe4acfb43bb587220", "a3f8397f4923e11baf868", "a42ee30228e834554ea02", "a452db1f9c5c605607497", "a5c3ff43586b1c33860e9", "a5edc660824c584755d73", "a93eeeb3007b800dbe503", "abd7a388f5432cfde1003", "ac342ce0a7e06bc080bd4", "ac8400acd2bafd188fad7", "ad9f35a12acda83a22236", "adaa8ece1cb0a13e1c648", "adb1905d135bb43e1e147", "adeecacf43ccdc438fd25", "aed3ee6e16dae40c625c8", "af8606a027a184eaf9327", "afa67894b21e237a0e8a3", "b00984779ffba7042dcc8", "b03bd2c509f7877d42066", "b062e53123699437291e4", "b09c6d6f606f8a84a9e87", "b0cfdad7dc7ba319ad643", "b16c159dad0e36ddf8a77", "b1a7e94a2c3ec2da93294", "b2d670609580a6472eec8", "b2e49a0bc958d7d019ad8", "b32ef0fd7e39217d27499", "b372fe6417b72a0ec0875", "b465f0571d033a5b189d8", "b4bc5a85bc07a7051baf8", "b549b9d6be6a087d07a94", "b5d4e9ef33702b31f3f95", "b7287e5757826514ad9f3", "b7ad20da31b5f6d398be9", "b7d78051dbccf90d42c45", "b82dc7525163f554fb8e8", "b8c4f6d7fc2327cc2de75", "b8c52fa01eda9e015c3c1", "b93efdd23fea87d579a27", "b9474e9c9e853e8a4b149", "baa71a54f0d8f2f046b26", "bb54cde47cffc9511d243", "bc34e1a28157eab90a082", "bc4e3cf102d6c5038e973", "bcde93eec60b95c2e08d1", "bf62d09cff09d4a9a1800", "bf9b33e6d4254b5b2d308", "bfafb7d557d8926fa1984", "c05923a0f0277f25b4fa1", "c0c2b46dab3c5a2592749", "c1438ac1093d3e0624104", "c31fe12c85ec6a8795b20", "c33ec70b36f7fe19faed0", "c4741a7e4f18018088c50", "c4f8e1f5ed97735563a53", "c5f3b8b69ce00b2b3aca2", "c63edd7acf2268dd9b0f9", "c72f39e37bd82bc7ef1a5", "c75fa84bd3c524ae7da95", "c9e6c483b9d7b3a985646", "ca4c0cdc1332a6dd4c157", "caa196d70dbdc4424c5b4", "caae8cfbcd17da3c65813", "cae63feeeae590849d3f9", "cb01f8edde38597d906c2", "cb986d3b7ab25d53ec1f1", "cc4f2b6d31bc0ea663222", "cf18b9ab202d28f3d9829", "cfa1ffd68eafacba6dc15", "d01f9ded7960f26f01f74", "d102e7d49b430d2ddcb44", "d1030c135f218473e6eb5", "d11dc3794a311c10f6d14", "d17c6d1340620a86c7771", "d1ac4522b78239dd53cc4", "d2d185cf0335faa282d78", "d528eb607be6cd3ad5939", "d6c44dcf6bf278c283ca4", "d7ec0baee25860b5e0d44", "d94f08657be7d9b67a8a0", "d9b583bbec1966f48d015", "da2da9b819ab4115875b7", "da30179a9975cb230a0f4", "dba08992d8bdfdda1e396", "dc7cca3900c26834ce9e3", "de0fc9ccea6a76e03b184", "de72054cdc4e5f3bc3943", "de95642337d3edb222004", "debdf6dd60d6477459189", "e03d6f3b6c2dc82907fe7", "e09a804e2e678bea487c1", "e0be08942738c3af70e95", "e17f3e20b5df03c9b78a2", "e1cb5fef289d2ae5d8a14", "e1df8da55265bf3db6b50", "e21f6971066046707a493", "e26128668820592913795", "e2f9ad9e55db847ea1eb6", "e429af71eec705165aaf5", "e48fc6e620c9860a1ef93", "e4c166405e529a266d274", "e518524c44a345cbbc6d3", "e568d9db05572eeda2e98", "e5d33b50f4817af09f781", "e601197e9fe390ac85b54", "e66af127845773ed4c179", "e6f7c8a395ef964598ac5", "e708bc2ae69a589930261", "e7a1c4a88cbd9811da3a2", "e8d87b78d00cd4e6846b5", "e933508dbd88ca6a5e7a6", "e9d1a7db1bb97970edb15", "ea6b3d44e6a691e9f4b48", "ebd5365996d157bf0a372", "ec20abb737e97fdd61229", "ec4733208160ac3c02620", "ec6e0426c18d46c227c89", "ecf9185f5a3841261b5c2", "ee090c8ae10704fb266a3", "ee302f28ac72e87c1b2b3", "ef11f0af4996a7cf38fc3", "ef4630d2c5a47f2283a72", "ef56a3d39f2e7a4c35bc5", "f04d6a032460908f6c996", "f1266ed2759887b3acc42", "f17e34b8c1254722b1022", "f29a0f97715376daae438", "f2c36e3a07da400ca8a20", "f4c6485f037d0c927b526", "f4e23bb82ce442f71f7e7", "f4f4199db611d5f505ad5", "f84b3eeb10ec9396de6b2", "f89440b317c217393a010", "fa5a00e7e98063f659cc7", "faccfa555d040de4a8591", "faf9d293c85c331c600a7", "fafce4d31517946b65470", "fc5209399e19e1a51f8b2", "fd88a2310142932e6e313", "fe58e0ccd48467e15ef27", "fe5c2e0bffea7a34106e8", "ff83baa77a2afe7d2edb3", "ffc177604b7f55c333a35"], "id": "lock4_ledgers"}, {"n": 5, "key": "lock5_scrolls", "title": "The Scroll Rack", "obj": "3-4", "objLabel": "CORE OBJECTIVES 3 AND 4", "objText": "Core Objective 3: Analyze the ways in which English colonists and Indigenous Americans responded to each other’s presence. Core Objective 4: Explain how the English colonies became the most populous, prosperous, and powerful region in North America by 1700.", "type": "pick", "card": "<p>Colonists and Indigenous peoples answered each other’s presence with trade, resistance, and war. English settlers wanted Indigenous land. Puritans also pushed Indigenous people to give up their religion and move to “praying towns.” In 1676, <b>Bacon’s Rebellion<\/b> broke out in Virginia. Landless former servants, small farmers, and some enslaved Africans rose up against the governor and the richest planters. Bacon’s followers also attacked Indigenous people. Bacon died of illness, and the rebellion fell apart.<\/p><p><b>King Philip’s War<\/b> (1675–1678) was fought in New England. Wampanoag leader Metacom and his allies fought the colonists over land. About 600 colonists and perhaps 4,000 Indigenous people died, and New England’s Indigenous population was cut in half. In New York, the <b>Iroquois League<\/b> was an alliance so strong that Dutch and English traders had to work with it.<\/p><p>By the early 1700s, the English colonies were the most populous, prosperous, and powerful in North America. They were run as profit-making businesses with little royal control, and they had more self-government. The Dutch and non-Puritan English colonies also welcomed people of many nations and religions.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 2, “Indigenous Peoples and English Settlers” (Food and Land, p. 89; Bacon’s Rebellion; Indigenous Americans and Christianity; King Philip’s War; The Iroquois League) and “Thriving Colonies” (p. 97).", "prompt": "Pick the correct answer for all four questions.", "qs": [{"id": "b", "q": "What helped cause Bacon’s Rebellion in 1676?", "opts": [{"id": "a", "label": "Colonists wanted to join Spain"}, {"id": "b", "label": "Many landless former servants were angry at the richest planters and the governor"}, {"id": "c", "label": "Parliament closed the colonial assemblies"}, {"id": "d", "label": "The Iroquois League attacked Jamestown"}]}, {"id": "k", "q": "What was the result of King Philip’s War (1675–1678)?", "opts": [{"id": "a", "label": "The fighting killed many people, and New England’s Indigenous population was cut in half"}, {"id": "b", "label": "Colonists and Indigenous nations signed a lasting peace"}, {"id": "c", "label": "England gave up its New England colonies"}, {"id": "d", "label": "Metacom became the governor of Plymouth"}]}, {"id": "i", "q": "What was the Iroquois League?", "opts": [{"id": "a", "label": "A Puritan church council"}, {"id": "b", "label": "A French army in New York"}, {"id": "c", "label": "A strong alliance of Indigenous nations that Dutch and English traders had to work with"}, {"id": "d", "label": "A joint-stock company"}]}, {"id": "t", "q": "Why did the English colonies become so powerful by the early 1700s?", "opts": [{"id": "a", "label": "The king ran every part of colonial life"}, {"id": "b", "label": "Spain and France paid for them"}, {"id": "c", "label": "They had very few settlers"}, {"id": "d", "label": "They were profit-making businesses with little royal control and more self-government"}]}], "hints": ["Each answer is in the Clue Card. Look for what angered people in Bacon’s Rebellion, the result of King Philip’s War, what the Iroquois League was, and why the English colonies were strong.", "Bacon’s Rebellion: landless former servants were angry. King Philip’s War: many died and New England’s Indigenous population was cut in half. The Iroquois League: a strong alliance. The colonies had little royal control and more self-government."], "nudge": "Not quite. At least one answer is off. Re-read the Clue Card for Bacon’s Rebellion, King Philip’s War, the Iroquois League, and why the colonies grew strong.", "entries": ["1c97d8200dc1556389aa3"], "id": "lock5_scrolls"}]}</script>
+<script>
+function sha256(ascii){
+  function rightRotate(v,a){return (v>>>a)|(v<<(32-a))}
+  var mathPow=Math.pow,maxWord=mathPow(2,32),i,j,result='',words=[],bitLen=ascii.length*8;
+  var hash=sha256.h=sha256.h||[],k=sha256.k=sha256.k||[],pc=k.length,comp={};
+  for(var c=2;pc<64;c++){if(!comp[c]){for(i=0;i<313;i+=c)comp[i]=c;hash[pc]=(mathPow(c,.5)*maxWord)|0;k[pc++]=(mathPow(c,1/3)*maxWord)|0}}
+  ascii+='\x80';while(ascii.length%64-56)ascii+='\x00';
+  for(i=0;i<ascii.length;i++){j=ascii.charCodeAt(i);words[i>>2]|=j<<((3-i)%4)*8}
+  words[words.length]=((bitLen/maxWord)|0);words[words.length]=(bitLen);
+  for(j=0;j<words.length;){
+    var w=words.slice(j,j+=16),old=hash;hash=hash.slice(0,8);
+    for(i=0;i<64;i++){
+      var w15=w[i-15],w2=w[i-2],a=hash[0],e=hash[4];
+      var t1=hash[7]+(rightRotate(e,6)^rightRotate(e,11)^rightRotate(e,25))+((e&hash[5])^((~e)&hash[6]))+k[i]+(w[i]=(i<16)?w[i]:(w[i-16]+(rightRotate(w15,7)^rightRotate(w15,18)^(w15>>>3))+w[i-7]+(rightRotate(w2,17)^rightRotate(w2,19)^(w2>>>10)))|0);
+      var t2=(rightRotate(a,2)^rightRotate(a,13)^rightRotate(a,22))+((a&hash[1])^(a&hash[2])^(hash[1]&hash[2]));
+      hash=[(t1+t2)|0].concat(hash);hash[4]=(hash[4]+t1)|0;
+    }
+    for(i=0;i<8;i++)hash[i]=(hash[i]+old[i])|0;
+  }
+  for(i=0;i<8;i++)for(j=3;j+1;j--){var b=(hash[i]>>(j*8))&255;result+=((b<16)?0:'')+b.toString(16)}
+  return result;
+}
+function sha256u(s){return sha256(unescape(encodeURIComponent(s)))}
+
+(function(){
+  var PACKET='CPUSH_L1_ESCAPE';
+  var STORE='cpush_l1_escape-room_';
+  var D=JSON.parse(document.getElementById('er-data').textContent);
+  var $=function(i){return document.getElementById(i)};
+  var S;
+  var digits={};            // runtime only: lock n -> digit
+  var entries={};           // lock id -> {h20: maskedDigit}
+  var expanded={};
+  var lastTick=0,timer=null;
+
+  function squash(t){return String(t).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'')}
+  function h20(s){return sha256u(s).slice(0,20)}
+  D.locks.forEach(function(L){var m={};L.entries.forEach(function(e){m[e.slice(0,20)]=+e.slice(20)});entries[L.id]=m});
+
+  function checkLock(L,canon){
+    var salt=D.salt+L.n+':';
+    var h=h20(salt+canon),mk=entries[L.id][h];
+    if(mk===undefined)return null;
+    var m=parseInt(sha256u('m:'+salt+canon).slice(0,2),16)%10;
+    return (mk-m+10)%10;
+  }
+  function fresh(){
+    var o={first:'',last:'',period:'',started:false,elapsed:0,escaped:false,escapeMs:0,debrief:'',codeTries:0,locks:{}};
+    D.locks.forEach(function(L){o.locks[L.id]={solved:false,attempts:0,hints:0,guess:'',readable:''}});
+    return o;
+  }
+  function loadLocal(){var o=fresh();try{var r=JSON.parse(localStorage.getItem(STORE+'state')||'null');if(r)restore(o,r)}catch(e){}return o}
+  function persist(){try{localStorage.setItem(STORE+'state',JSON.stringify(snapshot()))}catch(e){}}
+
+  function totals(){
+    var t={locksSolved:0,attempts:0,hintsUsed:0,exitCodeAttempts:S.codeTries};
+    D.locks.forEach(function(L){var l=S.locks[L.id];if(l.solved)t.locksSolved++;t.attempts+=l.attempts;t.hintsUsed+=l.hints});
+    return t;
+  }
+  function fmt(ms){var s=Math.round(ms/1000),m=Math.floor(s/60);s=s%60;return (m<10?'0':'')+m+':'+(s<10?'0':'')+s}
+  function snapshot(){
+    var o={packet:PACKET,course:'CPUSH',lesson:1,assignment:'Escape Room (Lite)',version:1,saved:new Date().toISOString(),
+      student:{first:$('f_first').value.trim(),last:$('f_last').value.trim(),period:$('f_period').value.trim()},
+      status:S.escaped?'ESCAPED':'INCOMPLETE',escaped:S.escaped,
+      escapeTime:S.escaped?{ms:S.escapeMs,text:fmt(S.escapeMs)}:null,
+      totals:totals(),elapsedMs:Math.round(S.elapsed),started:S.started,locks:{},debrief:$('debriefText')?$('debriefText').value:S.debrief};
+    D.locks.forEach(function(L){var l=S.locks[L.id];
+      o.locks[L.key]={objective:L.obj,puzzleType:L.type,solved:l.solved,attempts:l.attempts,hintsUsed:l.hints,solvedWith:l.readable,solvedGuess:l.guess}});
+    return o;
+  }
+  function restore(o,r){
+    if(!r||typeof r!=='object')return false;
+    var st=r.student||{};
+    o.first=st.first||'';o.last=st.last||'';o.period=st.period||'';
+    o.started=!!r.started;o.elapsed=+r.elapsedMs||0;o.debrief=typeof r.debrief==='string'?r.debrief:'';
+    o.codeTries=(r.totals&&+r.totals.exitCodeAttempts)||0;
+    var allOk=true;
+    D.locks.forEach(function(L){
+      var src=(r.locks&&r.locks[L.key])||{},l=o.locks[L.id];
+      l.attempts=+src.attempts||0;l.hints=Math.min(+src.hintsUsed||0,L.hints.length+0);
+      if(src.hintsUsed>L.hints.length)l.hints=L.hints.length;
+      if(src.solved&&typeof src.solvedGuess==='string'){
+        var d=checkLock(L,src.solvedGuess);
+        if(d!==null){l.solved=true;l.guess=src.solvedGuess;l.readable=String(src.solvedWith||'');digits[L.n]=d}else allOk=false;
+      }else allOk=false;
+    });
+    if(r.escaped&&allOk&&r.escapeTime){o.escaped=true;o.escapeMs=+r.escapeTime.ms||0}
+    return true;
+  }
+
+  /* ---------- scene ---------- */
+  var NS='http://www.w3.org/2000/svg';
+  var XS=[210,255,300,345,390];
+  (function(){
+    var g=$('plocks'),h='';
+    XS.forEach(function(x,i){
+      h+='<g class="plock" id="pl'+(i+1)+'"><path class="sh" d="M'+(x-8)+' 124V114a8 8 0 0 1 16 0V124" fill="none" stroke="#EBF4F3" stroke-width="4"/><rect class="bd" x="'+(x-15)+'" y="124" width="30" height="24" rx="4" fill="#D2AA4B"/><circle cx="'+x+'" cy="135" r="3" fill="#16413B"/></g>'+
+      '<rect x="'+(x-16)+'" y="158" width="32" height="36" rx="5" fill="#0E2A27" stroke="#E1C88E"/><text id="dw'+(i+1)+'" x="'+x+'" y="184" text-anchor="middle" font-size="24" font-weight="800" fill="#EBF4F3">?</text><text x="'+x+'" y="208" text-anchor="middle" font-size="11" font-weight="700" fill="#D4E3E1">LOCK '+(i+1)+'</text>';
+    });
+    g.innerHTML=h;
+  })();
+  function sceneUpdate(){
+    D.locks.forEach(function(L){
+      var open=S.locks[L.id].solved;
+      $('pl'+L.n).setAttribute('class','plock'+(open?' open':''));
+      $('dw'+L.n).textContent=open?digits[L.n]:'?';
+    });
+    $('scene').classList.toggle('escaped',S.escaped);
+  }
+
+  /* ---------- build lock cards ---------- */
+  var W={};   // widget state per lock
+  var LOCKSVG='<svg class="lk" viewBox="0 0 44 44" aria-hidden="true"><path class="sh" d="M13 20V14a9 9 0 0 1 18 0V20" fill="none" stroke="#EBF4F3" stroke-width="4"/><rect class="bd" x="8" y="20" width="28" height="20" rx="4" fill="#D2AA4B"/><circle cx="22" cy="30" r="3" fill="#16413B"/></svg>';
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+  function buildLock(L){
+    var sec=document.createElement('section');sec.className='lock glass locked';sec.id='lock'+L.n;
+    var head='<button class="lh" type="button" id="lh'+L.n+'" aria-expanded="false">'+LOCKSVG+'<span class="lt"><small>LOCK '+L.n+' · '+L.objLabel+'</small><strong>'+esc(L.title)+'</strong></span><span class="dg" id="dg'+L.n+'" aria-label="digit">?</span></button>';
+    var body='<div class="lb" id="lb'+L.n+'"><p class="objline">'+esc(L.objText)+'</p>'+
+      '<div class="card"><h4>CLUE CARD</h4>'+L.card+'<p class="src">'+L.src+'</p></div>'+
+      '<div class="prompt">'+L.prompt+'</div><div id="pz'+L.n+'"></div>'+
+      '<div class="row"><button class="btn primary" type="button" id="ck'+L.n+'">Check</button><button class="btn small" type="button" id="hb'+L.n+'">Hint</button><button class="btn small" type="button" id="rs'+L.n+'">Clear</button></div>'+
+      '<div class="hints" id="hs'+L.n+'"></div><div class="fb" id="fb'+L.n+'" role="status"></div></div>';
+    sec.innerHTML=head+body;
+    $('locks').appendChild(sec);
+    buildPuzzle(L);
+    $('lh'+L.n).addEventListener('click',function(){
+      var st=lockState(L);if(st==='locked')return;
+      expanded[L.n]=!expanded[L.n];updateLocks();
+    });
+    $('ck'+L.n).addEventListener('click',function(){submit(L)});
+    $('hb'+L.n).addEventListener('click',function(){hint(L)});
+    $('rs'+L.n).addEventListener('click',function(){clearPuzzle(L)});
+  }
+  function labelOf(list,id){for(var i=0;i<list.length;i++)if(list[i].id===id)return list[i].label;return id}
+
+  function buildPuzzle(L){
+    var el=$('pz'+L.n),w=W[L.n]={};
+    if(L.type==='order'){
+      w.sel=[];el.innerHTML='<div class="chips" id="ch'+L.n+'"></div>';
+      renderOrder(L);
+    }else if(L.type==='match'){
+      var h='';
+      L.terms.forEach(function(t){
+        h+='<div class="mrow"><label for="m'+L.n+t.id+'">'+esc(t.label)+'</label><select id="m'+L.n+t.id+'"><option value="">Choose a description...</option>';
+        L.descs.forEach(function(d){h+='<option value="'+d.id+'">'+esc(d.label)+'</option>'});
+        h+='</select></div>';
+      });
+      el.innerHTML=h;
+    }else if(L.type==='pick'){
+      var h2='';
+      L.qs.forEach(function(q){
+        h2+='<fieldset><legend>'+esc(q.q)+'</legend>';
+        q.opts.forEach(function(o){h2+='<label class="opt"><input type="radio" name="q'+L.n+q.id+'" value="'+o.id+'"> <span>'+esc(o.label)+'</span></label>'});
+        h2+='</fieldset>';
+      });
+      el.innerHTML=h2;
+    }else if(L.type==='decode'){
+      var k1='',k2='';
+      for(var i=0;i<26;i++){var p=String.fromCharCode(65+i),c=String.fromCharCode(65+(i+L.shift)%26);k1+='<div class="c">'+c+'</div>';k2+='<div>'+p+'</div>'}
+      // build key in two rows of 13
+      var key='';
+      for(var r=0;r<2;r++){for(var j=0;j<13;j++){var idx=r*13+j;key+='<div class="c">'+String.fromCharCode(65+(idx+L.shift)%26)+'</div>'}for(var j2=0;j2<13;j2++){key+='<div>'+String.fromCharCode(65+r*13+j2)+'</div>'}}
+      el.innerHTML='<div class="cipher" translate="no" aria-label="Coded message">'+esc(L.cipher)+'</div><p style="margin:.6em 0 0;font-size:15px;color:var(--dim)">Decoder key: the <span style="color:var(--hl);font-weight:700">gold</span> letter is in the message. The white letter under it is the real letter.</p><div class="key" aria-hidden="true">'+key+'</div><label>Decoded answer<input type="text" id="tx'+L.n+'" autocomplete="off" autocapitalize="none" spellcheck="false"></label><p class="ennote">Type the answer in English.</p>';
+    }else if(L.type==='fill'){
+      el.innerHTML='<p style="font-size:18px;margin:.2em 0">'+esc(L.sentence)+'</p><div class="scr" translate="no" aria-label="Scrambled letters">'+esc(L.scramble)+'</div><p style="margin:.4em 0;font-size:14px;color:var(--dim)">Unscramble the letters to fill the blank.</p><label>Your answer<input type="text" id="tx'+L.n+'" autocomplete="off" autocapitalize="none" spellcheck="false"></label><p class="ennote">Type the answer in English.</p>';
+    }
+    var t=$('tx'+L.n);
+    if(t)t.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();submit(L)}});
+  }
+  function renderOrder(L){
+    var w=W[L.n],ch=$('ch'+L.n),h='';
+    L.items.forEach(function(it){
+      var pos=w.sel.indexOf(it.id);
+      h+='<button type="button" class="chip'+(pos>=0?' sel':'')+'" data-id="'+it.id+'" aria-pressed="'+(pos>=0)+'">'+(pos>=0?'<span class="n">'+(pos+1)+'</span>':'')+'<span>'+esc(it.label)+'</span></button>';
+    });
+    ch.innerHTML=h;
+    [].forEach.call(ch.querySelectorAll('.chip'),function(b){
+      b.addEventListener('click',function(){
+        if(S.locks[L.id].solved)return;
+        var id=b.getAttribute('data-id'),p=w.sel.indexOf(id);
+        if(p>=0)w.sel.splice(p,1);else w.sel.push(id);
+        renderOrder(L);
+      });
+    });
+  }
+  function clearPuzzle(L){
+    if(S.locks[L.id].solved)return;
+    var w=W[L.n];
+    if(L.type==='order'){w.sel=[];renderOrder(L)}
+    else if(L.type==='match'){L.terms.forEach(function(t){$('m'+L.n+t.id).value=''})}
+    else if(L.type==='pick'){L.qs.forEach(function(q){[].forEach.call(document.getElementsByName('q'+L.n+q.id),function(r){r.checked=false})})}
+    else{$('tx'+L.n).value=''}
+    fb(L,'','');
+  }
+  function guessOf(L){
+    // returns {canon, readable} or {err}
+    if(L.type==='order'){
+      var w=W[L.n];
+      if(w.sel.length<L.items.length)return {err:'Tap all '+L.items.length+' events first, in order.'};
+      return {canon:w.sel.join('|'),readable:w.sel.map(function(i){return labelOf(L.items,i)}).join(' > ')};
+    }
+    if(L.type==='match'){
+      var c=[],r=[];
+      for(var i=0;i<L.terms.length;i++){var t=L.terms[i],v=$('m'+L.n+t.id).value;if(!v)return {err:'Match every term first.'};c.push(v);r.push(t.label+' = '+labelOf(L.descs,v))}
+      return {canon:c.join('|'),readable:r.join('; ')};
+    }
+    if(L.type==='pick'){
+      var c2=[],r2=[];
+      for(var j=0;j<L.qs.length;j++){var q=L.qs[j],v2='';[].forEach.call(document.getElementsByName('q'+L.n+q.id),function(x){if(x.checked)v2=x.value});if(!v2)return {err:'Answer every question first.'};c2.push(v2);r2.push(labelOf(q.opts,v2))}
+      return {canon:c2.join('|'),readable:r2.join('; ')};
+    }
+    var raw=$('tx'+L.n).value.trim();
+    if(!raw)return {err:'Type your answer first.'};
+    return {canon:squash(raw),readable:raw.slice(0,80)};
+  }
+  function fb(L,cls,text){var e=$('fb'+L.n);e.className='fb'+(cls?' show '+cls:'');e.textContent=text}
+  function submit(L){
+    var l=S.locks[L.id];if(l.solved)return;
+    var g=guessOf(L);
+    if(g.err){fb(L,'nudge',g.err);return}
+    l.attempts++;
+    var d=checkLock(L,g.canon);
+    if(d===null){
+      fb(L,'nudge',L.nudge);
+      var s=$('lock'+L.n);s.classList.remove('shake');void s.offsetWidth;s.classList.add('shake');
+      persist();updateBar();return;
+    }
+    l.solved=true;l.guess=g.canon;l.readable=g.readable;digits[L.n]=d;
+    fb(L,'good','Click! Lock '+L.n+' is open. Your digit is '+d+'.');
+    var wh=$('wheel');wh.classList.remove('spin');void wh.getBoundingClientRect();wh.classList.add('spin');
+    $('dw'+L.n).classList.add('pop');
+    persist();updateAll();
+    setTimeout(function(){
+      expanded[L.n]=false;
+      var nx=nextOpen();if(nx)expanded[nx]=true;
+      updateLocks();
+      var tgt=nx?$('lock'+nx):$('exit');
+      if(tgt&&tgt.scrollIntoView)tgt.scrollIntoView({behavior:'smooth',block:'start'});
+    },1600);
+  }
+  function hint(L){
+    var l=S.locks[L.id];
+    if(l.solved)return;
+    if(l.hints<L.hints.length){l.hints++;persist();updateHints(L);updateBar()}
+    else{fb(L,'nudge','That was the last hint. Read the Clue Card slowly and try again.')}
+  }
+  function updateHints(L){
+    var l=S.locks[L.id],h='';
+    for(var i=0;i<l.hints;i++)h+='<div class="hint"><b>Hint '+(i+1)+':</b> <span>'+esc(L.hints[i])+'</span></div>';
+    $('hs'+L.n).innerHTML=h;
+  }
+  function nextOpen(){for(var i=0;i<D.locks.length;i++)if(!S.locks[D.locks[i].id].solved)return D.locks[i].n;return 0}
+  function lockState(L){
+    if(S.locks[L.id].solved)return 'solved';
+    return L.n===nextOpen()?'current':'locked';
+  }
+  function updateLocks(){
+    var cur=nextOpen();
+    D.locks.forEach(function(L){
+      var st=lockState(L),sec=$('lock'+L.n);
+      if(st==='current'&&expanded[L.n]===undefined)expanded[L.n]=true;
+      var open=(st!=='locked')&&!!expanded[L.n];
+      sec.className='lock glass '+st+(open?' open':'');
+      $('lh'+L.n).setAttribute('aria-expanded',open?'true':'false');
+      $('dg'+L.n).textContent=S.locks[L.id].solved?digits[L.n]:'?';
+      if(S.locks[L.id].solved){
+        [].forEach.call(sec.querySelectorAll('input,select,button.chip,#ck'+L.n+',#hb'+L.n+',#rs'+L.n),function(x){x.disabled=true});
+        var f=$('fb'+L.n);if(!f.classList.contains('good'))fb(L,'good','Unlocked. Your digit is '+digits[L.n]+'.'+(S.locks[L.id].readable?' Your answer: '+S.locks[L.id].readable:''));
+      }
+      updateHints(L);
+    });
+  }
+  function codeStr(){var s='';for(var i=1;i<=5;i++)s+=(digits[i]===undefined?'':digits[i]);return s}
+  function allSolved(){return D.locks.every(function(L){return S.locks[L.id].solved})}
+  function updateExit(){
+    var ok=allSolved();
+    $('exit').classList.toggle('locked',!ok);
+    $('codeBtn').disabled=!ok||S.escaped;
+    [].forEach.call($('codebox').querySelectorAll('input'),function(i){i.disabled=!ok||S.escaped});
+    $('exitNote').textContent=S.escaped?'The door is open!':(ok?'All 5 locks are open. Type the 5 digits in order, Lock 1 first.':'Open all 5 locks first. The digits go in order: Lock 1 first.');
+  }
+  function updateBar(){
+    var t=totals();
+    $('lc').textContent=t.locksSolved;$('hc').textContent=t.hintsUsed;
+    $('tm').textContent=fmt(S.escaped?S.escapeMs:S.elapsed);
+  }
+  function updateStatus(){
+    var el=$('status'),db=($('debriefText').value.trim().length);
+    if(S.escaped)el.textContent=db>=40?'You escaped and wrote your Debrief. Ready to submit.':'You escaped! Write your Debrief, then download your file to submit.';
+    else el.textContent='Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.';
+  }
+  function updateEsc(){
+    $('esc').classList.toggle('show',S.escaped);
+    if(S.escaped){var t=totals();$('escTime').textContent=fmt(S.escapeMs);$('escSum').textContent='5 of 5 locks opened with '+t.attempts+' tries and '+t.hintsUsed+' hint'+(t.hintsUsed===1?'':'s')+'.'}
+  }
+  function updateAll(){sceneUpdate();updateLocks();updateExit();updateBar();updateEsc();updateStatus();
+    $('intro').classList.toggle('hidden',S.started);$('game').classList.toggle('hidden',!S.started);$('loadOnly').classList.toggle('hidden',S.started);
+  }
+
+  /* ---------- exit code ---------- */
+  (function(){
+    var cb=$('codebox');
+    for(var i=0;i<5;i++){
+      var inp=document.createElement('input');inp.type='text';inp.inputMode='numeric';inp.maxLength=1;inp.setAttribute('aria-label','Exit code digit '+(i+1));inp.disabled=true;
+      (function(i,inp){
+        inp.addEventListener('input',function(){inp.value=inp.value.replace(/[٠-٩]/g,function(c){return c.charCodeAt(0)-1632}).replace(/[۰-۹]/g,function(c){return c.charCodeAt(0)-1776}).replace(/[^0-9]/g,'');if(inp.value&&i<4)cb.children[i+1].focus()});
+        inp.addEventListener('keydown',function(e){
+          if(e.key==='Backspace'&&!inp.value&&i>0)cb.children[i-1].focus();
+          if(e.key==='Enter'){e.preventDefault();tryCode()}
+        });
+        inp.addEventListener('paste',function(e){
+          var t=(e.clipboardData||window.clipboardData).getData('text').replace(/[٠-٩]/g,function(c){return c.charCodeAt(0)-1632}).replace(/[۰-۹]/g,function(c){return c.charCodeAt(0)-1776}).replace(/[^0-9]/g,'');
+          if(t.length>1){e.preventDefault();for(var k=0;k<5;k++)cb.children[k].value=t[k]||''}
+        });
+      })(i,inp);
+      cb.appendChild(inp);
+    }
+  })();
+  function tryCode(){
+    if(!allSolved()||S.escaped)return;
+    var v='';[].forEach.call($('codebox').querySelectorAll('input'),function(i){v+=i.value});
+    var f=$('codefb');
+    if(v.length<5){f.className='fb show nudge';f.textContent='The code has 5 digits. Fill every box.';return}
+    S.codeTries++;
+    if(h20('exit:'+D.salt+v)!==D.exitHash){
+      f.className='fb show nudge';f.textContent='The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.';
+      var ex=$('exit');ex.classList.remove('shake');void ex.offsetWidth;ex.classList.add('shake');
+      persist();return;
+    }
+    S.escaped=true;S.escapeMs=S.elapsed;
+    f.className='fb show good';f.textContent='The door swings open!';
+    persist();updateAll();
+    setTimeout(function(){$('esc').scrollIntoView({behavior:'smooth',block:'start'})},900);
+  }
+  $('codeBtn').addEventListener('click',tryCode);
+
+  /* ---------- timer ---------- */
+  function tick(){
+    var n=Date.now();
+    if(S.started&&!S.escaped){S.elapsed+=Math.min(n-lastTick,5000);$('tm').textContent=fmt(S.elapsed)}
+    lastTick=n;
+  }
+  function startTimer(){lastTick=Date.now();if(!timer)timer=setInterval(function(){tick();if(Math.round(S.elapsed/1000)%10===0)persist()},1000)}
+
+  /* ---------- files ---------- */
+  function msg(t,err){var m=$('msg');m.textContent=t;m.className='msg'+(err?' err':'');m.style.display='block'}
+  function ascii(n){return String(n).normalize('NFD').replace(/[̀-ͯ]/g,'')}
+  function clean(n){n=window.spAscii?spAscii(n):n;return ascii(n).trim().replace(/\s+/g,'_').replace(/[^A-Za-z0-9_-]/g,'')}
+  function who(){return (clean($('f_last').value)||'Last')+'_'+(clean($('f_first').value)||'First')}
+  function download(name,obj){
+    var blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;
+    document.body.appendChild(a);a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);
+  }
+  function namesOk(){
+    var ids=['f_first','f_last','f_period'],ok=true;
+    ids.forEach(function(i){var f=$(i);if(!f.value.trim()){f.classList.add('bad');ok=false}});
+    if(!ok){msg('Enter your first name, last name, and period at the top first.',true);$('f_first').scrollIntoView({block:'center'})}
+    return ok;
+  }
+  ['f_first','f_last','f_period'].forEach(function(i){$(i).addEventListener('input',function(){$(i).classList.remove('bad');S[i.slice(2)]=$(i).value;persist()})});
+  $('debriefText').addEventListener('input',function(){S.debrief=$('debriefText').value;persist();updateStatus()});
+  $('saveBtn').addEventListener('click',function(){
+    if(!namesOk())return;tick();
+    download(who()+'-'+PACKET+'-PROGRESS.json',snapshot());
+    msg('Progress file downloaded. Use Load Progress to continue later.');
+  });
+  $('finishBtn').addEventListener('click',function(){
+    if(!namesOk())return;tick();
+    var now=new Date(),o=snapshot();o.completed=S.escaped;o.submitted=now.toISOString();
+    o.student.date=now.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+    download(who()+'-'+PACKET+'.json',o);
+    msg(S.escaped?('Done! File downloaded: '+who()+'-'+PACKET+'.json. Upload it to Canvas.'):('Your file downloaded and is marked INCOMPLETE (you have not escaped). Upload it to Canvas: '+who()+'-'+PACKET+'.json'));
+  });
+  function openLoad(){$('loadFile').click()}
+  $('loadBtn').addEventListener('click',openLoad);$('loadBtn0').addEventListener('click',openLoad);
+  $('loadFile').addEventListener('change',function(e){
+    var f=e.target.files[0];if(!f)return;
+    var r=new FileReader();
+    r.onload=function(){
+      try{
+        var o=JSON.parse(r.result);
+        if(!o||o.packet!==PACKET||typeof o.locks!=='object')throw new Error('wrong');
+        digits={};var n=fresh();restore(n,o);S=n;applyToDom();
+        msg('Progress loaded. Welcome back.');
+      }catch(err){msg('That file did not work. Choose a progress file saved from this Escape Room.',true)}
+      e.target.value='';
+    };
+    r.onerror=function(){msg('The file could not be read.',true)};
+    r.readAsText(f);
+  });
+  $('reset').addEventListener('click',function(){
+    if(!confirm('Clear all your work and start over? This cannot be undone.'))return;
+    digits={};expanded={};S=fresh();
+    try{localStorage.removeItem(STORE+'state')}catch(e){}
+    $('locks').innerHTML='';D.locks.forEach(buildLock);
+    $('f_first').value=$('f_last').value=$('f_period').value='';$('debriefText').value='';
+    [].forEach.call($('codebox').querySelectorAll('input'),function(i){i.value=''});$('codefb').className='fb';
+    applyToDom();
+  });
+  function applyToDom(){
+    $('f_first').value=S.first;$('f_last').value=S.last;$('f_period').value=S.period;$('debriefText').value=S.debrief;
+    // rebuild lock widgets, then pre-fill solved ones with readable note
+    $('locks').innerHTML='';D.locks.forEach(buildLock);
+    expanded={};
+    updateAll();
+    if(S.started)startTimer();
+  }
+  $('startBtn').addEventListener('click',function(){S.started=true;persist();startTimer();updateAll();$('game').scrollIntoView({behavior:'smooth'})});
+  window.addEventListener('beforeunload',function(){tick();persist()});
+
+  S=loadLocal();
+  D.locks.forEach(buildLock);
+  applyToDom();
+})();
+</script>
+<!--sp-i18n--><script type="application/json" id="sp-i18n">{"langs":["en","es","ar"],"default":"en","es":{"Save Progress":"Guardar progreso","Load Progress":"Cargar progreso","Finished — Download File to Submit":"Terminé — Descargar el archivo para entregar","Clear all my answers":"Borrar todas mis respuestas","FIRST NAME *":"NOMBRE *","LAST NAME *":"APELLIDO *","PERIOD *":"PERÍODO *","DATE (fills in when you finish)":"FECHA (se llena cuando terminas)","e.g. 3":"p. ej., 3","Automatic":"Automática","Please type your first name, last name, and period first.":"Primero escribe tu nombre, apellido y período.","Western Expansion and Southern Secession":"Expansión hacia el oeste y secesión del sur","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — La Ley de Esclavos Fugitivos","Bleeding Kansas":"Bleeding Kansas — Kansas sangriento","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"Se descargó tu archivo de progreso. Guárdalo bien. Usa «Cargar progreso» para continuar más tarde.","Progress loaded.":"Progreso cargado.","Could not read that file.":"No se pudo leer ese archivo.","Treaty of Guadalupe Hidalgo":"Tratado de Guadalupe Hidalgo","All 5 locks are open. Type the 5 digits in order, Lock 1 first.":"Los 5 candados están abiertos. Escribe los 5 dígitos en orden, primero el del Candado 1.","Answer every question first.":"Primero responde todas las preguntas.","CLUE CARD":"TARJETA DE INDICIOS","Check":"Comprobar","Choose a description...":"Elige una descripción...","Clear":"Borrar","Clear all my work and start over":"Borrar todo mi trabajo y empezar de nuevo","DEBRIEF":"INFORME FINAL","Debrief":"Informe final","Decoded answer":"Respuesta decodificada","Decoder key: the <span style=\"color:var(--hl);font-weight:700\">gold<\/span> letter is in the message. The white letter under it is the real letter.":"Clave del decodificador: la letra <span style=\"color:var(--hl);font-weight:700\">dorada<\/span> está en el mensaje. La letra blanca que está debajo es la letra verdadera.","ESCAPED":"¡ESCAPASTE!","Enter your first name, last name, and period at the top first.":"Primero escribe tu nombre, apellido y período arriba.","Exit code digit 1":"Dígito 1 del código de salida","Exit door":"Puerta de salida","Fill in the blank using the Clue Card.":"Llena el espacio en blanco con la tarjeta de indicios.","Have a saved file? Load it to continue.":"¿Tienes un archivo guardado? Cárgalo para continuar.","Hint":"Pista","Hints used":"Pistas usadas","How to escape:":"Cómo escapar:","If you get stuck, press <b>Hint<\/b>. Hints are free, but your teacher can see how many you used.":"Si te atoras, oprime <b>Pista<\/b>. Las pistas son gratis, pero tu maestro puede ver cuántas usaste.","Locks":"Candados","Match every term first.":"Primero relaciona todos los términos.","Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.":"Todavía no escapas (se marca INCOMPLETO). Aun así puedes descargar tu archivo y entregarlo.","Not quite. Check each match against the Clue Card. Which one are you least sure about?":"Casi. Revisa cada pareja con la tarjeta de indicios. ¿De cuál estás menos seguro?","Not quite. Decode one letter at a time with the key, then check your spelling.":"Casi. Decodifica una letra a la vez con la clave y luego revisa tu ortografía.","Not quite. Re-read the Clue Card and match each event to its year.":"Casi. Vuelve a leer la tarjeta de indicios y une cada suceso con su año.","Not quite. Re-read the Clue Card. Use the scrambled letters to check your spelling.":"Casi. Vuelve a leer la tarjeta de indicios. Usa las letras desordenadas para revisar tu ortografía.","One last step: write your Debrief below.":"Un último paso: escribe tu Informe final abajo.","Open all 5 locks first. The digits go in order: Lock 1 first.":"Primero abre los 5 candados. Los dígitos van en orden: primero el del Candado 1.","Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.":"Abre los 5 candados y luego escribe el código de salida de 5 dígitos. Termina con el Informe final.","Open each lock in order. Read the <b>Clue Card<\/b>. The answer is in the card.":"Abre cada candado en orden. Lee la <b>tarjeta de indicios<\/b>. La respuesta está en la tarjeta.","Open the Door":"Abrir la puerta","Pick the correct answer for all four questions.":"Elige la respuesta correcta en las cuatro preguntas.","Progress file downloaded. Use Load Progress to continue later.":"Se descargó el archivo de progreso. Usa «Cargar progreso» para continuar más tarde.","Progress loaded. Welcome back.":"Progreso cargado. Bienvenido de nuevo.","Solve the puzzle to open the lock and reveal one digit.":"Resuelve el acertijo para abrir el candado y descubrir un dígito.","THE EXIT DOOR":"LA PUERTA DE SALIDA","Tap all 4 events first, in order.":"Primero toca los 4 sucesos, en orden.","Tap the four events in the order they happened. Tap an event again to take it back.":"Toca los cuatro sucesos en el orden en que ocurrieron. Toca un suceso otra vez para quitarlo.","That file did not work. Choose a progress file saved from this Escape Room.":"Ese archivo no funcionó. Elige un archivo de progreso guardado de esta sala de escape.","That was the last hint. Read the Clue Card slowly and try again.":"Esa fue la última pista. Lee la tarjeta de indicios despacio y vuelve a intentarlo.","The clock starts when you press the button. Most students finish in about 20 minutes.":"El reloj empieza cuando oprimes el botón. La mayoría de los estudiantes termina en unos 20 minutos.","The code has 5 digits. Fill every box.":"El código tiene 5 dígitos. Llena todas las casillas.","The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.":"La puerta no se abrió. Revisa los dígitos debajo de cada candado y escríbelos en orden: primero el del Candado 1.","The door is open!":"¡La puerta está abierta!","The door swings open!":"¡La puerta se abre de golpe!","Time":"Tiempo","Type the answer in English.":"Escribe la respuesta en inglés.","Type the answer in English. Use the digits 0-9.":"Escribe la respuesta en inglés. Usa los dígitos 0-9.","Type the exit code":"Escribe el código de salida","Type your answer first.":"Primero escribe tu respuesta.","Type your answer here...":"Escribe tu respuesta aquí...","UNIT 1 · COLONIES, REVOLUTION, AND CONSTITUTION | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 1 · COLONIAS, REVOLUCIÓN Y CONSTITUCIÓN | CPUSH | DANIEL GARZA, M.A.","Unscramble the letters to fill the blank.":"Ordena las letras para llenar el espacio en blanco.","Which lock was hardest, and what did you learn that you did not know before?":"¿Qué candado fue el más difícil y qué aprendiste que antes no sabías?","Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.":"Escribe de 3 a 4 oraciones. Nombra el candado y usa un dato de su tarjeta de indicios. Puedes escribirlo aunque no hayas escapado.","You escaped and wrote your Debrief. Ready to submit.":"Escapaste y escribiste tu Informe final. Listo para entregar.","You escaped! Write your Debrief, then download your file to submit.":"¡Escapaste! Escribe tu Informe final y luego descarga tu archivo para entregarlo.","Your answer":"Tu respuesta","Your time:":"Tu tiempo:","digit":"dígito","Unlocked. Your digit is 5. Your answer: Raw materials = Goods such as timber, tobacco, and furs that England wanted; Parliament = The English lawmaking body that could tax the people; Joint-stock company = Investors buy shares so they share the cost, risk, and profits; The Puritans = Reformers who wanted to “purify” the Church of England":"Desbloqueado. Tu dígito es 5. Tu respuesta: Materias primas = Productos como madera, tabaco y pieles que Inglaterra quería; Parlamento = El cuerpo legislativo inglés que podía cobrar impuestos al pueblo; Compañía por acciones = Los inversionistas compran acciones para compartir el costo, el riesgo y las ganancias; Los puritanos = Reformadores que querían “purificar” la Iglesia de Inglaterra","Unlocked. Your digit is 0. Your answer: Colonists reach Chesapeake Bay and found Jamestown &gt; Settlers begin growing tobacco to sell in England &gt; The House of Burgesses is created &gt; Maryland is founded":"Desbloqueado. Tu dígito es 0. Tu respuesta: Los colonos llegan a la bahía de Chesapeake y fundan Jamestown &gt; Los colonos empiezan a cultivar tabaco para venderlo en Inglaterra &gt; Se crea la Cámara de los Burgueses &gt; Se funda Maryland","Unlocked. Your digit is 9. Your answer: Many landless former servants were angry at the richest planters and the governor; The fighting killed many people, and New England’s Indigenous population was cut in half; A strong alliance of Indigenous nations that Dutch and English traders had to work with; They were profit-making businesses with little royal control and more self-government":"Desbloqueado. Tu dígito es 9. Tu respuesta: Muchos sirvientes liberados sin tierra estaban enojados con los plantadores más ricos y con el gobernador; Los combates mataron a muchas personas, y la población indígena de Nueva Inglaterra se redujo a la mitad; Una alianza fuerte de naciones indígenas con la que los comerciantes holandeses e ingleses tenían que trabajar; Eran negocios para ganar dinero, con poco control del rey y más autogobierno","Escape Room 1 · Founding the English Colonies":"Sala de escape 1 · La fundación de las colonias inglesas","Escape the Meetinghouse Loft":"Escapa del desván de la casa de reunión","Founding the English Colonies":"La fundación de las colonias inglesas","MEETINGHOUSE LOFT":"DESVÁN DE REUNIÓN","A meetinghouse loft at night. On the left, a round window showing the moon, the sea, and a sailing ship, and an hourglass on a small table. On the right, a bell hanging from a beam, a rack of rolled scrolls, and a shelf of ledger books. The door has a MEETINGHOUSE LOFT sign and five padlocks in a row. Under each padlock is a window for one digit of the exit code.":"Un desván de una casa de reunión de noche. A la izquierda, una ventana redonda que muestra la luna, el mar y un barco de vela, y un reloj de arena sobre una mesita. A la derecha, una campana colgada de una viga, un estante de rollos y un estante de libros de cuentas. La puerta tiene un letrero de DESVÁN DE REUNIÓN y cinco candados en fila. Debajo de cada candado hay una ventanita para un dígito del código de salida.","You are locked in the meetinghouse loft.":"Estás encerrado en el desván de la casa de reunión.","The caretaker locked the meetinghouse loft for the night. A round window, an hourglass, a bell, a rack of scrolls, and a shelf of ledgers are in the room. The door has <b>5 locks<\/b>. Each lock matches one big idea from Lesson 1. Solve them all to find the <b>5-digit exit code<\/b>.":"El cuidador cerró con llave el desván de la casa de reunión por la noche. En el cuarto hay una ventana redonda, un reloj de arena, una campana, un estante de rollos y un estante de libros de cuentas. La puerta tiene <b>5 candados<\/b>. Cada candado corresponde a una idea importante de la Lección 1. Resuélvelos todos para encontrar el <b>código de salida de 5 dígitos<\/b>.","Enter the Loft":"Entrar al desván","The Round Window":"La ventana redonda","The Hourglass":"El reloj de arena","The Bell":"La campana","The Ledger Shelf":"El estante de libros de cuentas","The Scroll Rack":"El estante de rollos","LOCK 2 · CORE OBJECTIVE 2 (CHESAPEAKE)":"CANDADO 2 · OBJETIVO PRINCIPAL 2 (CHESAPEAKE)","LOCK 3 · CORE OBJECTIVE 2 (NEW ENGLAND)":"CANDADO 3 · OBJETIVO PRINCIPAL 2 (NUEVA INGLATERRA)","LOCK 4 · CORE OBJECTIVE 2 (CAROLINAS AND MIDDLE COLONIES)":"CANDADO 4 · OBJETIVO PRINCIPAL 2 (LAS CAROLINAS Y LAS COLONIAS CENTRALES)","Core Objective 1: Identify the economic, political, and religious motivations of English monarchs and investors for the establishment of American colonies.":"Objetivo principal 1: Identifica las razones económicas, políticas y religiosas que tuvieron los reyes y los inversionistas ingleses para establecer colonias en América.","Core Objective 2: Describe the political, economic, social, and religious characteristics of English colonies in the Chesapeake region, New England, the Carolinas, and the middle colonies—Pennsylvania, New York, New Jersey, and Delaware—before 1700. This lock covers the Chesapeake region.":"Objetivo principal 2: Describe las características políticas, económicas, sociales y religiosas de las colonias inglesas en la región de Chesapeake, Nueva Inglaterra, las Carolinas y las colonias centrales (Pensilvania, Nueva York, Nueva Jersey y Delaware) antes de 1700. Este candado trata la región de Chesapeake.","Core Objective 2: Describe the political, economic, social, and religious characteristics of English colonies in the Chesapeake region, New England, the Carolinas, and the middle colonies—Pennsylvania, New York, New Jersey, and Delaware—before 1700. This lock covers New England.":"Objetivo principal 2: Describe las características políticas, económicas, sociales y religiosas de las colonias inglesas en la región de Chesapeake, Nueva Inglaterra, las Carolinas y las colonias centrales (Pensilvania, Nueva York, Nueva Jersey y Delaware) antes de 1700. Este candado trata Nueva Inglaterra.","Core Objective 2: Describe the political, economic, social, and religious characteristics of English colonies in the Chesapeake region, New England, the Carolinas, and the middle colonies—Pennsylvania, New York, New Jersey, and Delaware—before 1700. This lock covers the Carolinas and the middle colonies.":"Objetivo principal 2: Describe las características políticas, económicas, sociales y religiosas de las colonias inglesas en la región de Chesapeake, Nueva Inglaterra, las Carolinas y las colonias centrales (Pensilvania, Nueva York, Nueva Jersey y Delaware) antes de 1700. Este candado trata las Carolinas y las colonias centrales.","Core Objective 3: Analyze the ways in which English colonists and Indigenous Americans responded to each other’s presence. Core Objective 4: Explain how the English colonies became the most populous, prosperous, and powerful region in North America by 1700.":"Objetivo principal 3: Analiza las formas en que los colonos ingleses y los indígenas americanos respondieron a la presencia del otro. Objetivo principal 4: Explica cómo las colonias inglesas se convirtieron en la región más poblada, rica y poderosa de América del Norte para 1700.","English colonies were private business ventures or religious experiments, or both. Few people were rich enough to pay for a colony alone. So investors bought shares of stock and formed <b>joint-stock companies<\/b>. This shared the risk and the profits. The government wanted colonies to send home raw materials such as timber, tobacco, and furs. It also wanted colonists to buy English goods.":"Las colonias inglesas eran empresas de negocios privadas o experimentos religiosos, o ambas cosas. Pocas personas eran lo bastante ricas para pagar una colonia solas. Por eso los inversionistas compraron acciones y formaron <b>compañías por acciones<\/b>. Así se compartían el riesgo y las ganancias. El gobierno quería que las colonias enviaran a Inglaterra materias primas, como madera, tabaco y pieles. También quería que los colonos compraran productos ingleses.","English kings shared power with <b>Parliament<\/b>, which could tax the people. James I and his son Charles I claimed great power and clashed with Parliament. The <b>Puritans<\/b> wanted to “purify” the Church of England of Catholic-style ceremonies. James I tried to jail or banish them, and many Puritans left England.":"Los reyes ingleses compartían el poder con el <b>Parlamento<\/b>, que podía cobrar impuestos al pueblo. Jacobo I y su hijo Carlos I decían tener un gran poder y chocaron con el Parlamento. Los <b>puritanos<\/b> querían “purificar” la Iglesia de Inglaterra de las ceremonias de estilo católico. Jacobo I trató de encarcelarlos o desterrarlos, y muchos puritanos se fueron de Inglaterra.","In 1606, King James I approved the Virginia Company, a joint-stock company. In 1607, 104 colonists reached Chesapeake Bay and built Jamestown. The <b>Powhatan Confederacy<\/b>, led by Wahunsunacock, ruled about 14,000 Indigenous people nearby. Jamestown nearly failed from hunger and disease. In 1612, settlers began growing <b>tobacco<\/b> to sell in England. It became very profitable, but it needed more land and more workers.":"En 1606, el rey Jacobo I aprobó la Compañía de Virginia, una compañía por acciones. En 1607, 104 colonos llegaron a la bahía de Chesapeake y construyeron Jamestown. La <b>Confederación Powhatan<\/b>, dirigida por Wahunsunacock, gobernaba a unos 14,000 indígenas en esa zona. Jamestown casi fracasó por el hambre y las enfermedades. En 1612, los colonos empezaron a cultivar <b>tabaco<\/b> para venderlo en Inglaterra. Fue muy rentable, pero necesitaba más tierra y más trabajadores.","In 1618, the company began the <b>headright<\/b> policy: a person who paid his way to Virginia got 50 acres, plus 50 more for each servant he brought. In 1619, the House of Burgesses, the first elected assembly in the colonies, began to meet. In that same year, a ship landed about 20 Africans in Virginia, the start of about 250 years of slavery in British North America. In 1634, Maryland was founded. Its owner hoped it would be a refuge for English Catholics.":"En 1618, la compañía empezó la política de <b>headright<\/b> (concesión de tierras): una persona que pagaba su propio viaje a Virginia recibía 50 acres, y 50 más por cada sirviente que llevara. En 1619, empezó a reunirse la Cámara de los Burgueses (House of Burgesses), la primera asamblea elegida de las colonias. Ese mismo año, un barco dejó en Virginia a unos 20 africanos, el comienzo de unos 250 años de esclavitud en la América del Norte británica. En 1634, se fundó Maryland. Su dueño esperaba que fuera un refugio para los católicos ingleses.","Puritan families settled New England to build self-governing religious communities. In 1620, 102 people sailed on the <i>Mayflower<\/i> and landed at Cape Cod. Forty-one men there signed the <b>Mayflower Compact<\/b>, a promise to rule themselves by “just and civil laws.” Only the male church members could vote and hold office.":"Familias puritanas se establecieron en Nueva Inglaterra para formar comunidades religiosas que se gobernaban a sí mismas. En 1620, 102 personas navegaron en el <i>Mayflower<\/i> y llegaron a Cape Cod. Allí, cuarenta y un hombres firmaron el <b>Pacto del Mayflower<\/b>, la promesa de gobernarse con “leyes justas y civiles”. Solo los hombres que eran miembros de la iglesia podían votar y ocupar cargos.","In 1630, John Winthrop led about 700 Puritans to found the <b>Massachusetts Bay Colony<\/b>. It grew much larger than Plymouth. Puritan leaders did not want democracy or religious toleration, and they punished people of other faiths. Rhode Island began after Puritan leaders banished a dissenter, and it welcomed all who fled religious persecution. In 1692–1693, the <b>witchcraft hysteria<\/b> in Salem Village led to 19 people being hanged.":"En 1630, John Winthrop dirigió a unos 700 puritanos para fundar la <b>Colonia de la Bahía de Massachusetts<\/b>. Llegó a ser mucho más grande que Plymouth. Los líderes puritanos no querían la democracia ni la tolerancia religiosa, y castigaban a las personas de otras religiones. Rhode Island comenzó después de que los líderes puritanos desterraron a un disidente, y recibió a todos los que huían de la persecución religiosa. En 1692–1693, la <b>histeria de brujería<\/b> en Salem Village hizo que 19 personas fueran ahorcadas.","In 1669, the first 145 English colonists in South Carolina reached Charles Town. Many planters came from <b>Barbados<\/b>, a Caribbean island known for its brutal treatment of enslaved Africans on sugar plantations. These planters depended on the <b>transatlantic slave trade<\/b>, which carried enslaved Africans across the Atlantic. They brought that system to Carolina. Rice became South Carolina’s main crop, and enslavers forced Africans to grow it partly because West Africans already knew how. In 1712, the colony was divided into <b>North and South Carolina<\/b>.":"En 1669, los primeros 145 colonos ingleses de Carolina del Sur llegaron a Charles Town. Muchos plantadores venían de <b>Barbados<\/b>, una isla del Caribe conocida por el trato brutal a los africanos esclavizados en las plantaciones de azúcar. Estos plantadores dependían del <b>comercio transatlántico de esclavos<\/b>, que llevaba africanos esclavizados a través del Atlántico. Llevaron ese sistema a Carolina. El arroz se volvió el cultivo principal de Carolina del Sur, y los esclavistas obligaban a los africanos a cultivarlo en parte porque los africanos del oeste ya sabían hacerlo. En 1712, la colonia se dividió en <b>Carolina del Norte y Carolina del Sur<\/b>.","The middle colonies were New York, New Jersey, Pennsylvania, and Delaware. The Dutch began <b>New Netherland<\/b> as a fur-trading business and welcomed people of many faiths. England took it in 1664 and renamed New Amsterdam as New York. William Penn made Pennsylvania a Quaker colony open to people of all faiths, and he bought land from Indigenous Americans. The middle colonies sold grain and flour to other colonies.":"Las colonias centrales eran Nueva York, Nueva Jersey, Pensilvania y Delaware. Los holandeses iniciaron <b>Nueva Holanda<\/b> como un negocio de comercio de pieles y recibieron a personas de muchas religiones. Inglaterra la tomó en 1664 y cambió el nombre de Nueva Ámsterdam a Nueva York. William Penn hizo de Pensilvania una colonia cuáquera abierta a personas de todas las religiones, y compró tierras a los indígenas americanos. Las colonias centrales vendían granos y harina a otras colonias.","Colonists and Indigenous peoples answered each other’s presence with trade, resistance, and war. English settlers wanted Indigenous land. Puritans also pushed Indigenous people to give up their religion and move to “praying towns.” In 1676, <b>Bacon’s Rebellion<\/b> broke out in Virginia. Landless former servants, small farmers, and some enslaved Africans rose up against the governor and the richest planters. Bacon’s followers also attacked Indigenous people. Bacon died of illness, and the rebellion fell apart.":"Los colonos y los pueblos indígenas respondieron a la presencia del otro con comercio, resistencia y guerra. Los colonos ingleses querían las tierras indígenas. Los puritanos también presionaron a los indígenas para que dejaran su religión y se mudaran a “pueblos de oración”. En 1676, estalló en Virginia la <b>Rebelión de Bacon<\/b>. Sirvientes liberados sin tierra, pequeños agricultores y algunos africanos esclavizados se levantaron contra el gobernador y los plantadores más ricos. Los seguidores de Bacon también atacaron a los indígenas. Bacon murió de una enfermedad, y la rebelión se deshizo.","<b>King Philip’s War<\/b> (1675–1678) was fought in New England. Wampanoag leader Metacom and his allies fought the colonists over land. About 600 colonists and perhaps 4,000 Indigenous people died, and New England’s Indigenous population was cut in half. In New York, the <b>Iroquois League<\/b> was an alliance so strong that Dutch and English traders had to work with it.":"La <b>Guerra del Rey Felipe<\/b> (1675–1678) se libró en Nueva Inglaterra. El líder wampanoag Metacom y sus aliados lucharon contra los colonos por la tierra. Murieron unos 600 colonos y quizá 4,000 indígenas, y la población indígena de Nueva Inglaterra se redujo a la mitad. En Nueva York, la <b>Liga Iroquesa<\/b> era una alianza tan fuerte que los comerciantes holandeses e ingleses tuvieron que trabajar con ella.","By the early 1700s, the English colonies were the most populous, prosperous, and powerful in North America. They were run as profit-making businesses with little royal control, and they had more self-government. The Dutch and non-Puritan English colonies also welcomed people of many nations and religions.":"A principios de la década de 1700, las colonias inglesas eran las más pobladas, ricas y poderosas de América del Norte. Se manejaban como negocios para ganar dinero, con poco control del rey, y tenían más autogobierno. Las colonias holandesas y las inglesas no puritanas también recibían a personas de muchas naciones y religiones.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 2, “Indigenous Peoples and English Settlers” (Food and Land, p. 89; Bacon’s Rebellion; Indigenous Americans and Christianity; King Philip’s War; The Iroquois League) and “Thriving Colonies” (p. 97).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 2, “Indigenous Peoples and English Settlers” (Food and Land, pág. 89; Bacon’s Rebellion; Indigenous Americans and Christianity; King Philip’s War; The Iroquois League) and “Thriving Colonies” (p. 97).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 2, “Settling the American Colonies” (New England; Plymouth; Massachusetts Bay; Rhode Island; Witches in Salem).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 2, “Settling the American Colonies” (New England; Plymouth; Massachusetts Bay; Rhode Island; Witches in Salem).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 2, “Settling the American Colonies” (The Carolinas; The Barbados Connection; Charles Town; Profitable Colonies; The Middle Colonies and Georgia; The Dutch Republic and Trade; New Jersey; Pennsylvania; Delaware).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 2, “Settling the American Colonies” (The Carolinas; The Barbados Connection; Charles Town; Profitable Colonies; The Middle Colonies and Georgia; The Dutch Republic and Trade; New Jersey; Pennsylvania; Delaware).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 2, “Settling the American Colonies” (The Chesapeake Region, p. 61; Jamestown; The Powhatan Confederacy; Tobacco; Governance; Slavery in British North America; Maryland).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 2, “Settling the American Colonies” (The Chesapeake Region, pág. 61; Jamestown; The Powhatan Confederacy; Tobacco; Governance; Slavery in British North America; Maryland).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 2, “The English Background” (People and Profits, p. 56; Political Traditions; Religious Conflict and War).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 2, “The English Background” (People and Profits, pág. 56; Political Traditions; Religious Conflict and War).","Joint-stock company":"Compañía por acciones","Parliament":"Parlamento","The Puritans":"Los puritanos","Raw materials":"Materias primas","Investors buy shares so they share the cost, risk, and profits":"Los inversionistas compran acciones para compartir el costo, el riesgo y las ganancias","The English lawmaking body that could tax the people":"El cuerpo legislativo inglés que podía cobrar impuestos al pueblo","Reformers who wanted to “purify” the Church of England":"Reformadores que querían “purificar” la Iglesia de Inglaterra","Goods such as timber, tobacco, and furs that England wanted":"Productos como madera, tabaco y pieles que Inglaterra quería","Match each idea to the best description. Use the Clue Card.":"Relaciona cada idea con la mejor descripción. Usa la tarjeta de indicios.","Look for the bold words in the Clue Card: joint-stock companies, Parliament, and Puritans. Then find what England wanted from its colonies.":"Busca las palabras en negrita en la tarjeta de indicios: compañías por acciones, Parlamento y puritanos. Luego busca qué quería Inglaterra de sus colonias.","Joint-stock companies shared risk and profits. Parliament could tax the people. The Puritans wanted to purify the church. England wanted raw materials.":"Las compañías por acciones compartían el riesgo y las ganancias. El Parlamento podía cobrar impuestos al pueblo. Los puritanos querían purificar la iglesia. Inglaterra quería materias primas.","Colonists reach Chesapeake Bay and found Jamestown":"Los colonos llegan a la bahía de Chesapeake y fundan Jamestown","Settlers begin growing tobacco to sell in England":"Los colonos empiezan a cultivar tabaco para venderlo en Inglaterra","The House of Burgesses is created":"Se crea la Cámara de los Burgueses","Maryland is founded":"Se funda Maryland","Look for the years in the Clue Card: 1607, 1612, 1619, and 1634.":"Busca los años en la tarjeta de indicios: 1607, 1612, 1619 y 1634.","The order is Jamestown (1607), tobacco (1612), the House of Burgesses (1619), then Maryland (1634).":"El orden es Jamestown (1607), el tabaco (1612), la Cámara de los Burgueses (1619) y luego Maryland (1634).","The 1620 promise to rule by “just and civil laws” is called the ________ Compact.":"La promesa de 1620 de gobernarse con “leyes justas y civiles” se llama el Pacto del ________.","Look for the bold words in the first paragraph of the Clue Card. The word before “Compact” is also the name of the ship.":"Busca las palabras en negrita en el primer párrafo de la tarjeta de indicios. La palabra antes de “Compact” es también el nombre del barco.","The word starts with M and has 9 letters. It ends with “flower.”":"La palabra empieza con M y tiene 9 letras. Termina en “flower”.","The Clue Card names a Caribbean island whose planters brought their sugar and slavery system to Carolina. A secret message gives its name. Each letter in the message was moved 3 steps forward in the alphabet. Decode it.":"La tarjeta de indicios nombra una isla del Caribe cuyos plantadores llevaron a Carolina su sistema de azúcar y esclavitud. Un mensaje secreto da su nombre. Cada letra del mensaje se movió 3 lugares hacia adelante en el alfabeto. Descífralo.","The secret message is the name of the island in bold in the Clue Card. Use the decoder key to spell it, one letter at a time.":"El mensaje secreto es el nombre de la isla que está en negrita en la tarjeta de indicios. Usa la clave del decodificador para escribirlo, una letra a la vez.","In the message, the letter E is really B, and the letter U is really R. The word has 8 letters and starts with B.":"En el mensaje, la letra E en realidad es B, y la letra U en realidad es R. La palabra tiene 8 letras y empieza con B.","What helped cause Bacon’s Rebellion in 1676?":"¿Qué ayudó a causar la Rebelión de Bacon en 1676?","Colonists wanted to join Spain":"Los colonos querían unirse a España","Many landless former servants were angry at the richest planters and the governor":"Muchos sirvientes liberados sin tierra estaban enojados con los plantadores más ricos y con el gobernador","Parliament closed the colonial assemblies":"El Parlamento cerró las asambleas coloniales","The Iroquois League attacked Jamestown":"La Liga Iroquesa atacó Jamestown","What was the result of King Philip’s War (1675–1678)?":"¿Cuál fue el resultado de la Guerra del Rey Felipe (1675–1678)?","The fighting killed many people, and New England’s Indigenous population was cut in half":"Los combates mataron a muchas personas, y la población indígena de Nueva Inglaterra se redujo a la mitad","Colonists and Indigenous nations signed a lasting peace":"Los colonos y las naciones indígenas firmaron una paz duradera","England gave up its New England colonies":"Inglaterra renunció a sus colonias de Nueva Inglaterra","Metacom became the governor of Plymouth":"Metacom se convirtió en el gobernador de Plymouth","What was the Iroquois League?":"¿Qué era la Liga Iroquesa?","A Puritan church council":"Un consejo de la iglesia puritana","A French army in New York":"Un ejército francés en Nueva York","A strong alliance of Indigenous nations that Dutch and English traders had to work with":"Una alianza fuerte de naciones indígenas con la que los comerciantes holandeses e ingleses tenían que trabajar","A joint-stock company":"Una compañía por acciones","Why did the English colonies become so powerful by the early 1700s?":"¿Por qué las colonias inglesas llegaron a ser tan poderosas a principios de la década de 1700?","The king ran every part of colonial life":"El rey controlaba todas las partes de la vida colonial","Spain and France paid for them":"España y Francia las pagaron","They had very few settlers":"Tenían muy pocos colonos","They were profit-making businesses with little royal control and more self-government":"Eran negocios para ganar dinero, con poco control del rey y más autogobierno","Each answer is in the Clue Card. Look for what angered people in Bacon’s Rebellion, the result of King Philip’s War, what the Iroquois League was, and why the English colonies were strong.":"Cada respuesta está en la tarjeta de indicios. Busca qué enojó a la gente en la Rebelión de Bacon, el resultado de la Guerra del Rey Felipe, qué era la Liga Iroquesa y por qué las colonias inglesas eran fuertes.","Bacon’s Rebellion: landless former servants were angry. King Philip’s War: many died and New England’s Indigenous population was cut in half. The Iroquois League: a strong alliance. The colonies had little royal control and more self-government.":"Rebelión de Bacon: los sirvientes liberados sin tierra estaban enojados. Guerra del Rey Felipe: murieron muchos y la población indígena de Nueva Inglaterra se redujo a la mitad. Liga Iroquesa: una alianza fuerte. Las colonias tenían poco control del rey y más autogobierno.","Not quite. At least one answer is off. Re-read the Clue Card for Bacon’s Rebellion, King Philip’s War, the Iroquois League, and why the colonies grew strong.":"Casi. Al menos una respuesta no es correcta. Vuelve a leer la tarjeta de indicios sobre la Rebelión de Bacon, la Guerra del Rey Felipe, la Liga Iroquesa y por qué las colonias se hicieron fuertes.","Clear all your work and start over? This cannot be undone.":"¿Borrar todo tu trabajo y empezar de nuevo? Esto no se puede deshacer.","The file could not be read.":"No se pudo leer el archivo."},"ar":{"Save Progress":"حفظ التقدم","Load Progress":"تحميل التقدم","Finished — Download File to Submit":"انتهيت — نزّل الملف لتسليمه","Clear all my answers":"امسح كل إجاباتي","FIRST NAME *":"الاسم الأول *","LAST NAME *":"اسم العائلة *","PERIOD *":"الحصة *","DATE (fills in when you finish)":"التاريخ (يُكتب تلقائيًا عند الانتهاء)","e.g. 3":"مثال: 3","Automatic":"تلقائي","Please type your first name, last name, and period first.":"اكتب أولًا اسمك الأول واسم العائلة والحصة.","Western Expansion and Southern Secession":"التوسع غربًا وانفصال الجنوب","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"الوحدة 3 · بيت منقسم وأُعيد بناؤه | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — قانون العبيد الهاربين","Bleeding Kansas":"Bleeding Kansas — كانساس النازفة","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"الوحدة 3 · بيت منقسم وأعيد بناؤه | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"تم تنزيل ملف التقدم. احتفظ به في مكان آمن. استخدم «تحميل التقدم» لتكمل لاحقًا.","Progress loaded.":"تم تحميل التقدم.","Could not read that file.":"تعذّرت قراءة هذا الملف.","Treaty of Guadalupe Hidalgo":"معاهدة غوادالوبي هيدالغو (Treaty of Guadalupe Hidalgo)","All 5 locks are open. Type the 5 digits in order, Lock 1 first.":"الأقفال الخمسة مفتوحة. اكتب الأرقام الخمسة بالترتيب: رقم القفل 1 أولًا.","Answer every question first.":"أجب عن كل الأسئلة أولًا.","CLUE CARD":"بطاقة القرائن","Check":"تحقق","Choose a description...":"اختر وصفًا...","Clear":"مسح","Clear all my work and start over":"امسح كل عملي وابدأ من جديد","DEBRIEF":"الملخص الختامي","Debrief":"الملخص الختامي","Decoded answer":"الإجابة بعد فك التشفير","Decoder key: the <span style=\"color:var(--hl);font-weight:700\">gold<\/span> letter is in the message. The white letter under it is the real letter.":"مفتاح فك التشفير: الحرف <span style=\"color:var(--hl);font-weight:700\">الذهبي<\/span> هو الحرف الموجود في الرسالة. والحرف الأبيض تحته هو الحرف الحقيقي.","ESCAPED":"لقد هربت!","Enter your first name, last name, and period at the top first.":"اكتب اسمك الأول واسم العائلة والحصة في الأعلى أولًا.","Exit code digit 1":"رقم رمز الخروج 1","Exit door":"باب الخروج","Fill in the blank using the Clue Card.":"املأ الفراغ باستخدام بطاقة القرائن.","Have a saved file? Load it to continue.":"هل لديك ملف محفوظ؟ حمّله لتكمل.","Hint":"تلميح","Hints used":"التلميحات المستخدمة","How to escape:":"كيف تهرب:","If you get stuck, press <b>Hint<\/b>. Hints are free, but your teacher can see how many you used.":"إذا تعثرت، اضغط <b>تلميح<\/b>. التلميحات مجانية، لكن معلمك يستطيع أن يرى كم تلميحًا استخدمت.","Locks":"الأقفال","Match every term first.":"طابق كل المصطلحات أولًا.","Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.":"لم تهرب بعد (يُسجَّل «غير مكتمل» INCOMPLETE). ما زال بإمكانك تنزيل ملفك وتسليمه.","Not quite. Check each match against the Clue Card. Which one are you least sure about?":"ليس تمامًا. تحقق من كل مطابقة باستخدام بطاقة القرائن. أي مطابقة أنت أقل تأكدًا منها؟","Not quite. Decode one letter at a time with the key, then check your spelling.":"ليس تمامًا. فُكّ تشفير حرف واحد في كل مرة باستخدام المفتاح، ثم تحقق من تهجئتك.","Not quite. Re-read the Clue Card and match each event to its year.":"ليس تمامًا. أعد قراءة بطاقة القرائن وطابق كل حدث مع سنته.","Not quite. Re-read the Clue Card. Use the scrambled letters to check your spelling.":"ليس تمامًا. أعد قراءة بطاقة القرائن. استخدم الحروف المبعثرة للتحقق من تهجئتك.","One last step: write your Debrief below.":"خطوة أخيرة: اكتب ملخصك الختامي أدناه.","Open all 5 locks first. The digits go in order: Lock 1 first.":"افتح الأقفال الخمسة أولًا. تُكتب الأرقام بالترتيب: رقم القفل 1 أولًا.","Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.":"افتح الأقفال الخمسة، ثم اكتب رمز الخروج المكوّن من 5 أرقام. أنهِ بالملخص الختامي.","Open each lock in order. Read the <b>Clue Card<\/b>. The answer is in the card.":"افتح كل قفل بالترتيب. اقرأ <b>بطاقة القرائن<\/b>. الإجابة موجودة في البطاقة.","Open the Door":"افتح الباب","Pick the correct answer for all four questions.":"اختر الإجابة الصحيحة للأسئلة الأربعة كلها.","Progress file downloaded. Use Load Progress to continue later.":"تم تنزيل ملف التقدم. استخدم «تحميل التقدم» لتكمل لاحقًا.","Progress loaded. Welcome back.":"تم تحميل التقدم. أهلًا بعودتك.","Solve the puzzle to open the lock and reveal one digit.":"حلّ اللغز لتفتح القفل وتكشف رقمًا واحدًا.","THE EXIT DOOR":"باب الخروج","Tap all 4 events first, in order.":"المس الأحداث الأربعة كلها أولًا، بالترتيب.","Tap the four events in the order they happened. Tap an event again to take it back.":"المس الأحداث الأربعة بالترتيب الذي وقعت به. المس الحدث مرة أخرى للتراجع عنه.","That file did not work. Choose a progress file saved from this Escape Room.":"لم يعمل هذا الملف. اختر ملف تقدم محفوظًا من غرفة الهروب هذه.","That was the last hint. Read the Clue Card slowly and try again.":"كان هذا آخر تلميح. اقرأ بطاقة القرائن ببطء وحاول مرة أخرى.","The clock starts when you press the button. Most students finish in about 20 minutes.":"يبدأ العدّاد عندما تضغط الزر. يُنهي معظم الطلاب في نحو 20 دقيقة.","The code has 5 digits. Fill every box.":"الرمز مكوّن من 5 أرقام. املأ كل المربعات.","The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.":"لم يُفتح الباب. تحقق من الأرقام تحت كل قفل، واكتبها بالترتيب: رقم القفل 1 أولًا.","The door is open!":"الباب مفتوح!","The door swings open!":"ينفتح الباب على مصراعيه!","Time":"الوقت","Type the answer in English.":"اكتب الإجابة بالإنجليزية.","Type the answer in English. Use the digits 0-9.":"اكتب الإجابة بالإنجليزية. استخدم الأرقام 0-9.","Type the exit code":"اكتب رمز الخروج","Type your answer first.":"اكتب إجابتك أولًا.","Type your answer here...":"اكتب إجابتك هنا...","UNIT 1 · COLONIES, REVOLUTION, AND CONSTITUTION | CPUSH | DANIEL GARZA, M.A.":"الوحدة 1 · المستعمرات والثورة والدستور | CPUSH | DANIEL GARZA, M.A.","Unscramble the letters to fill the blank.":"رتّب الأحرف لتملأ الفراغ.","Which lock was hardest, and what did you learn that you did not know before?":"أي قفل كان الأصعب، وماذا تعلمت ولم تكن تعرفه من قبل؟","Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.":"اكتب من 3 إلى 4 جمل. اذكر القفل واستخدم معلومة واحدة من بطاقة القرائن الخاصة به. يمكنك كتابة هذا حتى لو لم تهرب.","You escaped and wrote your Debrief. Ready to submit.":"لقد هربت وكتبت ملخصك الختامي. أنت جاهز للتسليم.","You escaped! Write your Debrief, then download your file to submit.":"لقد هربت! اكتب ملخصك الختامي، ثم نزّل ملفك لتسليمه.","Your answer":"إجابتك","Your time:":"وقتك:","digit":"رقم","Unlocked. Your digit is 5. Your answer: Raw materials = Goods such as timber, tobacco, and furs that England wanted; Parliament = The English lawmaking body that could tax the people; Joint-stock company = Investors buy shares so they share the cost, risk, and profits; The Puritans = Reformers who wanted to “purify” the Church of England":"تم الفتح. رقمك هو 5. إجابتك: المواد الخام = بضائع مثل الخشب والتبغ والفراء أرادتها إنجلترا; البرلمان (Parliament) = الهيئة التشريعية الإنجليزية التي كان بإمكانها فرض الضرائب على الشعب; شركة مساهمة (joint-stock company) = يشتري المستثمرون أسهمًا ليتقاسموا التكلفة والمخاطر والأرباح; البيوريتانيون (Puritans) = مصلحون أرادوا «تطهير» كنيسة إنجلترا (Church of England)","Unlocked. Your digit is 0. Your answer: Colonists reach Chesapeake Bay and found Jamestown &gt; Settlers begin growing tobacco to sell in England &gt; The House of Burgesses is created &gt; Maryland is founded":"تم الفتح. رقمك هو 0. إجابتك: يصل المستعمرون إلى خليج تشيسابيك ويؤسسون جيمستاون &gt; يبدأ المستوطنون زراعة التبغ ليبيعوه في إنجلترا &gt; يُنشأ مجلس النواب (House of Burgesses) &gt; تُؤسَّس ماريلاند","Unlocked. Your digit is 9. Your answer: Many landless former servants were angry at the richest planters and the governor; The fighting killed many people, and New England’s Indigenous population was cut in half; A strong alliance of Indigenous nations that Dutch and English traders had to work with; They were profit-making businesses with little royal control and more self-government":"تم الفتح. رقمك هو 9. إجابتك: كان كثير من الخدم المحررين الذين لا يملكون أرضًا غاضبين من أغنى المزارعين ومن الحاكم; قتل القتال كثيرين، وانخفض عدد السكان الأصليين في نيو إنجلاند إلى النصف; تحالف قوي من الأمم الأصلية اضطر التجار الهولنديون والإنجليز إلى العمل معه; كانت مشاريع تجارية تهدف إلى الربح مع قليل من سيطرة الملك وحكم ذاتي أكبر","Escape Room 1 · Founding the English Colonies":"غرفة الهروب 1 · تأسيس المستعمرات الإنجليزية","Escape the Meetinghouse Loft":"اهرب من علية بيت الاجتماع","Founding the English Colonies":"تأسيس المستعمرات الإنجليزية","MEETINGHOUSE LOFT":"علية بيت الاجتماع","A meetinghouse loft at night. On the left, a round window showing the moon, the sea, and a sailing ship, and an hourglass on a small table. On the right, a bell hanging from a beam, a rack of rolled scrolls, and a shelf of ledger books. The door has a MEETINGHOUSE LOFT sign and five padlocks in a row. Under each padlock is a window for one digit of the exit code.":"علية بيت اجتماع في الليل. على اليسار نافذة مستديرة تُظهر القمر والبحر وسفينة شراعية، وساعة رملية على طاولة صغيرة. وعلى اليمين جرس معلّق من عارضة، ورف لفائف ملفوفة، ورف دفاتر حسابات. على الباب لافتة «علية بيت الاجتماع» وخمسة أقفال في صف. تحت كل قفل نافذة صغيرة لرقم واحد من رمز الخروج.","You are locked in the meetinghouse loft.":"أنت محبوس في علية بيت الاجتماع.","The caretaker locked the meetinghouse loft for the night. A round window, an hourglass, a bell, a rack of scrolls, and a shelf of ledgers are in the room. The door has <b>5 locks<\/b>. Each lock matches one big idea from Lesson 1. Solve them all to find the <b>5-digit exit code<\/b>.":"أقفل الحارس علية بيت الاجتماع للّيل. وفي الغرفة نافذة مستديرة، وساعة رملية، وجرس، ورف لفائف، ورف دفاتر حسابات. وللباب <b>5 أقفال<\/b>. كل قفل يرتبط بفكرة كبيرة واحدة من الدرس 1. حُلّها كلها لتجد <b>رمز الخروج المكوّن من 5 أرقام<\/b>.","Enter the Loft":"ادخل العلية","The Round Window":"النافذة المستديرة","The Hourglass":"الساعة الرملية","The Bell":"الجرس","The Ledger Shelf":"رف دفاتر الحسابات","The Scroll Rack":"رف اللفائف","LOCK 2 · CORE OBJECTIVE 2 (CHESAPEAKE)":"القفل 2 · الهدف الأساسي 2 (تشيسابيك)","LOCK 3 · CORE OBJECTIVE 2 (NEW ENGLAND)":"القفل 3 · الهدف الأساسي 2 (نيو إنجلاند)","LOCK 4 · CORE OBJECTIVE 2 (CAROLINAS AND MIDDLE COLONIES)":"القفل 4 · الهدف الأساسي 2 (كارولاينا والمستعمرات الوسطى)","Core Objective 1: Identify the economic, political, and religious motivations of English monarchs and investors for the establishment of American colonies.":"الهدف الأساسي 1: حدّد الدوافع الاقتصادية والسياسية والدينية لملوك إنجلترا والمستثمرين لإنشاء المستعمرات الأمريكية.","Core Objective 2: Describe the political, economic, social, and religious characteristics of English colonies in the Chesapeake region, New England, the Carolinas, and the middle colonies—Pennsylvania, New York, New Jersey, and Delaware—before 1700. This lock covers the Chesapeake region.":"الهدف الأساسي 2: صِف الخصائص السياسية والاقتصادية والاجتماعية والدينية للمستعمرات الإنجليزية في منطقة تشيسابيك (Chesapeake)، ونيو إنجلاند (New England)، وكارولاينا (Carolinas)، والمستعمرات الوسطى، أي بنسلفانيا (Pennsylvania) ونيويورك (New York) ونيوجيرسي (New Jersey) وديلاوير (Delaware)، قبل عام 1700. يتناول هذا القفل منطقة تشيسابيك.","Core Objective 2: Describe the political, economic, social, and religious characteristics of English colonies in the Chesapeake region, New England, the Carolinas, and the middle colonies—Pennsylvania, New York, New Jersey, and Delaware—before 1700. This lock covers New England.":"الهدف الأساسي 2: صِف الخصائص السياسية والاقتصادية والاجتماعية والدينية للمستعمرات الإنجليزية في منطقة تشيسابيك (Chesapeake)، ونيو إنجلاند (New England)، وكارولاينا (Carolinas)، والمستعمرات الوسطى، أي بنسلفانيا (Pennsylvania) ونيويورك (New York) ونيوجيرسي (New Jersey) وديلاوير (Delaware)، قبل عام 1700. يتناول هذا القفل نيو إنجلاند.","Core Objective 2: Describe the political, economic, social, and religious characteristics of English colonies in the Chesapeake region, New England, the Carolinas, and the middle colonies—Pennsylvania, New York, New Jersey, and Delaware—before 1700. This lock covers the Carolinas and the middle colonies.":"الهدف الأساسي 2: صِف الخصائص السياسية والاقتصادية والاجتماعية والدينية للمستعمرات الإنجليزية في منطقة تشيسابيك (Chesapeake)، ونيو إنجلاند (New England)، وكارولاينا (Carolinas)، والمستعمرات الوسطى، أي بنسلفانيا (Pennsylvania) ونيويورك (New York) ونيوجيرسي (New Jersey) وديلاوير (Delaware)، قبل عام 1700. يتناول هذا القفل كارولاينا والمستعمرات الوسطى.","Core Objective 3: Analyze the ways in which English colonists and Indigenous Americans responded to each other’s presence. Core Objective 4: Explain how the English colonies became the most populous, prosperous, and powerful region in North America by 1700.":"الهدف الأساسي 3: حلّل الطرق التي تعامل بها المستعمرون الإنجليز والأمريكيون الأصليون مع وجود كل منهما للآخر. الهدف الأساسي 4: اشرح كيف أصبحت المستعمرات الإنجليزية أكثر المناطق سكانًا وثراءً وقوة في أمريكا الشمالية بحلول عام 1700.","English colonies were private business ventures or religious experiments, or both. Few people were rich enough to pay for a colony alone. So investors bought shares of stock and formed <b>joint-stock companies<\/b>. This shared the risk and the profits. The government wanted colonies to send home raw materials such as timber, tobacco, and furs. It also wanted colonists to buy English goods.":"كانت المستعمرات الإنجليزية مشاريع تجارية خاصة أو تجارب دينية، أو كليهما. وكان قليل من الناس أغنياء بما يكفي لدفع تكاليف مستعمرة وحدهم. لذلك اشترى المستثمرون أسهمًا وكوّنوا <b>شركات مساهمة<\/b> (joint-stock companies). وبهذا تقاسموا المخاطر والأرباح. وأرادت الحكومة أن ترسل المستعمرات إلى الوطن مواد خام مثل الخشب والتبغ والفراء. وأرادت أيضًا أن يشتري المستعمرون البضائع الإنجليزية.","English kings shared power with <b>Parliament<\/b>, which could tax the people. James I and his son Charles I claimed great power and clashed with Parliament. The <b>Puritans<\/b> wanted to “purify” the Church of England of Catholic-style ceremonies. James I tried to jail or banish them, and many Puritans left England.":"كان ملوك إنجلترا يتقاسمون السلطة مع <b>البرلمان<\/b> (Parliament)، الذي كان يستطيع فرض الضرائب على الشعب. وادّعى جيمس الأول (James I) وابنه تشارلز الأول (Charles I) سلطة كبيرة، وتصادما مع البرلمان. وأراد <b>البيوريتانيون<\/b> (Puritans) «تطهير» كنيسة إنجلترا (Church of England) من الطقوس الشبيهة بالكاثوليكية. وحاول جيمس الأول سجنهم أو نفيهم، فغادر كثير من البيوريتانيين إنجلترا.","In 1606, King James I approved the Virginia Company, a joint-stock company. In 1607, 104 colonists reached Chesapeake Bay and built Jamestown. The <b>Powhatan Confederacy<\/b>, led by Wahunsunacock, ruled about 14,000 Indigenous people nearby. Jamestown nearly failed from hunger and disease. In 1612, settlers began growing <b>tobacco<\/b> to sell in England. It became very profitable, but it needed more land and more workers.":"في عام 1606، وافق الملك جيمس الأول (James I) على إنشاء شركة فرجينيا (Virginia Company)، وهي شركة مساهمة. وفي عام 1607، وصل 104 مستعمرين إلى خليج تشيسابيك (Chesapeake Bay) وبنوا جيمستاون (Jamestown). وكان <b>اتحاد البوهاتان<\/b> (Powhatan Confederacy)، بقيادة واهونسوناكوك (Wahunsunacock)، يحكم نحو 14,000 من السكان الأصليين في تلك المنطقة. وكادت جيمستاون تفشل بسبب الجوع والمرض. وفي عام 1612، بدأ المستوطنون زراعة <b>التبغ<\/b> (tobacco) ليبيعوه في إنجلترا. وصار مربحًا جدًا، لكنه احتاج إلى أرض أكثر وعمال أكثر.","In 1618, the company began the <b>headright<\/b> policy: a person who paid his way to Virginia got 50 acres, plus 50 more for each servant he brought. In 1619, the House of Burgesses, the first elected assembly in the colonies, began to meet. In that same year, a ship landed about 20 Africans in Virginia, the start of about 250 years of slavery in British North America. In 1634, Maryland was founded. Its owner hoped it would be a refuge for English Catholics.":"في عام 1618، بدأت الشركة سياسة <b>«حق الرأس»<\/b> (headright): من دفع ثمن رحلته إلى فرجينيا (Virginia) حصل على 50 فدانًا (acres)، ومعها 50 فدانًا أخرى عن كل خادم يُحضره. وفي عام 1619، بدأ مجلس النواب (House of Burgesses)، وهو أول مجلس منتخب في المستعمرات، يجتمع. وفي السنة نفسها، أنزلت سفينة نحو 20 إفريقيًا في فرجينيا، وكان ذلك بداية نحو 250 عامًا من العبودية في أمريكا الشمالية البريطانية. وفي عام 1634، تأسست ماريلاند (Maryland). وكان مالكها يأمل أن تكون ملجأً للكاثوليك الإنجليز.","Puritan families settled New England to build self-governing religious communities. In 1620, 102 people sailed on the <i>Mayflower<\/i> and landed at Cape Cod. Forty-one men there signed the <b>Mayflower Compact<\/b>, a promise to rule themselves by “just and civil laws.” Only the male church members could vote and hold office.":"استقرت عائلات البيوريتانيين (Puritans) في نيو إنجلاند (New England) لتبني مجتمعات دينية تحكم نفسها بنفسها. وفي عام 1620، أبحر 102 شخصًا على متن سفينة <i>ماي فلاور<\/i> (Mayflower) ونزلوا في كيب كود (Cape Cod). وهناك وقّع واحد وأربعون رجلًا <b>ميثاق ماي فلاور<\/b> (Mayflower Compact)، وهو وعد بأن يحكموا أنفسهم بـ«قوانين عادلة ومدنية». ولم يكن يحق بالتصويت وتولّي المناصب إلا الرجال من أعضاء الكنيسة.","In 1630, John Winthrop led about 700 Puritans to found the <b>Massachusetts Bay Colony<\/b>. It grew much larger than Plymouth. Puritan leaders did not want democracy or religious toleration, and they punished people of other faiths. Rhode Island began after Puritan leaders banished a dissenter, and it welcomed all who fled religious persecution. In 1692–1693, the <b>witchcraft hysteria<\/b> in Salem Village led to 19 people being hanged.":"في عام 1630، قاد جون وينثروب (John Winthrop) نحو 700 من البيوريتانيين (Puritans) لتأسيس <b>مستعمرة خليج ماساتشوستس<\/b> (Massachusetts Bay Colony). وأصبحت أكبر بكثير من بليموث (Plymouth). ولم يكن القادة البيوريتانيون يريدون الديمقراطية ولا التسامح الديني، وكانوا يعاقبون أصحاب الأديان الأخرى. وبدأت رود آيلاند (Rhode Island) بعد أن نفى القادة البيوريتانيون أحد المعارضين، ورحّبت بكل من هربوا من الاضطهاد الديني. وفي 1692–1693، أدت <b>هستيريا السحر<\/b> (witchcraft hysteria) في قرية سالم (Salem Village) إلى شنق 19 شخصًا.","In 1669, the first 145 English colonists in South Carolina reached Charles Town. Many planters came from <b>Barbados<\/b>, a Caribbean island known for its brutal treatment of enslaved Africans on sugar plantations. These planters depended on the <b>transatlantic slave trade<\/b>, which carried enslaved Africans across the Atlantic. They brought that system to Carolina. Rice became South Carolina’s main crop, and enslavers forced Africans to grow it partly because West Africans already knew how. In 1712, the colony was divided into <b>North and South Carolina<\/b>.":"في عام 1669، وصل أول 145 مستعمرًا إنجليزيًا في كارولاينا الجنوبية (South Carolina) إلى تشارلز تاون (Charles Town). وجاء كثير من المزارعين من <b>باربادوس<\/b> (Barbados)، وهي جزيرة في الكاريبي (Caribbean) اشتهرت بمعاملتها القاسية للأفارقة المستعبَدين في مزارع السكر. وكان هؤلاء المزارعون يعتمدون على <b>تجارة الرقيق عبر الأطلسي<\/b> (transatlantic slave trade)، التي نقلت الأفارقة المستعبَدين عبر المحيط الأطلسي. وقد جلبوا هذا النظام إلى كارولاينا (Carolina). وأصبح الأرز المحصول الرئيسي في كارولاينا الجنوبية، وأجبر المستعبِدون الأفارقة على زراعته جزئيًا لأن أهل غرب إفريقيا كانوا يعرفون زراعته. وفي عام 1712، قُسّمت المستعمرة إلى <b>كارولاينا الشمالية وكارولاينا الجنوبية<\/b> (North and South Carolina).","The middle colonies were New York, New Jersey, Pennsylvania, and Delaware. The Dutch began <b>New Netherland<\/b> as a fur-trading business and welcomed people of many faiths. England took it in 1664 and renamed New Amsterdam as New York. William Penn made Pennsylvania a Quaker colony open to people of all faiths, and he bought land from Indigenous Americans. The middle colonies sold grain and flour to other colonies.":"كانت المستعمرات الوسطى هي نيويورك (New York) ونيوجيرسي (New Jersey) وبنسلفانيا (Pennsylvania) وديلاوير (Delaware). وبدأ الهولنديون <b>نيو نذرلاند<\/b> (New Netherland) كمشروع لتجارة الفراء ورحّبوا بأصحاب الأديان الكثيرة. وأخذتها إنجلترا عام 1664 وغيّرت اسم نيو أمستردام (New Amsterdam) إلى نيويورك. وجعل ويليام بن (William Penn) بنسلفانيا مستعمرة للكويكرز (Quakers) مفتوحة لأتباع جميع الأديان، واشترى الأرض من الأمريكيين الأصليين. وباعت المستعمرات الوسطى الحبوب والدقيق إلى المستعمرات الأخرى.","Colonists and Indigenous peoples answered each other’s presence with trade, resistance, and war. English settlers wanted Indigenous land. Puritans also pushed Indigenous people to give up their religion and move to “praying towns.” In 1676, <b>Bacon’s Rebellion<\/b> broke out in Virginia. Landless former servants, small farmers, and some enslaved Africans rose up against the governor and the richest planters. Bacon’s followers also attacked Indigenous people. Bacon died of illness, and the rebellion fell apart.":"استجاب المستعمرون والشعوب الأصلية لوجود بعضهم بعضًا بالتجارة والمقاومة والحرب. وأراد المستوطنون الإنجليز أرض السكان الأصليين. كما ضغط البيوريتانيون (Puritans) على السكان الأصليين ليتخلوا عن دينهم وينتقلوا إلى «بلدات الصلاة». وفي عام 1676، اندلع <b>تمرد بيكون<\/b> (Bacon’s Rebellion) في فرجينيا (Virginia). وثار الخدم المحررون الذين لا يملكون أرضًا، وصغار المزارعين، وبعض الأفارقة المستعبَدين على الحاكم وأغنى المزارعين. وهاجم أتباع بيكون السكان الأصليين أيضًا. ومات بيكون بسبب مرض، وانهار التمرد.","<b>King Philip’s War<\/b> (1675–1678) was fought in New England. Wampanoag leader Metacom and his allies fought the colonists over land. About 600 colonists and perhaps 4,000 Indigenous people died, and New England’s Indigenous population was cut in half. In New York, the <b>Iroquois League<\/b> was an alliance so strong that Dutch and English traders had to work with it.":"دارت <b>حرب الملك فيليب<\/b> (King Philip’s War) (1675–1678) في نيو إنجلاند (New England). وحارب زعيم الوامبانواغ (Wampanoag)، ميتاكوم (Metacom)، وحلفاؤه المستعمرين من أجل الأرض. ومات نحو 600 مستعمر وربما 4,000 من السكان الأصليين، وانخفض عدد السكان الأصليين في نيو إنجلاند إلى النصف. وفي نيويورك (New York)، كان <b>اتحاد الإيروكوا<\/b> (Iroquois League) تحالفًا قويًا إلى درجة أن التجار الهولنديين والإنجليز اضطروا إلى العمل معه.","By the early 1700s, the English colonies were the most populous, prosperous, and powerful in North America. They were run as profit-making businesses with little royal control, and they had more self-government. The Dutch and non-Puritan English colonies also welcomed people of many nations and religions.":"في أوائل القرن الثامن عشر، كانت المستعمرات الإنجليزية الأكثر سكانًا وثراءً وقوة في أمريكا الشمالية. وكانت تُدار كمشاريع تجارية تهدف إلى الربح مع قليل من سيطرة الملك، وكان لها حكم ذاتي أكبر. ورحّبت المستعمرات الهولندية والمستعمرات الإنجليزية غير البيوريتانية أيضًا بأشخاص من أمم وأديان كثيرة.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 2, “Indigenous Peoples and English Settlers” (Food and Land, p. 89; Bacon’s Rebellion; Indigenous Americans and Christianity; King Philip’s War; The Iroquois League) and “Thriving Colonies” (p. 97).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 2، “Indigenous Peoples and English Settlers” (Food and Land، ص. 89؛ Bacon’s Rebellion؛ Indigenous Americans and Christianity؛ King Philip’s War؛ The Iroquois League) and “Thriving Colonies” (p. 97).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 2, “Settling the American Colonies” (New England; Plymouth; Massachusetts Bay; Rhode Island; Witches in Salem).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 2، “Settling the American Colonies” (New England؛ Plymouth؛ Massachusetts Bay؛ Rhode Island؛ Witches in Salem).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 2, “Settling the American Colonies” (The Carolinas; The Barbados Connection; Charles Town; Profitable Colonies; The Middle Colonies and Georgia; The Dutch Republic and Trade; New Jersey; Pennsylvania; Delaware).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 2، “Settling the American Colonies” (The Carolinas؛ The Barbados Connection؛ Charles Town؛ Profitable Colonies؛ The Middle Colonies and Georgia؛ The Dutch Republic and Trade؛ New Jersey؛ Pennsylvania؛ Delaware).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 2, “Settling the American Colonies” (The Chesapeake Region, p. 61; Jamestown; The Powhatan Confederacy; Tobacco; Governance; Slavery in British North America; Maryland).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 2، “Settling the American Colonies” (The Chesapeake Region، ص. 61؛ Jamestown؛ The Powhatan Confederacy؛ Tobacco؛ Governance؛ Slavery in British North America؛ Maryland).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 2, “The English Background” (People and Profits, p. 56; Political Traditions; Religious Conflict and War).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 2، “The English Background” (People and Profits، ص. 56؛ Political Traditions؛ Religious Conflict and War).","Joint-stock company":"شركة مساهمة (joint-stock company)","Parliament":"البرلمان (Parliament)","The Puritans":"البيوريتانيون (Puritans)","Raw materials":"المواد الخام","Investors buy shares so they share the cost, risk, and profits":"يشتري المستثمرون أسهمًا ليتقاسموا التكلفة والمخاطر والأرباح","The English lawmaking body that could tax the people":"الهيئة التشريعية الإنجليزية التي كان بإمكانها فرض الضرائب على الشعب","Reformers who wanted to “purify” the Church of England":"مصلحون أرادوا «تطهير» كنيسة إنجلترا (Church of England)","Goods such as timber, tobacco, and furs that England wanted":"بضائع مثل الخشب والتبغ والفراء أرادتها إنجلترا","Match each idea to the best description. Use the Clue Card.":"اربط كل فكرة بأفضل وصف لها. استخدم بطاقة القرائن.","Look for the bold words in the Clue Card: joint-stock companies, Parliament, and Puritans. Then find what England wanted from its colonies.":"ابحث عن الكلمات المكتوبة بخط عريض في بطاقة القرائن: الشركات المساهمة والبرلمان والبيوريتانيون. ثم ابحث عمّا أرادته إنجلترا من مستعمراتها.","Joint-stock companies shared risk and profits. Parliament could tax the people. The Puritans wanted to purify the church. England wanted raw materials.":"الشركات المساهمة تقاسمت المخاطر والأرباح. وكان البرلمان يستطيع فرض الضرائب على الشعب. وأراد البيوريتانيون تطهير الكنيسة. وأرادت إنجلترا المواد الخام.","Colonists reach Chesapeake Bay and found Jamestown":"يصل المستعمرون إلى خليج تشيسابيك ويؤسسون جيمستاون","Settlers begin growing tobacco to sell in England":"يبدأ المستوطنون زراعة التبغ ليبيعوه في إنجلترا","The House of Burgesses is created":"يُنشأ مجلس النواب (House of Burgesses)","Maryland is founded":"تُؤسَّس ماريلاند","Look for the years in the Clue Card: 1607, 1612, 1619, and 1634.":"ابحث عن السنوات في بطاقة القرائن: 1607 و1612 و1619 و1634.","The order is Jamestown (1607), tobacco (1612), the House of Burgesses (1619), then Maryland (1634).":"الترتيب هو جيمستاون (1607)، ثم التبغ (1612)، ثم مجلس النواب (House of Burgesses) (1619)، ثم ماريلاند (1634).","The 1620 promise to rule by “just and civil laws” is called the ________ Compact.":"يُسمّى وعد عام 1620 بالحكم بـ«قوانين عادلة ومدنية» ميثاق ________.","Look for the bold words in the first paragraph of the Clue Card. The word before “Compact” is also the name of the ship.":"ابحث عن الكلمات المكتوبة بخط عريض في الفقرة الأولى من بطاقة القرائن. الكلمة التي قبل «Compact» هي أيضًا اسم السفينة.","The word starts with M and has 9 letters. It ends with “flower.”":"تبدأ الكلمة بحرف M وفيها 9 أحرف. وتنتهي بـ “flower”.","The Clue Card names a Caribbean island whose planters brought their sugar and slavery system to Carolina. A secret message gives its name. Each letter in the message was moved 3 steps forward in the alphabet. Decode it.":"تذكر بطاقة القرائن جزيرة في الكاريبي جلب مزارعوها نظام السكر والعبودية إلى كارولاينا. وتعطي رسالة سرية اسمها. كل حرف في الرسالة نُقل 3 خطوات إلى الأمام في الأبجدية. فكّ تشفيرها.","The secret message is the name of the island in bold in the Clue Card. Use the decoder key to spell it, one letter at a time.":"الرسالة السرية هي اسم الجزيرة المكتوب بخط عريض في بطاقة القرائن. استخدم مفتاح فك التشفير لتهجئته حرفًا حرفًا.","In the message, the letter E is really B, and the letter U is really R. The word has 8 letters and starts with B.":"في الرسالة، الحرف E هو في الحقيقة B، والحرف U هو في الحقيقة R. الكلمة من 8 أحرف وتبدأ بحرف B.","What helped cause Bacon’s Rebellion in 1676?":"ما الذي ساعد على اندلاع تمرد بيكون (Bacon’s Rebellion) عام 1676؟","Colonists wanted to join Spain":"أراد المستعمرون الانضمام إلى إسبانيا","Many landless former servants were angry at the richest planters and the governor":"كان كثير من الخدم المحررين الذين لا يملكون أرضًا غاضبين من أغنى المزارعين ومن الحاكم","Parliament closed the colonial assemblies":"أغلق البرلمان المجالس الاستعمارية","The Iroquois League attacked Jamestown":"هاجم اتحاد الإيروكوا (Iroquois League) جيمستاون","What was the result of King Philip’s War (1675–1678)?":"ما نتيجة حرب الملك فيليب (King Philip’s War) (1675–1678)؟","The fighting killed many people, and New England’s Indigenous population was cut in half":"قتل القتال كثيرين، وانخفض عدد السكان الأصليين في نيو إنجلاند إلى النصف","Colonists and Indigenous nations signed a lasting peace":"وقّع المستعمرون والأمم الأصلية سلامًا دائمًا","England gave up its New England colonies":"تخلّت إنجلترا عن مستعمراتها في نيو إنجلاند","Metacom became the governor of Plymouth":"أصبح ميتاكوم (Metacom) حاكم بليموث (Plymouth)","What was the Iroquois League?":"ما هو اتحاد الإيروكوا (Iroquois League)؟","A Puritan church council":"مجلس كنسي للبيوريتانيين","A French army in New York":"جيش فرنسي في نيويورك","A strong alliance of Indigenous nations that Dutch and English traders had to work with":"تحالف قوي من الأمم الأصلية اضطر التجار الهولنديون والإنجليز إلى العمل معه","A joint-stock company":"شركة مساهمة","Why did the English colonies become so powerful by the early 1700s?":"لماذا أصبحت المستعمرات الإنجليزية قوية جدًا في أوائل القرن الثامن عشر؟","The king ran every part of colonial life":"كان الملك يدير كل جانب من جوانب الحياة الاستعمارية","Spain and France paid for them":"دفعت إسبانيا وفرنسا تكاليفها","They had very few settlers":"كان عدد مستوطنيها قليلًا جدًا","They were profit-making businesses with little royal control and more self-government":"كانت مشاريع تجارية تهدف إلى الربح مع قليل من سيطرة الملك وحكم ذاتي أكبر","Each answer is in the Clue Card. Look for what angered people in Bacon’s Rebellion, the result of King Philip’s War, what the Iroquois League was, and why the English colonies were strong.":"كل إجابة موجودة في بطاقة القرائن. ابحث عمّا أغضب الناس في تمرد بيكون، ونتيجة حرب الملك فيليب، وما كان اتحاد الإيروكوا، ولماذا كانت المستعمرات الإنجليزية قوية.","Bacon’s Rebellion: landless former servants were angry. King Philip’s War: many died and New England’s Indigenous population was cut in half. The Iroquois League: a strong alliance. The colonies had little royal control and more self-government.":"تمرد بيكون: كان الخدم المحررون الذين لا يملكون أرضًا غاضبين. حرب الملك فيليب: مات كثيرون وانخفض عدد السكان الأصليين في نيو إنجلاند إلى النصف. اتحاد الإيروكوا: تحالف قوي. وكان للمستعمرات قليل من سيطرة الملك وحكم ذاتي أكبر.","Not quite. At least one answer is off. Re-read the Clue Card for Bacon’s Rebellion, King Philip’s War, the Iroquois League, and why the colonies grew strong.":"ليس تمامًا. إجابة واحدة على الأقل غير صحيحة. أعد قراءة بطاقة القرائن عن تمرد بيكون، وحرب الملك فيليب، واتحاد الإيروكوا، ولماذا أصبحت المستعمرات قوية.","Clear all your work and start over? This cannot be undone.":"هل تريد مسح كل عملك والبدء من جديد؟ لا يمكن التراجع عن هذا.","The file could not be read.":"تعذّرت قراءة الملف."},"patterns":[{"re":"^Still needed: first name, last name, and period\\.$","es":"Todavía falta: nombre, apellido y período.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة."},{"re":"^LOCK (\\d)$","es":"Cand. $1","ar":"القفل $1"},{"re":"^LOCK (\\d) · CORE OBJECTIVE (\\d)$","es":"CANDADO $1 · OBJETIVO PRINCIPAL $2","ar":"القفل $1 · الهدف الأساسي $2"},{"re":"^Hint (\\d):$","es":"Pista $1:","ar":"تلميح $1:"},{"re":"^Exit code digit (\\d)$","es":"Dígito $1 del código de salida","ar":"رقم رمز الخروج $1"},{"re":"^Click! Lock (\\d) is open\\. Your digit is (\\d)\\.$","es":"¡Clic! El Candado $1 está abierto. Tu dígito es $2.","ar":"نقرة! القفل $1 مفتوح. رقمك هو $2."},{"re":"^5 of 5 locks opened with (\\d+) tries and (\\d+) hints\\.$","es":"Abriste 5 de 5 candados con $1 intentos y $2 pistas.","ar":"فتحت 5 أقفال من 5 بعد $1 من المحاولات و$2 من التلميحات."},{"re":"^Done! File downloaded: (.*)\\. Upload it to Canvas\\.$","es":"¡Listo! Se descargó el archivo: $1. Súbelo a Canvas.","ar":"تم! تم تنزيل الملف: $1. ارفعه إلى Canvas."},{"re":"^Your file downloaded and is marked INCOMPLETE \\(you have not escaped\\)\\. Upload it to Canvas: (.*)$","es":"Tu archivo se descargó y está marcado INCOMPLETO (todavía no escapas). Súbelo a Canvas: $1","ar":"تم تنزيل ملفك وهو مُسجَّل «غير مكتمل» INCOMPLETE (لم تهرب بعد). ارفعه إلى Canvas: $1"},{"re":"^Unlocked\\. Your digit is (\\d)\\. Your answer: (.*)$","es":"Desbloqueado. Tu dígito es $1. Tu respuesta: $2","ar":"تم الفتح. رقمك هو $1. إجابتك: $2"},{"re":"^LOCK (\\d) · CORE OBJECTIVE (\\d+)$","es":"CANDADO $1 · OBJETIVO PRINCIPAL $2","ar":"القفل $1 · الهدف الأساسي $2"},{"re":"^LOCK (\\d) · CORE OBJECTIVES (\\d+) AND (\\d+)$","es":"CANDADO $1 · OBJETIVOS PRINCIPALES $2 Y $3","ar":"القفل $1 · الأهداف الأساسية $2 و$3"},{"re":"^Tap all (\\d) events first, in order\\.$","es":"Primero toca los $1 sucesos, en orden.","ar":"المس الأحداث الـ $1 كلها أولًا، بالترتيب."},{"re":"^5 of 5 locks opened with (\\d+) tries and 1 hint\\.$","es":"Abriste 5 de 5 candados con $1 intentos y 1 pista.","ar":"فتحت 5 أقفال من 5 بعد $1 من المحاولات وتلميح واحد."}]}</script>
+<script>
+/* Supplement language switch (English / Espanol / Arabic). Works on pages whose text is rendered by JS:
+   a MutationObserver translates text as it appears. Data: <script type="application/json" id="sp-i18n">
+   {"langs":["en","es","ar"],"default":"en","es":{englishHTML:translation},"ar":{...},"patterns":[{"re":"^(\\d+) of (\\d+)$","es":"$1 de $2","ar":"..."}]}
+   Keys are the English text exactly as it sits in the page (innerHTML, spaces collapsed).
+   Helpers: spSeen() english strings seen so far; spMissing() strings with no translation in the current language;
+   spSetLang(l); spTr(s) translate a string (used for confirm/alert); spAscii(s) plain-ASCII name for file names. */
+(function () {
+  var node = document.getElementById('sp-i18n');
+  var D = node ? JSON.parse(node.textContent) : { langs: ['en'], patterns: [] };
+  var INLINE = { B:1,I:1,EM:1,STRONG:1,SPAN:1,A:1,BR:1,SMALL:1,SUP:1,SUB:1,U:1,MARK:1,BDI:1,TSPAN:1,CODE:1 };
+  var SKIP = 'script,style,textarea,input,.sp-lang,.sp-nt,[translate="no"]';
+  var WORD = /[A-Za-z\u00C0-\u024F\u0600-\u06FF]{2}|e\.g\./;
+  var LANG = 'en', REC = new WeakMap(), SEEN = {}, MISS = {};
+  (D.patterns || []).forEach(function (p) { try { p._re = new RegExp(p.re); } catch (e) {} });
+  function norm(s) { return String(s).replace(/\s+/g, ' ').trim(); }
+  function tr(src) {
+    if (LANG === 'en') return null;
+    var t = D[LANG] && D[LANG][src];
+    if (t) return t;
+    var P = D.patterns || [];
+    for (var i = 0; i < P.length; i++) {
+      var m = P[i]._re && P[i]._re.exec(src);
+      if (m && P[i][LANG]) return P[i][LANG].replace(/\$(\d+)/g, function (_, n) { return m[+n] || ''; });
+    }
+    return null;
+  }
+  window.spTr = function (s) { var t = tr(norm(s)); return t ? t.replace(/<[^>]+>/g, '') : s; };
+  function isInline(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling)
+      if (c.nodeType === 1 && (!INLINE[c.tagName.toUpperCase()] || c.matches(SKIP))) return false;
+    return true;
+  }
+  function directText(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling) if (c.nodeType === 3 && WORD.test(c.nodeValue)) return true;
+    return false;
+  }
+  function cur(s) { return s.nodeType === 1 ? s.innerHTML : s.nodeValue; }
+  function put(s, v) { if (s.nodeType === 1) s.innerHTML = v; else s.nodeValue = v; }
+  function handle(s) {
+    var r = REC.get(s), c = cur(s);
+    if (!(r && c === r.wrote)) { r = { en: c, wrote: c }; REC.set(s, r); }
+    var src = norm(r.en), target = r.en;
+    if (WORD.test(src)) {
+      SEEN[src] = 1;
+      if (LANG !== 'en') {
+        var t = tr(src);
+        if (t) {
+          target = s.nodeType === 1 ? t : (r.en.match(/^\s*/)[0] + t + r.en.match(/\s*$/)[0]);
+          delete MISS[src];
+        } else MISS[src] = 1;
+      }
+    }
+    if (c !== target) put(s, target);
+    r.wrote = cur(s);
+  }
+  var ATTRS = ['placeholder', 'alt', 'aria-label', 'title'];
+  function attrs(root) {
+    var els = root.querySelectorAll ? root.querySelectorAll('[placeholder],[alt],[aria-label],[title]') : [];
+    var list = [].slice.call(els); if (root.matches && root.matches('[placeholder],[alt],[aria-label],[title]')) list.push(root);
+    list.forEach(function (el) {
+      if (el.closest && el.closest('.sp-lang,.sp-nt,[translate="no"],script,style')) return;
+      var rec = el.__spa || (el.__spa = {});
+      ATTRS.forEach(function (a) {
+        var v = el.getAttribute(a); if (v == null) return;
+        var r = rec[a];
+        if (!(r && v === r.wrote)) { r = rec[a] = { en: v, wrote: v }; }
+        var src = norm(r.en); if (!WORD.test(src)) return;
+        SEEN[src] = 1;
+        var t = LANG === 'en' ? null : tr(src);
+        if (LANG !== 'en' && !t) MISS[src] = 1;
+        var target = t ? t.replace(/<[^>]+>/g, '') : r.en;
+        if (v !== target) el.setAttribute(a, target);
+        r.wrote = el.getAttribute(a);
+      });
+    });
+  }
+  function walk(root) {
+    if (root.nodeType === 3) { if (WORD.test(root.nodeValue) && !(root.parentNode && root.parentNode.closest && root.parentNode.closest(SKIP))) handle(root); return; }
+    if (root.nodeType !== 1) return;
+    (function w(el) {
+      if (el.matches(SKIP)) return;
+      if (el !== document.body && directText(el) && isInline(el)) { handle(el); return; }
+      for (var c = el.firstChild; c; c = c.nextSibling) {
+        if (c.nodeType === 1) w(c); else if (c.nodeType === 3 && WORD.test(c.nodeValue)) handle(c);
+      }
+    })(root);
+    attrs(root);
+  }
+  var TITLE = { en: document.title, wrote: document.title };
+  function title() {
+    if (document.title !== TITLE.wrote) TITLE = { en: document.title, wrote: document.title };
+    var t = LANG === 'en' ? null : tr(norm(TITLE.en));
+    document.title = t ? t.replace(/<[^>]+>/g, '') : TITLE.en; TITLE.wrote = document.title;
+  }
+  function inl(e) { return e.nodeType === 1 && !!INLINE[e.tagName.toUpperCase()]; }
+  var mo = new MutationObserver(function (muts) {
+    var todo = [];
+    muts.forEach(function (m) {
+      if (m.type === 'childList') { for (var i = 0; i < m.addedNodes.length; i++) todo.push(m.addedNodes[i]); todo.push(m.target); }
+      else todo.push(m.target);
+    });
+    todo.forEach(function (n) {
+      var el = n.nodeType === 1 ? n : n.parentNode;
+      if (!el || el.nodeType !== 1 || !document.body.contains(el)) return;
+      while (el !== document.body && el.parentNode && el.parentNode.nodeType === 1 && inl(el) && inl(el.parentNode)) el = el.parentNode;
+      if (el.parentNode && el.parentNode.nodeType === 1 && inl(el.parentNode) && el.parentNode !== document.body) el = el.parentNode;
+      walk(el);
+    });
+    mo.takeRecords();
+  });
+  var AR = { 'ا':'a','أ':'a','إ':'i','آ':'a','ب':'b','ت':'t','ث':'th','ج':'j','ح':'h','خ':'kh','د':'d','ذ':'dh','ر':'r','ز':'z','س':'s','ش':'sh','ص':'s','ض':'d','ط':'t','ظ':'z','ع':'a','غ':'gh','ف':'f','ق':'q','ك':'k','ل':'l','م':'m','ن':'n','ه':'h','و':'w','ي':'y','ى':'a','ة':'a','ئ':'y','ؤ':'w' };
+  window.spAscii = function (s) {
+    s = String(s); if (s.normalize) s = s.normalize('NFD').replace(/[̀-ًͯ-ٰٟ]/g, '');
+    return s.replace(/[ء-ي]/g, function (c) { return AR[c] !== undefined ? AR[c] : ''; }).replace(/ñ/g, 'n').replace(/Ñ/g, 'N');
+  };
+  window.spSeen = function () { return Object.keys(SEEN); };
+  window.spMissing = function () { return Object.keys(MISS); };
+  window.spLang = function () { return LANG; };
+  window.spSetLang = function (l) {
+    if ((D.langs || ['en']).indexOf(l) < 0) l = 'en';
+    LANG = l; MISS = {};
+    var h = document.documentElement; h.lang = l; h.dir = l === 'ar' ? 'rtl' : 'ltr';
+    mo.disconnect(); walk(document.body); title(); mo.takeRecords();
+    mo.observe(document.body, { childList: true, subtree: true, characterData: true });
+    document.querySelectorAll('.sp-lang button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === l)); });
+    try { localStorage.setItem('sp_lang', l); } catch (e) {}
+    try { var u = new URL(location.href); if (l === 'en') u.searchParams.delete('lang'); else u.searchParams.set('lang', l); history.replaceState(null, '', u.toString()); } catch (e) {}
+    try { document.dispatchEvent(new CustomEvent('splangchange', { detail: l })); } catch (e) {}
+  };
+  var _c = window.confirm, _a = window.alert;
+  window.confirm = function (m) { return _c.call(window, window.spTr(m)); };
+  window.alert = function (m) { return _a.call(window, window.spTr(m)); };
+  document.querySelectorAll('.sp-lang button').forEach(function (b) { b.addEventListener('click', function () { window.spSetLang(b.getAttribute('data-lang')); }); });
+  var start = D['default'] || 'en';
+  try { start = new URL(location.href).searchParams.get('lang') || localStorage.getItem('sp_lang') || start; } catch (e) {}
+  window.spSetLang(start);
+})();
+
+</script><!--/sp-i18n-->
+</body>
+</html>

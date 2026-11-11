@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Escape Room 2 · Colonial Society and the Road to Independence</title>
+<style>
+:root{--bg:#194C4D;--txt:#EBF4F4;--a1:#276E6F;--a2:#D2B64B;--hl:#E1D08E;--glass:rgba(235,244,244,.07);--glassb:rgba(235,244,244,.2);--dim:#D3E4E4;--ok:#8FD3A8}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#297D7D 0%,#194C4D 60%) fixed;background-color:var(--bg);color:var(--txt);font:17px/1.55 "Segoe UI",system-ui,-apple-system,Verdana,sans-serif;min-height:100vh}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px 40px}
+.glass{background:var(--glass);border:1px solid var(--glassb);border-radius:16px;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+header.hero{padding:30px 0 12px;border-bottom:3px solid var(--a2)}
+.eyebrow{font-size:13px;letter-spacing:.16em;font-weight:700;color:var(--hl)}
+h1{margin:.15em 0 .05em;font-size:clamp(28px,6vw,40px);line-height:1.12}
+.sub{margin:0;font-weight:600;color:var(--dim)}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 4px}
+.meta label{flex:1 1 170px;font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--dim)}
+input[type=text],textarea,select{display:block;width:100%;margin-top:4px;padding:10px 12px;border:1px solid var(--glassb);border-radius:10px;background:rgba(16,49,51,.55);color:var(--txt);font:inherit;font-size:16px}
+input[type=text]:focus,textarea:focus,select:focus,button:focus-visible{outline:3px solid var(--hl);outline-offset:1px}
+input.bad{border-color:var(--a2);box-shadow:0 0 0 2px var(--a2)}
+textarea{min-height:120px;resize:vertical}
+.howto{margin:14px 0;padding:14px 16px;font-size:16px}
+.howto ol{margin:6px 0 0;padding-left:22px}
+.scene{margin:14px 0;padding:8px;text-align:center}
+.scene svg{width:100%;height:auto;display:block;border-radius:12px}
+.bar{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;padding:8px 12px;margin:10px 0;font-weight:700;font-size:15px;background:rgba(25,76,77,.92);border:1px solid var(--glassb);border-radius:12px}
+.bar span b{color:var(--hl)}
+.btn{font:inherit;font-size:16px;font-weight:700;padding:11px 18px;border-radius:12px;border:2px solid var(--hl);background:transparent;color:var(--txt);cursor:pointer;min-height:44px}
+.btn:hover{background:rgba(225,208,142,.18)}
+.btn.primary{background:var(--hl);color:#194C4D;border-color:var(--hl)}
+.btn.primary:hover{background:#EFE5BB}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.btn.small{padding:8px 14px;font-size:15px;min-height:40px}
+.intro{padding:20px;text-align:center}
+.intro p{margin:.4em 0}
+.lock{margin:12px 0;overflow:hidden}
+.lock>button.lh{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:12px;width:100%;padding:14px 16px;cursor:pointer}
+.lock>button.lh:focus-visible{outline:3px solid var(--hl);outline-offset:-3px}
+.lock.locked>button.lh{cursor:not-allowed;opacity:.55}
+.lk{flex:none;width:44px;height:44px}
+.lk .sh{transition:transform .5s cubic-bezier(.3,1.6,.5,1);transform-origin:center}
+.lock.solved .lk .sh{transform:translateY(-6px) rotate(-30deg);transform-origin:10px 14px}
+.lock.solved .lk .bd{fill:var(--hl)}
+.lt{flex:1}
+.lt small{display:block;font-size:12px;letter-spacing:.12em;font-weight:700;color:var(--hl)}
+.lt strong{font-size:19px}
+.dg{flex:none;min-width:42px;height:42px;border-radius:10px;border:2px solid var(--hl);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;background:rgba(16,49,51,.55)}
+.lb{padding:0 16px 16px;display:none}
+.lock.open .lb{display:block}
+.objline{font-size:14px;color:var(--dim);margin:0 0 10px}
+.card{background:rgba(235,244,244,.1);border-left:6px solid var(--a2);border-radius:10px;padding:12px 14px;margin:8px 0 12px}
+.card h4{margin:0 0 4px;font-size:13px;letter-spacing:.12em;color:var(--hl)}
+.card p{margin:.3em 0}
+.card .src{font-size:13px;color:var(--dim)}
+.prompt{font-weight:700;margin:10px 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0}
+.chip{font:inherit;font-size:16px;padding:10px 14px;border-radius:12px;border:2px solid var(--glassb);background:rgba(16,49,51,.55);color:var(--txt);cursor:pointer;min-height:44px;text-align:left}
+.chip.sel{border-color:var(--hl);background:rgba(225,208,142,.2)}
+.chip .n{display:inline-block;min-width:24px;height:24px;line-height:24px;border-radius:12px;background:var(--hl);color:#194C4D;font-weight:800;text-align:center;margin-right:8px}
+.mrow{margin:8px 0}
+.mrow label{font-weight:700;display:block}
+fieldset{border:1px solid var(--glassb);border-radius:10px;margin:8px 0;padding:8px 12px}
+legend{font-weight:700;padding:0 6px}
+.opt{display:flex;align-items:center;gap:10px;padding:6px 0;min-height:40px;cursor:pointer}
+.opt input{width:22px;height:22px;accent-color:#E1D08E;flex:none}
+.cipher{font:700 24px/1.3 "Courier New",monospace;letter-spacing:.14em;background:rgba(16,49,51,.65);padding:12px;border-radius:10px;border:1px dashed var(--hl);word-break:break-word;text-align:center}
+.key{display:grid;grid-template-columns:repeat(13,1fr);gap:2px;margin:10px 0;font:700 14px/1.2 "Courier New",monospace;text-align:center}
+.key div{padding:3px 0;border-radius:4px;background:rgba(235,244,244,.08)}
+.key .c{color:var(--hl)}
+.scr{font:800 30px/1.2 "Courier New",monospace;letter-spacing:.3em;text-align:center;background:rgba(16,49,51,.65);padding:10px;border-radius:10px;border:1px dashed var(--hl)}
+.row{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0;align-items:center}
+.fb{margin:8px 0;padding:10px 12px;border-radius:10px;display:none;font-weight:600}
+.fb.show{display:block}
+.fb.nudge{background:rgba(210,182,75,.18);border:1px solid var(--a2)}
+.fb.good{background:rgba(143,211,168,.16);border:1px solid var(--ok);color:#DDF5E6}
+.hints{margin:6px 0}
+.hint{background:rgba(225,208,142,.14);border:1px dashed var(--hl);border-radius:10px;padding:8px 12px;margin:6px 0;font-size:16px}
+.hint b{color:var(--hl)}
+.exit{margin:16px 0;padding:18px;text-align:center}
+.exit.locked{opacity:.55}
+.exit h2,.esc h2,.debrief h2{margin:.1em 0 .3em}
+.codebox{display:flex;justify-content:center;gap:8px;margin:12px 0}
+.codebox input{width:52px;height:60px;text-align:center;font:800 30px "Courier New",monospace;padding:0;margin:0}
+.esc{margin:16px 0;padding:22px;text-align:center;display:none;border:2px solid var(--hl)}
+.esc.show{display:block}
+.esc .big{overflow-wrap:anywhere;font-size:clamp(30px,9vw,64px);font-weight:900;letter-spacing:.14em;color:var(--hl);text-shadow:0 0 24px rgba(225,208,142,.6);animation:pop .8s cubic-bezier(.3,1.6,.5,1)}
+.esc .time{font-size:26px;font-weight:800}
+.debrief{margin:16px 0;padding:16px}
+.actions{margin:16px 0;padding:16px}
+.status{font-weight:700;margin-bottom:10px}
+.msg{display:none;margin-top:10px;padding:10px 12px;border-radius:10px;background:rgba(143,211,168,.16);border:1px solid var(--ok)}
+.msg.err{background:rgba(210,182,75,.2);border-color:var(--a2)}
+.link{all:unset;cursor:pointer;color:var(--dim);text-decoration:underline;font-size:14px;margin-top:10px;display:inline-block}
+.link:focus-visible{outline:3px solid var(--hl)}
+footer{text-wrap:balance;text-align:center;font-size:12px;letter-spacing:.1em;font-weight:700;color:var(--dim);padding:20px 8px 30px;border-top:1px solid var(--glassb);margin-top:20px}
+.ennote{margin:.4em 0 0;font-size:14px;font-weight:700;color:var(--dim)}
+.exit .ennote{text-align:center}
+.hidden{display:none!important}.lock,.exit,.esc{scroll-margin-top:64px}
+.pop{animation:pop .7s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pop{0%{transform:scale(.2);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes tap{0%,100%{transform:rotate(0)}50%{transform:rotate(9deg)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.shake{animation:shake .35s}
+.wheel{transform-box:view-box;transform-origin:276px 86px}
+.wheel.spin{animation:tap .5s ease-in-out 3}
+.plock .sh{transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
+.plock.open .sh{transform:translateY(-7px)}
+.plock.open .bd{fill:#E1D08E}
+#door{transform-origin:150px 20px;transition:transform 1.4s ease-in-out}
+.escaped #door{transform:scaleX(.1)}
+#glow{opacity:.15;transition:opacity 1.4s}
+.escaped #glow{opacity:1}
+html[dir="rtl"] .chip{text-align:right}
+html[dir="rtl"] .chip .n{margin-right:0;margin-left:8px}
+html[dir="rtl"] .card{border-left:0;border-right:6px solid var(--a2)}
+html[dir="rtl"] .howto ol{padding-left:0;padding-right:22px}
+html[dir="rtl"] .esc,html[dir="rtl"] .exit,html[dir="rtl"] .intro{text-align:center}
+html[dir="rtl"] .cipher,html[dir="rtl"] .scr,html[dir="rtl"] .key{direction:ltr}
+html[dir="rtl"] .scr{letter-spacing:.3em!important}
+html[dir="rtl"] .cipher{letter-spacing:.14em!important}
+html[dir="rtl"] .key{letter-spacing:0!important}
+html[dir="rtl"] .card .src{direction:ltr;text-align:left}
+html[dir="rtl"] .hint,html[dir="rtl"] .fb,html[dir="rtl"] .msg,html[dir="rtl"] .objline{text-align:start}
+html[dir="rtl"] .lock>button.lh{text-align:start}
+html[dir="rtl"] .lb,html[dir="rtl"] .actions{text-align:start}
+html[dir="rtl"] .bar{direction:rtl}
+html[dir="rtl"] .tt{unicode-bidi:plaintext}
+@media(max-width:520px){body{font-size:16px}.chip{width:100%}.key{font-size:12px;gap:1px}.codebox input{width:46px;height:54px}.dg{min-width:38px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{.bar,.actions button{display:none}}
+/*sp-i18n-css*/
+.sp-lang-bar{display:flex;justify-content:flex-end;padding:8px 12px 0;position:relative;z-index:5}
+.sp-lang{display:inline-flex;gap:2px;padding:3px;border-radius:10px;background:rgba(255,255,255,.88);border:1px solid rgba(0,0,0,.18);font-family:system-ui,"Segoe UI",Tahoma,Arial,sans-serif}
+.sp-lang button{border:0;background:transparent;color:#222;font:600 13px/1 system-ui,"Segoe UI",Tahoma,Arial,sans-serif;padding:7px 11px;border-radius:7px;cursor:pointer}
+.sp-lang button[aria-pressed="true"]{background:#222;color:#fff}
+.sp-lang button:focus-visible{outline:3px solid #2a6df4;outline-offset:1px}
+textarea,input,select{unicode-bidi:plaintext}
+html[lang="ar"] body,html[lang="ar"] button,html[lang="ar"] textarea,html[lang="ar"] input,html[lang="ar"] select{font-family:"Segoe UI",Tahoma,"Noto Sans Arabic","Arial",system-ui,sans-serif}
+html[lang="ar"] body{line-height:1.8}
+html[lang="ar"] *{letter-spacing:0!important}
+html[dir="rtl"] textarea,html[dir="rtl"] input{text-align:start}
+@media print{.sp-lang-bar{display:none}}
+/*/sp-i18n-css*/
+</style>
+</head>
+<body>
+<!--sp-bar--><div class="sp-lang-bar"><div class="sp-lang" role="group" aria-label="Language / Idioma / اللغة"><button type="button" data-lang="en" lang="en" aria-pressed="true">English</button><button type="button" data-lang="es" lang="es" aria-pressed="false">Español</button><button type="button" data-lang="ar" lang="ar" aria-pressed="false">العربية</button></div></div><!--/sp-bar-->
+<div class="wrap">
+<header class="hero">
+  <div class="eyebrow">1651-1776</div>
+  <h1>Escape the Ferryman’s Cottage</h1>
+  <p class="sub">Colonial Society and the Road to Independence</p>
+  <div class="meta">
+    <label>FIRST NAME *<input id="f_first" type="text" autocomplete="given-name"></label>
+    <label>LAST NAME *<input id="f_last" type="text" autocomplete="family-name"></label>
+    <label>PERIOD *<input id="f_period" type="text" inputmode="numeric" maxlength="12" placeholder="e.g. 3"></label>
+  </div>
+</header>
+
+<div class="howto glass"><b>How to escape:</b>
+<ol>
+<li>Open each lock in order. Read the <b>Clue Card</b>. The answer is in the card.</li>
+<li>Solve the puzzle to open the lock and reveal one digit.</li>
+<li>If you get stuck, press <b>Hint</b>. Hints are free, but your teacher can see how many you used.</li>
+<li>Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.</li>
+</ol></div>
+
+<div class="scene glass" id="scene">
+<svg viewBox="0 0 600 270" role="img" aria-label="A ferryman’s cottage at night. On the left, a window showing the moon, a river, and a flat ferry, and a lantern on a small table. On the right, two oars leaning on the wall, a ferry horn on a hook, and a hanging fishing net. The door has a FERRYMAN’S COTTAGE sign and five padlocks in a row. Under each padlock is a window for one digit of the exit code.">
+<defs>
+<pattern id="brick" width="40" height="270" patternUnits="userSpaceOnUse"><rect width="40" height="270" fill="#143C3B"/><path d="M0 0V270" stroke="#EBF4F4" stroke-opacity=".12" fill="none"/><path d="M20 0V270" stroke="#EBF4F4" stroke-opacity=".05" fill="none"/></pattern>
+<radialGradient id="glowg" cx="50%" cy="50%" r="60%"><stop offset="0" stop-color="#EBF4F4"/><stop offset="1" stop-color="#E1D08E"/></radialGradient>
+</defs>
+<rect width="600" height="270" fill="url(#brick)"/>
+<rect y="236" width="600" height="34" fill="#154142"/>
+<g stroke="#D3E4E4" stroke-opacity=".35" stroke-width="2"><path d="M0 248H600M0 260H600"/><path d="M60 236V248M180 236V248M300 236V248M420 236V248M540 236V248M120 248V260M240 248V260M360 248V260M480 248V260M600 248V260"/></g>
+<g>
+<rect x="16" y="24" width="108" height="84" rx="6" fill="#103133" stroke="#E1D08E" stroke-width="4"/>
+<rect x="22" y="30" width="96" height="72" fill="#0D2B2C"/>
+<circle cx="46" cy="50" r="9" fill="#E1D08E"/><circle cx="51" cy="47" r="8" fill="#0D2B2C"/>
+<g fill="#EBF4F4"><circle cx="78" cy="44" r="1.6"/><circle cx="100" cy="52" r="1.3"/><circle cx="88" cy="60" r="1.2"/><circle cx="32" cy="66" r="1.4"/></g>
+<rect x="22" y="76" width="96" height="26" fill="#276E6F" fill-opacity=".85"/>
+<path d="M26 84Q34 80 42 84T58 84T74 84M60 96Q68 92 76 96T92 96T108 96" stroke="#EBF4F4" stroke-opacity=".7" stroke-width="2" fill="none" stroke-linecap="round"/>
+<path d="M62 76H110L104 86H68Z" fill="#D2B64B" stroke="#E1D08E" stroke-width="1.5" stroke-linejoin="round"/><path d="M86 76V62" stroke="#E1D08E" stroke-width="2.5"/>
+<path d="M70 30V102M22 66H118" stroke="#E1D08E" stroke-width="3"/>
+<rect x="12" y="108" width="116" height="7" rx="3" fill="#E1D08E"/></g>
+<g><circle cx="70" cy="170" r="30" fill="#E1D08E" fill-opacity=".12"/>
+<rect x="20" y="198" width="100" height="8" rx="3" fill="#E1D08E"/><rect x="28" y="206" width="6" height="30" fill="#E1D08E"/><rect x="106" y="206" width="6" height="30" fill="#E1D08E"/>
+<rect x="54" y="188" width="32" height="10" rx="3" fill="#D2B64B" stroke="#E1D08E" stroke-width="2"/>
+<rect x="59" y="152" width="22" height="36" rx="3" fill="#E1D08E" fill-opacity=".9" stroke="#D2B64B" stroke-width="2.5"/>
+<path d="M70 152V188M59 170H81" stroke="#D2B64B" stroke-width="2"/>
+<path d="M54 152L70 138L86 152Z" fill="#D2B64B" stroke="#E1D08E" stroke-width="2" stroke-linejoin="round"/>
+<path d="M60 142Q70 122 80 142" stroke="#E1D08E" stroke-width="3" fill="none"/></g>
+<g><path d="M466 36V200" stroke="#E1D08E" stroke-width="6" stroke-linecap="round"/><rect x="459" y="196" width="16" height="40" rx="4" fill="#D2B64B" stroke="#E1D08E" stroke-width="2"/>
+<path d="M484 36V200" stroke="#E1D08E" stroke-width="6" stroke-linecap="round"/><rect x="477" y="196" width="16" height="40" rx="4" fill="#D2B64B" stroke="#E1D08E" stroke-width="2"/>
+<circle cx="466" cy="34" r="4" fill="#E1D08E"/><circle cx="484" cy="34" r="4" fill="#E1D08E"/></g>
+<g><path d="M532 26V40" stroke="#E1D08E" stroke-width="3"/><circle cx="532" cy="24" r="4" fill="none" stroke="#E1D08E" stroke-width="2.5"/>
+<path d="M538 44Q548 38 558 38" stroke="#E1D08E" stroke-width="2.5" fill="none"/>
+<path d="M506 74L566 44Q582 66 566 98L506 86Z" fill="#D2B64B" stroke="#E1D08E" stroke-width="2.5" stroke-linejoin="round"/>
+<ellipse cx="568" cy="71" rx="8" ry="27" fill="#103133" stroke="#E1D08E" stroke-width="2.5"/>
+<circle cx="503" cy="80" r="6" fill="#103133" stroke="#E1D08E" stroke-width="2.5"/>
+<path d="M516 72L560 52" stroke="#EBF4F4" stroke-opacity=".6" stroke-width="2" fill="none"/></g>
+<g><defs><pattern id="net" width="14" height="14" patternUnits="userSpaceOnUse"><path d="M0 0L14 14M14 0L0 14" stroke="#D2B64B" stroke-width="1.6" fill="none"/></pattern></defs>
+<path d="M498 120H586Q590 190 562 208Q532 216 508 202Q494 180 498 120Z" fill="url(#net)" stroke="#E1D08E" stroke-width="3" stroke-linejoin="round"/>
+<rect x="494" y="114" width="96" height="7" rx="3" fill="#E1D08E"/>
+<g fill="#EBF4F4"><circle cx="508" cy="132" r="3.5"/><circle cx="532" cy="132" r="3.5"/><circle cx="556" cy="132" r="3.5"/><circle cx="578" cy="132" r="3.5"/></g></g>
+<rect id="glow" x="150" y="20" width="300" height="216" rx="10" fill="url(#glowg)"/>
+<g id="door">
+<rect x="150" y="20" width="300" height="216" rx="10" fill="#276E6F" stroke="#E1D08E" stroke-width="3"/>
+<circle cx="164" cy="34" r="4" fill="#E1D08E"/><circle cx="436" cy="34" r="4" fill="#E1D08E"/><circle cx="164" cy="222" r="4" fill="#E1D08E"/><circle cx="436" cy="222" r="4" fill="#E1D08E"/>
+<rect x="210" y="30" width="180" height="26" rx="4" fill="#103133" stroke="#EBF4F4" stroke-opacity=".7"/>
+<text x="300" y="48" text-anchor="middle" font-size="11" letter-spacing="1.5" font-weight="700" fill="#EBF4F4">FERRYMAN’S COTTAGE</text>
+<rect x="262" y="90" width="76" height="8" rx="3" fill="#194C4D"/>
+<circle cx="276" cy="86" r="4" fill="#EBF4F4"/>
+<g class="wheel" id="wheel"><path d="M276 86L328 80" stroke="#EBF4F4" stroke-width="4" stroke-linecap="round"/><circle cx="330" cy="80" r="6" fill="#D2B64B"/></g>
+<rect x="170" y="106" width="260" height="8" rx="3" fill="#194C4D"/>
+<g id="plocks"></g>
+<text x="300" y="228" text-anchor="middle" direction="ltr" font-size="11" letter-spacing="3" font-weight="700" fill="#EBF4F4">1651 - 1776</text>
+</g>
+</svg>
+</div>
+
+<div class="intro glass" id="intro">
+  <h2 style="margin:.1em 0">You are locked in the ferryman’s cottage.</h2>
+  <p>The ferryman locked the cottage door for the night. A window, a lantern, a ferry horn, a pair of oars, and a fishing net are in the room. The door has <b>5 locks</b>. Each lock matches one big idea from Lesson 2. Solve them all to find the <b>5-digit exit code</b>.</p>
+  <p>The clock starts when you press the button. Most students finish in about 20 minutes.</p>
+  <p><button class="btn primary" id="startBtn">Enter the Cottage</button></p>
+</div>
+
+<div id="game" class="hidden">
+  <div class="bar" id="bar" aria-live="off"><span><span>Time</span> <b id="tm">00:00</b></span><span><span>Locks</span> <b id="lc">0</b>/5</span><span><span>Hints used</span> <b id="hc">0</b></span></div>
+  <div id="locks"></div>
+
+  <section class="exit glass locked" id="exit" aria-label="Exit door">
+    <div class="eyebrow">THE EXIT DOOR</div>
+    <h2>Type the exit code</h2>
+    <p id="exitNote">Open all 5 locks first. The digits go in order: Lock 1 first.</p>
+    <div class="codebox" id="codebox" dir="ltr"></div>
+    <p class="ennote">Type the answer in English. Use the digits 0-9.</p>
+    <div class="row" style="justify-content:center"><button class="btn primary" id="codeBtn" disabled>Open the Door</button></div>
+    <div class="fb" id="codefb"></div>
+  </section>
+
+  <section class="esc glass" id="esc" aria-live="polite">
+    <div class="big">ESCAPED</div>
+    <p class="time"><span>Your time:</span> <span id="escTime">00:00</span></p>
+    <p id="escSum"></p>
+    <p>One last step: write your Debrief below.</p>
+  </section>
+
+  <section class="debrief glass" id="debrief">
+    <div class="eyebrow">DEBRIEF</div>
+    <h2>Which lock was hardest, and what did you learn that you did not know before?</h2>
+    <p style="margin:.2em 0;color:var(--dim)">Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.</p>
+    <textarea id="debriefText" aria-label="Debrief" placeholder="Type your answer here..."></textarea>
+  </section>
+
+  <section class="actions glass" id="actions">
+    <div class="status" id="status"></div>
+    <div class="row">
+      <button class="btn" id="saveBtn">Save Progress</button>
+      <button class="btn" id="loadBtn">Load Progress</button>
+      <input type="file" id="loadFile" accept=".json,application/json" hidden>
+      <button class="btn primary" id="finishBtn">Finished — Download File to Submit</button>
+    </div>
+    <div class="msg" id="msg" role="status"></div>
+    <button class="link" id="reset">Clear all my work and start over</button>
+  </section>
+</div>
+
+<div class="actions glass hidden" id="loadOnly" style="margin-top:12px"><button class="btn" id="loadBtn0">Load Progress</button> <span style="color:var(--dim)">Have a saved file? Load it to continue.</span></div>
+
+<footer>UNIT 1 · COLONIES, REVOLUTION, AND CONSTITUTION | CPUSH | DANIEL GARZA, M.A.</footer>
+</div>
+
+<script type="application/json" id="er-data">{"salt": "L2esc:", "exitHash": "da505002a562d71d87d2", "locks": [{"n": 1, "key": "lock1_window", "title": "The Window", "obj": "1-2", "objLabel": "CORE OBJECTIVES 1 AND 2", "objText": "Core Objective 1: Explain the major factors that contributed to the demographic changes in the British American colonies during the eighteenth century. Core Objective 2: Describe the various roles of White and enslaved women in the British American colonies.", "type": "fill", "card": "<p>The colonial population grew fast. It doubled about every 25 years and neared 2.5 million by 1775. Land was cheap, workers were scarce, and women married earlier than in England, so families were large. Immigrants kept arriving, and a 1740 law let them become British subjects after seven years. Some colonists showed <b>nativism<\/b>, a prejudice against certain groups of immigrants.<\/p><p>Women’s roles were limited. White women were expected to run the home and care for children, and most could not vote, own property, or sign contracts. Enslaved women worked from before sunrise to after dark, in homes and in fields. A few women, such as Eliza Lucas Pinckney of South Carolina, managed plantations with the help of enslaved workers.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 3, “The Demography of the Early Colonies” (Population Growth, Birth and Death Rates, Immigrants and Citizenship, Nativism) and “Women in the Colonies.”", "prompt": "Fill in the blank using the Clue Card.", "sentence": "A prejudice against certain groups of immigrants is called ________.", "scramble": "I  I  V  A  T  S  M  N", "hints": ["Look for the word in bold in the Clue Card. It names a prejudice against certain immigrants.", "The word starts with N and has 8 letters. It ends with “ism.”"], "nudge": "Not quite. Re-read the Clue Card. Use the scrambled letters to check your spelling.", "entries": ["001e081be8ca72b54cd16", "00726b59b1a99ff440223", "015ce91061da8db50f260", "02aed916fd1ad2a917d80", "0346d287cb89549bb3597", "03fd70957565a3f5e9ab3", "04163bd3f76cfac839722", "04d76151918261008b9f6", "05da5d656ce2bf91955f3", "0742cbf553ed032fede77", "0834ae7abf8254997d955", "08674d6e4171baba0d5e6", "086dd2226051d3d4354b1", "08f42f6fc7a7881040bb7", "0989dfb54622d7da2ca91", "09a41dd86c0be49b55ad2", "09ac939eda3933775ed17", "0a1570899f2a0b48fb1f3", "0a32bb9c9a44318cd3450", "0a39104d2a5cab936c745", "0c35fd9efc1df89361c98", "0c709acf219f70e939166", "0cff8e666d7f0fef1a141", "0d72bcfacc47ff2bfb7c3", "0de5fc31f60aea8cac123", "0e46c5f42cc76efc09ac0", "0e72c63f27df26c030dc7", "0f7125644e920c95e3f63", "0f94771d07de98ea11799", "106661302157adb18a839", "1093e6febbdf129083a50", "113595e90f6de9a4844c6", "124100968b87fe4167884", "142adaa23dccc4fc6f137", "14d7ae2d256c4b4aded67", "1586114bd0e14a82e61e4", "158a1aabc90d0ff5e7253", "15dd185901c1d457b1888", "162a9b9b28d9df7e2b9d5", "165bd68fcaac00125bb70", "167730c276b33f7054792", "17a4aeeb3110b6e7cce01", "18128009cdf26f9560271", "1893afb777152c4c4ef05", "18c806ec97178a34095f0", "18fe679235b0f04091261", "191c4c5df94573814dd39", "1923333428963f4cd6375", "1aac311a8047e6790db43", "1adec89dbc347f6468932", "1b08eb30e088e27706907", "1becab8413e2dd404a2d1", "1c60c6218f2b26249e7f6", "1c9d32acefe05d6c5d845", "1ca8d982fe6a019a0df35", "1cadce46258a28e0ef754", "1ced6f7809b471ec1ad28", "1d20015df1090271e1d03", "1da131acd0545371c6d58", "1e2e2836f92777466af31", "1e4e29f483b21ee44eb47", "1efa6ce07b3c45dcc9776", "20031c03ca55b39acdfb9", "209c1e1d998cfd7411235", "210bd4007210b216319b0", "21590462e2f0e02091142", "21c5b85e2c703f61eef63", "2207c51e3d63e380a4442", "2371e2dc266bb5798a9b1", "240910729d08ae470b0a0", "24eb7a62c29b7d4271298", "2516754cb0c50b3554493", "25491f779ab5b6d0f6561", "257d2600439912bb14258", "26a0ada82f7e68f0f8625", "270d14c9d41e1e76fad66", "2725d945eca5b877d89a2", "2753d820d2fffbf01b0d5", "276e032caa4f15cbc40b8", "27848f96b68bc80c43368", "2915dc7946e9e23d9a1e4", "294263b32191e490cdd68", "29a289f6e153982da6c75", "29b68d3f35fd3338f4673", "2a86ad2ca584b8ecacef4", "2af747495487585f07f60", "2baa004d01160b2f5ccc0", "2bc8717536b6e2b24aa26", "2c6af54cf22839d98b4d7", "2ce698e1f2befe7b77815", "2d7ca3a5aa5020ed03586", "2e03b1db5ea3a11578672", "2e667e6af8c7062db64d3", "2fcb9d63f0cc0a307b2e9", "30b4fe786c1672b797a21", "30efce12deebf8f29c3b3", "321b9b309c868920e3413", "3371cb9f4795b57815730", "3457aa4c2e2926481c8a2", "34a42aedd6b3b1038ff07", "356d32916713ecb0211a7", "35784f699e2c9f3a1f440", "359a0a0eb7acf0e676b74", "37022919fd10d6555d8c2", "3707d1888a23a9aa9dc68", "37234b03d51ba70622bb5", "375a361aabd83122ff978", "379337feabe4dfa547ce7", "38191ab2a03ef2ff91050", "3964163f04adca16574b9", "39c66f9f919bcbe2c7b95", "3af159395395833d4af33", "3bf2df5793d703b1ecc99", "3dd6b2eaa975cfbd8da41", "3df07d063a16f37e00203", "3df61be8858c5cb96bda9", "3f1b776ccad844bc5c036", "40d0bd972cdb9bee0e2d9", "40eb82dba909a02b3ec67", "41d0612387b3c0bef12e5", "424ec020b17725735ff64", "4287d1ca3811686c0b451", "451452688cfec4c27e9f1", "456d322099c47e98249c8", "46638de0c0b6e0bde9b96", "46e7eb8eafc7a98eb6499", "470c99d33ca43d270a810", "47369a44bc539fe301107", "474bd210e09573776aa86", "47673b5491ae58a26bbd5", "483302f52eab1f0043504", "4843d143207da43f3eb23", "484d818e82e4e15f23c76", "48a6ea8967d413ee58628", "4a34ce92a3844884d1618", "4a9112f2980639e183c10", "4bffbc219e4093e0f1f91", "4ce61010cb3c780d51ac4", "4d4f1adaf18954b0df400", "4da0b20878449b1245535", "4ec214a36a0207c7f4cb7", "4ecbfef319b7f4b0ff130", "4efa3fd0691d5829a6312", "4f201d6283f343e664ee4", "4f83c2d731377a9c55237", "4fdc164f1d2bfee813963", "50a291d32a8973cf56980", "51a6a9ed3f5e571f82824", "526f2080fcfe69d1ff9a3", "53eddad74eb5ec138f305", "54942e83dfcd63cfe1fb3", "5502b9455e9ddb994f288", "5561b43388f5ce8177569", "561fddefc1f9e9253f010", "5690ab03e967dc47f94e7", "573ba563cc03dadf5d687", "57e6b256ec24a513f92e5", "582f742f00cbab7302fa9", "599bbb38437c9a06d42e2", "59bc5e2129776ec1ced07", "59d2893f61f40c0957029", "5a02d058ac4c8c6bc5638", "5baf3e67b1b5aa81b7306", "5bba7a1a0d9e7d15f89c4", "5cfc3ae1747d6d768cbe8", "5d4338f949d311006f7a6", "5d853ed0a460229304ec2", "5d9d328b0e95ca9ee61d1", "5dbd4b182c8df32d70310", "5f4623f5add84fcd94de4", "5f84c62d079f3311ad470", "5ffc9aff1e7c321606ee9", "619ebaff8b5ba66342155", "61cb8f0cdc9e6e81ee490", "61e0390dab16bcb90df10", "63c30ccc3f42326eb9364", "63e73d915771966082ad8", "63ea07e32d7ffd6e1c045", "63ff1fcd49d707867f668", "640d777b8c5d68550a667", "643c0c38e8a8d4a4df2c8", "64ddd87dc94c9d3840385", "65595671c702f0b3b71d0", "663ba6d82a984921d0351", "676f773fa7bf259ac6748", "683260d06325d09c2dfe7", "685fa0716caf14fe40275", "687ee944103fa69910f15", "696b6a0831ebdd99598f4", "69e3886e28c99371ba562", "69e72315185cf17ae62b4", "6ac7698cbfbf8e3603831", "6b26d9f69aa2b9c1f1d43", "6b31fb0e8257aedeedfe0", "6bb5b403c51c55057cd87", "6c44955838c10dd637ab0", "6ce5c0bda5d7bb9e78132", "6d24221c558234fc93fb1", "6d28b51e2077194743ce5", "6e523006574caae8db5b7", "6e79c3a6c2654e7dcac80", "6ec4cacd9bc62ae742785", "6f009ea67ea59e2920f36", "6f27b782dccb7008ef2c5", "6f40e41ae27cd1a441ad2", "700037b04cc9530ba95c1", "70c0657f9ed207815fed8", "70eeea84df8659d50b620", "714090c233c47983a0c95", "71d538ace652e33658b61", "727934ed03f90f072ee38", "72ccda6561952c2966d50", "744f32acaabfe579a23a9", "747da3ea3188e8aa0ec73", "74eb43fbe8cd6479d4c20", "75485c99f263c63856c99", "76945076c4fec80033d83", "7717806a460919f3778d2", "778cf3df9824e3bf98af9", "77c931ee97dc209809f50", "77d7bb737dda58c854011", "793eafb13a12c982308e5", "7ae11e0384bdb71e69e69", "7b1bfde22b21a2e116d50", "7b98543df8e78c79dcf36", "7b9bcab15f9d7fc48ee96", "7bc02c8c5195454d1e682", "7c23541d25e50fc79d870", "7c77784171d4cfd1853a7", "7c88a0a12a6d4a705a924", "7da6ebb988ae0951e0c37", "7e5f9f36f2fc173e2b0c2", "7f40f74dd3be797bdc7e9", "7f8dc024b9a29286f79a4", "7fc43a3c2eb38ef0f3fe7", "7fe365434b056101a8d63", "803d741db5204a8404f87", "805821a50f968af237201", "8230f213468667ed06960", "82811706e5e59b9b6e0b9", "82e9ef2a81f6faaa02e05", "83444a0e4ead1d56d80e4", "8465408c93147ec767a58", "851495a1f87c91a96d6a9", "868a0bf83bbfc6b8f88a0", "86a1a98624f497d838ec2", "86b36f0811f88eaf9ea15", "8748954493b771bafd0c0", "87778eb6dededc4484338", "8827bd1e52f46ad6bbee9", "883180fe49072cc22ba49", "891b01221b49d196867c9", "8a7f6f7a9e0967409e6f0", "8b2ca153be2ccf48a3f01", "8bd75941c009a99d817d8", "8bda149e6492493c5cf69", "8c23a0b6c9adc5ebdabd6", "8c644cfb0bad757e144a3", "8c6718aaf12cdc1cb95d7", "8cb2dde02f816592ad6c7", "8d85f41584057ebfe99d3", "8d9164595ff419247a516", "8e3fa59415b8464c82a50", "8f4f103bd1d13e1e84da9", "90cbc2c299528330a5223", "90e3afc068f9b2402bbb9", "90e48c56c9f6b708e47a5", "9253a1249b7fd41eea580", "94e603783ce9ed384b428", "9544e0b61907bce0c4292", "96563cde31e0c9a700f35", "965fa872bce3950819113", "96f0944a22b3a8c1a4169", "9794d059d56bce665d312", "97da763ea6cb36f074f71", "9897e4872c0cdca7cdc80", "993acc13a81b6a0e0d555", "994586e53a8f5f3948792", "99af7cb4dcab458dc9260", "9af21ba214ebf29ad6aa0", "9b237905ad10722a32266", "9bfa0a58e4a0449972829", "9d0bb737d1ff1de4e2493", "9e312756dadde1081c149", "9e6610a11a101e9af0761", "9f850c498fec77c59c544", "9ff3d171b1d4a5ed0c954", "a03e576c8a558ae2a5d67", "a074910f81a2257c02f13", "a2e1a47699468635b1cf6", "a3d0ead4dd605da5d6b12", "a48ae7e60cd2d3226bfd7", "a65ec35ca9eec84c92058", "a69a792a56cc5ba0da357", "a7726ffb022d742780802", "a99a897f7a8efd1874c07", "a9d86ea0fa8010c40e355", "ac1e3c34390bc11ce5bd4", "ace928c9233965ad839c1", "ad0945601546779f3f5f4", "ad35d8d6816c4fb94cd91", "ad9c91ea190ea54820ba0", "ada261aa8fe41c09a5af0", "aeb68bbafa1e6c7980a33", "af792ed8a6a4198cee083", "b0ea2c2e488d56eaa6df0", "b1bb1b2ccb129a5c03f75", "b1c6d32898111d18988c7", "b1dbaad50190881d43af3", "b26d3f17f728cbcfd0351", "b294cbd32fe2586126e13", "b3553db6d4e670cfa98d3", "b470591408b6f084f07f2", "b4d05940eeab92b8c2fa1", "b4e577d882f0f52d0f245", "b52006de3f201138c8bf9", "b5e0f4bc1ff50b33d2388", "b756947bc91b162c3f784", "b76cf0f1aa0d1d6b6c684", "b7e15b630e71674777a68", "b8210310876f3720e0565", "b835c7a9341fc51dd5384", "b8be14c6574c87551a4b4", "bac1fc4d2ecfb10ca2b36", "bb3e03a9297d4069896e7", "bb708de25d201856f3ac8", "bbf9169079e02ee50fbc9", "bc2e33d301571ac414767", "bc5ee0662b88427863659", "bd2367c8f42ef92afcd42", "bdd922152192ee2247c28", "be4b206dc867e4cfefc57", "be4dfdb45f5e42cabfa24", "beb2251d1cb12fa16fbe2", "bf09ac0bc848441eb6249", "bf60ba7caf14ae91799f7", "bf79a79f51298a5805498", "bfae3562a24dcad6f58d1", "c0effdbb74d13e142bd80", "c14ef6b13164eb1be82d8", "c205eb149a14f8b3f8db0", "c214727f3c5cb9f1f57e6", "c472b6f809e3468be03e5", "c4aa89eda4acbef4d20d0", "c6d4224432f3fc7a5a9d2", "c7027816fd75d9f2178d8", "c8b1c1ec53b93bb4f6456", "c8f68415b0ec1dc1ac4e2", "c9cb6c51932cfe43124b7", "ca3494e67f24f66163e01", "ca7dbb36287b2dfa9e0d7", "cc931617f6015522b19a5", "cd0233363da7a245a7118", "cd1b14dc5e3eb1d5dee34", "cd524062c5ae90da1df82", "ce2037bab62138d7fd2d1", "cf1ebb3bd1c0b2beea576", "d053f4a43e3bda8b60e02", "d056fcf8e22c4fee1b426", "d09491d887fbb416a87c1", "d0a890d5620eb7986bf66", "d0c6b0a364c51355c30f3", "d19cd062d808d32fae539", "d1f6abcb608e0ef8dc326", "d292f3272acc28d5e9d50", "d2c344799eaf5abe8e428", "d34814c44caaa1c28b490", "d3fb77d34b83fab2762e1", "d516637d17d40328d16a6", "d59ef6e217b9ce68934b7", "d5f9496c9766bac1b4043", "d649abbd935126343a482", "d720504fce4c2903f85d8", "d76e23fe435e0bf272861", "d7dc9ca6a6cd71ff1d951", "d8153ea18ef84c0e2ced2", "d8fc82c037ddc6de31861", "d97935b27e85feb061077", "da62906474ae8a38dbf28", "da753dfa6615b77c5f447", "daa6554b44bcc508947f5", "dac8415adc0b50d25a324", "db1514658501245749cc0", "db332e4180b4295cc1ec8", "db3a683db2849ad1fad36", "db68700ce5ebb5300e4d7", "dbda1e5c887cafe99ffb2", "dc050f4095e0825fb81e6", "dc6bc693fcf5fde0b0146", "dcb85b5ebae1f971ba732", "dcbd3913d043ba8666b24", "dd1df38eb1a3fa2672e09", "deb8215ccb3e267834d10", "df42f3253eedc9919bda0", "df5b45c886ee945311650", "dfa0d40ba3b12d78dad26", "e086374b3119b0341c558", "e25b84a0b2accb6be7f92", "e26bb41bfa8d2f07527c7", "e3fbd119f28857fc67645", "e447f28223e9f017c6099", "e48228d09376a32606a70", "e5d64509a362673d70698", "e7c498f64f9678c999451", "e8847eefc6d1020db5a97", "e8e258098e0c858dff137", "e908008809c40edc75bc0", "e9b9916c52ef7ab1ec293", "e9bd8531e5dd651464416", "eaa9b797b5047524bdfb8", "eb443a789f021bca5a7d6", "ecfe5222c62710bc4bfc2", "ed42d6ed2322739d4bfe8", "ed54a9d8746e263f2bf81", "edc13da2dfa1ea800bf94", "edea78341c59e8014e5a6", "ee55bb2a416dee54c1c39", "eed35bf9698fe37e402d3", "f07942d690577ef46a514", "f1071ea13de8013887c67", "f14ecc6d4d23841c69a64", "f3349422ded2040cf0cf5", "f473836b6621c4290e287", "f54177a468c8f2f986fb3", "f5845d0cb9d22929efb43", "f67204cdc4c843b1dc031", "f69003c31c35703e42277", "f721082cf117c589753b7", "f89417eeaeaec78460c50", "f92681f0a4b22407d6256", "fa3df2a13ab5cd7f7e295", "fb3b6c28382007727da51", "fb960c1e847acc41f46c1", "fc548b75d7b4e03651717", "fc57fee2c22300e2351e3", "fc6e070402c3e5b2adf15", "fcd5e4ee2c3ff3dbe0061", "fda35f4e58f52a8b81ec1", "fee8d9bbfe052b9544f85", "ff223990d08a397709746", "ff815de8fff1f98b964f8", "ffe3b8489c6948486ed97"], "id": "lock1_window"}, {"n": 2, "key": "lock2_lantern", "title": "The Lantern", "obj": "3-4", "objLabel": "CORE OBJECTIVES 3 AND 4", "objText": "Core Objective 3: Compare the societies and economies of the southern, New England, and middle colonies, and describe the roles of indentured servants, enslaved Indigenous people, and enslaved Africans. Core Objective 4: Describe the creation of race-based chattel slavery during the seventeenth century and its impact on the social and economic development of colonial America.", "type": "pick", "card": "<p>The colonial regions had different economies. The South grew tobacco, rice, and indigo on large plantations. New England had rocky soil, so its people turned to fishing, shipbuilding, and trade, and its economy also profited from the slave trade. The middle colonies were the most diverse.<\/p><p>Many early workers were indentured servants, who agreed to work three to seven years to pay for the trip.<\/p><p>Servitude did not last a lifetime, but slavery did. In Carolina, as many as 50,000 Indigenous people, mostly women and children, were sold into slavery between 1670 and 1715. By the 1640s in the Chesapeake, slavery had become permanent and based on race. Slave codes then ruled most parts of enslaved people’s lives. About one in six enslaved Africans died on the Middle Passage, the voyage across the Atlantic.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 3, “Society and Economy in the Colonies” (Indentured Servitude, The Trade in Enslaved Native Americans, The Southern Colonies, New England, The Middle Colonies, Colonial Society: A Slave Society) and “Race-Based Chattel Slavery in the Colonies” (Differing Treatment of Enslaved Africans).", "prompt": "Pick the correct answer for all four questions.", "qs": [{"id": "t", "q": "How long was a typical indenture?", "opts": [{"id": "a", "label": "Three to seven years"}, {"id": "b", "label": "One or two months"}, {"id": "c", "label": "The rest of a person’s life"}, {"id": "d", "label": "Ten to twelve years"}]}, {"id": "d", "q": "What was the most important difference between indentured servitude and slavery?", "opts": [{"id": "a", "label": "Servants were never given food"}, {"id": "b", "label": "Servitude did not last a lifetime"}, {"id": "c", "label": "Only slavery had a contract"}, {"id": "d", "label": "There was no difference"}]}, {"id": "n", "q": "Why did New England turn to fishing, shipbuilding, and trade?", "opts": [{"id": "a", "label": "Its soil was rocky"}, {"id": "b", "label": "It had huge plantations"}, {"id": "c", "label": "It had no ocean coast"}, {"id": "d", "label": "Its weather was warm all year"}]}, {"id": "c", "q": "By the 1640s in the Chesapeake colonies, how had slavery changed?", "opts": [{"id": "a", "label": "It had ended"}, {"id": "b", "label": "It was limited to seven years"}, {"id": "c", "label": "It had become permanent and based on race"}, {"id": "d", "label": "It applied only to Indigenous people"}]}], "hints": ["Each answer is in the Clue Card. Look for how long an indenture lasted, how servitude and slavery differed, why New England turned to the sea, and the change in the 1640s.", "An indenture lasted three to seven years. Servitude did not last a lifetime. New England’s soil was rocky. By the 1640s slavery was permanent and based on race."], "nudge": "Not quite. At least one answer is off. Re-read the Clue Card for the length of an indenture, servitude and slavery, New England’s soil, and the 1640s.", "entries": ["626ccf8459dd05a9886b1"], "id": "lock2_lantern"}, {"n": 3, "key": "lock3_ferry_horn", "title": "The Ferry Horn", "obj": "5-6", "objLabel": "CORE OBJECTIVES 5 AND 6", "objText": "Core Objective 5: Analyze the impact of the Enlightenment and Great Awakening on American religious thought during the colonial period. Core Objective 6: Compare how the British and French Empires administered their colonies before 1763.", "type": "match", "card": "<p>The Enlightenment praised reason, science, and individual freedom. Deists such as Thomas Jefferson and Benjamin Franklin believed that God made natural laws and then no longer acted directly in the world. The Great Awakening began in the 1730s as a wave of emotional religious revivals. Traveling preachers called itinerants, including some White women and African Americans, helped start it. Jonathan Edwards and George Whitefield were famous preachers of the revivals.<\/p><p>New France had fewer than 5 percent as many people as British America. In 1627, France said that only French Catholics could live there. France ruled it with absolute power, but it built a fur trade with Indigenous peoples. The British colonies had elected assemblies that controlled money and laws, so self-government became a habit. Britain controlled colonial trade with mercantilism and the Navigation Acts, but later enforced them loosely, a policy called salutary neglect.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 3, “First Stirrings of a Common Colonial Culture” (The Enlightenment, The Great Awakening) and Ch. 4, “French and British Colonies” (New France, Relations with Indigenous Societies, The Habit of Self-Government, Mercantilism, Navigation Acts, A New Emerging Colonial System).", "prompt": "Match each idea or place to the best description. Use the Clue Card.", "hints": ["Look for who praised reason, what the revivals were, which colony was small and traded furs, and which colonies had elected assemblies.", "The Enlightenment praised reason. The Great Awakening was emotional revivals. New France was small and traded furs. The British colonies had elected assemblies."], "nudge": "Not quite. Check each match against the Clue Card. Which one are you least sure about?", "terms": [{"id": "bc", "label": "The British colonies"}, {"id": "ga", "label": "The Great Awakening"}, {"id": "enl", "label": "The Enlightenment"}, {"id": "nf", "label": "New France"}], "descs": [{"id": "b", "label": "Waves of emotional religious revivals led by traveling preachers"}, {"id": "c", "label": "A small colony ruled with strong power from France that traded furs"}, {"id": "d", "label": "Colonies with elected assemblies and a habit of self-government"}, {"id": "a", "label": "Praised reason, science, and individual freedom"}], "entries": ["852ca996f3f02978908f9"], "id": "lock3_ferry_horn"}, {"n": 4, "key": "lock4_oars", "title": "The Oars", "obj": "7-8", "objLabel": "CORE OBJECTIVES 7 AND 8", "objText": "Core Objective 7: Analyze how the French and Indian War changed relations among the European powers in North America. Core Objective 8: Describe how, after the French and Indian War, the British tightened their control over the colonies, and summarize the colonial responses.", "type": "order", "card": "<p>The French and Indian War (1756–1763) began as a fight over the Ohio valley. In 1754, the Albany Plan of Union called for the colonies to unite, but it was rejected. In the Treaty of Paris (1763), France lost its North American land. Britain gained Canada and the land east of the Mississippi, and Spain received Louisiana. Britain now had a huge war debt and 10,000 soldiers to pay for in America. Indigenous nations, left out of the treaty talks, resisted British expansion in Pontiac’s Rebellion. The Proclamation of 1763 closed land west of the Appalachian Mountains to settlers, and many colonists disliked that.<\/p><p>Parliament then raised money from the colonies with the Sugar Act (1764) and the Stamp Act (1765). Colonists said they had not agreed to these taxes, and they protested and boycotted British goods. Parliament repealed the Stamp Act in 1766, but in 1767 the Townshend Acts taxed imports such as glass, paper, and tea.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 4, “Warfare in the Colonies” (The French and Indian War, The Albany Plan, The Treaty of Paris, Managing a New Empire, Pontiac’s Rebellion, The Proclamation Line) and “Tightening of Control over the British Colonies” (the Sugar Act, the Stamp Act, Protests, Nonimportation, Repeal, the Townshend Acts).", "prompt": "Tap the four events in the order they happened. Tap an event again to take it back.", "items": [{"id": "c", "label": "Parliament passes the Stamp Act"}, {"id": "a", "label": "The Albany Plan of Union is approved at Albany"}, {"id": "d", "label": "Parliament repeals the Stamp Act"}, {"id": "b", "label": "The Treaty of Paris ends the French and Indian War"}], "hints": ["Look for the years in the Clue Card: 1754, 1763, 1765, and 1766.", "The order is the Albany Plan (1754), the Treaty of Paris (1763), the Stamp Act (1765), then the repeal of the Stamp Act (1766)."], "nudge": "Not quite. Re-read the Clue Card and match each event to its year.", "entries": ["436ab8e2ce03e46b0c766"], "id": "lock4_oars"}, {"n": 5, "key": "lock5_fishing_net", "title": "The Fishing Net", "obj": "9", "objLabel": "CORE OBJECTIVE 9", "objText": "Core Objective 9: Explain the underlying factors amid the events in the 1770s that led the colonists to declare their independence from Britain.", "type": "decode", "shift": 3, "cipher": "FRPPRQ VHQVH", "card": "<p>In March 1770, a clash between a Boston crowd and British soldiers, the Boston Massacre, left five men dead. In December 1773, Patriots dumped 342 chests of East India Company tea into Boston Harbor. In 1774, Parliament answered with the Coercive Acts, which closed Boston Harbor and limited self-government in Massachusetts. That September, delegates from twelve colonies met at the First Continental Congress to plan joint resistance. After fighting began at Lexington and Concord, the king refused to read Congress’s Olive Branch Petition.<\/p><p>In January 1776, Thomas Paine published a pamphlet called <b>Common Sense<\/b>. It attacked the king directly, and more than 150,000 copies were circulating in three months.<\/p><p>On July 4, 1776, Congress adopted the Declaration of Independence. It said that all men are created equal and that governments get their power from the consent of the governed. But those words did not apply to enslaved people, and Southern delegates deleted Jefferson’s passage that blamed the king for slavery. In March 1776, Abigail Adams asked her husband John to remember the ladies in the new laws.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 4, “The Road to the American Revolution” (The Boston Massacre, The Boston Tea Party, The Coercive Acts, The First Continental Congress, “Open and Avowed” Enemies, Independence, Breaking the Bonds of Empire, Jefferson’s Declaration, The Contradictions of Freedom and Slavery, The Status of Women).", "prompt": "The Clue Card names a pamphlet from January 1776 that urged Americans to seek independence. A secret message gives its title. Each letter in the message was moved 3 steps forward in the alphabet. Decode it.", "hints": ["The secret message gives the pamphlet’s title in the Clue Card. Use the decoder key to spell it, one letter at a time.", "In the message, the letter F is really C, and the letter P is really M. The first word has 6 letters and starts with C. The second word has 5 letters and starts with S."], "nudge": "Not quite. Decode one letter at a time with the key, then check your spelling.", "entries": ["0000728bb8da3f9e51410", "00b3970ecffa1519f4df2", "014d92965af5d64263922", "015c8b9f3a077ab6ca344", "0175d158c45bf5b610059", "02ed390a43cdec81be704", "0358a554475287d8a9149", "037580d529bfba6303ad0", "0383ef8dc79c9ea362c78", "03c1cc88903ad0713c3d0", "03f2f1ddb249cf98fdff6", "04240bce4c135fefb0f38", "043a8aff2c93b43863917", "045defd9d5b548a127fe1", "04728dd2cf1132450bf97", "04d253d180ccaf3faabe0", "0625a917d1bbbe75699d3", "06435ec8d737d25a1ab47", "068ba68c8e55791835930", "07bac4ef060c554f02911", "08169f0bbd60fb4592328", "0a1d0a30aaa3856eff575", "0a4adab7ab2580556ccb3", "0a7fdbd24d5af4f180ef8", "0ab3e4c123a0db74962b7", "0ae165414478a64bda559", "0ba901546da77950d9b51", "0bd7cd84e388fceb18529", "0bdfd9fa270af8fdc2249", "0c479166f49cd6628ca06", "0c569c9db686a8b00c930", "0cd7c0ca93c0f97baa750", "0ceb3b1b3f0bd6e505d40", "0e571c8e38a27c32241b5", "0edc5fe95397c6e9c2e44", "0ef631ebe9dc7f3c727e7", "0f87f08e3ef61ad313060", "0f95108970c5da1a4e943", "104c6cfe07cfad1f8ae78", "107107b2e4e1ccbfc83f3", "1109ddf6d7578b8229da3", "116c5cb1394f2cb053835", "11ecd96cb4a64e8786228", "123bd97e9d625817c0616", "124db362f60bb0cb59859", "131f35bcc2e6293f83585", "13d0a4232e5afef13e580", "14fc9c973291a141aad39", "1553124090e1f5fdd5965", "15e588e992350e42b9a53", "164f64df14a6419873510", "16bf562bda1a9586f3de3", "17ac9cb372f1166d0fdc6", "18666056a19913818daf6", "1923311228cc393f1d003", "1a1ef475c518577f20190", "1a65ea52c979fb42cd457", "1a70d2de2df8bcec96f22", "1a97e0bb83ed9579b13c1", "1ae78d9c78c5cedfc7783", "1cee0a7252cc9ce46baa5", "1d068dd387f624cba47b1", "1eb7b9e8dc4151c5f9074", "1ecde851a5e3032680d42", "1f2c2439be83070f895f7", "1f5cbc5c1d5e2dabff830", "1f9e9f2c2c6acb464ddd4", "1fba46268bae2bfe08b47", "1fbaac3c928ceb14e0f14", "20af2f862215bd22c14e5", "212eea770119d6f855184", "229b63f68abc8882b7682", "22d1135cc4325998790e2", "22f8e8168d5b31fc3ebe1", "2330debab60be8f1ad5c1", "2366b0e1f870ea1911d95", "2455a20813b6aaacc42a0", "24e9c3f8e6ac4e612e0e7", "24f77ea2fb4855f8451a4", "25061dad6e3a725873355", "25a7e97fded0079e3db27", "25f59b38ee3bd5bac3d82", "26bb2a50228a8d3765d62", "2702467d8557d6b5c3aa3", "279a60339ae9d23b721c3", "27e4b508a6bfa7a60f9d9", "27e862f20b1cc47d2b945", "283b791d78660c77e1e73", "2854aa5370f4c3ec07c47", "28ae783ab71c68d629501", "28b0518b420a4dedd4c41", "28de73540353bbe9eb9f9", "28e477488f4df51efe498", "28f63ff4fd6c1a33410a1", "2989b1bf5a9b26831a892", "29b318f77863a15143691", "2a077d7020dc5383aa7f9", "2a1786ad2f24749c40473", "2a3d6ebf08c543c719d36", "2a3dd692f15f09b05a006", "2a70141baa829337cc579", "2ac8a6a796538a61396c5", "2b1a7d1de86256ccf3c55", "2b513dcc8db9d313ac139", "2bfa496dc8fed98c337e5", "2c4c470f21fb639403a95", "2c7a475aac1ce98cb2aa8", "2c87870f6ecd1b7d5ab12", "2cd83156679b4a6c34191", "2da95ceddcfeb943dd218", "2dfc0b4c95baace2c2ac2", "2dfe4555a590104e9d880", "2f288dc307695273deda4", "2fdeb81ea429862484801", "2fe76fbe15bff762bbd80", "300cbfb584df0ed9616d8", "301dcff5a62b866b29e73", "3052457d2c5eab5fa60c0", "310c728e7d43a712a8797", "316ba141a30430a1057e0", "318e14853187314f21f58", "32a6b4e3a735ba064ead3", "32b378aef97a372dd9331", "32c44c6bbccd19d366a68", "32d67a60e52cd10542da0", "333bd92d76fb8a03dca72", "33ffbbdab2b77463af284", "3450f7f507efe34b12074", "345bd1920858e3671cd65", "3470c78a6f4c6b375c615", "35099131785cdc03016a8", "35839dd0d1260c0d5e256", "366237a8cb45f8865e677", "36fa7ae097a2e3b6a5e41", "37835b2f603c75e4d3f53", "3805ed5d9094505150f36", "3846c6517dcac09053b99", "38ca0c9a1ba23ce3d22b2", "393f3efe4083e2fb03de0", "39510b757079c09614717", "3977ff5cd9ab6ca0072f6", "39e10b53e05eac7341c05", "3aacec415735d0dcb1ee3", "3b39ba7daa736a0530908", "3b7a1e7dd133243837ca6", "3cf17748d102cfa57b914", "3dd6d84972adcd02a2fd9", "3df205acb7e8047f9d744", "3e4e53294f1d383f0c791", "3ef5d1b1cd947e16ed567", "3ef9473e7aaaed0af9fc8", "3f8b82167b7d3e23d4511", "404e338c33ce264f29cd1", "40526b42c60bcd21bc662", "407516365d96d0a45e669", "4085992e740bdb426dba0", "40cf53b6b4a916de08ea3", "40f07aa8842913b8490d5", "4107eb8ccafde7064f685", "41771f1a0d18422115b88", "42001a0b5cf76fc9417a3", "42a62fff00c3bbef7d645", "42c58e985dbe98cf23788", "4313e57686e45715b4576", "43486b79c4e7e8b11ed38", "44edeb723d35b84ef9455", "44ffb60c3063ab4baecb8", "45cbb64827f612c11ed93", "464729277194da2f58621", "4739a0b82f922b865d845", "478f38d7c204adb1bf8a5", "48230597276de2daeadf3", "48507f427b5f2c83cbc69", "49580f7541d781a4e3192", "4964f055b98930ffa1606", "497f22da592adf082dbb5", "49933290da19df6dd0a84", "49c2f94b5091dfcc64742", "4a0ac693e3c0dd948f1d1", "4a10f8f6ef865f8ca9bb7", "4a91120ff9ecb91cbd659", "4a9418e889af0334e5f56", "4ae938266db34aa31d012", "4bb6da902d3c666373349", "4c39b4dcf20f6a49fc1f9", "4c4f0132d55c90843ede4", "4c52225b339e39d7f53f3", "4c8c2f861df051653ed87", "4cbba706060743a30fe90", "4cc0835395de69aeb9b69", "4e0412027ef1094ca0195", "4e6973ceb562952be2414", "4e8e2c7c05656fe4fabf8", "4f34f8cfd9c8b4e8f0b04", "4f3da7a849eb508c171c7", "4f409043a70c79d11ea98", "4f796959fad583e0203a2", "4fd559444bb2c98b5ff30", "50f485d78e8a6b7cd44a4", "5115a526b05ea601d0e46", "539540e5f17304a87d5a2", "5509a2a842d8e5fca9e85", "55e87476356684d1abb90", "562a5bacd036b4873c7b4", "567d2159ee9ce70cd1f93", "5756bc88516fbd9d3a7e6", "576047d395d8100fae2b6", "5841d32a6e302842de1d9", "58637f6527b993d8716c4", "58c8843845dc6ab7a2de6", "593fc9c0c6a57ab48a115", "59cc6174b03d444ffd808", "5a065b18019e17d6c8a60", "5a38b7ea86922e1a11404", "5a95855ae6fa4f5f0d7d1", "5ae25e8b48b25c58f0fa5", "5b030c1dda0e99c6dc8a1", "5c3f3af2f56d4f3a39909", "5c510d93408e74c347364", "5c6e15e8e9bc40b008059", "5c6fd2e0a8f76b6cd9a40", "5c9c09d731baf95565080", "5d46aa695185e1ab86ac0", "5d57d5e223c4a037ec520", "5dbc064578b197d49f467", "5df8a1d30cd8190c37657", "5e087d2e7957f8ec7fb90", "5e4d1cdba7598bee73472", "5ea3ca84e9e2ef5011c44", "5f90893489cf30cc4c1b4", "5fc6f8e46f4e0ddb8f842", "5fda526014c077cb2fbe3", "5fee6f1646473906a33c9", "60a1f5ec1de81de4b17a5", "6105a442c207a928528a1", "61e19be0ae1f0f7982003", "62b587a3cb0d7e0004437", "62bd499ef37f89022e9c8", "631adbc7d52a71ed14b01", "634e184b73cf5dae67dc3", "64122bec779987fe8e180", "64aa81c46204c888a7e03", "652cfd7bebaac23e56605", "6535013d4943afe794f25", "6639544f8ec66fb5f8b12", "66cad03d1df3b616aa9e1", "66eb15b6f95cb1917bd53", "6708cb31f26291cb47133", "670e49c17e0d4ea5d7978", "67f89ba2e1ac6c7e54289", "697d9a2666acab64eb9a4", "6a5626a07e71f3bd12587", "6b28e7015630926ed0a88", "6b56046cbda889bbdf1c0", "6c1a1963dba4eae191125", "6d9e3758c6a9857650c70", "6e5474262b50614bc5a80", "6fa39d2bfb4ae54c210e2", "725c5a40df0e1ce2bdef6", "72dd19899ea0715bc62c5", "72dd7a26e619492445124", "72de34307e9c3e7ba8bf5", "72f61b1067762f2dd8924", "73721d4b249fedf7d7ec8", "7396d114de9c74da49b87", "73ff4943d5e9c5b32aaa9", "7449cdc71b249ad50ce19", "7458fe5e8e2e727503800", "755a481a0d7189795fd41", "76924fcc621eca7081666", "76964eac494feb38d7a97", "77bf435848e0046c673a0", "77c705bc06363c565d770", "79194e76e186f63debed4", "792c3b9d0b96974956e15", "79c49f0161a7fc4987a59", "7a50841208761ed69f640", "7aede4d1678e803b21dc7", "7b01409c946764051e273", "7b63de51eda394d39cf76", "7bedc7e93052cb66b0090", "7c6896b8ea986d9b34629", "7d054ef79fdb616d2ce18", "7d688ae9a6721a2015a56", "7d9421885f4da1519b261", "7e0265c4cda9fd2326b57", "7e0b6a7faaf883bd381d1", "7e30d52afd6d858585e05", "7e4402ca8ffd931367164", "7e72b5bf8fc39aa153542", "7f0eb7f02214e715b62a2", "7f572e41c72026953d303", "7f65c9fb2c09844dc4712", "7f6f5c1d9d6dd9f8ed786", "8014c5589112f342aab76", "8026a1510805a04c322e8", "80f734021ddbf87d33fd9", "81146cbf4f21e80928bd4", "8118c34f94289ad9741d2", "815f7bb16362e839b4d89", "81e95b5c9a6523b0a4174", "81ef757e4c55f4fed9df7", "82ce14fd4e2b0cd97f494", "832de12f4649a18e97159", "8344e6ef99b332341f256", "83ba935a8a4f10c292c92", "83d1f20cd8b33dbe27a57", "8410d30ca167d3d3fcff1", "844850c639ab3a65aed11", "846d1e6430b9440b1e6f8", "84b421e7a71a8e6fd5c82", "84cfa652816d55fc632f5", "8514b1b168b2b492dc265", "853a156aa33515be8f3b8", "85774743ee8601b39fcd0", "85a324ce54a67f7ecd2d6", "85a5877fd4f0d9979e014", "85ad7aa538411e2188381", "861fcc374cb09a03883f4", "8709a932f4abdfba23793", "871dbaad20ca6b60cfe36", "876ab6fcfb40e454f7408", "87f4eacad730697701ad8", "886e26b31d92b37a89469", "8979f9f31a056a8b92885", "8b00426c16acba8e55e21", "8b4602aa9f6c5ec7cc061", "8b5828750bd0ba6d31929", "8b65aa4b9618cdbddc503", "8bd4d78df2d852bd716b6", "8c3ccf3e0e0f00f1b2b41", "8c7e8aa4e3f0934c9e406", "8c81a592a92862bce52f3", "8ce810b1293824c906830", "8d2c323f5fb455d217170", "8d753b2300be48f337fe1", "8de0ed6b109ec9658bf61", "8e3fc8722c65c5dc24226", "8ebedb01b08bb70b09465", "8ff1bd85a1db337d3c196", "904c27f40e79ad3793453", "909af70f5cd6b68ed2504", "90a40806ac8e153041719", "91900129848a98f33e045", "91a8f1c56559b7604b176", "91c5f22cf94f72ac0f800", "9207c644339c1c0d40c38", "9270f9435092c4ecc88d3", "92a7657bc6f40b699aa82", "92a804df00d22204fc2e7", "93153ef7d8a46948ef5e9", "932cdeccf6f8b5f9cb554", "9356627f0b06c59472021", "940a17a37c8c1751cff12", "942f2bc8ceee6fed5b848", "94796c933edcefa477a73", "9482fadd6b457e2f46032", "9762152482bffe0475ca7", "976955ca6168706864180", "9792072fc8070c601b446", "98cd63a6578e42025e746", "9999cba2d70c38c045710", "9a03a6e9560f9ebb44837", "9a06baaba44efd4321c56", "9a7e37e7057eb63624fd6", "9a7f6a795a22db6a56f22", "9b853c2e1f51eac3d6495", "9baa1e7ac7325d2dd0ea4", "9bae8e93788e765cb42c7", "9c8a761b457733cb245f2", "9ca0de60d21682069c996", "9cb6cb2027e32e8285da0", "9cb8c1d01d62048d92bd3", "9cc22d16165bd3a3b6ec1", "9cd64dea745b1238a3235", "9d1793f78862c01f55af9", "9d6ceef12163909bfda75", "9edab25f1ba3e430234d3", "9f2f51c61d0d56476e0f7", "9f483f4176a8664bbd110", "9fbfc71118cb86c75b419", "a06e856bd116adf1cb586", "a0a397a47b1ca96aa69f0", "a0ab33284cc9af5fff191", "a0e465c1a18dacaad5259", "a0f85a72dca2e4563f288", "a2cf407b46802d2d17808", "a2d28ab629eb8396bd910", "a3277c243295bedaccde2", "a3aa94aa8a9959a062c34", "a3e90f95452de5f5cd8d1", "a403f93335e85bd573435", "a4a5f76430065f1ba4e10", "a58c32c80acee79bcfea7", "a5b65603a8e91032b5274", "a5fd8014b6410f3741c06", "a606b17b6eb1710464ec9", "a632b23309244de55d7f0", "a75b107e10de6727a2a05", "a7e44fdc6668b96a44bf3", "a8293e1861eebe7087df4", "a8350cc788de985724676", "a887f957f15cbe90a6432", "a93341a7f3c5ad5985009", "a94de586d3766a858ed95", "aabb2118082f0549fc639", "ab3113adfa2bf21a046b5", "ab407827d70a3e752dce4", "acd9d5c466456d9481346", "ad23c8fccb410847fe472", "ad2592220263cf04c96b9", "ad6d322680244f9227920", "ada675e962695e81f2567", "ade64841b141fca28a6b8", "ae7502259dcd7e5a3ce56", "aec8c4a6854b54f4b3dc2", "af24075bb4567bae97a94", "af6f3aba7d5bd765fd446", "afa94c83a4957a5af0527", "afc124a95decdfa69c883", "afd36632bca0aced49167", "b00e65033b4aa27b83fd6", "b01435bffdde30b50ac46", "b05ab01cd0483ec46ece1", "b0bbac1e5861779c1f5c5", "b0eea4b7240a16a1baf81", "b0febe6954b4ce942d549", "b14406066cdf71fc7f037", "b1477ccf080e0f1150d92", "b166ccd61295971753b79", "b1dc6ef52d501344dab83", "b1e75aafb4bdc8dde6df2", "b2b2a9d65198f56090749", "b49d107e538709ddfb438", "b4fd3aca8bdf3577cc263", "b5069f721eb5625f98795", "b6229da9f313851119fb2", "b6645cb0562825eb91ba2", "b6ec07d3f6105da3c5774", "b8955690f5016d66c07b0", "b8f2575367fbfd54b4e37", "b90ea68ef5f714147d0d0", "b925d800a210d5ed8b4c2", "b93d0152259a6c2eff544", "b9466d37282e144956d87", "b96eb5b0b38c1efbb87c4", "ba990e0c0e9d2839b83e5", "bab19ebebc54b2a932e22", "bab3b6f1488e042ab0fe1", "baf6e60d888cea7c89284", "bb092f51f33528dd1f0d8", "bb1952e8772022fbe7786", "bb96fd21b3fc398854f42", "bbb58af7a8e58b49af009", "bc6a8abe618311621ebd5", "bd00b5ea91f6fa4755040", "bedac344c12dd359f8e31", "bf52bcffcda72acc3ca50", "bfd33a364b416f5531e01", "c1b8e66cc403b24f60d31", "c32d4cb3898075804b147", "c3b44ac8f91aaeec417f5", "c3df7e7a0b0559fc29575", "c454956ac117ab0c2d5d0", "c46f78620078a4bc2c0e4", "c478c605cd0a62d810907", "c4e89d7e9e107447466c1", "c4f96e17afa7fc0596be4", "c5854b12863b5187b8cc2", "c5efcc2909cb4a0db1590", "c6200ba28a687183a17b2", "c6c4634b5c0ad10749758", "c7054ede3ec7767de9943", "c71c9c8874988b1dcbc66", "c7231010f1faac8299246", "c7303f5554e6ab9c23644", "c730d007307b76af43cc5", "c81c1effe1af0c33db9a3", "c86b67545c039c6858e75", "c912d67aa2702df7a3903", "c9fa827957e54cac49725", "cbaa11b6003b7915a5245", "cc341d4aaff13d50aedc3", "cc7688a2c433a4bd5ddf2", "cce9fd8878669ba993264", "ccf317a472431d165a055", "cd9c2e78e1b8038901672", "cdb3c3f6af2adf8dd0b38", "ce051c542c31ca1ca3d73", "ce661002b288ff5ed9301", "ce9121a9b792f19ef2ba0", "cefe44c8ee134248c5269", "cf7dfcb9e1382fd59eaa1", "d226b1115e6a19249b114", "d2bf03d126211ebc39166", "d34c886cf2327661c7360", "d375cb60b78d268d2eac3", "d3ccaa25292083bcf9d98", "d510a857c0efd8b411143", "d5c0183c41120543fd096", "d5f70a4c7f9162ef97500", "d65a66b1fdc78c54082b6", "d675bff8a6cfccf3dd5d7", "d685161a2125e53499054", "d6ace2c069bb77f508135", "d6b60cae6599a43e93952", "d6b6dbaae695f3b47ed99", "d85d0798962866d01b2a1", "d86086ce7ad3ade4b5680", "d8c75a81df9150d44ec24", "d96800e4b8dc7a3f38e40", "d9ae70bebfdb98f6d80d8", "dad8f0cb3f54fa9dbbb59", "db2415baaf8b5fd30f5c9", "db24fe385d41559924a16", "dbb3411e944a9134f2fe6", "dbe100d587d6a769de4f4", "dd3a52551296503a88bd7", "dd5797ce51a2a934ece21", "dd8755b7f1f7172c1be25", "dd8a83d2d4c5ff57adb17", "dd9b0b585f2c015bf95e9", "dda8762770d141106ea55", "ddb2c63a144c580b6bae9", "ddc67e8502b3dbf75a679", "de5db243dd453b11b6075", "dea5700d8868d71b23827", "dede0f9906ea6ee139943", "df3cf9e1c185d5f75ed83", "df8a1d3ed0e4322d6a0f7", "dfc91e183b22d549351e2", "e029a5694fd889d3525d6", "e046de4d20b378f5f26f7", "e04a16192d9cfd17ef635", "e1843524af553b5357d80", "e467b7e40fdaed03de8c3", "e54ff5a9bc515c33bb498", "e5d0beded34b0fcf00e71", "e6106f72f28f75daa1275", "e66c0bfcb04ea192c04a0", "e6ee9c3d834c6040fe618", "e7016afb6daa9e38be494", "e70ef3d145f499913d5b7", "e75cf4dee9efbce70c101", "e84d0a862cfc2adf67ca4", "e87973b4de2e5e8f00d16", "e8cb187961760c2210dc7", "e908c9b02583c68f06300", "e9633d60af98c6fd55fa6", "e9d44d5f4ab65b9e33869", "e9edc297e6d4d97c8e2c7", "ea77c088d33a0f7c9ddd6", "ead60afc3a7abea97a9b8", "ec90a22af833108a75111", "ece9fadf829c303cad8c3", "ed22fa27517ea05737cb3", "ed660ccb115ca99526790", "ed9686b1a5d135c0f22e3", "edc87a2007bd924bd4a37", "eeade9261d3f8884d6a73", "eefde3d5dbf5c3ce1eb23", "ef95e2b7a8dae6ccc98e5", "efa034988280b5fd7afe0", "f0047e5ecc2034db35649", "f00f8a3c70599dffa5dd7", "f0b577952b61d2ae79100", "f27fa3f8aabae14f83526", "f3830a42c2968f72e6cc5", "f3fb735801f1eaf9dd949", "f46d8f86f9a726ef4e231", "f4c4fd20096f71cf5c535", "f5e708ad979e1acf130b1", "f6507e6d598bff42d2e80", "f6a6236eaffe15e620de9", "f7b2b758df850ca186557", "f7fd90b8930b6c649ef45", "f93a72bc9cb5e32857dd3", "f959d40eb7e840bc0ed75", "f9bfc492a3c3e7f410b82", "f9c7085e58b1ac971fb88", "f9c9a409ec88220f06dd4", "fa4378129b16821352a42", "fab49faa2086d015342c7", "fad8d745af66f3629b636", "fb83fea2f5b06d419a1c5", "fb8fce5e0e64c65b1a4d4", "fc2929e9ddaccba5a0d64", "fc766709cc9756f5b91a0", "fd543bafaa678d25c1117", "fda8a08227e9f14b25502", "fe07c1548ed4a4d7bd457", "fe11006f728c111d2f8f0", "fe671c2ff0d6d46e8a709", "fe6f9ed01a6aaaeeb0567", "ff2167136344c7b547ab9", "ffa7986d86c9e871d3413"], "id": "lock5_fishing_net"}]}</script>
+<script>
+function sha256(ascii){
+  function rightRotate(v,a){return (v>>>a)|(v<<(32-a))}
+  var mathPow=Math.pow,maxWord=mathPow(2,32),i,j,result='',words=[],bitLen=ascii.length*8;
+  var hash=sha256.h=sha256.h||[],k=sha256.k=sha256.k||[],pc=k.length,comp={};
+  for(var c=2;pc<64;c++){if(!comp[c]){for(i=0;i<313;i+=c)comp[i]=c;hash[pc]=(mathPow(c,.5)*maxWord)|0;k[pc++]=(mathPow(c,1/3)*maxWord)|0}}
+  ascii+='\x80';while(ascii.length%64-56)ascii+='\x00';
+  for(i=0;i<ascii.length;i++){j=ascii.charCodeAt(i);words[i>>2]|=j<<((3-i)%4)*8}
+  words[words.length]=((bitLen/maxWord)|0);words[words.length]=(bitLen);
+  for(j=0;j<words.length;){
+    var w=words.slice(j,j+=16),old=hash;hash=hash.slice(0,8);
+    for(i=0;i<64;i++){
+      var w15=w[i-15],w2=w[i-2],a=hash[0],e=hash[4];
+      var t1=hash[7]+(rightRotate(e,6)^rightRotate(e,11)^rightRotate(e,25))+((e&hash[5])^((~e)&hash[6]))+k[i]+(w[i]=(i<16)?w[i]:(w[i-16]+(rightRotate(w15,7)^rightRotate(w15,18)^(w15>>>3))+w[i-7]+(rightRotate(w2,17)^rightRotate(w2,19)^(w2>>>10)))|0);
+      var t2=(rightRotate(a,2)^rightRotate(a,13)^rightRotate(a,22))+((a&hash[1])^(a&hash[2])^(hash[1]&hash[2]));
+      hash=[(t1+t2)|0].concat(hash);hash[4]=(hash[4]+t1)|0;
+    }
+    for(i=0;i<8;i++)hash[i]=(hash[i]+old[i])|0;
+  }
+  for(i=0;i<8;i++)for(j=3;j+1;j--){var b=(hash[i]>>(j*8))&255;result+=((b<16)?0:'')+b.toString(16)}
+  return result;
+}
+function sha256u(s){return sha256(unescape(encodeURIComponent(s)))}
+
+(function(){
+  var PACKET='CPUSH_L2_ESCAPE';
+  var STORE='cpush_l2_escape-room_';
+  var D=JSON.parse(document.getElementById('er-data').textContent);
+  var $=function(i){return document.getElementById(i)};
+  var S;
+  var digits={};            // runtime only: lock n -> digit
+  var entries={};           // lock id -> {h20: maskedDigit}
+  var expanded={};
+  var lastTick=0,timer=null;
+
+  function squash(t){return String(t).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'')}
+  function h20(s){return sha256u(s).slice(0,20)}
+  D.locks.forEach(function(L){var m={};L.entries.forEach(function(e){m[e.slice(0,20)]=+e.slice(20)});entries[L.id]=m});
+
+  function checkLock(L,canon){
+    var salt=D.salt+L.n+':';
+    var h=h20(salt+canon),mk=entries[L.id][h];
+    if(mk===undefined)return null;
+    var m=parseInt(sha256u('m:'+salt+canon).slice(0,2),16)%10;
+    return (mk-m+10)%10;
+  }
+  function fresh(){
+    var o={first:'',last:'',period:'',started:false,elapsed:0,escaped:false,escapeMs:0,debrief:'',codeTries:0,locks:{}};
+    D.locks.forEach(function(L){o.locks[L.id]={solved:false,attempts:0,hints:0,guess:'',readable:''}});
+    return o;
+  }
+  function loadLocal(){var o=fresh();try{var r=JSON.parse(localStorage.getItem(STORE+'state')||'null');if(r)restore(o,r)}catch(e){}return o}
+  function persist(){try{localStorage.setItem(STORE+'state',JSON.stringify(snapshot()))}catch(e){}}
+
+  function totals(){
+    var t={locksSolved:0,attempts:0,hintsUsed:0,exitCodeAttempts:S.codeTries};
+    D.locks.forEach(function(L){var l=S.locks[L.id];if(l.solved)t.locksSolved++;t.attempts+=l.attempts;t.hintsUsed+=l.hints});
+    return t;
+  }
+  function fmt(ms){var s=Math.round(ms/1000),m=Math.floor(s/60);s=s%60;return (m<10?'0':'')+m+':'+(s<10?'0':'')+s}
+  function snapshot(){
+    var o={packet:PACKET,course:'CPUSH',lesson:2,assignment:'Escape Room (Lite)',version:1,saved:new Date().toISOString(),
+      student:{first:$('f_first').value.trim(),last:$('f_last').value.trim(),period:$('f_period').value.trim()},
+      status:S.escaped?'ESCAPED':'INCOMPLETE',escaped:S.escaped,
+      escapeTime:S.escaped?{ms:S.escapeMs,text:fmt(S.escapeMs)}:null,
+      totals:totals(),elapsedMs:Math.round(S.elapsed),started:S.started,locks:{},debrief:$('debriefText')?$('debriefText').value:S.debrief};
+    D.locks.forEach(function(L){var l=S.locks[L.id];
+      o.locks[L.key]={objective:L.obj,puzzleType:L.type,solved:l.solved,attempts:l.attempts,hintsUsed:l.hints,solvedWith:l.readable,solvedGuess:l.guess}});
+    return o;
+  }
+  function restore(o,r){
+    if(!r||typeof r!=='object')return false;
+    var st=r.student||{};
+    o.first=st.first||'';o.last=st.last||'';o.period=st.period||'';
+    o.started=!!r.started;o.elapsed=+r.elapsedMs||0;o.debrief=typeof r.debrief==='string'?r.debrief:'';
+    o.codeTries=(r.totals&&+r.totals.exitCodeAttempts)||0;
+    var allOk=true;
+    D.locks.forEach(function(L){
+      var src=(r.locks&&r.locks[L.key])||{},l=o.locks[L.id];
+      l.attempts=+src.attempts||0;l.hints=Math.min(+src.hintsUsed||0,L.hints.length+0);
+      if(src.hintsUsed>L.hints.length)l.hints=L.hints.length;
+      if(src.solved&&typeof src.solvedGuess==='string'){
+        var d=checkLock(L,src.solvedGuess);
+        if(d!==null){l.solved=true;l.guess=src.solvedGuess;l.readable=String(src.solvedWith||'');digits[L.n]=d}else allOk=false;
+      }else allOk=false;
+    });
+    if(r.escaped&&allOk&&r.escapeTime){o.escaped=true;o.escapeMs=+r.escapeTime.ms||0}
+    return true;
+  }
+
+  /* ---------- scene ---------- */
+  var NS='http://www.w3.org/2000/svg';
+  var XS=[210,255,300,345,390];
+  (function(){
+    var g=$('plocks'),h='';
+    XS.forEach(function(x,i){
+      h+='<g class="plock" id="pl'+(i+1)+'"><path class="sh" d="M'+(x-8)+' 124V114a8 8 0 0 1 16 0V124" fill="none" stroke="#EBF4F4" stroke-width="4"/><rect class="bd" x="'+(x-15)+'" y="124" width="30" height="24" rx="4" fill="#D2B64B"/><circle cx="'+x+'" cy="135" r="3" fill="#194C4D"/></g>'+
+      '<rect x="'+(x-16)+'" y="158" width="32" height="36" rx="5" fill="#103133" stroke="#E1D08E"/><text id="dw'+(i+1)+'" x="'+x+'" y="184" text-anchor="middle" font-size="24" font-weight="800" fill="#EBF4F4">?</text><text x="'+x+'" y="208" text-anchor="middle" font-size="11" font-weight="700" fill="#D3E4E4">LOCK '+(i+1)+'</text>';
+    });
+    g.innerHTML=h;
+  })();
+  function sceneUpdate(){
+    D.locks.forEach(function(L){
+      var open=S.locks[L.id].solved;
+      $('pl'+L.n).setAttribute('class','plock'+(open?' open':''));
+      $('dw'+L.n).textContent=open?digits[L.n]:'?';
+    });
+    $('scene').classList.toggle('escaped',S.escaped);
+  }
+
+  /* ---------- build lock cards ---------- */
+  var W={};   // widget state per lock
+  var LOCKSVG='<svg class="lk" viewBox="0 0 44 44" aria-hidden="true"><path class="sh" d="M13 20V14a9 9 0 0 1 18 0V20" fill="none" stroke="#EBF4F4" stroke-width="4"/><rect class="bd" x="8" y="20" width="28" height="20" rx="4" fill="#D2B64B"/><circle cx="22" cy="30" r="3" fill="#194C4D"/></svg>';
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+  function buildLock(L){
+    var sec=document.createElement('section');sec.className='lock glass locked';sec.id='lock'+L.n;
+    var head='<button class="lh" type="button" id="lh'+L.n+'" aria-expanded="false">'+LOCKSVG+'<span class="lt"><small>LOCK '+L.n+' · '+L.objLabel+'</small><strong>'+esc(L.title)+'</strong></span><span class="dg" id="dg'+L.n+'" aria-label="digit">?</span></button>';
+    var body='<div class="lb" id="lb'+L.n+'"><p class="objline">'+esc(L.objText)+'</p>'+
+      '<div class="card"><h4>CLUE CARD</h4>'+L.card+'<p class="src">'+L.src+'</p></div>'+
+      '<div class="prompt">'+L.prompt+'</div><div id="pz'+L.n+'"></div>'+
+      '<div class="row"><button class="btn primary" type="button" id="ck'+L.n+'">Check</button><button class="btn small" type="button" id="hb'+L.n+'">Hint</button><button class="btn small" type="button" id="rs'+L.n+'">Clear</button></div>'+
+      '<div class="hints" id="hs'+L.n+'"></div><div class="fb" id="fb'+L.n+'" role="status"></div></div>';
+    sec.innerHTML=head+body;
+    $('locks').appendChild(sec);
+    buildPuzzle(L);
+    $('lh'+L.n).addEventListener('click',function(){
+      var st=lockState(L);if(st==='locked')return;
+      expanded[L.n]=!expanded[L.n];updateLocks();
+    });
+    $('ck'+L.n).addEventListener('click',function(){submit(L)});
+    $('hb'+L.n).addEventListener('click',function(){hint(L)});
+    $('rs'+L.n).addEventListener('click',function(){clearPuzzle(L)});
+  }
+  function labelOf(list,id){for(var i=0;i<list.length;i++)if(list[i].id===id)return list[i].label;return id}
+
+  function buildPuzzle(L){
+    var el=$('pz'+L.n),w=W[L.n]={};
+    if(L.type==='order'){
+      w.sel=[];el.innerHTML='<div class="chips" id="ch'+L.n+'"></div>';
+      renderOrder(L);
+    }else if(L.type==='match'){
+      var h='';
+      L.terms.forEach(function(t){
+        h+='<div class="mrow"><label for="m'+L.n+t.id+'">'+esc(t.label)+'</label><select id="m'+L.n+t.id+'"><option value="">Choose a description...</option>';
+        L.descs.forEach(function(d){h+='<option value="'+d.id+'">'+esc(d.label)+'</option>'});
+        h+='</select></div>';
+      });
+      el.innerHTML=h;
+    }else if(L.type==='pick'){
+      var h2='';
+      L.qs.forEach(function(q){
+        h2+='<fieldset><legend>'+esc(q.q)+'</legend>';
+        q.opts.forEach(function(o){h2+='<label class="opt"><input type="radio" name="q'+L.n+q.id+'" value="'+o.id+'"> <span>'+esc(o.label)+'</span></label>'});
+        h2+='</fieldset>';
+      });
+      el.innerHTML=h2;
+    }else if(L.type==='decode'){
+      var k1='',k2='';
+      for(var i=0;i<26;i++){var p=String.fromCharCode(65+i),c=String.fromCharCode(65+(i+L.shift)%26);k1+='<div class="c">'+c+'</div>';k2+='<div>'+p+'</div>'}
+      // build key in two rows of 13
+      var key='';
+      for(var r=0;r<2;r++){for(var j=0;j<13;j++){var idx=r*13+j;key+='<div class="c">'+String.fromCharCode(65+(idx+L.shift)%26)+'</div>'}for(var j2=0;j2<13;j2++){key+='<div>'+String.fromCharCode(65+r*13+j2)+'</div>'}}
+      el.innerHTML='<div class="cipher" translate="no" aria-label="Coded message">'+esc(L.cipher)+'</div><p style="margin:.6em 0 0;font-size:15px;color:var(--dim)">Decoder key: the <span style="color:var(--hl);font-weight:700">gold</span> letter is in the message. The white letter under it is the real letter.</p><div class="key" aria-hidden="true">'+key+'</div><label>Decoded answer<input type="text" id="tx'+L.n+'" autocomplete="off" autocapitalize="none" spellcheck="false"></label><p class="ennote">Type the answer in English.</p>';
+    }else if(L.type==='fill'){
+      el.innerHTML='<p style="font-size:18px;margin:.2em 0">'+esc(L.sentence)+'</p><div class="scr" translate="no" aria-label="Scrambled letters">'+esc(L.scramble)+'</div><p style="margin:.4em 0;font-size:14px;color:var(--dim)">Unscramble the letters to fill the blank.</p><label>Your answer<input type="text" id="tx'+L.n+'" autocomplete="off" autocapitalize="none" spellcheck="false"></label><p class="ennote">Type the answer in English.</p>';
+    }
+    var t=$('tx'+L.n);
+    if(t)t.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();submit(L)}});
+  }
+  function renderOrder(L){
+    var w=W[L.n],ch=$('ch'+L.n),h='';
+    L.items.forEach(function(it){
+      var pos=w.sel.indexOf(it.id);
+      h+='<button type="button" class="chip'+(pos>=0?' sel':'')+'" data-id="'+it.id+'" aria-pressed="'+(pos>=0)+'">'+(pos>=0?'<span class="n">'+(pos+1)+'</span>':'')+'<span>'+esc(it.label)+'</span></button>';
+    });
+    ch.innerHTML=h;
+    [].forEach.call(ch.querySelectorAll('.chip'),function(b){
+      b.addEventListener('click',function(){
+        if(S.locks[L.id].solved)return;
+        var id=b.getAttribute('data-id'),p=w.sel.indexOf(id);
+        if(p>=0)w.sel.splice(p,1);else w.sel.push(id);
+        renderOrder(L);
+      });
+    });
+  }
+  function clearPuzzle(L){
+    if(S.locks[L.id].solved)return;
+    var w=W[L.n];
+    if(L.type==='order'){w.sel=[];renderOrder(L)}
+    else if(L.type==='match'){L.terms.forEach(function(t){$('m'+L.n+t.id).value=''})}
+    else if(L.type==='pick'){L.qs.forEach(function(q){[].forEach.call(document.getElementsByName('q'+L.n+q.id),function(r){r.checked=false})})}
+    else{$('tx'+L.n).value=''}
+    fb(L,'','');
+  }
+  function guessOf(L){
+    // returns {canon, readable} or {err}
+    if(L.type==='order'){
+      var w=W[L.n];
+      if(w.sel.length<L.items.length)return {err:'Tap all '+L.items.length+' events first, in order.'};
+      return {canon:w.sel.join('|'),readable:w.sel.map(function(i){return labelOf(L.items,i)}).join(' > ')};
+    }
+    if(L.type==='match'){
+      var c=[],r=[];
+      for(var i=0;i<L.terms.length;i++){var t=L.terms[i],v=$('m'+L.n+t.id).value;if(!v)return {err:'Match every term first.'};c.push(v);r.push(t.label+' = '+labelOf(L.descs,v))}
+      return {canon:c.join('|'),readable:r.join('; ')};
+    }
+    if(L.type==='pick'){
+      var c2=[],r2=[];
+      for(var j=0;j<L.qs.length;j++){var q=L.qs[j],v2='';[].forEach.call(document.getElementsByName('q'+L.n+q.id),function(x){if(x.checked)v2=x.value});if(!v2)return {err:'Answer every question first.'};c2.push(v2);r2.push(labelOf(q.opts,v2))}
+      return {canon:c2.join('|'),readable:r2.join('; ')};
+    }
+    var raw=$('tx'+L.n).value.trim();
+    if(!raw)return {err:'Type your answer first.'};
+    return {canon:squash(raw),readable:raw.slice(0,80)};
+  }
+  function fb(L,cls,text){var e=$('fb'+L.n);e.className='fb'+(cls?' show '+cls:'');e.textContent=text}
+  function submit(L){
+    var l=S.locks[L.id];if(l.solved)return;
+    var g=guessOf(L);
+    if(g.err){fb(L,'nudge',g.err);return}
+    l.attempts++;
+    var d=checkLock(L,g.canon);
+    if(d===null){
+      fb(L,'nudge',L.nudge);
+      var s=$('lock'+L.n);s.classList.remove('shake');void s.offsetWidth;s.classList.add('shake');
+      persist();updateBar();return;
+    }
+    l.solved=true;l.guess=g.canon;l.readable=g.readable;digits[L.n]=d;
+    fb(L,'good','Click! Lock '+L.n+' is open. Your digit is '+d+'.');
+    var wh=$('wheel');wh.classList.remove('spin');void wh.getBoundingClientRect();wh.classList.add('spin');
+    $('dw'+L.n).classList.add('pop');
+    persist();updateAll();
+    setTimeout(function(){
+      expanded[L.n]=false;
+      var nx=nextOpen();if(nx)expanded[nx]=true;
+      updateLocks();
+      var tgt=nx?$('lock'+nx):$('exit');
+      if(tgt&&tgt.scrollIntoView)tgt.scrollIntoView({behavior:'smooth',block:'start'});
+    },1600);
+  }
+  function hint(L){
+    var l=S.locks[L.id];
+    if(l.solved)return;
+    if(l.hints<L.hints.length){l.hints++;persist();updateHints(L);updateBar()}
+    else{fb(L,'nudge','That was the last hint. Read the Clue Card slowly and try again.')}
+  }
+  function updateHints(L){
+    var l=S.locks[L.id],h='';
+    for(var i=0;i<l.hints;i++)h+='<div class="hint"><b>Hint '+(i+1)+':</b> <span>'+esc(L.hints[i])+'</span></div>';
+    $('hs'+L.n).innerHTML=h;
+  }
+  function nextOpen(){for(var i=0;i<D.locks.length;i++)if(!S.locks[D.locks[i].id].solved)return D.locks[i].n;return 0}
+  function lockState(L){
+    if(S.locks[L.id].solved)return 'solved';
+    return L.n===nextOpen()?'current':'locked';
+  }
+  function updateLocks(){
+    var cur=nextOpen();
+    D.locks.forEach(function(L){
+      var st=lockState(L),sec=$('lock'+L.n);
+      if(st==='current'&&expanded[L.n]===undefined)expanded[L.n]=true;
+      var open=(st!=='locked')&&!!expanded[L.n];
+      sec.className='lock glass '+st+(open?' open':'');
+      $('lh'+L.n).setAttribute('aria-expanded',open?'true':'false');
+      $('dg'+L.n).textContent=S.locks[L.id].solved?digits[L.n]:'?';
+      if(S.locks[L.id].solved){
+        [].forEach.call(sec.querySelectorAll('input,select,button.chip,#ck'+L.n+',#hb'+L.n+',#rs'+L.n),function(x){x.disabled=true});
+        var f=$('fb'+L.n);if(!f.classList.contains('good'))fb(L,'good','Unlocked. Your digit is '+digits[L.n]+'.'+(S.locks[L.id].readable?' Your answer: '+S.locks[L.id].readable:''));
+      }
+      updateHints(L);
+    });
+  }
+  function codeStr(){var s='';for(var i=1;i<=5;i++)s+=(digits[i]===undefined?'':digits[i]);return s}
+  function allSolved(){return D.locks.every(function(L){return S.locks[L.id].solved})}
+  function updateExit(){
+    var ok=allSolved();
+    $('exit').classList.toggle('locked',!ok);
+    $('codeBtn').disabled=!ok||S.escaped;
+    [].forEach.call($('codebox').querySelectorAll('input'),function(i){i.disabled=!ok||S.escaped});
+    $('exitNote').textContent=S.escaped?'The door is open!':(ok?'All 5 locks are open. Type the 5 digits in order, Lock 1 first.':'Open all 5 locks first. The digits go in order: Lock 1 first.');
+  }
+  function updateBar(){
+    var t=totals();
+    $('lc').textContent=t.locksSolved;$('hc').textContent=t.hintsUsed;
+    $('tm').textContent=fmt(S.escaped?S.escapeMs:S.elapsed);
+  }
+  function updateStatus(){
+    var el=$('status'),db=($('debriefText').value.trim().length);
+    if(S.escaped)el.textContent=db>=40?'You escaped and wrote your Debrief. Ready to submit.':'You escaped! Write your Debrief, then download your file to submit.';
+    else el.textContent='Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.';
+  }
+  function updateEsc(){
+    $('esc').classList.toggle('show',S.escaped);
+    if(S.escaped){var t=totals();$('escTime').textContent=fmt(S.escapeMs);$('escSum').textContent='5 of 5 locks opened with '+t.attempts+' tries and '+t.hintsUsed+' hint'+(t.hintsUsed===1?'':'s')+'.'}
+  }
+  function updateAll(){sceneUpdate();updateLocks();updateExit();updateBar();updateEsc();updateStatus();
+    $('intro').classList.toggle('hidden',S.started);$('game').classList.toggle('hidden',!S.started);$('loadOnly').classList.toggle('hidden',S.started);
+  }
+
+  /* ---------- exit code ---------- */
+  (function(){
+    var cb=$('codebox');
+    for(var i=0;i<5;i++){
+      var inp=document.createElement('input');inp.type='text';inp.inputMode='numeric';inp.maxLength=1;inp.setAttribute('aria-label','Exit code digit '+(i+1));inp.disabled=true;
+      (function(i,inp){
+        inp.addEventListener('input',function(){inp.value=inp.value.replace(/[٠-٩]/g,function(c){return c.charCodeAt(0)-1632}).replace(/[۰-۹]/g,function(c){return c.charCodeAt(0)-1776}).replace(/[^0-9]/g,'');if(inp.value&&i<4)cb.children[i+1].focus()});
+        inp.addEventListener('keydown',function(e){
+          if(e.key==='Backspace'&&!inp.value&&i>0)cb.children[i-1].focus();
+          if(e.key==='Enter'){e.preventDefault();tryCode()}
+        });
+        inp.addEventListener('paste',function(e){
+          var t=(e.clipboardData||window.clipboardData).getData('text').replace(/[٠-٩]/g,function(c){return c.charCodeAt(0)-1632}).replace(/[۰-۹]/g,function(c){return c.charCodeAt(0)-1776}).replace(/[^0-9]/g,'');
+          if(t.length>1){e.preventDefault();for(var k=0;k<5;k++)cb.children[k].value=t[k]||''}
+        });
+      })(i,inp);
+      cb.appendChild(inp);
+    }
+  })();
+  function tryCode(){
+    if(!allSolved()||S.escaped)return;
+    var v='';[].forEach.call($('codebox').querySelectorAll('input'),function(i){v+=i.value});
+    var f=$('codefb');
+    if(v.length<5){f.className='fb show nudge';f.textContent='The code has 5 digits. Fill every box.';return}
+    S.codeTries++;
+    if(h20('exit:'+D.salt+v)!==D.exitHash){
+      f.className='fb show nudge';f.textContent='The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.';
+      var ex=$('exit');ex.classList.remove('shake');void ex.offsetWidth;ex.classList.add('shake');
+      persist();return;
+    }
+    S.escaped=true;S.escapeMs=S.elapsed;
+    f.className='fb show good';f.textContent='The door swings open!';
+    persist();updateAll();
+    setTimeout(function(){$('esc').scrollIntoView({behavior:'smooth',block:'start'})},900);
+  }
+  $('codeBtn').addEventListener('click',tryCode);
+
+  /* ---------- timer ---------- */
+  function tick(){
+    var n=Date.now();
+    if(S.started&&!S.escaped){S.elapsed+=Math.min(n-lastTick,5000);$('tm').textContent=fmt(S.elapsed)}
+    lastTick=n;
+  }
+  function startTimer(){lastTick=Date.now();if(!timer)timer=setInterval(function(){tick();if(Math.round(S.elapsed/1000)%10===0)persist()},1000)}
+
+  /* ---------- files ---------- */
+  function msg(t,err){var m=$('msg');m.textContent=t;m.className='msg'+(err?' err':'');m.style.display='block'}
+  function ascii(n){return String(n).normalize('NFD').replace(/[̀-ͯ]/g,'')}
+  function clean(n){n=window.spAscii?spAscii(n):n;return ascii(n).trim().replace(/\s+/g,'_').replace(/[^A-Za-z0-9_-]/g,'')}
+  function who(){return (clean($('f_last').value)||'Last')+'_'+(clean($('f_first').value)||'First')}
+  function download(name,obj){
+    var blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;
+    document.body.appendChild(a);a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);
+  }
+  function namesOk(){
+    var ids=['f_first','f_last','f_period'],ok=true;
+    ids.forEach(function(i){var f=$(i);if(!f.value.trim()){f.classList.add('bad');ok=false}});
+    if(!ok){msg('Enter your first name, last name, and period at the top first.',true);$('f_first').scrollIntoView({block:'center'})}
+    return ok;
+  }
+  ['f_first','f_last','f_period'].forEach(function(i){$(i).addEventListener('input',function(){$(i).classList.remove('bad');S[i.slice(2)]=$(i).value;persist()})});
+  $('debriefText').addEventListener('input',function(){S.debrief=$('debriefText').value;persist();updateStatus()});
+  $('saveBtn').addEventListener('click',function(){
+    if(!namesOk())return;tick();
+    download(who()+'-'+PACKET+'-PROGRESS.json',snapshot());
+    msg('Progress file downloaded. Use Load Progress to continue later.');
+  });
+  $('finishBtn').addEventListener('click',function(){
+    if(!namesOk())return;tick();
+    var now=new Date(),o=snapshot();o.completed=S.escaped;o.submitted=now.toISOString();
+    o.student.date=now.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+    download(who()+'-'+PACKET+'.json',o);
+    msg(S.escaped?('Done! File downloaded: '+who()+'-'+PACKET+'.json. Upload it to Canvas.'):('Your file downloaded and is marked INCOMPLETE (you have not escaped). Upload it to Canvas: '+who()+'-'+PACKET+'.json'));
+  });
+  function openLoad(){$('loadFile').click()}
+  $('loadBtn').addEventListener('click',openLoad);$('loadBtn0').addEventListener('click',openLoad);
+  $('loadFile').addEventListener('change',function(e){
+    var f=e.target.files[0];if(!f)return;
+    var r=new FileReader();
+    r.onload=function(){
+      try{
+        var o=JSON.parse(r.result);
+        if(!o||o.packet!==PACKET||typeof o.locks!=='object')throw new Error('wrong');
+        digits={};var n=fresh();restore(n,o);S=n;applyToDom();
+        msg('Progress loaded. Welcome back.');
+      }catch(err){msg('That file did not work. Choose a progress file saved from this Escape Room.',true)}
+      e.target.value='';
+    };
+    r.onerror=function(){msg('The file could not be read.',true)};
+    r.readAsText(f);
+  });
+  $('reset').addEventListener('click',function(){
+    if(!confirm('Clear all your work and start over? This cannot be undone.'))return;
+    digits={};expanded={};S=fresh();
+    try{localStorage.removeItem(STORE+'state')}catch(e){}
+    $('locks').innerHTML='';D.locks.forEach(buildLock);
+    $('f_first').value=$('f_last').value=$('f_period').value='';$('debriefText').value='';
+    [].forEach.call($('codebox').querySelectorAll('input'),function(i){i.value=''});$('codefb').className='fb';
+    applyToDom();
+  });
+  function applyToDom(){
+    $('f_first').value=S.first;$('f_last').value=S.last;$('f_period').value=S.period;$('debriefText').value=S.debrief;
+    // rebuild lock widgets, then pre-fill solved ones with readable note
+    $('locks').innerHTML='';D.locks.forEach(buildLock);
+    expanded={};
+    updateAll();
+    if(S.started)startTimer();
+  }
+  $('startBtn').addEventListener('click',function(){S.started=true;persist();startTimer();updateAll();$('game').scrollIntoView({behavior:'smooth'})});
+  window.addEventListener('beforeunload',function(){tick();persist()});
+
+  S=loadLocal();
+  D.locks.forEach(buildLock);
+  applyToDom();
+})();
+</script>
+<!--sp-i18n--><script type="application/json" id="sp-i18n">{"langs":["en","es","ar"],"default":"en","es":{"Save Progress":"Guardar progreso","Load Progress":"Cargar progreso","Finished — Download File to Submit":"Terminé — Descargar el archivo para entregar","Clear all my answers":"Borrar todas mis respuestas","FIRST NAME *":"NOMBRE *","LAST NAME *":"APELLIDO *","PERIOD *":"PERÍODO *","DATE (fills in when you finish)":"FECHA (se llena cuando terminas)","e.g. 3":"p. ej., 3","Automatic":"Automática","Please type your first name, last name, and period first.":"Primero escribe tu nombre, apellido y período.","Western Expansion and Southern Secession":"Expansión hacia el oeste y secesión del sur","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — La Ley de Esclavos Fugitivos","Bleeding Kansas":"Bleeding Kansas — Kansas sangriento","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"Se descargó tu archivo de progreso. Guárdalo bien. Usa «Cargar progreso» para continuar más tarde.","Progress loaded.":"Progreso cargado.","Could not read that file.":"No se pudo leer ese archivo.","Treaty of Guadalupe Hidalgo":"Tratado de Guadalupe Hidalgo","A ferryman’s cottage at night. On the left, a window showing the moon, a river, and a flat ferry, and a lantern on a small table. On the right, two oars leaning on the wall, a ferry horn on a hook, and a hanging fishing net. The door has a FERRYMAN’S COTTAGE sign and five padlocks in a row. Under each padlock is a window for one digit of the exit code.":"Una cabaña de barquero de noche. A la izquierda, una ventana que muestra la luna, un río y una balsa plana, y un farol sobre una mesita. A la derecha, dos remos apoyados en la pared, un cuerno de balsa colgado de un gancho y una red de pesca colgada. La puerta tiene un letrero de CABAÑA DEL BARQUERO y cinco candados en fila. Debajo de cada candado hay una ventanita para un dígito del código de salida.","A prejudice against certain groups of immigrants is called ________.":"A un prejuicio contra ciertos grupos de inmigrantes se le llama ________.","A small colony ruled with strong power from France that traded furs":"Una colonia pequeña gobernada con mucho poder desde Francia que comerciaba con pieles","All 5 locks are open. Type the 5 digits in order, Lock 1 first.":"Los 5 candados están abiertos. Escribe los 5 dígitos en orden, primero el del Candado 1.","An indenture lasted three to seven years. Servitude did not last a lifetime. New England’s soil was rocky. By the 1640s slavery was permanent and based on race.":"Un contrato de servidumbre duraba de tres a siete años. La servidumbre no duraba toda la vida. El suelo de Nueva Inglaterra era rocoso. Para la década de 1640, la esclavitud era permanente y se basaba en la raza.","Answer every question first.":"Primero responde todas las preguntas.","By the 1640s in the Chesapeake colonies, how had slavery changed?":"Para la década de 1640, en las colonias de Chesapeake, ¿cómo había cambiado la esclavitud?","CLUE CARD":"TARJETA DE INDICIOS","Check":"Comprobar","Choose a description...":"Elige una descripción...","Clear":"Borrar","Clear all my work and start over":"Borrar todo mi trabajo y empezar de nuevo","Colonial Society and the Road to Independence":"La sociedad colonial y el camino a la independencia","Colonies with elected assemblies and a habit of self-government":"Colonias con asambleas elegidas y el hábito de gobernarse a sí mismas","Core Objective 1: Explain the major factors that contributed to the demographic changes in the British American colonies during the eighteenth century. Core Objective 2: Describe the various roles of White and enslaved women in the British American colonies.":"Objetivo principal 1: Explica los factores principales que contribuyeron a los cambios demográficos en las colonias británicas de América durante el siglo XVIII. Objetivo principal 2: Describe los distintos papeles de las mujeres blancas y de las mujeres esclavizadas en las colonias británicas de América.","Core Objective 3: Compare the societies and economies of the southern, New England, and middle colonies, and describe the roles of indentured servants, enslaved Indigenous people, and enslaved Africans. Core Objective 4: Describe the creation of race-based chattel slavery during the seventeenth century and its impact on the social and economic development of colonial America.":"Objetivo principal 3: Compara las sociedades y las economías de las colonias del sur, de Nueva Inglaterra y centrales, y describe los papeles de los sirvientes por contrato, los indígenas esclavizados y los africanos esclavizados. Objetivo principal 4: Describe la creación de la esclavitud de bienes muebles basada en la raza durante el siglo XVII y su impacto en el desarrollo social y económico de la América colonial.","Core Objective 5: Analyze the impact of the Enlightenment and Great Awakening on American religious thought during the colonial period. Core Objective 6: Compare how the British and French Empires administered their colonies before 1763.":"Objetivo principal 5: Analiza el impacto de la Ilustración y del Gran Despertar en el pensamiento religioso estadounidense durante la época colonial. Objetivo principal 6: Compara cómo los imperios británico y francés administraban sus colonias antes de 1763.","Core Objective 7: Analyze how the French and Indian War changed relations among the European powers in North America. Core Objective 8: Describe how, after the French and Indian War, the British tightened their control over the colonies, and summarize the colonial responses.":"Objetivo principal 7: Analiza cómo la Guerra Franco-India cambió las relaciones entre las potencias europeas en América del Norte. Objetivo principal 8: Describe cómo, después de la Guerra Franco-India, los británicos aumentaron su control sobre las colonias, y resume las respuestas de los colonos.","Core Objective 9: Explain the underlying factors amid the events in the 1770s that led the colonists to declare their independence from Britain.":"Objetivo principal 9: Explica los factores de fondo, en medio de los sucesos de la década de 1770, que llevaron a los colonos a declarar su independencia de Gran Bretaña.","DEBRIEF":"INFORME FINAL","Debrief":"Informe final","Decoded answer":"Respuesta decodificada","Decoder key: the <span style=\"color:var(--hl);font-weight:700\">gold<\/span> letter is in the message. The white letter under it is the real letter.":"Clave del decodificador: la letra <span style=\"color:var(--hl);font-weight:700\">dorada<\/span> está en el mensaje. La letra blanca que está debajo es la letra verdadera.","ESCAPED":"¡ESCAPASTE!","Each answer is in the Clue Card. Look for how long an indenture lasted, how servitude and slavery differed, why New England turned to the sea, and the change in the 1640s.":"Cada respuesta está en la tarjeta de indicios. Busca cuánto duraba un contrato de servidumbre, en qué se diferenciaban la servidumbre y la esclavitud, por qué Nueva Inglaterra se volcó al mar y el cambio de la década de 1640.","Enter the Cottage":"Entrar a la cabaña","Enter your first name, last name, and period at the top first.":"Primero escribe tu nombre, apellido y período arriba.","Escape the Ferryman’s Cottage":"Escapa de la cabaña del barquero","Exit code digit 1":"Dígito 1 del código de salida","Exit door":"Puerta de salida","FERRYMAN’S COTTAGE":"CABAÑA DEL BARQUERO","Fill in the blank using the Clue Card.":"Llena el espacio en blanco con la tarjeta de indicios.","Have a saved file? Load it to continue.":"¿Tienes un archivo guardado? Cárgalo para continuar.","Hint":"Pista","Hints used":"Pistas usadas","How long was a typical indenture?":"¿Cuánto duraba un contrato de servidumbre típico?","How to escape:":"Cómo escapar:","If you get stuck, press <b>Hint<\/b>. Hints are free, but your teacher can see how many you used.":"Si te atoras, oprime <b>Pista<\/b>. Las pistas son gratis, pero tu maestro puede ver cuántas usaste.","In January 1776, Thomas Paine published a pamphlet called <b>Common Sense<\/b>. It attacked the king directly, and more than 150,000 copies were circulating in three months.":"En enero de 1776, Thomas Paine publicó un folleto llamado <b>Common Sense<\/b> (Sentido común). Atacó directamente al rey, y en tres meses circulaban más de 150,000 copias.","In March 1770, a clash between a Boston crowd and British soldiers, the Boston Massacre, left five men dead. In December 1773, Patriots dumped 342 chests of East India Company tea into Boston Harbor. In 1774, Parliament answered with the Coercive Acts, which closed Boston Harbor and limited self-government in Massachusetts. That September, delegates from twelve colonies met at the First Continental Congress to plan joint resistance. After fighting began at Lexington and Concord, the king refused to read Congress’s Olive Branch Petition.":"En marzo de 1770, un choque entre una multitud de Boston y soldados británicos, la Masacre de Boston, dejó cinco hombres muertos. En diciembre de 1773, los patriotas arrojaron 342 cajas de té de la Compañía de las Indias Orientales al puerto de Boston. En 1774, el Parlamento respondió con las Leyes Coercitivas, que cerraron el puerto de Boston y limitaron el autogobierno en Massachusetts. Ese septiembre, delegados de doce colonias se reunieron en el Primer Congreso Continental para planear una resistencia conjunta. Después de que empezaron los combates en Lexington y Concord, el rey se negó a leer la Petición de la Rama de Olivo del Congreso.","In the message, the letter F is really C, and the letter P is really M. The first word has 6 letters and starts with C. The second word has 5 letters and starts with S.":"En el mensaje, la letra F en realidad es C, y la letra P en realidad es M. La primera palabra tiene 6 letras y empieza con C. La segunda palabra tiene 5 letras y empieza con S.","It applied only to Indigenous people":"Se aplicaba solo a los pueblos indígenas","It had become permanent and based on race":"Se había vuelto permanente y basada en la raza","It had ended":"Había terminado","It had huge plantations":"Tenía enormes plantaciones","It had no ocean coast":"No tenía costa en el océano","It was limited to seven years":"Se limitaba a siete años","Its soil was rocky":"Su suelo era rocoso","Its weather was warm all year":"Su clima era cálido todo el año","Locks":"Candados","Look for the word in bold in the Clue Card. It names a prejudice against certain immigrants.":"Busca la palabra en negrita en la tarjeta de indicios. Nombra un prejuicio contra ciertos inmigrantes.","Look for the years in the Clue Card: 1754, 1763, 1765, and 1766.":"Busca los años en la tarjeta de indicios: 1754, 1763, 1765 y 1766.","Look for who praised reason, what the revivals were, which colony was small and traded furs, and which colonies had elected assemblies.":"Busca quién elogiaba la razón, qué eran los avivamientos, qué colonia era pequeña y comerciaba con pieles, y qué colonias tenían asambleas elegidas.","Many early workers were indentured servants, who agreed to work three to seven years to pay for the trip.":"Muchos de los primeros trabajadores eran sirvientes por contrato, que aceptaban trabajar de tres a siete años para pagar el viaje.","Match each idea or place to the best description. Use the Clue Card.":"Relaciona cada idea o lugar con la mejor descripción. Usa la tarjeta de indicios.","Match every term first.":"Primero relaciona todos los términos.","New France":"Nueva Francia","New France had fewer than 5 percent as many people as British America. In 1627, France said that only French Catholics could live there. France ruled it with absolute power, but it built a fur trade with Indigenous peoples. The British colonies had elected assemblies that controlled money and laws, so self-government became a habit. Britain controlled colonial trade with mercantilism and the Navigation Acts, but later enforced them loosely, a policy called salutary neglect.":"Nueva Francia tenía menos del 5 por ciento de la población de la América británica. En 1627, Francia dijo que solo los católicos franceses podían vivir allí. Francia la gobernaba con poder absoluto, pero desarrolló un comercio de pieles con los pueblos indígenas. Las colonias británicas tenían asambleas elegidas que controlaban el dinero y las leyes, así que el autogobierno se volvió un hábito. Gran Bretaña controlaba el comercio colonial con el mercantilismo y las Leyes de Navegación, pero después las aplicó con poco rigor, una política llamada negligencia saludable.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 3, “First Stirrings of a Common Colonial Culture” (The Enlightenment, The Great Awakening) and Ch. 4, “French and British Colonies” (New France, Relations with Indigenous Societies, The Habit of Self-Government, Mercantilism, Navigation Acts, A New Emerging Colonial System).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 3, “First Stirrings of a Common Colonial Culture” (The Enlightenment, The Great Awakening) y cap. 4, “French and British Colonies” (New France, Relations with Indigenous Societies, The Habit of Self-Government, Mercantilism, Navigation Acts, A New Emerging Colonial System).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 3, “Society and Economy in the Colonies” (Indentured Servitude, The Trade in Enslaved Native Americans, The Southern Colonies, New England, The Middle Colonies, Colonial Society: A Slave Society) and “Race-Based Chattel Slavery in the Colonies” (Differing Treatment of Enslaved Africans).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 3, “Society and Economy in the Colonies” (Indentured Servitude, The Trade in Enslaved Native Americans, The Southern Colonies, New England, The Middle Colonies, Colonial Society: A Slave Society) y “Race-Based Chattel Slavery in the Colonies” (Differing Treatment of Enslaved Africans).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 3, “The Demography of the Early Colonies” (Population Growth, Birth and Death Rates, Immigrants and Citizenship, Nativism) and “Women in the Colonies.”":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 3, “The Demography of the Early Colonies” (Population Growth, Birth and Death Rates, Immigrants and Citizenship, Nativism) y “Women in the Colonies.”","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 4, “The Road to the American Revolution” (The Boston Massacre, The Boston Tea Party, The Coercive Acts, The First Continental Congress, “Open and Avowed” Enemies, Independence, Breaking the Bonds of Empire, Jefferson’s Declaration, The Contradictions of Freedom and Slavery, The Status of Women).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 4, “The Road to the American Revolution” (The Boston Massacre, The Boston Tea Party, The Coercive Acts, The First Continental Congress, “Open and Avowed” Enemies, Independence, Breaking the Bonds of Empire, Jefferson’s Declaration, The Contradictions of Freedom and Slavery, The Status of Women).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 4, “Warfare in the Colonies” (The French and Indian War, The Albany Plan, The Treaty of Paris, Managing a New Empire, Pontiac’s Rebellion, The Proclamation Line) and “Tightening of Control over the British Colonies” (the Sugar Act, the Stamp Act, Protests, Nonimportation, Repeal, the Townshend Acts).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 4, “Warfare in the Colonies” (The French and Indian War, The Albany Plan, The Treaty of Paris, Managing a New Empire, Pontiac’s Rebellion, The Proclamation Line) y “Tightening of Control over the British Colonies” (the Sugar Act, the Stamp Act, Protests, Nonimportation, Repeal, the Townshend Acts).","Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.":"Todavía no escapas (se marca INCOMPLETO). Aun así puedes descargar tu archivo y entregarlo.","Not quite. At least one answer is off. Re-read the Clue Card for the length of an indenture, servitude and slavery, New England’s soil, and the 1640s.":"Casi. Al menos una respuesta no es correcta. Vuelve a leer la tarjeta de indicios sobre la duración de un contrato de servidumbre, la servidumbre y la esclavitud, el suelo de Nueva Inglaterra y la década de 1640.","Not quite. Check each match against the Clue Card. Which one are you least sure about?":"Casi. Revisa cada pareja con la tarjeta de indicios. ¿De cuál estás menos seguro?","Not quite. Decode one letter at a time with the key, then check your spelling.":"Casi. Decodifica una letra a la vez con la clave y luego revisa tu ortografía.","Not quite. Re-read the Clue Card and match each event to its year.":"Casi. Vuelve a leer la tarjeta de indicios y une cada suceso con su año.","Not quite. Re-read the Clue Card. Use the scrambled letters to check your spelling.":"Casi. Vuelve a leer la tarjeta de indicios. Usa las letras desordenadas para revisar tu ortografía.","On July 4, 1776, Congress adopted the Declaration of Independence. It said that all men are created equal and that governments get their power from the consent of the governed. But those words did not apply to enslaved people, and Southern delegates deleted Jefferson’s passage that blamed the king for slavery. In March 1776, Abigail Adams asked her husband John to remember the ladies in the new laws.":"El 4 de julio de 1776, el Congreso adoptó la Declaración de Independencia. Decía que todos los hombres son creados iguales y que los gobiernos obtienen su poder del consentimiento de los gobernados. Pero esas palabras no se aplicaban a las personas esclavizadas, y los delegados del Sur borraron el pasaje de Jefferson que culpaba al rey de la esclavitud. En marzo de 1776, Abigail Adams le pidió a su esposo John que se acordara de las damas en las nuevas leyes.","One last step: write your Debrief below.":"Un último paso: escribe tu Informe final abajo.","One or two months":"Uno o dos meses","Only slavery had a contract":"Solo la esclavitud tenía un contrato","Open all 5 locks first. The digits go in order: Lock 1 first.":"Primero abre los 5 candados. Los dígitos van en orden: primero el del Candado 1.","Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.":"Abre los 5 candados y luego escribe el código de salida de 5 dígitos. Termina con el Informe final.","Open each lock in order. Read the <b>Clue Card<\/b>. The answer is in the card.":"Abre cada candado en orden. Lee la <b>tarjeta de indicios<\/b>. La respuesta está en la tarjeta.","Open the Door":"Abrir la puerta","Parliament passes the Stamp Act":"El Parlamento aprueba la Ley del Timbre","Parliament repeals the Stamp Act":"El Parlamento revoca la Ley del Timbre","Parliament then raised money from the colonies with the Sugar Act (1764) and the Stamp Act (1765). Colonists said they had not agreed to these taxes, and they protested and boycotted British goods. Parliament repealed the Stamp Act in 1766, but in 1767 the Townshend Acts taxed imports such as glass, paper, and tea.":"Luego el Parlamento reunió dinero de las colonias con la Ley del Azúcar (1764) y la Ley del Timbre (1765). Los colonos dijeron que no habían aceptado esos impuestos, y protestaron y boicotearon los productos británicos. El Parlamento revocó la Ley del Timbre en 1766, pero en 1767 las Leyes Townshend gravaron importaciones como el vidrio, el papel y el té.","Pick the correct answer for all four questions.":"Elige la respuesta correcta en las cuatro preguntas.","Praised reason, science, and individual freedom":"Elogiaba la razón, la ciencia y la libertad individual","Progress file downloaded. Use Load Progress to continue later.":"Se descargó el archivo de progreso. Usa «Cargar progreso» para continuar más tarde.","Progress loaded. Welcome back.":"Progreso cargado. Bienvenido de nuevo.","Servants were never given food":"A los sirvientes nunca se les daba comida","Servitude did not last a lifetime":"La servidumbre no duraba toda la vida","Servitude did not last a lifetime, but slavery did. In Carolina, as many as 50,000 Indigenous people, mostly women and children, were sold into slavery between 1670 and 1715. By the 1640s in the Chesapeake, slavery had become permanent and based on race. Slave codes then ruled most parts of enslaved people’s lives. About one in six enslaved Africans died on the Middle Passage, the voyage across the Atlantic.":"La servidumbre no duraba toda la vida, pero la esclavitud sí. En Carolina, hasta 50,000 personas indígenas, en su mayoría mujeres y niños, fueron vendidas como esclavas entre 1670 y 1715. Para la década de 1640 en Chesapeake, la esclavitud se había vuelto permanente y basada en la raza. Después, los códigos de esclavos regularon casi todos los aspectos de la vida de las personas esclavizadas. Cerca de uno de cada seis africanos esclavizados murió en el Pasaje del Medio (Middle Passage), el viaje a través del Atlántico.","Solve the puzzle to open the lock and reveal one digit.":"Resuelve el acertijo para abrir el candado y descubrir un dígito.","THE EXIT DOOR":"LA PUERTA DE SALIDA","Tap all 4 events first, in order.":"Primero toca los 4 sucesos, en orden.","Tap the four events in the order they happened. Tap an event again to take it back.":"Toca los cuatro sucesos en el orden en que ocurrieron. Toca un suceso otra vez para quitarlo.","Ten to twelve years":"De diez a doce años","That file did not work. Choose a progress file saved from this Escape Room.":"Ese archivo no funcionó. Elige un archivo de progreso guardado de esta sala de escape.","That was the last hint. Read the Clue Card slowly and try again.":"Esa fue la última pista. Lee la tarjeta de indicios despacio y vuelve a intentarlo.","The Albany Plan of Union is approved at Albany":"El Plan de Unión de Albany se aprueba en Albany","The British colonies":"Las colonias británicas","The Clue Card names a pamphlet from January 1776 that urged Americans to seek independence. A secret message gives its title. Each letter in the message was moved 3 steps forward in the alphabet. Decode it.":"La tarjeta de indicios nombra un folleto de enero de 1776 que animaba a los estadounidenses a buscar la independencia. Un mensaje secreto da su título. Cada letra del mensaje se movió 3 lugares hacia adelante en el alfabeto. Descífralo.","The Enlightenment":"La Ilustración","The Enlightenment praised reason, science, and individual freedom. Deists such as Thomas Jefferson and Benjamin Franklin believed that God made natural laws and then no longer acted directly in the world. The Great Awakening began in the 1730s as a wave of emotional religious revivals. Traveling preachers called itinerants, including some White women and African Americans, helped start it. Jonathan Edwards and George Whitefield were famous preachers of the revivals.":"La Ilustración elogiaba la razón, la ciencia y la libertad individual. Los deístas, como Thomas Jefferson y Benjamin Franklin, creían que Dios hizo las leyes naturales y que luego ya no actuaba directamente en el mundo. El Gran Despertar comenzó en la década de 1730 como una ola de avivamientos religiosos llenos de emoción. Predicadores viajeros llamados itinerantes, entre ellos algunas mujeres blancas y afroamericanos, ayudaron a iniciarlo. Jonathan Edwards y George Whitefield fueron predicadores famosos de los avivamientos.","The Enlightenment praised reason. The Great Awakening was emotional revivals. New France was small and traded furs. The British colonies had elected assemblies.":"La Ilustración elogiaba la razón. El Gran Despertar fue de avivamientos llenos de emoción. Nueva Francia era pequeña y comerciaba con pieles. Las colonias británicas tenían asambleas elegidas.","The Ferry Horn":"El cuerno de la balsa","The Fishing Net":"La red de pesca","The French and Indian War (1756–1763) began as a fight over the Ohio valley. In 1754, the Albany Plan of Union called for the colonies to unite, but it was rejected. In the Treaty of Paris (1763), France lost its North American land. Britain gained Canada and the land east of the Mississippi, and Spain received Louisiana. Britain now had a huge war debt and 10,000 soldiers to pay for in America. Indigenous nations, left out of the treaty talks, resisted British expansion in Pontiac’s Rebellion. The Proclamation of 1763 closed land west of the Appalachian Mountains to settlers, and many colonists disliked that.":"La Guerra Franco-India (1756–1763) comenzó como una pelea por el valle del Ohio. En 1754, el Plan de Unión de Albany pidió que las colonias se unieran, pero fue rechazado. En el Tratado de París (1763), Francia perdió sus tierras en América del Norte. Gran Bretaña ganó Canadá y las tierras al este del Misisipi, y España recibió Luisiana. Gran Bretaña ahora tenía una enorme deuda de guerra y 10,000 soldados que pagar en América. Las naciones indígenas, excluidas de las conversaciones del tratado, resistieron la expansión británica en la Rebelión de Pontiac. La Proclamación de 1763 cerró a los colonos las tierras al oeste de los montes Apalaches, y a muchos colonos no les gustó eso.","The Great Awakening":"El Gran Despertar","The Lantern":"El farol","The Oars":"Los remos","The Treaty of Paris ends the French and Indian War":"El Tratado de París pone fin a la Guerra Franco-India","The Window":"La Ventana","The clock starts when you press the button. Most students finish in about 20 minutes.":"El reloj empieza cuando oprimes el botón. La mayoría de los estudiantes termina en unos 20 minutos.","The code has 5 digits. Fill every box.":"El código tiene 5 dígitos. Llena todas las casillas.","The colonial population grew fast. It doubled about every 25 years and neared 2.5 million by 1775. Land was cheap, workers were scarce, and women married earlier than in England, so families were large. Immigrants kept arriving, and a 1740 law let them become British subjects after seven years. Some colonists showed <b>nativism<\/b>, a prejudice against certain groups of immigrants.":"La población colonial creció rápido. Se duplicaba más o menos cada 25 años y casi llegó a 2.5 millones en 1775. La tierra era barata, los trabajadores eran escasos y las mujeres se casaban más jóvenes que en Inglaterra, así que las familias eran grandes. Seguían llegando inmigrantes, y una ley de 1740 les permitía convertirse en súbditos británicos después de siete años. Algunos colonos mostraron <b>nativism<\/b> (nativismo), un prejuicio contra ciertos grupos de inmigrantes.","The colonial regions had different economies. The South grew tobacco, rice, and indigo on large plantations. New England had rocky soil, so its people turned to fishing, shipbuilding, and trade, and its economy also profited from the slave trade. The middle colonies were the most diverse.":"Las regiones coloniales tenían economías distintas. El Sur cultivaba tabaco, arroz e índigo en grandes plantaciones. Nueva Inglaterra tenía suelo rocoso, así que su gente se dedicó a la pesca, la construcción de barcos y el comercio, y su economía también se benefició del comercio de esclavos. Las colonias centrales eran las más diversas.","The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.":"La puerta no se abrió. Revisa los dígitos debajo de cada candado y escríbelos en orden: primero el del Candado 1.","The door is open!":"¡La puerta está abierta!","The door swings open!":"¡La puerta se abre de golpe!","The ferryman locked the cottage door for the night. A window, a lantern, a ferry horn, a pair of oars, and a fishing net are in the room. The door has <b>5 locks<\/b>. Each lock matches one big idea from Lesson 2. Solve them all to find the <b>5-digit exit code<\/b>.":"El barquero cerró con llave la puerta de la cabaña para la noche. En el cuarto hay una ventana, un farol, un cuerno de balsa, un par de remos y una red de pesca. La puerta tiene <b>5 candados<\/b>. Cada candado corresponde a una idea importante de la Lección 2. Resuélvelos todos para encontrar el <b>código de salida de 5 dígitos<\/b>.","The order is the Albany Plan (1754), the Treaty of Paris (1763), the Stamp Act (1765), then the repeal of the Stamp Act (1766).":"El orden es el Plan de Albany (1754), el Tratado de París (1763), la Ley del Timbre (1765) y luego la revocación de la Ley del Timbre (1766).","The rest of a person’s life":"El resto de la vida de una persona","The secret message gives the pamphlet’s title in the Clue Card. Use the decoder key to spell it, one letter at a time.":"El mensaje secreto da el título del folleto de la tarjeta de indicios. Usa la clave del decodificador para escribirlo, una letra a la vez.","The word starts with N and has 8 letters. It ends with “ism.”":"La palabra empieza con N y tiene 8 letras. Termina en “ism”.","There was no difference":"No había ninguna diferencia","Three to seven years":"De tres a siete años","Time":"Tiempo","Type the answer in English.":"Escribe la respuesta en inglés.","Type the answer in English. Use the digits 0-9.":"Escribe la respuesta en inglés. Usa los dígitos 0-9.","Type the exit code":"Escribe el código de salida","Type your answer first.":"Primero escribe tu respuesta.","Type your answer here...":"Escribe tu respuesta aquí...","UNIT 1 · COLONIES, REVOLUTION, AND CONSTITUTION | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 1 · COLONIAS, REVOLUCIÓN Y CONSTITUCIÓN | CPUSH | DANIEL GARZA, M.A.","Unlocked. Your digit is 1. Your answer: Three to seven years; Servitude did not last a lifetime; Its soil was rocky; It had become permanent and based on race":"Desbloqueado. Tu dígito es 1. Tu respuesta: De tres a siete años; La servidumbre no duraba toda la vida; Su suelo era rocoso; Se había vuelto permanente y basada en la raza","Unlocked. Your digit is 4. Your answer: The Albany Plan of Union is approved at Albany &gt; The Treaty of Paris ends the French and Indian War &gt; Parliament passes the Stamp Act &gt; Parliament repeals the Stamp Act":"Desbloqueado. Tu dígito es 4. Tu respuesta: El Plan de Unión de Albany se aprueba en Albany &gt; El Tratado de París pone fin a la Guerra Franco-India &gt; El Parlamento aprueba la Ley del Timbre &gt; El Parlamento revoca la Ley del Timbre","Unlocked. Your digit is 7. Your answer: The British colonies = Colonies with elected assemblies and a habit of self-government; The Great Awakening = Waves of emotional religious revivals led by traveling preachers; The Enlightenment = Praised reason, science, and individual freedom; New France = A small colony ruled with strong power from France that traded furs":"Desbloqueado. Tu dígito es 7. Tu respuesta: Las colonias británicas = Colonias con asambleas elegidas y el hábito de gobernarse a sí mismas; El Gran Despertar = Olas de avivamientos religiosos llenos de emoción dirigidos por predicadores viajeros; La Ilustración = Elogiaba la razón, la ciencia y la libertad individual; Nueva Francia = Una colonia pequeña gobernada con mucho poder desde Francia que comerciaba con pieles","Unscramble the letters to fill the blank.":"Ordena las letras para llenar el espacio en blanco.","Waves of emotional religious revivals led by traveling preachers":"Olas de avivamientos religiosos llenos de emoción dirigidos por predicadores viajeros","What was the most important difference between indentured servitude and slavery?":"¿Cuál era la diferencia más importante entre la servidumbre por contrato y la esclavitud?","Which lock was hardest, and what did you learn that you did not know before?":"¿Qué candado fue el más difícil y qué aprendiste que antes no sabías?","Why did New England turn to fishing, shipbuilding, and trade?":"¿Por qué Nueva Inglaterra se dedicó a la pesca, la construcción de barcos y el comercio?","Women’s roles were limited. White women were expected to run the home and care for children, and most could not vote, own property, or sign contracts. Enslaved women worked from before sunrise to after dark, in homes and in fields. A few women, such as Eliza Lucas Pinckney of South Carolina, managed plantations with the help of enslaved workers.":"Los papeles de las mujeres eran limitados. Se esperaba que las mujeres blancas dirigieran el hogar y cuidaran a los niños, y la mayoría no podía votar, tener propiedades ni firmar contratos. Las mujeres esclavizadas trabajaban desde antes del amanecer hasta después de oscurecer, en las casas y en los campos. Algunas mujeres, como Eliza Lucas Pinckney, de Carolina del Sur, dirigieron plantaciones con la ayuda de personas esclavizadas.","Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.":"Escribe de 3 a 4 oraciones. Nombra el candado y usa un dato de su tarjeta de indicios. Puedes escribirlo aunque no hayas escapado.","You are locked in the ferryman’s cottage.":"Estás encerrado en la cabaña del barquero.","You escaped and wrote your Debrief. Ready to submit.":"Escapaste y escribiste tu Informe final. Listo para entregar.","You escaped! Write your Debrief, then download your file to submit.":"¡Escapaste! Escribe tu Informe final y luego descarga tu archivo para entregarlo.","Your answer":"Tu respuesta","Your time:":"Tu tiempo:","digit":"dígito","Escape Room 2 · Colonial Society and the Road to Independence":"Sala de escape 2 · La sociedad colonial y el camino a la independencia","Clear all your work and start over? This cannot be undone.":"¿Borrar todo tu trabajo y empezar de nuevo? Esto no se puede deshacer."},"ar":{"Save Progress":"حفظ التقدم","Load Progress":"تحميل التقدم","Finished — Download File to Submit":"انتهيت — نزّل الملف لتسليمه","Clear all my answers":"امسح كل إجاباتي","FIRST NAME *":"الاسم الأول *","LAST NAME *":"اسم العائلة *","PERIOD *":"الحصة *","DATE (fills in when you finish)":"التاريخ (يُكتب تلقائيًا عند الانتهاء)","e.g. 3":"مثال: 3","Automatic":"تلقائي","Please type your first name, last name, and period first.":"اكتب أولًا اسمك الأول واسم العائلة والحصة.","Western Expansion and Southern Secession":"التوسع غربًا وانفصال الجنوب","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"الوحدة 3 · بيت منقسم وأُعيد بناؤه | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — قانون العبيد الهاربين","Bleeding Kansas":"Bleeding Kansas — كانساس النازفة","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"الوحدة 3 · بيت منقسم وأعيد بناؤه | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"تم تنزيل ملف التقدم. احتفظ به في مكان آمن. استخدم «تحميل التقدم» لتكمل لاحقًا.","Progress loaded.":"تم تحميل التقدم.","Could not read that file.":"تعذّرت قراءة هذا الملف.","Treaty of Guadalupe Hidalgo":"معاهدة غوادالوبي هيدالغو (Treaty of Guadalupe Hidalgo)","A ferryman’s cottage at night. On the left, a window showing the moon, a river, and a flat ferry, and a lantern on a small table. On the right, two oars leaning on the wall, a ferry horn on a hook, and a hanging fishing net. The door has a FERRYMAN’S COTTAGE sign and five padlocks in a row. Under each padlock is a window for one digit of the exit code.":"كوخ عبّار في الليل. على اليسار نافذة تُظهر القمر ونهرًا وعبّارة مسطّحة، وفانوس على طاولة صغيرة. وعلى اليمين مجدافان مسنودان إلى الجدار، وبوق عبّارة معلّق على خطّاف، وشبكة صيد معلّقة. على الباب لافتة «كوخ العبّار» وخمسة أقفال في صف. تحت كل قفل نافذة صغيرة لرقم واحد من رمز الخروج.","A prejudice against certain groups of immigrants is called ________.":"التحيّز ضد فئات معيّنة من المهاجرين يُسمّى ________.","A small colony ruled with strong power from France that traded furs":"مستعمرة صغيرة تحكمها فرنسا بسلطة قوية وتتاجر بالفراء","All 5 locks are open. Type the 5 digits in order, Lock 1 first.":"الأقفال الخمسة مفتوحة. اكتب الأرقام الخمسة بالترتيب: رقم القفل 1 أولًا.","An indenture lasted three to seven years. Servitude did not last a lifetime. New England’s soil was rocky. By the 1640s slavery was permanent and based on race.":"كان عقد الخدمة يدوم من ثلاث إلى سبع سنوات. ولم تكن الخدمة بعقد تدوم مدى الحياة. وكانت تربة نيو إنجلاند (New England) صخرية. وبحلول أربعينيات القرن السابع عشر (1640s) أصبحت العبودية دائمة وقائمة على العرق.","Answer every question first.":"أجب عن كل الأسئلة أولًا.","By the 1640s in the Chesapeake colonies, how had slavery changed?":"بحلول أربعينيات القرن السابع عشر (1640s) في مستعمرات تشيسابيك (Chesapeake)، كيف تغيّرت العبودية؟","CLUE CARD":"بطاقة القرائن","Check":"تحقق","Choose a description...":"اختر وصفًا...","Clear":"مسح","Clear all my work and start over":"امسح كل عملي وابدأ من جديد","Colonial Society and the Road to Independence":"المجتمع الاستعماري والطريق إلى الاستقلال","Colonies with elected assemblies and a habit of self-government":"مستعمرات لها مجالس منتخبة وعادة الحكم الذاتي","Core Objective 1: Explain the major factors that contributed to the demographic changes in the British American colonies during the eighteenth century. Core Objective 2: Describe the various roles of White and enslaved women in the British American colonies.":"الهدف الأساسي 1: اشرح العوامل الرئيسية التي أسهمت في التغيرات السكانية في المستعمرات البريطانية في أمريكا خلال القرن الثامن عشر. الهدف الأساسي 2: صِف الأدوار المختلفة للنساء البيض والنساء المستعبَدات في المستعمرات البريطانية في أمريكا.","Core Objective 3: Compare the societies and economies of the southern, New England, and middle colonies, and describe the roles of indentured servants, enslaved Indigenous people, and enslaved Africans. Core Objective 4: Describe the creation of race-based chattel slavery during the seventeenth century and its impact on the social and economic development of colonial America.":"الهدف الأساسي 3: قارن بين المجتمعات والاقتصادات في المستعمرات الجنوبية ومستعمرات نيو إنجلاند (New England) والمستعمرات الوسطى، وصِف أدوار الخدم بعقود، والسكان الأصليين المستعبَدين، والأفارقة المستعبَدين. الهدف الأساسي 4: صِف نشأة العبودية التملكية القائمة على العِرق خلال القرن السابع عشر وأثرها في التطور الاجتماعي والاقتصادي لأمريكا الاستعمارية.","Core Objective 5: Analyze the impact of the Enlightenment and Great Awakening on American religious thought during the colonial period. Core Objective 6: Compare how the British and French Empires administered their colonies before 1763.":"الهدف الأساسي 5: حلّل أثر عصر التنوير والصحوة الكبرى في الفكر الديني الأمريكي خلال الفترة الاستعمارية. الهدف الأساسي 6: قارن بين الطريقة التي أدارت بها الإمبراطوريتان البريطانية والفرنسية مستعمراتهما قبل عام 1763.","Core Objective 7: Analyze how the French and Indian War changed relations among the European powers in North America. Core Objective 8: Describe how, after the French and Indian War, the British tightened their control over the colonies, and summarize the colonial responses.":"الهدف الأساسي 7: حلّل كيف غيّرت الحرب الفرنسية والهندية العلاقات بين القوى الأوروبية في أمريكا الشمالية. الهدف الأساسي 8: صِف كيف شدّد البريطانيون سيطرتهم على المستعمرات بعد الحرب الفرنسية والهندية، ولخّص ردود فعل المستعمرين.","Core Objective 9: Explain the underlying factors amid the events in the 1770s that led the colonists to declare their independence from Britain.":"الهدف الأساسي 9: اشرح العوامل العميقة، وسط أحداث سبعينيات القرن الثامن عشر، التي دفعت المستعمرين إلى إعلان استقلالهم عن بريطانيا.","DEBRIEF":"الملخص الختامي","Debrief":"الملخص الختامي","Decoded answer":"الإجابة بعد فك التشفير","Decoder key: the <span style=\"color:var(--hl);font-weight:700\">gold<\/span> letter is in the message. The white letter under it is the real letter.":"مفتاح فك التشفير: الحرف <span style=\"color:var(--hl);font-weight:700\">الذهبي<\/span> هو الحرف الموجود في الرسالة. والحرف الأبيض تحته هو الحرف الحقيقي.","ESCAPED":"لقد هربت!","Each answer is in the Clue Card. Look for how long an indenture lasted, how servitude and slavery differed, why New England turned to the sea, and the change in the 1640s.":"كل إجابة موجودة في بطاقة القرائن. ابحث عن مدة عقد الخدمة، وعن الفرق بين الخدمة بعقد والعبودية، وعن سبب اتجاه نيو إنجلاند (New England) إلى البحر، وعن التغيّر في أربعينيات القرن السابع عشر (1640s).","Enter the Cottage":"ادخل الكوخ","Enter your first name, last name, and period at the top first.":"اكتب اسمك الأول واسم العائلة والحصة في الأعلى أولًا.","Escape the Ferryman’s Cottage":"اهرب من كوخ العبّار","Exit code digit 1":"رقم رمز الخروج 1","Exit door":"باب الخروج","FERRYMAN’S COTTAGE":"كوخ العبّار","Fill in the blank using the Clue Card.":"املأ الفراغ باستخدام بطاقة القرائن.","Have a saved file? Load it to continue.":"هل لديك ملف محفوظ؟ حمّله لتكمل.","Hint":"تلميح","Hints used":"التلميحات المستخدمة","How long was a typical indenture?":"كم كانت مدة عقد الخدمة المعتاد؟","How to escape:":"كيف تهرب:","If you get stuck, press <b>Hint<\/b>. Hints are free, but your teacher can see how many you used.":"إذا تعثرت، اضغط <b>تلميح<\/b>. التلميحات مجانية، لكن معلمك يستطيع أن يرى كم تلميحًا استخدمت.","In January 1776, Thomas Paine published a pamphlet called <b>Common Sense<\/b>. It attacked the king directly, and more than 150,000 copies were circulating in three months.":"في يناير 1776، نشر توماس باين (Thomas Paine) كتيّبًا اسمه <b>Common Sense<\/b> (الحسّ السليم). وقد هاجم الملك مباشرة، وفي ثلاثة أشهر كان أكثر من 150,000 نسخة منه متداولًا.","In March 1770, a clash between a Boston crowd and British soldiers, the Boston Massacre, left five men dead. In December 1773, Patriots dumped 342 chests of East India Company tea into Boston Harbor. In 1774, Parliament answered with the Coercive Acts, which closed Boston Harbor and limited self-government in Massachusetts. That September, delegates from twelve colonies met at the First Continental Congress to plan joint resistance. After fighting began at Lexington and Concord, the king refused to read Congress’s Olive Branch Petition.":"في مارس 1770، أدى اشتباك بين حشد من أهل بوسطن (Boston) وجنود بريطانيين، عُرف بمذبحة بوسطن (Boston Massacre)، إلى مقتل خمسة رجال. وفي ديسمبر 1773، ألقى الوطنيون 342 صندوقًا من شاي شركة الهند الشرقية (East India Company) في ميناء بوسطن. وفي عام 1774، ردّ البرلمان بالقوانين القسرية (Coercive Acts) التي أغلقت ميناء بوسطن وحدّت من الحكم الذاتي في ماساتشوستس (Massachusetts). وفي سبتمبر من ذلك العام اجتمع مندوبو اثنتي عشرة مستعمرة في الكونغرس القاري الأول (First Continental Congress) للتخطيط لمقاومة مشتركة. وبعد أن بدأ القتال في ليكسينغتون (Lexington) وكونكورد (Concord)، رفض الملك أن يقرأ عريضة غصن الزيتون (Olive Branch Petition) التي أرسلها الكونغرس.","In the message, the letter F is really C, and the letter P is really M. The first word has 6 letters and starts with C. The second word has 5 letters and starts with S.":"في الرسالة، الحرف F هو في الحقيقة C، والحرف P هو في الحقيقة M. الكلمة الأولى من 6 أحرف وتبدأ بحرف C. والكلمة الثانية من 5 أحرف وتبدأ بحرف S.","It applied only to Indigenous people":"كانت تنطبق على السكان الأصليين فقط","It had become permanent and based on race":"أصبحت دائمة وقائمة على العرق","It had ended":"كانت قد انتهت","It had huge plantations":"كانت فيها مزارع ضخمة","It had no ocean coast":"لم يكن لها ساحل على المحيط","It was limited to seven years":"كانت محدودة بسبع سنوات","Its soil was rocky":"كانت تربتها صخرية","Its weather was warm all year":"كان طقسها دافئًا طوال السنة","Locks":"الأقفال","Look for the word in bold in the Clue Card. It names a prejudice against certain immigrants.":"ابحث عن الكلمة المكتوبة بخط عريض في بطاقة القرائن. إنها تسمّي تحيّزًا ضد بعض المهاجرين.","Look for the years in the Clue Card: 1754, 1763, 1765, and 1766.":"ابحث عن السنوات في بطاقة القرائن: 1754 و1763 و1765 و1766.","Look for who praised reason, what the revivals were, which colony was small and traded furs, and which colonies had elected assemblies.":"ابحث عمّن مجّد العقل، وما كانت الصحوات الدينية، وأي مستعمرة كانت صغيرة وتتاجر بالفراء، وأي مستعمرات كان لها مجالس منتخبة.","Many early workers were indentured servants, who agreed to work three to seven years to pay for the trip.":"كان كثير من العمال الأوائل خدمًا بعقود، وافقوا على العمل من ثلاث إلى سبع سنوات لدفع تكلفة الرحلة.","Match each idea or place to the best description. Use the Clue Card.":"اربط كل فكرة أو مكان بأفضل وصف له. استخدم بطاقة القرائن.","Match every term first.":"طابق كل المصطلحات أولًا.","New France":"فرنسا الجديدة","New France had fewer than 5 percent as many people as British America. In 1627, France said that only French Catholics could live there. France ruled it with absolute power, but it built a fur trade with Indigenous peoples. The British colonies had elected assemblies that controlled money and laws, so self-government became a habit. Britain controlled colonial trade with mercantilism and the Navigation Acts, but later enforced them loosely, a policy called salutary neglect.":"كان عدد سكان فرنسا الجديدة (New France) أقل من 5 بالمئة من عدد سكان أمريكا البريطانية. وفي عام 1627 قالت فرنسا إن الكاثوليك الفرنسيين وحدهم يمكنهم العيش هناك. وكانت فرنسا تحكمها بسلطة مطلقة، لكنها أقامت تجارة فراء مع الشعوب الأصلية. وكان للمستعمرات البريطانية مجالس منتخبة تتحكم في المال والقوانين، فصار الحكم الذاتي عادة. وكانت بريطانيا تتحكم في التجارة الاستعمارية بالمركنتيلية (mercantilism) وقوانين الملاحة (Navigation Acts)، لكنها خفّفت تطبيقها بعد ذلك، وهي سياسة تُسمّى الإهمال المفيد (salutary neglect).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 3, “First Stirrings of a Common Colonial Culture” (The Enlightenment, The Great Awakening) and Ch. 4, “French and British Colonies” (New France, Relations with Indigenous Societies, The Habit of Self-Government, Mercantilism, Navigation Acts, A New Emerging Colonial System).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 3، “First Stirrings of a Common Colonial Culture” (The Enlightenment، The Great Awakening) والفصل 4، “French and British Colonies” (New France، Relations with Indigenous Societies، The Habit of Self-Government، Mercantilism، Navigation Acts، A New Emerging Colonial System).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 3, “Society and Economy in the Colonies” (Indentured Servitude, The Trade in Enslaved Native Americans, The Southern Colonies, New England, The Middle Colonies, Colonial Society: A Slave Society) and “Race-Based Chattel Slavery in the Colonies” (Differing Treatment of Enslaved Africans).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 3، “Society and Economy in the Colonies” (Indentured Servitude، The Trade in Enslaved Native Americans، The Southern Colonies، New England، The Middle Colonies، Colonial Society: A Slave Society) و“Race-Based Chattel Slavery in the Colonies” (Differing Treatment of Enslaved Africans).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 3, “The Demography of the Early Colonies” (Population Growth, Birth and Death Rates, Immigrants and Citizenship, Nativism) and “Women in the Colonies.”":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 3، “The Demography of the Early Colonies” (Population Growth، Birth and Death Rates، Immigrants and Citizenship، Nativism) و“Women in the Colonies.”","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 4, “The Road to the American Revolution” (The Boston Massacre, The Boston Tea Party, The Coercive Acts, The First Continental Congress, “Open and Avowed” Enemies, Independence, Breaking the Bonds of Empire, Jefferson’s Declaration, The Contradictions of Freedom and Slavery, The Status of Women).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 4، “The Road to the American Revolution” (The Boston Massacre، The Boston Tea Party، The Coercive Acts، The First Continental Congress، “Open and Avowed” Enemies، Independence، Breaking the Bonds of Empire، Jefferson’s Declaration، The Contradictions of Freedom and Slavery، The Status of Women).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 4, “Warfare in the Colonies” (The French and Indian War, The Albany Plan, The Treaty of Paris, Managing a New Empire, Pontiac’s Rebellion, The Proclamation Line) and “Tightening of Control over the British Colonies” (the Sugar Act, the Stamp Act, Protests, Nonimportation, Repeal, the Townshend Acts).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 4، “Warfare in the Colonies” (The French and Indian War، The Albany Plan، The Treaty of Paris، Managing a New Empire، Pontiac’s Rebellion، The Proclamation Line) و“Tightening of Control over the British Colonies” (the Sugar Act، the Stamp Act، Protests، Nonimportation، Repeal، the Townshend Acts).","Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.":"لم تهرب بعد (يُسجَّل «غير مكتمل» INCOMPLETE). ما زال بإمكانك تنزيل ملفك وتسليمه.","Not quite. At least one answer is off. Re-read the Clue Card for the length of an indenture, servitude and slavery, New England’s soil, and the 1640s.":"ليس تمامًا. إجابة واحدة على الأقل غير صحيحة. أعد قراءة بطاقة القرائن عن مدة عقد الخدمة، والخدمة بعقد والعبودية، وتربة نيو إنجلاند (New England)، وأربعينيات القرن السابع عشر (1640s).","Not quite. Check each match against the Clue Card. Which one are you least sure about?":"ليس تمامًا. تحقق من كل مطابقة باستخدام بطاقة القرائن. أي مطابقة أنت أقل تأكدًا منها؟","Not quite. Decode one letter at a time with the key, then check your spelling.":"ليس تمامًا. فُكّ تشفير حرف واحد في كل مرة باستخدام المفتاح، ثم تحقق من تهجئتك.","Not quite. Re-read the Clue Card and match each event to its year.":"ليس تمامًا. أعد قراءة بطاقة القرائن وطابق كل حدث مع سنته.","Not quite. Re-read the Clue Card. Use the scrambled letters to check your spelling.":"ليس تمامًا. أعد قراءة بطاقة القرائن. استخدم الحروف المبعثرة للتحقق من تهجئتك.","On July 4, 1776, Congress adopted the Declaration of Independence. It said that all men are created equal and that governments get their power from the consent of the governed. But those words did not apply to enslaved people, and Southern delegates deleted Jefferson’s passage that blamed the king for slavery. In March 1776, Abigail Adams asked her husband John to remember the ladies in the new laws.":"في 4 يوليو 1776 تبنّى الكونغرس إعلان الاستقلال (Declaration of Independence). وجاء فيه أن جميع الناس خُلقوا متساوين، وأن الحكومات تستمد سلطتها من موافقة المحكومين. لكن هذه الكلمات لم تنطبق على المستعبَدين، وحذف مندوبو الجنوب فقرة جيفرسون (Jefferson) التي حمّلت الملك مسؤولية العبودية. وفي مارس 1776 طلبت أبيغيل آدامز (Abigail Adams) من زوجها جون (John) أن يتذكر السيدات في القوانين الجديدة.","One last step: write your Debrief below.":"خطوة أخيرة: اكتب ملخصك الختامي أدناه.","One or two months":"شهر أو شهران","Only slavery had a contract":"العبودية وحدها كان لها عقد","Open all 5 locks first. The digits go in order: Lock 1 first.":"افتح الأقفال الخمسة أولًا. تُكتب الأرقام بالترتيب: رقم القفل 1 أولًا.","Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.":"افتح الأقفال الخمسة، ثم اكتب رمز الخروج المكوّن من 5 أرقام. أنهِ بالملخص الختامي.","Open each lock in order. Read the <b>Clue Card<\/b>. The answer is in the card.":"افتح كل قفل بالترتيب. اقرأ <b>بطاقة القرائن<\/b>. الإجابة موجودة في البطاقة.","Open the Door":"افتح الباب","Parliament passes the Stamp Act":"يُقرّ البرلمان قانون الطوابع (Stamp Act)","Parliament repeals the Stamp Act":"يُلغي البرلمان قانون الطوابع (Stamp Act)","Parliament then raised money from the colonies with the Sugar Act (1764) and the Stamp Act (1765). Colonists said they had not agreed to these taxes, and they protested and boycotted British goods. Parliament repealed the Stamp Act in 1766, but in 1767 the Townshend Acts taxed imports such as glass, paper, and tea.":"ثم جمع البرلمان المال من المستعمرات بقانون السكر (Sugar Act) (1764) وقانون الطوابع (Stamp Act) (1765). وقال المستعمرون إنهم لم يوافقوا على هذه الضرائب، فاحتجّوا وقاطعوا البضائع البريطانية. وألغى البرلمان قانون الطوابع عام 1766، لكنه أصدر في عام 1767 قوانين تاونشند (Townshend Acts) التي فرضت ضرائب على واردات مثل الزجاج والورق والشاي.","Pick the correct answer for all four questions.":"اختر الإجابة الصحيحة للأسئلة الأربعة كلها.","Praised reason, science, and individual freedom":"مجّد العقل والعلم والحرية الفردية","Progress file downloaded. Use Load Progress to continue later.":"تم تنزيل ملف التقدم. استخدم «تحميل التقدم» لتكمل لاحقًا.","Progress loaded. Welcome back.":"تم تحميل التقدم. أهلًا بعودتك.","Servants were never given food":"لم يكن الخدم يحصلون على طعام أبدًا","Servitude did not last a lifetime":"لم تكن الخدمة بعقد تدوم مدى الحياة","Servitude did not last a lifetime, but slavery did. In Carolina, as many as 50,000 Indigenous people, mostly women and children, were sold into slavery between 1670 and 1715. By the 1640s in the Chesapeake, slavery had become permanent and based on race. Slave codes then ruled most parts of enslaved people’s lives. About one in six enslaved Africans died on the Middle Passage, the voyage across the Atlantic.":"لم تكن الخدمة بعقد تدوم مدى الحياة، أما العبودية فكانت كذلك. وفي كارولاينا (Carolina) بيع ما يصل إلى 50,000 شخص من السكان الأصليين، معظمهم نساء وأطفال، ليُستعبَدوا بين عامي 1670 و1715. وبحلول أربعينيات القرن السابع عشر (1640s) في تشيسابيك (Chesapeake)، أصبحت العبودية دائمة وقائمة على العرق. ثم نظّمت قوانين العبودية (slave codes) معظم جوانب حياة المستعبَدين. ومات نحو واحد من كل ستة أفارقة مستعبَدين في الرحلة عبر الأطلسي المعروفة بالممر الأوسط (Middle Passage).","Solve the puzzle to open the lock and reveal one digit.":"حلّ اللغز لتفتح القفل وتكشف رقمًا واحدًا.","THE EXIT DOOR":"باب الخروج","Tap all 4 events first, in order.":"المس الأحداث الأربعة كلها أولًا، بالترتيب.","Tap the four events in the order they happened. Tap an event again to take it back.":"المس الأحداث الأربعة بالترتيب الذي وقعت به. المس الحدث مرة أخرى للتراجع عنه.","Ten to twelve years":"من عشر إلى اثنتي عشرة سنة","That file did not work. Choose a progress file saved from this Escape Room.":"لم يعمل هذا الملف. اختر ملف تقدم محفوظًا من غرفة الهروب هذه.","That was the last hint. Read the Clue Card slowly and try again.":"كان هذا آخر تلميح. اقرأ بطاقة القرائن ببطء وحاول مرة أخرى.","The Albany Plan of Union is approved at Albany":"تتم الموافقة على خطة ألباني للاتحاد (Albany Plan of Union) في ألباني","The British colonies":"المستعمرات البريطانية","The Clue Card names a pamphlet from January 1776 that urged Americans to seek independence. A secret message gives its title. Each letter in the message was moved 3 steps forward in the alphabet. Decode it.":"تذكر بطاقة القرائن كتيّبًا من يناير 1776 حثّ الأمريكيين على السعي إلى الاستقلال. وتعطي رسالة سرية عنوانه. كل حرف في الرسالة نُقل 3 خطوات إلى الأمام في الأبجدية. فكّ تشفيرها.","The Enlightenment":"عصر التنوير","The Enlightenment praised reason, science, and individual freedom. Deists such as Thomas Jefferson and Benjamin Franklin believed that God made natural laws and then no longer acted directly in the world. The Great Awakening began in the 1730s as a wave of emotional religious revivals. Traveling preachers called itinerants, including some White women and African Americans, helped start it. Jonathan Edwards and George Whitefield were famous preachers of the revivals.":"مجّد عصر التنوير العقل والعلم والحرية الفردية. وآمن الربوبيون (Deists)، مثل توماس جيفرسون (Thomas Jefferson) وبنجامين فرانكلين (Benjamin Franklin)، بأن الله خلق القوانين الطبيعية ثم لم يعد يتدخل مباشرة في العالم. وبدأت الصحوة الكبرى (Great Awakening) في ثلاثينيات القرن الثامن عشر (1730s) كموجة من الصحوات الدينية المفعمة بالعاطفة. وساعد في إطلاقها وعّاظ متجوّلون يُسمَّون المتجوّلين (itinerants)، ومنهم بعض النساء البيض والأمريكيين من أصل أفريقي. وكان جوناثان إدواردز (Jonathan Edwards) وجورج وايتفيلد (George Whitefield) من الوعّاظ المشهورين في تلك الصحوات.","The Enlightenment praised reason. The Great Awakening was emotional revivals. New France was small and traded furs. The British colonies had elected assemblies.":"مجّد عصر التنوير العقل. وكانت الصحوة الكبرى صحوات دينية مفعمة بالعاطفة. وكانت فرنسا الجديدة صغيرة وتتاجر بالفراء. وكان للمستعمرات البريطانية مجالس منتخبة.","The Ferry Horn":"بوق العبّارة","The Fishing Net":"شبكة الصيد","The French and Indian War (1756–1763) began as a fight over the Ohio valley. In 1754, the Albany Plan of Union called for the colonies to unite, but it was rejected. In the Treaty of Paris (1763), France lost its North American land. Britain gained Canada and the land east of the Mississippi, and Spain received Louisiana. Britain now had a huge war debt and 10,000 soldiers to pay for in America. Indigenous nations, left out of the treaty talks, resisted British expansion in Pontiac’s Rebellion. The Proclamation of 1763 closed land west of the Appalachian Mountains to settlers, and many colonists disliked that.":"بدأت الحرب الفرنسية والهندية (French and Indian War) (1756–1763) كصراع على وادي أوهايو (Ohio). وفي عام 1754 دعت خطة ألباني للاتحاد (Albany Plan of Union) المستعمرات إلى الاتحاد، لكنها رُفضت. وفي معاهدة باريس (Treaty of Paris) (1763) خسرت فرنسا أراضيها في أمريكا الشمالية. وحصلت بريطانيا على كندا والأراضي الواقعة شرق نهر المسيسيبي (Mississippi)، وتسلّمت إسبانيا لويزيانا (Louisiana). وصار على بريطانيا الآن دَين حرب ضخم و10,000 جندي عليها أن تدفع تكاليفهم في أمريكا. وقاومت أمم السكان الأصليين، التي استُبعدت من محادثات المعاهدة، التوسع البريطاني في تمرد بونتياك (Pontiac’s Rebellion). وأغلق إعلان عام 1763 (Proclamation of 1763) الأراضي الواقعة غرب جبال الأبلاش (Appalachian Mountains) أمام المستوطنين، ولم يعجب ذلك كثيرًا من المستعمرين.","The Great Awakening":"الصحوة الكبرى","The Lantern":"الفانوس","The Oars":"المجاديف","The Treaty of Paris ends the French and Indian War":"تنهي معاهدة باريس (Treaty of Paris) الحرب الفرنسية والهندية","The Window":"النافذة","The clock starts when you press the button. Most students finish in about 20 minutes.":"يبدأ العدّاد عندما تضغط الزر. يُنهي معظم الطلاب في نحو 20 دقيقة.","The code has 5 digits. Fill every box.":"الرمز مكوّن من 5 أرقام. املأ كل المربعات.","The colonial population grew fast. It doubled about every 25 years and neared 2.5 million by 1775. Land was cheap, workers were scarce, and women married earlier than in England, so families were large. Immigrants kept arriving, and a 1740 law let them become British subjects after seven years. Some colonists showed <b>nativism<\/b>, a prejudice against certain groups of immigrants.":"نما عدد السكان في المستعمرات بسرعة. فقد كان يتضاعف تقريبًا كل 25 سنة، واقترب من 2.5 مليون بحلول عام 1775. وكانت الأرض رخيصة والعمال قليلين، وكانت النساء يتزوجن في سن أصغر مما في إنجلترا، فكانت الأسر كبيرة. وظل المهاجرون يصلون، وسمح لهم قانون عام 1740 بأن يصبحوا رعايا بريطانيين بعد سبع سنوات. وأظهر بعض المستعمرين <b>nativism<\/b> (العداء للمهاجرين)، وهو تحيّز ضد فئات معيّنة من المهاجرين.","The colonial regions had different economies. The South grew tobacco, rice, and indigo on large plantations. New England had rocky soil, so its people turned to fishing, shipbuilding, and trade, and its economy also profited from the slave trade. The middle colonies were the most diverse.":"كان لكل منطقة من المناطق الاستعمارية اقتصاد مختلف. فقد زرع الجنوب التبغ والأرز والنيلة في مزارع كبيرة. وكانت تربة نيو إنجلاند (New England) صخرية، فاتجه أهلها إلى صيد السمك وبناء السفن والتجارة، واستفاد اقتصادها أيضًا من تجارة الرقيق. وكانت المستعمرات الوسطى هي الأكثر تنوعًا.","The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.":"لم يُفتح الباب. تحقق من الأرقام تحت كل قفل، واكتبها بالترتيب: رقم القفل 1 أولًا.","The door is open!":"الباب مفتوح!","The door swings open!":"ينفتح الباب على مصراعيه!","The ferryman locked the cottage door for the night. A window, a lantern, a ferry horn, a pair of oars, and a fishing net are in the room. The door has <b>5 locks<\/b>. Each lock matches one big idea from Lesson 2. Solve them all to find the <b>5-digit exit code<\/b>.":"أقفل العبّار باب الكوخ للّيل. وفي الغرفة نافذة، وفانوس، وبوق عبّارة، ومجدافان، وشبكة صيد. وللباب <b>5 أقفال<\/b>. كل قفل يرتبط بفكرة كبيرة واحدة من الدرس 2. حُلّها كلها لتجد <b>رمز الخروج المكوّن من 5 أرقام<\/b>.","The order is the Albany Plan (1754), the Treaty of Paris (1763), the Stamp Act (1765), then the repeal of the Stamp Act (1766).":"الترتيب هو: خطة ألباني (Albany Plan) (1754)، ثم معاهدة باريس (Treaty of Paris) (1763)، ثم قانون الطوابع (Stamp Act) (1765)، ثم إلغاء قانون الطوابع (1766).","The rest of a person’s life":"بقية حياة الشخص","The secret message gives the pamphlet’s title in the Clue Card. Use the decoder key to spell it, one letter at a time.":"تعطي الرسالة السرية عنوان الكتيّب المذكور في بطاقة القرائن. استخدم مفتاح فك التشفير لتهجئته حرفًا حرفًا.","The word starts with N and has 8 letters. It ends with “ism.”":"تبدأ الكلمة بحرف N وفيها 8 أحرف. وتنتهي بـ “ism”.","There was no difference":"لم يكن هناك فرق","Three to seven years":"من ثلاث إلى سبع سنوات","Time":"الوقت","Type the answer in English.":"اكتب الإجابة بالإنجليزية.","Type the answer in English. Use the digits 0-9.":"اكتب الإجابة بالإنجليزية. استخدم الأرقام 0-9.","Type the exit code":"اكتب رمز الخروج","Type your answer first.":"اكتب إجابتك أولًا.","Type your answer here...":"اكتب إجابتك هنا...","UNIT 1 · COLONIES, REVOLUTION, AND CONSTITUTION | CPUSH | DANIEL GARZA, M.A.":"الوحدة 1 · المستعمرات والثورة والدستور | CPUSH | DANIEL GARZA, M.A.","Unlocked. Your digit is 1. Your answer: Three to seven years; Servitude did not last a lifetime; Its soil was rocky; It had become permanent and based on race":"تم الفتح. رقمك هو 1. إجابتك: من ثلاث إلى سبع سنوات; لم تكن الخدمة بعقد تدوم مدى الحياة; كانت تربتها صخرية; أصبحت دائمة وقائمة على العرق","Unlocked. Your digit is 4. Your answer: The Albany Plan of Union is approved at Albany &gt; The Treaty of Paris ends the French and Indian War &gt; Parliament passes the Stamp Act &gt; Parliament repeals the Stamp Act":"تم الفتح. رقمك هو 4. إجابتك: تتم الموافقة على خطة ألباني للاتحاد (Albany Plan of Union) في ألباني &gt; تنهي معاهدة باريس (Treaty of Paris) الحرب الفرنسية والهندية &gt; يُقرّ البرلمان قانون الطوابع (Stamp Act) &gt; يُلغي البرلمان قانون الطوابع (Stamp Act)","Unlocked. Your digit is 7. Your answer: The British colonies = Colonies with elected assemblies and a habit of self-government; The Great Awakening = Waves of emotional religious revivals led by traveling preachers; The Enlightenment = Praised reason, science, and individual freedom; New France = A small colony ruled with strong power from France that traded furs":"تم الفتح. رقمك هو 7. إجابتك: المستعمرات البريطانية = مستعمرات لها مجالس منتخبة وعادة الحكم الذاتي; الصحوة الكبرى = موجات من الصحوات الدينية المفعمة بالعاطفة يقودها وعّاظ متجوّلون; عصر التنوير = مجّد العقل والعلم والحرية الفردية; فرنسا الجديدة = مستعمرة صغيرة تحكمها فرنسا بسلطة قوية وتتاجر بالفراء","Unscramble the letters to fill the blank.":"رتّب الأحرف لتملأ الفراغ.","Waves of emotional religious revivals led by traveling preachers":"موجات من الصحوات الدينية المفعمة بالعاطفة يقودها وعّاظ متجوّلون","What was the most important difference between indentured servitude and slavery?":"ما أهم فرق بين الخدمة بعقد والعبودية؟","Which lock was hardest, and what did you learn that you did not know before?":"أي قفل كان الأصعب، وماذا تعلمت ولم تكن تعرفه من قبل؟","Why did New England turn to fishing, shipbuilding, and trade?":"لماذا اتجهت نيو إنجلاند (New England) إلى صيد السمك وبناء السفن والتجارة؟","Women’s roles were limited. White women were expected to run the home and care for children, and most could not vote, own property, or sign contracts. Enslaved women worked from before sunrise to after dark, in homes and in fields. A few women, such as Eliza Lucas Pinckney of South Carolina, managed plantations with the help of enslaved workers.":"كانت أدوار النساء محدودة. فقد كان يُتوقع من النساء البيض إدارة البيت ورعاية الأطفال، ولم يكن معظمهن يستطعن التصويت أو امتلاك الممتلكات أو توقيع العقود. وكانت النساء المستعبَدات يعملن من قبل شروق الشمس إلى ما بعد الغروب، في البيوت وفي الحقول. وقد أدارت بعض النساء، مثل إليزا لوكاس بينكني (Eliza Lucas Pinckney) من كارولاينا الجنوبية (South Carolina)، مزارع بمساعدة المستعبَدين.","Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.":"اكتب من 3 إلى 4 جمل. اذكر القفل واستخدم معلومة واحدة من بطاقة القرائن الخاصة به. يمكنك كتابة هذا حتى لو لم تهرب.","You are locked in the ferryman’s cottage.":"أنت محبوس في كوخ العبّار.","You escaped and wrote your Debrief. Ready to submit.":"لقد هربت وكتبت ملخصك الختامي. أنت جاهز للتسليم.","You escaped! Write your Debrief, then download your file to submit.":"لقد هربت! اكتب ملخصك الختامي، ثم نزّل ملفك لتسليمه.","Your answer":"إجابتك","Your time:":"وقتك:","digit":"رقم","Escape Room 2 · Colonial Society and the Road to Independence":"غرفة الهروب 2 · المجتمع الاستعماري والطريق إلى الاستقلال","Clear all your work and start over? This cannot be undone.":"هل تريد مسح كل عملك والبدء من جديد؟ لا يمكن التراجع عن هذا."},"patterns":[{"re":"^Still needed: first name, last name, and period\\.$","es":"Todavía falta: nombre, apellido y período.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة."},{"re":"^LOCK (\\d)$","es":"Cand. $1","ar":"القفل $1"},{"re":"^LOCK (\\d) · CORE OBJECTIVE (\\d)$","es":"CANDADO $1 · OBJETIVO PRINCIPAL $2","ar":"القفل $1 · الهدف الأساسي $2"},{"re":"^Hint (\\d):$","es":"Pista $1:","ar":"تلميح $1:"},{"re":"^Exit code digit (\\d)$","es":"Dígito $1 del código de salida","ar":"رقم رمز الخروج $1"},{"re":"^Click! Lock (\\d) is open\\. Your digit is (\\d)\\.$","es":"¡Clic! El Candado $1 está abierto. Tu dígito es $2.","ar":"نقرة! القفل $1 مفتوح. رقمك هو $2."},{"re":"^5 of 5 locks opened with (\\d+) tries and (\\d+) hints\\.$","es":"Abriste 5 de 5 candados con $1 intentos y $2 pistas.","ar":"فتحت 5 أقفال من 5 بعد $1 من المحاولات و$2 من التلميحات."},{"re":"^Done! File downloaded: (.*)\\. Upload it to Canvas\\.$","es":"¡Listo! Se descargó el archivo: $1. Súbelo a Canvas.","ar":"تم! تم تنزيل الملف: $1. ارفعه إلى Canvas."},{"re":"^Your file downloaded and is marked INCOMPLETE \\(you have not escaped\\)\\. Upload it to Canvas: (.*)$","es":"Tu archivo se descargó y está marcado INCOMPLETO (todavía no escapas). Súbelo a Canvas: $1","ar":"تم تنزيل ملفك وهو مُسجَّل «غير مكتمل» INCOMPLETE (لم تهرب بعد). ارفعه إلى Canvas: $1"},{"re":"^Unlocked\\. Your digit is (\\d)\\. Your answer: (.*)$","es":"Desbloqueado. Tu dígito es $1. Tu respuesta: $2","ar":"تم الفتح. رقمك هو $1. إجابتك: $2"},{"re":"^LOCK (\\d) · CORE OBJECTIVE (\\d+)$","es":"CANDADO $1 · OBJETIVO PRINCIPAL $2","ar":"القفل $1 · الهدف الأساسي $2"},{"re":"^LOCK (\\d) · CORE OBJECTIVES (\\d+) AND (\\d+)$","es":"CANDADO $1 · OBJETIVOS PRINCIPALES $2 Y $3","ar":"القفل $1 · الأهداف الأساسية $2 و$3"},{"re":"^Tap all (\\d) events first, in order\\.$","es":"Primero toca los $1 sucesos, en orden.","ar":"المس الأحداث الـ $1 كلها أولًا، بالترتيب."}]}</script>
+<script>
+/* Supplement language switch (English / Espanol / Arabic). Works on pages whose text is rendered by JS:
+   a MutationObserver translates text as it appears. Data: <script type="application/json" id="sp-i18n">
+   {"langs":["en","es","ar"],"default":"en","es":{englishHTML:translation},"ar":{...},"patterns":[{"re":"^(\\d+) of (\\d+)$","es":"$1 de $2","ar":"..."}]}
+   Keys are the English text exactly as it sits in the page (innerHTML, spaces collapsed).
+   Helpers: spSeen() english strings seen so far; spMissing() strings with no translation in the current language;
+   spSetLang(l); spTr(s) translate a string (used for confirm/alert); spAscii(s) plain-ASCII name for file names. */
+(function () {
+  var node = document.getElementById('sp-i18n');
+  var D = node ? JSON.parse(node.textContent) : { langs: ['en'], patterns: [] };
+  var INLINE = { B:1,I:1,EM:1,STRONG:1,SPAN:1,A:1,BR:1,SMALL:1,SUP:1,SUB:1,U:1,MARK:1,BDI:1,TSPAN:1,CODE:1 };
+  var SKIP = 'script,style,textarea,input,.sp-lang,.sp-nt,[translate="no"]';
+  var WORD = /[A-Za-z\u00C0-\u024F\u0600-\u06FF]{2}|e\.g\./;
+  var LANG = 'en', REC = new WeakMap(), SEEN = {}, MISS = {};
+  (D.patterns || []).forEach(function (p) { try { p._re = new RegExp(p.re); } catch (e) {} });
+  function norm(s) { return String(s).replace(/\s+/g, ' ').trim(); }
+  function tr(src) {
+    if (LANG === 'en') return null;
+    var t = D[LANG] && D[LANG][src];
+    if (t) return t;
+    var P = D.patterns || [];
+    for (var i = 0; i < P.length; i++) {
+      var m = P[i]._re && P[i]._re.exec(src);
+      if (m && P[i][LANG]) return P[i][LANG].replace(/\$(\d+)/g, function (_, n) { return m[+n] || ''; });
+    }
+    return null;
+  }
+  window.spTr = function (s) { var t = tr(norm(s)); return t ? t.replace(/<[^>]+>/g, '') : s; };
+  function isInline(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling)
+      if (c.nodeType === 1 && (!INLINE[c.tagName.toUpperCase()] || c.matches(SKIP))) return false;
+    return true;
+  }
+  function directText(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling) if (c.nodeType === 3 && WORD.test(c.nodeValue)) return true;
+    return false;
+  }
+  function cur(s) { return s.nodeType === 1 ? s.innerHTML : s.nodeValue; }
+  function put(s, v) { if (s.nodeType === 1) s.innerHTML = v; else s.nodeValue = v; }
+  function handle(s) {
+    var r = REC.get(s), c = cur(s);
+    if (!(r && c === r.wrote)) { r = { en: c, wrote: c }; REC.set(s, r); }
+    var src = norm(r.en), target = r.en;
+    if (WORD.test(src)) {
+      SEEN[src] = 1;
+      if (LANG !== 'en') {
+        var t = tr(src);
+        if (t) {
+          target = s.nodeType === 1 ? t : (r.en.match(/^\s*/)[0] + t + r.en.match(/\s*$/)[0]);
+          delete MISS[src];
+        } else MISS[src] = 1;
+      }
+    }
+    if (c !== target) put(s, target);
+    r.wrote = cur(s);
+  }
+  var ATTRS = ['placeholder', 'alt', 'aria-label', 'title'];
+  function attrs(root) {
+    var els = root.querySelectorAll ? root.querySelectorAll('[placeholder],[alt],[aria-label],[title]') : [];
+    var list = [].slice.call(els); if (root.matches && root.matches('[placeholder],[alt],[aria-label],[title]')) list.push(root);
+    list.forEach(function (el) {
+      if (el.closest && el.closest('.sp-lang,.sp-nt,[translate="no"],script,style')) return;
+      var rec = el.__spa || (el.__spa = {});
+      ATTRS.forEach(function (a) {
+        var v = el.getAttribute(a); if (v == null) return;
+        var r = rec[a];
+        if (!(r && v === r.wrote)) { r = rec[a] = { en: v, wrote: v }; }
+        var src = norm(r.en); if (!WORD.test(src)) return;
+        SEEN[src] = 1;
+        var t = LANG === 'en' ? null : tr(src);
+        if (LANG !== 'en' && !t) MISS[src] = 1;
+        var target = t ? t.replace(/<[^>]+>/g, '') : r.en;
+        if (v !== target) el.setAttribute(a, target);
+        r.wrote = el.getAttribute(a);
+      });
+    });
+  }
+  function walk(root) {
+    if (root.nodeType === 3) { if (WORD.test(root.nodeValue) && !(root.parentNode && root.parentNode.closest && root.parentNode.closest(SKIP))) handle(root); return; }
+    if (root.nodeType !== 1) return;
+    (function w(el) {
+      if (el.matches(SKIP)) return;
+      if (el !== document.body && directText(el) && isInline(el)) { handle(el); return; }
+      for (var c = el.firstChild; c; c = c.nextSibling) {
+        if (c.nodeType === 1) w(c); else if (c.nodeType === 3 && WORD.test(c.nodeValue)) handle(c);
+      }
+    })(root);
+    attrs(root);
+  }
+  var TITLE = { en: document.title, wrote: document.title };
+  function title() {
+    if (document.title !== TITLE.wrote) TITLE = { en: document.title, wrote: document.title };
+    var t = LANG === 'en' ? null : tr(norm(TITLE.en));
+    document.title = t ? t.replace(/<[^>]+>/g, '') : TITLE.en; TITLE.wrote = document.title;
+  }
+  function inl(e) { return e.nodeType === 1 && !!INLINE[e.tagName.toUpperCase()]; }
+  var mo = new MutationObserver(function (muts) {
+    var todo = [];
+    muts.forEach(function (m) {
+      if (m.type === 'childList') { for (var i = 0; i < m.addedNodes.length; i++) todo.push(m.addedNodes[i]); todo.push(m.target); }
+      else todo.push(m.target);
+    });
+    todo.forEach(function (n) {
+      var el = n.nodeType === 1 ? n : n.parentNode;
+      if (!el || el.nodeType !== 1 || !document.body.contains(el)) return;
+      while (el !== document.body && el.parentNode && el.parentNode.nodeType === 1 && inl(el) && inl(el.parentNode)) el = el.parentNode;
+      if (el.parentNode && el.parentNode.nodeType === 1 && inl(el.parentNode) && el.parentNode !== document.body) el = el.parentNode;
+      walk(el);
+    });
+    mo.takeRecords();
+  });
+  var AR = { 'ا':'a','أ':'a','إ':'i','آ':'a','ب':'b','ت':'t','ث':'th','ج':'j','ح':'h','خ':'kh','د':'d','ذ':'dh','ر':'r','ز':'z','س':'s','ش':'sh','ص':'s','ض':'d','ط':'t','ظ':'z','ع':'a','غ':'gh','ف':'f','ق':'q','ك':'k','ل':'l','م':'m','ن':'n','ه':'h','و':'w','ي':'y','ى':'a','ة':'a','ئ':'y','ؤ':'w' };
+  window.spAscii = function (s) {
+    s = String(s); if (s.normalize) s = s.normalize('NFD').replace(/[̀-ًͯ-ٰٟ]/g, '');
+    return s.replace(/[ء-ي]/g, function (c) { return AR[c] !== undefined ? AR[c] : ''; }).replace(/ñ/g, 'n').replace(/Ñ/g, 'N');
+  };
+  window.spSeen = function () { return Object.keys(SEEN); };
+  window.spMissing = function () { return Object.keys(MISS); };
+  window.spLang = function () { return LANG; };
+  window.spSetLang = function (l) {
+    if ((D.langs || ['en']).indexOf(l) < 0) l = 'en';
+    LANG = l; MISS = {};
+    var h = document.documentElement; h.lang = l; h.dir = l === 'ar' ? 'rtl' : 'ltr';
+    mo.disconnect(); walk(document.body); title(); mo.takeRecords();
+    mo.observe(document.body, { childList: true, subtree: true, characterData: true });
+    document.querySelectorAll('.sp-lang button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === l)); });
+    try { localStorage.setItem('sp_lang', l); } catch (e) {}
+    try { var u = new URL(location.href); if (l === 'en') u.searchParams.delete('lang'); else u.searchParams.set('lang', l); history.replaceState(null, '', u.toString()); } catch (e) {}
+    try { document.dispatchEvent(new CustomEvent('splangchange', { detail: l })); } catch (e) {}
+  };
+  var _c = window.confirm, _a = window.alert;
+  window.confirm = function (m) { return _c.call(window, window.spTr(m)); };
+  window.alert = function (m) { return _a.call(window, window.spTr(m)); };
+  document.querySelectorAll('.sp-lang button').forEach(function (b) { b.addEventListener('click', function () { window.spSetLang(b.getAttribute('data-lang')); }); });
+  var start = D['default'] || 'en';
+  try { start = new URL(location.href).searchParams.get('lang') || localStorage.getItem('sp_lang') || start; } catch (e) {}
+  window.spSetLang(start);
+})();
+
+</script><!--/sp-i18n-->
+</body>
+</html>

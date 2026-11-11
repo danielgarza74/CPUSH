@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Escape Room 6 · Nationalism, Sectionalism, and Jacksonian Democracy</title>
+<style>
+:root{--bg:#2E471F;--txt:#EFF4EB;--a1:#45682F;--a2:#D2774B;--hl:#E1A98E;--glass:rgba(239,244,235,.07);--glassb:rgba(239,244,235,.2);--dim:#D2DCCB;--ok:#8FD3A8}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#3B5A28 0%,#2E471F 60%) fixed;background-color:var(--bg);color:var(--txt);font:17px/1.55 "Segoe UI",system-ui,-apple-system,Verdana,sans-serif;min-height:100vh}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px 40px}
+.glass{background:var(--glass);border:1px solid var(--glassb);border-radius:16px;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+header.hero{padding:30px 0 12px;border-bottom:3px solid var(--a2)}
+.eyebrow{font-size:13px;letter-spacing:.16em;font-weight:700;color:var(--hl)}
+h1{margin:.15em 0 .05em;font-size:clamp(28px,6vw,40px);line-height:1.12}
+.sub{margin:0;font-weight:600;color:var(--dim)}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 4px}
+.meta label{flex:1 1 170px;font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--dim)}
+input[type=text],textarea,select{display:block;width:100%;margin-top:4px;padding:10px 12px;border:1px solid var(--glassb);border-radius:10px;background:rgba(29,46,20,.55);color:var(--txt);font:inherit;font-size:16px}
+input[type=text]:focus,textarea:focus,select:focus,button:focus-visible{outline:3px solid var(--hl);outline-offset:1px}
+input.bad{border-color:var(--a2);box-shadow:0 0 0 2px var(--a2)}
+textarea{min-height:120px;resize:vertical}
+.howto{margin:14px 0;padding:14px 16px;font-size:16px}
+.howto ol{margin:6px 0 0;padding-left:22px}
+.scene{margin:14px 0;padding:8px;text-align:center}
+.scene svg{width:100%;height:auto;display:block;border-radius:12px}
+.bar{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;padding:8px 12px;margin:10px 0;font-weight:700;font-size:15px;background:rgba(46,71,31,.92);border:1px solid var(--glassb);border-radius:12px}
+.bar span b{color:var(--hl)}
+.btn{font:inherit;font-size:16px;font-weight:700;padding:11px 18px;border-radius:12px;border:2px solid var(--hl);background:transparent;color:var(--txt);cursor:pointer;min-height:44px}
+.btn:hover{background:rgba(225,169,142,.18)}
+.btn.primary{background:var(--hl);color:#2E471F;border-color:var(--hl)}
+.btn.primary:hover{background:#EBC0A8}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.btn.small{padding:8px 14px;font-size:15px;min-height:40px}
+.intro{padding:20px;text-align:center}
+.intro p{margin:.4em 0}
+.lock{margin:12px 0;overflow:hidden}
+.lock>button.lh{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:12px;width:100%;padding:14px 16px;cursor:pointer}
+.lock>button.lh:focus-visible{outline:3px solid var(--hl);outline-offset:-3px}
+.lock.locked>button.lh{cursor:not-allowed;opacity:.55}
+.lk{flex:none;width:44px;height:44px}
+.lk .sh{transition:transform .5s cubic-bezier(.3,1.6,.5,1);transform-origin:center}
+.lock.solved .lk .sh{transform:translateY(-6px) rotate(-30deg);transform-origin:10px 14px}
+.lock.solved .lk .bd{fill:var(--hl)}
+.lt{flex:1}
+.lt small{display:block;font-size:12px;letter-spacing:.12em;font-weight:700;color:var(--hl)}
+.lt strong{font-size:19px}
+.dg{flex:none;min-width:42px;height:42px;border-radius:10px;border:2px solid var(--hl);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;background:rgba(29,46,20,.55)}
+.lb{padding:0 16px 16px;display:none}
+.lock.open .lb{display:block}
+.objline{font-size:14px;color:var(--dim);margin:0 0 10px}
+.card{background:rgba(239,244,235,.1);border-left:6px solid var(--a2);border-radius:10px;padding:12px 14px;margin:8px 0 12px}
+.card h4{margin:0 0 4px;font-size:13px;letter-spacing:.12em;color:var(--hl)}
+.card p{margin:.3em 0}
+.card .src{font-size:13px;color:var(--dim)}
+.prompt{font-weight:700;margin:10px 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0}
+.chip{font:inherit;font-size:16px;padding:10px 14px;border-radius:12px;border:2px solid var(--glassb);background:rgba(29,46,20,.55);color:var(--txt);cursor:pointer;min-height:44px;text-align:left}
+.chip.sel{border-color:var(--hl);background:rgba(225,169,142,.2)}
+.chip .n{display:inline-block;min-width:24px;height:24px;line-height:24px;border-radius:12px;background:var(--hl);color:#2E471F;font-weight:800;text-align:center;margin-right:8px}
+.mrow{margin:8px 0}
+.mrow label{font-weight:700;display:block}
+fieldset{border:1px solid var(--glassb);border-radius:10px;margin:8px 0;padding:8px 12px}
+legend{font-weight:700;padding:0 6px}
+.opt{display:flex;align-items:center;gap:10px;padding:6px 0;min-height:40px;cursor:pointer}
+.opt input{width:22px;height:22px;accent-color:#E1A98E;flex:none}
+.cipher{font:700 24px/1.3 "Courier New",monospace;letter-spacing:.14em;background:rgba(29,46,20,.65);padding:12px;border-radius:10px;border:1px dashed var(--hl);word-break:break-word;text-align:center}
+.key{display:grid;grid-template-columns:repeat(13,1fr);gap:2px;margin:10px 0;font:700 14px/1.2 "Courier New",monospace;text-align:center}
+.key div{padding:3px 0;border-radius:4px;background:rgba(239,244,235,.08)}
+.key .c{color:var(--hl)}
+.scr{font:800 30px/1.2 "Courier New",monospace;letter-spacing:.3em;text-align:center;background:rgba(29,46,20,.65);padding:10px;border-radius:10px;border:1px dashed var(--hl)}
+.row{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0;align-items:center}
+.fb{margin:8px 0;padding:10px 12px;border-radius:10px;display:none;font-weight:600}
+.fb.show{display:block}
+.fb.nudge{background:rgba(210,119,75,.18);border:1px solid var(--a2)}
+.fb.good{background:rgba(143,211,168,.16);border:1px solid var(--ok);color:#DDF5E6}
+.hints{margin:6px 0}
+.hint{background:rgba(225,169,142,.14);border:1px dashed var(--hl);border-radius:10px;padding:8px 12px;margin:6px 0;font-size:16px}
+.hint b{color:var(--hl)}
+.exit{margin:16px 0;padding:18px;text-align:center}
+.exit.locked{opacity:.55}
+.exit h2,.esc h2,.debrief h2{margin:.1em 0 .3em}
+.codebox{display:flex;justify-content:center;gap:8px;margin:12px 0}
+.codebox input{width:52px;height:60px;text-align:center;font:800 30px "Courier New",monospace;padding:0;margin:0}
+.esc{margin:16px 0;padding:22px;text-align:center;display:none;border:2px solid var(--hl)}
+.esc.show{display:block}
+.esc .big{overflow-wrap:anywhere;font-size:clamp(30px,9vw,64px);font-weight:900;letter-spacing:.14em;color:var(--hl);text-shadow:0 0 24px rgba(225,169,142,.6);animation:pop .8s cubic-bezier(.3,1.6,.5,1)}
+.esc .time{font-size:26px;font-weight:800}
+.debrief{margin:16px 0;padding:16px}
+.actions{margin:16px 0;padding:16px}
+.status{font-weight:700;margin-bottom:10px}
+.msg{display:none;margin-top:10px;padding:10px 12px;border-radius:10px;background:rgba(143,211,168,.16);border:1px solid var(--ok)}
+.msg.err{background:rgba(210,119,75,.2);border-color:var(--a2)}
+.link{all:unset;cursor:pointer;color:var(--dim);text-decoration:underline;font-size:14px;margin-top:10px;display:inline-block}
+.link:focus-visible{outline:3px solid var(--hl)}
+footer{text-align:center;font-size:12px;letter-spacing:.1em;font-weight:700;color:var(--dim);padding:20px 8px 30px;border-top:1px solid var(--glassb);margin-top:20px}
+.ennote{margin:.4em 0 0;font-size:14px;font-weight:700;color:var(--dim)}
+.exit .ennote{text-align:center}
+.hidden{display:none!important}.lock,.exit,.esc{scroll-margin-top:64px}
+.pop{animation:pop .7s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pop{0%{transform:scale(.2);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes tap{0%,100%{transform:rotate(0)}50%{transform:rotate(9deg)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.shake{animation:shake .35s}
+.wheel{transform-box:view-box;transform-origin:276px 86px}
+.wheel.spin{animation:tap .5s ease-in-out 3}
+.plock .sh{transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
+.plock.open .sh{transform:translateY(-7px)}
+.plock.open .bd{fill:#E1A98E}
+#door{transform-origin:150px 20px;transition:transform 1.4s ease-in-out}
+.escaped #door{transform:scaleX(.1)}
+#glow{opacity:.15;transition:opacity 1.4s}
+.escaped #glow{opacity:1}
+html[dir="rtl"] .chip{text-align:right}
+html[dir="rtl"] .chip .n{margin-right:0;margin-left:8px}
+html[dir="rtl"] .card{border-left:0;border-right:6px solid var(--a2)}
+html[dir="rtl"] .howto ol{padding-left:0;padding-right:22px}
+html[dir="rtl"] .esc,html[dir="rtl"] .exit,html[dir="rtl"] .intro{text-align:center}
+html[dir="rtl"] .cipher,html[dir="rtl"] .scr,html[dir="rtl"] .key{direction:ltr}
+html[dir="rtl"] .scr{letter-spacing:.3em!important}
+html[dir="rtl"] .cipher{letter-spacing:.14em!important}
+html[dir="rtl"] .key{letter-spacing:0!important}
+html[dir="rtl"] .card .src{direction:ltr;text-align:left}
+html[dir="rtl"] .hint,html[dir="rtl"] .fb,html[dir="rtl"] .msg,html[dir="rtl"] .objline{text-align:start}
+html[dir="rtl"] .lock>button.lh{text-align:start}
+html[dir="rtl"] .lb,html[dir="rtl"] .actions{text-align:start}
+html[dir="rtl"] .bar{direction:rtl}
+html[dir="rtl"] .tt{unicode-bidi:plaintext}
+@media(max-width:520px){body{font-size:16px}.chip{width:100%}.key{font-size:12px;gap:1px}.codebox input{width:46px;height:54px}.dg{min-width:38px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{.bar,.actions button{display:none}}
+/*sp-i18n-css*/
+.sp-lang-bar{display:flex;justify-content:flex-end;padding:8px 12px 0;position:relative;z-index:5}
+.sp-lang{display:inline-flex;gap:2px;padding:3px;border-radius:10px;background:rgba(255,255,255,.88);border:1px solid rgba(0,0,0,.18);font-family:system-ui,"Segoe UI",Tahoma,Arial,sans-serif}
+.sp-lang button{border:0;background:transparent;color:#222;font:600 13px/1 system-ui,"Segoe UI",Tahoma,Arial,sans-serif;padding:7px 11px;border-radius:7px;cursor:pointer}
+.sp-lang button[aria-pressed="true"]{background:#222;color:#fff}
+.sp-lang button:focus-visible{outline:3px solid #2a6df4;outline-offset:1px}
+textarea,input,select{unicode-bidi:plaintext}
+html[lang="ar"] body,html[lang="ar"] button,html[lang="ar"] textarea,html[lang="ar"] input,html[lang="ar"] select{font-family:"Segoe UI",Tahoma,"Noto Sans Arabic","Arial",system-ui,sans-serif}
+html[lang="ar"] body{line-height:1.8}
+html[lang="ar"] *{letter-spacing:0!important}
+html[dir="rtl"] textarea,html[dir="rtl"] input{text-align:start}
+@media print{.sp-lang-bar{display:none}}
+/*/sp-i18n-css*/
+</style>
+</head>
+<body>
+<!--sp-bar--><div class="sp-lang-bar"><div class="sp-lang" role="group" aria-label="Language / Idioma / اللغة"><button type="button" data-lang="en" lang="en" aria-pressed="true">English</button><button type="button" data-lang="es" lang="es" aria-pressed="false">Español</button><button type="button" data-lang="ar" lang="ar" aria-pressed="false">العربية</button></div></div><!--/sp-bar-->
+<div class="wrap">
+<header class="hero">
+  <div class="eyebrow">1811-1840</div>
+  <h1>Escape the Canal Toll House</h1>
+  <p class="sub">Nationalism, Sectionalism, and <span style="white-space:nowrap">Jacksonian Democracy</span></p>
+  <div class="meta">
+    <label>FIRST NAME *<input id="f_first" type="text" autocomplete="given-name"></label>
+    <label>LAST NAME *<input id="f_last" type="text" autocomplete="family-name"></label>
+    <label>PERIOD *<input id="f_period" type="text" inputmode="numeric" maxlength="12" placeholder="e.g. 3"></label>
+  </div>
+</header>
+
+<div class="howto glass"><b>How to escape:</b>
+<ol>
+<li>Open each lock in order. Read the <b>Clue Card</b>. The answer is in the card.</li>
+<li>Solve the puzzle to open the lock and reveal one digit.</li>
+<li>If you get stuck, press <b>Hint</b>. Hints are free, but your teacher can see how many you used.</li>
+<li>Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.</li>
+</ol></div>
+
+<div class="scene glass" id="scene">
+<svg viewBox="0 0 600 270" role="img" aria-label="A canal toll house at night. On the left, a window shows a canal with a boat, above a shelf of ledgers and a desk with a brass scale and a lantern. On the right, a wall clock and a toll rates board hang above a desk with a cash box and a coil of rope. The door has a TOLL HOUSE sign and five padlocks in a row. Under each padlock is a window for one digit of the exit code.">
+<defs>
+<pattern id="brick" width="40" height="270" patternUnits="userSpaceOnUse"><rect width="40" height="270" fill="#243818"/><path d="M0 0V270" stroke="#EFF4EB" stroke-opacity=".12" fill="none"/><path d="M20 0V270" stroke="#EFF4EB" stroke-opacity=".05" fill="none"/></pattern>
+<radialGradient id="glowg" cx="50%" cy="50%" r="60%"><stop offset="0" stop-color="#EFF4EB"/><stop offset="1" stop-color="#E1A98E"/></radialGradient>
+</defs>
+<rect width="600" height="270" fill="url(#brick)"/>
+<rect y="236" width="600" height="34" fill="#263C1A"/>
+<g stroke="#D2DCCB" stroke-opacity=".35" stroke-width="2"><path d="M0 248H600M0 260H600"/><path d="M60 236V248M180 236V248M300 236V248M420 236V248M540 236V248M120 248V260M240 248V260M360 248V260M480 248V260M600 248V260"/></g>
+<g>
+<rect x="12" y="20" width="124" height="62" rx="3" fill="#1D2E14" stroke="#E1A98E" stroke-width="3"/>
+<rect x="18" y="26" width="112" height="50" fill="#45682F" fill-opacity=".45"/>
+<rect x="18" y="52" width="112" height="24" fill="#45682F"/>
+<path d="M22 60Q30 56 38 60T54 60T70 60T86 60T102 60T118 60" stroke="#EFF4EB" stroke-opacity=".5" stroke-width="1.5" fill="none"/>
+<path d="M22 68Q30 64 38 68T54 68T70 68T86 68T102 68T118 68" stroke="#EFF4EB" stroke-opacity=".35" stroke-width="1.5" fill="none"/>
+<path d="M44 50H100L94 60H52Z" fill="#2E471F" stroke="#EFF4EB" stroke-opacity=".8" stroke-width="1.5"/>
+<rect x="58" y="40" width="28" height="10" fill="#E1A98E" stroke="#EFF4EB" stroke-opacity=".7"/>
+<rect x="66" y="34" width="4" height="6" fill="#EFF4EB" fill-opacity=".8"/>
+<path d="M18 76H130" stroke="#E1A98E" stroke-opacity=".6" stroke-width="2"/>
+<path d="M74 23V79M15 51H133" stroke="#E1A98E" stroke-width="3"/></g>
+<g><rect x="10" y="112" width="132" height="7" rx="2" fill="#E1A98E"/><path d="M18 119V128M134 119V128" stroke="#E1A98E" stroke-width="4"/>
+<rect x="16" y="90" width="12" height="22" fill="#D2774B"/><rect x="30" y="94" width="10" height="18" fill="#EFF4EB" fill-opacity=".9"/><rect x="42" y="88" width="13" height="24" fill="#E1A98E"/><rect x="57" y="93" width="10" height="19" fill="#45682F" stroke="#EFF4EB" stroke-opacity=".6"/><rect x="69" y="90" width="12" height="22" fill="#D2774B"/><rect x="83" y="95" width="10" height="17" fill="#EFF4EB" fill-opacity=".9"/><rect x="95" y="89" width="13" height="23" fill="#E1A98E"/><rect x="110" y="92" width="11" height="20" fill="#45682F" stroke="#EFF4EB" stroke-opacity=".6"/><rect x="123" y="90" width="12" height="22" fill="#D2774B"/>
+<path d="M19 96H25M19 102H25M45 94H52M72 96H78M98 95H105M126 96H132" stroke="#1D2E14" stroke-width="2" stroke-linecap="round"/></g>
+<g><rect x="10" y="204" width="136" height="8" rx="3" fill="#E1A98E"/><path d="M18 212V236M138 212V236" stroke="#E1A98E" stroke-width="6"/>
+<rect x="42" y="196" width="40" height="8" rx="2" fill="#45682F" stroke="#EFF4EB" stroke-opacity=".7"/>
+<rect x="60" y="158" width="4" height="38" fill="#EFF4EB" fill-opacity=".9"/>
+<path d="M30 160H94" stroke="#E1A98E" stroke-width="4" stroke-linecap="round"/><circle cx="62" cy="156" r="5" fill="#D2774B" stroke="#EFF4EB" stroke-opacity=".7"/>
+<path d="M32 162L24 186M32 162L44 186M92 162L84 186M92 162L104 186" stroke="#EFF4EB" stroke-opacity=".8" stroke-width="1.5"/>
+<ellipse cx="34" cy="187" rx="15" ry="4" fill="#E1A98E" stroke="#EFF4EB" stroke-opacity=".7"/><ellipse cx="94" cy="187" rx="15" ry="4" fill="#E1A98E" stroke="#EFF4EB" stroke-opacity=".7"/>
+<path d="M112 204V176H132V204Z" fill="#45682F" stroke="#E1A98E" stroke-width="2.5"/>
+<rect x="116" y="180" width="12" height="20" rx="2" fill="#E1A98E" fill-opacity=".85"/>
+<path d="M110 176H134L130 168H114Z" fill="#E1A98E"/><path d="M116 168Q122 156 128 168" stroke="#E1A98E" stroke-width="2.5" fill="none"/></g>
+<g><circle cx="500" cy="62" r="22" fill="#1D2E14" stroke="#E1A98E" stroke-width="3"/><circle cx="500" cy="62" r="16" fill="#EFF4EB" fill-opacity=".1"/>
+<path d="M500 48V52M500 72V76M486 62H490M510 62H514" stroke="#EFF4EB" stroke-width="2"/><path d="M500 62V52M500 62L508 66" stroke="#D2774B" stroke-width="3" stroke-linecap="round"/><circle cx="500" cy="62" r="2.5" fill="#E1A98E"/></g>
+<g><rect x="536" y="26" width="54" height="86" rx="3" fill="#2E471F" stroke="#E1A98E" stroke-width="2"/>
+<rect x="544" y="34" width="38" height="14" rx="2" fill="#1D2E14" stroke="#EFF4EB" stroke-opacity=".6"/><path d="M549 41H577" stroke="#E1A98E" stroke-width="3" stroke-linecap="round"/>
+<g stroke="#EFF4EB" stroke-opacity=".85" stroke-width="2.5" stroke-linecap="round"><path d="M547 60H575M547 70H568M547 80H575M547 90H566M547 100H572"/></g></g>
+<g><rect x="466" y="204" width="124" height="8" rx="3" fill="#E1A98E"/><path d="M474 212V236M582 212V236" stroke="#E1A98E" stroke-width="6"/>
+<rect x="474" y="176" width="48" height="28" rx="3" fill="#45682F" stroke="#E1A98E" stroke-width="2.5"/>
+<path d="M474 186H522" stroke="#E1A98E" stroke-width="2"/><rect x="492" y="182" width="12" height="10" rx="2" fill="#D2774B" stroke="#EFF4EB" stroke-opacity=".7"/><circle cx="498" cy="187" r="1.8" fill="#1D2E14"/>
+<ellipse cx="558" cy="200" rx="26" ry="5" fill="#E1A98E"/><ellipse cx="558" cy="194" rx="22" ry="4.5" fill="#D2774B"/><ellipse cx="558" cy="188" rx="18" ry="4" fill="#E1A98E"/><ellipse cx="558" cy="182" rx="14" ry="3.5" fill="#D2774B"/><ellipse cx="558" cy="177" rx="10" ry="3" fill="#E1A98E"/></g>
+<rect id="glow" x="150" y="20" width="300" height="216" rx="10" fill="url(#glowg)"/>
+<g id="door">
+<rect x="150" y="20" width="300" height="216" rx="10" fill="#45682F" stroke="#E1A98E" stroke-width="3"/>
+<circle cx="164" cy="34" r="4" fill="#E1A98E"/><circle cx="436" cy="34" r="4" fill="#E1A98E"/><circle cx="164" cy="222" r="4" fill="#E1A98E"/><circle cx="436" cy="222" r="4" fill="#E1A98E"/>
+<rect x="210" y="30" width="180" height="26" rx="4" fill="#1D2E14" stroke="#EFF4EB" stroke-opacity=".7"/>
+<text x="300" y="48" text-anchor="middle" font-size="12" letter-spacing="2" font-weight="700" fill="#EFF4EB">TOLL HOUSE</text>
+<rect x="262" y="90" width="76" height="8" rx="3" fill="#2E471F"/>
+<circle cx="276" cy="86" r="4" fill="#EFF4EB"/>
+<g class="wheel" id="wheel"><path d="M276 86L328 80" stroke="#EFF4EB" stroke-width="4" stroke-linecap="round"/><circle cx="330" cy="80" r="6" fill="#D2774B"/></g>
+<rect x="170" y="106" width="260" height="8" rx="3" fill="#2E471F"/>
+<g id="plocks"></g>
+<text x="300" y="228" text-anchor="middle" direction="ltr" font-size="11" letter-spacing="3" font-weight="700" fill="#EFF4EB">1811 - 1840</text>
+</g>
+</svg>
+</div>
+
+<div class="intro glass" id="intro">
+  <h2 style="margin:.1em 0">You are locked in the canal toll house.</h2>
+  <p>The canal toll house closed for the night, and the toll keeper locked the door. A shelf of ledgers, a brass scale, a lantern, a coil of rope, a cash box, and a wall clock sit in the room. The door has <b>5 locks</b>. Each lock matches two big ideas from Lesson 6. Solve them all to find the <b>5-digit exit code</b>.</p>
+  <p>The clock starts when you press the button. Most students finish in about 20 minutes.</p>
+  <p><button class="btn primary" id="startBtn">Enter the Toll House</button></p>
+</div>
+
+<div id="game" class="hidden">
+  <div class="bar" id="bar" aria-live="off"><span><span>Time</span> <b id="tm">00:00</b></span><span><span>Locks</span> <b id="lc">0</b>/5</span><span><span>Hints used</span> <b id="hc">0</b></span></div>
+  <div id="locks"></div>
+
+  <section class="exit glass locked" id="exit" aria-label="Exit door">
+    <div class="eyebrow">THE EXIT DOOR</div>
+    <h2>Type the exit code</h2>
+    <p id="exitNote">Open all 5 locks first. The digits go in order: Lock 1 first.</p>
+    <div class="codebox" id="codebox" dir="ltr"></div>
+    <p class="ennote">Type the answer in English. Use the digits 0-9.</p>
+    <div class="row" style="justify-content:center"><button class="btn primary" id="codeBtn" disabled>Open the Door</button></div>
+    <div class="fb" id="codefb"></div>
+  </section>
+
+  <section class="esc glass" id="esc" aria-live="polite">
+    <div class="big">ESCAPED</div>
+    <p class="time"><span>Your time:</span> <span id="escTime">00:00</span></p>
+    <p id="escSum"></p>
+    <p>One last step: write your Debrief below.</p>
+  </section>
+
+  <section class="debrief glass" id="debrief">
+    <div class="eyebrow">DEBRIEF</div>
+    <h2>Which lock was hardest, and what did you learn that you did not know before?</h2>
+    <p style="margin:.2em 0;color:var(--dim)">Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.</p>
+    <textarea id="debriefText" aria-label="Debrief" placeholder="Type your answer here..."></textarea>
+  </section>
+
+  <section class="actions glass" id="actions">
+    <div class="status" id="status"></div>
+    <div class="row">
+      <button class="btn" id="saveBtn">Save Progress</button>
+      <button class="btn" id="loadBtn">Load Progress</button>
+      <input type="file" id="loadFile" accept=".json,application/json" hidden>
+      <button class="btn primary" id="finishBtn">Finished — Download File to Submit</button>
+    </div>
+    <div class="msg" id="msg" role="status"></div>
+    <button class="link" id="reset">Clear all my work and start over</button>
+  </section>
+</div>
+
+<div class="actions glass hidden" id="loadOnly" style="margin-top:12px"><button class="btn" id="loadBtn0">Load Progress</button> <span style="color:var(--dim)">Have a saved file? Load it to continue.</span></div>
+
+<footer>UNIT 2 · AN EXPANDING NATION | CPUSH | DANIEL GARZA, M.A.</footer>
+</div>
+
+<script type="application/json" id="er-data">{"salt": "L6esc:", "exitHash": "73f6746e6ffe6fb3c8ae", "locks": [{"n": 1, "key": "lock1_toll_ledger", "title": "The Toll Ledger", "obj": "1-2", "objLabel": "CORE OBJECTIVES 1 AND 2", "objText": "Core Objectives 1 and 2: Analyze how the spirit of nationalism that emerged after the War of 1812 affected economic policies and judicial decisions. Explain how Henry Clay’s American System fueled the rise of sectional conflict during this era.", "type": "order", "card": "<p><b>A new nationalism.<\/b> After the War of 1812, many Americans wanted a stronger national government. In 1816, Congress set up the Second Bank of the United States to support a stable national currency. The Tariff of 1816 put a 20–25 percent tax on many imported goods to protect new northern factories from cheaper British products. Congress also debated money for roads, bridges, and canals, called internal improvements. In 1817, on his last day in office, President Madison vetoed a bill for this kind of building because he worried that the Constitution did not allow it. The Supreme Court, led by Chief Justice John Marshall, also strengthened the national government. In <i>McCulloch v. Maryland<\/i> (1819), it ruled that Congress could charter the bank and that states could not tax it. In <i>Gibbons v. Ogden<\/i> (1824), it ruled that a state steamboat monopoly conflicted with a federal license and that Congress could regulate interstate commerce.<\/p><p><b>The American System.<\/b> Henry Clay called the national bank, tariffs, and federal roads and canals the American System. His plan depended on each region agreeing to compromise. Critics said tariffs helped northern factories but hurt southern and western farmers, who paid higher prices. Norton says tariffs helped the Northeast more than the South, which made sectional tensions worse. Many people moving west were southerners tied to cotton and slavery. Norton says the question of whether new western states would allow slavery became the greatest political conflict of the nineteenth century.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 9, “A New Nationalism” (section begins p. 368) and “Debates over the American System” (section begins p. 372).", "prompt": "Tap the four events in the order they happened. Tap an event again to take it back.", "items": [{"id": "c", "label": "The Supreme Court decides McCulloch v. Maryland"}, {"id": "a", "label": "Congress sets up the Second Bank of the United States"}, {"id": "d", "label": "The Supreme Court decides Gibbons v. Ogden"}, {"id": "b", "label": "Madison vetoes a bill for roads and canals"}], "hints": ["Look for the years in the Clue Card: 1816, 1817, 1819, and 1824.", "The order is the Second Bank (1816), Madison’s veto (1817), McCulloch v. Maryland (1819), then Gibbons v. Ogden (1824)."], "nudge": "Not quite. Re-read the Clue Card and match each event to its year.", "entries": ["769cab6ebbf98b37bc161"], "id": "lock1_toll_ledger"}, {"n": 2, "key": "lock2_brass_scale", "title": "The Brass Scale", "obj": "3-4", "objLabel": "CORE OBJECTIVES 3 AND 4", "objText": "Core Objectives 3 and 4: Identify the social and economic factors that led to the demise of the “Era of Good Feelings.” Explain how the federal government’s diplomatic accomplishments during James Monroe’s presidency reflected the policies expressed in the Monroe Doctrine.", "type": "match", "card": "<p><b>The end of good feelings.<\/b> James Monroe took office when the nation was at peace and the economy was strong. A Boston newspaper said he would bring an “Era of Good Feelings.” But the goodwill did not last. In the Panic of 1819, cotton prices suddenly fell after British mills bought cheaper cotton from other places. Banks failed, businesses went bankrupt, and many people lost their jobs. The depression lasted about three years, and many people, especially in the South and West, blamed the national bank. Also in 1819, Missouri asked to become a state, and most of its residents wanted to allow slavery. Representative James Tallmadge proposed a ban on bringing enslaved people into Missouri, and many slaveholders were angry. At that time there were eleven slave states and eleven free states. In 1820, Congress admitted Maine as a free state and Missouri as a slave state. It also banned slavery in the rest of the Louisiana Purchase north of latitude 36°30′.<\/p><p><b>Diplomacy under Monroe.<\/b> Secretary of State John Quincy Adams worked to settle the nation’s borders and to make Europe respect American power. In 1819, the Transcontinental Treaty (also called the Adams-Onís Treaty) gave all of Florida to the United States. It also set the western border of the Louisiana Territory, so the nation now reached the Pacific Ocean. In December 1823, Monroe sent a message to Congress that became known as the Monroe Doctrine. It said the American continents were no longer open to new colonies from European powers. It also said the United States would stay out of the wars and internal affairs of Europe. Norton says the Monroe Doctrine had no standing in international law, and no European nation recognized it.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 9, “‘An Era of Good Feelings’” (section begins p. 373) and “Nationalist Diplomacy” (section begins p. 379).", "prompt": "Match each term to the best description. Use the Clue Card.", "hints": ["Look for the dates and key words: cotton prices, Maine and Missouri, Florida and $5 million, and “new colonies.”", "The Panic of 1819 was the cotton price fall. The Missouri Compromise admitted Maine and Missouri. The Transcontinental Treaty gave Florida to the United States. The Monroe Doctrine closed the Americas to new colonies."], "nudge": "Not quite. Check each match against the Clue Card. Which one are you least sure about?", "terms": [{"id": "mis", "label": "Missouri Compromise"}, {"id": "tra", "label": "Transcontinental Treaty"}, {"id": "mon", "label": "Monroe Doctrine"}, {"id": "pan", "label": "Panic of 1819"}], "descs": [{"id": "d", "label": "A message saying the American continents were closed to new European colonies"}, {"id": "c", "label": "A treaty in which Spain gave all of Florida to the United States for $5 million"}, {"id": "b", "label": "A deal to admit Maine as a free state and Missouri as a slave state"}, {"id": "a", "label": "A fall in cotton prices that closed banks and left many people jobless"}], "entries": ["b9203b966ae5b691581b2"], "id": "lock2_brass_scale"}, {"n": 3, "key": "lock3_rope_coil", "title": "The Rope Coil", "obj": "5-6", "objLabel": "CORE OBJECTIVES 5 AND 6", "objText": "Core Objectives 5 and 6: Evaluate the social and political factors that contributed to Andrew Jackson’s success in the 1828 election. Describe how democracy expanded and contracted during this period.", "type": "fill", "card": "<p><b>Jackson’s rise.<\/b> Andrew Jackson was a self-made military hero. He was a popular candidate, especially with voters of Irish and Scots-Irish backgrounds. In the election of 1824, no one had enough electoral votes. Jackson had 99, Adams 84, Crawford 41, and Clay 37. The House of Representatives chose Adams after Clay endorsed him. Jackson charged that Clay and Adams had made a “corrupt <b>bargain<\/b>.” In 1828, Jackson ran as the candidate of the “common” voter, and many men voted for president for the first time. He beat Adams 178 to 83 in the Electoral College. More than twice as many men voted as in 1824.<\/p><p><b>Democracy grows and shrinks.<\/b> After the Revolution, more and more White men gained the right to vote, even if they had little or no wealth. Politics became popular entertainment, and in 1831 Jackson’s Democrats held their first national nominating convention. But democracy did not grow for everyone. Norton says free Black men in northern states voted for the first time, but that did not last. New York (1821) added new limits on Black voting. New Jersey (1807) and Pennsylvania (1838) outlawed it. Norton also says African Americans, Indigenous Americans, and women were denied political and civil rights. Norton says Jackson’s idea of “the people” was a democracy of White men.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 9, “The Rise of Andrew Jackson” (section begins p. 382) and Ch. 10, “Democratization and the Role of the Federal Government” (page not read; cited by section).", "prompt": "Fill in the blank using the Clue Card.", "sentence": "Jackson charged that Clay and Adams had made a “corrupt ________” to decide the election of 1824.", "scramble": "R  I  A  G  B  A  N", "hints": ["Look for the word in bold in the Clue Card, in the paragraph about the election of 1824. It means a deal.", "The word starts with B and has 7 letters. It ends with “gain.”"], "nudge": "Not quite. Re-read the Clue Card. Use the scrambled letters to check your spelling.", "entries": ["002d7e97805e001bb9144", "00317a1aadb8a0b0a1ae5", "0079e6f9fdac98dfd2fa7", "0118e6c92382811f0b0b4", "021cd177bfe0738f368b1", "025cb6bedc46a89a9ec06", "02d9885e59b0a986519f9", "02f2bda39911a558a1189", "05b3f5bbb59f941bdee93", "06dd90843d63d940d60b0", "07014ee2f664060260ad5", "0b523e640a1930e93c501", "0beafc5fcffa249bdd917", "0edae4c3504379386ab21", "1014769dea9ec0437bd38", "114cfa2f369e46f72e0d4", "118eb9b307d1f2246d053", "118f2bdef433b638e4d48", "1194adc4fa64cda035f10", "11ecb3d05ef428d655c88", "1295622469243ecfcb538", "16c884cd149ace78a1625", "1704f11037d9918decc71", "181600c26e14cc32b27a3", "184d75c2880a06d9a37a2", "188d8a5e8c1320f2a0900", "195bdb1d2bb9845144ae9", "1b56641c9e76dc71a0295", "1c2d25356f07213acd484", "1c2ed7e82bbc99be9b626", "1cdc96421ed134ed3fa10", "1e0a2c363de0c3ae27ff5", "1f21ec3a2a651c0cfb848", "1f5f972c99a8adddbf594", "1f8c18577e51a86bafda2", "1f9427f9f21aa269b0c24", "1fc453e03cf07f4870ab7", "1fd2f289ed0849bc82b30", "21dd411bd4d6641818282", "2297234cc470618e34241", "229a11338a697dfa2a466", "2416a562f91b250187475", "24bc056bdb9e0ed198297", "2648ef9636df9b9570656", "26e024d5e1acc3b0134d4", "27c53323925141735b0e8", "28108599bb78e0ca82c67", "28de0ffdfebe8575c0a73", "2962f67cb4182a1b44b72", "297a91fdec0f53fea6525", "298eb94445e68c92acfe5", "2adc539833d4d99038f55", "2b141c466ca2eb4be67f6", "2b2994ff5ec25b8625571", "2b2fab503823d71a9e095", "2b4e7ea449504cfad4e42", "2b71e5d2c3f93a59b0658", "2c686bf716a85f3a60585", "2ef268ca4d4283f414eb8", "3018ef8a3f49202ccb131", "305b72beb979e80fb9521", "310b00f8c5389de48e4d4", "31a43dc586ce5e8863c15", "3273380124aff02078731", "328fa3842ae04d3b02fe0", "329a3901c1b385456e265", "32bfff40603374d6e52d6", "32d34a2b9a30a5e49f795", "3394b38329a7e18114682", "34de85892446acc184a55", "351e41170ccca0c32bca9", "3562ecc3371a7fa27f359", "364e3af793020baecb9b8", "3666ca72b615c7659ca30", "3732cebfa4aecf0fe8ef9", "37966a1a655187d5db3c3", "37e810973bbe6c497b358", "380329b6bf50bc976cb06", "38862f3a7d6b4656850d0", "3a07a95e163d8ce645315", "3b0ae8d5bbc036ed03eb0", "3ba97114259d5aa1e19c1", "3c98f8e6364a7a01acc84", "3cde830f597f98bcdc921", "3d3177086361c8a4967c3", "3d53f29d5751592082f60", "3da7e37a69d9880d74206", "3ea20f27c23c495272c60", "3f29a1abc603be5d4a917", "3f532d9163e37d96cb1f4", "3f91abb17269cd5024dc2", "402264b08667320157ef2", "40576824a28796da57122", "40be3cad3475bf09aed18", "432e31cb6fa7630cb0f49", "44100bb539aee0039a3d6", "441fcd21cdfef6acd2861", "44ef9815ed6b2d873c3f2", "454ef6dd66280fbb9c6e1", "4554561f9de808531aa20", "4895df294623decabedd7", "49c24bab208555f8a3372", "49e1040b167be64142b91", "4b3242b18ca14a302e410", "4bc7869d07cc85366e696", "4c84b1505951a9a7ce548", "4cf16463f5975fd064784", "4dc9b34cc42b6a697db25", "4ea775938aeb5100d5f35", "4fc615c23238b270f19c2", "4feeb190ca8ef39885bc9", "5100d8323dec26eeda916", "51fbb253cb56e202d23a4", "52b651dc08acb6962d2f9", "52ed0c8480cca706d8cf8", "539ebb62bfabbac06d7e8", "546ca13393cdef51ee760", "54993d0440bae09321ac0", "56a29b189704c4d38a539", "5723bcc650b70787963d0", "5798c313f27beda9ac8c0", "586c4477ad166e13965d6", "5968273f47cde01e3b5f6", "59b8822ac8709c065ba51", "5a79530064cf7b5b1d3a8", "5b4fdba2f73d4725ce768", "5b9717f330187b9d23305", "5bb9160131cc3bf25a628", "5c1f2d2fd359a8a1c7f21", "5c961c881a0a86edfa5c0", "5ca8c8ac3b8dfe6706348", "5d5687c19877b2e2fc7e8", "5deea37cd2b1257477b37", "5ed06e58fe1b8397e0c04", "5ef3bbc87a872f5a3f275", "60c32509ea4d8742aa7c5", "60c710441a7b0a35e9377", "6252c29e35b767e596e19", "649ae32864e9433cfeee8", "650bcf92a8ee60647e4d8", "6643a2a9ed741ada8e4f6", "664e8630f20658b9012f6", "667b53e3de96efd40cee8", "67eedf428f147b6c88b04", "683f16fb05b7a73ddd754", "695eef43897cf53018697", "6969382bdddbf2b0e5d70", "69af3d6594fd26dbc3d07", "6a427b3a972eb280ec510", "6a5cc5c53974893cc1b56", "6a924bb2ef89706a3d4e2", "6ac5979e5d157b1fdb0c9", "6aff3591d91b5fe316475", "6b29ef6b4b583d740e650", "6b577e1a713c41839ef63", "6b715c1167f05a3408900", "6bbc350345c9d7aebf868", "6c0aeed66bdea398aefd5", "6c177e0e5849f20ff2c05", "6cce23ea61f58a5256141", "6d43e30678d9222783275", "6e82db58aa4966b28c358", "6f148553aff0facf1d413", "6f45bed0b2a2a3e28d262", "6fe6e85ca4b5efc504cf7", "700b8f006417418ba1a69", "704cf6f7c76d357619a48", "70969c2149aaf5d882f89", "7152af64ad1f4dfade666", "72df2b96f9ba61927ed54", "731e548aa0b61e7595cb4", "732e3cd3bf6dc5e7b6e36", "738144482f094de9b1032", "73a5d63c1641467bc2ef4", "73b8e4e5dc02b497e0e12", "73fd980c0830117b9ba49", "741124b120b3a726d0171", "741aff1569706dc8f09f9", "745ba27fa4fee81cd19b5", "756970624e8c9a6ac9ab6", "75df44868ccdb630ddb80", "75fd6fd09498e6f7e4589", "76d2ad922fac4d8693586", "76f0ed38fdbd0ef60a472", "776404fc16c2c87d97517", "77c912cf166c5adfe3ce0", "784f41f4f05f993ca6123", "79d54a42d4c1bc2667483", "79e5a36c26b4791283bf9", "7a9f2c088b49c12b8fb74", "7d377f7efc2fd23a67d46", "7d8946bb89be87c3bfa03", "7e1109343493fd02a2ef2", "7e71ebe315e771d439a44", "803f23c8fb76de6ec8f39", "816706ce6a528f043fd46", "82acfcea1124f68f98a04", "82ade7ee0a70c50ada7d5", "837867695760481dc0204", "83e672ad9664134d21038", "8432efc5563b0caf89397", "84e301a6b7356a87f9542", "84f774de3399490dcba10", "84ff448839b545e765f92", "86260d27a96eaffaf3c04", "866683ab65e93658de827", "867bde600905f5bfa0c20", "88a814d5aabd0bf9393a6", "890d0d2245bc8633d2a04", "8a6b9b72c751d35b69cc8", "8a775635248221d937eb7", "8b44f3219e5fcae645223", "8c00a88cf5634f2dac4c3", "8db7da01b527d1d695174", "8de0ff4a5cf2dc2bc22b0", "8dfe226cf28d38f612712", "8e0514096edb14a553198", "8f5f8a2b5e8dc79a7a073", "8fade2d5123e2cca38d35", "9010ede375855671a9117", "915560f1776fb9352c919", "9214d2c7cc0f81897a101", "9235b90c398745921a520", "9267b354a6bb5c24de467", "93646c1161169dbb79c90", "943b8ed668e725aaf2e02", "9450ff666aa8028d56592", "9461bc50366ffb31b86d5", "9477f3efc180a1effd9e5", "94fdfe80fffa6457e81e1", "9539295cece420ac44fc6", "9539be190a2f4ebd70504", "9635912c534e8daa6bc32", "96d56d829dad926c1bcf0", "9734882f0ccc9e49c49c7", "9813691bcd4e34bc900d2", "9d6385d6b75cae949ff99", "9d8874fe3378b1d991af0", "9f82bf6eb178cc8f406a5", "9f9ca9c3a877f6f1f0fa6", "a0acff57798c5007b7f32", "a112edb4ae3ed3e075667", "a207e002d3eea7df0e277", "a2c25ff979658df65e928", "a2d0c999f03796d171a48", "a3e97066780f8980f5909", "a439acee79b764253d4e3", "a43eca3435ad88aa505d3", "a48cab1f3b567456eb142", "a4cb2c6f719d4f541f4b1", "a4fb0ff7bc450ff3128f3", "a547ba0c6ad4a774e3870", "a5f22d5cab912b0772560", "a67b412b003f5f8ec00e4", "a711a366a651976682725", "a7396168653d2a1402618", "a73bb070a726635501f23", "a761e0412e7e0ca348f48", "a764270bf90772348f933", "a76e15b0ec16af25260e9", "a7770cd615391764fbe55", "a970d859b6ecf58f39012", "aa8a582fdaffe75edb713", "aaa6cfc0bfb794a74b1b6", "aaf814fe0750314875202", "ab77a790bb8209105f245", "ac244bc1398f8af02d8a4", "ac64fb2846403e7220a36", "acbcba62c9ba3de3ba3a9", "ada17294752dbdbbbd166", "ae76a099411213d9ac370", "af4a9fb52d8e77625fb19", "af90f8209d3bb461cadc6", "b03123110143f54dd4c70", "b09d37257fa955e603904", "b1557c145915b5ead6005", "b2267e223d0cd4ad47a76", "b273662ee59354e07be97", "b347454899834bb6cef30", "b5d438169f9e67d018fe6", "b5ed0b5bb9a906add7147", "b62dc2c8d25c137c15cb5", "b67d3e8af2d8674b153a2", "b6eea161eb018322b0752", "b726fb3b789b8c24d6e64", "b72b45ef24513d8105ae3", "b750686bd650acccb2508", "b7f7ab8adf3a8cecd7a79", "b88a3e47bbb4341307ca1", "b97914a7777f1b4c8ab05", "b9d15b0b2130393b1ad89", "bac0f73bd48612c524930", "bad576fbb35d386eda031", "baf1e44e7e061b2cb6c21", "bb1b840a03274f953d830", "bb2285b7dd3ac6fb72f23", "bde6ef39834e5bfbd7873", "be006149ccef3f6d214b1", "c0ea72af64741d6f7df70", "c112da8a582c8fde21f40", "c3dec39b2720a6725b4b5", "c402632287c5892769bf2", "c44b6db8250f84dc9d5e7", "c4aeed80291faeba18834", "c56f11d61091f419e4737", "c5d47cd528e80e700b6e5", "c5d5d8723ac43377dccd8", "c61e6dd1f25011362a3b6", "c6a7b7a2d3f25ae0e6730", "c83f64fdeb1ea77bb8b49", "c8a55241d92ca1014d972", "ca4ae770427b33becfef2", "cae42d0721cbcd7fdebf3", "caf68db08bbaf327420d2", "cb6d5509da5e4bee4e866", "cc11c343a704f2a4264d8", "cd9bb6c416f192c10e546", "cddabafa42e729cd7da82", "ce4c1aa86b7b36256d072", "ce7cb28a84de83ec50bd5", "ceee44ab4ec42cf35a663", "d0ae57c9bb72284574538", "d2785d1a3f90010c9ee57", "d2c8480fd7cf7f1cb8035", "d424030d0e7f76a34b4e1", "d530fc88568ff807e74e7", "d5428d9978d9974bde178", "d5710660fd708b6fb6d82", "d64bb39bf8453ea894074", "d707e8c5006bf43349804", "d75901f7e8470c9130b50", "d772ab0ab591f26d5dc47", "d85ded7eb3412e64096a1", "d9d40c82f89ebf667e087", "dab39e8cf2dec54e090b9", "dacefab53d33527145620", "db0fbd6a4ec23171557b9", "db61e636c3693a20d7884", "dbaad729c6db5b22698b0", "dc0fc6976477968e0ecd4", "dc6b6202ea6d241bd43a0", "dcce583c9c3e60d170121", "dd4a8d3367f54fde88e80", "de7f127f6283efb48c9d6", "df43c4cfad6bdfc4e7263", "df731d0d087502667a571", "df88a392c12b40f01c273", "df9cb2f16fb88ee277eb6", "dfe4dd3eb9b0b02e72385", "e007466fa3c00b0b01010", "e0aa89ab639ffcca25a55", "e144b60c1e91fa229d4b2", "e1ce6d7debfb063954e88", "e253832d906b048f0bc87", "e3f592a825a97328cf6b8", "e406d232f37ea7e4aeb01", "e58cbbccbecfa00fe4a81", "e599edb9e85b0678b0632", "e6f563f648d5bd455ad85", "e89c5453b9116008a3e74", "e95776504caa709ec2265", "ec14819b5ef30926c2972", "ec3d546e6614084068902", "ec4ed0ce219e52ddda186", "ed7ebfad8a084195928d6", "ee23cb646123d27a1e665", "ee6b948c10ad261e62b67", "f047254a3db169b1ee122", "f0646ed81f66c171ab9d9", "f19bb0131d62c0bd52f94", "f1a5d45e77f3f36d475c1", "f1d966eeba8f877f3d496", "f2541e2b2338258846fb7", "f267ac680b959742f44c3", "f315819dfd10929e69a98", "f3a2f80bcda64e7ad3959", "f45f792b87d1d4ba8a487", "f48ca9c80f0ba781bd491", "f49822f068df9e3dd7b89", "f72b27c0c31aa33de1312", "f78de3ba6e46e9f5d1b54", "f8473b528f178ce761299", "f8ba6fc9791f7ba7b1e92", "fa294ba45b663e1544541", "fa499596f6bc5874e86f7", "fbb6c409efcad41a01d33", "fe7e3ff589c9dd173dad9", "fec8ae4857156203af442", "ffeebb03987ab4c0fe4e6", "ffffd9312ca4f09d5f605"], "id": "lock3_rope_coil"}, {"n": 4, "key": "lock4_lantern", "title": "The Lantern", "obj": "7-8", "objLabel": "CORE OBJECTIVES 7 AND 8", "objText": "Core Objectives 7 and 8: Evaluate Jackson’s response to the nullification crisis. Analyze Jackson’s legacy regarding the status of Indigenous people in American society.", "type": "decode", "shift": 3, "cipher": "IRUFH ELOO", "card": "<p><b>The nullification crisis.<\/b> Many South Carolinians blamed the Tariff of 1828, called the Tariff of Abominations, for their economic troubles. John C. Calhoun wrote that a state could “nullify,” or veto, a federal law it thought was unconstitutional. In November 1832, a South Carolina convention declared the tariffs of 1828 and 1832 “null, void, and no law.” No other southern state agreed. Jackson said nullification meant rebellion and war, and he asked Congress for a law that let him use the U.S. Army to make South Carolina follow federal law. In March 1833, Congress passed that law and a compromise tariff, based on Henry Clay’s plan, that lowered tariffs slowly. Both sides claimed victory. Jackson had upheld the supremacy of the Union, and South Carolina got a lower tariff.<\/p><p><b>Jackson and Indigenous peoples.<\/b> Jackson believed that Indigenous people and settlers could never live together. He wanted the eastern nations moved west of the Mississippi River and called this a “wise and humane policy.” Indigenous nations disagreed. They said the land had been theirs for centuries. In 1830, Congress passed the Indian Removal Act by a slim margin. It let Jackson ignore earlier treaty promises and force nearly 100,000 Indigenous people to move. In <i>Worcester v. Georgia<\/i> (1832), the Supreme Court said Georgia law had no force in the Cherokee Nation. Jackson still forced the Cherokee and other nations to obey harsh new state laws or move west. In 1838 and 1839, under President Van Buren, about 17,000 Cherokee were forced to walk 800 miles on the Trail of Tears. Thousands died from exposure, disease, or starvation.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 10, “Nullification” (page not read; cited by section) and “Jackson’s Policy on Indigenous Americans” (page not read; cited by section).", "prompt": "The Clue Card describes a law Jackson asked Congress for in 1833. It let him use the U.S. Army to make South Carolina follow federal law. A secret message gives the two-word name of that law. Each letter in the message was moved 3 steps forward in the alphabet. Decode it.", "hints": ["Look at the “nullification crisis” paragraph. Jackson asked Congress for a law that let him use the Army. The secret message names it in two words. Use the decoder key to spell it, one letter at a time.", "In the message, the letter I is really F, and the letter E is really B. The first word has 5 letters and starts with F. The second word has 4 letters and starts with B."], "nudge": "Not quite. Decode one letter at a time with the key, then check your spelling.", "entries": ["00327eacbc13b5c268d87", "011493900aa5aaca8e007", "01b3866d87f1ea1200842", "01fb7b6254c0e985a5c66", "02165ba8a867adbb37613", "02512cd74595e336cbff9", "02a72add991d3f570d318", "0348ebb6eeb10a04b8702", "05b44af3bafbff38c56d0", "05f0f917f64c5ebd9d5b6", "06c0cb6efcb6b2cd7c8b0", "06f56af03fc2c3789fca4", "0732da40c022401e5dcd9", "076014e8e812bc65c48d4", "082060d64719268fbebb0", "09b6c359a8ecbdccfc237", "0aeefb9372f29865d9ad4", "0dde7eb3b6fe86e68e2d0", "0fbc200f5db370d54f398", "10a211f25cde8b5559971", "128a37bd0c39d16676ab4", "1349186c1a426b0b22711", "141381b375c45fe127ca7", "14152520c4b2e2a5f3013", "148346a311ae07bb2a963", "14a35f04717cc4a02b3a2", "14cbe1d0253e58f74ba90", "14ff67ac25727b3669d00", "158005b1b69edac3a4bb0", "1607d843269116e280e73", "16606ab32c725b9945d47", "169a8207e270583606ca9", "1775c00a0b4f2a8ebb004", "18e734c8e4730fe819bd7", "1a3b5a43ad5a59a97e774", "1aff910af39e12b372e84", "1b2afdda14df3ed5f5a55", "1c2125185aa2c792e7192", "1df99a5dc7717ea6ae948", "1e0247190e8fcde236a46", "1f7ca165a6c45f5b12a52", "1ffa45f7cebfa1da49733", "204f1e7c134cdbdd477f8", "205eff2f420db60480a09", "20851d5348ad3c034ff28", "208bc6baf0586008417c7", "20f88125c208986f7e5d6", "215d4311078d8238c0032", "219ec8d8e10b7b796e905", "2213d166a934a7352cd09", "22bc7417bf591ac15c744", "23b7a5a1cd995c37bf319", "249de7104c0b3705408e2", "25e1cf907959beaf60216", "260024b9034494dfe4f34", "2702616acb65598c451e7", "27e763d8db652a20bbc72", "27ed0c7ef38f60ef9f148", "28225575770220ae6e408", "28b76289e4f3e9e3925d0", "28f265ba0c49bb6cdf0c3", "297cbace038da693a6479", "29a4a1b13e3cab8abf2d1", "2ae81b56a5e38b7d96f21", "2b32a5806c6903266b842", "2b7f0d3029b876f1b52b1", "2bc38a3242b5a84d71ac0", "2c79842b1f4588e7ce860", "2d7360bdf47086ad00f57", "2da07ec990ec1fb33af71", "2def543fa91963bba7888", "2e49d82a1eb7364e7de78", "2fc7a84c4dab5eb23b795", "2fe6c429800633aee2506", "307fb00e4a4e232f03011", "31c8338b1a79f2d1cda56", "3266689ca56aad063f105", "328743e8e66ed8a420492", "32d484ddf0e8ad3185696", "33137024c3dbaa14509c6", "3355851aab984abdf3405", "342fdbd618f8b13ac4ef2", "34ba674bc959a17d87e85", "354a3880fc72c17a60df3", "35a850ba1a39b17a46eb1", "35be73db399b4600d12a4", "363217e83f1ff6905e6d6", "3669517a62fc71fd10931", "367719d09cf864907de77", "375df5076e1f4040a78d6", "37c4d730d6f08849a9884", "37c8a8d019efe661dd4f3", "37d0bc4812a82e19ddef6", "38b959469da4b21824901", "39684d6a57690a52fb765", "39961cb8b9da4769fe8f4", "3a3b25008c0e5d3340ef4", "3ae7e1da554ddbabcf186", "3bbfd581e52ef1eff4f26", "3c03334325ea7114a6f27", "3c1f7d68164c3a1763142", "3c5da64229c5181b20f79", "3d03e466742d16c1d9594", "3d9e71de122f87b097117", "3da8116e244d49abde5e2", "3dc90816aef27931d04d8", "3e419a5cf1163ba7afb60", "3ec96978dde38893ae601", "3ecfda725fcd1198cbb62", "4010308e3a96ef66a3bb2", "421daef72d0b9ab707426", "424fe6da3e1addd94a648", "42f0cc06efa56257bd546", "435b8737a41abc219ab81", "43eeeaf18e9d9ee7b8c95", "44539b1b8ac5cedca5b71", "446bb9257eb98a4ba0e77", "448e5f5cf6f3dff06e696", "44b34baf74ada270bebe3", "44b9d11e3beea81816fb6", "4500ac77509d97a429e69", "45b88b2fcc66facad8437", "45ea7954dc8912c946ef7", "46482bbc36369c6a1d0d8", "469c7b45562488bb1d5f4", "46f7c71ba63ffe1df0f43", "4832abef865463424c094", "48f5033b60cc718a03457", "49d5b8c0d69d17f479105", "4a4c29387a5a2e82495f4", "4a89df48f209e35be2b19", "4b1e3d3575d05f8b27515", "4b2a32e1906ee9ec0c2e4", "4bbbf9c31f391d1624617", "4c7bc06b69ada4aefd5d6", "4cedd5517082704898e78", "4d14a022d5b2923b6a0f3", "4d362d22378a03808e0a3", "4d53e1f14b7eb99323e24", "4d78806c18147ed8007c0", "4e356b56b72086912e704", "4f04bfc042c08ea24b369", "4f1c016b03256b10a7c11", "4f25b81d06f58a5bb3f02", "4f5225c87ae1fd9f47980", "4fccf78702ae06a66ae51", "500b22585c29edbebf783", "502ffe7d5da8b22452707", "50a064ceea7a8d44ff7a3", "50d6276b1981e39939867", "51fcf8070081457946ed1", "52113a365ef3de8379ae5", "538fa9451739e71edc912", "53d7d5e690569a3784e77", "562fc36db6478ec2c0c90", "56f3b18004e99a70251f8", "5700d8a0e9639e4d225a6", "57085ce297e57704b6413", "5765d468578a03754e2b9", "579b5ac99ef0fadf98233", "57a388879721ec3e13405", "58126a618027c840cae11", "5817afdf3a4825215ffc2", "593a2a3c211bfbe0f1480", "59c595535d83fefb2a269", "5a3c0aae700484d0fd4f1", "5a7a5c1e1e581ef2be545", "5b3f4e28edf1e5b53d043", "5b5193f5bde1e992161e6", "5bd8e08a60da0d5572c40", "5c6a0069d78f2042067a5", "5d7459f41d16c14e90c69", "5ddca354a721aa75afae0", "5e3968f9b7b14730d46a9", "5e43f11c2b6e95e3aab13", "5e9200fe4e65b3f1da526", "5eb0ad7bbd2e4fa6ac982", "5f6600b14c578e531bda7", "60efd67e3aa0f542728d4", "61ab06389ebbe18af4887", "61f7d52914617ad832cc0", "6233cf01c10fb07413936", "6343c645b2f87bd876b83", "646efbb1acd150349f3f8", "64763eb2f616f3c811879", "64937d25714d43ca1b908", "652101062690b23ce2524", "655549398beb01c467192", "667eeb9092cea8a32d252", "66d2c250a80e6c4d6cc49", "66f40544577e177507327", "6820555fa2fe8d51a69c6", "69a271182e815fb4be831", "6a328e39ee28dad4d1e25", "6c4e8440363f94ee6fe78", "6c9f6b6809fb2d46e5911", "6d40cf8295d311f243068", "6d4336b55cf2069864116", "6f2f8c84726f6d485c690", "6fca68a8856e09fb405d1", "70dd482fba4537f259803", "718387874dd4d90365c07", "7184210af0838d4522f27", "71a385b295a1a89adbd12", "71c86e62f1038ea652aa0", "72909e15abc2f9ddec753", "72bb4f30b14bed5379453", "73138b807526d360071e8", "737fab99b16cd778f7168", "73c56b5ac32d3d4cde955", "73efd2803ee14cdef8410", "741841f99ff743e426481", "747465ac14ca86e549aa1", "74829a21597c054ec9238", "748a39c8d9ce214cb1e26", "74b7c28aff659e2f238c9", "74c4e5471220a79b0d824", "75e78e0f65aa0098cfc66", "76bba857403d6f3f89da2", "76f18575098329d456597", "7703817c615739e689e34", "777d86a1de1025b49aad0", "77fa2ded45010044a2b01", "780c350f3415dd935da05", "78b4f6e108ff221161d21", "7b79e86cede611d4e3aa1", "7bfc3255e458f3fa11c51", "7c76f35a1921f15374c05", "7c7bd8256e41e8358b3d7", "7d2712924cd3dc0416c10", "7e300b6f21082050d0276", "7e4718ba858119af0c930", "7e7c4daf2241df357db17", "7ef200a0fc578a2e24d32", "7f064a400e7cfe1b82c27", "7f3dd472dcf69b3355876", "7f7bbee3b3852a7ec1700", "7ffa7bb094b5d1ff06657", "8038c271b2abeb64d7327", "8145ba338996f6d420942", "820bc784afeae890e3803", "8211b02d42a39d0cadf20", "82a88d97c3978abd8ae33", "831fad77fb36a64eac072", "84415b2e721ec1ff25e21", "848649579bf715e794f10", "85174194e78c17adc4e52", "85625fba2bfcaf5281768", "8584649e51e1bcc37b6f7", "86886442531d9debb0635", "8748af1e3411e9b2a9188", "880d37733d5bff1d2dae7", "88abea07aa1bc9d5f8848", "88ebb26323f5274ff37a1", "8b88e5050589446576d67", "8c0d0b535d1b7e6e12981", "8c424d756e87f19f93128", "8c6757cdd7719facad3b5", "8d7fa26d154823e35d2a7", "8d80c32a43607418ec936", "8ddbdcd4b6b0b3a6aa288", "8e07bf9f469061c5c7d97", "90c47c2a2afe6ba8c21c3", "918abf8aab585dd718a16", "9206a8e84791a2bbbf606", "92301083ea68d0dccdc36", "9253d4c452e0bda37aa43", "92b0ab52054d40abbd3d5", "92f0c71fcbacbd49ab550", "92f27387b9f7b3b5ec361", "93126c60f10446e7adfa9", "93254fa63642d14e64845", "932a1e9431a9f2b892a17", "93a6375053572c6ff0552", "93b492e68ae854098ce31", "93ee2deab5457a29c5602", "93f32024142de5f01f9d6", "943513cf22240d03edb01", "94cb8514af42ad11d6e58", "94d3ebe39b7704befbf96", "95638e2b60b55ba7a2cb2", "956aea93b2143876eab93", "957e681e0688455b66d32", "95f8d28b42f61169f6779", "96b10ed2b8f8da2b829a5", "96b8deb24a9bb2bdf4911", "96bfcbfa672018d891948", "96ea1d6c42762839bced5", "970d9b844297e58cdc596", "97d2c545062bca42f9629", "97de214056ebe28a3c7b9", "97fbf18b63db1021ee496", "97febe82de2a0d7f311b0", "9845113729e5a798122c2", "984d8c166b518d82c9d59", "98ea0cf8a349a46e74d67", "9948e4d20c86d9a9867a8", "995cf0a666badbb230fb2", "99d2e62357ec7763c6865", "9a9b5905b46681a6f5df2", "9b197dbd3a4c162786416", "9be1b8a7c209d06107fa4", "9c49e687a4a605a2d3988", "9c95bdcf0e0e3c11ecc26", "9df6f48a114304b2da354", "9ee20901237e2bfb0dfb4", "9fc0f3ab75db83ff17505", "a0613651f46f6af3ee941", "a140e4d5ce4ba97d778f6", "a1506a983151d8ae82624", "a306f2d37ee3f050beec5", "a30ed8796b55b8b02af17", "a3c44db0cd2f8c9b37156", "a3f3d8e08177b9b1a80e8", "a4282d3e7ae356a36f179", "a482d2abb484f871a7d28", "a4c1bb742d290971736a6", "a588893d801a1202fbce2", "a59a1972f1ef3549889d1", "a5bbe44bc8fac1f878984", "a5be20f8005f790047f02", "a6bbd98adb6a7f2c6d830", "a7137f0fa50a0b38841b3", "a9900b6b666674061f985", "a994db37cec29ebcefc11", "a9e8caf45852a02a553d3", "aa685bab5ed78330d7434", "ab3acac521659336a9b98", "ab6a67063447f25dbb096", "ab7d6389949d742ba0701", "ac540a35cb9a0d6dd93e1", "ade8ed8eecdd6a187ce30", "ae8ea2e8d9f4e03cb34c0", "af0cdf68d056ed38de3d2", "af2dc29d61dce8202c672", "b0eb5d8859176314a2095", "b15f7c8198aacd654e1b5", "b16b7369525db7a8079c1", "b1b16fa4c7bb4587bd523", "b2165af33dff2cb63e6b0", "b230c0afabb19d3044009", "b2360b3f21a5636e93325", "b2bef74985a47ffdc0dd9", "b2d189e7ca1fbef874681", "b2d91e5128f34a485e3c0", "b30f1b0fa05549a454b63", "b38783e3b5fc85a27b0b9", "b3ad8774c35eb1151b1f2", "b3e2795645e869c3ac412", "b43120821c0a4bdd31292", "b594de565cf5dad642183", "b6ca13aa56cf9d3085e79", "b71bc394cc8cddff069a0", "b7662999fc1b3034fb915", "b77d22132bc3e44accdd0", "b78609aea3b2acea990c5", "b7a231a58cc030562cd36", "b7ce1d3f2cd64e7b67f65", "b8385ca39889fa1cf15c1", "b84e49a0394f72842b6b9", "ba26b6740bbdfed03a6d4", "ba617572c2635473463f6", "bb775d170a036de5a2910", "bc55da404ac5987d4c221", "bc6603c3c8d159844b370", "bdd08424922492ddddcc6", "bf53ceaa96ac15f45e267", "bf591335679892d46ee91", "c0120ade019c0996540a0", "c0405f29e83c825ca5b27", "c0411353f8e27ab7ca3f6", "c1803575074647c34fdc5", "c29a556b5de74c38adf94", "c2c0b33cc53796542c627", "c3d03e3ddfa7ae3eccd23", "c42b2103b706ea2273e81", "c4394bf97fff96bf0d665", "c4d29723e8a4fcf8cc0e1", "c521428326491c36fb121", "c5428aba6a075ac47a9b3", "c54c29074d6444c448e98", "c61ae64d8ee08764072e0", "c63c6db5796568a7c3732", "c689852c5681bb2b12100", "c6c1a2d7dae0a41423a66", "c83cb1b569c5db31a2895", "c8bbf7c9f104e1d978801", "c8e4bbf898410a6452e56", "c9aeb7a472ee3c5000939", "c9f08e0fe5296f2cc8711", "ca5b8104e74cd5ddaa504", "cb0277b1b1478d59ffa86", "cb3eed54bca853e74f0b0", "cb4292ceaafc0ec786f61", "cb4e18eba5408abe832d1", "cb864c305078d2b161c89", "cc005857ea8af41264d10", "cc4978b0c4743d44ba5c5", "ccd6731d1d4a31a5dad63", "cd09fbfbb4209c79e8564", "d00159b5adece95a8b112", "d05bd0d1ce6dc5d9b7cc0", "d0ef481c4d5e2057df473", "d1629d43d308ad9703bf3", "d1e7b6945ce975fac4d86", "d236d52c677258a7b02c1", "d2b5daadbdea9b7f96960", "d356a262d9bb4ae25c981", "d3701dc6e54e9993f89a7", "d578fe34bce6cfa4a9755", "d58d0242a058b2fb75c67", "d5928469805c4c4ab1b14", "d79147aa82be6090e2e51", "d7f2c9542bc9d2b721e12", "d80298a5817c13a690005", "d8b3adeb64276c628fba8", "d8b436c56c97bc76cfe83", "d8ece666681e040184210", "d91c3847f0d32d7f9c8b6", "d9a74ea77f3717acd8735", "da8f4583b70a2988d1249", "db039c1fa9a1c26572cb0", "db960911705f743ceeaf6", "db9d871cfac82a18febf2", "dba1968652135930078c9", "dcd6840b350f1e2ff1b91", "dce1133c87d6caa385f21", "dd1a21f18da291c1595f1", "df0b8971896ff4e89b7c0", "dfdf2795f3a0f43aefc26", "e017c45c0e504554acb44", "e08cc8ac4fc4ab7b4fff2", "e12de9b1dcc3888008b17", "e1a2179d8ea02e96bb985", "e3724bf21f126212f8386", "e3b3d39672934fc4a3a97", "e3c0f01e4fdffb1156089", "e459f996925f25e174115", "e49e13c426947522547c3", "e4d5365f0d88b82b750f9", "e58573bcbd6d805a94025", "e5aa87e17567569bdcd06", "e637876c192a230d41b82", "e65010579b50a1e0b9889", "e78c9c73be1bff1877268", "e7afe24d72153cc833758", "e8527bde791c7237dbe31", "e8addde8aca00e4c27224", "e8e18db6242d00d03a309", "e9dbd1fbe262de693f6a3", "ea8fd3a4e4a7f733d2463", "ebe0ed762495e6521e347", "ebe6193b3ae5ac461bd77", "ec4f5410afb2889e68126", "eca56d1b25fd3f02e6594", "ecd9d6bc12da4a172f9c5", "ed2c5794b15df9f369db2", "ed33c73cba70558c2e402", "ed9d0d1d79276e22da500", "ede440e11941813d3ded9", "ee6d254fc1263389485e6", "eeb1a95c611d3693694e1", "f03c3f9f22decb197e034", "f0b534a88621ea9c2a8f7", "f0d22756616bb89b0fcf1", "f143c9286770ae04ecdf5", "f17b37c8bcee75cf8a967", "f1b96ae9378aca2ab4c32", "f1cd80f4d5cb8ddb14613", "f2dcdc10768113f062548", "f35f873fd68a408861885", "f44338658899e7ff2aa81", "f4b107d0babdfab1f0680", "f65e246c50fa4fd1c2d87", "f6d8b9e053b3defded1d3", "f6f85b8c4462f52ae1b48", "f71c5f152c0919a3bc5b5", "f80ad2929e7cae9aeac52", "f9369490cdd58dfa888e9", "fa1dbba590b73d1000574", "fa9cf698ce30507f0d609", "faa477b3cff1a667c4824", "fb1db2849e183416e7512", "fc4a504545874dae32985", "fcff40f646041c97d9f86", "fe030bfb615d8f2fae7b4", "fe30e5894489be0f41062", "fe875c952074cc25e1f70", "fe96069c44f94aeb3aab8", "feb860c6ac370cbd42907", "ffadba7722730add06aa1", "ffcb3d9cbb38d421f8ba6"], "id": "lock4_lantern"}, {"n": 5, "key": "lock5_cash_box", "title": "The Cash Box", "obj": "9-10", "objLabel": "CORE OBJECTIVES 9 AND 10", "objText": "Core Objectives 9 and 10: Explain the causes of the economic depression of the late 1830s and the emergence of the Whig Party. Assess the strengths and weaknesses of Jackson’s presidency.", "type": "pick", "card": "<p><b>Depression and the Whigs.<\/b> Jackson thought the national bank had too much power. In 1832, he vetoed the Bank Recharter Bill. He said the bank made “the rich richer and the potent more powerful.” Some state banks then printed a great deal of paper money. In 1836, the Distribution Act sent federal money to state banks. That summer, Jackson’s Specie Circular said that land speculators had to pay for federal land with gold or silver coins. Banks had to cut their lending, and the economy slowed. On May 10, 1837, large New York banks stopped turning paper money into coins. This was the start of the Panic of 1837, which Norton calls the republic’s worst depression. It lasted seven years. A crisis in Great Britain had cut demand for American cotton. By fall 1837, one-third of workers had no job. Jackson’s opponents, who called him “King Andrew I,” formed the Whig Party. The Whigs backed Henry Clay’s American System.<\/p><p><b>Jackson’s record.<\/b> Norton calls Jackson’s legacy messy and contradictory. He gave “common” White men a bigger role in politics and helped build the modern Democratic Party. He also saved the Union by ending the nullification crisis. But his idea of “the people” was limited to White men. Critics said his vetoes were “monarchical.” Jackson said he was strengthening the Union. Norton says Jackson was willing to defy limits on his authority.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 10, “Democratization and the Role of the Federal Government” (The Bank War, The Recharter Effort), “Political Battles” (The Money Question, The Whig Coalition, The Eighth President, The Panic of 1837), and “Beyond Jackson’s Legacy: A New Era” (all pages not read; cited by section).", "prompt": "Pick the correct answer for all four questions.", "qs": [{"id": "s", "q": "In 1836, who did the Specie Circular require to pay for federal land with gold or silver coins?", "opts": [{"id": "a", "label": "Land speculators"}, {"id": "b", "label": "Every farmer in the country"}, {"id": "c", "label": "Only the state banks"}, {"id": "d", "label": "Only the Cherokee Nation"}]}, {"id": "w", "q": "Why did Jackson’s opponents form the Whig Party?", "opts": [{"id": "a", "label": "They wanted to end the two-party system"}, {"id": "b", "label": "They said Jackson was ruling like a monarch and opposed his war on the national bank"}, {"id": "c", "label": "They wanted to repeal the Missouri Compromise"}, {"id": "d", "label": "They wanted Congress to pass the Indian Removal Act"}]}, {"id": "v", "q": "What did Jackson do to the Bank Recharter Bill in 1832?", "opts": [{"id": "a", "label": "He signed it"}, {"id": "b", "label": "He asked the Supreme Court to rewrite it"}, {"id": "c", "label": "He vetoed it"}, {"id": "d", "label": "He gave it to Calhoun"}]}, {"id": "p", "q": "Norton says Jackson’s idea of “the people” was limited to which group?", "opts": [{"id": "a", "label": "All adult citizens"}, {"id": "b", "label": "Free Black men in the North"}, {"id": "c", "label": "White men"}, {"id": "d", "label": "Men and women of every background"}]}], "hints": ["Each answer is in the Clue Card. Look for who had to pay with gold or silver, why the Whig Party started, what Jackson did to the bank bill in 1832, and who “the people” meant.", "Land speculators had to pay with gold or silver coins. The Whigs said Jackson ruled like a monarch. Jackson vetoed the bank bill. “The people” meant White men."], "nudge": "Not quite. At least one answer is off. Re-read the Clue Card for the Specie Circular, the Whig Party, the 1832 bank bill, and the meaning of “the people.”", "entries": ["2c18731692176ed1de749"], "id": "lock5_cash_box"}]}</script>
+<script>
+function sha256(ascii){
+  function rightRotate(v,a){return (v>>>a)|(v<<(32-a))}
+  var mathPow=Math.pow,maxWord=mathPow(2,32),i,j,result='',words=[],bitLen=ascii.length*8;
+  var hash=sha256.h=sha256.h||[],k=sha256.k=sha256.k||[],pc=k.length,comp={};
+  for(var c=2;pc<64;c++){if(!comp[c]){for(i=0;i<313;i+=c)comp[i]=c;hash[pc]=(mathPow(c,.5)*maxWord)|0;k[pc++]=(mathPow(c,1/3)*maxWord)|0}}
+  ascii+='\x80';while(ascii.length%64-56)ascii+='\x00';
+  for(i=0;i<ascii.length;i++){j=ascii.charCodeAt(i);words[i>>2]|=j<<((3-i)%4)*8}
+  words[words.length]=((bitLen/maxWord)|0);words[words.length]=(bitLen);
+  for(j=0;j<words.length;){
+    var w=words.slice(j,j+=16),old=hash;hash=hash.slice(0,8);
+    for(i=0;i<64;i++){
+      var w15=w[i-15],w2=w[i-2],a=hash[0],e=hash[4];
+      var t1=hash[7]+(rightRotate(e,6)^rightRotate(e,11)^rightRotate(e,25))+((e&hash[5])^((~e)&hash[6]))+k[i]+(w[i]=(i<16)?w[i]:(w[i-16]+(rightRotate(w15,7)^rightRotate(w15,18)^(w15>>>3))+w[i-7]+(rightRotate(w2,17)^rightRotate(w2,19)^(w2>>>10)))|0);
+      var t2=(rightRotate(a,2)^rightRotate(a,13)^rightRotate(a,22))+((a&hash[1])^(a&hash[2])^(hash[1]&hash[2]));
+      hash=[(t1+t2)|0].concat(hash);hash[4]=(hash[4]+t1)|0;
+    }
+    for(i=0;i<8;i++)hash[i]=(hash[i]+old[i])|0;
+  }
+  for(i=0;i<8;i++)for(j=3;j+1;j--){var b=(hash[i]>>(j*8))&255;result+=((b<16)?0:'')+b.toString(16)}
+  return result;
+}
+function sha256u(s){return sha256(unescape(encodeURIComponent(s)))}
+
+(function(){
+  var PACKET='CPUSH_L6_ESCAPE';
+  var STORE='cpush_l6_escape-room_';
+  var D=JSON.parse(document.getElementById('er-data').textContent);
+  var $=function(i){return document.getElementById(i)};
+  var S;
+  var digits={};            // runtime only: lock n -> digit
+  var entries={};           // lock id -> {h20: maskedDigit}
+  var expanded={};
+  var lastTick=0,timer=null;
+
+  function squash(t){return String(t).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'')}
+  function h20(s){return sha256u(s).slice(0,20)}
+  D.locks.forEach(function(L){var m={};L.entries.forEach(function(e){m[e.slice(0,20)]=+e.slice(20)});entries[L.id]=m});
+
+  function checkLock(L,canon){
+    var salt=D.salt+L.n+':';
+    var h=h20(salt+canon),mk=entries[L.id][h];
+    if(mk===undefined)return null;
+    var m=parseInt(sha256u('m:'+salt+canon).slice(0,2),16)%10;
+    return (mk-m+10)%10;
+  }
+  function fresh(){
+    var o={first:'',last:'',period:'',started:false,elapsed:0,escaped:false,escapeMs:0,debrief:'',codeTries:0,locks:{}};
+    D.locks.forEach(function(L){o.locks[L.id]={solved:false,attempts:0,hints:0,guess:'',readable:''}});
+    return o;
+  }
+  function loadLocal(){var o=fresh();try{var r=JSON.parse(localStorage.getItem(STORE+'state')||'null');if(r)restore(o,r)}catch(e){}return o}
+  function persist(){try{localStorage.setItem(STORE+'state',JSON.stringify(snapshot()))}catch(e){}}
+
+  function totals(){
+    var t={locksSolved:0,attempts:0,hintsUsed:0,exitCodeAttempts:S.codeTries};
+    D.locks.forEach(function(L){var l=S.locks[L.id];if(l.solved)t.locksSolved++;t.attempts+=l.attempts;t.hintsUsed+=l.hints});
+    return t;
+  }
+  function fmt(ms){var s=Math.round(ms/1000),m=Math.floor(s/60);s=s%60;return (m<10?'0':'')+m+':'+(s<10?'0':'')+s}
+  function snapshot(){
+    var o={packet:PACKET,course:'CPUSH',lesson:6,assignment:'Escape Room (Lite)',version:1,saved:new Date().toISOString(),
+      student:{first:$('f_first').value.trim(),last:$('f_last').value.trim(),period:$('f_period').value.trim()},
+      status:S.escaped?'ESCAPED':'INCOMPLETE',escaped:S.escaped,
+      escapeTime:S.escaped?{ms:S.escapeMs,text:fmt(S.escapeMs)}:null,
+      totals:totals(),elapsedMs:Math.round(S.elapsed),started:S.started,locks:{},debrief:$('debriefText')?$('debriefText').value:S.debrief};
+    D.locks.forEach(function(L){var l=S.locks[L.id];
+      o.locks[L.key]={objective:L.obj,puzzleType:L.type,solved:l.solved,attempts:l.attempts,hintsUsed:l.hints,solvedWith:l.readable,solvedGuess:l.guess}});
+    return o;
+  }
+  function restore(o,r){
+    if(!r||typeof r!=='object')return false;
+    var st=r.student||{};
+    o.first=st.first||'';o.last=st.last||'';o.period=st.period||'';
+    o.started=!!r.started;o.elapsed=+r.elapsedMs||0;o.debrief=typeof r.debrief==='string'?r.debrief:'';
+    o.codeTries=(r.totals&&+r.totals.exitCodeAttempts)||0;
+    var allOk=true;
+    D.locks.forEach(function(L){
+      var src=(r.locks&&r.locks[L.key])||{},l=o.locks[L.id];
+      l.attempts=+src.attempts||0;l.hints=Math.min(+src.hintsUsed||0,L.hints.length+0);
+      if(src.hintsUsed>L.hints.length)l.hints=L.hints.length;
+      if(src.solved&&typeof src.solvedGuess==='string'){
+        var d=checkLock(L,src.solvedGuess);
+        if(d!==null){l.solved=true;l.guess=src.solvedGuess;l.readable=String(src.solvedWith||'');digits[L.n]=d}else allOk=false;
+      }else allOk=false;
+    });
+    if(r.escaped&&allOk&&r.escapeTime){o.escaped=true;o.escapeMs=+r.escapeTime.ms||0}
+    return true;
+  }
+
+  /* ---------- scene ---------- */
+  var NS='http://www.w3.org/2000/svg';
+  var XS=[210,255,300,345,390];
+  (function(){
+    var g=$('plocks'),h='';
+    XS.forEach(function(x,i){
+      h+='<g class="plock" id="pl'+(i+1)+'"><path class="sh" d="M'+(x-8)+' 124V114a8 8 0 0 1 16 0V124" fill="none" stroke="#EFF4EB" stroke-width="4"/><rect class="bd" x="'+(x-15)+'" y="124" width="30" height="24" rx="4" fill="#D2774B"/><circle cx="'+x+'" cy="135" r="3" fill="#2E471F"/></g>'+
+      '<rect x="'+(x-16)+'" y="158" width="32" height="36" rx="5" fill="#1D2E14" stroke="#E1A98E"/><text id="dw'+(i+1)+'" x="'+x+'" y="184" text-anchor="middle" font-size="24" font-weight="800" fill="#EFF4EB">?</text><text x="'+x+'" y="208" text-anchor="middle" font-size="11" font-weight="700" fill="#D2DCCB">LOCK '+(i+1)+'</text>';
+    });
+    g.innerHTML=h;
+  })();
+  function sceneUpdate(){
+    D.locks.forEach(function(L){
+      var open=S.locks[L.id].solved;
+      $('pl'+L.n).setAttribute('class','plock'+(open?' open':''));
+      $('dw'+L.n).textContent=open?digits[L.n]:'?';
+    });
+    $('scene').classList.toggle('escaped',S.escaped);
+  }
+
+  /* ---------- build lock cards ---------- */
+  var W={};   // widget state per lock
+  var LOCKSVG='<svg class="lk" viewBox="0 0 44 44" aria-hidden="true"><path class="sh" d="M13 20V14a9 9 0 0 1 18 0V20" fill="none" stroke="#EFF4EB" stroke-width="4"/><rect class="bd" x="8" y="20" width="28" height="20" rx="4" fill="#D2774B"/><circle cx="22" cy="30" r="3" fill="#2E471F"/></svg>';
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+  function buildLock(L){
+    var sec=document.createElement('section');sec.className='lock glass locked';sec.id='lock'+L.n;
+    var head='<button class="lh" type="button" id="lh'+L.n+'" aria-expanded="false">'+LOCKSVG+'<span class="lt"><small>LOCK '+L.n+' · '+L.objLabel+'</small><strong>'+esc(L.title)+'</strong></span><span class="dg" id="dg'+L.n+'" aria-label="digit">?</span></button>';
+    var body='<div class="lb" id="lb'+L.n+'"><p class="objline">'+esc(L.objText)+'</p>'+
+      '<div class="card"><h4>CLUE CARD</h4>'+L.card+'<p class="src">'+L.src+'</p></div>'+
+      '<div class="prompt">'+L.prompt+'</div><div id="pz'+L.n+'"></div>'+
+      '<div class="row"><button class="btn primary" type="button" id="ck'+L.n+'">Check</button><button class="btn small" type="button" id="hb'+L.n+'">Hint</button><button class="btn small" type="button" id="rs'+L.n+'">Clear</button></div>'+
+      '<div class="hints" id="hs'+L.n+'"></div><div class="fb" id="fb'+L.n+'" role="status"></div></div>';
+    sec.innerHTML=head+body;
+    $('locks').appendChild(sec);
+    buildPuzzle(L);
+    $('lh'+L.n).addEventListener('click',function(){
+      var st=lockState(L);if(st==='locked')return;
+      expanded[L.n]=!expanded[L.n];updateLocks();
+    });
+    $('ck'+L.n).addEventListener('click',function(){submit(L)});
+    $('hb'+L.n).addEventListener('click',function(){hint(L)});
+    $('rs'+L.n).addEventListener('click',function(){clearPuzzle(L)});
+  }
+  function labelOf(list,id){for(var i=0;i<list.length;i++)if(list[i].id===id)return list[i].label;return id}
+
+  function buildPuzzle(L){
+    var el=$('pz'+L.n),w=W[L.n]={};
+    if(L.type==='order'){
+      w.sel=[];el.innerHTML='<div class="chips" id="ch'+L.n+'"></div>';
+      renderOrder(L);
+    }else if(L.type==='match'){
+      var h='';
+      L.terms.forEach(function(t){
+        h+='<div class="mrow"><label for="m'+L.n+t.id+'">'+esc(t.label)+'</label><select id="m'+L.n+t.id+'"><option value="">Choose a description...</option>';
+        L.descs.forEach(function(d){h+='<option value="'+d.id+'">'+esc(d.label)+'</option>'});
+        h+='</select></div>';
+      });
+      el.innerHTML=h;
+    }else if(L.type==='pick'){
+      var h2='';
+      L.qs.forEach(function(q){
+        h2+='<fieldset><legend>'+esc(q.q)+'</legend>';
+        q.opts.forEach(function(o){h2+='<label class="opt"><input type="radio" name="q'+L.n+q.id+'" value="'+o.id+'"> <span>'+esc(o.label)+'</span></label>'});
+        h2+='</fieldset>';
+      });
+      el.innerHTML=h2;
+    }else if(L.type==='decode'){
+      var k1='',k2='';
+      for(var i=0;i<26;i++){var p=String.fromCharCode(65+i),c=String.fromCharCode(65+(i+L.shift)%26);k1+='<div class="c">'+c+'</div>';k2+='<div>'+p+'</div>'}
+      // build key in two rows of 13
+      var key='';
+      for(var r=0;r<2;r++){for(var j=0;j<13;j++){var idx=r*13+j;key+='<div class="c">'+String.fromCharCode(65+(idx+L.shift)%26)+'</div>'}for(var j2=0;j2<13;j2++){key+='<div>'+String.fromCharCode(65+r*13+j2)+'</div>'}}
+      el.innerHTML='<div class="cipher" translate="no" aria-label="Coded message">'+esc(L.cipher)+'</div><p style="margin:.6em 0 0;font-size:15px;color:var(--dim)">Decoder key: the <span style="color:var(--hl);font-weight:700">gold</span> letter is in the message. The white letter under it is the real letter.</p><div class="key" aria-hidden="true">'+key+'</div><label>Decoded answer<input type="text" id="tx'+L.n+'" autocomplete="off" autocapitalize="none" spellcheck="false"></label><p class="ennote">Type the answer in English.</p>';
+    }else if(L.type==='fill'){
+      el.innerHTML='<p style="font-size:18px;margin:.2em 0">'+esc(L.sentence)+'</p><div class="scr" translate="no" aria-label="Scrambled letters">'+esc(L.scramble)+'</div><p style="margin:.4em 0;font-size:14px;color:var(--dim)">Unscramble the letters to fill the blank.</p><label>Your answer<input type="text" id="tx'+L.n+'" autocomplete="off" autocapitalize="none" spellcheck="false"></label><p class="ennote">Type the answer in English.</p>';
+    }
+    var t=$('tx'+L.n);
+    if(t)t.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();submit(L)}});
+  }
+  function renderOrder(L){
+    var w=W[L.n],ch=$('ch'+L.n),h='';
+    L.items.forEach(function(it){
+      var pos=w.sel.indexOf(it.id);
+      h+='<button type="button" class="chip'+(pos>=0?' sel':'')+'" data-id="'+it.id+'" aria-pressed="'+(pos>=0)+'">'+(pos>=0?'<span class="n">'+(pos+1)+'</span>':'')+'<span>'+esc(it.label)+'</span></button>';
+    });
+    ch.innerHTML=h;
+    [].forEach.call(ch.querySelectorAll('.chip'),function(b){
+      b.addEventListener('click',function(){
+        if(S.locks[L.id].solved)return;
+        var id=b.getAttribute('data-id'),p=w.sel.indexOf(id);
+        if(p>=0)w.sel.splice(p,1);else w.sel.push(id);
+        renderOrder(L);
+      });
+    });
+  }
+  function clearPuzzle(L){
+    if(S.locks[L.id].solved)return;
+    var w=W[L.n];
+    if(L.type==='order'){w.sel=[];renderOrder(L)}
+    else if(L.type==='match'){L.terms.forEach(function(t){$('m'+L.n+t.id).value=''})}
+    else if(L.type==='pick'){L.qs.forEach(function(q){[].forEach.call(document.getElementsByName('q'+L.n+q.id),function(r){r.checked=false})})}
+    else{$('tx'+L.n).value=''}
+    fb(L,'','');
+  }
+  function guessOf(L){
+    // returns {canon, readable} or {err}
+    if(L.type==='order'){
+      var w=W[L.n];
+      if(w.sel.length<L.items.length)return {err:'Tap all '+L.items.length+' events first, in order.'};
+      return {canon:w.sel.join('|'),readable:w.sel.map(function(i){return labelOf(L.items,i)}).join(' > ')};
+    }
+    if(L.type==='match'){
+      var c=[],r=[];
+      for(var i=0;i<L.terms.length;i++){var t=L.terms[i],v=$('m'+L.n+t.id).value;if(!v)return {err:'Match every term first.'};c.push(v);r.push(t.label+' = '+labelOf(L.descs,v))}
+      return {canon:c.join('|'),readable:r.join('; ')};
+    }
+    if(L.type==='pick'){
+      var c2=[],r2=[];
+      for(var j=0;j<L.qs.length;j++){var q=L.qs[j],v2='';[].forEach.call(document.getElementsByName('q'+L.n+q.id),function(x){if(x.checked)v2=x.value});if(!v2)return {err:'Answer every question first.'};c2.push(v2);r2.push(labelOf(q.opts,v2))}
+      return {canon:c2.join('|'),readable:r2.join('; ')};
+    }
+    var raw=$('tx'+L.n).value.trim();
+    if(!raw)return {err:'Type your answer first.'};
+    return {canon:squash(raw),readable:raw.slice(0,80)};
+  }
+  function fb(L,cls,text){var e=$('fb'+L.n);e.className='fb'+(cls?' show '+cls:'');e.textContent=text}
+  function submit(L){
+    var l=S.locks[L.id];if(l.solved)return;
+    var g=guessOf(L);
+    if(g.err){fb(L,'nudge',g.err);return}
+    l.attempts++;
+    var d=checkLock(L,g.canon);
+    if(d===null){
+      fb(L,'nudge',L.nudge);
+      var s=$('lock'+L.n);s.classList.remove('shake');void s.offsetWidth;s.classList.add('shake');
+      persist();updateBar();return;
+    }
+    l.solved=true;l.guess=g.canon;l.readable=g.readable;digits[L.n]=d;
+    fb(L,'good','Click! Lock '+L.n+' is open. Your digit is '+d+'.');
+    var wh=$('wheel');wh.classList.remove('spin');void wh.getBoundingClientRect();wh.classList.add('spin');
+    $('dw'+L.n).classList.add('pop');
+    persist();updateAll();
+    setTimeout(function(){
+      expanded[L.n]=false;
+      var nx=nextOpen();if(nx)expanded[nx]=true;
+      updateLocks();
+      var tgt=nx?$('lock'+nx):$('exit');
+      if(tgt&&tgt.scrollIntoView)tgt.scrollIntoView({behavior:'smooth',block:'start'});
+    },1600);
+  }
+  function hint(L){
+    var l=S.locks[L.id];
+    if(l.solved)return;
+    if(l.hints<L.hints.length){l.hints++;persist();updateHints(L);updateBar()}
+    else{fb(L,'nudge','That was the last hint. Read the Clue Card slowly and try again.')}
+  }
+  function updateHints(L){
+    var l=S.locks[L.id],h='';
+    for(var i=0;i<l.hints;i++)h+='<div class="hint"><b>Hint '+(i+1)+':</b> <span>'+esc(L.hints[i])+'</span></div>';
+    $('hs'+L.n).innerHTML=h;
+  }
+  function nextOpen(){for(var i=0;i<D.locks.length;i++)if(!S.locks[D.locks[i].id].solved)return D.locks[i].n;return 0}
+  function lockState(L){
+    if(S.locks[L.id].solved)return 'solved';
+    return L.n===nextOpen()?'current':'locked';
+  }
+  function updateLocks(){
+    var cur=nextOpen();
+    D.locks.forEach(function(L){
+      var st=lockState(L),sec=$('lock'+L.n);
+      if(st==='current'&&expanded[L.n]===undefined)expanded[L.n]=true;
+      var open=(st!=='locked')&&!!expanded[L.n];
+      sec.className='lock glass '+st+(open?' open':'');
+      $('lh'+L.n).setAttribute('aria-expanded',open?'true':'false');
+      $('dg'+L.n).textContent=S.locks[L.id].solved?digits[L.n]:'?';
+      if(S.locks[L.id].solved){
+        [].forEach.call(sec.querySelectorAll('input,select,button.chip,#ck'+L.n+',#hb'+L.n+',#rs'+L.n),function(x){x.disabled=true});
+        var f=$('fb'+L.n);if(!f.classList.contains('good'))fb(L,'good','Unlocked. Your digit is '+digits[L.n]+'.'+(S.locks[L.id].readable?' Your answer: '+S.locks[L.id].readable:''));
+      }
+      updateHints(L);
+    });
+  }
+  function codeStr(){var s='';for(var i=1;i<=5;i++)s+=(digits[i]===undefined?'':digits[i]);return s}
+  function allSolved(){return D.locks.every(function(L){return S.locks[L.id].solved})}
+  function updateExit(){
+    var ok=allSolved();
+    $('exit').classList.toggle('locked',!ok);
+    $('codeBtn').disabled=!ok||S.escaped;
+    [].forEach.call($('codebox').querySelectorAll('input'),function(i){i.disabled=!ok||S.escaped});
+    $('exitNote').textContent=S.escaped?'The door is open!':(ok?'All 5 locks are open. Type the 5 digits in order, Lock 1 first.':'Open all 5 locks first. The digits go in order: Lock 1 first.');
+  }
+  function updateBar(){
+    var t=totals();
+    $('lc').textContent=t.locksSolved;$('hc').textContent=t.hintsUsed;
+    $('tm').textContent=fmt(S.escaped?S.escapeMs:S.elapsed);
+  }
+  function updateStatus(){
+    var el=$('status'),db=($('debriefText').value.trim().length);
+    if(S.escaped)el.textContent=db>=40?'You escaped and wrote your Debrief. Ready to submit.':'You escaped! Write your Debrief, then download your file to submit.';
+    else el.textContent='Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.';
+  }
+  function updateEsc(){
+    $('esc').classList.toggle('show',S.escaped);
+    if(S.escaped){var t=totals();$('escTime').textContent=fmt(S.escapeMs);$('escSum').textContent='5 of 5 locks opened with '+t.attempts+' tries and '+t.hintsUsed+' hint'+(t.hintsUsed===1?'':'s')+'.'}
+  }
+  function updateAll(){sceneUpdate();updateLocks();updateExit();updateBar();updateEsc();updateStatus();
+    $('intro').classList.toggle('hidden',S.started);$('game').classList.toggle('hidden',!S.started);$('loadOnly').classList.toggle('hidden',S.started);
+  }
+
+  /* ---------- exit code ---------- */
+  (function(){
+    var cb=$('codebox');
+    for(var i=0;i<5;i++){
+      var inp=document.createElement('input');inp.type='text';inp.inputMode='numeric';inp.maxLength=1;inp.setAttribute('aria-label','Exit code digit '+(i+1));inp.disabled=true;
+      (function(i,inp){
+        inp.addEventListener('input',function(){inp.value=inp.value.replace(/[٠-٩]/g,function(c){return c.charCodeAt(0)-1632}).replace(/[۰-۹]/g,function(c){return c.charCodeAt(0)-1776}).replace(/[^0-9]/g,'');if(inp.value&&i<4)cb.children[i+1].focus()});
+        inp.addEventListener('keydown',function(e){
+          if(e.key==='Backspace'&&!inp.value&&i>0)cb.children[i-1].focus();
+          if(e.key==='Enter'){e.preventDefault();tryCode()}
+        });
+        inp.addEventListener('paste',function(e){
+          var t=(e.clipboardData||window.clipboardData).getData('text').replace(/[٠-٩]/g,function(c){return c.charCodeAt(0)-1632}).replace(/[۰-۹]/g,function(c){return c.charCodeAt(0)-1776}).replace(/[^0-9]/g,'');
+          if(t.length>1){e.preventDefault();for(var k=0;k<5;k++)cb.children[k].value=t[k]||''}
+        });
+      })(i,inp);
+      cb.appendChild(inp);
+    }
+  })();
+  function tryCode(){
+    if(!allSolved()||S.escaped)return;
+    var v='';[].forEach.call($('codebox').querySelectorAll('input'),function(i){v+=i.value});
+    var f=$('codefb');
+    if(v.length<5){f.className='fb show nudge';f.textContent='The code has 5 digits. Fill every box.';return}
+    S.codeTries++;
+    if(h20('exit:'+D.salt+v)!==D.exitHash){
+      f.className='fb show nudge';f.textContent='The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.';
+      var ex=$('exit');ex.classList.remove('shake');void ex.offsetWidth;ex.classList.add('shake');
+      persist();return;
+    }
+    S.escaped=true;S.escapeMs=S.elapsed;
+    f.className='fb show good';f.textContent='The door swings open!';
+    persist();updateAll();
+    setTimeout(function(){$('esc').scrollIntoView({behavior:'smooth',block:'start'})},900);
+  }
+  $('codeBtn').addEventListener('click',tryCode);
+
+  /* ---------- timer ---------- */
+  function tick(){
+    var n=Date.now();
+    if(S.started&&!S.escaped){S.elapsed+=Math.min(n-lastTick,5000);$('tm').textContent=fmt(S.elapsed)}
+    lastTick=n;
+  }
+  function startTimer(){lastTick=Date.now();if(!timer)timer=setInterval(function(){tick();if(Math.round(S.elapsed/1000)%10===0)persist()},1000)}
+
+  /* ---------- files ---------- */
+  function msg(t,err){var m=$('msg');m.textContent=t;m.className='msg'+(err?' err':'');m.style.display='block'}
+  function ascii(n){return String(n).normalize('NFD').replace(/[̀-ͯ]/g,'')}
+  function clean(n){n=window.spAscii?spAscii(n):n;return ascii(n).trim().replace(/\s+/g,'_').replace(/[^A-Za-z0-9_-]/g,'')}
+  function who(){return (clean($('f_last').value)||'Last')+'_'+(clean($('f_first').value)||'First')}
+  function download(name,obj){
+    var blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;
+    document.body.appendChild(a);a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);
+  }
+  function namesOk(){
+    var ids=['f_first','f_last','f_period'],ok=true;
+    ids.forEach(function(i){var f=$(i);if(!f.value.trim()){f.classList.add('bad');ok=false}});
+    if(!ok){msg('Enter your first name, last name, and period at the top first.',true);$('f_first').scrollIntoView({block:'center'})}
+    return ok;
+  }
+  ['f_first','f_last','f_period'].forEach(function(i){$(i).addEventListener('input',function(){$(i).classList.remove('bad');S[i.slice(2)]=$(i).value;persist()})});
+  $('debriefText').addEventListener('input',function(){S.debrief=$('debriefText').value;persist();updateStatus()});
+  $('saveBtn').addEventListener('click',function(){
+    if(!namesOk())return;tick();
+    download(who()+'-'+PACKET+'-PROGRESS.json',snapshot());
+    msg('Progress file downloaded. Use Load Progress to continue later.');
+  });
+  $('finishBtn').addEventListener('click',function(){
+    if(!namesOk())return;tick();
+    var now=new Date(),o=snapshot();o.completed=S.escaped;o.submitted=now.toISOString();
+    o.student.date=now.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+    download(who()+'-'+PACKET+'.json',o);
+    msg(S.escaped?('Done! File downloaded: '+who()+'-'+PACKET+'.json. Upload it to Canvas.'):('Your file downloaded and is marked INCOMPLETE (you have not escaped). Upload it to Canvas: '+who()+'-'+PACKET+'.json'));
+  });
+  function openLoad(){$('loadFile').click()}
+  $('loadBtn').addEventListener('click',openLoad);$('loadBtn0').addEventListener('click',openLoad);
+  $('loadFile').addEventListener('change',function(e){
+    var f=e.target.files[0];if(!f)return;
+    var r=new FileReader();
+    r.onload=function(){
+      try{
+        var o=JSON.parse(r.result);
+        if(!o||o.packet!==PACKET||typeof o.locks!=='object')throw new Error('wrong');
+        digits={};var n=fresh();restore(n,o);S=n;applyToDom();
+        msg('Progress loaded. Welcome back.');
+      }catch(err){msg('That file did not work. Choose a progress file saved from this Escape Room.',true)}
+      e.target.value='';
+    };
+    r.onerror=function(){msg('The file could not be read.',true)};
+    r.readAsText(f);
+  });
+  $('reset').addEventListener('click',function(){
+    if(!confirm('Clear all your work and start over? This cannot be undone.'))return;
+    digits={};expanded={};S=fresh();
+    try{localStorage.removeItem(STORE+'state')}catch(e){}
+    $('locks').innerHTML='';D.locks.forEach(buildLock);
+    $('f_first').value=$('f_last').value=$('f_period').value='';$('debriefText').value='';
+    [].forEach.call($('codebox').querySelectorAll('input'),function(i){i.value=''});$('codefb').className='fb';
+    applyToDom();
+  });
+  function applyToDom(){
+    $('f_first').value=S.first;$('f_last').value=S.last;$('f_period').value=S.period;$('debriefText').value=S.debrief;
+    // rebuild lock widgets, then pre-fill solved ones with readable note
+    $('locks').innerHTML='';D.locks.forEach(buildLock);
+    expanded={};
+    updateAll();
+    if(S.started)startTimer();
+  }
+  $('startBtn').addEventListener('click',function(){S.started=true;persist();startTimer();updateAll();$('game').scrollIntoView({behavior:'smooth'})});
+  window.addEventListener('beforeunload',function(){tick();persist()});
+
+  S=loadLocal();
+  D.locks.forEach(buildLock);
+  applyToDom();
+})();
+</script>
+<!--sp-i18n--><script type="application/json" id="sp-i18n">{"langs":["en","es","ar"],"default":"en","es":{"Save Progress":"Guardar progreso","Load Progress":"Cargar progreso","Finished — Download File to Submit":"Terminé — Descargar el archivo para entregar","Clear all my answers":"Borrar todas mis respuestas","FIRST NAME *":"NOMBRE *","LAST NAME *":"APELLIDO *","PERIOD *":"PERÍODO *","DATE (fills in when you finish)":"FECHA (se llena cuando terminas)","e.g. 3":"p. ej., 3","Automatic":"Automática","Please type your first name, last name, and period first.":"Primero escribe tu nombre, apellido y período.","Western Expansion and Southern Secession":"Expansión hacia el oeste y secesión del sur","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — La Ley de Esclavos Fugitivos","Bleeding Kansas":"Bleeding Kansas — Kansas sangriento","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"Se descargó tu archivo de progreso. Guárdalo bien. Usa «Cargar progreso» para continuar más tarde.","Progress loaded.":"Progreso cargado.","Could not read that file.":"No se pudo leer ese archivo.","Treaty of Guadalupe Hidalgo":"Tratado de Guadalupe Hidalgo","<b>A new nationalism.<\/b> After the War of 1812, many Americans wanted a stronger national government. In 1816, Congress set up the Second Bank of the United States to support a stable national currency. The Tariff of 1816 put a 20–25 percent tax on many imported goods to protect new northern factories from cheaper British products. Congress also debated money for roads, bridges, and canals, called internal improvements. In 1817, on his last day in office, President Madison vetoed a bill for this kind of building because he worried that the Constitution did not allow it. The Supreme Court, led by Chief Justice John Marshall, also strengthened the national government. In <i>McCulloch v. Maryland<\/i> (1819), it ruled that Congress could charter the bank and that states could not tax it. In <i>Gibbons v. Ogden<\/i> (1824), it ruled that a state steamboat monopoly conflicted with a federal license and that Congress could regulate interstate commerce.":"<b>Un nuevo nacionalismo.<\/b> Después de la Guerra de 1812, muchos estadounidenses querían un gobierno nacional más fuerte. En 1816, el Congreso creó el Segundo Banco de Estados Unidos (Second Bank of the United States) para apoyar una moneda nacional estable. El Arancel de 1816 (Tariff of 1816) puso un impuesto de 20 a 25 por ciento a muchos productos importados, para proteger a las nuevas fábricas del Norte de los productos británicos más baratos. El Congreso también debatió dinero para caminos, puentes y canales, llamados mejoras internas (internal improvements). En 1817, en su último día en el cargo, el presidente Madison vetó un proyecto de ley para este tipo de construcción porque le preocupaba que la Constitución no lo permitiera. La Corte Suprema, dirigida por el presidente de la Corte, John Marshall, también fortaleció al gobierno nacional. En <i>McCulloch v. Maryland<\/i> (1819), decidió que el Congreso podía crear el banco y que los estados no podían cobrarle impuestos. En <i>Gibbons v. Ogden<\/i> (1824), decidió que un monopolio estatal de barcos de vapor chocaba con una licencia federal y que el Congreso podía regular el comercio entre estados.","<b>Democracy grows and shrinks.<\/b> After the Revolution, more and more White men gained the right to vote, even if they had little or no wealth. Politics became popular entertainment, and in 1831 Jackson’s Democrats held their first national nominating convention. But democracy did not grow for everyone. Norton says free Black men in northern states voted for the first time, but that did not last. New York (1821) added new limits on Black voting. New Jersey (1807) and Pennsylvania (1838) outlawed it. Norton also says African Americans, Indigenous Americans, and women were denied political and civil rights. Norton says Jackson’s idea of “the people” was a democracy of White men.":"<b>La democracia crece y se reduce.<\/b> Después de la Revolución, cada vez más hombres blancos ganaron el derecho al voto, aunque tuvieran poca riqueza o ninguna. La política se volvió un entretenimiento popular, y en 1831 los demócratas de Jackson celebraron su primera convención nacional para nominar candidato. Pero la democracia no creció para todos. Norton dice que hombres negros libres de los estados del Norte votaron por primera vez, pero eso no duró. Nueva York (1821) agregó nuevos límites al voto de los negros. Nueva Jersey (1807) y Pensilvania (1838) lo prohibieron. Norton también dice que a los afroamericanos, a los indígenas y a las mujeres se les negaron los derechos políticos y civiles. Norton dice que la idea de “el pueblo” de Jackson era una democracia de hombres blancos.","<b>Depression and the Whigs.<\/b> Jackson thought the national bank had too much power. In 1832, he vetoed the Bank Recharter Bill. He said the bank made “the rich richer and the potent more powerful.” Some state banks then printed a great deal of paper money. In 1836, the Distribution Act sent federal money to state banks. That summer, Jackson’s Specie Circular said that land speculators had to pay for federal land with gold or silver coins. Banks had to cut their lending, and the economy slowed. On May 10, 1837, large New York banks stopped turning paper money into coins. This was the start of the Panic of 1837, which Norton calls the republic’s worst depression. It lasted seven years. A crisis in Great Britain had cut demand for American cotton. By fall 1837, one-third of workers had no job. Jackson’s opponents, who called him “King Andrew I,” formed the Whig Party. The Whigs backed Henry Clay’s American System.":"<b>La depresión y los whigs.<\/b> Jackson pensaba que el banco nacional tenía demasiado poder. En 1832, vetó el Proyecto de Ley de Renovación del Banco (Bank Recharter Bill). Dijo que el banco hacía “más ricos a los ricos y más poderosos a los poderosos”. Entonces algunos bancos estatales imprimieron muchísimo papel moneda. En 1836, la Ley de Distribución (Distribution Act) envió dinero federal a los bancos estatales. Ese verano, la Circular de Especie (Specie Circular) de Jackson dijo que los especuladores de tierras tenían que pagar las tierras federales con monedas de oro o de plata. Los bancos tuvieron que prestar menos, y la economía se frenó. El 10 de mayo de 1837, grandes bancos de Nueva York dejaron de cambiar el papel moneda por monedas. Este fue el comienzo del Pánico de 1837 (Panic of 1837), que Norton llama la peor depresión de la república. Duró siete años. Una crisis en Gran Bretaña había reducido la demanda de algodón estadounidense. Para el otoño de 1837, un tercio de los trabajadores no tenía empleo. Los opositores de Jackson, que lo llamaban “Rey Andrés I” (King Andrew I), formaron el Partido Whig (Whig Party). Los whigs apoyaron el Sistema Americano de Henry Clay.","<b>Diplomacy under Monroe.<\/b> Secretary of State John Quincy Adams worked to settle the nation’s borders and to make Europe respect American power. In 1819, the Transcontinental Treaty (also called the Adams-Onís Treaty) gave all of Florida to the United States. It also set the western border of the Louisiana Territory, so the nation now reached the Pacific Ocean. In December 1823, Monroe sent a message to Congress that became known as the Monroe Doctrine. It said the American continents were no longer open to new colonies from European powers. It also said the United States would stay out of the wars and internal affairs of Europe. Norton says the Monroe Doctrine had no standing in international law, and no European nation recognized it.":"<b>La diplomacia bajo Monroe.<\/b> El secretario de Estado John Quincy Adams trabajó para fijar las fronteras de la nación y para que Europa respetara el poder estadounidense. En 1819, el Tratado Transcontinental (Transcontinental Treaty; también llamado Tratado Adams-Onís) le dio toda Florida a Estados Unidos. También fijó la frontera occidental del Territorio de Luisiana, así que la nación ahora llegaba al océano Pacífico. En diciembre de 1823, Monroe envió un mensaje al Congreso que se conoció como la Doctrina Monroe (Monroe Doctrine). Decía que los continentes americanos ya no estaban abiertos a nuevas colonias de potencias europeas. También decía que Estados Unidos se mantendría fuera de las guerras y los asuntos internos de Europa. Norton dice que la Doctrina Monroe no tenía validez en el derecho internacional y que ninguna nación europea la reconoció.","<b>Jackson and Indigenous peoples.<\/b> Jackson believed that Indigenous people and settlers could never live together. He wanted the eastern nations moved west of the Mississippi River and called this a “wise and humane policy.” Indigenous nations disagreed. They said the land had been theirs for centuries. In 1830, Congress passed the Indian Removal Act by a slim margin. It let Jackson ignore earlier treaty promises and force nearly 100,000 Indigenous people to move. In <i>Worcester v. Georgia<\/i> (1832), the Supreme Court said Georgia law had no force in the Cherokee Nation. Jackson still forced the Cherokee and other nations to obey harsh new state laws or move west. In 1838 and 1839, under President Van Buren, about 17,000 Cherokee were forced to walk 800 miles on the Trail of Tears. Thousands died from exposure, disease, or starvation.":"<b>Jackson y los pueblos indígenas.<\/b> Jackson creía que los indígenas y los colonos nunca podrían vivir juntos. Quería que las naciones del Este fueran trasladadas al oeste del río Misisipi, y lo llamó una “política sabia y humana”. Las naciones indígenas no estaban de acuerdo. Decían que la tierra había sido suya por siglos. En 1830, el Congreso aprobó la Ley de Expulsión de los Indígenas (Indian Removal Act) por un margen muy pequeño. Esa ley permitió a Jackson ignorar promesas de tratados anteriores y obligar a casi 100,000 indígenas a mudarse. En <i>Worcester v. Georgia<\/i> (1832), la Corte Suprema dijo que la ley de Georgia no tenía fuerza dentro de la Nación Cheroqui. Aun así, Jackson obligó a los cheroquis y a otras naciones a obedecer nuevas leyes estatales duras o mudarse al Oeste. En 1838 y 1839, bajo el presidente Van Buren, unos 17,000 cheroquis fueron obligados a caminar 800 millas en el Sendero de Lágrimas (Trail of Tears). Miles murieron por la exposición a la intemperie, las enfermedades o el hambre.","<b>Jackson’s record.<\/b> Norton calls Jackson’s legacy messy and contradictory. He gave “common” White men a bigger role in politics and helped build the modern Democratic Party. He also saved the Union by ending the nullification crisis. But his idea of “the people” was limited to White men. Critics said his vetoes were “monarchical.” Jackson said he was strengthening the Union. Norton says Jackson was willing to defy limits on his authority.":"<b>El historial de Jackson.<\/b> Norton dice que el legado de Jackson es confuso y contradictorio. Les dio a los hombres blancos “comunes” un papel más grande en la política y ayudó a crear el Partido Demócrata moderno. También salvó la Unión al terminar la crisis de la anulación. Pero su idea de “el pueblo” se limitaba a los hombres blancos. Los críticos decían que sus vetos eran “monárquicos”. Jackson decía que estaba fortaleciendo la Unión. Norton dice que Jackson estaba dispuesto a desafiar los límites de su autoridad.","<b>Jackson’s rise.<\/b> Andrew Jackson was a self-made military hero. He was a popular candidate, especially with voters of Irish and Scots-Irish backgrounds. In the election of 1824, no one had enough electoral votes. Jackson had 99, Adams 84, Crawford 41, and Clay 37. The House of Representatives chose Adams after Clay endorsed him. Jackson charged that Clay and Adams had made a “corrupt <b>bargain<\/b>.” In 1828, Jackson ran as the candidate of the “common” voter, and many men voted for president for the first time. He beat Adams 178 to 83 in the Electoral College. More than twice as many men voted as in 1824.":"<b>El ascenso de Jackson.<\/b> Andrew Jackson era un héroe militar que se hizo a sí mismo. Era un candidato popular, sobre todo entre votantes de origen irlandés y escocés-irlandés. En la elección de 1824, nadie tuvo suficientes votos electorales. Jackson tuvo 99, Adams 84, Crawford 41 y Clay 37. La Cámara de Representantes eligió a Adams después de que Clay lo apoyó. Jackson acusó a Clay y a Adams de haber hecho un “<b>trato (bargain)<\/b> corrupto”. En 1828, Jackson se presentó como el candidato del votante “común”, y muchos hombres votaron por presidente por primera vez. Venció a Adams 178 a 83 en el Colegio Electoral. Votaron más del doble de hombres que en 1824.","<b>The American System.<\/b> Henry Clay called the national bank, tariffs, and federal roads and canals the American System. His plan depended on each region agreeing to compromise. Critics said tariffs helped northern factories but hurt southern and western farmers, who paid higher prices. Norton says tariffs helped the Northeast more than the South, which made sectional tensions worse. Many people moving west were southerners tied to cotton and slavery. Norton says the question of whether new western states would allow slavery became the greatest political conflict of the nineteenth century.":"<b>El Sistema Americano.<\/b> Henry Clay llamó Sistema Americano (American System) al banco nacional, los aranceles y los caminos y canales federales. Su plan dependía de que cada región aceptara un acuerdo. Los críticos decían que los aranceles ayudaban a las fábricas del Norte pero perjudicaban a los agricultores del Sur y del Oeste, que pagaban precios más altos. Norton dice que los aranceles ayudaban más al Noreste que al Sur, lo que empeoró las tensiones entre regiones. Muchas de las personas que se mudaban al Oeste eran sureños ligados al algodón y a la esclavitud. Norton dice que la pregunta de si los nuevos estados del Oeste permitirían la esclavitud se convirtió en el mayor conflicto político del siglo XIX.","<b>The end of good feelings.<\/b> James Monroe took office when the nation was at peace and the economy was strong. A Boston newspaper said he would bring an “Era of Good Feelings.” But the goodwill did not last. In the Panic of 1819, cotton prices suddenly fell after British mills bought cheaper cotton from other places. Banks failed, businesses went bankrupt, and many people lost their jobs. The depression lasted about three years, and many people, especially in the South and West, blamed the national bank. Also in 1819, Missouri asked to become a state, and most of its residents wanted to allow slavery. Representative James Tallmadge proposed a ban on bringing enslaved people into Missouri, and many slaveholders were angry. At that time there were eleven slave states and eleven free states. In 1820, Congress admitted Maine as a free state and Missouri as a slave state. It also banned slavery in the rest of the Louisiana Purchase north of latitude 36°30′.":"<b>El fin de los buenos sentimientos.<\/b> James Monroe llegó a la presidencia cuando la nación estaba en paz y la economía iba bien. Un periódico de Boston dijo que traería una “Era de los Buenos Sentimientos” (Era of Good Feelings). Pero esa buena voluntad no duró. En el Pánico de 1819 (Panic of 1819), los precios del algodón cayeron de repente después de que las fábricas británicas compraron algodón más barato de otros lugares. Los bancos quebraron, los negocios se fueron a la bancarrota y muchas personas perdieron su trabajo. La depresión duró unos tres años, y muchas personas, sobre todo en el Sur y el Oeste, culparon al banco nacional. También en 1819, Misuri pidió ser estado, y la mayoría de sus habitantes quería permitir la esclavitud. El representante James Tallmadge propuso prohibir que se llevaran personas esclavizadas a Misuri, y muchos esclavistas se enojaron. En ese tiempo había once estados esclavistas y once estados libres. En 1820, el Congreso admitió a Maine como estado libre y a Misuri como estado esclavista. También prohibió la esclavitud en el resto de la Compra de Luisiana al norte de la latitud 36°30′.","<b>The nullification crisis.<\/b> Many South Carolinians blamed the Tariff of 1828, called the Tariff of Abominations, for their economic troubles. John C. Calhoun wrote that a state could “nullify,” or veto, a federal law it thought was unconstitutional. In November 1832, a South Carolina convention declared the tariffs of 1828 and 1832 “null, void, and no law.” No other southern state agreed. Jackson said nullification meant rebellion and war, and he asked Congress for a law that let him use the U.S. Army to make South Carolina follow federal law. In March 1833, Congress passed that law and a compromise tariff, based on Henry Clay’s plan, that lowered tariffs slowly. Both sides claimed victory. Jackson had upheld the supremacy of the Union, and South Carolina got a lower tariff.":"<b>La crisis de la anulación.<\/b> Muchos habitantes de Carolina del Sur culparon al Arancel de 1828, llamado el Arancel de las Abominaciones (Tariff of Abominations), de sus problemas económicos. John C. Calhoun escribió que un estado podía “anular” (nullify), o vetar, una ley federal que considerara inconstitucional. En noviembre de 1832, una convención de Carolina del Sur declaró que los aranceles de 1828 y 1832 eran “nulos, sin valor y sin fuerza de ley”. Ningún otro estado del Sur estuvo de acuerdo. Jackson dijo que la anulación significaba rebelión y guerra, y le pidió al Congreso una ley que le permitiera usar el Ejército de Estados Unidos para obligar a Carolina del Sur a cumplir la ley federal. En marzo de 1833, el Congreso aprobó esa ley y un arancel de compromiso, basado en el plan de Henry Clay, que bajaba los aranceles poco a poco. Los dos lados dijeron que habían ganado. Jackson había defendido la supremacía de la Unión, y Carolina del Sur consiguió un arancel más bajo.","A canal toll house at night. On the left, a window shows a canal with a boat, above a shelf of ledgers and a desk with a brass scale and a lantern. On the right, a wall clock and a toll rates board hang above a desk with a cash box and a coil of rope. The door has a TOLL HOUSE sign and five padlocks in a row. Under each padlock is a window for one digit of the exit code.":"Una caseta de peaje de un canal por la noche. A la izquierda, una ventana muestra un canal con un bote, sobre un estante de libros de registro y un escritorio con una balanza de latón y un farol. A la derecha, un reloj de pared y un tablero de tarifas de peaje cuelgan sobre un escritorio con una caja de dinero y un rollo de cuerda. La puerta tiene un letrero que dice CASETA DE PEAJE y cinco candados en fila. Debajo de cada candado hay una ventana para un dígito del código de salida.","A deal to admit Maine as a free state and Missouri as a slave state":"Un acuerdo para admitir a Maine como estado libre y a Misuri como estado esclavista","A fall in cotton prices that closed banks and left many people jobless":"Una caída de los precios del algodón que cerró bancos y dejó a muchas personas sin trabajo","A message saying the American continents were closed to new European colonies":"Un mensaje que decía que los continentes americanos estaban cerrados a nuevas colonias europeas","A treaty in which Spain gave all of Florida to the United States for $5 million":"Un tratado en el que España le dio toda Florida a Estados Unidos por 5 millones de dólares","All adult citizens":"Todos los ciudadanos adultos","Congress sets up the Second Bank of the United States":"El Congreso crea el Segundo Banco de Estados Unidos","Core Objectives 1 and 2: Analyze how the spirit of nationalism that emerged after the War of 1812 affected economic policies and judicial decisions. Explain how Henry Clay’s American System fueled the rise of sectional conflict during this era.":"Objetivos principales 1 y 2: Analizar cómo el espíritu de nacionalismo que surgió después de la Guerra de 1812 afectó las políticas económicas y las decisiones judiciales. Explicar cómo el Sistema Americano de Henry Clay alimentó el aumento del conflicto entre regiones en esta época.","Core Objectives 3 and 4: Identify the social and economic factors that led to the demise of the “Era of Good Feelings.” Explain how the federal government’s diplomatic accomplishments during James Monroe’s presidency reflected the policies expressed in the Monroe Doctrine.":"Objetivos principales 3 y 4: Identificar los factores sociales y económicos que llevaron al fin de la “Era de los Buenos Sentimientos”. Explicar cómo los logros diplomáticos del gobierno federal durante la presidencia de James Monroe reflejaban las políticas expresadas en la Doctrina Monroe.","Core Objectives 5 and 6: Evaluate the social and political factors that contributed to Andrew Jackson’s success in the 1828 election. Describe how democracy expanded and contracted during this period.":"Objetivos principales 5 y 6: Evaluar los factores sociales y políticos que contribuyeron al éxito de Andrew Jackson en la elección de 1828. Describir cómo la democracia se amplió y se redujo durante este período.","Core Objectives 7 and 8: Evaluate Jackson’s response to the nullification crisis. Analyze Jackson’s legacy regarding the status of Indigenous people in American society.":"Objetivos principales 7 y 8: Evaluar la respuesta de Jackson a la crisis de la anulación. Analizar el legado de Jackson sobre la situación de los pueblos indígenas en la sociedad estadounidense.","Core Objectives 9 and 10: Explain the causes of the economic depression of the late 1830s and the emergence of the Whig Party. Assess the strengths and weaknesses of Jackson’s presidency.":"Objetivos principales 9 y 10: Explicar las causas de la depresión económica de finales de la década de 1830 y el surgimiento del Partido Whig. Evaluar los puntos fuertes y los puntos débiles de la presidencia de Jackson.","Each answer is in the Clue Card. Look for who had to pay with gold or silver, why the Whig Party started, what Jackson did to the bank bill in 1832, and who “the people” meant.":"Cada respuesta está en la tarjeta de indicios. Busca quién tenía que pagar con oro o plata, por qué empezó el Partido Whig, qué hizo Jackson con el proyecto de ley del banco en 1832 y a quién se refería “el pueblo”.","Enter the Toll House":"Entrar a la caseta de peaje","Escape the Canal Toll House":"Escapa de la caseta de peaje del canal","Every farmer in the country":"Todos los agricultores del país","Free Black men in the North":"Los hombres negros libres del Norte","He asked the Supreme Court to rewrite it":"Le pidió a la Corte Suprema que lo reescribiera","He gave it to Calhoun":"Se lo dio a Calhoun","He signed it":"Lo firmó","He vetoed it":"Lo vetó","In 1836, who did the Specie Circular require to pay for federal land with gold or silver coins?":"En 1836, ¿a quién le exigió la Circular de Especie (Specie Circular) pagar las tierras federales con monedas de oro o de plata?","In the message, the letter I is really F, and the letter E is really B. The first word has 5 letters and starts with F. The second word has 4 letters and starts with B.":"En el mensaje, la letra I en realidad es F, y la letra E en realidad es B. La primera palabra tiene 5 letras y empieza con F. La segunda palabra tiene 4 letras y empieza con B.","Jackson charged that Clay and Adams had made a “corrupt ________” to decide the election of 1824.":"Jackson acusó a Clay y a Adams de haber hecho un “corrupt ________” (un trato corrupto) para decidir la elección de 1824.","Land speculators had to pay with gold or silver coins. The Whigs said Jackson ruled like a monarch. Jackson vetoed the bank bill. “The people” meant White men.":"Los especuladores de tierras tenían que pagar con monedas de oro o de plata. Los whigs dijeron que Jackson gobernaba como un monarca. Jackson vetó el proyecto de ley del banco. “El pueblo” eran los hombres blancos.","Land speculators":"Los especuladores de tierras","Look at the “nullification crisis” paragraph. Jackson asked Congress for a law that let him use the Army. The secret message names it in two words. Use the decoder key to spell it, one letter at a time.":"Mira el párrafo de la “crisis de la anulación”. Jackson le pidió al Congreso una ley que le permitiera usar el Ejército. El mensaje secreto la nombra con dos palabras. Usa la clave del decodificador para escribirla, una letra a la vez.","Look for the dates and key words: cotton prices, Maine and Missouri, Florida and $5 million, and “new colonies.”":"Busca las fechas y las palabras clave: precios del algodón, Maine y Misuri, Florida y 5 millones de dólares, y “nuevas colonias”.","Look for the word in bold in the Clue Card, in the paragraph about the election of 1824. It means a deal.":"Busca en la tarjeta de indicios la palabra en negrita, en el párrafo sobre la elección de 1824. Significa un acuerdo.","Look for the years in the Clue Card: 1816, 1817, 1819, and 1824.":"Busca los años en la tarjeta de indicios: 1816, 1817, 1819 y 1824.","Madison vetoes a bill for roads and canals":"Madison veta un proyecto de ley para caminos y canales","Men and women of every background":"Hombres y mujeres de todos los orígenes","Missouri Compromise":"Compromiso de Misuri","Monroe Doctrine":"Doctrina Monroe","Nationalism, Sectionalism, and <span style=\"white-space:nowrap\">Jacksonian Democracy<\/span>":"Nacionalismo, seccionalismo y <span style=\"white-space:nowrap\">democracia jacksoniana<\/span>","Norton says Jackson’s idea of “the people” was limited to which group?":"Según Norton, ¿a qué grupo se limitaba la idea de “el pueblo” de Jackson?","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 10, “Democratization and the Role of the Federal Government” (The Bank War, The Recharter Effort), “Political Battles” (The Money Question, The Whig Coalition, The Eighth President, The Panic of 1837), and “Beyond Jackson’s Legacy: A New Era” (all pages not read; cited by section).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 10, “Democratization and the Role of the Federal Government” (The Bank War, The Recharter Effort), “Political Battles” (The Money Question, The Whig Coalition, The Eighth President, The Panic of 1837) y “Beyond Jackson’s Legacy: A New Era” (no se leyeron las páginas; se cita por sección).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 10, “Nullification” (page not read; cited by section) and “Jackson’s Policy on Indigenous Americans” (page not read; cited by section).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 10, “Nullification” (no se leyó la página; se cita por sección) y “Jackson’s Policy on Indigenous Americans” (no se leyó la página; se cita por sección).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 9, “A New Nationalism” (section begins p. 368) and “Debates over the American System” (section begins p. 372).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 9, “A New Nationalism” (la sección empieza en la pág. 368) y “Debates over the American System” (la sección empieza en la pág. 372).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 9, “The Rise of Andrew Jackson” (section begins p. 382) and Ch. 10, “Democratization and the Role of the Federal Government” (page not read; cited by section).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 9, “The Rise of Andrew Jackson” (la sección empieza en la pág. 382) y cap. 10, “Democratization and the Role of the Federal Government” (no se leyó la página; se cita por sección).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 9, “‘An Era of Good Feelings’” (section begins p. 373) and “Nationalist Diplomacy” (section begins p. 379).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 9, “‘An Era of Good Feelings’” (la sección empieza en la pág. 373) y “Nationalist Diplomacy” (la sección empieza en la pág. 379).","Not quite. At least one answer is off. Re-read the Clue Card for the Specie Circular, the Whig Party, the 1832 bank bill, and the meaning of “the people.”":"Casi. Al menos una respuesta no es correcta. Vuelve a leer la tarjeta de indicios sobre la Circular de Especie, el Partido Whig, el proyecto de ley del banco de 1832 y el significado de “el pueblo”.","Not quite. Re-read the Clue Card and match each event to its year.":"Casi. Vuelve a leer la tarjeta de indicios y une cada suceso con su año.","Only the Cherokee Nation":"Solo la Nación Cheroqui","Only the state banks":"Solo los bancos estatales","Panic of 1819":"Pánico de 1819","TOLL HOUSE":"CASETA DE PEAJE","The Brass Scale":"La balanza de latón","The Cash Box":"La caja de dinero","The Clue Card describes a law Jackson asked Congress for in 1833. It let him use the U.S. Army to make South Carolina follow federal law. A secret message gives the two-word name of that law. Each letter in the message was moved 3 steps forward in the alphabet. Decode it.":"La tarjeta de indicios describe una ley que Jackson le pidió al Congreso en 1833. Le permitía usar el Ejército de Estados Unidos para obligar a Carolina del Sur a cumplir la ley federal. Un mensaje secreto da el nombre de dos palabras de esa ley. Cada letra del mensaje se movió 3 pasos hacia adelante en el alfabeto. Descífralo.","The Lantern":"El farol","The Panic of 1819 was the cotton price fall. The Missouri Compromise admitted Maine and Missouri. The Transcontinental Treaty gave Florida to the United States. The Monroe Doctrine closed the Americas to new colonies.":"El Pánico de 1819 fue la caída de los precios del algodón. El Compromiso de Misuri admitió a Maine y a Misuri. El Tratado Transcontinental le dio Florida a Estados Unidos. La Doctrina Monroe cerró las Américas a nuevas colonias.","The Rope Coil":"El rollo de cuerda","The Supreme Court decides Gibbons v. Ogden":"La Corte Suprema decide Gibbons v. Ogden","The Supreme Court decides McCulloch v. Maryland":"La Corte Suprema decide McCulloch v. Maryland","The Toll Ledger":"El libro de peajes","The canal toll house closed for the night, and the toll keeper locked the door. A shelf of ledgers, a brass scale, a lantern, a coil of rope, a cash box, and a wall clock sit in the room. The door has <b>5 locks<\/b>. Each lock matches two big ideas from Lesson 6. Solve them all to find the <b>5-digit exit code<\/b>.":"La caseta de peaje del canal cerró por la noche, y el encargado del peaje cerró la puerta con llave. En la sala hay un estante de libros de registro, una balanza de latón, un farol, un rollo de cuerda, una caja de dinero y un reloj de pared. La puerta tiene <b>5 candados<\/b>. Cada candado corresponde a dos ideas importantes de la Lección 6. Resuélvelos todos para encontrar el <b>código de salida de 5 dígitos<\/b>.","The order is the Second Bank (1816), Madison’s veto (1817), McCulloch v. Maryland (1819), then Gibbons v. Ogden (1824).":"El orden es el Segundo Banco (1816), el veto de Madison (1817), McCulloch v. Maryland (1819) y luego Gibbons v. Ogden (1824).","The word starts with B and has 7 letters. It ends with “gain.”":"La palabra empieza con B y tiene 7 letras. Termina con “gain”.","They said Jackson was ruling like a monarch and opposed his war on the national bank":"Dijeron que Jackson gobernaba como un monarca y se oponían a su guerra contra el banco nacional","They wanted Congress to pass the Indian Removal Act":"Querían que el Congreso aprobara la Ley de Expulsión de los Indígenas (Indian Removal Act)","They wanted to end the two-party system":"Querían terminar con el sistema de dos partidos","They wanted to repeal the Missouri Compromise":"Querían revocar el Compromiso de Misuri","Transcontinental Treaty":"Tratado Transcontinental","UNIT 2 · AN EXPANDING NATION | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 2 · UNA NACIÓN EN EXPANSIÓN | CPUSH | DANIEL GARZA, M.A.","What did Jackson do to the Bank Recharter Bill in 1832?":"¿Qué hizo Jackson con el proyecto de ley de renovación del banco (Bank Recharter Bill) en 1832?","White men":"Los hombres blancos","Why did Jackson’s opponents form the Whig Party?":"¿Por qué los opositores de Jackson formaron el Partido Whig?","You are locked in the canal toll house.":"Estás encerrado en la caseta de peaje del canal.","All 5 locks are open. Type the 5 digits in order, Lock 1 first.":"Los 5 candados están abiertos. Escribe los 5 dígitos en orden, primero el del Candado 1.","Answer every question first.":"Primero responde todas las preguntas.","CLUE CARD":"TARJETA DE INDICIOS","Check":"Comprobar","Choose a description...":"Elige una descripción...","Clear":"Borrar","Clear all my work and start over":"Borrar todo mi trabajo y empezar de nuevo","DEBRIEF":"INFORME FINAL","Debrief":"Informe final","Decoded answer":"Respuesta decodificada","Decoder key: the <span style=\"color:var(--hl);font-weight:700\">gold<\/span> letter is in the message. The white letter under it is the real letter.":"Clave del decodificador: la letra <span style=\"color:var(--hl);font-weight:700\">dorada<\/span> está en el mensaje. La letra blanca que está debajo es la letra verdadera.","ESCAPED":"¡ESCAPASTE!","Enter your first name, last name, and period at the top first.":"Primero escribe tu nombre, apellido y período arriba.","Exit code digit 1":"Dígito 1 del código de salida","Exit door":"Puerta de salida","Fill in the blank using the Clue Card.":"Llena el espacio en blanco con la tarjeta de indicios.","Have a saved file? Load it to continue.":"¿Tienes un archivo guardado? Cárgalo para continuar.","Hint":"Pista","Hints used":"Pistas usadas","How to escape:":"Cómo escapar:","If you get stuck, press <b>Hint<\/b>. Hints are free, but your teacher can see how many you used.":"Si te atoras, oprime <b>Pista<\/b>. Las pistas son gratis, pero tu maestro puede ver cuántas usaste.","Locks":"Candados","Match each term to the best description. Use the Clue Card.":"Relaciona cada término con la mejor descripción. Usa la tarjeta de indicios.","Match every term first.":"Primero relaciona todos los términos.","Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.":"Todavía no escapas (se marca INCOMPLETO). Aun así puedes descargar tu archivo y entregarlo.","Not quite. Check each match against the Clue Card. Which one are you least sure about?":"Casi. Revisa cada pareja con la tarjeta de indicios. ¿De cuál estás menos seguro?","Not quite. Decode one letter at a time with the key, then check your spelling.":"Casi. Decodifica una letra a la vez con la clave y luego revisa tu ortografía.","Not quite. Re-read the Clue Card. Use the scrambled letters to check your spelling.":"Casi. Vuelve a leer la tarjeta de indicios. Usa las letras desordenadas para revisar tu ortografía.","One last step: write your Debrief below.":"Un último paso: escribe tu Informe final abajo.","Open all 5 locks first. The digits go in order: Lock 1 first.":"Primero abre los 5 candados. Los dígitos van en orden: primero el del Candado 1.","Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.":"Abre los 5 candados y luego escribe el código de salida de 5 dígitos. Termina con el Informe final.","Open each lock in order. Read the <b>Clue Card<\/b>. The answer is in the card.":"Abre cada candado en orden. Lee la <b>tarjeta de indicios<\/b>. La respuesta está en la tarjeta.","Open the Door":"Abrir la puerta","Pick the correct answer for all four questions.":"Elige la respuesta correcta en las cuatro preguntas.","Progress file downloaded. Use Load Progress to continue later.":"Se descargó el archivo de progreso. Usa «Cargar progreso» para continuar más tarde.","Progress loaded. Welcome back.":"Progreso cargado. Bienvenido de nuevo.","Solve the puzzle to open the lock and reveal one digit.":"Resuelve el acertijo para abrir el candado y descubrir un dígito.","THE EXIT DOOR":"LA PUERTA DE SALIDA","Tap all 4 events first, in order.":"Primero toca los 4 sucesos, en orden.","Tap the four events in the order they happened. Tap an event again to take it back.":"Toca los cuatro sucesos en el orden en que ocurrieron. Toca un suceso otra vez para quitarlo.","That file did not work. Choose a progress file saved from this Escape Room.":"Ese archivo no funcionó. Elige un archivo de progreso guardado de esta sala de escape.","That was the last hint. Read the Clue Card slowly and try again.":"Esa fue la última pista. Lee la tarjeta de indicios despacio y vuelve a intentarlo.","The clock starts when you press the button. Most students finish in about 20 minutes.":"El reloj empieza cuando oprimes el botón. La mayoría de los estudiantes termina en unos 20 minutos.","The code has 5 digits. Fill every box.":"El código tiene 5 dígitos. Llena todas las casillas.","The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.":"La puerta no se abrió. Revisa los dígitos debajo de cada candado y escríbelos en orden: primero el del Candado 1.","The door is open!":"¡La puerta está abierta!","The door swings open!":"¡La puerta se abre de golpe!","Time":"Tiempo","Type the answer in English.":"Escribe la respuesta en inglés.","Type the answer in English. Use the digits 0-9.":"Escribe la respuesta en inglés. Usa los dígitos 0-9.","Type the exit code":"Escribe el código de salida","Type your answer first.":"Primero escribe tu respuesta.","Type your answer here...":"Escribe tu respuesta aquí...","Unscramble the letters to fill the blank.":"Ordena las letras para llenar el espacio en blanco.","Which lock was hardest, and what did you learn that you did not know before?":"¿Qué candado fue el más difícil y qué aprendiste que antes no sabías?","Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.":"Escribe de 3 a 4 oraciones. Nombra el candado y usa un dato de su tarjeta de indicios. Puedes escribirlo aunque no hayas escapado.","You escaped and wrote your Debrief. Ready to submit.":"Escapaste y escribiste tu Informe final. Listo para entregar.","You escaped! Write your Debrief, then download your file to submit.":"¡Escapaste! Escribe tu Informe final y luego descarga tu archivo para entregarlo.","Your answer":"Tu respuesta","Your time:":"Tu tiempo:","digit":"dígito"},"ar":{"Save Progress":"حفظ التقدم","Load Progress":"تحميل التقدم","Finished — Download File to Submit":"انتهيت — نزّل الملف لتسليمه","Clear all my answers":"امسح كل إجاباتي","FIRST NAME *":"الاسم الأول *","LAST NAME *":"اسم العائلة *","PERIOD *":"الحصة *","DATE (fills in when you finish)":"التاريخ (يُكتب تلقائيًا عند الانتهاء)","e.g. 3":"مثال: 3","Automatic":"تلقائي","Please type your first name, last name, and period first.":"اكتب أولًا اسمك الأول واسم العائلة والحصة.","Western Expansion and Southern Secession":"التوسع غربًا وانفصال الجنوب","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"الوحدة 3 · بيت منقسم وأُعيد بناؤه | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — قانون العبيد الهاربين","Bleeding Kansas":"Bleeding Kansas — كانساس النازفة","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"الوحدة 3 · بيت منقسم وأعيد بناؤه | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"تم تنزيل ملف التقدم. احتفظ به في مكان آمن. استخدم «تحميل التقدم» لتكمل لاحقًا.","Progress loaded.":"تم تحميل التقدم.","Could not read that file.":"تعذّرت قراءة هذا الملف.","Treaty of Guadalupe Hidalgo":"معاهدة غوادالوبي هيدالغو (Treaty of Guadalupe Hidalgo)","<b>A new nationalism.<\/b> After the War of 1812, many Americans wanted a stronger national government. In 1816, Congress set up the Second Bank of the United States to support a stable national currency. The Tariff of 1816 put a 20–25 percent tax on many imported goods to protect new northern factories from cheaper British products. Congress also debated money for roads, bridges, and canals, called internal improvements. In 1817, on his last day in office, President Madison vetoed a bill for this kind of building because he worried that the Constitution did not allow it. The Supreme Court, led by Chief Justice John Marshall, also strengthened the national government. In <i>McCulloch v. Maryland<\/i> (1819), it ruled that Congress could charter the bank and that states could not tax it. In <i>Gibbons v. Ogden<\/i> (1824), it ruled that a state steamboat monopoly conflicted with a federal license and that Congress could regulate interstate commerce.":"<b>قومية جديدة.<\/b> بعد حرب 1812 (War of 1812)، أراد كثير من الأمريكيين حكومة وطنية أقوى. وفي 1816، أنشأ الكونغرس البنك الثاني للولايات المتحدة (Second Bank of the United States) لدعم عملة وطنية مستقرة. وفرضت تعرفة 1816 (Tariff of 1816) ضريبة من 20 إلى 25 بالمئة على كثير من البضائع المستوردة، لحماية المصانع الشمالية الجديدة من المنتجات البريطانية الأرخص. وناقش الكونغرس أيضًا تخصيص مال للطرق والجسور والقنوات، وتُسمى التحسينات الداخلية (internal improvements). وفي 1817، في آخر يوم له في المنصب، استخدم الرئيس ماديسون (Madison) حق النقض (الفيتو) ضد مشروع قانون لهذا النوع من البناء، لأنه خشي ألا يسمح به الدستور. كما قوّت المحكمة العليا، برئاسة رئيس المحكمة جون مارشال (John Marshall)، الحكومة الوطنية. ففي قضية <i>ماكولوك ضد ماريلاند<\/i> (McCulloch v. Maryland) عام 1819، حكمت بأن للكونغرس أن ينشئ البنك وأن الولايات لا تستطيع فرض ضرائب عليه. وفي قضية <i>غيبونز ضد أوغدن<\/i> (Gibbons v. Ogden) عام 1824، حكمت بأن احتكار ولاية للسفن البخارية يتعارض مع ترخيص فيدرالي، وأن للكونغرس أن ينظم التجارة بين الولايات.","<b>Democracy grows and shrinks.<\/b> After the Revolution, more and more White men gained the right to vote, even if they had little or no wealth. Politics became popular entertainment, and in 1831 Jackson’s Democrats held their first national nominating convention. But democracy did not grow for everyone. Norton says free Black men in northern states voted for the first time, but that did not last. New York (1821) added new limits on Black voting. New Jersey (1807) and Pennsylvania (1838) outlawed it. Norton also says African Americans, Indigenous Americans, and women were denied political and civil rights. Norton says Jackson’s idea of “the people” was a democracy of White men.":"<b>الديمقراطية تنمو وتتقلص.<\/b> بعد الثورة، حصل عدد متزايد من الرجال البيض على حق التصويت، حتى لو كانت ثروتهم قليلة أو معدومة. وأصبحت السياسة تسلية شعبية، وفي 1831 عقد ديمقراطيو جاكسون (Jackson) أول مؤتمر وطني لهم لترشيح المرشح. لكن الديمقراطية لم تنمُ للجميع. يقول Norton إن رجالًا سودًا أحرارًا في ولايات الشمال صوّتوا لأول مرة، لكن ذلك لم يدم. فأضافت نيويورك (New York) عام 1821 قيودًا جديدة على تصويت السود. وحظرته نيوجيرسي (New Jersey) عام 1807 وبنسلفانيا (Pennsylvania) عام 1838. ويقول Norton أيضًا إن الأمريكيين الأفارقة والسكان الأصليين والنساء حُرموا من الحقوق السياسية والمدنية. ويقول Norton إن فكرة جاكسون عن «الشعب» كانت ديمقراطية للرجال البيض.","<b>Depression and the Whigs.<\/b> Jackson thought the national bank had too much power. In 1832, he vetoed the Bank Recharter Bill. He said the bank made “the rich richer and the potent more powerful.” Some state banks then printed a great deal of paper money. In 1836, the Distribution Act sent federal money to state banks. That summer, Jackson’s Specie Circular said that land speculators had to pay for federal land with gold or silver coins. Banks had to cut their lending, and the economy slowed. On May 10, 1837, large New York banks stopped turning paper money into coins. This was the start of the Panic of 1837, which Norton calls the republic’s worst depression. It lasted seven years. A crisis in Great Britain had cut demand for American cotton. By fall 1837, one-third of workers had no job. Jackson’s opponents, who called him “King Andrew I,” formed the Whig Party. The Whigs backed Henry Clay’s American System.":"<b>الكساد والويغ.<\/b> اعتقد جاكسون (Jackson) أن للبنك الوطني سلطة أكبر من اللازم. وفي 1832، استخدم حق النقض (الفيتو) ضد قانون تجديد ميثاق البنك (Bank Recharter Bill). وقال إن البنك يجعل «الأغنياء أغنى والأقوياء أقوى». ثم طبعت بعض بنوك الولايات كمية كبيرة من النقود الورقية. وفي 1836، أرسل قانون التوزيع (Distribution Act) أموالًا فيدرالية إلى بنوك الولايات. وفي ذلك الصيف، قال تعميم العملات المعدنية (Specie Circular) الذي أصدره جاكسون إن على المضاربين على الأراضي أن يدفعوا ثمن الأراضي الفيدرالية بقطع نقدية من الذهب أو الفضة. واضطرت البنوك إلى تقليل الإقراض، وتباطأ الاقتصاد. وفي 10 مايو 1837، توقفت بنوك كبيرة في نيويورك (New York) عن تحويل النقود الورقية إلى عملات معدنية. وكانت هذه بداية ذعر 1837 المالي (Panic of 1837)، الذي يسميه Norton أسوأ كساد في الجمهورية. واستمر سبع سنوات. وكانت أزمة في بريطانيا العظمى قد خفّضت الطلب على القطن الأمريكي. وبحلول خريف 1837، لم يكن لدى ثلث العمال وظيفة. وشكّل خصوم جاكسون، الذين سمّوه «الملك أندرو الأول» (King Andrew I)، حزب الويغ (Whig Party). وأيّد الويغ النظام الأمريكي (American System) لهنري كلاي (Henry Clay).","<b>Diplomacy under Monroe.<\/b> Secretary of State John Quincy Adams worked to settle the nation’s borders and to make Europe respect American power. In 1819, the Transcontinental Treaty (also called the Adams-Onís Treaty) gave all of Florida to the United States. It also set the western border of the Louisiana Territory, so the nation now reached the Pacific Ocean. In December 1823, Monroe sent a message to Congress that became known as the Monroe Doctrine. It said the American continents were no longer open to new colonies from European powers. It also said the United States would stay out of the wars and internal affairs of Europe. Norton says the Monroe Doctrine had no standing in international law, and no European nation recognized it.":"<b>الدبلوماسية في عهد مونرو.<\/b> عمل وزير الخارجية جون كوينسي آدامز (John Quincy Adams) على تحديد حدود الأمة وعلى جعل أوروبا تحترم القوة الأمريكية. وفي 1819، أعطت المعاهدة العابرة للقارة (Transcontinental Treaty، وتُسمى أيضًا معاهدة آدامز-أونيس) فلوريدا كلها للولايات المتحدة. كما حددت الحدود الغربية لإقليم لويزيانا (Louisiana Territory)، فصارت الأمة تصل الآن إلى المحيط الهادئ. وفي ديسمبر 1823، أرسل مونرو (Monroe) رسالة إلى الكونغرس عُرفت بمبدأ مونرو (Monroe Doctrine). وقالت الرسالة إن القارتين الأمريكيتين لم تعودا مفتوحتين لمستعمرات جديدة من القوى الأوروبية. وقالت أيضًا إن الولايات المتحدة ستبقى بعيدة عن حروب أوروبا وشؤونها الداخلية. ويقول Norton إن مبدأ مونرو لم يكن له أي وضع في القانون الدولي، وإن أي دولة أوروبية لم تعترف به.","<b>Jackson and Indigenous peoples.<\/b> Jackson believed that Indigenous people and settlers could never live together. He wanted the eastern nations moved west of the Mississippi River and called this a “wise and humane policy.” Indigenous nations disagreed. They said the land had been theirs for centuries. In 1830, Congress passed the Indian Removal Act by a slim margin. It let Jackson ignore earlier treaty promises and force nearly 100,000 Indigenous people to move. In <i>Worcester v. Georgia<\/i> (1832), the Supreme Court said Georgia law had no force in the Cherokee Nation. Jackson still forced the Cherokee and other nations to obey harsh new state laws or move west. In 1838 and 1839, under President Van Buren, about 17,000 Cherokee were forced to walk 800 miles on the Trail of Tears. Thousands died from exposure, disease, or starvation.":"<b>جاكسون (Jackson) والشعوب الأصلية.<\/b> اعتقد جاكسون أن السكان الأصليين والمستوطنين لا يمكن أن يعيشوا معًا أبدًا. وأراد نقل الأمم الشرقية إلى غرب نهر الميسيسيبي (Mississippi River)، ووصف ذلك بأنه «سياسة حكيمة وإنسانية». لكن الأمم الأصلية لم توافق. وقالت إن الأرض كانت لها منذ قرون. وفي 1830، أقر الكونغرس قانون ترحيل الهنود (Indian Removal Act) بفارق ضئيل. وسمح القانون لجاكسون بتجاهل وعود المعاهدات السابقة وإجبار نحو 100,000 من السكان الأصليين على الانتقال. وفي قضية <i>ورسستر ضد جورجيا<\/i> (Worcester v. Georgia) عام 1832، قالت المحكمة العليا إن قانون ولاية جورجيا (Georgia) لا قوة له داخل أمة الشيروكي (Cherokee Nation). ومع ذلك أجبر جاكسون الشيروكي وأممًا أخرى على الالتزام بقوانين ولايات جديدة قاسية أو الانتقال غربًا. وفي 1838 و1839، في عهد الرئيس فان بيورين (Van Buren)، أُجبر نحو 17,000 من الشيروكي على المشي 800 ميل في درب الدموع (Trail of Tears). ومات الآلاف بسبب التعرض للعوامل الجوية والأمراض والجوع.","<b>Jackson’s record.<\/b> Norton calls Jackson’s legacy messy and contradictory. He gave “common” White men a bigger role in politics and helped build the modern Democratic Party. He also saved the Union by ending the nullification crisis. But his idea of “the people” was limited to White men. Critics said his vetoes were “monarchical.” Jackson said he was strengthening the Union. Norton says Jackson was willing to defy limits on his authority.":"<b>سجل جاكسون.<\/b> يقول Norton إن إرث جاكسون (Jackson) مضطرب ومتناقض. فقد منح الرجال البيض «العاديين» دورًا أكبر في السياسة، وساعد في تأسيس الحزب الديمقراطي الحديث. كما أنقذ الاتحاد بإنهاء أزمة الإبطال (nullification). لكن فكرته عن «الشعب» اقتصرت على الرجال البيض. وقال المنتقدون إن استخدامه حق النقض (الفيتو) «ملكي». أما جاكسون فقال إنه يقوّي الاتحاد. ويقول Norton إن جاكسون كان مستعدًا لتحدي حدود سلطته.","<b>Jackson’s rise.<\/b> Andrew Jackson was a self-made military hero. He was a popular candidate, especially with voters of Irish and Scots-Irish backgrounds. In the election of 1824, no one had enough electoral votes. Jackson had 99, Adams 84, Crawford 41, and Clay 37. The House of Representatives chose Adams after Clay endorsed him. Jackson charged that Clay and Adams had made a “corrupt <b>bargain<\/b>.” In 1828, Jackson ran as the candidate of the “common” voter, and many men voted for president for the first time. He beat Adams 178 to 83 in the Electoral College. More than twice as many men voted as in 1824.":"<b>صعود جاكسون.<\/b> كان أندرو جاكسون (Andrew Jackson) بطلًا عسكريًا صنع نفسه بنفسه. وكان مرشحًا شعبيًا، خاصة بين الناخبين من أصول أيرلندية وأيرلندية اسكتلندية. وفي انتخابات 1824، لم ينل أحد أصواتًا انتخابية كافية. فقد نال جاكسون 99، وآدامز (Adams) 84، وكروفورد (Crawford) 41، وكلاي (Clay) 37. وانتخب مجلس النواب آدامز بعد أن أيّده كلاي. واتهم جاكسون كلاي وآدامز بأنهما عقدا «<b>صفقة (bargain)<\/b> فاسدة». وفي 1828، ترشح جاكسون بصفته مرشح الناخب «العادي»، وصوّت كثير من الرجال لرئيس الدولة لأول مرة. وهزم آدامز بنتيجة 178 مقابل 83 في المجمع الانتخابي. وصوّت عدد من الرجال يزيد على ضعف عددهم في 1824.","<b>The American System.<\/b> Henry Clay called the national bank, tariffs, and federal roads and canals the American System. His plan depended on each region agreeing to compromise. Critics said tariffs helped northern factories but hurt southern and western farmers, who paid higher prices. Norton says tariffs helped the Northeast more than the South, which made sectional tensions worse. Many people moving west were southerners tied to cotton and slavery. Norton says the question of whether new western states would allow slavery became the greatest political conflict of the nineteenth century.":"<b>النظام الأمريكي.<\/b> سمّى هنري كلاي (Henry Clay) البنك الوطني والتعرفات والطرق والقنوات الفيدرالية النظام الأمريكي (American System). وكانت خطته تعتمد على موافقة كل منطقة على التوصل إلى حل وسط. وقال المنتقدون إن التعرفات تساعد المصانع الشمالية لكنها تضر مزارعي الجنوب والغرب، الذين كانوا يدفعون أسعارًا أعلى. ويقول Norton إن التعرفات ساعدت الشمال الشرقي أكثر من الجنوب، مما زاد التوتر بين المناطق. وكان كثير من الذين ينتقلون إلى الغرب جنوبيين مرتبطين بالقطن والعبودية. ويقول Norton إن السؤال عما إذا كانت الولايات الغربية الجديدة ستسمح بالعبودية أصبح أكبر صراع سياسي في القرن التاسع عشر.","<b>The end of good feelings.<\/b> James Monroe took office when the nation was at peace and the economy was strong. A Boston newspaper said he would bring an “Era of Good Feelings.” But the goodwill did not last. In the Panic of 1819, cotton prices suddenly fell after British mills bought cheaper cotton from other places. Banks failed, businesses went bankrupt, and many people lost their jobs. The depression lasted about three years, and many people, especially in the South and West, blamed the national bank. Also in 1819, Missouri asked to become a state, and most of its residents wanted to allow slavery. Representative James Tallmadge proposed a ban on bringing enslaved people into Missouri, and many slaveholders were angry. At that time there were eleven slave states and eleven free states. In 1820, Congress admitted Maine as a free state and Missouri as a slave state. It also banned slavery in the rest of the Louisiana Purchase north of latitude 36°30′.":"<b>نهاية المشاعر الطيبة.<\/b> تولى جيمس مونرو (James Monroe) الرئاسة والأمة في سلام والاقتصاد قوي. وقالت صحيفة في بوسطن (Boston) إنه سيجلب «عصر المشاعر الطيبة» (Era of Good Feelings). لكن حسن النية هذا لم يدم. ففي ذعر 1819 المالي (Panic of 1819)، هبطت أسعار القطن فجأة بعد أن اشترت المصانع البريطانية قطنًا أرخص من أماكن أخرى. وأفلست البنوك والشركات، وفقد كثير من الناس وظائفهم. واستمر الكساد نحو ثلاث سنوات، ولام كثير من الناس، خاصة في الجنوب والغرب، البنك الوطني. وفي 1819 أيضًا، طلبت ميزوري (Missouri) أن تصبح ولاية، وأراد معظم سكانها السماح بالعبودية. واقترح النائب جيمس تالماج (James Tallmadge) منع إدخال المستعبَدين إلى ميزوري، فغضب كثير من أصحاب العبيد. وفي ذلك الوقت كانت هناك إحدى عشرة ولاية عبودية وإحدى عشرة ولاية حرة. وفي 1820، قبل الكونغرس مين (Maine) ولايةً حرة وميزوري ولايةً تسمح بالعبودية. كما منع العبودية في بقية شراء لويزيانا (Louisiana Purchase) شمال خط العرض 36°30′.","<b>The nullification crisis.<\/b> Many South Carolinians blamed the Tariff of 1828, called the Tariff of Abominations, for their economic troubles. John C. Calhoun wrote that a state could “nullify,” or veto, a federal law it thought was unconstitutional. In November 1832, a South Carolina convention declared the tariffs of 1828 and 1832 “null, void, and no law.” No other southern state agreed. Jackson said nullification meant rebellion and war, and he asked Congress for a law that let him use the U.S. Army to make South Carolina follow federal law. In March 1833, Congress passed that law and a compromise tariff, based on Henry Clay’s plan, that lowered tariffs slowly. Both sides claimed victory. Jackson had upheld the supremacy of the Union, and South Carolina got a lower tariff.":"<b>أزمة الإبطال.<\/b> لام كثير من سكان كارولينا الجنوبية (South Carolina) تعرفة 1828، التي سُمّيت تعرفة الرجاسات (Tariff of Abominations)، على مشكلاتهم الاقتصادية. وكتب جون سي. كالهون (John C. Calhoun) أن للولاية أن «تُبطل» (nullify)، أي تنقض، قانونًا فيدراليًا ترى أنه غير دستوري. وفي نوفمبر 1832، أعلن مؤتمر في كارولينا الجنوبية أن تعرفتي 1828 و1832 «باطلتان ولا قيمة لهما ولا قوة قانون». ولم توافق أي ولاية جنوبية أخرى. وقال جاكسون (Jackson) إن الإبطال يعني التمرد والحرب، وطلب من الكونغرس قانونًا يتيح له استخدام جيش الولايات المتحدة لإجبار كارولينا الجنوبية على اتباع القانون الفيدرالي. وفي مارس 1833، أقر الكونغرس ذلك القانون وتعرفة تسوية، مبنية على خطة هنري كلاي (Henry Clay)، خفّضت التعرفات تدريجيًا. وادّعى الطرفان النصر. فقد حافظ جاكسون على سيادة الاتحاد، وحصلت كارولينا الجنوبية على تعرفة أقل.","A canal toll house at night. On the left, a window shows a canal with a boat, above a shelf of ledgers and a desk with a brass scale and a lantern. On the right, a wall clock and a toll rates board hang above a desk with a cash box and a coil of rope. The door has a TOLL HOUSE sign and five padlocks in a row. Under each padlock is a window for one digit of the exit code.":"مكتب رسوم على قناة في الليل. على اليسار نافذة تُظهر قناة وقاربًا، فوق رف فيه دفاتر تسجيل ومكتب عليه ميزان نحاسي وفانوس. وعلى اليمين ساعة حائط ولوحة أسعار الرسوم معلّقتان فوق مكتب عليه صندوق نقود ولفة حبل. وعلى الباب لافتة مكتوب عليها مكتب الرسوم وخمسة أقفال في صف واحد. وتحت كل قفل نافذة صغيرة لرقم واحد من رمز الخروج.","A deal to admit Maine as a free state and Missouri as a slave state":"اتفاق لقبول مين (Maine) ولايةً حرة وميزوري (Missouri) ولايةً تسمح بالعبودية","A fall in cotton prices that closed banks and left many people jobless":"هبوط في أسعار القطن أغلق البنوك وترك كثيرًا من الناس بلا عمل","A message saying the American continents were closed to new European colonies":"رسالة تقول إن القارتين الأمريكيتين مغلقتان أمام المستعمرات الأوروبية الجديدة","A treaty in which Spain gave all of Florida to the United States for $5 million":"معاهدة أعطت فيها إسبانيا (Spain) فلوريدا كلها للولايات المتحدة مقابل 5 ملايين دولار","All adult citizens":"جميع المواطنين البالغين","Congress sets up the Second Bank of the United States":"الكونغرس ينشئ البنك الثاني للولايات المتحدة (Second Bank of the United States)","Core Objectives 1 and 2: Analyze how the spirit of nationalism that emerged after the War of 1812 affected economic policies and judicial decisions. Explain how Henry Clay’s American System fueled the rise of sectional conflict during this era.":"الأهداف الأساسية 1 و2: تحليل كيف أثّرت روح القومية التي ظهرت بعد حرب 1812 في السياسات الاقتصادية والقرارات القضائية. شرح كيف غذّى النظام الأمريكي (American System) لهنري كلاي (Henry Clay) تصاعد الصراع بين المناطق في هذه الفترة.","Core Objectives 3 and 4: Identify the social and economic factors that led to the demise of the “Era of Good Feelings.” Explain how the federal government’s diplomatic accomplishments during James Monroe’s presidency reflected the policies expressed in the Monroe Doctrine.":"الأهداف الأساسية 3 و4: تحديد العوامل الاجتماعية والاقتصادية التي أدت إلى نهاية «عصر المشاعر الطيبة». شرح كيف عكست الإنجازات الدبلوماسية للحكومة الفيدرالية أثناء رئاسة جيمس مونرو (James Monroe) السياسات التي عبّر عنها مبدأ مونرو (Monroe Doctrine).","Core Objectives 5 and 6: Evaluate the social and political factors that contributed to Andrew Jackson’s success in the 1828 election. Describe how democracy expanded and contracted during this period.":"الأهداف الأساسية 5 و6: تقييم العوامل الاجتماعية والسياسية التي ساهمت في نجاح أندرو جاكسون (Andrew Jackson) في انتخابات 1828. وصف كيف توسعت الديمقراطية وتقلصت خلال هذه الفترة.","Core Objectives 7 and 8: Evaluate Jackson’s response to the nullification crisis. Analyze Jackson’s legacy regarding the status of Indigenous people in American society.":"الأهداف الأساسية 7 و8: تقييم استجابة جاكسون (Jackson) لأزمة الإبطال (nullification). تحليل إرث جاكسون فيما يتعلق بوضع السكان الأصليين في المجتمع الأمريكي.","Core Objectives 9 and 10: Explain the causes of the economic depression of the late 1830s and the emergence of the Whig Party. Assess the strengths and weaknesses of Jackson’s presidency.":"الأهداف الأساسية 9 و10: شرح أسباب الكساد الاقتصادي في أواخر ثلاثينيات القرن التاسع عشر وظهور حزب الويغ (Whig Party). تقييم نقاط القوة ونقاط الضعف في رئاسة جاكسون (Jackson).","Each answer is in the Clue Card. Look for who had to pay with gold or silver, why the Whig Party started, what Jackson did to the bank bill in 1832, and who “the people” meant.":"كل إجابة موجودة في بطاقة القرائن. ابحث عمّن كان عليه أن يدفع بالذهب أو الفضة، ولماذا بدأ حزب الويغ، وماذا فعل جاكسون بمشروع قانون البنك في 1832، ومن كان المقصود بـ«الشعب».","Enter the Toll House":"ادخل مكتب الرسوم","Escape the Canal Toll House":"اهرب من مكتب رسوم القناة","Every farmer in the country":"كل مزارع في البلاد","Free Black men in the North":"الرجال السود الأحرار في الشمال","He asked the Supreme Court to rewrite it":"طلب من المحكمة العليا أن تعيد كتابته","He gave it to Calhoun":"أعطاه لكالهون (Calhoun)","He signed it":"وقّع عليه","He vetoed it":"استخدم حق النقض (الفيتو) ضده","In 1836, who did the Specie Circular require to pay for federal land with gold or silver coins?":"في 1836، من الذي طلب منه تعميم العملات المعدنية (Specie Circular) أن يدفع ثمن الأراضي الفيدرالية بقطع نقدية من الذهب أو الفضة؟","In the message, the letter I is really F, and the letter E is really B. The first word has 5 letters and starts with F. The second word has 4 letters and starts with B.":"في الرسالة، الحرف I هو في الحقيقة F، والحرف E هو في الحقيقة B. الكلمة الأولى من 5 أحرف وتبدأ بـ F. والكلمة الثانية من 4 أحرف وتبدأ بـ B.","Jackson charged that Clay and Adams had made a “corrupt ________” to decide the election of 1824.":"اتهم جاكسون كلاي وآدامز بأنهما عقدا «corrupt ________» (صفقة فاسدة) لحسم انتخابات 1824.","Land speculators had to pay with gold or silver coins. The Whigs said Jackson ruled like a monarch. Jackson vetoed the bank bill. “The people” meant White men.":"كان على المضاربين على الأراضي أن يدفعوا بقطع نقدية من الذهب أو الفضة. وقال الويغ إن جاكسون يحكم كالملك. واستخدم جاكسون حق النقض (الفيتو) ضد مشروع قانون البنك. وكان «الشعب» يعني الرجال البيض.","Land speculators":"المضاربون على الأراضي","Look at the “nullification crisis” paragraph. Jackson asked Congress for a law that let him use the Army. The secret message names it in two words. Use the decoder key to spell it, one letter at a time.":"انظر إلى فقرة «أزمة الإبطال». طلب جاكسون من الكونغرس قانونًا يتيح له استخدام الجيش. والرسالة السرية تسمّيه بكلمتين. استخدم مفتاح فك التشفير لتهجئته حرفًا حرفًا.","Look for the dates and key words: cotton prices, Maine and Missouri, Florida and $5 million, and “new colonies.”":"ابحث عن التواريخ والكلمات المفتاحية: أسعار القطن، ومين وميزوري، وفلوريدا و5 ملايين دولار، و«مستعمرات جديدة».","Look for the word in bold in the Clue Card, in the paragraph about the election of 1824. It means a deal.":"ابحث في بطاقة القرائن عن الكلمة بالخط الغامق، في فقرة انتخابات 1824. معناها اتفاق.","Look for the years in the Clue Card: 1816, 1817, 1819, and 1824.":"ابحث عن السنوات في بطاقة القرائن: 1816 و1817 و1819 و1824.","Madison vetoes a bill for roads and canals":"ماديسون يستخدم حق النقض (الفيتو) ضد مشروع قانون للطرق والقنوات","Men and women of every background":"رجال ونساء من جميع الخلفيات","Missouri Compromise":"تسوية ميزوري (Missouri Compromise)","Monroe Doctrine":"مبدأ مونرو (Monroe Doctrine)","Nationalism, Sectionalism, and <span style=\"white-space:nowrap\">Jacksonian Democracy<\/span>":"القومية والانقسام الإقليمي و<span style=\"white-space:nowrap\">ديمقراطية جاكسون<\/span>","Norton says Jackson’s idea of “the people” was limited to which group?":"حسب Norton، إلى أي فئة اقتصرت فكرة جاكسون عن «الشعب»؟","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 10, “Democratization and the Role of the Federal Government” (The Bank War, The Recharter Effort), “Political Battles” (The Money Question, The Whig Coalition, The Eighth President, The Panic of 1837), and “Beyond Jackson’s Legacy: A New Era” (all pages not read; cited by section).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 10، “Democratization and the Role of the Federal Government” (The Bank War, The Recharter Effort)، و“Political Battles” (The Money Question, The Whig Coalition, The Eighth President, The Panic of 1837)، و“Beyond Jackson’s Legacy: A New Era” (لم تُقرأ الصفحات؛ يُستشهد بها بحسب القسم).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 10, “Nullification” (page not read; cited by section) and “Jackson’s Policy on Indigenous Americans” (page not read; cited by section).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 10، “Nullification” (لم تُقرأ الصفحة؛ يُستشهد بها بحسب القسم)، و“Jackson’s Policy on Indigenous Americans” (لم تُقرأ الصفحة؛ يُستشهد بها بحسب القسم).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 9, “A New Nationalism” (section begins p. 368) and “Debates over the American System” (section begins p. 372).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 9، “A New Nationalism” (يبدأ القسم في ص. 368)، و“Debates over the American System” (يبدأ القسم في ص. 372).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 9, “The Rise of Andrew Jackson” (section begins p. 382) and Ch. 10, “Democratization and the Role of the Federal Government” (page not read; cited by section).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 9، “The Rise of Andrew Jackson” (يبدأ القسم في ص. 382)، والفصل 10، “Democratization and the Role of the Federal Government” (لم تُقرأ الصفحة؛ يُستشهد بها بحسب القسم).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 9, “‘An Era of Good Feelings’” (section begins p. 373) and “Nationalist Diplomacy” (section begins p. 379).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 9، “‘An Era of Good Feelings’” (يبدأ القسم في ص. 373)، و“Nationalist Diplomacy” (يبدأ القسم في ص. 379).","Not quite. At least one answer is off. Re-read the Clue Card for the Specie Circular, the Whig Party, the 1832 bank bill, and the meaning of “the people.”":"ليس تمامًا. إجابة واحدة على الأقل غير صحيحة. أعد قراءة بطاقة القرائن عن تعميم العملات المعدنية، وحزب الويغ، ومشروع قانون البنك في 1832، ومعنى «الشعب».","Not quite. Re-read the Clue Card and match each event to its year.":"ليس تمامًا. أعد قراءة بطاقة القرائن وطابق كل حدث مع سنته.","Only the Cherokee Nation":"أمة الشيروكي (Cherokee Nation) فقط","Only the state banks":"بنوك الولايات فقط","Panic of 1819":"ذعر 1819 المالي (Panic of 1819)","TOLL HOUSE":"مكتب الرسوم","The Brass Scale":"الميزان النحاسي","The Cash Box":"صندوق النقود","The Clue Card describes a law Jackson asked Congress for in 1833. It let him use the U.S. Army to make South Carolina follow federal law. A secret message gives the two-word name of that law. Each letter in the message was moved 3 steps forward in the alphabet. Decode it.":"تصف بطاقة القرائن قانونًا طلبه جاكسون من الكونغرس في 1833. وقد أتاح له استخدام جيش الولايات المتحدة لإجبار كارولينا الجنوبية على اتباع القانون الفيدرالي. وتعطي رسالة سرية اسم ذلك القانون المكوَّن من كلمتين. وكل حرف في الرسالة نُقل 3 خطوات إلى الأمام في الأبجدية. فُكّ تشفيرها.","The Lantern":"الفانوس","The Panic of 1819 was the cotton price fall. The Missouri Compromise admitted Maine and Missouri. The Transcontinental Treaty gave Florida to the United States. The Monroe Doctrine closed the Americas to new colonies.":"ذعر 1819 المالي هو هبوط أسعار القطن. وتسوية ميزوري قبلت مين وميزوري. والمعاهدة العابرة للقارة أعطت فلوريدا للولايات المتحدة. ومبدأ مونرو أغلق الأمريكتين أمام المستعمرات الجديدة.","The Rope Coil":"لفة الحبل","The Supreme Court decides Gibbons v. Ogden":"المحكمة العليا تحكم في قضية غيبونز ضد أوغدن (Gibbons v. Ogden)","The Supreme Court decides McCulloch v. Maryland":"المحكمة العليا تحكم في قضية ماكولوك ضد ماريلاند (McCulloch v. Maryland)","The Toll Ledger":"دفتر الرسوم","The canal toll house closed for the night, and the toll keeper locked the door. A shelf of ledgers, a brass scale, a lantern, a coil of rope, a cash box, and a wall clock sit in the room. The door has <b>5 locks<\/b>. Each lock matches two big ideas from Lesson 6. Solve them all to find the <b>5-digit exit code<\/b>.":"أُغلق مكتب رسوم القناة في الليل، وأقفل المسؤول عن الرسوم الباب. وفي الغرفة رف فيه دفاتر تسجيل، وميزان نحاسي، وفانوس، ولفة حبل، وصندوق نقود، وساعة حائط. وللباب <b>5 أقفال<\/b>. كل قفل يخص فكرتين كبيرتين من الدرس 6. حلّها كلها لتعرف <b>رمز الخروج المكوَّن من 5 أرقام<\/b>.","The order is the Second Bank (1816), Madison’s veto (1817), McCulloch v. Maryland (1819), then Gibbons v. Ogden (1824).":"الترتيب هو: البنك الثاني (1816)، ثم نقض ماديسون (1817)، ثم قضية McCulloch v. Maryland (1819)، ثم قضية Gibbons v. Ogden (1824).","The word starts with B and has 7 letters. It ends with “gain.”":"تبدأ الكلمة بحرف B وفيها 7 أحرف. وتنتهي بـ «gain».","They said Jackson was ruling like a monarch and opposed his war on the national bank":"قالوا إن جاكسون يحكم كالملك، وعارضوا حربه على البنك الوطني","They wanted Congress to pass the Indian Removal Act":"أرادوا أن يقر الكونغرس قانون ترحيل الهنود (Indian Removal Act)","They wanted to end the two-party system":"أرادوا إنهاء نظام الحزبين","They wanted to repeal the Missouri Compromise":"أرادوا إلغاء تسوية ميزوري (Missouri Compromise)","Transcontinental Treaty":"المعاهدة العابرة للقارة (Transcontinental Treaty)","UNIT 2 · AN EXPANDING NATION | CPUSH | DANIEL GARZA, M.A.":"الوحدة 2 · أمة في توسع | CPUSH | DANIEL GARZA, M.A.","What did Jackson do to the Bank Recharter Bill in 1832?":"ماذا فعل جاكسون بمشروع قانون تجديد ميثاق البنك (Bank Recharter Bill) في 1832؟","White men":"الرجال البيض","Why did Jackson’s opponents form the Whig Party?":"لماذا شكّل خصوم جاكسون حزب الويغ؟","You are locked in the canal toll house.":"أنت محبوس في مكتب رسوم القناة.","All 5 locks are open. Type the 5 digits in order, Lock 1 first.":"الأقفال الخمسة مفتوحة. اكتب الأرقام الخمسة بالترتيب: رقم القفل 1 أولًا.","Answer every question first.":"أجب عن كل الأسئلة أولًا.","CLUE CARD":"بطاقة القرائن","Check":"تحقق","Choose a description...":"اختر وصفًا...","Clear":"مسح","Clear all my work and start over":"امسح كل عملي وابدأ من جديد","DEBRIEF":"الملخص الختامي","Debrief":"الملخص الختامي","Decoded answer":"الإجابة بعد فك التشفير","Decoder key: the <span style=\"color:var(--hl);font-weight:700\">gold<\/span> letter is in the message. The white letter under it is the real letter.":"مفتاح فك التشفير: الحرف <span style=\"color:var(--hl);font-weight:700\">الذهبي<\/span> هو الحرف الموجود في الرسالة. والحرف الأبيض تحته هو الحرف الحقيقي.","ESCAPED":"لقد هربت!","Enter your first name, last name, and period at the top first.":"اكتب اسمك الأول واسم العائلة والحصة في الأعلى أولًا.","Exit code digit 1":"رقم رمز الخروج 1","Exit door":"باب الخروج","Fill in the blank using the Clue Card.":"املأ الفراغ باستخدام بطاقة القرائن.","Have a saved file? Load it to continue.":"هل لديك ملف محفوظ؟ حمّله لتكمل.","Hint":"تلميح","Hints used":"التلميحات المستخدمة","How to escape:":"كيف تهرب:","If you get stuck, press <b>Hint<\/b>. Hints are free, but your teacher can see how many you used.":"إذا تعثرت، اضغط <b>تلميح<\/b>. التلميحات مجانية، لكن معلمك يستطيع أن يرى كم تلميحًا استخدمت.","Locks":"الأقفال","Match each term to the best description. Use the Clue Card.":"اربط كل مصطلح بأفضل وصف له. استخدم بطاقة القرائن.","Match every term first.":"طابق كل المصطلحات أولًا.","Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.":"لم تهرب بعد (يُسجَّل «غير مكتمل» INCOMPLETE). ما زال بإمكانك تنزيل ملفك وتسليمه.","Not quite. Check each match against the Clue Card. Which one are you least sure about?":"ليس تمامًا. تحقق من كل مطابقة باستخدام بطاقة القرائن. أي مطابقة أنت أقل تأكدًا منها؟","Not quite. Decode one letter at a time with the key, then check your spelling.":"ليس تمامًا. فُكّ تشفير حرف واحد في كل مرة باستخدام المفتاح، ثم تحقق من تهجئتك.","Not quite. Re-read the Clue Card. Use the scrambled letters to check your spelling.":"ليس تمامًا. أعد قراءة بطاقة القرائن. استخدم الحروف المبعثرة للتحقق من تهجئتك.","One last step: write your Debrief below.":"خطوة أخيرة: اكتب ملخصك الختامي أدناه.","Open all 5 locks first. The digits go in order: Lock 1 first.":"افتح الأقفال الخمسة أولًا. تُكتب الأرقام بالترتيب: رقم القفل 1 أولًا.","Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.":"افتح الأقفال الخمسة، ثم اكتب رمز الخروج المكوّن من 5 أرقام. أنهِ بالملخص الختامي.","Open each lock in order. Read the <b>Clue Card<\/b>. The answer is in the card.":"افتح كل قفل بالترتيب. اقرأ <b>بطاقة القرائن<\/b>. الإجابة موجودة في البطاقة.","Open the Door":"افتح الباب","Pick the correct answer for all four questions.":"اختر الإجابة الصحيحة للأسئلة الأربعة كلها.","Progress file downloaded. Use Load Progress to continue later.":"تم تنزيل ملف التقدم. استخدم «تحميل التقدم» لتكمل لاحقًا.","Progress loaded. Welcome back.":"تم تحميل التقدم. أهلًا بعودتك.","Solve the puzzle to open the lock and reveal one digit.":"حلّ اللغز لتفتح القفل وتكشف رقمًا واحدًا.","THE EXIT DOOR":"باب الخروج","Tap all 4 events first, in order.":"المس الأحداث الأربعة كلها أولًا، بالترتيب.","Tap the four events in the order they happened. Tap an event again to take it back.":"المس الأحداث الأربعة بالترتيب الذي وقعت به. المس الحدث مرة أخرى للتراجع عنه.","That file did not work. Choose a progress file saved from this Escape Room.":"لم يعمل هذا الملف. اختر ملف تقدم محفوظًا من غرفة الهروب هذه.","That was the last hint. Read the Clue Card slowly and try again.":"كان هذا آخر تلميح. اقرأ بطاقة القرائن ببطء وحاول مرة أخرى.","The clock starts when you press the button. Most students finish in about 20 minutes.":"يبدأ العدّاد عندما تضغط الزر. يُنهي معظم الطلاب في نحو 20 دقيقة.","The code has 5 digits. Fill every box.":"الرمز مكوّن من 5 أرقام. املأ كل المربعات.","The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.":"لم يُفتح الباب. تحقق من الأرقام تحت كل قفل، واكتبها بالترتيب: رقم القفل 1 أولًا.","The door is open!":"الباب مفتوح!","The door swings open!":"ينفتح الباب على مصراعيه!","Time":"الوقت","Type the answer in English.":"اكتب الإجابة بالإنجليزية.","Type the answer in English. Use the digits 0-9.":"اكتب الإجابة بالإنجليزية. استخدم الأرقام 0-9.","Type the exit code":"اكتب رمز الخروج","Type your answer first.":"اكتب إجابتك أولًا.","Type your answer here...":"اكتب إجابتك هنا...","Unscramble the letters to fill the blank.":"رتّب الأحرف لتملأ الفراغ.","Which lock was hardest, and what did you learn that you did not know before?":"أي قفل كان الأصعب، وماذا تعلمت ولم تكن تعرفه من قبل؟","Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.":"اكتب من 3 إلى 4 جمل. اذكر القفل واستخدم معلومة واحدة من بطاقة القرائن الخاصة به. يمكنك كتابة هذا حتى لو لم تهرب.","You escaped and wrote your Debrief. Ready to submit.":"لقد هربت وكتبت ملخصك الختامي. أنت جاهز للتسليم.","You escaped! Write your Debrief, then download your file to submit.":"لقد هربت! اكتب ملخصك الختامي، ثم نزّل ملفك لتسليمه.","Your answer":"إجابتك","Your time:":"وقتك:","digit":"رقم"},"patterns":[{"re":"^Still needed: first name, last name, and period\\.$","es":"Todavía falta: nombre, apellido y período.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة."},{"re":"^LOCK (\\d)$","es":"Cand. $1","ar":"القفل $1"},{"re":"^Hint (\\d):$","es":"Pista $1:","ar":"تلميح $1:"},{"re":"^Exit code digit (\\d)$","es":"Dígito $1 del código de salida","ar":"رقم رمز الخروج $1"},{"re":"^Click! Lock (\\d) is open\\. Your digit is (\\d)\\.$","es":"¡Clic! El Candado $1 está abierto. Tu dígito es $2.","ar":"نقرة! القفل $1 مفتوح. رقمك هو $2."},{"re":"^5 of 5 locks opened with (\\d+) tries and (\\d+) hints\\.$","es":"Abriste 5 de 5 candados con $1 intentos y $2 pistas.","ar":"فتحت 5 أقفال من 5 بعد $1 من المحاولات و$2 من التلميحات."},{"re":"^Done! File downloaded: (.*)\\. Upload it to Canvas\\.$","es":"¡Listo! Se descargó el archivo: $1. Súbelo a Canvas.","ar":"تم! تم تنزيل الملف: $1. ارفعه إلى Canvas."},{"re":"^Your file downloaded and is marked INCOMPLETE \\(you have not escaped\\)\\. Upload it to Canvas: (.*)$","es":"Tu archivo se descargó y está marcado INCOMPLETO (todavía no escapas). Súbelo a Canvas: $1","ar":"تم تنزيل ملفك وهو مُسجَّل «غير مكتمل» INCOMPLETE (لم تهرب بعد). ارفعه إلى Canvas: $1"},{"re":"^Unlocked\\. Your digit is (\\d)\\. Your answer: (.*)$","es":"Desbloqueado. Tu dígito es $1. Tu respuesta: $2","ar":"تم الفتح. رقمك هو $1. إجابتك: $2"},{"re":"^Tap all (\\d) events first, in order\\.$","es":"Primero toca los $1 sucesos, en orden.","ar":"المس الأحداث الـ $1 كلها أولًا، بالترتيب."},{"re":"^LOCK (\\d) · CORE OBJECTIVES (\\d+) AND (\\d+)$","es":"CANDADO $1 · OBJETIVOS PRINCIPALES $2 Y $3","ar":"القفل $1 · الأهداف الأساسية $2 و$3"}]}</script>
+<script>
+/* Supplement language switch (English / Espanol / Arabic). Works on pages whose text is rendered by JS:
+   a MutationObserver translates text as it appears. Data: <script type="application/json" id="sp-i18n">
+   {"langs":["en","es","ar"],"default":"en","es":{englishHTML:translation},"ar":{...},"patterns":[{"re":"^(\\d+) of (\\d+)$","es":"$1 de $2","ar":"..."}]}
+   Keys are the English text exactly as it sits in the page (innerHTML, spaces collapsed).
+   Helpers: spSeen() english strings seen so far; spMissing() strings with no translation in the current language;
+   spSetLang(l); spTr(s) translate a string (used for confirm/alert); spAscii(s) plain-ASCII name for file names. */
+(function () {
+  var node = document.getElementById('sp-i18n');
+  var D = node ? JSON.parse(node.textContent) : { langs: ['en'], patterns: [] };
+  var INLINE = { B:1,I:1,EM:1,STRONG:1,SPAN:1,A:1,BR:1,SMALL:1,SUP:1,SUB:1,U:1,MARK:1,BDI:1,TSPAN:1,CODE:1 };
+  var SKIP = 'script,style,textarea,input,.sp-lang,.sp-nt,[translate="no"]';
+  var WORD = /[A-Za-z\u00C0-\u024F\u0600-\u06FF]{2}|e\.g\./;
+  var LANG = 'en', REC = new WeakMap(), SEEN = {}, MISS = {};
+  (D.patterns || []).forEach(function (p) { try { p._re = new RegExp(p.re); } catch (e) {} });
+  function norm(s) { return String(s).replace(/\s+/g, ' ').trim(); }
+  function tr(src) {
+    if (LANG === 'en') return null;
+    var t = D[LANG] && D[LANG][src];
+    if (t) return t;
+    var P = D.patterns || [];
+    for (var i = 0; i < P.length; i++) {
+      var m = P[i]._re && P[i]._re.exec(src);
+      if (m && P[i][LANG]) return P[i][LANG].replace(/\$(\d+)/g, function (_, n) { return m[+n] || ''; });
+    }
+    return null;
+  }
+  window.spTr = function (s) { var t = tr(norm(s)); return t ? t.replace(/<[^>]+>/g, '') : s; };
+  function isInline(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling)
+      if (c.nodeType === 1 && (!INLINE[c.tagName.toUpperCase()] || c.matches(SKIP))) return false;
+    return true;
+  }
+  function directText(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling) if (c.nodeType === 3 && WORD.test(c.nodeValue)) return true;
+    return false;
+  }
+  function cur(s) { return s.nodeType === 1 ? s.innerHTML : s.nodeValue; }
+  function put(s, v) { if (s.nodeType === 1) s.innerHTML = v; else s.nodeValue = v; }
+  function handle(s) {
+    var r = REC.get(s), c = cur(s);
+    if (!(r && c === r.wrote)) { r = { en: c, wrote: c }; REC.set(s, r); }
+    var src = norm(r.en), target = r.en;
+    if (WORD.test(src)) {
+      SEEN[src] = 1;
+      if (LANG !== 'en') {
+        var t = tr(src);
+        if (t) {
+          target = s.nodeType === 1 ? t : (r.en.match(/^\s*/)[0] + t + r.en.match(/\s*$/)[0]);
+          delete MISS[src];
+        } else MISS[src] = 1;
+      }
+    }
+    if (c !== target) put(s, target);
+    r.wrote = cur(s);
+  }
+  var ATTRS = ['placeholder', 'alt', 'aria-label', 'title'];
+  function attrs(root) {
+    var els = root.querySelectorAll ? root.querySelectorAll('[placeholder],[alt],[aria-label],[title]') : [];
+    var list = [].slice.call(els); if (root.matches && root.matches('[placeholder],[alt],[aria-label],[title]')) list.push(root);
+    list.forEach(function (el) {
+      if (el.closest && el.closest('.sp-lang,.sp-nt,[translate="no"],script,style')) return;
+      var rec = el.__spa || (el.__spa = {});
+      ATTRS.forEach(function (a) {
+        var v = el.getAttribute(a); if (v == null) return;
+        var r = rec[a];
+        if (!(r && v === r.wrote)) { r = rec[a] = { en: v, wrote: v }; }
+        var src = norm(r.en); if (!WORD.test(src)) return;
+        SEEN[src] = 1;
+        var t = LANG === 'en' ? null : tr(src);
+        if (LANG !== 'en' && !t) MISS[src] = 1;
+        var target = t ? t.replace(/<[^>]+>/g, '') : r.en;
+        if (v !== target) el.setAttribute(a, target);
+        r.wrote = el.getAttribute(a);
+      });
+    });
+  }
+  function walk(root) {
+    if (root.nodeType === 3) { if (WORD.test(root.nodeValue) && !(root.parentNode && root.parentNode.closest && root.parentNode.closest(SKIP))) handle(root); return; }
+    if (root.nodeType !== 1) return;
+    (function w(el) {
+      if (el.matches(SKIP)) return;
+      if (el !== document.body && directText(el) && isInline(el)) { handle(el); return; }
+      for (var c = el.firstChild; c; c = c.nextSibling) {
+        if (c.nodeType === 1) w(c); else if (c.nodeType === 3 && WORD.test(c.nodeValue)) handle(c);
+      }
+    })(root);
+    attrs(root);
+  }
+  var TITLE = { en: document.title, wrote: document.title };
+  function title() {
+    if (document.title !== TITLE.wrote) TITLE = { en: document.title, wrote: document.title };
+    var t = LANG === 'en' ? null : tr(norm(TITLE.en));
+    document.title = t ? t.replace(/<[^>]+>/g, '') : TITLE.en; TITLE.wrote = document.title;
+  }
+  function inl(e) { return e.nodeType === 1 && !!INLINE[e.tagName.toUpperCase()]; }
+  var mo = new MutationObserver(function (muts) {
+    var todo = [];
+    muts.forEach(function (m) {
+      if (m.type === 'childList') { for (var i = 0; i < m.addedNodes.length; i++) todo.push(m.addedNodes[i]); todo.push(m.target); }
+      else todo.push(m.target);
+    });
+    todo.forEach(function (n) {
+      var el = n.nodeType === 1 ? n : n.parentNode;
+      if (!el || el.nodeType !== 1 || !document.body.contains(el)) return;
+      while (el !== document.body && el.parentNode && el.parentNode.nodeType === 1 && inl(el) && inl(el.parentNode)) el = el.parentNode;
+      if (el.parentNode && el.parentNode.nodeType === 1 && inl(el.parentNode) && el.parentNode !== document.body) el = el.parentNode;
+      walk(el);
+    });
+    mo.takeRecords();
+  });
+  var AR = { 'ا':'a','أ':'a','إ':'i','آ':'a','ب':'b','ت':'t','ث':'th','ج':'j','ح':'h','خ':'kh','د':'d','ذ':'dh','ر':'r','ز':'z','س':'s','ش':'sh','ص':'s','ض':'d','ط':'t','ظ':'z','ع':'a','غ':'gh','ف':'f','ق':'q','ك':'k','ل':'l','م':'m','ن':'n','ه':'h','و':'w','ي':'y','ى':'a','ة':'a','ئ':'y','ؤ':'w' };
+  window.spAscii = function (s) {
+    s = String(s); if (s.normalize) s = s.normalize('NFD').replace(/[̀-ًͯ-ٰٟ]/g, '');
+    return s.replace(/[ء-ي]/g, function (c) { return AR[c] !== undefined ? AR[c] : ''; }).replace(/ñ/g, 'n').replace(/Ñ/g, 'N');
+  };
+  window.spSeen = function () { return Object.keys(SEEN); };
+  window.spMissing = function () { return Object.keys(MISS); };
+  window.spLang = function () { return LANG; };
+  window.spSetLang = function (l) {
+    if ((D.langs || ['en']).indexOf(l) < 0) l = 'en';
+    LANG = l; MISS = {};
+    var h = document.documentElement; h.lang = l; h.dir = l === 'ar' ? 'rtl' : 'ltr';
+    mo.disconnect(); walk(document.body); title(); mo.takeRecords();
+    mo.observe(document.body, { childList: true, subtree: true, characterData: true });
+    document.querySelectorAll('.sp-lang button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === l)); });
+    try { localStorage.setItem('sp_lang', l); } catch (e) {}
+    try { var u = new URL(location.href); if (l === 'en') u.searchParams.delete('lang'); else u.searchParams.set('lang', l); history.replaceState(null, '', u.toString()); } catch (e) {}
+    try { document.dispatchEvent(new CustomEvent('splangchange', { detail: l })); } catch (e) {}
+  };
+  var _c = window.confirm, _a = window.alert;
+  window.confirm = function (m) { return _c.call(window, window.spTr(m)); };
+  window.alert = function (m) { return _a.call(window, window.spTr(m)); };
+  document.querySelectorAll('.sp-lang button').forEach(function (b) { b.addEventListener('click', function () { window.spSetLang(b.getAttribute('data-lang')); }); });
+  var start = D['default'] || 'en';
+  try { start = new URL(location.href).searchParams.get('lang') || localStorage.getItem('sp_lang') || start; } catch (e) {}
+  window.spSetLang(start);
+})();
+
+</script><!--/sp-i18n-->
+</body>
+</html>

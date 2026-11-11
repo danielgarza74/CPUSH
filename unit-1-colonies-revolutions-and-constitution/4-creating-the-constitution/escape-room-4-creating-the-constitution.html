@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Escape Room 4 · Creating the Constitution</title>
+<style>
+:root{--bg:#1C4B54;--txt:#EBF3F4;--a1:#2C6D7A;--a2:#D2C24B;--hl:#E1D78E;--glass:rgba(235,243,244,.07);--glassb:rgba(235,243,244,.2);--dim:#CFE0E2;--ok:#8FD3A8}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#246070 0%,#1C4B54 60%) fixed;background-color:var(--bg);color:var(--txt);font:17px/1.55 "Segoe UI",system-ui,-apple-system,Verdana,sans-serif;min-height:100vh}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px 40px}
+.glass{background:var(--glass);border:1px solid var(--glassb);border-radius:16px;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+header.hero{padding:30px 0 12px;border-bottom:3px solid var(--a2)}
+.eyebrow{font-size:13px;letter-spacing:.16em;font-weight:700;color:var(--hl)}
+h1{margin:.15em 0 .05em;font-size:clamp(28px,6vw,40px);line-height:1.12}
+.sub{margin:0;font-weight:600;color:var(--dim)}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 4px}
+.meta label{flex:1 1 170px;font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--dim)}
+input[type=text],textarea,select{display:block;width:100%;margin-top:4px;padding:10px 12px;border:1px solid var(--glassb);border-radius:10px;background:rgba(17,49,55,.55);color:var(--txt);font:inherit;font-size:16px}
+input[type=text]:focus,textarea:focus,select:focus,button:focus-visible{outline:3px solid var(--hl);outline-offset:1px}
+input.bad{border-color:var(--a2);box-shadow:0 0 0 2px var(--a2)}
+textarea{min-height:120px;resize:vertical}
+.howto{margin:14px 0;padding:14px 16px;font-size:16px}
+.howto ol{margin:6px 0 0;padding-left:22px}
+.scene{margin:14px 0;padding:8px;text-align:center}
+.scene svg{width:100%;height:auto;display:block;border-radius:12px}
+.bar{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;padding:8px 12px;margin:10px 0;font-weight:700;font-size:15px;background:rgba(28,75,84,.92);border:1px solid var(--glassb);border-radius:12px}
+.bar span b{color:var(--hl)}
+.btn{font:inherit;font-size:16px;font-weight:700;padding:11px 18px;border-radius:12px;border:2px solid var(--hl);background:transparent;color:var(--txt);cursor:pointer;min-height:44px}
+.btn:hover{background:rgba(225,215,142,.18)}
+.btn.primary{background:var(--hl);color:#1C4B54;border-color:var(--hl)}
+.btn.primary:hover{background:#EDE4AE}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.btn.small{padding:8px 14px;font-size:15px;min-height:40px}
+.intro{padding:20px;text-align:center}
+.intro p{margin:.4em 0}
+.lock{margin:12px 0;overflow:hidden}
+.lock>button.lh{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:12px;width:100%;padding:14px 16px;cursor:pointer}
+.lock>button.lh:focus-visible{outline:3px solid var(--hl);outline-offset:-3px}
+.lock.locked>button.lh{cursor:not-allowed;opacity:.55}
+.lk{flex:none;width:44px;height:44px}
+.lk .sh{transition:transform .5s cubic-bezier(.3,1.6,.5,1);transform-origin:center}
+.lock.solved .lk .sh{transform:translateY(-6px) rotate(-30deg);transform-origin:10px 14px}
+.lock.solved .lk .bd{fill:var(--hl)}
+.lt{flex:1}
+.lt small{display:block;font-size:12px;letter-spacing:.12em;font-weight:700;color:var(--hl)}
+.lt strong{font-size:19px}
+.dg{flex:none;min-width:42px;height:42px;border-radius:10px;border:2px solid var(--hl);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;background:rgba(17,49,55,.55)}
+.lb{padding:0 16px 16px;display:none}
+.lock.open .lb{display:block}
+.objline{font-size:14px;color:var(--dim);margin:0 0 10px}
+.card{background:rgba(235,243,244,.1);border-left:6px solid var(--a2);border-radius:10px;padding:12px 14px;margin:8px 0 12px}
+.card h4{margin:0 0 4px;font-size:13px;letter-spacing:.12em;color:var(--hl)}
+.card p{margin:.3em 0}
+.card .src{font-size:13px;color:var(--dim)}
+.prompt{font-weight:700;margin:10px 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0}
+.chip{font:inherit;font-size:16px;padding:10px 14px;border-radius:12px;border:2px solid var(--glassb);background:rgba(17,49,55,.55);color:var(--txt);cursor:pointer;min-height:44px;text-align:left}
+.chip.sel{border-color:var(--hl);background:rgba(225,215,142,.2)}
+.chip .n{display:inline-block;min-width:24px;height:24px;line-height:24px;border-radius:12px;background:var(--hl);color:#1C4B54;font-weight:800;text-align:center;margin-right:8px}
+.mrow{margin:8px 0}
+.mrow label{font-weight:700;display:block}
+fieldset{border:1px solid var(--glassb);border-radius:10px;margin:8px 0;padding:8px 12px}
+legend{font-weight:700;padding:0 6px}
+.opt{display:flex;align-items:center;gap:10px;padding:6px 0;min-height:40px;cursor:pointer}
+.opt input{width:22px;height:22px;accent-color:#E1D78E;flex:none}
+.cipher{font:700 24px/1.3 "Courier New",monospace;letter-spacing:.14em;background:rgba(17,49,55,.65);padding:12px;border-radius:10px;border:1px dashed var(--hl);word-break:break-word;text-align:center}
+.key{display:grid;grid-template-columns:repeat(13,1fr);gap:2px;margin:10px 0;font:700 14px/1.2 "Courier New",monospace;text-align:center}
+.key div{padding:3px 0;border-radius:4px;background:rgba(235,243,244,.08)}
+.key .c{color:var(--hl)}
+.scr{font:800 30px/1.2 "Courier New",monospace;letter-spacing:.3em;text-align:center;background:rgba(17,49,55,.65);padding:10px;border-radius:10px;border:1px dashed var(--hl)}
+.row{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0;align-items:center}
+.fb{margin:8px 0;padding:10px 12px;border-radius:10px;display:none;font-weight:600}
+.fb.show{display:block}
+.fb.nudge{background:rgba(210,194,75,.18);border:1px solid var(--a2)}
+.fb.good{background:rgba(143,211,168,.16);border:1px solid var(--ok);color:#DDF5E6}
+.hints{margin:6px 0}
+.hint{background:rgba(225,215,142,.14);border:1px dashed var(--hl);border-radius:10px;padding:8px 12px;margin:6px 0;font-size:16px}
+.hint b{color:var(--hl)}
+.exit{margin:16px 0;padding:18px;text-align:center}
+.exit.locked{opacity:.55}
+.exit h2,.esc h2,.debrief h2{margin:.1em 0 .3em}
+.codebox{display:flex;justify-content:center;gap:8px;margin:12px 0}
+.codebox input{width:52px;height:60px;text-align:center;font:800 30px "Courier New",monospace;padding:0;margin:0}
+.esc{margin:16px 0;padding:22px;text-align:center;display:none;border:2px solid var(--hl)}
+.esc.show{display:block}
+.esc .big{overflow-wrap:anywhere;font-size:clamp(30px,9vw,64px);font-weight:900;letter-spacing:.14em;color:var(--hl);text-shadow:0 0 24px rgba(225,215,142,.6);animation:pop .8s cubic-bezier(.3,1.6,.5,1)}
+.esc .time{font-size:26px;font-weight:800}
+.debrief{margin:16px 0;padding:16px}
+.actions{margin:16px 0;padding:16px}
+.status{font-weight:700;margin-bottom:10px}
+.msg{display:none;margin-top:10px;padding:10px 12px;border-radius:10px;background:rgba(143,211,168,.16);border:1px solid var(--ok)}
+.msg.err{background:rgba(210,194,75,.2);border-color:var(--a2)}
+.link{all:unset;cursor:pointer;color:var(--dim);text-decoration:underline;font-size:14px;margin-top:10px;display:inline-block}
+.link:focus-visible{outline:3px solid var(--hl)}
+footer{text-wrap:balance;text-align:center;font-size:12px;letter-spacing:.1em;font-weight:700;color:var(--dim);padding:20px 8px 30px;border-top:1px solid var(--glassb);margin-top:20px}
+.ennote{margin:.4em 0 0;font-size:14px;font-weight:700;color:var(--dim)}
+.exit .ennote{text-align:center}
+.hidden{display:none!important}.lock,.exit,.esc{scroll-margin-top:64px}
+.pop{animation:pop .7s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pop{0%{transform:scale(.2);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes tap{0%,100%{transform:rotate(0)}50%{transform:rotate(9deg)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.shake{animation:shake .35s}
+.wheel{transform-box:view-box;transform-origin:276px 86px}
+.wheel.spin{animation:tap .5s ease-in-out 3}
+.plock .sh{transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
+.plock.open .sh{transform:translateY(-7px)}
+.plock.open .bd{fill:#E1D78E}
+#door{transform-origin:150px 20px;transition:transform 1.4s ease-in-out}
+.escaped #door{transform:scaleX(.1)}
+#glow{opacity:.15;transition:opacity 1.4s}
+.escaped #glow{opacity:1}
+html[dir="rtl"] .chip{text-align:right}
+html[dir="rtl"] .chip .n{margin-right:0;margin-left:8px}
+html[dir="rtl"] .card{border-left:0;border-right:6px solid var(--a2)}
+html[dir="rtl"] .howto ol{padding-left:0;padding-right:22px}
+html[dir="rtl"] .esc,html[dir="rtl"] .exit,html[dir="rtl"] .intro{text-align:center}
+html[dir="rtl"] .cipher,html[dir="rtl"] .scr,html[dir="rtl"] .key{direction:ltr}
+html[dir="rtl"] .scr{letter-spacing:.3em!important}
+html[dir="rtl"] .cipher{letter-spacing:.14em!important}
+html[dir="rtl"] .key{letter-spacing:0!important}
+html[dir="rtl"] .card .src{direction:ltr;text-align:left}
+html[dir="rtl"] .hint,html[dir="rtl"] .fb,html[dir="rtl"] .msg,html[dir="rtl"] .objline{text-align:start}
+html[dir="rtl"] .lock>button.lh{text-align:start}
+html[dir="rtl"] .lb,html[dir="rtl"] .actions{text-align:start}
+html[dir="rtl"] .bar{direction:rtl}
+html[dir="rtl"] .tt{unicode-bidi:plaintext}
+@media(max-width:520px){body{font-size:16px}.chip{width:100%}.key{font-size:12px;gap:1px}.codebox input{width:46px;height:54px}.dg{min-width:38px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{.bar,.actions button{display:none}}
+/*sp-i18n-css*/
+.sp-lang-bar{display:flex;justify-content:flex-end;padding:8px 12px 0;position:relative;z-index:5}
+.sp-lang{display:inline-flex;gap:2px;padding:3px;border-radius:10px;background:rgba(255,255,255,.88);border:1px solid rgba(0,0,0,.18);font-family:system-ui,"Segoe UI",Tahoma,Arial,sans-serif}
+.sp-lang button{border:0;background:transparent;color:#222;font:600 13px/1 system-ui,"Segoe UI",Tahoma,Arial,sans-serif;padding:7px 11px;border-radius:7px;cursor:pointer}
+.sp-lang button[aria-pressed="true"]{background:#222;color:#fff}
+.sp-lang button:focus-visible{outline:3px solid #2a6df4;outline-offset:1px}
+textarea,input,select{unicode-bidi:plaintext}
+html[lang="ar"] body,html[lang="ar"] button,html[lang="ar"] textarea,html[lang="ar"] input,html[lang="ar"] select{font-family:"Segoe UI",Tahoma,"Noto Sans Arabic","Arial",system-ui,sans-serif}
+html[lang="ar"] body{line-height:1.8}
+html[lang="ar"] *{letter-spacing:0!important}
+html[dir="rtl"] textarea,html[dir="rtl"] input{text-align:start}
+@media print{.sp-lang-bar{display:none}}
+/*/sp-i18n-css*/
+</style>
+</head>
+<body>
+<!--sp-bar--><div class="sp-lang-bar"><div class="sp-lang" role="group" aria-label="Language / Idioma / اللغة"><button type="button" data-lang="en" lang="en" aria-pressed="true">English</button><button type="button" data-lang="es" lang="es" aria-pressed="false">Español</button><button type="button" data-lang="ar" lang="ar" aria-pressed="false">العربية</button></div></div><!--/sp-bar-->
+<div class="wrap">
+<header class="hero">
+  <div class="eyebrow">1781-1800</div>
+  <h1>Escape the Tavern Back Room</h1>
+  <p class="sub">Creating the Constitution</p>
+  <div class="meta">
+    <label>FIRST NAME *<input id="f_first" type="text" autocomplete="given-name"></label>
+    <label>LAST NAME *<input id="f_last" type="text" autocomplete="family-name"></label>
+    <label>PERIOD *<input id="f_period" type="text" inputmode="numeric" maxlength="12" placeholder="e.g. 3"></label>
+  </div>
+</header>
+
+<div class="howto glass"><b>How to escape:</b>
+<ol>
+<li>Open each lock in order. Read the <b>Clue Card</b>. The answer is in the card.</li>
+<li>Solve the puzzle to open the lock and reveal one digit.</li>
+<li>If you get stuck, press <b>Hint</b>. Hints are free, but your teacher can see how many you used.</li>
+<li>Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.</li>
+</ol></div>
+
+<div class="scene glass" id="scene">
+<svg viewBox="0 0 600 270" role="img" aria-label="A tavern back room at night. On the left, a window with a crescent moon and stars above a wall clock and a table with an inkwell, a quill, and a rolled scroll. On the right, a bookshelf, a three-cornered hat and a ring of keys on a peg rail, and a wooden chair. The door has a BACK ROOM sign and five padlocks in a row. Under each padlock is a window for one digit of the exit code.">
+<defs>
+<pattern id="brick" width="40" height="270" patternUnits="userSpaceOnUse"><rect width="40" height="270" fill="#163B41"/><path d="M0 0V270" stroke="#EBF3F4" stroke-opacity=".12" fill="none"/><path d="M20 0V270" stroke="#EBF3F4" stroke-opacity=".05" fill="none"/></pattern>
+<radialGradient id="glowg" cx="50%" cy="50%" r="60%"><stop offset="0" stop-color="#EBF3F4"/><stop offset="1" stop-color="#E1D78E"/></radialGradient>
+</defs>
+<rect width="600" height="270" fill="url(#brick)"/>
+<rect y="236" width="600" height="34" fill="#174047"/>
+<g stroke="#CFE0E2" stroke-opacity=".35" stroke-width="2"><path d="M0 248H600M0 260H600"/><path d="M60 236V248M180 236V248M300 236V248M420 236V248M540 236V248M120 248V260M240 248V260M360 248V260M480 248V260M600 248V260"/></g>
+<g>
+<rect x="14" y="20" width="112" height="84" rx="3" fill="#0E2A30" stroke="#E1D78E" stroke-width="3"/>
+<path d="M70 20V104M14 62H126" stroke="#E1D78E" stroke-width="3"/>
+<circle cx="40" cy="42" r="12" fill="#E1D78E"/><circle cx="46" cy="38" r="11" fill="#0E2A30"/>
+<g fill="#EBF3F4"><circle cx="90" cy="34" r="1.8"/><circle cx="108" cy="48" r="1.5"/><circle cx="84" cy="52" r="1.3"/><circle cx="26" cy="80" r="1.6"/><circle cx="100" cy="82" r="1.8"/><circle cx="52" cy="90" r="1.3"/></g>
+<rect x="8" y="104" width="124" height="8" rx="2" fill="#E1D78E"/></g>
+<g><circle cx="70" cy="152" r="21" fill="#2C6D7A" stroke="#E1D78E" stroke-width="3"/><circle cx="70" cy="152" r="16" fill="#113137" fill-opacity=".45"/>
+<path d="M70 138V141M70 163V166M56 152H59M81 152H84" stroke="#EBF3F4" stroke-width="2"/><path d="M70 152V142M70 152L79 157" stroke="#EBF3F4" stroke-width="2.5" stroke-linecap="round"/><circle cx="70" cy="152" r="2.5" fill="#E1D78E"/></g>
+<g><rect x="10" y="204" width="136" height="8" rx="3" fill="#E1D78E"/><path d="M18 212V236M138 212V236" stroke="#E1D78E" stroke-width="6"/>
+<rect x="28" y="190" width="18" height="14" rx="3" fill="#113137" stroke="#E1D78E" stroke-width="2"/><rect x="33" y="184" width="8" height="6" rx="1" fill="#E1D78E"/>
+<path d="M37 184C40 168 52 160 66 156C62 168 52 178 41 184Z" fill="#EBF3F4" fill-opacity=".92" stroke="#E1D78E" stroke-width="1.5"/><path d="M38 184C46 172 54 166 64 158" stroke="#113137" stroke-width="1.2" fill="none"/>
+<rect x="82" y="192" width="44" height="12" rx="6" fill="#EBF3F4" fill-opacity=".92" stroke="#E1D78E" stroke-width="2"/><rect x="100" y="190" width="8" height="16" rx="2" fill="#D2C24B"/><path d="M104 206V212" stroke="#D2C24B" stroke-width="3"/></g>
+<g><rect x="462" y="20" width="128" height="100" rx="3" fill="#0E2A30" stroke="#E1D78E" stroke-width="3"/>
+<path d="M466 66H586M466 112H586" stroke="#E1D78E" stroke-width="4"/>
+<g stroke="#E1D78E" stroke-width="1.5"><rect x="472" y="30" width="12" height="36" fill="#2C6D7A"/><rect x="486" y="36" width="10" height="30" fill="#D2C24B"/><rect x="498" y="28" width="14" height="38" fill="#EBF3F4" fill-opacity=".9"/><rect x="514" y="34" width="11" height="32" fill="#2C6D7A"/><rect x="527" y="30" width="13" height="36" fill="#D2C24B"/><rect x="542" y="36" width="10" height="30" fill="#EBF3F4" fill-opacity=".9"/><rect x="554" y="28" width="14" height="38" fill="#2C6D7A"/>
+<rect x="472" y="76" width="14" height="36" fill="#EBF3F4" fill-opacity=".9"/><rect x="488" y="82" width="11" height="30" fill="#2C6D7A"/><rect x="501" y="74" width="12" height="38" fill="#D2C24B"/><rect x="516" y="80" width="16" height="32" fill="#2C6D7A"/><rect x="534" y="76" width="10" height="36" fill="#EBF3F4" fill-opacity=".9"/><path d="M548 112L556 78L568 80L560 112Z" fill="#D2C24B"/></g></g>
+<g><rect x="470" y="128" width="114" height="8" rx="3" fill="#E1D78E"/><circle cx="496" cy="136" r="3" fill="#E1D78E"/><circle cx="560" cy="136" r="3" fill="#E1D78E"/>
+<path d="M470 164L496 150L522 164L496 170Z" fill="#113137" stroke="#E1D78E" stroke-width="2" stroke-linejoin="round"/><path d="M484 157Q496 142 508 157Z" fill="#113137" stroke="#E1D78E" stroke-width="2" stroke-linejoin="round"/>
+<circle cx="560" cy="148" r="8" fill="none" stroke="#E1D78E" stroke-width="3"/>
+<g stroke="#E1D78E" stroke-width="3" stroke-linecap="round" fill="none"><path d="M553 154V176M553 170H558M553 175H557"/><path d="M567 154V172M567 166H562M567 171H561"/></g></g>
+<g><rect x="486" y="216" width="84" height="8" rx="3" fill="#E1D78E"/><path d="M494 224V236M562 224V236" stroke="#E1D78E" stroke-width="6"/><path d="M496 216V194M560 216V194" stroke="#E1D78E" stroke-width="5"/><rect x="494" y="188" width="74" height="8" rx="3" fill="#E1D78E"/></g>
+<rect id="glow" x="150" y="20" width="300" height="216" rx="10" fill="url(#glowg)"/>
+<g id="door">
+<rect x="150" y="20" width="300" height="216" rx="10" fill="#2C6D7A" stroke="#E1D78E" stroke-width="3"/>
+<circle cx="164" cy="34" r="4" fill="#E1D78E"/><circle cx="436" cy="34" r="4" fill="#E1D78E"/><circle cx="164" cy="222" r="4" fill="#E1D78E"/><circle cx="436" cy="222" r="4" fill="#E1D78E"/>
+<rect x="210" y="30" width="180" height="26" rx="4" fill="#113137" stroke="#EBF3F4" stroke-opacity=".7"/>
+<text x="300" y="48" text-anchor="middle" font-size="12" letter-spacing="2" font-weight="700" fill="#EBF3F4">BACK ROOM</text>
+<rect x="262" y="90" width="76" height="8" rx="3" fill="#1C4B54"/>
+<circle cx="276" cy="86" r="4" fill="#EBF3F4"/>
+<g class="wheel" id="wheel"><path d="M276 86L328 80" stroke="#EBF3F4" stroke-width="4" stroke-linecap="round"/><circle cx="330" cy="80" r="6" fill="#D2C24B"/></g>
+<rect x="170" y="106" width="260" height="8" rx="3" fill="#1C4B54"/>
+<g id="plocks"></g>
+<text x="300" y="228" text-anchor="middle" direction="ltr" font-size="11" letter-spacing="3" font-weight="700" fill="#EBF3F4">1781 - 1800</text>
+</g>
+</svg>
+</div>
+
+<div class="intro glass" id="intro">
+  <h2 style="margin:.1em 0">You are locked in the tavern back room.</h2>
+  <p>The tavern closed for the night, and the owner locked the door of the back room. A bookshelf, a wall clock, a window, a table with an inkwell and a quill, and a ring of keys on a peg sit in the room. The door has <b>5 locks</b>. Each lock matches one big idea from Lesson 4. Solve them all to find the <b>5-digit exit code</b>.</p>
+  <p>The clock starts when you press the button. Most students finish in about 20 minutes.</p>
+  <p><button class="btn primary" id="startBtn">Enter the Back Room</button></p>
+</div>
+
+<div id="game" class="hidden">
+  <div class="bar" id="bar" aria-live="off"><span><span>Time</span> <b id="tm">00:00</b></span><span><span>Locks</span> <b id="lc">0</b>/5</span><span><span>Hints used</span> <b id="hc">0</b></span></div>
+  <div id="locks"></div>
+
+  <section class="exit glass locked" id="exit" aria-label="Exit door">
+    <div class="eyebrow">THE EXIT DOOR</div>
+    <h2>Type the exit code</h2>
+    <p id="exitNote">Open all 5 locks first. The digits go in order: Lock 1 first.</p>
+    <div class="codebox" id="codebox" dir="ltr"></div>
+    <p class="ennote">Type the answer in English. Use the digits 0-9.</p>
+    <div class="row" style="justify-content:center"><button class="btn primary" id="codeBtn" disabled>Open the Door</button></div>
+    <div class="fb" id="codefb"></div>
+  </section>
+
+  <section class="esc glass" id="esc" aria-live="polite">
+    <div class="big">ESCAPED</div>
+    <p class="time"><span>Your time:</span> <span id="escTime">00:00</span></p>
+    <p id="escSum"></p>
+    <p>One last step: write your Debrief below.</p>
+  </section>
+
+  <section class="debrief glass" id="debrief">
+    <div class="eyebrow">DEBRIEF</div>
+    <h2>Which lock was hardest, and what did you learn that you did not know before?</h2>
+    <p style="margin:.2em 0;color:var(--dim)">Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.</p>
+    <textarea id="debriefText" aria-label="Debrief" placeholder="Type your answer here..."></textarea>
+  </section>
+
+  <section class="actions glass" id="actions">
+    <div class="status" id="status"></div>
+    <div class="row">
+      <button class="btn" id="saveBtn">Save Progress</button>
+      <button class="btn" id="loadBtn">Load Progress</button>
+      <input type="file" id="loadFile" accept=".json,application/json" hidden>
+      <button class="btn primary" id="finishBtn">Finished — Download File to Submit</button>
+    </div>
+    <div class="msg" id="msg" role="status"></div>
+    <button class="link" id="reset">Clear all my work and start over</button>
+  </section>
+</div>
+
+<div class="actions glass hidden" id="loadOnly" style="margin-top:12px"><button class="btn" id="loadBtn0">Load Progress</button> <span style="color:var(--dim)">Have a saved file? Load it to continue.</span></div>
+
+<footer>UNIT 1 · COLONIES, REVOLUTION, AND CONSTITUTION | CPUSH | DANIEL GARZA, M.A.</footer>
+</div>
+
+<script type="application/json" id="er-data">{"salt": "L4esc:", "exitHash": "5e56d763e066f459175e", "locks": [{"n": 1, "key": "lock1_bookshelf", "title": "The Bookshelf", "obj": "1", "objLabel": "CORE OBJECTIVE 1", "objText": "Core Objective 1: Identify the strengths and weaknesses of the Articles of Confederation and explain how they prompted the creation of a new U.S. constitution in 1787.", "type": "match", "card": "<p>The Articles of Confederation, approved in 1781, joined thirteen independent states in a loose alliance. Each state had one vote in Congress, so Rhode Island, with 68,000 people, had the same vote as Virginia, with more than 747,000. Congress had no cash and could not collect taxes. Its Northwest Ordinance of 1787 said new territories would become equal states and banned slavery north of the Ohio River. It also promised that Indigenous lands would never be taken without their consent, a promise that was repeatedly broken. In 1786, struggling farmers in western Massachusetts rose up over debts and taxes, and Daniel Shays led a march in early 1787. George Washington said the nation needed a stronger national government.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 6, “The Confederation Government” (A Loose Alliance of States, The Northwest Ordinance, Money, and Shays’s Rebellion).", "prompt": "Match each term to the best description. Use the Clue Card.", "hints": ["Look for the key words: new states, one vote, no cash, and farmers in western Massachusetts.", "The Northwest Ordinance was about new states. Voting in Congress was one vote for each state. Money and taxes meant no cash and no taxing power. Shays’s Rebellion was the farmers’ uprising."], "nudge": "Not quite. Check each match against the Clue Card. Which one are you least sure about?", "terms": [{"id": "tax", "label": "Money and taxes"}, {"id": "nwo", "label": "Northwest Ordinance (1787)"}, {"id": "vot", "label": "Voting in Congress"}, {"id": "shy", "label": "Shays’s Rebellion"}], "descs": [{"id": "c", "label": "Congress had no cash and could not collect taxes"}, {"id": "a", "label": "New territories would become equal states, and slavery was banned north of the Ohio River"}, {"id": "d", "label": "Struggling farmers in western Massachusetts rose up over debts and taxes"}, {"id": "b", "label": "Each state had one vote, no matter how many people lived there"}], "entries": ["95366b873f0efe7d29107"], "id": "lock1_bookshelf"}, {"n": 2, "key": "lock2_inkwell", "title": "The Inkwell", "obj": "2", "objLabel": "CORE OBJECTIVE 2", "objText": "Core Objective 2: Describe the political innovations that the 1787 Constitutional Convention developed for the new nation.", "type": "fill", "card": "<p>In 1787, delegates met in Philadelphia’s State House to revise the Articles, and they wrote a new Constitution instead. It begins, “We the people of the United States.” Norton calls the idea that the voters are the source of all authority the most important political innovation since the Declaration of Independence. The Great Compromise gave larger states seats in the House by population and gave every state two senators. The Constitution also split power among three branches and set up the Electoral College to choose the president. Dividing power between the national government and the states is called <b>federalism<\/b>. The delegates also agreed that three-fifths of the enslaved would count toward a state’s seats in Congress, and they refused even to discuss political rights for women.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 6, “The Constitution” (the opening, The Executive, The Electoral College, Guiding Assumptions, The Three-Fifths Compromise, and The Absence of Women’s Rights).", "prompt": "Fill in the blank using the Clue Card.", "sentence": "Dividing power between the national government and the states is called ________.", "scramble": "S  D  F  I  L  M  A  E  R  E", "hints": ["Look for the word in bold in the Clue Card. It names the idea of sharing power between the national government and the states.", "The word starts with F and has 10 letters. It ends with “ism.”"], "nudge": "Not quite. Re-read the Clue Card. Use the scrambled letters to check your spelling.", "entries": ["0021246e92890bd0dd458", "00aa01dbcd26e58db6574", "012ced6e7a4d5e06b18c6", "016149c7a4d1775baf633", "01808d6d350781ca37107", "027bf32c8196a5e855430", "032d35cfa4c60f7fe1350", "037a136211f973df4faf5", "03ea1e1c4008eb88770a0", "040379261f177bcb87775", "0683cbe580d5bc8fba9d1", "0688413cf9a2bdcc3c722", "06936a0c754124aa04683", "06d6365326c6d913ad0b3", "07b20bdec7663aeb666b8", "082564302292e23b8f082", "08404bc9ef463c0d380e9", "0864fa423aa845c491b78", "087e949a35c4b90903c26", "0888f263ffec394fc1201", "09f3fbf3ae48e6ff171a0", "0a939cef90134a59b1854", "0b8b89d808daceffdb4d0", "0bb4a8e1e1ceb3cf029a1", "0c36fcdce14d10311aa71", "0c5451238704207cf8072", "0db00014d3291b7edda50", "0ef8b3aefe42b53403e98", "0effb5e51830c19d6c0b9", "0fbe8df079b6331d684c1", "12abcc5ff393e6abde894", "13e4e1945671a0383e4e0", "1423f80e47f4ba2cad3e7", "151526e337ba60e8f9285", "1574472992f2b6279f6a1", "1576f538fe4d1c1df9ba8", "1639dfb16ca7c2d2a5c28", "167209ef14f2068447010", "1683d4a86f01597f6f387", "1859046f299c70396c839", "195cac99a88f38c479053", "1a59ba998febb2afa0824", "1a605ac744fda538666a6", "1aa3dd0b63dd095039600", "1ae347c416768a7349382", "1b3bfb63ff1279b3c6947", "1bca9f1d9761755690345", "1c37dd5935e889c8e8153", "1c4bd9992912f7a2e3630", "1d94fc9caf939d31d6219", "1e722f3791a41160f4bc4", "1e9fb14e7b543db9ca802", "1ec36fcf2e676e93e9423", "1ed9c5b741336b340b579", "1edc96e397947d7a70b20", "1efb5cb2bc7c427926571", "2035636e7696c5463d095", "20489d0b6a8560bf2e358", "20e9d895bb5425321d8c4", "215ef9b93897c8fb91d65", "22663267ec385de47ac07", "2283e2455dbfa4a59b985", "22bcdac76585aff76ca36", "22c8cbcb8391b2f098885", "245cbdeebf2d5054a9213", "24e10b2702c536449b2f2", "260c3ef006237f2d32b08", "266d3056bed2f32e18ec7", "26c81c9237b8a6f075be5", "274574f63652ffdbc7696", "27d58fcec9bb4771776c5", "2803a45af5d6a7c00b3d8", "28b73c694edbc5a9ee3b8", "29c791078bd3135c76c26", "29eec0c4d0e092128b460", "2af8666c46208c41501f9", "2b0b3bbf165acf002d2f9", "2bcd27ddf04acb817d400", "2bfda69f67ccae846bfc9", "2ca0c72f2b074ca711956", "2cf329645a8aaf5518683", "2dddd4025bedbd175d3f9", "2e043d55fced109136e42", "2e7729ff694ad97dfbe46", "2fb1ec3fa8881711343d5", "30573b3b5a5c4d35bfa80", "30d94fd2cf5d70d158565", "318bacf2a2e2ab211ad53", "3210a1c966c9848e76c57", "325d31aa78af6e9dc12d0", "339a97c16aae9b1c9fd92", "33b518c1a1f33879a6504", "340afeab35a75c184b207", "34c23da5e5232dd9b4978", "34d628e96c5b6e7c0dfb5", "34f5d319a93dd4392aad8", "350910575d36a80913ec2", "35e75422456f012721119", "37235520d054a406f0da0", "3741bfa0f9f4b5d21fd89", "379c9df291400f18619e1", "37e546bad208fda205ea5", "3865be955663440f434f7", "38954a75817549d1d1781", "38d32d35fbe10b3e493d8", "3931425f84f374e03cbd5", "394a54048496b04670758", "39743eeea215cfd4c1722", "39e7f60287062fd9a7902", "3a9b566d45487dbfa57c7", "3af7af59214336f222279", "3beecb7cf20139c1cab35", "3c8f6111bf2fe595bc9c0", "3d09bd467230277a195c5", "3d1625a2159746fddaf72", "3dbeab14a5e8aff882a48", "3de08dd53b89fddc18406", "3de0ae819a7829fdac0a3", "3e0a569065985eb8f8068", "3e65e1fde7eb7affd0c72", "3e88deaf702e1d446d761", "3ee7084e58dbaa6d22c32", "3f5d82600b0ac074c0b61", "3fdfa23d145132c232352", "4069d7132cfda7cafd235", "406cf41b059d48dd06563", "407e528eb5199454dfb33", "40fea4b2337d5a6b73a35", "41e82004d6605346d93b5", "42125ef0223d7b22cbf91", "431bfba99ce0a98eb26e4", "4411547b5a2fa7df09832", "441d3db198f53a707e6f4", "4448827f7ac76a322ece8", "445836b2f636f4d86a459", "44f6e91be5a33d866c283", "45682c8a31ff05230b189", "45ef4a5cd6d9ed9f44591", "4658044c8a6215a33b9d9", "47273aa532520471d7787", "4742d606b5f13f0502796", "48c8af6a76fe0c7f22a55", "48d1f547abb890cbad8b2", "49807406ced40388fa973", "4c492b104bd9794fec6c6", "4cbf458f60a3f39c9b3c7", "4cea40b246b501587dde9", "4d83d9b7c2bf08d0f1067", "4e1ff6ad2fecdcfd30e99", "4e9673e1061df2f2ac4a4", "4efdb57e9e7bd14a3ed55", "4f2e4ae1ea90e6868ed10", "4f6199e4420ddfa58fd67", "50825ef8ad25bc589d455", "509ce4fbc62b4e38375d4", "50c5879fdc565f5299773", "519eff20db47b0aef07d0", "520a0fd5385577f2b1c43", "536c28a54b5a07b9d0370", "5409142d35b8e4d4b7a90", "54a812cdd347e071bb010", "54e229089371bb3aeca42", "54fa40a35746e031b1b44", "557b6227409ea16d7a0a6", "55894c21a8761b13d12a5", "559f6a7bb0bd8cfad6c22", "55b527e6ef496eee80ea9", "55d2840be0694d05fec19", "56b17587c84834856aa05", "56d3f59022a54ca5c0064", "572342dc0605b37536b22", "583f6069e1665803e9939", "5896143e455185f341779", "5af04952890c90af13ed4", "5b6841147d56ada0509c8", "5bec3551f009e852581b0", "5c37dde9d69ac41a3c986", "5edf8450f0cab42728c53", "5eed773674b32460588f1", "5f0139f378b296b9b03f1", "5f089f543d16856ee27e0", "5f2adb1ce6e69a38380f9", "5f82809fa83ef15765541", "5f8442746f12d6bfe9d30", "5fd8064df92637e840fa6", "5fde4ed3644b145ef5f15", "608d0a535682dfa93ec05", "6158c20ea8c37ed50d613", "62630c7b55a61240e7e31", "62b0e3c67a1d39c101791", "62cdf6e5a42f3d13cf129", "634a272c0620976cb0de8", "64502328954c73ee6ed69", "6552a3ecb71570eba61f4", "65964272baaf09b267d50", "65a9f8fb93e817aa1ff86", "6618dbf571d56960ed495", "661e2a1ce0f2348145bc0", "668a5f01143fa507e6d46", "668c8f0228b76bc4ff0e0", "669e5252a462fe16065a4", "671f32464e46150659e06", "67af6a5da43353ae4c1f9", "681bf8d614ec506b56426", "699c56d9f110d01d2c826", "69dbea94191cdec033cb4", "6a011cba9c6522533eb83", "6b42ad5db5437e8a5f5f1", "6b5d4dd85ac955b1b81c1", "6bd5387c3121e75e834e9", "6bf5c4c419d2d8db48449", "6c00c404acb9619ebdbf1", "6c023c23c310e693373e7", "6cd3d6c124f5fd2e70821", "6cdfeb70acccde3c90df6", "6ceeb64ee95577ae2d116", "6d13f5a684fccf17b3c22", "6e197d7854cc298cf0850", "6ed97b00899a6b80c1498", "6f378b732c8e6afb34059", "6f6d25998de048675eb28", "6f7539fd469b2acdea418", "70623e2fd9428baaf12e0", "7157c98059d59fbb6c1d4", "715ad7103c2ab0819e971", "716f197d2e32769a8ef83", "717328a0d7ad23e957e13", "717cac7fffd9019f87b40", "717fd034c564469bc8da3", "724e2a2c1d6f66d741050", "72bd63ea16357fe829d16", "733e05535fc89eeb68f18", "7340457f072c1dbd5eb03", "73f7ed7462fce3a381057", "74104724bbba7b1fdcd20", "74255223ad7316d1b50e6", "744a593a9ace408358f40", "74ccdf7b290877a6cd7f5", "75011f61587b9994ab371", "753ddc3e3ecd654f1ff68", "75a675f6d9c3a5fd95ca0", "763b556116eac69a5eca1", "76418e9165f878b4f53d2", "770a6bf90bd1fb30ae795", "7740ca3fc8de2338e27f2", "7750ab07730e3b59d75d6", "77d15141e02491f27faf7", "77f16e1fd37a4a0690112", "780110fbd9fe03361aeb3", "7818fae8f1db8eace8813", "782142369d137d45ef009", "78399b4f67ee0161bc586", "78707b992ae47156e0216", "79203dbc2f478a56c13f8", "792ff2c237b4110133790", "7935ab69ddd9527cbe674", "79c0c10d98b2bbfdc5fc2", "79f2d04d4c369923a3e78", "7a043d8eb50e6c018d6c7", "7a2db3ff3bb47abff3df2", "7a3abdde948a48ca48b86", "7a40b51e22b7fa702ea88", "7b31af00aa37100fc6712", "7b8b7c543a4456ee69156", "7bd77b9b4c4d10f151885", "7cc2cd8e6e6bf41d799f3", "7d8fa8cb64fd1a1403b70", "7dd3ff2a524a043e00e79", "7df5fb7c8c484a7767299", "802cb80307993c0898904", "80d57a81a0faaf5481193", "81264b121ec1d42600214", "81297a8b76e203a898c64", "81407470307254d68cdb3", "81894d5ce21999c6de700", "81c1ddb3cd7db7ddf0a19", "827350062b3611fb41b18", "8301eadbcede7924bea40", "833da9073cb14e7b49f27", "835cee12f93e0be30f035", "83b418f17430f4c400b29", "83bd1484aa1469837f8a5", "847dcf921ca20a465b5f9", "84b6792b9b6d2e7491fe1", "84ddc519684460ce3ee69", "85a48c0c9a5d7d5a5c059", "86161dc6a71c2b8335cd3", "8663cae46c6793e0824b5", "875c5f69dad1f1834e151", "87ac727f455808de82b92", "88a6311e04fb8591fe357", "88e62feef51bc0faeeab1", "8914aa42a91ad2b6cf6f7", "895c87ca41d49d0611ce1", "895c97d68614b85fd88a4", "8999861b53729479cc591", "89d8db9f597fb23e4ff39", "8a09fb4d5cbe4d3afb066", "8a0e8fca076ce37c43d91", "8aa66bf97046d63d7cbf3", "8ada0bdc211d76c129570", "8c319321e1dde467607e8", "8ce3d89d78547ed9f7756", "8d1f56c52f2464c2b4b06", "8d3a8070040559cd7f711", "8d7758f86741c6ced0be9", "8da8c340317adfad895d9", "8dbe86c31513f846c3cd6", "8e0bdc7a13f9da3469311", "8e6939db8a2c44adb1ae8", "8ea866202cdd913e7e9e8", "8f52ee5181986bac93457", "8fe83e8df9c39cb539198", "9053578a7ec912fa6b839", "90f7a4a8f0e49ce0a0031", "916087d4bf35a3a50b824", "91a986be2ee10325d0b27", "920b9f9b6377cb9d3dec7", "93127aa6668d3e4342482", "93ef768252eacc7bbdad8", "9404530ab71a1c2fafef7", "95655422848cd8d221c87", "959fdd50109f926b77029", "9608dedc28fc751d64367", "96393ad3562266811b795", "965b908f5205faf11dbf6", "967ade69fb26b57d82822", "9753ed2f41cb35717a664", "97adbef355fc0f4b1a678", "97c1884447f3949668557", "987d274ee644099f42c53", "98c9ba3eefeca8bffd073", "99130b5e7d12ac3170959", "99d78cf4f7906137d75f3", "99f92d8c9dda0064f37a3", "9a28c6736f35186231784", "9afab1aaa6a09c2678d20", "9b297d301839fc91cb7f7", "9bbe2279d85f0326dd715", "9bd9a004957bc88eca858", "9ce01a4e3eca66987a462", "9d84c5f4aa14b31bbabd7", "9e1458e1a948859823191", "9eb3ac0e77a16a07865c0", "9ec7dc29cec6a1918b1d4", "9fcac6903ae77f1313ac5", "9fcc169f2630c15eb7ba7", "a0275a0091a5e4b2d63f2", "a02c7f5aa42e6df4ae5c9", "a0499ebb952100b41d688", "a0730061dd57754d79e20", "a07d812542ad3be578d68", "a0cb61cae9aacbb8c7fb6", "a13e0967583894149f606", "a15ba1735dfa0228aac34", "a1a9855e7570bb31ad5c4", "a1c467839c5b6d00b6326", "a29f6a2fd4320963493c0", "a2cc4e08cfb0e1b7fa9c6", "a2eae0d4a38f0c248ec15", "a33b070e2fc74458704e1", "a541d02b848f84c07c413", "a55a42e4f64a406a2f250", "a58a49f761b0a43dd01d1", "a71e0253b8a400cd9ae53", "a78388ca91e870bdf1990", "a7cfddf7a6297f4375ed7", "a7f4628466275dc7723b0", "a8210fd44bef57a4409e4", "aa67e939cbba81c090468", "aaf3ad51d60cbdf616b56", "ab4b84352294ad3237cb9", "ab5cf529489b007fb1ce0", "ab7aa369925ea0879ec49", "ac9ec005bd6ce67379bc5", "adbb07ea8019e999c85c2", "aeaca3fe41709230d3bb8", "afb0db45fbfe422118a91", "afbb35efd212424131bc5", "b00114ca83e32bbc462c7", "b05ca62187c1a4f9d25e0", "b0b6f18a97f9f8f48d788", "b10879588209e742140d1", "b12c3194880dc94657496", "b1b479ffde9e89df35211", "b27cd4c5a93b5522d82c7", "b325277742cf4f9cfcf66", "b3da3ba99f4f7a0a70ea7", "b498ad6f37e9f9784c6e6", "b565e0bab0a88cacd7eb5", "b5bc442a36c73c1ff9c69", "b5e521566ffcb94a44785", "b5e75425ba31eb4fb8507", "b642eeacc082996bd4c44", "b68ef65066cb3e6342bd0", "b69aea2e778867623c4e2", "b6b4895e7130258a8a8d2", "b70ca6fa146649658e1a3", "b810e97b79e5a7acf9630", "b842b775be01e32430f39", "b8710affb6dfc2c1bdf57", "b8a2733c7da442fd6c064", "b9dceacb9a5e644a325b7", "ba269593a4e2d4348a2c2", "ba6e62589d0696e85ffd5", "baa125d502e6b358d5933", "baa9035689be0abf7daf7", "bb4a9982542a1cbe9ef15", "bb7cb1c7a2f7562f7a5f4", "bba3e274d6e6fc1dcfa21", "bc3e0fcbd96c74efd19e0", "bcee9baacebdeff52ed82", "bd57607194d1f5b5563b6", "bd92d5c3ad3a1d5a9f413", "be072064ab9a6db867d15", "be9ce1011e56f4a4f9231", "bf7dd0b948d97de212355", "bfb38fb5a781b3575f007", "c0630d6f66728abe79dc3", "c14534d2557f69437bf69", "c1578de4797863933cac5", "c19e74ea50077f22d4f90", "c1afdd2c160404d537a65", "c305d3b3e419624bb8552", "c35c348421c778ff95a60", "c36179bb164a3690ce022", "c3c36d5dc0c94e4746081", "c420dda9ad2059250f5d3", "c42a3943fc5a449c21b58", "c57d64b1453aacb8c7868", "c580396f6cb3b8bd9fdf0", "c629764f81feb8f325e61", "c6509b4258128c8ac8fc6", "c861d26d1d3a7e4ce1ec9", "ca7cd64a36e0129bd0643", "ca86441b7359ccf4a1ad1", "ca8a86b9d1e7ddcd5c4c8", "cc61be819eac9598bb985", "cc976f049dc865d103f14", "cd1520ffed4a49208f260", "ce421f92d150858e29eb5", "ce43efc9c5299a8403ed7", "ce5bb4a1b5c101b6713c6", "ceda25b55edfbbf33f2d9", "cfcbb489e31d026411176", "d0340a47312dcf1602457", "d10c793fbd198dd6e87f2", "d1ae3c732116132daa112", "d1f7e16406db98dd89b43", "d241766aa35ea46a12795", "d2ff373c7fd190264dbd9", "d3bcae5b8d3be61b5c9d4", "d3d256461d3b812f00f63", "d43da33d1909fa1fe1e73", "d57bd0ce011786ae1cc92", "d61bd4a29b583d001b653", "d68744eb3c47c6dcfec98", "d71ef926a6b65554ebf80", "d742a5929a2bf89ccb2b0", "d7a620241ba3d049350f0", "d7fe4a0d4a55198c1b167", "d841c7a796c5434e2cd59", "d849c7ebcd0db454fae52", "d90a54a71bac8cbe3fea1", "d92c4d800d33d6cd90db0", "d95fd8aac6c260feb6d47", "d96a88cafb423d1434e53", "d9a211faea687689f37b6", "da2067355322af3f83824", "da64dcc40fa110f3fe180", "db28ce28a2eb0abca9b19", "db5fc79f3845ec58f0268", "dbffe10ce147e1ac5c297", "dc89bd852efde7c65f7c0", "dc8e95190895c29e4edf6", "dd649b42a880d382d58f7", "ddb3be61e84e086b6be95", "ddc40cf7c860cd058ab54", "ddccb3e0bf33b3640dda5", "de49f7aa3b41861543f85", "de6f0aff9e16b1e7383e6", "de8a68ad366dab8349a67", "e00f10fa851eee324f4b8", "e08c1ddedf43cb71c3436", "e0b37ece38bd252e1afc3", "e17259dbb2f69ef557835", "e25d931391c107305fda1", "e3301ea3fe1bd71773ed3", "e37279b739e957ba824a9", "e47be6389ea37126c4770", "e4d1a586651e612994122", "e504449ebd2227dbb8596", "e63e40db60aaf024f4298", "e831e8d064c77a98cc344", "e935e93cac9e4d1678c29", "ea4c8b0b15994a2a65855", "eacb44ed5b293bcc30998", "ec55c7521faa11fcb51e3", "ed2a7543cdc496beee7c4", "ed720525f79e83400c0c4", "eddcad0279f5b9af1fb98", "edf190b1ab7765199f818", "ef19b30070d20617e76f6", "ef49a648f4f44ecc69575", "ef7de3b592d2a6e2e1215", "ef816e51ca66c9cffc774", "ef945fab636fe9ec650a5", "ef9d6e9ccd7d7b6566193", "f020556987815938c5396", "f05eaee02627a7be6ef19", "f16dadd96cf022189f820", "f1da981c2b59b916ad2c2", "f2294d593c3c527d17786", "f2787f4f8c31dd814aed7", "f2a09fdd7957f581b2b38", "f3a6376de3c798d1c84d5", "f4a66d661d0f5b204d427", "f52fdf65bc90d89167216", "f56e603aaede2cb6c2059", "f59b3c4bbd786acfa9551", "f60aba045fd3f81c56100", "f62fa91ebaec774a924b5", "f64fe5370745e079942d2", "f6b5f566028450cc6fe51", "f6e3275788cb776e90807", "f728bc052da6e89eb3571", "f749cc3a0ef50042e6e50", "f82aefe1b70425ab2a321", "f842bcb521a29d0cc20d6", "f8a8284dec041c311bab7", "f8d3157b449e790b876f4", "f909a2b798aaefc6133c6", "f97ea5d5ff9fd3c569ca6", "f99be904f938b4ce04ef5", "f9c6ab72561b23390ac26", "fa1e22165626e7481c714", "fa343a2ae059b0a36a221", "fa3674f9e504807d2c147", "fa4403401c3be866fd474", "fb0157ddc700da0127885", "fbf5eafdea11d8fd8da13", "fc8a021648e6fe1f6b5b6", "fcf572f91aec57aeaf151", "fda8f3763ce3314c66c28", "fdaff69070014f7e8ce03", "ff61e94613ebae1fc45b8"], "id": "lock2_inkwell"}, {"n": 3, "key": "lock3_wall_clock", "title": "The Wall Clock", "obj": "3", "objLabel": "CORE OBJECTIVE 3", "objText": "Core Objective 3: Summarize the major debates surrounding the ratification of the Constitution. Explain why they arose and how they were resolved.", "type": "order", "card": "<p>In 1787, the Constitution was written in Philadelphia, and each state then had to decide whether to ratify it. The Federalists, led by James Madison and Alexander Hamilton, supported it. The Anti-Federalists feared the new national government would grow corrupt and tyrannical, and they criticized the lack of a bill of rights. Starting in 1787, Madison, Hamilton, and John Jay published essays in New York newspapers to convince New Yorkers to ratify. On June 21, 1788, New Hampshire became the ninth state to ratify, which was the minimum needed. Strong opposition in some states was won over by an agreement to add a bill of rights. By the end of 1791, three-fourths of the states had approved ten amendments, now called the Bill of Rights.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 6, “The Fight for Ratification” (Choosing Sides, The Federalist Papers, The States Decide) and “The Federalist Era” (The Bill of Rights).", "prompt": "Tap the four events in the order they happened. Tap an event again to take it back.", "items": [{"id": "c", "label": "New Hampshire becomes the ninth state to ratify"}, {"id": "a", "label": "The Constitution is written in Philadelphia"}, {"id": "d", "label": "The Bill of Rights is approved by three-fourths of the states"}, {"id": "b", "label": "The Federalist Papers essays begin in New York newspapers"}], "hints": ["Look for the years in the Clue Card: 1787, 1788, and 1791. The essays began in 1787, right after the Constitution was written.", "The order is the Constitution written (1787), the Federalist Papers begin (1787), New Hampshire ratifies (June 1788), then the Bill of Rights is approved (1791)."], "nudge": "Not quite. Re-read the Clue Card and match each event to its year.", "entries": ["8cc5554d6f4fa8768ce54"], "id": "lock3_wall_clock"}, {"n": 4, "key": "lock4_window", "title": "The Window", "obj": "4", "objLabel": "CORE OBJECTIVE 4", "objText": "Core Objective 4: Compare the Federalists’ vision for the United States with that of their Republican opponents during the 1790s.", "type": "pick", "card": "<p>In the 1790s, two political parties formed. The Federalists, led by Alexander Hamilton and John Adams, were most numerous in New York and New England. They wanted a strong central government led by the wisest leaders. They hoped for economic growth, social stability, and national defense, and they feared too much democracy. The Republicans, led by Thomas Jefferson and James Madison, were mostly southerners who wanted the nation to stay a rural place of small farmers. They worried that a strong national government would threaten individual freedoms and states’ rights, and they trusted the people. Hamilton asked for a national bank, which Congress created in 1791, but Madison and Jefferson said the Constitution said nothing about creating one.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 6, “The Federalist Era” (the section introduction, A National Bank, and Federalists and Republicans).", "prompt": "Pick the correct answer for all four questions.", "qs": [{"id": "l", "q": "Who led the Federalists?", "opts": [{"id": "a", "label": "Thomas Jefferson and James Madison"}, {"id": "b", "label": "Alexander Hamilton and John Adams"}, {"id": "c", "label": "Daniel Shays and John Jay"}, {"id": "d", "label": "George Mason and James Wilson"}]}, {"id": "s", "q": "Which side wanted the country to stay a rural nation of small farmers?", "opts": [{"id": "a", "label": "The Federalists"}, {"id": "b", "label": "Both parties equally"}, {"id": "c", "label": "The Republicans"}, {"id": "d", "label": "Neither party"}]}, {"id": "b", "q": "Why did Madison and Jefferson oppose Hamilton’s national bank?", "opts": [{"id": "a", "label": "Banks were against the law in every state"}, {"id": "b", "label": "They wanted only the states to have banks"}, {"id": "c", "label": "The bank would be run by France"}, {"id": "d", "label": "The Constitution said nothing about creating a national bank"}]}, {"id": "f", "q": "What did the Republicans fear a strong national government would threaten?", "opts": [{"id": "a", "label": "Trade with France"}, {"id": "b", "label": "Individual freedoms and states’ rights"}, {"id": "c", "label": "The cost of building roads"}, {"id": "d", "label": "The size of the army"}]}], "hints": ["Each answer is in the Clue Card. Look for who led the Federalists, who wanted small farms, what Madison and Jefferson said about the bank, and what the Republicans feared.", "Hamilton and Adams led the Federalists. The Republicans wanted a nation of small farmers. The Constitution said nothing about a national bank. The Republicans feared threats to individual freedoms and states’ rights."], "nudge": "Not quite. At least one answer is off. Re-read the Clue Card for the leaders, the small farmers, the bank, and what the Republicans feared.", "entries": ["244bb834c9ae7a8a64522"], "id": "lock4_window"}, {"n": 5, "key": "lock5_key_ring", "title": "The Key Ring", "obj": "5", "objLabel": "CORE OBJECTIVE 5", "objText": "Core Objective 5: Assess how attitudes toward Great Britain and France shaped American politics in the late eighteenth century.", "type": "decode", "shift": 3, "cipher": "MDB’V WUHDWB", "card": "<p>The French Revolution split American opinion. Jefferson and the Republicans loved its democratic ideals. Hamilton and Adams saw it as vicious and godless, and they sided with Great Britain. In 1794, President Washington sent John Jay to London to settle problems with Britain. Britain promised to leave its six forts on the northwest frontier by 1796, but it refused to stop “impressing” American sailors. When the terms were made public, many Americans, especially Republicans, were outraged. In 1798, Federalists who feared immigrants from France passed the Alien and Sedition Acts. Madison and Jefferson answered with the Kentucky and Virginia Resolutions, and in 1800 Jefferson won the presidency.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 6, “Foreign and Domestic Crises” (Effects of the French Revolution, the 1794 mission to London, War at Home, and Republican Victory in 1800).", "prompt": "The Clue Card describes a 1794 agreement with Britain that outraged many Republicans. A secret message gives its name in two words. Each letter in the message was moved 3 steps forward in the alphabet. Decode it.", "hints": ["Look at the Clue Card for the agreement that John Jay made in London in 1794. The secret message names it. Use the decoder key to spell it, one letter at a time.", "In the message, the letter M is really J, and the letter D is really A. The first word has 4 letters and starts with J. The second word has 6 letters and starts with T."], "nudge": "Not quite. Decode one letter at a time with the key, then check your spelling.", "entries": ["0055ed0cb101f686a91f1", "005917aa3d4e0fcbc55c5", "0060cf2ff0746771565d4", "00a160b356b8963af4622", "0187dc24aecdbc8f3e865", "01ce9bda2ea4ae4752e25", "01dce10d08c07d3fa0d39", "038224133f9c1bdd3dcd8", "03cd577e7db9944398f43", "03cd7f8c565213508b9f9", "045b13513a14ad942a3e0", "04a2722502cb20370a378", "04cad773628f86dd31048", "04f2113aba346c278fb96", "056ff5d256342dd902f26", "05ba17e04172f7529b0d1", "05bd421cce0d3f3aadb36", "062d0fe575beb5bff4d51", "063f1f39e8835b1a7f5d2", "06af96bfcd7158a8ed355", "06b84f677197840922772", "06f42006b661a0bd73681", "0729e1259389a9c94bd41", "073564ccf4441bb9b71d3", "07f3e2a8aa99ad6eea003", "09272cbfc900fd2c241a8", "093befef46ec09079dee1", "0b4a06b66918fdca6d128", "0c239cd65d999c7a4f303", "0c75232f20f1a2a9cea82", "0cd5a479d790ad16e2535", "0d0f882efef54c46c2a74", "0d20bf53a99c4459945c3", "0d87429b14f7bff2b8651", "0e9abb764dcdace41fba7", "0f541d626d06cad1e9f14", "0f6408ba5b3e925929ab7", "0f7d6fb7490d80974b398", "0fa7c86ff41caa7f27748", "10bef3a38f53f336392c2", "10cdc202976e2a2724e15", "11d7831ef6688ffe3e8f7", "11fc16383c3cfdd50e7c0", "1228a3edb155186ab2c08", "131a8e70f672b0ef45d96", "13319f6746c8040e9cb07", "13a4a50a7c45afada5f16", "14073eaea9864a481b979", "14b45105d9165420ac703", "157c0c025c41b35a8b2c1", "167f92914ec6ac18c8dc4", "16f7e985c1a3388766356", "16fef0f9dc4704600bc90", "17b1c5153bd6d738a3fa0", "17f907d46060a44e51f08", "181dd52d19accb78d28d8", "1914c8b7ea6577da697f3", "19eed35591ea202cdd0c5", "1bcee9e4803e622ed1e56", "1db6807a2a374f3f3d028", "1e4248a4a14a250a71874", "1f12d9ec74f34063271c8", "20cfba8091685dd438dc3", "2144e5e7b29e8725f5df3", "225c688bf9ba59e1f3296", "22623adf163fdaa21e8e7", "23b11f4356889c65816c7", "241496b2dbb257059b3a0", "253ae9c780bf4ce117211", "2590047d506cc1a52b949", "25c8145e30e0c4b17e021", "27f83dd4f2b4188ff4f99", "280ec547982acb4c50d06", "2877eab5a8dff1f111558", "28809f27dc92eab55d2c3", "28b84977ab309e69ec616", "2a00a6efb6f58ccb5e3c6", "2a5148a44dcd1b6e2da33", "2a7f440eedd59744075e1", "2afd87fc5fb07a230b1f6", "2b534e5c46c47c2568d17", "2c118bc2017e356d5fa15", "2c7ddc522a1d2c4ce93e6", "2cb8cadf9f883d655ff09", "2d06c6b42206a13708c37", "2d0751234e9eb9531b121", "2d2366ab153fa83a0b263", "2d8bac17399a8f6911b47", "2ef57b3ba7e8edfba2fd1", "2f45155225bce526f4ed4", "306800eaf9271a2d69306", "30c23b8721ade7f08fb22", "30f77104d35b53e977ee8", "321b8ea73fbe06e1162f8", "33981a0f7a2ab1e689f80", "3459a099943e330ae2144", "34a8e062b38736a5523c7", "34ebd0c1a659c9672b965", "35f7bc5538f8cd7299e38", "3728115ee8f962bae15e2", "373117408462603c28899", "3762a289d3d0f21e48c94", "3851565c3f409db0391b5", "3873beff750220bceeb92", "38a424805c4297bda8698", "390b4aa60a024af46db16", "3943cdd97c4265f0af506", "399d5492575a9ddb46ef1", "3d830f42d3f4c829057d9", "3d9d3fbd97a59ae011592", "3ebdf9bca9e8973c88bf8", "3f335952938d4a0ddbfb5", "40819e1148b1b2084ff41", "41e77b1d649b78c598988", "41f744ac5dcafc3d36815", "4249226e9d4dd65ae83d3", "436823493b1a2d5b42005", "4397bd9fc44f029a44de5", "43cee645a0cda2ff0f638", "4442c74437a5b93719756", "44d26ccdb9e78ea0f2522", "4580bf1a688ef6c4ba077", "46c754f866a20f3f801c9", "46e347422c1649f036e12", "46ff427592bd30ea587d6", "4769ec140964e9b351808", "47b589aef07297aab8c37", "49324590970322e513c31", "4932bc03dffd361422692", "49927316ef3d9bbdd5ec3", "49aa2a4e0c5d365ed0384", "4a1d2205fd8f1daaf1505", "4a307c5369b27bb4b4e80", "4b1cfe11804f39caad4d1", "4b2ebb035691d2b53d742", "4ba3fd5cd40a6f6c6b0f3", "4bab6f01a37f6fa1e81d3", "4c9f2032ef4818f4ea046", "4cc98c52c7a8aa45fc665", "4e0c49e5873ee802de608", "4e3056da6a546a2ada4b2", "4e4b9f7f7acc09e8f3047", "4e4dd2df5bf577a347f18", "4f04f4cc100b597a796c4", "4f5cf6283e46a2683cd95", "4ff165a3c6585699fe458", "501e4f9233d097a965141", "506bfb3e0a2827521bf85", "507158f981f31448f3c79", "5246edaf40cdbd1dcab67", "52957fb7733d2d7a82fa2", "5377c1501ae3dfbeb8b03", "53aa316d2a7cd5f249868", "53bc29e45b429bd5b7258", "54e7bc5159e5f6afa1478", "54f4bea77bbf22bb615d7", "5530f8a8f0da04c38ac37", "5671afc4b29c7b8be3cf2", "5675f6ee8784264845761", "56939b2492d46ff31ffd2", "5696439d78336e1a09cb7", "5716ab25478b5f1a43918", "59151236727cd628bf1b2", "596f9270e2cbb86e81cb9", "598a933f4ed0094cf0c26", "5a498bd25583c2a7bb8b8", "5adfb54753d769c837756", "5bbb45852001e2a27ec87", "5c5d0b6740b2818d17999", "5c60d885550450c3a4678", "5c68a7db1a5c266249ec8", "5d0871c718357a852b9c6", "5d3dbf273e7515d743718", "5d77f84d5ccc9a8b248d4", "5e1293862a9af2a7f7258", "5f06cc6758e9f63ecc5d5", "5f3d5afe81f99f0997af8", "5fbba215589c11328c399", "5fff5dfad48ec90b97506", "603f8d4c50d116bb58a65", "604b841c81033e2975764", "60e77f68fa6103aad88d4", "61a99520ae46535afdfc3", "61b75bbe70149739c36a7", "624c3f471d9d08c5bd4d8", "62665dcb950231f37dcb5", "62848b91f3b7155aa2135", "62892c3152a59090c9a66", "62c7ec95908fbef6954d1", "632b0d4c29c3743436237", "636524723150321b41679", "645752aa6791493d5f479", "645bc83d5ba1c74f0c820", "645fc1e49c50284a1f2f9", "6467b60512745ef5ce730", "64734b02663682d2c5449", "6484f4eb32332aa5398f5", "648c7b845b0c1f96e3a24", "64f53a797c668a7c6b945", "652f4e9cdd4a174da09c0", "65ead6bf7d28d9ba7af77", "6669d4f30d0fbe9178070", "6680122894720fe3e2129", "668da4e1261654f3f81f8", "6693043c8033f160bfe17", "66c0ae50d60181e1b5ba0", "66c65d182b6d6c5b49dc7", "66da9788d203759d24be8", "66e5c04ecde521237bf19", "6761b314023809ed4b978", "6781957e361ed953f1817", "678ac185633b094ccd1f1", "68496895f473f6c4e22f2", "68729393c3d64bd8f8201", "69b6a279894a45deedcc2", "69b9c146a739800b63819", "69d0b4973fd7e7eae9161", "6a47094c544041a065c11", "6a4747c201d6a2050a8e3", "6b3d21489c23711542de4", "6c66b6bc3d88742de6f31", "6d0c351a441afe22a4a78", "6d46efdc373f5a2fbbf46", "6d6c8f41437cda0d0a5a8", "6dd0d66e088be7b548990", "6e6d2a45079c840eca466", "6f280bba27660bd633a90", "704d78cf54c94d9c9c075", "705e0ed321ff874b535f6", "7094cc10a1f528d1fd803", "70f4a1088e0615abb7f79", "7173eafb29bf1f488dbf7", "71e5704dc07f25840f7f4", "71f6e3cd6b535e611a6c8", "71fcaa815e381d997ce49", "7216019761a95f42558f9", "72249f80ebaab166e8a27", "724f23036bf22131f5816", "72ad83ea3cadbb026a112", "72fd7cb5a8cd1213d4487", "732cfa300592e0f668fd4", "733fa37322f2f8b385dd7", "749ef08d820db01ef8fa8", "74c6152c0a5bff3e2b0a5", "74d807f60ba8f84801304", "74f831eb282f0b34450e4", "74ff70e300bac08a78d77", "75ac256f4de34e79c73f5", "75ebf6a3506b3aaa67fb0", "766cbf44cb8ff3bfa9ac2", "77562eb07324627e8b8f1", "7849c18653ccf593ce7a9", "78de599aa4be253932916", "78e958a23385c63fc18c5", "79d4793321548318a78c1", "79ea714948a966d423c56", "7a5783a4dd4a9491551a4", "7a68748f5ebce05a9ceb2", "7aae6d4ee545083615df8", "7acbbbdd2b1ccd3cd7457", "7b012f2b6f8aae6349630", "7b0ee472f70706f20de64", "7bae849754bde72d89b54", "7bca8c378d2b88810ee20", "7c367a6c71a5a0758fdf6", "7c65f3402ef447a2ebf85", "7daeb04d5fb5d6b7cf547", "7dbcfdcd5d9a06696ed68", "7dc8ca66054026f1a4676", "7ddc6e85a82ed80e6df21", "7dedb8b33eeccdb5849c4", "7e4d6f4f2b10d71fc6876", "8056076d4a006abd3f240", "8078d1282ac9e22e2ff86", "8090d00c7b37de5440eb2", "80aeb040a59d141276338", "80bb6e11da5810a5614f5", "822503ab8ea46dda15949", "82449920d099186257824", "83146b3c9d77a27cdbed4", "8370531008cd5eed84fa2", "83b3927443896e8b8e589", "83bebcfb222aa386da6d9", "84bc203f741571c594e73", "850d211c8447372b69ec3", "852d7bd20d8d6f5ec1866", "85862d69322082a6eee04", "85b5cef09dcf0ff3e0029", "867cc62f39fdc33ea1308", "86b4154ed0f9ead917212", "87551eacb86e99aa8e7b4", "87f147321a376b25c6bc4", "88e112ba23c345e187646", "8aa24f5a8ff8818b61785", "8afccccb716fafa197aa3", "8afef46fdc4232e730cd7", "8b5b37ce00146df0764c1", "8c93c313315158a0fa7f4", "8ca8add852f661454cb95", "8dbcfc378745705b785d8", "8dca36cf4b6277e850ee1", "8dcbd35b783631fda7ac4", "8dd1d947106f3a8ad2819", "8e1222af0fbf587297ce7", "8e1a1b38c2146746ba396", "8e898ceb929d3b3811a66", "8f4fe828ec3ce98317d42", "8f520031df8fe921b3c51", "8f89428ad6fcf7c443b97", "8fc2620a8a306de0e5832", "9037482513d264f78c437", "909f57fd6d0d79add6553", "90cbe43b9e5a70b4375f1", "90f5b87d5065ab18994b2", "92b1a275b4284af2bf6d4", "92c15b55c73ffdcdc2522", "92c268fc57463bab345f8", "92c7b9608bcdbdbb87241", "938130d20a8f9205115e8", "93dd3934e206a7c2f11b3", "9431bc1cb79cc09059ed9", "95571576dd4960231fba0", "9574ec57b407092828ec5", "973512aca0676c0e3aea2", "973a0eb0b1855f4ff0884", "9749d2cc6dac7e2b9ab74", "997d3b8d2dc218cc43fc0", "9a2497e3042d238726a39", "9b1402339b2778bb21ac4", "9b2f1207d885853ee5e18", "9b6dd81b072b499ba67f2", "9bc7dc7d78968a644f5e3", "9be390031bd284fe72444", "9c26d531d219ee3b36978", "9cd2f7a6949bd5589fe88", "9e4b3b90e009000ee2ae9", "9e696454d6dd7d41a3fd0", "9e8d7c4cc614fd82e7b02", "9f2337b947370d02efbe1", "9f436575a76304b1258f2", "9f60d209426761b364c15", "9f7f31eb1b6bda3b74384", "9f92878f8ed2e7d497891", "a06591094ffc30934aa50", "a072d45b34eb18f7e5e37", "a08495356032785a1c912", "a0af10b6023c57b3af446", "a0f892c1afd274d22a917", "a1a24d20cc3d91b3acfa5", "a1bac7a7ef4f463a0f432", "a206b3c8a570f19db51e0", "a25a7dfca970e49045c69", "a28e574a997583a4e1528", "a2f8e92218ec5fac81972", "a3819f375d4576359c8f8", "a3fa1381fa585ae33c9f2", "a465bf7af337ce4d1baf1", "a58e7505265264a5a1f80", "a6277d6beea272900c082", "a66abe81ab08885e0f632", "a66f6c24b8d25465be561", "a67369a46830d847b3264", "a6d074140c9be704e85e7", "a6e59b05a97aacd58b598", "a72e01237bb8d4d77cb59", "a7f35b7f9695584e1b1d5", "a826b90648c4b1d0b5635", "aa43796604e9a61af9143", "aa596dbd43792c30774b8", "aa7140bc6719c5f78fad6", "aa978186af2a7fdf4fb07", "aaadbeca6526463a64b95", "aad32e1f43d2a81347048", "ab5aed4a406e81ffb2365", "ac7dcedbd6e2e155922e9", "acbc3eb233fb68b37f173", "acbcdb459978880bfc996", "ad03e1af595771851a981", "ae1eb073e70afbdc30b44", "af255d0830b14f2a05279", "af4baedacd5331809afa8", "af7e938fd8787f3078327", "afe84b66131288e97d1e4", "b09bcffb9b35974a0c9e4", "b284665804ed9d25b1953", "b28c6c35358f154b064a4", "b31966daa416ffbb94aa5", "b41b71a92edcc899c61d3", "b42af4ec91625f06166c0", "b44d289bc2afc44fd0903", "b483c5d6e69b2904390d8", "b4a8208909ec0bd1dcdc8", "b561d74e460ba467f1cb5", "b59ff25df06d8db3ee0d5", "b657c542b99b24eeaaa48", "b7095be49f1ddac13d137", "b7f0bb5597fe48a499dc7", "b81c997d0905a2862bc91", "b824ca8cf0cf84e2861e1", "b838a51f256ce2ea81212", "b8e53a1084d06b97fc540", "b9242ced3b4af90b6a760", "b96a648d73f8bc7288223", "b9aabdc7650949b6d1e57", "b9f1e36cf8dfb545ea4f7", "ba91502bec74b3c0aa586", "baaefa692957e8da00713", "bbc6509accb96110b37e9", "bca34b1c83325ce1a8223", "bd0aa8c873405e0f82681", "bd0ad8dd00f9e2bfe43f7", "bd138f506bd2c7bbe0137", "bd4f424f4249add8db5c6", "bd638a4f6080e9c38d723", "bdd40695d46e1da64c1d9", "bdf3b6e175493f6051627", "be548f2feaa1fbfa80d57", "be939705c25383d135a48", "bee29975ab704776688b7", "bee9ac429fb07eb9ed531", "bef730a61f3b936f9acd1", "bf620e88004d5059d98c2", "bfbae254697bb456a7004", "bfc47c7c6c8edd208ddf1", "c01ee2103b443e1522454", "c0a5a0af1066cc9834f36", "c0e62efb78438adc28456", "c29f9e84c4830a9cc0c00", "c2adf199496f36dfbb799", "c475c6ce5b858639f6b71", "c5dc94a3bf74d32139117", "c696e3af05830ab3f4225", "c6f39bfcdb2231aae8803", "c7380e594895f2d871e57", "c7481d48a64083e3d56f4", "c895d7d26c19be92d1973", "c89c648c4abcfb01286d5", "c904f99e2ea5721df0118", "c9b886561f3ff1b8cb976", "c9efa8840fbcbcdc85c38", "ca51895452d3b3f651316", "ca78d3562f197ccf17cc0", "cc2cc535791a189115831", "cc374be975e19e457dd41", "cdcf94550d2db728ca278", "ceb9a2b5248f50d524b33", "d018d15d6bd3e58a6dee7", "d01bc5a81d1a4214c41d3", "d0c6288989e3f3cec5e49", "d10749c760340f6cb7b84", "d20d0348d753572cad762", "d29a6791d035ed08b90f6", "d2b4d567149359d3847f3", "d2dd9447eabb2c7ebc6f3", "d314ecabc718bcc74ce86", "d49adb1aa1a667f073f75", "d530522df6d16ae835d48", "d57d6c374be714caf1f77", "d591ee72946ef6298d970", "d621df70b784751f46e04", "d62752ba25462269e6791", "d63370f3247c311001cb2", "d665052742ed9ecb2d915", "d780d00ec6e41860a98f9", "d7f42b2937a2da83b77c8", "d82eea6c955a628cfe648", "d91027d041f6487119185", "daae2bc9665a2fc5ddcc7", "dabe56380921b760a56b0", "db72567201deddb48aae7", "dbde9470702383d5b8274", "dbfdcefc31e98498ed9e8", "dc0276d3a5ace7c313cd0", "defd4cef88f9551c03ce9", "e0127e51837e063c1ab98", "e0212865d0f79a6b9d818", "e022e891270368abc95c4", "e0345bb5fb02b5d365131", "e0415cf33be1ef4b50f60", "e07169a03b729ff4b53b2", "e0ccc3ede7eb62969cd14", "e13dd4f70463730f5fbe6", "e1e7fa796db9f674e83d5", "e1fcd62e8c06001fd5fe3", "e2d3dffa23ec202681fc5", "e2f5225575e3842a25067", "e35cf6354fe2366d32e22", "e453c8c9243922bde30f9", "e4e79a30321d40230a638", "e5c69c798c0042b0bb0f5", "e69c719df52fa8b16a614", "e6a745fffc3d6dc721a58", "e7ad6e74b67ac61cccb72", "e828c558d49dd2d6af088", "e82fd17c1cd83b505b393", "e952b3bc8f75bc46a0387", "e9c2fbe5848fbfaf20085", "e9f3ee36091dc3a13c1d3", "ea04c015f14252fb66084", "ea135dedbe72e957fab33", "ebaa58b9f1faf93324e95", "ec5e1b8fc4a96f77817f6", "ecdc5723aa0ff5572bd21", "ece259544c651ad8d6f82", "ed195d6500f3d7cba4a54", "ed2e6d0aa7ad96f9f98c6", "ee72d644dc06a2dd73a23", "ee7ab86e8538a8ac61752", "ef106cdbb63176fdb2886", "efa633e392fde93728a34", "efcc04d9ba7f4d2409786", "f004108c423da12ac7d40", "f02a60c2e86c18add5a71", "f0aef9660676455cc9287", "f16e015ab2c1599ecd253", "f1a769fe8b0cf466bad80", "f2510d6ae7f2aa3e74656", "f26a6bf938959303a02b1", "f2c44aef67af2d4853a24", "f3aa65f53f6df8dda6d34", "f5533dee750adfd851744", "f57048305c066f7157358", "f5c67648c06f4ee4c0878", "f61a954dd5c24a4467276", "f627374c340a98e2a0093", "f691ca9333456bd46ec48", "f6cb0f6aff8e22d3c1666", "f6d9715c6e3b4253e0177", "f72da9b7640defb2a9b83", "f78bbc4520a7bbc05f865", "f822dbc68565898e4c510", "f95137e20559f7c302b56", "f95e2070e83e5c7f6e127", "f966165470c6c0e4565a5", "f9ea5a565b17bd6c0f4b5", "fb68a557b4424e1c8cf25", "fc82fd0b1c14091288cd9", "fc8724cd8a88a9c039ae5", "fcbbc627b8d5728bfc2b7", "fd07fcf1c6d1a37c44c79", "fd44a08de8345359511d6", "fd8c47c696238a48841d8", "fe004d3639d505646ad91", "fe065c37bdb3503c4f1d6", "fe90b6f7daa51ce4be252", "ff2f234f9bedff6cf9bf5"], "id": "lock5_key_ring"}]}</script>
+<script>
+function sha256(ascii){
+  function rightRotate(v,a){return (v>>>a)|(v<<(32-a))}
+  var mathPow=Math.pow,maxWord=mathPow(2,32),i,j,result='',words=[],bitLen=ascii.length*8;
+  var hash=sha256.h=sha256.h||[],k=sha256.k=sha256.k||[],pc=k.length,comp={};
+  for(var c=2;pc<64;c++){if(!comp[c]){for(i=0;i<313;i+=c)comp[i]=c;hash[pc]=(mathPow(c,.5)*maxWord)|0;k[pc++]=(mathPow(c,1/3)*maxWord)|0}}
+  ascii+='\x80';while(ascii.length%64-56)ascii+='\x00';
+  for(i=0;i<ascii.length;i++){j=ascii.charCodeAt(i);words[i>>2]|=j<<((3-i)%4)*8}
+  words[words.length]=((bitLen/maxWord)|0);words[words.length]=(bitLen);
+  for(j=0;j<words.length;){
+    var w=words.slice(j,j+=16),old=hash;hash=hash.slice(0,8);
+    for(i=0;i<64;i++){
+      var w15=w[i-15],w2=w[i-2],a=hash[0],e=hash[4];
+      var t1=hash[7]+(rightRotate(e,6)^rightRotate(e,11)^rightRotate(e,25))+((e&hash[5])^((~e)&hash[6]))+k[i]+(w[i]=(i<16)?w[i]:(w[i-16]+(rightRotate(w15,7)^rightRotate(w15,18)^(w15>>>3))+w[i-7]+(rightRotate(w2,17)^rightRotate(w2,19)^(w2>>>10)))|0);
+      var t2=(rightRotate(a,2)^rightRotate(a,13)^rightRotate(a,22))+((a&hash[1])^(a&hash[2])^(hash[1]&hash[2]));
+      hash=[(t1+t2)|0].concat(hash);hash[4]=(hash[4]+t1)|0;
+    }
+    for(i=0;i<8;i++)hash[i]=(hash[i]+old[i])|0;
+  }
+  for(i=0;i<8;i++)for(j=3;j+1;j--){var b=(hash[i]>>(j*8))&255;result+=((b<16)?0:'')+b.toString(16)}
+  return result;
+}
+function sha256u(s){return sha256(unescape(encodeURIComponent(s)))}
+
+(function(){
+  var PACKET='CPUSH_L4_ESCAPE';
+  var STORE='cpush_l4_escape-room_';
+  var D=JSON.parse(document.getElementById('er-data').textContent);
+  var $=function(i){return document.getElementById(i)};
+  var S;
+  var digits={};            // runtime only: lock n -> digit
+  var entries={};           // lock id -> {h20: maskedDigit}
+  var expanded={};
+  var lastTick=0,timer=null;
+
+  function squash(t){return String(t).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'')}
+  function h20(s){return sha256u(s).slice(0,20)}
+  D.locks.forEach(function(L){var m={};L.entries.forEach(function(e){m[e.slice(0,20)]=+e.slice(20)});entries[L.id]=m});
+
+  function checkLock(L,canon){
+    var salt=D.salt+L.n+':';
+    var h=h20(salt+canon),mk=entries[L.id][h];
+    if(mk===undefined)return null;
+    var m=parseInt(sha256u('m:'+salt+canon).slice(0,2),16)%10;
+    return (mk-m+10)%10;
+  }
+  function fresh(){
+    var o={first:'',last:'',period:'',started:false,elapsed:0,escaped:false,escapeMs:0,debrief:'',codeTries:0,locks:{}};
+    D.locks.forEach(function(L){o.locks[L.id]={solved:false,attempts:0,hints:0,guess:'',readable:''}});
+    return o;
+  }
+  function loadLocal(){var o=fresh();try{var r=JSON.parse(localStorage.getItem(STORE+'state')||'null');if(r)restore(o,r)}catch(e){}return o}
+  function persist(){try{localStorage.setItem(STORE+'state',JSON.stringify(snapshot()))}catch(e){}}
+
+  function totals(){
+    var t={locksSolved:0,attempts:0,hintsUsed:0,exitCodeAttempts:S.codeTries};
+    D.locks.forEach(function(L){var l=S.locks[L.id];if(l.solved)t.locksSolved++;t.attempts+=l.attempts;t.hintsUsed+=l.hints});
+    return t;
+  }
+  function fmt(ms){var s=Math.round(ms/1000),m=Math.floor(s/60);s=s%60;return (m<10?'0':'')+m+':'+(s<10?'0':'')+s}
+  function snapshot(){
+    var o={packet:PACKET,course:'CPUSH',lesson:4,assignment:'Escape Room (Lite)',version:1,saved:new Date().toISOString(),
+      student:{first:$('f_first').value.trim(),last:$('f_last').value.trim(),period:$('f_period').value.trim()},
+      status:S.escaped?'ESCAPED':'INCOMPLETE',escaped:S.escaped,
+      escapeTime:S.escaped?{ms:S.escapeMs,text:fmt(S.escapeMs)}:null,
+      totals:totals(),elapsedMs:Math.round(S.elapsed),started:S.started,locks:{},debrief:$('debriefText')?$('debriefText').value:S.debrief};
+    D.locks.forEach(function(L){var l=S.locks[L.id];
+      o.locks[L.key]={objective:L.obj,puzzleType:L.type,solved:l.solved,attempts:l.attempts,hintsUsed:l.hints,solvedWith:l.readable,solvedGuess:l.guess}});
+    return o;
+  }
+  function restore(o,r){
+    if(!r||typeof r!=='object')return false;
+    var st=r.student||{};
+    o.first=st.first||'';o.last=st.last||'';o.period=st.period||'';
+    o.started=!!r.started;o.elapsed=+r.elapsedMs||0;o.debrief=typeof r.debrief==='string'?r.debrief:'';
+    o.codeTries=(r.totals&&+r.totals.exitCodeAttempts)||0;
+    var allOk=true;
+    D.locks.forEach(function(L){
+      var src=(r.locks&&r.locks[L.key])||{},l=o.locks[L.id];
+      l.attempts=+src.attempts||0;l.hints=Math.min(+src.hintsUsed||0,L.hints.length+0);
+      if(src.hintsUsed>L.hints.length)l.hints=L.hints.length;
+      if(src.solved&&typeof src.solvedGuess==='string'){
+        var d=checkLock(L,src.solvedGuess);
+        if(d!==null){l.solved=true;l.guess=src.solvedGuess;l.readable=String(src.solvedWith||'');digits[L.n]=d}else allOk=false;
+      }else allOk=false;
+    });
+    if(r.escaped&&allOk&&r.escapeTime){o.escaped=true;o.escapeMs=+r.escapeTime.ms||0}
+    return true;
+  }
+
+  /* ---------- scene ---------- */
+  var NS='http://www.w3.org/2000/svg';
+  var XS=[210,255,300,345,390];
+  (function(){
+    var g=$('plocks'),h='';
+    XS.forEach(function(x,i){
+      h+='<g class="plock" id="pl'+(i+1)+'"><path class="sh" d="M'+(x-8)+' 124V114a8 8 0 0 1 16 0V124" fill="none" stroke="#EBF3F4" stroke-width="4"/><rect class="bd" x="'+(x-15)+'" y="124" width="30" height="24" rx="4" fill="#D2C24B"/><circle cx="'+x+'" cy="135" r="3" fill="#1C4B54"/></g>'+
+      '<rect x="'+(x-16)+'" y="158" width="32" height="36" rx="5" fill="#113137" stroke="#E1D78E"/><text id="dw'+(i+1)+'" x="'+x+'" y="184" text-anchor="middle" font-size="24" font-weight="800" fill="#EBF3F4">?</text><text x="'+x+'" y="208" text-anchor="middle" font-size="11" font-weight="700" fill="#CFE0E2">LOCK '+(i+1)+'</text>';
+    });
+    g.innerHTML=h;
+  })();
+  function sceneUpdate(){
+    D.locks.forEach(function(L){
+      var open=S.locks[L.id].solved;
+      $('pl'+L.n).setAttribute('class','plock'+(open?' open':''));
+      $('dw'+L.n).textContent=open?digits[L.n]:'?';
+    });
+    $('scene').classList.toggle('escaped',S.escaped);
+  }
+
+  /* ---------- build lock cards ---------- */
+  var W={};   // widget state per lock
+  var LOCKSVG='<svg class="lk" viewBox="0 0 44 44" aria-hidden="true"><path class="sh" d="M13 20V14a9 9 0 0 1 18 0V20" fill="none" stroke="#EBF3F4" stroke-width="4"/><rect class="bd" x="8" y="20" width="28" height="20" rx="4" fill="#D2C24B"/><circle cx="22" cy="30" r="3" fill="#1C4B54"/></svg>';
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+  function buildLock(L){
+    var sec=document.createElement('section');sec.className='lock glass locked';sec.id='lock'+L.n;
+    var head='<button class="lh" type="button" id="lh'+L.n+'" aria-expanded="false">'+LOCKSVG+'<span class="lt"><small>LOCK '+L.n+' · '+L.objLabel+'</small><strong>'+esc(L.title)+'</strong></span><span class="dg" id="dg'+L.n+'" aria-label="digit">?</span></button>';
+    var body='<div class="lb" id="lb'+L.n+'"><p class="objline">'+esc(L.objText)+'</p>'+
+      '<div class="card"><h4>CLUE CARD</h4>'+L.card+'<p class="src">'+L.src+'</p></div>'+
+      '<div class="prompt">'+L.prompt+'</div><div id="pz'+L.n+'"></div>'+
+      '<div class="row"><button class="btn primary" type="button" id="ck'+L.n+'">Check</button><button class="btn small" type="button" id="hb'+L.n+'">Hint</button><button class="btn small" type="button" id="rs'+L.n+'">Clear</button></div>'+
+      '<div class="hints" id="hs'+L.n+'"></div><div class="fb" id="fb'+L.n+'" role="status"></div></div>';
+    sec.innerHTML=head+body;
+    $('locks').appendChild(sec);
+    buildPuzzle(L);
+    $('lh'+L.n).addEventListener('click',function(){
+      var st=lockState(L);if(st==='locked')return;
+      expanded[L.n]=!expanded[L.n];updateLocks();
+    });
+    $('ck'+L.n).addEventListener('click',function(){submit(L)});
+    $('hb'+L.n).addEventListener('click',function(){hint(L)});
+    $('rs'+L.n).addEventListener('click',function(){clearPuzzle(L)});
+  }
+  function labelOf(list,id){for(var i=0;i<list.length;i++)if(list[i].id===id)return list[i].label;return id}
+
+  function buildPuzzle(L){
+    var el=$('pz'+L.n),w=W[L.n]={};
+    if(L.type==='order'){
+      w.sel=[];el.innerHTML='<div class="chips" id="ch'+L.n+'"></div>';
+      renderOrder(L);
+    }else if(L.type==='match'){
+      var h='';
+      L.terms.forEach(function(t){
+        h+='<div class="mrow"><label for="m'+L.n+t.id+'">'+esc(t.label)+'</label><select id="m'+L.n+t.id+'"><option value="">Choose a description...</option>';
+        L.descs.forEach(function(d){h+='<option value="'+d.id+'">'+esc(d.label)+'</option>'});
+        h+='</select></div>';
+      });
+      el.innerHTML=h;
+    }else if(L.type==='pick'){
+      var h2='';
+      L.qs.forEach(function(q){
+        h2+='<fieldset><legend>'+esc(q.q)+'</legend>';
+        q.opts.forEach(function(o){h2+='<label class="opt"><input type="radio" name="q'+L.n+q.id+'" value="'+o.id+'"> <span>'+esc(o.label)+'</span></label>'});
+        h2+='</fieldset>';
+      });
+      el.innerHTML=h2;
+    }else if(L.type==='decode'){
+      var k1='',k2='';
+      for(var i=0;i<26;i++){var p=String.fromCharCode(65+i),c=String.fromCharCode(65+(i+L.shift)%26);k1+='<div class="c">'+c+'</div>';k2+='<div>'+p+'</div>'}
+      // build key in two rows of 13
+      var key='';
+      for(var r=0;r<2;r++){for(var j=0;j<13;j++){var idx=r*13+j;key+='<div class="c">'+String.fromCharCode(65+(idx+L.shift)%26)+'</div>'}for(var j2=0;j2<13;j2++){key+='<div>'+String.fromCharCode(65+r*13+j2)+'</div>'}}
+      el.innerHTML='<div class="cipher" translate="no" aria-label="Coded message">'+esc(L.cipher)+'</div><p style="margin:.6em 0 0;font-size:15px;color:var(--dim)">Decoder key: the <span style="color:var(--hl);font-weight:700">gold</span> letter is in the message. The white letter under it is the real letter.</p><div class="key" aria-hidden="true">'+key+'</div><label>Decoded answer<input type="text" id="tx'+L.n+'" autocomplete="off" autocapitalize="none" spellcheck="false"></label><p class="ennote">Type the answer in English.</p>';
+    }else if(L.type==='fill'){
+      el.innerHTML='<p style="font-size:18px;margin:.2em 0">'+esc(L.sentence)+'</p><div class="scr" translate="no" aria-label="Scrambled letters">'+esc(L.scramble)+'</div><p style="margin:.4em 0;font-size:14px;color:var(--dim)">Unscramble the letters to fill the blank.</p><label>Your answer<input type="text" id="tx'+L.n+'" autocomplete="off" autocapitalize="none" spellcheck="false"></label><p class="ennote">Type the answer in English.</p>';
+    }
+    var t=$('tx'+L.n);
+    if(t)t.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();submit(L)}});
+  }
+  function renderOrder(L){
+    var w=W[L.n],ch=$('ch'+L.n),h='';
+    L.items.forEach(function(it){
+      var pos=w.sel.indexOf(it.id);
+      h+='<button type="button" class="chip'+(pos>=0?' sel':'')+'" data-id="'+it.id+'" aria-pressed="'+(pos>=0)+'">'+(pos>=0?'<span class="n">'+(pos+1)+'</span>':'')+'<span>'+esc(it.label)+'</span></button>';
+    });
+    ch.innerHTML=h;
+    [].forEach.call(ch.querySelectorAll('.chip'),function(b){
+      b.addEventListener('click',function(){
+        if(S.locks[L.id].solved)return;
+        var id=b.getAttribute('data-id'),p=w.sel.indexOf(id);
+        if(p>=0)w.sel.splice(p,1);else w.sel.push(id);
+        renderOrder(L);
+      });
+    });
+  }
+  function clearPuzzle(L){
+    if(S.locks[L.id].solved)return;
+    var w=W[L.n];
+    if(L.type==='order'){w.sel=[];renderOrder(L)}
+    else if(L.type==='match'){L.terms.forEach(function(t){$('m'+L.n+t.id).value=''})}
+    else if(L.type==='pick'){L.qs.forEach(function(q){[].forEach.call(document.getElementsByName('q'+L.n+q.id),function(r){r.checked=false})})}
+    else{$('tx'+L.n).value=''}
+    fb(L,'','');
+  }
+  function guessOf(L){
+    // returns {canon, readable} or {err}
+    if(L.type==='order'){
+      var w=W[L.n];
+      if(w.sel.length<L.items.length)return {err:'Tap all '+L.items.length+' events first, in order.'};
+      return {canon:w.sel.join('|'),readable:w.sel.map(function(i){return labelOf(L.items,i)}).join(' > ')};
+    }
+    if(L.type==='match'){
+      var c=[],r=[];
+      for(var i=0;i<L.terms.length;i++){var t=L.terms[i],v=$('m'+L.n+t.id).value;if(!v)return {err:'Match every term first.'};c.push(v);r.push(t.label+' = '+labelOf(L.descs,v))}
+      return {canon:c.join('|'),readable:r.join('; ')};
+    }
+    if(L.type==='pick'){
+      var c2=[],r2=[];
+      for(var j=0;j<L.qs.length;j++){var q=L.qs[j],v2='';[].forEach.call(document.getElementsByName('q'+L.n+q.id),function(x){if(x.checked)v2=x.value});if(!v2)return {err:'Answer every question first.'};c2.push(v2);r2.push(labelOf(q.opts,v2))}
+      return {canon:c2.join('|'),readable:r2.join('; ')};
+    }
+    var raw=$('tx'+L.n).value.trim();
+    if(!raw)return {err:'Type your answer first.'};
+    return {canon:squash(raw),readable:raw.slice(0,80)};
+  }
+  function fb(L,cls,text){var e=$('fb'+L.n);e.className='fb'+(cls?' show '+cls:'');e.textContent=text}
+  function submit(L){
+    var l=S.locks[L.id];if(l.solved)return;
+    var g=guessOf(L);
+    if(g.err){fb(L,'nudge',g.err);return}
+    l.attempts++;
+    var d=checkLock(L,g.canon);
+    if(d===null){
+      fb(L,'nudge',L.nudge);
+      var s=$('lock'+L.n);s.classList.remove('shake');void s.offsetWidth;s.classList.add('shake');
+      persist();updateBar();return;
+    }
+    l.solved=true;l.guess=g.canon;l.readable=g.readable;digits[L.n]=d;
+    fb(L,'good','Click! Lock '+L.n+' is open. Your digit is '+d+'.');
+    var wh=$('wheel');wh.classList.remove('spin');void wh.getBoundingClientRect();wh.classList.add('spin');
+    $('dw'+L.n).classList.add('pop');
+    persist();updateAll();
+    setTimeout(function(){
+      expanded[L.n]=false;
+      var nx=nextOpen();if(nx)expanded[nx]=true;
+      updateLocks();
+      var tgt=nx?$('lock'+nx):$('exit');
+      if(tgt&&tgt.scrollIntoView)tgt.scrollIntoView({behavior:'smooth',block:'start'});
+    },1600);
+  }
+  function hint(L){
+    var l=S.locks[L.id];
+    if(l.solved)return;
+    if(l.hints<L.hints.length){l.hints++;persist();updateHints(L);updateBar()}
+    else{fb(L,'nudge','That was the last hint. Read the Clue Card slowly and try again.')}
+  }
+  function updateHints(L){
+    var l=S.locks[L.id],h='';
+    for(var i=0;i<l.hints;i++)h+='<div class="hint"><b>Hint '+(i+1)+':</b> <span>'+esc(L.hints[i])+'</span></div>';
+    $('hs'+L.n).innerHTML=h;
+  }
+  function nextOpen(){for(var i=0;i<D.locks.length;i++)if(!S.locks[D.locks[i].id].solved)return D.locks[i].n;return 0}
+  function lockState(L){
+    if(S.locks[L.id].solved)return 'solved';
+    return L.n===nextOpen()?'current':'locked';
+  }
+  function updateLocks(){
+    var cur=nextOpen();
+    D.locks.forEach(function(L){
+      var st=lockState(L),sec=$('lock'+L.n);
+      if(st==='current'&&expanded[L.n]===undefined)expanded[L.n]=true;
+      var open=(st!=='locked')&&!!expanded[L.n];
+      sec.className='lock glass '+st+(open?' open':'');
+      $('lh'+L.n).setAttribute('aria-expanded',open?'true':'false');
+      $('dg'+L.n).textContent=S.locks[L.id].solved?digits[L.n]:'?';
+      if(S.locks[L.id].solved){
+        [].forEach.call(sec.querySelectorAll('input,select,button.chip,#ck'+L.n+',#hb'+L.n+',#rs'+L.n),function(x){x.disabled=true});
+        var f=$('fb'+L.n);if(!f.classList.contains('good'))fb(L,'good','Unlocked. Your digit is '+digits[L.n]+'.'+(S.locks[L.id].readable?' Your answer: '+S.locks[L.id].readable:''));
+      }
+      updateHints(L);
+    });
+  }
+  function codeStr(){var s='';for(var i=1;i<=5;i++)s+=(digits[i]===undefined?'':digits[i]);return s}
+  function allSolved(){return D.locks.every(function(L){return S.locks[L.id].solved})}
+  function updateExit(){
+    var ok=allSolved();
+    $('exit').classList.toggle('locked',!ok);
+    $('codeBtn').disabled=!ok||S.escaped;
+    [].forEach.call($('codebox').querySelectorAll('input'),function(i){i.disabled=!ok||S.escaped});
+    $('exitNote').textContent=S.escaped?'The door is open!':(ok?'All 5 locks are open. Type the 5 digits in order, Lock 1 first.':'Open all 5 locks first. The digits go in order: Lock 1 first.');
+  }
+  function updateBar(){
+    var t=totals();
+    $('lc').textContent=t.locksSolved;$('hc').textContent=t.hintsUsed;
+    $('tm').textContent=fmt(S.escaped?S.escapeMs:S.elapsed);
+  }
+  function updateStatus(){
+    var el=$('status'),db=($('debriefText').value.trim().length);
+    if(S.escaped)el.textContent=db>=40?'You escaped and wrote your Debrief. Ready to submit.':'You escaped! Write your Debrief, then download your file to submit.';
+    else el.textContent='Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.';
+  }
+  function updateEsc(){
+    $('esc').classList.toggle('show',S.escaped);
+    if(S.escaped){var t=totals();$('escTime').textContent=fmt(S.escapeMs);$('escSum').textContent='5 of 5 locks opened with '+t.attempts+' tries and '+t.hintsUsed+' hint'+(t.hintsUsed===1?'':'s')+'.'}
+  }
+  function updateAll(){sceneUpdate();updateLocks();updateExit();updateBar();updateEsc();updateStatus();
+    $('intro').classList.toggle('hidden',S.started);$('game').classList.toggle('hidden',!S.started);$('loadOnly').classList.toggle('hidden',S.started);
+  }
+
+  /* ---------- exit code ---------- */
+  (function(){
+    var cb=$('codebox');
+    for(var i=0;i<5;i++){
+      var inp=document.createElement('input');inp.type='text';inp.inputMode='numeric';inp.maxLength=1;inp.setAttribute('aria-label','Exit code digit '+(i+1));inp.disabled=true;
+      (function(i,inp){
+        inp.addEventListener('input',function(){inp.value=inp.value.replace(/[٠-٩]/g,function(c){return c.charCodeAt(0)-1632}).replace(/[۰-۹]/g,function(c){return c.charCodeAt(0)-1776}).replace(/[^0-9]/g,'');if(inp.value&&i<4)cb.children[i+1].focus()});
+        inp.addEventListener('keydown',function(e){
+          if(e.key==='Backspace'&&!inp.value&&i>0)cb.children[i-1].focus();
+          if(e.key==='Enter'){e.preventDefault();tryCode()}
+        });
+        inp.addEventListener('paste',function(e){
+          var t=(e.clipboardData||window.clipboardData).getData('text').replace(/[٠-٩]/g,function(c){return c.charCodeAt(0)-1632}).replace(/[۰-۹]/g,function(c){return c.charCodeAt(0)-1776}).replace(/[^0-9]/g,'');
+          if(t.length>1){e.preventDefault();for(var k=0;k<5;k++)cb.children[k].value=t[k]||''}
+        });
+      })(i,inp);
+      cb.appendChild(inp);
+    }
+  })();
+  function tryCode(){
+    if(!allSolved()||S.escaped)return;
+    var v='';[].forEach.call($('codebox').querySelectorAll('input'),function(i){v+=i.value});
+    var f=$('codefb');
+    if(v.length<5){f.className='fb show nudge';f.textContent='The code has 5 digits. Fill every box.';return}
+    S.codeTries++;
+    if(h20('exit:'+D.salt+v)!==D.exitHash){
+      f.className='fb show nudge';f.textContent='The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.';
+      var ex=$('exit');ex.classList.remove('shake');void ex.offsetWidth;ex.classList.add('shake');
+      persist();return;
+    }
+    S.escaped=true;S.escapeMs=S.elapsed;
+    f.className='fb show good';f.textContent='The door swings open!';
+    persist();updateAll();
+    setTimeout(function(){$('esc').scrollIntoView({behavior:'smooth',block:'start'})},900);
+  }
+  $('codeBtn').addEventListener('click',tryCode);
+
+  /* ---------- timer ---------- */
+  function tick(){
+    var n=Date.now();
+    if(S.started&&!S.escaped){S.elapsed+=Math.min(n-lastTick,5000);$('tm').textContent=fmt(S.elapsed)}
+    lastTick=n;
+  }
+  function startTimer(){lastTick=Date.now();if(!timer)timer=setInterval(function(){tick();if(Math.round(S.elapsed/1000)%10===0)persist()},1000)}
+
+  /* ---------- files ---------- */
+  function msg(t,err){var m=$('msg');m.textContent=t;m.className='msg'+(err?' err':'');m.style.display='block'}
+  function ascii(n){return String(n).normalize('NFD').replace(/[̀-ͯ]/g,'')}
+  function clean(n){n=window.spAscii?spAscii(n):n;return ascii(n).trim().replace(/\s+/g,'_').replace(/[^A-Za-z0-9_-]/g,'')}
+  function who(){return (clean($('f_last').value)||'Last')+'_'+(clean($('f_first').value)||'First')}
+  function download(name,obj){
+    var blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;
+    document.body.appendChild(a);a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);
+  }
+  function namesOk(){
+    var ids=['f_first','f_last','f_period'],ok=true;
+    ids.forEach(function(i){var f=$(i);if(!f.value.trim()){f.classList.add('bad');ok=false}});
+    if(!ok){msg('Enter your first name, last name, and period at the top first.',true);$('f_first').scrollIntoView({block:'center'})}
+    return ok;
+  }
+  ['f_first','f_last','f_period'].forEach(function(i){$(i).addEventListener('input',function(){$(i).classList.remove('bad');S[i.slice(2)]=$(i).value;persist()})});
+  $('debriefText').addEventListener('input',function(){S.debrief=$('debriefText').value;persist();updateStatus()});
+  $('saveBtn').addEventListener('click',function(){
+    if(!namesOk())return;tick();
+    download(who()+'-'+PACKET+'-PROGRESS.json',snapshot());
+    msg('Progress file downloaded. Use Load Progress to continue later.');
+  });
+  $('finishBtn').addEventListener('click',function(){
+    if(!namesOk())return;tick();
+    var now=new Date(),o=snapshot();o.completed=S.escaped;o.submitted=now.toISOString();
+    o.student.date=now.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+    download(who()+'-'+PACKET+'.json',o);
+    msg(S.escaped?('Done! File downloaded: '+who()+'-'+PACKET+'.json. Upload it to Canvas.'):('Your file downloaded and is marked INCOMPLETE (you have not escaped). Upload it to Canvas: '+who()+'-'+PACKET+'.json'));
+  });
+  function openLoad(){$('loadFile').click()}
+  $('loadBtn').addEventListener('click',openLoad);$('loadBtn0').addEventListener('click',openLoad);
+  $('loadFile').addEventListener('change',function(e){
+    var f=e.target.files[0];if(!f)return;
+    var r=new FileReader();
+    r.onload=function(){
+      try{
+        var o=JSON.parse(r.result);
+        if(!o||o.packet!==PACKET||typeof o.locks!=='object')throw new Error('wrong');
+        digits={};var n=fresh();restore(n,o);S=n;applyToDom();
+        msg('Progress loaded. Welcome back.');
+      }catch(err){msg('That file did not work. Choose a progress file saved from this Escape Room.',true)}
+      e.target.value='';
+    };
+    r.onerror=function(){msg('The file could not be read.',true)};
+    r.readAsText(f);
+  });
+  $('reset').addEventListener('click',function(){
+    if(!confirm('Clear all your work and start over? This cannot be undone.'))return;
+    digits={};expanded={};S=fresh();
+    try{localStorage.removeItem(STORE+'state')}catch(e){}
+    $('locks').innerHTML='';D.locks.forEach(buildLock);
+    $('f_first').value=$('f_last').value=$('f_period').value='';$('debriefText').value='';
+    [].forEach.call($('codebox').querySelectorAll('input'),function(i){i.value=''});$('codefb').className='fb';
+    applyToDom();
+  });
+  function applyToDom(){
+    $('f_first').value=S.first;$('f_last').value=S.last;$('f_period').value=S.period;$('debriefText').value=S.debrief;
+    // rebuild lock widgets, then pre-fill solved ones with readable note
+    $('locks').innerHTML='';D.locks.forEach(buildLock);
+    expanded={};
+    updateAll();
+    if(S.started)startTimer();
+  }
+  $('startBtn').addEventListener('click',function(){S.started=true;persist();startTimer();updateAll();$('game').scrollIntoView({behavior:'smooth'})});
+  window.addEventListener('beforeunload',function(){tick();persist()});
+
+  S=loadLocal();
+  D.locks.forEach(buildLock);
+  applyToDom();
+})();
+</script>
+<!--sp-i18n--><script type="application/json" id="sp-i18n">{"langs":["en","es","ar"],"default":"en","es":{"Save Progress":"Guardar progreso","Load Progress":"Cargar progreso","Finished — Download File to Submit":"Terminé — Descargar el archivo para entregar","Clear all my answers":"Borrar todas mis respuestas","FIRST NAME *":"NOMBRE *","LAST NAME *":"APELLIDO *","PERIOD *":"PERÍODO *","DATE (fills in when you finish)":"FECHA (se llena cuando terminas)","e.g. 3":"p. ej., 3","Automatic":"Automática","Please type your first name, last name, and period first.":"Primero escribe tu nombre, apellido y período.","Western Expansion and Southern Secession":"Expansión hacia el oeste y secesión del sur","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — La Ley de Esclavos Fugitivos","Bleeding Kansas":"Bleeding Kansas — Kansas sangriento","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"Se descargó tu archivo de progreso. Guárdalo bien. Usa «Cargar progreso» para continuar más tarde.","Progress loaded.":"Progreso cargado.","Could not read that file.":"No se pudo leer ese archivo.","Treaty of Guadalupe Hidalgo":"Tratado de Guadalupe Hidalgo","A tavern back room at night. On the left, a window with a crescent moon and stars above a wall clock and a table with an inkwell, a quill, and a rolled scroll. On the right, a bookshelf, a three-cornered hat and a ring of keys on a peg rail, and a wooden chair. The door has a BACK ROOM sign and five padlocks in a row. Under each padlock is a window for one digit of the exit code.":"Una sala trasera de una taberna por la noche. A la izquierda, una ventana con una luna creciente y estrellas sobre un reloj de pared y una mesa con un tintero, una pluma y un rollo de papel. A la derecha, un estante de libros, un sombrero de tres picos y un llavero en una barra de clavijas, y una silla de madera. En la puerta hay un letrero de SALA TRASERA y cinco candados en fila. Debajo de cada candado hay una ventanita para un dígito del código de salida.","Alexander Hamilton and John Adams":"Alexander Hamilton y John Adams","All 5 locks are open. Type the 5 digits in order, Lock 1 first.":"Los 5 candados están abiertos. Escribe los 5 dígitos en orden, primero el del Candado 1.","Answer every question first.":"Primero responde todas las preguntas.","BACK ROOM":"SALA TRASERA","Banks were against the law in every state":"Los bancos eran ilegales en todos los estados","Both parties equally":"Los dos partidos por igual","CLUE CARD":"TARJETA DE INDICIOS","Check":"Comprobar","Choose a description...":"Elige una descripción...","Clear":"Borrar","Clear all my work and start over":"Borrar todo mi trabajo y empezar de nuevo","Congress had no cash and could not collect taxes":"El Congreso no tenía dinero y no podía cobrar impuestos","Core Objective 1: Identify the strengths and weaknesses of the Articles of Confederation and explain how they prompted the creation of a new U.S. constitution in 1787.":"Objetivo principal 1: Identifica las fortalezas y debilidades de los Artículos de la Confederación y explica cómo llevaron a la creación de una nueva constitución de EE. UU. en 1787.","Core Objective 2: Describe the political innovations that the 1787 Constitutional Convention developed for the new nation.":"Objetivo principal 2: Describe las innovaciones políticas que desarrolló la Convención Constitucional de 1787 para la nueva nación.","Core Objective 3: Summarize the major debates surrounding the ratification of the Constitution. Explain why they arose and how they were resolved.":"Objetivo principal 3: Resume los principales debates sobre la ratificación de la Constitución. Explica por qué surgieron y cómo se resolvieron.","Core Objective 4: Compare the Federalists’ vision for the United States with that of their Republican opponents during the 1790s.":"Objetivo principal 4: Compara la visión de los federalistas para Estados Unidos con la de sus oponentes republicanos durante la década de 1790.","Core Objective 5: Assess how attitudes toward Great Britain and France shaped American politics in the late eighteenth century.":"Objetivo principal 5: Evalúa cómo las actitudes hacia Gran Bretaña y Francia influyeron en la política estadounidense a finales del siglo XVIII.","Creating the Constitution":"La creación de la Constitución","DEBRIEF":"INFORME FINAL","Daniel Shays and John Jay":"Daniel Shays y John Jay","Debrief":"Informe final","Decoded answer":"Respuesta decodificada","Decoder key: the <span style=\"color:var(--hl);font-weight:700\">gold<\/span> letter is in the message. The white letter under it is the real letter.":"Clave del decodificador: la letra <span style=\"color:var(--hl);font-weight:700\">dorada<\/span> está en el mensaje. La letra blanca que está debajo es la letra verdadera.","Dividing power between the national government and the states is called ________.":"Dividir el poder entre el gobierno nacional y los estados se llama ________.","ESCAPED":"¡ESCAPASTE!","Each answer is in the Clue Card. Look for who led the Federalists, who wanted small farms, what Madison and Jefferson said about the bank, and what the Republicans feared.":"Cada respuesta está en la tarjeta de indicios. Busca quiénes dirigieron a los federalistas, quiénes querían pequeñas granjas, qué dijeron Madison y Jefferson sobre el banco y qué temían los republicanos.","Each state had one vote, no matter how many people lived there":"Cada estado tenía un voto, sin importar cuántas personas vivían allí","Enter the Back Room":"Entrar a la sala trasera","Enter your first name, last name, and period at the top first.":"Primero escribe tu nombre, apellido y período arriba.","Escape the Tavern Back Room":"Escapa de la sala trasera de la taberna","Exit code digit 1":"Dígito 1 del código de salida","Exit door":"Puerta de salida","Fill in the blank using the Clue Card.":"Llena el espacio en blanco con la tarjeta de indicios.","George Mason and James Wilson":"George Mason y James Wilson","Hamilton and Adams led the Federalists. The Republicans wanted a nation of small farmers. The Constitution said nothing about a national bank. The Republicans feared threats to individual freedoms and states’ rights.":"Hamilton y Adams dirigieron a los federalistas. Los republicanos querían una nación de pequeños granjeros. La Constitución no decía nada sobre un banco nacional. Los republicanos temían amenazas a las libertades individuales y a los derechos de los estados.","Have a saved file? Load it to continue.":"¿Tienes un archivo guardado? Cárgalo para continuar.","Hint":"Pista","Hints used":"Pistas usadas","How to escape:":"Cómo escapar:","If you get stuck, press <b>Hint<\/b>. Hints are free, but your teacher can see how many you used.":"Si te atoras, oprime <b>Pista<\/b>. Las pistas son gratis, pero tu maestro puede ver cuántas usaste.","In 1787, delegates met in Philadelphia’s State House to revise the Articles, and they wrote a new Constitution instead. It begins, “We the people of the United States.” Norton calls the idea that the voters are the source of all authority the most important political innovation since the Declaration of Independence. The Great Compromise gave larger states seats in the House by population and gave every state two senators. The Constitution also split power among three branches and set up the Electoral College to choose the president. Dividing power between the national government and the states is called <b>federalism<\/b>. The delegates also agreed that three-fifths of the enslaved would count toward a state’s seats in Congress, and they refused even to discuss political rights for women.":"En 1787, los delegados se reunieron en la Casa de Estado (State House) de Filadelfia para revisar los Artículos, y en vez de eso escribieron una nueva Constitución. Empieza así: «Nosotros, el pueblo de los Estados Unidos». Norton dice que la idea de que los votantes son la fuente de toda autoridad fue la innovación política más importante desde la Declaración de Independencia. El Gran Compromiso dio a los estados grandes escaños en la Cámara según su población y dio a cada estado dos senadores. La Constitución también dividió el poder entre tres ramas y creó el Colegio Electoral para elegir al presidente. Dividir el poder entre el gobierno nacional y los estados se llama <b>federalismo (federalism)<\/b>. Los delegados también acordaron que tres quintas partes de las personas esclavizadas contarían para los escaños de un estado en el Congreso, y se negaron incluso a discutir los derechos políticos de las mujeres.","In 1787, the Constitution was written in Philadelphia, and each state then had to decide whether to ratify it. The Federalists, led by James Madison and Alexander Hamilton, supported it. The Anti-Federalists feared the new national government would grow corrupt and tyrannical, and they criticized the lack of a bill of rights. Starting in 1787, Madison, Hamilton, and John Jay published essays in New York newspapers to convince New Yorkers to ratify. On June 21, 1788, New Hampshire became the ninth state to ratify, which was the minimum needed. Strong opposition in some states was won over by an agreement to add a bill of rights. By the end of 1791, three-fourths of the states had approved ten amendments, now called the Bill of Rights.":"En 1787, la Constitución se escribió en Filadelfia, y luego cada estado tuvo que decidir si la ratificaba. Los federalistas, dirigidos por James Madison y Alexander Hamilton, la apoyaban. Los antifederalistas temían que el nuevo gobierno nacional se volviera corrupto y tiránico, y criticaban que no tuviera una declaración de derechos. Desde 1787, Madison, Hamilton y John Jay publicaron ensayos en periódicos de Nueva York para convencer a los neoyorquinos de que la ratificaran. El 21 de junio de 1788, Nueva Hampshire se convirtió en el noveno estado en ratificarla, que era el mínimo necesario. En algunos estados, una fuerte oposición se ganó con un acuerdo para añadir una declaración de derechos. A finales de 1791, las tres cuartas partes de los estados habían aprobado diez enmiendas, que hoy se llaman la Declaración de Derechos.","In the 1790s, two political parties formed. The Federalists, led by Alexander Hamilton and John Adams, were most numerous in New York and New England. They wanted a strong central government led by the wisest leaders. They hoped for economic growth, social stability, and national defense, and they feared too much democracy. The Republicans, led by Thomas Jefferson and James Madison, were mostly southerners who wanted the nation to stay a rural place of small farmers. They worried that a strong national government would threaten individual freedoms and states’ rights, and they trusted the people. Hamilton asked for a national bank, which Congress created in 1791, but Madison and Jefferson said the Constitution said nothing about creating one.":"En la década de 1790 se formaron dos partidos políticos. Los federalistas, dirigidos por Alexander Hamilton y John Adams, eran más numerosos en Nueva York y Nueva Inglaterra. Querían un gobierno central fuerte dirigido por los líderes más sabios. Esperaban crecimiento económico, estabilidad social y defensa nacional, y temían demasiada democracia. Los republicanos, dirigidos por Thomas Jefferson y James Madison, eran sobre todo sureños que querían que la nación siguiera siendo un lugar rural de pequeños granjeros. Les preocupaba que un gobierno nacional fuerte amenazara las libertades individuales y los derechos de los estados, y confiaban en el pueblo. Hamilton pidió un banco nacional, que el Congreso creó en 1791, pero Madison y Jefferson dijeron que la Constitución no decía nada sobre crear uno.","In the message, the letter M is really J, and the letter D is really A. The first word has 4 letters and starts with J. The second word has 6 letters and starts with T.":"En el mensaje, la letra M en realidad es J, y la letra D en realidad es A. La primera palabra tiene 4 letras y empieza con J. La segunda palabra tiene 6 letras y empieza con T.","Individual freedoms and states’ rights":"Las libertades individuales y los derechos de los estados","Locks":"Candados","Look at the Clue Card for the agreement that John Jay made in London in 1794. The secret message names it. Use the decoder key to spell it, one letter at a time.":"Busca en la tarjeta de indicios el acuerdo que John Jay hizo en Londres en 1794. El mensaje secreto lo nombra. Usa la clave del decodificador para escribirlo, una letra a la vez.","Look for the key words: new states, one vote, no cash, and farmers in western Massachusetts.":"Busca las palabras clave: nuevos estados, un voto, sin dinero y granjeros del oeste de Massachusetts.","Look for the word in bold in the Clue Card. It names the idea of sharing power between the national government and the states.":"Busca en la tarjeta de indicios la palabra en negrita. Nombra la idea de compartir el poder entre el gobierno nacional y los estados.","Look for the years in the Clue Card: 1787, 1788, and 1791. The essays began in 1787, right after the Constitution was written.":"Busca los años en la tarjeta de indicios: 1787, 1788 y 1791. Los ensayos empezaron en 1787, justo después de que se escribió la Constitución.","Match each term to the best description. Use the Clue Card.":"Relaciona cada término con la mejor descripción. Usa la tarjeta de indicios.","Match every term first.":"Primero relaciona todos los términos.","Money and taxes":"Dinero e impuestos","Neither party":"Ningún partido","New Hampshire becomes the ninth state to ratify":"Nueva Hampshire se convierte en el noveno estado en ratificar","New territories would become equal states, and slavery was banned north of the Ohio River":"Los nuevos territorios se convertirían en estados iguales, y se prohibió la esclavitud al norte del río Ohio","Northwest Ordinance (1787)":"Ordenanza del Noroeste (1787)","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 6, “Foreign and Domestic Crises” (Effects of the French Revolution, the 1794 mission to London, War at Home, and Republican Victory in 1800).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 6, “Foreign and Domestic Crises” (Effects of the French Revolution, the 1794 mission to London, War at Home, y Republican Victory in 1800).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 6, “The Confederation Government” (A Loose Alliance of States, The Northwest Ordinance, Money, and Shays’s Rebellion).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 6, “The Confederation Government” (A Loose Alliance of States, The Northwest Ordinance, Money, y Shays’s Rebellion).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 6, “The Constitution” (the opening, The Executive, The Electoral College, Guiding Assumptions, The Three-Fifths Compromise, and The Absence of Women’s Rights).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 6, “The Constitution” (the opening, The Executive, The Electoral College, Guiding Assumptions, The Three-Fifths Compromise, y The Absence of Women’s Rights).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 6, “The Federalist Era” (the section introduction, A National Bank, and Federalists and Republicans).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 6, “The Federalist Era” (the section introduction, A National Bank, y Federalists and Republicans).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 6, “The Fight for Ratification” (Choosing Sides, The Federalist Papers, The States Decide) and “The Federalist Era” (The Bill of Rights).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 6, “The Fight for Ratification” (Choosing Sides, The Federalist Papers, The States Decide) y “The Federalist Era” (The Bill of Rights).","Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.":"Todavía no escapas (se marca INCOMPLETO). Aun así puedes descargar tu archivo y entregarlo.","Not quite. At least one answer is off. Re-read the Clue Card for the leaders, the small farmers, the bank, and what the Republicans feared.":"Casi. Al menos una respuesta no es correcta. Vuelve a leer la tarjeta de indicios para ver los líderes, los pequeños granjeros, el banco y lo que temían los republicanos.","Not quite. Check each match against the Clue Card. Which one are you least sure about?":"Casi. Revisa cada pareja con la tarjeta de indicios. ¿De cuál estás menos seguro?","Not quite. Decode one letter at a time with the key, then check your spelling.":"Casi. Decodifica una letra a la vez con la clave y luego revisa tu ortografía.","Not quite. Re-read the Clue Card and match each event to its year.":"Casi. Vuelve a leer la tarjeta de indicios y une cada suceso con su año.","Not quite. Re-read the Clue Card. Use the scrambled letters to check your spelling.":"Casi. Vuelve a leer la tarjeta de indicios. Usa las letras desordenadas para revisar tu ortografía.","One last step: write your Debrief below.":"Un último paso: escribe tu Informe final abajo.","Open all 5 locks first. The digits go in order: Lock 1 first.":"Primero abre los 5 candados. Los dígitos van en orden: primero el del Candado 1.","Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.":"Abre los 5 candados y luego escribe el código de salida de 5 dígitos. Termina con el Informe final.","Open each lock in order. Read the <b>Clue Card<\/b>. The answer is in the card.":"Abre cada candado en orden. Lee la <b>tarjeta de indicios<\/b>. La respuesta está en la tarjeta.","Open the Door":"Abrir la puerta","Pick the correct answer for all four questions.":"Elige la respuesta correcta en las cuatro preguntas.","Progress file downloaded. Use Load Progress to continue later.":"Se descargó el archivo de progreso. Usa «Cargar progreso» para continuar más tarde.","Progress loaded. Welcome back.":"Progreso cargado. Bienvenido de nuevo.","Shays’s Rebellion":"Rebelión de Shays","Solve the puzzle to open the lock and reveal one digit.":"Resuelve el acertijo para abrir el candado y descubrir un dígito.","Struggling farmers in western Massachusetts rose up over debts and taxes":"Granjeros en apuros del oeste de Massachusetts se levantaron por sus deudas e impuestos","THE EXIT DOOR":"LA PUERTA DE SALIDA","Tap all 4 events first, in order.":"Primero toca los 4 sucesos, en orden.","Tap the four events in the order they happened. Tap an event again to take it back.":"Toca los cuatro sucesos en el orden en que ocurrieron. Toca un suceso otra vez para quitarlo.","That file did not work. Choose a progress file saved from this Escape Room.":"Ese archivo no funcionó. Elige un archivo de progreso guardado de esta sala de escape.","That was the last hint. Read the Clue Card slowly and try again.":"Esa fue la última pista. Lee la tarjeta de indicios despacio y vuelve a intentarlo.","The Articles of Confederation, approved in 1781, joined thirteen independent states in a loose alliance. Each state had one vote in Congress, so Rhode Island, with 68,000 people, had the same vote as Virginia, with more than 747,000. Congress had no cash and could not collect taxes. Its Northwest Ordinance of 1787 said new territories would become equal states and banned slavery north of the Ohio River. It also promised that Indigenous lands would never be taken without their consent, a promise that was repeatedly broken. In 1786, struggling farmers in western Massachusetts rose up over debts and taxes, and Daniel Shays led a march in early 1787. George Washington said the nation needed a stronger national government.":"Los Artículos de la Confederación, aprobados en 1781, unieron a trece estados independientes en una alianza débil. Cada estado tenía un voto en el Congreso, así que Rhode Island, con 68,000 habitantes, tenía el mismo voto que Virginia, con más de 747,000. El Congreso no tenía dinero y no podía cobrar impuestos. Su Ordenanza del Noroeste de 1787 decía que los nuevos territorios se convertirían en estados iguales y prohibía la esclavitud al norte del río Ohio. También prometía que las tierras indígenas nunca se tomarían sin su consentimiento, una promesa que se rompió una y otra vez. En 1786, granjeros en apuros del oeste de Massachusetts se levantaron por sus deudas e impuestos, y Daniel Shays encabezó una marcha a principios de 1787. George Washington dijo que la nación necesitaba un gobierno nacional más fuerte.","The Bill of Rights is approved by three-fourths of the states":"Las tres cuartas partes de los estados aprueban la Declaración de Derechos","The Bookshelf":"El Estante de Libros","The Clue Card describes a 1794 agreement with Britain that outraged many Republicans. A secret message gives its name in two words. Each letter in the message was moved 3 steps forward in the alphabet. Decode it.":"La tarjeta de indicios describe un acuerdo de 1794 con Gran Bretaña que enojó a muchos republicanos. Un mensaje secreto da su nombre en dos palabras. Cada letra del mensaje se movió 3 lugares hacia adelante en el alfabeto. Descífralo.","The Constitution is written in Philadelphia":"La Constitución se escribe en Filadelfia","The Constitution said nothing about creating a national bank":"La Constitución no decía nada sobre crear un banco nacional","The Federalist Papers essays begin in New York newspapers":"Los ensayos de Los Documentos Federalistas empiezan en periódicos de Nueva York","The Federalists":"Los federalistas","The French Revolution split American opinion. Jefferson and the Republicans loved its democratic ideals. Hamilton and Adams saw it as vicious and godless, and they sided with Great Britain. In 1794, President Washington sent John Jay to London to settle problems with Britain. Britain promised to leave its six forts on the northwest frontier by 1796, but it refused to stop “impressing” American sailors. When the terms were made public, many Americans, especially Republicans, were outraged. In 1798, Federalists who feared immigrants from France passed the Alien and Sedition Acts. Madison and Jefferson answered with the Kentucky and Virginia Resolutions, and in 1800 Jefferson won the presidency.":"La Revolución Francesa dividió la opinión de los estadounidenses. Jefferson y los republicanos amaban sus ideales democráticos. Hamilton y Adams la veían como cruel y sin Dios, y se pusieron del lado de Gran Bretaña. En 1794, el presidente Washington envió a John Jay a Londres para resolver los problemas con Gran Bretaña. Gran Bretaña prometió dejar sus seis fuertes de la frontera noroeste para 1796, pero se negó a dejar de «reclutar por la fuerza» a marineros estadounidenses. Cuando se hicieron públicos los términos, muchos estadounidenses, sobre todo los republicanos, se enojaron muchísimo. En 1798, los federalistas, que temían a los inmigrantes de Francia, aprobaron las Leyes de Extranjería y Sedición. Madison y Jefferson respondieron con las Resoluciones de Kentucky y Virginia, y en 1800 Jefferson ganó la presidencia.","The Inkwell":"El Tintero","The Key Ring":"El Llavero","The Northwest Ordinance was about new states. Voting in Congress was one vote for each state. Money and taxes meant no cash and no taxing power. Shays’s Rebellion was the farmers’ uprising.":"La Ordenanza del Noroeste trataba de los nuevos estados. La votación en el Congreso era un voto por cada estado. Dinero e impuestos significaba que no había dinero ni poder para cobrar impuestos. La Rebelión de Shays fue el levantamiento de los granjeros.","The Republicans":"Los republicanos","The Wall Clock":"El Reloj de Pared","The Window":"La Ventana","The bank would be run by France":"Francia dirigiría el banco","The clock starts when you press the button. Most students finish in about 20 minutes.":"El reloj empieza cuando oprimes el botón. La mayoría de los estudiantes termina en unos 20 minutos.","The code has 5 digits. Fill every box.":"El código tiene 5 dígitos. Llena todas las casillas.","The cost of building roads":"El costo de construir caminos","The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.":"La puerta no se abrió. Revisa los dígitos debajo de cada candado y escríbelos en orden: primero el del Candado 1.","The door is open!":"¡La puerta está abierta!","The door swings open!":"¡La puerta se abre de golpe!","The order is the Constitution written (1787), the Federalist Papers begin (1787), New Hampshire ratifies (June 1788), then the Bill of Rights is approved (1791).":"El orden es: se escribe la Constitución (1787), empiezan Los Documentos Federalistas (1787), Nueva Hampshire ratifica (junio de 1788) y luego se aprueba la Declaración de Derechos (1791).","The size of the army":"El tamaño del ejército","The tavern closed for the night, and the owner locked the door of the back room. A bookshelf, a wall clock, a window, a table with an inkwell and a quill, and a ring of keys on a peg sit in the room. The door has <b>5 locks<\/b>. Each lock matches one big idea from Lesson 4. Solve them all to find the <b>5-digit exit code<\/b>.":"La taberna cerró por la noche, y el dueño cerró con llave la puerta de la sala trasera. En el cuarto hay un estante de libros, un reloj de pared, una ventana, una mesa con un tintero y una pluma, y un llavero colgado de una clavija. La puerta tiene <b>5 candados<\/b>. Cada candado corresponde a una idea importante de la Lección 4. Resuélvelos todos para encontrar el <b>código de salida de 5 dígitos<\/b>.","The word starts with F and has 10 letters. It ends with “ism.”":"La palabra empieza con F y tiene 10 letras. En inglés termina en “ism”.","They wanted only the states to have banks":"Querían que solo los estados tuvieran bancos","Thomas Jefferson and James Madison":"Thomas Jefferson y James Madison","Time":"Tiempo","Trade with France":"El comercio con Francia","Type the answer in English.":"Escribe la respuesta en inglés.","Type the answer in English. Use the digits 0-9.":"Escribe la respuesta en inglés. Usa los dígitos 0-9.","Type the exit code":"Escribe el código de salida","Type your answer first.":"Primero escribe tu respuesta.","Type your answer here...":"Escribe tu respuesta aquí...","UNIT 1 · COLONIES, REVOLUTION, AND CONSTITUTION | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 1 · COLONIAS, REVOLUCIÓN Y CONSTITUCIÓN | CPUSH | DANIEL GARZA, M.A.","Unlocked. Your digit is 1. Your answer: Alexander Hamilton and John Adams; The Republicans; The Constitution said nothing about creating a national bank; Individual freedoms and states’ rights":"Desbloqueado. Tu dígito es 1. Tu respuesta: Alexander Hamilton y John Adams; Los republicanos; La Constitución no decía nada sobre crear un banco nacional; Las libertades individuales y los derechos de los estados","Unscramble the letters to fill the blank.":"Ordena las letras para llenar el espacio en blanco.","Voting in Congress":"La votación en el Congreso","What did the Republicans fear a strong national government would threaten?":"¿Qué temían los republicanos que amenazara un gobierno nacional fuerte?","Which lock was hardest, and what did you learn that you did not know before?":"¿Qué candado fue el más difícil y qué aprendiste que antes no sabías?","Which side wanted the country to stay a rural nation of small farmers?":"¿Qué bando quería que el país siguiera siendo una nación rural de pequeños granjeros?","Who led the Federalists?":"¿Quiénes dirigieron a los federalistas?","Why did Madison and Jefferson oppose Hamilton’s national bank?":"¿Por qué se opusieron Madison y Jefferson al banco nacional de Hamilton?","Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.":"Escribe de 3 a 4 oraciones. Nombra el candado y usa un dato de su tarjeta de indicios. Puedes escribirlo aunque no hayas escapado.","You are locked in the tavern back room.":"Estás encerrado en la sala trasera de la taberna.","You escaped and wrote your Debrief. Ready to submit.":"Escapaste y escribiste tu Informe final. Listo para entregar.","You escaped! Write your Debrief, then download your file to submit.":"¡Escapaste! Escribe tu Informe final y luego descarga tu archivo para entregarlo.","Your answer":"Tu respuesta","Your time:":"Tu tiempo:","digit":"dígito","Unlocked. Your digit is 6. Your answer: Voting in Congress = Each state had one vote, no matter how many people lived there; Money and taxes = Congress had no cash and could not collect taxes; Shays’s Rebellion = Struggling farmers in western Massachusetts rose up over debts and taxes; Northwest Ordinance (1787) = New territories would become equal states, and slavery was banned north of the Ohio River":"Desbloqueado. Tu dígito es 6. Tu respuesta: La votación en el Congreso = Cada estado tenía un voto, sin importar cuántas personas vivían allí; Dinero e impuestos = El Congreso no tenía dinero y no podía cobrar impuestos; Rebelión de Shays = Granjeros en apuros del oeste de Massachusetts se levantaron por sus deudas e impuestos; Ordenanza del Noroeste (1787) = Los nuevos territorios se convertirían en estados iguales, y se prohibió la esclavitud al norte del río Ohio","Unlocked. Your digit is 4. Your answer: The Constitution is written in Philadelphia > The Federalist Papers essays begin in New York newspapers > New Hampshire becomes the ninth state to ratify > The Bill of Rights is approved by three-fourths of the states":"Desbloqueado. Tu dígito es 4. Tu respuesta: La Constitución se escribe en Filadelfia > Los ensayos de Los Documentos Federalistas empiezan en periódicos de Nueva York > Nueva Hampshire se convierte en el noveno estado en ratificar > Las tres cuartas partes de los estados aprueban la Declaración de Derechos","Clear all your work and start over? This cannot be undone.":"¿Borrar todo tu trabajo y empezar de nuevo? Esto no se puede deshacer."},"ar":{"Save Progress":"حفظ التقدم","Load Progress":"تحميل التقدم","Finished — Download File to Submit":"انتهيت — نزّل الملف لتسليمه","Clear all my answers":"امسح كل إجاباتي","FIRST NAME *":"الاسم الأول *","LAST NAME *":"اسم العائلة *","PERIOD *":"الحصة *","DATE (fills in when you finish)":"التاريخ (يُكتب تلقائيًا عند الانتهاء)","e.g. 3":"مثال: 3","Automatic":"تلقائي","Please type your first name, last name, and period first.":"اكتب أولًا اسمك الأول واسم العائلة والحصة.","Western Expansion and Southern Secession":"التوسع غربًا وانفصال الجنوب","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"الوحدة 3 · بيت منقسم وأُعيد بناؤه | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — قانون العبيد الهاربين","Bleeding Kansas":"Bleeding Kansas — كانساس النازفة","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"الوحدة 3 · بيت منقسم وأعيد بناؤه | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"تم تنزيل ملف التقدم. احتفظ به في مكان آمن. استخدم «تحميل التقدم» لتكمل لاحقًا.","Progress loaded.":"تم تحميل التقدم.","Could not read that file.":"تعذّرت قراءة هذا الملف.","Treaty of Guadalupe Hidalgo":"معاهدة غوادالوبي هيدالغو (Treaty of Guadalupe Hidalgo)","A tavern back room at night. On the left, a window with a crescent moon and stars above a wall clock and a table with an inkwell, a quill, and a rolled scroll. On the right, a bookshelf, a three-cornered hat and a ring of keys on a peg rail, and a wooden chair. The door has a BACK ROOM sign and five padlocks in a row. Under each padlock is a window for one digit of the exit code.":"غرفة خلفية في نُزُل (tavern) ليلًا. على اليسار، نافذة فيها هلال ونجوم فوق ساعة حائط وطاولة عليها محبرة وريشة كتابة ولفافة ورق. وعلى اليمين، رف كتب وقبعة ثلاثية الأطراف وحلقة مفاتيح على قضيب مسامير، وكرسي خشبي. وعلى الباب لافتة «الغرفة الخلفية» وخمسة أقفال في صف واحد. وتحت كل قفل نافذة صغيرة لرقم واحد من رمز الخروج.","Alexander Hamilton and John Adams":"ألكسندر هاملتون (Alexander Hamilton) وجون آدامز (John Adams)","All 5 locks are open. Type the 5 digits in order, Lock 1 first.":"الأقفال الخمسة مفتوحة. اكتب الأرقام الخمسة بالترتيب: رقم القفل 1 أولًا.","Answer every question first.":"أجب عن كل الأسئلة أولًا.","BACK ROOM":"الغرفة الخلفية","Banks were against the law in every state":"كانت البنوك مخالفة للقانون في كل ولاية","Both parties equally":"الحزبان بالتساوي","CLUE CARD":"بطاقة القرائن","Check":"تحقق","Choose a description...":"اختر وصفًا...","Clear":"مسح","Clear all my work and start over":"امسح كل عملي وابدأ من جديد","Congress had no cash and could not collect taxes":"لم يكن لدى الكونغرس مال ولم يكن يستطيع جمع الضرائب","Core Objective 1: Identify the strengths and weaknesses of the Articles of Confederation and explain how they prompted the creation of a new U.S. constitution in 1787.":"الهدف الأساسي 1: حدّد نقاط القوة والضعف في مواد الكونفدرالية، واشرح كيف أدّت إلى وضع دستور أمريكي جديد عام 1787.","Core Objective 2: Describe the political innovations that the 1787 Constitutional Convention developed for the new nation.":"الهدف الأساسي 2: صِف الابتكارات السياسية التي وضعها المؤتمر الدستوري عام 1787 للأمة الجديدة.","Core Objective 3: Summarize the major debates surrounding the ratification of the Constitution. Explain why they arose and how they were resolved.":"الهدف الأساسي 3: لخّص النقاشات الرئيسية حول التصديق على الدستور. اشرح لماذا ظهرت وكيف حُلّت.","Core Objective 4: Compare the Federalists’ vision for the United States with that of their Republican opponents during the 1790s.":"الهدف الأساسي 4: قارن رؤية الفيدراليين للولايات المتحدة برؤية خصومهم الجمهوريين خلال تسعينيات القرن الثامن عشر.","Core Objective 5: Assess how attitudes toward Great Britain and France shaped American politics in the late eighteenth century.":"الهدف الأساسي 5: قيّم كيف شكّلت المواقف تجاه بريطانيا العظمى وفرنسا السياسة الأمريكية في أواخر القرن الثامن عشر.","Creating the Constitution":"صياغة الدستور","DEBRIEF":"الملخص الختامي","Daniel Shays and John Jay":"دانيال شايز (Daniel Shays) وجون جاي (John Jay)","Debrief":"الملخص الختامي","Decoded answer":"الإجابة بعد فك التشفير","Decoder key: the <span style=\"color:var(--hl);font-weight:700\">gold<\/span> letter is in the message. The white letter under it is the real letter.":"مفتاح فك التشفير: الحرف <span style=\"color:var(--hl);font-weight:700\">الذهبي<\/span> هو الحرف الموجود في الرسالة. والحرف الأبيض تحته هو الحرف الحقيقي.","Dividing power between the national government and the states is called ________.":"يُسمّى تقسيم السلطة بين الحكومة الوطنية والولايات ________.","ESCAPED":"لقد هربت!","Each answer is in the Clue Card. Look for who led the Federalists, who wanted small farms, what Madison and Jefferson said about the bank, and what the Republicans feared.":"كل إجابة موجودة في بطاقة القرائن. ابحث عمّن قاد الفيدراليين، ومن أراد المزارع الصغيرة، وماذا قال ماديسون (Madison) وجيفرسون (Jefferson) عن البنك، وماذا خشي الجمهوريون.","Each state had one vote, no matter how many people lived there":"كان لكل ولاية صوت واحد، مهما كان عدد من يعيشون فيها","Enter the Back Room":"ادخل الغرفة الخلفية","Enter your first name, last name, and period at the top first.":"اكتب اسمك الأول واسم العائلة والحصة في الأعلى أولًا.","Escape the Tavern Back Room":"اهرب من الغرفة الخلفية في النُّزُل (tavern)","Exit code digit 1":"رقم رمز الخروج 1","Exit door":"باب الخروج","Fill in the blank using the Clue Card.":"املأ الفراغ باستخدام بطاقة القرائن.","George Mason and James Wilson":"جورج ميسون (George Mason) وجيمس ويلسون (James Wilson)","Hamilton and Adams led the Federalists. The Republicans wanted a nation of small farmers. The Constitution said nothing about a national bank. The Republicans feared threats to individual freedoms and states’ rights.":"قاد هاملتون (Hamilton) وآدامز (Adams) الفيدراليين. وأراد الجمهوريون أمة من صغار المزارعين. ولم يقل الدستور شيئًا عن بنك وطني. وخشي الجمهوريون من تهديد الحريات الفردية وحقوق الولايات.","Have a saved file? Load it to continue.":"هل لديك ملف محفوظ؟ حمّله لتكمل.","Hint":"تلميح","Hints used":"التلميحات المستخدمة","How to escape:":"كيف تهرب:","If you get stuck, press <b>Hint<\/b>. Hints are free, but your teacher can see how many you used.":"إذا تعثرت، اضغط <b>تلميح<\/b>. التلميحات مجانية، لكن معلمك يستطيع أن يرى كم تلميحًا استخدمت.","In 1787, delegates met in Philadelphia’s State House to revise the Articles, and they wrote a new Constitution instead. It begins, “We the people of the United States.” Norton calls the idea that the voters are the source of all authority the most important political innovation since the Declaration of Independence. The Great Compromise gave larger states seats in the House by population and gave every state two senators. The Constitution also split power among three branches and set up the Electoral College to choose the president. Dividing power between the national government and the states is called <b>federalism<\/b>. The delegates also agreed that three-fifths of the enslaved would count toward a state’s seats in Congress, and they refused even to discuss political rights for women.":"في عام 1787، اجتمع المندوبون في دار الولاية (State House) في فيلادلفيا (Philadelphia) لمراجعة مواد الكونفدرالية، لكنهم كتبوا دستورًا جديدًا بدلًا من ذلك. ويبدأ بعبارة «نحن شعب الولايات المتحدة». ويصف Norton فكرة أن الناخبين هم مصدر كل سلطة بأنها أهم ابتكار سياسي منذ إعلان الاستقلال. ومنحت التسوية الكبرى (Great Compromise) الولايات الكبرى مقاعد في مجلس النواب بحسب عدد السكان، ومنحت كل ولاية عضوين في مجلس الشيوخ. كما قسّم الدستور السلطة بين ثلاثة فروع، وأنشأ المجمع الانتخابي (Electoral College) لاختيار الرئيس. ويُسمّى تقسيم السلطة بين الحكومة الوطنية والولايات <b>الفيدرالية (federalism)<\/b>. واتفق المندوبون أيضًا على أن يُحسب ثلاثة أخماس المستعبَدين ضمن مقاعد الولاية في الكونغرس، ورفضوا حتى مناقشة الحقوق السياسية للنساء.","In 1787, the Constitution was written in Philadelphia, and each state then had to decide whether to ratify it. The Federalists, led by James Madison and Alexander Hamilton, supported it. The Anti-Federalists feared the new national government would grow corrupt and tyrannical, and they criticized the lack of a bill of rights. Starting in 1787, Madison, Hamilton, and John Jay published essays in New York newspapers to convince New Yorkers to ratify. On June 21, 1788, New Hampshire became the ninth state to ratify, which was the minimum needed. Strong opposition in some states was won over by an agreement to add a bill of rights. By the end of 1791, three-fourths of the states had approved ten amendments, now called the Bill of Rights.":"في عام 1787، كُتب الدستور في فيلادلفيا (Philadelphia)، ثم كان على كل ولاية أن تقرر هل تصدّق عليه. وأيّده الفيدراليون (Federalists)، بقيادة جيمس ماديسون (James Madison) وألكسندر هاملتون (Alexander Hamilton). وخشي معارضو الفيدرالية (Anti-Federalists) أن تصبح الحكومة الوطنية الجديدة فاسدة وطاغية، وانتقدوا غياب وثيقة حقوق. وبدءًا من عام 1787، نشر ماديسون وهاملتون وجون جاي (John Jay) مقالات في صحف نيويورك (New York) لإقناع سكان نيويورك بالتصديق عليه. وفي 21 يونيو 1788، أصبحت نيو هامبشير (New Hampshire) الولاية التاسعة التي تصدّق عليه، وهذا هو الحد الأدنى المطلوب. وكُسبت معارضة قوية في بعض الولايات باتفاق على إضافة وثيقة حقوق. وبحلول نهاية عام 1791، كانت ثلاثة أرباع الولايات قد وافقت على عشرة تعديلات تُسمّى اليوم وثيقة الحقوق (Bill of Rights).","In the 1790s, two political parties formed. The Federalists, led by Alexander Hamilton and John Adams, were most numerous in New York and New England. They wanted a strong central government led by the wisest leaders. They hoped for economic growth, social stability, and national defense, and they feared too much democracy. The Republicans, led by Thomas Jefferson and James Madison, were mostly southerners who wanted the nation to stay a rural place of small farmers. They worried that a strong national government would threaten individual freedoms and states’ rights, and they trusted the people. Hamilton asked for a national bank, which Congress created in 1791, but Madison and Jefferson said the Constitution said nothing about creating one.":"في تسعينيات القرن الثامن عشر تشكّل حزبان سياسيان. كان الفيدراليون (Federalists)، بقيادة ألكسندر هاملتون (Alexander Hamilton) وجون آدامز (John Adams)، أكثر عددًا في نيويورك (New York) ونيو إنغلاند (New England). وأرادوا حكومة مركزية قوية يقودها أكثر القادة حكمة. وتمنّوا النمو الاقتصادي والاستقرار الاجتماعي والدفاع الوطني، وخافوا من الإفراط في الديمقراطية. أما الجمهوريون (Republicans)، بقيادة توماس جيفرسون (Thomas Jefferson) وجيمس ماديسون (James Madison)، فكانوا في الغالب من الجنوبيين الذين أرادوا أن تبقى الأمة ريفية يعيش فيها صغار المزارعين. وقلقوا من أن تهدد حكومة وطنية قوية الحريات الفردية وحقوق الولايات، ووثقوا بالشعب. وطلب هاملتون إنشاء بنك وطني أنشأه الكونغرس عام 1791، لكن ماديسون وجيفرسون قالا إن الدستور لا يقول شيئًا عن إنشاء بنك.","In the message, the letter M is really J, and the letter D is really A. The first word has 4 letters and starts with J. The second word has 6 letters and starts with T.":"في الرسالة، الحرف M هو في الحقيقة J، والحرف D هو في الحقيقة A. الكلمة الأولى من 4 أحرف وتبدأ بـ J. والكلمة الثانية من 6 أحرف وتبدأ بـ T.","Individual freedoms and states’ rights":"الحريات الفردية وحقوق الولايات","Locks":"الأقفال","Look at the Clue Card for the agreement that John Jay made in London in 1794. The secret message names it. Use the decoder key to spell it, one letter at a time.":"ابحث في بطاقة القرائن عن الاتفاق الذي عقده جون جاي (John Jay) في لندن (London) عام 1794. تسمّيه الرسالة السرية. استخدم مفتاح فك التشفير لتهجئته حرفًا حرفًا.","Look for the key words: new states, one vote, no cash, and farmers in western Massachusetts.":"ابحث عن الكلمات الأساسية: ولايات جديدة، وصوت واحد، ولا مال، ومزارعون في غرب ماساتشوستس (Massachusetts).","Look for the word in bold in the Clue Card. It names the idea of sharing power between the national government and the states.":"ابحث في بطاقة القرائن عن الكلمة المكتوبة بخط عريض. إنها تسمّي فكرة تقاسم السلطة بين الحكومة الوطنية والولايات.","Look for the years in the Clue Card: 1787, 1788, and 1791. The essays began in 1787, right after the Constitution was written.":"ابحث عن السنوات في بطاقة القرائن: 1787 و1788 و1791. بدأت المقالات في عام 1787، بعد كتابة الدستور مباشرة.","Match each term to the best description. Use the Clue Card.":"اربط كل مصطلح بأفضل وصف له. استخدم بطاقة القرائن.","Match every term first.":"طابق كل المصطلحات أولًا.","Money and taxes":"المال والضرائب","Neither party":"لا أحد من الحزبين","New Hampshire becomes the ninth state to ratify":"تصبح نيو هامبشير (New Hampshire) الولاية التاسعة التي تصدّق","New territories would become equal states, and slavery was banned north of the Ohio River":"ستصبح الأقاليم الجديدة ولايات متساوية، وحُظرت العبودية شمال نهر أوهايو (Ohio River)","Northwest Ordinance (1787)":"مرسوم الشمال الغربي (Northwest Ordinance) (1787)","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 6, “Foreign and Domestic Crises” (Effects of the French Revolution, the 1794 mission to London, War at Home, and Republican Victory in 1800).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 6، “Foreign and Domestic Crises” (Effects of the French Revolution، the 1794 mission to London، War at Home، وRepublican Victory in 1800).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 6, “The Confederation Government” (A Loose Alliance of States, The Northwest Ordinance, Money, and Shays’s Rebellion).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 6، “The Confederation Government” (A Loose Alliance of States، The Northwest Ordinance، Money، وShays’s Rebellion).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 6, “The Constitution” (the opening, The Executive, The Electoral College, Guiding Assumptions, The Three-Fifths Compromise, and The Absence of Women’s Rights).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 6، “The Constitution” (the opening، The Executive، The Electoral College، Guiding Assumptions، The Three-Fifths Compromise، وThe Absence of Women’s Rights).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 6, “The Federalist Era” (the section introduction, A National Bank, and Federalists and Republicans).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 6، “The Federalist Era” (the section introduction، A National Bank، وFederalists and Republicans).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 6, “The Fight for Ratification” (Choosing Sides, The Federalist Papers, The States Decide) and “The Federalist Era” (The Bill of Rights).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 6، “The Fight for Ratification” (Choosing Sides، The Federalist Papers، The States Decide) و“The Federalist Era” (The Bill of Rights).","Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.":"لم تهرب بعد (يُسجَّل «غير مكتمل» INCOMPLETE). ما زال بإمكانك تنزيل ملفك وتسليمه.","Not quite. At least one answer is off. Re-read the Clue Card for the leaders, the small farmers, the bank, and what the Republicans feared.":"ليس تمامًا. إجابة واحدة على الأقل غير صحيحة. أعد قراءة بطاقة القرائن عن القادة، وصغار المزارعين، والبنك، وما خشيه الجمهوريون.","Not quite. Check each match against the Clue Card. Which one are you least sure about?":"ليس تمامًا. تحقق من كل مطابقة باستخدام بطاقة القرائن. أي مطابقة أنت أقل تأكدًا منها؟","Not quite. Decode one letter at a time with the key, then check your spelling.":"ليس تمامًا. فُكّ تشفير حرف واحد في كل مرة باستخدام المفتاح، ثم تحقق من تهجئتك.","Not quite. Re-read the Clue Card and match each event to its year.":"ليس تمامًا. أعد قراءة بطاقة القرائن وطابق كل حدث مع سنته.","Not quite. Re-read the Clue Card. Use the scrambled letters to check your spelling.":"ليس تمامًا. أعد قراءة بطاقة القرائن. استخدم الحروف المبعثرة للتحقق من تهجئتك.","One last step: write your Debrief below.":"خطوة أخيرة: اكتب ملخصك الختامي أدناه.","Open all 5 locks first. The digits go in order: Lock 1 first.":"افتح الأقفال الخمسة أولًا. تُكتب الأرقام بالترتيب: رقم القفل 1 أولًا.","Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.":"افتح الأقفال الخمسة، ثم اكتب رمز الخروج المكوّن من 5 أرقام. أنهِ بالملخص الختامي.","Open each lock in order. Read the <b>Clue Card<\/b>. The answer is in the card.":"افتح كل قفل بالترتيب. اقرأ <b>بطاقة القرائن<\/b>. الإجابة موجودة في البطاقة.","Open the Door":"افتح الباب","Pick the correct answer for all four questions.":"اختر الإجابة الصحيحة للأسئلة الأربعة كلها.","Progress file downloaded. Use Load Progress to continue later.":"تم تنزيل ملف التقدم. استخدم «تحميل التقدم» لتكمل لاحقًا.","Progress loaded. Welcome back.":"تم تحميل التقدم. أهلًا بعودتك.","Shays’s Rebellion":"تمرّد شايز (Shays’s Rebellion)","Solve the puzzle to open the lock and reveal one digit.":"حلّ اللغز لتفتح القفل وتكشف رقمًا واحدًا.","Struggling farmers in western Massachusetts rose up over debts and taxes":"ثار مزارعون يعانون في غرب ماساتشوستس (Massachusetts) بسبب الديون والضرائب","THE EXIT DOOR":"باب الخروج","Tap all 4 events first, in order.":"المس الأحداث الأربعة كلها أولًا، بالترتيب.","Tap the four events in the order they happened. Tap an event again to take it back.":"المس الأحداث الأربعة بالترتيب الذي وقعت به. المس الحدث مرة أخرى للتراجع عنه.","That file did not work. Choose a progress file saved from this Escape Room.":"لم يعمل هذا الملف. اختر ملف تقدم محفوظًا من غرفة الهروب هذه.","That was the last hint. Read the Clue Card slowly and try again.":"كان هذا آخر تلميح. اقرأ بطاقة القرائن ببطء وحاول مرة أخرى.","The Articles of Confederation, approved in 1781, joined thirteen independent states in a loose alliance. Each state had one vote in Congress, so Rhode Island, with 68,000 people, had the same vote as Virginia, with more than 747,000. Congress had no cash and could not collect taxes. Its Northwest Ordinance of 1787 said new territories would become equal states and banned slavery north of the Ohio River. It also promised that Indigenous lands would never be taken without their consent, a promise that was repeatedly broken. In 1786, struggling farmers in western Massachusetts rose up over debts and taxes, and Daniel Shays led a march in early 1787. George Washington said the nation needed a stronger national government.":"أنشأت مواد الكونفدرالية (Articles of Confederation)، التي أُقرّت عام 1781، تحالفًا ضعيفًا بين ثلاث عشرة ولاية مستقلة. وكان لكل ولاية صوت واحد في الكونغرس، فكان لرود آيلاند (Rhode Island)، التي يسكنها 68,000 شخص، نفس الصوت الذي لفرجينيا (Virginia)، التي يسكنها أكثر من 747,000. ولم يكن لدى الكونغرس مال، ولم يكن يستطيع جمع الضرائب. ونصّ مرسوم الشمال الغربي (Northwest Ordinance) الصادر عام 1787 على أن تصبح الأقاليم الجديدة ولايات متساوية، وحظر العبودية شمال نهر أوهايو (Ohio River). ووعد أيضًا بألّا تؤخذ أراضي السكان الأصليين دون موافقتهم، وهو وعد نُقض مرارًا. وفي عام 1786، ثار مزارعون يعانون من الديون والضرائب في غرب ماساتشوستس (Massachusetts)، وقاد دانيال شايز (Daniel Shays) مسيرة في أوائل عام 1787. وقال جورج واشنطن (George Washington) إن الأمة تحتاج إلى حكومة وطنية أقوى.","The Bill of Rights is approved by three-fourths of the states":"توافق ثلاثة أرباع الولايات على وثيقة الحقوق (Bill of Rights)","The Bookshelf":"رف الكتب","The Clue Card describes a 1794 agreement with Britain that outraged many Republicans. A secret message gives its name in two words. Each letter in the message was moved 3 steps forward in the alphabet. Decode it.":"تصف بطاقة القرائن اتفاقًا عُقد عام 1794 مع بريطانيا وأغضب كثيرًا من الجمهوريين. وتعطي رسالة سرية اسمه بكلمتين. كل حرف في الرسالة نُقل 3 خطوات إلى الأمام في الأبجدية. فكّ تشفيرها.","The Constitution is written in Philadelphia":"يُكتب الدستور في فيلادلفيا (Philadelphia)","The Constitution said nothing about creating a national bank":"لم يقل الدستور شيئًا عن إنشاء بنك وطني","The Federalist Papers essays begin in New York newspapers":"تبدأ مقالات الأوراق الفيدرالية (The Federalist Papers) في صحف نيويورك (New York)","The Federalists":"الفيدراليون","The French Revolution split American opinion. Jefferson and the Republicans loved its democratic ideals. Hamilton and Adams saw it as vicious and godless, and they sided with Great Britain. In 1794, President Washington sent John Jay to London to settle problems with Britain. Britain promised to leave its six forts on the northwest frontier by 1796, but it refused to stop “impressing” American sailors. When the terms were made public, many Americans, especially Republicans, were outraged. In 1798, Federalists who feared immigrants from France passed the Alien and Sedition Acts. Madison and Jefferson answered with the Kentucky and Virginia Resolutions, and in 1800 Jefferson won the presidency.":"قسّمت الثورة الفرنسية (French Revolution) الرأي العام الأمريكي. أحبّ جيفرسون (Jefferson) والجمهوريون مبادئها الديمقراطية. أما هاملتون (Hamilton) وآدامز (Adams) فرأيا أنها قاسية وملحدة، فوقفا مع بريطانيا العظمى. وفي عام 1794، أرسل الرئيس واشنطن (Washington) جون جاي (John Jay) إلى لندن (London) لحل المشكلات مع بريطانيا. ووعدت بريطانيا بإخلاء حصونها الستة على الحدود الشمالية الغربية بحلول عام 1796، لكنها رفضت التوقف عن «تجنيد» البحّارة الأمريكيين بالقوة. وعندما أُعلنت الشروط، غضب كثير من الأمريكيين، وخاصة الجمهوريين، غضبًا شديدًا. وفي عام 1798، أصدر الفيدراليون، الذين خافوا من المهاجرين القادمين من فرنسا، قوانين الأجانب والتحريض (Alien and Sedition Acts). ورد ماديسون (Madison) وجيفرسون بقرارات كنتاكي وفرجينيا (Kentucky and Virginia Resolutions)، وفي عام 1800 فاز جيفرسون بالرئاسة.","The Inkwell":"المحبرة","The Key Ring":"حلقة المفاتيح","The Northwest Ordinance was about new states. Voting in Congress was one vote for each state. Money and taxes meant no cash and no taxing power. Shays’s Rebellion was the farmers’ uprising.":"تناول مرسوم الشمال الغربي (Northwest Ordinance) الولايات الجديدة. وكان التصويت في الكونغرس صوتًا واحدًا لكل ولاية. وكان معنى المال والضرائب أنه لا مال ولا سلطة لجمع الضرائب. وكان تمرّد شايز (Shays’s Rebellion) انتفاضة المزارعين.","The Republicans":"الجمهوريون","The Wall Clock":"ساعة الحائط","The Window":"النافذة","The bank would be run by France":"كانت فرنسا ستدير البنك","The clock starts when you press the button. Most students finish in about 20 minutes.":"يبدأ العدّاد عندما تضغط الزر. يُنهي معظم الطلاب في نحو 20 دقيقة.","The code has 5 digits. Fill every box.":"الرمز مكوّن من 5 أرقام. املأ كل المربعات.","The cost of building roads":"تكلفة بناء الطرق","The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.":"لم يُفتح الباب. تحقق من الأرقام تحت كل قفل، واكتبها بالترتيب: رقم القفل 1 أولًا.","The door is open!":"الباب مفتوح!","The door swings open!":"ينفتح الباب على مصراعيه!","The order is the Constitution written (1787), the Federalist Papers begin (1787), New Hampshire ratifies (June 1788), then the Bill of Rights is approved (1791).":"الترتيب هو: كتابة الدستور (1787)، ثم بداية الأوراق الفيدرالية (The Federalist Papers) (1787)، ثم تصديق نيو هامبشير (New Hampshire) (يونيو 1788)، ثم الموافقة على وثيقة الحقوق (Bill of Rights) (1791).","The size of the army":"حجم الجيش","The tavern closed for the night, and the owner locked the door of the back room. A bookshelf, a wall clock, a window, a table with an inkwell and a quill, and a ring of keys on a peg sit in the room. The door has <b>5 locks<\/b>. Each lock matches one big idea from Lesson 4. Solve them all to find the <b>5-digit exit code<\/b>.":"أُغلق النُّزُل (tavern) في الليل، وأقفل صاحبه باب الغرفة الخلفية. وفي الغرفة رف كتب، وساعة حائط، ونافذة، وطاولة عليها محبرة وريشة كتابة، وحلقة مفاتيح معلّقة على مسمار. وللباب <b>5 أقفال<\/b>. كل قفل يوافق فكرة كبيرة واحدة من الدرس 4. حُلّ الألغاز كلها لتجد <b>رمز الخروج المكوّن من 5 أرقام<\/b>.","The word starts with F and has 10 letters. It ends with “ism.”":"تبدأ الكلمة بحرف F وتتكون من 10 أحرف. وتنتهي بـ “ism”.","They wanted only the states to have banks":"أرادوا أن تكون البنوك للولايات وحدها","Thomas Jefferson and James Madison":"توماس جيفرسون (Thomas Jefferson) وجيمس ماديسون (James Madison)","Time":"الوقت","Trade with France":"التجارة مع فرنسا","Type the answer in English.":"اكتب الإجابة بالإنجليزية.","Type the answer in English. Use the digits 0-9.":"اكتب الإجابة بالإنجليزية. استخدم الأرقام 0-9.","Type the exit code":"اكتب رمز الخروج","Type your answer first.":"اكتب إجابتك أولًا.","Type your answer here...":"اكتب إجابتك هنا...","UNIT 1 · COLONIES, REVOLUTION, AND CONSTITUTION | CPUSH | DANIEL GARZA, M.A.":"الوحدة 1 · المستعمرات والثورة والدستور | CPUSH | DANIEL GARZA, M.A.","Unlocked. Your digit is 1. Your answer: Alexander Hamilton and John Adams; The Republicans; The Constitution said nothing about creating a national bank; Individual freedoms and states’ rights":"تم الفتح. رقمك هو 1. إجابتك: ألكسندر هاملتون (Alexander Hamilton) وجون آدامز (John Adams); الجمهوريون; لم يقل الدستور شيئًا عن إنشاء بنك وطني; الحريات الفردية وحقوق الولايات","Unscramble the letters to fill the blank.":"رتّب الأحرف لتملأ الفراغ.","Voting in Congress":"التصويت في الكونغرس","What did the Republicans fear a strong national government would threaten?":"ماذا خشي الجمهوريون أن تهدد حكومة وطنية قوية؟","Which lock was hardest, and what did you learn that you did not know before?":"أي قفل كان الأصعب، وماذا تعلمت ولم تكن تعرفه من قبل؟","Which side wanted the country to stay a rural nation of small farmers?":"أي طرف أراد أن تبقى البلاد أمة ريفية من صغار المزارعين؟","Who led the Federalists?":"من قاد الفيدراليين؟","Why did Madison and Jefferson oppose Hamilton’s national bank?":"لماذا عارض ماديسون (Madison) وجيفرسون (Jefferson) بنك هاملتون (Hamilton) الوطني؟","Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.":"اكتب من 3 إلى 4 جمل. اذكر القفل واستخدم معلومة واحدة من بطاقة القرائن الخاصة به. يمكنك كتابة هذا حتى لو لم تهرب.","You are locked in the tavern back room.":"أنت محبوس في الغرفة الخلفية في النُّزُل (tavern).","You escaped and wrote your Debrief. Ready to submit.":"لقد هربت وكتبت ملخصك الختامي. أنت جاهز للتسليم.","You escaped! Write your Debrief, then download your file to submit.":"لقد هربت! اكتب ملخصك الختامي، ثم نزّل ملفك لتسليمه.","Your answer":"إجابتك","Your time:":"وقتك:","digit":"رقم","Unlocked. Your digit is 6. Your answer: Voting in Congress = Each state had one vote, no matter how many people lived there; Money and taxes = Congress had no cash and could not collect taxes; Shays’s Rebellion = Struggling farmers in western Massachusetts rose up over debts and taxes; Northwest Ordinance (1787) = New territories would become equal states, and slavery was banned north of the Ohio River":"تم الفتح. رقمك هو 6. إجابتك: التصويت في الكونغرس = كان لكل ولاية صوت واحد، مهما كان عدد من يعيشون فيها; المال والضرائب = لم يكن لدى الكونغرس مال ولم يكن يستطيع جمع الضرائب; تمرّد شايز (Shays’s Rebellion) = ثار مزارعون يعانون في غرب ماساتشوستس (Massachusetts) بسبب الديون والضرائب; مرسوم الشمال الغربي (Northwest Ordinance) (1787) = ستصبح الأقاليم الجديدة ولايات متساوية، وحُظرت العبودية شمال نهر أوهايو (Ohio River)","Unlocked. Your digit is 4. Your answer: The Constitution is written in Philadelphia > The Federalist Papers essays begin in New York newspapers > New Hampshire becomes the ninth state to ratify > The Bill of Rights is approved by three-fourths of the states":"تم الفتح. رقمك هو 4. إجابتك: يُكتب الدستور في فيلادلفيا (Philadelphia) > تبدأ مقالات الأوراق الفيدرالية (The Federalist Papers) في صحف نيويورك (New York) > تصبح نيو هامبشير (New Hampshire) الولاية التاسعة التي تصدّق > توافق ثلاثة أرباع الولايات على وثيقة الحقوق (Bill of Rights)","Clear all your work and start over? This cannot be undone.":"هل تريد مسح كل عملك والبدء من جديد؟ لا يمكن التراجع عن هذا."},"patterns":[{"re":"^Still needed: first name, last name, and period\\.$","es":"Todavía falta: nombre, apellido y período.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة."},{"re":"^LOCK (\\d)$","es":"Cand. $1","ar":"القفل $1"},{"re":"^LOCK (\\d) · CORE OBJECTIVE (\\d)$","es":"CANDADO $1 · OBJETIVO PRINCIPAL $2","ar":"القفل $1 · الهدف الأساسي $2"},{"re":"^Hint (\\d):$","es":"Pista $1:","ar":"تلميح $1:"},{"re":"^Exit code digit (\\d)$","es":"Dígito $1 del código de salida","ar":"رقم رمز الخروج $1"},{"re":"^Click! Lock (\\d) is open\\. Your digit is (\\d)\\.$","es":"¡Clic! El Candado $1 está abierto. Tu dígito es $2.","ar":"نقرة! القفل $1 مفتوح. رقمك هو $2."},{"re":"^5 of 5 locks opened with (\\d+) tries and (\\d+) hints\\.$","es":"Abriste 5 de 5 candados con $1 intentos y $2 pistas.","ar":"فتحت 5 أقفال من 5 بعد $1 من المحاولات و$2 من التلميحات."},{"re":"^Done! File downloaded: (.*)\\. Upload it to Canvas\\.$","es":"¡Listo! Se descargó el archivo: $1. Súbelo a Canvas.","ar":"تم! تم تنزيل الملف: $1. ارفعه إلى Canvas."},{"re":"^Your file downloaded and is marked INCOMPLETE \\(you have not escaped\\)\\. Upload it to Canvas: (.*)$","es":"Tu archivo se descargó y está marcado INCOMPLETO (todavía no escapas). Súbelo a Canvas: $1","ar":"تم تنزيل ملفك وهو مُسجَّل «غير مكتمل» INCOMPLETE (لم تهرب بعد). ارفعه إلى Canvas: $1"},{"re":"^Unlocked\\. Your digit is (\\d)\\. Your answer: (.*)$","es":"Desbloqueado. Tu dígito es $1. Tu respuesta: $2","ar":"تم الفتح. رقمك هو $1. إجابتك: $2"},{"re":"^LOCK (\\d) · CORE OBJECTIVE (\\d+)$","es":"CANDADO $1 · OBJETIVO PRINCIPAL $2","ar":"القفل $1 · الهدف الأساسي $2"},{"re":"^LOCK (\\d) · CORE OBJECTIVES (\\d+) AND (\\d+)$","es":"CANDADO $1 · OBJETIVOS PRINCIPALES $2 Y $3","ar":"القفل $1 · الأهداف الأساسية $2 و$3"},{"re":"^Tap all (\\d) events first, in order\\.$","es":"Primero toca los $1 sucesos, en orden.","ar":"المس الأحداث الـ $1 كلها أولًا، بالترتيب."}]}</script>
+<script>
+/* Supplement language switch (English / Espanol / Arabic). Works on pages whose text is rendered by JS:
+   a MutationObserver translates text as it appears. Data: <script type="application/json" id="sp-i18n">
+   {"langs":["en","es","ar"],"default":"en","es":{englishHTML:translation},"ar":{...},"patterns":[{"re":"^(\\d+) of (\\d+)$","es":"$1 de $2","ar":"..."}]}
+   Keys are the English text exactly as it sits in the page (innerHTML, spaces collapsed).
+   Helpers: spSeen() english strings seen so far; spMissing() strings with no translation in the current language;
+   spSetLang(l); spTr(s) translate a string (used for confirm/alert); spAscii(s) plain-ASCII name for file names. */
+(function () {
+  var node = document.getElementById('sp-i18n');
+  var D = node ? JSON.parse(node.textContent) : { langs: ['en'], patterns: [] };
+  var INLINE = { B:1,I:1,EM:1,STRONG:1,SPAN:1,A:1,BR:1,SMALL:1,SUP:1,SUB:1,U:1,MARK:1,BDI:1,TSPAN:1,CODE:1 };
+  var SKIP = 'script,style,textarea,input,.sp-lang,.sp-nt,[translate="no"]';
+  var WORD = /[A-Za-z\u00C0-\u024F\u0600-\u06FF]{2}|e\.g\./;
+  var LANG = 'en', REC = new WeakMap(), SEEN = {}, MISS = {};
+  (D.patterns || []).forEach(function (p) { try { p._re = new RegExp(p.re); } catch (e) {} });
+  function norm(s) { return String(s).replace(/\s+/g, ' ').trim(); }
+  function tr(src) {
+    if (LANG === 'en') return null;
+    var t = D[LANG] && D[LANG][src];
+    if (t) return t;
+    var P = D.patterns || [];
+    for (var i = 0; i < P.length; i++) {
+      var m = P[i]._re && P[i]._re.exec(src);
+      if (m && P[i][LANG]) return P[i][LANG].replace(/\$(\d+)/g, function (_, n) { return m[+n] || ''; });
+    }
+    return null;
+  }
+  window.spTr = function (s) { var t = tr(norm(s)); return t ? t.replace(/<[^>]+>/g, '') : s; };
+  function isInline(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling)
+      if (c.nodeType === 1 && (!INLINE[c.tagName.toUpperCase()] || c.matches(SKIP))) return false;
+    return true;
+  }
+  function directText(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling) if (c.nodeType === 3 && WORD.test(c.nodeValue)) return true;
+    return false;
+  }
+  function cur(s) { return s.nodeType === 1 ? s.innerHTML : s.nodeValue; }
+  function put(s, v) { if (s.nodeType === 1) s.innerHTML = v; else s.nodeValue = v; }
+  function handle(s) {
+    var r = REC.get(s), c = cur(s);
+    if (!(r && c === r.wrote)) { r = { en: c, wrote: c }; REC.set(s, r); }
+    var src = norm(r.en), target = r.en;
+    if (WORD.test(src)) {
+      SEEN[src] = 1;
+      if (LANG !== 'en') {
+        var t = tr(src);
+        if (t) {
+          target = s.nodeType === 1 ? t : (r.en.match(/^\s*/)[0] + t + r.en.match(/\s*$/)[0]);
+          delete MISS[src];
+        } else MISS[src] = 1;
+      }
+    }
+    if (c !== target) put(s, target);
+    r.wrote = cur(s);
+  }
+  var ATTRS = ['placeholder', 'alt', 'aria-label', 'title'];
+  function attrs(root) {
+    var els = root.querySelectorAll ? root.querySelectorAll('[placeholder],[alt],[aria-label],[title]') : [];
+    var list = [].slice.call(els); if (root.matches && root.matches('[placeholder],[alt],[aria-label],[title]')) list.push(root);
+    list.forEach(function (el) {
+      if (el.closest && el.closest('.sp-lang,.sp-nt,[translate="no"],script,style')) return;
+      var rec = el.__spa || (el.__spa = {});
+      ATTRS.forEach(function (a) {
+        var v = el.getAttribute(a); if (v == null) return;
+        var r = rec[a];
+        if (!(r && v === r.wrote)) { r = rec[a] = { en: v, wrote: v }; }
+        var src = norm(r.en); if (!WORD.test(src)) return;
+        SEEN[src] = 1;
+        var t = LANG === 'en' ? null : tr(src);
+        if (LANG !== 'en' && !t) MISS[src] = 1;
+        var target = t ? t.replace(/<[^>]+>/g, '') : r.en;
+        if (v !== target) el.setAttribute(a, target);
+        r.wrote = el.getAttribute(a);
+      });
+    });
+  }
+  function walk(root) {
+    if (root.nodeType === 3) { if (WORD.test(root.nodeValue) && !(root.parentNode && root.parentNode.closest && root.parentNode.closest(SKIP))) handle(root); return; }
+    if (root.nodeType !== 1) return;
+    (function w(el) {
+      if (el.matches(SKIP)) return;
+      if (el !== document.body && directText(el) && isInline(el)) { handle(el); return; }
+      for (var c = el.firstChild; c; c = c.nextSibling) {
+        if (c.nodeType === 1) w(c); else if (c.nodeType === 3 && WORD.test(c.nodeValue)) handle(c);
+      }
+    })(root);
+    attrs(root);
+  }
+  var TITLE = { en: document.title, wrote: document.title };
+  function title() {
+    if (document.title !== TITLE.wrote) TITLE = { en: document.title, wrote: document.title };
+    var t = LANG === 'en' ? null : tr(norm(TITLE.en));
+    document.title = t ? t.replace(/<[^>]+>/g, '') : TITLE.en; TITLE.wrote = document.title;
+  }
+  function inl(e) { return e.nodeType === 1 && !!INLINE[e.tagName.toUpperCase()]; }
+  var mo = new MutationObserver(function (muts) {
+    var todo = [];
+    muts.forEach(function (m) {
+      if (m.type === 'childList') { for (var i = 0; i < m.addedNodes.length; i++) todo.push(m.addedNodes[i]); todo.push(m.target); }
+      else todo.push(m.target);
+    });
+    todo.forEach(function (n) {
+      var el = n.nodeType === 1 ? n : n.parentNode;
+      if (!el || el.nodeType !== 1 || !document.body.contains(el)) return;
+      while (el !== document.body && el.parentNode && el.parentNode.nodeType === 1 && inl(el) && inl(el.parentNode)) el = el.parentNode;
+      if (el.parentNode && el.parentNode.nodeType === 1 && inl(el.parentNode) && el.parentNode !== document.body) el = el.parentNode;
+      walk(el);
+    });
+    mo.takeRecords();
+  });
+  var AR = { 'ا':'a','أ':'a','إ':'i','آ':'a','ب':'b','ت':'t','ث':'th','ج':'j','ح':'h','خ':'kh','د':'d','ذ':'dh','ر':'r','ز':'z','س':'s','ش':'sh','ص':'s','ض':'d','ط':'t','ظ':'z','ع':'a','غ':'gh','ف':'f','ق':'q','ك':'k','ل':'l','م':'m','ن':'n','ه':'h','و':'w','ي':'y','ى':'a','ة':'a','ئ':'y','ؤ':'w' };
+  window.spAscii = function (s) {
+    s = String(s); if (s.normalize) s = s.normalize('NFD').replace(/[̀-ًͯ-ٰٟ]/g, '');
+    return s.replace(/[ء-ي]/g, function (c) { return AR[c] !== undefined ? AR[c] : ''; }).replace(/ñ/g, 'n').replace(/Ñ/g, 'N');
+  };
+  window.spSeen = function () { return Object.keys(SEEN); };
+  window.spMissing = function () { return Object.keys(MISS); };
+  window.spLang = function () { return LANG; };
+  window.spSetLang = function (l) {
+    if ((D.langs || ['en']).indexOf(l) < 0) l = 'en';
+    LANG = l; MISS = {};
+    var h = document.documentElement; h.lang = l; h.dir = l === 'ar' ? 'rtl' : 'ltr';
+    mo.disconnect(); walk(document.body); title(); mo.takeRecords();
+    mo.observe(document.body, { childList: true, subtree: true, characterData: true });
+    document.querySelectorAll('.sp-lang button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === l)); });
+    try { localStorage.setItem('sp_lang', l); } catch (e) {}
+    try { var u = new URL(location.href); if (l === 'en') u.searchParams.delete('lang'); else u.searchParams.set('lang', l); history.replaceState(null, '', u.toString()); } catch (e) {}
+    try { document.dispatchEvent(new CustomEvent('splangchange', { detail: l })); } catch (e) {}
+  };
+  var _c = window.confirm, _a = window.alert;
+  window.confirm = function (m) { return _c.call(window, window.spTr(m)); };
+  window.alert = function (m) { return _a.call(window, window.spTr(m)); };
+  document.querySelectorAll('.sp-lang button').forEach(function (b) { b.addEventListener('click', function () { window.spSetLang(b.getAttribute('data-lang')); }); });
+  var start = D['default'] || 'en';
+  try { start = new URL(location.href).searchParams.get('lang') || localStorage.getItem('sp_lang') || start; } catch (e) {}
+  window.spSetLang(start);
+})();
+
+</script><!--/sp-i18n-->
+</body>
+</html>

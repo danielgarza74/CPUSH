@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Escape Room 15 · The Great Depression and the New Deal</title>
+<style>
+:root{--bg:#3D291A;--txt:#F4EFEB;--a1:#63442C;--a2:#4B9CD2;--hl:#8EC0E1;--glass:rgba(244,239,235,.07);--glassb:rgba(244,239,235,.2);--dim:#D3C9BF;--ok:#8FD3A8}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#4E3622 0%,#3D291A 60%) fixed;background-color:var(--bg);color:var(--txt);font:17px/1.55 "Segoe UI",system-ui,-apple-system,Verdana,sans-serif;min-height:100vh}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px 40px}
+.glass{background:var(--glass);border:1px solid var(--glassb);border-radius:16px;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+header.hero{padding:30px 0 12px;border-bottom:3px solid var(--a2)}
+.eyebrow{font-size:13px;letter-spacing:.16em;font-weight:700;color:var(--hl)}
+h1{margin:.15em 0 .05em;font-size:clamp(28px,6vw,40px);line-height:1.12}
+.sub{margin:0;font-weight:600;color:var(--dim)}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 4px}
+.meta label{flex:1 1 170px;font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--dim)}
+input[type=text],textarea,select{display:block;width:100%;margin-top:4px;padding:10px 12px;border:1px solid var(--glassb);border-radius:10px;background:rgba(32,21,13,.55);color:var(--txt);font:inherit;font-size:16px}
+input[type=text]:focus,textarea:focus,select:focus,button:focus-visible{outline:3px solid var(--hl);outline-offset:1px}
+input.bad{border-color:var(--a2);box-shadow:0 0 0 2px var(--a2)}
+textarea{min-height:120px;resize:vertical}
+.howto{margin:14px 0;padding:14px 16px;font-size:16px}
+.howto ol{margin:6px 0 0;padding-left:22px}
+.scene{margin:14px 0;padding:8px;text-align:center}
+.scene svg{width:100%;height:auto;display:block;border-radius:12px}
+.bar{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;padding:8px 12px;margin:10px 0;font-weight:700;font-size:15px;background:rgba(61,41,26,.92);border:1px solid var(--glassb);border-radius:12px}
+.bar span b{color:var(--hl)}
+.btn{font:inherit;font-size:16px;font-weight:700;padding:11px 18px;border-radius:12px;border:2px solid var(--hl);background:transparent;color:var(--txt);cursor:pointer;min-height:44px}
+.btn:hover{background:rgba(142,192,225,.18)}
+.btn.primary{background:var(--hl);color:#3D291A;border-color:var(--hl)}
+.btn.primary:hover{background:#B6D6EC}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.btn.small{padding:8px 14px;font-size:15px;min-height:40px}
+.intro{padding:20px;text-align:center}
+.intro p{margin:.4em 0}
+.lock{margin:12px 0;overflow:hidden}
+.lock>button.lh{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:12px;width:100%;padding:14px 16px;cursor:pointer}
+.lock>button.lh:focus-visible{outline:3px solid var(--hl);outline-offset:-3px}
+.lock.locked>button.lh{cursor:not-allowed;opacity:.55}
+.lk{flex:none;width:44px;height:44px}
+.lk .sh{transition:transform .5s cubic-bezier(.3,1.6,.5,1);transform-origin:center}
+.lock.solved .lk .sh{transform:translateY(-6px) rotate(-30deg);transform-origin:10px 14px}
+.lock.solved .lk .bd{fill:var(--hl)}
+.lt{flex:1}
+.lt small{display:block;font-size:12px;letter-spacing:.12em;font-weight:700;color:var(--hl)}
+.lt strong{font-size:19px}
+.dg{flex:none;min-width:42px;height:42px;border-radius:10px;border:2px solid var(--hl);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;background:rgba(32,21,13,.55)}
+.lb{padding:0 16px 16px;display:none}
+.lock.open .lb{display:block}
+.objline{font-size:14px;color:var(--dim);margin:0 0 10px}
+.card{background:rgba(244,239,235,.1);border-left:6px solid var(--a2);border-radius:10px;padding:12px 14px;margin:8px 0 12px}
+.card h4{margin:0 0 4px;font-size:13px;letter-spacing:.12em;color:var(--hl)}
+.card p{margin:.3em 0}
+.card .src{font-size:13px;color:var(--dim)}
+.prompt{font-weight:700;margin:10px 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0}
+.chip{font:inherit;font-size:16px;padding:10px 14px;border-radius:12px;border:2px solid var(--glassb);background:rgba(32,21,13,.55);color:var(--txt);cursor:pointer;min-height:44px;text-align:left}
+.chip.sel{border-color:var(--hl);background:rgba(142,192,225,.2)}
+.chip .n{display:inline-block;min-width:24px;height:24px;line-height:24px;border-radius:12px;background:var(--hl);color:#3D291A;font-weight:800;text-align:center;margin-right:8px}
+.mrow{margin:8px 0}
+.mrow label{font-weight:700;display:block}
+fieldset{border:1px solid var(--glassb);border-radius:10px;margin:8px 0;padding:8px 12px}
+legend{font-weight:700;padding:0 6px}
+.opt{display:flex;align-items:center;gap:10px;padding:6px 0;min-height:40px;cursor:pointer}
+.opt input{width:22px;height:22px;accent-color:#8EC0E1;flex:none}
+.cipher{font:700 24px/1.3 "Courier New",monospace;letter-spacing:.14em;background:rgba(32,21,13,.65);padding:12px;border-radius:10px;border:1px dashed var(--hl);word-break:break-word;text-align:center}
+.key{display:grid;grid-template-columns:repeat(13,1fr);gap:2px;margin:10px 0;font:700 14px/1.2 "Courier New",monospace;text-align:center}
+.key div{padding:3px 0;border-radius:4px;background:rgba(244,239,235,.08)}
+.key .c{color:var(--hl)}
+.scr{font:800 30px/1.2 "Courier New",monospace;letter-spacing:.3em;text-align:center;background:rgba(32,21,13,.65);padding:10px;border-radius:10px;border:1px dashed var(--hl)}
+.row{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0;align-items:center}
+.fb{margin:8px 0;padding:10px 12px;border-radius:10px;display:none;font-weight:600}
+.fb.show{display:block}
+.fb.nudge{background:rgba(75,156,210,.18);border:1px solid var(--a2)}
+.fb.good{background:rgba(143,211,168,.16);border:1px solid var(--ok);color:#DDF5E6}
+.hints{margin:6px 0}
+.hint{background:rgba(142,192,225,.14);border:1px dashed var(--hl);border-radius:10px;padding:8px 12px;margin:6px 0;font-size:16px}
+.hint b{color:var(--hl)}
+.exit{margin:16px 0;padding:18px;text-align:center}
+.exit.locked{opacity:.55}
+.exit h2,.esc h2,.debrief h2{margin:.1em 0 .3em}
+.codebox{display:flex;justify-content:center;gap:8px;margin:12px 0}
+.codebox input{width:52px;height:60px;text-align:center;font:800 30px "Courier New",monospace;padding:0;margin:0}
+.esc{margin:16px 0;padding:22px;text-align:center;display:none;border:2px solid var(--hl)}
+.esc.show{display:block}
+.esc .big{overflow-wrap:anywhere;font-size:clamp(30px,9vw,64px);font-weight:900;letter-spacing:.14em;color:var(--hl);text-shadow:0 0 24px rgba(142,192,225,.6);animation:pop .8s cubic-bezier(.3,1.6,.5,1)}
+.esc .time{font-size:26px;font-weight:800}
+.debrief{margin:16px 0;padding:16px}
+.actions{margin:16px 0;padding:16px}
+.status{font-weight:700;margin-bottom:10px}
+.msg{display:none;margin-top:10px;padding:10px 12px;border-radius:10px;background:rgba(143,211,168,.16);border:1px solid var(--ok)}
+.msg.err{background:rgba(75,156,210,.2);border-color:var(--a2)}
+.link{all:unset;cursor:pointer;color:var(--dim);text-decoration:underline;font-size:14px;margin-top:10px;display:inline-block}
+.link:focus-visible{outline:3px solid var(--hl)}
+footer{text-align:center;font-size:12px;letter-spacing:.1em;font-weight:700;color:var(--dim);padding:20px 8px 30px;border-top:1px solid var(--glassb);margin-top:20px}
+.ennote{margin:.4em 0 0;font-size:14px;font-weight:700;color:var(--dim)}
+.exit .ennote{text-align:center}
+.hidden{display:none!important}.lock,.exit,.esc{scroll-margin-top:64px}
+.pop{animation:pop .7s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pop{0%{transform:scale(.2);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes tap{0%,100%{transform:rotate(0)}50%{transform:rotate(9deg)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.shake{animation:shake .35s}
+.wheel{transform-box:view-box;transform-origin:276px 86px}
+.wheel.spin{animation:tap .5s ease-in-out 3}
+.plock .sh{transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
+.plock.open .sh{transform:translateY(-7px)}
+.plock.open .bd{fill:#8EC0E1}
+#door{transform-origin:150px 20px;transition:transform 1.4s ease-in-out}
+.escaped #door{transform:scaleX(.1)}
+#glow{opacity:.15;transition:opacity 1.4s}
+.escaped #glow{opacity:1}
+html[dir="rtl"] .chip{text-align:right}
+html[dir="rtl"] .chip .n{margin-right:0;margin-left:8px}
+html[dir="rtl"] .card{border-left:0;border-right:6px solid var(--a2)}
+html[dir="rtl"] .howto ol{padding-left:0;padding-right:22px}
+html[dir="rtl"] .esc,html[dir="rtl"] .exit,html[dir="rtl"] .intro{text-align:center}
+html[dir="rtl"] .cipher,html[dir="rtl"] .scr,html[dir="rtl"] .key{direction:ltr}
+html[dir="rtl"] .scr{letter-spacing:.3em!important}
+html[dir="rtl"] .cipher{letter-spacing:.14em!important}
+html[dir="rtl"] .key{letter-spacing:0!important}
+html[dir="rtl"] .card .src{direction:ltr;text-align:left}
+html[dir="rtl"] .hint,html[dir="rtl"] .fb,html[dir="rtl"] .msg,html[dir="rtl"] .objline{text-align:start}
+html[dir="rtl"] .lock>button.lh{text-align:start}
+html[dir="rtl"] .lb,html[dir="rtl"] .actions{text-align:start}
+html[dir="rtl"] .bar{direction:rtl}
+html[dir="rtl"] .tt{unicode-bidi:plaintext}
+@media(max-width:520px){body{font-size:16px}.chip{width:100%}.key{font-size:12px;gap:1px}.codebox input{width:46px;height:54px}.dg{min-width:38px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{.bar,.actions button{display:none}}
+/*sp-i18n-css*/
+.sp-lang-bar{display:flex;justify-content:flex-end;padding:8px 12px 0;position:relative;z-index:5}
+.sp-lang{display:inline-flex;gap:2px;padding:3px;border-radius:10px;background:rgba(255,255,255,.88);border:1px solid rgba(0,0,0,.18);font-family:system-ui,"Segoe UI",Tahoma,Arial,sans-serif}
+.sp-lang button{border:0;background:transparent;color:#222;font:600 13px/1 system-ui,"Segoe UI",Tahoma,Arial,sans-serif;padding:7px 11px;border-radius:7px;cursor:pointer}
+.sp-lang button[aria-pressed="true"]{background:#222;color:#fff}
+.sp-lang button:focus-visible{outline:3px solid #2a6df4;outline-offset:1px}
+textarea,input,select{unicode-bidi:plaintext}
+html[lang="ar"] body,html[lang="ar"] button,html[lang="ar"] textarea,html[lang="ar"] input,html[lang="ar"] select{font-family:"Segoe UI",Tahoma,"Noto Sans Arabic","Arial",system-ui,sans-serif}
+html[lang="ar"] body{line-height:1.8}
+html[lang="ar"] *{letter-spacing:0!important}
+html[dir="rtl"] textarea,html[dir="rtl"] input{text-align:start}
+@media print{.sp-lang-bar{display:none}}
+/*/sp-i18n-css*/
+</style>
+</head>
+<body>
+<!--sp-bar--><div class="sp-lang-bar"><div class="sp-lang" role="group" aria-label="Language / Idioma / اللغة"><button type="button" data-lang="en" lang="en" aria-pressed="true">English</button><button type="button" data-lang="es" lang="es" aria-pressed="false">Español</button><button type="button" data-lang="ar" lang="ar" aria-pressed="false">العربية</button></div></div><!--/sp-bar-->
+<div class="wrap">
+<header class="hero">
+  <div class="eyebrow">1929-1937</div>
+  <h1>Escape the Newsroom</h1>
+  <p class="sub">The Great Depression and the New Deal</p>
+  <div class="meta">
+    <label>FIRST NAME *<input id="f_first" type="text" autocomplete="given-name"></label>
+    <label>LAST NAME *<input id="f_last" type="text" autocomplete="family-name"></label>
+    <label>PERIOD *<input id="f_period" type="text" inputmode="numeric" maxlength="12" placeholder="e.g. 3"></label>
+  </div>
+</header>
+
+<div class="howto glass"><b>How to escape:</b>
+<ol>
+<li>Open each lock in order. Read the <b>Clue Card</b>. The answer is in the card.</li>
+<li>Solve the puzzle to open the lock and reveal one digit.</li>
+<li>If you get stuck, press <b>Hint</b>. Hints are free, but your teacher can see how many you used.</li>
+<li>Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.</li>
+</ol></div>
+
+<div class="scene glass" id="scene">
+<svg viewBox="0 0 600 270" role="img" aria-label="A 1930s newspaper office at night. On the left, a corkboard with pinned newspaper pages hangs above a desk with a typewriter and a desk lamp, and a stack of newspapers sits on the floor. On the right, a clock and a framed front page hang above a filing cabinet with a telephone and a stack of newspapers on top. The door has a PRESS ROOM sign and five padlocks in a row. Under each padlock is a window for one digit of the exit code.">
+<defs>
+<pattern id="brick" width="40" height="270" patternUnits="userSpaceOnUse"><rect width="40" height="270" fill="#2F1F13"/><path d="M0 0V270" stroke="#F4EFEB" stroke-opacity=".12" fill="none"/><path d="M20 0V270" stroke="#F4EFEB" stroke-opacity=".05" fill="none"/></pattern>
+<radialGradient id="glowg" cx="50%" cy="50%" r="60%"><stop offset="0" stop-color="#F4EFEB"/><stop offset="1" stop-color="#8EC0E1"/></radialGradient>
+</defs>
+<rect width="600" height="270" fill="url(#brick)"/>
+<rect y="236" width="600" height="34" fill="#261910"/>
+<g stroke="#D3C9BF" stroke-opacity=".35" stroke-width="2"><path d="M0 248H600M0 260H600"/><path d="M60 236V248M180 236V248M300 236V248M420 236V248M540 236V248M120 248V260M240 248V260M360 248V260M480 248V260M600 248V260"/></g>
+<g stroke="#D3C9BF" stroke-opacity=".5" stroke-width="2" fill="none"><path d="M0 14Q75 30 150 18"/><path d="M450 18Q525 30 600 14"/></g>
+<g><rect x="10" y="34" width="128" height="84" rx="4" fill="#63442C" stroke="#8EC0E1" stroke-opacity=".6" stroke-width="3"/>
+<rect x="18" y="42" width="34" height="44" fill="#F4EFEB" fill-opacity=".88"/><rect x="22" y="46" width="26" height="6" fill="#3D291A" fill-opacity=".7"/><path d="M22 58H48M22 64H48M22 70H48M22 76H40" stroke="#3D291A" stroke-opacity=".45" stroke-width="2"/>
+<rect x="58" y="44" width="30" height="34" fill="#F4EFEB" fill-opacity=".88"/><rect x="62" y="48" width="22" height="5" fill="#3D291A" fill-opacity=".7"/><path d="M62 58H84M62 64H84M62 70H78" stroke="#3D291A" stroke-opacity=".45" stroke-width="2"/>
+<rect x="94" y="40" width="38" height="50" fill="#F4EFEB" fill-opacity=".88"/><rect x="98" y="44" width="30" height="7" fill="#3D291A" fill-opacity=".7"/><path d="M98 57H128M98 63H128M98 69H128M98 75H128M98 81H116" stroke="#3D291A" stroke-opacity=".45" stroke-width="2"/>
+<rect x="30" y="92" width="44" height="20" fill="#F4EFEB" fill-opacity=".88"/><path d="M34 98H70M34 104H70" stroke="#3D291A" stroke-opacity=".45" stroke-width="2"/>
+<circle cx="35" cy="44" r="3" fill="#4B9CD2"/><circle cx="73" cy="46" r="3" fill="#4B9CD2"/><circle cx="113" cy="42" r="3" fill="#4B9CD2"/><circle cx="52" cy="94" r="3" fill="#4B9CD2"/></g>
+<g><rect x="24" y="196" width="112" height="10" rx="3" fill="#8EC0E1"/><path d="M34 206V236M126 206V236" stroke="#8EC0E1" stroke-width="6"/>
+<rect x="60" y="148" width="30" height="26" fill="#F4EFEB" fill-opacity=".92"/><path d="M65 156H85M65 162H85M65 168H79" stroke="#3D291A" stroke-opacity=".5" stroke-width="2"/>
+<rect x="48" y="170" width="54" height="8" rx="2" fill="#20150D" stroke="#F4EFEB" stroke-opacity=".7"/>
+<rect x="44" y="178" width="64" height="18" rx="3" fill="#63442C" stroke="#8EC0E1" stroke-width="2"/>
+<g fill="#F4EFEB"><circle cx="54" cy="188" r="2.6"/><circle cx="64" cy="188" r="2.6"/><circle cx="74" cy="188" r="2.6"/><circle cx="84" cy="188" r="2.6"/><circle cx="94" cy="188" r="2.6"/></g>
+<ellipse cx="124" cy="194" rx="10" ry="3" fill="#8EC0E1"/><path d="M124 194L117 168L131 156" fill="none" stroke="#8EC0E1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M124 150L142 158L136 167L119 159Z" fill="#4B9CD2" stroke="#F4EFEB" stroke-opacity=".6"/></g>
+<g fill="#F4EFEB" fill-opacity=".88" stroke="#3D291A" stroke-opacity=".5"><rect x="6" y="226" width="26" height="10"/><rect x="8" y="217" width="24" height="9"/><rect x="7" y="208" width="26" height="9"/></g>
+<g><circle cx="500" cy="62" r="22" fill="#20150D" stroke="#8EC0E1" stroke-width="3"/><circle cx="500" cy="62" r="16" fill="#F4EFEB" fill-opacity=".1"/>
+<path d="M500 48V52M500 72V76M486 62H490M510 62H514" stroke="#F4EFEB" stroke-width="2"/><path d="M500 62V52M500 62L508 66" stroke="#4B9CD2" stroke-width="3" stroke-linecap="round"/><circle cx="500" cy="62" r="2.5" fill="#8EC0E1"/></g>
+<g><rect x="536" y="38" width="52" height="66" fill="#F4EFEB" fill-opacity=".9" stroke="#8EC0E1" stroke-width="2"/><rect x="541" y="44" width="42" height="9" fill="#3D291A" fill-opacity=".75"/><rect x="541" y="58" width="20" height="16" fill="#4B9CD2" fill-opacity=".6"/><path d="M565 60H583M565 66H583M565 72H583M541 80H583M541 86H583M541 92H576" stroke="#3D291A" stroke-opacity=".45" stroke-width="2"/></g>
+<g><rect x="470" y="150" width="98" height="86" rx="4" fill="#2F1F13" stroke="#8EC0E1" stroke-width="3"/><path d="M470 178H568M470 207H568" stroke="#8EC0E1" stroke-opacity=".6" stroke-width="2"/>
+<rect x="508" y="160" width="22" height="6" rx="2" fill="#4B9CD2"/><rect x="508" y="189" width="22" height="6" rx="2" fill="#4B9CD2"/><rect x="508" y="218" width="22" height="6" rx="2" fill="#4B9CD2"/>
+<rect x="498" y="138" width="44" height="12" rx="3" fill="#63442C" stroke="#8EC0E1" stroke-width="2"/><path d="M520 138V114" stroke="#8EC0E1" stroke-width="4" stroke-linecap="round"/><circle cx="520" cy="109" r="7" fill="#8EC0E1"/><path d="M538 138V122Q546 120 546 110" fill="none" stroke="#8EC0E1" stroke-width="3" stroke-linecap="round"/><circle cx="546" cy="108" r="4" fill="#4B9CD2"/>
+<g fill="#F4EFEB" fill-opacity=".88" stroke="#3D291A" stroke-opacity=".5"><rect x="548" y="141" width="18" height="9"/><rect x="549" y="133" width="16" height="8"/></g></g>
+<rect id="glow" x="150" y="20" width="300" height="216" rx="10" fill="url(#glowg)"/>
+<g id="door">
+<rect x="150" y="20" width="300" height="216" rx="10" fill="#63442C" stroke="#8EC0E1" stroke-width="3"/>
+<circle cx="164" cy="34" r="4" fill="#8EC0E1"/><circle cx="436" cy="34" r="4" fill="#8EC0E1"/><circle cx="164" cy="222" r="4" fill="#8EC0E1"/><circle cx="436" cy="222" r="4" fill="#8EC0E1"/>
+<rect x="210" y="30" width="180" height="26" rx="4" fill="#20150D" stroke="#F4EFEB" stroke-opacity=".7"/>
+<text x="300" y="48" text-anchor="middle" font-size="13" letter-spacing="3" font-weight="700" fill="#F4EFEB">PRESS ROOM</text>
+<rect x="262" y="90" width="76" height="8" rx="3" fill="#3D291A"/>
+<circle cx="276" cy="86" r="4" fill="#F4EFEB"/>
+<g class="wheel" id="wheel"><path d="M276 86L328 80" stroke="#F4EFEB" stroke-width="4" stroke-linecap="round"/><circle cx="330" cy="80" r="6" fill="#4B9CD2"/></g>
+<rect x="170" y="106" width="260" height="8" rx="3" fill="#3D291A"/>
+<g id="plocks"></g>
+<text x="300" y="228" text-anchor="middle" direction="ltr" font-size="11" letter-spacing="3" font-weight="700" fill="#F4EFEB">1929 - 1937</text>
+</g>
+</svg>
+</div>
+
+<div class="intro glass" id="intro">
+  <h2 style="margin:.1em 0">You are locked in the newsroom.</h2>
+  <p>The newspaper office closed for the night, and the night editor locked up the newsroom. Old front pages and typewriters from the Depression years sit in the room. The door has <b>5 locks</b>. Each lock matches one big idea from Lesson 15. Solve them all to find the <b>5-digit exit code</b>.</p>
+  <p>The clock starts when you press the button. Most students finish in about 20 minutes.</p>
+  <p><button class="btn primary" id="startBtn">Enter the Newsroom</button></p>
+</div>
+
+<div id="game" class="hidden">
+  <div class="bar" id="bar" aria-live="off"><span><span>Time</span> <b id="tm">00:00</b></span><span><span>Locks</span> <b id="lc">0</b>/5</span><span><span>Hints used</span> <b id="hc">0</b></span></div>
+  <div id="locks"></div>
+
+  <section class="exit glass locked" id="exit" aria-label="Exit door">
+    <div class="eyebrow">THE EXIT DOOR</div>
+    <h2>Type the exit code</h2>
+    <p id="exitNote">Open all 5 locks first. The digits go in order: Lock 1 first.</p>
+    <div class="codebox" id="codebox" dir="ltr"></div>
+    <p class="ennote">Type the answer in English. Use the digits 0-9.</p>
+    <div class="row" style="justify-content:center"><button class="btn primary" id="codeBtn" disabled>Open the Door</button></div>
+    <div class="fb" id="codefb"></div>
+  </section>
+
+  <section class="esc glass" id="esc" aria-live="polite">
+    <div class="big">ESCAPED</div>
+    <p class="time"><span>Your time:</span> <span id="escTime">00:00</span></p>
+    <p id="escSum"></p>
+    <p>One last step: write your Debrief below.</p>
+  </section>
+
+  <section class="debrief glass" id="debrief">
+    <div class="eyebrow">DEBRIEF</div>
+    <h2>Which lock was hardest, and what did you learn that you did not know before?</h2>
+    <p style="margin:.2em 0;color:var(--dim)">Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.</p>
+    <textarea id="debriefText" aria-label="Debrief" placeholder="Type your answer here..."></textarea>
+  </section>
+
+  <section class="actions glass" id="actions">
+    <div class="status" id="status"></div>
+    <div class="row">
+      <button class="btn" id="saveBtn">Save Progress</button>
+      <button class="btn" id="loadBtn">Load Progress</button>
+      <input type="file" id="loadFile" accept=".json,application/json" hidden>
+      <button class="btn primary" id="finishBtn">Finished — Download File to Submit</button>
+    </div>
+    <div class="msg" id="msg" role="status"></div>
+    <button class="link" id="reset">Clear all my work and start over</button>
+  </section>
+</div>
+
+<div class="actions glass hidden" id="loadOnly" style="margin-top:12px"><button class="btn" id="loadBtn0">Load Progress</button> <span style="color:var(--dim)">Have a saved file? Load it to continue.</span></div>
+
+<footer>UNIT 6 · DEPRESSION AND WORLD WAR | CPUSH | DANIEL GARZA, M.A.</footer>
+</div>
+
+<script type="application/json" id="er-data">{"salt": "L15esc:", "exitHash": "82d7c9a3cf293155de55", "locks": [{"n": 1, "key": "lock1_ticker_tape", "title": "The Ticker Tape", "obj": "1", "objLabel": "CORE OBJECTIVE 1", "objText": "Core Objective 1: Identify the major causes of the Great Depression.", "type": "pick", "card": "<p>In the 1920s, many people bought stocks “on margin.” An investor paid a small down payment and borrowed the rest from a stockbroker. On Black Tuesday, October 29, 1929, share prices went into free fall. The crash did not cause the Great Depression, but it showed that the prosperity of the 1920s had been built on unstable foundations. Factories made more products than consumers could buy, and wages did not keep up. From 1929 to 1933, U.S. economic output dropped by 27 percent. The Smoot-Hawley Tariff of 1930 raised the average tariff rate from 25 percent to 50 percent, and other countries passed tariffs of their own. The Federal Reserve also tightened the money supply, and it shrank by a third between 1929 and 1932.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 23, “The Causes of the Great Depression” (pp. 1001-1004).", "prompt": "Pick the correct answer for all three questions.", "qs": [{"id": "m", "q": "What does it mean to buy stocks “on margin”?", "opts": [{"id": "a", "label": "Pay the full price in cash"}, {"id": "b", "label": "Pay a small down payment and borrow the rest from a broker"}, {"id": "c", "label": "Buy stocks only from the government"}, {"id": "d", "label": "Trade stocks only after the market closes"}]}, {"id": "o", "q": "How much did U.S. economic output drop from 1929 to 1933?", "opts": [{"id": "a", "label": "7 percent"}, {"id": "b", "label": "17 percent"}, {"id": "c", "label": "27 percent"}, {"id": "d", "label": "57 percent"}]}, {"id": "t", "q": "What did the Smoot-Hawley Tariff do to the average tariff rate?", "opts": [{"id": "a", "label": "Cut it from 50 percent to 25 percent"}, {"id": "b", "label": "Raised it from 25 percent to 50 percent"}, {"id": "c", "label": "Raised it from 5 percent to 10 percent"}, {"id": "d", "label": "Left it at 25 percent"}]}], "hints": ["Each answer is in the Clue Card. Look for “on margin,” for the drop in economic output, and for the tariff rates.", "“On margin” means a small down payment plus a loan from a broker. Output dropped by 27 percent. The tariff went from 25 percent to 50 percent."], "nudge": "Not quite. At least one answer is off. Re-read the Clue Card for what “on margin” means, how far output dropped, and the tariff rates.", "entries": ["317c47acaccb6fc7df992"], "id": "lock1_ticker_tape"}, {"n": 2, "key": "lock2_telephone", "title": "The Telephone", "obj": "2", "objLabel": "CORE OBJECTIVE 2", "objText": "Core Objective 2: Describe the impact of the Great Depression on the lives of the American people.", "type": "match", "card": "<p>By 1932, perhaps one-quarter of the population could not afford housing or adequate food, and unemployment had reached 12 million. Hungry people by the millions lined up at soup kitchens for small amounts of food and water. Shantytowns appeared in cities across the country to shelter the homeless. Married women were the main targets of layoffs, and Black workers who had moved north had the highest rate of joblessness. In 1931, Hoover approved a plan to forcibly return Mexicans to Mexico. Estimates vary, but at least 350,000 people were exiled, and many of them were U.S. citizens. In the 1930s, a terrible drought created the Dust Bowl, where strong winds scooped up millions of tons of topsoil. Dust Bowl refugees, called “Okies” or “Arkies,” headed to California in search of jobs.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 23, “The Human Toll of the Depression” (pp. 1005-1009).", "prompt": "Match each term to the best description. Use the Clue Card.", "terms": [{"id": "ok", "label": "Okies"}, {"id": "db", "label": "Dust Bowl"}, {"id": "sk", "label": "Soup kitchens"}, {"id": "st", "label": "Shantytowns"}], "descs": [{"id": "d", "label": "The label for refugees from the Dust Bowl who headed to California for jobs"}, {"id": "c", "label": "A drought disaster in the southern plains where winds carried away millions of tons of topsoil"}, {"id": "a", "label": "Places where hungry people lined up for small amounts of food and water"}, {"id": "b", "label": "Makeshift housing that appeared in cities to shelter the homeless"}], "hints": ["Two terms name places people used or built (soup kitchens, shantytowns). One names a disaster (Dust Bowl). One names a label for the people who left it (Okies).", "Soup kitchens gave out food. Shantytowns were makeshift housing. The Dust Bowl was a drought disaster. The Okies were Dust Bowl refugees who went to California."], "nudge": "Not quite. Check each match against the Clue Card. Which one are you least sure about?", "entries": ["cac253ea3a296d04a5d16"], "id": "lock2_telephone"}, {"n": 3, "key": "lock3_code_book", "title": "The Code Book", "obj": "3", "objLabel": "CORE OBJECTIVE 3", "objText": "Core Objective 3: Explain how the Hoover administration failed to address the human distress caused by the Great Depression.", "type": "decode", "shift": 5, "cipher": "ATQZSYFWNXR", "card": "<p>President Hoover refused to start federal programs to help needy people directly. He feared the nation would be “plunged into socialism.” He hoped that the “natural generosity” of Americans, local charities, and churches would be enough, and he believed that volunteers would relieve the suffering. But there were no jobs, even for people who wanted to work, and homeless people called their shantytowns “Hoovervilles” to criticize the president. Hoover also pushed through the Revenue Act of 1932, the largest peacetime tax increase in history. In 1932, army soldiers attacked unemployed veterans and their families at a camp near the Capitol, burned their shelters, and injured 55 veterans. Roosevelt won the 1932 election, 23 million votes to 16 million.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 23, “From Hooverism to the New Deal” (pp. 1010-1014).", "prompt": "The Clue Card describes an idea without naming it. A secret message names it. Each letter in the message was moved 5 steps forward in the alphabet. Decode it to name the idea.", "hints": ["The Clue Card describes the idea but does not name it. Use the decoder key to spell the name, one letter at a time.", "In the message, the letter A is really V, and the letter T is really O. The word has 11 letters and starts with V."], "nudge": "Not quite. Decode one letter at a time with the key, then check your spelling.", "entries": ["0007834b45b6d5a0bb586", "023a754bff2973c12d077", "0272489658634690bf8a4", "02f8c5e6ffdc22d53f649", "032ff924ec741dcb07a43", "033ef31bf50fde9073515", "036bd75f80326843a4f59", "0444ab2c23b4ad1f9a2a7", "0521e943ed123637d49e6", "05c66fdac80b9611695e5", "064d59e7c593c883d7379", "06e915ba2e4803b44e857", "0762a32dca75a85c1c043", "07f5c853a978718403288", "0ada38206c20edad98e37", "0b9093ef16264bc2e1da9", "0ba7b9099b3a2993a3257", "0bbe9dbacb26dc6331445", "0bdbec2bf33fd18456999", "0c16ed60e9dbf83869ad3", "0c18d496d8c473bc25d69", "0d31a31dc2c3e0c75d925", "0d3ce49347570a5746e40", "0d3e4a45b8a31d438e8e9", "0dc0a74a2607c94200434", "0e4be6f1467cc676d0a71", "0e63d22e2658bc4cd7251", "0f20e216700430bb0a379", "0ff6cd73a0b5201672de4", "10044cacd59c5df1468c9", "1016cf6b4e5301cf34cf7", "10b57eb190e5c350c7513", "111d038e96210f74de9c4", "115aa5772cc7c6d11ef23", "116c54f72a5bba8f772b9", "11b425324d65c4050d4a1", "11ddf4c32398943b134c8", "127c6462ad1fb7f5d1637", "1359d77099b453668f8f1", "13c07dccfbaad63347516", "13d1484c1dccca98121e0", "14197dfd8089855a44266", "143c2525c4effbd6729c3", "1464094c9e4d55eefac97", "148d765232d5b0f396824", "14e5ff26de5534c5b57e4", "15c374473c322a6409a93", "15fb73bf4e0ec34e64136", "16bd25233086d2db56f59", "16f23184ee4547519a373", "17330bd4d4484a5970e16", "18af384e3a28eacc4e248", "18fea7dc780214e03c464", "195f1eb6c520a51457016", "19958c0cbb03e29ec9115", "1a8324f83d1cdf43b2b52", "1a84a8ffdfb24b764d904", "1abb8ad3581aa867d1ea7", "1b3155bbe50b9d87c3498", "1b49e59b3f36103c8eba1", "1b85f09c61fb6ce9bf624", "1b87a06892eb8b6415fb0", "1c040c5f06645ccdd5fe7", "1d173189f5df087189237", "1d85db07992def1c0bcf5", "1dce71e320e564256f855", "1e47b59c5b4e753957ee8", "1ecf60c7a73634cc781a1", "1ef8c41cfa73a0a543da2", "1f1549bb9a1b9224c7148", "1f5c3d338b4f13f44bfc9", "1f5e4d3480381a1ad2f82", "2040af3598f92ec694256", "204b1953754dc02ff8ad8", "209b13b65936bfd9512a8", "2115412e8ee7357952046", "215f49249752abe48e210", "21881efb7fef68078d502", "21b601758fe8669276651", "221e68743fab26275b571", "226fcd6ec59b51eb0bb68", "23062b2f759b10d2addf6", "2392a6f6e43749c465395", "23a80d517215b50b2a843", "23c227b3b6a4065529d85", "24274f3c164f16250a715", "243577fc29494395493a0", "24858a4fa6ab3ab6ac671", "24e3881713611a9f6b9d9", "268dd4b3efc255c853434", "2722f8836a80cb0f5b5d5", "27db24ff8940f721666a4", "282cce411a61831d908b4", "28517ed4e53cf3de8df04", "2858a152b5a619456d548", "28ce3431724bebfb0ef15", "293b98a7f1445cd9817a1", "29eb08c83c5af62616f08", "2a34d34917513008a58d5", "2a46745708dc73c09c539", "2b0e41a36bc7806ea48b3", "2b204efe518c2e8f742f1", "2bd10b30d75cb86a45f35", "2bd35e8e1d3ee50e1ca12", "2c3e21e3e543c48ae9f35", "2cd2c468161a3628ae0f8", "2cede454194e30eceeb04", "2cff42386b8b04a1b4871", "2d7414a6b4e1add549508", "2dbe7eccf24e21a44e1b5", "2e0ef3c8dcc3aee9dc598", "2f27b8db4f329fe589bd1", "2fc4812ff7e0015297192", "30fbda513b752d152e7e5", "31745b8348d506758df71", "31aed568f76649e952d36", "31d7b6784daef45ef7a51", "31ef3c32fd945134d3265", "32a4ff4f6d5e6f3aff056", "32cd1a2c76083a5546011", "32e45f86cfa118aa69989", "3349a02977e6b3b1cb126", "33a5afb2fbfba52100a18", "34608b25084f1a7137e74", "346caa6f41657e7bb33f1", "346fc86b2a557f5c5b496", "353c9d9747992371e5f03", "3579c6ea71ae9bad442d8", "357d7c3da54bbc9571935", "35e4c48aec5455e948c23", "36496e74de75940e51093", "36815729d5c8d3f0d0607", "368ced9ecd8b6b92fd3f2", "36bb5bf13ddd0b5f79d18", "37bf80ccfd5de5361e994", "381470b1937dd1f2b7191", "384b1f2cd90056f22f138", "38b3f4540aa3acfb88db7", "38dfeeb0e9fdfa7b5f8a4", "38e4089671fdd9ebecd38", "394658e7801d89ecc9ff9", "3949c91c718172eb3e127", "3980b2ff1467853295094", "3a16fdb09c8f2b4fd7046", "3a7cce8071ab43f2ab142", "3b012ee04bbbaef70d0c2", "3b1c4608cacdbe5e86869", "3b3dd74a14c3113ba0f26", "3bd2b0e43b751513beb97", "3c47c9dafd86be08ba820", "3c4dd2a348d25d419c891", "3c77eb7bd7a864d8448d3", "3c9527c927b0cf23c9e91", "3cc829c62b3054fddd121", "3d1a3aac3f37220d84d62", "3d2480a5677efacf13301", "3db48f34dbfcb89a10695", "3de7cc40b24880646da26", "3f4190550eb101e653101", "3f64d63f647d364f9d528", "3fe6eae00031cef1190e8", "3fe855d9fbc22bb387131", "41b4a9b6f1c1ee2c4fe23", "422815a25bdae890d8c93", "4251a8198a156069f0583", "425b91330d5daf462ffc9", "42bea14f1fe8dc83adc25", "42f663f4baa3072216ce3", "4414aafe2baab67499492", "45c7155b5a30e3f52be59", "466c472ff2f382e3c5f94", "46bfde93f3b516abb69c6", "47360de7e7db7754421c3", "47521eafb55c241915a41", "4783a843ce07448464019", "48741d6416b6e674e78f2", "48d288c23e17c8aa48c05", "4a5d925c7c3c34d26dca1", "4ab011a4e1172e5608873", "4ab286837a120680f1a61", "4b2f7a9c85408d124be37", "4be2bc4ee30d5a8892831", "4c08495207549dab90110", "4c2ff8f1b0b54dea6ac33", "4d41ce01b7d555bbbd594", "4f488e5c01cd92b4a6502", "4f61b7cd51976e0d2de57", "503ccfdae91a85efd1d20", "50468de4cbef953e684d4", "5066915cb197cc980e4e9", "50c9cfdb0e99aa7fb1ea2", "51358841a98aeeedd9bd6", "51da74a8765211fc638f5", "5209a7fa303e4d52c4d42", "523c56925fbeba1c35ed1", "53580478dc85c31a2c806", "5363c4999658112bc7ab7", "53730a9565c17818a1905", "5396d262b652d254c91a4", "54139b86d7c221ad9cb16", "54493e0a7971d7d825f55", "54854e7433f5d54ca79e7", "54adf22ff5edbb98e5b19", "54d17ec41fa2329355d52", "54da2c5289c0af6da1175", "552a5d0d1f63e4db17330", "55e27ea372788b3373584", "56cdd2b7a0259c8be5984", "56e908102aa108b18c704", "578ec0d1f7080317ac784", "57f09b23d9a2f1dbdfbf5", "58674782eb2ed83165956", "5893f2f7d3fde97497274", "59630bb2ccd2bd9b0d9d9", "59bfecb0d2157d9fa0971", "59d736d7f73731bf1e652", "59f0d16594acc2ff2f307", "5a33bdaeeebda75e765f6", "5b24e30b391df0f748a39", "5b324b4b1c918a1518828", "5b5244b369c42cdfb9bc6", "5b6e39be0813dc4073402", "5b6eb3b062eb38c7a7070", "5b7c09981d33e6cd3f4c8", "5bb43b21f6bf3aae6c283", "5be07e635431ebc34f188", "5c93bd1fa8813c2b17582", "5cc176823e40b5319c3b5", "5ce16c622790551329df1", "5d50c5e43ccd4d2de0f39", "5d559016d39a02f4afa63", "5dc3d67c042417d4764e5", "5f22255e90e1fb492d342", "5f4cd5dcadd5cb6d280c0", "5f50f2267d3b5fd3c2d81", "5fe61bb50d5fecb13e933", "602aaaebe8d933bffde85", "60b68d702cc21efd14968", "617ba37ba04a5adae40a1", "61c78a6e051fa84145083", "62ccf590006cd7290f221", "635cde6694d0ca64cc0a2", "63645a2011dbe27719776", "64c589e30df14b8b39704", "6567a6c83f0f7b0bb1189", "657626b0466e84a712916", "6626f184b36ca6e8e3864", "662a42af0dc89f0ce77b2", "6648f49d8e4bb91acb703", "665fb85f59400fc8c77b3", "6672a8703c51392c0c183", "66e249959403fba254ec8", "681c21069c41221d14955", "68fd574d90f0bed7a7457", "6970819d97056af28a438", "69b08937359f31eaa3257", "6a1c55e2c7439f7285a94", "6bb6bca8cafbfd2fadad0", "6bed9c15f3b753b0021d7", "6c425c01cc3b1c103fc43", "6cbbbe834620d77c424a1", "6d522bed2a55337e7a5e6", "6d5265755629bf45b70a8", "6d75922f9281316b42b16", "6d9e5f7fdc9faf51e4799", "6e65e5af27e322631a050", "6e98b461a3014e5c9b4a2", "6eab10a85997e80bb18f3", "6eac02310d0464d4de6c2", "6f9d46c865f53f3ba2199", "6fb3c94a7cd995166f206", "711db68d6f7b4c2c7c274", "717470b01446d24afb966", "71756f0101b3bb7fc2994", "71b8fd5d2f90a7b17f6a4", "72dfb99f4113346864c09", "72faaf3dd88e382f1b501", "73400ea0082e6852ec0d7", "73c636434348c23fbdf08", "73f2b75d057f50f8c1cc7", "743230b45c6e3d6787aa4", "7634ce8980ed7618d52d1", "77678a9da62961d019b80", "7781123212dbb564fcf85", "779c440c25ed1209e9c72", "77b357a5b206df5758e51", "77c64576398bc8fa74348", "77caab437c9bf240d18e7", "78153d27e67a79a7ff7d7", "79c81531c275bb0ebf8d6", "7a4742905af1ac6d243e1", "7a63714c60cf89b02b662", "7a6895216d7daff7f36e2", "7a7bd47d0f458a0e28ff0", "7ba27c2ee9930965e7936", "7bdaa25640ce438914a36", "7c219f0c2352607cce591", "7c226357d3f5c585cdb69", "7c40bc222ff812c03a526", "7c724478b1d2d61697e71", "7cfc16267973ac3ab5e49", "7deebba78f1142aad91f0", "7e074edee5b658bfef6b6", "7e3543ae5518ce823e142", "7e5aeeb2d209991898541", "7ee0487f35b0db1fe7c58", "7ef7d46a4d34c5669c200", "7f3c6ff351de8f1b5a3a8", "7f7639535b7c83a1ad669", "804967cee1bea7e77aef4", "80e39a7c72571bb6721f3", "8106f9d5e9de47593bce8", "81dd1501187715c353b06", "83ba185c2443640b12e33", "8423144e9be2e5c88e269", "846b1af34a3ea7f4cfad9", "850cd244fb344e6226718", "858e4f55b7f709a5845f6", "862bf0e4dc5efa4875d01", "86454df32eba3ba757a89", "86a89c916cff7318f6c60", "8748f3e9c3d6857a271d1", "87ee500516d670ab5b922", "87f06e07f097ef9e9a7a6", "87f5b89d3a13519105109", "881b2ccf73599dbf82213", "881ec540d91718f2725a0", "88386f2eb0452de24a738", "88f30eb9c9d475636ee55", "89a396c0beddb72e92e58", "89ddfbf507b92572435e5", "89eba5784931625fcecd3", "8a180401944a940208048", "8aa2e0fb5f6706bb78104", "8ac8afc9b57b6297dec26", "8aea9e6290aa6c0279897", "8af59b9a6509e174a15e9", "8cfeca50858e7fa13e104", "8d1430e311393b8692288", "8d84fd6504bceb24e6da5", "8dd85ee0671c5dfc3eb70", "8e9c8761c6276235e3ce9", "8ed1e7e8a346cff562971", "8f7be519101e744325292", "8f8619cd3400c80b21403", "8fdee0dbb5295a3fc1ad1", "91637df0fef2ba8bda4e0", "9177e6eca3a753cd6d9d6", "9192bfff14139bcabd5b8", "92041a229389262c6e469", "9206cf2c8fb78b344f144", "9233f66cd76c1533adb75", "9357731c8a487711c2078", "93cb309b2e1d5c444ecc0", "948a16dac120efa0363d7", "94e3cf9be6b35301bf993", "94f3dbaec995a17551d81", "95c8dacf1280bd866fc65", "965f969864c113cf1bc33", "9668e7c2a8757292eabf3", "97ef4a3cd4a0b487ee8e7", "97f15e972e6418e567740", "98dbfe4c3ba0563e72144", "991fd09addf60242cedd5", "99429f9fb54220cc67641", "9994fd9df3fadae14d075", "9a0be1fd901a00c719d79", "9ae69c01080fe4cd9dce8", "9b390bc33c07d4b3aefd1", "9b53b34f09289579d0f37", "9babc804ac14660857d74", "9bc4f206ac673e7e29899", "9bd4fc29a6a464a10bb68", "9c66c626c64e2e2fbca03", "9c70d52436bc1f6b731c7", "9cfd3610a02e6f8888e96", "9d67920687dcf8c1fd829", "9df81143ddbd54cef5710", "9e4cddc0d1985f40ca647", "9f57bf7499a0520c311b7", "a005ca8d5d59901b90c24", "a0096b522745688014ed4", "a0112bd74b07655693828", "a071d53d47c059b669438", "a09bc45b0903754dbe4f1", "a0a56e73d3408a27d5243", "a0e4ae93165413eefb351", "a14fc10334e91ce9a4547", "a2572f0cbbe44f5a09366", "a27370cb663d9f9a9ef24", "a3f5cb27e3e9446843298", "a43e5abbc800281b0bec2", "a54ab8c66b40d85d4cba5", "a54b5d5cd7645257bd148", "a563e9dccf5783941bf45", "a5769f514f7c9559dd962", "a58d3ec3800dd0b351656", "a5ce9e3b4b15e13a336d0", "a68ee3fc9346ff7b50914", "a770cbf7ede2a6bdffcf4", "a78fc2c80eaf57fae25d0", "a79c3cc2323354deb1400", "a81c91e3cae92a6778fc9", "a87df4ac009668e04cce2", "a8a726eb5db8b2b9365e1", "a8b985eca7769aab35b04", "a916b96b6603b57b64144", "aa815b6953ad1ca30a370", "aae4c5f206daf430a6866", "aaf1db01ed5c3a1ba2540", "ab03deffb63885e242c58", "ac35f5ba17753f7ffeaa6", "ad08ae736e5e960df3a90", "ae1d2fbd059d2a59fe501", "b0222e30a0becad540ef9", "b03e7a5e4913b7c21c935", "b0f5ee423d9baff5f7b35", "b13bd57060559c7f04939", "b1a782334bbfb75934930", "b1f91cdea538b00748320", "b305c1381b638ab623db3", "b4181e563646dfdf090f3", "b4a5e3b154c95e8ad6a79", "b4f0bb8a4675cf184e676", "b65d6845178d67d2f29e3", "b67a48ba735d0a0413fb2", "b73bd33283f24dbe6db23", "b773782874aa3c6444c47", "b8640428d63dc35380e85", "b86f9096d0b4f3ac22ee3", "b889044ec3d1ee3514822", "b8b8086675b801820e465", "b93447f5349c604fdd449", "b9675bf15324a726d7bf7", "ba42f193401efd7c97216", "ba5d1fb0602386a065e88", "ba92bdfd0c15d3c351570", "bb2d6dde232776c2a1944", "bb6c1334763bb5e348846", "bbd865d346ca4a61368d7", "bcb01f6a5ea64d2d759a0", "bcb39e08df58161157763", "be960f833387855361fd9", "bf0897cc733c29ecd1279", "bf61cb6ff394379a65ae3", "bff5fb8f9a4831bc38d78", "c0da42faf9656a3b16a02", "c1ab7a6cdc0c1c2f99788", "c22d2cbdba1d40643a179", "c236aa25dcc9401d318e4", "c23a05f3cb76a4f606ce3", "c23c5991ee0fe12470ca6", "c2a63f1a3a0f1e48c3639", "c2cb0bd60ee88a9a3e8f0", "c38ff7228e22864a9e789", "c41363019e69b9e133727", "c45cf29593abdbafd0066", "c4a0db38edc7ae9447136", "c65dee2313b31b8579826", "c69407e25a0162f9a1888", "c6b207b17faf7a477d344", "c6f8388938cba65bfdd25", "c78f57b9fbfab2d4f46c6", "c79b72505a463edb9df00", "c7af48309389333b91fb5", "c7b94ad8d7b72f5d0b695", "c8684ad5d7ecd4e1c75f9", "c8b2c69592b3e54418910", "c8eb37ed161e37c1ec1e4", "c971f4ef34bf2761de710", "ca121b60dfc6064422fd3", "ca19b18f5a7780c3ff512", "cba60090e9bc66dd17b18", "cbaeab639f83663b51891", "cbc25c4abdebefb67ea15", "cc0577a73cebcd65aa663", "cc0dae6dd3e7945970e05", "cd2626b7faffdbdcce450", "cd61629812ba500252682", "cdd6375693a4d5451d2a2", "cdf5ef92f9b547df9a4b4", "ce2636f46b80e59449414", "ce52e7bff1e4bdb365d02", "ce65007241cb5c0b22104", "ce74c7765c146e81c7428", "cec1106791452e0c5bfa3", "cee5b41d2d820b4ccd9e8", "cef776a487acb337d3c57", "cf915c543c73b97678ed5", "d022b66b1a097eacab187", "d0402dd7df8056ecd9271", "d13915f3c3fc4768f1eb3", "d21f5eda9e08f28ea9886", "d30c5096225561e3d6ab2", "d337d8a5abb676026b944", "d373c10f75d70e1eae0d0", "d3b5a95960aeb95b529c9", "d3dd4148d2e5a23239ef5", "d42651c728bf9ffc89c63", "d44f765108caab770b661", "d5102434780717793a2c2", "d53cc3dad660fd7891450", "d543ac666c9b4a0cb5924", "d5a8b161c34ef3cfad5f6", "d6a27aba657fbb11ee252", "d7526f093fc5ae11b74a6", "d7d65df690a29c8cd64a6", "d83e4ceed536ea0879682", "d845a41194e4ec6b248d6", "d8dfc67d21d788e022999", "da3832e5f1b5b4e46f703", "da680bfa40a5d553fdab6", "dac0b44ec8068a0979b99", "db9f26444b351b09d5e13", "dbb79b9ba5c9f10623655", "dbd82b1324d28e9289372", "dc3b76bdaf0d092a7c687", "dcf19899248fd089e6f83", "dcf78869ed7e547c48d33", "dd1ed13d9e7715dd47f49", "dd37c70339925d5fe4498", "ddc3365ebb0ef2c29dbc0", "dde4d84cb15be7c057215", "de74b85b1207bff5e8523", "dedb4df9ad056e6d855b0", "df8e6130a9d1c18a660e5", "e09733d944eed618b6398", "e098d7f20f4cbe6959c54", "e0a43a32560960a639358", "e182fa24ecf9f813f00e5", "e291b0908ea891b3d8144", "e3469bf7637c518aac0d0", "e3bff95d4cc3211ec4449", "e3c7d1f8645398fa96d08", "e41df1b88047ba5939234", "e4ce0f3920276dd3be8e6", "e6103c70e8c877adc3243", "e6229bcc4036ef3e09da1", "e632508961d049839d6b3", "e65a65e6bab8e4a1e40c7", "e68aa68abe133b029bab4", "e6c6c10f3637dff8b88b7", "e6d2529960ec93b3c9bb9", "e6dc8a06a09a1488fbcd5", "e746859f15760b00dd180", "e7ba2cd5a36eb5cd48d78", "e7f9fd571325865af74b4", "e80a3ae7546f595209764", "e972cbd2fa5303a3e88a7", "e998d20262b5255133ba0", "e9fcc94d8f404b3cfb655", "ea02a1efc117f51eb79d0", "ea2a55b09d36f97134c15", "eae61a29fc8c80fd53ab3", "eb7447ae776608a270196", "ebdcc45048d2135090036", "ed207e5c78ce8a99735e5", "ed7e8d5f1fec3d43721a3", "edd2ef9232aa105001b91", "ede61dce9ab2311663577", "ee39a4ba27ff45e9a4230", "ef73d2137522e9da9fc78", "efd7a47f9b19305bbba88", "f04d99154be67ae0949e9", "f0bc5f18e8a2e2b426115", "f123afcbafb55d18b1788", "f1895cf1243b96a934948", "f19d515cc2f7274b60622", "f19eec28c95abf08539d3", "f2983f75030fde62ebf57", "f323e8d49999cd0999e11", "f356770a069ae936ea1f5", "f446e0160313eb936cd26", "f4f39a4c61dd40f551402", "f69c587d259df592dd757", "f6a62c9c217f5b87630d4", "f6b3a60e41ba621fe5698", "f6fbe369c0a7589159008", "f776b5ed64c6f07062750", "f7c3d4c125ed88ec454c6", "f7d4105fc4996f62ef1b0", "f80f7833bae80a97edff3", "f9104ef8c3cbcfee0ab03", "f94e3ba91e66c7af20cb4", "f99071ea2f964a5399ae5", "f9d9af2cde82665b46d40", "fa7536810ae5887cb8c46", "faafd6aa080d955169068", "fad2ef662fbcda7639ab8", "fb29f3a4e13f2a6548e91", "fb2d8e57f8eaa72644595", "fb64df845265822c45681", "fc46fb3c70f291633bcf9", "fc5d283f710979f6d3728", "fcdc99f1bd481aa98b008", "fdb5feebb6d3415547b19", "fdfd57b9f0cd46dafe6b2", "fe8a535f0974fe643f728"], "id": "lock3_code_book"}, {"n": 4, "key": "lock4_front_page", "title": "The Front Page", "obj": "4", "objLabel": "CORE OBJECTIVE 4", "objText": "Core Objective 4: Assess the goals and accomplishments of the First New Deal.", "type": "order", "card": "<p>Roosevelt took office in March 1933 and promised “action, and action now.” In the First Hundred Days, from March 9 to June 16, Congress approved fifteen major laws. On March 12, Roosevelt gave his first radio “fireside chat” to tell Americans that their money was safer in a reopened bank than under the mattress. On June 16, the Glass-Steagall Banking Act created the Federal Deposit Insurance Corporation (FDIC), which insured customer bank accounts up to $2,500. The Securities Exchange Act of 1934 set up the Securities and Exchange Commission (SEC) to enforce the rules for stocks and bonds. The Civilian Conservation Corps (CCC) hired half a million young, unmarried men, but women were excluded, and African Americans and Indigenous Americans were housed in segregated facilities. The National Industrial Recovery Act (NIRA) of 1933 created the National Recovery Administration (NRA), but the Supreme Court declared the NIRA unconstitutional in May 1935.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 23, “Roosevelt’s New Deal” (pp. 1015-1024).", "prompt": "Tap the four events in the order they happened. Tap an event again to take it back.", "items": [{"id": "d", "label": "The Supreme Court declares the NIRA unconstitutional"}, {"id": "b", "label": "The Glass-Steagall Banking Act creates the FDIC"}, {"id": "a", "label": "Roosevelt gives his first radio “fireside chat” about the banks"}, {"id": "c", "label": "The Securities Exchange Act creates the SEC"}], "hints": ["Look for the dates in the Clue Card: March 12 (1933), June 16 (1933), 1934, and May 1935. Each event has its own date.", "The order is the first fireside chat, the Glass-Steagall Banking Act, the Securities Exchange Act, then the Supreme Court ruling on the NIRA."], "nudge": "Not quite. Re-read the Clue Card and match each event to its date.", "entries": ["1882ab2e840a2a25ec558"], "id": "lock4_front_page"}, {"n": 5, "key": "lock5_printing_press", "title": "The Printing Press", "obj": "5", "objLabel": "CORE OBJECTIVES 5 AND 6", "objText": "Core Objectives 5 and 6: Describe how the Depression was reflected in cultural life, and analyze the opposition to the First New Deal. Evaluate how the Second New Deal transformed the role of federal government in American life.", "type": "fill", "card": "<p>Many writers, such as John Steinbeck, showed the suffering of the Depression, while popular movies helped Americans escape their troubles for a short time. Critics attacked the New Deal from both sides. Business leaders and conservatives said it was moving toward socialism, and others on the left said it did not do enough. Huey Long, Francis Townsend, and Father Charles Coughlin offered other plans, and Coughlin’s radio shows drew as many as 40 million listeners. By the end of its 1935–1936 term, the Supreme Court had ruled against New Deal programs in seven of nine major cases.<\/p><p>In January 1935, Roosevelt launched the Second New Deal, which was much more far-reaching. The Works Progress Administration (WPA) became the nation’s largest employer, and the Wagner Act guaranteed workers the right to organize unions. The centerpiece of the Social Security Act of 1935 was a federal retirement fund for people over age 65. The act left out 9.5 million low-paid workers, such as farm laborers and domestic workers, and a disproportionate share of them were African Americans.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 23, “The New Deal Years: Hardships, Cultural Life, Criticism” (pp. 1025-1035) and “The Second New Deal” (pp. 1036-1039).", "prompt": "Fill in the blank using the Clue Card.", "sentence": "The Social Security Act of 1935 created a federal ________ fund for people over age 65.", "scramble": "E  T  T  R  E  M  E  N  R  I", "hints": ["Read the last two sentences of the Clue Card. The missing word tells what kind of fund was the centerpiece of the Social Security Act.", "The word starts with R and ends with T. It has 10 letters."], "nudge": "Not quite. Re-read the last two sentences of the Clue Card. Use the scrambled letters to check your spelling.", "entries": ["002c94afe0fd268088554", "00adf0fc4888955784329", "018025cffeac59d8a32c6", "01ba8457be1d1ebae2ee3", "02d32458f33b1712c4ad0", "031ac8b21a07d3edc36f1", "037274181bc9bbf4932d0", "03b1e64f98d8d66d80271", "03e5e6f8c1ada53e06f86", "03ec09017efae02fdf914", "04a2f8cd1ca2ac1b48e38", "04d52e9cf7c7ac0560e12", "05246463d242921793bf2", "052717bd557e1107422c9", "056d8c08fe8c680e91342", "05f77af7d63391490ca37", "06306e4e4d4be7611e399", "06592d988d8484dc7f4e7", "067b3c38179343da3c997", "075c7d8aec89c3844f834", "07b7f8b695d2667135408", "08e69c138c88c43e28803", "08efa35f9c46a4a675715", "08f45368aab44c5cbe894", "09235431de913a6008c36", "0967c939e834192313439", "09850d272cd0002d31784", "099bfa371112884340cb4", "0a5cd9fec273754eca5a8", "0a79604b77eac79234a09", "0ab7d4bb9f2b52bd49290", "0ac89c385e2207d8fb8b8", "0b64423abfb71ea7cdc01", "0ba470bd49bbee9c20e41", "0c0ea0a96e587d10c5136", "0c30057a33ecd97f1b5f7", "0ce4fc0ba79cfcd2851d8", "0d5bb4e703edfad1a34b3", "0df74640735d42afb4d34", "0e44603eefc1a397bdc05", "0e4b061c8ca4bf8fa5820", "0e98b17f4cd5d2decc437", "0ea66cc56476793c72201", "107eddfe3ee5801da22d0", "11c9faa1a6687a3f8e281", "1228e31718357d24f0d13", "12c26dc6f9b5b9b73c7c2", "12e989d9ea591a9a82af4", "133d90e2cc039ad5fef48", "135530f395ee35fa6a4d5", "1361f4e63e05073bd3df0", "13970802f1908f24a7635", "14706fed31ff801e403f5", "15733136c17c2110096a1", "1576c134ce47ba4c35933", "15b4968b1fabd1b245573", "15c3d711b5a1b94701910", "1737e0a983abad2894425", "1753d3ff1f31e71cb02e6", "1791237e599119a414762", "1844191190c7053d57485", "187e9ddee1a60b57884b0", "19015ef6c148f64e82af9", "19366c703adeb2aa1d8a9", "19902fb44a57295eb6d70", "1a4fcaaac96d01602af81", "1b09a0bb2db3239376885", "1b0aa2b4852eb707fb428", "1b4313f3ff5ad256ef6f6", "1b65d8a9f8951f58ef840", "1d5711532e2feedf8e4d4", "1db5f2e4ed097b2044634", "1de92ff76d4b44eda32f7", "1ff245bc113c07028ae94", "201866f56da5368f22a86", "203cd461abe25c3d17dd7", "20560ab390d3a5a8c9a35", "206d123e5d63621429984", "2073659660d10f4a93a49", "21f6398dce21698e74538", "233764bd2fda420fccc09", "244ec69b1e0a0272a5de2", "249d8cdf05081e559a572", "2539bec45ae07e2788ab2", "256bcb16a3184e5dfc3c6", "26c9132b05e2e80a99463", "278011f22968bc9efc580", "278514bfb3f4a4132ceb9", "27a8729164b6b09305284", "27f72a89bd0298ce38dc5", "2828dfe79ce06aeaae9c4", "2838e7b518ba5059a08a2", "287800556fc063bcd23e7", "28d06f71887e6b0fedff9", "292b045f89c9025395001", "296e10f63c14ddd655828", "2a88ec56ac9335f1db3a3", "2a9b958d09797a3fda790", "2ac2f9eb1bdb002f7b662", "2aed2793e2b1bc9a7ccf2", "2b312acce6052ac0e1b36", "2b943b2e7aac3b7267909", "2c791b9953b64d9cc9522", "2d0e72b46dbfb27745ed0", "2dc0e5571941dfe580ae5", "2df06f2b24b604495fb34", "2f268cc47ce8f5c3d6f54", "2f6f53704dd99719289b8", "301c0da024bbf1dc3ec67", "30b2c55084f479fa0c406", "30bf701918164d5e4edd1", "310760ead6d6a62fea835", "31215d0c7e7521253a8a7", "3154ff5a3e78acd450fd9", "31a2bdb9da530ce91f5b6", "3203278fb709e19948905", "329530759d7e29156f2c5", "32e6c130a3ec9a5ff8346", "32e8ef0189bd4f2081643", "33137ca9d2a6a99945331", "33aa4f08da1eb160b44c4", "33fce0c0bce02b4355b45", "3575ce2d2adee0c496307", "36025ae095c22138304c2", "3614f4a828d3609659ea1", "364913f59b17d12a19381", "368e948cb2b491f4378b1", "36b8b9456d1a5e05f1130", "36dd6c7fc7d0efa56fba6", "379a3817bcb1d8d350d06", "38018bbbdab937e29e3c5", "380d3fe89f253d380ab15", "3940bfa36e4ea806b05d4", "395a231182a9949317110", "39bb146bea2cc154c1f34", "3a4a7290b29cc0706c685", "3ab3b1a8b252f14784193", "3ba47ae12964e9c843c94", "3ef4ba2e8f95779b0b7e9", "3f54d4f5853c81d2e2292", "40a2c85bb10fb101a7a61", "40aa5af2686ce5ae32af1", "41dde8494704816697d40", "4267632d151f29e1b1e51", "432450773ca94496a5696", "4376bbafc683ef3f94560", "4380c4194e537863ff9b0", "456eeeb5ec37054f91895", "457978e715cc0372993e5", "4736178429a4d93826ea2", "47c73e9b9c35362e766e2", "494a92bbb7b65db1544d3", "49bff6b339a9c44e56cd9", "4a175fc2309df58cbe8a1", "4a2739eb2f281b6082595", "4a31fe6341fd7a7f75777", "4a5c1be2c0070a5775f70", "4ad83b30406bc5edaff48", "4aed076f09f7f8b865e97", "4bc53266a5c23f4b17310", "4cab3e092abe6a33049f5", "4d0b8088ab6a4e2b94b55", "4e124b65019f8dcf8cf08", "4e60c349e6fdca1dcfae8", "4e90bc927fcba55b30092", "4eacc894848f13834bdd0", "4f5398beeff29ab24e2e5", "4fbfdf3d53f3ecd920955", "50753ec4dfa52cb5bb616", "511a4cdc615f71a136a73", "512c88941d58e688f5ac1", "518f5b20f02088c8562a4", "5193180a014451f9a9f61", "5200cc2a1f6891792ff08", "529eadfb1ece1dce8dfa5", "5370527a9897ed490d229", "53816461fc1f6f820e842", "53a7254e33b88531fc663", "5472d925820d8d6bae411", "56267948c8ce0c9b32c62", "56656acbbfbb0c3ec1182", "570a83c2b013a28d84a38", "572b3066ae8888ba3bb98", "57cdc431996a6ff763ec8", "57f198406c2b0a54eb617", "586e370577a6c42d0b5c6", "58b0acfdbf8f67457e6b3", "591ca7c5ef1253c215672", "5a37faac3a237d7aeea48", "5aca0cd7cf885e65967a3", "5b2acb0e4ab98fbbfb766", "5b885eaeaea1664b05e24", "5be606e407efa761dd463", "5c3b8d2429556edd30e67", "5d40c86b4c824c8c81b54", "5d845c325c449a5514693", "5d9f3e0fadd7e674d2782", "5dbb345c345142d1ec4b5", "5e2ca34edb4b8117926d3", "5e35d273df05dcd6cf458", "5e4794236c3f161db84a4", "5f3682eb1d61673cdb474", "6057fb669d8727e338974", "6084df0645044d7788457", "610884d31c758b9d5eff2", "620021d2ffcc8723f36b5", "6281b88df3be4eea8b6f3", "62f1a5e574d653543b3d2", "635c31747b89dc1c93c21", "641b61de58a3ea866cf84", "64403b43383a3c616e2c2", "64bf1ab8eb10c46b01b56", "656c28ce41c1c852d7556", "65cc9c974fa2382ee7d69", "6651dde7e4c60a3ba9cb8", "66d379ea45dd770404d78", "674fde8efbd0e0e91f105", "677d370b121fd8fe83245", "67af2f01de5b155eb3a31", "67dd719fc1cb70c1b3cb0", "68311f8914842be59c875", "68b94e2f14208b8bb76f0", "68da89fae7c1d5a801da3", "6a4f569f3b59c52335010", "6a63ddf5bba522d0c33f3", "6a7f5df10e56a01a35134", "6b9b0b6ff81d1e0828c54", "6d8c419fd7d9527920568", "6e3b6d48be746dd4f4bf9", "6e6cba2b7d35b99f47844", "6e74600e958aeaffaac73", "6ec74c5d8c8bbdb5715a3", "6ee203b0886f4b20256b1", "6ee35938f495181043c48", "6fb7bc7cd7b597f0119f2", "7085c6c26fbf354408209", "70b532614a8e6b2ebfdd1", "70ba6ec835fc2b45bf0a0", "71c6f4897cf715424d5f3", "72201b57e6cfcf4511d05", "72c11b4e1cfe5aeab30b8", "72ea0277cf17122b9f174", "7373c419116302c327626", "73b1a026503df656c6792", "73b72b262cdad8535cee1", "7481e6d62759f27392d35", "75e4b342ec437c2b04a73", "7604fe0b916d77bc80892", "76b977f29f6e0d3bbacf3", "76d1768223864a83b6000", "77c99de6a143ea21da6c9", "77d863dc39c204095aae3", "77e299562b82b810ac9b7", "785af028fb36838e4fa56", "79539b18da103d4095314", "79a28c287fb18a7bde2f2", "79ccb68c532fd85d5c862", "79d1f21b63b5ed623e8a4", "7a7f81f18307c91b60da1", "7aee48621630b79232bb0", "7b6ee5d01c7007c1505d5", "7bce3a93090c8450e1048", "7c442db8b761dedf467f3", "7c92e4306742cfd6ad0c4", "7cf0389bbff9534931c02", "7e71614a3d4963fcd0fa9", "7e93b03d604276467b2f3", "7f14b6c068d695bcfdf80", "7feafeced8a25148f3352", "7fecba68a56723cf071a6", "813b505a924c73fb20995", "81acb761e9f034c3febe4", "82692e85f54923045a0e9", "82ec31061e77055f05392", "8396b77be1b31a71b5514", "83da4ed31885293c6c744", "83e882d17cd9d5fb8ec45", "845fc74b33ffb95081fc9", "84637dd42adb98a94eb77", "846f358ab60982e478b95", "84bc1e464615bd6c622a2", "84e0c30902b89ad15a072", "8547bc0f8fb91801aab42", "8558605e518a5e7e642b5", "85816b642c92179674f31", "858fa16d53b613f2de5e8", "869d786b8cec3c11d6528", "87cb36ce83b79b876be43", "87ce88ed4977393104307", "888b967416cbf54e9ec15", "89ccfd95c0ea5a5eee471", "8ab7c168c5d6c59ecb775", "8b08950336060a7028948", "8b55081c6c3129c9ce135", "8b642b0c4ba83e3d99610", "8b7b70f33867b1e5b7a44", "8bd6b8b45677b7fb7e893", "8c4f09a5802dbfdf04e09", "8c7ca49a5235282b0ef66", "8cce008f73f7db432c1f0", "8ea1dbeffe7c9d87b0075", "8ee539a34904ac0e23e86", "8ff78aef90be57aaafb92", "9082bca0f747432cc1a04", "90889a86dad0d20305322", "91df0dda28a005eda5274", "9349db46dbec69582f1b1", "9360173c364985c8b01d3", "94277c5f273f7ebbdc8d1", "9483e34753487b35234d8", "954333656de0a972b3008", "95c9e3085f75c6a9f6137", "95ec17673d5a14e4a1a53", "96376df8b613bc77b0342", "96f5b8869cfe3248b3a49", "9755ec3e691b81d708407", "97d8978c2efd69a8c8e43", "97e94a43bae580ec5b111", "987c4a93dcf9455bdccb5", "98dd96c83e9e288a92371", "9968dfe3faf24aa2140b2", "996f8412bdc91f4938ee9", "997804da7b6a06ace8227", "99ace51044b0303b80562", "99b605d397f26852ddd13", "99cf186692e159af1f976", "9a9a349ba8371a69b55d1", "9b214c08daddffc130332", "9b53e243b901e638aa274", "9b5b27f152ca033e6aca3", "9b873d930b58339600781", "9c1de5b56037374aa0fc9", "9d03460a4e4e3bfc9eac9", "9d3b4c45fd4dac1232121", "9d4e7a70e4b0d62f63f97", "9de328ac5ac00e3ffad35", "9df2254283219b01cb266", "9e974cea14d15b1a03750", "9f01e7a376e93673d9870", "9fc34691fded6fc3784c1", "a0b5c921f896b76c5dbe3", "a1376ce50cc6165618fe9", "a1a268cf953af9f58a5c6", "a270cde5c66448e3c8dc2", "a297627096434619dbee9", "a2a5ab36472b5e2f63e83", "a39a2c15287eea7ffd879", "a3a9dc0648f838da14e00", "a44f7d04608e8758b1f45", "a557dd9f0402e6f195831", "a60caa26d59ec13c4a887", "a68662a15a4a7fbe5e560", "a6970e75481e5cfb673e2", "a746740826a16ec7c33d1", "a8052ff32af1ff6537ce1", "a805c74346e0c09d26309", "a86c5dbf0e9a196e6fd90", "a8d73dc2bd12d8c81a274", "a8e9ed910d7686e244f08", "a9015476a9f9bdcb162d8", "a90242695972d405fb290", "a92ebb304940d8ef3c783", "aa7f502f1d9bb1a866d40", "ab246423cf13d82436eb4", "ab86d4fb3b2eb3cf01b67", "abea30e55a83318fbc514", "abf89ae6b08e9518e41f3", "ac13dc4897bd9434ac285", "adac0481eb5d568fc6716", "ae0d9b25ea3c74677a7d4", "ae71aad4b1fd859fdf771", "aed741aaacd622a36d418", "afc246475b0bb905cdd34", "b026b719856cbda5c7480", "b06b9db10f3272bf7f927", "b1071ad3009ac26d9bea4", "b2137dbea8b58c3c1be65", "b2bf42fe605593597fb07", "b2eb3a02baeb3de05fff4", "b32ae2c08eaa743cea1d0", "b35fd155213c1581d1786", "b3bc3952f26789118a956", "b40779cf480c9b8b54e57", "b42fdc063da7ab8f61bb6", "b48af95e1331829cf6445", "b5d161097eb020b080b80", "b771742c204c5e8b58d54", "b78324bd8c4f4354db8e1", "b8a2c4bc1f39254fb3af9", "b9e3484d391f2684a1b57", "ba971de451f1d66700a60", "baa1f585068e451eed658", "bb801552283ba0a5a04e7", "bb8404f4bdd0a8dc7b2d7", "bb88bab494d93466841f7", "bbd239207a54e93350186", "bcea7f5cff3511346fec3", "bdd69f7612d49ac365845", "bec45ef7d0dd0205ea8b0", "bf92cf861a717fe560cb5", "bfd01715b8ab02d8b9e97", "bfd15c7a9efeba95b2e52", "c012b6b07257e2fc753b0", "c0332f57bb81d8a460c11", "c08102c502d6206fe4932", "c0ba17d04343c7afd6115", "c0d23d0897497d81ab347", "c0d332d3d3d75f8354cf6", "c14cfcfc5bbc0380721a0", "c2cd087d101b30b164eb5", "c2df059a5966f8fd1bc49", "c3aeabd7c182883602a78", "c40bb90c8b39de18c23f0", "c43338a7476607146b6f9", "c525530e8235336e1f5d3", "c57a40ae874ea22171934", "c5ffdf5c2cff5a9f02a75", "c68a1a53888682384b743", "c69b9cc7cbfa7bff49a04", "c69f9ffb9821b7bbb4cd0", "c7468d5d919e88ea24f55", "c7aa8b9acbbd5f85a9b15", "c829a620b3b207560fb32", "c8402fadd04602fe2bc92", "c8cd89be2fcc7305e4749", "c8d06adb9dba17b0c8ce2", "c9a545dc1d14561656af3", "c9dea5031abf68cb9e4f5", "cc3f29c6dad52eb9274b0", "cc549835159216f8f1954", "ccad8f59ca19b12215b33", "ccbc0ca20918d2a267a07", "cd4d9bdc031c0fecb2523", "cd5eef511e28c2f495e32", "ce50b3314281f9a347ad0", "ce6c04506c4c196cc1a31", "cec15ae92c1449abea635", "cf73f40259a2cb755cdc5", "cf7c034c9ab6d15361279", "cfc685f4764625c0af935", "cfe350d8fa3d062c1de25", "d1b07560a469527171896", "d2122c18bcd8199cfe910", "d23069a5f4ed460bfec12", "d24fa14f2b72dbc0c8fc8", "d2719bd51bac6be3827a2", "d2dbed25a4a6ae70c0f11", "d3005c4879379ddef6557", "d35eef89a637704ccbce4", "d3a4bc89f8993f0125c53", "d3d2f29e75be0f9d18cb4", "d42a62df8f589c0c6cb20", "d44397b37ef5f27d4e485", "d55571851053ef42e5043", "d56e605de6031670a9276", "d5cec89cf633e4d95c3c6", "d5dda9d3f9a53c26f57d5", "d6327389b36233b94ea85", "d6387565883a89202c952", "d6690e6acef24597312d6", "d6fd1b64c41c692643b56", "d73bb95a2c6d4e6812025", "d7a04cde1a42df3b6e141", "d7a0e56028ad487c7efe8", "d7f04bc40a73b07daecf0", "d81e9d9110bbe91c4d065", "d90078bec0d449b197c80", "da7e15ec67a650809a477", "db48a546ea7eb0b42d085", "db707c4a1d4ecc6d051a0", "db9c52f14f1289d7bf2d2", "dbe2bbdb5f2268ddb9464", "dc4163b4c4b5f23d67469", "dd298117d271083ceb300", "dd31072e817d99897ab11", "dd71b41d9bcfc8e14c562", "ddd7a9b3118d1f7cae5b7", "ddf6890dd5a0d53db59c8", "de26198b576f7bc6b6829", "df28a90ec7817e6786657", "df58db7aa5ae7beea7434", "e090ed8bd3cd6ee5af195", "e0e4837fcf53c5bb3a860", "e0ebb01e5a6a4358a4e13", "e1a6a55d71b173b4a64b1", "e29efb5ab35cbc8a825f4", "e413a8056382e6bfce444", "e535d52493c681103b697", "e538f9f2742f2137cb898", "e5c69e37c0e27a86c1188", "e616cfa6f0907ef1cd535", "e63d0898dd3c0018acd35", "e6908b416212c4c03a290", "e6ca82981ee74d0c121e7", "e730a4f4d5cd98363f9d3", "e7378929cdb51802bae44", "e8ba7423ad177efbfcfa7", "e8dc685b270c8fba6d166", "e941f479ef9a133ddf081", "e95d95c40bb3f7c70f310", "ea24dce3f448b2cf5bdb7", "eaf6721704d3e74260ee2", "eb83e885fb3ecc228f154", "ec0808fde7596424c4bc0", "ec5a8266955e22c10fb91", "ec7913e28591258cfdd76", "ecab7fce2b960bc579c63", "ecdae626e412dc849b5e3", "ed538b20c6ad5e2409f55", "ef0bba8e700fb9cd0e717", "efc20db5d0973ed006c43", "f0200d23317a17b3ba1a1", "f042e4fb3a5f15d3a5946", "f073e50edaf2ff501da67", "f096a23a59ec7572d5bb1", "f0975c8c4c381d51d08c6", "f0978cc9aa864c2ee5d78", "f1bda3d625d67d97a5935", "f1e71fdbcede4d48e82e8", "f26bd7d2d9eb5637e3731", "f28c0eb0bb86232126a96", "f296c02c1b9bf37295c63", "f2b8685c58dca4668d415", "f33fead215984076ef750", "f359f3fc23ad5b5baebc8", "f3d976207b51884fc13d9", "f471a89d2433273ca8249", "f68ab246ddfe6879cffd2", "f6afe357529a8e2739587", "f6c2556adf5613402da06", "f6cea22a600257971e002", "f6d11d70dd931b97d6356", "f938dae2c7fb0574bbf66", "f99cdcb4a57834ea45a33", "f9a5e92c70d005ecef8f6", "f9e4f91e98a7c7ab100a6", "fa611b08f6a8a0ff03116", "fa8e21c71a149d7610340", "fcb71f4db235731142869", "fdaab43384234226daf76", "fdec6943d2668b3d9a390", "fe51e8c30c408edad6667", "fe611e66149633f3c82a1", "ff1a4faf28e44ad069a70", "ffd8fb31098d330c56c14", "ffff737988c17fdfefdf9"], "id": "lock5_printing_press"}]}</script>
+<script>
+function sha256(ascii){
+  function rightRotate(v,a){return (v>>>a)|(v<<(32-a))}
+  var mathPow=Math.pow,maxWord=mathPow(2,32),i,j,result='',words=[],bitLen=ascii.length*8;
+  var hash=sha256.h=sha256.h||[],k=sha256.k=sha256.k||[],pc=k.length,comp={};
+  for(var c=2;pc<64;c++){if(!comp[c]){for(i=0;i<313;i+=c)comp[i]=c;hash[pc]=(mathPow(c,.5)*maxWord)|0;k[pc++]=(mathPow(c,1/3)*maxWord)|0}}
+  ascii+='\x80';while(ascii.length%64-56)ascii+='\x00';
+  for(i=0;i<ascii.length;i++){j=ascii.charCodeAt(i);words[i>>2]|=j<<((3-i)%4)*8}
+  words[words.length]=((bitLen/maxWord)|0);words[words.length]=(bitLen);
+  for(j=0;j<words.length;){
+    var w=words.slice(j,j+=16),old=hash;hash=hash.slice(0,8);
+    for(i=0;i<64;i++){
+      var w15=w[i-15],w2=w[i-2],a=hash[0],e=hash[4];
+      var t1=hash[7]+(rightRotate(e,6)^rightRotate(e,11)^rightRotate(e,25))+((e&hash[5])^((~e)&hash[6]))+k[i]+(w[i]=(i<16)?w[i]:(w[i-16]+(rightRotate(w15,7)^rightRotate(w15,18)^(w15>>>3))+w[i-7]+(rightRotate(w2,17)^rightRotate(w2,19)^(w2>>>10)))|0);
+      var t2=(rightRotate(a,2)^rightRotate(a,13)^rightRotate(a,22))+((a&hash[1])^(a&hash[2])^(hash[1]&hash[2]));
+      hash=[(t1+t2)|0].concat(hash);hash[4]=(hash[4]+t1)|0;
+    }
+    for(i=0;i<8;i++)hash[i]=(hash[i]+old[i])|0;
+  }
+  for(i=0;i<8;i++)for(j=3;j+1;j--){var b=(hash[i]>>(j*8))&255;result+=((b<16)?0:'')+b.toString(16)}
+  return result;
+}
+function sha256u(s){return sha256(unescape(encodeURIComponent(s)))}
+
+(function(){
+  var PACKET='CPUSH_L15_ESCAPE';
+  var STORE='cpush_l15_escape-room_';
+  var D=JSON.parse(document.getElementById('er-data').textContent);
+  var $=function(i){return document.getElementById(i)};
+  var S;
+  var digits={};            // runtime only: lock n -> digit
+  var entries={};           // lock id -> {h20: maskedDigit}
+  var expanded={};
+  var lastTick=0,timer=null;
+
+  function squash(t){return String(t).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'')}
+  function h20(s){return sha256u(s).slice(0,20)}
+  D.locks.forEach(function(L){var m={};L.entries.forEach(function(e){m[e.slice(0,20)]=+e.slice(20)});entries[L.id]=m});
+
+  function checkLock(L,canon){
+    var salt=D.salt+L.n+':';
+    var h=h20(salt+canon),mk=entries[L.id][h];
+    if(mk===undefined)return null;
+    var m=parseInt(sha256u('m:'+salt+canon).slice(0,2),16)%10;
+    return (mk-m+10)%10;
+  }
+  function fresh(){
+    var o={first:'',last:'',period:'',started:false,elapsed:0,escaped:false,escapeMs:0,debrief:'',codeTries:0,locks:{}};
+    D.locks.forEach(function(L){o.locks[L.id]={solved:false,attempts:0,hints:0,guess:'',readable:''}});
+    return o;
+  }
+  function loadLocal(){var o=fresh();try{var r=JSON.parse(localStorage.getItem(STORE+'state')||'null');if(r)restore(o,r)}catch(e){}return o}
+  function persist(){try{localStorage.setItem(STORE+'state',JSON.stringify(snapshot()))}catch(e){}}
+
+  function totals(){
+    var t={locksSolved:0,attempts:0,hintsUsed:0,exitCodeAttempts:S.codeTries};
+    D.locks.forEach(function(L){var l=S.locks[L.id];if(l.solved)t.locksSolved++;t.attempts+=l.attempts;t.hintsUsed+=l.hints});
+    return t;
+  }
+  function fmt(ms){var s=Math.round(ms/1000),m=Math.floor(s/60);s=s%60;return (m<10?'0':'')+m+':'+(s<10?'0':'')+s}
+  function snapshot(){
+    var o={packet:PACKET,course:'CPUSH',lesson:15,assignment:'Escape Room (Lite)',version:1,saved:new Date().toISOString(),
+      student:{first:$('f_first').value.trim(),last:$('f_last').value.trim(),period:$('f_period').value.trim()},
+      status:S.escaped?'ESCAPED':'INCOMPLETE',escaped:S.escaped,
+      escapeTime:S.escaped?{ms:S.escapeMs,text:fmt(S.escapeMs)}:null,
+      totals:totals(),elapsedMs:Math.round(S.elapsed),started:S.started,locks:{},debrief:$('debriefText')?$('debriefText').value:S.debrief};
+    D.locks.forEach(function(L){var l=S.locks[L.id];
+      o.locks[L.key]={objective:L.obj,puzzleType:L.type,solved:l.solved,attempts:l.attempts,hintsUsed:l.hints,solvedWith:l.readable,solvedGuess:l.guess}});
+    return o;
+  }
+  function restore(o,r){
+    if(!r||typeof r!=='object')return false;
+    var st=r.student||{};
+    o.first=st.first||'';o.last=st.last||'';o.period=st.period||'';
+    o.started=!!r.started;o.elapsed=+r.elapsedMs||0;o.debrief=typeof r.debrief==='string'?r.debrief:'';
+    o.codeTries=(r.totals&&+r.totals.exitCodeAttempts)||0;
+    var allOk=true;
+    D.locks.forEach(function(L){
+      var src=(r.locks&&r.locks[L.key])||{},l=o.locks[L.id];
+      l.attempts=+src.attempts||0;l.hints=Math.min(+src.hintsUsed||0,L.hints.length+0);
+      if(src.hintsUsed>L.hints.length)l.hints=L.hints.length;
+      if(src.solved&&typeof src.solvedGuess==='string'){
+        var d=checkLock(L,src.solvedGuess);
+        if(d!==null){l.solved=true;l.guess=src.solvedGuess;l.readable=String(src.solvedWith||'');digits[L.n]=d}else allOk=false;
+      }else allOk=false;
+    });
+    if(r.escaped&&allOk&&r.escapeTime){o.escaped=true;o.escapeMs=+r.escapeTime.ms||0}
+    return true;
+  }
+
+  /* ---------- scene ---------- */
+  var NS='http://www.w3.org/2000/svg';
+  var XS=[210,255,300,345,390];
+  (function(){
+    var g=$('plocks'),h='';
+    XS.forEach(function(x,i){
+      h+='<g class="plock" id="pl'+(i+1)+'"><path class="sh" d="M'+(x-8)+' 124V114a8 8 0 0 1 16 0V124" fill="none" stroke="#F4EFEB" stroke-width="4"/><rect class="bd" x="'+(x-15)+'" y="124" width="30" height="24" rx="4" fill="#4B9CD2"/><circle cx="'+x+'" cy="135" r="3" fill="#3D291A"/></g>'+
+      '<rect x="'+(x-16)+'" y="158" width="32" height="36" rx="5" fill="#20150D" stroke="#8EC0E1"/><text id="dw'+(i+1)+'" x="'+x+'" y="184" text-anchor="middle" font-size="24" font-weight="800" fill="#F4EFEB">?</text><text x="'+x+'" y="208" text-anchor="middle" font-size="11" font-weight="700" fill="#D3C9BF">LOCK '+(i+1)+'</text>';
+    });
+    g.innerHTML=h;
+  })();
+  function sceneUpdate(){
+    D.locks.forEach(function(L){
+      var open=S.locks[L.id].solved;
+      $('pl'+L.n).setAttribute('class','plock'+(open?' open':''));
+      $('dw'+L.n).textContent=open?digits[L.n]:'?';
+    });
+    $('scene').classList.toggle('escaped',S.escaped);
+  }
+
+  /* ---------- build lock cards ---------- */
+  var W={};   // widget state per lock
+  var LOCKSVG='<svg class="lk" viewBox="0 0 44 44" aria-hidden="true"><path class="sh" d="M13 20V14a9 9 0 0 1 18 0V20" fill="none" stroke="#F4EFEB" stroke-width="4"/><rect class="bd" x="8" y="20" width="28" height="20" rx="4" fill="#4B9CD2"/><circle cx="22" cy="30" r="3" fill="#3D291A"/></svg>';
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+  function buildLock(L){
+    var sec=document.createElement('section');sec.className='lock glass locked';sec.id='lock'+L.n;
+    var head='<button class="lh" type="button" id="lh'+L.n+'" aria-expanded="false">'+LOCKSVG+'<span class="lt"><small>LOCK '+L.n+' · '+L.objLabel+'</small><strong>'+esc(L.title)+'</strong></span><span class="dg" id="dg'+L.n+'" aria-label="digit">?</span></button>';
+    var body='<div class="lb" id="lb'+L.n+'"><p class="objline">'+esc(L.objText)+'</p>'+
+      '<div class="card"><h4>CLUE CARD</h4>'+L.card+'<p class="src">'+L.src+'</p></div>'+
+      '<div class="prompt">'+L.prompt+'</div><div id="pz'+L.n+'"></div>'+
+      '<div class="row"><button class="btn primary" type="button" id="ck'+L.n+'">Check</button><button class="btn small" type="button" id="hb'+L.n+'">Hint</button><button class="btn small" type="button" id="rs'+L.n+'">Clear</button></div>'+
+      '<div class="hints" id="hs'+L.n+'"></div><div class="fb" id="fb'+L.n+'" role="status"></div></div>';
+    sec.innerHTML=head+body;
+    $('locks').appendChild(sec);
+    buildPuzzle(L);
+    $('lh'+L.n).addEventListener('click',function(){
+      var st=lockState(L);if(st==='locked')return;
+      expanded[L.n]=!expanded[L.n];updateLocks();
+    });
+    $('ck'+L.n).addEventListener('click',function(){submit(L)});
+    $('hb'+L.n).addEventListener('click',function(){hint(L)});
+    $('rs'+L.n).addEventListener('click',function(){clearPuzzle(L)});
+  }
+  function labelOf(list,id){for(var i=0;i<list.length;i++)if(list[i].id===id)return list[i].label;return id}
+
+  function buildPuzzle(L){
+    var el=$('pz'+L.n),w=W[L.n]={};
+    if(L.type==='order'){
+      w.sel=[];el.innerHTML='<div class="chips" id="ch'+L.n+'"></div>';
+      renderOrder(L);
+    }else if(L.type==='match'){
+      var h='';
+      L.terms.forEach(function(t){
+        h+='<div class="mrow"><label for="m'+L.n+t.id+'">'+esc(t.label)+'</label><select id="m'+L.n+t.id+'"><option value="">Choose a description...</option>';
+        L.descs.forEach(function(d){h+='<option value="'+d.id+'">'+esc(d.label)+'</option>'});
+        h+='</select></div>';
+      });
+      el.innerHTML=h;
+    }else if(L.type==='pick'){
+      var h2='';
+      L.qs.forEach(function(q){
+        h2+='<fieldset><legend>'+esc(q.q)+'</legend>';
+        q.opts.forEach(function(o){h2+='<label class="opt"><input type="radio" name="q'+L.n+q.id+'" value="'+o.id+'"> <span>'+esc(o.label)+'</span></label>'});
+        h2+='</fieldset>';
+      });
+      el.innerHTML=h2;
+    }else if(L.type==='decode'){
+      var k1='',k2='';
+      for(var i=0;i<26;i++){var p=String.fromCharCode(65+i),c=String.fromCharCode(65+(i+L.shift)%26);k1+='<div class="c">'+c+'</div>';k2+='<div>'+p+'</div>'}
+      // build key in two rows of 13
+      var key='';
+      for(var r=0;r<2;r++){for(var j=0;j<13;j++){var idx=r*13+j;key+='<div class="c">'+String.fromCharCode(65+(idx+L.shift)%26)+'</div>'}for(var j2=0;j2<13;j2++){key+='<div>'+String.fromCharCode(65+r*13+j2)+'</div>'}}
+      el.innerHTML='<div class="cipher" translate="no" aria-label="Coded message">'+esc(L.cipher)+'</div><p style="margin:.6em 0 0;font-size:15px;color:var(--dim)">Decoder key: the <span style="color:var(--hl);font-weight:700">blue</span> letter is in the message. The white letter under it is the real letter.</p><div class="key" aria-hidden="true">'+key+'</div><label>Decoded answer<input type="text" id="tx'+L.n+'" autocomplete="off" autocapitalize="none" spellcheck="false"></label><p class="ennote">Type the answer in English.</p>';
+    }else if(L.type==='fill'){
+      el.innerHTML='<p style="font-size:18px;margin:.2em 0">'+esc(L.sentence)+'</p><div class="scr" translate="no" aria-label="Scrambled letters">'+esc(L.scramble)+'</div><p style="margin:.4em 0;font-size:14px;color:var(--dim)">Unscramble the letters to fill the blank.</p><label>Your answer<input type="text" id="tx'+L.n+'" autocomplete="off" autocapitalize="none" spellcheck="false"></label><p class="ennote">Type the answer in English.</p>';
+    }
+    var t=$('tx'+L.n);
+    if(t)t.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();submit(L)}});
+  }
+  function renderOrder(L){
+    var w=W[L.n],ch=$('ch'+L.n),h='';
+    L.items.forEach(function(it){
+      var pos=w.sel.indexOf(it.id);
+      h+='<button type="button" class="chip'+(pos>=0?' sel':'')+'" data-id="'+it.id+'" aria-pressed="'+(pos>=0)+'">'+(pos>=0?'<span class="n">'+(pos+1)+'</span>':'')+'<span>'+esc(it.label)+'</span></button>';
+    });
+    ch.innerHTML=h;
+    [].forEach.call(ch.querySelectorAll('.chip'),function(b){
+      b.addEventListener('click',function(){
+        if(S.locks[L.id].solved)return;
+        var id=b.getAttribute('data-id'),p=w.sel.indexOf(id);
+        if(p>=0)w.sel.splice(p,1);else w.sel.push(id);
+        renderOrder(L);
+      });
+    });
+  }
+  function clearPuzzle(L){
+    if(S.locks[L.id].solved)return;
+    var w=W[L.n];
+    if(L.type==='order'){w.sel=[];renderOrder(L)}
+    else if(L.type==='match'){L.terms.forEach(function(t){$('m'+L.n+t.id).value=''})}
+    else if(L.type==='pick'){L.qs.forEach(function(q){[].forEach.call(document.getElementsByName('q'+L.n+q.id),function(r){r.checked=false})})}
+    else{$('tx'+L.n).value=''}
+    fb(L,'','');
+  }
+  function guessOf(L){
+    // returns {canon, readable} or {err}
+    if(L.type==='order'){
+      var w=W[L.n];
+      if(w.sel.length<L.items.length)return {err:'Tap all '+L.items.length+' places first, in order.'};
+      return {canon:w.sel.join('|'),readable:w.sel.map(function(i){return labelOf(L.items,i)}).join(' > ')};
+    }
+    if(L.type==='match'){
+      var c=[],r=[];
+      for(var i=0;i<L.terms.length;i++){var t=L.terms[i],v=$('m'+L.n+t.id).value;if(!v)return {err:'Match every term first.'};c.push(v);r.push(t.label+' = '+labelOf(L.descs,v))}
+      return {canon:c.join('|'),readable:r.join('; ')};
+    }
+    if(L.type==='pick'){
+      var c2=[],r2=[];
+      for(var j=0;j<L.qs.length;j++){var q=L.qs[j],v2='';[].forEach.call(document.getElementsByName('q'+L.n+q.id),function(x){if(x.checked)v2=x.value});if(!v2)return {err:'Answer every question first.'};c2.push(v2);r2.push(labelOf(q.opts,v2))}
+      return {canon:c2.join('|'),readable:r2.join('; ')};
+    }
+    var raw=$('tx'+L.n).value.trim();
+    if(!raw)return {err:'Type your answer first.'};
+    return {canon:squash(raw),readable:raw.slice(0,80)};
+  }
+  function fb(L,cls,text){var e=$('fb'+L.n);e.className='fb'+(cls?' show '+cls:'');e.textContent=text}
+  function submit(L){
+    var l=S.locks[L.id];if(l.solved)return;
+    var g=guessOf(L);
+    if(g.err){fb(L,'nudge',g.err);return}
+    l.attempts++;
+    var d=checkLock(L,g.canon);
+    if(d===null){
+      fb(L,'nudge',L.nudge);
+      var s=$('lock'+L.n);s.classList.remove('shake');void s.offsetWidth;s.classList.add('shake');
+      persist();updateBar();return;
+    }
+    l.solved=true;l.guess=g.canon;l.readable=g.readable;digits[L.n]=d;
+    fb(L,'good','Click! Lock '+L.n+' is open. Your digit is '+d+'.');
+    var wh=$('wheel');wh.classList.remove('spin');void wh.getBoundingClientRect();wh.classList.add('spin');
+    $('dw'+L.n).classList.add('pop');
+    persist();updateAll();
+    setTimeout(function(){
+      expanded[L.n]=false;
+      var nx=nextOpen();if(nx)expanded[nx]=true;
+      updateLocks();
+      var tgt=nx?$('lock'+nx):$('exit');
+      if(tgt&&tgt.scrollIntoView)tgt.scrollIntoView({behavior:'smooth',block:'start'});
+    },1600);
+  }
+  function hint(L){
+    var l=S.locks[L.id];
+    if(l.solved)return;
+    if(l.hints<L.hints.length){l.hints++;persist();updateHints(L);updateBar()}
+    else{fb(L,'nudge','That was the last hint. Read the Clue Card slowly and try again.')}
+  }
+  function updateHints(L){
+    var l=S.locks[L.id],h='';
+    for(var i=0;i<l.hints;i++)h+='<div class="hint"><b>Hint '+(i+1)+':</b> <span>'+esc(L.hints[i])+'</span></div>';
+    $('hs'+L.n).innerHTML=h;
+  }
+  function nextOpen(){for(var i=0;i<D.locks.length;i++)if(!S.locks[D.locks[i].id].solved)return D.locks[i].n;return 0}
+  function lockState(L){
+    if(S.locks[L.id].solved)return 'solved';
+    return L.n===nextOpen()?'current':'locked';
+  }
+  function updateLocks(){
+    var cur=nextOpen();
+    D.locks.forEach(function(L){
+      var st=lockState(L),sec=$('lock'+L.n);
+      if(st==='current'&&expanded[L.n]===undefined)expanded[L.n]=true;
+      var open=(st!=='locked')&&!!expanded[L.n];
+      sec.className='lock glass '+st+(open?' open':'');
+      $('lh'+L.n).setAttribute('aria-expanded',open?'true':'false');
+      $('dg'+L.n).textContent=S.locks[L.id].solved?digits[L.n]:'?';
+      if(S.locks[L.id].solved){
+        [].forEach.call(sec.querySelectorAll('input,select,button.chip,#ck'+L.n+',#hb'+L.n+',#rs'+L.n),function(x){x.disabled=true});
+        var f=$('fb'+L.n);if(!f.classList.contains('good'))fb(L,'good','Unlocked. Your digit is '+digits[L.n]+'.'+(S.locks[L.id].readable?' Your answer: '+S.locks[L.id].readable:''));
+      }
+      updateHints(L);
+    });
+  }
+  function codeStr(){var s='';for(var i=1;i<=5;i++)s+=(digits[i]===undefined?'':digits[i]);return s}
+  function allSolved(){return D.locks.every(function(L){return S.locks[L.id].solved})}
+  function updateExit(){
+    var ok=allSolved();
+    $('exit').classList.toggle('locked',!ok);
+    $('codeBtn').disabled=!ok||S.escaped;
+    [].forEach.call($('codebox').querySelectorAll('input'),function(i){i.disabled=!ok||S.escaped});
+    $('exitNote').textContent=S.escaped?'The door is open!':(ok?'All 5 locks are open. Type the 5 digits in order, Lock 1 first.':'Open all 5 locks first. The digits go in order: Lock 1 first.');
+  }
+  function updateBar(){
+    var t=totals();
+    $('lc').textContent=t.locksSolved;$('hc').textContent=t.hintsUsed;
+    $('tm').textContent=fmt(S.escaped?S.escapeMs:S.elapsed);
+  }
+  function updateStatus(){
+    var el=$('status'),db=($('debriefText').value.trim().length);
+    if(S.escaped)el.textContent=db>=40?'You escaped and wrote your Debrief. Ready to submit.':'You escaped! Write your Debrief, then download your file to submit.';
+    else el.textContent='Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.';
+  }
+  function updateEsc(){
+    $('esc').classList.toggle('show',S.escaped);
+    if(S.escaped){var t=totals();$('escTime').textContent=fmt(S.escapeMs);$('escSum').textContent='5 of 5 locks opened with '+t.attempts+' tries and '+t.hintsUsed+' hint'+(t.hintsUsed===1?'':'s')+'.'}
+  }
+  function updateAll(){sceneUpdate();updateLocks();updateExit();updateBar();updateEsc();updateStatus();
+    $('intro').classList.toggle('hidden',S.started);$('game').classList.toggle('hidden',!S.started);$('loadOnly').classList.toggle('hidden',S.started);
+  }
+
+  /* ---------- exit code ---------- */
+  (function(){
+    var cb=$('codebox');
+    for(var i=0;i<5;i++){
+      var inp=document.createElement('input');inp.type='text';inp.inputMode='numeric';inp.maxLength=1;inp.setAttribute('aria-label','Exit code digit '+(i+1));inp.disabled=true;
+      (function(i,inp){
+        inp.addEventListener('input',function(){inp.value=inp.value.replace(/[٠-٩]/g,function(c){return c.charCodeAt(0)-1632}).replace(/[۰-۹]/g,function(c){return c.charCodeAt(0)-1776}).replace(/[^0-9]/g,'');if(inp.value&&i<4)cb.children[i+1].focus()});
+        inp.addEventListener('keydown',function(e){
+          if(e.key==='Backspace'&&!inp.value&&i>0)cb.children[i-1].focus();
+          if(e.key==='Enter'){e.preventDefault();tryCode()}
+        });
+        inp.addEventListener('paste',function(e){
+          var t=(e.clipboardData||window.clipboardData).getData('text').replace(/[٠-٩]/g,function(c){return c.charCodeAt(0)-1632}).replace(/[۰-۹]/g,function(c){return c.charCodeAt(0)-1776}).replace(/[^0-9]/g,'');
+          if(t.length>1){e.preventDefault();for(var k=0;k<5;k++)cb.children[k].value=t[k]||''}
+        });
+      })(i,inp);
+      cb.appendChild(inp);
+    }
+  })();
+  function tryCode(){
+    if(!allSolved()||S.escaped)return;
+    var v='';[].forEach.call($('codebox').querySelectorAll('input'),function(i){v+=i.value});
+    var f=$('codefb');
+    if(v.length<5){f.className='fb show nudge';f.textContent='The code has 5 digits. Fill every box.';return}
+    S.codeTries++;
+    if(h20('exit:'+D.salt+v)!==D.exitHash){
+      f.className='fb show nudge';f.textContent='The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.';
+      var ex=$('exit');ex.classList.remove('shake');void ex.offsetWidth;ex.classList.add('shake');
+      persist();return;
+    }
+    S.escaped=true;S.escapeMs=S.elapsed;
+    f.className='fb show good';f.textContent='The door swings open!';
+    persist();updateAll();
+    setTimeout(function(){$('esc').scrollIntoView({behavior:'smooth',block:'start'})},900);
+  }
+  $('codeBtn').addEventListener('click',tryCode);
+
+  /* ---------- timer ---------- */
+  function tick(){
+    var n=Date.now();
+    if(S.started&&!S.escaped){S.elapsed+=Math.min(n-lastTick,5000);$('tm').textContent=fmt(S.elapsed)}
+    lastTick=n;
+  }
+  function startTimer(){lastTick=Date.now();if(!timer)timer=setInterval(function(){tick();if(Math.round(S.elapsed/1000)%10===0)persist()},1000)}
+
+  /* ---------- files ---------- */
+  function msg(t,err){var m=$('msg');m.textContent=t;m.className='msg'+(err?' err':'');m.style.display='block'}
+  function ascii(n){return String(n).normalize('NFD').replace(/[̀-ͯ]/g,'')}
+  function clean(n){n=window.spAscii?spAscii(n):n;return ascii(n).trim().replace(/\s+/g,'_').replace(/[^A-Za-z0-9_-]/g,'')}
+  function who(){return (clean($('f_last').value)||'Last')+'_'+(clean($('f_first').value)||'First')}
+  function download(name,obj){
+    var blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;
+    document.body.appendChild(a);a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);
+  }
+  function namesOk(){
+    var ids=['f_first','f_last','f_period'],ok=true;
+    ids.forEach(function(i){var f=$(i);if(!f.value.trim()){f.classList.add('bad');ok=false}});
+    if(!ok){msg('Enter your first name, last name, and period at the top first.',true);$('f_first').scrollIntoView({block:'center'})}
+    return ok;
+  }
+  ['f_first','f_last','f_period'].forEach(function(i){$(i).addEventListener('input',function(){$(i).classList.remove('bad');S[i.slice(2)]=$(i).value;persist()})});
+  $('debriefText').addEventListener('input',function(){S.debrief=$('debriefText').value;persist();updateStatus()});
+  $('saveBtn').addEventListener('click',function(){
+    if(!namesOk())return;tick();
+    download(who()+'-'+PACKET+'-PROGRESS.json',snapshot());
+    msg('Progress file downloaded. Use Load Progress to continue later.');
+  });
+  $('finishBtn').addEventListener('click',function(){
+    if(!namesOk())return;tick();
+    var now=new Date(),o=snapshot();o.completed=S.escaped;o.submitted=now.toISOString();
+    o.student.date=now.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+    download(who()+'-'+PACKET+'.json',o);
+    msg(S.escaped?('Done! File downloaded: '+who()+'-'+PACKET+'.json. Upload it to Canvas.'):('Your file downloaded and is marked INCOMPLETE (you have not escaped). Upload it to Canvas: '+who()+'-'+PACKET+'.json'));
+  });
+  function openLoad(){$('loadFile').click()}
+  $('loadBtn').addEventListener('click',openLoad);$('loadBtn0').addEventListener('click',openLoad);
+  $('loadFile').addEventListener('change',function(e){
+    var f=e.target.files[0];if(!f)return;
+    var r=new FileReader();
+    r.onload=function(){
+      try{
+        var o=JSON.parse(r.result);
+        if(!o||o.packet!==PACKET||typeof o.locks!=='object')throw new Error('wrong');
+        digits={};var n=fresh();restore(n,o);S=n;applyToDom();
+        msg('Progress loaded. Welcome back.');
+      }catch(err){msg('That file did not work. Choose a progress file saved from this Escape Room.',true)}
+      e.target.value='';
+    };
+    r.onerror=function(){msg('The file could not be read.',true)};
+    r.readAsText(f);
+  });
+  $('reset').addEventListener('click',function(){
+    if(!confirm('Clear all your work and start over? This cannot be undone.'))return;
+    digits={};expanded={};S=fresh();
+    try{localStorage.removeItem(STORE+'state')}catch(e){}
+    $('locks').innerHTML='';D.locks.forEach(buildLock);
+    $('f_first').value=$('f_last').value=$('f_period').value='';$('debriefText').value='';
+    [].forEach.call($('codebox').querySelectorAll('input'),function(i){i.value=''});$('codefb').className='fb';
+    applyToDom();
+  });
+  function applyToDom(){
+    $('f_first').value=S.first;$('f_last').value=S.last;$('f_period').value=S.period;$('debriefText').value=S.debrief;
+    // rebuild lock widgets, then pre-fill solved ones with readable note
+    $('locks').innerHTML='';D.locks.forEach(buildLock);
+    expanded={};
+    updateAll();
+    if(S.started)startTimer();
+  }
+  $('startBtn').addEventListener('click',function(){S.started=true;persist();startTimer();updateAll();$('game').scrollIntoView({behavior:'smooth'})});
+  window.addEventListener('beforeunload',function(){tick();persist()});
+
+  S=loadLocal();
+  D.locks.forEach(buildLock);
+  applyToDom();
+})();
+</script>
+<!--sp-i18n--><script type="application/json" id="sp-i18n">{"langs":["en","es","ar"],"default":"en","es":{"Save Progress":"Guardar progreso","Load Progress":"Cargar progreso","Finished — Download File to Submit":"Terminé — Descargar el archivo para entregar","Clear all my answers":"Borrar todas mis respuestas","FIRST NAME *":"NOMBRE *","LAST NAME *":"APELLIDO *","PERIOD *":"PERÍODO *","DATE (fills in when you finish)":"FECHA (se llena cuando terminas)","e.g. 3":"p. ej., 3","Automatic":"Automática","Please type your first name, last name, and period first.":"Primero escribe tu nombre, apellido y período.","Western Expansion and Southern Secession":"Expansión hacia el oeste y secesión del sur","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — La Ley de Esclavos Fugitivos","Bleeding Kansas":"Bleeding Kansas — Kansas sangriento","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"Se descargó tu archivo de progreso. Guárdalo bien. Usa «Cargar progreso» para continuar más tarde.","Progress loaded.":"Progreso cargado.","Could not read that file.":"No se pudo leer ese archivo.","Treaty of Guadalupe Hidalgo":"Tratado de Guadalupe Hidalgo","All 5 locks are open. Type the 5 digits in order, Lock 1 first.":"Los 5 candados están abiertos. Escribe los 5 dígitos en orden, primero el del Candado 1.","Answer every question first.":"Primero responde todas las preguntas.","CLUE CARD":"TARJETA DE INDICIOS","Check":"Comprobar","Choose a description...":"Elige una descripción...","Clear":"Borrar","Clear all my work and start over":"Borrar todo mi trabajo y empezar de nuevo","DEBRIEF":"INFORME FINAL","Debrief":"Informe final","Decoded answer":"Respuesta decodificada","ESCAPED":"¡ESCAPASTE!","Enter your first name, last name, and period at the top first.":"Primero escribe tu nombre, apellido y período arriba.","Exit code digit 1":"Dígito 1 del código de salida","Exit door":"Puerta de salida","Fill in the blank using the Clue Card.":"Llena el espacio en blanco con la tarjeta de indicios.","Have a saved file? Load it to continue.":"¿Tienes un archivo guardado? Cárgalo para continuar.","Hint":"Pista","Hints used":"Pistas usadas","How to escape:":"Cómo escapar:","If you get stuck, press <b>Hint<\/b>. Hints are free, but your teacher can see how many you used.":"Si te atoras, oprime <b>Pista<\/b>. Las pistas son gratis, pero tu maestro puede ver cuántas usaste.","Locks":"Candados","Match each term to the best description. Use the Clue Card.":"Relaciona cada término con la mejor descripción. Usa la tarjeta de indicios.","Match every term first.":"Primero relaciona todos los términos.","Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.":"Todavía no escapas (se marca INCOMPLETO). Aun así puedes descargar tu archivo y entregarlo.","Not quite. Check each match against the Clue Card. Which one are you least sure about?":"Casi. Revisa cada pareja con la tarjeta de indicios. ¿De cuál estás menos seguro?","Not quite. Decode one letter at a time with the key, then check your spelling.":"Casi. Decodifica una letra a la vez con la clave y luego revisa tu ortografía.","One last step: write your Debrief below.":"Un último paso: escribe tu Informe final abajo.","Open all 5 locks first. The digits go in order: Lock 1 first.":"Primero abre los 5 candados. Los dígitos van en orden: primero el del Candado 1.","Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.":"Abre los 5 candados y luego escribe el código de salida de 5 dígitos. Termina con el Informe final.","Open each lock in order. Read the <b>Clue Card<\/b>. The answer is in the card.":"Abre cada candado en orden. Lee la <b>tarjeta de indicios<\/b>. La respuesta está en la tarjeta.","Open the Door":"Abrir la puerta","Pick the correct answer for all three questions.":"Elige la respuesta correcta para las tres preguntas.","Progress file downloaded. Use Load Progress to continue later.":"Se descargó el archivo de progreso. Usa «Cargar progreso» para continuar más tarde.","Progress loaded. Welcome back.":"Progreso cargado. Bienvenido de nuevo.","Solve the puzzle to open the lock and reveal one digit.":"Resuelve el acertijo para abrir el candado y descubrir un dígito.","THE EXIT DOOR":"LA PUERTA DE SALIDA","Tap all 4 places first, in order.":"Primero toca los 4 lugares, en orden.","Tap the four events in the order they happened. Tap an event again to take it back.":"Toca los cuatro sucesos en el orden en que ocurrieron. Toca un suceso otra vez para quitarlo.","That file did not work. Choose a progress file saved from this Escape Room.":"Ese archivo no funcionó. Elige un archivo de progreso guardado de esta sala de escape.","That was the last hint. Read the Clue Card slowly and try again.":"Esa fue la última pista. Lee la tarjeta de indicios despacio y vuelve a intentarlo.","The Code Book":"El libro de códigos","The clock starts when you press the button. Most students finish in about 20 minutes.":"El reloj empieza cuando oprimes el botón. La mayoría de los estudiantes termina en unos 20 minutos.","The code has 5 digits. Fill every box.":"El código tiene 5 dígitos. Llena todas las casillas.","The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.":"La puerta no se abrió. Revisa los dígitos debajo de cada candado y escríbelos en orden: primero el del Candado 1.","The door is open!":"¡La puerta está abierta!","The door swings open!":"¡La puerta se abre de golpe!","Time":"Tiempo","Type the answer in English.":"Escribe la respuesta en inglés.","Type the answer in English. Use the digits 0-9.":"Escribe la respuesta en inglés. Usa los dígitos 0-9.","Type the exit code":"Escribe el código de salida","Type your answer first.":"Primero escribe tu respuesta.","Type your answer here...":"Escribe tu respuesta aquí...","Unscramble the letters to fill the blank.":"Ordena las letras para llenar el espacio en blanco.","Which lock was hardest, and what did you learn that you did not know before?":"¿Qué candado fue el más difícil y qué aprendiste que antes no sabías?","Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.":"Escribe de 3 a 4 oraciones. Nombra el candado y usa un dato de su tarjeta de indicios. Puedes escribirlo aunque no hayas escapado.","You escaped and wrote your Debrief. Ready to submit.":"Escapaste y escribiste tu Informe final. Listo para entregar.","You escaped! Write your Debrief, then download your file to submit.":"¡Escapaste! Escribe tu Informe final y luego descarga tu archivo para entregarlo.","Your answer":"Tu respuesta","Your time:":"Tu tiempo:","digit":"dígito","Core Objective 1: Identify the major causes of the Great Depression.":"Objetivo principal 1: Identificar las principales causas de la Gran Depresión.","Core Objective 2: Describe the impact of the Great Depression on the lives of the American people.":"Objetivo principal 2: Describir el impacto de la Gran Depresión en la vida del pueblo estadounidense.","Core Objective 3: Explain how the Hoover administration failed to address the human distress caused by the Great Depression.":"Objetivo principal 3: Explicar cómo el gobierno de Hoover no logró atender el sufrimiento humano causado por la Gran Depresión.","Core Objective 4: Assess the goals and accomplishments of the First New Deal.":"Objetivo principal 4: Evaluar las metas y los logros del Primer New Deal.","Core Objectives 5 and 6: Describe how the Depression was reflected in cultural life, and analyze the opposition to the First New Deal. Evaluate how the Second New Deal transformed the role of federal government in American life.":"Objetivos principales 5 y 6: Describir cómo se reflejó la Depresión en la vida cultural y analizar la oposición al Primer New Deal. Evaluar cómo el Segundo New Deal transformó el papel del gobierno federal en la vida estadounidense.","LOCK 5 · CORE OBJECTIVES 5 AND 6":"CANDADO 5 · OBJETIVOS PRINCIPALES 5 Y 6","The Great Depression and the New Deal":"La Gran Depresión y el New Deal","Escape the Newsroom":"Escapa de la sala de redacción","Enter the Newsroom":"Entrar a la sala de redacción","You are locked in the newsroom.":"Estás encerrado en la sala de redacción.","PRESS ROOM":"SALA DE PRENSA","A 1930s newspaper office at night. On the left, a corkboard with pinned newspaper pages hangs above a desk with a typewriter and a desk lamp, and a stack of newspapers sits on the floor. On the right, a clock and a framed front page hang above a filing cabinet with a telephone and a stack of newspapers on top. The door has a PRESS ROOM sign and five padlocks in a row. Under each padlock is a window for one digit of the exit code.":"Una oficina de periódico de los años treinta, de noche. A la izquierda, un tablero de corcho con páginas de periódico clavadas cuelga sobre un escritorio con una máquina de escribir y una lámpara, y hay una pila de periódicos en el piso. A la derecha, un reloj y una primera plana enmarcada cuelgan sobre un archivero con un teléfono y una pila de periódicos encima. La puerta tiene un letrero de SALA DE PRENSA y cinco candados en fila. Debajo de cada candado hay una ventanita para un dígito del código de salida.","The newspaper office closed for the night, and the night editor locked up the newsroom. Old front pages and typewriters from the Depression years sit in the room. The door has <b>5 locks<\/b>. Each lock matches one big idea from Lesson 15. Solve them all to find the <b>5-digit exit code<\/b>.":"La oficina del periódico cerró por la noche y el editor nocturno cerró con llave la sala de redacción. En el cuarto hay primeras planas y máquinas de escribir antiguas de los años de la Depresión. La puerta tiene <b>5 candados<\/b>. Cada candado corresponde a una idea importante de la Lección 15. Resuélvelos todos para encontrar el <b>código de salida de 5 dígitos<\/b>.","UNIT 6 · DEPRESSION AND WORLD WAR | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 6 · DEPRESIÓN Y GUERRA MUNDIAL | CPUSH | DANIEL GARZA, M.A.","Decoder key: the <span style=\"color:var(--hl);font-weight:700\">blue<\/span> letter is in the message. The white letter under it is the real letter.":"Clave del decodificador: la letra <span style=\"color:var(--hl);font-weight:700\">azul<\/span> está en el mensaje. La letra blanca que está debajo es la letra verdadera.","Escape Room 15 · The Great Depression and the New Deal":"Sala de escape 15 · La Gran Depresión y el New Deal","The Ticker Tape":"La cinta del teletipo","The Telephone":"El teléfono","The Front Page":"La primera plana","The Printing Press":"La imprenta","7 percent":"7 por ciento","17 percent":"17 por ciento","27 percent":"27 por ciento","57 percent":"57 por ciento","What does it mean to buy stocks “on margin”?":"¿Qué significa comprar acciones “a margen”?","Pay the full price in cash":"Pagar el precio completo en efectivo","Pay a small down payment and borrow the rest from a broker":"Dar un pequeño pago inicial y pedir prestado el resto a un corredor de bolsa","Buy stocks only from the government":"Comprar acciones solo del gobierno","Trade stocks only after the market closes":"Comprar y vender acciones solo después de que cierra el mercado","How much did U.S. economic output drop from 1929 to 1933?":"¿Cuánto cayó la producción económica de EE. UU. de 1929 a 1933?","What did the Smoot-Hawley Tariff do to the average tariff rate?":"¿Qué le hizo el Arancel Smoot-Hawley a la tasa de arancel promedio?","Cut it from 50 percent to 25 percent":"La bajó del 50 por ciento al 25 por ciento","Raised it from 25 percent to 50 percent":"La subió del 25 por ciento al 50 por ciento","Raised it from 5 percent to 10 percent":"La subió del 5 por ciento al 10 por ciento","Left it at 25 percent":"La dejó en el 25 por ciento","In the 1920s, many people bought stocks “on margin.” An investor paid a small down payment and borrowed the rest from a stockbroker. On Black Tuesday, October 29, 1929, share prices went into free fall. The crash did not cause the Great Depression, but it showed that the prosperity of the 1920s had been built on unstable foundations. Factories made more products than consumers could buy, and wages did not keep up. From 1929 to 1933, U.S. economic output dropped by 27 percent. The Smoot-Hawley Tariff of 1930 raised the average tariff rate from 25 percent to 50 percent, and other countries passed tariffs of their own. The Federal Reserve also tightened the money supply, and it shrank by a third between 1929 and 1932.":"En los años 1920, mucha gente compró acciones “a margen”. Un inversionista daba un pequeño pago inicial y pedía prestado el resto a un corredor de bolsa. El Martes Negro, 29 de octubre de 1929, los precios de las acciones se desplomaron. El derrumbe no causó la Gran Depresión, pero mostró que la prosperidad de los años 1920 se había construido sobre bases inestables. Las fábricas producían más productos de los que los consumidores podían comprar, y los salarios no subían al mismo ritmo. De 1929 a 1933, la producción económica de EE. UU. cayó un 27 por ciento. El Arancel Smoot-Hawley de 1930 subió la tasa de arancel promedio del 25 por ciento al 50 por ciento, y otros países pusieron aranceles propios. La Reserva Federal también restringió la cantidad de dinero, y esta bajó en un tercio entre 1929 y 1932.","Each answer is in the Clue Card. Look for “on margin,” for the drop in economic output, and for the tariff rates.":"Cada respuesta está en la tarjeta de indicios. Busca “a margen”, la caída de la producción económica y las tasas de arancel.","“On margin” means a small down payment plus a loan from a broker. Output dropped by 27 percent. The tariff went from 25 percent to 50 percent.":"“A margen” quiere decir un pequeño pago inicial más un préstamo de un corredor de bolsa. La producción cayó un 27 por ciento. El arancel pasó del 25 por ciento al 50 por ciento.","Not quite. At least one answer is off. Re-read the Clue Card for what “on margin” means, how far output dropped, and the tariff rates.":"Casi. Al menos una respuesta no es correcta. Vuelve a leer la tarjeta de indicios para ver qué significa “a margen”, cuánto cayó la producción y cuáles fueron las tasas de arancel.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 23, “The Causes of the Great Depression” (pp. 1001-1004).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 23, “The Causes of the Great Depression” (págs. 1001-1004).","Soup kitchens":"Comedores populares","Shantytowns":"Barrios de chozas","Dust Bowl":"Dust Bowl (Cuenca de Polvo)","Okies":"Okies","Places where hungry people lined up for small amounts of food and water":"Lugares donde las personas con hambre hacían fila para recibir pequeñas cantidades de comida y agua","Makeshift housing that appeared in cities to shelter the homeless":"Viviendas improvisadas que aparecieron en las ciudades para dar refugio a las personas sin hogar","A drought disaster in the southern plains where winds carried away millions of tons of topsoil":"Un desastre de sequía en las llanuras del sur donde los vientos se llevaron millones de toneladas de tierra de la superficie","The label for refugees from the Dust Bowl who headed to California for jobs":"El nombre que se les dio a los refugiados del Dust Bowl que se fueron a California en busca de trabajo","By 1932, perhaps one-quarter of the population could not afford housing or adequate food, and unemployment had reached 12 million. Hungry people by the millions lined up at soup kitchens for small amounts of food and water. Shantytowns appeared in cities across the country to shelter the homeless. Married women were the main targets of layoffs, and Black workers who had moved north had the highest rate of joblessness. In 1931, Hoover approved a plan to forcibly return Mexicans to Mexico. Estimates vary, but at least 350,000 people were exiled, and many of them were U.S. citizens. In the 1930s, a terrible drought created the Dust Bowl, where strong winds scooped up millions of tons of topsoil. Dust Bowl refugees, called “Okies” or “Arkies,” headed to California in search of jobs.":"Para 1932, tal vez una cuarta parte de la población no podía pagar vivienda ni comida suficiente, y el desempleo había llegado a 12 millones. Millones de personas con hambre hacían fila en los comedores populares para recibir pequeñas cantidades de comida y agua. Aparecieron barrios de chozas en ciudades de todo el país para dar refugio a las personas sin hogar. Las mujeres casadas eran el blanco principal de los despidos, y los trabajadores negros que se habían mudado al norte tenían la tasa más alta de desempleo. En 1931, Hoover aprobó un plan para regresar a la fuerza a los mexicanos a México. Los cálculos varían, pero al menos 350,000 personas fueron expulsadas, y muchas de ellas eran ciudadanos de EE. UU. En los años 1930, una terrible sequía creó el Dust Bowl (Cuenca de Polvo), donde fuertes vientos levantaron millones de toneladas de tierra de la superficie. Los refugiados del Dust Bowl, llamados “Okies” o “Arkies”, se fueron a California en busca de trabajo.","Two terms name places people used or built (soup kitchens, shantytowns). One names a disaster (Dust Bowl). One names a label for the people who left it (Okies).":"Dos términos nombran lugares que la gente usó o construyó (comedores populares, barrios de chozas). Uno nombra un desastre (Dust Bowl). Otro es el nombre que se dio a las personas que se fueron de allí (Okies).","Soup kitchens gave out food. Shantytowns were makeshift housing. The Dust Bowl was a drought disaster. The Okies were Dust Bowl refugees who went to California.":"Los comedores populares daban comida. Los barrios de chozas eran viviendas improvisadas. El Dust Bowl fue un desastre de sequía. Los Okies eran refugiados del Dust Bowl que se fueron a California.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 23, “The Human Toll of the Depression” (pp. 1005-1009).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 23, “The Human Toll of the Depression” (págs. 1005-1009).","The Clue Card describes an idea without naming it. A secret message names it. Each letter in the message was moved 5 steps forward in the alphabet. Decode it to name the idea.":"La tarjeta de indicios describe una idea sin nombrarla. Un mensaje secreto la nombra. Cada letra del mensaje se movió 5 pasos hacia adelante en el alfabeto. Decodifícalo para escribir el nombre de la idea.","The Clue Card describes the idea but does not name it. Use the decoder key to spell the name, one letter at a time.":"La tarjeta de indicios describe la idea, pero no la nombra. Usa la clave del decodificador para escribir el nombre, una letra a la vez.","In the message, the letter A is really V, and the letter T is really O. The word has 11 letters and starts with V.":"En el mensaje, la letra A en realidad es V, y la letra T en realidad es O. La palabra tiene 11 letras y empieza con V.","President Hoover refused to start federal programs to help needy people directly. He feared the nation would be “plunged into socialism.” He hoped that the “natural generosity” of Americans, local charities, and churches would be enough, and he believed that volunteers would relieve the suffering. But there were no jobs, even for people who wanted to work, and homeless people called their shantytowns “Hoovervilles” to criticize the president. Hoover also pushed through the Revenue Act of 1932, the largest peacetime tax increase in history. In 1932, army soldiers attacked unemployed veterans and their families at a camp near the Capitol, burned their shelters, and injured 55 veterans. Roosevelt won the 1932 election, 23 million votes to 16 million.":"El presidente Hoover se negó a iniciar programas federales para ayudar directamente a las personas necesitadas. Temía que la nación fuera “empujada al socialismo”. Esperaba que la “generosidad natural” de los estadounidenses, de las organizaciones de caridad locales y de las iglesias fuera suficiente, y creía que los voluntarios aliviarían el sufrimiento. Pero no había trabajos, ni siquiera para quienes querían trabajar, y las personas sin hogar llamaron a sus barrios de chozas “Hoovervilles” como crítica al presidente. Hoover también hizo que el Congreso aprobara la Ley de Ingresos de 1932, el aumento de impuestos en tiempos de paz más grande de la historia. En 1932, soldados del ejército atacaron a veteranos desempleados y a sus familias en un campamento cerca del Capitolio, quemaron sus refugios e hirieron a 55 veteranos. Roosevelt ganó las elecciones de 1932, con 23 millones de votos contra 16 millones.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 23, “From Hooverism to the New Deal” (pp. 1010-1014).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 23, “From Hooverism to the New Deal” (págs. 1010-1014).","Roosevelt gives his first radio “fireside chat” about the banks":"Roosevelt da su primera “charla junto a la chimenea” por radio sobre los bancos","The Glass-Steagall Banking Act creates the FDIC":"La Ley Bancaria Glass-Steagall crea la FDIC","The Securities Exchange Act creates the SEC":"La Ley de Bolsas de Valores crea la SEC","The Supreme Court declares the NIRA unconstitutional":"La Corte Suprema declara inconstitucional la NIRA","Roosevelt took office in March 1933 and promised “action, and action now.” In the First Hundred Days, from March 9 to June 16, Congress approved fifteen major laws. On March 12, Roosevelt gave his first radio “fireside chat” to tell Americans that their money was safer in a reopened bank than under the mattress. On June 16, the Glass-Steagall Banking Act created the Federal Deposit Insurance Corporation (FDIC), which insured customer bank accounts up to $2,500. The Securities Exchange Act of 1934 set up the Securities and Exchange Commission (SEC) to enforce the rules for stocks and bonds. The Civilian Conservation Corps (CCC) hired half a million young, unmarried men, but women were excluded, and African Americans and Indigenous Americans were housed in segregated facilities. The National Industrial Recovery Act (NIRA) of 1933 created the National Recovery Administration (NRA), but the Supreme Court declared the NIRA unconstitutional in May 1935.":"Roosevelt tomó posesión en marzo de 1933 y prometió “acción, y acción ahora”. En los Primeros Cien Días, del 9 de marzo al 16 de junio, el Congreso aprobó quince leyes importantes. El 12 de marzo, Roosevelt dio su primera “charla junto a la chimenea” por radio para decirles a los estadounidenses que su dinero estaba más seguro en un banco reabierto que debajo del colchón. El 16 de junio, la Ley Bancaria Glass-Steagall creó la Corporación Federal de Seguro de Depósitos (Federal Deposit Insurance Corporation, FDIC), que aseguraba las cuentas bancarias de los clientes hasta $2,500. La Ley de Bolsas de Valores de 1934 estableció la Comisión de Bolsa y Valores (Securities and Exchange Commission, SEC) para hacer cumplir las reglas sobre acciones y bonos. El Cuerpo Civil de Conservación (Civilian Conservation Corps, CCC) contrató a medio millón de hombres jóvenes y solteros, pero se excluyó a las mujeres, y a los afroamericanos y a los indígenas estadounidenses se les alojó en instalaciones segregadas. La Ley Nacional de Recuperación Industrial (National Industrial Recovery Act, NIRA) de 1933 creó la Administración Nacional de Recuperación (National Recovery Administration, NRA), pero la Corte Suprema declaró inconstitucional la NIRA en mayo de 1935.","Look for the dates in the Clue Card: March 12 (1933), June 16 (1933), 1934, and May 1935. Each event has its own date.":"Busca las fechas en la tarjeta de indicios: 12 de marzo (1933), 16 de junio (1933), 1934 y mayo de 1935. Cada hecho tiene su propia fecha.","The order is the first fireside chat, the Glass-Steagall Banking Act, the Securities Exchange Act, then the Supreme Court ruling on the NIRA.":"El orden es la primera charla junto a la chimenea, la Ley Bancaria Glass-Steagall, la Ley de Bolsas de Valores y luego el fallo de la Corte Suprema sobre la NIRA.","Not quite. Re-read the Clue Card and match each event to its date.":"Casi. Vuelve a leer la tarjeta de indicios y relaciona cada hecho con su fecha.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 23, “Roosevelt’s New Deal” (pp. 1015-1024).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 23, “Roosevelt’s New Deal” (págs. 1015-1024).","Many writers, such as John Steinbeck, showed the suffering of the Depression, while popular movies helped Americans escape their troubles for a short time. Critics attacked the New Deal from both sides. Business leaders and conservatives said it was moving toward socialism, and others on the left said it did not do enough. Huey Long, Francis Townsend, and Father Charles Coughlin offered other plans, and Coughlin’s radio shows drew as many as 40 million listeners. By the end of its 1935–1936 term, the Supreme Court had ruled against New Deal programs in seven of nine major cases.":"Muchos escritores, como John Steinbeck, mostraron el sufrimiento de la Depresión, mientras que las películas populares ayudaron a los estadounidenses a escapar de sus problemas por un rato. Los críticos atacaron el New Deal desde ambos lados. Los líderes de negocios y los conservadores decían que se estaba moviendo hacia el socialismo, y otros, de la izquierda, decían que no hacía lo suficiente. Huey Long, Francis Townsend y el padre Charles Coughlin ofrecieron otros planes, y los programas de radio de Coughlin atraían hasta 40 millones de oyentes. Para el final de su periodo de 1935–1936, la Corte Suprema había fallado en contra de programas del New Deal en siete de nueve casos importantes.","In January 1935, Roosevelt launched the Second New Deal, which was much more far-reaching. The Works Progress Administration (WPA) became the nation’s largest employer, and the Wagner Act guaranteed workers the right to organize unions. The centerpiece of the Social Security Act of 1935 was a federal retirement fund for people over age 65. The act left out 9.5 million low-paid workers, such as farm laborers and domestic workers, and a disproportionate share of them were African Americans.":"En enero de 1935, Roosevelt lanzó el Segundo New Deal, que fue mucho más amplio. La Administración del Progreso de Obras (Works Progress Administration, WPA) se convirtió en el empleador más grande del país, y la Ley Wagner (Wagner Act) garantizó a los trabajadores el derecho a organizar sindicatos. La pieza central de la Ley del Seguro Social de 1935 era un fondo federal de jubilación para personas mayores de 65 años. La ley dejó fuera a 9.5 millones de trabajadores mal pagados, como los jornaleros del campo y los trabajadores domésticos, y una parte desproporcionada de ellos eran afroamericanos.","The Social Security Act of 1935 created a federal ________ fund for people over age 65.":"La Ley del Seguro Social de 1935 creó un fondo federal de ________ para personas mayores de 65 años.","Read the last two sentences of the Clue Card. The missing word tells what kind of fund was the centerpiece of the Social Security Act.":"Lee las dos últimas oraciones de la tarjeta de indicios. La palabra que falta dice qué tipo de fondo era la pieza central de la Ley del Seguro Social.","The word starts with R and ends with T. It has 10 letters.":"La palabra empieza con R y termina con T. Tiene 10 letras.","Not quite. Re-read the last two sentences of the Clue Card. Use the scrambled letters to check your spelling.":"Casi. Vuelve a leer las dos últimas oraciones de la tarjeta de indicios. Usa las letras revueltas para revisar cómo la escribiste.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 23, “The New Deal Years: Hardships, Cultural Life, Criticism” (pp. 1025-1035) and “The Second New Deal” (pp. 1036-1039).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 23, “The New Deal Years: Hardships, Cultural Life, Criticism” (págs. 1025-1035) y “The Second New Deal” (págs. 1036-1039).","Unlocked. Your digit is 4. Your answer: Pay a small down payment and borrow the rest from a broker; 27 percent; Raised it from 25 percent to 50 percent":"Desbloqueado. Tu dígito es 4. Tu respuesta: Dar un pequeño pago inicial y pedir prestado el resto a un corredor de bolsa; 27 por ciento; La subió del 25 por ciento al 50 por ciento","Unlocked. Your digit is 0. Your answer: Okies = The label for refugees from the Dust Bowl who headed to California for jobs; Dust Bowl = A drought disaster in the southern plains where winds carried away millions of tons of topsoil; Soup kitchens = Places where hungry people lined up for small amounts of food and water; Shantytowns = Makeshift housing that appeared in cities to shelter the homeless":"Desbloqueado. Tu dígito es 0. Tu respuesta: Okies = El nombre que se les dio a los refugiados del Dust Bowl que se fueron a California en busca de trabajo; Dust Bowl (Cuenca de Polvo) = Un desastre de sequía en las llanuras del sur donde los vientos se llevaron millones de toneladas de tierra de la superficie; Comedores populares = Lugares donde las personas con hambre hacían fila para recibir pequeñas cantidades de comida y agua; Barrios de chozas = Viviendas improvisadas que aparecieron en las ciudades para dar refugio a las personas sin hogar","Unlocked. Your digit is 3. Your answer: Roosevelt gives his first radio “fireside chat” about the banks &gt; The Glass-Steagall Banking Act creates the FDIC &gt; The Securities Exchange Act creates the SEC &gt; The Supreme Court declares the NIRA unconstitutional":"Desbloqueado. Tu dígito es 3. Tu respuesta: Roosevelt da su primera “charla junto a la chimenea” por radio sobre los bancos &gt; La Ley Bancaria Glass-Steagall crea la FDIC &gt; La Ley de Bolsas de Valores crea la SEC &gt; La Corte Suprema declara inconstitucional la NIRA"},"ar":{"Save Progress":"حفظ التقدم","Load Progress":"تحميل التقدم","Finished — Download File to Submit":"انتهيت — نزّل الملف لتسليمه","Clear all my answers":"امسح كل إجاباتي","FIRST NAME *":"الاسم الأول *","LAST NAME *":"اسم العائلة *","PERIOD *":"الحصة *","DATE (fills in when you finish)":"التاريخ (يُكتب تلقائيًا عند الانتهاء)","e.g. 3":"مثال: 3","Automatic":"تلقائي","Please type your first name, last name, and period first.":"اكتب أولًا اسمك الأول واسم العائلة والحصة.","Western Expansion and Southern Secession":"التوسع غربًا وانفصال الجنوب","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"الوحدة 3 · بيت منقسم وأُعيد بناؤه | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — قانون العبيد الهاربين","Bleeding Kansas":"Bleeding Kansas — كانساس النازفة","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"الوحدة 3 · بيت منقسم وأعيد بناؤه | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"تم تنزيل ملف التقدم. احتفظ به في مكان آمن. استخدم «تحميل التقدم» لتكمل لاحقًا.","Progress loaded.":"تم تحميل التقدم.","Could not read that file.":"تعذّرت قراءة هذا الملف.","Treaty of Guadalupe Hidalgo":"معاهدة غوادالوبي هيدالغو (Treaty of Guadalupe Hidalgo)","All 5 locks are open. Type the 5 digits in order, Lock 1 first.":"الأقفال الخمسة مفتوحة. اكتب الأرقام الخمسة بالترتيب: رقم القفل 1 أولًا.","Answer every question first.":"أجب عن كل الأسئلة أولًا.","CLUE CARD":"بطاقة القرائن","Check":"تحقق","Choose a description...":"اختر وصفًا...","Clear":"مسح","Clear all my work and start over":"امسح كل عملي وابدأ من جديد","DEBRIEF":"الملخص الختامي","Debrief":"الملخص الختامي","Decoded answer":"الإجابة بعد فك التشفير","ESCAPED":"لقد هربت!","Enter your first name, last name, and period at the top first.":"اكتب اسمك الأول واسم العائلة والحصة في الأعلى أولًا.","Exit code digit 1":"رقم رمز الخروج 1","Exit door":"باب الخروج","Fill in the blank using the Clue Card.":"املأ الفراغ باستخدام بطاقة القرائن.","Have a saved file? Load it to continue.":"هل لديك ملف محفوظ؟ حمّله لتكمل.","Hint":"تلميح","Hints used":"التلميحات المستخدمة","How to escape:":"كيف تهرب:","If you get stuck, press <b>Hint<\/b>. Hints are free, but your teacher can see how many you used.":"إذا تعثرت، اضغط <b>تلميح<\/b>. التلميحات مجانية، لكن معلمك يستطيع أن يرى كم تلميحًا استخدمت.","Locks":"الأقفال","Match each term to the best description. Use the Clue Card.":"طابق كل مصطلح مع أفضل وصف له. استخدم بطاقة القرائن.","Match every term first.":"طابق كل المصطلحات أولًا.","Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.":"لم تهرب بعد (يُسجَّل «غير مكتمل» INCOMPLETE). ما زال بإمكانك تنزيل ملفك وتسليمه.","Not quite. Check each match against the Clue Card. Which one are you least sure about?":"ليس تمامًا. تحقق من كل مطابقة باستخدام بطاقة القرائن. أي مطابقة أنت أقل تأكدًا منها؟","Not quite. Decode one letter at a time with the key, then check your spelling.":"ليس تمامًا. فُكّ تشفير حرف واحد في كل مرة باستخدام المفتاح، ثم تحقق من تهجئتك.","One last step: write your Debrief below.":"خطوة أخيرة: اكتب ملخصك الختامي أدناه.","Open all 5 locks first. The digits go in order: Lock 1 first.":"افتح الأقفال الخمسة أولًا. تُكتب الأرقام بالترتيب: رقم القفل 1 أولًا.","Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.":"افتح الأقفال الخمسة، ثم اكتب رمز الخروج المكوّن من 5 أرقام. أنهِ بالملخص الختامي.","Open each lock in order. Read the <b>Clue Card<\/b>. The answer is in the card.":"افتح كل قفل بالترتيب. اقرأ <b>بطاقة القرائن<\/b>. الإجابة موجودة في البطاقة.","Open the Door":"افتح الباب","Pick the correct answer for all three questions.":"اختر الإجابة الصحيحة للأسئلة الثلاثة.","Progress file downloaded. Use Load Progress to continue later.":"تم تنزيل ملف التقدم. استخدم «تحميل التقدم» لتكمل لاحقًا.","Progress loaded. Welcome back.":"تم تحميل التقدم. أهلًا بعودتك.","Solve the puzzle to open the lock and reveal one digit.":"حلّ اللغز لتفتح القفل وتكشف رقمًا واحدًا.","THE EXIT DOOR":"باب الخروج","Tap all 4 places first, in order.":"المس الأماكن الأربعة أولًا، بالترتيب.","Tap the four events in the order they happened. Tap an event again to take it back.":"المس الأحداث الأربعة بالترتيب الذي وقعت به. المس الحدث مرة أخرى للتراجع عنه.","That file did not work. Choose a progress file saved from this Escape Room.":"لم يعمل هذا الملف. اختر ملف تقدم محفوظًا من غرفة الهروب هذه.","That was the last hint. Read the Clue Card slowly and try again.":"كان هذا آخر تلميح. اقرأ بطاقة القرائن ببطء وحاول مرة أخرى.","The Code Book":"كتاب الشيفرة","The clock starts when you press the button. Most students finish in about 20 minutes.":"يبدأ العدّاد عندما تضغط الزر. يُنهي معظم الطلاب في نحو 20 دقيقة.","The code has 5 digits. Fill every box.":"الرمز مكوّن من 5 أرقام. املأ كل المربعات.","The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.":"لم يُفتح الباب. تحقق من الأرقام تحت كل قفل، واكتبها بالترتيب: رقم القفل 1 أولًا.","The door is open!":"الباب مفتوح!","The door swings open!":"ينفتح الباب على مصراعيه!","Time":"الوقت","Type the answer in English.":"اكتب الإجابة بالإنجليزية.","Type the answer in English. Use the digits 0-9.":"اكتب الإجابة بالإنجليزية. استخدم الأرقام 0-9.","Type the exit code":"اكتب رمز الخروج","Type your answer first.":"اكتب إجابتك أولًا.","Type your answer here...":"اكتب إجابتك هنا...","Unscramble the letters to fill the blank.":"رتّب الأحرف لتملأ الفراغ.","Which lock was hardest, and what did you learn that you did not know before?":"أي قفل كان الأصعب، وماذا تعلمت ولم تكن تعرفه من قبل؟","Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.":"اكتب من 3 إلى 4 جمل. اذكر القفل واستخدم معلومة واحدة من بطاقة القرائن الخاصة به. يمكنك كتابة هذا حتى لو لم تهرب.","You escaped and wrote your Debrief. Ready to submit.":"لقد هربت وكتبت ملخصك الختامي. أنت جاهز للتسليم.","You escaped! Write your Debrief, then download your file to submit.":"لقد هربت! اكتب ملخصك الختامي، ثم نزّل ملفك لتسليمه.","Your answer":"إجابتك","Your time:":"وقتك:","digit":"رقم","Core Objective 1: Identify the major causes of the Great Depression.":"الهدف الأساسي 1: تحديد الأسباب الرئيسية للكساد الكبير.","Core Objective 2: Describe the impact of the Great Depression on the lives of the American people.":"الهدف الأساسي 2: وصف أثر الكساد الكبير على حياة الشعب الأمريكي.","Core Objective 3: Explain how the Hoover administration failed to address the human distress caused by the Great Depression.":"الهدف الأساسي 3: شرح كيف فشلت إدارة هوفر (Hoover) في معالجة المعاناة الإنسانية التي سببها الكساد الكبير.","Core Objective 4: Assess the goals and accomplishments of the First New Deal.":"الهدف الأساسي 4: تقييم أهداف الصفقة الجديدة الأولى (First New Deal) وإنجازاتها.","Core Objectives 5 and 6: Describe how the Depression was reflected in cultural life, and analyze the opposition to the First New Deal. Evaluate how the Second New Deal transformed the role of federal government in American life.":"الأهداف الأساسية 5 و6: وصف كيف انعكس الكساد في الحياة الثقافية، وتحليل المعارضة للصفقة الجديدة الأولى (First New Deal). تقييم كيف غيّرت الصفقة الجديدة الثانية (Second New Deal) دور الحكومة الفيدرالية في الحياة الأمريكية.","LOCK 5 · CORE OBJECTIVES 5 AND 6":"القفل 5 · الأهداف الأساسية 5 و6","The Great Depression and the New Deal":"الكساد الكبير والصفقة الجديدة (New Deal)","Escape the Newsroom":"اهرب من غرفة التحرير","Enter the Newsroom":"ادخل غرفة التحرير","You are locked in the newsroom.":"أنت محبوس في غرفة التحرير.","PRESS ROOM":"غرفة المطبعة","A 1930s newspaper office at night. On the left, a corkboard with pinned newspaper pages hangs above a desk with a typewriter and a desk lamp, and a stack of newspapers sits on the floor. On the right, a clock and a framed front page hang above a filing cabinet with a telephone and a stack of newspapers on top. The door has a PRESS ROOM sign and five padlocks in a row. Under each padlock is a window for one digit of the exit code.":"مكتب صحيفة في ثلاثينيات القرن الماضي ليلًا. على اليسار، لوحة من الفلين عليها صفحات صحف مثبّتة معلّقة فوق مكتب عليه آلة كاتبة ومصباح مكتب، وعلى الأرض كومة من الصحف. وعلى اليمين، ساعة وصفحة أولى مؤطرة معلّقتان فوق خزانة ملفات عليها هاتف وكومة من الصحف. وعلى الباب لافتة «غرفة المطبعة» وخمسة أقفال في صف واحد. وتحت كل قفل نافذة صغيرة لرقم واحد من رمز الخروج.","The newspaper office closed for the night, and the night editor locked up the newsroom. Old front pages and typewriters from the Depression years sit in the room. The door has <b>5 locks<\/b>. Each lock matches one big idea from Lesson 15. Solve them all to find the <b>5-digit exit code<\/b>.":"أغلق مكتب الصحيفة أبوابه لهذه الليلة، وأقفل محرر الليل غرفة التحرير. وفي الغرفة صفحات أولى وآلات كاتبة قديمة من سنوات الكساد. وللباب <b>5 أقفال<\/b>. كل قفل يرتبط بفكرة كبيرة من الدرس 15. حُلّها كلها لتجد <b>رمز الخروج المكوّن من 5 أرقام<\/b>.","UNIT 6 · DEPRESSION AND WORLD WAR | CPUSH | DANIEL GARZA, M.A.":"الوحدة 6 · الكساد والحرب العالمية | CPUSH | DANIEL GARZA, M.A.","Decoder key: the <span style=\"color:var(--hl);font-weight:700\">blue<\/span> letter is in the message. The white letter under it is the real letter.":"مفتاح فك التشفير: الحرف <span style=\"color:var(--hl);font-weight:700\">الأزرق<\/span> هو الحرف الموجود في الرسالة. والحرف الأبيض تحته هو الحرف الحقيقي.","Escape Room 15 · The Great Depression and the New Deal":"غرفة الهروب 15 · الكساد الكبير والصفقة الجديدة (New Deal)","The Ticker Tape":"شريط المؤشر","The Telephone":"الهاتف","The Front Page":"الصفحة الأولى","The Printing Press":"آلة الطباعة","7 percent":"7 بالمئة","17 percent":"17 بالمئة","27 percent":"27 بالمئة","57 percent":"57 بالمئة","What does it mean to buy stocks “on margin”?":"ماذا يعني شراء الأسهم «بالهامش»؟","Pay the full price in cash":"دفع السعر الكامل نقدًا","Pay a small down payment and borrow the rest from a broker":"دفع مبلغ صغير مقدمًا واقتراض الباقي من سمسار","Buy stocks only from the government":"شراء الأسهم من الحكومة فقط","Trade stocks only after the market closes":"تداول الأسهم بعد إغلاق السوق فقط","How much did U.S. economic output drop from 1929 to 1933?":"كم انخفض الإنتاج الاقتصادي الأمريكي من 1929 إلى 1933؟","What did the Smoot-Hawley Tariff do to the average tariff rate?":"ماذا فعلت تعريفة سموت-هاولي (Smoot-Hawley Tariff) بمتوسط الرسوم الجمركية؟","Cut it from 50 percent to 25 percent":"خفّضته من 50 بالمئة إلى 25 بالمئة","Raised it from 25 percent to 50 percent":"رفعته من 25 بالمئة إلى 50 بالمئة","Raised it from 5 percent to 10 percent":"رفعته من 5 بالمئة إلى 10 بالمئة","Left it at 25 percent":"أبقته عند 25 بالمئة","In the 1920s, many people bought stocks “on margin.” An investor paid a small down payment and borrowed the rest from a stockbroker. On Black Tuesday, October 29, 1929, share prices went into free fall. The crash did not cause the Great Depression, but it showed that the prosperity of the 1920s had been built on unstable foundations. Factories made more products than consumers could buy, and wages did not keep up. From 1929 to 1933, U.S. economic output dropped by 27 percent. The Smoot-Hawley Tariff of 1930 raised the average tariff rate from 25 percent to 50 percent, and other countries passed tariffs of their own. The Federal Reserve also tightened the money supply, and it shrank by a third between 1929 and 1932.":"في العشرينيات، اشترى كثير من الناس الأسهم «بالهامش». كان المستثمر يدفع مبلغًا صغيرًا مقدمًا ويقترض الباقي من سمسار الأسهم. وفي الثلاثاء الأسود (Black Tuesday)، 29 أكتوبر 1929، انهارت أسعار الأسهم بسرعة. ولم يتسبب الانهيار في الكساد الكبير، لكنه أظهر أن ازدهار العشرينيات كان مبنيًا على أسس غير مستقرة. فقد أنتجت المصانع منتجات أكثر مما يستطيع المستهلكون شراءه، ولم ترتفع الأجور بالقدر نفسه. ومن 1929 إلى 1933، انخفض الإنتاج الاقتصادي الأمريكي بنسبة 27 بالمئة. ورفعت تعريفة سموت-هاولي (Smoot-Hawley Tariff) لعام 1930 متوسط الرسوم الجمركية من 25 بالمئة إلى 50 بالمئة، وفرضت دول أخرى رسومًا جمركية خاصة بها. كما قلّل الاحتياطي الفيدرالي (Federal Reserve) كمية المال، فانكمشت بمقدار الثلث بين 1929 و1932.","Each answer is in the Clue Card. Look for “on margin,” for the drop in economic output, and for the tariff rates.":"كل إجابة موجودة في بطاقة القرائن. ابحث عن «بالهامش»، وعن انخفاض الإنتاج الاقتصادي، وعن نسب الرسوم الجمركية.","“On margin” means a small down payment plus a loan from a broker. Output dropped by 27 percent. The tariff went from 25 percent to 50 percent.":"«بالهامش» تعني مبلغًا صغيرًا مقدمًا مع قرض من سمسار. انخفض الإنتاج بنسبة 27 بالمئة. وارتفعت الرسوم الجمركية من 25 بالمئة إلى 50 بالمئة.","Not quite. At least one answer is off. Re-read the Clue Card for what “on margin” means, how far output dropped, and the tariff rates.":"ليس تمامًا. إجابة واحدة على الأقل غير صحيحة. أعد قراءة بطاقة القرائن لتعرف معنى «بالهامش»، ومقدار انخفاض الإنتاج، ونسب الرسوم الجمركية.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 23, “The Causes of the Great Depression” (pp. 1001-1004).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 23، “The Causes of the Great Depression” (ص. 1001-1004).","Soup kitchens":"مطابخ الحساء","Shantytowns":"أحياء الأكواخ","Dust Bowl":"وعاء الغبار (Dust Bowl)","Okies":"أوكيز (Okies)","Places where hungry people lined up for small amounts of food and water":"أماكن وقف فيها الجائعون في طوابير للحصول على كميات قليلة من الطعام والماء","Makeshift housing that appeared in cities to shelter the homeless":"مساكن مؤقتة ظهرت في المدن لإيواء المشردين","A drought disaster in the southern plains where winds carried away millions of tons of topsoil":"كارثة جفاف في السهول الجنوبية حملت فيها الرياح ملايين الأطنان من التربة السطحية","The label for refugees from the Dust Bowl who headed to California for jobs":"التسمية التي أُطلقت على لاجئي وعاء الغبار الذين توجّهوا إلى كاليفورنيا بحثًا عن عمل","By 1932, perhaps one-quarter of the population could not afford housing or adequate food, and unemployment had reached 12 million. Hungry people by the millions lined up at soup kitchens for small amounts of food and water. Shantytowns appeared in cities across the country to shelter the homeless. Married women were the main targets of layoffs, and Black workers who had moved north had the highest rate of joblessness. In 1931, Hoover approved a plan to forcibly return Mexicans to Mexico. Estimates vary, but at least 350,000 people were exiled, and many of them were U.S. citizens. In the 1930s, a terrible drought created the Dust Bowl, where strong winds scooped up millions of tons of topsoil. Dust Bowl refugees, called “Okies” or “Arkies,” headed to California in search of jobs.":"بحلول عام 1932، ربما لم يكن ربع السكان قادرًا على دفع تكلفة السكن أو الطعام الكافي، وبلغت البطالة 12 مليونًا. ووقف الملايين من الجائعين في طوابير أمام مطابخ الحساء للحصول على كميات قليلة من الطعام والماء. وظهرت أحياء الأكواخ في مدن البلاد لإيواء المشردين. وكانت النساء المتزوجات الهدف الرئيسي للتسريح من العمل، وسجّل العمال السود الذين انتقلوا إلى الشمال أعلى معدل للبطالة. وفي عام 1931، وافق هوفر (Hoover) على خطة لإعادة المكسيكيين بالقوة إلى المكسيك. وتختلف التقديرات، لكن ما لا يقل عن 350,000 شخص نُفوا، وكان كثير منهم مواطنين أمريكيين. وفي الثلاثينيات، سبّب جفاف رهيب كارثة «وعاء الغبار» (Dust Bowl)، حيث رفعت رياح قوية ملايين الأطنان من التربة السطحية. وتوجّه لاجئو وعاء الغبار، الذين سُمّوا «أوكيز» (Okies) أو «آركيز» (Arkies)، إلى كاليفورنيا بحثًا عن عمل.","Two terms name places people used or built (soup kitchens, shantytowns). One names a disaster (Dust Bowl). One names a label for the people who left it (Okies).":"مصطلحان يسميان أماكن استخدمها الناس أو بنوها (مطابخ الحساء، أحياء الأكواخ). وأحدهما يسمي كارثة (وعاء الغبار (Dust Bowl)). والآخر يسمي تسمية للناس الذين تركوه (أوكيز (Okies)).","Soup kitchens gave out food. Shantytowns were makeshift housing. The Dust Bowl was a drought disaster. The Okies were Dust Bowl refugees who went to California.":"مطابخ الحساء كانت توزّع الطعام. وأحياء الأكواخ كانت مساكن مؤقتة. ووعاء الغبار (Dust Bowl) كان كارثة جفاف. وأوكيز (Okies) كانوا لاجئين من وعاء الغبار ذهبوا إلى كاليفورنيا.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 23, “The Human Toll of the Depression” (pp. 1005-1009).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 23، “The Human Toll of the Depression” (ص. 1005-1009).","The Clue Card describes an idea without naming it. A secret message names it. Each letter in the message was moved 5 steps forward in the alphabet. Decode it to name the idea.":"تصف بطاقة القرائن فكرة دون أن تذكر اسمها. رسالة سرية تذكر اسمها. تم تحريك كل حرف في الرسالة 5 خطوات إلى الأمام في الأبجدية. فُكّ تشفيرها لتعرف اسم الفكرة.","The Clue Card describes the idea but does not name it. Use the decoder key to spell the name, one letter at a time.":"تصف بطاقة القرائن الفكرة لكنها لا تذكر اسمها. استخدم مفتاح فك التشفير لتهجئة الاسم، حرفًا حرفًا.","In the message, the letter A is really V, and the letter T is really O. The word has 11 letters and starts with V.":"في الرسالة، الحرف A هو في الحقيقة V، والحرف T هو في الحقيقة O. الكلمة من 11 حرفًا وتبدأ بالحرف V.","President Hoover refused to start federal programs to help needy people directly. He feared the nation would be “plunged into socialism.” He hoped that the “natural generosity” of Americans, local charities, and churches would be enough, and he believed that volunteers would relieve the suffering. But there were no jobs, even for people who wanted to work, and homeless people called their shantytowns “Hoovervilles” to criticize the president. Hoover also pushed through the Revenue Act of 1932, the largest peacetime tax increase in history. In 1932, army soldiers attacked unemployed veterans and their families at a camp near the Capitol, burned their shelters, and injured 55 veterans. Roosevelt won the 1932 election, 23 million votes to 16 million.":"رفض الرئيس هوفر (Hoover) بدء برامج فيدرالية لمساعدة المحتاجين مباشرة. وخشي أن تُدفَع الأمة «إلى الاشتراكية». وكان يأمل أن يكفي «الكرم الطبيعي» للأمريكيين والجمعيات الخيرية المحلية والكنائس، واعتقد أن المتطوعين سيخففون المعاناة. لكن لم تكن هناك وظائف، حتى لمن أراد العمل، وسمّى المشردون أحياءهم المؤقتة «هوفرفيلز» (Hoovervilles) انتقادًا للرئيس. كما دفع هوفر الكونغرس إلى إقرار قانون الإيرادات لعام 1932 (Revenue Act of 1932)، وهو أكبر زيادة ضريبية في زمن السلم في التاريخ. وفي عام 1932، هاجم جنود الجيش المحاربين القدامى العاطلين عن العمل وأسرهم في معسكر قرب الكابيتول (Capitol)، وأحرقوا مساكنهم، وأصابوا 55 من المحاربين القدامى. وفاز روزفلت (Roosevelt) في انتخابات 1932 بـ 23 مليون صوت مقابل 16 مليونًا.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 23, “From Hooverism to the New Deal” (pp. 1010-1014).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 23، “From Hooverism to the New Deal” (ص. 1010-1014).","Roosevelt gives his first radio “fireside chat” about the banks":"يلقي روزفلت (Roosevelt) أول «حديث بجانب المدفأة» عبر الإذاعة عن البنوك","The Glass-Steagall Banking Act creates the FDIC":"يُنشئ قانون غلاس-ستيغال (Glass-Steagall) المصرفي مؤسسة FDIC","The Securities Exchange Act creates the SEC":"يُنشئ قانون تداول الأوراق المالية هيئة SEC","The Supreme Court declares the NIRA unconstitutional":"تعلن المحكمة العليا أن قانون NIRA غير دستوري","Roosevelt took office in March 1933 and promised “action, and action now.” In the First Hundred Days, from March 9 to June 16, Congress approved fifteen major laws. On March 12, Roosevelt gave his first radio “fireside chat” to tell Americans that their money was safer in a reopened bank than under the mattress. On June 16, the Glass-Steagall Banking Act created the Federal Deposit Insurance Corporation (FDIC), which insured customer bank accounts up to $2,500. The Securities Exchange Act of 1934 set up the Securities and Exchange Commission (SEC) to enforce the rules for stocks and bonds. The Civilian Conservation Corps (CCC) hired half a million young, unmarried men, but women were excluded, and African Americans and Indigenous Americans were housed in segregated facilities. The National Industrial Recovery Act (NIRA) of 1933 created the National Recovery Administration (NRA), but the Supreme Court declared the NIRA unconstitutional in May 1935.":"تولّى روزفلت (Roosevelt) المنصب في مارس 1933 ووعد بـ«العمل، والعمل الآن». وفي الأيام المئة الأولى، من 9 مارس إلى 16 يونيو، أقرّ الكونغرس خمسة عشر قانونًا كبيرًا. وفي 12 مارس، ألقى روزفلت أول «حديث بجانب المدفأة» عبر الإذاعة ليقول للأمريكيين إن أموالهم أكثر أمانًا في بنك أُعيد فتحه منها تحت الفراش. وفي 16 يونيو، أنشأ قانون غلاس-ستيغال (Glass-Steagall) المصرفي «المؤسسة الفيدرالية للتأمين على الودائع» (Federal Deposit Insurance Corporation, FDIC)، التي أمّنت حسابات العملاء المصرفية حتى 2,500 دولار. وأنشأ قانون تداول الأوراق المالية لعام 1934 «هيئة الأوراق المالية والبورصات» (Securities and Exchange Commission, SEC) لتطبيق القواعد الخاصة بالأسهم والسندات. وجنّد «فيلق الحفاظ المدني» (Civilian Conservation Corps, CCC) نصف مليون شاب أعزب، لكن النساء استُبعدن، وسُكّن الأمريكيون من أصل أفريقي والسكان الأصليون الأمريكيون في مرافق خاضعة للفصل العنصري. وأنشأ قانون التعافي الصناعي الوطني (National Industrial Recovery Act, NIRA) لعام 1933 «إدارة التعافي الوطني» (National Recovery Administration, NRA)، لكن المحكمة العليا أعلنت أن قانون NIRA غير دستوري في مايو 1935.","Look for the dates in the Clue Card: March 12 (1933), June 16 (1933), 1934, and May 1935. Each event has its own date.":"ابحث في بطاقة القرائن عن التواريخ: 12 مارس (1933) و16 يونيو (1933) و1934 ومايو 1935. لكل حدث تاريخه الخاص.","The order is the first fireside chat, the Glass-Steagall Banking Act, the Securities Exchange Act, then the Supreme Court ruling on the NIRA.":"الترتيب هو: أول حديث بجانب المدفأة، ثم قانون غلاس-ستيغال (Glass-Steagall) المصرفي، ثم قانون تداول الأوراق المالية، ثم حكم المحكمة العليا بشأن قانون NIRA.","Not quite. Re-read the Clue Card and match each event to its date.":"ليس تمامًا. أعد قراءة بطاقة القرائن واربط كل حدث بتاريخه.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 23, “Roosevelt’s New Deal” (pp. 1015-1024).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 23، “Roosevelt’s New Deal” (ص. 1015-1024).","Many writers, such as John Steinbeck, showed the suffering of the Depression, while popular movies helped Americans escape their troubles for a short time. Critics attacked the New Deal from both sides. Business leaders and conservatives said it was moving toward socialism, and others on the left said it did not do enough. Huey Long, Francis Townsend, and Father Charles Coughlin offered other plans, and Coughlin’s radio shows drew as many as 40 million listeners. By the end of its 1935–1936 term, the Supreme Court had ruled against New Deal programs in seven of nine major cases.":"صوّر كثير من الكتّاب، مثل جون شتاينبك (John Steinbeck)، معاناة الكساد، بينما ساعدت الأفلام الشعبية الأمريكيين على الهروب من همومهم لفترة قصيرة. وهاجم المنتقدون الصفقة الجديدة (New Deal) من الجانبين. فقال قادة الأعمال والمحافظون إنها تتجه نحو الاشتراكية، وقال آخرون من اليسار إنها لا تفعل ما يكفي. وقدّم هويي لونغ (Huey Long) وفرانسيس تاونسند (Francis Townsend) والأب تشارلز كوغلن (Charles Coughlin) خططًا أخرى، وجذبت برامج كوغلن الإذاعية ما يصل إلى 40 مليون مستمع. وبحلول نهاية دورتها لعام 1935–1936، كانت المحكمة العليا قد حكمت ضد برامج الصفقة الجديدة في سبع من تسع قضايا رئيسية.","In January 1935, Roosevelt launched the Second New Deal, which was much more far-reaching. The Works Progress Administration (WPA) became the nation’s largest employer, and the Wagner Act guaranteed workers the right to organize unions. The centerpiece of the Social Security Act of 1935 was a federal retirement fund for people over age 65. The act left out 9.5 million low-paid workers, such as farm laborers and domestic workers, and a disproportionate share of them were African Americans.":"وفي يناير 1935، أطلق روزفلت (Roosevelt) الصفقة الجديدة الثانية (Second New Deal)، وكانت أبعد مدى بكثير. وأصبحت «إدارة تقدم الأشغال» (Works Progress Administration, WPA) أكبر جهة توظيف في البلاد، وضمّن قانون واغنر (Wagner Act) حق العمال في تنظيم النقابات. وكان محور قانون الضمان الاجتماعي لعام 1935 (Social Security Act) صندوقًا فيدراليًا للتقاعد للأشخاص فوق سن 65. وقد استثنى القانون 9.5 مليون عامل منخفضي الأجر، مثل العمال الزراعيين وعمال المنازل، وكانت نسبة غير متناسبة منهم من الأمريكيين من أصل أفريقي.","The Social Security Act of 1935 created a federal ________ fund for people over age 65.":"أنشأ قانون الضمان الاجتماعي لعام 1935 (Social Security Act) صندوقًا فيدراليًا من نوع ________ للأشخاص فوق سن 65.","Read the last two sentences of the Clue Card. The missing word tells what kind of fund was the centerpiece of the Social Security Act.":"اقرأ آخر جملتين في بطاقة القرائن. الكلمة الناقصة تبيّن نوع الصندوق الذي كان محور قانون الضمان الاجتماعي (Social Security Act).","The word starts with R and ends with T. It has 10 letters.":"الكلمة تبدأ بالحرف R وتنتهي بالحرف T. وهي من 10 أحرف.","Not quite. Re-read the last two sentences of the Clue Card. Use the scrambled letters to check your spelling.":"ليس تمامًا. أعد قراءة آخر جملتين في بطاقة القرائن. استخدم الحروف المبعثرة للتحقق من الإملاء.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 23, “The New Deal Years: Hardships, Cultural Life, Criticism” (pp. 1025-1035) and “The Second New Deal” (pp. 1036-1039).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 23، “The New Deal Years: Hardships, Cultural Life, Criticism” (ص. 1025-1035) و“The Second New Deal” (ص. 1036-1039).","Unlocked. Your digit is 4. Your answer: Pay a small down payment and borrow the rest from a broker; 27 percent; Raised it from 25 percent to 50 percent":"تم الفتح. رقمك هو 4. إجابتك: دفع مبلغ صغير مقدمًا واقتراض الباقي من سمسار؛ 27 بالمئة؛ رفعته من 25 بالمئة إلى 50 بالمئة","Unlocked. Your digit is 0. Your answer: Okies = The label for refugees from the Dust Bowl who headed to California for jobs; Dust Bowl = A drought disaster in the southern plains where winds carried away millions of tons of topsoil; Soup kitchens = Places where hungry people lined up for small amounts of food and water; Shantytowns = Makeshift housing that appeared in cities to shelter the homeless":"تم الفتح. رقمك هو 0. إجابتك: أوكيز (Okies) = التسمية التي أُطلقت على لاجئي وعاء الغبار الذين توجّهوا إلى كاليفورنيا بحثًا عن عمل; وعاء الغبار (Dust Bowl) = كارثة جفاف في السهول الجنوبية حملت فيها الرياح ملايين الأطنان من التربة السطحية; مطابخ الحساء = أماكن وقف فيها الجائعون في طوابير للحصول على كميات قليلة من الطعام والماء; أحياء الأكواخ = مساكن مؤقتة ظهرت في المدن لإيواء المشردين","Unlocked. Your digit is 3. Your answer: Roosevelt gives his first radio “fireside chat” about the banks &gt; The Glass-Steagall Banking Act creates the FDIC &gt; The Securities Exchange Act creates the SEC &gt; The Supreme Court declares the NIRA unconstitutional":"تم الفتح. رقمك هو 3. إجابتك: يلقي روزفلت (Roosevelt) أول «حديث بجانب المدفأة» عبر الإذاعة عن البنوك &gt; يُنشئ قانون غلاس-ستيغال (Glass-Steagall) المصرفي مؤسسة FDIC &gt; يُنشئ قانون تداول الأوراق المالية هيئة SEC &gt; تعلن المحكمة العليا أن قانون NIRA غير دستوري"},"patterns":[{"re":"^Still needed: first name, last name, and period\\.$","es":"Todavía falta: nombre, apellido y período.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة."},{"re":"^LOCK (\\d)$","es":"Cand. $1","ar":"القفل $1"},{"re":"^LOCK (\\d) · CORE OBJECTIVE (\\d+)$","es":"CANDADO $1 · OBJETIVO PRINCIPAL $2","ar":"القفل $1 · الهدف الأساسي $2"},{"re":"^Hint (\\d):$","es":"Pista $1:","ar":"تلميح $1:"},{"re":"^Exit code digit (\\d)$","es":"Dígito $1 del código de salida","ar":"رقم رمز الخروج $1"},{"re":"^Click! Lock (\\d) is open\\. Your digit is (\\d)\\.$","es":"¡Clic! El Candado $1 está abierto. Tu dígito es $2.","ar":"نقرة! القفل $1 مفتوح. رقمك هو $2."},{"re":"^5 of 5 locks opened with (\\d+) tries and (\\d+) hints\\.$","es":"Abriste 5 de 5 candados con $1 intentos y $2 pistas.","ar":"فتحت 5 أقفال من 5 بعد $1 محاولة و$2 تلميحات."},{"re":"^Tap all (\\d) places first, in order\\.$","es":"Primero toca los $1 lugares, en orden.","ar":"المس الأماكن الـ $1 أولًا، بالترتيب."},{"re":"^Done! File downloaded: (.*)\\. Upload it to Canvas\\.$","es":"¡Listo! Se descargó el archivo: $1. Súbelo a Canvas.","ar":"تم! تم تنزيل الملف: $1. ارفعه إلى Canvas."},{"re":"^Your file downloaded and is marked INCOMPLETE \\(you have not escaped\\)\\. Upload it to Canvas: (.*)$","es":"Tu archivo se descargó y está marcado INCOMPLETO (todavía no escapas). Súbelo a Canvas: $1","ar":"تم تنزيل ملفك وهو مُسجَّل «غير مكتمل» INCOMPLETE (لم تهرب بعد). ارفعه إلى Canvas: $1"},{"re":"^Unlocked\\. Your digit is (\\d)\\. Your answer: (.*)$","es":"Desbloqueado. Tu dígito es $1. Tu respuesta: $2","ar":"تم الفتح. رقمك هو $1. إجابتك: $2"}]}</script>
+<script>
+/* Supplement language switch (English / Espanol / Arabic). Works on pages whose text is rendered by JS:
+   a MutationObserver translates text as it appears. Data: <script type="application/json" id="sp-i18n">
+   {"langs":["en","es","ar"],"default":"en","es":{englishHTML:translation},"ar":{...},"patterns":[{"re":"^(\\d+) of (\\d+)$","es":"$1 de $2","ar":"..."}]}
+   Keys are the English text exactly as it sits in the page (innerHTML, spaces collapsed).
+   Helpers: spSeen() english strings seen so far; spMissing() strings with no translation in the current language;
+   spSetLang(l); spTr(s) translate a string (used for confirm/alert); spAscii(s) plain-ASCII name for file names. */
+(function () {
+  var node = document.getElementById('sp-i18n');
+  var D = node ? JSON.parse(node.textContent) : { langs: ['en'], patterns: [] };
+  var INLINE = { B:1,I:1,EM:1,STRONG:1,SPAN:1,A:1,BR:1,SMALL:1,SUP:1,SUB:1,U:1,MARK:1,BDI:1,TSPAN:1,CODE:1 };
+  var SKIP = 'script,style,textarea,input,.sp-lang,.sp-nt,[translate="no"]';
+  var WORD = /[A-Za-z\u00C0-\u024F\u0600-\u06FF]{2}|e\.g\./;
+  var LANG = 'en', REC = new WeakMap(), SEEN = {}, MISS = {};
+  (D.patterns || []).forEach(function (p) { try { p._re = new RegExp(p.re); } catch (e) {} });
+  function norm(s) { return String(s).replace(/\s+/g, ' ').trim(); }
+  function tr(src) {
+    if (LANG === 'en') return null;
+    var t = D[LANG] && D[LANG][src];
+    if (t) return t;
+    var P = D.patterns || [];
+    for (var i = 0; i < P.length; i++) {
+      var m = P[i]._re && P[i]._re.exec(src);
+      if (m && P[i][LANG]) return P[i][LANG].replace(/\$(\d+)/g, function (_, n) { return m[+n] || ''; });
+    }
+    return null;
+  }
+  window.spTr = function (s) { var t = tr(norm(s)); return t ? t.replace(/<[^>]+>/g, '') : s; };
+  function isInline(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling)
+      if (c.nodeType === 1 && (!INLINE[c.tagName.toUpperCase()] || c.matches(SKIP))) return false;
+    return true;
+  }
+  function directText(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling) if (c.nodeType === 3 && WORD.test(c.nodeValue)) return true;
+    return false;
+  }
+  function cur(s) { return s.nodeType === 1 ? s.innerHTML : s.nodeValue; }
+  function put(s, v) { if (s.nodeType === 1) s.innerHTML = v; else s.nodeValue = v; }
+  function handle(s) {
+    var r = REC.get(s), c = cur(s);
+    if (!(r && c === r.wrote)) { r = { en: c, wrote: c }; REC.set(s, r); }
+    var src = norm(r.en), target = r.en;
+    if (WORD.test(src)) {
+      SEEN[src] = 1;
+      if (LANG !== 'en') {
+        var t = tr(src);
+        if (t) {
+          target = s.nodeType === 1 ? t : (r.en.match(/^\s*/)[0] + t + r.en.match(/\s*$/)[0]);
+          delete MISS[src];
+        } else MISS[src] = 1;
+      }
+    }
+    if (c !== target) put(s, target);
+    r.wrote = cur(s);
+  }
+  var ATTRS = ['placeholder', 'alt', 'aria-label', 'title'];
+  function attrs(root) {
+    var els = root.querySelectorAll ? root.querySelectorAll('[placeholder],[alt],[aria-label],[title]') : [];
+    var list = [].slice.call(els); if (root.matches && root.matches('[placeholder],[alt],[aria-label],[title]')) list.push(root);
+    list.forEach(function (el) {
+      if (el.closest && el.closest('.sp-lang,.sp-nt,[translate="no"],script,style')) return;
+      var rec = el.__spa || (el.__spa = {});
+      ATTRS.forEach(function (a) {
+        var v = el.getAttribute(a); if (v == null) return;
+        var r = rec[a];
+        if (!(r && v === r.wrote)) { r = rec[a] = { en: v, wrote: v }; }
+        var src = norm(r.en); if (!WORD.test(src)) return;
+        SEEN[src] = 1;
+        var t = LANG === 'en' ? null : tr(src);
+        if (LANG !== 'en' && !t) MISS[src] = 1;
+        var target = t ? t.replace(/<[^>]+>/g, '') : r.en;
+        if (v !== target) el.setAttribute(a, target);
+        r.wrote = el.getAttribute(a);
+      });
+    });
+  }
+  function walk(root) {
+    if (root.nodeType === 3) { if (WORD.test(root.nodeValue) && !(root.parentNode && root.parentNode.closest && root.parentNode.closest(SKIP))) handle(root); return; }
+    if (root.nodeType !== 1) return;
+    (function w(el) {
+      if (el.matches(SKIP)) return;
+      if (el !== document.body && directText(el) && isInline(el)) { handle(el); return; }
+      for (var c = el.firstChild; c; c = c.nextSibling) {
+        if (c.nodeType === 1) w(c); else if (c.nodeType === 3 && WORD.test(c.nodeValue)) handle(c);
+      }
+    })(root);
+    attrs(root);
+  }
+  var TITLE = { en: document.title, wrote: document.title };
+  function title() {
+    if (document.title !== TITLE.wrote) TITLE = { en: document.title, wrote: document.title };
+    var t = LANG === 'en' ? null : tr(norm(TITLE.en));
+    document.title = t ? t.replace(/<[^>]+>/g, '') : TITLE.en; TITLE.wrote = document.title;
+  }
+  function inl(e) { return e.nodeType === 1 && !!INLINE[e.tagName.toUpperCase()]; }
+  var mo = new MutationObserver(function (muts) {
+    var todo = [];
+    muts.forEach(function (m) {
+      if (m.type === 'childList') { for (var i = 0; i < m.addedNodes.length; i++) todo.push(m.addedNodes[i]); todo.push(m.target); }
+      else todo.push(m.target);
+    });
+    todo.forEach(function (n) {
+      var el = n.nodeType === 1 ? n : n.parentNode;
+      if (!el || el.nodeType !== 1 || !document.body.contains(el)) return;
+      while (el !== document.body && el.parentNode && el.parentNode.nodeType === 1 && inl(el) && inl(el.parentNode)) el = el.parentNode;
+      if (el.parentNode && el.parentNode.nodeType === 1 && inl(el.parentNode) && el.parentNode !== document.body) el = el.parentNode;
+      walk(el);
+    });
+    mo.takeRecords();
+  });
+  var AR = { 'ا':'a','أ':'a','إ':'i','آ':'a','ب':'b','ت':'t','ث':'th','ج':'j','ح':'h','خ':'kh','د':'d','ذ':'dh','ر':'r','ز':'z','س':'s','ش':'sh','ص':'s','ض':'d','ط':'t','ظ':'z','ع':'a','غ':'gh','ف':'f','ق':'q','ك':'k','ل':'l','م':'m','ن':'n','ه':'h','و':'w','ي':'y','ى':'a','ة':'a','ئ':'y','ؤ':'w' };
+  window.spAscii = function (s) {
+    s = String(s); if (s.normalize) s = s.normalize('NFD').replace(/[̀-ًͯ-ٰٟ]/g, '');
+    return s.replace(/[ء-ي]/g, function (c) { return AR[c] !== undefined ? AR[c] : ''; }).replace(/ñ/g, 'n').replace(/Ñ/g, 'N');
+  };
+  window.spSeen = function () { return Object.keys(SEEN); };
+  window.spMissing = function () { return Object.keys(MISS); };
+  window.spLang = function () { return LANG; };
+  window.spSetLang = function (l) {
+    if ((D.langs || ['en']).indexOf(l) < 0) l = 'en';
+    LANG = l; MISS = {};
+    var h = document.documentElement; h.lang = l; h.dir = l === 'ar' ? 'rtl' : 'ltr';
+    mo.disconnect(); walk(document.body); title(); mo.takeRecords();
+    mo.observe(document.body, { childList: true, subtree: true, characterData: true });
+    document.querySelectorAll('.sp-lang button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === l)); });
+    try { localStorage.setItem('sp_lang', l); } catch (e) {}
+    try { var u = new URL(location.href); if (l === 'en') u.searchParams.delete('lang'); else u.searchParams.set('lang', l); history.replaceState(null, '', u.toString()); } catch (e) {}
+    try { document.dispatchEvent(new CustomEvent('splangchange', { detail: l })); } catch (e) {}
+  };
+  var _c = window.confirm, _a = window.alert;
+  window.confirm = function (m) { return _c.call(window, window.spTr(m)); };
+  window.alert = function (m) { return _a.call(window, window.spTr(m)); };
+  document.querySelectorAll('.sp-lang button').forEach(function (b) { b.addEventListener('click', function () { window.spSetLang(b.getAttribute('data-lang')); }); });
+  var start = D['default'] || 'en';
+  try { start = new URL(location.href).searchParams.get('lang') || localStorage.getItem('sp_lang') || start; } catch (e) {}
+  window.spSetLang(start);
+})();
+
+</script><!--/sp-i18n-->
+</body>
+</html>

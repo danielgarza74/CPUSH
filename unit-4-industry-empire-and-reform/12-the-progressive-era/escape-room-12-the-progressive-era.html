@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Escape Room 12 · The Progressive Era</title>
+<style>
+:root{--bg:#231933;--txt:#EFEBF4;--a1:#493669;--a2:#D2954B;--hl:#E1BB8E;--glass:rgba(239,235,244,.07);--glassb:rgba(239,235,244,.2);--dim:#C4BBD3;--ok:#8FD3A8}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#3A2A57 0%,#231933 60%) fixed;background-color:var(--bg);color:var(--txt);font:17px/1.55 "Segoe UI",system-ui,-apple-system,Verdana,sans-serif;min-height:100vh}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px 40px}
+.glass{background:var(--glass);border:1px solid var(--glassb);border-radius:16px;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+header.hero{padding:30px 0 12px;border-bottom:3px solid var(--a2)}
+.eyebrow{font-size:13px;letter-spacing:.16em;font-weight:700;color:var(--hl)}
+h1{margin:.15em 0 .05em;font-size:clamp(28px,6vw,40px);line-height:1.12}
+.sub{margin:0;font-weight:600;color:var(--dim)}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 4px}
+.meta label{flex:1 1 170px;font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--dim)}
+input[type=text],textarea,select{display:block;width:100%;margin-top:4px;padding:10px 12px;border:1px solid var(--glassb);border-radius:10px;background:rgba(14,8,24,.55);color:var(--txt);font:inherit;font-size:16px}
+input[type=text]:focus,textarea:focus,select:focus,button:focus-visible{outline:3px solid var(--hl);outline-offset:1px}
+input.bad{border-color:var(--a2);box-shadow:0 0 0 2px var(--a2)}
+textarea{min-height:120px;resize:vertical}
+.howto{margin:14px 0;padding:14px 16px;font-size:16px}
+.howto ol{margin:6px 0 0;padding-left:22px}
+.scene{margin:14px 0;padding:8px;text-align:center}
+.scene svg{width:100%;height:auto;display:block;border-radius:12px}
+.bar{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;padding:8px 12px;margin:10px 0;font-weight:700;font-size:15px;background:rgba(35,25,51,.92);border:1px solid var(--glassb);border-radius:12px}
+.bar span b{color:var(--hl)}
+.btn{font:inherit;font-size:16px;font-weight:700;padding:11px 18px;border-radius:12px;border:2px solid var(--hl);background:transparent;color:var(--txt);cursor:pointer;min-height:44px}
+.btn:hover{background:rgba(225,187,142,.18)}
+.btn.primary{background:var(--hl);color:#231933;border-color:var(--hl)}
+.btn.primary:hover{background:#EBCBA0}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.btn.small{padding:8px 14px;font-size:15px;min-height:40px}
+.intro{padding:20px;text-align:center}
+.intro p{margin:.4em 0}
+.lock{margin:12px 0;overflow:hidden}
+.lock>button.lh{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:12px;width:100%;padding:14px 16px;cursor:pointer}
+.lock>button.lh:focus-visible{outline:3px solid var(--hl);outline-offset:-3px}
+.lock.locked>button.lh{cursor:not-allowed;opacity:.55}
+.lk{flex:none;width:44px;height:44px}
+.lk .sh{transition:transform .5s cubic-bezier(.3,1.6,.5,1);transform-origin:center}
+.lock.solved .lk .sh{transform:translateY(-6px) rotate(-30deg);transform-origin:10px 14px}
+.lock.solved .lk .bd{fill:var(--hl)}
+.lt{flex:1}
+.lt small{display:block;font-size:12px;letter-spacing:.12em;font-weight:700;color:var(--hl)}
+.lt strong{font-size:19px}
+.dg{flex:none;min-width:42px;height:42px;border-radius:10px;border:2px solid var(--hl);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;background:rgba(14,8,24,.55)}
+.lb{padding:0 16px 16px;display:none}
+.lock.open .lb{display:block}
+.objline{font-size:14px;color:var(--dim);margin:0 0 10px}
+.card{background:rgba(239,235,244,.1);border-left:6px solid var(--a2);border-radius:10px;padding:12px 14px;margin:8px 0 12px}
+.card h4{margin:0 0 4px;font-size:13px;letter-spacing:.12em;color:var(--hl)}
+.card p{margin:.3em 0}
+.card .src{font-size:13px;color:var(--dim)}
+.prompt{font-weight:700;margin:10px 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0}
+.chip{font:inherit;font-size:16px;padding:10px 14px;border-radius:12px;border:2px solid var(--glassb);background:rgba(14,8,24,.55);color:var(--txt);cursor:pointer;min-height:44px;text-align:left}
+.chip.sel{border-color:var(--hl);background:rgba(225,187,142,.2)}
+.chip .n{display:inline-block;min-width:24px;height:24px;line-height:24px;border-radius:12px;background:var(--hl);color:#231933;font-weight:800;text-align:center;margin-right:8px}
+.mrow{margin:8px 0}
+.mrow label{font-weight:700;display:block}
+fieldset{border:1px solid var(--glassb);border-radius:10px;margin:8px 0;padding:8px 12px}
+legend{font-weight:700;padding:0 6px}
+.opt{display:flex;align-items:center;gap:10px;padding:6px 0;min-height:40px;cursor:pointer}
+.opt input{width:22px;height:22px;accent-color:#E1BB8E;flex:none}
+.cipher{font:700 24px/1.3 "Courier New",monospace;letter-spacing:.14em;background:rgba(14,8,24,.65);padding:12px;border-radius:10px;border:1px dashed var(--hl);word-break:break-word;text-align:center}
+.key{display:grid;grid-template-columns:repeat(13,1fr);gap:2px;margin:10px 0;font:700 14px/1.2 "Courier New",monospace;text-align:center}
+.key div{padding:3px 0;border-radius:4px;background:rgba(239,235,244,.08)}
+.key .c{color:var(--hl)}
+.scr{font:800 30px/1.2 "Courier New",monospace;letter-spacing:.3em;text-align:center;background:rgba(14,8,24,.65);padding:10px;border-radius:10px;border:1px dashed var(--hl)}
+.row{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0;align-items:center}
+.fb{margin:8px 0;padding:10px 12px;border-radius:10px;display:none;font-weight:600}
+.fb.show{display:block}
+.fb.nudge{background:rgba(210,149,75,.18);border:1px solid var(--a2)}
+.fb.good{background:rgba(143,211,168,.16);border:1px solid var(--ok);color:#DDF5E6}
+.hints{margin:6px 0}
+.hint{background:rgba(225,187,142,.14);border:1px dashed var(--hl);border-radius:10px;padding:8px 12px;margin:6px 0;font-size:16px}
+.hint b{color:var(--hl)}
+.exit{margin:16px 0;padding:18px;text-align:center}
+.exit.locked{opacity:.55}
+.exit h2,.esc h2,.debrief h2{margin:.1em 0 .3em}
+.codebox{display:flex;justify-content:center;gap:8px;margin:12px 0}
+.codebox input{width:52px;height:60px;text-align:center;font:800 30px "Courier New",monospace;padding:0;margin:0}
+.esc{margin:16px 0;padding:22px;text-align:center;display:none;border:2px solid var(--hl)}
+.esc.show{display:block}
+.esc .big{overflow-wrap:anywhere;font-size:clamp(30px,9vw,64px);font-weight:900;letter-spacing:.14em;color:var(--hl);text-shadow:0 0 24px rgba(225,187,142,.6);animation:pop .8s cubic-bezier(.3,1.6,.5,1)}
+.esc .time{font-size:26px;font-weight:800}
+.debrief{margin:16px 0;padding:16px}
+.actions{margin:16px 0;padding:16px}
+.status{font-weight:700;margin-bottom:10px}
+.msg{display:none;margin-top:10px;padding:10px 12px;border-radius:10px;background:rgba(143,211,168,.16);border:1px solid var(--ok)}
+.msg.err{background:rgba(210,149,75,.2);border-color:var(--a2)}
+.link{all:unset;cursor:pointer;color:var(--dim);text-decoration:underline;font-size:14px;margin-top:10px;display:inline-block}
+.link:focus-visible{outline:3px solid var(--hl)}
+footer{text-align:center;font-size:12px;letter-spacing:.1em;font-weight:700;color:var(--dim);padding:20px 8px 30px;border-top:1px solid var(--glassb);margin-top:20px}
+.ennote{margin:.4em 0 0;font-size:14px;font-weight:700;color:var(--dim)}
+.exit .ennote{text-align:center}
+.hidden{display:none!important}.lock,.exit,.esc{scroll-margin-top:64px}
+.pop{animation:pop .7s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pop{0%{transform:scale(.2);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes tap{0%,100%{transform:rotate(0)}50%{transform:rotate(9deg)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.shake{animation:shake .35s}
+.wheel{transform-box:view-box;transform-origin:276px 86px}
+.wheel.spin{animation:tap .5s ease-in-out 3}
+.plock .sh{transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
+.plock.open .sh{transform:translateY(-7px)}
+.plock.open .bd{fill:#E1BB8E}
+#door{transform-origin:150px 20px;transition:transform 1.4s ease-in-out}
+.escaped #door{transform:scaleX(.1)}
+#glow{opacity:.15;transition:opacity 1.4s}
+.escaped #glow{opacity:1}
+html[dir="rtl"] .chip{text-align:right}
+html[dir="rtl"] .chip .n{margin-right:0;margin-left:8px}
+html[dir="rtl"] .card{border-left:0;border-right:6px solid var(--a2)}
+html[dir="rtl"] .howto ol{padding-left:0;padding-right:22px}
+html[dir="rtl"] .esc,html[dir="rtl"] .exit,html[dir="rtl"] .intro{text-align:center}
+html[dir="rtl"] .cipher,html[dir="rtl"] .scr,html[dir="rtl"] .key{direction:ltr}
+html[dir="rtl"] .scr{letter-spacing:.3em!important}
+html[dir="rtl"] .cipher{letter-spacing:.14em!important}
+html[dir="rtl"] .key{letter-spacing:0!important}
+html[dir="rtl"] .card .src{direction:ltr;text-align:left}
+html[dir="rtl"] .hint,html[dir="rtl"] .fb,html[dir="rtl"] .msg,html[dir="rtl"] .objline{text-align:start}
+html[dir="rtl"] .lock>button.lh{text-align:start}
+html[dir="rtl"] .lb,html[dir="rtl"] .actions{text-align:start}
+html[dir="rtl"] .bar{direction:rtl}
+html[dir="rtl"] .tt{unicode-bidi:plaintext}
+@media(max-width:520px){body{font-size:16px}.chip{width:100%}.key{font-size:12px;gap:1px}.codebox input{width:46px;height:54px}.dg{min-width:38px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{.bar,.actions button{display:none}}
+/*sp-i18n-css*/
+.sp-lang-bar{display:flex;justify-content:flex-end;padding:8px 12px 0;position:relative;z-index:5}
+.sp-lang{display:inline-flex;gap:2px;padding:3px;border-radius:10px;background:rgba(255,255,255,.88);border:1px solid rgba(0,0,0,.18);font-family:system-ui,"Segoe UI",Tahoma,Arial,sans-serif}
+.sp-lang button{border:0;background:transparent;color:#222;font:600 13px/1 system-ui,"Segoe UI",Tahoma,Arial,sans-serif;padding:7px 11px;border-radius:7px;cursor:pointer}
+.sp-lang button[aria-pressed="true"]{background:#222;color:#fff}
+.sp-lang button:focus-visible{outline:3px solid #2a6df4;outline-offset:1px}
+textarea,input,select{unicode-bidi:plaintext}
+html[lang="ar"] body,html[lang="ar"] button,html[lang="ar"] textarea,html[lang="ar"] input,html[lang="ar"] select{font-family:"Segoe UI",Tahoma,"Noto Sans Arabic","Arial",system-ui,sans-serif}
+html[lang="ar"] body{line-height:1.8}
+html[lang="ar"] *{letter-spacing:0!important}
+html[dir="rtl"] textarea,html[dir="rtl"] input{text-align:start}
+@media print{.sp-lang-bar{display:none}}
+/*/sp-i18n-css*/
+</style>
+</head>
+<body>
+<!--sp-bar--><div class="sp-lang-bar"><div class="sp-lang" role="group" aria-label="Language / Idioma / اللغة"><button type="button" data-lang="en" lang="en" aria-pressed="true">English</button><button type="button" data-lang="es" lang="es" aria-pressed="false">Español</button><button type="button" data-lang="ar" lang="ar" aria-pressed="false">العربية</button></div></div><!--/sp-bar-->
+<div class="wrap">
+<header class="hero">
+  <div class="eyebrow">1889-1916</div>
+  <h1>Escape the Campaign Headquarters</h1>
+  <p class="sub">The Progressive Era</p>
+  <div class="meta">
+    <label>FIRST NAME *<input id="f_first" type="text" autocomplete="given-name"></label>
+    <label>LAST NAME *<input id="f_last" type="text" autocomplete="family-name"></label>
+    <label>PERIOD *<input id="f_period" type="text" inputmode="numeric" maxlength="12" placeholder="e.g. 3"></label>
+  </div>
+</header>
+
+<div class="howto glass"><b>How to escape:</b>
+<ol>
+<li>Open each lock in order. Read the <b>Clue Card</b>. The answer is in the card.</li>
+<li>Solve the puzzle to open the lock and reveal one digit.</li>
+<li>If you get stuck, press <b>Hint</b>. Hints are free, but your teacher can see how many you used.</li>
+<li>Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.</li>
+</ol></div>
+
+<div class="scene glass" id="scene">
+<svg viewBox="0 0 600 270" role="img" aria-label="A campaign headquarters at night. Flag bunting hangs across the top of the walls. A wooden speaker's podium stands on the left, a wall map of the country hangs above it, and a ballot box with a slot and a stack of leaflets sit on the right. The headquarters door has five padlocks in a row. Under each padlock is a window for one digit of the exit code.">
+<defs>
+<pattern id="brick" width="40" height="270" patternUnits="userSpaceOnUse"><rect width="40" height="270" fill="#1C1429"/><path d="M0 0V270" stroke="#EFEBF4" stroke-opacity=".12" fill="none"/><path d="M20 0V270" stroke="#EFEBF4" stroke-opacity=".05" fill="none"/></pattern>
+<radialGradient id="glowg" cx="50%" cy="50%" r="60%"><stop offset="0" stop-color="#EFEBF4"/><stop offset="1" stop-color="#E1BB8E"/></radialGradient>
+</defs>
+<rect width="600" height="270" fill="url(#brick)"/>
+<rect y="236" width="600" height="34" fill="#161020"/>
+<g stroke="#C4BBD3" stroke-opacity=".35" stroke-width="2"><path d="M0 248H600M0 260H600"/><path d="M60 236V248M180 236V248M300 236V248M420 236V248M540 236V248M120 248V260M240 248V260M360 248V260M480 248V260M600 248V260"/></g>
+<g stroke="#C4BBD3" stroke-opacity=".6" stroke-width="2" fill="none"><path d="M0 14Q75 30 150 18"/><path d="M450 18Q525 30 600 14"/></g>
+<g><path d="M10 20l12 3-6 18z" fill="#D2954B"/><path d="M34 25l12 1-5 18z" fill="#EFEBF4"/><path d="M58 29l12-1-4 18z" fill="#493669" stroke="#E1BB8E" stroke-width="1"/><path d="M82 30l12-2-3 18z" fill="#D2954B"/><path d="M106 29l12-3-3 18z" fill="#EFEBF4"/><path d="M128 25l12-3-2 18z" fill="#493669" stroke="#E1BB8E" stroke-width="1"/>
+<path d="M460 22l12 3-3 18z" fill="#D2954B"/><path d="M484 27l12 1-3 18z" fill="#EFEBF4"/><path d="M508 29l12-1-2 18z" fill="#493669" stroke="#E1BB8E" stroke-width="1"/><path d="M532 28l12-2 0 18z" fill="#D2954B"/><path d="M556 25l12-3 2 18z" fill="#EFEBF4"/><path d="M578 21l12-3 4 18z" fill="#493669" stroke="#E1BB8E" stroke-width="1"/></g>
+<g><rect x="22" y="62" width="112" height="70" rx="4" fill="#120C1D" stroke="#E1BB8E" stroke-width="3"/>
+<path d="M34 76L58 70L78 80L102 72L122 86L112 112L84 122L56 118L40 104Z" fill="#493669" stroke="#EFEBF4" stroke-opacity=".7" stroke-width="2"/>
+<path d="M56 74L60 116M78 80L84 120M100 74L98 116" stroke="#EFEBF4" stroke-opacity=".35" stroke-width="1.5" fill="none"/>
+<circle cx="66" cy="94" r="4" fill="#D2954B"/><circle cx="92" cy="100" r="4" fill="#E1BB8E"/></g>
+<g><path d="M30 168H128L120 236H38Z" fill="#493669" stroke="#E1BB8E" stroke-width="3"/><path d="M22 160H136L128 170H30Z" fill="#E1BB8E"/><path d="M44 184H114M46 204H112M48 222H110" stroke="#120C1D" stroke-opacity=".45" stroke-width="2"/><path d="M79 146L79 160" stroke="#C4BBD3" stroke-width="3"/><circle cx="79" cy="143" r="5" fill="#D2954B"/></g>
+<g><rect x="462" y="190" width="104" height="46" rx="4" fill="#493669" stroke="#E1BB8E" stroke-width="3"/><rect x="456" y="182" width="116" height="12" rx="3" fill="#E1BB8E"/><rect x="490" y="186" width="48" height="5" rx="2" fill="#120C1D"/><path d="M476 206H552M476 220H552" stroke="#EFEBF4" stroke-opacity=".3" stroke-width="2"/><rect x="498" y="204" width="32" height="14" rx="2" fill="#D2954B"/></g>
+<g><rect x="476" y="132" width="86" height="12" rx="2" fill="#EFEBF4" fill-opacity=".88"/><rect x="472" y="144" width="94" height="12" rx="2" fill="#E1BB8E" fill-opacity=".85"/><rect x="478" y="156" width="82" height="12" rx="2" fill="#EFEBF4" fill-opacity=".88"/><path d="M482 138H552M480 150H556M484 162H554" stroke="#493669" stroke-opacity=".5" stroke-width="2"/></g>
+<g><circle cx="500" cy="98" r="22" fill="#120C1D" stroke="#E1BB8E" stroke-width="3"/><path d="M500 84l4 9 10 1-7 7 2 10-9-5-9 5 2-10-7-7 10-1z" fill="#D2954B"/></g>
+<rect id="glow" x="150" y="20" width="300" height="216" rx="10" fill="url(#glowg)"/>
+<g id="door">
+<rect x="150" y="20" width="300" height="216" rx="10" fill="#493669" stroke="#E1BB8E" stroke-width="3"/>
+<circle cx="164" cy="34" r="4" fill="#E1BB8E"/><circle cx="436" cy="34" r="4" fill="#E1BB8E"/><circle cx="164" cy="222" r="4" fill="#E1BB8E"/><circle cx="436" cy="222" r="4" fill="#E1BB8E"/>
+<rect x="210" y="30" width="180" height="26" rx="4" fill="#120C1D" stroke="#EFEBF4" stroke-opacity=".7"/>
+<text x="300" y="48" text-anchor="middle" font-size="13" letter-spacing="3" font-weight="700" fill="#EFEBF4">HEADQUARTERS</text>
+<rect x="262" y="90" width="76" height="8" rx="3" fill="#231933"/>
+<circle cx="276" cy="86" r="4" fill="#EFEBF4"/>
+<g class="wheel" id="wheel"><path d="M276 86L328 80" stroke="#EFEBF4" stroke-width="4" stroke-linecap="round"/><circle cx="330" cy="80" r="6" fill="#D2954B"/></g>
+<rect x="170" y="106" width="260" height="8" rx="3" fill="#231933"/>
+<g id="plocks"></g>
+<text x="300" y="228" text-anchor="middle" direction="ltr" font-size="11" letter-spacing="3" font-weight="700" fill="#EFEBF4">1889 - 1916</text>
+</g>
+</svg>
+</div>
+
+<div class="intro glass" id="intro">
+  <h2 style="margin:.1em 0">You are locked in campaign headquarters.</h2>
+  <p>The campaign office closed for the night and the last volunteer locked up headquarters. Old posters and flags from 1889 to 1916 hang on the wall. The door has <b>5 locks</b>. Each lock matches one big idea from Lesson 12. Solve them all to find the <b>5-digit exit code</b>.</p>
+  <p>The clock starts when you press the button. Most students finish in about 20 minutes.</p>
+  <p><button class="btn primary" id="startBtn">Enter Headquarters</button></p>
+</div>
+
+<div id="game" class="hidden">
+  <div class="bar" id="bar" aria-live="off"><span><span>Time</span> <b id="tm">00:00</b></span><span><span>Locks</span> <b id="lc">0</b>/5</span><span><span>Hints used</span> <b id="hc">0</b></span></div>
+  <div id="locks"></div>
+
+  <section class="exit glass locked" id="exit" aria-label="Exit door">
+    <div class="eyebrow">THE EXIT DOOR</div>
+    <h2>Type the exit code</h2>
+    <p id="exitNote">Open all 5 locks first. The digits go in order: Lock 1 first.</p>
+    <div class="codebox" id="codebox" dir="ltr"></div>
+    <p class="ennote">Type the answer in English. Use the digits 0-9.</p>
+    <div class="row" style="justify-content:center"><button class="btn primary" id="codeBtn" disabled>Open the Door</button></div>
+    <div class="fb" id="codefb"></div>
+  </section>
+
+  <section class="esc glass" id="esc" aria-live="polite">
+    <div class="big">ESCAPED</div>
+    <p class="time"><span>Your time:</span> <span id="escTime">00:00</span></p>
+    <p id="escSum"></p>
+    <p>One last step: write your Debrief below.</p>
+  </section>
+
+  <section class="debrief glass" id="debrief">
+    <div class="eyebrow">DEBRIEF</div>
+    <h2>Which lock was hardest, and what did you learn that you did not know before?</h2>
+    <p style="margin:.2em 0;color:var(--dim)">Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.</p>
+    <textarea id="debriefText" aria-label="Debrief" placeholder="Type your answer here..."></textarea>
+  </section>
+
+  <section class="actions glass" id="actions">
+    <div class="status" id="status"></div>
+    <div class="row">
+      <button class="btn" id="saveBtn">Save Progress</button>
+      <button class="btn" id="loadBtn">Load Progress</button>
+      <input type="file" id="loadFile" accept=".json,application/json" hidden>
+      <button class="btn primary" id="finishBtn">Finished — Download File to Submit</button>
+    </div>
+    <div class="msg" id="msg" role="status"></div>
+    <button class="link" id="reset">Clear all my work and start over</button>
+  </section>
+</div>
+
+<div class="actions glass hidden" id="loadOnly" style="margin-top:12px"><button class="btn" id="loadBtn0">Load Progress</button> <span style="color:var(--dim)">Have a saved file? Load it to continue.</span></div>
+
+<footer>UNIT 4 · INDUSTRY, EMPIRE, AND REFORM | CPUSH | DANIEL GARZA, M.A.</footer>
+</div>
+
+<script type="application/json" id="er-data">{"salt": "L12esc:", "exitHash": "b93dfc1183a33f236e7b", "locks": [{"n": 1, "key": "lock1_ballot_box", "title": "The Ballot Box", "obj": "1", "objLabel": "CORE OBJECTIVE 1", "objText": "Core Objective 1: Assess the motives of progressive reformers and how they reflected the underlying values of the progressive movement.", "type": "pick", "card": "<p>Progressives, many of them from the middle class, were liberals, not revolutionaries. They feared that if problems in society were not fixed, unrest could lead people to embrace socialism or anarchism, which had real support in this era. They wanted to reform and regulate capitalism, not destroy it. What progressives shared was the belief that governments must become more active in solving the problems of fast urban and industrial growth. Jane Addams, a leading reformer in Chicago, said that charities and churches were “totally inadequate to deal with the vast numbers of the city’s disinherited.”<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 20, “The Progressive Impulse” (no page numbers are marked in this section).", "prompt": "Pick the correct answer for all three questions.", "qs": [{"id": "c", "q": "What did progressives want to do to capitalism?", "opts": [{"id": "a", "label": "Destroy it"}, {"id": "b", "label": "Replace it with socialism"}, {"id": "c", "label": "Reform and regulate it"}, {"id": "d", "label": "Leave it alone"}]}, {"id": "g", "q": "What did progressives believe governments must become?", "opts": [{"id": "a", "label": "More active in fixing city and industrial problems"}, {"id": "b", "label": "Smaller and quieter"}, {"id": "c", "label": "Run by big businesses"}, {"id": "d", "label": "Free of all rules"}]}, {"id": "a", "q": "Which reformer said that charities and churches were “totally inadequate”?", "opts": [{"id": "a", "label": "Theodore Roosevelt"}, {"id": "b", "label": "Jacob Riis"}, {"id": "c", "label": "Ida Tarbell"}, {"id": "d", "label": "Jane Addams"}]}], "hints": ["Each answer is in the Clue Card. Look for what progressives wanted to do to capitalism, what they thought governments must become, and the name of the Chicago reformer.", "Progressives wanted to fix capitalism, not end it. Governments had to do more. The reformer who spoke of the “disinherited” was a leader in Chicago."], "nudge": "Not quite. At least one answer is off. Re-read the Clue Card for what progressives wanted to do to capitalism, what governments must become, and who said “totally inadequate.”", "entries": ["c0ac6f73177b8f43fb955"], "id": "lock1_ballot_box"}, {"n": 2, "key": "lock2_poster_wall", "title": "The Poster Wall", "obj": "2", "objLabel": "CORE OBJECTIVE 2", "objText": "Core Objective 2: Explain the sources of thought and social activism that contributed to the progressive movement.", "type": "match", "card": "<p>The muckrakers were America’s first investigative journalists. Magazines such as <i>McClure’s<\/i> and writers such as Jacob Riis exposed corruption and showed “how the other half lives.” Religious activism added the social gospel, the belief that Christians should treat all people like brothers and sisters and help the poorest. In 1889, Jane Addams and Ellen Gates Starr turned a run-down mansion into Hull House, a settlement house in Chicago that helped the working poor, especially newly arrived European immigrants. In 1869, Susan B. Anthony and Elizabeth Cady Stanton founded the National Woman Suffrage Association (NWSA) to win an amendment to the Constitution for women’s suffrage. The NWSA also campaigned for higher pay for working women and for laws that helped abused wives get divorces.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 20, “The Varied Sources of Progressivism” (Muckraking Journalism, pp. 865-866; Religious Activism and Social Responsibility, p. 867; Settlement Houses, p. 867; The Women’s Suffrage Movement, p. 868).", "prompt": "Match each term to the best description. Use the Clue Card.", "terms": [{"id": "hh", "label": "Hull House"}, {"id": "mu", "label": "Muckrakers"}, {"id": "nw", "label": "NWSA"}, {"id": "sg", "label": "Social gospel"}], "descs": [{"id": "a", "label": "Reporters who dug up facts about corruption and about how the poor lived"}, {"id": "c", "label": "A Chicago settlement house that helped the working poor, especially new immigrants"}, {"id": "b", "label": "The belief that Christians should treat all people like brothers and sisters and help the poor"}, {"id": "d", "label": "The group founded in 1869 to win an amendment giving women the right to vote"}], "hints": ["Two terms are about groups that pushed for change (the muckrakers and the NWSA). Two are about helping the poor (the social gospel and Hull House).", "The muckrakers were reporters. Hull House was a place in Chicago. The NWSA worked for women’s right to vote. The social gospel was a religious idea."], "nudge": "Not quite. Check each match against the Clue Card. Which one are you least sure about?", "entries": ["47f6fc04ae0f4804400c3"], "id": "lock2_poster_wall"}, {"n": 3, "key": "lock3_telephone", "title": "The Telephone", "obj": "3", "objLabel": "CORE OBJECTIVE 3", "objText": "Core Objective 3: Identify the reforms the progressives achieved at the local, state, and national levels, and how those reforms advanced the larger cause of social justice.", "type": "decode", "shift": 7, "cipher": "YLJHSS", "card": "<p>To clean up politics, progressives pushed for the direct primary, so all members of a party, not just party leaders, could vote on the party’s nominees. Citizens could sign a petition to put a proposal on the ballot (the initiative) and then vote on it (the referendum). Another idea let voters remove a corrupt or incompetent elected official by a public petition and a vote. In 1913, the Seventeenth Amendment let voters, not state legislatures, elect U.S. senators. On March 25, 1911, a fire at the Triangle Shirtwaist factory in New York City killed 146 garment workers, and reformers then won dozens of new rules on fire hazards, working conditions, women workers’ rights, and child labor. Because lynchings and other racial violence continued, Black and White progressives, including Ida B. Wells and W.E.B. Du Bois, founded the NAACP in February 1909.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 20, “Progressives’ Aims and Achievements” (Political Reforms, p. 871; The Triangle Shirtwaist Factory Fire, pp. 876-877; Racial Violence and the Origins of Modern Civil Rights Organizing, p. 880).", "prompt": "The Clue Card describes a voting tool without naming it: voters can remove a corrupt or incompetent official by petition and vote. A secret message names it. Each letter in the message was moved 7 steps forward in the alphabet. Decode it to name the tool.", "hints": ["Find the sentence in the Clue Card about removing a corrupt or incompetent elected official. The card describes the idea but does not name it. Use the decoder key to spell the name.", "In the message, the letter Y is really R, and the letter L is really E. The word has 6 letters and starts with R."], "nudge": "Not quite. Decode one letter at a time with the key, then check your spelling.", "entries": ["0181eb01a501f61987e57", "0189410909c366b22fa79", "02465b23b7e2e4d06f681", "025408014ea1dea77c491", "026696904d27a3db843b5", "02c349a1483aee718e803", "03dfcde43bfe9f5a57ad2", "043654fa7d631951cd361", "0612c21162cdbdbeeb9a3", "075e24007853b0cdbe984", "076ee92b398a4a8e67184", "077822352b447ef0574d1", "0876fe42decd145f7fa11", "0a8119321b1cbe44c3027", "0b95255edaaf1bee38153", "0bc006db7ca8a9e8866e0", "0c3d57cd6d21d6b754c82", "0c5f19f7344a343af5456", "0e51018997d0641dc60e4", "0eaecab65891d71881960", "0ec24acf0a095a35d45c6", "0ef6539e3f192fc230801", "0f96a3d05e85ca2c0a695", "10562dd16d0d8c5c36ee5", "1267af14762459a5ddfa1", "12c43b3cefbbd3bea4451", "12eb42355365ac10e7e38", "144837dbabb72f67a5986", "154694f8e4a072a6b7b36", "15a22a491a721d40d4755", "15d528f40cc55e1f121a9", "16a73cdae1b651d91c5e2", "192a49c45f0a7157486c6", "19cae1e42a9cf17b3bd79", "19f16cdd776bd90042fa9", "1a23f32407c4a5f8d54d5", "1aa3cf6e33094fa7f4f28", "1af3ee1157e168494ad06", "1d4d4a4314f4941e27679", "1df239c4f0fb219f97be5", "1e1c5aa3c536cc154e343", "1e53c831901a0e8f43b82", "1e63b0ca0264cd06b88f5", "1f0f9b03ea54205832692", "1f595870db4f226e27cf5", "1fab4583d540570b180a3", "21ef0dee388ed7b19f4e4", "2227ccd9074a81742ef61", "22a135ef3df29c38dc3f2", "22bfe4f5d45c3a5dc6f44", "24df4b58d036ded91d945", "250787645c7da46a5c882", "25565fd019594bdce4909", "263973f708aefaafdcbd5", "277d4ac515a755318f637", "28154a2894eec84ddcba3", "28d4a537d27f634d08f88", "2a5e8cba4bccbb8312f13", "2a695a2277aa939e204f5", "2af372c10816466bd42f9", "2b5f0830291b4778d2929", "2b79fc473c650abd1c336", "2c05575c6737caffef441", "2c0c27071fcc2ac93d1c0", "2c826d942dd386643dd25", "2c8b3e378b14e97fa29d1", "2de304390f4d80ddc7ec2", "2ef2f00079f3f048ec744", "2fd7c5bf30b69511f86b3", "31c06c3d2bd73af642e65", "31d831c1807579774aff1", "31ee8adc55d24be21cbf0", "327aa720c2b531b48e364", "327b3fcb5bbe469108247", "3281a01d2044e79b50cf9", "32cdeed5ec9e859d69293", "3358e4f644c9e5a0ef925", "335d16a0846e5f84d0a77", "338a3ccaa9bcef82f5984", "33bbd464bca7b3eed6105", "33e02c75387ed79a8d7b1", "34d7a66eaa9eebda9b441", "34e171a2316e2484c3700", "34e44df649d285e578397", "35a5bae687f82044334b2", "35aaaa7a6c7d28a579946", "35db513b85347756b37e7", "379be7bc32bc9dfde1940", "37e33ab9ba07b1d1859d8", "3840c618d404fc61ceb72", "386b46f184d2d1b7106f5", "38b309f5f8060104b7929", "3cf6c1b06bf61cd5c63d5", "3d73c9b249285421bdb84", "3e160a7acf511cbc08d70", "3e30132aaa4ba582ae659", "3efae45978ddade410199", "3f58d8204850934e8ec86", "40b7e91a6ed2749ca3f72", "411bb569927a2ebe41019", "411fcfcf82ed9fe38ef43", "4149feb3e214bfdbe9ef9", "424c17de4940156a349b6", "42a728c228032f7f23d00", "43952c4e895a13fa977e4", "459670136f4bf5b6b21a0", "45ee269f61aaef5ba5243", "463e8f62a974f3b3932d7", "4763cf9451b61412260f2", "47afeb9dc88b382f91710", "483756ec5e903af40dc68", "488d88267e459f1471102", "4894bf84658e80b7cff43", "48df7869ad0b5169afa90", "495fa1cc59e5c621fecc5", "4a3ec3e8663e1a9f1cf15", "4a8f0f5be13c23f38ec88", "4b0d8af0c29b0f602e8a7", "4b63cb45e96ca696c8f56", "4cd7e693a76608fd0f893", "4d53331c4ea8138591d91", "4e685c5a92c9084c52145", "4fcb07a147453ca2b6301", "4fd008dc38ab16ca61ea0", "513d4e4ec47547e9f0508", "5185e86d40ba4bcbe4e74", "5231dead22233bef71e48", "52f2a8c40b439aeecd9e2", "54217570036ebb3ad74c3", "548b0518b695f70058f54", "54afd7d5bf5f82d2bc145", "553570aa6bd49b9862097", "55f46f5e13c257ae49716", "575732b7f84195a4db604", "582464d6ccadb4563fb93", "588d48caa40263a08ed51", "58c1c7f7e093c71f277c7", "59131330d4469d8580ef1", "597443f62e4e69b856974", "5990020713577bbbc2ba0", "5b9ce02616a9c257a2cc5", "5c9330326da972d3dcd89", "5d2f5be349da42d9ede59", "5f62a9b42eae4a37eec55", "600fbcc766b6bcb2555e1", "605a380f2a03a140bc837", "60e1cff869edaabf01982", "63064920dd5959d0e0532", "63a5ff34b894750fd3dd3", "63dcf61c1c9b7ddcc5480", "64664d40c9dec8220f2b6", "648415111a249c91ac9b6", "65171eb294acda2380fe4", "6951fc2e8958ad2fb0b81", "6956ae8ac64d86328cf63", "69e1970a90e21b93f28f5", "6adec59e61a3eca164581", "6f0d12bb3aa90ba0adab9", "6f3e097e0977db8a74227", "6fbc692010fc858613554", "7284f33f0ad9c6a1719e4", "728812995b4710d4540f6", "729e96571d647003e1592", "73317d0c128b02967fde4", "7501f0029ec96d8134483", "7543a2409543387238e59", "756109dee49d83802eb02", "75d93b2b61e0433c44ef8", "76d0e3e95683a7f0730d5", "773f43177aeef74104db4", "77cd9685d680569958659", "7863e017c067e91516eb3", "789fdc2850e63efa23921", "793440296b9ef23dd1da2", "799332cafb51364b0ef89", "7b9c1e203c05a51c5dea5", "7bb54a3f0de5a04583a24", "7c4390412584590b5fa13", "7dfdcf40632cbb35c3623", "7f745a5d8ee9b2c42a635", "7ff6088a5563fe1d9e034", "815bab2ea50ff15f71771", "82ff4cce5d9019607ddc8", "830c45e17f81da5f1b737", "833c1a28a7b1907cf4fa1", "84a5ff213641a3bc77ff7", "86fc4d9017fd7863a08c6", "8a3ee963cfab350ef3db3", "8df539795cbc9c6373ca4", "8e1cee3071af1cdb87216", "8e29ffc2a49d4f1092a50", "8ff2a74b7660a59678381", "906ea461b1b2536338da1", "90b6fced556274d0f90d6", "933cbc0aade7c2b886057", "9386b0afc3abb71773149", "948e23ffd9a5e9b3a7e68", "956e8dfd84acceaf38285", "9570788e99dae88094477", "96aea86304cd87db936e9", "97e3eac06c6f6a13e4f56", "991da0f968e2d5509a1f0", "993325921fd282774b5e1", "9aae44346bc38cfebf043", "9bcf9922b7ad3a364ada2", "9de77f9b2330ddc7bafb0", "9deaef8fb44e6f31779d5", "9e365d7061a597779daf2", "9f60ddb30ec53c0005c84", "a020e182be23982ccfed4", "a0970317c63239244e017", "a135a5274a06e3961de66", "a1718ebb19dca8f1c8c97", "a1897eea73955d21cbb46", "a1f8f4cad682a93f4c849", "a45d66ca03c6fca216a34", "a7261e81aabf2b8ebbdc1", "a72dadcc7c484dfa7e883", "a79dead5bfd7d29d33d46", "a8c4487c6a2989d682f41", "aa8302b774dc59a859435", "aaef101568957d964f699", "ac36bed73b7774d6f7cc0", "ac7554fcc55feebecafc4", "ac8293bd71285fb50b1a4", "ae1f9c8ad6f8cafa80375", "ae3f851825549c740b249", "ae4d9ba5cfb6880235b49", "ae900d1b430f8ef9ceaa9", "aeb41abc0bbce47a553b0", "aef67a34516e3b7770d20", "af93c73c8adc2d4e24906", "b0c21bfcdb322c2b11ab5", "b14f838ad2c91d012bda7", "b24e4b3a52cd4237a6f69", "b252a5307e00b324e5337", "b29a010fe953d312c2193", "b2f86f1bdeaeb6e929124", "b38ac96ede3d21f863fa7", "b3f6a3e7c944f5789b5e7", "b57bf4f2a0a4b2f3eee69", "b6d2d8a96ea78eb766d61", "b73fdf1353a1baf696c19", "b757c3473ae782308e386", "b76283c4cf98a785bff65", "b84d056bfa00e4a195134", "b8b849ad8bf16bbb02b17", "b8bf78c3fd0aeac49fbd4", "b92c5f89960d08c44f2e1", "ba42a6f8d0e6be0520f11", "baf21d85cc34b9aa23b23", "bb19a9c8ccab8414dc842", "bbff51399cac0d92cc030", "bc3bc2ab79c9327edf059", "bc427e56a1c361b2e76a5", "bc9d165466f809336d117", "bcdb6abdb634a3735b986", "bd4c3fadadc93290a8364", "bdaaf320aef792277e3d4", "bef9e3c4f6677f9e0f3a1", "c0b56a689c10096ad0814", "c10d3424ecb3105a55822", "c1e129f85bc84d084de99", "c2cee7f21232641510be9", "c2e07072eddc37e178491", "c45e938b0bfedbf3dc438", "c51c1a9c3faac95591e44", "c5668bb563e53a0dfd564", "c632ba30c7f32f24bf2f9", "c7bf473ea9e7d40c47e90", "c7d16c302f0cf63e5c437", "c802395e62e55cd12a1f2", "c8536553bd7b2de3c52e0", "c89328bf5e72638ed67d2", "c91a49685c98644383422", "c9cbe9ebc06e6a7d270d4", "cbcf9d9fa5001b78fc537", "cdbc18d24828f54838608", "cdca32e9e3bcaf16a1ba1", "ce51442847c5ebd9feb49", "cea9e1063df23f796bf50", "cee98f4aa55f519ab1540", "cf4266f8e60964faad779", "d021bcf37bfe0782caca3", "d1ee9a331fb14afc39275", "d22c3bb13dc13b7bfc251", "d339151ad3eca4f2365d7", "d40821dbd2cf192d83417", "d4acbf96af2724e4d41b5", "d5b10299f3b23959c8ea2", "d5db9e85ab8838bd78a68", "d68a9e7fc2fc5bbdbe870", "d6d34f137a84b868fd3d5", "d76f3143a9223bd672014", "d7792380ff318b7e83c05", "d8b60f300569bdeee2a38", "d8e63583c4e0e8c12fbb0", "dcff278c0e3e3cd5899f3", "de236e6e5928bb03ea5e4", "df40ad7b11c9ddd3e2885", "e0b8ebde9df837e475a95", "e1dd1f99cbd5e16954f52", "e2094026ef111ae699b52", "e29749461effa2ec96644", "e334b923f3ae04a65c346", "e33c494154fc3d1fa5672", "e459502acb8ef8515e8d2", "e4ba95f364cd7b89a3488", "e52458dae22bfc7b9a609", "e5f4d550799aa397dda62", "e71e0fd533a8e8309aff9", "ea63507072b15787e74b3", "eb12a9d18ad2f02578125", "eb9aa49df869b65c47dc5", "ec33cbe76563aea8adce0", "eca90c9090afaa36acbc5", "ee9e6855f9b4f1c3d5ee6", "eff0498a073e8bf211449", "f132ed84778863f4842f1", "f267fa63e69054a2ccb30", "f323e588ccd1465e8b178", "f37b0f1fa0fc88a215b47", "f44f006ab19143c032c19", "f47399258d9cd0ee14ef7", "f62f99c3f2bee49fb2700", "f7052ac521a38e7aeb599", "fa326e058a2b7cfa5e8f5", "fa743680c34444b988ba2", "fafc23fc5b46068429685", "fb83ccb198d5f2f32f512", "fd9a5dc31cea1b55c1490", "fe4e3b9719e62812b9e94", "fe5e6a758f37e680e6723", "ff011450e4cf3f4ad9a20", "ff36381d4853c65c79c58", "ff981b31446b693e12ae6"], "id": "lock3_telephone"}, {"n": 4, "key": "lock4_campaign_map", "title": "The Campaign Map", "obj": "4", "objLabel": "CORE OBJECTIVE 4", "objText": "Core Objective 4: Describe how Presidents Theodore Roosevelt and William Howard Taft differed in their approaches to progressive reform.", "type": "order", "card": "<p>Theodore Roosevelt used the presidency as a “bully pulpit.” His Square Deal had “Three Cs”: control of corporations, conservation of natural resources, and protection of consumers. In 1902, only five months into his presidency, he ordered the attorney general to break up the Northern Securities Company, a railroad trust. Roosevelt then urged Republicans to nominate his friend William Howard Taft, who won the election of 1908. Taft was a “conservative progressive.” His administration filed almost twice as many anti-trust suits as Roosevelt’s and preserved more federal land in four years, but he did not push for new reforms. In 1910, Taft fired Gifford Pinchot, the forestry chief and Roosevelt’s friend, and Roosevelt felt that Taft had failed to “carry out my work.” In 1912, after Taft won the Republican nomination, Roosevelt’s supporters walked out and started the Progressive Party, nicknamed the “Bull Moose Party.”<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 20, “Progressivism under Roosevelt and Taft” (Roosevelt’s Square Deal and the Northern Securities case, pp. 883-884; “The Transition from Roosevelt to Taft” and “A Life of Public Service,” p. 888; “The Ballinger-Pinchot Controversy” and “The Taft-Roosevelt Feud,” p. 889; “The Progressive Party,” p. 890).", "prompt": "Tap the four events in the order they happened. Tap an event again to take it back.", "items": [{"id": "d", "label": "Roosevelt’s supporters leave the Republican convention and start the Progressive Party"}, {"id": "b", "label": "Taft wins the presidency after Roosevelt urges Republicans to nominate him"}, {"id": "a", "label": "Roosevelt orders the attorney general to break up the Northern Securities railroad trust"}, {"id": "c", "label": "Taft fires forestry chief Gifford Pinchot"}], "hints": ["Look for the years in the Clue Card: 1902, 1908, 1910, and 1912. Match each event to its year.", "The order is the Northern Securities order, Taft’s election, Pinchot’s firing, then the start of the Progressive Party."], "nudge": "Not quite. Re-read the Clue Card and match each event to its year.", "entries": ["66a9f4cfc979e528c7557"], "id": "lock4_campaign_map"}, {"n": 5, "key": "lock5_podium", "title": "The Podium", "obj": "5", "objLabel": "CORE OBJECTIVE 5", "objText": "Core Objective 5: Explain how President Woodrow Wilson’s progressive policies affected the role of government—and the presidency in particular—in the Progressive Era.", "type": "fill", "card": "<p>In the election of 1912, the debate was between Roosevelt’s New Nationalism and Woodrow Wilson’s New Freedom. Wilson favored small government, and his New Freedom aimed to break up all trusts and bring back competition. Wilson won with 435 electoral votes. In 1913, his Underwood-Simmons Tariff Act lowered tariffs on almost 1,000 products and created the first income tax allowed by the Sixteenth Amendment, and the Federal Reserve Act created a national banking system with twelve regional banks. Norton calls the Federal Reserve Banks the most significant new program of his presidency. In 1914, the five-member Federal Trade Commission was created to stop unfair trade practices, and the Clayton Anti-Trust Act said that labor unions were not “monopolies.” Progressivism had limits: cabinet members racially segregated their agencies, Wilson defended segregation in federal offices, and he said that voting rights for women should be left to the states.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 20, “Woodrow Wilson: A Progressive Southerner” (The 1912 Election, pp. 893-894; Burst of Reform Bills, p. 895; Wilson’s Economic Policies, pp. 895-896; Anti-Trust Actions, p. 896; Progressivism for Whites Only, pp. 897-898; The Vote for Women, p. 898).", "prompt": "Fill in the blank using the Clue Card.", "sentence": "Wilson’s plan to break up all trusts and bring back competition was called the New ________.", "scramble": "M  R  F  O  D  E  E", "hints": ["Read the second sentence of the Clue Card. The missing word comes right after the word “New.”", "The word starts with F and ends with M. It has 7 letters."], "nudge": "Not quite. Re-read the second sentence of the Clue Card. Use the scrambled letters to check your spelling.", "entries": ["0059d3e863c7e20da7484", "009d64aa46493092610f2", "0111a799ff643a60f1a13", "01d3ff71078099abd8206", "020584c2b209443d81a20", "0256a7f4d16677f139757", "02781aa760d001d53a6e6", "02a50aacf7bd3236bdad6", "02d97ec0afdeac094b467", "03f391bc8ce0cc9fe8ad1", "0589dd87727a029ab6a67", "06a26aaacce103affe318", "06eb8c2f6aa0b92ecc273", "06f7312fb10a38ad46e80", "09f04ec0bd6fd94d7cad5", "0a41683a817f29e6834b5", "0ad9df433c274ac946633", "0b68be3dd3a46dcac3f95", "0de7cff05602b13f750a0", "0f2c57e20924d6af2dab3", "0fb346d76755c72e9edb0", "0fc3bcb6b73241813aab3", "1031acd75ee3b1c486e74", "108d10915ac763ffe8636", "118865bf6f6994f2956c8", "12a837f70b094f55ccd80", "12d064cf5f16a7918ff48", "13226e2f1aa275ae8e495", "141b86fd12a721fe1dd61", "14d7c0c1ef657404be763", "15bc4b06d0e6e199a5df0", "164c50bdb47057a983dd1", "16d444ec73d23e12e59c5", "16f7479e475c2557b9c14", "17809457814c26fb94cc4", "187c61df8ac681227c3d0", "18bfc2a01c10b5739c209", "1ac3b1ab1172a0a594447", "1b54935f2a9c18c512871", "1c90e9b67646b5bc53562", "1cc45dd41e1e8b2b93128", "1d5cd37017603b2199242", "1d6b28278d6d7dbfe83e8", "1daaa9f06cfb0e349fdf7", "1e50886546a1da5e330d5", "1e875820f2fba6c6a1966", "1eea82e44558307275986", "1f4c279fd1ce375fbe888", "1f595e719f3cd747db0a7", "2029d74781a662b3cfcc4", "2314ff9be53e0051b01d1", "23e16b6df657a27d03eb8", "2409e9957d7780d44a964", "2426c72163099657db430", "24392b9f62789eb2d7574", "246cb8d394bf90d1edb81", "25ed2daa2eb18939dbd65", "262452f401ea70717b362", "26ca12aee8c26955fd9c0", "27275ed959b84b120c151", "27a4971bd133714d4d616", "286ad54477920f6ecb324", "293ff8b49f9dabd12d347", "29861e0ce116d371900b4", "29b9c2bf6216aafd90780", "2a9e2de2756cf1a2f42d1", "2c2f8097426de92b15083", "2c9c5bc12da91ceb86ec3", "2cfb59be6395c555b1a90", "2de69e74aaf73b493a581", "2e26502fa4eaa9d3ee780", "2e2f4b7b1f8ceb7c3c914", "2ffad4e4746a078e33c33", "30838ca6a4a3f9b0da569", "3171edd101abb3f7a1dd8", "3231bdce2d575f2951026", "3242e4e651bf804699397", "32506a902297f3fb01241", "32a75d305ad2199ae5943", "32fadc2d5bc1df7709aa5", "33a0f0a1a8142c79d4487", "33b6b64bb8ec8c238c0b9", "3469683f55081b8fd6928", "34744b5a8b550532559e1", "34bb76c7855522a07ee02", "360f31a1901e23c06d120", "3612f36b286ec4415c7b4", "362c0891a12378f95f5c4", "36306366659a486a00694", "36806f1f271dd0104d838", "36d8ad501439bd84c72e8", "3708720aa8ed64a617f81", "38429e4db65716f7a2664", "3a3fc0fe52b67d7e2c6e2", "3a855dd1739c947820662", "3cca60ae12a0c5041b097", "3d9ecae462098fa227dc9", "3de8528e39e7cc9889df6", "3ebc62306502b9ecb5ba1", "40bd69e965a8c11ca3173", "4167043447330552abf12", "41935e14bf08981b196f9", "427aaa0e84aad758b68d8", "42cf290f35226c8ca1f31", "43194ffef889e9f1e2fa8", "445873813a42740a35708", "454394ab3ededd3f42287", "457e9a89f12a81f5b9429", "45f8f2502b2c72b92e4c8", "46c3c05f39a8d36a32372", "46f0cbb7b055f7fc35b74", "46fb9bc3bca471b2e4616", "470d573912fc6b55a4bd0", "47324b9f08ac7f3c71397", "4793ebe984d5e16f36bf6", "48f4627838078747c1bd7", "4b08f470184686badd060", "4b0dbd4f3a0a7dba18cc5", "4be9d6bbd8489b1e88889", "4c142140a6b5e087a8d96", "4c8b57edc3b3a7cac0596", "4d623ee4c0edee2080f88", "4f689e68663e45a6c4150", "4fce9347454814e8811c1", "50411e2f91774df477f75", "5246972ae0cd11a54e911", "52c0b3a1e412ab1f7e537", "52de05962a3d91cade9d0", "530783f9b9020a4ab5f20", "533e069807386cef21745", "5384c90ac854404e537d6", "539537f8385ed1c959b76", "54764aef36c5e0cba5923", "54cbd4078738769ba7e81", "556e91106b462e6ee7329", "56d4824ad45a4e1ad6021", "579bfbc7fbe65acbabae3", "57c3fd00af7d8306de056", "5a9a88f3171fb5c6c3c96", "5b9c3e4b25b70318a4334", "5becdfe9979a1e7debdc2", "5c980e5350f0de61e6824", "5cd58430f1ab6a28391a9", "5d56763fc2838d338fe77", "5deb4aa0cdf45528e16f4", "5fb9e83eb3fceda24d4e6", "605ef9280e8d2a9d0d048", "60b1fc2a29ccbc1c06c17", "612c973add55b0a8e36b4", "62e1385ecdf45445de239", "640677abea4fd70c88fa8", "64b12407e77afbe96d1f6", "666c4af7e17d7484e4b21", "677000fd56ba1f219b090", "67caf4f4b87d246be0f79", "68154464d9bf415e99ce1", "68354ce5ff9de3b1e7d36", "69ebe7337bbdd67c0c821", "69f244a0fefea14c871a7", "6a2ec9101929424db8191", "6a616edb8401fd6aacbe9", "6ae0a97f55ff02033f7a6", "6be0622a24a34cf9939d7", "6c931f4c97e05e11f6c86", "6e332957ef1574dc8e0e5", "6ee6eb65de7f3565a2991", "6ef0a0a51655cf2dcd7a2", "6f5afb9afb534adc27aa5", "70e3f7d479861adfff652", "71c03712410a1fb1c8e07", "71dc8632dfa576723c6a1", "730aab0095505bca5b0a2", "73948f22a3c72c05c21b8", "740697657cc6afc667031", "752370d567007aee20192", "755010e0ff93999cdf807", "767d4e050c960dc59deb7", "76d720769b7f21d495880", "77bd1e3bb2b4993e76bc9", "77e4b9bc5e192496a89e0", "78236063ee14f74e4f624", "79603f10cbc1e23b916b7", "7993747644590bed4f7f1", "79d678b41d871e28a6571", "7a357ae1f9fb21b78c152", "7a5b113c8f352bb646ce9", "7af89f5402a9f6c288bd2", "7b47275b12f187050cfc7", "7ba88c925c05265eece92", "7da9896421b03d8719e20", "7e590bb7bfac7862affc9", "7ed2f8c2084da193cfba0", "7f5c3ef55b1ac6bd7e2e2", "7fb8d3a99ac54fc3b5737", "801b5d8572424fe4ec927", "80d54645c511cc27442e3", "819d260868c2719a80883", "82a249e848ce5b5fb0d20", "82d8ea53268a53fa75a48", "831c868900ea0df7b7662", "83d01d712d87dc8a0c553", "83ecc7349cc6c39125952", "85861e432b69f17b9d8b3", "86791662557b6f46d33f1", "873e410bd78d0678085c3", "87785233aec3f9f85dd53", "88227a8c2ecd820cdffa4", "886722ada683eef0e9b30", "89130d8f07c9a400a6477", "898e1900b1c5033846417", "89e5ab9284c6c827d52d1", "8a27395d959cf1b831950", "8aa0f06c40b8c99e71530", "8b5fe4007fc6e9a7453f3", "8d2a700fd18f2d06ec801", "8d3e11158179029357b22", "8d91723fe56b7efd08059", "8dfbb41e0ce7e51c4ff05", "8dfff694336738429ae26", "8e19f95556345484ac119", "8e98c2282cafdef35d920", "8fa254580aad8d2ca73d7", "8fd33bf5461bf6d2a0738", "91151dd67d0959a17bee4", "91add68a39cc2c32d3d09", "9261c79b30f864ae2ecc8", "935f4cfeb667abff98280", "94dc75416d01052ad5432", "951a43de828118cf8cc61", "9840524856fb8071dc427", "98ce126677a532fc92c05", "9b462a79eb88ba5b14056", "9b4d8bb73294b977c8187", "9b511729ba0defdb3bd70", "9d5d9de21874bfa055237", "9e471fdc9e27b8da6c7d1", "9ec17a9ffb08b1d6bf434", "a01c8303658b438c8ada9", "a1f3f13f822120fee4fa1", "a1f828d24fc449f23a524", "a251024f94e21ff4e5322", "a26d9bf8cc03c6eb64c67", "a3e4ed974fe0a05db81f6", "a41036614c8c0827158c2", "a5a51e73e468177a648e9", "a5e1cfc15dacae83671f6", "a67797f0df23c090c26d1", "a6be3462ad651d35c98c7", "a86044acd920016e1dfa6", "a8666399e88c0943e19f7", "a882e06e0b48963817376", "a899be4ed4489e92e7d90", "a8b84362a379c2d64f320", "a90e3b86c143643b1bef6", "a93501c4c569f1b4293e6", "aba464214b7e97f162554", "ad7d6a162b5ca114529c8", "ada64fe2490eb1a2f8307", "adab5db8a0d1913cda1e0", "aec36277693e318f704f4", "b0b8cbe6afba82242c088", "b1128144c7d9a0236ed82", "b18e892c3d582cc247fd6", "b2971e6edcbfc26d1bd22", "b2cc8b37939a6438f9535", "b35a173a9b1e6760c41c8", "b56f56701d60a88337621", "b5bcdd711916849af1095", "b5c0eb82af6cbc43117f2", "b5e0164a3ef3bb22e95c1", "b8f9f7f616f26dfea66d2", "b8fa3ed50685e9b26ae00", "b951cea06ef823c049790", "b961ac05ee3a9d662ea15", "b9d255deffe383926e090", "bb104a3ea2e85d288b077", "bb237ed14423b3d3b7644", "bb888b666a44099f3e742", "bb9e54c356582817a0c10", "bd5f65de9c4ba02a21a89", "bded7f4930172e1f2b9d0", "be87672c858ace98fbad7", "be9ef310078367fec33f8", "bfdd2477a047784fbb8c8", "c02f7c09a0d20383788c1", "c0c5721763ab6631e6e63", "c115c8a4bd51e8993e8e3", "c171c36e9938c50b169a9", "c211b68e8670a1236cf29", "c272c285b9fdf5387e893", "c28e472abaf9041480ee9", "c2a5754f24264338796a9", "c2e9344ee6b71abc2cfc0", "c3292e1194aab3e8bc285", "c3ad4eccc6fbd037a2320", "c3f66b8ebd6d5586c3c24", "c4087f08c3cd877a33eb5", "c4315c13ae48865fe8781", "c562833d631b690521818", "c57ca2e4c96423a710339", "c5b8313bbaee1406ff002", "c61ffbcc5dffd2a2c22c9", "c733f70947a2c54308984", "c8a07b6d5108bce4ecb37", "c8edce5b68692c28a6350", "c8f6ab32a63ed2d6378b9", "c9eb371ac43ffd60f7134", "caed564481b703ba27512", "cc77689e1edcd6f94f145", "cc8d3a1374174f1e185d2", "ccfd04630c41d2479db46", "cde15786d73a9909067e7", "cfb4d945b90890b4a4ad4", "cfd4992764c93668a5041", "d1348c8d871af4c831006", "d1cad856c96124810bb28", "d29650d51c7d286b96e03", "d2c8db8eb1869eb17d676", "d34f63a49ff231b47d276", "d4ef68dca92b087d5dd67", "d5b516e701415efb293d0", "d5fe83ada0be2f099bed9", "d6b5dcad6ad8501e756b2", "d6c5720bc6b6e2d7a0fb4", "d70eb51d30618211370c5", "d7bb69961509e137c9183", "d8d1c70aea9ab03002b98", "d9d979028cb1d51859174", "da0743cae2b87a7fd2bc7", "da81227f8e236db936084", "db5689de8c76ecbdf67a5", "dbada3263dc730415b201", "dc73de611411125fb3ce9", "dd52847dbcf7845312c13", "de261deb2721b90d812a0", "e096496fa9d29d7db6f57", "e0a32d55e362668d740e8", "e0ea9ce6231fca94d0c30", "e14c8d8f0509a87c5cb63", "e1f4bd6f9cb0c6f886ad2", "e29e2ed285889cc8f9aa6", "e2f64d1c47288a4692441", "e3416696a8bb10c021458", "e356d266fce5289a7dde3", "e37e96225534f7635fa17", "e39b35a73123a20de4232", "e3b71b4698ecf6521cba6", "e555286ba0d0219a77287", "e5b4a5405923dabe79040", "e62c58e26e243f27bbd95", "e6787a0dfd3df93c42933", "e6ac6b12828677c1799f4", "e797c17f98dd031520473", "e82d9d2a445dbc68184c0", "e844dc18dff6dd8cd66f2", "e9d6de611fdf8ea32ba70", "eb8cfd0253d301c447c13", "ebc3e83dca8ec0901b4e9", "ecaae2fac06970b45cb04", "ee01d70f323b502b02712", "ee25bd83a2cd0af5df552", "ee345cd8878fd1f012109", "eecd15dc346fd7852cc30", "eee83844f530bc2875405", "ef3a50c7a17c39d1789c1", "ef3fa3626d36adec5a134", "f021f51da47bd7346acf5", "f054c5d944f3c33871463", "f0a61ae2385d3a907ea46", "f0befb0b49a8860713201", "f1630c95fc4a91f771295", "f375c79385850a12f8d83", "f39527e201535fdea9326", "f41bbfdff50cf6c1d3d00", "f43b92d6cecb87280e811", "f63c0707de84df62b18f4", "f74bfb57b4c3d15b96ca3", "f9e1f62496055c24b0888", "fa1cf39a689656a241611", "fa27da2436a37f33cffa3", "fa86a247ed8a3766f66b0", "fac1f93e99c36cf37c146", "fbb5bb50c3ba9e0cff5d6", "fcbc32df3fdfb82196938", "fd23c260e50a011e3bee7", "fde6822f711017066aab5", "feeb4f1c01cc1889f8e90", "ff535899da63260310d24", "ff8f1f58f45fa98140457", "ffeccef6ec8802e5701b3"], "id": "lock5_podium"}]}</script>
+<script>
+function sha256(ascii){
+  function rightRotate(v,a){return (v>>>a)|(v<<(32-a))}
+  var mathPow=Math.pow,maxWord=mathPow(2,32),i,j,result='',words=[],bitLen=ascii.length*8;
+  var hash=sha256.h=sha256.h||[],k=sha256.k=sha256.k||[],pc=k.length,comp={};
+  for(var c=2;pc<64;c++){if(!comp[c]){for(i=0;i<313;i+=c)comp[i]=c;hash[pc]=(mathPow(c,.5)*maxWord)|0;k[pc++]=(mathPow(c,1/3)*maxWord)|0}}
+  ascii+='\x80';while(ascii.length%64-56)ascii+='\x00';
+  for(i=0;i<ascii.length;i++){j=ascii.charCodeAt(i);words[i>>2]|=j<<((3-i)%4)*8}
+  words[words.length]=((bitLen/maxWord)|0);words[words.length]=(bitLen);
+  for(j=0;j<words.length;){
+    var w=words.slice(j,j+=16),old=hash;hash=hash.slice(0,8);
+    for(i=0;i<64;i++){
+      var w15=w[i-15],w2=w[i-2],a=hash[0],e=hash[4];
+      var t1=hash[7]+(rightRotate(e,6)^rightRotate(e,11)^rightRotate(e,25))+((e&hash[5])^((~e)&hash[6]))+k[i]+(w[i]=(i<16)?w[i]:(w[i-16]+(rightRotate(w15,7)^rightRotate(w15,18)^(w15>>>3))+w[i-7]+(rightRotate(w2,17)^rightRotate(w2,19)^(w2>>>10)))|0);
+      var t2=(rightRotate(a,2)^rightRotate(a,13)^rightRotate(a,22))+((a&hash[1])^(a&hash[2])^(hash[1]&hash[2]));
+      hash=[(t1+t2)|0].concat(hash);hash[4]=(hash[4]+t1)|0;
+    }
+    for(i=0;i<8;i++)hash[i]=(hash[i]+old[i])|0;
+  }
+  for(i=0;i<8;i++)for(j=3;j+1;j--){var b=(hash[i]>>(j*8))&255;result+=((b<16)?0:'')+b.toString(16)}
+  return result;
+}
+function sha256u(s){return sha256(unescape(encodeURIComponent(s)))}
+
+(function(){
+  var PACKET='CPUSH_L12_ESCAPE';
+  var STORE='cpush_l12_escape-room_';
+  var D=JSON.parse(document.getElementById('er-data').textContent);
+  var $=function(i){return document.getElementById(i)};
+  var S;
+  var digits={};            // runtime only: lock n -> digit
+  var entries={};           // lock id -> {h20: maskedDigit}
+  var expanded={};
+  var lastTick=0,timer=null;
+
+  function squash(t){return String(t).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'')}
+  function h20(s){return sha256u(s).slice(0,20)}
+  D.locks.forEach(function(L){var m={};L.entries.forEach(function(e){m[e.slice(0,20)]=+e.slice(20)});entries[L.id]=m});
+
+  function checkLock(L,canon){
+    var salt=D.salt+L.n+':';
+    var h=h20(salt+canon),mk=entries[L.id][h];
+    if(mk===undefined)return null;
+    var m=parseInt(sha256u('m:'+salt+canon).slice(0,2),16)%10;
+    return (mk-m+10)%10;
+  }
+  function fresh(){
+    var o={first:'',last:'',period:'',started:false,elapsed:0,escaped:false,escapeMs:0,debrief:'',codeTries:0,locks:{}};
+    D.locks.forEach(function(L){o.locks[L.id]={solved:false,attempts:0,hints:0,guess:'',readable:''}});
+    return o;
+  }
+  function loadLocal(){var o=fresh();try{var r=JSON.parse(localStorage.getItem(STORE+'state')||'null');if(r)restore(o,r)}catch(e){}return o}
+  function persist(){try{localStorage.setItem(STORE+'state',JSON.stringify(snapshot()))}catch(e){}}
+
+  function totals(){
+    var t={locksSolved:0,attempts:0,hintsUsed:0,exitCodeAttempts:S.codeTries};
+    D.locks.forEach(function(L){var l=S.locks[L.id];if(l.solved)t.locksSolved++;t.attempts+=l.attempts;t.hintsUsed+=l.hints});
+    return t;
+  }
+  function fmt(ms){var s=Math.round(ms/1000),m=Math.floor(s/60);s=s%60;return (m<10?'0':'')+m+':'+(s<10?'0':'')+s}
+  function snapshot(){
+    var o={packet:PACKET,course:'CPUSH',lesson:12,assignment:'Escape Room (Lite)',version:1,saved:new Date().toISOString(),
+      student:{first:$('f_first').value.trim(),last:$('f_last').value.trim(),period:$('f_period').value.trim()},
+      status:S.escaped?'ESCAPED':'INCOMPLETE',escaped:S.escaped,
+      escapeTime:S.escaped?{ms:S.escapeMs,text:fmt(S.escapeMs)}:null,
+      totals:totals(),elapsedMs:Math.round(S.elapsed),started:S.started,locks:{},debrief:$('debriefText')?$('debriefText').value:S.debrief};
+    D.locks.forEach(function(L){var l=S.locks[L.id];
+      o.locks[L.key]={objective:L.obj,puzzleType:L.type,solved:l.solved,attempts:l.attempts,hintsUsed:l.hints,solvedWith:l.readable,solvedGuess:l.guess}});
+    return o;
+  }
+  function restore(o,r){
+    if(!r||typeof r!=='object')return false;
+    var st=r.student||{};
+    o.first=st.first||'';o.last=st.last||'';o.period=st.period||'';
+    o.started=!!r.started;o.elapsed=+r.elapsedMs||0;o.debrief=typeof r.debrief==='string'?r.debrief:'';
+    o.codeTries=(r.totals&&+r.totals.exitCodeAttempts)||0;
+    var allOk=true;
+    D.locks.forEach(function(L){
+      var src=(r.locks&&r.locks[L.key])||{},l=o.locks[L.id];
+      l.attempts=+src.attempts||0;l.hints=Math.min(+src.hintsUsed||0,L.hints.length+0);
+      if(src.hintsUsed>L.hints.length)l.hints=L.hints.length;
+      if(src.solved&&typeof src.solvedGuess==='string'){
+        var d=checkLock(L,src.solvedGuess);
+        if(d!==null){l.solved=true;l.guess=src.solvedGuess;l.readable=String(src.solvedWith||'');digits[L.n]=d}else allOk=false;
+      }else allOk=false;
+    });
+    if(r.escaped&&allOk&&r.escapeTime){o.escaped=true;o.escapeMs=+r.escapeTime.ms||0}
+    return true;
+  }
+
+  /* ---------- scene ---------- */
+  var NS='http://www.w3.org/2000/svg';
+  var XS=[210,255,300,345,390];
+  (function(){
+    var g=$('plocks'),h='';
+    XS.forEach(function(x,i){
+      h+='<g class="plock" id="pl'+(i+1)+'"><path class="sh" d="M'+(x-8)+' 124V114a8 8 0 0 1 16 0V124" fill="none" stroke="#EFEBF4" stroke-width="4"/><rect class="bd" x="'+(x-15)+'" y="124" width="30" height="24" rx="4" fill="#D2954B"/><circle cx="'+x+'" cy="135" r="3" fill="#231933"/></g>'+
+      '<rect x="'+(x-16)+'" y="158" width="32" height="36" rx="5" fill="#120C1D" stroke="#E1BB8E"/><text id="dw'+(i+1)+'" x="'+x+'" y="184" text-anchor="middle" font-size="24" font-weight="800" fill="#EFEBF4">?</text><text x="'+x+'" y="208" text-anchor="middle" font-size="11" font-weight="700" fill="#C4BBD3">LOCK '+(i+1)+'</text>';
+    });
+    g.innerHTML=h;
+  })();
+  function sceneUpdate(){
+    D.locks.forEach(function(L){
+      var open=S.locks[L.id].solved;
+      $('pl'+L.n).setAttribute('class','plock'+(open?' open':''));
+      $('dw'+L.n).textContent=open?digits[L.n]:'?';
+    });
+    $('scene').classList.toggle('escaped',S.escaped);
+  }
+
+  /* ---------- build lock cards ---------- */
+  var W={};   // widget state per lock
+  var LOCKSVG='<svg class="lk" viewBox="0 0 44 44" aria-hidden="true"><path class="sh" d="M13 20V14a9 9 0 0 1 18 0V20" fill="none" stroke="#EFEBF4" stroke-width="4"/><rect class="bd" x="8" y="20" width="28" height="20" rx="4" fill="#D2954B"/><circle cx="22" cy="30" r="3" fill="#231933"/></svg>';
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+  function buildLock(L){
+    var sec=document.createElement('section');sec.className='lock glass locked';sec.id='lock'+L.n;
+    var head='<button class="lh" type="button" id="lh'+L.n+'" aria-expanded="false">'+LOCKSVG+'<span class="lt"><small>LOCK '+L.n+' · '+L.objLabel+'</small><strong>'+esc(L.title)+'</strong></span><span class="dg" id="dg'+L.n+'" aria-label="digit">?</span></button>';
+    var body='<div class="lb" id="lb'+L.n+'"><p class="objline">'+esc(L.objText)+'</p>'+
+      '<div class="card"><h4>CLUE CARD</h4>'+L.card+'<p class="src">'+L.src+'</p></div>'+
+      '<div class="prompt">'+L.prompt+'</div><div id="pz'+L.n+'"></div>'+
+      '<div class="row"><button class="btn primary" type="button" id="ck'+L.n+'">Check</button><button class="btn small" type="button" id="hb'+L.n+'">Hint</button><button class="btn small" type="button" id="rs'+L.n+'">Clear</button></div>'+
+      '<div class="hints" id="hs'+L.n+'"></div><div class="fb" id="fb'+L.n+'" role="status"></div></div>';
+    sec.innerHTML=head+body;
+    $('locks').appendChild(sec);
+    buildPuzzle(L);
+    $('lh'+L.n).addEventListener('click',function(){
+      var st=lockState(L);if(st==='locked')return;
+      expanded[L.n]=!expanded[L.n];updateLocks();
+    });
+    $('ck'+L.n).addEventListener('click',function(){submit(L)});
+    $('hb'+L.n).addEventListener('click',function(){hint(L)});
+    $('rs'+L.n).addEventListener('click',function(){clearPuzzle(L)});
+  }
+  function labelOf(list,id){for(var i=0;i<list.length;i++)if(list[i].id===id)return list[i].label;return id}
+
+  function buildPuzzle(L){
+    var el=$('pz'+L.n),w=W[L.n]={};
+    if(L.type==='order'){
+      w.sel=[];el.innerHTML='<div class="chips" id="ch'+L.n+'"></div>';
+      renderOrder(L);
+    }else if(L.type==='match'){
+      var h='';
+      L.terms.forEach(function(t){
+        h+='<div class="mrow"><label for="m'+L.n+t.id+'">'+esc(t.label)+'</label><select id="m'+L.n+t.id+'"><option value="">Choose a description...</option>';
+        L.descs.forEach(function(d){h+='<option value="'+d.id+'">'+esc(d.label)+'</option>'});
+        h+='</select></div>';
+      });
+      el.innerHTML=h;
+    }else if(L.type==='pick'){
+      var h2='';
+      L.qs.forEach(function(q){
+        h2+='<fieldset><legend>'+esc(q.q)+'</legend>';
+        q.opts.forEach(function(o){h2+='<label class="opt"><input type="radio" name="q'+L.n+q.id+'" value="'+o.id+'"> <span>'+esc(o.label)+'</span></label>'});
+        h2+='</fieldset>';
+      });
+      el.innerHTML=h2;
+    }else if(L.type==='decode'){
+      var k1='',k2='';
+      for(var i=0;i<26;i++){var p=String.fromCharCode(65+i),c=String.fromCharCode(65+(i+L.shift)%26);k1+='<div class="c">'+c+'</div>';k2+='<div>'+p+'</div>'}
+      // build key in two rows of 13
+      var key='';
+      for(var r=0;r<2;r++){for(var j=0;j<13;j++){var idx=r*13+j;key+='<div class="c">'+String.fromCharCode(65+(idx+L.shift)%26)+'</div>'}for(var j2=0;j2<13;j2++){key+='<div>'+String.fromCharCode(65+r*13+j2)+'</div>'}}
+      el.innerHTML='<div class="cipher" translate="no" aria-label="Coded message">'+esc(L.cipher)+'</div><p style="margin:.6em 0 0;font-size:15px;color:var(--dim)">Decoder key: the <span style="color:var(--hl);font-weight:700">gold</span> letter is in the message. The white letter under it is the real letter.</p><div class="key" aria-hidden="true">'+key+'</div><label>Decoded answer<input type="text" id="tx'+L.n+'" autocomplete="off" autocapitalize="none" spellcheck="false"></label><p class="ennote">Type the answer in English.</p>';
+    }else if(L.type==='fill'){
+      el.innerHTML='<p style="font-size:18px;margin:.2em 0">'+esc(L.sentence)+'</p><div class="scr" translate="no" aria-label="Scrambled letters">'+esc(L.scramble)+'</div><p style="margin:.4em 0;font-size:14px;color:var(--dim)">Unscramble the letters to fill the blank.</p><label>Your answer<input type="text" id="tx'+L.n+'" autocomplete="off" autocapitalize="none" spellcheck="false"></label><p class="ennote">Type the answer in English.</p>';
+    }
+    var t=$('tx'+L.n);
+    if(t)t.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();submit(L)}});
+  }
+  function renderOrder(L){
+    var w=W[L.n],ch=$('ch'+L.n),h='';
+    L.items.forEach(function(it){
+      var pos=w.sel.indexOf(it.id);
+      h+='<button type="button" class="chip'+(pos>=0?' sel':'')+'" data-id="'+it.id+'" aria-pressed="'+(pos>=0)+'">'+(pos>=0?'<span class="n">'+(pos+1)+'</span>':'')+'<span>'+esc(it.label)+'</span></button>';
+    });
+    ch.innerHTML=h;
+    [].forEach.call(ch.querySelectorAll('.chip'),function(b){
+      b.addEventListener('click',function(){
+        if(S.locks[L.id].solved)return;
+        var id=b.getAttribute('data-id'),p=w.sel.indexOf(id);
+        if(p>=0)w.sel.splice(p,1);else w.sel.push(id);
+        renderOrder(L);
+      });
+    });
+  }
+  function clearPuzzle(L){
+    if(S.locks[L.id].solved)return;
+    var w=W[L.n];
+    if(L.type==='order'){w.sel=[];renderOrder(L)}
+    else if(L.type==='match'){L.terms.forEach(function(t){$('m'+L.n+t.id).value=''})}
+    else if(L.type==='pick'){L.qs.forEach(function(q){[].forEach.call(document.getElementsByName('q'+L.n+q.id),function(r){r.checked=false})})}
+    else{$('tx'+L.n).value=''}
+    fb(L,'','');
+  }
+  function guessOf(L){
+    // returns {canon, readable} or {err}
+    if(L.type==='order'){
+      var w=W[L.n];
+      if(w.sel.length<L.items.length)return {err:'Tap all '+L.items.length+' places first, in order.'};
+      return {canon:w.sel.join('|'),readable:w.sel.map(function(i){return labelOf(L.items,i)}).join(' > ')};
+    }
+    if(L.type==='match'){
+      var c=[],r=[];
+      for(var i=0;i<L.terms.length;i++){var t=L.terms[i],v=$('m'+L.n+t.id).value;if(!v)return {err:'Match every term first.'};c.push(v);r.push(t.label+' = '+labelOf(L.descs,v))}
+      return {canon:c.join('|'),readable:r.join('; ')};
+    }
+    if(L.type==='pick'){
+      var c2=[],r2=[];
+      for(var j=0;j<L.qs.length;j++){var q=L.qs[j],v2='';[].forEach.call(document.getElementsByName('q'+L.n+q.id),function(x){if(x.checked)v2=x.value});if(!v2)return {err:'Answer every question first.'};c2.push(v2);r2.push(labelOf(q.opts,v2))}
+      return {canon:c2.join('|'),readable:r2.join('; ')};
+    }
+    var raw=$('tx'+L.n).value.trim();
+    if(!raw)return {err:'Type your answer first.'};
+    return {canon:squash(raw),readable:raw.slice(0,80)};
+  }
+  function fb(L,cls,text){var e=$('fb'+L.n);e.className='fb'+(cls?' show '+cls:'');e.textContent=text}
+  function submit(L){
+    var l=S.locks[L.id];if(l.solved)return;
+    var g=guessOf(L);
+    if(g.err){fb(L,'nudge',g.err);return}
+    l.attempts++;
+    var d=checkLock(L,g.canon);
+    if(d===null){
+      fb(L,'nudge',L.nudge);
+      var s=$('lock'+L.n);s.classList.remove('shake');void s.offsetWidth;s.classList.add('shake');
+      persist();updateBar();return;
+    }
+    l.solved=true;l.guess=g.canon;l.readable=g.readable;digits[L.n]=d;
+    fb(L,'good','Click! Lock '+L.n+' is open. Your digit is '+d+'.');
+    var wh=$('wheel');wh.classList.remove('spin');void wh.getBoundingClientRect();wh.classList.add('spin');
+    $('dw'+L.n).classList.add('pop');
+    persist();updateAll();
+    setTimeout(function(){
+      expanded[L.n]=false;
+      var nx=nextOpen();if(nx)expanded[nx]=true;
+      updateLocks();
+      var tgt=nx?$('lock'+nx):$('exit');
+      if(tgt&&tgt.scrollIntoView)tgt.scrollIntoView({behavior:'smooth',block:'start'});
+    },1600);
+  }
+  function hint(L){
+    var l=S.locks[L.id];
+    if(l.solved)return;
+    if(l.hints<L.hints.length){l.hints++;persist();updateHints(L);updateBar()}
+    else{fb(L,'nudge','That was the last hint. Read the Clue Card slowly and try again.')}
+  }
+  function updateHints(L){
+    var l=S.locks[L.id],h='';
+    for(var i=0;i<l.hints;i++)h+='<div class="hint"><b>Hint '+(i+1)+':</b> <span>'+esc(L.hints[i])+'</span></div>';
+    $('hs'+L.n).innerHTML=h;
+  }
+  function nextOpen(){for(var i=0;i<D.locks.length;i++)if(!S.locks[D.locks[i].id].solved)return D.locks[i].n;return 0}
+  function lockState(L){
+    if(S.locks[L.id].solved)return 'solved';
+    return L.n===nextOpen()?'current':'locked';
+  }
+  function updateLocks(){
+    var cur=nextOpen();
+    D.locks.forEach(function(L){
+      var st=lockState(L),sec=$('lock'+L.n);
+      if(st==='current'&&expanded[L.n]===undefined)expanded[L.n]=true;
+      var open=(st!=='locked')&&!!expanded[L.n];
+      sec.className='lock glass '+st+(open?' open':'');
+      $('lh'+L.n).setAttribute('aria-expanded',open?'true':'false');
+      $('dg'+L.n).textContent=S.locks[L.id].solved?digits[L.n]:'?';
+      if(S.locks[L.id].solved){
+        [].forEach.call(sec.querySelectorAll('input,select,button.chip,#ck'+L.n+',#hb'+L.n+',#rs'+L.n),function(x){x.disabled=true});
+        var f=$('fb'+L.n);if(!f.classList.contains('good'))fb(L,'good','Unlocked. Your digit is '+digits[L.n]+'.'+(S.locks[L.id].readable?' Your answer: '+S.locks[L.id].readable:''));
+      }
+      updateHints(L);
+    });
+  }
+  function codeStr(){var s='';for(var i=1;i<=5;i++)s+=(digits[i]===undefined?'':digits[i]);return s}
+  function allSolved(){return D.locks.every(function(L){return S.locks[L.id].solved})}
+  function updateExit(){
+    var ok=allSolved();
+    $('exit').classList.toggle('locked',!ok);
+    $('codeBtn').disabled=!ok||S.escaped;
+    [].forEach.call($('codebox').querySelectorAll('input'),function(i){i.disabled=!ok||S.escaped});
+    $('exitNote').textContent=S.escaped?'The door is open!':(ok?'All 5 locks are open. Type the 5 digits in order, Lock 1 first.':'Open all 5 locks first. The digits go in order: Lock 1 first.');
+  }
+  function updateBar(){
+    var t=totals();
+    $('lc').textContent=t.locksSolved;$('hc').textContent=t.hintsUsed;
+    $('tm').textContent=fmt(S.escaped?S.escapeMs:S.elapsed);
+  }
+  function updateStatus(){
+    var el=$('status'),db=($('debriefText').value.trim().length);
+    if(S.escaped)el.textContent=db>=40?'You escaped and wrote your Debrief. Ready to submit.':'You escaped! Write your Debrief, then download your file to submit.';
+    else el.textContent='Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.';
+  }
+  function updateEsc(){
+    $('esc').classList.toggle('show',S.escaped);
+    if(S.escaped){var t=totals();$('escTime').textContent=fmt(S.escapeMs);$('escSum').textContent='5 of 5 locks opened with '+t.attempts+' tries and '+t.hintsUsed+' hint'+(t.hintsUsed===1?'':'s')+'.'}
+  }
+  function updateAll(){sceneUpdate();updateLocks();updateExit();updateBar();updateEsc();updateStatus();
+    $('intro').classList.toggle('hidden',S.started);$('game').classList.toggle('hidden',!S.started);$('loadOnly').classList.toggle('hidden',S.started);
+  }
+
+  /* ---------- exit code ---------- */
+  (function(){
+    var cb=$('codebox');
+    for(var i=0;i<5;i++){
+      var inp=document.createElement('input');inp.type='text';inp.inputMode='numeric';inp.maxLength=1;inp.setAttribute('aria-label','Exit code digit '+(i+1));inp.disabled=true;
+      (function(i,inp){
+        inp.addEventListener('input',function(){inp.value=inp.value.replace(/[٠-٩]/g,function(c){return c.charCodeAt(0)-1632}).replace(/[۰-۹]/g,function(c){return c.charCodeAt(0)-1776}).replace(/[^0-9]/g,'');if(inp.value&&i<4)cb.children[i+1].focus()});
+        inp.addEventListener('keydown',function(e){
+          if(e.key==='Backspace'&&!inp.value&&i>0)cb.children[i-1].focus();
+          if(e.key==='Enter'){e.preventDefault();tryCode()}
+        });
+        inp.addEventListener('paste',function(e){
+          var t=(e.clipboardData||window.clipboardData).getData('text').replace(/[٠-٩]/g,function(c){return c.charCodeAt(0)-1632}).replace(/[۰-۹]/g,function(c){return c.charCodeAt(0)-1776}).replace(/[^0-9]/g,'');
+          if(t.length>1){e.preventDefault();for(var k=0;k<5;k++)cb.children[k].value=t[k]||''}
+        });
+      })(i,inp);
+      cb.appendChild(inp);
+    }
+  })();
+  function tryCode(){
+    if(!allSolved()||S.escaped)return;
+    var v='';[].forEach.call($('codebox').querySelectorAll('input'),function(i){v+=i.value});
+    var f=$('codefb');
+    if(v.length<5){f.className='fb show nudge';f.textContent='The code has 5 digits. Fill every box.';return}
+    S.codeTries++;
+    if(h20('exit:'+D.salt+v)!==D.exitHash){
+      f.className='fb show nudge';f.textContent='The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.';
+      var ex=$('exit');ex.classList.remove('shake');void ex.offsetWidth;ex.classList.add('shake');
+      persist();return;
+    }
+    S.escaped=true;S.escapeMs=S.elapsed;
+    f.className='fb show good';f.textContent='The door swings open!';
+    persist();updateAll();
+    setTimeout(function(){$('esc').scrollIntoView({behavior:'smooth',block:'start'})},900);
+  }
+  $('codeBtn').addEventListener('click',tryCode);
+
+  /* ---------- timer ---------- */
+  function tick(){
+    var n=Date.now();
+    if(S.started&&!S.escaped){S.elapsed+=Math.min(n-lastTick,5000);$('tm').textContent=fmt(S.elapsed)}
+    lastTick=n;
+  }
+  function startTimer(){lastTick=Date.now();if(!timer)timer=setInterval(function(){tick();if(Math.round(S.elapsed/1000)%10===0)persist()},1000)}
+
+  /* ---------- files ---------- */
+  function msg(t,err){var m=$('msg');m.textContent=t;m.className='msg'+(err?' err':'');m.style.display='block'}
+  function ascii(n){return String(n).normalize('NFD').replace(/[̀-ͯ]/g,'')}
+  function clean(n){n=window.spAscii?spAscii(n):n;return ascii(n).trim().replace(/\s+/g,'_').replace(/[^A-Za-z0-9_-]/g,'')}
+  function who(){return (clean($('f_last').value)||'Last')+'_'+(clean($('f_first').value)||'First')}
+  function download(name,obj){
+    var blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;
+    document.body.appendChild(a);a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);
+  }
+  function namesOk(){
+    var ids=['f_first','f_last','f_period'],ok=true;
+    ids.forEach(function(i){var f=$(i);if(!f.value.trim()){f.classList.add('bad');ok=false}});
+    if(!ok){msg('Enter your first name, last name, and period at the top first.',true);$('f_first').scrollIntoView({block:'center'})}
+    return ok;
+  }
+  ['f_first','f_last','f_period'].forEach(function(i){$(i).addEventListener('input',function(){$(i).classList.remove('bad');S[i.slice(2)]=$(i).value;persist()})});
+  $('debriefText').addEventListener('input',function(){S.debrief=$('debriefText').value;persist();updateStatus()});
+  $('saveBtn').addEventListener('click',function(){
+    if(!namesOk())return;tick();
+    download(who()+'-'+PACKET+'-PROGRESS.json',snapshot());
+    msg('Progress file downloaded. Use Load Progress to continue later.');
+  });
+  $('finishBtn').addEventListener('click',function(){
+    if(!namesOk())return;tick();
+    var now=new Date(),o=snapshot();o.completed=S.escaped;o.submitted=now.toISOString();
+    o.student.date=now.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+    download(who()+'-'+PACKET+'.json',o);
+    msg(S.escaped?('Done! File downloaded: '+who()+'-'+PACKET+'.json. Upload it to Canvas.'):('Your file downloaded and is marked INCOMPLETE (you have not escaped). Upload it to Canvas: '+who()+'-'+PACKET+'.json'));
+  });
+  function openLoad(){$('loadFile').click()}
+  $('loadBtn').addEventListener('click',openLoad);$('loadBtn0').addEventListener('click',openLoad);
+  $('loadFile').addEventListener('change',function(e){
+    var f=e.target.files[0];if(!f)return;
+    var r=new FileReader();
+    r.onload=function(){
+      try{
+        var o=JSON.parse(r.result);
+        if(!o||o.packet!==PACKET||typeof o.locks!=='object')throw new Error('wrong');
+        digits={};var n=fresh();restore(n,o);S=n;applyToDom();
+        msg('Progress loaded. Welcome back.');
+      }catch(err){msg('That file did not work. Choose a progress file saved from this Escape Room.',true)}
+      e.target.value='';
+    };
+    r.onerror=function(){msg('The file could not be read.',true)};
+    r.readAsText(f);
+  });
+  $('reset').addEventListener('click',function(){
+    if(!confirm('Clear all your work and start over? This cannot be undone.'))return;
+    digits={};expanded={};S=fresh();
+    try{localStorage.removeItem(STORE+'state')}catch(e){}
+    $('locks').innerHTML='';D.locks.forEach(buildLock);
+    $('f_first').value=$('f_last').value=$('f_period').value='';$('debriefText').value='';
+    [].forEach.call($('codebox').querySelectorAll('input'),function(i){i.value=''});$('codefb').className='fb';
+    applyToDom();
+  });
+  function applyToDom(){
+    $('f_first').value=S.first;$('f_last').value=S.last;$('f_period').value=S.period;$('debriefText').value=S.debrief;
+    // rebuild lock widgets, then pre-fill solved ones with readable note
+    $('locks').innerHTML='';D.locks.forEach(buildLock);
+    expanded={};
+    updateAll();
+    if(S.started)startTimer();
+  }
+  $('startBtn').addEventListener('click',function(){S.started=true;persist();startTimer();updateAll();$('game').scrollIntoView({behavior:'smooth'})});
+  window.addEventListener('beforeunload',function(){tick();persist()});
+
+  S=loadLocal();
+  D.locks.forEach(buildLock);
+  applyToDom();
+})();
+</script>
+<!--sp-i18n--><script type="application/json" id="sp-i18n">{"langs":["en","es","ar"],"default":"en","es":{"Save Progress":"Guardar progreso","Load Progress":"Cargar progreso","Finished — Download File to Submit":"Terminé — Descargar el archivo para entregar","Clear all my answers":"Borrar todas mis respuestas","FIRST NAME *":"NOMBRE *","LAST NAME *":"APELLIDO *","PERIOD *":"PERÍODO *","DATE (fills in when you finish)":"FECHA (se llena cuando terminas)","e.g. 3":"p. ej., 3","Automatic":"Automática","Please type your first name, last name, and period first.":"Primero escribe tu nombre, apellido y período.","Western Expansion and Southern Secession":"Expansión hacia el oeste y secesión del sur","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — La Ley de Esclavos Fugitivos","Bleeding Kansas":"Bleeding Kansas — Kansas sangriento","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"Se descargó tu archivo de progreso. Guárdalo bien. Usa «Cargar progreso» para continuar más tarde.","Progress loaded.":"Progreso cargado.","Could not read that file.":"No se pudo leer ese archivo.","Treaty of Guadalupe Hidalgo":"Tratado de Guadalupe Hidalgo","The Progressive Era":"La Era Progresista","Escape Room 12 · The Progressive Era":"Sala de escape 12 · La Era Progresista","Escape the Campaign Headquarters":"Escapa del cuartel general de la campaña","You are locked in campaign headquarters.":"Estás encerrado en el cuartel general de la campaña.","The campaign office closed for the night and the last volunteer locked up headquarters. Old posters and flags from 1889 to 1916 hang on the wall. The door has <b>5 locks<\/b>. Each lock matches one big idea from Lesson 12. Solve them all to find the <b>5-digit exit code<\/b>.":"La oficina de la campaña cerró por la noche y el último voluntario cerró con llave el cuartel general. Todavía hay carteles y banderas antiguos de 1889 a 1916 colgados en la pared. La puerta tiene <b>5 candados<\/b>. Cada candado corresponde a una idea importante de la Lección 12. Resuélvelos todos para encontrar el <b>código de salida de 5 dígitos<\/b>.","Enter Headquarters":"Entrar al cuartel general","HEADQUARTERS":"CUARTEL GENERAL","A campaign headquarters at night. Flag bunting hangs across the top of the walls. A wooden speaker's podium stands on the left, a wall map of the country hangs above it, and a ballot box with a slot and a stack of leaflets sit on the right. The headquarters door has five padlocks in a row. Under each padlock is a window for one digit of the exit code.":"El cuartel general de una campaña de noche. Banderines cuelgan en la parte de arriba de las paredes. A la izquierda hay un podio de madera para oradores, con un mapa del país en la pared encima, y a la derecha hay una urna con una ranura y una pila de volantes. La puerta del cuartel general tiene cinco candados en fila. Debajo de cada candado hay una ventanita para un dígito del código de salida.","The Ballot Box":"La urna","The Poster Wall":"La pared de carteles","The Telephone":"El teléfono","The Campaign Map":"El mapa de la campaña","The Podium":"El podio","Core Objective 1: Assess the motives of progressive reformers and how they reflected the underlying values of the progressive movement.":"Objetivo principal 1: Evaluar los motivos de los reformistas progresistas y cómo reflejaban los valores de fondo del movimiento progresista.","Core Objective 2: Explain the sources of thought and social activism that contributed to the progressive movement.":"Objetivo principal 2: Explicar las fuentes de pensamiento y de activismo social que contribuyeron al movimiento progresista.","Core Objective 3: Identify the reforms the progressives achieved at the local, state, and national levels, and how those reforms advanced the larger cause of social justice.":"Objetivo principal 3: Identificar las reformas que lograron los progresistas a nivel local, estatal y nacional, y cómo esas reformas impulsaron la causa más amplia de la justicia social.","Core Objective 4: Describe how Presidents Theodore Roosevelt and William Howard Taft differed in their approaches to progressive reform.":"Objetivo principal 4: Describir en qué se diferenciaron los presidentes Theodore Roosevelt y William Howard Taft en sus formas de abordar la reforma progresista.","Core Objective 5: Explain how President Woodrow Wilson’s progressive policies affected the role of government—and the presidency in particular—in the Progressive Era.":"Objetivo principal 5: Explicar cómo las políticas progresistas del presidente Woodrow Wilson afectaron el papel del gobierno —y de la presidencia en particular— en la Era Progresista.","Progressives, many of them from the middle class, were liberals, not revolutionaries. They feared that if problems in society were not fixed, unrest could lead people to embrace socialism or anarchism, which had real support in this era. They wanted to reform and regulate capitalism, not destroy it. What progressives shared was the belief that governments must become more active in solving the problems of fast urban and industrial growth. Jane Addams, a leading reformer in Chicago, said that charities and churches were “totally inadequate to deal with the vast numbers of the city’s disinherited.”":"Los progresistas, muchos de ellos de clase media, eran liberales, no revolucionarios. Temían que, si no se arreglaban los problemas de la sociedad, el descontento llevara a la gente a adoptar el socialismo o el anarquismo, que tenían apoyo real en esta época. Querían reformar y regular el capitalismo, no destruirlo. Lo que los progresistas compartían era la idea de que los gobiernos debían ser más activos para resolver los problemas del rápido crecimiento urbano e industrial. Jane Addams, una reformista destacada de Chicago, dijo que las organizaciones de caridad y las iglesias eran “totalmente insuficientes para atender a las grandes cantidades de desheredados de la ciudad.”","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 20, “The Progressive Impulse” (no page numbers are marked in this section).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 20, “The Progressive Impulse” (en esta sección Norton no marca números de página).","What did progressives want to do to capitalism?":"¿Qué querían hacer los progresistas con el capitalismo?","Destroy it":"Destruirlo","Replace it with socialism":"Reemplazarlo con el socialismo","Reform and regulate it":"Reformarlo y regularlo","Leave it alone":"Dejarlo como estaba","What did progressives believe governments must become?":"¿En qué creían los progresistas que debían convertirse los gobiernos?","More active in fixing city and industrial problems":"Más activos para resolver los problemas de las ciudades y de la industria","Smaller and quieter":"Más pequeños y más callados","Run by big businesses":"Dirigidos por las grandes empresas","Free of all rules":"Libres de todas las reglas","Which reformer said that charities and churches were “totally inadequate”?":"¿Qué reformista dijo que las organizaciones de caridad y las iglesias eran “totalmente insuficientes”?","Theodore Roosevelt":"Theodore Roosevelt","Jacob Riis":"Jacob Riis","Ida Tarbell":"Ida Tarbell","Jane Addams":"Jane Addams","Each answer is in the Clue Card. Look for what progressives wanted to do to capitalism, what they thought governments must become, and the name of the Chicago reformer.":"Cada respuesta está en la tarjeta de indicios. Busca qué querían hacer los progresistas con el capitalismo, en qué pensaban que debían convertirse los gobiernos y el nombre de la reformista de Chicago.","Progressives wanted to fix capitalism, not end it. Governments had to do more. The reformer who spoke of the “disinherited” was a leader in Chicago.":"Los progresistas querían arreglar el capitalismo, no acabar con él. Los gobiernos tenían que hacer más. La reformista que habló de los “desheredados” era una líder de Chicago.","Not quite. At least one answer is off. Re-read the Clue Card for what progressives wanted to do to capitalism, what governments must become, and who said “totally inadequate.”":"Casi. Al menos una respuesta está mal. Vuelve a leer la tarjeta de indicios para ver qué querían hacer los progresistas con el capitalismo, en qué debían convertirse los gobiernos y quién dijo “totalmente insuficientes”.","The muckrakers were America’s first investigative journalists. Magazines such as <i>McClure’s<\/i> and writers such as Jacob Riis exposed corruption and showed “how the other half lives.” Religious activism added the social gospel, the belief that Christians should treat all people like brothers and sisters and help the poorest. In 1889, Jane Addams and Ellen Gates Starr turned a run-down mansion into Hull House, a settlement house in Chicago that helped the working poor, especially newly arrived European immigrants. In 1869, Susan B. Anthony and Elizabeth Cady Stanton founded the National Woman Suffrage Association (NWSA) to win an amendment to the Constitution for women’s suffrage. The NWSA also campaigned for higher pay for working women and for laws that helped abused wives get divorces.":"Los muckrakers fueron los primeros periodistas de investigación de Estados Unidos. Revistas como <i>McClure’s<\/i> y escritores como Jacob Riis denunciaron la corrupción y mostraron “cómo vive la otra mitad.” El activismo religioso añadió el evangelio social (social gospel), la creencia de que los cristianos debían tratar a todas las personas como hermanos y hermanas y ayudar a los más pobres. En 1889, Jane Addams y Ellen Gates Starr convirtieron una mansión en mal estado en Hull House, una casa de asentamiento social (settlement house) de Chicago que ayudaba a los trabajadores pobres, sobre todo a los inmigrantes europeos recién llegados. En 1869, Susan B. Anthony y Elizabeth Cady Stanton fundaron la Asociación Nacional por el Sufragio de la Mujer (NWSA) para lograr una enmienda a la Constitución sobre el sufragio femenino. La NWSA también luchó por mejores sueldos para las mujeres trabajadoras y por leyes que ayudaran a las esposas maltratadas a obtener el divorcio.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 20, “The Varied Sources of Progressivism” (Muckraking Journalism, pp. 865-866; Religious Activism and Social Responsibility, p. 867; Settlement Houses, p. 867; The Women’s Suffrage Movement, p. 868).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 20, “The Varied Sources of Progressivism” (Muckraking Journalism, págs. 865-866; Religious Activism and Social Responsibility, pág. 867; Settlement Houses, pág. 867; The Women’s Suffrage Movement, pág. 868).","Muckrakers":"Muckrakers","Social gospel":"Evangelio social (social gospel)","Hull House":"Hull House","NWSA":"NWSA","Reporters who dug up facts about corruption and about how the poor lived":"Reporteros que descubrían datos sobre la corrupción y sobre cómo vivían los pobres","The belief that Christians should treat all people like brothers and sisters and help the poor":"La creencia de que los cristianos deben tratar a todas las personas como hermanos y hermanas y ayudar a los pobres","A Chicago settlement house that helped the working poor, especially new immigrants":"Una casa de asentamiento social (settlement house) de Chicago que ayudaba a los trabajadores pobres, sobre todo a los nuevos inmigrantes","The group founded in 1869 to win an amendment giving women the right to vote":"El grupo fundado en 1869 para lograr una enmienda que diera a las mujeres el derecho al voto","Two terms are about groups that pushed for change (the muckrakers and the NWSA). Two are about helping the poor (the social gospel and Hull House).":"Dos términos son de grupos que impulsaron el cambio (los muckrakers y la NWSA). Dos son sobre ayudar a los pobres (el evangelio social y Hull House).","The muckrakers were reporters. Hull House was a place in Chicago. The NWSA worked for women’s right to vote. The social gospel was a religious idea.":"Los muckrakers eran reporteros. Hull House era un lugar en Chicago. La NWSA luchaba por el derecho de las mujeres al voto. El evangelio social era una idea religiosa.","To clean up politics, progressives pushed for the direct primary, so all members of a party, not just party leaders, could vote on the party’s nominees. Citizens could sign a petition to put a proposal on the ballot (the initiative) and then vote on it (the referendum). Another idea let voters remove a corrupt or incompetent elected official by a public petition and a vote. In 1913, the Seventeenth Amendment let voters, not state legislatures, elect U.S. senators. On March 25, 1911, a fire at the Triangle Shirtwaist factory in New York City killed 146 garment workers, and reformers then won dozens of new rules on fire hazards, working conditions, women workers’ rights, and child labor. Because lynchings and other racial violence continued, Black and White progressives, including Ida B. Wells and W.E.B. Du Bois, founded the NAACP in February 1909.":"Para limpiar la política, los progresistas impulsaron la elección primaria directa, para que todos los miembros de un partido, y no solo sus líderes, pudieran votar por los candidatos del partido. Los ciudadanos podían firmar una petición para poner una propuesta en la boleta (la iniciativa) y luego votar a favor o en contra (el referéndum). Otra idea permitía que los votantes destituyeran a un funcionario electo corrupto o incompetente con una petición pública y una votación. En 1913, la Decimoséptima Enmienda dio a los votantes, y no a las legislaturas estatales, el poder de elegir a los senadores de EE. UU. El 25 de marzo de 1911, un incendio en la fábrica Triangle Shirtwaist de la ciudad de Nueva York mató a 146 trabajadores de la confección, y después los reformistas lograron docenas de nuevas reglas sobre riesgos de incendio, condiciones de trabajo, derechos de las mujeres trabajadoras y trabajo infantil. Como los linchamientos y otra violencia racial continuaban, progresistas negros y blancos, entre ellos Ida B. Wells y W.E.B. Du Bois, fundaron la NAACP en febrero de 1909.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 20, “Progressives’ Aims and Achievements” (Political Reforms, p. 871; The Triangle Shirtwaist Factory Fire, pp. 876-877; Racial Violence and the Origins of Modern Civil Rights Organizing, p. 880).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 20, “Progressives’ Aims and Achievements” (Political Reforms, pág. 871; The Triangle Shirtwaist Factory Fire, págs. 876-877; Racial Violence and the Origins of Modern Civil Rights Organizing, pág. 880).","The Clue Card describes a voting tool without naming it: voters can remove a corrupt or incompetent official by petition and vote. A secret message names it. Each letter in the message was moved 7 steps forward in the alphabet. Decode it to name the tool.":"La tarjeta de indicios describe una herramienta de voto sin decir su nombre: los votantes pueden destituir a un funcionario corrupto o incompetente con una petición y una votación. Un mensaje secreto la nombra. Cada letra del mensaje se movió 7 pasos hacia adelante en el alfabeto. Decodifícalo para nombrar la herramienta.","Decoder key: the <span style=\"color:var(--hl);font-weight:700\">gold<\/span> letter is in the message. The white letter under it is the real letter.":"Clave del decodificador: la letra <span style=\"color:var(--hl);font-weight:700\">dorada<\/span> está en el mensaje. La letra blanca que está debajo es la letra verdadera.","Find the sentence in the Clue Card about removing a corrupt or incompetent elected official. The card describes the idea but does not name it. Use the decoder key to spell the name.":"Busca en la tarjeta de indicios la oración sobre destituir a un funcionario electo corrupto o incompetente. La tarjeta describe la idea, pero no dice su nombre. Usa la clave del decodificador para escribir el nombre.","In the message, the letter Y is really R, and the letter L is really E. The word has 6 letters and starts with R.":"En el mensaje, la letra Y es en realidad R, y la letra L es en realidad E. La palabra (en inglés) tiene 6 letras y empieza con R.","Theodore Roosevelt used the presidency as a “bully pulpit.” His Square Deal had “Three Cs”: control of corporations, conservation of natural resources, and protection of consumers. In 1902, only five months into his presidency, he ordered the attorney general to break up the Northern Securities Company, a railroad trust. Roosevelt then urged Republicans to nominate his friend William Howard Taft, who won the election of 1908. Taft was a “conservative progressive.” His administration filed almost twice as many anti-trust suits as Roosevelt’s and preserved more federal land in four years, but he did not push for new reforms. In 1910, Taft fired Gifford Pinchot, the forestry chief and Roosevelt’s friend, and Roosevelt felt that Taft had failed to “carry out my work.” In 1912, after Taft won the Republican nomination, Roosevelt’s supporters walked out and started the Progressive Party, nicknamed the “Bull Moose Party.”":"Theodore Roosevelt usó la presidencia como un “púlpito de intimidación” (bully pulpit). Su Trato Justo (Square Deal) tenía las “Tres C”: control de las corporaciones, conservación de los recursos naturales y protección de los consumidores. En 1902, cinco meses después de llegar a la presidencia, ordenó al fiscal general que disolviera la Northern Securities Company, un trust de ferrocarriles. Después, Roosevelt pidió a los republicanos que nominaran a su amigo William Howard Taft, quien ganó la elección de 1908. Taft era un “progresista conservador.” Su gobierno presentó casi el doble de demandas antimonopolio que el de Roosevelt y preservó más tierras federales en cuatro años, pero no impulsó nuevas reformas. En 1910, Taft despidió a Gifford Pinchot, jefe forestal y amigo de Roosevelt, y Roosevelt sintió que Taft no había logrado “llevar adelante mi obra.” En 1912, después de que Taft ganó la nominación republicana, los partidarios de Roosevelt se retiraron y fundaron el Partido Progresista, apodado el “Partido Bull Moose.”","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 20, “Progressivism under Roosevelt and Taft” (Roosevelt’s Square Deal and the Northern Securities case, pp. 883-884; “The Transition from Roosevelt to Taft” and “A Life of Public Service,” p. 888; “The Ballinger-Pinchot Controversy” and “The Taft-Roosevelt Feud,” p. 889; “The Progressive Party,” p. 890).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 20, “Progressivism under Roosevelt and Taft” (Roosevelt’s Square Deal and the Northern Securities case, págs. 883-884; “The Transition from Roosevelt to Taft” y “A Life of Public Service,” pág. 888; “The Ballinger-Pinchot Controversy” y “The Taft-Roosevelt Feud,” pág. 889; “The Progressive Party,” pág. 890).","Roosevelt orders the attorney general to break up the Northern Securities railroad trust":"Roosevelt ordena al fiscal general que disuelva el trust de ferrocarriles Northern Securities","Taft wins the presidency after Roosevelt urges Republicans to nominate him":"Taft gana la presidencia después de que Roosevelt pide a los republicanos que lo nominen","Taft fires forestry chief Gifford Pinchot":"Taft despide al jefe forestal Gifford Pinchot","Roosevelt’s supporters leave the Republican convention and start the Progressive Party":"Los partidarios de Roosevelt dejan la convención republicana y fundan el Partido Progresista","Look for the years in the Clue Card: 1902, 1908, 1910, and 1912. Match each event to its year.":"Busca los años en la tarjeta de indicios: 1902, 1908, 1910 y 1912. Relaciona cada suceso con su año.","The order is the Northern Securities order, Taft’s election, Pinchot’s firing, then the start of the Progressive Party.":"El orden es la orden de Northern Securities, la elección de Taft, el despido de Pinchot y luego el inicio del Partido Progresista.","In the election of 1912, the debate was between Roosevelt’s New Nationalism and Woodrow Wilson’s New Freedom. Wilson favored small government, and his New Freedom aimed to break up all trusts and bring back competition. Wilson won with 435 electoral votes. In 1913, his Underwood-Simmons Tariff Act lowered tariffs on almost 1,000 products and created the first income tax allowed by the Sixteenth Amendment, and the Federal Reserve Act created a national banking system with twelve regional banks. Norton calls the Federal Reserve Banks the most significant new program of his presidency. In 1914, the five-member Federal Trade Commission was created to stop unfair trade practices, and the Clayton Anti-Trust Act said that labor unions were not “monopolies.” Progressivism had limits: cabinet members racially segregated their agencies, Wilson defended segregation in federal offices, and he said that voting rights for women should be left to the states.":"En la elección de 1912, el debate fue entre el Nuevo Nacionalismo de Roosevelt y la Nueva Libertad (New Freedom) de Woodrow Wilson. Wilson prefería un gobierno pequeño, y su Nueva Libertad buscaba disolver todos los trusts y devolver la competencia. Wilson ganó con 435 votos electorales. En 1913, su Ley Arancelaria Underwood-Simmons bajó los aranceles de casi 1,000 productos y creó el primer impuesto sobre la renta permitido por la Decimosexta Enmienda, y la Ley de la Reserva Federal creó un sistema bancario nacional con doce bancos regionales. Norton llama a los Bancos de la Reserva Federal el programa nuevo más importante de su presidencia. En 1914 se creó la Comisión Federal de Comercio (FTC), de cinco miembros, para detener las prácticas comerciales injustas, y la Ley Antimonopolio Clayton dijo que los sindicatos no eran “monopolios.” El progresismo tuvo límites: los miembros del gabinete separaron por raza a los empleados de sus agencias, Wilson defendió la segregación en las oficinas federales y dijo que el derecho al voto de las mujeres debía dejarse a los estados.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 20, “Woodrow Wilson: A Progressive Southerner” (The 1912 Election, pp. 893-894; Burst of Reform Bills, p. 895; Wilson’s Economic Policies, pp. 895-896; Anti-Trust Actions, p. 896; Progressivism for Whites Only, pp. 897-898; The Vote for Women, p. 898).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 20, “Woodrow Wilson: A Progressive Southerner” (The 1912 Election, págs. 893-894; Burst of Reform Bills, pág. 895; Wilson’s Economic Policies, págs. 895-896; Anti-Trust Actions, pág. 896; Progressivism for Whites Only, págs. 897-898; The Vote for Women, pág. 898).","Wilson’s plan to break up all trusts and bring back competition was called the New ________.":"El plan de Wilson para disolver todos los trusts y devolver la competencia se llamaba el New ________ (palabra en inglés).","Read the second sentence of the Clue Card. The missing word comes right after the word “New.”":"Lee la segunda oración de la tarjeta de indicios. La palabra que falta viene justo después de la palabra “New.”","The word starts with F and ends with M. It has 7 letters.":"La palabra (en inglés) empieza con F y termina con M. Tiene 7 letras.","Not quite. Re-read the second sentence of the Clue Card. Use the scrambled letters to check your spelling.":"Casi. Vuelve a leer la segunda oración de la tarjeta de indicios. Usa las letras desordenadas para revisar tu ortografía.","Unlocked. Your digit is 8. Your answer: Reform and regulate it; More active in fixing city and industrial problems; Jane Addams":"Desbloqueado. Tu dígito es 8. Tu respuesta: Reformarlo y regularlo; Más activos para resolver los problemas de las ciudades y de la industria; Jane Addams","Unlocked. Your digit is 4. Your answer: Hull House = A Chicago settlement house that helped the working poor, especially new immigrants; Muckrakers = Reporters who dug up facts about corruption and about how the poor lived; NWSA = The group founded in 1869 to win an amendment giving women the right to vote; Social gospel = The belief that Christians should treat all people like brothers and sisters and help the poor":"Desbloqueado. Tu dígito es 4. Tu respuesta: Hull House = Una casa de asentamiento social (settlement house) de Chicago que ayudaba a los trabajadores pobres, sobre todo a los nuevos inmigrantes; Muckrakers = Reporteros que descubrían datos sobre la corrupción y sobre cómo vivían los pobres; NWSA = El grupo fundado en 1869 para lograr una enmienda que diera a las mujeres el derecho al voto; Evangelio social (social gospel) = La creencia de que los cristianos deben tratar a todas las personas como hermanos y hermanas y ayudar a los pobres","Unlocked. Your digit is 2. Your answer: Roosevelt orders the attorney general to break up the Northern Securities railroad trust &gt; Taft wins the presidency after Roosevelt urges Republicans to nominate him &gt; Taft fires forestry chief Gifford Pinchot &gt; Roosevelt’s supporters leave the Republican convention and start the Progressive Party":"Desbloqueado. Tu dígito es 2. Tu respuesta: Roosevelt ordena al fiscal general que disuelva el trust de ferrocarriles Northern Securities &gt; Taft gana la presidencia después de que Roosevelt pide a los republicanos que lo nominen &gt; Taft despide al jefe forestal Gifford Pinchot &gt; Los partidarios de Roosevelt dejan la convención republicana y fundan el Partido Progresista","All 5 locks are open. Type the 5 digits in order, Lock 1 first.":"Los 5 candados están abiertos. Escribe los 5 dígitos en orden, primero el del Candado 1.","Answer every question first.":"Primero responde todas las preguntas.","CLUE CARD":"TARJETA DE INDICIOS","Check":"Comprobar","Choose a description...":"Elige una descripción...","Clear":"Borrar","Clear all my work and start over":"Borrar todo mi trabajo y empezar de nuevo","DEBRIEF":"INFORME FINAL","Debrief":"Informe final","Decoded answer":"Respuesta decodificada","ESCAPED":"¡ESCAPASTE!","Enter your first name, last name, and period at the top first.":"Primero escribe tu nombre, apellido y período arriba.","Exit code digit 1":"Dígito 1 del código de salida","Exit door":"Puerta de salida","Fill in the blank using the Clue Card.":"Llena el espacio en blanco con la tarjeta de indicios.","Have a saved file? Load it to continue.":"¿Tienes un archivo guardado? Cárgalo para continuar.","Hint":"Pista","Hints used":"Pistas usadas","How to escape:":"Cómo escapar:","If you get stuck, press <b>Hint<\/b>. Hints are free, but your teacher can see how many you used.":"Si te atoras, oprime <b>Pista<\/b>. Las pistas son gratis, pero tu maestro puede ver cuántas usaste.","Locks":"Candados","Match each term to the best description. Use the Clue Card.":"Relaciona cada término con la mejor descripción. Usa la tarjeta de indicios.","Match every term first.":"Primero relaciona todos los términos.","Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.":"Todavía no escapas (se marca INCOMPLETO). Aun así puedes descargar tu archivo y entregarlo.","Not quite. Check each match against the Clue Card. Which one are you least sure about?":"Casi. Revisa cada pareja con la tarjeta de indicios. ¿De cuál estás menos seguro?","Not quite. Decode one letter at a time with the key, then check your spelling.":"Casi. Decodifica una letra a la vez con la clave y luego revisa tu ortografía.","Not quite. Re-read the Clue Card and match each event to its year.":"Casi. Vuelve a leer la tarjeta de indicios y relaciona cada suceso con su año.","One last step: write your Debrief below.":"Un último paso: escribe tu Informe final abajo.","Open all 5 locks first. The digits go in order: Lock 1 first.":"Primero abre los 5 candados. Los dígitos van en orden: primero el del Candado 1.","Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.":"Abre los 5 candados y luego escribe el código de salida de 5 dígitos. Termina con el Informe final.","Open each lock in order. Read the <b>Clue Card<\/b>. The answer is in the card.":"Abre cada candado en orden. Lee la <b>tarjeta de indicios<\/b>. La respuesta está en la tarjeta.","Open the Door":"Abrir la puerta","Pick the correct answer for all three questions.":"Elige la respuesta correcta para las tres preguntas.","Progress file downloaded. Use Load Progress to continue later.":"Se descargó el archivo de progreso. Usa «Cargar progreso» para continuar más tarde.","Progress loaded. Welcome back.":"Progreso cargado. Bienvenido de nuevo.","Solve the puzzle to open the lock and reveal one digit.":"Resuelve el acertijo para abrir el candado y descubrir un dígito.","THE EXIT DOOR":"LA PUERTA DE SALIDA","Tap all 4 places first, in order.":"Primero toca los 4 lugares, en orden.","Tap the four events in the order they happened. Tap an event again to take it back.":"Toca los cuatro sucesos en el orden en que ocurrieron. Toca un suceso otra vez para quitarlo.","That file did not work. Choose a progress file saved from this Escape Room.":"Ese archivo no funcionó. Elige un archivo de progreso guardado de esta sala de escape.","That was the last hint. Read the Clue Card slowly and try again.":"Esa fue la última pista. Lee la tarjeta de indicios despacio y vuelve a intentarlo.","The clock starts when you press the button. Most students finish in about 20 minutes.":"El reloj empieza cuando oprimes el botón. La mayoría de los estudiantes termina en unos 20 minutos.","The code has 5 digits. Fill every box.":"El código tiene 5 dígitos. Llena todas las casillas.","The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.":"La puerta no se abrió. Revisa los dígitos debajo de cada candado y escríbelos en orden: primero el del Candado 1.","The door is open!":"¡La puerta está abierta!","The door swings open!":"¡La puerta se abre de golpe!","Time":"Tiempo","Type the answer in English.":"Escribe la respuesta en inglés.","Type the answer in English. Use the digits 0-9.":"Escribe la respuesta en inglés. Usa los dígitos 0-9.","Type the exit code":"Escribe el código de salida","Type your answer first.":"Primero escribe tu respuesta.","Type your answer here...":"Escribe tu respuesta aquí...","UNIT 4 · INDUSTRY, EMPIRE, AND REFORM | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 4 · INDUSTRIA, IMPERIO Y REFORMA | CPUSH | DANIEL GARZA, M.A.","Unscramble the letters to fill the blank.":"Ordena las letras para llenar el espacio en blanco.","Which lock was hardest, and what did you learn that you did not know before?":"¿Qué candado fue el más difícil y qué aprendiste que antes no sabías?","Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.":"Escribe de 3 a 4 oraciones. Nombra el candado y usa un dato de su tarjeta de indicios. Puedes escribirlo aunque no hayas escapado.","You escaped and wrote your Debrief. Ready to submit.":"Escapaste y escribiste tu Informe final. Listo para entregar.","You escaped! Write your Debrief, then download your file to submit.":"¡Escapaste! Escribe tu Informe final y luego descarga tu archivo para entregarlo.","Your answer":"Tu respuesta","Your time:":"Tu tiempo:","digit":"dígito"},"ar":{"Save Progress":"حفظ التقدم","Load Progress":"تحميل التقدم","Finished — Download File to Submit":"انتهيت — نزّل الملف لتسليمه","Clear all my answers":"امسح كل إجاباتي","FIRST NAME *":"الاسم الأول *","LAST NAME *":"اسم العائلة *","PERIOD *":"الحصة *","DATE (fills in when you finish)":"التاريخ (يُكتب تلقائيًا عند الانتهاء)","e.g. 3":"مثال: 3","Automatic":"تلقائي","Please type your first name, last name, and period first.":"اكتب أولًا اسمك الأول واسم العائلة والحصة.","Western Expansion and Southern Secession":"التوسع غربًا وانفصال الجنوب","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"الوحدة 3 · بيت منقسم وأُعيد بناؤه | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — قانون العبيد الهاربين","Bleeding Kansas":"Bleeding Kansas — كانساس النازفة","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"الوحدة 3 · بيت منقسم وأعيد بناؤه | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"تم تنزيل ملف التقدم. احتفظ به في مكان آمن. استخدم «تحميل التقدم» لتكمل لاحقًا.","Progress loaded.":"تم تحميل التقدم.","Could not read that file.":"تعذّرت قراءة هذا الملف.","Treaty of Guadalupe Hidalgo":"معاهدة غوادالوبي هيدالغو (Treaty of Guadalupe Hidalgo)","The Progressive Era":"العصر التقدمي","Escape Room 12 · The Progressive Era":"غرفة الهروب 12 · العصر التقدمي","Escape the Campaign Headquarters":"اهرب من مقر الحملة الانتخابية","You are locked in campaign headquarters.":"أنت محبوس في مقر الحملة الانتخابية.","The campaign office closed for the night and the last volunteer locked up headquarters. Old posters and flags from 1889 to 1916 hang on the wall. The door has <b>5 locks<\/b>. Each lock matches one big idea from Lesson 12. Solve them all to find the <b>5-digit exit code<\/b>.":"أُغلق مكتب الحملة في الليل وأقفل آخر متطوع المقر. ما زالت ملصقات وأعلام قديمة من عام 1889 إلى عام 1916 معلّقة على الجدار. في الباب <b>5 أقفال<\/b>. كل قفل يرتبط بفكرة كبيرة واحدة من الدرس 12. حلّها كلها لتجد <b>رمز الخروج المكوّن من 5 أرقام<\/b>.","Enter Headquarters":"ادخل المقر","HEADQUARTERS":"المقر","A campaign headquarters at night. Flag bunting hangs across the top of the walls. A wooden speaker's podium stands on the left, a wall map of the country hangs above it, and a ballot box with a slot and a stack of leaflets sit on the right. The headquarters door has five padlocks in a row. Under each padlock is a window for one digit of the exit code.":"مقر حملة انتخابية في الليل. تتدلى أعلام صغيرة في أعلى الجدران. توجد منصة خشبية للخطباء على اليسار، وفوقها خريطة للبلاد على الجدار، وعلى اليمين صندوق اقتراع بفتحة وكومة من المنشورات. في باب المقر خمسة أقفال في صف واحد. تحت كل قفل نافذة صغيرة لرقم واحد من رمز الخروج.","The Ballot Box":"صندوق الاقتراع","The Poster Wall":"جدار الملصقات","The Telephone":"الهاتف","The Campaign Map":"خريطة الحملة","The Podium":"المنصة","Core Objective 1: Assess the motives of progressive reformers and how they reflected the underlying values of the progressive movement.":"الهدف الأساسي 1: قيّم دوافع المصلحين التقدميين وكيف عكست القيم الأساسية للحركة التقدمية.","Core Objective 2: Explain the sources of thought and social activism that contributed to the progressive movement.":"الهدف الأساسي 2: اشرح مصادر الفكر والنشاط الاجتماعي التي أسهمت في الحركة التقدمية.","Core Objective 3: Identify the reforms the progressives achieved at the local, state, and national levels, and how those reforms advanced the larger cause of social justice.":"الهدف الأساسي 3: حدّد الإصلاحات التي حققها التقدميون على المستوى المحلي ومستوى الولايات والمستوى الوطني، وكيف دفعت تلك الإصلاحات قضية العدالة الاجتماعية الأوسع.","Core Objective 4: Describe how Presidents Theodore Roosevelt and William Howard Taft differed in their approaches to progressive reform.":"الهدف الأساسي 4: صِف كيف اختلف الرئيسان ثيودور روزفلت (Theodore Roosevelt) ووليام هوارد تافت (William Howard Taft) في أسلوب كل منهما في الإصلاح التقدمي.","Core Objective 5: Explain how President Woodrow Wilson’s progressive policies affected the role of government—and the presidency in particular—in the Progressive Era.":"الهدف الأساسي 5: اشرح كيف أثّرت سياسات الرئيس وودرو ويلسون (Woodrow Wilson) التقدمية في دور الحكومة—والرئاسة بشكل خاص—في العصر التقدمي.","Progressives, many of them from the middle class, were liberals, not revolutionaries. They feared that if problems in society were not fixed, unrest could lead people to embrace socialism or anarchism, which had real support in this era. They wanted to reform and regulate capitalism, not destroy it. What progressives shared was the belief that governments must become more active in solving the problems of fast urban and industrial growth. Jane Addams, a leading reformer in Chicago, said that charities and churches were “totally inadequate to deal with the vast numbers of the city’s disinherited.”":"كان التقدميون، وكثير منهم من الطبقة الوسطى، ليبراليين لا ثوريين. وخافوا أنه إذا لم تُعالج مشكلات المجتمع، فقد يدفع الاضطراب الناس إلى تبني الاشتراكية أو الفوضوية، وكان لهما دعم حقيقي في تلك الفترة. وأرادوا إصلاح الرأسمالية وتنظيمها، لا تدميرها. وما جمع التقدميين هو الاعتقاد بأن الحكومات يجب أن تصبح أكثر نشاطًا في حل مشكلات النمو السريع للمدن والصناعة. وقالت جين آدامز (Jane Addams)، وهي مصلحة بارزة في شيكاغو (Chicago)، إن الجمعيات الخيرية والكنائس «عاجزة تمامًا عن التعامل مع الأعداد الهائلة من محرومي المدينة».","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 20, “The Progressive Impulse” (no page numbers are marked in this section).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 20، “The Progressive Impulse” (لا يضع Norton أرقام صفحات في هذا القسم).","What did progressives want to do to capitalism?":"ماذا أراد التقدميون أن يفعلوا بالرأسمالية؟","Destroy it":"تدميرها","Replace it with socialism":"استبدالها بالاشتراكية","Reform and regulate it":"إصلاحها وتنظيمها","Leave it alone":"تركها كما هي","What did progressives believe governments must become?":"ماذا اعتقد التقدميون أن على الحكومات أن تصبح؟","More active in fixing city and industrial problems":"أكثر نشاطًا في حل مشكلات المدن والصناعة","Smaller and quieter":"أصغر وأهدأ","Run by big businesses":"تديرها الشركات الكبرى","Free of all rules":"بلا أي قواعد","Which reformer said that charities and churches were “totally inadequate”?":"أي مصلح قال إن الجمعيات الخيرية والكنائس «عاجزة تمامًا»؟","Theodore Roosevelt":"ثيودور روزفلت (Theodore Roosevelt)","Jacob Riis":"جاكوب ريس (Jacob Riis)","Ida Tarbell":"آيدا تاربل (Ida Tarbell)","Jane Addams":"جين آدامز (Jane Addams)","Each answer is in the Clue Card. Look for what progressives wanted to do to capitalism, what they thought governments must become, and the name of the Chicago reformer.":"كل إجابة في بطاقة القرائن. ابحث عمّا أراد التقدميون فعله بالرأسمالية، وما اعتقدوا أن على الحكومات أن تصبح عليه، واسم المصلحة في شيكاغو.","Progressives wanted to fix capitalism, not end it. Governments had to do more. The reformer who spoke of the “disinherited” was a leader in Chicago.":"أراد التقدميون إصلاح الرأسمالية لا إنهاءها. وكان على الحكومات أن تفعل أكثر. والمصلحة التي تحدثت عن «المحرومين» كانت قائدة في شيكاغو.","Not quite. At least one answer is off. Re-read the Clue Card for what progressives wanted to do to capitalism, what governments must become, and who said “totally inadequate.”":"ليس تمامًا. إجابة واحدة على الأقل خاطئة. أعد قراءة بطاقة القرائن لتعرف ما أراد التقدميون فعله بالرأسمالية، وما يجب أن تصبح عليه الحكومات، ومن قال «عاجزة تمامًا».","The muckrakers were America’s first investigative journalists. Magazines such as <i>McClure’s<\/i> and writers such as Jacob Riis exposed corruption and showed “how the other half lives.” Religious activism added the social gospel, the belief that Christians should treat all people like brothers and sisters and help the poorest. In 1889, Jane Addams and Ellen Gates Starr turned a run-down mansion into Hull House, a settlement house in Chicago that helped the working poor, especially newly arrived European immigrants. In 1869, Susan B. Anthony and Elizabeth Cady Stanton founded the National Woman Suffrage Association (NWSA) to win an amendment to the Constitution for women’s suffrage. The NWSA also campaigned for higher pay for working women and for laws that helped abused wives get divorces.":"كان صحفيو كشف الفضائح (muckrakers) أول صحفيين استقصائيين في أمريكا. وكشفت مجلات مثل <i>McClure’s<\/i> وكتّاب مثل جاكوب ريس (Jacob Riis) الفساد وبيّنت «كيف يعيش النصف الآخر». وأضاف النشاط الديني «الإنجيل الاجتماعي» (social gospel)، وهو الاعتقاد بأن على المسيحيين أن يعاملوا جميع الناس كإخوة وأخوات وأن يساعدوا أشد الناس فقرًا. وفي عام 1889، حوّلت جين آدامز (Jane Addams) وإلين غيتس ستار (Ellen Gates Starr) قصرًا متهالكًا إلى «هال هاوس» (Hull House)، وهي دار للخدمة الاجتماعية (settlement house) في شيكاغو (Chicago) ساعدت العمال الفقراء، وخاصة المهاجرين الأوروبيين الذين وصلوا حديثًا. وفي عام 1869، أسست سوزان ب. أنتوني (Susan B. Anthony) وإليزابيث كادي ستانتون (Elizabeth Cady Stanton) «الجمعية الوطنية لحق المرأة في الاقتراع» (NWSA) للحصول على تعديل دستوري يمنح المرأة حق التصويت. وناضلت الجمعية أيضًا من أجل رواتب أعلى للعاملات ومن أجل قوانين تساعد الزوجات اللواتي يتعرضن للإساءة على الحصول على الطلاق.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 20, “The Varied Sources of Progressivism” (Muckraking Journalism, pp. 865-866; Religious Activism and Social Responsibility, p. 867; Settlement Houses, p. 867; The Women’s Suffrage Movement, p. 868).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 20، “The Varied Sources of Progressivism” (Muckraking Journalism، ص. 865-866؛ Religious Activism and Social Responsibility، ص. 867؛ Settlement Houses، ص. 867؛ The Women’s Suffrage Movement، ص. 868).","Muckrakers":"صحفيو كشف الفضائح (muckrakers)","Social gospel":"الإنجيل الاجتماعي (social gospel)","Hull House":"«هال هاوس» (Hull House)","NWSA":"NWSA","Reporters who dug up facts about corruption and about how the poor lived":"صحفيون كشفوا حقائق عن الفساد وعن كيفية عيش الفقراء","The belief that Christians should treat all people like brothers and sisters and help the poor":"الاعتقاد بأن على المسيحيين أن يعاملوا جميع الناس كإخوة وأخوات وأن يساعدوا الفقراء","A Chicago settlement house that helped the working poor, especially new immigrants":"دار للخدمة الاجتماعية (settlement house) في شيكاغو ساعدت العمال الفقراء، وخاصة المهاجرين الجدد","The group founded in 1869 to win an amendment giving women the right to vote":"الجماعة التي تأسست عام 1869 للحصول على تعديل يمنح النساء حق التصويت","Two terms are about groups that pushed for change (the muckrakers and the NWSA). Two are about helping the poor (the social gospel and Hull House).":"مصطلحان عن جماعات دفعت نحو التغيير (صحفيو كشف الفضائح والجمعية NWSA). ومصطلحان عن مساعدة الفقراء (الإنجيل الاجتماعي و«هال هاوس»).","The muckrakers were reporters. Hull House was a place in Chicago. The NWSA worked for women’s right to vote. The social gospel was a religious idea.":"كان صحفيو كشف الفضائح مراسلين. وكانت «هال هاوس» مكانًا في شيكاغو. وعملت الجمعية NWSA من أجل حق المرأة في التصويت. وكان الإنجيل الاجتماعي فكرة دينية.","To clean up politics, progressives pushed for the direct primary, so all members of a party, not just party leaders, could vote on the party’s nominees. Citizens could sign a petition to put a proposal on the ballot (the initiative) and then vote on it (the referendum). Another idea let voters remove a corrupt or incompetent elected official by a public petition and a vote. In 1913, the Seventeenth Amendment let voters, not state legislatures, elect U.S. senators. On March 25, 1911, a fire at the Triangle Shirtwaist factory in New York City killed 146 garment workers, and reformers then won dozens of new rules on fire hazards, working conditions, women workers’ rights, and child labor. Because lynchings and other racial violence continued, Black and White progressives, including Ida B. Wells and W.E.B. Du Bois, founded the NAACP in February 1909.":"ولتنظيف السياسة، دفع التقدميون نحو «الانتخابات التمهيدية المباشرة»، ليتمكن كل أعضاء الحزب، لا قادة الحزب فقط، من التصويت على مرشحي الحزب. وكان بإمكان المواطنين توقيع عريضة لوضع اقتراح على ورقة الاقتراع (المبادرة) ثم التصويت عليه (الاستفتاء). وسمحت فكرة أخرى للناخبين بعزل مسؤول منتخب فاسد أو غير كفء بعريضة عامة وتصويت. وفي عام 1913، منح «التعديل السابع عشر» (Seventeenth Amendment) الناخبين، لا المجالس التشريعية للولايات، سلطة انتخاب أعضاء مجلس الشيوخ الأمريكي. وفي 25 مارس 1911، قتل حريق في مصنع «ترايانغل شيرتويست» (Triangle Shirtwaist) في مدينة نيويورك (New York) 146 عاملًا في صناعة الملابس، ثم حقق المصلحون عشرات القواعد الجديدة بشأن مخاطر الحريق وظروف العمل وحقوق العاملات وعمالة الأطفال. ولأن عمليات الإعدام الغوغائي (lynchings) وأشكال العنف العنصري الأخرى استمرت، أسس تقدميون سود وبيض، منهم آيدا ب. ويلز (Ida B. Wells) وو. إ. ب. دو بوا (W.E.B. Du Bois)، «الجمعية الوطنية للنهوض بالملونين» (NAACP) في فبراير 1909.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 20, “Progressives’ Aims and Achievements” (Political Reforms, p. 871; The Triangle Shirtwaist Factory Fire, pp. 876-877; Racial Violence and the Origins of Modern Civil Rights Organizing, p. 880).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 20، “Progressives’ Aims and Achievements” (Political Reforms، ص. 871؛ The Triangle Shirtwaist Factory Fire، ص. 876-877؛ Racial Violence and the Origins of Modern Civil Rights Organizing، ص. 880).","The Clue Card describes a voting tool without naming it: voters can remove a corrupt or incompetent official by petition and vote. A secret message names it. Each letter in the message was moved 7 steps forward in the alphabet. Decode it to name the tool.":"تصف بطاقة القرائن أداة تصويت دون أن تذكر اسمها: يستطيع الناخبون عزل مسؤول فاسد أو غير كفء بعريضة وتصويت. ورسالة سرية تذكر اسمها. كل حرف في الرسالة نُقل 7 خطوات إلى الأمام في الأبجدية. فكّ شفرتها لتعرف اسم الأداة.","Decoder key: the <span style=\"color:var(--hl);font-weight:700\">gold<\/span> letter is in the message. The white letter under it is the real letter.":"مفتاح فك التشفير: الحرف <span style=\"color:var(--hl);font-weight:700\">الذهبي<\/span> هو الحرف الموجود في الرسالة. والحرف الأبيض تحته هو الحرف الحقيقي.","Find the sentence in the Clue Card about removing a corrupt or incompetent elected official. The card describes the idea but does not name it. Use the decoder key to spell the name.":"ابحث في بطاقة القرائن عن الجملة التي تتحدث عن عزل مسؤول منتخب فاسد أو غير كفء. تصف البطاقة الفكرة لكنها لا تذكر اسمها. استخدم مفتاح فك التشفير لتهجئة الاسم.","In the message, the letter Y is really R, and the letter L is really E. The word has 6 letters and starts with R.":"في الرسالة، الحرف Y هو في الحقيقة R، والحرف L هو في الحقيقة E. تتكون الكلمة (بالإنجليزية) من 6 أحرف وتبدأ بالحرف R.","Theodore Roosevelt used the presidency as a “bully pulpit.” His Square Deal had “Three Cs”: control of corporations, conservation of natural resources, and protection of consumers. In 1902, only five months into his presidency, he ordered the attorney general to break up the Northern Securities Company, a railroad trust. Roosevelt then urged Republicans to nominate his friend William Howard Taft, who won the election of 1908. Taft was a “conservative progressive.” His administration filed almost twice as many anti-trust suits as Roosevelt’s and preserved more federal land in four years, but he did not push for new reforms. In 1910, Taft fired Gifford Pinchot, the forestry chief and Roosevelt’s friend, and Roosevelt felt that Taft had failed to “carry out my work.” In 1912, after Taft won the Republican nomination, Roosevelt’s supporters walked out and started the Progressive Party, nicknamed the “Bull Moose Party.”":"استخدم ثيودور روزفلت (Theodore Roosevelt) الرئاسة بوصفها «منبرًا قويًا» (bully pulpit). وكانت «صفقته العادلة» (Square Deal) تقوم على «الأحرف الثلاثة C»: السيطرة على الشركات، وحماية الموارد الطبيعية، وحماية المستهلكين. وفي عام 1902، بعد خمسة أشهر فقط من توليه الرئاسة، أمر المدعي العام بتفكيك شركة نورذرن سيكيوريتيز (Northern Securities Company)، وهي ترست للسكك الحديدية. ثم دعا روزفلت الجمهوريين إلى ترشيح صديقه ويليام هوارد تافت (William Howard Taft)، الذي فاز في انتخابات 1908. وكان تافت «تقدميًا محافظًا». ورفعت إدارته قضايا لمكافحة الاحتكار تقارب ضعف ما رفعته إدارة روزفلت، وحافظت على أراضٍ فيدرالية أكثر في أربع سنوات، لكنه لم يدفع نحو إصلاحات جديدة. وفي عام 1910، أقال تافت جيفورد بينشو (Gifford Pinchot)، رئيس الغابات وصديق روزفلت، وشعر روزفلت أن تافت فشل في «مواصلة عملي». وفي عام 1912، بعد أن فاز تافت بترشيح الجمهوريين، انسحب أنصار روزفلت وأسسوا «الحزب التقدمي» (Progressive Party)، الذي لُقّب «حزب الموظ الثائر».","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 20, “Progressivism under Roosevelt and Taft” (Roosevelt’s Square Deal and the Northern Securities case, pp. 883-884; “The Transition from Roosevelt to Taft” and “A Life of Public Service,” p. 888; “The Ballinger-Pinchot Controversy” and “The Taft-Roosevelt Feud,” p. 889; “The Progressive Party,” p. 890).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 20، “Progressivism under Roosevelt and Taft” (Roosevelt’s Square Deal and the Northern Securities case، ص. 883-884؛ “The Transition from Roosevelt to Taft” و“A Life of Public Service”، ص. 888؛ “The Ballinger-Pinchot Controversy” و“The Taft-Roosevelt Feud”، ص. 889؛ “The Progressive Party”، ص. 890).","Roosevelt orders the attorney general to break up the Northern Securities railroad trust":"يأمر روزفلت (Roosevelt) المدعي العام بتفكيك ترست السكك الحديدية نورذرن سيكيوريتيز (Northern Securities)","Taft wins the presidency after Roosevelt urges Republicans to nominate him":"يفوز تافت (Taft) بالرئاسة بعد أن يدعو روزفلت (Roosevelt) الجمهوريين إلى ترشيحه","Taft fires forestry chief Gifford Pinchot":"يقيل تافت (Taft) رئيس الغابات جيفورد بينشو (Gifford Pinchot)","Roosevelt’s supporters leave the Republican convention and start the Progressive Party":"ينسحب أنصار روزفلت (Roosevelt) من مؤتمر الجمهوريين ويؤسسون الحزب التقدمي","Look for the years in the Clue Card: 1902, 1908, 1910, and 1912. Match each event to its year.":"ابحث عن السنوات في بطاقة القرائن: 1902 و1908 و1910 و1912. اربط كل حدث بسنته.","The order is the Northern Securities order, Taft’s election, Pinchot’s firing, then the start of the Progressive Party.":"الترتيب هو: أمر نورذرن سيكيوريتيز (Northern Securities)، ثم انتخاب تافت (Taft)، ثم إقالة بينشو (Pinchot)، ثم بداية الحزب التقدمي.","In the election of 1912, the debate was between Roosevelt’s New Nationalism and Woodrow Wilson’s New Freedom. Wilson favored small government, and his New Freedom aimed to break up all trusts and bring back competition. Wilson won with 435 electoral votes. In 1913, his Underwood-Simmons Tariff Act lowered tariffs on almost 1,000 products and created the first income tax allowed by the Sixteenth Amendment, and the Federal Reserve Act created a national banking system with twelve regional banks. Norton calls the Federal Reserve Banks the most significant new program of his presidency. In 1914, the five-member Federal Trade Commission was created to stop unfair trade practices, and the Clayton Anti-Trust Act said that labor unions were not “monopolies.” Progressivism had limits: cabinet members racially segregated their agencies, Wilson defended segregation in federal offices, and he said that voting rights for women should be left to the states.":"في انتخابات عام 1912، كان النقاش بين «القومية الجديدة» لروزفلت (Roosevelt) و«الحرية الجديدة» (New Freedom) لوودرو ويلسون (Woodrow Wilson). فضّل ويلسون حكومة صغيرة، وهدفت «حريته الجديدة» إلى تفكيك كل الترستات وإعادة المنافسة. وفاز ويلسون بـ 435 صوتًا انتخابيًا. وفي عام 1913، خفّض «قانون أندروود-سيمونز للتعريفة» (Underwood-Simmons Tariff Act) الرسوم الجمركية على نحو 1,000 منتج، وأنشأ أول ضريبة دخل يسمح بها «التعديل السادس عشر» (Sixteenth Amendment)، وأنشأ «قانون الاحتياطي الفيدرالي» (Federal Reserve Act) نظامًا مصرفيًا وطنيًا من اثني عشر بنكًا إقليميًا. ويصف Norton بنوك الاحتياطي الفيدرالي بأنها أهم برنامج جديد في رئاسته. وفي عام 1914، أُنشئت «لجنة التجارة الفيدرالية» (Federal Trade Commission) المكوّنة من خمسة أعضاء لوقف الممارسات التجارية غير العادلة، ونص «قانون كلايتون لمكافحة الاحتكار» (Clayton Anti-Trust Act) على أن النقابات العمالية ليست «احتكارات». وكان للتقدمية حدود: فقد فصل أعضاء مجلس الوزراء موظفي وكالاتهم عنصريًا، ودافع ويلسون عن الفصل العنصري في المكاتب الفيدرالية، وقال إن حق المرأة في التصويت يجب أن يُترك للولايات.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 20, “Woodrow Wilson: A Progressive Southerner” (The 1912 Election, pp. 893-894; Burst of Reform Bills, p. 895; Wilson’s Economic Policies, pp. 895-896; Anti-Trust Actions, p. 896; Progressivism for Whites Only, pp. 897-898; The Vote for Women, p. 898).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 20، “Woodrow Wilson: A Progressive Southerner” (The 1912 Election، ص. 893-894؛ Burst of Reform Bills، ص. 895؛ Wilson’s Economic Policies، ص. 895-896؛ Anti-Trust Actions، ص. 896؛ Progressivism for Whites Only، ص. 897-898؛ The Vote for Women، ص. 898).","Wilson’s plan to break up all trusts and bring back competition was called the New ________.":"وكانت خطة ويلسون (Wilson) لتفكيك كل الترستات وإعادة المنافسة تسمى New ________ (كلمة بالإنجليزية).","Read the second sentence of the Clue Card. The missing word comes right after the word “New.”":"اقرأ الجملة الثانية في بطاقة القرائن. الكلمة الناقصة تأتي مباشرة بعد كلمة “New”.","The word starts with F and ends with M. It has 7 letters.":"تبدأ الكلمة (بالإنجليزية) بالحرف F وتنتهي بالحرف M. وهي مكوّنة من 7 أحرف.","Not quite. Re-read the second sentence of the Clue Card. Use the scrambled letters to check your spelling.":"ليس تمامًا. أعد قراءة الجملة الثانية في بطاقة القرائن. استخدم الحروف المبعثرة للتحقق من تهجئتك.","Unlocked. Your digit is 8. Your answer: Reform and regulate it; More active in fixing city and industrial problems; Jane Addams":"تم الفتح. رقمك هو 8. إجابتك: إصلاحها وتنظيمها؛ أكثر نشاطًا في حل مشكلات المدن والصناعة؛ جين آدامز (Jane Addams)","Unlocked. Your digit is 4. Your answer: Hull House = A Chicago settlement house that helped the working poor, especially new immigrants; Muckrakers = Reporters who dug up facts about corruption and about how the poor lived; NWSA = The group founded in 1869 to win an amendment giving women the right to vote; Social gospel = The belief that Christians should treat all people like brothers and sisters and help the poor":"تم الفتح. رقمك هو 4. إجابتك: «هال هاوس» (Hull House) = دار للخدمة الاجتماعية (settlement house) في شيكاغو ساعدت العمال الفقراء، وخاصة المهاجرين الجدد؛ صحفيو كشف الفضائح (muckrakers) = صحفيون كشفوا حقائق عن الفساد وعن كيفية عيش الفقراء؛ NWSA = الجماعة التي تأسست عام 1869 للحصول على تعديل يمنح النساء حق التصويت؛ الإنجيل الاجتماعي (social gospel) = الاعتقاد بأن على المسيحيين أن يعاملوا جميع الناس كإخوة وأخوات وأن يساعدوا الفقراء","Unlocked. Your digit is 2. Your answer: Roosevelt orders the attorney general to break up the Northern Securities railroad trust &gt; Taft wins the presidency after Roosevelt urges Republicans to nominate him &gt; Taft fires forestry chief Gifford Pinchot &gt; Roosevelt’s supporters leave the Republican convention and start the Progressive Party":"تم الفتح. رقمك هو 2. إجابتك: يأمر روزفلت (Roosevelt) المدعي العام بتفكيك ترست السكك الحديدية نورذرن سيكيوريتيز (Northern Securities) &gt; يفوز تافت (Taft) بالرئاسة بعد أن يدعو روزفلت (Roosevelt) الجمهوريين إلى ترشيحه &gt; يقيل تافت (Taft) رئيس الغابات جيفورد بينشو (Gifford Pinchot) &gt; ينسحب أنصار روزفلت (Roosevelt) من مؤتمر الجمهوريين ويؤسسون الحزب التقدمي","All 5 locks are open. Type the 5 digits in order, Lock 1 first.":"الأقفال الخمسة مفتوحة. اكتب الأرقام الخمسة بالترتيب: رقم القفل 1 أولًا.","Answer every question first.":"أجب عن كل الأسئلة أولًا.","CLUE CARD":"بطاقة القرائن","Check":"تحقق","Choose a description...":"اختر وصفًا...","Clear":"مسح","Clear all my work and start over":"امسح كل عملي وابدأ من جديد","DEBRIEF":"الملخص الختامي","Debrief":"الملخص الختامي","Decoded answer":"الإجابة بعد فك التشفير","ESCAPED":"لقد هربت!","Enter your first name, last name, and period at the top first.":"اكتب اسمك الأول واسم العائلة والحصة في الأعلى أولًا.","Exit code digit 1":"رقم رمز الخروج 1","Exit door":"باب الخروج","Fill in the blank using the Clue Card.":"املأ الفراغ باستخدام بطاقة القرائن.","Have a saved file? Load it to continue.":"هل لديك ملف محفوظ؟ حمّله لتكمل.","Hint":"تلميح","Hints used":"التلميحات المستخدمة","How to escape:":"كيف تهرب:","If you get stuck, press <b>Hint<\/b>. Hints are free, but your teacher can see how many you used.":"إذا تعثرت، اضغط <b>تلميح<\/b>. التلميحات مجانية، لكن معلمك يستطيع أن يرى كم تلميحًا استخدمت.","Locks":"الأقفال","Match each term to the best description. Use the Clue Card.":"طابق كل مصطلح مع أفضل وصف له. استخدم بطاقة القرائن.","Match every term first.":"طابق كل المصطلحات أولًا.","Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.":"لم تهرب بعد (يُسجَّل «غير مكتمل» INCOMPLETE). ما زال بإمكانك تنزيل ملفك وتسليمه.","Not quite. Check each match against the Clue Card. Which one are you least sure about?":"ليس تمامًا. تحقق من كل مطابقة باستخدام بطاقة القرائن. أي مطابقة أنت أقل تأكدًا منها؟","Not quite. Decode one letter at a time with the key, then check your spelling.":"ليس تمامًا. فُكّ تشفير حرف واحد في كل مرة باستخدام المفتاح، ثم تحقق من تهجئتك.","Not quite. Re-read the Clue Card and match each event to its year.":"ليس تمامًا. أعد قراءة بطاقة القرائن واربط كل حدث بسنته.","One last step: write your Debrief below.":"خطوة أخيرة: اكتب ملخصك الختامي أدناه.","Open all 5 locks first. The digits go in order: Lock 1 first.":"افتح الأقفال الخمسة أولًا. تُكتب الأرقام بالترتيب: رقم القفل 1 أولًا.","Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.":"افتح الأقفال الخمسة، ثم اكتب رمز الخروج المكوّن من 5 أرقام. أنهِ بالملخص الختامي.","Open each lock in order. Read the <b>Clue Card<\/b>. The answer is in the card.":"افتح كل قفل بالترتيب. اقرأ <b>بطاقة القرائن<\/b>. الإجابة موجودة في البطاقة.","Open the Door":"افتح الباب","Pick the correct answer for all three questions.":"اختر الإجابة الصحيحة للأسئلة الثلاثة.","Progress file downloaded. Use Load Progress to continue later.":"تم تنزيل ملف التقدم. استخدم «تحميل التقدم» لتكمل لاحقًا.","Progress loaded. Welcome back.":"تم تحميل التقدم. أهلًا بعودتك.","Solve the puzzle to open the lock and reveal one digit.":"حلّ اللغز لتفتح القفل وتكشف رقمًا واحدًا.","THE EXIT DOOR":"باب الخروج","Tap all 4 places first, in order.":"المس الأماكن الأربعة أولًا، بالترتيب.","Tap the four events in the order they happened. Tap an event again to take it back.":"المس الأحداث الأربعة بالترتيب الذي وقعت به. المس الحدث مرة أخرى للتراجع عنه.","That file did not work. Choose a progress file saved from this Escape Room.":"لم يعمل هذا الملف. اختر ملف تقدم محفوظًا من غرفة الهروب هذه.","That was the last hint. Read the Clue Card slowly and try again.":"كان هذا آخر تلميح. اقرأ بطاقة القرائن ببطء وحاول مرة أخرى.","The clock starts when you press the button. Most students finish in about 20 minutes.":"يبدأ العدّاد عندما تضغط الزر. يُنهي معظم الطلاب في نحو 20 دقيقة.","The code has 5 digits. Fill every box.":"الرمز مكوّن من 5 أرقام. املأ كل المربعات.","The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.":"لم يُفتح الباب. تحقق من الأرقام تحت كل قفل، واكتبها بالترتيب: رقم القفل 1 أولًا.","The door is open!":"الباب مفتوح!","The door swings open!":"ينفتح الباب على مصراعيه!","Time":"الوقت","Type the answer in English.":"اكتب الإجابة بالإنجليزية.","Type the answer in English. Use the digits 0-9.":"اكتب الإجابة بالإنجليزية. استخدم الأرقام 0-9.","Type the exit code":"اكتب رمز الخروج","Type your answer first.":"اكتب إجابتك أولًا.","Type your answer here...":"اكتب إجابتك هنا...","UNIT 4 · INDUSTRY, EMPIRE, AND REFORM | CPUSH | DANIEL GARZA, M.A.":"الوحدة 4 · الصناعة والإمبراطورية والإصلاح | CPUSH | DANIEL GARZA, M.A.","Unscramble the letters to fill the blank.":"رتّب الأحرف لتملأ الفراغ.","Which lock was hardest, and what did you learn that you did not know before?":"أي قفل كان الأصعب، وماذا تعلمت ولم تكن تعرفه من قبل؟","Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.":"اكتب من 3 إلى 4 جمل. اذكر القفل واستخدم معلومة واحدة من بطاقة القرائن الخاصة به. يمكنك كتابة هذا حتى لو لم تهرب.","You escaped and wrote your Debrief. Ready to submit.":"لقد هربت وكتبت ملخصك الختامي. أنت جاهز للتسليم.","You escaped! Write your Debrief, then download your file to submit.":"لقد هربت! اكتب ملخصك الختامي، ثم نزّل ملفك لتسليمه.","Your answer":"إجابتك","Your time:":"وقتك:","digit":"رقم"},"patterns":[{"re":"^Still needed: first name, last name, and period\\.$","es":"Todavía falta: nombre, apellido y período.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة."},{"re":"^LOCK (\\d)$","es":"Cand. $1","ar":"القفل $1"},{"re":"^LOCK (\\d) · CORE OBJECTIVE (\\d+)$","es":"CANDADO $1 · OBJETIVO PRINCIPAL $2","ar":"القفل $1 · الهدف الأساسي $2"},{"re":"^LOCK (\\d) · CORE OBJECTIVES (\\d+)-(\\d+)$","es":"CANDADO $1 · OBJETIVOS PRINCIPALES $2-$3","ar":"القفل $1 · الأهداف الأساسية $2-$3"},{"re":"^LOCK (\\d) · CORE OBJECTIVES (\\d+) AND (\\d+)$","es":"CANDADO $1 · OBJETIVOS PRINCIPALES $2 Y $3","ar":"القفل $1 · الأهداف الأساسية $2 و$3"},{"re":"^Hint (\\d):$","es":"Pista $1:","ar":"تلميح $1:"},{"re":"^Exit code digit (\\d)$","es":"Dígito $1 del código de salida","ar":"رقم رمز الخروج $1"},{"re":"^Click! Lock (\\d) is open\\. Your digit is (\\d)\\.$","es":"¡Clic! El Candado $1 está abierto. Tu dígito es $2.","ar":"نقرة! القفل $1 مفتوح. رقمك هو $2."},{"re":"^5 of 5 locks opened with (\\d+) tries and 1 hint\\.$","es":"Abriste 5 de 5 candados con $1 intentos y 1 pista.","ar":"فتحت 5 أقفال من 5 بعد $1 محاولة وتلميح واحد."},{"re":"^5 of 5 locks opened with (\\d+) tries and (\\d+) hints\\.$","es":"Abriste 5 de 5 candados con $1 intentos y $2 pistas.","ar":"فتحت 5 أقفال من 5 بعد $1 محاولة و$2 تلميحات."},{"re":"^Tap all (\\d) places first, in order\\.$","es":"Primero toca los $1 lugares, en orden.","ar":"المس الأماكن الـ $1 أولًا، بالترتيب."},{"re":"^Done! File downloaded: (.*)\\. Upload it to Canvas\\.$","es":"¡Listo! Se descargó el archivo: $1. Súbelo a Canvas.","ar":"تم! تم تنزيل الملف: $1. ارفعه إلى Canvas."},{"re":"^Your file downloaded and is marked INCOMPLETE \\(you have not escaped\\)\\. Upload it to Canvas: (.*)$","es":"Tu archivo se descargó y está marcado INCOMPLETO (todavía no escapas). Súbelo a Canvas: $1","ar":"تم تنزيل ملفك وهو مُسجَّل «غير مكتمل» INCOMPLETE (لم تهرب بعد). ارفعه إلى Canvas: $1"},{"re":"^Unlocked\\. Your digit is (\\d)\\. Your answer: (.*)$","es":"Desbloqueado. Tu dígito es $1. Tu respuesta: $2","ar":"تم الفتح. رقمك هو $1. إجابتك: $2"},{"re":"^Unlocked\\. Your digit is (\\d)\\.$","es":"Desbloqueado. Tu dígito es $1.","ar":"تم الفتح. رقمك هو $1."}]}</script>
+<script>
+/* Supplement language switch (English / Espanol / Arabic). Works on pages whose text is rendered by JS:
+   a MutationObserver translates text as it appears. Data: <script type="application/json" id="sp-i18n">
+   {"langs":["en","es","ar"],"default":"en","es":{englishHTML:translation},"ar":{...},"patterns":[{"re":"^(\\d+) of (\\d+)$","es":"$1 de $2","ar":"..."}]}
+   Keys are the English text exactly as it sits in the page (innerHTML, spaces collapsed).
+   Helpers: spSeen() english strings seen so far; spMissing() strings with no translation in the current language;
+   spSetLang(l); spTr(s) translate a string (used for confirm/alert); spAscii(s) plain-ASCII name for file names. */
+(function () {
+  var node = document.getElementById('sp-i18n');
+  var D = node ? JSON.parse(node.textContent) : { langs: ['en'], patterns: [] };
+  var INLINE = { B:1,I:1,EM:1,STRONG:1,SPAN:1,A:1,BR:1,SMALL:1,SUP:1,SUB:1,U:1,MARK:1,BDI:1,TSPAN:1,CODE:1 };
+  var SKIP = 'script,style,textarea,input,.sp-lang,.sp-nt,[translate="no"]';
+  var WORD = /[A-Za-z\u00C0-\u024F\u0600-\u06FF]{2}|e\.g\./;
+  var LANG = 'en', REC = new WeakMap(), SEEN = {}, MISS = {};
+  (D.patterns || []).forEach(function (p) { try { p._re = new RegExp(p.re); } catch (e) {} });
+  function norm(s) { return String(s).replace(/\s+/g, ' ').trim(); }
+  function tr(src) {
+    if (LANG === 'en') return null;
+    var t = D[LANG] && D[LANG][src];
+    if (t) return t;
+    var P = D.patterns || [];
+    for (var i = 0; i < P.length; i++) {
+      var m = P[i]._re && P[i]._re.exec(src);
+      if (m && P[i][LANG]) return P[i][LANG].replace(/\$(\d+)/g, function (_, n) { return m[+n] || ''; });
+    }
+    return null;
+  }
+  window.spTr = function (s) { var t = tr(norm(s)); return t ? t.replace(/<[^>]+>/g, '') : s; };
+  function isInline(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling)
+      if (c.nodeType === 1 && (!INLINE[c.tagName.toUpperCase()] || c.matches(SKIP))) return false;
+    return true;
+  }
+  function directText(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling) if (c.nodeType === 3 && WORD.test(c.nodeValue)) return true;
+    return false;
+  }
+  function cur(s) { return s.nodeType === 1 ? s.innerHTML : s.nodeValue; }
+  function put(s, v) { if (s.nodeType === 1) s.innerHTML = v; else s.nodeValue = v; }
+  function handle(s) {
+    var r = REC.get(s), c = cur(s);
+    if (!(r && c === r.wrote)) { r = { en: c, wrote: c }; REC.set(s, r); }
+    var src = norm(r.en), target = r.en;
+    if (WORD.test(src)) {
+      SEEN[src] = 1;
+      if (LANG !== 'en') {
+        var t = tr(src);
+        if (t) {
+          target = s.nodeType === 1 ? t : (r.en.match(/^\s*/)[0] + t + r.en.match(/\s*$/)[0]);
+          delete MISS[src];
+        } else MISS[src] = 1;
+      }
+    }
+    if (c !== target) put(s, target);
+    r.wrote = cur(s);
+  }
+  var ATTRS = ['placeholder', 'alt', 'aria-label', 'title'];
+  function attrs(root) {
+    var els = root.querySelectorAll ? root.querySelectorAll('[placeholder],[alt],[aria-label],[title]') : [];
+    var list = [].slice.call(els); if (root.matches && root.matches('[placeholder],[alt],[aria-label],[title]')) list.push(root);
+    list.forEach(function (el) {
+      if (el.closest && el.closest('.sp-lang,.sp-nt,[translate="no"],script,style')) return;
+      var rec = el.__spa || (el.__spa = {});
+      ATTRS.forEach(function (a) {
+        var v = el.getAttribute(a); if (v == null) return;
+        var r = rec[a];
+        if (!(r && v === r.wrote)) { r = rec[a] = { en: v, wrote: v }; }
+        var src = norm(r.en); if (!WORD.test(src)) return;
+        SEEN[src] = 1;
+        var t = LANG === 'en' ? null : tr(src);
+        if (LANG !== 'en' && !t) MISS[src] = 1;
+        var target = t ? t.replace(/<[^>]+>/g, '') : r.en;
+        if (v !== target) el.setAttribute(a, target);
+        r.wrote = el.getAttribute(a);
+      });
+    });
+  }
+  function walk(root) {
+    if (root.nodeType === 3) { if (WORD.test(root.nodeValue) && !(root.parentNode && root.parentNode.closest && root.parentNode.closest(SKIP))) handle(root); return; }
+    if (root.nodeType !== 1) return;
+    (function w(el) {
+      if (el.matches(SKIP)) return;
+      if (el !== document.body && directText(el) && isInline(el)) { handle(el); return; }
+      for (var c = el.firstChild; c; c = c.nextSibling) {
+        if (c.nodeType === 1) w(c); else if (c.nodeType === 3 && WORD.test(c.nodeValue)) handle(c);
+      }
+    })(root);
+    attrs(root);
+  }
+  var TITLE = { en: document.title, wrote: document.title };
+  function title() {
+    if (document.title !== TITLE.wrote) TITLE = { en: document.title, wrote: document.title };
+    var t = LANG === 'en' ? null : tr(norm(TITLE.en));
+    document.title = t ? t.replace(/<[^>]+>/g, '') : TITLE.en; TITLE.wrote = document.title;
+  }
+  function inl(e) { return e.nodeType === 1 && !!INLINE[e.tagName.toUpperCase()]; }
+  var mo = new MutationObserver(function (muts) {
+    var todo = [];
+    muts.forEach(function (m) {
+      if (m.type === 'childList') { for (var i = 0; i < m.addedNodes.length; i++) todo.push(m.addedNodes[i]); todo.push(m.target); }
+      else todo.push(m.target);
+    });
+    todo.forEach(function (n) {
+      var el = n.nodeType === 1 ? n : n.parentNode;
+      if (!el || el.nodeType !== 1 || !document.body.contains(el)) return;
+      while (el !== document.body && el.parentNode && el.parentNode.nodeType === 1 && inl(el) && inl(el.parentNode)) el = el.parentNode;
+      if (el.parentNode && el.parentNode.nodeType === 1 && inl(el.parentNode) && el.parentNode !== document.body) el = el.parentNode;
+      walk(el);
+    });
+    mo.takeRecords();
+  });
+  var AR = { 'ا':'a','أ':'a','إ':'i','آ':'a','ب':'b','ت':'t','ث':'th','ج':'j','ح':'h','خ':'kh','د':'d','ذ':'dh','ر':'r','ز':'z','س':'s','ش':'sh','ص':'s','ض':'d','ط':'t','ظ':'z','ع':'a','غ':'gh','ف':'f','ق':'q','ك':'k','ل':'l','م':'m','ن':'n','ه':'h','و':'w','ي':'y','ى':'a','ة':'a','ئ':'y','ؤ':'w' };
+  window.spAscii = function (s) {
+    s = String(s); if (s.normalize) s = s.normalize('NFD').replace(/[̀-ًͯ-ٰٟ]/g, '');
+    return s.replace(/[ء-ي]/g, function (c) { return AR[c] !== undefined ? AR[c] : ''; }).replace(/ñ/g, 'n').replace(/Ñ/g, 'N');
+  };
+  window.spSeen = function () { return Object.keys(SEEN); };
+  window.spMissing = function () { return Object.keys(MISS); };
+  window.spLang = function () { return LANG; };
+  window.spSetLang = function (l) {
+    if ((D.langs || ['en']).indexOf(l) < 0) l = 'en';
+    LANG = l; MISS = {};
+    var h = document.documentElement; h.lang = l; h.dir = l === 'ar' ? 'rtl' : 'ltr';
+    mo.disconnect(); walk(document.body); title(); mo.takeRecords();
+    mo.observe(document.body, { childList: true, subtree: true, characterData: true });
+    document.querySelectorAll('.sp-lang button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === l)); });
+    try { localStorage.setItem('sp_lang', l); } catch (e) {}
+    try { var u = new URL(location.href); if (l === 'en') u.searchParams.delete('lang'); else u.searchParams.set('lang', l); history.replaceState(null, '', u.toString()); } catch (e) {}
+    try { document.dispatchEvent(new CustomEvent('splangchange', { detail: l })); } catch (e) {}
+  };
+  var _c = window.confirm, _a = window.alert;
+  window.confirm = function (m) { return _c.call(window, window.spTr(m)); };
+  window.alert = function (m) { return _a.call(window, window.spTr(m)); };
+  document.querySelectorAll('.sp-lang button').forEach(function (b) { b.addEventListener('click', function () { window.spSetLang(b.getAttribute('data-lang')); }); });
+  var start = D['default'] || 'en';
+  try { start = new URL(location.href).searchParams.get('lang') || localStorage.getItem('sp_lang') || start; } catch (e) {}
+  window.spSetLang(start);
+})();
+
+</script><!--/sp-i18n-->
+</body>
+</html>

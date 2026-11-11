@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Escape Room 5 · The Early Republic and the Market Economy</title>
+<style>
+:root{--bg:#2D3D1A;--txt:#F0F4EB;--a1:#49632C;--a2:#D26B4B;--hl:#E1A28E;--glass:rgba(240,244,235,.07);--glassb:rgba(240,244,235,.2);--dim:#D4DCC9;--ok:#8FD3A8}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#3E5625 0%,#2D3D1A 60%) fixed;background-color:var(--bg);color:var(--txt);font:17px/1.55 "Segoe UI",system-ui,-apple-system,Verdana,sans-serif;min-height:100vh}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px 40px}
+.glass{background:var(--glass);border:1px solid var(--glassb);border-radius:16px;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+header.hero{padding:30px 0 12px;border-bottom:3px solid var(--a2)}
+.eyebrow{font-size:13px;letter-spacing:.16em;font-weight:700;color:var(--hl)}
+h1{margin:.15em 0 .05em;font-size:clamp(28px,6vw,40px);line-height:1.12}
+.sub{margin:0;font-weight:600;color:var(--dim)}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 4px}
+.meta label{flex:1 1 170px;font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--dim)}
+input[type=text],textarea,select{display:block;width:100%;margin-top:4px;padding:10px 12px;border:1px solid var(--glassb);border-radius:10px;background:rgba(28,40,17,.55);color:var(--txt);font:inherit;font-size:16px}
+input[type=text]:focus,textarea:focus,select:focus,button:focus-visible{outline:3px solid var(--hl);outline-offset:1px}
+input.bad{border-color:var(--a2);box-shadow:0 0 0 2px var(--a2)}
+textarea{min-height:120px;resize:vertical}
+.howto{margin:14px 0;padding:14px 16px;font-size:16px}
+.howto ol{margin:6px 0 0;padding-left:22px}
+.scene{margin:14px 0;padding:8px;text-align:center}
+.scene svg{width:100%;height:auto;display:block;border-radius:12px}
+.bar{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;padding:8px 12px;margin:10px 0;font-weight:700;font-size:15px;background:rgba(45,61,26,.92);border:1px solid var(--glassb);border-radius:12px}
+.bar span b{color:var(--hl)}
+.btn{font:inherit;font-size:16px;font-weight:700;padding:11px 18px;border-radius:12px;border:2px solid var(--hl);background:transparent;color:var(--txt);cursor:pointer;min-height:44px}
+.btn:hover{background:rgba(225,162,142,.18)}
+.btn.primary{background:var(--hl);color:#2D3D1A;border-color:var(--hl)}
+.btn.primary:hover{background:#EBBAA6}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.btn.small{padding:8px 14px;font-size:15px;min-height:40px}
+.intro{padding:20px;text-align:center}
+.intro p{margin:.4em 0}
+.lock{margin:12px 0;overflow:hidden}
+.lock>button.lh{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:12px;width:100%;padding:14px 16px;cursor:pointer}
+.lock>button.lh:focus-visible{outline:3px solid var(--hl);outline-offset:-3px}
+.lock.locked>button.lh{cursor:not-allowed;opacity:.55}
+.lk{flex:none;width:44px;height:44px}
+.lk .sh{transition:transform .5s cubic-bezier(.3,1.6,.5,1);transform-origin:center}
+.lock.solved .lk .sh{transform:translateY(-6px) rotate(-30deg);transform-origin:10px 14px}
+.lock.solved .lk .bd{fill:var(--hl)}
+.lt{flex:1}
+.lt small{display:block;font-size:12px;letter-spacing:.12em;font-weight:700;color:var(--hl)}
+.lt strong{font-size:19px}
+.dg{flex:none;min-width:42px;height:42px;border-radius:10px;border:2px solid var(--hl);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;background:rgba(28,40,17,.55)}
+.lb{padding:0 16px 16px;display:none}
+.lock.open .lb{display:block}
+.objline{font-size:14px;color:var(--dim);margin:0 0 10px}
+.card{background:rgba(240,244,235,.1);border-left:6px solid var(--a2);border-radius:10px;padding:12px 14px;margin:8px 0 12px}
+.card h4{margin:0 0 4px;font-size:13px;letter-spacing:.12em;color:var(--hl)}
+.card p{margin:.3em 0}
+.card .src{font-size:13px;color:var(--dim)}
+.prompt{font-weight:700;margin:10px 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0}
+.chip{font:inherit;font-size:16px;padding:10px 14px;border-radius:12px;border:2px solid var(--glassb);background:rgba(28,40,17,.55);color:var(--txt);cursor:pointer;min-height:44px;text-align:left}
+.chip.sel{border-color:var(--hl);background:rgba(225,162,142,.2)}
+.chip .n{display:inline-block;min-width:24px;height:24px;line-height:24px;border-radius:12px;background:var(--hl);color:#2D3D1A;font-weight:800;text-align:center;margin-right:8px}
+.mrow{margin:8px 0}
+.mrow label{font-weight:700;display:block}
+fieldset{border:1px solid var(--glassb);border-radius:10px;margin:8px 0;padding:8px 12px}
+legend{font-weight:700;padding:0 6px}
+.opt{display:flex;align-items:center;gap:10px;padding:6px 0;min-height:40px;cursor:pointer}
+.opt input{width:22px;height:22px;accent-color:#E1A28E;flex:none}
+.cipher{font:700 24px/1.3 "Courier New",monospace;letter-spacing:.14em;background:rgba(28,40,17,.65);padding:12px;border-radius:10px;border:1px dashed var(--hl);word-break:break-word;text-align:center}
+.key{display:grid;grid-template-columns:repeat(13,1fr);gap:2px;margin:10px 0;font:700 14px/1.2 "Courier New",monospace;text-align:center}
+.key div{padding:3px 0;border-radius:4px;background:rgba(240,244,235,.08)}
+.key .c{color:var(--hl)}
+.scr{font:800 30px/1.2 "Courier New",monospace;letter-spacing:.3em;text-align:center;background:rgba(28,40,17,.65);padding:10px;border-radius:10px;border:1px dashed var(--hl)}
+.row{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0;align-items:center}
+.fb{margin:8px 0;padding:10px 12px;border-radius:10px;display:none;font-weight:600}
+.fb.show{display:block}
+.fb.nudge{background:rgba(210,107,75,.18);border:1px solid var(--a2)}
+.fb.good{background:rgba(143,211,168,.16);border:1px solid var(--ok);color:#DDF5E6}
+.hints{margin:6px 0}
+.hint{background:rgba(225,162,142,.14);border:1px dashed var(--hl);border-radius:10px;padding:8px 12px;margin:6px 0;font-size:16px}
+.hint b{color:var(--hl)}
+.exit{margin:16px 0;padding:18px;text-align:center}
+.exit.locked{opacity:.55}
+.exit h2,.esc h2,.debrief h2{margin:.1em 0 .3em}
+.codebox{display:flex;justify-content:center;gap:8px;margin:12px 0}
+.codebox input{width:52px;height:60px;text-align:center;font:800 30px "Courier New",monospace;padding:0;margin:0}
+.esc{margin:16px 0;padding:22px;text-align:center;display:none;border:2px solid var(--hl)}
+.esc.show{display:block}
+.esc .big{overflow-wrap:anywhere;font-size:clamp(30px,9vw,64px);font-weight:900;letter-spacing:.14em;color:var(--hl);text-shadow:0 0 24px rgba(225,162,142,.6);animation:pop .8s cubic-bezier(.3,1.6,.5,1)}
+.esc .time{font-size:26px;font-weight:800}
+.debrief{margin:16px 0;padding:16px}
+.actions{margin:16px 0;padding:16px}
+.status{font-weight:700;margin-bottom:10px}
+.msg{display:none;margin-top:10px;padding:10px 12px;border-radius:10px;background:rgba(143,211,168,.16);border:1px solid var(--ok)}
+.msg.err{background:rgba(210,107,75,.2);border-color:var(--a2)}
+.link{all:unset;cursor:pointer;color:var(--dim);text-decoration:underline;font-size:14px;margin-top:10px;display:inline-block}
+.link:focus-visible{outline:3px solid var(--hl)}
+footer{text-align:center;font-size:12px;letter-spacing:.1em;font-weight:700;color:var(--dim);padding:20px 8px 30px;border-top:1px solid var(--glassb);margin-top:20px}
+.ennote{margin:.4em 0 0;font-size:14px;font-weight:700;color:var(--dim)}
+.exit .ennote{text-align:center}
+.hidden{display:none!important}.lock,.exit,.esc{scroll-margin-top:64px}
+.pop{animation:pop .7s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pop{0%{transform:scale(.2);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes tap{0%,100%{transform:rotate(0)}50%{transform:rotate(9deg)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.shake{animation:shake .35s}
+.wheel{transform-box:view-box;transform-origin:276px 86px}
+.wheel.spin{animation:tap .5s ease-in-out 3}
+.plock .sh{transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
+.plock.open .sh{transform:translateY(-7px)}
+.plock.open .bd{fill:#E1A28E}
+#door{transform-origin:150px 20px;transition:transform 1.4s ease-in-out}
+.escaped #door{transform:scaleX(.1)}
+#glow{opacity:.15;transition:opacity 1.4s}
+.escaped #glow{opacity:1}
+html[dir="rtl"] .chip{text-align:right}
+html[dir="rtl"] .chip .n{margin-right:0;margin-left:8px}
+html[dir="rtl"] .card{border-left:0;border-right:6px solid var(--a2)}
+html[dir="rtl"] .howto ol{padding-left:0;padding-right:22px}
+html[dir="rtl"] .esc,html[dir="rtl"] .exit,html[dir="rtl"] .intro{text-align:center}
+html[dir="rtl"] .cipher,html[dir="rtl"] .scr,html[dir="rtl"] .key{direction:ltr}
+html[dir="rtl"] .scr{letter-spacing:.3em!important}
+html[dir="rtl"] .cipher{letter-spacing:.14em!important}
+html[dir="rtl"] .key{letter-spacing:0!important}
+html[dir="rtl"] .card .src{direction:ltr;text-align:left}
+html[dir="rtl"] .hint,html[dir="rtl"] .fb,html[dir="rtl"] .msg,html[dir="rtl"] .objline{text-align:start}
+html[dir="rtl"] .lock>button.lh{text-align:start}
+html[dir="rtl"] .lb,html[dir="rtl"] .actions{text-align:start}
+html[dir="rtl"] .bar{direction:rtl}
+html[dir="rtl"] .tt{unicode-bidi:plaintext}
+@media(max-width:520px){body{font-size:16px}.chip{width:100%}.key{font-size:12px;gap:1px}.codebox input{width:46px;height:54px}.dg{min-width:38px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{.bar,.actions button{display:none}}
+/*sp-i18n-css*/
+.sp-lang-bar{display:flex;justify-content:flex-end;padding:8px 12px 0;position:relative;z-index:5}
+.sp-lang{display:inline-flex;gap:2px;padding:3px;border-radius:10px;background:rgba(255,255,255,.88);border:1px solid rgba(0,0,0,.18);font-family:system-ui,"Segoe UI",Tahoma,Arial,sans-serif}
+.sp-lang button{border:0;background:transparent;color:#222;font:600 13px/1 system-ui,"Segoe UI",Tahoma,Arial,sans-serif;padding:7px 11px;border-radius:7px;cursor:pointer}
+.sp-lang button[aria-pressed="true"]{background:#222;color:#fff}
+.sp-lang button:focus-visible{outline:3px solid #2a6df4;outline-offset:1px}
+textarea,input,select{unicode-bidi:plaintext}
+html[lang="ar"] body,html[lang="ar"] button,html[lang="ar"] textarea,html[lang="ar"] input,html[lang="ar"] select{font-family:"Segoe UI",Tahoma,"Noto Sans Arabic","Arial",system-ui,sans-serif}
+html[lang="ar"] body{line-height:1.8}
+html[lang="ar"] *{letter-spacing:0!important}
+html[dir="rtl"] textarea,html[dir="rtl"] input{text-align:start}
+@media print{.sp-lang-bar{display:none}}
+/*/sp-i18n-css*/
+</style>
+</head>
+<body>
+<!--sp-bar--><div class="sp-lang-bar"><div class="sp-lang" role="group" aria-label="Language / Idioma / اللغة"><button type="button" data-lang="en" lang="en" aria-pressed="true">English</button><button type="button" data-lang="es" lang="es" aria-pressed="false">Español</button><button type="button" data-lang="ar" lang="ar" aria-pressed="false">العربية</button></div></div><!--/sp-bar-->
+
+<div class="wrap">
+<header class="hero">
+  <div class="eyebrow">1793-1854</div>
+  <h1>Escape the Surveyor’s Office</h1>
+  <p class="sub">The Early Republic and the <span style="white-space:nowrap">Market Economy</span></p>
+  <div class="meta">
+    <label>FIRST NAME *<input id="f_first" type="text" autocomplete="given-name"></label>
+    <label>LAST NAME *<input id="f_last" type="text" autocomplete="family-name"></label>
+    <label>PERIOD *<input id="f_period" type="text" inputmode="numeric" maxlength="12" placeholder="e.g. 3"></label>
+  </div>
+</header>
+
+<div class="howto glass"><b>How to escape:</b>
+<ol>
+<li>Open each lock in order. Read the <b>Clue Card</b>. The answer is in the card.</li>
+<li>Solve the puzzle to open the lock and reveal one digit.</li>
+<li>If you get stuck, press <b>Hint</b>. Hints are free, but your teacher can see how many you used.</li>
+<li>Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.</li>
+</ol></div>
+
+<div class="scene glass" id="scene">
+<svg viewBox="0 0 600 270" role="img" aria-label="A surveyor’s office at night. On the left, a wall map with contour lines and a dotted route hangs above a rack of rolled maps and a desk with a globe and a rolled scroll. On the right, a compass and a measuring chain hang on the wall above a surveying instrument on a tripod. The door has a SURVEY OFFICE sign and five padlocks in a row. Under each padlock is a window for one digit of the exit code.">
+<defs>
+<pattern id="brick" width="40" height="270" patternUnits="userSpaceOnUse"><rect width="40" height="270" fill="#233014"/><path d="M0 0V270" stroke="#F0F4EB" stroke-opacity=".12" fill="none"/><path d="M20 0V270" stroke="#F0F4EB" stroke-opacity=".05" fill="none"/></pattern>
+<radialGradient id="glowg" cx="50%" cy="50%" r="60%"><stop offset="0" stop-color="#F0F4EB"/><stop offset="1" stop-color="#E1A28E"/></radialGradient>
+</defs>
+<rect width="600" height="270" fill="url(#brick)"/>
+<rect y="236" width="600" height="34" fill="#253416"/>
+<g stroke="#D4DCC9" stroke-opacity=".35" stroke-width="2"><path d="M0 248H600M0 260H600"/><path d="M60 236V248M180 236V248M300 236V248M420 236V248M540 236V248M120 248V260M240 248V260M360 248V260M480 248V260M600 248V260"/></g>
+<g>
+<rect x="12" y="20" width="124" height="62" rx="3" fill="#1C2811" stroke="#E1A28E" stroke-width="3"/>
+<rect x="18" y="26" width="112" height="50" fill="#49632C" fill-opacity=".5"/>
+<path d="M22 66Q40 46 62 58T104 40T126 50" stroke="#F0F4EB" stroke-opacity=".6" stroke-width="1.5" fill="none"/>
+<path d="M22 72Q44 56 64 66T108 50T126 60" stroke="#F0F4EB" stroke-opacity=".4" stroke-width="1.5" fill="none"/>
+<path d="M30 34L60 44L84 36L112 52" stroke="#D26B4B" stroke-width="2" stroke-dasharray="5 4" fill="none"/>
+<circle cx="30" cy="34" r="3" fill="#E1A28E"/><circle cx="112" cy="52" r="3" fill="#E1A28E"/>
+<path d="M118 32V44M114 38H122" stroke="#E1A28E" stroke-width="2"/><path d="M118 30L121 36H115Z" fill="#E1A28E"/></g>
+<g><rect x="10" y="112" width="132" height="7" rx="2" fill="#E1A28E"/><path d="M18 119V128M134 119V128" stroke="#E1A28E" stroke-width="4"/>
+<rect x="14" y="86" width="124" height="26" rx="2" fill="#1C2811" stroke="#E1A28E" stroke-opacity=".7" stroke-width="2"/>
+<g fill="#F0F4EB" fill-opacity=".9" stroke="#E1A28E" stroke-width="1.5"><circle cx="30" cy="99" r="10"/><circle cx="52" cy="99" r="10" fill="#E1A28E" fill-opacity=".85"/><circle cx="74" cy="99" r="10"/><circle cx="96" cy="99" r="10" fill="#E1A28E" fill-opacity=".85"/><circle cx="118" cy="99" r="10"/></g>
+<g fill="none" stroke="#1C2811" stroke-width="1.6"><path d="M30 99m-5 0a5 5 0 1 1 5 5M52 99m-5 0a5 5 0 1 1 5 5M74 99m-5 0a5 5 0 1 1 5 5M96 99m-5 0a5 5 0 1 1 5 5M118 99m-5 0a5 5 0 1 1 5 5"/></g></g>
+<g><rect x="10" y="204" width="136" height="8" rx="3" fill="#E1A28E"/><path d="M18 212V236M138 212V236" stroke="#E1A28E" stroke-width="6"/>
+<rect x="40" y="196" width="44" height="8" rx="2" fill="#49632C" stroke="#F0F4EB" stroke-opacity=".7"/>
+<circle cx="62" cy="172" r="22" fill="#49632C" stroke="#E1A28E" stroke-width="3"/>
+<path d="M62 150V194M40 172H84" stroke="#F0F4EB" stroke-opacity=".6" stroke-width="1.5"/><ellipse cx="62" cy="172" rx="10" ry="22" fill="none" stroke="#F0F4EB" stroke-opacity=".6" stroke-width="1.5"/>
+<path d="M45 158Q56 152 66 160T80 170" stroke="#E1A28E" stroke-width="3" fill="none"/>
+<rect x="100" y="188" width="36" height="16" rx="8" fill="#F0F4EB" fill-opacity=".9" stroke="#E1A28E" stroke-width="2"/><path d="M104 196H132" stroke="#1C2811" stroke-width="2"/>
+<path d="M100 196H98" stroke="#E1A28E" stroke-width="2"/></g>
+<g><circle cx="500" cy="62" r="24" fill="#1C2811" stroke="#E1A28E" stroke-width="3"/><circle cx="500" cy="62" r="18" fill="#F0F4EB" fill-opacity=".1"/>
+<path d="M500 42V48M500 76V82M480 62H486M514 62H520" stroke="#F0F4EB" stroke-width="2"/><path d="M500 62L494 70L500 46L506 70Z" fill="#D26B4B" stroke="#F0F4EB" stroke-opacity=".7" stroke-width="1"/><circle cx="500" cy="62" r="2.5" fill="#E1A28E"/></g>
+<g><rect x="536" y="26" width="54" height="86" rx="3" fill="#2D3D1A" stroke="#E1A28E" stroke-width="2"/>
+<rect x="544" y="34" width="38" height="14" rx="2" fill="#1C2811" stroke="#F0F4EB" stroke-opacity=".6"/><path d="M549 41H577" stroke="#E1A28E" stroke-width="3" stroke-linecap="round"/>
+<path d="M552 56C540 66 540 76 552 82C566 90 580 84 572 70C566 62 560 66 566 74" stroke="#F0F4EB" stroke-opacity=".85" stroke-width="3" stroke-dasharray="2 4" stroke-linecap="round" fill="none"/>
+<circle cx="552" cy="56" r="3" fill="#D26B4B"/><circle cx="566" cy="74" r="3" fill="#D26B4B"/></g>
+<g><path d="M520 150L490 236M520 150L520 236M520 150L552 236" stroke="#E1A28E" stroke-width="5" stroke-linecap="round"/>
+<path d="M500 205H540" stroke="#E1A28E" stroke-opacity=".6" stroke-width="2"/>
+<rect x="506" y="136" width="28" height="14" rx="3" fill="#49632C" stroke="#F0F4EB" stroke-opacity=".8" stroke-width="2"/>
+<rect x="500" y="118" width="12" height="18" rx="2" fill="#E1A28E" stroke="#F0F4EB" stroke-opacity=".7"/>
+<g transform="rotate(-14 520 124)"><rect x="508" y="114" width="52" height="12" rx="3" fill="#D26B4B" stroke="#F0F4EB" stroke-opacity=".8" stroke-width="1.5"/><rect x="556" y="112" width="8" height="16" rx="2" fill="#E1A28E"/></g>
+<circle cx="520" cy="124" r="4" fill="#1C2811" stroke="#F0F4EB" stroke-opacity=".8"/></g>
+<rect id="glow" x="150" y="20" width="300" height="216" rx="10" fill="url(#glowg)"/>
+<g id="door">
+<rect x="150" y="20" width="300" height="216" rx="10" fill="#49632C" stroke="#E1A28E" stroke-width="3"/>
+<circle cx="164" cy="34" r="4" fill="#E1A28E"/><circle cx="436" cy="34" r="4" fill="#E1A28E"/><circle cx="164" cy="222" r="4" fill="#E1A28E"/><circle cx="436" cy="222" r="4" fill="#E1A28E"/>
+<rect x="210" y="30" width="180" height="26" rx="4" fill="#1C2811" stroke="#F0F4EB" stroke-opacity=".7"/>
+<text x="300" y="48" text-anchor="middle" font-size="12" letter-spacing="2" font-weight="700" fill="#F0F4EB">SURVEY OFFICE</text>
+<rect x="262" y="90" width="76" height="8" rx="3" fill="#2D3D1A"/>
+<circle cx="276" cy="86" r="4" fill="#F0F4EB"/>
+<g class="wheel" id="wheel"><path d="M276 86L328 80" stroke="#F0F4EB" stroke-width="4" stroke-linecap="round"/><circle cx="330" cy="80" r="6" fill="#D26B4B"/></g>
+<rect x="170" y="106" width="260" height="8" rx="3" fill="#2D3D1A"/>
+<g id="plocks"></g>
+<text x="300" y="228" text-anchor="middle" direction="ltr" font-size="11" letter-spacing="3" font-weight="700" fill="#F0F4EB">1793 - 1854</text>
+</g>
+</svg>
+</div>
+
+<div class="intro glass" id="intro">
+  <h2 style="margin:.1em 0">You are locked in the surveyor’s office.</h2>
+  <p>The surveyor’s office closed for the night, and the surveyor locked the door. A wall map, a rack of rolled maps, a globe, a compass, a measuring chain, and a surveying instrument on a tripod sit in the room. The door has <b>5 locks</b>. Each lock matches one or two big ideas from Lesson 5. Solve them all to find the <b>5-digit exit code</b>.</p>
+  <p>The clock starts when you press the button. Most students finish in about 20 minutes.</p>
+  <p><button class="btn primary" id="startBtn">Enter the Office</button></p>
+</div>
+
+<div id="game" class="hidden">
+  <div class="bar" id="bar" aria-live="off"><span><span>Time</span> <b id="tm">00:00</b></span><span><span>Locks</span> <b id="lc">0</b>/5</span><span><span>Hints used</span> <b id="hc">0</b></span></div>
+  <div id="locks"></div>
+
+  <section class="exit glass locked" id="exit" aria-label="Exit door">
+    <div class="eyebrow">THE EXIT DOOR</div>
+    <h2>Type the exit code</h2>
+    <p id="exitNote">Open all 5 locks first. The digits go in order: Lock 1 first.</p>
+    <div class="codebox" id="codebox" dir="ltr"></div>
+    <p class="ennote">Type the answer in English. Use the digits 0-9.</p>
+    <div class="row" style="justify-content:center"><button class="btn primary" id="codeBtn" disabled>Open the Door</button></div>
+    <div class="fb" id="codefb"></div>
+  </section>
+
+  <section class="esc glass" id="esc" aria-live="polite">
+    <div class="big">ESCAPED</div>
+    <p class="time"><span>Your time:</span> <span id="escTime">00:00</span></p>
+    <p id="escSum"></p>
+    <p>One last step: write your Debrief below.</p>
+  </section>
+
+  <section class="debrief glass" id="debrief">
+    <div class="eyebrow">DEBRIEF</div>
+    <h2>Which lock was hardest, and what did you learn that you did not know before?</h2>
+    <p style="margin:.2em 0;color:var(--dim)">Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.</p>
+    <textarea id="debriefText" aria-label="Debrief" placeholder="Type your answer here..."></textarea>
+  </section>
+
+  <section class="actions glass" id="actions">
+    <div class="status" id="status"></div>
+    <div class="row">
+      <button class="btn" id="saveBtn">Save Progress</button>
+      <button class="btn" id="loadBtn">Load Progress</button>
+      <input type="file" id="loadFile" accept=".json,application/json" hidden>
+      <button class="btn primary" id="finishBtn">Finished — Download File to Submit</button>
+    </div>
+    <div class="msg" id="msg" role="status"></div>
+    <button class="link" id="reset">Clear all my work and start over</button>
+  </section>
+</div>
+
+<div class="actions glass hidden" id="loadOnly" style="margin-top:12px"><button class="btn" id="loadBtn0">Load Progress</button> <span style="color:var(--dim)">Have a saved file? Load it to continue.</span></div>
+
+<footer>UNIT 2 · AN EXPANDING NATION | CPUSH | DANIEL GARZA, M.A.</footer>
+</div>
+
+<script type="application/json" id="er-data">{"salt": "L5esc:", "exitHash": "4abae8d0765db4786eb1", "locks": [{"n": 1, "key": "lock1_wall_map", "title": "The Wall Map", "obj": "1-2", "objLabel": "CORE OBJECTIVES 1 AND 2", "objText": "Core Objectives 1 and 2: Summarize the major domestic political developments that took place during Thomas Jefferson’s administration. Describe how foreign events affected the United States during the Jefferson and Madison administrations.", "type": "order", "card": "<p><b>Jefferson in office.<\/b> In 1803, the Supreme Court decided <i>Marbury v. Madison<\/i>. Chief Justice John Marshall said the Court had the power “to say what the law is.” This power is called judicial review. Also in 1803, the United States agreed to buy the Louisiana Territory from France for $15 million. Jefferson worried that the Constitution did not mention buying land, but he went ahead. Norton says France sold only its colonial rights, and Indigenous people had lived on the land for generations. In 1804, Lewis and Clark’s Corps of Discovery set out from near St. Louis. Clark’s enslaved man York went with them.<\/p><p><b>Trouble at sea.<\/b> Britain and France were at war, and each one tried to stop American trade with the other. British ships practiced impressment. They stopped American ships and took sailors, saying the men were British. Norton says 6,200 American sailors were forced into the British navy between 1803 and 1811. In June 1807, the British warship <i>Leopard<\/i> attacked the American ship <i>Chesapeake<\/i> off Virginia, and three Americans were killed. In December 1807, Jefferson and Congress passed the Embargo Act to stop all American exports. Norton says exports fell from $48 million in 1807 to $9 million a year later.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 7, “Jeffersonian Republicanism” (section begins p. 284; pp. 288–293) and “War in the Mediterranean and Europe” (section begins p. 300; pp. 301–303).", "prompt": "Tap the four events in the order they happened. Tap an event again to take it back.", "items": [{"id": "d", "label": "Congress passes the Embargo Act"}, {"id": "b", "label": "Lewis and Clark’s Corps of Discovery sets out"}, {"id": "a", "label": "The United States buys the Louisiana Territory"}, {"id": "c", "label": "A British warship attacks the Chesapeake"}], "hints": ["Look for the years in the Clue Card: 1803, 1804, and 1807. Two events happened in 1807, so check the months, June and December.", "The order is the Louisiana Purchase (1803), Lewis and Clark set out (1804), the Chesapeake attack (June 1807), then the Embargo Act (December 1807)."], "nudge": "Not quite. Re-read the Clue Card and match each event to its year.", "entries": ["8391ca0a1108486918d94"], "id": "lock1_wall_map"}, {"n": 2, "key": "lock2_rolled_maps", "title": "The Rolled Maps", "obj": "3-4", "objLabel": "CORE OBJECTIVES 3 AND 4", "objText": "Core Objectives 3 and 4: Explain the primary causes of the American decision to declare war on Great Britain in 1812 and how the conflict played out in different areas of the country. Analyze the most significant outcomes of the War of 1812 on the United States, and their importance.", "type": "match", "card": "<p><b>Why war came.<\/b> In 1812, Congress declared war for the first time ever. It declared war on Great Britain. President Madison and the Republicans believed that only war would end impressment and stop attacks by Indigenous groups on the western frontier. Some Americans also wanted to take Canada. Henry Clay and John C. Calhoun were the loudest “war hawks.” New England had little interest in war because it could hurt shipping. Norton says Shawnee leader Tecumseh wanted many Indigenous nations to unite and stop American expansion. In fall 1811, William Henry Harrison led 1,000 troops to Tecumseh’s village, Prophetstown, in the Battle of Tippecanoe. The troops burned the village, and Tecumseh’s alliance fell apart. Norton says the war was fought on three fronts: the Chesapeake Bay, the South, and the Canadian border.<\/p><p><b>How the war ended.<\/b> On Christmas Eve 1814, diplomats agreed to the Treaty of Ghent. Each side returned prisoners and restored the old boundaries. News took six weeks to reach the United States, so Andrew Jackson’s army beat the British at New Orleans in January 1815. Norton says this victory made Americans proud and later helped make Jackson a presidential candidate. New England Federalists opposed “Mr. Madison’s War.” At the Hartford Convention, they proposed amendments to limit Republican and southern power and said they might “secede.” Norton says the Federalist Party never recovered. Norton also says the war pushed the United States to build its own industry. It was very hard on Indigenous nations, and none of their lost lands were returned.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 7, “The War of 1812” (section begins p. 305; pp. 305–308) and “The Aftermath of War” (section begins p. 316; pp. 316–320).", "prompt": "Match each term to the best description. Use the Clue Card.", "hints": ["Look for the key words: a village burned, prisoners returned, a victory after the peace treaty, and a threat to secede.", "Tippecanoe was the burned village. Ghent returned prisoners and boundaries. New Orleans came after the treaty. The Hartford Convention was the Federalist meeting."], "nudge": "Not quite. Check each match against the Clue Card. Which one are you least sure about?", "terms": [{"id": "nor", "label": "Battle of New Orleans"}, {"id": "har", "label": "Hartford Convention"}, {"id": "ghe", "label": "Treaty of Ghent"}, {"id": "tip", "label": "Battle of Tippecanoe"}], "descs": [{"id": "a", "label": "Harrison’s troops burned a Shawnee village, and Tecumseh’s alliance fell apart"}, {"id": "b", "label": "An agreement that returned prisoners and restored the old boundaries"}, {"id": "d", "label": "A meeting where New England Federalists proposed amendments and threatened to secede"}, {"id": "c", "label": "A victory for Jackson that came after the peace treaty was signed"}], "entries": ["cd98579a1db46a74de246"], "id": "lock2_rolled_maps"}, {"n": 3, "key": "lock3_globe", "title": "The Globe", "obj": "5", "objLabel": "CORE OBJECTIVE 5", "objText": "Core Objective 5: Describe how changes in transportation and communications altered the economic landscape during the first half of the nineteenth century.", "type": "fill", "card": "<p><b>Roads and waterways.<\/b> The market economy needed better ways to move goods. Many people argued about who should pay for roads and canals: the federal government, the states, or private companies. Construction on the National Road began in 1811. By 1818 it ran from Cumberland, Maryland, to Vandalia, Illinois. It was the first interstate road paid for by the federal government. In 1807, the steamboat <i>Clermont<\/i> went up the Hudson River from New York City to Albany. Steamboats could travel both ways on rivers, so goods could move upstream too. The Erie Canal opened in 1825 and ran 363 miles from Albany to Buffalo. It cut the cost of moving a ton of freight from $100 to $5. Thousands of laborers, mostly German and Irish immigrants, built it for less than a dollar a day.<\/p><p><b>Rails and wires.<\/b> In 1830, the nation had only 23 miles of railroad track. By 1850, it had 9,021 miles. Trains could run all year, and early railroads went more than twice as fast as stagecoaches. In May 1844, Samuel F. B. Morse sent the first message between cities over the <b>telegraph<\/b>, from Washington, D.C., to Baltimore. By 1861, the telegraph reached from the Pacific Coast to cities in the East.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 8, “The Market Revolution” (section begins p. 334; pp. 334–342).", "prompt": "Fill in the blank using the Clue Card.", "sentence": "In May 1844, Samuel Morse sent the first message between cities over the ________, from Washington, D.C., to Baltimore.", "scramble": "L  E  E  T  H  P  A  R  G", "hints": ["Look for the word in bold in the Clue Card, in the paragraph called “Rails and wires.” It names a way to send messages over wires.", "The word starts with T and has 9 letters. It ends with “graph.”"], "nudge": "Not quite. Re-read the Clue Card. Use the scrambled letters to check your spelling.", "entries": ["0004a1024be7fee23f7b4", "00eb136e83c72575d07c3", "01af1bc05da598a7c6317", "02048c5a17e3af7f642d1", "022c53336d7d6e4876958", "0331254338463eacd7cd2", "037c620718792eab5ade9", "0400cc5dc2b807cb40879", "04485d152f5e9930f9318", "05a9a70a365ca7a349b80", "05c3a139794d2c02a7663", "0626482c37cfdf548c5b5", "065d4068fcbd498cdf339", "06d01cc5f8a7012d64df5", "0772eaceb6eca81c1e585", "07c31a3ce2d0e30a1fef4", "0836fa5f95f46d3d81051", "08ca12c716dd6ea469097", "092edbd08f264e6f68368", "0a66f558984a9c78a8f65", "0adf8cd1110d6a54e3bb6", "0afa98dffdb07fe01cfb1", "0c6e9d901e60a0340a9c2", "0c723f5109db58a1e9839", "0df3aa9f922bfb6e44582", "0f4f1fc6af25ea1202920", "108eec6afe3dfbe068493", "10e5d1f25e75e07b7d836", "11dbce3789c7c3b38e9e9", "120a4e473f352a0088ac2", "12639fe6680ab49715081", "127ccf2e0064905a31b84", "130a35c3fdb074baf78a8", "140689dc28e07dd6c00b0", "140846494d576f58e71d7", "155710a2bce12cbd4d784", "15d5ef20d89dd39440c50", "15fd37d35a504cca66860", "16305ca31a30a43056057", "169728f34bdfa1b610826", "19415bc2bf103085eb2b1", "1a88d6daf75a163523cf4", "1b470341b7ac03cdf36a0", "1b744fcf0b209c8453be1", "1b9c40f83d77c6e8b5760", "1bbeda86367985e6fa375", "1cbec50b6bb72758e1929", "1db319370864d1146bf86", "1dce65aa3aa127467d442", "1e6a5eea8f2f124ea0f02", "1f1609c70ef12e3cc0012", "1fd21da35c982744523c0", "20738b5e4c81545dcdd80", "20de102c81b25a66f53f4", "20e5ae7c94348883534e0", "217d978e12d6119f15f23", "22b5ffe202e41869d1f73", "22d7084be39af606d9bf9", "22f182207983ccdd88591", "2344a583be7676db906d9", "23a014d3219960fdfc451", "23f230d59c1c5a62a7bf2", "25afdd4bf8edd886d8105", "2658ce53b0146102bd2a4", "27412dd39e3451c777711", "275ead0b53f50f05eed12", "28de72cdd064e8356b6a9", "2a14a590139ebb0419f49", "2a8fb9340ff69909541e9", "2ab1efc7909a7598da865", "2b71d6c6c35627118e711", "2b8a932f46e0579288cb2", "2bb1ca1df045406557c42", "2bd57ede9db25c366a248", "2c360ff55f56daa39ada3", "2c6ae62ea06a43f079a93", "2d327782aab8aa6b97412", "2d3ffa760979bf8743265", "2d6a0441d642d9b63d087", "2ea6af580a6e18bc241d5", "2ebf462c7f78fcd387358", "2ef890debad5cf72e0bf6", "2f589f29cdf72e9dffa03", "2f6a3b8d6768e59fafab4", "2fb6fd500bd5184c731f5", "2fbdff3c16a0a6c2e0d22", "2fc0ab43e048fd7bb1f04", "305b94f70ac5fade4cf63", "3077987eb2751f70ff273", "3162df1ecf6319282f5d4", "3179c928681c8d52811c2", "31abe4adb930bd1c2b9b0", "31d84a39317e88e835c32", "31ddcfaf5394d59ea7b06", "320ae6aa32172fd2ec0d4", "32af308fffadc601d1466", "32b3c5c47756f1da5c1d9", "32ff144946d50edaa7f35", "3367c6dcd4da3ca1cf5c9", "3401f8989d988a5cda253", "3411342aa14d8d6d880e4", "341af0a40498a0341fc33", "344354367bc8b552c3cb6", "357012a2ec7b97f729bb0", "3773c007780728597ceb1", "39023271da20e0de11530", "3a03104fcc1d27d8590a3", "3a068a3565696f5a401d8", "3a512c4b2e731f1803321", "3ad0da6724829b7ff3836", "3beb58b402b717c028f98", "3c0edd2f806be5e1a0194", "3c8408539484995692631", "3d3318a210fe4b18893c3", "3dd51d8f68ba008587421", "3e883de5de55a115edeb1", "3f22f9074aaa301295d79", "3fe78b36da3ae8b1dd3e5", "417e7a02a2be468961568", "41ef8a93bd613f3e2e7d4", "420cf34e6da6bef0b6d81", "42d4f8f7c84d56a3050f3", "42e70c2aa3fb3dab52377", "4327d106529176cc9bf12", "44027c9707ae096c9a708", "441cd05f06c68c381bdb5", "4526a48afb8c4570c8138", "45cfe0f30379c997a1bd4", "4619fe1a7d120741d2024", "46700c82610f5009252e8", "467591e1bfbfe16278538", "4696b6253a06ad94faa25", "479da62e935ba8dc336e7", "484f30043cd09958f7a07", "48b2fc028f77dd4c9b0c1", "49904b648a317709e30d8", "49fae414e1a6b4597b317", "4a1807560fd342aa41549", "4b193fac4fa5108a53249", "4b971b5ec589bdb51f937", "4b9930657bded51d405a3", "4bff460de8c552f4cc6f2", "4c3304aa4604bbe2e10d5", "4c8b7b450ed5aae119111", "4d2dce7dfc4f7099f1429", "4d55a302c35c95d96b513", "4dc80d9110a86cd59f668", "4e33f7b178e0bca05f002", "4e606dc9b524eda5ed984", "4ef7d204d0b736c427cf6", "4f5ae1fda64bf021217e1", "4f861d051bff2aaaa06f0", "4fcb673dbe4eae2fe3bd4", "503ca5ccdc3ab2b649bc4", "512f922e648cc69943753", "52012f5fea4602e655807", "52210af258528dded8971", "52efc3e483fefd714aae3", "546215dfe79f4d3fbce52", "54e00c1794c537cd2f365", "54f8d601812efc1318e78", "55071ab71170d0a39cf26", "55338754ef00cb7a98dd8", "554fdaddc4e509ed90016", "558f54433194e6290d199", "55dcd0f0e42f87b5a10d2", "55e9d21a64cdfc31bc726", "56322c1867feb77162e05", "58af70995107212c24df8", "58d100833ddb576158c56", "5a5dbec3c580b92fc5be9", "5a6e28719bbfba36fd770", "5afa73a2d32c6ef32b168", "5b8cf405d38c03d82f598", "5bf95ee69c78004e3f227", "5c2e74716e9d1a1f15039", "5cb3add2b4bdf57b72db6", "5ce175bb851d51c226505", "5d890f76951c696b24724", "5ddbe7f8eb92bfd2b7052", "5de78f96a150fa2b34f36", "5edfe929b70472ae29a93", "5f08c433e865e6ed3fdd7", "5f6fffef48a016b6d6e68", "5fb6a12ff7cad8e8d7367", "5fe58830b0f78e13d55d9", "609168cab2bea46704158", "60da57262b3ce3884b606", "63745a9458dd6f1c6cac4", "637695122617f45fd4d68", "64f59f16e870812cc8bf5", "6513107a717ce25b717a6", "655a1a51726bb556f9639", "6682193370a420984d965", "668ea8dc1d2bebf225ec4", "6829666332982c3e4e7a1", "6a039225d81191da623c8", "6af9a49b5bdb37ac0f623", "6b291a584dfa974c4cd78", "6b743a2777bb92a3a1e11", "6bce8072e4d56be4ddae8", "6cd104472ffad0a855df6", "6d4915c49166776663620", "6dc10ea6bd987852d1598", "6e123010bbb647d6c9833", "6f4bcc08eb35905840b61", "6f8df88de15eb2d6afb41", "7004cc8d12a3eb7a85358", "70a2f269c087a563cf8f8", "70a98377bb9c429573ce4", "70df2c6185c1015663bf9", "70dfa5639a9dc03e18f82", "7130ca00f00c47200bb91", "736257ad519092c20b3b2", "736ec6486966a0cc88ee5", "74bbdd69289c2c563d849", "7521eb71be6b6d9f21ee6", "757598ba493eff4af9ec9", "7627bb96c083eb7a86db9", "765c515bf80db30d21584", "76c0a7ab33eb4e763e358", "77e0f471206dcf2882233", "78afe36796954a5e8c181", "7a9a6abf2b3b0523c4a98", "7aea7e84e456d844b8296", "7b2a5d65e01b38de38ce3", "7bc51ffca58daa13903b4", "7d08404e663e667c6ce26", "7d64f051110b6bb7ecd27", "7d9d8acc1ebad26eb1488", "7dae074590606fdb4a891", "7e01d3163d67959e1fa95", "7e65e73c3ece117717623", "7ecce0c305bba04f04292", "7f8cf47dcc5cf0e6d2f61", "7f98b674ddd2789dabe35", "7fbbdd24f6e96af2210e4", "7ff7aa5a4ac7237d68399", "803f2893e94d1bd9bfbb1", "808b657264a4366abfcd2", "80b471bcae7325e172d37", "816e392b6fe8876abebb3", "82ed8d716cb76ce927d50", "83a475720094395b27396", "83ec785d9dd33b956e6d3", "846c4e3cb32cde14998e0", "847b74f18d8c401910f42", "8528ff763d7db6b2da3f4", "8546cc787fc019d574d27", "870699e9f50c8d8c78443", "875a0a0755d804e728bb8", "87e96a0436429f6e4f741", "88b0e2ab36d9f02c1a518", "88e379e8b3110d6f48aa3", "8cc10f5850e97fe4c7cc7", "8f5f9ca60f88851e0d118", "91716f537198015038ae1", "9215cba62e4eeed4c0228", "92e7ef4969e523f5e4872", "9358020984723ac206e17", "949ef9e52d796e029dc72", "95f77f22e941b9e3b7230", "974e57c45ea0e0dc73497", "984c6602906ad60cd8594", "98db80ad2763a2a0731b0", "9961a197cf94d77dc4eb3", "9a497ce16252a0b33ac40", "9a7598fa11397c344f754", "9aa801f001e089d4313c9", "9ae10e0b875e824526033", "9af4b8687e689d1b91534", "9b0093e2c63f047a50ff5", "9b26cd692d3a08d3cbe68", "9bb34af351bb928b9d353", "9c2cd60fd345c988ed239", "9ca4be3d2803dcd12f028", "9cbd95aab037f074a37e4", "9d51f98018c3cc433de07", "9df94f957e6fe35c1e987", "9ea7b110c4fa05cea9da8", "9f3fc453c1e670f1741b7", "9f8e8f0022b56b47140f8", "a027440da46b2fa67df51", "a0e8eea4246026a4514e3", "a18a13f746148351a9490", "a2095168989be855ddad8", "a2ce4b6b6f46b7f1d52d2", "a3262b109a9af3e3fbd07", "a3327eba5c5605b8fae26", "a3383292c28ee3dfd4242", "a376667634922b7b36dc7", "a3e01e9f2f1330fff7021", "a4e039dc5507d490fa0f5", "a4e5c7e1e2d0908dcb294", "a7199e68b0b33c7f00ea7", "a75a9708cffd262819e76", "a7e4c1676cb30ef99c850", "a84cde3ab6cf0f74bbac8", "a8ac5a41a4f2a639b7734", "a8b50c927941315547540", "a8c0fe03e7fb697e1c0d3", "a8e9cb51b47d2c46fc9d7", "a90d3afaf3f35555b16c4", "a9159a8c669f84acf4a43", "a9426d7c251a60652bdb6", "a99b69e7c91ef1d206b39", "aa9a2ed6b9e0163df7133", "aaab9a52393e217826148", "aab0f9497e4ab75c1c535", "aafd81343702406f6d8a4", "ab471abed46da0c0e2fc3", "abfd7964a8751270bcbb3", "ac5b4392ff561fc7b6fb8", "ac7dd7bc431b9635ac1c1", "ac8c888cb6d4613468c24", "ac8f1011a1eb7a9e854e0", "ac944245d1933a11d5404", "ae6148633ec30a7f1d1a6", "ae640a4bbf77e4ba5ec22", "aee7ac8686b7b5ee29d52", "b0702a37b462a6eac0886", "b1d23864ccfae79b6a051", "b1fa294b6ed5c0f943630", "b233759e6a70276b90a75", "b24ea53d2929791bf6168", "b35d7df59e7e081ebc8b0", "b4e28693608448ce40482", "b5939ec6dc81c130e0891", "b605874671ce8946ceaf1", "b613feda004cac0fbfa24", "b87ad0f18702049d44493", "b87bf3321c691caf0ec14", "b88df42e5bad5cbae7079", "b8ffea23d3ab2c50aae61", "b9265a8d98daf5a0c6643", "b97afdc00bbdaae41e589", "b9ba46ad94819ecd9c753", "bb2f1e112d7655ef36368", "bb6869b86625d43846fd2", "bb9f05ca43648ca301501", "bba53d927c5bcedb0f463", "bbee146538bc9c52f73f7", "bc0f8655731301695a9e5", "bc1272aad51acd75c46b1", "bc2a4004fdcda6ad0c454", "bc902ac460aaa1763aa45", "bcb93e52d619433645411", "bd3159285452b06087567", "bd3c980267279d6d5ce74", "bdaedbf9fd300c9e3ca01", "be5eff9f2575b52a60426", "bff13885454571a03d3e4", "c151f04bf3dd2b47ab4f2", "c180eb95137a6c5ce41c2", "c21ee8772e5c7244f2c46", "c278b5152bbbb34e469f3", "c2d1526421f3f53949890", "c2ec064e1025bfac80927", "c33b8119249a61efa0812", "c41d287b61d5fe6e781b0", "c512368b5fee1727e0dc5", "c52e05956b6d6e3b049e9", "c5a9e97f305c44087be79", "c5eae3bd0f3d4deec57c6", "c606d6d8bd24b4acebba6", "c643ceb7359c2306eb358", "c9c28ae50954b87345e52", "caaaf7f0a2b8e9fd4c130", "cad804c64310d76da8f19", "cbd2e07a9a4b46999e0c6", "ccdbcc8a7b79d0856cb78", "ceb2d4536391f3e3f9dd3", "cfb162c67a7313bc4a2c8", "cfcc77b071319890a53d5", "d000c2fed306b14d9a862", "d005bba38184fddb21759", "d197827a798a03b575c37", "d26ca92a81e9146cc9640", "d27196591c42882f94b74", "d364165e728e6123f8684", "d38b488cd084026520894", "d3fa9f1240f6d8737f391", "d4a48ef8b3af6f19a3376", "d4aec25dfb71f3aee6307", "d4bf7e9707c6d814e1cf6", "d552d654aa11c2a4eacc0", "d5f8af84af0b0469f92f3", "d70d886153ec75686ef71", "d812c68cff3023087ec08", "d9107e83e12041912fd88", "d911f7b7c3d43bf15eed7", "d9abe8ff48c2e3b36a9a0", "d9b8044c17b8a46355f72", "d9c422a2a38529f330be1", "d9c455676fad5c2e33e75", "da295410c0735ca2476b9", "da72e4c20c32180213623", "da7e08cd95b2270990fe2", "da89aeff562f5b81df6a0", "daca1fb26743c3ada00e3", "dae2c18d8c803a27de755", "dbd585d29c03adfd057e5", "dbd92f63d3f1993cea9b7", "dcf6dedd34d0d39cc95c4", "dd2bf45a25b42d906f398", "dd3f1b3ecffe00d459f25", "dd6b85ea40cd7320e41d8", "dd9106226bae5317c9913", "dd91f70f32ca47032ef22", "de61c0d4a47da7250bde5", "debd6c89b9d8cfe04f6d1", "df264ed09e92ea6689c09", "dfd54343d202394bd05b8", "e0533f050c3b9143aaf87", "e16fb31da19feb4acfcd1", "e1c80bd705d8301ed32b1", "e1e7a46740e483d5993b5", "e1ed1c4abc791277155d5", "e303ad8c611b84d30ffe2", "e57742904f285943e2204", "e5ec72cb7e7f95aa63770", "e633870db5f6df0b39c27", "e65512933f95f516b93f1", "e68581d54e8fe5b677651", "e783e1c74fc228d1bdc34", "e79e3a210d76e8520b537", "e7a2970f96e6cbdd3b8c0", "e7abba97af8263482a606", "e8652d60d9f4215865690", "e915cca55bdbaabfc1fe2", "e9d329bf99cbbdc41c571", "ea0165965f821976c2808", "ea22513e8d64f6959b8d3", "eac1e626b8ff0dd90a4d3", "ead4dd0c61f7bac577155", "eafbbc7f4e107ad4749c8", "eb43c1f270c6670b1db73", "eb7f8ea86aa653094d6c0", "ece231583c23dc9727a60", "ed0749a81333ad979e101", "ed114b5ec00291902c0f6", "ee803b30875bfad5ecc51", "eee10c5065d15c4e43446", "eee4ad09d1ae9a00e53c1", "eeee2c3e9a24d65c0db23", "ef38f42b2de9a4f1a5145", "ef5c804adf9ad3787f505", "ef89ea234e790c2ca19a1", "effe886c00623278e16c8", "f0bc662b92e7a7384a034", "f11a88b91831b8a493332", "f1611d7603d364deadf05", "f2079dc186da42a7701b2", "f24fc904ccd4b18823142", "f28f9d0a76bfa821acde6", "f3e7c895cc7b0f3d83de3", "f440d4ff3b7a5b9149994", "f473f650440d8d9c3a767", "f48c269f0b9d02c044183", "f4d1c6b36117e6af52a87", "f5d11c578aa927d137156", "f5da0cfd6930cf74e5246", "f6c4f51886fec47563ed3", "f70a5726335930d7fb916", "f72e95f02b6dabc7440c0", "f76d054bff8a4a50ff836", "f780964e294e960bced22", "f7e539fdbcf7ba3bd8f35", "f883c5f04e7ff60045476", "f884acac168ec443940c1", "f8a0135bddd27ad064236", "f8a7d5f582d63b55089e6", "f8c6a032781062c7cec63", "f8e6b37206aa786e799b2", "f9fc0dc12645a1a85c816", "fa2d6c236375721679317", "fa4b033b3133e63b5d380", "fab862bedfe5d1fcca4d9", "fafac0b2e9cadcec4d0d1", "fb1c6dfcc49aef3462b66", "fb5510cc45ab9f6f28625", "fba02549e8378b7eea636", "fbc22b8d6a8178800be40", "fc10c3efb948dd55e1575", "fc982163240d759f5aba5", "fcdd02f1d47b81c70f567", "fd98b4e359b1695c7f133", "fe1cc4b645448effde0d4", "fe84cd4ddc7b677987536", "fedf30e59e267082b7bd0", "fee6fd1717dbc99697ad4", "ff7ed63e61903667fa1f1", "ffb8f227ad4dd0638a105", "fff5b5ffcbada5db044c6"], "id": "lock3_globe"}, {"n": 4, "key": "lock4_compass", "title": "The Compass", "obj": "6", "objLabel": "CORE OBJECTIVE 6", "objText": "Core Objective 6: Explain the impact of the Industrial Revolution on the way people worked and lived.", "type": "decode", "shift": 3, "cipher": "FRWWRQ JLQ", "card": "<p><b>New machines.<\/b> In 1793, Eli Whitney finished a machine that took the seeds out of cotton. Before that, one person working all day could clean barely one pound of cotton by hand. Whitney’s machine was fifty times more productive. Cotton became the crop that drove the southern economy. People called it “white gold.” Norton says slavery grew along with cotton. The number of enslaved people rose from just under 700,000 in 1790 to nearly 4 million before the Civil War, and about 70 percent worked in some way with cotton. In the Midwest, Cyrus McCormick built a horse-pulled reaper in 1831. A farmer with a hand sickle could cut half an acre of wheat in a day. With a McCormick reaper, two people could cut twelve acres.<\/p><p><b>Mills and cities.<\/b> In 1813, the first factory with spinning and weaving under one roof opened at Waltham, Massachusetts. In 1822, a mill began at a village that was renamed Lowell. Young women from farm families became the nation’s first factory workers. They earned $2.50 a week, less than men earned for the same work. By 1840, Lowell had 8,000 textile workers, and the village had become a grimy industrial city. In 1834, the women went on strike over wage cuts, and they lost. In 1836, they walked out over higher rents in company boardinghouses, and this time the owners backed down.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 8, “Industrial Development” (section begins p. 342; pp. 343–351).", "prompt": "The Clue Card describes a machine that took the seeds out of cotton in 1793. A secret message gives the two-word name of that machine. Each letter in the message was moved 3 steps forward in the alphabet. Decode it.", "hints": ["Look at the “New machines” paragraph. Whitney finished a machine in 1793 that took seeds out of cotton. The secret message names it in two words. Use the decoder key to spell it, one letter at a time.", "In the message, the letter F is really C, and the letter J is really G. The first word has 6 letters and starts with C. The second word has 3 letters and starts with G."], "nudge": "Not quite. Decode one letter at a time with the key, then check your spelling.", "entries": ["0105a9d275cd9ae638b24", "0496e072e1a1ffdaa5305", "05a623cb1f2a0b315f036", "065f0d911dabe6d501114", "06c7eab1204be6085d385", "06fe16ad6fc5f0d331bc6", "0703926c811c180cf9a40", "07a13386fb79e68033c28", "07dc7da749b5348c01fe8", "0830e63a01fdebf54e152", "090d9dad99f1aa56d7b68", "099c0bebb547cddac74c3", "09d71fd4835df0170d436", "09f577698f7d1adb1ea33", "0a026a18c17c10dac40b9", "0b02193eb7fb5148d3480", "0b596fea5ac821e5f95d3", "0b9403595f244fbf7d013", "0bb70705842541b7ba0c2", "0ca958bf6dbfa381bd952", "0cb16e056d20f99e0f315", "0cdac92caa47f3da8ce35", "0e1db089d5a5fe5387f01", "0e46b0da9bc377fb3c3a3", "0e5b181b0577ae71ccfa8", "0e8607e5d54e861569f11", "0e8ba37aaace126651814", "0ebae5366efa0f75c3791", "0ef7d4a8ef7b9908d8d07", "0fe12921e31c216b10ae5", "1052b2866a23170bec493", "109c8ee1f5e9b166586f2", "1178a13980f38a134e686", "120bef7b2dd4591076d14", "12399b6fdaef29dd93821", "1289e37ac1fff6ca75704", "12c351b59d8be89c81c59", "12f8dc496b9f647b19109", "133032e0fd19ae2315208", "1331f67444af041553cb3", "139aa1c3bf827a0570fd0", "140dd4e5fe475e7f8bbb9", "14de5bfe61a9cb690e620", "14df14eb5771f49656837", "162b85e4bf0e0891d5df7", "16b47f3ac65c25cb178b9", "16f592d1ee8cf581f28f9", "174a3acb8cc5fee279ac4", "176fcda3787c2ad5b8f18", "177a58f9d9f0a62233346", "19156bbdfe136594f0f68", "195d035c516bc3f029708", "1a949a76fce6995618542", "1acb20714f279490cd823", "1c73b4bda773ad456f373", "1f21625e4d08763df42a1", "1f87e016f28e9ae40a988", "1f98841e169955ee00633", "201c922ae0299a9c946b6", "20da53667894c44c531b0", "20e79306bfe1b093a2586", "21a6077dd160779987990", "22c2eaad08fd3996af431", "232fd1c62d9ddfe81b835", "238eec34acb11ec9ddc52", "239f272aba6c4acaad362", "23bab27946b03f24b23e8", "247db2211df3f3cae7718", "24e1065aab68cef54f999", "254c5f1cbd9a5a34ba653", "255dcf7f8130598fcb658", "25d3ce7016796351ec5b4", "2644cf7e87ff538287cc9", "26b738ce528ab788d6390", "27afb673e93142592d744", "28149a20c554c0a3bbb77", "2883cf1d0d9c718069170", "28b68086d929b3afe0389", "2938716aef3f9b6640f00", "2a30e3262f3c9aee6b6f0", "2a5e2cb6e8c71e7c5d763", "2a60759c02682c073d885", "2b1008550458f4128c7d5", "2b4775f052bf41bb43513", "2c3abc5773cb60cd99d10", "2c71513445d351d29e0e3", "2cf302e630a240e613f85", "2d098cf95c09b5b95cc13", "2d8bd057df8a51077bb63", "2d985543680b4f74753d2", "2e07fa70e8a43420345c0", "2e549eff6879b240f0e29", "2e56a3d37a3169acf97d2", "2f179d1d23e7615e87758", "2f77f4bdd69d0aa889d72", "300f72efa0a4f2ea24b31", "327d4381ae7c14289e136", "32946549bf4949f916d43", "33257e3e71d60549f4bf6", "33a18d446d4b83f90f231", "33d7b08e3323a79306576", "35287578b5252450bd041", "356f8323028971f4d9318", "3617b3cae6bca483025c8", "36687675027d9ab29c031", "3718d6a6f5674d7f4f4d8", "371f996efa5637f54ca46", "3887ebd7ae2cfd1c4cb19", "38898ebcfcc83a0d08de2", "389f4df78490e10889d23", "391db34c5efd7f3483866", "392e2e70912b5c377efa6", "39aaf82a6e4d0ca968969", "39d5abb7a40dd841b29e2", "3aa4fb72914c60e142071", "3b697cb0fb5b135b56565", "3c612a0acd76e2456b8b8", "3d751be667189d195b4b5", "3d83156ce4982ac3c1640", "3da78cffe12328ce0e747", "3e0bdacc1afa3708d2119", "3e3964725bf1d017aa5a6", "3e77ac0250d781a21ad58", "3ec75ff6abc495c825512", "3ec94470ed34b6cf54c15", "3ef877bb69a225ad54231", "3f0a4692bcd9ea600f927", "3f51bb96e99ce80101429", "3f6219ffd54faf2c21be9", "40316398c65ad9bca24d9", "4108ab28f0ab3f3da1bb5", "41130fc9373bd22bfb192", "414d13ec2d4d1f5e0c660", "4173ac3a7fe3144a1fbd2", "4282a4f9aa4f05c083c62", "42a55363043b44e3c8a51", "42e2f5df1e631b93e31e9", "433f093183d8b5d525c09", "4369dac7f04422ee4f7f4", "43f39d934db2f8fbe0725", "43f677e74dcd3da54f999", "44579b32976e94b143c20", "4571dd1398bc6a26ba4e2", "4631f7e7e9b130b430fc6", "4647205fbb5e9112f3617", "47604f389e729b3771d10", "4802f6f8fd1df542ac949", "493043c38f255bb2ea339", "49723a67c93d75d7e4b19", "4a1e870aabf6e6ae642d0", "4a71dbe0ae937c08a21c6", "4af751b3d2020e769b9d8", "4aff4e0f5041ff920e539", "4b4b0cb07e658323af823", "4bcb939dffcd1c3fac7e1", "4bd52b4d475340ee20d19", "4c0e912a4f47f1cfff976", "4d2435f06b78dcaf1d6b4", "4e82b07b4ab4c63b26de2", "4f1bff869437060ef0434", "4ffe52a9efd13a64e5eb8", "507b38a660444a4226cf8", "50b64ffe75ef3f3f4d280", "5159f40b7c5a0fc5e6e49", "51ee65a7dacdd66369b81", "529e1339e0969fd969bc5", "5341427f482d6a80a4749", "54004be83f7b5d4c1f6c1", "54ac9240e383536efe2e2", "54fdf55674cd4313ff1e3", "551b6642d8a1e09de1f06", "55c019cf1659eb686d8a4", "565bd7cb4773de8660a83", "56e8d027d09092c45a0e3", "57628c528eb2764df3161", "578d9afe7184e6f211b99", "58600b1b40522709ec906", "590fac0a6eb851ff11e87", "5b20c01e038d983680c62", "5c66da263f5546be6c2f2", "5d88c606a19df90207135", "5e355f0f89262b771ed16", "5ec2392ebcfd5a94eb336", "5f4744bc87b5e65485a95", "5f482c2a1de85630642f9", "60335322e178699404613", "60fac8795ae0dc310e777", "62153063764b40acc7401", "626c1b2d0255d18bb3dd8", "626fe5562d0b33cb02aa3", "62c84ddc792ee271d1021", "62f26510abb69cb1167b6", "63510ac1568173ee582e5", "64070d95fd5acbdf36229", "6568648994172997e68c8", "65c1f92e543b0e49e9998", "65e0d7515c35e70dd7031", "6643e58baec4edc49d0f6", "669fd6ba2faf65a401ae8", "688cde80689ff386826a7", "68e2c0c03d58119bf9056", "69021a61722d1ba608246", "6ab38fa71dc4a2d97ddc0", "6b44d441158f05f8e78f5", "6c058e7c18545a70563b7", "6c395edfeb85a5bb7cbb0", "6c8fee37c91c530cb6d84", "6d88a46315e1387e8d910", "6d8ecaccd87f37eedf5f5", "6d99747b9d22b3540aef6", "6dc49b36518389aadba58", "6dc7d1a0b644e942a5c29", "6dfcbaf25fd65a7c7fe87", "6ee59540ea95e9eab1237", "6fb91a6080d38ce47ca41", "7029d2f8d6fdbfff138a8", "707f40fa8ea65172dd4a1", "70e4336d628dd8267c619", "7157e1e3a784ce47035c2", "71a83f1f66b2e8bd78c32", "729edf5db1cd2c44b5077", "741929545b606187034c6", "7502d1218dd580e387402", "752951e9648c73c679208", "7586f47e4566fcf2b7779", "758c7683828c6d69b8295", "7590a74b141ea5b5c0f26", "75b5e446efb922b17da73", "7617a62bc5b7355666e18", "765b8a8bb6ff765ef4b24", "769cc399df95798ea9f13", "76d1844f684d28c697149", "773f69870ebf8250c5ce8", "784d602dbe2b4eeb645e3", "785786ba0fcb1675bdd64", "79234e976415ab535e5f7", "799e61447bf7c0cae05b2", "79de70eefbc070acb1769", "7b8fabc210fe4a2e8bd40", "7cd8f869f05c1552d1127", "7de0c99c58e3868c0d9d8", "7dee4892dac78c54c8f73", "7e5b89ddfce5bf0962267", "7ea2aed977bd9ef485e97", "7ea788c0ec1e78095da19", "7fd2fe5f4fe650138b348", "7fe25d7d5f38cb3db0b17", "80618efb0839f052e7fa2", "80c8319c4de185986b403", "80d55b4d89c80c3fe05d5", "811e2856bce4e72154fb6", "8226ee3b184967547a1b4", "8236ec8e45bf1c3e285f7", "82dd4b039cbe44627b2c5", "8335f272b8024ac7f8ed4", "8370e563327aed64c28a5", "838028c17a69bad45ff56", "83db0b8765e41cabcee47", "843be6492abe2d05d6871", "8447431b78f920f34d9b2", "858fc639ff65b99d3d046", "85d472b1a3e127f6f5a52", "8633043357af1b2719a86", "86d200783c879ea28ef68", "885aaa8ef287525650bc6", "89bdf2c63ccdac235ee72", "8a1f3395ac3a4a6f7bd75", "8abb8bf06f3d28b8474a9", "8b8b711103082fecf64f8", "8c704d177d2e1cca680d7", "8cb92904e7e712c6df340", "8cbc3513f20db7e18a941", "8d65534c82c81ed713872", "8decba9c3dcbfd52c4fe0", "8e430d079d18fd27f72b1", "8e95e6d8426f3299bd389", "8ebd27b03ca640e9e54a7", "8ef140a99227285e7c7d9", "8f94ae99f815395283785", "9078d3f00bebbea8ecc14", "90bd341dcf58fc39c9873", "90c745510925a08fcc112", "90f5dc763df13596cd3f8", "9146adf9f86bd0b45b9f3", "91d1f3f60413f47d0b578", "922ed8081bd524e506938", "926d6bfa3f06291b86695", "929098fd48a8a23a74bf9", "92a9974837bbcc039d051", "93fe4b3195b9d4f9699a0", "94479fe0df12bfd8eeaf1", "951901a6cb6623e21a8d9", "953d0d9186401de104fc0", "95478ef9406974634d653", "95668b929dcc696c3fe61", "957e369e95f6943466ed7", "9586fef46eeb3d237da58", "96061131394fb52bbb141", "974f331395de8561e07f9", "97c5bada7f2fd30b4a057", "981f19e1736db3ff02221", "98b0dd992838cf5748a37", "98c2bdea2234f5f7cd675", "9907e501a666519a12481", "9909b745eac17013adcb2", "9914da09dd07e3ccae083", "993e7a9487d20b186c1f7", "9944336caf2e3c676ba85", "995e11b445903b1b68926", "9b20f0423aa9ce8ceb745", "9b7a7d1cad8a86564a914", "9b8169e253644ce4d0ab0", "9c0e466096c68faac09d6", "9c197336e814aac2c4948", "9c6fc257e136af28cf836", "9cd1a76dddeefadc47f33", "9ce1a32acbadbc1148230", "9d7662ca5bec2cdab7d87", "9d7e9490323acb340a3f5", "9ded9de9cf116cdb79716", "9e32a30811e90db427c66", "9eca19b99c896f0f19fc2", "9f073b0c66aeb88d0f8d5", "a0778a8454488b49cdcd6", "a1185e7d06043545067c2", "a11de531f41047b566275", "a1d3d4c594a6e53820190", "a2d97f7d5494e41d79457", "a315e09f21249ed320d75", "a415c2fab421208c8a5b8", "a4a543d54ed85f12da894", "a524189a13e9b54f87719", "a6719fdb8281c2df363c1", "a6be3813470d6857820c9", "a711d703d77d90af9ba58", "a7f6b98505ffde98167e4", "a8e03850d5e5e74ccd263", "a9028218dfe0bccec0cc8", "a9f97202dfc8bd9aa60e4", "ac6ae7aff2a812e27d7e1", "ad4b3b01102ffd3e0fd41", "ad53ddb42ae43131d07f6", "add7fc2441e85b0af9935", "aea05f63aa36431652e03", "aed22f5b55168eab495e8", "af4b3bbd8632588225dd6", "afa3f86e575978c983579", "b14fa75dfb882872a0464", "b2217cc9c00931775e261", "b273eafd7875eb925fde0", "b2e4a316f49bc8fc688f9", "b3bb4d60dc6e5e28fee96", "b400813d56b50507d4a11", "b44fc3efbc98c9efb5f77", "b4589a2ca8bbf0965a947", "b4ff85917bf169b3a9422", "b559a52047f925c55c664", "b56545f85790f0aeb56f1", "b58a15103c376e9457432", "b5b61145da27768e7e427", "b745906f1fb002987bff3", "b7bfe3fd39e75b3b3a3d8", "b7e6bfaf3b81b4fc65466", "b91685a1e50a52db714c8", "b96ceec35fde0b876dab2", "bae6227623dce78ef0da1", "bb0539bdfd0243427a348", "bb07c6b420e29078e4481", "bbff427dc35151825df04", "bc089688ca0bdb1a25ce1", "bccd9105b73616d4cd4d3", "be52398600d94d4549599", "bf4f09fb0067e91bfe9b7", "bfd761786da5a9a1a60b5", "c143ce9a25e113c4b9093", "c14494c64c2bf27960638", "c1556dcfbba7408520445", "c1ecd93adbd5d7b67c239", "c23799ea3496a420bde77", "c29f35602ad359c134594", "c38a02cdb7df1b7a35381", "c394fcd401624f51b61b0", "c570c18c644c820634ba6", "c5ce7c81bef05b22836c0", "c5d17d589f732b91cbb12", "c65bbe0057e28e1b89087", "c7904b4523aaa480c9191", "c848c1abb727ceb587d95", "c85567f2cb1c6c008cd12", "c8799b0dd67455e39b975", "c8cd114d885898031bd45", "c931baac0a47707969137", "ca130283bb6dd9b8d6938", "ca57ad563ea1576bceeb1", "ca5ab999bc177d6aca6b2", "cacd30ceb173cfa632a54", "cbf1001d4fe9583a8dd25", "cc0dec1baac7c40bb2490", "cd18024d3048d845b4fb3", "cd8426d32e4665fce87c6", "cd97e0b8cce32794f19a1", "cdc503af63b91b038ff00", "ce1bdf83109840f0a48f5", "cee9bcbe72c5a725e07a5", "cefc3c5f9b506feacf527", "cf4f6f76951ff715681b1", "cfe5e03b0565eda540bb7", "d1eb5b13aa1264da0c898", "d28e673b98b1d15f47067", "d3df4994cdc3792a1d746", "d3df72779a82ed242e9a5", "d410025de6df0f0766b73", "d47d44c619f1c0ac7b2c3", "d4bf6f1ef9760dc70be25", "d4bfc14d45e5d4b770066", "d4cfee906776bc5e1bc46", "d6059b7f251d8dfdc84d6", "d61f3882d32e47e580392", "d6d166d223e14f2bad238", "d7e1c9e626a2875fd4492", "d7fb543aba103734b3733", "d8de6b65cf80416ef2679", "d8e6539412664540e7bc1", "d9549497b96b95a061a42", "daf40f69774fbded6b752", "dbf75debf98a7e439c341", "dc2d060259a8420e0e8f9", "dc46b5a1c516bf452df67", "dc54a98a11817aae60d22", "dc8dacc819122cc50eb76", "dd0c24bf03965945006f1", "ddb3e4510e071f0696899", "de64528db5c62f7726195", "de94bf4d1107920263095", "deb4a97feb68aca37dec2", "df07cadddc6aae8e5c0e8", "df0875e2c6780e6ac6d26", "e0104ab38a06a52a952e5", "e148d94ce1b4cd01358a3", "e22d60cfd45b017274715", "e230e5cea4312c767b093", "e26179f75baa05dccfc48", "e2798b0e12206f02c2e26", "e3135287e483a23744294", "e4f5fa7ba27f7a03a1a09", "e5ab3bc5709d86f91b647", "e673379c0545b6ae18257", "e6a92f000ec722ca6b108", "e75ea2c003318e0099601", "e8c17c214164fd81aa9b1", "e988dcdbbd20a3db41775", "e9b94024310a15d7ef895", "ea37283573ffe1af70584", "ea8f11c46c8491fe22999", "eae0ef8831371e7870d39", "eb0f70ae76bda6e7861b2", "eb31da06f8c79f167fb74", "eb4e8710a09ecf6bd09e5", "eba7172a36d1da5eeec77", "ebd300261f45e32cb5f04", "ecc2a84132125d5580626", "ed3456573cfec4ee4a2b2", "ed3b1e7c3f177e52077c4", "ee7dfd6d8ee97ae0a46d1", "f042c530d5aa5ba608e81", "f11db6195c64b4bd45580", "f12186beb9827b77d0d80", "f15dbeed085f1e2785009", "f172cec0893a289151be7", "f3d5f5f5f3cb5102c9be9", "f47203908b4f1d3bc6644", "f481d5938e4ec44bf48a5", "f6ff054fc15f327f60ba3", "f702699a311528cbc31e3", "f776038c1de17cf4db914", "f79ad1ec2137576a18626", "f7d50c9346ce9abe19fa5", "f7e4dbe04a289fb4ffc98", "f9234f82fc449ef4c4bb9", "f9b647c42c630c18804a1", "fa0914c351e83544db184", "fab0087128f46deb871b2", "fab7cdf8a30e13fb00a52", "faeebe7d1a467fe058e01", "fb81854bd49b168dc82c1", "fb843184468c8e5221b89", "fbb56c68d0d156a440b62", "fbf7734ce281d87199c29", "fc57e8cc09bd2b390d467", "fcb6bb291a7f57c47fd07", "fcd5111a32c50e23677c3", "fd60729433afe8bc0be04"], "id": "lock4_compass"}, {"n": 5, "key": "lock5_chain", "title": "The Measuring Chain", "obj": "7-8", "objLabel": "CORE OBJECTIVES 7 AND 8", "objText": "Core Objectives 7 and 8: Analyze how immigration altered the nation’s population and shaped its politics. Evaluate the impact of the expanding capitalist “market economy” on workers, professionals, and women.", "type": "pick", "card": "<p><b>New arrivals.<\/b> After 1815, the number of immigrants rose each year. By 1860, more than one of every eight Americans was born in another country. In 1845, a fungus destroyed Ireland’s potato crop. More than a million people died in the potato famine, and almost 2 million more left Ireland. Irish men built many canals and railroads, and Irish women often worked as live-in servants. German immigrants were almost as many. Many were skilled craftspeople or farmers who moved with their families. Some native-born Protestants, called nativists, resented the newcomers, especially Catholics. The Know-Nothings wanted immigrants and Catholics kept out of public office. They also wanted the waiting time for citizenship raised from five years to twenty-one. Norton says some nativists used violence against Catholic immigrants. By 1860, the party was dead.<\/p><p><b>Workers and professions.<\/b> Skilled artisans struggled to compete with cheap factory goods. Early unions were prosecuted as unlawful conspiracies. In 1842, in <i>Commonwealth v. Hunt<\/i>, the Massachusetts Supreme Court said forming a union was not illegal. In 1834, the National Trades’ Union formed. Women formed unions too. Louise Mitchell said that when women complained about low pay, employers answered that men had families to support. Growing towns also needed new professions, such as teachers, lawyers, doctors, and engineers. Teaching grew fast, and women eventually replaced men as teachers. Women were mostly limited to nursing and teaching. Elizabeth Blackwell finished first in her class at Geneva Medical College in 1849. She was the first woman to earn a medical degree. After that, the school refused to admit more women.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 8, “Immigration” (section begins p. 355; pp. 355–359) and “Organized Labor and New Professions” (section begins p. 359; pp. 360–363).", "prompt": "Pick the correct answer for all four questions.", "qs": [{"id": "f", "q": "What destroyed Ireland’s potato crop in 1845?", "opts": [{"id": "a", "label": "A fungus"}, {"id": "b", "label": "A new law in Britain"}, {"id": "c", "label": "A strike by farm workers"}, {"id": "d", "label": "A canal that flooded the fields"}]}, {"id": "k", "q": "The Know-Nothings wanted the waiting time for citizenship raised from five years to how many years?", "opts": [{"id": "a", "label": "Ten years"}, {"id": "b", "label": "Fifteen years"}, {"id": "c", "label": "Twenty-one years"}, {"id": "d", "label": "Twenty-five years"}]}, {"id": "h", "q": "In Commonwealth v. Hunt (1842), what did the Massachusetts Supreme Court say?", "opts": [{"id": "a", "label": "Forming a trade union was not illegal"}, {"id": "b", "label": "Unions were unlawful conspiracies"}, {"id": "c", "label": "Women could not join unions"}, {"id": "d", "label": "Workers could never go on strike"}]}, {"id": "b", "q": "Who was the first woman to earn a medical degree, according to Norton?", "opts": [{"id": "a", "label": "Sarah Monroe"}, {"id": "b", "label": "Louise Mitchell"}, {"id": "c", "label": "Elizabeth Blackwell"}, {"id": "d", "label": "Horace Mann"}]}], "hints": ["Each answer is in the Clue Card. Look for what hurt the Irish potato crop, how many years the Know-Nothings wanted for citizenship, what the Massachusetts court said about unions, and who earned the first medical degree for a woman.", "A fungus destroyed the potato crop. The Know-Nothings wanted twenty-one years. The court said forming a union was not illegal. Elizabeth Blackwell was the first woman to earn a medical degree."], "nudge": "Not quite. At least one answer is off. Re-read the Clue Card for the potato crop, the Know-Nothings, the 1842 court case, and the first woman with a medical degree.", "entries": ["fa59cb83192f1dccc8292"], "id": "lock5_chain"}]}</script>
+<script>
+function sha256(ascii){
+  function rightRotate(v,a){return (v>>>a)|(v<<(32-a))}
+  var mathPow=Math.pow,maxWord=mathPow(2,32),i,j,result='',words=[],bitLen=ascii.length*8;
+  var hash=sha256.h=sha256.h||[],k=sha256.k=sha256.k||[],pc=k.length,comp={};
+  for(var c=2;pc<64;c++){if(!comp[c]){for(i=0;i<313;i+=c)comp[i]=c;hash[pc]=(mathPow(c,.5)*maxWord)|0;k[pc++]=(mathPow(c,1/3)*maxWord)|0}}
+  ascii+='\x80';while(ascii.length%64-56)ascii+='\x00';
+  for(i=0;i<ascii.length;i++){j=ascii.charCodeAt(i);words[i>>2]|=j<<((3-i)%4)*8}
+  words[words.length]=((bitLen/maxWord)|0);words[words.length]=(bitLen);
+  for(j=0;j<words.length;){
+    var w=words.slice(j,j+=16),old=hash;hash=hash.slice(0,8);
+    for(i=0;i<64;i++){
+      var w15=w[i-15],w2=w[i-2],a=hash[0],e=hash[4];
+      var t1=hash[7]+(rightRotate(e,6)^rightRotate(e,11)^rightRotate(e,25))+((e&hash[5])^((~e)&hash[6]))+k[i]+(w[i]=(i<16)?w[i]:(w[i-16]+(rightRotate(w15,7)^rightRotate(w15,18)^(w15>>>3))+w[i-7]+(rightRotate(w2,17)^rightRotate(w2,19)^(w2>>>10)))|0);
+      var t2=(rightRotate(a,2)^rightRotate(a,13)^rightRotate(a,22))+((a&hash[1])^(a&hash[2])^(hash[1]&hash[2]));
+      hash=[(t1+t2)|0].concat(hash);hash[4]=(hash[4]+t1)|0;
+    }
+    for(i=0;i<8;i++)hash[i]=(hash[i]+old[i])|0;
+  }
+  for(i=0;i<8;i++)for(j=3;j+1;j--){var b=(hash[i]>>(j*8))&255;result+=((b<16)?0:'')+b.toString(16)}
+  return result;
+}
+function sha256u(s){return sha256(unescape(encodeURIComponent(s)))}
+
+(function(){
+  var PACKET='CPUSH_L5_ESCAPE';
+  var STORE='cpush_l5_escape-room_';
+  var D=JSON.parse(document.getElementById('er-data').textContent);
+  var $=function(i){return document.getElementById(i)};
+  var S;
+  var digits={};            // runtime only: lock n -> digit
+  var entries={};           // lock id -> {h20: maskedDigit}
+  var expanded={};
+  var lastTick=0,timer=null;
+
+  function squash(t){return String(t).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'')}
+  function h20(s){return sha256u(s).slice(0,20)}
+  D.locks.forEach(function(L){var m={};L.entries.forEach(function(e){m[e.slice(0,20)]=+e.slice(20)});entries[L.id]=m});
+
+  function checkLock(L,canon){
+    var salt=D.salt+L.n+':';
+    var h=h20(salt+canon),mk=entries[L.id][h];
+    if(mk===undefined)return null;
+    var m=parseInt(sha256u('m:'+salt+canon).slice(0,2),16)%10;
+    return (mk-m+10)%10;
+  }
+  function fresh(){
+    var o={first:'',last:'',period:'',started:false,elapsed:0,escaped:false,escapeMs:0,debrief:'',codeTries:0,locks:{}};
+    D.locks.forEach(function(L){o.locks[L.id]={solved:false,attempts:0,hints:0,guess:'',readable:''}});
+    return o;
+  }
+  function loadLocal(){var o=fresh();try{var r=JSON.parse(localStorage.getItem(STORE+'state')||'null');if(r)restore(o,r)}catch(e){}return o}
+  function persist(){try{localStorage.setItem(STORE+'state',JSON.stringify(snapshot()))}catch(e){}}
+
+  function totals(){
+    var t={locksSolved:0,attempts:0,hintsUsed:0,exitCodeAttempts:S.codeTries};
+    D.locks.forEach(function(L){var l=S.locks[L.id];if(l.solved)t.locksSolved++;t.attempts+=l.attempts;t.hintsUsed+=l.hints});
+    return t;
+  }
+  function fmt(ms){var s=Math.round(ms/1000),m=Math.floor(s/60);s=s%60;return (m<10?'0':'')+m+':'+(s<10?'0':'')+s}
+  function snapshot(){
+    var o={packet:PACKET,course:'CPUSH',lesson:5,assignment:'Escape Room (Lite)',version:1,saved:new Date().toISOString(),
+      student:{first:$('f_first').value.trim(),last:$('f_last').value.trim(),period:$('f_period').value.trim()},
+      status:S.escaped?'ESCAPED':'INCOMPLETE',escaped:S.escaped,
+      escapeTime:S.escaped?{ms:S.escapeMs,text:fmt(S.escapeMs)}:null,
+      totals:totals(),elapsedMs:Math.round(S.elapsed),started:S.started,locks:{},debrief:$('debriefText')?$('debriefText').value:S.debrief};
+    D.locks.forEach(function(L){var l=S.locks[L.id];
+      o.locks[L.key]={objective:L.obj,puzzleType:L.type,solved:l.solved,attempts:l.attempts,hintsUsed:l.hints,solvedWith:l.readable,solvedGuess:l.guess}});
+    return o;
+  }
+  function restore(o,r){
+    if(!r||typeof r!=='object')return false;
+    var st=r.student||{};
+    o.first=st.first||'';o.last=st.last||'';o.period=st.period||'';
+    o.started=!!r.started;o.elapsed=+r.elapsedMs||0;o.debrief=typeof r.debrief==='string'?r.debrief:'';
+    o.codeTries=(r.totals&&+r.totals.exitCodeAttempts)||0;
+    var allOk=true;
+    D.locks.forEach(function(L){
+      var src=(r.locks&&r.locks[L.key])||{},l=o.locks[L.id];
+      l.attempts=+src.attempts||0;l.hints=Math.min(+src.hintsUsed||0,L.hints.length+0);
+      if(src.hintsUsed>L.hints.length)l.hints=L.hints.length;
+      if(src.solved&&typeof src.solvedGuess==='string'){
+        var d=checkLock(L,src.solvedGuess);
+        if(d!==null){l.solved=true;l.guess=src.solvedGuess;l.readable=String(src.solvedWith||'');digits[L.n]=d}else allOk=false;
+      }else allOk=false;
+    });
+    if(r.escaped&&allOk&&r.escapeTime){o.escaped=true;o.escapeMs=+r.escapeTime.ms||0}
+    return true;
+  }
+
+  /* ---------- scene ---------- */
+  var NS='http://www.w3.org/2000/svg';
+  var XS=[210,255,300,345,390];
+  (function(){
+    var g=$('plocks'),h='';
+    XS.forEach(function(x,i){
+      h+='<g class="plock" id="pl'+(i+1)+'"><path class="sh" d="M'+(x-8)+' 124V114a8 8 0 0 1 16 0V124" fill="none" stroke="#F0F4EB" stroke-width="4"/><rect class="bd" x="'+(x-15)+'" y="124" width="30" height="24" rx="4" fill="#D26B4B"/><circle cx="'+x+'" cy="135" r="3" fill="#2D3D1A"/></g>'+
+      '<rect x="'+(x-16)+'" y="158" width="32" height="36" rx="5" fill="#1C2811" stroke="#E1A28E"/><text id="dw'+(i+1)+'" x="'+x+'" y="184" text-anchor="middle" font-size="24" font-weight="800" fill="#F0F4EB">?</text><text x="'+x+'" y="208" text-anchor="middle" font-size="11" font-weight="700" fill="#D4DCC9">LOCK '+(i+1)+'</text>';
+    });
+    g.innerHTML=h;
+  })();
+  function sceneUpdate(){
+    D.locks.forEach(function(L){
+      var open=S.locks[L.id].solved;
+      $('pl'+L.n).setAttribute('class','plock'+(open?' open':''));
+      $('dw'+L.n).textContent=open?digits[L.n]:'?';
+    });
+    $('scene').classList.toggle('escaped',S.escaped);
+  }
+
+  /* ---------- build lock cards ---------- */
+  var W={};   // widget state per lock
+  var LOCKSVG='<svg class="lk" viewBox="0 0 44 44" aria-hidden="true"><path class="sh" d="M13 20V14a9 9 0 0 1 18 0V20" fill="none" stroke="#F0F4EB" stroke-width="4"/><rect class="bd" x="8" y="20" width="28" height="20" rx="4" fill="#D26B4B"/><circle cx="22" cy="30" r="3" fill="#2D3D1A"/></svg>';
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+  function buildLock(L){
+    var sec=document.createElement('section');sec.className='lock glass locked';sec.id='lock'+L.n;
+    var head='<button class="lh" type="button" id="lh'+L.n+'" aria-expanded="false">'+LOCKSVG+'<span class="lt"><small>LOCK '+L.n+' · '+L.objLabel+'</small><strong>'+esc(L.title)+'</strong></span><span class="dg" id="dg'+L.n+'" aria-label="digit">?</span></button>';
+    var body='<div class="lb" id="lb'+L.n+'"><p class="objline">'+esc(L.objText)+'</p>'+
+      '<div class="card"><h4>CLUE CARD</h4>'+L.card+'<p class="src">'+L.src+'</p></div>'+
+      '<div class="prompt">'+L.prompt+'</div><div id="pz'+L.n+'"></div>'+
+      '<div class="row"><button class="btn primary" type="button" id="ck'+L.n+'">Check</button><button class="btn small" type="button" id="hb'+L.n+'">Hint</button><button class="btn small" type="button" id="rs'+L.n+'">Clear</button></div>'+
+      '<div class="hints" id="hs'+L.n+'"></div><div class="fb" id="fb'+L.n+'" role="status"></div></div>';
+    sec.innerHTML=head+body;
+    $('locks').appendChild(sec);
+    buildPuzzle(L);
+    $('lh'+L.n).addEventListener('click',function(){
+      var st=lockState(L);if(st==='locked')return;
+      expanded[L.n]=!expanded[L.n];updateLocks();
+    });
+    $('ck'+L.n).addEventListener('click',function(){submit(L)});
+    $('hb'+L.n).addEventListener('click',function(){hint(L)});
+    $('rs'+L.n).addEventListener('click',function(){clearPuzzle(L)});
+  }
+  function labelOf(list,id){for(var i=0;i<list.length;i++)if(list[i].id===id)return list[i].label;return id}
+
+  function buildPuzzle(L){
+    var el=$('pz'+L.n),w=W[L.n]={};
+    if(L.type==='order'){
+      w.sel=[];el.innerHTML='<div class="chips" id="ch'+L.n+'"></div>';
+      renderOrder(L);
+    }else if(L.type==='match'){
+      var h='';
+      L.terms.forEach(function(t){
+        h+='<div class="mrow"><label for="m'+L.n+t.id+'">'+esc(t.label)+'</label><select id="m'+L.n+t.id+'"><option value="">Choose a description...</option>';
+        L.descs.forEach(function(d){h+='<option value="'+d.id+'">'+esc(d.label)+'</option>'});
+        h+='</select></div>';
+      });
+      el.innerHTML=h;
+    }else if(L.type==='pick'){
+      var h2='';
+      L.qs.forEach(function(q){
+        h2+='<fieldset><legend>'+esc(q.q)+'</legend>';
+        q.opts.forEach(function(o){h2+='<label class="opt"><input type="radio" name="q'+L.n+q.id+'" value="'+o.id+'"> <span>'+esc(o.label)+'</span></label>'});
+        h2+='</fieldset>';
+      });
+      el.innerHTML=h2;
+    }else if(L.type==='decode'){
+      var k1='',k2='';
+      for(var i=0;i<26;i++){var p=String.fromCharCode(65+i),c=String.fromCharCode(65+(i+L.shift)%26);k1+='<div class="c">'+c+'</div>';k2+='<div>'+p+'</div>'}
+      // build key in two rows of 13
+      var key='';
+      for(var r=0;r<2;r++){for(var j=0;j<13;j++){var idx=r*13+j;key+='<div class="c">'+String.fromCharCode(65+(idx+L.shift)%26)+'</div>'}for(var j2=0;j2<13;j2++){key+='<div>'+String.fromCharCode(65+r*13+j2)+'</div>'}}
+      el.innerHTML='<div class="cipher" translate="no" aria-label="Coded message">'+esc(L.cipher)+'</div><p style="margin:.6em 0 0;font-size:15px;color:var(--dim)">Decoder key: the <span style="color:var(--hl);font-weight:700">gold</span> letter is in the message. The white letter under it is the real letter.</p><div class="key" aria-hidden="true">'+key+'</div><label>Decoded answer<input type="text" id="tx'+L.n+'" autocomplete="off" autocapitalize="none" spellcheck="false"></label><p class="ennote">Type the answer in English.</p>';
+    }else if(L.type==='fill'){
+      el.innerHTML='<p style="font-size:18px;margin:.2em 0">'+esc(L.sentence)+'</p><div class="scr" translate="no" aria-label="Scrambled letters">'+esc(L.scramble)+'</div><p style="margin:.4em 0;font-size:14px;color:var(--dim)">Unscramble the letters to fill the blank.</p><label>Your answer<input type="text" id="tx'+L.n+'" autocomplete="off" autocapitalize="none" spellcheck="false"></label><p class="ennote">Type the answer in English.</p>';
+    }
+    var t=$('tx'+L.n);
+    if(t)t.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();submit(L)}});
+  }
+  function renderOrder(L){
+    var w=W[L.n],ch=$('ch'+L.n),h='';
+    L.items.forEach(function(it){
+      var pos=w.sel.indexOf(it.id);
+      h+='<button type="button" class="chip'+(pos>=0?' sel':'')+'" data-id="'+it.id+'" aria-pressed="'+(pos>=0)+'">'+(pos>=0?'<span class="n">'+(pos+1)+'</span>':'')+'<span>'+esc(it.label)+'</span></button>';
+    });
+    ch.innerHTML=h;
+    [].forEach.call(ch.querySelectorAll('.chip'),function(b){
+      b.addEventListener('click',function(){
+        if(S.locks[L.id].solved)return;
+        var id=b.getAttribute('data-id'),p=w.sel.indexOf(id);
+        if(p>=0)w.sel.splice(p,1);else w.sel.push(id);
+        renderOrder(L);
+      });
+    });
+  }
+  function clearPuzzle(L){
+    if(S.locks[L.id].solved)return;
+    var w=W[L.n];
+    if(L.type==='order'){w.sel=[];renderOrder(L)}
+    else if(L.type==='match'){L.terms.forEach(function(t){$('m'+L.n+t.id).value=''})}
+    else if(L.type==='pick'){L.qs.forEach(function(q){[].forEach.call(document.getElementsByName('q'+L.n+q.id),function(r){r.checked=false})})}
+    else{$('tx'+L.n).value=''}
+    fb(L,'','');
+  }
+  function guessOf(L){
+    // returns {canon, readable} or {err}
+    if(L.type==='order'){
+      var w=W[L.n];
+      if(w.sel.length<L.items.length)return {err:'Tap all '+L.items.length+' events first, in order.'};
+      return {canon:w.sel.join('|'),readable:w.sel.map(function(i){return labelOf(L.items,i)}).join(' > ')};
+    }
+    if(L.type==='match'){
+      var c=[],r=[];
+      for(var i=0;i<L.terms.length;i++){var t=L.terms[i],v=$('m'+L.n+t.id).value;if(!v)return {err:'Match every term first.'};c.push(v);r.push(t.label+' = '+labelOf(L.descs,v))}
+      return {canon:c.join('|'),readable:r.join('; ')};
+    }
+    if(L.type==='pick'){
+      var c2=[],r2=[];
+      for(var j=0;j<L.qs.length;j++){var q=L.qs[j],v2='';[].forEach.call(document.getElementsByName('q'+L.n+q.id),function(x){if(x.checked)v2=x.value});if(!v2)return {err:'Answer every question first.'};c2.push(v2);r2.push(labelOf(q.opts,v2))}
+      return {canon:c2.join('|'),readable:r2.join('; ')};
+    }
+    var raw=$('tx'+L.n).value.trim();
+    if(!raw)return {err:'Type your answer first.'};
+    return {canon:squash(raw),readable:raw.slice(0,80)};
+  }
+  function fb(L,cls,text){var e=$('fb'+L.n);e.className='fb'+(cls?' show '+cls:'');e.textContent=text}
+  function submit(L){
+    var l=S.locks[L.id];if(l.solved)return;
+    var g=guessOf(L);
+    if(g.err){fb(L,'nudge',g.err);return}
+    l.attempts++;
+    var d=checkLock(L,g.canon);
+    if(d===null){
+      fb(L,'nudge',L.nudge);
+      var s=$('lock'+L.n);s.classList.remove('shake');void s.offsetWidth;s.classList.add('shake');
+      persist();updateBar();return;
+    }
+    l.solved=true;l.guess=g.canon;l.readable=g.readable;digits[L.n]=d;
+    fb(L,'good','Click! Lock '+L.n+' is open. Your digit is '+d+'.');
+    var wh=$('wheel');wh.classList.remove('spin');void wh.getBoundingClientRect();wh.classList.add('spin');
+    $('dw'+L.n).classList.add('pop');
+    persist();updateAll();
+    setTimeout(function(){
+      expanded[L.n]=false;
+      var nx=nextOpen();if(nx)expanded[nx]=true;
+      updateLocks();
+      var tgt=nx?$('lock'+nx):$('exit');
+      if(tgt&&tgt.scrollIntoView)tgt.scrollIntoView({behavior:'smooth',block:'start'});
+    },1600);
+  }
+  function hint(L){
+    var l=S.locks[L.id];
+    if(l.solved)return;
+    if(l.hints<L.hints.length){l.hints++;persist();updateHints(L);updateBar()}
+    else{fb(L,'nudge','That was the last hint. Read the Clue Card slowly and try again.')}
+  }
+  function updateHints(L){
+    var l=S.locks[L.id],h='';
+    for(var i=0;i<l.hints;i++)h+='<div class="hint"><b>Hint '+(i+1)+':</b> <span>'+esc(L.hints[i])+'</span></div>';
+    $('hs'+L.n).innerHTML=h;
+  }
+  function nextOpen(){for(var i=0;i<D.locks.length;i++)if(!S.locks[D.locks[i].id].solved)return D.locks[i].n;return 0}
+  function lockState(L){
+    if(S.locks[L.id].solved)return 'solved';
+    return L.n===nextOpen()?'current':'locked';
+  }
+  function updateLocks(){
+    var cur=nextOpen();
+    D.locks.forEach(function(L){
+      var st=lockState(L),sec=$('lock'+L.n);
+      if(st==='current'&&expanded[L.n]===undefined)expanded[L.n]=true;
+      var open=(st!=='locked')&&!!expanded[L.n];
+      sec.className='lock glass '+st+(open?' open':'');
+      $('lh'+L.n).setAttribute('aria-expanded',open?'true':'false');
+      $('dg'+L.n).textContent=S.locks[L.id].solved?digits[L.n]:'?';
+      if(S.locks[L.id].solved){
+        [].forEach.call(sec.querySelectorAll('input,select,button.chip,#ck'+L.n+',#hb'+L.n+',#rs'+L.n),function(x){x.disabled=true});
+        var f=$('fb'+L.n);if(!f.classList.contains('good'))fb(L,'good','Unlocked. Your digit is '+digits[L.n]+'.'+(S.locks[L.id].readable?' Your answer: '+S.locks[L.id].readable:''));
+      }
+      updateHints(L);
+    });
+  }
+  function codeStr(){var s='';for(var i=1;i<=5;i++)s+=(digits[i]===undefined?'':digits[i]);return s}
+  function allSolved(){return D.locks.every(function(L){return S.locks[L.id].solved})}
+  function updateExit(){
+    var ok=allSolved();
+    $('exit').classList.toggle('locked',!ok);
+    $('codeBtn').disabled=!ok||S.escaped;
+    [].forEach.call($('codebox').querySelectorAll('input'),function(i){i.disabled=!ok||S.escaped});
+    $('exitNote').textContent=S.escaped?'The door is open!':(ok?'All 5 locks are open. Type the 5 digits in order, Lock 1 first.':'Open all 5 locks first. The digits go in order: Lock 1 first.');
+  }
+  function updateBar(){
+    var t=totals();
+    $('lc').textContent=t.locksSolved;$('hc').textContent=t.hintsUsed;
+    $('tm').textContent=fmt(S.escaped?S.escapeMs:S.elapsed);
+  }
+  function updateStatus(){
+    var el=$('status'),db=($('debriefText').value.trim().length);
+    if(S.escaped)el.textContent=db>=40?'You escaped and wrote your Debrief. Ready to submit.':'You escaped! Write your Debrief, then download your file to submit.';
+    else el.textContent='Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.';
+  }
+  function updateEsc(){
+    $('esc').classList.toggle('show',S.escaped);
+    if(S.escaped){var t=totals();$('escTime').textContent=fmt(S.escapeMs);$('escSum').textContent='5 of 5 locks opened with '+t.attempts+' tries and '+t.hintsUsed+' hint'+(t.hintsUsed===1?'':'s')+'.'}
+  }
+  function updateAll(){sceneUpdate();updateLocks();updateExit();updateBar();updateEsc();updateStatus();
+    $('intro').classList.toggle('hidden',S.started);$('game').classList.toggle('hidden',!S.started);$('loadOnly').classList.toggle('hidden',S.started);
+  }
+
+  /* ---------- exit code ---------- */
+  (function(){
+    var cb=$('codebox');
+    for(var i=0;i<5;i++){
+      var inp=document.createElement('input');inp.type='text';inp.inputMode='numeric';inp.maxLength=1;inp.setAttribute('aria-label','Exit code digit '+(i+1));inp.disabled=true;
+      (function(i,inp){
+        inp.addEventListener('input',function(){inp.value=inp.value.replace(/[٠-٩]/g,function(c){return c.charCodeAt(0)-1632}).replace(/[۰-۹]/g,function(c){return c.charCodeAt(0)-1776}).replace(/[^0-9]/g,'');if(inp.value&&i<4)cb.children[i+1].focus()});
+        inp.addEventListener('keydown',function(e){
+          if(e.key==='Backspace'&&!inp.value&&i>0)cb.children[i-1].focus();
+          if(e.key==='Enter'){e.preventDefault();tryCode()}
+        });
+        inp.addEventListener('paste',function(e){
+          var t=(e.clipboardData||window.clipboardData).getData('text').replace(/[٠-٩]/g,function(c){return c.charCodeAt(0)-1632}).replace(/[۰-۹]/g,function(c){return c.charCodeAt(0)-1776}).replace(/[^0-9]/g,'');
+          if(t.length>1){e.preventDefault();for(var k=0;k<5;k++)cb.children[k].value=t[k]||''}
+        });
+      })(i,inp);
+      cb.appendChild(inp);
+    }
+  })();
+  function tryCode(){
+    if(!allSolved()||S.escaped)return;
+    var v='';[].forEach.call($('codebox').querySelectorAll('input'),function(i){v+=i.value});
+    var f=$('codefb');
+    if(v.length<5){f.className='fb show nudge';f.textContent='The code has 5 digits. Fill every box.';return}
+    S.codeTries++;
+    if(h20('exit:'+D.salt+v)!==D.exitHash){
+      f.className='fb show nudge';f.textContent='The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.';
+      var ex=$('exit');ex.classList.remove('shake');void ex.offsetWidth;ex.classList.add('shake');
+      persist();return;
+    }
+    S.escaped=true;S.escapeMs=S.elapsed;
+    f.className='fb show good';f.textContent='The door swings open!';
+    persist();updateAll();
+    setTimeout(function(){$('esc').scrollIntoView({behavior:'smooth',block:'start'})},900);
+  }
+  $('codeBtn').addEventListener('click',tryCode);
+
+  /* ---------- timer ---------- */
+  function tick(){
+    var n=Date.now();
+    if(S.started&&!S.escaped){S.elapsed+=Math.min(n-lastTick,5000);$('tm').textContent=fmt(S.elapsed)}
+    lastTick=n;
+  }
+  function startTimer(){lastTick=Date.now();if(!timer)timer=setInterval(function(){tick();if(Math.round(S.elapsed/1000)%10===0)persist()},1000)}
+
+  /* ---------- files ---------- */
+  function msg(t,err){var m=$('msg');m.textContent=t;m.className='msg'+(err?' err':'');m.style.display='block'}
+  function ascii(n){return String(n).normalize('NFD').replace(/[̀-ͯ]/g,'')}
+  function clean(n){n=window.spAscii?spAscii(n):n;return ascii(n).trim().replace(/\s+/g,'_').replace(/[^A-Za-z0-9_-]/g,'')}
+  function who(){return (clean($('f_last').value)||'Last')+'_'+(clean($('f_first').value)||'First')}
+  function download(name,obj){
+    var blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;
+    document.body.appendChild(a);a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);
+  }
+  function namesOk(){
+    var ids=['f_first','f_last','f_period'],ok=true;
+    ids.forEach(function(i){var f=$(i);if(!f.value.trim()){f.classList.add('bad');ok=false}});
+    if(!ok){msg('Enter your first name, last name, and period at the top first.',true);$('f_first').scrollIntoView({block:'center'})}
+    return ok;
+  }
+  ['f_first','f_last','f_period'].forEach(function(i){$(i).addEventListener('input',function(){$(i).classList.remove('bad');S[i.slice(2)]=$(i).value;persist()})});
+  $('debriefText').addEventListener('input',function(){S.debrief=$('debriefText').value;persist();updateStatus()});
+  $('saveBtn').addEventListener('click',function(){
+    if(!namesOk())return;tick();
+    download(who()+'-'+PACKET+'-PROGRESS.json',snapshot());
+    msg('Progress file downloaded. Use Load Progress to continue later.');
+  });
+  $('finishBtn').addEventListener('click',function(){
+    if(!namesOk())return;tick();
+    var now=new Date(),o=snapshot();o.completed=S.escaped;o.submitted=now.toISOString();
+    o.student.date=now.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+    download(who()+'-'+PACKET+'.json',o);
+    msg(S.escaped?('Done! File downloaded: '+who()+'-'+PACKET+'.json. Upload it to Canvas.'):('Your file downloaded and is marked INCOMPLETE (you have not escaped). Upload it to Canvas: '+who()+'-'+PACKET+'.json'));
+  });
+  function openLoad(){$('loadFile').click()}
+  $('loadBtn').addEventListener('click',openLoad);$('loadBtn0').addEventListener('click',openLoad);
+  $('loadFile').addEventListener('change',function(e){
+    var f=e.target.files[0];if(!f)return;
+    var r=new FileReader();
+    r.onload=function(){
+      try{
+        var o=JSON.parse(r.result);
+        if(!o||o.packet!==PACKET||typeof o.locks!=='object')throw new Error('wrong');
+        digits={};var n=fresh();restore(n,o);S=n;applyToDom();
+        msg('Progress loaded. Welcome back.');
+      }catch(err){msg('That file did not work. Choose a progress file saved from this Escape Room.',true)}
+      e.target.value='';
+    };
+    r.onerror=function(){msg('The file could not be read.',true)};
+    r.readAsText(f);
+  });
+  $('reset').addEventListener('click',function(){
+    if(!confirm('Clear all your work and start over? This cannot be undone.'))return;
+    digits={};expanded={};S=fresh();
+    try{localStorage.removeItem(STORE+'state')}catch(e){}
+    $('locks').innerHTML='';D.locks.forEach(buildLock);
+    $('f_first').value=$('f_last').value=$('f_period').value='';$('debriefText').value='';
+    [].forEach.call($('codebox').querySelectorAll('input'),function(i){i.value=''});$('codefb').className='fb';
+    applyToDom();
+  });
+  function applyToDom(){
+    $('f_first').value=S.first;$('f_last').value=S.last;$('f_period').value=S.period;$('debriefText').value=S.debrief;
+    // rebuild lock widgets, then pre-fill solved ones with readable note
+    $('locks').innerHTML='';D.locks.forEach(buildLock);
+    expanded={};
+    updateAll();
+    if(S.started)startTimer();
+  }
+  $('startBtn').addEventListener('click',function(){S.started=true;persist();startTimer();updateAll();$('game').scrollIntoView({behavior:'smooth'})});
+  window.addEventListener('beforeunload',function(){tick();persist()});
+
+  S=loadLocal();
+  D.locks.forEach(buildLock);
+  applyToDom();
+})();
+</script>
+<!--sp-i18n--><script type="application/json" id="sp-i18n">{"langs":["en","es","ar"],"default":"en","es":{"Save Progress":"Guardar progreso","Load Progress":"Cargar progreso","Finished — Download File to Submit":"Terminé — Descargar el archivo para entregar","Clear all my answers":"Borrar todas mis respuestas","FIRST NAME *":"NOMBRE *","LAST NAME *":"APELLIDO *","PERIOD *":"PERÍODO *","DATE (fills in when you finish)":"FECHA (se llena cuando terminas)","e.g. 3":"p. ej., 3","Automatic":"Automática","Please type your first name, last name, and period first.":"Primero escribe tu nombre, apellido y período.","Western Expansion and Southern Secession":"Expansión hacia el oeste y secesión del sur","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — La Ley de Esclavos Fugitivos","Bleeding Kansas":"Bleeding Kansas — Kansas sangriento","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"Se descargó tu archivo de progreso. Guárdalo bien. Usa «Cargar progreso» para continuar más tarde.","Progress loaded.":"Progreso cargado.","Could not read that file.":"No se pudo leer ese archivo.","Treaty of Guadalupe Hidalgo":"Tratado de Guadalupe Hidalgo","<b>Jefferson in office.<\/b> In 1803, the Supreme Court decided <i>Marbury v. Madison<\/i>. Chief Justice John Marshall said the Court had the power “to say what the law is.” This power is called judicial review. Also in 1803, the United States agreed to buy the Louisiana Territory from France for $15 million. Jefferson worried that the Constitution did not mention buying land, but he went ahead. Norton says France sold only its colonial rights, and Indigenous people had lived on the land for generations. In 1804, Lewis and Clark’s Corps of Discovery set out from near St. Louis. Clark’s enslaved man York went with them.":"<b>Jefferson en el cargo.<\/b> En 1803, la Corte Suprema decidió el caso <i>Marbury v. Madison<\/i>. El presidente de la Corte, John Marshall, dijo que la Corte tenía el poder de “decir cuál es la ley”. Este poder se llama revisión judicial. También en 1803, Estados Unidos acordó comprarle a Francia el Territorio de Luisiana por 15 millones de dólares. A Jefferson le preocupaba que la Constitución no mencionara la compra de tierras, pero siguió adelante. Norton dice que Francia solo vendió sus derechos coloniales, y que los pueblos indígenas habían vivido en esas tierras por generaciones. En 1804, el Cuerpo de Descubrimiento (Corps of Discovery) de Lewis y Clark partió de un lugar cerca de San Luis. York, un hombre esclavizado por Clark, fue con ellos.","<b>Trouble at sea.<\/b> Britain and France were at war, and each one tried to stop American trade with the other. British ships practiced impressment. They stopped American ships and took sailors, saying the men were British. Norton says 6,200 American sailors were forced into the British navy between 1803 and 1811. In June 1807, the British warship <i>Leopard<\/i> attacked the American ship <i>Chesapeake<\/i> off Virginia, and three Americans were killed. In December 1807, Jefferson and Congress passed the Embargo Act to stop all American exports. Norton says exports fell from $48 million in 1807 to $9 million a year later.":"<b>Problemas en el mar.<\/b> Gran Bretaña y Francia estaban en guerra, y cada una trataba de impedir el comercio de Estados Unidos con la otra. Los barcos británicos practicaban el reclutamiento forzoso (impressment). Detenían barcos estadounidenses y se llevaban marineros, diciendo que eran británicos. Norton dice que 6,200 marineros estadounidenses fueron obligados a servir en la armada británica entre 1803 y 1811. En junio de 1807, el buque de guerra británico <i>Leopard<\/i> atacó al barco estadounidense <i>Chesapeake<\/i> frente a Virginia, y tres estadounidenses murieron. En diciembre de 1807, Jefferson y el Congreso aprobaron la Ley de Embargo (Embargo Act) para detener todas las exportaciones estadounidenses. Norton dice que las exportaciones bajaron de 48 millones de dólares en 1807 a 9 millones un año después.","<b>Why war came.<\/b> In 1812, Congress declared war for the first time ever. It declared war on Great Britain. President Madison and the Republicans believed that only war would end impressment and stop attacks by Indigenous groups on the western frontier. Some Americans also wanted to take Canada. Henry Clay and John C. Calhoun were the loudest “war hawks.” New England had little interest in war because it could hurt shipping. Norton says Shawnee leader Tecumseh wanted many Indigenous nations to unite and stop American expansion. In fall 1811, William Henry Harrison led 1,000 troops to Tecumseh’s village, Prophetstown, in the Battle of Tippecanoe. The troops burned the village, and Tecumseh’s alliance fell apart. Norton says the war was fought on three fronts: the Chesapeake Bay, the South, and the Canadian border.":"<b>Por qué llegó la guerra.<\/b> En 1812, el Congreso declaró la guerra por primera vez en la historia. Le declaró la guerra a Gran Bretaña. El presidente Madison y los republicanos creían que solo la guerra acabaría con el reclutamiento forzoso y detendría los ataques de grupos indígenas en la frontera del oeste. Algunos estadounidenses también querían tomar Canadá. Henry Clay y John C. Calhoun eran los “halcones de guerra” (war hawks) más ruidosos. A Nueva Inglaterra le interesaba poco la guerra porque podía dañar el transporte marítimo. Norton dice que Tecumseh, líder shawnee, quería que muchas naciones indígenas se unieran para detener la expansión estadounidense. En el otoño de 1811, William Henry Harrison llevó a 1,000 soldados a la aldea de Tecumseh, Prophetstown, en la Batalla de Tippecanoe. Las tropas quemaron la aldea, y la alianza de Tecumseh se deshizo. Norton dice que la guerra se peleó en tres frentes: la bahía de Chesapeake, el Sur y la frontera con Canadá.","<b>How the war ended.<\/b> On Christmas Eve 1814, diplomats agreed to the Treaty of Ghent. Each side returned prisoners and restored the old boundaries. News took six weeks to reach the United States, so Andrew Jackson’s army beat the British at New Orleans in January 1815. Norton says this victory made Americans proud and later helped make Jackson a presidential candidate. New England Federalists opposed “Mr. Madison’s War.” At the Hartford Convention, they proposed amendments to limit Republican and southern power and said they might “secede.” Norton says the Federalist Party never recovered. Norton also says the war pushed the United States to build its own industry. It was very hard on Indigenous nations, and none of their lost lands were returned.":"<b>Cómo terminó la guerra.<\/b> En la víspera de Navidad de 1814, los diplomáticos aceptaron el Tratado de Gante (Treaty of Ghent). Cada lado devolvió a los prisioneros y restauró las antiguas fronteras. Las noticias tardaron seis semanas en llegar a Estados Unidos, así que el ejército de Andrew Jackson venció a los británicos en Nueva Orleans en enero de 1815. Norton dice que esta victoria llenó de orgullo a los estadounidenses y que más tarde ayudó a convertir a Jackson en candidato presidencial. Los federalistas de Nueva Inglaterra se opusieron a la “guerra del señor Madison”. En la Convención de Hartford (Hartford Convention), propusieron enmiendas para limitar el poder de los republicanos y del Sur, y dijeron que tal vez se “separarían” (secede) de la Unión. Norton dice que el Partido Federalista nunca se recuperó. Norton también dice que la guerra empujó a Estados Unidos a construir su propia industria. Fue muy dura para las naciones indígenas, y no se les devolvió ninguna de las tierras que perdieron.","<b>Roads and waterways.<\/b> The market economy needed better ways to move goods. Many people argued about who should pay for roads and canals: the federal government, the states, or private companies. Construction on the National Road began in 1811. By 1818 it ran from Cumberland, Maryland, to Vandalia, Illinois. It was the first interstate road paid for by the federal government. In 1807, the steamboat <i>Clermont<\/i> went up the Hudson River from New York City to Albany. Steamboats could travel both ways on rivers, so goods could move upstream too. The Erie Canal opened in 1825 and ran 363 miles from Albany to Buffalo. It cut the cost of moving a ton of freight from $100 to $5. Thousands of laborers, mostly German and Irish immigrants, built it for less than a dollar a day.":"<b>Caminos y vías de agua.<\/b> La economía de mercado necesitaba mejores maneras de mover mercancías. Mucha gente discutía quién debía pagar los caminos y los canales: el gobierno federal, los estados o las empresas privadas. La construcción del Camino Nacional (National Road) empezó en 1811. En 1818 llegaba de Cumberland, Maryland, a Vandalia, Illinois. Fue el primer camino entre estados pagado por el gobierno federal. En 1807, el barco de vapor <i>Clermont<\/i> subió por el río Hudson desde la ciudad de Nueva York hasta Albany. Los barcos de vapor podían viajar en ambas direcciones por los ríos, así que las mercancías también podían subir río arriba. El Canal de Erie (Erie Canal) se abrió en 1825 y medía 363 millas, de Albany a Buffalo. Redujo el costo de mover una tonelada de carga de 100 dólares a 5. Miles de obreros, en su mayoría inmigrantes alemanes e irlandeses, lo construyeron por menos de un dólar al día.","<b>Rails and wires.<\/b> In 1830, the nation had only 23 miles of railroad track. By 1850, it had 9,021 miles. Trains could run all year, and early railroads went more than twice as fast as stagecoaches. In May 1844, Samuel F. B. Morse sent the first message between cities over the <b>telegraph<\/b>, from Washington, D.C., to Baltimore. By 1861, the telegraph reached from the Pacific Coast to cities in the East.":"<b>Rieles y cables.<\/b> En 1830, el país tenía solo 23 millas de vías de ferrocarril. En 1850 tenía 9,021 millas. Los trenes podían funcionar todo el año, y los primeros ferrocarriles iban a más del doble de velocidad que las diligencias. En mayo de 1844, Samuel F. B. Morse envió el primer mensaje entre ciudades por el <b>telégrafo<\/b>, de Washington, D.C., a Baltimore. En 1861, el telégrafo iba desde la costa del Pacífico hasta las ciudades del Este.","<b>New machines.<\/b> In 1793, Eli Whitney finished a machine that took the seeds out of cotton. Before that, one person working all day could clean barely one pound of cotton by hand. Whitney’s machine was fifty times more productive. Cotton became the crop that drove the southern economy. People called it “white gold.” Norton says slavery grew along with cotton. The number of enslaved people rose from just under 700,000 in 1790 to nearly 4 million before the Civil War, and about 70 percent worked in some way with cotton. In the Midwest, Cyrus McCormick built a horse-pulled reaper in 1831. A farmer with a hand sickle could cut half an acre of wheat in a day. With a McCormick reaper, two people could cut twelve acres.":"<b>Nuevas máquinas.<\/b> En 1793, Eli Whitney terminó una máquina que sacaba las semillas del algodón. Antes de eso, una persona que trabajaba todo el día apenas podía limpiar una libra de algodón a mano. La máquina de Whitney era cincuenta veces más productiva. El algodón se volvió el cultivo que impulsó la economía del Sur. La gente lo llamaba “oro blanco”. Norton dice que la esclavitud creció junto con el algodón. El número de personas esclavizadas subió de poco menos de 700,000 en 1790 a casi 4 millones antes de la Guerra Civil, y cerca del 70 por ciento trabajaba de alguna manera en el algodón. En el Medio Oeste, Cyrus McCormick construyó en 1831 una segadora tirada por caballos. Un agricultor con una hoz de mano podía cortar media acre de trigo en un día. Con una segadora McCormick, dos personas podían cortar doce acres.","<b>Mills and cities.<\/b> In 1813, the first factory with spinning and weaving under one roof opened at Waltham, Massachusetts. In 1822, a mill began at a village that was renamed Lowell. Young women from farm families became the nation’s first factory workers. They earned $2.50 a week, less than men earned for the same work. By 1840, Lowell had 8,000 textile workers, and the village had become a grimy industrial city. In 1834, the women went on strike over wage cuts, and they lost. In 1836, they walked out over higher rents in company boardinghouses, and this time the owners backed down.":"<b>Fábricas y ciudades.<\/b> En 1813, la primera fábrica con hilado y tejido bajo un mismo techo abrió en Waltham, Massachusetts. En 1822 empezó una fábrica en un pueblo que fue rebautizado Lowell. Mujeres jóvenes de familias de granjeros se convirtieron en las primeras obreras de fábrica del país. Ganaban 2.50 dólares a la semana, menos de lo que ganaban los hombres por el mismo trabajo. Para 1840, Lowell tenía 8,000 trabajadores textiles, y el pueblo se había convertido en una ciudad industrial sucia. En 1834, las mujeres hicieron huelga por los recortes de sueldo, y perdieron. En 1836, dejaron el trabajo por el aumento de los alquileres en las casas de huéspedes de la compañía, y esta vez los dueños cedieron.","<b>New arrivals.<\/b> After 1815, the number of immigrants rose each year. By 1860, more than one of every eight Americans was born in another country. In 1845, a fungus destroyed Ireland’s potato crop. More than a million people died in the potato famine, and almost 2 million more left Ireland. Irish men built many canals and railroads, and Irish women often worked as live-in servants. German immigrants were almost as many. Many were skilled craftspeople or farmers who moved with their families. Some native-born Protestants, called nativists, resented the newcomers, especially Catholics. The Know-Nothings wanted immigrants and Catholics kept out of public office. They also wanted the waiting time for citizenship raised from five years to twenty-one. Norton says some nativists used violence against Catholic immigrants. By 1860, the party was dead.":"<b>Nuevos llegados.<\/b> Después de 1815, el número de inmigrantes subió cada año. Para 1860, más de uno de cada ocho estadounidenses había nacido en otro país. En 1845, un hongo destruyó la cosecha de papa de Irlanda. Más de un millón de personas murieron en la hambruna de la papa, y casi 2 millones más se fueron de Irlanda. Los hombres irlandeses construyeron muchos canales y ferrocarriles, y las mujeres irlandesas a menudo trabajaban como sirvientas que vivían en la casa. Los inmigrantes alemanes eran casi tantos. Muchos eran artesanos especializados o agricultores que se mudaron con sus familias. Algunos protestantes nacidos en el país, llamados nativistas (nativists), veían con resentimiento a los recién llegados, sobre todo a los católicos. Los Know-Nothings querían que los inmigrantes y los católicos fueran excluidos de los cargos públicos. También querían que el tiempo de espera para la ciudadanía subiera de cinco años a veintiuno. Norton dice que algunos nativistas usaron la violencia contra los inmigrantes católicos. Para 1860, el partido había desaparecido.","<b>Workers and professions.<\/b> Skilled artisans struggled to compete with cheap factory goods. Early unions were prosecuted as unlawful conspiracies. In 1842, in <i>Commonwealth v. Hunt<\/i>, the Massachusetts Supreme Court said forming a union was not illegal. In 1834, the National Trades’ Union formed. Women formed unions too. Louise Mitchell said that when women complained about low pay, employers answered that men had families to support. Growing towns also needed new professions, such as teachers, lawyers, doctors, and engineers. Teaching grew fast, and women eventually replaced men as teachers. Women were mostly limited to nursing and teaching. Elizabeth Blackwell finished first in her class at Geneva Medical College in 1849. She was the first woman to earn a medical degree. After that, the school refused to admit more women.":"<b>Trabajadores y profesiones.<\/b> Los artesanos especializados tenían dificultades para competir con los productos baratos de las fábricas. Los primeros sindicatos eran procesados como conspiraciones ilegales. En 1842, en <i>Commonwealth v. Hunt<\/i>, la Corte Suprema de Massachusetts dijo que formar un sindicato no era ilegal. En 1834 se formó la Unión Nacional de Oficios (National Trades’ Union). Las mujeres también formaron sindicatos. Louise Mitchell dijo que, cuando las mujeres se quejaban del pago bajo, los empleadores respondían que los hombres tenían familias que mantener. Los pueblos en crecimiento también necesitaban nuevas profesiones, como maestros, abogados, médicos e ingenieros. La enseñanza creció rápido, y con el tiempo las mujeres reemplazaron a los hombres como maestros. A las mujeres casi solo se les permitía ser enfermeras o maestras. Elizabeth Blackwell terminó primera de su clase en la Facultad de Medicina de Ginebra (Geneva Medical College) en 1849. Fue la primera mujer en obtener un título de medicina. Después de eso, la facultad se negó a admitir más mujeres.","A British warship attacks the Chesapeake":"Un buque de guerra británico ataca al Chesapeake","A canal that flooded the fields":"Un canal que inundó los campos","A fungus destroyed the potato crop. The Know-Nothings wanted twenty-one years. The court said forming a union was not illegal. Elizabeth Blackwell was the first woman to earn a medical degree.":"Un hongo destruyó la cosecha de papa. Los Know-Nothings querían veintiún años. La corte dijo que formar un sindicato no era ilegal. Elizabeth Blackwell fue la primera mujer en obtener un título de medicina.","A fungus":"Un hongo","A meeting where New England Federalists proposed amendments and threatened to secede":"Una reunión donde los federalistas de Nueva Inglaterra propusieron enmiendas y amenazaron con separarse de la Unión","A new law in Britain":"Una nueva ley en Gran Bretaña","A strike by farm workers":"Una huelga de trabajadores agrícolas","A surveyor’s office at night. On the left, a wall map with contour lines and a dotted route hangs above a rack of rolled maps and a desk with a globe and a rolled scroll. On the right, a compass and a measuring chain hang on the wall above a surveying instrument on a tripod. The door has a SURVEY OFFICE sign and five padlocks in a row. Under each padlock is a window for one digit of the exit code.":"Una oficina de agrimensor por la noche. A la izquierda, un mapa de pared con curvas de nivel y una ruta punteada cuelga sobre un estante con mapas enrollados y un escritorio con un globo terráqueo y un rollo de papel. A la derecha, una brújula y una cadena de medir cuelgan de la pared sobre un instrumento de agrimensura en un trípode. La puerta tiene un letrero de OFICINA DE AGRIMENSURA y cinco candados en fila. Debajo de cada candado hay una ventanilla para un dígito del código de salida.","A victory for Jackson that came after the peace treaty was signed":"Una victoria de Jackson que llegó después de firmarse el tratado de paz","An agreement that returned prisoners and restored the old boundaries":"Un acuerdo que devolvió a los prisioneros y restauró las antiguas fronteras","Battle of New Orleans":"Batalla de Nueva Orleans","Battle of Tippecanoe":"Batalla de Tippecanoe","Congress passes the Embargo Act":"El Congreso aprueba la Ley de Embargo","Core Objective 5: Describe how changes in transportation and communications altered the economic landscape during the first half of the nineteenth century.":"Objetivo principal 5: Describir cómo los cambios en el transporte y las comunicaciones transformaron el panorama económico durante la primera mitad del siglo XIX.","Core Objective 6: Explain the impact of the Industrial Revolution on the way people worked and lived.":"Objetivo principal 6: Explicar el impacto de la Revolución Industrial en la manera en que la gente trabajaba y vivía.","Core Objectives 1 and 2: Summarize the major domestic political developments that took place during Thomas Jefferson’s administration. Describe how foreign events affected the United States during the Jefferson and Madison administrations.":"Objetivos principales 1 y 2: Resumir los principales acontecimientos políticos internos durante el gobierno de Thomas Jefferson. Describir cómo los acontecimientos extranjeros afectaron a Estados Unidos durante los gobiernos de Jefferson y Madison.","Core Objectives 3 and 4: Explain the primary causes of the American decision to declare war on Great Britain in 1812 and how the conflict played out in different areas of the country. Analyze the most significant outcomes of the War of 1812 on the United States, and their importance.":"Objetivos principales 3 y 4: Explicar las causas principales de la decisión de Estados Unidos de declararle la guerra a Gran Bretaña en 1812 y cómo se desarrolló el conflicto en diferentes zonas del país. Analizar los resultados más importantes de la Guerra de 1812 para Estados Unidos y su importancia.","Core Objectives 7 and 8: Analyze how immigration altered the nation’s population and shaped its politics. Evaluate the impact of the expanding capitalist “market economy” on workers, professionals, and women.":"Objetivos principales 7 y 8: Analizar cómo la inmigración cambió la población del país y moldeó su política. Evaluar el impacto de la “economía de mercado” capitalista en expansión sobre los trabajadores, los profesionales y las mujeres.","Each answer is in the Clue Card. Look for what hurt the Irish potato crop, how many years the Know-Nothings wanted for citizenship, what the Massachusetts court said about unions, and who earned the first medical degree for a woman.":"Cada respuesta está en la tarjeta de indicios. Busca qué dañó la cosecha de papa de Irlanda, cuántos años querían los Know-Nothings para la ciudadanía, qué dijo la corte de Massachusetts sobre los sindicatos y quién obtuvo el primer título de medicina para una mujer.","Elizabeth Blackwell":"Elizabeth Blackwell","Escape the Surveyor’s Office":"Escapa de la oficina del agrimensor","Fifteen years":"Quince años","Forming a trade union was not illegal":"Formar un sindicato no era ilegal","Harrison’s troops burned a Shawnee village, and Tecumseh’s alliance fell apart":"Las tropas de Harrison quemaron una aldea shawnee, y la alianza de Tecumseh se deshizo","Hartford Convention":"Convención de Hartford","Horace Mann":"Horace Mann","In Commonwealth v. Hunt (1842), what did the Massachusetts Supreme Court say?":"En <i>Commonwealth v. Hunt<\/i> (1842), ¿qué dijo la Corte Suprema de Massachusetts?","In May 1844, Samuel Morse sent the first message between cities over the ________, from Washington, D.C., to Baltimore.":"En mayo de 1844, Samuel Morse envió el primer mensaje entre ciudades por el ________, de Washington, D.C., a Baltimore.","In the message, the letter F is really C, and the letter J is really G. The first word has 6 letters and starts with C. The second word has 3 letters and starts with G.":"En el mensaje, la letra F en realidad es C, y la letra J en realidad es G. La primera palabra tiene 6 letras y empieza con C. La segunda palabra tiene 3 letras y empieza con G.","Lewis and Clark’s Corps of Discovery sets out":"El Cuerpo de Descubrimiento de Lewis y Clark parte","Look at the “New machines” paragraph. Whitney finished a machine in 1793 that took seeds out of cotton. The secret message names it in two words. Use the decoder key to spell it, one letter at a time.":"Mira el párrafo “Nuevas máquinas”. En 1793, Whitney terminó una máquina que sacaba las semillas del algodón. El mensaje secreto la nombra en dos palabras. Usa la clave del decodificador para escribirlo, una letra a la vez.","Look for the key words: a village burned, prisoners returned, a victory after the peace treaty, and a threat to secede.":"Busca las palabras clave: una aldea quemada, prisioneros devueltos, una victoria después del tratado de paz y una amenaza de separarse.","Look for the word in bold in the Clue Card, in the paragraph called “Rails and wires.” It names a way to send messages over wires.":"Busca en la tarjeta de indicios la palabra en negrita, en el párrafo llamado “Rieles y cables”. Nombra una manera de enviar mensajes por cables.","Look for the years in the Clue Card: 1803, 1804, and 1807. Two events happened in 1807, so check the months, June and December.":"Busca los años en la tarjeta de indicios: 1803, 1804 y 1807. Dos sucesos ocurrieron en 1807, así que fíjate en los meses, junio y diciembre.","Louise Mitchell":"Louise Mitchell","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 7, “Jeffersonian Republicanism” (section begins p. 284; pp. 288–293) and “War in the Mediterranean and Europe” (section begins p. 300; pp. 301–303).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 7, “Jeffersonian Republicanism” (la sección empieza en la pág. 284; págs. 288–293) y “War in the Mediterranean and Europe” (la sección empieza en la pág. 300; págs. 301–303).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 7, “The War of 1812” (section begins p. 305; pp. 305–308) and “The Aftermath of War” (section begins p. 316; pp. 316–320).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 7, “The War of 1812” (la sección empieza en la pág. 305; págs. 305–308) y “The Aftermath of War” (la sección empieza en la pág. 316; págs. 316–320).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 8, “Immigration” (section begins p. 355; pp. 355–359) and “Organized Labor and New Professions” (section begins p. 359; pp. 360–363).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 8, “Immigration” (la sección empieza en la pág. 355; págs. 355–359) y “Organized Labor and New Professions” (la sección empieza en la pág. 359; págs. 360–363).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 8, “Industrial Development” (section begins p. 342; pp. 343–351).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 8, “Industrial Development” (la sección empieza en la pág. 342; págs. 343–351).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 8, “The Market Revolution” (section begins p. 334; pp. 334–342).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 8, “The Market Revolution” (la sección empieza en la pág. 334; págs. 334–342).","Not quite. At least one answer is off. Re-read the Clue Card for the potato crop, the Know-Nothings, the 1842 court case, and the first woman with a medical degree.":"Casi. Al menos una respuesta no es correcta. Vuelve a leer la tarjeta de indicios para ver la cosecha de papa, los Know-Nothings, el caso de la corte de 1842 y la primera mujer con un título de medicina.","SURVEY OFFICE":"OFICINA DE AGRIMENSURA","Sarah Monroe":"Sarah Monroe","Ten years":"Diez años","The Clue Card describes a machine that took the seeds out of cotton in 1793. A secret message gives the two-word name of that machine. Each letter in the message was moved 3 steps forward in the alphabet. Decode it.":"La tarjeta de indicios describe una máquina que sacaba las semillas del algodón en 1793. Un mensaje secreto da el nombre de dos palabras de esa máquina. Cada letra del mensaje se movió 3 lugares hacia adelante en el alfabeto. Descífralo.","The Compass":"La brújula","The Early Republic and the <span style=\"white-space:nowrap\">Market Economy<\/span>":"La república temprana y la <span style=\"white-space:nowrap\">economía de mercado<\/span>","The Know-Nothings wanted the waiting time for citizenship raised from five years to how many years?":"¿A cuántos años querían los Know-Nothings subir el tiempo de espera para la ciudadanía, que era de cinco años?","The Measuring Chain":"La cadena de medir","The Rolled Maps":"Los mapas enrollados","The United States buys the Louisiana Territory":"Estados Unidos compra el Territorio de Luisiana","The order is the Louisiana Purchase (1803), Lewis and Clark set out (1804), the Chesapeake attack (June 1807), then the Embargo Act (December 1807).":"El orden es la Compra de Luisiana (1803), Lewis y Clark parten (1804), el ataque al Chesapeake (junio de 1807) y luego la Ley de Embargo (diciembre de 1807).","The surveyor’s office closed for the night, and the surveyor locked the door. A wall map, a rack of rolled maps, a globe, a compass, a measuring chain, and a surveying instrument on a tripod sit in the room. The door has <b>5 locks<\/b>. Each lock matches one or two big ideas from Lesson 5. Solve them all to find the <b>5-digit exit code<\/b>.":"La oficina del agrimensor cerró por la noche, y el agrimensor cerró la puerta con llave. En el cuarto hay un mapa de pared, un estante con mapas enrollados, un globo terráqueo, una brújula, una cadena de medir y un instrumento de agrimensura sobre un trípode. La puerta tiene <b>5 candados<\/b>. Cada candado corresponde a una o dos ideas importantes de la Lección 5. Resuélvelos todos para encontrar el <b>código de salida de 5 dígitos<\/b>.","The word starts with T and has 9 letters. It ends with “graph.”":"La palabra empieza con T y tiene 9 letras. Termina con “graph”.","Tippecanoe was the burned village. Ghent returned prisoners and boundaries. New Orleans came after the treaty. The Hartford Convention was the Federalist meeting.":"Tippecanoe fue la aldea quemada. Gante devolvió a los prisioneros y restauró las fronteras. Nueva Orleans ocurrió después del tratado. La Convención de Hartford fue la reunión de los federalistas.","Treaty of Ghent":"Tratado de Gante","Twenty-five years":"Veinticinco años","Twenty-one years":"Veintiún años","Unions were unlawful conspiracies":"Los sindicatos eran conspiraciones ilegales","What destroyed Ireland’s potato crop in 1845?":"¿Qué destruyó la cosecha de papa de Irlanda en 1845?","Who was the first woman to earn a medical degree, according to Norton?":"¿Quién fue la primera mujer en obtener un título de medicina, según Norton?","Women could not join unions":"Las mujeres no podían unirse a los sindicatos","Workers could never go on strike":"Los trabajadores nunca podían hacer huelga","You are locked in the surveyor’s office.":"Estás encerrado en la oficina del agrimensor.","All 5 locks are open. Type the 5 digits in order, Lock 1 first.":"Los 5 candados están abiertos. Escribe los 5 dígitos en orden, primero el del Candado 1.","Answer every question first.":"Primero responde todas las preguntas.","CLUE CARD":"TARJETA DE INDICIOS","Check":"Comprobar","Choose a description...":"Elige una descripción...","Clear":"Borrar","Clear all my work and start over":"Borrar todo mi trabajo y empezar de nuevo","DEBRIEF":"INFORME FINAL","Debrief":"Informe final","Decoded answer":"Respuesta decodificada","Decoder key: the <span style=\"color:var(--hl);font-weight:700\">gold<\/span> letter is in the message. The white letter under it is the real letter.":"Clave del decodificador: la letra <span style=\"color:var(--hl);font-weight:700\">dorada<\/span> está en el mensaje. La letra blanca que está debajo es la letra verdadera.","ESCAPED":"¡ESCAPASTE!","Enter the Office":"Entrar a la oficina","Enter your first name, last name, and period at the top first.":"Primero escribe tu nombre, apellido y período arriba.","Exit code digit 1":"Dígito 1 del código de salida","Exit door":"Puerta de salida","Fill in the blank using the Clue Card.":"Llena el espacio en blanco con la tarjeta de indicios.","Have a saved file? Load it to continue.":"¿Tienes un archivo guardado? Cárgalo para continuar.","Hint":"Pista","Hints used":"Pistas usadas","How to escape:":"Cómo escapar:","If you get stuck, press <b>Hint<\/b>. Hints are free, but your teacher can see how many you used.":"Si te atoras, oprime <b>Pista<\/b>. Las pistas son gratis, pero tu maestro puede ver cuántas usaste.","Locks":"Candados","Match each term to the best description. Use the Clue Card.":"Relaciona cada término con la mejor descripción. Usa la tarjeta de indicios.","Match every term first.":"Primero relaciona todos los términos.","Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.":"Todavía no escapas (se marca INCOMPLETO). Aun así puedes descargar tu archivo y entregarlo.","Not quite. Check each match against the Clue Card. Which one are you least sure about?":"Casi. Revisa cada pareja con la tarjeta de indicios. ¿De cuál estás menos seguro?","Not quite. Decode one letter at a time with the key, then check your spelling.":"Casi. Decodifica una letra a la vez con la clave y luego revisa tu ortografía.","Not quite. Re-read the Clue Card and match each event to its year.":"Casi. Vuelve a leer la tarjeta de indicios y une cada suceso con su año.","Not quite. Re-read the Clue Card. Use the scrambled letters to check your spelling.":"Casi. Vuelve a leer la tarjeta de indicios. Usa las letras desordenadas para revisar tu ortografía.","One last step: write your Debrief below.":"Un último paso: escribe tu Informe final abajo.","Open all 5 locks first. The digits go in order: Lock 1 first.":"Primero abre los 5 candados. Los dígitos van en orden: primero el del Candado 1.","Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.":"Abre los 5 candados y luego escribe el código de salida de 5 dígitos. Termina con el Informe final.","Open each lock in order. Read the <b>Clue Card<\/b>. The answer is in the card.":"Abre cada candado en orden. Lee la <b>tarjeta de indicios<\/b>. La respuesta está en la tarjeta.","Open the Door":"Abrir la puerta","Pick the correct answer for all four questions.":"Elige la respuesta correcta en las cuatro preguntas.","Progress file downloaded. Use Load Progress to continue later.":"Se descargó el archivo de progreso. Usa «Cargar progreso» para continuar más tarde.","Progress loaded. Welcome back.":"Progreso cargado. Bienvenido de nuevo.","Solve the puzzle to open the lock and reveal one digit.":"Resuelve el acertijo para abrir el candado y descubrir un dígito.","THE EXIT DOOR":"LA PUERTA DE SALIDA","Tap all 4 events first, in order.":"Primero toca los 4 sucesos, en orden.","Tap the four events in the order they happened. Tap an event again to take it back.":"Toca los cuatro sucesos en el orden en que ocurrieron. Toca un suceso otra vez para quitarlo.","That file did not work. Choose a progress file saved from this Escape Room.":"Ese archivo no funcionó. Elige un archivo de progreso guardado de esta sala de escape.","That was the last hint. Read the Clue Card slowly and try again.":"Esa fue la última pista. Lee la tarjeta de indicios despacio y vuelve a intentarlo.","The Globe":"El globo terráqueo","The Wall Map":"El mapa de pared","The clock starts when you press the button. Most students finish in about 20 minutes.":"El reloj empieza cuando oprimes el botón. La mayoría de los estudiantes termina en unos 20 minutos.","The code has 5 digits. Fill every box.":"El código tiene 5 dígitos. Llena todas las casillas.","The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.":"La puerta no se abrió. Revisa los dígitos debajo de cada candado y escríbelos en orden: primero el del Candado 1.","The door is open!":"¡La puerta está abierta!","The door swings open!":"¡La puerta se abre de golpe!","Time":"Tiempo","Type the answer in English.":"Escribe la respuesta en inglés.","Type the answer in English. Use the digits 0-9.":"Escribe la respuesta en inglés. Usa los dígitos 0-9.","Type the exit code":"Escribe el código de salida","Type your answer first.":"Primero escribe tu respuesta.","Type your answer here...":"Escribe tu respuesta aquí...","UNIT 2 · AN EXPANDING NATION | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 2 · UNA NACIÓN EN EXPANSIÓN | CPUSH | DANIEL GARZA, M.A.","Unscramble the letters to fill the blank.":"Ordena las letras para llenar el espacio en blanco.","Which lock was hardest, and what did you learn that you did not know before?":"¿Qué candado fue el más difícil y qué aprendiste que antes no sabías?","Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.":"Escribe de 3 a 4 oraciones. Nombra el candado y usa un dato de su tarjeta de indicios. Puedes escribirlo aunque no hayas escapado.","You escaped and wrote your Debrief. Ready to submit.":"Escapaste y escribiste tu Informe final. Listo para entregar.","You escaped! Write your Debrief, then download your file to submit.":"¡Escapaste! Escribe tu Informe final y luego descarga tu archivo para entregarlo.","Your answer":"Tu respuesta","Your time:":"Tu tiempo:","digit":"dígito","Clear all your work and start over? This cannot be undone.":"¿Borrar todo tu trabajo y empezar de nuevo? Esto no se puede deshacer."},"ar":{"Save Progress":"حفظ التقدم","Load Progress":"تحميل التقدم","Finished — Download File to Submit":"انتهيت — نزّل الملف لتسليمه","Clear all my answers":"امسح كل إجاباتي","FIRST NAME *":"الاسم الأول *","LAST NAME *":"اسم العائلة *","PERIOD *":"الحصة *","DATE (fills in when you finish)":"التاريخ (يُكتب تلقائيًا عند الانتهاء)","e.g. 3":"مثال: 3","Automatic":"تلقائي","Please type your first name, last name, and period first.":"اكتب أولًا اسمك الأول واسم العائلة والحصة.","Western Expansion and Southern Secession":"التوسع غربًا وانفصال الجنوب","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"الوحدة 3 · بيت منقسم وأُعيد بناؤه | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — قانون العبيد الهاربين","Bleeding Kansas":"Bleeding Kansas — كانساس النازفة","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"الوحدة 3 · بيت منقسم وأعيد بناؤه | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"تم تنزيل ملف التقدم. احتفظ به في مكان آمن. استخدم «تحميل التقدم» لتكمل لاحقًا.","Progress loaded.":"تم تحميل التقدم.","Could not read that file.":"تعذّرت قراءة هذا الملف.","Treaty of Guadalupe Hidalgo":"معاهدة غوادالوبي هيدالغو (Treaty of Guadalupe Hidalgo)","<b>Jefferson in office.<\/b> In 1803, the Supreme Court decided <i>Marbury v. Madison<\/i>. Chief Justice John Marshall said the Court had the power “to say what the law is.” This power is called judicial review. Also in 1803, the United States agreed to buy the Louisiana Territory from France for $15 million. Jefferson worried that the Constitution did not mention buying land, but he went ahead. Norton says France sold only its colonial rights, and Indigenous people had lived on the land for generations. In 1804, Lewis and Clark’s Corps of Discovery set out from near St. Louis. Clark’s enslaved man York went with them.":"<b>جيفرسون (Jefferson) في الحكم.<\/b> في عام 1803، أصدرت المحكمة العليا حكمها في قضية <i>ماربري ضد ماديسون (Marbury v. Madison)<\/i>. قال رئيس المحكمة جون مارشال (John Marshall) إن للمحكمة سلطة «أن تقول ما هو القانون». تُسمى هذه السلطة المراجعة القضائية. وفي عام 1803 أيضًا، وافقت الولايات المتحدة على شراء إقليم لويزيانا (Louisiana Territory) من فرنسا مقابل 15 مليون دولار. قلق جيفرسون لأن الدستور لم يذكر شراء الأراضي، لكنه مضى في الصفقة. يقول نورتون (Norton) إن فرنسا باعت حقوقها الاستعمارية فقط، وإن الشعوب الأصلية عاشت على هذه الأرض أجيالًا. وفي عام 1804، انطلق «فيلق الاكتشاف» (Corps of Discovery) بقيادة لويس وكلارك (Lewis and Clark) من قرب سانت لويس (St. Louis). وذهب معهم يورك (York)، وهو رجل استعبده كلارك.","<b>Trouble at sea.<\/b> Britain and France were at war, and each one tried to stop American trade with the other. British ships practiced impressment. They stopped American ships and took sailors, saying the men were British. Norton says 6,200 American sailors were forced into the British navy between 1803 and 1811. In June 1807, the British warship <i>Leopard<\/i> attacked the American ship <i>Chesapeake<\/i> off Virginia, and three Americans were killed. In December 1807, Jefferson and Congress passed the Embargo Act to stop all American exports. Norton says exports fell from $48 million in 1807 to $9 million a year later.":"<b>مشكلات في البحر.<\/b> كانت بريطانيا وفرنسا في حرب، وحاولت كل واحدة منهما منع التجارة الأمريكية مع الأخرى. مارست السفن البريطانية «التجنيد القسري» (impressment). كانت توقف السفن الأمريكية وتأخذ البحارة، وتقول إنهم بريطانيون. يقول نورتون (Norton) إن 6,200 بحار أمريكي أُجبروا على الخدمة في البحرية البريطانية بين 1803 و1811. وفي يونيو 1807، هاجمت السفينة الحربية البريطانية ليوبارد (Leopard) السفينة الأمريكية تشيسابيك (Chesapeake) قرب فيرجينيا (Virginia)، وقُتل ثلاثة أمريكيين. وفي ديسمبر 1807، أصدر جيفرسون (Jefferson) والكونغرس قانون الحظر (Embargo Act) لوقف كل الصادرات الأمريكية. يقول نورتون إن الصادرات انخفضت من 48 مليون دولار في 1807 إلى 9 ملايين بعد عام.","<b>Why war came.<\/b> In 1812, Congress declared war for the first time ever. It declared war on Great Britain. President Madison and the Republicans believed that only war would end impressment and stop attacks by Indigenous groups on the western frontier. Some Americans also wanted to take Canada. Henry Clay and John C. Calhoun were the loudest “war hawks.” New England had little interest in war because it could hurt shipping. Norton says Shawnee leader Tecumseh wanted many Indigenous nations to unite and stop American expansion. In fall 1811, William Henry Harrison led 1,000 troops to Tecumseh’s village, Prophetstown, in the Battle of Tippecanoe. The troops burned the village, and Tecumseh’s alliance fell apart. Norton says the war was fought on three fronts: the Chesapeake Bay, the South, and the Canadian border.":"<b>لماذا جاءت الحرب.<\/b> في عام 1812، أعلن الكونغرس الحرب لأول مرة في تاريخه. أعلنها على بريطانيا العظمى. اعتقد الرئيس ماديسون (Madison) والجمهوريون أن الحرب وحدها ستنهي التجنيد القسري وتوقف هجمات الجماعات الأصلية على الحدود الغربية. وأراد بعض الأمريكيين أيضًا الاستيلاء على كندا. وكان هنري كلاي (Henry Clay) وجون سي. كالهون (John C. Calhoun) أعلى «صقور الحرب» (war hawks) صوتًا. ولم تهتم نيو إنجلاند (New England) كثيرًا بالحرب لأنها قد تضر بالشحن البحري. يقول نورتون (Norton) إن تيكومسه (Tecumseh)، زعيم الشاوني (Shawnee)، أراد أن تتحد أمم أصلية كثيرة لوقف التوسع الأمريكي. وفي خريف 1811، قاد ويليام هنري هاريسون (William Henry Harrison) 1,000 جندي إلى قرية تيكومسه، بروفيتستاون (Prophetstown)، في معركة تيبيكانو (Tippecanoe). أحرقت القوات القرية، وتفكك تحالف تيكومسه. ويقول نورتون إن الحرب دارت على ثلاث جبهات: خليج تشيسابيك (Chesapeake Bay) والجنوب والحدود مع كندا.","<b>How the war ended.<\/b> On Christmas Eve 1814, diplomats agreed to the Treaty of Ghent. Each side returned prisoners and restored the old boundaries. News took six weeks to reach the United States, so Andrew Jackson’s army beat the British at New Orleans in January 1815. Norton says this victory made Americans proud and later helped make Jackson a presidential candidate. New England Federalists opposed “Mr. Madison’s War.” At the Hartford Convention, they proposed amendments to limit Republican and southern power and said they might “secede.” Norton says the Federalist Party never recovered. Norton also says the war pushed the United States to build its own industry. It was very hard on Indigenous nations, and none of their lost lands were returned.":"<b>كيف انتهت الحرب.<\/b> في ليلة عيد الميلاد عام 1814، وافق الدبلوماسيون على معاهدة غنت (Treaty of Ghent). أعاد كل طرف الأسرى وأعاد الحدود القديمة. واستغرق وصول الأخبار ستة أسابيع إلى الولايات المتحدة، فهزم جيش أندرو جاكسون (Andrew Jackson) البريطانيين في نيو أورلينز (New Orleans) في يناير 1815. يقول نورتون (Norton) إن هذا النصر جعل الأمريكيين فخورين، وساعد لاحقًا على جعل جاكسون مرشحًا للرئاسة. وعارض الفيدراليون في نيو إنجلاند (New England) «حرب السيد ماديسون». وفي مؤتمر هارتفورد (Hartford Convention)، اقترحوا تعديلات للحد من قوة الجمهوريين والجنوب، وقالوا إنهم قد «ينفصلون» (secede) عن الاتحاد. ويقول نورتون إن الحزب الفيدرالي لم يتعافَ أبدًا. ويقول نورتون أيضًا إن الحرب دفعت الولايات المتحدة إلى بناء صناعتها الخاصة. وكانت شديدة القسوة على الأمم الأصلية، ولم تُعد إليها أي من الأراضي التي فقدتها.","<b>Roads and waterways.<\/b> The market economy needed better ways to move goods. Many people argued about who should pay for roads and canals: the federal government, the states, or private companies. Construction on the National Road began in 1811. By 1818 it ran from Cumberland, Maryland, to Vandalia, Illinois. It was the first interstate road paid for by the federal government. In 1807, the steamboat <i>Clermont<\/i> went up the Hudson River from New York City to Albany. Steamboats could travel both ways on rivers, so goods could move upstream too. The Erie Canal opened in 1825 and ran 363 miles from Albany to Buffalo. It cut the cost of moving a ton of freight from $100 to $5. Thousands of laborers, mostly German and Irish immigrants, built it for less than a dollar a day.":"<b>الطرق والممرات المائية.<\/b> احتاج اقتصاد السوق إلى طرق أفضل لنقل البضائع. وناقش كثير من الناس من يجب أن يدفع تكلفة الطرق والقنوات: الحكومة الفيدرالية أم الولايات أم الشركات الخاصة. بدأ بناء الطريق الوطني (National Road) في عام 1811. وفي عام 1818 كان يمتد من كمبرلاند (Cumberland) بولاية ماريلاند (Maryland) إلى فانداليا (Vandalia) بولاية إلينوي (Illinois). وكان أول طريق بين الولايات تدفع الحكومة الفيدرالية تكلفته. وفي عام 1807، صعدت الباخرة كليرمونت (Clermont) في نهر هدسون (Hudson River) من مدينة نيويورك إلى ألباني (Albany). وكانت البواخر تسير في الاتجاهين على الأنهار، فصار بإمكان البضائع أن تتحرك عكس التيار أيضًا. وافتُتحت قناة إيري (Erie Canal) عام 1825، وكان طولها 363 ميلًا من ألباني إلى بافالو (Buffalo). وخفّضت تكلفة نقل طن من البضائع من 100 دولار إلى 5 دولارات. وبناها آلاف العمال، ومعظمهم مهاجرون ألمان وأيرلنديون، مقابل أقل من دولار في اليوم.","<b>Rails and wires.<\/b> In 1830, the nation had only 23 miles of railroad track. By 1850, it had 9,021 miles. Trains could run all year, and early railroads went more than twice as fast as stagecoaches. In May 1844, Samuel F. B. Morse sent the first message between cities over the <b>telegraph<\/b>, from Washington, D.C., to Baltimore. By 1861, the telegraph reached from the Pacific Coast to cities in the East.":"<b>القضبان والأسلاك.<\/b> في عام 1830، لم يكن في البلاد سوى 23 ميلًا من خطوط السكك الحديدية. وفي عام 1850 صار فيها 9,021 ميلًا. وكانت القطارات تعمل طوال السنة، وكانت السكك الحديدية الأولى أسرع من عربات النقل بالخيول بأكثر من الضعف. وفي مايو 1844، أرسل صامويل إف. بي. مورس (Samuel F. B. Morse) أول رسالة بين مدينتين عبر <b>التلغراف<\/b>، من واشنطن العاصمة (Washington, D.C.) إلى بالتيمور (Baltimore). وبحلول عام 1861، امتد التلغراف من ساحل المحيط الهادئ إلى مدن الشرق.","<b>New machines.<\/b> In 1793, Eli Whitney finished a machine that took the seeds out of cotton. Before that, one person working all day could clean barely one pound of cotton by hand. Whitney’s machine was fifty times more productive. Cotton became the crop that drove the southern economy. People called it “white gold.” Norton says slavery grew along with cotton. The number of enslaved people rose from just under 700,000 in 1790 to nearly 4 million before the Civil War, and about 70 percent worked in some way with cotton. In the Midwest, Cyrus McCormick built a horse-pulled reaper in 1831. A farmer with a hand sickle could cut half an acre of wheat in a day. With a McCormick reaper, two people could cut twelve acres.":"<b>آلات جديدة.<\/b> في عام 1793، أنهى إيلي ويتني (Eli Whitney) آلة تُخرج البذور من القطن. وقبل ذلك، كان الشخص الذي يعمل طوال اليوم بالكاد ينظّف رطلًا واحدًا من القطن باليد. وكانت آلة ويتني أكثر إنتاجًا بخمسين مرة. وأصبح القطن المحصول الذي يحرّك اقتصاد الجنوب. وسمّاه الناس «الذهب الأبيض». يقول نورتون (Norton) إن العبودية نمت مع القطن. فقد ارتفع عدد المستعبَدين من أقل بقليل من 700,000 في عام 1790 إلى نحو 4 ملايين قبل الحرب الأهلية، وكان نحو 70 بالمئة منهم يعملون بشكل ما في القطن. وفي الغرب الأوسط، صنع سايروس مكورميك (Cyrus McCormick) عام 1831 حصّادة تجرّها الخيول. وكان المزارع الذي يستعمل منجلًا يدويًا يحصد نصف فدان من القمح في اليوم. أما بحصّادة مكورميك فكان شخصان يحصدان اثني عشر فدانًا.","<b>Mills and cities.<\/b> In 1813, the first factory with spinning and weaving under one roof opened at Waltham, Massachusetts. In 1822, a mill began at a village that was renamed Lowell. Young women from farm families became the nation’s first factory workers. They earned $2.50 a week, less than men earned for the same work. By 1840, Lowell had 8,000 textile workers, and the village had become a grimy industrial city. In 1834, the women went on strike over wage cuts, and they lost. In 1836, they walked out over higher rents in company boardinghouses, and this time the owners backed down.":"<b>المصانع والمدن.<\/b> في عام 1813، افتُتح في والتهام (Waltham) بولاية ماساتشوستس (Massachusetts) أول مصنع يجمع الغزل والنسج تحت سقف واحد. وفي عام 1822، بدأ مصنع في قرية أُعيدت تسميتها لويل (Lowell). وصارت شابات من أسر المزارعين أول عاملات مصانع في البلاد. وكنّ يكسبن 2.50 دولار في الأسبوع، أقل مما يكسبه الرجال على العمل نفسه. وبحلول عام 1840، كان في لويل 8,000 عامل نسيج، وتحولت القرية إلى مدينة صناعية قذرة. وفي عام 1834، أضربت النساء احتجاجًا على خفض الأجور، وخسرن. وفي عام 1836، تركن العمل احتجاجًا على ارتفاع الإيجارات في بيوت السكن التابعة للشركة، وهذه المرة تراجع أصحاب المصانع.","<b>New arrivals.<\/b> After 1815, the number of immigrants rose each year. By 1860, more than one of every eight Americans was born in another country. In 1845, a fungus destroyed Ireland’s potato crop. More than a million people died in the potato famine, and almost 2 million more left Ireland. Irish men built many canals and railroads, and Irish women often worked as live-in servants. German immigrants were almost as many. Many were skilled craftspeople or farmers who moved with their families. Some native-born Protestants, called nativists, resented the newcomers, especially Catholics. The Know-Nothings wanted immigrants and Catholics kept out of public office. They also wanted the waiting time for citizenship raised from five years to twenty-one. Norton says some nativists used violence against Catholic immigrants. By 1860, the party was dead.":"<b>القادمون الجدد.<\/b> بعد عام 1815، ارتفع عدد المهاجرين كل سنة. وبحلول عام 1860، كان أكثر من واحد من كل ثمانية أمريكيين قد وُلد في بلد آخر. وفي عام 1845، دمّر فطر محصول البطاطس في أيرلندا (Ireland). ومات أكثر من مليون شخص في مجاعة البطاطس، وغادر نحو 2 مليون شخص آخرين أيرلندا. وبنى الرجال الأيرلنديون قنوات وسكك حديدية كثيرة، وكانت النساء الأيرلنديات يعملن غالبًا خادمات يقمن في بيوت أصحاب العمل. وكان عدد المهاجرين الألمان قريبًا من عددهم. وكان كثير منهم حرفيين ماهرين أو مزارعين انتقلوا مع أسرهم. وكان بعض البروتستانت المولودين في البلاد، ويُسمَّون الوطنيين المتعصبين (nativists)، يستاؤون من القادمين الجدد، خاصة الكاثوليك. وأراد حزب نو-ناثينغ (Know-Nothings) إبعاد المهاجرين والكاثوليك عن المناصب العامة. وأرادوا أيضًا رفع مدة الانتظار للحصول على الجنسية من خمس سنوات إلى واحد وعشرين عامًا. يقول نورتون (Norton) إن بعض الوطنيين المتعصبين استخدموا العنف ضد المهاجرين الكاثوليك. وبحلول عام 1860، كان الحزب قد انتهى.","<b>Workers and professions.<\/b> Skilled artisans struggled to compete with cheap factory goods. Early unions were prosecuted as unlawful conspiracies. In 1842, in <i>Commonwealth v. Hunt<\/i>, the Massachusetts Supreme Court said forming a union was not illegal. In 1834, the National Trades’ Union formed. Women formed unions too. Louise Mitchell said that when women complained about low pay, employers answered that men had families to support. Growing towns also needed new professions, such as teachers, lawyers, doctors, and engineers. Teaching grew fast, and women eventually replaced men as teachers. Women were mostly limited to nursing and teaching. Elizabeth Blackwell finished first in her class at Geneva Medical College in 1849. She was the first woman to earn a medical degree. After that, the school refused to admit more women.":"<b>العمال والمهن.<\/b> واجه الحرفيون المهرة صعوبة في منافسة البضائع الرخيصة من المصانع. وكانت النقابات الأولى تُلاحَق قضائيًا بوصفها مؤامرات غير قانونية. وفي عام 1842، في قضية <i>كومنولث ضد هانت (Commonwealth v. Hunt)<\/i>، قالت المحكمة العليا في ماساتشوستس (Massachusetts) إن تكوين نقابة ليس غير قانوني. وفي عام 1834، تأسس اتحاد النقابات الوطني (National Trades’ Union). وكوّنت النساء نقابات أيضًا. وقالت لويز ميتشل (Louise Mitchell) إن النساء حين كنّ يشتكين من قلة الأجر، كان أصحاب العمل يردّون بأن الرجال عليهم إعالة أسر. كما احتاجت البلدات المتنامية إلى مهن جديدة، مثل المعلمين والمحامين والأطباء والمهندسين. ونما التعليم بسرعة، وحلّت النساء في النهاية محل الرجال في التدريس. وكان مسموحًا للنساء غالبًا بالتمريض والتدريس فقط. وأنهت إليزابيث بلاكويل (Elizabeth Blackwell) دراستها الأولى على صفها في كلية جنيف الطبية (Geneva Medical College) عام 1849. وكانت أول امرأة تنال شهادة في الطب. وبعد ذلك رفضت الكلية قبول المزيد من النساء.","A British warship attacks the Chesapeake":"سفينة حربية بريطانية تهاجم السفينة تشيسابيك (Chesapeake)","A canal that flooded the fields":"قناة أغرقت الحقول","A fungus destroyed the potato crop. The Know-Nothings wanted twenty-one years. The court said forming a union was not illegal. Elizabeth Blackwell was the first woman to earn a medical degree.":"فطر دمّر محصول البطاطس. أراد حزب نو-ناثينغ (Know-Nothings) واحدًا وعشرين عامًا. وقالت المحكمة إن تكوين نقابة ليس غير قانوني. وكانت إليزابيث بلاكويل (Elizabeth Blackwell) أول امرأة تنال شهادة في الطب.","A fungus":"فطر","A meeting where New England Federalists proposed amendments and threatened to secede":"اجتماع اقترح فيه الفيدراليون في نيو إنجلاند (New England) تعديلات وهدّدوا بالانفصال","A new law in Britain":"قانون جديد في بريطانيا","A strike by farm workers":"إضراب عمال المزارع","A surveyor’s office at night. On the left, a wall map with contour lines and a dotted route hangs above a rack of rolled maps and a desk with a globe and a rolled scroll. On the right, a compass and a measuring chain hang on the wall above a surveying instrument on a tripod. The door has a SURVEY OFFICE sign and five padlocks in a row. Under each padlock is a window for one digit of the exit code.":"مكتب مساح ليلًا. على اليسار، خريطة جدارية عليها خطوط الارتفاع ومسار منقط معلّقة فوق رف فيه خرائط ملفوفة ومكتب عليه كرة أرضية ولفافة ورق. وعلى اليمين، بوصلة وسلسلة قياس معلّقتان على الجدار فوق جهاز مسح على حامل ثلاثي. وعلى الباب لافتة «مكتب المساحة» وخمسة أقفال في صف واحد. وتحت كل قفل نافذة صغيرة لرقم واحد من رمز الخروج.","A victory for Jackson that came after the peace treaty was signed":"انتصار لجاكسون (Jackson) جاء بعد توقيع معاهدة السلام","An agreement that returned prisoners and restored the old boundaries":"اتفاق أعاد الأسرى وأعاد الحدود القديمة","Battle of New Orleans":"معركة نيو أورلينز (Battle of New Orleans)","Battle of Tippecanoe":"معركة تيبيكانو (Battle of Tippecanoe)","Congress passes the Embargo Act":"الكونغرس يصدر قانون الحظر (Embargo Act)","Core Objective 5: Describe how changes in transportation and communications altered the economic landscape during the first half of the nineteenth century.":"الهدف الأساسي 5: وصف كيف غيّرت التحولات في النقل والاتصالات المشهد الاقتصادي خلال النصف الأول من القرن التاسع عشر.","Core Objective 6: Explain the impact of the Industrial Revolution on the way people worked and lived.":"الهدف الأساسي 6: شرح تأثير الثورة الصناعية في الطريقة التي كان الناس يعملون ويعيشون بها.","Core Objectives 1 and 2: Summarize the major domestic political developments that took place during Thomas Jefferson’s administration. Describe how foreign events affected the United States during the Jefferson and Madison administrations.":"الأهداف الأساسية 1 و2: تلخيص أهم التطورات السياسية الداخلية خلال حكم توماس جيفرسون. وصف كيف أثّرت الأحداث الخارجية في الولايات المتحدة خلال حكم جيفرسون وماديسون.","Core Objectives 3 and 4: Explain the primary causes of the American decision to declare war on Great Britain in 1812 and how the conflict played out in different areas of the country. Analyze the most significant outcomes of the War of 1812 on the United States, and their importance.":"الأهداف الأساسية 3 و4: شرح الأسباب الرئيسية لقرار الولايات المتحدة إعلان الحرب على بريطانيا في عام 1812 وكيف دار الصراع في مناطق مختلفة من البلاد. تحليل أهم نتائج حرب 1812 على الولايات المتحدة وأهميتها.","Core Objectives 7 and 8: Analyze how immigration altered the nation’s population and shaped its politics. Evaluate the impact of the expanding capitalist “market economy” on workers, professionals, and women.":"الأهداف الأساسية 7 و8: تحليل كيف غيّرت الهجرة سكان البلاد وشكّلت سياستها. تقييم تأثير «اقتصاد السوق» الرأسمالي المتوسع في العمال وأصحاب المهن والنساء.","Each answer is in the Clue Card. Look for what hurt the Irish potato crop, how many years the Know-Nothings wanted for citizenship, what the Massachusetts court said about unions, and who earned the first medical degree for a woman.":"كل إجابة موجودة في بطاقة القرائن. ابحث عمّا أضرّ بمحصول البطاطس في أيرلندا، وعن عدد السنوات التي أرادها حزب نو-ناثينغ (Know-Nothings) للحصول على الجنسية، وعمّا قالته محكمة ماساتشوستس عن النقابات، وعمّن نالت أول شهادة طب لامرأة.","Elizabeth Blackwell":"إليزابيث بلاكويل (Elizabeth Blackwell)","Escape the Surveyor’s Office":"اهرب من مكتب المساح","Fifteen years":"خمس عشرة سنة","Forming a trade union was not illegal":"تكوين نقابة عمالية ليس غير قانوني","Harrison’s troops burned a Shawnee village, and Tecumseh’s alliance fell apart":"أحرقت قوات هاريسون (Harrison) قرية للشاوني، وتفكك تحالف تيكومسه (Tecumseh)","Hartford Convention":"مؤتمر هارتفورد (Hartford Convention)","Horace Mann":"هوراس مان (Horace Mann)","In Commonwealth v. Hunt (1842), what did the Massachusetts Supreme Court say?":"في قضية كومنولث ضد هانت (Commonwealth v. Hunt) عام 1842، ماذا قالت المحكمة العليا في ماساتشوستس؟","In May 1844, Samuel Morse sent the first message between cities over the ________, from Washington, D.C., to Baltimore.":"في مايو 1844، أرسل صامويل مورس (Samuel Morse) أول رسالة بين مدينتين عبر ________، من واشنطن العاصمة (Washington, D.C.) إلى بالتيمور (Baltimore).","In the message, the letter F is really C, and the letter J is really G. The first word has 6 letters and starts with C. The second word has 3 letters and starts with G.":"في الرسالة، الحرف F هو في الحقيقة C، والحرف J هو في الحقيقة G. الكلمة الأولى فيها 6 أحرف وتبدأ بحرف C. والكلمة الثانية فيها 3 أحرف وتبدأ بحرف G.","Lewis and Clark’s Corps of Discovery sets out":"«فيلق الاكتشاف» بقيادة لويس وكلارك (Lewis and Clark) ينطلق","Look at the “New machines” paragraph. Whitney finished a machine in 1793 that took seeds out of cotton. The secret message names it in two words. Use the decoder key to spell it, one letter at a time.":"انظر إلى فقرة «آلات جديدة». أنهى ويتني (Whitney) عام 1793 آلة تُخرج البذور من القطن. وتسمّيها الرسالة السرية بكلمتين. استخدم مفتاح فك التشفير لكتابتها حرفًا حرفًا.","Look for the key words: a village burned, prisoners returned, a victory after the peace treaty, and a threat to secede.":"ابحث عن الكلمات المفتاحية: قرية محروقة، وأسرى أُعيدوا، وانتصار بعد معاهدة السلام، وتهديد بالانفصال.","Look for the word in bold in the Clue Card, in the paragraph called “Rails and wires.” It names a way to send messages over wires.":"ابحث في بطاقة القرائن عن الكلمة المكتوبة بخط عريض، في الفقرة المسماة «القضبان والأسلاك». إنها تسمّي طريقة لإرسال الرسائل عبر الأسلاك.","Look for the years in the Clue Card: 1803, 1804, and 1807. Two events happened in 1807, so check the months, June and December.":"ابحث عن السنوات في بطاقة القرائن: 1803 و1804 و1807. حدث أمران في عام 1807، فانتبه إلى الشهرين: يونيو وديسمبر.","Louise Mitchell":"لويز ميتشل (Louise Mitchell)","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 7, “Jeffersonian Republicanism” (section begins p. 284; pp. 288–293) and “War in the Mediterranean and Europe” (section begins p. 300; pp. 301–303).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 7، “Jeffersonian Republicanism” (يبدأ القسم في ص. 284؛ ص. 288–293)، و“War in the Mediterranean and Europe” (يبدأ القسم في ص. 300؛ ص. 301–303).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 7, “The War of 1812” (section begins p. 305; pp. 305–308) and “The Aftermath of War” (section begins p. 316; pp. 316–320).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 7، “The War of 1812” (يبدأ القسم في ص. 305؛ ص. 305–308)، و“The Aftermath of War” (يبدأ القسم في ص. 316؛ ص. 316–320).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 8, “Immigration” (section begins p. 355; pp. 355–359) and “Organized Labor and New Professions” (section begins p. 359; pp. 360–363).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 8، “Immigration” (يبدأ القسم في ص. 355؛ ص. 355–359)، و“Organized Labor and New Professions” (يبدأ القسم في ص. 359؛ ص. 360–363).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 8, “Industrial Development” (section begins p. 342; pp. 343–351).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 8، “Industrial Development” (يبدأ القسم في ص. 342؛ ص. 343–351).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 8, “The Market Revolution” (section begins p. 334; pp. 334–342).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 8، “The Market Revolution” (يبدأ القسم في ص. 334؛ ص. 334–342).","Not quite. At least one answer is off. Re-read the Clue Card for the potato crop, the Know-Nothings, the 1842 court case, and the first woman with a medical degree.":"ليس تمامًا. إجابة واحدة على الأقل غير صحيحة. أعد قراءة بطاقة القرائن عن محصول البطاطس، وحزب نو-ناثينغ (Know-Nothings)، وقضية المحكمة عام 1842، وأول امرأة نالت شهادة في الطب.","SURVEY OFFICE":"مكتب المساحة","Sarah Monroe":"سارة مونرو (Sarah Monroe)","Ten years":"عشر سنوات","The Clue Card describes a machine that took the seeds out of cotton in 1793. A secret message gives the two-word name of that machine. Each letter in the message was moved 3 steps forward in the alphabet. Decode it.":"تصف بطاقة القرائن آلة كانت تُخرج البذور من القطن عام 1793. وتعطي رسالة سرية اسم هذه الآلة بكلمتين. كل حرف في الرسالة نُقل 3 خطوات إلى الأمام في الأبجدية. فكّ تشفيرها.","The Compass":"البوصلة","The Early Republic and the <span style=\"white-space:nowrap\">Market Economy<\/span>":"الجمهورية المبكرة و<span style=\"white-space:nowrap\">اقتصاد السوق<\/span>","The Know-Nothings wanted the waiting time for citizenship raised from five years to how many years?":"أراد حزب نو-ناثينغ (Know-Nothings) رفع مدة الانتظار للحصول على الجنسية من خمس سنوات إلى كم سنة؟","The Measuring Chain":"سلسلة القياس","The Rolled Maps":"الخرائط الملفوفة","The United States buys the Louisiana Territory":"الولايات المتحدة تشتري إقليم لويزيانا (Louisiana Territory)","The order is the Louisiana Purchase (1803), Lewis and Clark set out (1804), the Chesapeake attack (June 1807), then the Embargo Act (December 1807).":"الترتيب هو: شراء لويزيانا (1803)، ثم انطلاق لويس وكلارك (1804)، ثم الهجوم على تشيسابيك (يونيو 1807)، ثم قانون الحظر (ديسمبر 1807).","The surveyor’s office closed for the night, and the surveyor locked the door. A wall map, a rack of rolled maps, a globe, a compass, a measuring chain, and a surveying instrument on a tripod sit in the room. The door has <b>5 locks<\/b>. Each lock matches one or two big ideas from Lesson 5. Solve them all to find the <b>5-digit exit code<\/b>.":"أُغلق مكتب المساح في الليل، وأقفل المساح الباب. وفي الغرفة خريطة جدارية، ورف فيه خرائط ملفوفة، وكرة أرضية، وبوصلة، وسلسلة قياس، وجهاز مسح على حامل ثلاثي. وللباب <b>5 أقفال<\/b>. كل قفل يوافق فكرة كبيرة واحدة أو فكرتين من الدرس 5. حُلّ الألغاز كلها لتجد <b>رمز الخروج المكوّن من 5 أرقام<\/b>.","The word starts with T and has 9 letters. It ends with “graph.”":"تبدأ الكلمة بحرف T وفيها 9 أحرف. وتنتهي بـ “graph”.","Tippecanoe was the burned village. Ghent returned prisoners and boundaries. New Orleans came after the treaty. The Hartford Convention was the Federalist meeting.":"تيبيكانو هي القرية المحروقة. وأعادت غنت الأسرى والحدود. وجاءت نيو أورلينز بعد المعاهدة. وكان مؤتمر هارتفورد اجتماع الفيدراليين.","Treaty of Ghent":"معاهدة غنت (Treaty of Ghent)","Twenty-five years":"خمس وعشرون سنة","Twenty-one years":"واحد وعشرون عامًا","Unions were unlawful conspiracies":"النقابات مؤامرات غير قانونية","What destroyed Ireland’s potato crop in 1845?":"ما الذي دمّر محصول البطاطس في أيرلندا (Ireland) عام 1845؟","Who was the first woman to earn a medical degree, according to Norton?":"من كانت أول امرأة تنال شهادة في الطب، بحسب نورتون (Norton)؟","Women could not join unions":"لا يحق للنساء الانضمام إلى النقابات","Workers could never go on strike":"لا يحق للعمال الإضراب أبدًا","You are locked in the surveyor’s office.":"أنت محبوس في مكتب المساح.","All 5 locks are open. Type the 5 digits in order, Lock 1 first.":"الأقفال الخمسة مفتوحة. اكتب الأرقام الخمسة بالترتيب: رقم القفل 1 أولًا.","Answer every question first.":"أجب عن كل الأسئلة أولًا.","CLUE CARD":"بطاقة القرائن","Check":"تحقق","Choose a description...":"اختر وصفًا...","Clear":"مسح","Clear all my work and start over":"امسح كل عملي وابدأ من جديد","DEBRIEF":"الملخص الختامي","Debrief":"الملخص الختامي","Decoded answer":"الإجابة بعد فك التشفير","Decoder key: the <span style=\"color:var(--hl);font-weight:700\">gold<\/span> letter is in the message. The white letter under it is the real letter.":"مفتاح فك التشفير: الحرف <span style=\"color:var(--hl);font-weight:700\">الذهبي<\/span> هو الحرف الموجود في الرسالة. والحرف الأبيض تحته هو الحرف الحقيقي.","ESCAPED":"لقد هربت!","Enter the Office":"ادخل المكتب","Enter your first name, last name, and period at the top first.":"اكتب اسمك الأول واسم العائلة والحصة في الأعلى أولًا.","Exit code digit 1":"رقم رمز الخروج 1","Exit door":"باب الخروج","Fill in the blank using the Clue Card.":"املأ الفراغ باستخدام بطاقة القرائن.","Have a saved file? Load it to continue.":"هل لديك ملف محفوظ؟ حمّله لتكمل.","Hint":"تلميح","Hints used":"التلميحات المستخدمة","How to escape:":"كيف تهرب:","If you get stuck, press <b>Hint<\/b>. Hints are free, but your teacher can see how many you used.":"إذا تعثرت، اضغط <b>تلميح<\/b>. التلميحات مجانية، لكن معلمك يستطيع أن يرى كم تلميحًا استخدمت.","Locks":"الأقفال","Match each term to the best description. Use the Clue Card.":"اربط كل مصطلح بأفضل وصف له. استخدم بطاقة القرائن.","Match every term first.":"طابق كل المصطلحات أولًا.","Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.":"لم تهرب بعد (يُسجَّل «غير مكتمل» INCOMPLETE). ما زال بإمكانك تنزيل ملفك وتسليمه.","Not quite. Check each match against the Clue Card. Which one are you least sure about?":"ليس تمامًا. تحقق من كل مطابقة باستخدام بطاقة القرائن. أي مطابقة أنت أقل تأكدًا منها؟","Not quite. Decode one letter at a time with the key, then check your spelling.":"ليس تمامًا. فُكّ تشفير حرف واحد في كل مرة باستخدام المفتاح، ثم تحقق من تهجئتك.","Not quite. Re-read the Clue Card and match each event to its year.":"ليس تمامًا. أعد قراءة بطاقة القرائن وطابق كل حدث مع سنته.","Not quite. Re-read the Clue Card. Use the scrambled letters to check your spelling.":"ليس تمامًا. أعد قراءة بطاقة القرائن. استخدم الحروف المبعثرة للتحقق من تهجئتك.","One last step: write your Debrief below.":"خطوة أخيرة: اكتب ملخصك الختامي أدناه.","Open all 5 locks first. The digits go in order: Lock 1 first.":"افتح الأقفال الخمسة أولًا. تُكتب الأرقام بالترتيب: رقم القفل 1 أولًا.","Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.":"افتح الأقفال الخمسة، ثم اكتب رمز الخروج المكوّن من 5 أرقام. أنهِ بالملخص الختامي.","Open each lock in order. Read the <b>Clue Card<\/b>. The answer is in the card.":"افتح كل قفل بالترتيب. اقرأ <b>بطاقة القرائن<\/b>. الإجابة موجودة في البطاقة.","Open the Door":"افتح الباب","Pick the correct answer for all four questions.":"اختر الإجابة الصحيحة للأسئلة الأربعة كلها.","Progress file downloaded. Use Load Progress to continue later.":"تم تنزيل ملف التقدم. استخدم «تحميل التقدم» لتكمل لاحقًا.","Progress loaded. Welcome back.":"تم تحميل التقدم. أهلًا بعودتك.","Solve the puzzle to open the lock and reveal one digit.":"حلّ اللغز لتفتح القفل وتكشف رقمًا واحدًا.","THE EXIT DOOR":"باب الخروج","Tap all 4 events first, in order.":"المس الأحداث الأربعة كلها أولًا، بالترتيب.","Tap the four events in the order they happened. Tap an event again to take it back.":"المس الأحداث الأربعة بالترتيب الذي وقعت به. المس الحدث مرة أخرى للتراجع عنه.","That file did not work. Choose a progress file saved from this Escape Room.":"لم يعمل هذا الملف. اختر ملف تقدم محفوظًا من غرفة الهروب هذه.","That was the last hint. Read the Clue Card slowly and try again.":"كان هذا آخر تلميح. اقرأ بطاقة القرائن ببطء وحاول مرة أخرى.","The Globe":"الكرة الأرضية","The Wall Map":"الخريطة الجدارية","The clock starts when you press the button. Most students finish in about 20 minutes.":"يبدأ العدّاد عندما تضغط الزر. يُنهي معظم الطلاب في نحو 20 دقيقة.","The code has 5 digits. Fill every box.":"الرمز مكوّن من 5 أرقام. املأ كل المربعات.","The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.":"لم يُفتح الباب. تحقق من الأرقام تحت كل قفل، واكتبها بالترتيب: رقم القفل 1 أولًا.","The door is open!":"الباب مفتوح!","The door swings open!":"ينفتح الباب على مصراعيه!","Time":"الوقت","Type the answer in English.":"اكتب الإجابة بالإنجليزية.","Type the answer in English. Use the digits 0-9.":"اكتب الإجابة بالإنجليزية. استخدم الأرقام 0-9.","Type the exit code":"اكتب رمز الخروج","Type your answer first.":"اكتب إجابتك أولًا.","Type your answer here...":"اكتب إجابتك هنا...","UNIT 2 · AN EXPANDING NATION | CPUSH | DANIEL GARZA, M.A.":"الوحدة 2 · أمة في توسع | CPUSH | DANIEL GARZA, M.A.","Unscramble the letters to fill the blank.":"رتّب الأحرف لتملأ الفراغ.","Which lock was hardest, and what did you learn that you did not know before?":"أي قفل كان الأصعب، وماذا تعلمت ولم تكن تعرفه من قبل؟","Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.":"اكتب من 3 إلى 4 جمل. اذكر القفل واستخدم معلومة واحدة من بطاقة القرائن الخاصة به. يمكنك كتابة هذا حتى لو لم تهرب.","You escaped and wrote your Debrief. Ready to submit.":"لقد هربت وكتبت ملخصك الختامي. أنت جاهز للتسليم.","You escaped! Write your Debrief, then download your file to submit.":"لقد هربت! اكتب ملخصك الختامي، ثم نزّل ملفك لتسليمه.","Your answer":"إجابتك","Your time:":"وقتك:","digit":"رقم","Clear all your work and start over? This cannot be undone.":"هل تريد مسح كل عملك والبدء من جديد؟ لا يمكن التراجع عن هذا."},"patterns":[{"re":"^Still needed: first name, last name, and period\\.$","es":"Todavía falta: nombre, apellido y período.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة."},{"re":"^LOCK (\\d)$","es":"Cand. $1","ar":"القفل $1"},{"re":"^LOCK (\\d) · CORE OBJECTIVE (\\d)$","es":"CANDADO $1 · OBJETIVO PRINCIPAL $2","ar":"القفل $1 · الهدف الأساسي $2"},{"re":"^Hint (\\d):$","es":"Pista $1:","ar":"تلميح $1:"},{"re":"^Exit code digit (\\d)$","es":"Dígito $1 del código de salida","ar":"رقم رمز الخروج $1"},{"re":"^Click! Lock (\\d) is open\\. Your digit is (\\d)\\.$","es":"¡Clic! El Candado $1 está abierto. Tu dígito es $2.","ar":"نقرة! القفل $1 مفتوح. رقمك هو $2."},{"re":"^5 of 5 locks opened with (\\d+) tries and (\\d+) hints\\.$","es":"Abriste 5 de 5 candados con $1 intentos y $2 pistas.","ar":"فتحت 5 أقفال من 5 بعد $1 من المحاولات و$2 من التلميحات."},{"re":"^Done! File downloaded: (.*)\\. Upload it to Canvas\\.$","es":"¡Listo! Se descargó el archivo: $1. Súbelo a Canvas.","ar":"تم! تم تنزيل الملف: $1. ارفعه إلى Canvas."},{"re":"^Your file downloaded and is marked INCOMPLETE \\(you have not escaped\\)\\. Upload it to Canvas: (.*)$","es":"Tu archivo se descargó y está marcado INCOMPLETO (todavía no escapas). Súbelo a Canvas: $1","ar":"تم تنزيل ملفك وهو مُسجَّل «غير مكتمل» INCOMPLETE (لم تهرب بعد). ارفعه إلى Canvas: $1"},{"re":"^Unlocked\\. Your digit is (\\d)\\. Your answer: (.*)$","es":"Desbloqueado. Tu dígito es $1. Tu respuesta: $2","ar":"تم الفتح. رقمك هو $1. إجابتك: $2"},{"re":"^LOCK (\\d) · CORE OBJECTIVE (\\d+)$","es":"CANDADO $1 · OBJETIVO PRINCIPAL $2","ar":"القفل $1 · الهدف الأساسي $2"},{"re":"^LOCK (\\d) · CORE OBJECTIVES (\\d+) AND (\\d+)$","es":"CANDADO $1 · OBJETIVOS PRINCIPALES $2 Y $3","ar":"القفل $1 · الأهداف الأساسية $2 و$3"},{"re":"^Tap all (\\d) events first, in order\\.$","es":"Primero toca los $1 sucesos, en orden.","ar":"المس الأحداث الـ $1 كلها أولًا، بالترتيب."}]}</script>
+<script>
+/* Supplement language switch (English / Espanol / Arabic). Works on pages whose text is rendered by JS:
+   a MutationObserver translates text as it appears. Data: <script type="application/json" id="sp-i18n">
+   {"langs":["en","es","ar"],"default":"en","es":{englishHTML:translation},"ar":{...},"patterns":[{"re":"^(\\d+) of (\\d+)$","es":"$1 de $2","ar":"..."}]}
+   Keys are the English text exactly as it sits in the page (innerHTML, spaces collapsed).
+   Helpers: spSeen() english strings seen so far; spMissing() strings with no translation in the current language;
+   spSetLang(l); spTr(s) translate a string (used for confirm/alert); spAscii(s) plain-ASCII name for file names. */
+(function () {
+  var node = document.getElementById('sp-i18n');
+  var D = node ? JSON.parse(node.textContent) : { langs: ['en'], patterns: [] };
+  var INLINE = { B:1,I:1,EM:1,STRONG:1,SPAN:1,A:1,BR:1,SMALL:1,SUP:1,SUB:1,U:1,MARK:1,BDI:1,TSPAN:1,CODE:1 };
+  var SKIP = 'script,style,textarea,input,.sp-lang,.sp-nt,[translate="no"]';
+  var WORD = /[A-Za-z\u00C0-\u024F\u0600-\u06FF]{2}|e\.g\./;
+  var LANG = 'en', REC = new WeakMap(), SEEN = {}, MISS = {};
+  (D.patterns || []).forEach(function (p) { try { p._re = new RegExp(p.re); } catch (e) {} });
+  function norm(s) { return String(s).replace(/\s+/g, ' ').trim(); }
+  function tr(src) {
+    if (LANG === 'en') return null;
+    var t = D[LANG] && D[LANG][src];
+    if (t) return t;
+    var P = D.patterns || [];
+    for (var i = 0; i < P.length; i++) {
+      var m = P[i]._re && P[i]._re.exec(src);
+      if (m && P[i][LANG]) return P[i][LANG].replace(/\$(\d+)/g, function (_, n) { return m[+n] || ''; });
+    }
+    return null;
+  }
+  window.spTr = function (s) { var t = tr(norm(s)); return t ? t.replace(/<[^>]+>/g, '') : s; };
+  function isInline(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling)
+      if (c.nodeType === 1 && (!INLINE[c.tagName.toUpperCase()] || c.matches(SKIP))) return false;
+    return true;
+  }
+  function directText(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling) if (c.nodeType === 3 && WORD.test(c.nodeValue)) return true;
+    return false;
+  }
+  function cur(s) { return s.nodeType === 1 ? s.innerHTML : s.nodeValue; }
+  function put(s, v) { if (s.nodeType === 1) s.innerHTML = v; else s.nodeValue = v; }
+  function handle(s) {
+    var r = REC.get(s), c = cur(s);
+    if (!(r && c === r.wrote)) { r = { en: c, wrote: c }; REC.set(s, r); }
+    var src = norm(r.en), target = r.en;
+    if (WORD.test(src)) {
+      SEEN[src] = 1;
+      if (LANG !== 'en') {
+        var t = tr(src);
+        if (t) {
+          target = s.nodeType === 1 ? t : (r.en.match(/^\s*/)[0] + t + r.en.match(/\s*$/)[0]);
+          delete MISS[src];
+        } else MISS[src] = 1;
+      }
+    }
+    if (c !== target) put(s, target);
+    r.wrote = cur(s);
+  }
+  var ATTRS = ['placeholder', 'alt', 'aria-label', 'title'];
+  function attrs(root) {
+    var els = root.querySelectorAll ? root.querySelectorAll('[placeholder],[alt],[aria-label],[title]') : [];
+    var list = [].slice.call(els); if (root.matches && root.matches('[placeholder],[alt],[aria-label],[title]')) list.push(root);
+    list.forEach(function (el) {
+      if (el.closest && el.closest('.sp-lang,.sp-nt,[translate="no"],script,style')) return;
+      var rec = el.__spa || (el.__spa = {});
+      ATTRS.forEach(function (a) {
+        var v = el.getAttribute(a); if (v == null) return;
+        var r = rec[a];
+        if (!(r && v === r.wrote)) { r = rec[a] = { en: v, wrote: v }; }
+        var src = norm(r.en); if (!WORD.test(src)) return;
+        SEEN[src] = 1;
+        var t = LANG === 'en' ? null : tr(src);
+        if (LANG !== 'en' && !t) MISS[src] = 1;
+        var target = t ? t.replace(/<[^>]+>/g, '') : r.en;
+        if (v !== target) el.setAttribute(a, target);
+        r.wrote = el.getAttribute(a);
+      });
+    });
+  }
+  function walk(root) {
+    if (root.nodeType === 3) { if (WORD.test(root.nodeValue) && !(root.parentNode && root.parentNode.closest && root.parentNode.closest(SKIP))) handle(root); return; }
+    if (root.nodeType !== 1) return;
+    (function w(el) {
+      if (el.matches(SKIP)) return;
+      if (el !== document.body && directText(el) && isInline(el)) { handle(el); return; }
+      for (var c = el.firstChild; c; c = c.nextSibling) {
+        if (c.nodeType === 1) w(c); else if (c.nodeType === 3 && WORD.test(c.nodeValue)) handle(c);
+      }
+    })(root);
+    attrs(root);
+  }
+  var TITLE = { en: document.title, wrote: document.title };
+  function title() {
+    if (document.title !== TITLE.wrote) TITLE = { en: document.title, wrote: document.title };
+    var t = LANG === 'en' ? null : tr(norm(TITLE.en));
+    document.title = t ? t.replace(/<[^>]+>/g, '') : TITLE.en; TITLE.wrote = document.title;
+  }
+  function inl(e) { return e.nodeType === 1 && !!INLINE[e.tagName.toUpperCase()]; }
+  var mo = new MutationObserver(function (muts) {
+    var todo = [];
+    muts.forEach(function (m) {
+      if (m.type === 'childList') { for (var i = 0; i < m.addedNodes.length; i++) todo.push(m.addedNodes[i]); todo.push(m.target); }
+      else todo.push(m.target);
+    });
+    todo.forEach(function (n) {
+      var el = n.nodeType === 1 ? n : n.parentNode;
+      if (!el || el.nodeType !== 1 || !document.body.contains(el)) return;
+      while (el !== document.body && el.parentNode && el.parentNode.nodeType === 1 && inl(el) && inl(el.parentNode)) el = el.parentNode;
+      if (el.parentNode && el.parentNode.nodeType === 1 && inl(el.parentNode) && el.parentNode !== document.body) el = el.parentNode;
+      walk(el);
+    });
+    mo.takeRecords();
+  });
+  var AR = { 'ا':'a','أ':'a','إ':'i','آ':'a','ب':'b','ت':'t','ث':'th','ج':'j','ح':'h','خ':'kh','د':'d','ذ':'dh','ر':'r','ز':'z','س':'s','ش':'sh','ص':'s','ض':'d','ط':'t','ظ':'z','ع':'a','غ':'gh','ف':'f','ق':'q','ك':'k','ل':'l','م':'m','ن':'n','ه':'h','و':'w','ي':'y','ى':'a','ة':'a','ئ':'y','ؤ':'w' };
+  window.spAscii = function (s) {
+    s = String(s); if (s.normalize) s = s.normalize('NFD').replace(/[̀-ًͯ-ٰٟ]/g, '');
+    return s.replace(/[ء-ي]/g, function (c) { return AR[c] !== undefined ? AR[c] : ''; }).replace(/ñ/g, 'n').replace(/Ñ/g, 'N');
+  };
+  window.spSeen = function () { return Object.keys(SEEN); };
+  window.spMissing = function () { return Object.keys(MISS); };
+  window.spLang = function () { return LANG; };
+  window.spSetLang = function (l) {
+    if ((D.langs || ['en']).indexOf(l) < 0) l = 'en';
+    LANG = l; MISS = {};
+    var h = document.documentElement; h.lang = l; h.dir = l === 'ar' ? 'rtl' : 'ltr';
+    mo.disconnect(); walk(document.body); title(); mo.takeRecords();
+    mo.observe(document.body, { childList: true, subtree: true, characterData: true });
+    document.querySelectorAll('.sp-lang button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === l)); });
+    try { localStorage.setItem('sp_lang', l); } catch (e) {}
+    try { var u = new URL(location.href); if (l === 'en') u.searchParams.delete('lang'); else u.searchParams.set('lang', l); history.replaceState(null, '', u.toString()); } catch (e) {}
+    try { document.dispatchEvent(new CustomEvent('splangchange', { detail: l })); } catch (e) {}
+  };
+  var _c = window.confirm, _a = window.alert;
+  window.confirm = function (m) { return _c.call(window, window.spTr(m)); };
+  window.alert = function (m) { return _a.call(window, window.spTr(m)); };
+  document.querySelectorAll('.sp-lang button').forEach(function (b) { b.addEventListener('click', function () { window.spSetLang(b.getAttribute('data-lang')); }); });
+  var start = D['default'] || 'en';
+  try { start = new URL(location.href).searchParams.get('lang') || localStorage.getItem('sp_lang') || start; } catch (e) {}
+  window.spSetLang(start);
+})();
+
+</script><!--/sp-i18n-->
+</body>
+</html>

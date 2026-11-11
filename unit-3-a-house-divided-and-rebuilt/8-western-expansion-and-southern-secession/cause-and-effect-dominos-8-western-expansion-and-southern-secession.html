@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cause-and-Effect Dominos 8 · Western Expansion and Southern Secession</title>
+<style>
+:root{--slate:#1B283C;--frost:#EBEFF4;--blue:#2E4261;--red:#D24B54;--rose:#E18E94;
+ --bg:#EEF1F6;--paper:#FBFCFD;--ink:#141E2D;--rule:#CCD1D8;--line:#A6ADB7;--ok:#2F6B3A;--redink:#A8323B;
+ --serif:Georgia,"Times New Roman",serif;--sans:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
+ --glass:color-mix(in srgb,#fff 66%,transparent);--edge:color-mix(in srgb,#fff 75%,transparent);
+ --depth:0 1px 1px rgba(20,30,45,.05),0 4px 8px -3px rgba(20,30,45,.10),0 18px 40px -18px rgba(20,30,45,.32)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:
+ radial-gradient(42vmax 42vmax at 8% 6%,rgba(27,40,60,.28),transparent 70%),
+ radial-gradient(38vmax 38vmax at 96% 22%,rgba(210,75,84,.22),transparent 70%),
+ radial-gradient(46vmax 40vmax at 70% 104%,rgba(46,66,97,.22),transparent 70%)}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px 50px}
+.hero-band{position:relative;overflow:hidden;margin-top:24px;border-radius:16px;padding:32px 30px 28px;color:var(--frost);
+ background:linear-gradient(100deg,#1B283C 40%,#2E4261)}
+.hero-band::after{content:"";position:absolute;left:0;right:0;bottom:0;height:5px;background:linear-gradient(90deg,var(--red),var(--rose))}
+.eyebrow{font-size:13px;letter-spacing:.18em;font-weight:700;color:var(--rose)}
+.hero-band .eyebrow{color:var(--rose)}
+h1{margin:.2em 0 .2em;font:700 clamp(30px,5vw,46px)/1.1 var(--serif);color:var(--frost);max-width:16em}
+.sub{margin:0;font-size:16px;font-weight:500;color:var(--frost)}
+.hero-num{position:absolute;right:18px;bottom:-30px;font:700 180px/1 var(--serif);color:#fff;opacity:.10;pointer-events:none}
+.panel{background:var(--glass);border:1px solid var(--edge);border-radius:14px;box-shadow:var(--depth);padding:16px 20px;margin:16px 0;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.meta{display:flex;flex-wrap:wrap;gap:12px}
+.meta label{flex:1 1 150px;font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--blue)}
+input[type=text],textarea{display:block;width:100%;margin-top:4px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);font:inherit;font-size:16.5px}
+input[readonly]{background:#E3E6EC;color:var(--blue)}
+textarea{min-height:84px;resize:vertical;line-height:1.5}
+input:focus,textarea:focus{outline:3px solid rgba(210,75,84,.35);border-color:var(--red)}
+input.bad{border-color:#B3261E;background:#FFF1EF}
+textarea.done{border-color:var(--ok);box-shadow:inset 4px 0 0 var(--ok)}
+.bigq{background:rgba(255,255,255,.55);border-left:6px solid var(--red)}
+.bigq p{margin:.3em 0;font:500 21px/1.4 var(--serif)}
+.howto{font-size:15.5px;color:var(--blue)}
+.howto ol{margin:.4em 0 0;padding-left:1.2em}.howto li{margin:.25em 0}
+.bar{position:sticky;top:0;z-index:20;margin:0 -16px;padding:9px 16px;background:rgba(238,241,246,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
+.bar .row{display:flex;align-items:center;gap:12px;font-size:14px;font-weight:700;color:var(--blue)}
+.track{flex:1;height:10px;border-radius:6px;background:#D4D8DE;overflow:hidden}
+.fill{height:100%;width:0;background:var(--red);transition:width .3s}
+.btn{border:2px solid var(--slate);background:#fff;color:var(--slate);padding:9px 16px;min-height:44px;border-radius:10px;font:inherit;font-size:15px;font-weight:700;cursor:pointer}
+.btn:hover{background:var(--slate);color:#fff}
+.btn.primary{background:var(--slate);color:#fff}
+.btn.primary:hover{background:var(--blue)}
+.btn:disabled{background:#C9CDD4;border-color:#C9CDD4;color:#4B5565;cursor:not-allowed}
+.btn:focus-visible{outline:3px solid rgba(210,75,84,.55);outline-offset:2px}
+.link{background:none;border:0;color:var(--blue);text-decoration:underline;cursor:pointer;font:inherit;font-size:14px;margin-top:12px;padding:8px}
+h2.chain{margin:34px 0 4px;font:700 clamp(24px,4vw,32px)/1.15 var(--serif);color:var(--slate)}
+.kicker{font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--redink)}
+.hint{font-size:15px;color:var(--blue);margin:.3em 0 .6em}
+.ends{display:flex;justify-content:space-between;font-size:12.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin:8px 4px 4px}
+ol.dom{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.tile{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:10px;align-items:center;background:#fff;border:2px solid var(--slate);border-radius:14px;padding:8px 10px 8px 8px;box-shadow:0 3px 0 var(--slate),0 8px 14px -8px rgba(20,30,45,.4);transition:transform .15s,box-shadow .15s;position:relative}
+.tile::before{content:"";position:absolute;left:52px;top:10px;bottom:10px;width:2px;background:repeating-linear-gradient(to bottom,var(--rose) 0 6px,transparent 6px 10px)}
+.pos{width:40px;height:40px;border-radius:10px;background:var(--slate);color:var(--frost);display:flex;align-items:center;justify-content:center;font:700 20px var(--serif)}
+.tb{padding-left:10px;min-width:0}
+.ev{font-weight:800;font-size:17px;line-height:1.25;color:var(--ink);overflow-wrap:anywhere}
+.dt{display:inline-block;margin-top:3px;padding:1px 9px;border-radius:999px;background:var(--slate);color:var(--frost);font-size:13.5px;font-weight:700}
+.sb{font-size:14px;color:var(--blue);margin-top:3px}
+.mv{display:grid;gap:6px}
+.mv button{width:86px;height:46px;white-space:nowrap;border:2px solid var(--blue);border-radius:10px;background:var(--blue);color:#fff;font:700 15px var(--sans);cursor:pointer;touch-action:manipulation}
+.mv button:hover{background:var(--slate)}
+.mv button:disabled{background:#D9DCE2;border-color:#D9DCE2;color:#6A7383;cursor:not-allowed}
+.mv button:focus-visible{outline:3px solid rgba(210,75,84,.6);outline-offset:2px}
+.tile[draggable=true]{cursor:grab}
+.tile.dragging{opacity:.45}.tile.over{box-shadow:0 0 0 4px var(--rose)}
+.locked .tile{border-color:var(--blue);box-shadow:0 2px 0 var(--blue)}
+.locked.good .tile{border-color:var(--ok);box-shadow:0 3px 0 var(--ok)}
+.locked.good .pos{background:var(--ok)}
+.tile.tip{animation:tip .9s ease both;transform-origin:bottom left}
+@keyframes tip{0%{transform:rotate(0)}35%{transform:rotate(-4deg) translateX(10px)}70%{transform:rotate(1.5deg)}100%{transform:rotate(0)}}
+.checkrow{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:14px 0 4px}
+.chkinfo{font-size:14.5px;font-weight:700;color:var(--blue)}
+.result{margin:8px 0 0;padding:10px 14px;border-radius:10px;font-weight:700;font-size:16.5px;display:none}
+.result.show{display:block}
+.result.info{background:#E6EBF3;color:var(--slate);border:1px solid #B9C4D6}
+.result.win{background:#E5F2E7;color:#1D4A27;border:1px solid #8DBB96}
+.result.stop{background:#FBEAEC;color:#7C2229;border:1px solid #E5A9AE}
+.because{margin-top:18px}
+.because h3{margin:0 0 4px;font:700 22px/1.2 var(--serif);color:var(--slate)}
+.wait{padding:12px 14px;border:2px dashed var(--line);border-radius:12px;color:var(--blue);font-weight:600;font-size:15px}
+.link-row{padding:12px 0;border-top:1px solid var(--rule)}
+.link-row:first-of-type{border-top:0}
+.pair{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;font-weight:700;font-size:15px}
+.chip{background:var(--slate);color:var(--frost);border-radius:8px;padding:3px 10px;font-size:14px;overflow-wrap:anywhere}
+.arrow{color:var(--redink);font-size:20px;font-weight:800}
+.starter{margin:8px 0 0;font:italic 600 16.5px var(--serif);color:var(--redink)}
+.finish{text-align:center}
+.status{font-size:15px;font-weight:700;color:var(--blue);margin-bottom:10px}
+.btns{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.msg{display:none;margin:12px auto;padding:10px 14px;border-radius:10px;background:#E5F2E7;border:1px solid var(--ok);color:#1D4A27;font-weight:700;max-width:600px}
+.msg.err{background:#FFF1EF;border-color:#B3261E;color:#8C1D18}
+footer{margin-top:30px;padding-top:10px;border-top:1px solid var(--rule);font-size:12px;letter-spacing:.05em;color:var(--slate);font-weight:600}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (max-width:480px){
+ .tile{grid-template-columns:38px minmax(0,1fr) auto;gap:6px;padding:8px}.tile::before{left:46px}
+ .pos{width:36px;height:36px;font-size:18px}.mv button{width:80px;font-size:14px}.ev{font-size:16px}
+ .hero-band{padding:24px 18px 22px}.panel{padding:14px 14px}.hero-num{font-size:120px}}
+@media (prefers-reduced-motion:reduce){.tile.tip{animation:none}.tile,.fill{transition:none}}
+@media print{.bar,.finish,.btn,.mv{display:none!important}body{background:#fff}}
+
+html[dir=rtl] .tile{padding:8px 8px 8px 10px}
+html[dir=rtl] .tile::before{left:auto;right:52px}
+html[dir=rtl] .tb{padding-left:0;padding-right:10px}
+html[dir=rtl] .bigq{border-left:1px solid var(--edge);border-right:6px solid var(--red)}
+html[dir=rtl] textarea.done{box-shadow:inset -4px 0 0 var(--ok)}
+html[dir=rtl] .hero-num{right:auto;left:18px}
+html[dir=rtl] .howto ol{padding-left:0;padding-right:1.2em}
+html[dir=rtl] .arrow{display:inline-block;transform:scaleX(-1)}
+html[dir=rtl] .dt{direction:ltr}
+html[dir=rtl] .tile.tip{transform-origin:bottom right}
+@media (max-width:480px){html[dir=rtl] .tile{padding:8px}html[dir=rtl] .tile::before{left:auto;right:46px}}
+/*sp-i18n-css*/
+.sp-lang-bar{display:flex;justify-content:flex-end;padding:8px 12px 0;position:relative;z-index:5}
+.sp-lang{display:inline-flex;gap:2px;padding:3px;border-radius:10px;background:rgba(255,255,255,.88);border:1px solid rgba(0,0,0,.18);font-family:system-ui,"Segoe UI",Tahoma,Arial,sans-serif}
+.sp-lang button{border:0;background:transparent;color:#222;font:600 13px/1 system-ui,"Segoe UI",Tahoma,Arial,sans-serif;padding:7px 11px;border-radius:7px;cursor:pointer}
+.sp-lang button[aria-pressed="true"]{background:#222;color:#fff}
+.sp-lang button:focus-visible{outline:3px solid #2a6df4;outline-offset:1px}
+textarea,input,select{unicode-bidi:plaintext}
+html[lang="ar"] body,html[lang="ar"] button,html[lang="ar"] textarea,html[lang="ar"] input,html[lang="ar"] select{font-family:"Segoe UI",Tahoma,"Noto Sans Arabic","Arial",system-ui,sans-serif}
+html[lang="ar"] body{line-height:1.8}
+html[lang="ar"] *{letter-spacing:0!important}
+html[dir="rtl"] textarea,html[dir="rtl"] input{text-align:start}
+@media print{.sp-lang-bar{display:none}}
+/*/sp-i18n-css*/
+</style></head><body>
+<!--sp-bar--><div class="sp-lang-bar"><div class="sp-lang" role="group" aria-label="Language / Idioma / اللغة"><button type="button" data-lang="en" lang="en" aria-pressed="true">English</button><button type="button" data-lang="es" lang="es" aria-pressed="false">Español</button><button type="button" data-lang="ar" lang="ar" aria-pressed="false">العربية</button></div></div><!--/sp-bar-->
+
+
+<div class="wrap">
+<div class="bar"><div class="row"><span id="pct">0 of 15 steps done</span><div class="track"><div class="fill" id="fill"></div></div><button class="btn" onclick="window.print()" style="min-height:36px;padding:4px 12px">Print</button></div></div>
+<header>
+ <div class="hero-band"><div class="eyebrow">1750-1861</div><h1>Cause-and-Effect Dominos</h1><p class="sub">Western Expansion and Southern Secession</p><span class="hero-num" aria-hidden="true">8</span></div>
+ <div class="panel meta">
+  <label>FIRST NAME *<input id="f_first" type="text" autocomplete="given-name"></label>
+  <label>LAST NAME *<input id="f_last" type="text" autocomplete="family-name"></label>
+  <label>PERIOD *<input id="f_period" type="text" inputmode="numeric" maxlength="12" placeholder="e.g. 3"></label>
+  <label>DATE (fills in when you finish)<input id="f_date" type="text" readonly tabindex="-1" placeholder="Automatic"></label>
+ </div>
+</header>
+<div class="panel bigq"><div class="eyebrow" style="color:#A8323B">BIG QUESTION</div><p>How did one event lead to the next until the country split apart?</p></div>
+<div class="panel howto"><b>How to work (about 15 to 20 minutes):</b>
+ <ol>
+  <li>Each domino is an event with a date. Tap <b>&#9650; Up</b> or <b>&#9660; Down</b> to move it. (On a computer you can also drag it.)</li>
+  <li>Tap <b>Check my order</b>. It tells you how many dominos are in the right place, but not which ones. You get 3 checks for each chain.</li>
+  <li>Once your order is locked, write one &ldquo;because&rdquo; sentence for each link between two dominos.</li>
+  <li>Answer the last question about which domino mattered most.</li>
+  <li>Your work saves on this device as you go. Use <b>Save Progress</b> to download a backup and <b>Load Progress</b> to keep working later. When you are done, tap <b>Finished</b> and upload the file to Canvas.</li>
+ </ol></div>
+
+<section id="sec-chain1" data-chain="chain1">
+<div class="kicker">Chain 1 of 2</div>
+<h2 class="chain">Moving West to the Compromise of 1850</h2>
+<p class="hint">Put the dominos in order. The <b>first event</b> goes on top. Each event should help cause the one below it.</p>
+<div class="ends"><span>&#9650; First (cause)</span><span>Last (effect) &#9660;</span></div>
+<ol class="dom" id="list-chain1" aria-label="Chain 1 dominos"></ol>
+<div class="checkrow"><button class="btn primary" id="check-chain1">Check my order</button><span class="chkinfo" id="info-chain1"></span></div>
+<div class="result" id="res-chain1" role="status" aria-live="polite"></div>
+<div class="panel because" id="bec-chain1"><h3>Why did each domino fall?</h3><div id="becbody-chain1"></div></div>
+</section>
+
+<section id="sec-chain2" data-chain="chain2">
+<div class="kicker">Chain 2 of 2</div>
+<h2 class="chain">Kansas-Nebraska Act to Secession</h2>
+<p class="hint">Put the dominos in order. The <b>first event</b> goes on top. Each event should help cause the one below it.</p>
+<div class="ends"><span>&#9650; First (cause)</span><span>Last (effect) &#9660;</span></div>
+<ol class="dom" id="list-chain2" aria-label="Chain 2 dominos"></ol>
+<div class="checkrow"><button class="btn primary" id="check-chain2">Check my order</button><span class="chkinfo" id="info-chain2"></span></div>
+<div class="result" id="res-chain2" role="status" aria-live="polite"></div>
+<div class="panel because" id="bec-chain2"><h3>Why did each domino fall?</h3><div id="becbody-chain2"></div></div>
+</section>
+<section id="sec-final">
+<div class="kicker">Last step</div>
+<h2 class="chain">Which domino mattered most?</h2>
+<div class="panel"><p class="starter">I think the most important domino was ___ because...</p>
+<label for="final_most_important" class="sr">Which domino do you think mattered most? Why?</label>
+<textarea id="final_most_important" data-q="1" placeholder="Pick one domino from either chain. Explain why it mattered most. Use a fact from the chapter."></textarea></div>
+</section>
+<div class="panel finish" id="actions">
+ <div class="status" id="status"></div>
+ <div class="btns">
+  <button class="btn" id="saveBtn">Save Progress</button>
+  <button class="btn" id="loadBtn">Load Progress</button>
+  <input type="file" id="loadFile" accept=".json,application/json" hidden>
+  <button class="btn primary" id="finishBtn" disabled>Finished — Download File to Submit</button>
+ </div>
+ <div class="msg" id="msg" role="status"></div>
+ <button class="link" id="reset">Clear all my answers</button>
+</div>
+<footer>UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.</footer>
+</div>
+<script>
+var DATA=[{"key": "chain1", "num": 1, "title": "Moving West to the Compromise of 1850", "tiles": [{"id": "t2ht", "ev": "Compromise of 1850", "dt": "1850", "sb": "Congress passes five laws about slavery and the new land."}, {"id": "tbp4", "ev": "Mexican-American War begins", "dt": "1846", "sb": "Fighting breaks out at the Rio Grande."}, {"id": "th3b", "ev": "Texas Revolution", "dt": "1835–1836", "sb": "Texians fight to break away from Mexico."}, {"id": "trjp", "ev": "Americans settle in Mexican Texas", "dt": "1820s–1830s", "sb": "They bring enslaved people with them."}, {"id": "tf5g", "ev": "Gold rush and a free-state California", "dt": "1849", "sb": "Settlers pour in and set up a no-slavery government."}, {"id": "tw75", "ev": "U.S. annexes Texas", "dt": "1845", "sb": "Texas becomes part of the United States."}, {"id": "ttgk", "ev": "Treaty of Guadalupe Hidalgo", "dt": "Feb. 1848", "sb": "Mexico gives up about half its land."}], "hashes": ["9277423e954d0629fb0347ead60e429be53076625e8b0dc0e81f4c55d6045a2d", "cc86bc8780cd8f43d11341b4534d7e0e52968986c5c3b689496eedf551c0eefb", "4f77d87505d706331af9bbc0018c0ffc47ecb3b1b8112981221f7f958036fd84", "317279685466abff6d01da2f4d875ffe1decfa2b919f16c7a73b5d472e84be94", "13eddeb4b50eaa609ff4a12ac79e47a8b8d345c1f09884ab04066a307c3151fc", "310612653b75152c572d86ee693728a74e7f04f466d054cf57edb148cf1c49b4", "2e7da17d2f1435c312af518f8ee0b406b9e07f808198e21f762cb7b23a1b7f3a"]}, {"key": "chain2", "num": 2, "title": "Kansas-Nebraska Act to Secession", "tiles": [{"id": "t9pc", "ev": "Lincoln-Douglas debates", "dt": "1858", "sb": "Lincoln says the nation cannot stay half slave and half free."}, {"id": "thft", "ev": "Republican Party runs its first presidential candidate", "dt": "1856", "sb": "A new party opposes the spread of slavery."}, {"id": "tgkt", "ev": "Lincoln wins the presidency", "dt": "Nov. 1860", "sb": "He carries all eighteen free states and no slave states."}, {"id": "tbk3", "ev": "Seven southern states have seceded", "dt": "By Feb. 1861", "sb": "Six more states follow South Carolina."}, {"id": "tsgn", "ev": "Bleeding Kansas", "dt": "1855–1856", "sb": "Pro-slavery and anti-slavery forces fight over Kansas."}, {"id": "tsp4", "ev": "Kansas-Nebraska Act", "dt": "1854", "sb": "Voters in each territory will decide on slavery."}, {"id": "tjkh", "ev": "South Carolina secedes", "dt": "Dec. 1860", "sb": "The first state to leave the Union."}], "hashes": ["071c56f4dd98e91450e4bf121a5f8444198d05d1a5e278ddea204653426f00cf", "465b50522fb47b2a618e65ba992c1e9de114510e78f130f7fa2bb57040a2ca4a", "dcbc716e9132aae9aa0090be96da189d368058228138d04dbb5d01585a9f94cd", "5649124c53bef52e236a5437f538c196701a4aeea0e89a4b7c40edf263cf9d48", "32576b91cf0f1832c7c5d0e261f375e3de5dff2e35d83bcb23374dedb3abded5", "b844487183e752429e6841468f4f0da1a88593ec844dff73e134425b13ab932b", "420d4b4578efe9914637892a2a7b503070e24befe66b0cf5d9065e709da43cb7"]}];
+(function(){
+var PACKET='CPUSH_L8_DOMINOS';
+var STORE='cpush_l8_dominos_student';
+var SALT='L8DOM', MAXCHECKS=3, MINLEN=15;
+var $=function(i){return document.getElementById(i)};
+var first=$('f_first'),last=$('f_last'),per=$('f_period'),dateF=$('f_date');
+var meta=[first,last,per,dateF],metaIds=['f_first','f_last','f_period','f_date'];
+var data={},ST={};
+
+/* SHA-256 (plain JS so it works from file:// and Canvas) */
+function sha256(ascii){
+ function rr(v,a){return (v>>>a)|(v<<(32-a))}
+ var maxWord=Math.pow(2,32),i,j,result='',words=[],bits=ascii.length*8,hash=[],k=[],pc=0,comp={};
+ for(var cand=2;pc<64;cand++){if(!comp[cand]){for(i=0;i<313;i+=cand)comp[i]=cand;hash[pc]=(Math.pow(cand,.5)*maxWord)|0;k[pc++]=(Math.pow(cand,1/3)*maxWord)|0}}
+ ascii+='\x80';while(ascii.length%64-56)ascii+='\x00';
+ for(i=0;i<ascii.length;i++){j=ascii.charCodeAt(i);words[i>>2]|=j<<((3-i)%4)*8}
+ words[words.length]=((bits/maxWord)|0);words[words.length]=bits;
+ for(j=0;j<words.length;){
+  var w=words.slice(j,j+=16),old=hash;hash=hash.slice(0,8);
+  for(i=0;i<64;i++){
+   var w15=w[i-15],w2=w[i-2],a=hash[0],e=hash[4];
+   var t1=hash[7]+(rr(e,6)^rr(e,11)^rr(e,25))+((e&hash[5])^((~e)&hash[6]))+k[i]+(w[i]=(i<16)?w[i]:(w[i-16]+(rr(w15,7)^rr(w15,18)^(w15>>>3))+w[i-7]+(rr(w2,17)^rr(w2,19)^(w2>>>10)))|0);
+   var t2=(rr(a,2)^rr(a,13)^rr(a,22))+((a&hash[1])^(a&hash[2])^(hash[1]&hash[2]));
+   hash=[(t1+t2)|0].concat(hash);hash[4]=(hash[4]+t1)|0;
+  }
+  for(i=0;i<8;i++)hash[i]=(hash[i]+old[i])|0;
+ }
+ for(i=0;i<8;i++)for(j=3;j+1;j--){var b=(hash[i]>>(j*8))&255;result+=((b<16)?0:'')+b.toString(16)}
+ return result;
+}
+function H(c,pos,id){return sha256(SALT+'|'+c.key+'|'+pos+'|'+id)}
+function inPlace(c,order){var n=0;for(var i=0;i<order.length;i++)if(H(c,i,order[i])===c.hashes[i])n++;return n}
+function byId(c,id){for(var i=0;i<c.tiles.length;i++)if(c.tiles[i].id===id)return c.tiles[i]}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+function startOrder(c){var ids=c.tiles.map(function(t){return t.id}),o,tries=0;
+ do{o=shuffle(ids);tries++}while(inPlace(c,o)>0&&tries<300);return o}
+function validOrder(c,o){if(!o||o.length!==c.tiles.length)return false;var seen={};for(var i=0;i<o.length;i++){if(!byId(c,o[i])||seen[o[i]])return false;seen[o[i]]=1}return true}
+
+function loadStore(){try{data=JSON.parse(localStorage.getItem(STORE)||'{}')}catch(e){data={}}}
+function persist(){try{localStorage.setItem(STORE,JSON.stringify(data))}catch(e){}}
+function msg(t,err){var m=$('msg');m.textContent=t;m.className='msg'+(err?' err':'');m.style.display='block'}
+function clean(n){n=window.spAscii?spAscii(n):n;n=String(n);if(n.normalize)n=n.normalize('NFD').replace(/[\u0300-\u036f]/g,'');return n.trim().replace(/\s+/g,'_').replace(/[^A-Za-z0-9_-]/g,'')}
+function who(){return (clean(last.value)||'Last')+'_'+(clean(first.value)||'First')}
+
+/* ---------- chain UI ---------- */
+function say(c,text,cls){var r=$('res-'+c.key);r.textContent=text;r.className='result show '+cls}
+function renderList(c,focusId,focusAct){
+ var s=ST[c.key],ol=$('list-'+c.key),n=s.order.length;
+ ol.innerHTML='';
+ ol.className='dom'+(s.locked?' locked'+(s.correct?' good':''):'');
+ s.order.forEach(function(id,i){
+  var t=byId(c,id),li=document.createElement('li');
+  li.className='tile';li.setAttribute('data-id',id);
+  if(!s.locked)li.draggable=true;
+  li.innerHTML='<div class="pos" aria-hidden="true">'+(i+1)+'</div><div class="tb"><div class="ev"></div><span class="dt"></span><div class="sb"></div></div><div class="mv"></div>';
+  li.querySelector('.ev').textContent=t.ev;li.querySelector('.dt').textContent=t.dt;li.querySelector('.sb').textContent=t.sb;
+  var mv=li.querySelector('.mv');
+  [['up','\u25B2 Up','up'],['down','\u25BC Down','down']].forEach(function(b){
+   var btn=document.createElement('button');btn.type='button';btn.textContent=b[1];
+   btn.setAttribute('data-act',b[0]);btn.setAttribute('data-id',id);
+   btn.setAttribute('aria-label','Move '+t.ev+' '+b[0]+'. Now position '+(i+1)+' of '+n);
+   btn.disabled=s.locked||(b[0]==='up'&&i===0)||(b[0]==='down'&&i===n-1);
+   mv.appendChild(btn)});
+  ol.appendChild(li)});
+ if(focusId){var q=ol.querySelector('button[data-id="'+focusId+'"][data-act="'+focusAct+'"]');
+  if(!q||q.disabled)q=ol.querySelector('button[data-id="'+focusId+'"]:not(:disabled)');
+  if(q)q.focus()}
+}
+function move(c,id,delta){
+ var s=ST[c.key];if(s.locked)return;
+ var i=s.order.indexOf(id),j=i+delta;if(i<0||j<0||j>=s.order.length)return;
+ s.order.splice(i,1);s.order.splice(j,0,id);
+ $('res-'+c.key).className='result';
+ renderList(c,id,delta<0?'up':'down');sync();
+}
+function updateInfo(c){var s=ST[c.key];
+ $('info-'+c.key).textContent=s.locked?(s.correct?'Order locked. All in place.':'Order locked.'):'Checks used: '+s.checks+' of '+MAXCHECKS;
+ $('check-'+c.key).disabled=s.locked;
+}
+function check(c){
+ var s=ST[c.key];if(s.locked)return;
+ s.checks++;var n=inPlace(c,s.order),tot=c.tiles.length;s.lastInPlace=n;
+ if(n===tot){s.locked=true;s.correct=true;
+  say(c,'All '+tot+' dominos are in place! Your order is locked. Watch them fall.','win');
+  renderList(c);tip(c);
+ }else if(s.checks>=MAXCHECKS){s.locked=true;s.correct=false;
+  say(c,n+' of '+tot+' in place. That was your last check, so your order is locked. Keep going and write your sentences.','stop');
+  renderList(c);
+ }else{
+  say(c,n+' of '+tot+' in place. You have '+(MAXCHECKS-s.checks)+' check'+(MAXCHECKS-s.checks===1?'':'s')+' left.','info');
+ }
+ updateInfo(c);buildBecause(c);sync();
+}
+function tip(c){
+ if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ [].forEach.call($('list-'+c.key).children,function(li,i){li.style.animationDelay=(i*0.14)+'s';li.classList.add('tip')});
+}
+function buildBecause(c){
+ var s=ST[c.key],body=$('becbody-'+c.key);
+ if(!s.locked){body.innerHTML='<div class="wait">Locked until you finish your order. Use your checks above, then come back here.</div>';return}
+ var keep={};[].forEach.call(body.querySelectorAll('textarea'),function(t){keep[t.id]=t.value});
+ body.innerHTML='';
+ for(var i=0;i<s.order.length-1;i++){
+  var a=byId(c,s.order[i]),b=byId(c,s.order[i+1]),id=c.key+'_link'+(i+1)+'_because';
+  var row=document.createElement('div');row.className='link-row';
+  row.innerHTML='<div class="pair"><span class="chip"></span><span class="arrow" aria-hidden="true">&rarr;</span><span class="chip"></span></div><p class="starter">This led to the next event because...</p><label class="sr" for="'+id+'"></label><textarea data-q="1" id="'+id+'" placeholder="Finish the sentence. Use one fact from the chapter."></textarea>';
+  var ch=row.querySelectorAll('.chip');ch[0].textContent=a.ev;ch[1].textContent=b.ev;
+  row.querySelector('label').textContent='Because sentence for link '+(i+1)+': '+a.ev+' led to '+b.ev;
+  var ta=row.querySelector('textarea');
+  ta.value=(keep[id]!==undefined?keep[id]:(data[id]||''));
+  ta.addEventListener('input',sync);
+  body.appendChild(row);
+ }
+}
+function bindChain(c){
+ var ol=$('list-'+c.key);
+ ol.addEventListener('click',function(e){
+  var b=e.target.closest('button[data-act]');if(!b||b.disabled)return;
+  move(c,b.getAttribute('data-id'),b.getAttribute('data-act')==='up'?-1:1)});
+ var dragId=null;
+ ol.addEventListener('dragstart',function(e){var li=e.target.closest('.tile');if(!li||ST[c.key].locked)return;
+  dragId=li.getAttribute('data-id');li.classList.add('dragging');try{e.dataTransfer.setData('text/plain',dragId);e.dataTransfer.effectAllowed='move'}catch(x){}});
+ ol.addEventListener('dragover',function(e){if(dragId){e.preventDefault();var li=e.target.closest('.tile');[].forEach.call(ol.children,function(x){x.classList.remove('over')});if(li)li.classList.add('over')}});
+ ol.addEventListener('dragend',function(){dragId=null;[].forEach.call(ol.children,function(x){x.classList.remove('dragging','over')})});
+ ol.addEventListener('drop',function(e){e.preventDefault();var li=e.target.closest('.tile');if(!li||!dragId)return;
+  var s=ST[c.key],from=s.order.indexOf(dragId),to=s.order.indexOf(li.getAttribute('data-id'));
+  if(from<0||to<0||from===to){dragId=null;return}
+  s.order.splice(from,1);s.order.splice(to,0,dragId);$('res-'+c.key).className='result';
+  var id=dragId;dragId=null;renderList(c,id,'down');sync()});
+ $('check-'+c.key).addEventListener('click',function(){check(c)});
+}
+
+/* ---------- state, progress, save/load ---------- */
+var qsAll=function(){return [].slice.call(document.querySelectorAll('textarea[data-q]'))};
+function sync(){
+ metaIds.forEach(function(id,i){data[id]=meta[i].value});
+ qsAll().forEach(function(t){data[t.id]=t.value});
+ data._chains={};DATA.forEach(function(c){var s=ST[c.key];data._chains[c.key]={order:s.order,checks:s.checks,locked:s.locked,correct:s.correct,lastInPlace:s.lastInPlace}});
+ persist();refresh();
+}
+function state(){
+ var units=0,tot=2+12+1,missing=[];
+ DATA.forEach(function(c){if(ST[c.key].locked)units++;else missing.push('lock in the order for Chain '+c.num)});
+ var bec=0,becNeed=0;
+ qsAll().forEach(function(t){var d=t.value.trim().length>=MINLEN;t.classList.toggle('done',d);if(t.id!=='final_most_important'){if(d)bec++}else if(d)units++});
+ units+=bec;
+ var final=$('final_most_important').value.trim().length>=MINLEN;
+ if(bec<12)missing.push((12-bec)+' because sentence'+(12-bec===1?'':'s'));
+ if(!final)missing.push('the last question');
+ var named=first.value.trim()&&last.value.trim()&&per.value.trim();
+ if(!named)missing.push('first name, last name, and period');
+ return {units:units,tot:tot,all:units===tot&&!!named,missing:missing};
+}
+function refresh(){
+ var s=state();
+ $('pct').textContent=s.units+' of '+s.tot+' steps done';
+ $('fill').style.width=(100*s.units/s.tot)+'%';
+ $('status').textContent=s.all?'Everything is done. You can finish now.':'Still needed: '+s.missing.join(', ')+'.';
+ $('finishBtn').disabled=!s.all;
+}
+function snapshot(){
+ var o={packet:PACKET,course:'CPUSH',lesson:8,assignment:'Cause-and-Effect Dominos',version:1,saved:new Date().toISOString(),
+  student:{first:first.value.trim(),last:last.value.trim(),period:per.value.trim(),date:dateF.value.trim()},chains:{},answers:{}};
+ DATA.forEach(function(c){var s=ST[c.key];
+  o.chains[c.key]={title:c.title,checksUsed:s.checks,orderLocked:s.locked,orderCorrect:!!s.correct,inPlaceAtLastCheck:s.lastInPlace,
+   orderIds:s.order.slice(),
+   finalOrder:s.order.map(function(id,i){var t=byId(c,id);return {position:i+1,event:t.ev,date:t.dt}}),
+   links:[]};
+  for(var i=0;i<s.order.length-1;i++){var id=c.key+'_link'+(i+1)+'_because';
+   o.chains[c.key].links.push({id:id,from:byId(c,s.order[i]).ev,to:byId(c,s.order[i+1]).ev});
+   var ta=$(id);o.answers[id]=ta?ta.value:(data[id]||'')}
+ });
+ o.answers.final_most_important=$('final_most_important').value;
+ return o;
+}
+function download(name,obj){
+ var blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
+ var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;
+ document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);
+}
+function applySaved(o){
+ var st=o.student||{};
+ first.value=st.first||'';last.value=st.last||'';per.value=st.period||'';dateF.value=(o.completed?st.date:'')||'';
+ DATA.forEach(function(c){
+  var sv=(o.chains||{})[c.key]||{},s=ST[c.key];
+  s.order=validOrder(c,sv.orderIds)?sv.orderIds.slice():startOrder(c);
+  s.checks=Math.min(MAXCHECKS,sv.checksUsed|0);s.locked=!!sv.orderLocked&&validOrder(c,sv.orderIds);
+  s.lastInPlace=sv.inPlaceAtLastCheck;
+  s.correct=s.locked&&inPlace(c,s.order)===c.tiles.length;
+  renderList(c);updateInfo(c);$('res-'+c.key).className='result';
+  [].forEach.call($('becbody-'+c.key).querySelectorAll('textarea'),function(t){delete data[t.id]});
+  for(var i=0;i<c.tiles.length-1;i++){var id=c.key+'_link'+(i+1)+'_because';data[id]=(o.answers&&o.answers[id])||''}
+  buildBecause(c);
+ });
+ $('final_most_important').value=(o.answers&&o.answers.final_most_important)||'';
+ sync();
+}
+function init(){
+ loadStore();
+ meta.forEach(function(m){if(data[m.id])m.value=data[m.id];m.addEventListener('input',function(){m.classList.remove('bad');sync()})});
+ DATA.forEach(function(c){
+  var sv=(data._chains||{})[c.key];
+  var ok=sv&&validOrder(c,sv.order);
+  ST[c.key]={order:ok?sv.order.slice():startOrder(c),checks:ok?(sv.checks|0):0,locked:ok&&!!sv.locked,correct:false,lastInPlace:ok?sv.lastInPlace:undefined};
+  ST[c.key].correct=ST[c.key].locked&&inPlace(c,ST[c.key].order)===c.tiles.length;
+  bindChain(c);renderList(c);updateInfo(c);buildBecause(c);
+  if(ST[c.key].locked)say(c,ST[c.key].correct?'All '+c.tiles.length+' dominos are in place!':'Order locked.',ST[c.key].correct?'win':'info');
+ });
+ var f=$('final_most_important');if(data.final_most_important)f.value=data.final_most_important;f.addEventListener('input',sync);
+ refresh();
+}
+$('saveBtn').addEventListener('click',function(){
+ if(!first.value.trim()||!last.value.trim()||!per.value.trim()){
+  [first,last,per].forEach(function(f){if(!f.value.trim())f.classList.add('bad')});
+  msg('Type your first name, last name, and period first.',true);first.scrollIntoView({block:'center'});return}
+ download(who()+'-'+PACKET+'-PROGRESS.json',snapshot());msg('Progress file downloaded. Keep it safe. Use Load Progress to continue later.');
+});
+$('loadBtn').addEventListener('click',function(){$('loadFile').click()});
+$('loadFile').addEventListener('change',function(e){
+ var f=e.target.files[0];if(!f)return;var r=new FileReader();
+ r.onload=function(){try{var o=JSON.parse(r.result);
+   if(!o||o.packet!==PACKET||typeof o.answers!=='object')throw new Error('wrong');
+   applySaved(o);msg('Progress loaded.')}catch(err){msg('That file is not a saved progress file for this assignment.',true)}e.target.value=''};
+ r.onerror=function(){msg('Could not read that file.',true)};r.readAsText(f);
+});
+$('finishBtn').addEventListener('click',function(){
+ var s=state();if(!s.all){refresh();return}
+ var now=new Date();dateF.value=now.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});sync();
+ var o=snapshot();o.completed=true;o.submitted=now.toISOString();
+ download(who()+'-'+PACKET+'.json',o);msg('Done! The file '+who()+'-'+PACKET+'.json was downloaded. Upload it to Canvas to turn it in.');
+});
+$('reset').addEventListener('click',function(){
+ if(!confirm('Clear everything and start over?'))return;
+ meta.forEach(function(m){m.value=''});data={};
+ DATA.forEach(function(c){ST[c.key]={order:startOrder(c),checks:0,locked:false,correct:false};renderList(c);updateInfo(c);$('res-'+c.key).className='result';$('becbody-'+c.key).innerHTML='';buildBecause(c)});
+ $('final_most_important').value='';sync();
+});
+init();
+window.__sha=sha256;
+})();
+</script><!--sp-i18n--><script type="application/json" id="sp-i18n">{"langs":["en","es","ar"],"default":"en","es":{"Save Progress":"Guardar progreso","Load Progress":"Cargar progreso","Finished — Download File to Submit":"Terminé — Descargar el archivo para entregar","Clear all my answers":"Borrar todas mis respuestas","FIRST NAME *":"NOMBRE *","LAST NAME *":"APELLIDO *","PERIOD *":"PERÍODO *","DATE (fills in when you finish)":"FECHA (se llena cuando terminas)","e.g. 3":"p. ej., 3","Automatic":"Automática","Please type your first name, last name, and period first.":"Primero escribe tu nombre, apellido y período.","Western Expansion and Southern Secession":"Expansión hacia el Oeste y secesión del Sur","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — La Ley de Esclavos Fugitivos","Bleeding Kansas":"Kansas sangriento","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"Se descargó el archivo de progreso. Guárdalo bien. Usa «Cargar progreso» para continuar más tarde.","Progress loaded.":"Progreso cargado.","Could not read that file.":"No se pudo leer ese archivo.","Treaty of Guadalupe Hidalgo":"Tratado de Guadalupe Hidalgo","Print":"Imprimir","BIG QUESTION":"PREGUNTA CENTRAL","Type your first name, last name, and period first.":"Primero escribe tu nombre, apellido y período.","That file is not a saved progress file for this assignment.":"Ese archivo no es un archivo de progreso guardado de esta tarea.","Clear everything and start over?":"¿Borrar todo y empezar de nuevo?","Everything is done. You can finish now.":"Todo está listo. Ya puedes terminar.","Cause-and-Effect Dominos":"Dominós de causa y efecto","Cause-and-Effect Dominos 8 · Western Expansion and Southern Secession":"Dominós de causa y efecto 8 · Expansión hacia el Oeste y secesión del Sur","How did one event lead to the next until the country split apart?":"¿Cómo llevó un suceso al siguiente hasta que el país se dividió?","How to work (about 15 to 20 minutes):":"Cómo trabajar (unos 15 a 20 minutos):","Each domino is an event with a date. Tap <b>▲ Up<\/b> or <b>▼ Down<\/b> to move it. (On a computer you can also drag it.)":"Cada dominó es un suceso con una fecha. Toca <b>▲ Subir<\/b> o <b>▼ Bajar<\/b> para moverlo. (En una computadora también puedes arrastrarlo.)","Tap <b>Check my order<\/b>. It tells you how many dominos are in the right place, but not which ones. You get 3 checks for each chain.":"Toca <b>Revisar mi orden<\/b>. Te dice cuántos dominós están en el lugar correcto, pero no cuáles. Tienes 3 revisiones para cada cadena.","Once your order is locked, write one “because” sentence for each link between two dominos.":"Cuando tu orden esté fijado, escribe una oración con “porque” para cada eslabón entre dos dominós.","Answer the last question about which domino mattered most.":"Responde la última pregunta sobre qué dominó fue el más importante.","Your work saves on this device as you go. Use <b>Save Progress<\/b> to download a backup and <b>Load Progress<\/b> to keep working later. When you are done, tap <b>Finished<\/b> and upload the file to Canvas.":"Tu trabajo se guarda en este dispositivo mientras avanzas. Usa <b>Guardar progreso<\/b> para descargar una copia de respaldo y <b>Cargar progreso<\/b> para seguir trabajando más tarde. Cuando termines, toca <b>Terminé<\/b> y sube el archivo a Canvas.","Last step":"Último paso","Which domino mattered most?":"¿Qué dominó fue el más importante?","Which domino do you think mattered most? Why?":"¿Qué dominó crees que fue el más importante? ¿Por qué?","I think the most important domino was ___ because...":"Creo que el dominó más importante fue ___ porque...","Pick one domino from either chain. Explain why it mattered most. Use a fact from the chapter.":"Elige un dominó de cualquiera de las dos cadenas. Explica por qué fue el más importante. Usa un dato del capítulo.","Put the dominos in order. The <b>first event<\/b> goes on top. Each event should help cause the one below it.":"Pon los dominós en orden. El <b>primer suceso<\/b> va arriba. Cada suceso debe ayudar a causar el que está debajo.","▲ First (cause)":"▲ Primero (causa)","Last (effect) ▼":"Último (efecto) ▼","▲ Up":"▲ Subir","▼ Down":"▼ Bajar","Check my order":"Revisar mi orden","Chain 1 dominos":"Dominós de la cadena 1","Chain 2 dominos":"Dominós de la cadena 2","Why did each domino fall?":"¿Por qué cayó cada dominó?","Locked until you finish your order. Use your checks above, then come back here.":"Bloqueado hasta que termines tu orden. Usa tus revisiones de arriba y luego vuelve aquí.","This led to the next event because...":"Esto llevó al siguiente suceso porque...","Finish the sentence. Use one fact from the chapter.":"Termina la oración. Usa un dato del capítulo.","Order locked.":"Orden fijado.","Order locked. All in place.":"Orden fijado. Todos están en su lugar.","Moving West to the Compromise of 1850":"De la expansión hacia el Oeste al Compromiso de 1850","Kansas-Nebraska Act to Secession":"De la Ley Kansas-Nebraska a la secesión","Americans settle in Mexican Texas":"Los estadounidenses se establecen en el Texas mexicano","They bring enslaved people with them.":"Llevan consigo a personas esclavizadas.","Texas Revolution":"Revolución de Texas","Texians fight to break away from Mexico.":"Los texanos luchan por separarse de México.","U.S. annexes Texas":"EE. UU. anexa Texas","Texas becomes part of the United States.":"Texas pasa a ser parte de Estados Unidos.","Mexican-American War begins":"Comienza la guerra México-Estados Unidos","Fighting breaks out at the Rio Grande.":"Estallan los combates en el Río Grande.","Feb. 1848":"feb. 1848","Mexico gives up about half its land.":"México cede cerca de la mitad de su territorio.","Gold rush and a free-state California":"Fiebre del oro y California como estado libre","Settlers pour in and set up a no-slavery government.":"Llegan colonos en masa y forman un gobierno sin esclavitud.","Compromise of 1850":"Compromiso de 1850","Congress passes five laws about slavery and the new land.":"El Congreso aprueba cinco leyes sobre la esclavitud y las nuevas tierras.","Kansas-Nebraska Act":"Ley Kansas-Nebraska","Voters in each territory will decide on slavery.":"Los votantes de cada territorio decidirán sobre la esclavitud.","Pro-slavery and anti-slavery forces fight over Kansas.":"Las fuerzas a favor y en contra de la esclavitud pelean por Kansas.","Republican Party runs its first presidential candidate":"El Partido Republicano presenta a su primer candidato a presidente","A new party opposes the spread of slavery.":"Un nuevo partido se opone a la expansión de la esclavitud.","Lincoln-Douglas debates":"Debates Lincoln-Douglas","Lincoln says the nation cannot stay half slave and half free.":"Lincoln dice que la nación no puede seguir siendo mitad esclavista y mitad libre.","Lincoln wins the presidency":"Lincoln gana la presidencia","Nov. 1860":"nov. 1860","He carries all eighteen free states and no slave states.":"Gana los dieciocho estados libres y ningún estado esclavista.","South Carolina secedes":"Carolina del Sur se separa","Dec. 1860":"dic. 1860","The first state to leave the Union.":"El primer estado en dejar la Unión.","Seven southern states have seceded":"Siete estados del Sur se han separado","By Feb. 1861":"Para feb. 1861","Six more states follow South Carolina.":"Seis estados más siguen a Carolina del Sur."},"ar":{"Save Progress":"حفظ التقدم","Load Progress":"تحميل التقدم","Finished — Download File to Submit":"انتهيت — نزّل الملف لتسليمه","Clear all my answers":"امسح كل إجاباتي","FIRST NAME *":"الاسم الأول *","LAST NAME *":"اسم العائلة *","PERIOD *":"الحصة *","DATE (fills in when you finish)":"التاريخ (يُكتب تلقائيًا عند الانتهاء)","e.g. 3":"مثال: 3","Automatic":"تلقائي","Please type your first name, last name, and period first.":"اكتب أولًا اسمك الأول واسم العائلة والحصة.","Western Expansion and Southern Secession":"التوسع غربًا وانفصال الجنوب","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"الوحدة 3 · بيت منقسم وأُعيد بناؤه | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — قانون العبيد الهاربين","Bleeding Kansas":"كانساس النازفة (⁦Bleeding Kansas⁩)","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"الوحدة 3 · بيت منقسم وأُعيد بناؤه | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"تم تنزيل ملف التقدم. احتفظ به في مكان آمن. استخدم «تحميل التقدم» لتكمل لاحقًا.","Progress loaded.":"تم تحميل تقدمك.","Could not read that file.":"تعذّرت قراءة هذا الملف.","Treaty of Guadalupe Hidalgo":"معاهدة غوادالوبي هيدالغو (⁦Treaty of Guadalupe Hidalgo⁩)","Print":"طباعة","BIG QUESTION":"السؤال الكبير","Type your first name, last name, and period first.":"اكتب اسمك الأول واسم العائلة والحصة أولًا.","That file is not a saved progress file for this assignment.":"هذا الملف ليس ملف تقدم محفوظًا لهذه المهمة.","Clear everything and start over?":"هل تريد مسح كل شيء والبدء من جديد؟","Everything is done. You can finish now.":"اكتمل كل شيء. يمكنك الإنهاء الآن.","Cause-and-Effect Dominos":"دومينو السبب والنتيجة","Cause-and-Effect Dominos 8 · Western Expansion and Southern Secession":"دومينو السبب والنتيجة 8 · التوسع غربًا وانفصال الجنوب","How did one event lead to the next until the country split apart?":"كيف أدى كل حدث إلى الحدث الذي يليه حتى انقسمت البلاد؟","How to work (about 15 to 20 minutes):":"طريقة العمل (نحو 15 إلى 20 دقيقة):","Each domino is an event with a date. Tap <b>▲ Up<\/b> or <b>▼ Down<\/b> to move it. (On a computer you can also drag it.)":"كل قطعة دومينو هي حدث له تاريخ. اضغط على <b>▲ أعلى<\/b> أو <b>▼ أسفل<\/b> لتحريكها. (على الحاسوب يمكنك أيضًا سحبها.)","Tap <b>Check my order<\/b>. It tells you how many dominos are in the right place, but not which ones. You get 3 checks for each chain.":"اضغط على <b>تحقق من ترتيبي<\/b>. يخبرك كم قطعة دومينو في مكانها الصحيح، لكنه لا يخبرك أيّها. لديك 3 محاولات تحقق لكل سلسلة.","Once your order is locked, write one “because” sentence for each link between two dominos.":"عندما يتثبّت ترتيبك، اكتب جملة تبدأ بـ «لأن» لكل حلقة بين قطعتي دومينو.","Answer the last question about which domino mattered most.":"أجب عن السؤال الأخير: أي قطعة دومينو كانت الأهم؟","Your work saves on this device as you go. Use <b>Save Progress<\/b> to download a backup and <b>Load Progress<\/b> to keep working later. When you are done, tap <b>Finished<\/b> and upload the file to Canvas.":"يُحفظ عملك على هذا الجهاز أثناء تقدمك. استخدم <b>حفظ التقدم<\/b> لتنزيل نسخة احتياطية و<b>تحميل التقدم<\/b> لتكمل العمل لاحقًا. عندما تنتهي، اضغط على <b>انتهيت<\/b> وارفع الملف إلى Canvas.","Last step":"الخطوة الأخيرة","Which domino mattered most?":"أي قطعة دومينو كانت الأهم؟","Which domino do you think mattered most? Why?":"أي قطعة دومينو تعتقد أنها كانت الأهم؟ لماذا؟","I think the most important domino was ___ because...":"أعتقد أن أهم قطعة دومينو كانت ___ لأن...","Pick one domino from either chain. Explain why it mattered most. Use a fact from the chapter.":"اختر قطعة دومينو واحدة من أي من السلسلتين. اشرح لماذا كانت الأهم. استخدم معلومة من الفصل.","Put the dominos in order. The <b>first event<\/b> goes on top. Each event should help cause the one below it.":"رتّب قطع الدومينو. يوضع <b>الحدث الأول<\/b> في الأعلى. يجب أن يساعد كل حدث في التسبب في الحدث الذي تحته.","▲ First (cause)":"▲ الأول (السبب)","Last (effect) ▼":"الأخير (النتيجة) ▼","▲ Up":"▲ أعلى","▼ Down":"▼ أسفل","Check my order":"تحقق من ترتيبي","Chain 1 dominos":"قطع دومينو السلسلة 1","Chain 2 dominos":"قطع دومينو السلسلة 2","Why did each domino fall?":"لماذا سقطت كل قطعة دومينو؟","Locked until you finish your order. Use your checks above, then come back here.":"مغلق حتى تنتهي من ترتيبك. استخدم محاولات التحقق أعلاه ثم عد إلى هنا.","This led to the next event because...":"أدى هذا إلى الحدث التالي لأن...","Finish the sentence. Use one fact from the chapter.":"أكمل الجملة. استخدم معلومة واحدة من الفصل.","Order locked.":"تم تثبيت الترتيب.","Order locked. All in place.":"تم تثبيت الترتيب. كل القطع في مكانها.","Moving West to the Compromise of 1850":"من التوسع غربًا إلى تسوية 1850 (⁦Compromise of 1850⁩)","Kansas-Nebraska Act to Secession":"من قانون كانساس-نبراسكا (⁦Kansas-Nebraska Act⁩) إلى الانفصال","Americans settle in Mexican Texas":"يستقر الأمريكيون في تكساس (⁦Texas⁩) المكسيكية","They bring enslaved people with them.":"يأتون معهم بأشخاص مستعبَدين.","Texas Revolution":"ثورة تكساس (⁦Texas Revolution⁩)","Texians fight to break away from Mexico.":"يقاتل التكساسيون (⁦Texians⁩) للانفصال عن المكسيك (⁦Mexico⁩).","U.S. annexes Texas":"الولايات المتحدة تضم تكساس (⁦Texas⁩)","Texas becomes part of the United States.":"تصبح تكساس جزءًا من الولايات المتحدة.","Mexican-American War begins":"تبدأ الحرب المكسيكية الأمريكية (⁦Mexican-American War⁩)","Fighting breaks out at the Rio Grande.":"تندلع المعارك عند ريو غراندي (⁦Rio Grande⁩).","Feb. 1848":"1848 فبراير","Mexico gives up about half its land.":"تتخلى المكسيك (⁦Mexico⁩) عن نحو نصف أراضيها.","Gold rush and a free-state California":"حمى الذهب وكاليفورنيا (⁦California⁩) ولاية حرة","Settlers pour in and set up a no-slavery government.":"يتدفق المستوطنون ويقيمون حكومة بلا عبودية.","Compromise of 1850":"تسوية 1850 (⁦Compromise of 1850⁩)","Congress passes five laws about slavery and the new land.":"يقرّ الكونغرس خمسة قوانين عن العبودية والأراضي الجديدة.","Kansas-Nebraska Act":"قانون كانساس-نبراسكا (⁦Kansas-Nebraska Act⁩)","Voters in each territory will decide on slavery.":"يقرر الناخبون في كل إقليم مسألة العبودية.","Pro-slavery and anti-slavery forces fight over Kansas.":"تتقاتل القوى المؤيدة للعبودية والمعارضة لها على كانساس (⁦Kansas⁩).","Republican Party runs its first presidential candidate":"الحزب الجمهوري (⁦Republican Party⁩) يرشّح أول مرشح له للرئاسة","A new party opposes the spread of slavery.":"حزب جديد يعارض انتشار العبودية.","Lincoln-Douglas debates":"مناظرات لينكولن-دوغلاس (⁦Lincoln-Douglas debates⁩)","Lincoln says the nation cannot stay half slave and half free.":"يقول لينكولن (⁦Lincoln⁩) إن الأمة لا تستطيع أن تبقى نصفها مع العبودية ونصفها حرًا.","Lincoln wins the presidency":"لينكولن (⁦Lincoln⁩) يفوز بالرئاسة","Nov. 1860":"1860 نوفمبر","He carries all eighteen free states and no slave states.":"يفوز بكل الولايات الحرة الثماني عشرة ولا يفوز بأي ولاية من ولايات العبودية.","South Carolina secedes":"كارولاينا الجنوبية (⁦South Carolina⁩) تنفصل","Dec. 1860":"1860 ديسمبر","The first state to leave the Union.":"أول ولاية تغادر الاتحاد.","Seven southern states have seceded":"سبع ولايات جنوبية انفصلت","By Feb. 1861":"1861 بحلول فبراير","Six more states follow South Carolina.":"ست ولايات أخرى تتبع كارولاينا الجنوبية (⁦South Carolina⁩)."},"patterns":[{"re":"^Still needed: first name, last name, and period\\.$","es":"Todavía falta: nombre, apellido y período.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة."},{"re":"^Done! The file (.+) was downloaded\\. Upload it to Canvas to turn it in\\.$","es":"¡Listo! Se descargó el archivo $1. Súbelo a Canvas para entregar tu trabajo.","ar":"تم! تم تنزيل الملف $1. ارفعه إلى Canvas لتسلّم عملك."},{"re":"^(\\d+) of (\\d+) steps done$","es":"$1 de $2 pasos completados","ar":"أنجزت $1 من $2 خطوة"},{"re":"^Chain (\\d+) of (\\d+)$","es":"Cadena $1 de $2","ar":"السلسلة $1 من $2"},{"re":"^All (\\d+) dominos are in place!$","es":"¡Los $1 dominós están en su lugar!","ar":"جميع قطع الدومينو ($1) في مكانها!"},{"re":"^All (\\d+) dominos are in place! Your order is locked\\. Watch them fall\\.$","es":"¡Los $1 dominós están en su lugar! Tu orden queda fijado. Míralos caer.","ar":"جميع قطع الدومينو ($1) في مكانها! تم تثبيت ترتيبك. شاهدها وهي تسقط."},{"re":"^Checks used: (\\d+) of (\\d+)$","es":"Revisiones usadas: $1 de $2","ar":"عدد مرات التحقق المستخدمة: $1 من $2"},{"re":"^(\\d+) of (\\d+) in place\\. You have 1 check left\\.$","es":"$1 de $2 en su lugar. Te queda 1 revisión.","ar":"$1 من $2 في مكانها. عدد محاولات التحقق المتبقية: 1."},{"re":"^(\\d+) of (\\d+) in place\\. You have (\\d+) checks left\\.$","es":"$1 de $2 en su lugar. Te quedan $3 revisiones.","ar":"$1 من $2 في مكانها. عدد محاولات التحقق المتبقية: $3."},{"re":"^(\\d+) of (\\d+) in place\\. That was your last check, so your order is locked\\. Keep going and write your sentences\\.$","es":"$1 de $2 en su lugar. Esa fue tu última revisión, así que tu orden queda fijado. Sigue y escribe tus oraciones.","ar":"$1 من $2 في مكانها. كانت تلك آخر محاولة تحقق، لذلك تم تثبيت ترتيبك. تابع واكتب جملك."},{"re":"^Move Americans settle in Mexican Texas up\\. Now position (\\d+) of (\\d+)$","es":"Mover «Los estadounidenses se establecen en el Texas mexicano» hacia arriba. Ahora está en la posición $1 de $2","ar":"انقل «يستقر الأمريكيون في تكساس (⁦Texas⁩) المكسيكية» إلى الأعلى. موضعها الآن $1 من $2"},{"re":"^Move Americans settle in Mexican Texas down\\. Now position (\\d+) of (\\d+)$","es":"Mover «Los estadounidenses se establecen en el Texas mexicano» hacia abajo. Ahora está en la posición $1 de $2","ar":"انقل «يستقر الأمريكيون في تكساس (⁦Texas⁩) المكسيكية» إلى الأسفل. موضعها الآن $1 من $2"},{"re":"^Move Texas Revolution up\\. Now position (\\d+) of (\\d+)$","es":"Mover «Revolución de Texas» hacia arriba. Ahora está en la posición $1 de $2","ar":"انقل «ثورة تكساس (⁦Texas Revolution⁩)» إلى الأعلى. موضعها الآن $1 من $2"},{"re":"^Move Texas Revolution down\\. Now position (\\d+) of (\\d+)$","es":"Mover «Revolución de Texas» hacia abajo. Ahora está en la posición $1 de $2","ar":"انقل «ثورة تكساس (⁦Texas Revolution⁩)» إلى الأسفل. موضعها الآن $1 من $2"},{"re":"^Move U\\.S\\. annexes Texas up\\. Now position (\\d+) of (\\d+)$","es":"Mover «EE. UU. anexa Texas» hacia arriba. Ahora está en la posición $1 de $2","ar":"انقل «الولايات المتحدة تضم تكساس (⁦Texas⁩)» إلى الأعلى. موضعها الآن $1 من $2"},{"re":"^Move U\\.S\\. annexes Texas down\\. Now position (\\d+) of (\\d+)$","es":"Mover «EE. UU. anexa Texas» hacia abajo. Ahora está en la posición $1 de $2","ar":"انقل «الولايات المتحدة تضم تكساس (⁦Texas⁩)» إلى الأسفل. موضعها الآن $1 من $2"},{"re":"^Move Mexican\\-American War begins up\\. Now position (\\d+) of (\\d+)$","es":"Mover «Comienza la guerra México-Estados Unidos» hacia arriba. Ahora está en la posición $1 de $2","ar":"انقل «تبدأ الحرب المكسيكية الأمريكية (⁦Mexican-American War⁩)» إلى الأعلى. موضعها الآن $1 من $2"},{"re":"^Move Mexican\\-American War begins down\\. Now position (\\d+) of (\\d+)$","es":"Mover «Comienza la guerra México-Estados Unidos» hacia abajo. Ahora está en la posición $1 de $2","ar":"انقل «تبدأ الحرب المكسيكية الأمريكية (⁦Mexican-American War⁩)» إلى الأسفل. موضعها الآن $1 من $2"},{"re":"^Move Treaty of Guadalupe Hidalgo up\\. Now position (\\d+) of (\\d+)$","es":"Mover «Tratado de Guadalupe Hidalgo» hacia arriba. Ahora está en la posición $1 de $2","ar":"انقل «معاهدة غوادالوبي هيدالغو (⁦Treaty of Guadalupe Hidalgo⁩)» إلى الأعلى. موضعها الآن $1 من $2"},{"re":"^Move Treaty of Guadalupe Hidalgo down\\. Now position (\\d+) of (\\d+)$","es":"Mover «Tratado de Guadalupe Hidalgo» hacia abajo. Ahora está en la posición $1 de $2","ar":"انقل «معاهدة غوادالوبي هيدالغو (⁦Treaty of Guadalupe Hidalgo⁩)» إلى الأسفل. موضعها الآن $1 من $2"},{"re":"^Move Gold rush and a free\\-state California up\\. Now position (\\d+) of (\\d+)$","es":"Mover «Fiebre del oro y California como estado libre» hacia arriba. Ahora está en la posición $1 de $2","ar":"انقل «حمى الذهب وكاليفورنيا (⁦California⁩) ولاية حرة» إلى الأعلى. موضعها الآن $1 من $2"},{"re":"^Move Gold rush and a free\\-state California down\\. Now position (\\d+) of (\\d+)$","es":"Mover «Fiebre del oro y California como estado libre» hacia abajo. Ahora está en la posición $1 de $2","ar":"انقل «حمى الذهب وكاليفورنيا (⁦California⁩) ولاية حرة» إلى الأسفل. موضعها الآن $1 من $2"},{"re":"^Move Compromise of 1850 up\\. Now position (\\d+) of (\\d+)$","es":"Mover «Compromiso de 1850» hacia arriba. Ahora está en la posición $1 de $2","ar":"انقل «تسوية 1850 (⁦Compromise of 1850⁩)» إلى الأعلى. موضعها الآن $1 من $2"},{"re":"^Move Compromise of 1850 down\\. Now position (\\d+) of (\\d+)$","es":"Mover «Compromiso de 1850» hacia abajo. Ahora está en la posición $1 de $2","ar":"انقل «تسوية 1850 (⁦Compromise of 1850⁩)» إلى الأسفل. موضعها الآن $1 من $2"},{"re":"^Move Kansas\\-Nebraska Act up\\. Now position (\\d+) of (\\d+)$","es":"Mover «Ley Kansas-Nebraska» hacia arriba. Ahora está en la posición $1 de $2","ar":"انقل «قانون كانساس-نبراسكا (⁦Kansas-Nebraska Act⁩)» إلى الأعلى. موضعها الآن $1 من $2"},{"re":"^Move Kansas\\-Nebraska Act down\\. Now position (\\d+) of (\\d+)$","es":"Mover «Ley Kansas-Nebraska» hacia abajo. Ahora está en la posición $1 de $2","ar":"انقل «قانون كانساس-نبراسكا (⁦Kansas-Nebraska Act⁩)» إلى الأسفل. موضعها الآن $1 من $2"},{"re":"^Move Bleeding Kansas up\\. Now position (\\d+) of (\\d+)$","es":"Mover «Kansas sangriento» hacia arriba. Ahora está en la posición $1 de $2","ar":"انقل «كانساس النازفة (⁦Bleeding Kansas⁩)» إلى الأعلى. موضعها الآن $1 من $2"},{"re":"^Move Bleeding Kansas down\\. Now position (\\d+) of (\\d+)$","es":"Mover «Kansas sangriento» hacia abajo. Ahora está en la posición $1 de $2","ar":"انقل «كانساس النازفة (⁦Bleeding Kansas⁩)» إلى الأسفل. موضعها الآن $1 من $2"},{"re":"^Move Republican Party runs its first presidential candidate up\\. Now position (\\d+) of (\\d+)$","es":"Mover «El Partido Republicano presenta a su primer candidato a presidente» hacia arriba. Ahora está en la posición $1 de $2","ar":"انقل «الحزب الجمهوري (⁦Republican Party⁩) يرشّح أول مرشح له للرئاسة» إلى الأعلى. موضعها الآن $1 من $2"},{"re":"^Move Republican Party runs its first presidential candidate down\\. Now position (\\d+) of (\\d+)$","es":"Mover «El Partido Republicano presenta a su primer candidato a presidente» hacia abajo. Ahora está en la posición $1 de $2","ar":"انقل «الحزب الجمهوري (⁦Republican Party⁩) يرشّح أول مرشح له للرئاسة» إلى الأسفل. موضعها الآن $1 من $2"},{"re":"^Move Lincoln\\-Douglas debates up\\. Now position (\\d+) of (\\d+)$","es":"Mover «Debates Lincoln-Douglas» hacia arriba. Ahora está en la posición $1 de $2","ar":"انقل «مناظرات لينكولن-دوغلاس (⁦Lincoln-Douglas debates⁩)» إلى الأعلى. موضعها الآن $1 من $2"},{"re":"^Move Lincoln\\-Douglas debates down\\. Now position (\\d+) of (\\d+)$","es":"Mover «Debates Lincoln-Douglas» hacia abajo. Ahora está en la posición $1 de $2","ar":"انقل «مناظرات لينكولن-دوغلاس (⁦Lincoln-Douglas debates⁩)» إلى الأسفل. موضعها الآن $1 من $2"},{"re":"^Move Lincoln wins the presidency up\\. Now position (\\d+) of (\\d+)$","es":"Mover «Lincoln gana la presidencia» hacia arriba. Ahora está en la posición $1 de $2","ar":"انقل «لينكولن (⁦Lincoln⁩) يفوز بالرئاسة» إلى الأعلى. موضعها الآن $1 من $2"},{"re":"^Move Lincoln wins the presidency down\\. Now position (\\d+) of (\\d+)$","es":"Mover «Lincoln gana la presidencia» hacia abajo. Ahora está en la posición $1 de $2","ar":"انقل «لينكولن (⁦Lincoln⁩) يفوز بالرئاسة» إلى الأسفل. موضعها الآن $1 من $2"},{"re":"^Move South Carolina secedes up\\. Now position (\\d+) of (\\d+)$","es":"Mover «Carolina del Sur se separa» hacia arriba. Ahora está en la posición $1 de $2","ar":"انقل «كارولاينا الجنوبية (⁦South Carolina⁩) تنفصل» إلى الأعلى. موضعها الآن $1 من $2"},{"re":"^Move South Carolina secedes down\\. Now position (\\d+) of (\\d+)$","es":"Mover «Carolina del Sur se separa» hacia abajo. Ahora está en la posición $1 de $2","ar":"انقل «كارولاينا الجنوبية (⁦South Carolina⁩) تنفصل» إلى الأسفل. موضعها الآن $1 من $2"},{"re":"^Move Seven southern states have seceded up\\. Now position (\\d+) of (\\d+)$","es":"Mover «Siete estados del Sur se han separado» hacia arriba. Ahora está en la posición $1 de $2","ar":"انقل «سبع ولايات جنوبية انفصلت» إلى الأعلى. موضعها الآن $1 من $2"},{"re":"^Move Seven southern states have seceded down\\. Now position (\\d+) of (\\d+)$","es":"Mover «Siete estados del Sur se han separado» hacia abajo. Ahora está en la posición $1 de $2","ar":"انقل «سبع ولايات جنوبية انفصلت» إلى الأسفل. موضعها الآن $1 من $2"},{"re":"^Because sentence for link (\\d+): Americans settle in Mexican Texas led to Texas Revolution$","es":"Oración con “porque” para el eslabón $1: Los estadounidenses se establecen en el Texas mexicano llevó a Revolución de Texas","ar":"جملة «لأن» للحلقة $1: يستقر الأمريكيون في تكساس (⁦Texas⁩) المكسيكية أدى إلى ثورة تكساس (⁦Texas Revolution⁩)"},{"re":"^Because sentence for link (\\d+): Americans settle in Mexican Texas led to U\\.S\\. annexes Texas$","es":"Oración con “porque” para el eslabón $1: Los estadounidenses se establecen en el Texas mexicano llevó a EE. UU. anexa Texas","ar":"جملة «لأن» للحلقة $1: يستقر الأمريكيون في تكساس (⁦Texas⁩) المكسيكية أدى إلى الولايات المتحدة تضم تكساس (⁦Texas⁩)"},{"re":"^Because sentence for link (\\d+): Americans settle in Mexican Texas led to Mexican\\-American War begins$","es":"Oración con “porque” para el eslabón $1: Los estadounidenses se establecen en el Texas mexicano llevó a Comienza la guerra México-Estados Unidos","ar":"جملة «لأن» للحلقة $1: يستقر الأمريكيون في تكساس (⁦Texas⁩) المكسيكية أدى إلى تبدأ الحرب المكسيكية الأمريكية (⁦Mexican-American War⁩)"},{"re":"^Because sentence for link (\\d+): Americans settle in Mexican Texas led to Treaty of Guadalupe Hidalgo$","es":"Oración con “porque” para el eslabón $1: Los estadounidenses se establecen en el Texas mexicano llevó a Tratado de Guadalupe Hidalgo","ar":"جملة «لأن» للحلقة $1: يستقر الأمريكيون في تكساس (⁦Texas⁩) المكسيكية أدى إلى معاهدة غوادالوبي هيدالغو (⁦Treaty of Guadalupe Hidalgo⁩)"},{"re":"^Because sentence for link (\\d+): Americans settle in Mexican Texas led to Gold rush and a free\\-state California$","es":"Oración con “porque” para el eslabón $1: Los estadounidenses se establecen en el Texas mexicano llevó a Fiebre del oro y California como estado libre","ar":"جملة «لأن» للحلقة $1: يستقر الأمريكيون في تكساس (⁦Texas⁩) المكسيكية أدى إلى حمى الذهب وكاليفورنيا (⁦California⁩) ولاية حرة"},{"re":"^Because sentence for link (\\d+): Americans settle in Mexican Texas led to Compromise of 1850$","es":"Oración con “porque” para el eslabón $1: Los estadounidenses se establecen en el Texas mexicano llevó a Compromiso de 1850","ar":"جملة «لأن» للحلقة $1: يستقر الأمريكيون في تكساس (⁦Texas⁩) المكسيكية أدى إلى تسوية 1850 (⁦Compromise of 1850⁩)"},{"re":"^Because sentence for link (\\d+): Texas Revolution led to Americans settle in Mexican Texas$","es":"Oración con “porque” para el eslabón $1: Revolución de Texas llevó a Los estadounidenses se establecen en el Texas mexicano","ar":"جملة «لأن» للحلقة $1: ثورة تكساس (⁦Texas Revolution⁩) أدى إلى يستقر الأمريكيون في تكساس (⁦Texas⁩) المكسيكية"},{"re":"^Because sentence for link (\\d+): Texas Revolution led to U\\.S\\. annexes Texas$","es":"Oración con “porque” para el eslabón $1: Revolución de Texas llevó a EE. UU. anexa Texas","ar":"جملة «لأن» للحلقة $1: ثورة تكساس (⁦Texas Revolution⁩) أدى إلى الولايات المتحدة تضم تكساس (⁦Texas⁩)"},{"re":"^Because sentence for link (\\d+): Texas Revolution led to Mexican\\-American War begins$","es":"Oración con “porque” para el eslabón $1: Revolución de Texas llevó a Comienza la guerra México-Estados Unidos","ar":"جملة «لأن» للحلقة $1: ثورة تكساس (⁦Texas Revolution⁩) أدى إلى تبدأ الحرب المكسيكية الأمريكية (⁦Mexican-American War⁩)"},{"re":"^Because sentence for link (\\d+): Texas Revolution led to Treaty of Guadalupe Hidalgo$","es":"Oración con “porque” para el eslabón $1: Revolución de Texas llevó a Tratado de Guadalupe Hidalgo","ar":"جملة «لأن» للحلقة $1: ثورة تكساس (⁦Texas Revolution⁩) أدى إلى معاهدة غوادالوبي هيدالغو (⁦Treaty of Guadalupe Hidalgo⁩)"},{"re":"^Because sentence for link (\\d+): Texas Revolution led to Gold rush and a free\\-state California$","es":"Oración con “porque” para el eslabón $1: Revolución de Texas llevó a Fiebre del oro y California como estado libre","ar":"جملة «لأن» للحلقة $1: ثورة تكساس (⁦Texas Revolution⁩) أدى إلى حمى الذهب وكاليفورنيا (⁦California⁩) ولاية حرة"},{"re":"^Because sentence for link (\\d+): Texas Revolution led to Compromise of 1850$","es":"Oración con “porque” para el eslabón $1: Revolución de Texas llevó a Compromiso de 1850","ar":"جملة «لأن» للحلقة $1: ثورة تكساس (⁦Texas Revolution⁩) أدى إلى تسوية 1850 (⁦Compromise of 1850⁩)"},{"re":"^Because sentence for link (\\d+): U\\.S\\. annexes Texas led to Americans settle in Mexican Texas$","es":"Oración con “porque” para el eslabón $1: EE. UU. anexa Texas llevó a Los estadounidenses se establecen en el Texas mexicano","ar":"جملة «لأن» للحلقة $1: الولايات المتحدة تضم تكساس (⁦Texas⁩) أدى إلى يستقر الأمريكيون في تكساس (⁦Texas⁩) المكسيكية"},{"re":"^Because sentence for link (\\d+): U\\.S\\. annexes Texas led to Texas Revolution$","es":"Oración con “porque” para el eslabón $1: EE. UU. anexa Texas llevó a Revolución de Texas","ar":"جملة «لأن» للحلقة $1: الولايات المتحدة تضم تكساس (⁦Texas⁩) أدى إلى ثورة تكساس (⁦Texas Revolution⁩)"},{"re":"^Because sentence for link (\\d+): U\\.S\\. annexes Texas led to Mexican\\-American War begins$","es":"Oración con “porque” para el eslabón $1: EE. UU. anexa Texas llevó a Comienza la guerra México-Estados Unidos","ar":"جملة «لأن» للحلقة $1: الولايات المتحدة تضم تكساس (⁦Texas⁩) أدى إلى تبدأ الحرب المكسيكية الأمريكية (⁦Mexican-American War⁩)"},{"re":"^Because sentence for link (\\d+): U\\.S\\. annexes Texas led to Treaty of Guadalupe Hidalgo$","es":"Oración con “porque” para el eslabón $1: EE. UU. anexa Texas llevó a Tratado de Guadalupe Hidalgo","ar":"جملة «لأن» للحلقة $1: الولايات المتحدة تضم تكساس (⁦Texas⁩) أدى إلى معاهدة غوادالوبي هيدالغو (⁦Treaty of Guadalupe Hidalgo⁩)"},{"re":"^Because sentence for link (\\d+): U\\.S\\. annexes Texas led to Gold rush and a free\\-state California$","es":"Oración con “porque” para el eslabón $1: EE. UU. anexa Texas llevó a Fiebre del oro y California como estado libre","ar":"جملة «لأن» للحلقة $1: الولايات المتحدة تضم تكساس (⁦Texas⁩) أدى إلى حمى الذهب وكاليفورنيا (⁦California⁩) ولاية حرة"},{"re":"^Because sentence for link (\\d+): U\\.S\\. annexes Texas led to Compromise of 1850$","es":"Oración con “porque” para el eslabón $1: EE. UU. anexa Texas llevó a Compromiso de 1850","ar":"جملة «لأن» للحلقة $1: الولايات المتحدة تضم تكساس (⁦Texas⁩) أدى إلى تسوية 1850 (⁦Compromise of 1850⁩)"},{"re":"^Because sentence for link (\\d+): Mexican\\-American War begins led to Americans settle in Mexican Texas$","es":"Oración con “porque” para el eslabón $1: Comienza la guerra México-Estados Unidos llevó a Los estadounidenses se establecen en el Texas mexicano","ar":"جملة «لأن» للحلقة $1: تبدأ الحرب المكسيكية الأمريكية (⁦Mexican-American War⁩) أدى إلى يستقر الأمريكيون في تكساس (⁦Texas⁩) المكسيكية"},{"re":"^Because sentence for link (\\d+): Mexican\\-American War begins led to Texas Revolution$","es":"Oración con “porque” para el eslabón $1: Comienza la guerra México-Estados Unidos llevó a Revolución de Texas","ar":"جملة «لأن» للحلقة $1: تبدأ الحرب المكسيكية الأمريكية (⁦Mexican-American War⁩) أدى إلى ثورة تكساس (⁦Texas Revolution⁩)"},{"re":"^Because sentence for link (\\d+): Mexican\\-American War begins led to U\\.S\\. annexes Texas$","es":"Oración con “porque” para el eslabón $1: Comienza la guerra México-Estados Unidos llevó a EE. UU. anexa Texas","ar":"جملة «لأن» للحلقة $1: تبدأ الحرب المكسيكية الأمريكية (⁦Mexican-American War⁩) أدى إلى الولايات المتحدة تضم تكساس (⁦Texas⁩)"},{"re":"^Because sentence for link (\\d+): Mexican\\-American War begins led to Treaty of Guadalupe Hidalgo$","es":"Oración con “porque” para el eslabón $1: Comienza la guerra México-Estados Unidos llevó a Tratado de Guadalupe Hidalgo","ar":"جملة «لأن» للحلقة $1: تبدأ الحرب المكسيكية الأمريكية (⁦Mexican-American War⁩) أدى إلى معاهدة غوادالوبي هيدالغو (⁦Treaty of Guadalupe Hidalgo⁩)"},{"re":"^Because sentence for link (\\d+): Mexican\\-American War begins led to Gold rush and a free\\-state California$","es":"Oración con “porque” para el eslabón $1: Comienza la guerra México-Estados Unidos llevó a Fiebre del oro y California como estado libre","ar":"جملة «لأن» للحلقة $1: تبدأ الحرب المكسيكية الأمريكية (⁦Mexican-American War⁩) أدى إلى حمى الذهب وكاليفورنيا (⁦California⁩) ولاية حرة"},{"re":"^Because sentence for link (\\d+): Mexican\\-American War begins led to Compromise of 1850$","es":"Oración con “porque” para el eslabón $1: Comienza la guerra México-Estados Unidos llevó a Compromiso de 1850","ar":"جملة «لأن» للحلقة $1: تبدأ الحرب المكسيكية الأمريكية (⁦Mexican-American War⁩) أدى إلى تسوية 1850 (⁦Compromise of 1850⁩)"},{"re":"^Because sentence for link (\\d+): Treaty of Guadalupe Hidalgo led to Americans settle in Mexican Texas$","es":"Oración con “porque” para el eslabón $1: Tratado de Guadalupe Hidalgo llevó a Los estadounidenses se establecen en el Texas mexicano","ar":"جملة «لأن» للحلقة $1: معاهدة غوادالوبي هيدالغو (⁦Treaty of Guadalupe Hidalgo⁩) أدى إلى يستقر الأمريكيون في تكساس (⁦Texas⁩) المكسيكية"},{"re":"^Because sentence for link (\\d+): Treaty of Guadalupe Hidalgo led to Texas Revolution$","es":"Oración con “porque” para el eslabón $1: Tratado de Guadalupe Hidalgo llevó a Revolución de Texas","ar":"جملة «لأن» للحلقة $1: معاهدة غوادالوبي هيدالغو (⁦Treaty of Guadalupe Hidalgo⁩) أدى إلى ثورة تكساس (⁦Texas Revolution⁩)"},{"re":"^Because sentence for link (\\d+): Treaty of Guadalupe Hidalgo led to U\\.S\\. annexes Texas$","es":"Oración con “porque” para el eslabón $1: Tratado de Guadalupe Hidalgo llevó a EE. UU. anexa Texas","ar":"جملة «لأن» للحلقة $1: معاهدة غوادالوبي هيدالغو (⁦Treaty of Guadalupe Hidalgo⁩) أدى إلى الولايات المتحدة تضم تكساس (⁦Texas⁩)"},{"re":"^Because sentence for link (\\d+): Treaty of Guadalupe Hidalgo led to Mexican\\-American War begins$","es":"Oración con “porque” para el eslabón $1: Tratado de Guadalupe Hidalgo llevó a Comienza la guerra México-Estados Unidos","ar":"جملة «لأن» للحلقة $1: معاهدة غوادالوبي هيدالغو (⁦Treaty of Guadalupe Hidalgo⁩) أدى إلى تبدأ الحرب المكسيكية الأمريكية (⁦Mexican-American War⁩)"},{"re":"^Because sentence for link (\\d+): Treaty of Guadalupe Hidalgo led to Gold rush and a free\\-state California$","es":"Oración con “porque” para el eslabón $1: Tratado de Guadalupe Hidalgo llevó a Fiebre del oro y California como estado libre","ar":"جملة «لأن» للحلقة $1: معاهدة غوادالوبي هيدالغو (⁦Treaty of Guadalupe Hidalgo⁩) أدى إلى حمى الذهب وكاليفورنيا (⁦California⁩) ولاية حرة"},{"re":"^Because sentence for link (\\d+): Treaty of Guadalupe Hidalgo led to Compromise of 1850$","es":"Oración con “porque” para el eslabón $1: Tratado de Guadalupe Hidalgo llevó a Compromiso de 1850","ar":"جملة «لأن» للحلقة $1: معاهدة غوادالوبي هيدالغو (⁦Treaty of Guadalupe Hidalgo⁩) أدى إلى تسوية 1850 (⁦Compromise of 1850⁩)"},{"re":"^Because sentence for link (\\d+): Gold rush and a free\\-state California led to Americans settle in Mexican Texas$","es":"Oración con “porque” para el eslabón $1: Fiebre del oro y California como estado libre llevó a Los estadounidenses se establecen en el Texas mexicano","ar":"جملة «لأن» للحلقة $1: حمى الذهب وكاليفورنيا (⁦California⁩) ولاية حرة أدى إلى يستقر الأمريكيون في تكساس (⁦Texas⁩) المكسيكية"},{"re":"^Because sentence for link (\\d+): Gold rush and a free\\-state California led to Texas Revolution$","es":"Oración con “porque” para el eslabón $1: Fiebre del oro y California como estado libre llevó a Revolución de Texas","ar":"جملة «لأن» للحلقة $1: حمى الذهب وكاليفورنيا (⁦California⁩) ولاية حرة أدى إلى ثورة تكساس (⁦Texas Revolution⁩)"},{"re":"^Because sentence for link (\\d+): Gold rush and a free\\-state California led to U\\.S\\. annexes Texas$","es":"Oración con “porque” para el eslabón $1: Fiebre del oro y California como estado libre llevó a EE. UU. anexa Texas","ar":"جملة «لأن» للحلقة $1: حمى الذهب وكاليفورنيا (⁦California⁩) ولاية حرة أدى إلى الولايات المتحدة تضم تكساس (⁦Texas⁩)"},{"re":"^Because sentence for link (\\d+): Gold rush and a free\\-state California led to Mexican\\-American War begins$","es":"Oración con “porque” para el eslabón $1: Fiebre del oro y California como estado libre llevó a Comienza la guerra México-Estados Unidos","ar":"جملة «لأن» للحلقة $1: حمى الذهب وكاليفورنيا (⁦California⁩) ولاية حرة أدى إلى تبدأ الحرب المكسيكية الأمريكية (⁦Mexican-American War⁩)"},{"re":"^Because sentence for link (\\d+): Gold rush and a free\\-state California led to Treaty of Guadalupe Hidalgo$","es":"Oración con “porque” para el eslabón $1: Fiebre del oro y California como estado libre llevó a Tratado de Guadalupe Hidalgo","ar":"جملة «لأن» للحلقة $1: حمى الذهب وكاليفورنيا (⁦California⁩) ولاية حرة أدى إلى معاهدة غوادالوبي هيدالغو (⁦Treaty of Guadalupe Hidalgo⁩)"},{"re":"^Because sentence for link (\\d+): Gold rush and a free\\-state California led to Compromise of 1850$","es":"Oración con “porque” para el eslabón $1: Fiebre del oro y California como estado libre llevó a Compromiso de 1850","ar":"جملة «لأن» للحلقة $1: حمى الذهب وكاليفورنيا (⁦California⁩) ولاية حرة أدى إلى تسوية 1850 (⁦Compromise of 1850⁩)"},{"re":"^Because sentence for link (\\d+): Compromise of 1850 led to Americans settle in Mexican Texas$","es":"Oración con “porque” para el eslabón $1: Compromiso de 1850 llevó a Los estadounidenses se establecen en el Texas mexicano","ar":"جملة «لأن» للحلقة $1: تسوية 1850 (⁦Compromise of 1850⁩) أدى إلى يستقر الأمريكيون في تكساس (⁦Texas⁩) المكسيكية"},{"re":"^Because sentence for link (\\d+): Compromise of 1850 led to Texas Revolution$","es":"Oración con “porque” para el eslabón $1: Compromiso de 1850 llevó a Revolución de Texas","ar":"جملة «لأن» للحلقة $1: تسوية 1850 (⁦Compromise of 1850⁩) أدى إلى ثورة تكساس (⁦Texas Revolution⁩)"},{"re":"^Because sentence for link (\\d+): Compromise of 1850 led to U\\.S\\. annexes Texas$","es":"Oración con “porque” para el eslabón $1: Compromiso de 1850 llevó a EE. UU. anexa Texas","ar":"جملة «لأن» للحلقة $1: تسوية 1850 (⁦Compromise of 1850⁩) أدى إلى الولايات المتحدة تضم تكساس (⁦Texas⁩)"},{"re":"^Because sentence for link (\\d+): Compromise of 1850 led to Mexican\\-American War begins$","es":"Oración con “porque” para el eslabón $1: Compromiso de 1850 llevó a Comienza la guerra México-Estados Unidos","ar":"جملة «لأن» للحلقة $1: تسوية 1850 (⁦Compromise of 1850⁩) أدى إلى تبدأ الحرب المكسيكية الأمريكية (⁦Mexican-American War⁩)"},{"re":"^Because sentence for link (\\d+): Compromise of 1850 led to Treaty of Guadalupe Hidalgo$","es":"Oración con “porque” para el eslabón $1: Compromiso de 1850 llevó a Tratado de Guadalupe Hidalgo","ar":"جملة «لأن» للحلقة $1: تسوية 1850 (⁦Compromise of 1850⁩) أدى إلى معاهدة غوادالوبي هيدالغو (⁦Treaty of Guadalupe Hidalgo⁩)"},{"re":"^Because sentence for link (\\d+): Compromise of 1850 led to Gold rush and a free\\-state California$","es":"Oración con “porque” para el eslabón $1: Compromiso de 1850 llevó a Fiebre del oro y California como estado libre","ar":"جملة «لأن» للحلقة $1: تسوية 1850 (⁦Compromise of 1850⁩) أدى إلى حمى الذهب وكاليفورنيا (⁦California⁩) ولاية حرة"},{"re":"^Because sentence for link (\\d+): Kansas\\-Nebraska Act led to Bleeding Kansas$","es":"Oración con “porque” para el eslabón $1: Ley Kansas-Nebraska llevó a Kansas sangriento","ar":"جملة «لأن» للحلقة $1: قانون كانساس-نبراسكا (⁦Kansas-Nebraska Act⁩) أدى إلى كانساس النازفة (⁦Bleeding Kansas⁩)"},{"re":"^Because sentence for link (\\d+): Kansas\\-Nebraska Act led to Republican Party runs its first presidential candidate$","es":"Oración con “porque” para el eslabón $1: Ley Kansas-Nebraska llevó a El Partido Republicano presenta a su primer candidato a presidente","ar":"جملة «لأن» للحلقة $1: قانون كانساس-نبراسكا (⁦Kansas-Nebraska Act⁩) أدى إلى الحزب الجمهوري (⁦Republican Party⁩) يرشّح أول مرشح له للرئاسة"},{"re":"^Because sentence for link (\\d+): Kansas\\-Nebraska Act led to Lincoln\\-Douglas debates$","es":"Oración con “porque” para el eslabón $1: Ley Kansas-Nebraska llevó a Debates Lincoln-Douglas","ar":"جملة «لأن» للحلقة $1: قانون كانساس-نبراسكا (⁦Kansas-Nebraska Act⁩) أدى إلى مناظرات لينكولن-دوغلاس (⁦Lincoln-Douglas debates⁩)"},{"re":"^Because sentence for link (\\d+): Kansas\\-Nebraska Act led to Lincoln wins the presidency$","es":"Oración con “porque” para el eslabón $1: Ley Kansas-Nebraska llevó a Lincoln gana la presidencia","ar":"جملة «لأن» للحلقة $1: قانون كانساس-نبراسكا (⁦Kansas-Nebraska Act⁩) أدى إلى لينكولن (⁦Lincoln⁩) يفوز بالرئاسة"},{"re":"^Because sentence for link (\\d+): Kansas\\-Nebraska Act led to South Carolina secedes$","es":"Oración con “porque” para el eslabón $1: Ley Kansas-Nebraska llevó a Carolina del Sur se separa","ar":"جملة «لأن» للحلقة $1: قانون كانساس-نبراسكا (⁦Kansas-Nebraska Act⁩) أدى إلى كارولاينا الجنوبية (⁦South Carolina⁩) تنفصل"},{"re":"^Because sentence for link (\\d+): Kansas\\-Nebraska Act led to Seven southern states have seceded$","es":"Oración con “porque” para el eslabón $1: Ley Kansas-Nebraska llevó a Siete estados del Sur se han separado","ar":"جملة «لأن» للحلقة $1: قانون كانساس-نبراسكا (⁦Kansas-Nebraska Act⁩) أدى إلى سبع ولايات جنوبية انفصلت"},{"re":"^Because sentence for link (\\d+): Bleeding Kansas led to Kansas\\-Nebraska Act$","es":"Oración con “porque” para el eslabón $1: Kansas sangriento llevó a Ley Kansas-Nebraska","ar":"جملة «لأن» للحلقة $1: كانساس النازفة (⁦Bleeding Kansas⁩) أدى إلى قانون كانساس-نبراسكا (⁦Kansas-Nebraska Act⁩)"},{"re":"^Because sentence for link (\\d+): Bleeding Kansas led to Republican Party runs its first presidential candidate$","es":"Oración con “porque” para el eslabón $1: Kansas sangriento llevó a El Partido Republicano presenta a su primer candidato a presidente","ar":"جملة «لأن» للحلقة $1: كانساس النازفة (⁦Bleeding Kansas⁩) أدى إلى الحزب الجمهوري (⁦Republican Party⁩) يرشّح أول مرشح له للرئاسة"},{"re":"^Because sentence for link (\\d+): Bleeding Kansas led to Lincoln\\-Douglas debates$","es":"Oración con “porque” para el eslabón $1: Kansas sangriento llevó a Debates Lincoln-Douglas","ar":"جملة «لأن» للحلقة $1: كانساس النازفة (⁦Bleeding Kansas⁩) أدى إلى مناظرات لينكولن-دوغلاس (⁦Lincoln-Douglas debates⁩)"},{"re":"^Because sentence for link (\\d+): Bleeding Kansas led to Lincoln wins the presidency$","es":"Oración con “porque” para el eslabón $1: Kansas sangriento llevó a Lincoln gana la presidencia","ar":"جملة «لأن» للحلقة $1: كانساس النازفة (⁦Bleeding Kansas⁩) أدى إلى لينكولن (⁦Lincoln⁩) يفوز بالرئاسة"},{"re":"^Because sentence for link (\\d+): Bleeding Kansas led to South Carolina secedes$","es":"Oración con “porque” para el eslabón $1: Kansas sangriento llevó a Carolina del Sur se separa","ar":"جملة «لأن» للحلقة $1: كانساس النازفة (⁦Bleeding Kansas⁩) أدى إلى كارولاينا الجنوبية (⁦South Carolina⁩) تنفصل"},{"re":"^Because sentence for link (\\d+): Bleeding Kansas led to Seven southern states have seceded$","es":"Oración con “porque” para el eslabón $1: Kansas sangriento llevó a Siete estados del Sur se han separado","ar":"جملة «لأن» للحلقة $1: كانساس النازفة (⁦Bleeding Kansas⁩) أدى إلى سبع ولايات جنوبية انفصلت"},{"re":"^Because sentence for link (\\d+): Republican Party runs its first presidential candidate led to Kansas\\-Nebraska Act$","es":"Oración con “porque” para el eslabón $1: El Partido Republicano presenta a su primer candidato a presidente llevó a Ley Kansas-Nebraska","ar":"جملة «لأن» للحلقة $1: الحزب الجمهوري (⁦Republican Party⁩) يرشّح أول مرشح له للرئاسة أدى إلى قانون كانساس-نبراسكا (⁦Kansas-Nebraska Act⁩)"},{"re":"^Because sentence for link (\\d+): Republican Party runs its first presidential candidate led to Bleeding Kansas$","es":"Oración con “porque” para el eslabón $1: El Partido Republicano presenta a su primer candidato a presidente llevó a Kansas sangriento","ar":"جملة «لأن» للحلقة $1: الحزب الجمهوري (⁦Republican Party⁩) يرشّح أول مرشح له للرئاسة أدى إلى كانساس النازفة (⁦Bleeding Kansas⁩)"},{"re":"^Because sentence for link (\\d+): Republican Party runs its first presidential candidate led to Lincoln\\-Douglas debates$","es":"Oración con “porque” para el eslabón $1: El Partido Republicano presenta a su primer candidato a presidente llevó a Debates Lincoln-Douglas","ar":"جملة «لأن» للحلقة $1: الحزب الجمهوري (⁦Republican Party⁩) يرشّح أول مرشح له للرئاسة أدى إلى مناظرات لينكولن-دوغلاس (⁦Lincoln-Douglas debates⁩)"},{"re":"^Because sentence for link (\\d+): Republican Party runs its first presidential candidate led to Lincoln wins the presidency$","es":"Oración con “porque” para el eslabón $1: El Partido Republicano presenta a su primer candidato a presidente llevó a Lincoln gana la presidencia","ar":"جملة «لأن» للحلقة $1: الحزب الجمهوري (⁦Republican Party⁩) يرشّح أول مرشح له للرئاسة أدى إلى لينكولن (⁦Lincoln⁩) يفوز بالرئاسة"},{"re":"^Because sentence for link (\\d+): Republican Party runs its first presidential candidate led to South Carolina secedes$","es":"Oración con “porque” para el eslabón $1: El Partido Republicano presenta a su primer candidato a presidente llevó a Carolina del Sur se separa","ar":"جملة «لأن» للحلقة $1: الحزب الجمهوري (⁦Republican Party⁩) يرشّح أول مرشح له للرئاسة أدى إلى كارولاينا الجنوبية (⁦South Carolina⁩) تنفصل"},{"re":"^Because sentence for link (\\d+): Republican Party runs its first presidential candidate led to Seven southern states have seceded$","es":"Oración con “porque” para el eslabón $1: El Partido Republicano presenta a su primer candidato a presidente llevó a Siete estados del Sur se han separado","ar":"جملة «لأن» للحلقة $1: الحزب الجمهوري (⁦Republican Party⁩) يرشّح أول مرشح له للرئاسة أدى إلى سبع ولايات جنوبية انفصلت"},{"re":"^Because sentence for link (\\d+): Lincoln\\-Douglas debates led to Kansas\\-Nebraska Act$","es":"Oración con “porque” para el eslabón $1: Debates Lincoln-Douglas llevó a Ley Kansas-Nebraska","ar":"جملة «لأن» للحلقة $1: مناظرات لينكولن-دوغلاس (⁦Lincoln-Douglas debates⁩) أدى إلى قانون كانساس-نبراسكا (⁦Kansas-Nebraska Act⁩)"},{"re":"^Because sentence for link (\\d+): Lincoln\\-Douglas debates led to Bleeding Kansas$","es":"Oración con “porque” para el eslabón $1: Debates Lincoln-Douglas llevó a Kansas sangriento","ar":"جملة «لأن» للحلقة $1: مناظرات لينكولن-دوغلاس (⁦Lincoln-Douglas debates⁩) أدى إلى كانساس النازفة (⁦Bleeding Kansas⁩)"},{"re":"^Because sentence for link (\\d+): Lincoln\\-Douglas debates led to Republican Party runs its first presidential candidate$","es":"Oración con “porque” para el eslabón $1: Debates Lincoln-Douglas llevó a El Partido Republicano presenta a su primer candidato a presidente","ar":"جملة «لأن» للحلقة $1: مناظرات لينكولن-دوغلاس (⁦Lincoln-Douglas debates⁩) أدى إلى الحزب الجمهوري (⁦Republican Party⁩) يرشّح أول مرشح له للرئاسة"},{"re":"^Because sentence for link (\\d+): Lincoln\\-Douglas debates led to Lincoln wins the presidency$","es":"Oración con “porque” para el eslabón $1: Debates Lincoln-Douglas llevó a Lincoln gana la presidencia","ar":"جملة «لأن» للحلقة $1: مناظرات لينكولن-دوغلاس (⁦Lincoln-Douglas debates⁩) أدى إلى لينكولن (⁦Lincoln⁩) يفوز بالرئاسة"},{"re":"^Because sentence for link (\\d+): Lincoln\\-Douglas debates led to South Carolina secedes$","es":"Oración con “porque” para el eslabón $1: Debates Lincoln-Douglas llevó a Carolina del Sur se separa","ar":"جملة «لأن» للحلقة $1: مناظرات لينكولن-دوغلاس (⁦Lincoln-Douglas debates⁩) أدى إلى كارولاينا الجنوبية (⁦South Carolina⁩) تنفصل"},{"re":"^Because sentence for link (\\d+): Lincoln\\-Douglas debates led to Seven southern states have seceded$","es":"Oración con “porque” para el eslabón $1: Debates Lincoln-Douglas llevó a Siete estados del Sur se han separado","ar":"جملة «لأن» للحلقة $1: مناظرات لينكولن-دوغلاس (⁦Lincoln-Douglas debates⁩) أدى إلى سبع ولايات جنوبية انفصلت"},{"re":"^Because sentence for link (\\d+): Lincoln wins the presidency led to Kansas\\-Nebraska Act$","es":"Oración con “porque” para el eslabón $1: Lincoln gana la presidencia llevó a Ley Kansas-Nebraska","ar":"جملة «لأن» للحلقة $1: لينكولن (⁦Lincoln⁩) يفوز بالرئاسة أدى إلى قانون كانساس-نبراسكا (⁦Kansas-Nebraska Act⁩)"},{"re":"^Because sentence for link (\\d+): Lincoln wins the presidency led to Bleeding Kansas$","es":"Oración con “porque” para el eslabón $1: Lincoln gana la presidencia llevó a Kansas sangriento","ar":"جملة «لأن» للحلقة $1: لينكولن (⁦Lincoln⁩) يفوز بالرئاسة أدى إلى كانساس النازفة (⁦Bleeding Kansas⁩)"},{"re":"^Because sentence for link (\\d+): Lincoln wins the presidency led to Republican Party runs its first presidential candidate$","es":"Oración con “porque” para el eslabón $1: Lincoln gana la presidencia llevó a El Partido Republicano presenta a su primer candidato a presidente","ar":"جملة «لأن» للحلقة $1: لينكولن (⁦Lincoln⁩) يفوز بالرئاسة أدى إلى الحزب الجمهوري (⁦Republican Party⁩) يرشّح أول مرشح له للرئاسة"},{"re":"^Because sentence for link (\\d+): Lincoln wins the presidency led to Lincoln\\-Douglas debates$","es":"Oración con “porque” para el eslabón $1: Lincoln gana la presidencia llevó a Debates Lincoln-Douglas","ar":"جملة «لأن» للحلقة $1: لينكولن (⁦Lincoln⁩) يفوز بالرئاسة أدى إلى مناظرات لينكولن-دوغلاس (⁦Lincoln-Douglas debates⁩)"},{"re":"^Because sentence for link (\\d+): Lincoln wins the presidency led to South Carolina secedes$","es":"Oración con “porque” para el eslabón $1: Lincoln gana la presidencia llevó a Carolina del Sur se separa","ar":"جملة «لأن» للحلقة $1: لينكولن (⁦Lincoln⁩) يفوز بالرئاسة أدى إلى كارولاينا الجنوبية (⁦South Carolina⁩) تنفصل"},{"re":"^Because sentence for link (\\d+): Lincoln wins the presidency led to Seven southern states have seceded$","es":"Oración con “porque” para el eslabón $1: Lincoln gana la presidencia llevó a Siete estados del Sur se han separado","ar":"جملة «لأن» للحلقة $1: لينكولن (⁦Lincoln⁩) يفوز بالرئاسة أدى إلى سبع ولايات جنوبية انفصلت"},{"re":"^Because sentence for link (\\d+): South Carolina secedes led to Kansas\\-Nebraska Act$","es":"Oración con “porque” para el eslabón $1: Carolina del Sur se separa llevó a Ley Kansas-Nebraska","ar":"جملة «لأن» للحلقة $1: كارولاينا الجنوبية (⁦South Carolina⁩) تنفصل أدى إلى قانون كانساس-نبراسكا (⁦Kansas-Nebraska Act⁩)"},{"re":"^Because sentence for link (\\d+): South Carolina secedes led to Bleeding Kansas$","es":"Oración con “porque” para el eslabón $1: Carolina del Sur se separa llevó a Kansas sangriento","ar":"جملة «لأن» للحلقة $1: كارولاينا الجنوبية (⁦South Carolina⁩) تنفصل أدى إلى كانساس النازفة (⁦Bleeding Kansas⁩)"},{"re":"^Because sentence for link (\\d+): South Carolina secedes led to Republican Party runs its first presidential candidate$","es":"Oración con “porque” para el eslabón $1: Carolina del Sur se separa llevó a El Partido Republicano presenta a su primer candidato a presidente","ar":"جملة «لأن» للحلقة $1: كارولاينا الجنوبية (⁦South Carolina⁩) تنفصل أدى إلى الحزب الجمهوري (⁦Republican Party⁩) يرشّح أول مرشح له للرئاسة"},{"re":"^Because sentence for link (\\d+): South Carolina secedes led to Lincoln\\-Douglas debates$","es":"Oración con “porque” para el eslabón $1: Carolina del Sur se separa llevó a Debates Lincoln-Douglas","ar":"جملة «لأن» للحلقة $1: كارولاينا الجنوبية (⁦South Carolina⁩) تنفصل أدى إلى مناظرات لينكولن-دوغلاس (⁦Lincoln-Douglas debates⁩)"},{"re":"^Because sentence for link (\\d+): South Carolina secedes led to Lincoln wins the presidency$","es":"Oración con “porque” para el eslabón $1: Carolina del Sur se separa llevó a Lincoln gana la presidencia","ar":"جملة «لأن» للحلقة $1: كارولاينا الجنوبية (⁦South Carolina⁩) تنفصل أدى إلى لينكولن (⁦Lincoln⁩) يفوز بالرئاسة"},{"re":"^Because sentence for link (\\d+): South Carolina secedes led to Seven southern states have seceded$","es":"Oración con “porque” para el eslabón $1: Carolina del Sur se separa llevó a Siete estados del Sur se han separado","ar":"جملة «لأن» للحلقة $1: كارولاينا الجنوبية (⁦South Carolina⁩) تنفصل أدى إلى سبع ولايات جنوبية انفصلت"},{"re":"^Because sentence for link (\\d+): Seven southern states have seceded led to Kansas\\-Nebraska Act$","es":"Oración con “porque” para el eslabón $1: Siete estados del Sur se han separado llevó a Ley Kansas-Nebraska","ar":"جملة «لأن» للحلقة $1: سبع ولايات جنوبية انفصلت أدى إلى قانون كانساس-نبراسكا (⁦Kansas-Nebraska Act⁩)"},{"re":"^Because sentence for link (\\d+): Seven southern states have seceded led to Bleeding Kansas$","es":"Oración con “porque” para el eslabón $1: Siete estados del Sur se han separado llevó a Kansas sangriento","ar":"جملة «لأن» للحلقة $1: سبع ولايات جنوبية انفصلت أدى إلى كانساس النازفة (⁦Bleeding Kansas⁩)"},{"re":"^Because sentence for link (\\d+): Seven southern states have seceded led to Republican Party runs its first presidential candidate$","es":"Oración con “porque” para el eslabón $1: Siete estados del Sur se han separado llevó a El Partido Republicano presenta a su primer candidato a presidente","ar":"جملة «لأن» للحلقة $1: سبع ولايات جنوبية انفصلت أدى إلى الحزب الجمهوري (⁦Republican Party⁩) يرشّح أول مرشح له للرئاسة"},{"re":"^Because sentence for link (\\d+): Seven southern states have seceded led to Lincoln\\-Douglas debates$","es":"Oración con “porque” para el eslabón $1: Siete estados del Sur se han separado llevó a Debates Lincoln-Douglas","ar":"جملة «لأن» للحلقة $1: سبع ولايات جنوبية انفصلت أدى إلى مناظرات لينكولن-دوغلاس (⁦Lincoln-Douglas debates⁩)"},{"re":"^Because sentence for link (\\d+): Seven southern states have seceded led to Lincoln wins the presidency$","es":"Oración con “porque” para el eslabón $1: Siete estados del Sur se han separado llevó a Lincoln gana la presidencia","ar":"جملة «لأن» للحلقة $1: سبع ولايات جنوبية انفصلت أدى إلى لينكولن (⁦Lincoln⁩) يفوز بالرئاسة"},{"re":"^Because sentence for link (\\d+): Seven southern states have seceded led to South Carolina secedes$","es":"Oración con “porque” para el eslabón $1: Siete estados del Sur se han separado llevó a Carolina del Sur se separa","ar":"جملة «لأن» للحلقة $1: سبع ولايات جنوبية انفصلت أدى إلى كارولاينا الجنوبية (⁦South Carolina⁩) تنفصل"},{"re":"^Still needed: first name, last name, and period\\.$","es":"Todavía falta: nombre, apellido y período.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة."},{"re":"^Still needed: the last question\\.$","es":"Todavía falta: la última pregunta.","ar":"ما زال ناقصًا: السؤال الأخير."},{"re":"^Still needed: the last question, first name, last name, and period\\.$","es":"Todavía falta: la última pregunta, nombre, apellido y período.","ar":"ما زال ناقصًا: السؤال الأخير، الاسم الأول واسم العائلة والحصة."},{"re":"^Still needed: 1 because sentence\\.$","es":"Todavía falta: 1 oración con “porque”.","ar":"ما زال ناقصًا: جمل «لأن» الناقصة: 1."},{"re":"^Still needed: 1 because sentence, first name, last name, and period\\.$","es":"Todavía falta: 1 oración con “porque”, nombre, apellido y período.","ar":"ما زال ناقصًا: جمل «لأن» الناقصة: 1، الاسم الأول واسم العائلة والحصة."},{"re":"^Still needed: 1 because sentence, the last question\\.$","es":"Todavía falta: 1 oración con “porque”, la última pregunta.","ar":"ما زال ناقصًا: جمل «لأن» الناقصة: 1، السؤال الأخير."},{"re":"^Still needed: 1 because sentence, the last question, first name, last name, and period\\.$","es":"Todavía falta: 1 oración con “porque”, la última pregunta, nombre, apellido y período.","ar":"ما زال ناقصًا: جمل «لأن» الناقصة: 1، السؤال الأخير، الاسم الأول واسم العائلة والحصة."},{"re":"^Still needed: (\\d+) because sentences\\.$","es":"Todavía falta: $1 oraciones con “porque”.","ar":"ما زال ناقصًا: جمل «لأن» الناقصة: $1."},{"re":"^Still needed: (\\d+) because sentences, first name, last name, and period\\.$","es":"Todavía falta: $1 oraciones con “porque”, nombre, apellido y período.","ar":"ما زال ناقصًا: جمل «لأن» الناقصة: $1، الاسم الأول واسم العائلة والحصة."},{"re":"^Still needed: (\\d+) because sentences, the last question\\.$","es":"Todavía falta: $1 oraciones con “porque”, la última pregunta.","ar":"ما زال ناقصًا: جمل «لأن» الناقصة: $1، السؤال الأخير."},{"re":"^Still needed: (\\d+) because sentences, the last question, first name, last name, and period\\.$","es":"Todavía falta: $1 oraciones con “porque”, la última pregunta, nombre, apellido y período.","ar":"ما زال ناقصًا: جمل «لأن» الناقصة: $1، السؤال الأخير، الاسم الأول واسم العائلة والحصة."},{"re":"^Still needed: lock in the order for Chain 2\\.$","es":"Todavía falta: fija el orden de la Cadena 2.","ar":"ما زال ناقصًا: ثبّت ترتيب السلسلة 2."},{"re":"^Still needed: lock in the order for Chain 2, first name, last name, and period\\.$","es":"Todavía falta: fija el orden de la Cadena 2, nombre, apellido y período.","ar":"ما زال ناقصًا: ثبّت ترتيب السلسلة 2، الاسم الأول واسم العائلة والحصة."},{"re":"^Still needed: lock in the order for Chain 2, the last question\\.$","es":"Todavía falta: fija el orden de la Cadena 2, la última pregunta.","ar":"ما زال ناقصًا: ثبّت ترتيب السلسلة 2، السؤال الأخير."},{"re":"^Still needed: lock in the order for Chain 2, the last question, first name, last name, and period\\.$","es":"Todavía falta: fija el orden de la Cadena 2, la última pregunta, nombre, apellido y período.","ar":"ما زال ناقصًا: ثبّت ترتيب السلسلة 2، السؤال الأخير، الاسم الأول واسم العائلة والحصة."},{"re":"^Still needed: lock in the order for Chain 2, 1 because sentence\\.$","es":"Todavía falta: fija el orden de la Cadena 2, 1 oración con “porque”.","ar":"ما زال ناقصًا: ثبّت ترتيب السلسلة 2، جمل «لأن» الناقصة: 1."},{"re":"^Still needed: lock in the order for Chain 2, 1 because sentence, first name, last name, and period\\.$","es":"Todavía falta: fija el orden de la Cadena 2, 1 oración con “porque”, nombre, apellido y período.","ar":"ما زال ناقصًا: ثبّت ترتيب السلسلة 2، جمل «لأن» الناقصة: 1، الاسم الأول واسم العائلة والحصة."},{"re":"^Still needed: lock in the order for Chain 2, 1 because sentence, the last question\\.$","es":"Todavía falta: fija el orden de la Cadena 2, 1 oración con “porque”, la última pregunta.","ar":"ما زال ناقصًا: ثبّت ترتيب السلسلة 2، جمل «لأن» الناقصة: 1، السؤال الأخير."},{"re":"^Still needed: lock in the order for Chain 2, 1 because sentence, the last question, first name, last name, and period\\.$","es":"Todavía falta: fija el orden de la Cadena 2, 1 oración con “porque”, la última pregunta, nombre, apellido y período.","ar":"ما زال ناقصًا: ثبّت ترتيب السلسلة 2، جمل «لأن» الناقصة: 1، السؤال الأخير، الاسم الأول واسم العائلة والحصة."},{"re":"^Still needed: lock in the order for Chain 2, (\\d+) because sentences\\.$","es":"Todavía falta: fija el orden de la Cadena 2, $1 oraciones con “porque”.","ar":"ما زال ناقصًا: ثبّت ترتيب السلسلة 2، جمل «لأن» الناقصة: $1."},{"re":"^Still needed: lock in the order for Chain 2, (\\d+) because sentences, first name, last name, and period\\.$","es":"Todavía falta: fija el orden de la Cadena 2, $1 oraciones con “porque”, nombre, apellido y período.","ar":"ما زال ناقصًا: ثبّت ترتيب السلسلة 2، جمل «لأن» الناقصة: $1، الاسم الأول واسم العائلة والحصة."},{"re":"^Still needed: lock in the order for Chain 2, (\\d+) because sentences, the last question\\.$","es":"Todavía falta: fija el orden de la Cadena 2, $1 oraciones con “porque”, la última pregunta.","ar":"ما زال ناقصًا: ثبّت ترتيب السلسلة 2، جمل «لأن» الناقصة: $1، السؤال الأخير."},{"re":"^Still needed: lock in the order for Chain 2, (\\d+) because sentences, the last question, first name, last name, and period\\.$","es":"Todavía falta: fija el orden de la Cadena 2, $1 oraciones con “porque”, la última pregunta, nombre, apellido y período.","ar":"ما زال ناقصًا: ثبّت ترتيب السلسلة 2، جمل «لأن» الناقصة: $1، السؤال الأخير، الاسم الأول واسم العائلة والحصة."},{"re":"^Still needed: lock in the order for Chain 1\\.$","es":"Todavía falta: fija el orden de la Cadena 1.","ar":"ما زال ناقصًا: ثبّت ترتيب السلسلة 1."},{"re":"^Still needed: lock in the order for Chain 1, first name, last name, and period\\.$","es":"Todavía falta: fija el orden de la Cadena 1, nombre, apellido y período.","ar":"ما زال ناقصًا: ثبّت ترتيب السلسلة 1، الاسم الأول واسم العائلة والحصة."},{"re":"^Still needed: lock in the order for Chain 1, the last question\\.$","es":"Todavía falta: fija el orden de la Cadena 1, la última pregunta.","ar":"ما زال ناقصًا: ثبّت ترتيب السلسلة 1، السؤال الأخير."},{"re":"^Still needed: lock in the order for Chain 1, the last question, first name, last name, and period\\.$","es":"Todavía falta: fija el orden de la Cadena 1, la última pregunta, nombre, apellido y período.","ar":"ما زال ناقصًا: ثبّت ترتيب السلسلة 1، السؤال الأخير، الاسم الأول واسم العائلة والحصة."},{"re":"^Still needed: lock in the order for Chain 1, 1 because sentence\\.$","es":"Todavía falta: fija el orden de la Cadena 1, 1 oración con “porque”.","ar":"ما زال ناقصًا: ثبّت ترتيب السلسلة 1، جمل «لأن» الناقصة: 1."},{"re":"^Still needed: lock in the order for Chain 1, 1 because sentence, first name, last name, and period\\.$","es":"Todavía falta: fija el orden de la Cadena 1, 1 oración con “porque”, nombre, apellido y período.","ar":"ما زال ناقصًا: ثبّت ترتيب السلسلة 1، جمل «لأن» الناقصة: 1، الاسم الأول واسم العائلة والحصة."},{"re":"^Still needed: lock in the order for Chain 1, 1 because sentence, the last question\\.$","es":"Todavía falta: fija el orden de la Cadena 1, 1 oración con “porque”, la última pregunta.","ar":"ما زال ناقصًا: ثبّت ترتيب السلسلة 1، جمل «لأن» الناقصة: 1، السؤال الأخير."},{"re":"^Still needed: lock in the order for Chain 1, 1 because sentence, the last question, first name, last name, and period\\.$","es":"Todavía falta: fija el orden de la Cadena 1, 1 oración con “porque”, la última pregunta, nombre, apellido y período.","ar":"ما زال ناقصًا: ثبّت ترتيب السلسلة 1، جمل «لأن» الناقصة: 1، السؤال الأخير، الاسم الأول واسم العائلة والحصة."},{"re":"^Still needed: lock in the order for Chain 1, (\\d+) because sentences\\.$","es":"Todavía falta: fija el orden de la Cadena 1, $1 oraciones con “porque”.","ar":"ما زال ناقصًا: ثبّت ترتيب السلسلة 1، جمل «لأن» الناقصة: $1."},{"re":"^Still needed: lock in the order for Chain 1, (\\d+) because sentences, first name, last name, and period\\.$","es":"Todavía falta: fija el orden de la Cadena 1, $1 oraciones con “porque”, nombre, apellido y período.","ar":"ما زال ناقصًا: ثبّت ترتيب السلسلة 1، جمل «لأن» الناقصة: $1، الاسم الأول واسم العائلة والحصة."},{"re":"^Still needed: lock in the order for Chain 1, (\\d+) because sentences, the last question\\.$","es":"Todavía falta: fija el orden de la Cadena 1, $1 oraciones con “porque”, la última pregunta.","ar":"ما زال ناقصًا: ثبّت ترتيب السلسلة 1، جمل «لأن» الناقصة: $1، السؤال الأخير."},{"re":"^Still needed: lock in the order for Chain 1, (\\d+) because sentences, the last question, first name, last name, and period\\.$","es":"Todavía falta: fija el orden de la Cadena 1, $1 oraciones con “porque”, la última pregunta, nombre, apellido y período.","ar":"ما زال ناقصًا: ثبّت ترتيب السلسلة 1، جمل «لأن» الناقصة: $1، السؤال الأخير، الاسم الأول واسم العائلة والحصة."},{"re":"^Still needed: lock in the order for Chain 1, lock in the order for Chain 2\\.$","es":"Todavía falta: fija el orden de la Cadena 1, fija el orden de la Cadena 2.","ar":"ما زال ناقصًا: ثبّت ترتيب السلسلة 1، ثبّت ترتيب السلسلة 2."},{"re":"^Still needed: lock in the order for Chain 1, lock in the order for Chain 2, first name, last name, and period\\.$","es":"Todavía falta: fija el orden de la Cadena 1, fija el orden de la Cadena 2, nombre, apellido y período.","ar":"ما زال ناقصًا: ثبّت ترتيب السلسلة 1، ثبّت ترتيب السلسلة 2، الاسم الأول واسم العائلة والحصة."},{"re":"^Still needed: lock in the order for Chain 1, lock in the order for Chain 2, the last question\\.$","es":"Todavía falta: fija el orden de la Cadena 1, fija el orden de la Cadena 2, la última pregunta.","ar":"ما زال ناقصًا: ثبّت ترتيب السلسلة 1، ثبّت ترتيب السلسلة 2، السؤال الأخير."},{"re":"^Still needed: lock in the order for Chain 1, lock in the order for Chain 2, the last question, first name, last name, and period\\.$","es":"Todavía falta: fija el orden de la Cadena 1, fija el orden de la Cadena 2, la última pregunta, nombre, apellido y período.","ar":"ما زال ناقصًا: ثبّت ترتيب السلسلة 1، ثبّت ترتيب السلسلة 2، السؤال الأخير، الاسم الأول واسم العائلة والحصة."},{"re":"^Still needed: lock in the order for Chain 1, lock in the order for Chain 2, 1 because sentence\\.$","es":"Todavía falta: fija el orden de la Cadena 1, fija el orden de la Cadena 2, 1 oración con “porque”.","ar":"ما زال ناقصًا: ثبّت ترتيب السلسلة 1، ثبّت ترتيب السلسلة 2، جمل «لأن» الناقصة: 1."},{"re":"^Still needed: lock in the order for Chain 1, lock in the order for Chain 2, 1 because sentence, first name, last name, and period\\.$","es":"Todavía falta: fija el orden de la Cadena 1, fija el orden de la Cadena 2, 1 oración con “porque”, nombre, apellido y período.","ar":"ما زال ناقصًا: ثبّت ترتيب السلسلة 1، ثبّت ترتيب السلسلة 2، جمل «لأن» الناقصة: 1، الاسم الأول واسم العائلة والحصة."},{"re":"^Still needed: lock in the order for Chain 1, lock in the order for Chain 2, 1 because sentence, the last question\\.$","es":"Todavía falta: fija el orden de la Cadena 1, fija el orden de la Cadena 2, 1 oración con “porque”, la última pregunta.","ar":"ما زال ناقصًا: ثبّت ترتيب السلسلة 1، ثبّت ترتيب السلسلة 2، جمل «لأن» الناقصة: 1، السؤال الأخير."},{"re":"^Still needed: lock in the order for Chain 1, lock in the order for Chain 2, 1 because sentence, the last question, first name, last name, and period\\.$","es":"Todavía falta: fija el orden de la Cadena 1, fija el orden de la Cadena 2, 1 oración con “porque”, la última pregunta, nombre, apellido y período.","ar":"ما زال ناقصًا: ثبّت ترتيب السلسلة 1، ثبّت ترتيب السلسلة 2، جمل «لأن» الناقصة: 1، السؤال الأخير، الاسم الأول واسم العائلة والحصة."},{"re":"^Still needed: lock in the order for Chain 1, lock in the order for Chain 2, (\\d+) because sentences\\.$","es":"Todavía falta: fija el orden de la Cadena 1, fija el orden de la Cadena 2, $1 oraciones con “porque”.","ar":"ما زال ناقصًا: ثبّت ترتيب السلسلة 1، ثبّت ترتيب السلسلة 2، جمل «لأن» الناقصة: $1."},{"re":"^Still needed: lock in the order for Chain 1, lock in the order for Chain 2, (\\d+) because sentences, first name, last name, and period\\.$","es":"Todavía falta: fija el orden de la Cadena 1, fija el orden de la Cadena 2, $1 oraciones con “porque”, nombre, apellido y período.","ar":"ما زال ناقصًا: ثبّت ترتيب السلسلة 1، ثبّت ترتيب السلسلة 2، جمل «لأن» الناقصة: $1، الاسم الأول واسم العائلة والحصة."},{"re":"^Still needed: lock in the order for Chain 1, lock in the order for Chain 2, (\\d+) because sentences, the last question\\.$","es":"Todavía falta: fija el orden de la Cadena 1, fija el orden de la Cadena 2, $1 oraciones con “porque”, la última pregunta.","ar":"ما زال ناقصًا: ثبّت ترتيب السلسلة 1، ثبّت ترتيب السلسلة 2، جمل «لأن» الناقصة: $1، السؤال الأخير."},{"re":"^Still needed: lock in the order for Chain 1, lock in the order for Chain 2, (\\d+) because sentences, the last question, first name, last name, and period\\.$","es":"Todavía falta: fija el orden de la Cadena 1, fija el orden de la Cadena 2, $1 oraciones con “porque”, la última pregunta, nombre, apellido y período.","ar":"ما زال ناقصًا: ثبّت ترتيب السلسلة 1، ثبّت ترتيب السلسلة 2، جمل «لأن» الناقصة: $1، السؤال الأخير، الاسم الأول واسم العائلة والحصة."}]}</script>
+<script>
+/* Supplement language switch (English / Espanol / Arabic). Works on pages whose text is rendered by JS:
+   a MutationObserver translates text as it appears. Data: <script type="application/json" id="sp-i18n">
+   {"langs":["en","es","ar"],"default":"en","es":{englishHTML:translation},"ar":{...},"patterns":[{"re":"^(\\d+) of (\\d+)$","es":"$1 de $2","ar":"..."}]}
+   Keys are the English text exactly as it sits in the page (innerHTML, spaces collapsed).
+   Helpers: spSeen() english strings seen so far; spMissing() strings with no translation in the current language;
+   spSetLang(l); spTr(s) translate a string (used for confirm/alert); spAscii(s) plain-ASCII name for file names. */
+(function () {
+  var node = document.getElementById('sp-i18n');
+  var D = node ? JSON.parse(node.textContent) : { langs: ['en'], patterns: [] };
+  var INLINE = { B:1,I:1,EM:1,STRONG:1,SPAN:1,A:1,BR:1,SMALL:1,SUP:1,SUB:1,U:1,MARK:1,BDI:1,TSPAN:1,CODE:1 };
+  var SKIP = 'script,style,textarea,input,.sp-lang,.sp-nt,[translate="no"]';
+  var WORD = /[A-Za-z\u00C0-\u024F\u0600-\u06FF]{2}|e\.g\./;
+  var LANG = 'en', REC = new WeakMap(), SEEN = {}, MISS = {};
+  (D.patterns || []).forEach(function (p) { try { p._re = new RegExp(p.re); } catch (e) {} });
+  function norm(s) { return String(s).replace(/\s+/g, ' ').trim(); }
+  function tr(src) {
+    if (LANG === 'en') return null;
+    var t = D[LANG] && D[LANG][src];
+    if (t) return t;
+    var P = D.patterns || [];
+    for (var i = 0; i < P.length; i++) {
+      var m = P[i]._re && P[i]._re.exec(src);
+      if (m && P[i][LANG]) return P[i][LANG].replace(/\$(\d+)/g, function (_, n) { return m[+n] || ''; });
+    }
+    return null;
+  }
+  window.spTr = function (s) { var t = tr(norm(s)); return t ? t.replace(/<[^>]+>/g, '') : s; };
+  function isInline(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling)
+      if (c.nodeType === 1 && (!INLINE[c.tagName.toUpperCase()] || c.matches(SKIP))) return false;
+    return true;
+  }
+  function directText(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling) if (c.nodeType === 3 && WORD.test(c.nodeValue)) return true;
+    return false;
+  }
+  function cur(s) { return s.nodeType === 1 ? s.innerHTML : s.nodeValue; }
+  function put(s, v) { if (s.nodeType === 1) s.innerHTML = v; else s.nodeValue = v; }
+  function handle(s) {
+    var r = REC.get(s), c = cur(s);
+    if (!(r && c === r.wrote)) { r = { en: c, wrote: c }; REC.set(s, r); }
+    var src = norm(r.en), target = r.en;
+    if (WORD.test(src)) {
+      SEEN[src] = 1;
+      if (LANG !== 'en') {
+        var t = tr(src);
+        if (t) {
+          target = s.nodeType === 1 ? t : (r.en.match(/^\s*/)[0] + t + r.en.match(/\s*$/)[0]);
+          delete MISS[src];
+        } else MISS[src] = 1;
+      }
+    }
+    if (c !== target) put(s, target);
+    r.wrote = cur(s);
+  }
+  var ATTRS = ['placeholder', 'alt', 'aria-label', 'title'];
+  function attrs(root) {
+    var els = root.querySelectorAll ? root.querySelectorAll('[placeholder],[alt],[aria-label],[title]') : [];
+    var list = [].slice.call(els); if (root.matches && root.matches('[placeholder],[alt],[aria-label],[title]')) list.push(root);
+    list.forEach(function (el) {
+      if (el.closest && el.closest('.sp-lang,.sp-nt,[translate="no"],script,style')) return;
+      var rec = el.__spa || (el.__spa = {});
+      ATTRS.forEach(function (a) {
+        var v = el.getAttribute(a); if (v == null) return;
+        var r = rec[a];
+        if (!(r && v === r.wrote)) { r = rec[a] = { en: v, wrote: v }; }
+        var src = norm(r.en); if (!WORD.test(src)) return;
+        SEEN[src] = 1;
+        var t = LANG === 'en' ? null : tr(src);
+        if (LANG !== 'en' && !t) MISS[src] = 1;
+        var target = t ? t.replace(/<[^>]+>/g, '') : r.en;
+        if (v !== target) el.setAttribute(a, target);
+        r.wrote = el.getAttribute(a);
+      });
+    });
+  }
+  function walk(root) {
+    if (root.nodeType === 3) { if (WORD.test(root.nodeValue) && !(root.parentNode && root.parentNode.closest && root.parentNode.closest(SKIP))) handle(root); return; }
+    if (root.nodeType !== 1) return;
+    (function w(el) {
+      if (el.matches(SKIP)) return;
+      if (el !== document.body && directText(el) && isInline(el)) { handle(el); return; }
+      for (var c = el.firstChild; c; c = c.nextSibling) {
+        if (c.nodeType === 1) w(c); else if (c.nodeType === 3 && WORD.test(c.nodeValue)) handle(c);
+      }
+    })(root);
+    attrs(root);
+  }
+  var TITLE = { en: document.title, wrote: document.title };
+  function title() {
+    if (document.title !== TITLE.wrote) TITLE = { en: document.title, wrote: document.title };
+    var t = LANG === 'en' ? null : tr(norm(TITLE.en));
+    document.title = t ? t.replace(/<[^>]+>/g, '') : TITLE.en; TITLE.wrote = document.title;
+  }
+  function inl(e) { return e.nodeType === 1 && !!INLINE[e.tagName.toUpperCase()]; }
+  var mo = new MutationObserver(function (muts) {
+    var todo = [];
+    muts.forEach(function (m) {
+      if (m.type === 'childList') { for (var i = 0; i < m.addedNodes.length; i++) todo.push(m.addedNodes[i]); todo.push(m.target); }
+      else todo.push(m.target);
+    });
+    todo.forEach(function (n) {
+      var el = n.nodeType === 1 ? n : n.parentNode;
+      if (!el || el.nodeType !== 1 || !document.body.contains(el)) return;
+      while (el !== document.body && el.parentNode && el.parentNode.nodeType === 1 && inl(el) && inl(el.parentNode)) el = el.parentNode;
+      if (el.parentNode && el.parentNode.nodeType === 1 && inl(el.parentNode) && el.parentNode !== document.body) el = el.parentNode;
+      walk(el);
+    });
+    mo.takeRecords();
+  });
+  var AR = { 'ا':'a','أ':'a','إ':'i','آ':'a','ب':'b','ت':'t','ث':'th','ج':'j','ح':'h','خ':'kh','د':'d','ذ':'dh','ر':'r','ز':'z','س':'s','ش':'sh','ص':'s','ض':'d','ط':'t','ظ':'z','ع':'a','غ':'gh','ف':'f','ق':'q','ك':'k','ل':'l','م':'m','ن':'n','ه':'h','و':'w','ي':'y','ى':'a','ة':'a','ئ':'y','ؤ':'w' };
+  window.spAscii = function (s) {
+    s = String(s); if (s.normalize) s = s.normalize('NFD').replace(/[̀-ًͯ-ٰٟ]/g, '');
+    return s.replace(/[ء-ي]/g, function (c) { return AR[c] !== undefined ? AR[c] : ''; }).replace(/ñ/g, 'n').replace(/Ñ/g, 'N');
+  };
+  window.spSeen = function () { return Object.keys(SEEN); };
+  window.spMissing = function () { return Object.keys(MISS); };
+  window.spLang = function () { return LANG; };
+  window.spSetLang = function (l) {
+    if ((D.langs || ['en']).indexOf(l) < 0) l = 'en';
+    LANG = l; MISS = {};
+    var h = document.documentElement; h.lang = l; h.dir = l === 'ar' ? 'rtl' : 'ltr';
+    mo.disconnect(); walk(document.body); title(); mo.takeRecords();
+    mo.observe(document.body, { childList: true, subtree: true, characterData: true });
+    document.querySelectorAll('.sp-lang button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === l)); });
+    try { localStorage.setItem('sp_lang', l); } catch (e) {}
+    try { var u = new URL(location.href); if (l === 'en') u.searchParams.delete('lang'); else u.searchParams.set('lang', l); history.replaceState(null, '', u.toString()); } catch (e) {}
+    try { document.dispatchEvent(new CustomEvent('splangchange', { detail: l })); } catch (e) {}
+  };
+  var _c = window.confirm, _a = window.alert;
+  window.confirm = function (m) { return _c.call(window, window.spTr(m)); };
+  window.alert = function (m) { return _a.call(window, window.spTr(m)); };
+  document.querySelectorAll('.sp-lang button').forEach(function (b) { b.addEventListener('click', function () { window.spSetLang(b.getAttribute('data-lang')); }); });
+  var start = D['default'] || 'en';
+  try { start = new URL(location.href).searchParams.get('lang') || localStorage.getItem('sp_lang') || start; } catch (e) {}
+  window.spSetLang(start);
+})();
+
+</script><!--/sp-i18n-->
+</body></html>

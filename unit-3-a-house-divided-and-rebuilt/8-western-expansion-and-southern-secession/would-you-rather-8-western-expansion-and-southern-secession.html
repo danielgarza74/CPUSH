@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Would You Rather 8 · Western Expansion and Southern Secession</title>
+<style>
+:root{--bg:#EEF1F6;--paper:#FBFCFD;--maroon:#1B283C;--ink:#141E2D;--brown:#2E4261;--red:#D24B54;--rose:#E18E94;
+--redink:#9B2D37;--rule:#CCD1D8;--line:#8C95A3;--ok:#2F5E2B;--frost:#EBEFF4;
+--serif:Georgia,"Times New Roman",serif;--sans:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
+--glass:color-mix(in srgb,var(--paper) 70%,transparent);--glass-strong:color-mix(in srgb,var(--paper) 90%,transparent);
+--edge:color-mix(in srgb,#fff 70%,transparent);
+--hi:inset 0 1px 0 color-mix(in srgb,#fff 85%,transparent);
+--depth:0 1px 1px rgba(20,30,45,.05),0 3px 6px -2px rgba(20,30,45,.08),0 18px 40px -16px rgba(20,30,45,.30)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:
+radial-gradient(42vmax 42vmax at 8% 6%,rgba(27,40,60,.28),transparent 70%),
+radial-gradient(38vmax 38vmax at 96% 22%,rgba(210,75,84,.22),transparent 70%),
+radial-gradient(46vmax 40vmax at 70% 104%,rgba(27,40,60,.18),transparent 70%),
+radial-gradient(30vmax 30vmax at 20% 88%,rgba(225,142,148,.22),transparent 70%)}
+.wrap{max-width:860px;margin:0 auto;padding:0 18px 60px}
+h1,h2,h3{font-family:var(--serif);text-wrap:balance}
+.eyebrow{font-size:12.5px;letter-spacing:.16em;font-weight:700;text-transform:uppercase}
+header.hero{padding:26px 0 0}
+.hero-band{position:relative;overflow:hidden;border-radius:16px;padding:34px 34px 30px;color:var(--frost);background:linear-gradient(110deg,#1B283C 40%,#2E4261);
+box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 30px 60px -24px rgba(27,40,60,.75)}
+.hero-band::before{content:"";position:absolute;left:0;top:0;bottom:0;width:8px;background:var(--red)}
+.hero-band .eyebrow{color:var(--rose)}
+.hero-band h1{color:#fff;font-size:clamp(32px,6vw,50px);line-height:1.08;margin:.2em 0 .2em}
+.hero-band .sub{margin:0;font-size:17px;color:var(--frost);font-weight:600}
+.hero-num{position:absolute;right:20px;bottom:-30px;font:700 180px/1 var(--serif);color:#fff;opacity:.12;pointer-events:none}
+.panel{background:var(--glass);border:1px solid var(--edge);border-radius:14px;box-shadow:var(--hi),var(--depth);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3)}
+.meta{display:flex;flex-wrap:wrap;gap:14px;margin:18px 0 0;padding:16px 20px}
+.meta label{flex:1 1 170px;font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--brown)}
+.meta input{display:block;width:100%;margin-top:5px;padding:12px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);font:inherit;font-size:17px;min-height:48px}
+.meta input[readonly]{background:#E4E8EE;color:var(--brown)}
+.howto{margin:16px 0;padding:14px 20px;font-size:16px}
+.howto ol{margin:.4em 0 .2em 1.2em;padding:0}
+.howto li{margin:.2em 0}
+.bar{position:sticky;top:0;z-index:5;padding:9px 14px;margin:0 -14px;background:rgba(238,241,246,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--rule)}
+.bar .row{display:flex;align-items:center;gap:12px;font-size:14px;font-weight:700;color:var(--brown)}
+.track{flex:1;height:10px;border-radius:6px;background:#D4D8DE;overflow:hidden}
+.fill{height:100%;width:0;background:linear-gradient(90deg,var(--rose),var(--red));transition:width .3s}
+.card{margin:26px 0;padding:22px 24px 24px;scroll-margin-top:70px}
+.kick{font-size:12.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--redink)}
+.kick span{color:var(--brown)}
+.card h2{margin:.15em 0 .4em;font-size:clamp(24px,4.5vw,32px);line-height:1.15;color:var(--maroon)}
+.there{background:var(--glass-strong);border:1px solid var(--edge);border-radius:12px;padding:6px 20px 8px;margin:10px 0 18px;border-left:6px solid var(--red)}
+.there .lab{display:inline-block;margin:12px 0 0;font:800 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:#fff;background:var(--maroon);padding:6px 11px 5px;border-radius:999px}
+.there p{font:18.5px/1.65 var(--serif);margin:.7em 0}
+.rather{font:700 22px/1.2 var(--serif);color:var(--maroon);margin:4px 0 12px}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.choice{display:flex;align-items:center;gap:14px;text-align:left;width:100%;min-height:84px;padding:16px 18px;border-radius:14px;border:2px solid var(--maroon);background:#fff;color:var(--maroon);font:700 19px/1.3 var(--sans);cursor:pointer;touch-action:manipulation;transition:transform .15s,box-shadow .15s,background-color .15s}
+.choice .ltr{flex:0 0 auto;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--maroon);color:#fff;font:800 20px/1 var(--serif)}
+.choice:hover{transform:translateY(-2px);box-shadow:0 10px 20px -10px rgba(27,40,60,.5)}
+.choice[aria-pressed="true"]{background:var(--maroon);color:#fff;border-color:var(--maroon);box-shadow:0 0 0 4px rgba(210,75,84,.55)}
+.choice[aria-pressed="true"] .ltr{background:var(--red);color:#fff}
+.choice[aria-pressed="true"]::after{content:"\2713";margin-left:auto;font-size:26px;color:#fff}
+.choice:disabled{cursor:default;transform:none;box-shadow:none}
+.choice:disabled[aria-pressed="false"]{opacity:.55}
+.choice:disabled[aria-pressed="true"]{box-shadow:0 0 0 4px rgba(210,75,84,.55)}
+.choice:focus-visible,.btn:focus-visible,textarea:focus-visible,input:focus-visible,.link:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.work{display:none;margin-top:20px}
+.card.chosen .work{display:block}
+.field{background:color-mix(in srgb,var(--rose) 14%,var(--paper));border:1px solid color-mix(in srgb,var(--red) 28%,var(--rule));border-radius:12px;padding:14px 18px;margin:12px 0}
+.field label{display:block;font:700 19px/1.25 var(--serif);color:var(--maroon)}
+.field .hint{display:block;font:400 14.5px/1.4 var(--sans);color:var(--brown);margin:3px 0 8px}
+textarea{width:100%;min-height:96px;padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);font:inherit;font-size:17px;line-height:1.5;resize:vertical}
+textarea:read-only{background:#EEF1F5;color:#2b3547}
+.row2{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:12px}
+.btn{border:2px solid var(--maroon);background:#fff;color:var(--maroon);padding:12px 20px;border-radius:10px;font:700 16px/1.2 var(--sans);cursor:pointer;min-height:48px;touch-action:manipulation}
+.btn:hover:not(:disabled){background:var(--maroon);color:#fff}
+.btn.primary{background:var(--maroon);color:#fff}
+.btn.primary:disabled{background:#5a6475;border-color:#5a6475;color:#fff;cursor:not-allowed;opacity:.8}
+.cstat{font-size:14.5px;font-weight:600;color:var(--brown)}
+.reveal{display:none;margin-top:16px;background:#fff;border:1px solid var(--rule);border-left:6px solid var(--maroon);border-radius:12px;padding:6px 20px 10px}
+.card.locked .reveal{display:block}
+.reveal .lab{display:inline-block;margin:12px 0 0;font:800 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--maroon);box-shadow:inset 0 0 0 1.5px var(--maroon);padding:6px 11px 5px;border-radius:999px}
+.reveal p{font:18px/1.62 var(--serif);margin:.7em 0}
+.reveal .cite{font:13px/1.5 var(--sans);color:var(--brown)}
+.link{background:none;border:0;color:var(--brown);text-decoration:underline;cursor:pointer;font:inherit;font-size:15px;padding:10px 4px;min-height:44px}
+.card.locked .lockBtn{display:none}
+.card:not(.locked) .editBtn{display:none}
+.tally{padding:20px 24px;margin:26px 0}
+.tally h2{margin:.1em 0 .3em;font-size:28px;color:var(--maroon)}
+.tally ol{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:8px}
+.tally li{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;background:#fff;border:1px solid var(--rule);border-radius:10px;padding:10px 14px}
+.tally .tn{grid-row:1/3;align-self:center;width:34px;height:34px;border-radius:50%;background:var(--maroon);color:#fff;display:grid;place-items:center;font:800 16px/1 var(--serif)}
+.tally .tq{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--brown)}
+.tally .ta{font-weight:700;color:var(--maroon);overflow-wrap:anywhere}
+.tally li.none .ta{color:#4d586b;font-weight:600;font-style:italic}
+.tally li.none .tn{background:#6b7586}
+.tally .sum{margin:12px 0 0;font-weight:600;color:var(--brown)}
+.finish{text-align:center;margin:26px 0;padding:22px 20px}
+.status{font-size:15px;font-weight:700;color:var(--brown);margin-bottom:12px;overflow-wrap:anywhere}
+.btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.msg{display:none;margin:14px auto 0;padding:10px 14px;border-radius:8px;background:#EAF3E6;border:1px solid var(--ok);color:var(--ok);font-weight:700;max-width:620px;overflow-wrap:anywhere}
+.msg.err{background:#FDEDEB;border-color:#B3261E;color:#8C1D18}
+input.bad{border-color:#B3261E;background:#FFF1EF}
+footer{margin-top:34px;padding-top:12px;border-top:1px solid var(--rule);font-size:12px;letter-spacing:.05em;color:var(--maroon);font-weight:600}
+@media (max-width:720px){.choices{grid-template-columns:1fr}.hero-band{padding:26px 20px 24px}.hero-num{font-size:120px}.card{padding:18px 16px 20px}.there{padding:4px 14px 6px}.there p{font-size:18px}.btn.primary,.btns .btn{width:100%}.bar{margin:0 -18px;padding:9px 18px}}
+html[dir=rtl] .hero-band::before{left:auto;right:0}
+html[dir=rtl] .hero-num{right:auto;left:20px}
+html[dir=rtl] .there{border-left:1px solid var(--edge);border-right:6px solid var(--red)}
+html[dir=rtl] .reveal{border-left:1px solid var(--rule);border-right:6px solid var(--maroon)}
+html[dir=rtl] .choice{text-align:right}
+html[dir=rtl] .choice[aria-pressed="true"]::after{margin-left:0;margin-right:auto}
+html[dir=rtl] .howto ol{margin:.4em 1.2em .2em 0}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+@media print{body::before{display:none}.bar,.finish,.btn,.msg,.choice:disabled[aria-pressed=false]{display:none!important}.panel{backdrop-filter:none;box-shadow:none;background:#fff}.card{break-inside:avoid}}
+/*sp-i18n-css*/
+.sp-lang-bar{display:flex;justify-content:flex-end;padding:8px 12px 0;position:relative;z-index:5}
+.sp-lang{display:inline-flex;gap:2px;padding:3px;border-radius:10px;background:rgba(255,255,255,.88);border:1px solid rgba(0,0,0,.18);font-family:system-ui,"Segoe UI",Tahoma,Arial,sans-serif}
+.sp-lang button{border:0;background:transparent;color:#222;font:600 13px/1 system-ui,"Segoe UI",Tahoma,Arial,sans-serif;padding:7px 11px;border-radius:7px;cursor:pointer}
+.sp-lang button[aria-pressed="true"]{background:#222;color:#fff}
+.sp-lang button:focus-visible{outline:3px solid #2a6df4;outline-offset:1px}
+textarea,input,select{unicode-bidi:plaintext}
+html[lang="ar"] body,html[lang="ar"] button,html[lang="ar"] textarea,html[lang="ar"] input,html[lang="ar"] select{font-family:"Segoe UI",Tahoma,"Noto Sans Arabic","Arial",system-ui,sans-serif}
+html[lang="ar"] body{line-height:1.8}
+html[lang="ar"] *{letter-spacing:0!important}
+html[dir="rtl"] textarea,html[dir="rtl"] input{text-align:start}
+@media print{.sp-lang-bar{display:none}}
+/*/sp-i18n-css*/
+</style></head><body>
+<!--sp-bar--><div class="sp-lang-bar"><div class="sp-lang" role="group" aria-label="Language / Idioma / اللغة"><button type="button" data-lang="en" lang="en" aria-pressed="true">English</button><button type="button" data-lang="es" lang="es" aria-pressed="false">Español</button><button type="button" data-lang="ar" lang="ar" aria-pressed="false">العربية</button></div></div><!--/sp-bar-->
+
+<div class="wrap">
+<header class="hero"><div class="hero-band"><div class="eyebrow">1750-1861</div>
+<h1>Would You Rather</h1><p class="sub">Western Expansion and Southern Secession</p><span class="hero-num" aria-hidden="true">8</span></div>
+<div class="meta panel">
+<label>FIRST NAME *<input id="f_first" type="text" autocomplete="given-name"></label>
+<label>LAST NAME *<input id="f_last" type="text" autocomplete="family-name"></label>
+<label>PERIOD *<input id="f_period" type="text" inputmode="numeric" maxlength="12" placeholder="Example: 3"></label>
+<label>DATE (fills in when you finish)<input id="f_date" type="text" readonly tabindex="-1" placeholder="Automatic"></label>
+</div></header>
+<div class="howto panel"><div><b>How to work.</b> People in history faced hard choices. Here are five. There is no right or wrong choice. Your job is to understand why people chose what they did.</div>
+<ol><li>Read “You are there.”</li><li>Tap the choice you would make.</li><li>Write your reason. Use at least one fact from the lesson.</li><li>Write a Counter-Argument: the best reason someone on the other side would give.</li><li>Tap <b>Lock in my answer</b> to see what really happened.</li></ol>
+<div>Your work saves on this device as you type. Use <b>Save Progress</b> at the bottom to download a backup file, and <b>Load Progress</b> to continue later.</div></div>
+<div class="bar"><div class="row"><span id="pct">0 of 5 dilemmas locked in</span><div class="track"><div class="fill" id="fill"></div></div></div></div>
+
+<section class="card panel" id="d1" data-n="1" data-a="Pack up and take the Overland Trail west" data-b="Stay home" data-short="The Overland Trail" aria-labelledby="h1">
+<div class="kick">Dilemma 1 <span>of 5</span> · 1843</div>
+<h2 id="h1">Go West or Stay Home?</h2>
+<div class="there"><span class="lab">You are there</span><p>It is 1843. “Oregon Fever” is spreading across the country “like any other contagion,” one journalist writes.</p><p>The Oregon Trail starts in Independence, Missouri. It is more than 2,000 miles long, and most people walk it beside wagons pulled by oxen or mules. The trip takes five to six months.</p><p>Some say the trail is the road to your own land, wealth, and independence. Others point to broken wagons, dead animals, and cholera along the way.</p><p>Your family has to decide.</p></div>
+<p class="rather">Would you rather...</p>
+<div class="choices" role="group" aria-label="Choose one">
+<button type="button" class="choice" data-o="A" aria-pressed="false"><span class="ltr">A</span><span>Pack up and take the Overland Trail west</span></button>
+<button type="button" class="choice" data-o="B" aria-pressed="false"><span class="ltr">B</span><span>Stay home</span></button>
+</div>
+<div class="work">
+<div class="field"><label for="d1_reason">Your reason</label><span class="hint">Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”</span>
+<textarea id="d1_reason" data-k="reason" placeholder="Type your reason here..."></textarea></div>
+<div class="field"><label for="d1_counter">Counter-Argument</label><span class="hint">What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”</span>
+<textarea id="d1_counter" data-k="counter" placeholder="Type the other side’s best reason here..."></textarea></div>
+<div class="row2"><button type="button" class="btn primary lockBtn" disabled>Lock in my answer</button>
+<button type="button" class="btn editBtn">Edit my answer</button><span class="cstat" aria-live="polite"></span></div>
+<div class="reveal" aria-live="polite"><span class="lab">What really happened</span><p>In 1843, the move to Oregon became one of the largest voluntary overland migrations in history. Most settlers traveled in family groups. They left Missouri in late spring and tried to finish the trip by winter.</p><p>The trip was as hard as people warned. Wagons broke down, animals died, and cholera killed many travelers. Norton says there was, on average, one grave every eighty yards along the overland trails. By 1845, about 5,000 people had settled in Oregon’s Willamette Valley. The wagon trains also tore through Native American lands and culture.</p><p class="cite">Source: Norton Ch. 13, “Moving West”.</p></div>
+</div>
+</section>
+<section class="card panel" id="d2" data-n="2" data-a="Support going to war with Mexico" data-b="Oppose going to war with Mexico" data-short="War with Mexico" aria-labelledby="h2">
+<div class="kick">Dilemma 2 <span>of 5</span> · May 1846</div>
+<h2 id="h2">War with Mexico: Yes or No?</h2>
+<div class="there"><span class="lab">You are there</span><p>It is May 1846. President James K. Polk learns that Mexican troops attacked U.S. soldiers along the Rio Grande and killed eleven Americans. He asks Congress to declare war.</p><p>But the Rio Grande is about 150 miles south of the Nueces River, which both sides had publicly named as the border. Polk had tried to push the border south to the Rio Grande. Mexico said no.</p><p>In the South, where “expansion fever” runs high, many people want war. In the North, many Whigs and abolitionists do not. A Delaware senator says sending troops there was “as much an act of aggression on our part as is a man pointing a pistol at another’s heart.”</p><p>You have to take a side.</p></div>
+<p class="rather">Would you rather...</p>
+<div class="choices" role="group" aria-label="Choose one">
+<button type="button" class="choice" data-o="A" aria-pressed="false"><span class="ltr">A</span><span>Support going to war with Mexico</span></button>
+<button type="button" class="choice" data-o="B" aria-pressed="false"><span class="ltr">B</span><span>Oppose going to war with Mexico</span></button>
+</div>
+<div class="work">
+<div class="field"><label for="d2_reason">Your reason</label><span class="hint">Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”</span>
+<textarea id="d2_reason" data-k="reason" placeholder="Type your reason here..."></textarea></div>
+<div class="field"><label for="d2_counter">Counter-Argument</label><span class="hint">What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”</span>
+<textarea id="d2_counter" data-k="counter" placeholder="Type the other side’s best reason here..."></textarea></div>
+<div class="row2"><button type="button" class="btn primary lockBtn" disabled>Lock in my answer</button>
+<button type="button" class="btn editBtn">Edit my answer</button><span class="cstat" aria-live="polite"></span></div>
+<div class="reveal" aria-live="polite"><span class="lab">What really happened</span><p>Congress went along with Polk and authorized 50,000 soldiers. The war was very popular in the South. So many men volunteered that thousands had to be turned back. In the end, 112,000 White men served.</p><p>The war lasted from March 1846 to April 1848. More than 13,000 Americans died, and 11,550 of them died from disease. In the Treaty of Guadalupe Hidalgo (1848), Mexico gave up half its territory, and the United States paid $15 million. Opponents kept speaking out. Ulysses S. Grant, who fought in the war, later called it “one of the most unjust wars ever waged by a stronger against a weaker nation.”</p><p class="cite">Source: Norton Ch. 13, “The Mexican-American War”.</p></div>
+</div>
+</section>
+<section class="card panel" id="d3" data-n="3" data-a="Ban slavery in all the new territories (the Wilmot idea)" data-b="Let the settlers in each territory vote (popular sovereignty)" data-short="Slavery in the territories" aria-labelledby="h3">
+<div class="kick">Dilemma 3 <span>of 5</span> · 1846-1848</div>
+<h2 id="h3">New Lands: Ban Slavery or Let Settlers Vote?</h2>
+<div class="there"><span class="lab">You are there</span><p>It is 1847. The United States is fighting Mexico and may gain a lot of new land. People are asking: will slavery be allowed there?</p><p>In August 1846, Congressman David Wilmot of Pennsylvania said slavery should be banned in any land taken from Mexico. Senator Henry Clay said he could not vote to turn free land into slave land, because Mexico had already outlawed slavery there. Some others did not want new slave states gaining power in Congress, or enslaved people competing with free workers.</p><p>Senator Lewis Cass of Michigan had a different idea. Let the citizens of each territory “regulate their own internal concerns in their own way.” He called this popular sovereignty. It appealed to many people who wanted to protect states’ rights.</p><p>Which plan would you back?</p></div>
+<p class="rather">Would you rather...</p>
+<div class="choices" role="group" aria-label="Choose one">
+<button type="button" class="choice" data-o="A" aria-pressed="false"><span class="ltr">A</span><span>Ban slavery in all the new territories (the Wilmot idea)</span></button>
+<button type="button" class="choice" data-o="B" aria-pressed="false"><span class="ltr">B</span><span>Let the settlers in each territory vote (popular sovereignty)</span></button>
+</div>
+<div class="work">
+<div class="field"><label for="d3_reason">Your reason</label><span class="hint">Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”</span>
+<textarea id="d3_reason" data-k="reason" placeholder="Type your reason here..."></textarea></div>
+<div class="field"><label for="d3_counter">Counter-Argument</label><span class="hint">What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”</span>
+<textarea id="d3_counter" data-k="counter" placeholder="Type the other side’s best reason here..."></textarea></div>
+<div class="row2"><button type="button" class="btn primary lockBtn" disabled>Lock in my answer</button>
+<button type="button" class="btn editBtn">Edit my answer</button><span class="cstat" aria-live="polite"></span></div>
+<div class="reveal" aria-live="polite"><span class="lab">What really happened</span><p>President Polk got Wilmot to hold back his amendment, but Wilmot’s idea kept shaping the debate in Congress. Abraham Lincoln later said that in his one term in Congress, he voted forty times to restrict slavery in the new territories. Senator John C. Calhoun offered a third view. He said banning slavery would take property from slaveholders, which he said broke the Fifth Amendment.</p><p>A similar idea appeared in the Utah Act of 1850, which let Utah’s legislature decide on slavery, and in the Kansas-Nebraska Act of 1854. In Kansas, about 5,000 “border ruffians” from Missouri crossed the border on election day, took over polling places, and cast four times as many votes as there were residents. Then in 1857, the Dred Scott decision said Congress could not exclude slavery from a territory. If Congress could not, Norton explains, neither could a territorial government.</p><p class="cite">Source: Norton Ch. 13, “Slavery in the Territories”.</p></div>
+</div>
+</section>
+<section class="card panel" id="d4" data-n="4" data-a="Obey the law and help" data-b="Refuse to follow the law" data-short="The Fugitive Slave Act" aria-labelledby="h4">
+<div class="kick">Dilemma 4 <span>of 5</span> · 1850</div>
+<h2 id="h4">The Fugitive Slave Act: Obey or Refuse?</h2>
+<div class="there"><span class="lab">You are there</span><p>It is late 1850. You live in a northern city. Congress has passed the Compromise of 1850, and one part of it is a new Fugitive Slave Act.</p><p>The law requires the federal government and northern states to help capture freedom seekers and return them to the South. It also requires citizens to help find and catch them. Federal commissioners hear each case. There is no jury, and the person accused cannot give testimony. A commissioner is paid $10 to send someone back to slavery and only $5 to free them.</p><p>Ralph Waldo Emerson urges people to break the law. Imagine that a federal officer asks for your help in finding a freedom seeker in your town.</p><p>What would you do?</p></div>
+<p class="rather">Would you rather...</p>
+<div class="choices" role="group" aria-label="Choose one">
+<button type="button" class="choice" data-o="A" aria-pressed="false"><span class="ltr">A</span><span>Obey the law and help</span></button>
+<button type="button" class="choice" data-o="B" aria-pressed="false"><span class="ltr">B</span><span>Refuse to follow the law</span></button>
+</div>
+<div class="work">
+<div class="field"><label for="d4_reason">Your reason</label><span class="hint">Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”</span>
+<textarea id="d4_reason" data-k="reason" placeholder="Type your reason here..."></textarea></div>
+<div class="field"><label for="d4_counter">Counter-Argument</label><span class="hint">What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”</span>
+<textarea id="d4_counter" data-k="counter" placeholder="Type the other side’s best reason here..."></textarea></div>
+<div class="row2"><button type="button" class="btn primary lockBtn" disabled>Lock in my answer</button>
+<button type="button" class="btn editBtn">Edit my answer</button><span class="cstat" aria-live="polite"></span></div>
+<div class="reveal" aria-live="polite"><span class="lab">What really happened</span><p>Norton calls the Fugitive Slave Act the most controversial part of the Compromise of 1850. By September 20, 1850, President Millard Fillmore had signed all the parts of the Compromise into law. It tried to recover people who had already escaped, and it let slave-traders kidnap free Black people in northern states by claiming they were fugitives.</p><p>Abolitionists were furious. Emerson urged people to break the law. In New York, Reverend Jermain Loguen, who had himself escaped slavery, shouted: “I don’t respect this law—I don’t fear it—I won’t obey it! It outlaws me, and I outlaw it.” In late October 1850, two slave-catchers from Georgia arrived in Boston to use the act to recapture William and Ellen Craft.</p><p class="cite">Source: Norton Ch. 13, “Slavery in the Territories”.</p></div>
+</div>
+</section>
+<section class="card panel" id="d5" data-n="5" data-a="Secede from the Union" data-b="Stay in the Union" data-short="Secession" aria-labelledby="h5">
+<div class="kick">Dilemma 5 <span>of 5</span> · Winter 1860-1861</div>
+<h2 id="h5">After Lincoln Wins: Secede or Stay?</h2>
+<div class="there"><span class="lab">You are there</span><p>It is the winter of 1860. You live in South Carolina. Republican Abraham Lincoln has won the presidency with 39 percent of the popular vote. He carried all eighteen free states and none of the slave states. The Republican Party opposes the extension of slavery into the territories.</p><p>South Carolina’s whole congressional delegation has resigned. A convention in Charleston will vote on leaving the Union. Nearly all the delegates own enslaved people. Delegate Thomas Jefferson Withers says the “true question for us all is how shall we sustain African slavery in South Carolina from a series of annoying attacks?”</p><p>James L. Petigru, one of the few Unionists in Charleston, says his state “is too small to be a Republic and too large to be an insane asylum.” President James Buchanan says secession is illegal, but he also says he cannot stop it.</p><p>What would you choose?</p></div>
+<p class="rather">Would you rather...</p>
+<div class="choices" role="group" aria-label="Choose one">
+<button type="button" class="choice" data-o="A" aria-pressed="false"><span class="ltr">A</span><span>Secede from the Union</span></button>
+<button type="button" class="choice" data-o="B" aria-pressed="false"><span class="ltr">B</span><span>Stay in the Union</span></button>
+</div>
+<div class="work">
+<div class="field"><label for="d5_reason">Your reason</label><span class="hint">Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”</span>
+<textarea id="d5_reason" data-k="reason" placeholder="Type your reason here..."></textarea></div>
+<div class="field"><label for="d5_counter">Counter-Argument</label><span class="hint">What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”</span>
+<textarea id="d5_counter" data-k="counter" placeholder="Type the other side’s best reason here..."></textarea></div>
+<div class="row2"><button type="button" class="btn primary lockBtn" disabled>Lock in my answer</button>
+<button type="button" class="btn editBtn">Edit my answer</button><span class="cstat" aria-live="polite"></span></div>
+<div class="reveal" aria-live="polite"><span class="lab">What really happened</span><p>On December 20, 1860, the South Carolina convention voted unanimously for an Ordinance of Secession. By February 1, 1861, Florida, Georgia, Louisiana, and Texas had also left, and seven southern states in all seceded soon after Lincoln’s election. Their ordinances listed several complaints against the federal government, but Norton says the main reason for leaving was their determination to preserve slavery.</p><p>The new Confederacy elected Jefferson Davis of Mississippi as its president. President Buchanan, in his last weeks in office, declared secession illegal but said he lacked the power to stop it: “I can do nothing.” Armed southerners surrounded federal forts in the seceded states.</p><p class="cite">Source: Norton Ch. 13, “The Southern Response”.</p></div>
+</div>
+</section>
+<section class="tally panel" id="tally"><div class="kick">The end</div><h2>Your choices</h2><p style="margin:0">Here is a summary of the choices you made.</p>
+<ol id="tallyList"></ol><p class="sum" id="tallySum"></p></section>
+<div class="finish panel" id="actions"><div class="status" id="status"></div>
+<div class="btns"><button class="btn" id="saveBtn" type="button">Save Progress</button><button class="btn" id="loadBtn" type="button">Load Progress</button>
+<input type="file" id="loadFile" accept=".json,application/json" hidden>
+<button class="btn primary" id="finishBtn" type="button" disabled>Finished — Download File to Submit</button></div>
+<div class="msg" id="msg" role="status"></div><button class="link" id="reset" type="button">Clear all my answers</button></div>
+<footer>UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.</footer>
+</div>
+<script>
+(function(){
+  var PACKET='CPUSH_L8_WYR';
+  var STORE='cpush_l8_wyr_student';
+  var $=function(i){return document.getElementById(i)};
+  var first=$('f_first'),last=$('f_last'),period=$('f_period'),dateF=$('f_date');
+  var cards=[].slice.call(document.querySelectorAll('.card'));
+  var MIN=15;
+  var data={meta:{},cards:{}};
+  function load(){try{var d=JSON.parse(localStorage.getItem(STORE)||'null');if(d&&d.cards)data=d}catch(e){}}
+  function persist(){try{localStorage.setItem(STORE,JSON.stringify(data))}catch(e){}}
+  function cs(n){return data.cards[n]||(data.cards[n]={choice:'',reason:'',counter:'',locked:false})}
+  function msg(t,err){var m=$('msg');m.textContent=t;m.className='msg'+(err?' err':'');m.style.display='block'}
+  function clean(n){n=window.spAscii?spAscii(n):n;return String(n).normalize('NFD').replace(/[̀-ͯ]/g,'').trim().replace(/\s+/g,'_').replace(/[^A-Za-z0-9_-]/g,'')}
+  function who(){return (clean(last.value)||'Last')+'_'+(clean(first.value)||'First')}
+  function named(){return !!(first.value.trim()&&last.value.trim()&&period.value.trim())}
+  function optText(c,o){return o==='A'?c.getAttribute('data-a'):o==='B'?c.getAttribute('data-b'):''}
+  function render(){
+    var locked=0;
+    cards.forEach(function(c){
+      var n=c.getAttribute('data-n'),s=cs(n);
+      c.classList.toggle('chosen',!!s.choice);
+      c.classList.toggle('locked',!!s.locked);
+      [].forEach.call(c.querySelectorAll('.choice'),function(b){
+        b.setAttribute('aria-pressed',b.getAttribute('data-o')===s.choice?'true':'false');
+        b.disabled=!!s.locked;
+      });
+      var r=c.querySelector('[data-k=reason]'),k=c.querySelector('[data-k=counter]');
+      if(r.value!==s.reason)r.value=s.reason;
+      if(k.value!==s.counter)k.value=s.counter;
+      r.readOnly=k.readOnly=!!s.locked;
+      var ok=s.choice&&s.reason.trim().length>=MIN&&s.counter.trim().length>=MIN;
+      c.querySelector('.lockBtn').disabled=!ok;
+      var st=c.querySelector('.cstat');
+      st.textContent=s.locked?'Locked in. Read what really happened below.':(ok?'Ready. Tap Lock in to see what happened.':'Fill in both boxes to unlock the next step.');
+      if(s.locked)locked++;
+    });
+    var tot=cards.length;
+    $('pct').textContent=locked+' of '+tot+' dilemmas locked in';
+    $('fill').style.width=(100*locked/tot)+'%';
+    var ol=$('tallyList');ol.innerHTML='';
+    cards.forEach(function(c){
+      var n=c.getAttribute('data-n'),s=cs(n),li=document.createElement('li');
+      var txt=s.choice?optText(c,s.choice):'';
+      li.className=(s.locked&&s.choice)?'':'none';
+      li.innerHTML='<span class="tn"></span><span class="tq"></span><span class="ta"></span>';
+      li.querySelector('.tn').textContent=n;
+      li.querySelector('.tq').textContent=c.getAttribute('data-short');
+      li.querySelector('.ta').textContent=(s.locked&&s.choice)?('You chose: '+txt):(s.choice?('Chosen, not locked in yet: '+txt):'Not answered yet');
+      ol.appendChild(li);
+    });
+    $('tallySum').textContent=locked===tot?'All five dilemmas are locked in. Nice work.':'Lock in all five dilemmas to finish.';
+    var miss=[];
+    if(!named())miss.push('first name, last name, and period');
+    if(locked<tot)miss.push((tot-locked)+' dilemma'+(tot-locked===1?'':'s')+' to lock in');
+    var all=named()&&locked===tot;
+    $('status').textContent=all?'Everything is done. Tap Finished to download your file.':'Still needed: '+miss.join('; ')+'.';
+    $('finishBtn').disabled=!all;
+    return all;
+  }
+  function sync(){
+    data.meta={first:first.value,last:last.value,period:period.value,date:dateF.value};
+    persist();render();
+  }
+  function snapshot(){
+    var o={packet:PACKET,course:'CPUSH',lesson:8,assignment:'Would You Rather',version:1,saved:new Date().toISOString(),
+      student:{first:first.value.trim(),last:last.value.trim(),period:period.value.trim(),date:dateF.value.trim()},answers:{}};
+    cards.forEach(function(c){
+      var n=c.getAttribute('data-n'),s=cs(n),p='dilemma_'+n+'_';
+      o.answers[p+'topic']=c.getAttribute('data-short');
+      o.answers[p+'choice']=s.choice;
+      o.answers[p+'choice_text']=optText(c,s.choice);
+      o.answers[p+'reason']=s.reason;
+      o.answers[p+'counter_argument']=s.counter;
+      o.answers[p+'locked_in']=!!s.locked;
+    });
+    return o;
+  }
+  function download(name,obj){
+    var blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;
+    document.body.appendChild(a);a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);
+  }
+  load();
+  var m=data.meta||{};first.value=m.first||'';last.value=m.last||'';period.value=m.period||'';dateF.value=m.date||'';
+  [first,last,period].forEach(function(f){f.addEventListener('input',function(){f.classList.remove('bad');sync()})});
+  cards.forEach(function(c){
+    var n=c.getAttribute('data-n');
+    [].forEach.call(c.querySelectorAll('.choice'),function(b){b.addEventListener('click',function(){var s=cs(n);if(s.locked)return;s.choice=b.getAttribute('data-o');sync()})});
+    c.querySelector('[data-k=reason]').addEventListener('input',function(e){cs(n).reason=e.target.value;sync()});
+    c.querySelector('[data-k=counter]').addEventListener('input',function(e){cs(n).counter=e.target.value;sync()});
+    c.querySelector('.lockBtn').addEventListener('click',function(){var s=cs(n);if(!s.choice||s.reason.trim().length<MIN||s.counter.trim().length<MIN)return;s.locked=true;sync();var r=c.querySelector('.reveal');if(r.scrollIntoView)r.scrollIntoView({block:'nearest',behavior:'smooth'})});
+    c.querySelector('.editBtn').addEventListener('click',function(){cs(n).locked=false;sync()});
+  });
+  $('saveBtn').addEventListener('click',function(){
+    if(!named()){[first,last,period].forEach(function(f){if(!f.value.trim())f.classList.add('bad')});msg('Please type your first name, last name, and period first.',true);first.scrollIntoView({block:'center'});return}
+    download(who()+'-'+PACKET+'-PROGRESS.json',snapshot());msg('Progress file downloaded. Keep it safe. Use Load Progress to continue later.');
+  });
+  $('loadBtn').addEventListener('click',function(){$('loadFile').click()});
+  $('loadFile').addEventListener('change',function(ev){
+    var f=ev.target.files[0];if(!f)return;
+    var r=new FileReader();
+    r.onload=function(){
+      try{
+        var o=JSON.parse(r.result);
+        if(!o||o.packet!==PACKET||typeof o.answers!=='object')throw new Error('wrong');
+        var st=o.student||{};first.value=st.first||'';last.value=st.last||'';period.value=st.period||'';dateF.value=(o.completed?st.date:'')||'';
+        data.cards={};
+        cards.forEach(function(c){var n=c.getAttribute('data-n'),p='dilemma_'+n+'_',a=o.answers;
+          data.cards[n]={choice:(a[p+'choice']==='A'||a[p+'choice']==='B')?a[p+'choice']:'',reason:String(a[p+'reason']||''),counter:String(a[p+'counter_argument']||''),locked:!!a[p+'locked_in']};});
+        sync();msg('Progress loaded.');
+      }catch(err){msg('That file does not look like a Would You Rather progress file. Try again.',true)}
+      ev.target.value='';
+    };
+    r.onerror=function(){msg('Could not read that file.',true)};
+    r.readAsText(f);
+  });
+  $('finishBtn').addEventListener('click',function(){
+    if(!render())return;
+    var now=new Date();dateF.value=now.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});sync();
+    var o=snapshot();o.completed=true;o.submitted=now.toISOString();
+    var fn=who()+'-'+PACKET+'.json';download(fn,o);
+    msg('Done! Your file '+fn+' downloaded. Upload it to Canvas.');
+  });
+  $('reset').addEventListener('click',function(){
+    if(!confirm('Clear all of your answers on this page?'))return;
+    data={meta:{},cards:{}};first.value=last.value=period.value=dateF.value='';persist();render();
+  });
+  render();
+})();
+</script><!--sp-i18n--><script type="application/json" id="sp-i18n">{"langs":["en","es","ar"],"default":"en","es":{"Save Progress":"Guardar progreso","Load Progress":"Cargar progreso","Finished — Download File to Submit":"Terminé — Descargar el archivo para entregar","Clear all my answers":"Borrar todas mis respuestas","FIRST NAME *":"NOMBRE *","LAST NAME *":"APELLIDO *","PERIOD *":"PERÍODO *","DATE (fills in when you finish)":"FECHA (se llena cuando terminas)","e.g. 3":"p. ej., 3","Automatic":"Automática","Please type your first name, last name, and period first.":"Primero escribe tu nombre, apellido y período.","Western Expansion and Southern Secession":"La expansión hacia el oeste y la secesión del Sur","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH","The Fugitive Slave Act":"La Ley de Esclavos Fugitivos","Bleeding Kansas":"Bleeding Kansas — Kansas sangriento","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"Se descargó tu archivo de progreso. Guárdalo bien. Usa «Cargar progreso» para continuar más tarde.","Progress loaded.":"Progreso cargado.","Could not read that file.":"No se pudo leer ese archivo.","Treaty of Guadalupe Hidalgo":"Tratado de Guadalupe Hidalgo","Would You Rather 8 · Western Expansion and Southern Secession":"¿Qué preferirías? 8 · La expansión hacia el oeste y la secesión del Sur","Would You Rather":"¿Qué preferirías?","Example: 3":"Ejemplo: 3","Clear all of your answers on this page?":"¿Borrar todas tus respuestas en esta página?","That file does not look like a Would You Rather progress file. Try again.":"Ese archivo no parece un archivo de progreso de «¿Qué preferirías?». Inténtalo de nuevo.","Everything is done. Tap Finished to download your file.":"Todo está listo. Toca «Terminé» para descargar tu archivo.","Choose one":"Elige uno","Type your reason here...":"Escribe tu razón aquí...","Type the other side’s best reason here...":"Escribe aquí la mejor razón del otro lado...","<b>How to work.<\/b> People in history faced hard choices. Here are five. There is no right or wrong choice. Your job is to understand why people chose what they did.":"<b>Cómo trabajar.<\/b> Las personas en la historia enfrentaron decisiones difíciles. Aquí hay cinco. No hay una opción correcta ni incorrecta. Tu trabajo es entender por qué las personas eligieron lo que eligieron.","Read “You are there.”":"Lee «Tú estás allí».","Tap the choice you would make.":"Toca la opción que tú elegirías.","Write your reason. Use at least one fact from the lesson.":"Escribe tu razón. Usa al menos un dato de la lección.","Write a Counter-Argument: the best reason someone on the other side would give.":"Escribe un contraargumento: la mejor razón que daría alguien del otro lado.","Tap <b>Lock in my answer<\/b> to see what really happened.":"Toca <b>Confirmar mi respuesta<\/b> para ver lo que realmente pasó.","Your work saves on this device as you type. Use <b>Save Progress<\/b> at the bottom to download a backup file, and <b>Load Progress<\/b> to continue later.":"Tu trabajo se guarda en este dispositivo mientras escribes. Usa <b>Guardar progreso<\/b> al final para descargar una copia de respaldo, y <b>Cargar progreso<\/b> para continuar más tarde.","You are there":"Tú estás allí","Would you rather...":"¿Qué preferirías?...","Your reason":"Tu razón","Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”":"¿Por qué elegiste esto? Usa al menos un dato de la lección. Prueba: «Elegí esto porque... Un dato es...»","Counter-Argument":"Contraargumento","What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”":"¿Cuál es la mejor razón que daría alguien del OTRO lado? Escríbela como la diría esa persona. Prueba: «Alguien que eligió el otro lado diría...»","Lock in my answer":"Confirmar mi respuesta","Edit my answer":"Cambiar mi respuesta","Fill in both boxes to unlock the next step.":"Llena las dos casillas para pasar al siguiente paso.","Ready. Tap Lock in to see what happened.":"Listo. Toca «Confirmar» para ver lo que pasó.","Locked in. Read what really happened below.":"Confirmada. Lee abajo lo que realmente pasó.","What really happened":"Lo que realmente pasó","Dilemma 1 <span>of 5<\/span> · 1843":"Dilema 1 <span>de 5<\/span> · 1843","Dilemma 2 <span>of 5<\/span> · May 1846":"Dilema 2 <span>de 5<\/span> · mayo de 1846","Dilemma 3 <span>of 5<\/span> · 1846-1848":"Dilema 3 <span>de 5<\/span> · 1846-1848","Dilemma 4 <span>of 5<\/span> · 1850":"Dilema 4 <span>de 5<\/span> · 1850","Dilemma 5 <span>of 5<\/span> · Winter 1860-1861":"Dilema 5 <span>de 5<\/span> · invierno de 1860-1861","The end":"El final","Your choices":"Tus elecciones","Here is a summary of the choices you made.":"Este es un resumen de las elecciones que hiciste.","Not answered yet":"Aún sin responder","All five dilemmas are locked in. Nice work.":"Las cinco decisiones están confirmadas. Buen trabajo.","Lock in all five dilemmas to finish.":"Confirma las cinco decisiones para terminar.","The Overland Trail":"La Ruta Terrestre","Go West or Stay Home?":"¿Ir al oeste o quedarte en casa?","Pack up and take the Overland Trail west":"Empacar y tomar la Ruta Terrestre (Overland Trail) hacia el oeste","Stay home":"Quedarte en casa","War with Mexico":"La guerra con México","War with Mexico: Yes or No?":"La guerra con México: ¿sí o no?","Support going to war with Mexico":"Apoyar la guerra con México","Oppose going to war with Mexico":"Oponerte a la guerra con México","Slavery in the territories":"La esclavitud en los territorios","New Lands: Ban Slavery or Let Settlers Vote?":"Tierras nuevas: ¿prohibir la esclavitud o dejar que los colonos voten?","Ban slavery in all the new territories (the Wilmot idea)":"Prohibir la esclavitud en todos los territorios nuevos (la idea de Wilmot)","Let the settlers in each territory vote (popular sovereignty)":"Dejar que los colonos de cada territorio voten (soberanía popular)","The Fugitive Slave Act: Obey or Refuse?":"La Ley de Esclavos Fugitivos: ¿obedecer o negarte?","Obey the law and help":"Obedecer la ley y ayudar","Refuse to follow the law":"Negarte a cumplir la ley","Secession":"La secesión","After Lincoln Wins: Secede or Stay?":"Después de que gana Lincoln: ¿separarse o quedarse?","Secede from the Union":"Separarte de la Unión","Stay in the Union":"Quedarte en la Unión","It is 1843. “Oregon Fever” is spreading across the country “like any other contagion,” one journalist writes.":"Es 1843. La «fiebre de Oregón» se está extendiendo por todo el país «como cualquier otro contagio», escribe un periodista.","The Oregon Trail starts in Independence, Missouri. It is more than 2,000 miles long, and most people walk it beside wagons pulled by oxen or mules. The trip takes five to six months.":"El Camino de Oregón empieza en Independence, Misuri. Mide más de 2,000 millas, y la mayoría de la gente lo recorre a pie junto a carretas jaladas por bueyes o mulas. El viaje dura de cinco a seis meses.","Some say the trail is the road to your own land, wealth, and independence. Others point to broken wagons, dead animals, and cholera along the way.":"Algunos dicen que el camino lleva a tener tu propia tierra, riqueza e independencia. Otros señalan las carretas rotas, los animales muertos y el cólera en el camino.","Your family has to decide.":"Tu familia tiene que decidir.","In 1843, the move to Oregon became one of the largest voluntary overland migrations in history. Most settlers traveled in family groups. They left Missouri in late spring and tried to finish the trip by winter.":"En 1843, el viaje a Oregón se convirtió en una de las mayores migraciones voluntarias por tierra de la historia. La mayoría de los colonos viajaban en grupos familiares. Salían de Misuri a fines de la primavera y trataban de terminar el viaje antes del invierno.","The trip was as hard as people warned. Wagons broke down, animals died, and cholera killed many travelers. Norton says there was, on average, one grave every eighty yards along the overland trails. By 1845, about 5,000 people had settled in Oregon’s Willamette Valley. The wagon trains also tore through Native American lands and culture.":"El viaje fue tan duro como la gente advertía. Las carretas se descomponían, los animales morían y el cólera mató a muchos viajeros. Norton dice que había, en promedio, una tumba cada ochenta yardas a lo largo de las rutas terrestres. Para 1845, unas 5,000 personas se habían establecido en el valle de Willamette, en Oregón. Las caravanas de carretas también destruyeron tierras y culturas de los pueblos nativos americanos.","Source: Norton Ch. 13, “Moving West”.":"Fuente: Norton, cap. 13, “Moving West”.","It is May 1846. President James K. Polk learns that Mexican troops attacked U.S. soldiers along the Rio Grande and killed eleven Americans. He asks Congress to declare war.":"Es mayo de 1846. El presidente James K. Polk se entera de que tropas mexicanas atacaron a soldados de Estados Unidos a lo largo del río Bravo (Rio Grande) y mataron a once estadounidenses. Le pide al Congreso que declare la guerra.","But the Rio Grande is about 150 miles south of the Nueces River, which both sides had publicly named as the border. Polk had tried to push the border south to the Rio Grande. Mexico said no.":"Pero el río Bravo está unas 150 millas al sur del río Nueces, que ambos lados habían nombrado públicamente como la frontera. Polk había tratado de mover la frontera hacia el sur, hasta el río Bravo. México dijo que no.","In the South, where “expansion fever” runs high, many people want war. In the North, many Whigs and abolitionists do not. A Delaware senator says sending troops there was “as much an act of aggression on our part as is a man pointing a pistol at another’s heart.”":"En el Sur, donde la «fiebre de expansión» está muy alta, muchas personas quieren la guerra. En el Norte, muchos whigs y abolicionistas no la quieren. Un senador de Delaware dice que enviar tropas allí fue «un acto de agresión de nuestra parte, tanto como lo es que un hombre apunte con una pistola al corazón de otro».","You have to take a side.":"Tienes que tomar partido.","Congress went along with Polk and authorized 50,000 soldiers. The war was very popular in the South. So many men volunteered that thousands had to be turned back. In the end, 112,000 White men served.":"El Congreso apoyó a Polk y autorizó 50,000 soldados. La guerra fue muy popular en el Sur. Se ofrecieron tantos hombres como voluntarios que hubo que rechazar a miles. Al final, sirvieron 112,000 hombres blancos.","The war lasted from March 1846 to April 1848. More than 13,000 Americans died, and 11,550 of them died from disease. In the Treaty of Guadalupe Hidalgo (1848), Mexico gave up half its territory, and the United States paid $15 million. Opponents kept speaking out. Ulysses S. Grant, who fought in the war, later called it “one of the most unjust wars ever waged by a stronger against a weaker nation.”":"La guerra duró de marzo de 1846 a abril de 1848. Murieron más de 13,000 estadounidenses, y 11,550 de ellos murieron por enfermedades. En el Tratado de Guadalupe Hidalgo (1848), México cedió la mitad de su territorio y Estados Unidos pagó 15 millones de dólares. Los opositores siguieron alzando la voz. Ulysses S. Grant, que combatió en la guerra, la llamó más tarde «una de las guerras más injustas que una nación fuerte haya librado contra una nación más débil».","Source: Norton Ch. 13, “The Mexican-American War”.":"Fuente: Norton, cap. 13, “The Mexican-American War”.","It is 1847. The United States is fighting Mexico and may gain a lot of new land. People are asking: will slavery be allowed there?":"Es 1847. Estados Unidos está en guerra con México y podría ganar mucha tierra nueva. La gente pregunta: ¿se permitirá la esclavitud allí?","In August 1846, Congressman David Wilmot of Pennsylvania said slavery should be banned in any land taken from Mexico. Senator Henry Clay said he could not vote to turn free land into slave land, because Mexico had already outlawed slavery there. Some others did not want new slave states gaining power in Congress, or enslaved people competing with free workers.":"En agosto de 1846, el congresista David Wilmot, de Pensilvania, dijo que se debía prohibir la esclavitud en cualquier tierra quitada a México. El senador Henry Clay dijo que no podía votar por convertir tierra libre en tierra esclavista, porque México ya había prohibido la esclavitud allí. Otros no querían que nuevos estados esclavistas ganaran poder en el Congreso, ni que las personas esclavizadas compitieran con los trabajadores libres.","Senator Lewis Cass of Michigan had a different idea. Let the citizens of each territory “regulate their own internal concerns in their own way.” He called this popular sovereignty. It appealed to many people who wanted to protect states’ rights.":"El senador Lewis Cass, de Míchigan, tenía otra idea. Que los ciudadanos de cada territorio «regulen sus propios asuntos internos a su manera». Lo llamó soberanía popular. Atrajo a muchas personas que querían proteger los derechos de los estados.","Which plan would you back?":"¿Qué plan apoyarías?","President Polk got Wilmot to hold back his amendment, but Wilmot’s idea kept shaping the debate in Congress. Abraham Lincoln later said that in his one term in Congress, he voted forty times to restrict slavery in the new territories. Senator John C. Calhoun offered a third view. He said banning slavery would take property from slaveholders, which he said broke the Fifth Amendment.":"El presidente Polk logró que Wilmot retirara su enmienda, pero la idea de Wilmot siguió moldeando el debate en el Congreso. Abraham Lincoln dijo más tarde que, en su único período en el Congreso, votó cuarenta veces para restringir la esclavitud en los territorios nuevos. El senador John C. Calhoun ofreció una tercera postura. Dijo que prohibir la esclavitud le quitaría propiedad a los esclavistas, lo cual, según él, violaba la Quinta Enmienda.","A similar idea appeared in the Utah Act of 1850, which let Utah’s legislature decide on slavery, and in the Kansas-Nebraska Act of 1854. In Kansas, about 5,000 “border ruffians” from Missouri crossed the border on election day, took over polling places, and cast four times as many votes as there were residents. Then in 1857, the Dred Scott decision said Congress could not exclude slavery from a territory. If Congress could not, Norton explains, neither could a territorial government.":"Una idea parecida apareció en la Ley de Utah de 1850, que dejó que la legislatura de Utah decidiera sobre la esclavitud, y en la Ley Kansas-Nebraska de 1854. En Kansas, unos 5,000 «rufianes de la frontera» de Misuri cruzaron la frontera el día de las elecciones, tomaron los lugares de votación y depositaron cuatro veces más votos que el número de residentes. Luego, en 1857, la decisión del caso Dred Scott dijo que el Congreso no podía excluir la esclavitud de un territorio. Si el Congreso no podía, explica Norton, tampoco podía un gobierno territorial.","Source: Norton Ch. 13, “Slavery in the Territories”.":"Fuente: Norton, cap. 13, “Slavery in the Territories”.","It is late 1850. You live in a northern city. Congress has passed the Compromise of 1850, and one part of it is a new Fugitive Slave Act.":"Es fines de 1850. Vives en una ciudad del Norte. El Congreso aprobó el Compromiso de 1850, y una parte de él es una nueva Ley de Esclavos Fugitivos.","The law requires the federal government and northern states to help capture freedom seekers and return them to the South. It also requires citizens to help find and catch them. Federal commissioners hear each case. There is no jury, and the person accused cannot give testimony. A commissioner is paid $10 to send someone back to slavery and only $5 to free them.":"La ley exige que el gobierno federal y los estados del Norte ayuden a capturar a las personas que buscan la libertad y a devolverlas al Sur. También exige que los ciudadanos ayuden a encontrarlas y atraparlas. Comisionados federales escuchan cada caso. No hay jurado, y la persona acusada no puede dar testimonio. A un comisionado le pagan 10 dólares por mandar a alguien de regreso a la esclavitud y solo 5 dólares por dejarlo libre.","Ralph Waldo Emerson urges people to break the law. Imagine that a federal officer asks for your help in finding a freedom seeker in your town.":"Ralph Waldo Emerson pide a la gente que desobedezca la ley. Imagina que un oficial federal te pide ayuda para encontrar a una persona que busca la libertad en tu pueblo.","What would you do?":"¿Qué harías?","Norton calls the Fugitive Slave Act the most controversial part of the Compromise of 1850. By September 20, 1850, President Millard Fillmore had signed all the parts of the Compromise into law. It tried to recover people who had already escaped, and it let slave-traders kidnap free Black people in northern states by claiming they were fugitives.":"Norton llama a la Ley de Esclavos Fugitivos la parte más polémica del Compromiso de 1850. Para el 20 de septiembre de 1850, el presidente Millard Fillmore había firmado todas las partes del Compromiso para convertirlas en ley. La ley trataba de recuperar a personas que ya habían escapado, y permitía que los traficantes de esclavos secuestraran a personas negras libres en los estados del Norte alegando que eran fugitivas.","Abolitionists were furious. Emerson urged people to break the law. In New York, Reverend Jermain Loguen, who had himself escaped slavery, shouted: “I don’t respect this law—I don’t fear it—I won’t obey it! It outlaws me, and I outlaw it.” In late October 1850, two slave-catchers from Georgia arrived in Boston to use the act to recapture William and Ellen Craft.":"Los abolicionistas estaban furiosos. Emerson pidió a la gente que desobedeciera la ley. En Nueva York, el reverendo Jermain Loguen, que él mismo había escapado de la esclavitud, gritó: «¡No respeto esta ley, no le tengo miedo, no la voy a obedecer! Ella me pone fuera de la ley, y yo la pongo fuera de la ley». A fines de octubre de 1850, dos cazadores de esclavos de Georgia llegaron a Boston para usar la ley y volver a capturar a William y Ellen Craft.","Source: Norton Ch. 13, “The Southern Response”.":"Fuente: Norton, cap. 13, “The Southern Response”.","It is the winter of 1860. You live in South Carolina. Republican Abraham Lincoln has won the presidency with 39 percent of the popular vote. He carried all eighteen free states and none of the slave states. The Republican Party opposes the extension of slavery into the territories.":"Es el invierno de 1860. Vives en Carolina del Sur. El republicano Abraham Lincoln ganó la presidencia con el 39 por ciento del voto popular. Ganó en los dieciocho estados libres y en ninguno de los estados esclavistas. El Partido Republicano se opone a que la esclavitud se extienda a los territorios.","South Carolina’s whole congressional delegation has resigned. A convention in Charleston will vote on leaving the Union. Nearly all the delegates own enslaved people. Delegate Thomas Jefferson Withers says the “true question for us all is how shall we sustain African slavery in South Carolina from a series of annoying attacks?”":"Toda la delegación de Carolina del Sur en el Congreso ha renunciado. Una convención en Charleston votará si se sale de la Unión. Casi todos los delegados tienen personas esclavizadas. El delegado Thomas Jefferson Withers dice que «la verdadera pregunta para todos nosotros es cómo vamos a sostener la esclavitud africana en Carolina del Sur frente a una serie de ataques molestos».","James L. Petigru, one of the few Unionists in Charleston, says his state “is too small to be a Republic and too large to be an insane asylum.” President James Buchanan says secession is illegal, but he also says he cannot stop it.":"James L. Petigru, uno de los pocos unionistas en Charleston, dice que su estado «es demasiado pequeño para ser una república y demasiado grande para ser un manicomio». El presidente James Buchanan dice que la secesión es ilegal, pero también dice que no puede detenerla.","On December 20, 1860, the South Carolina convention voted unanimously for an Ordinance of Secession. By February 1, 1861, Florida, Georgia, Louisiana, and Texas had also left, and seven southern states in all seceded soon after Lincoln’s election. Their ordinances listed several complaints against the federal government, but Norton says the main reason for leaving was their determination to preserve slavery.":"El 20 de diciembre de 1860, la convención de Carolina del Sur votó por unanimidad una Ordenanza de Secesión. Para el 1 de febrero de 1861, Florida, Georgia, Luisiana y Texas también se habían ido, y en total siete estados del Sur se separaron poco después de la elección de Lincoln. Sus ordenanzas enumeraban varias quejas contra el gobierno federal, pero Norton dice que la razón principal para irse era su determinación de preservar la esclavitud.","The new Confederacy elected Jefferson Davis of Mississippi as its president. President Buchanan, in his last weeks in office, declared secession illegal but said he lacked the power to stop it: “I can do nothing.” Armed southerners surrounded federal forts in the seceded states.":"La nueva Confederación eligió a Jefferson Davis, de Misisipi, como su presidente. El presidente Buchanan, en sus últimas semanas en el cargo, declaró ilegal la secesión pero dijo que no tenía poder para detenerla: «No puedo hacer nada». Sureños armados rodearon los fuertes federales en los estados que se habían separado.","What would you choose?":"¿Qué elegirías?","You chose: Pack up and take the Overland Trail west":"Elegiste: Empacar y tomar la Ruta Terrestre (Overland Trail) hacia el oeste","Chosen, not locked in yet: Pack up and take the Overland Trail west":"Elegida, aún sin confirmar: Empacar y tomar la Ruta Terrestre (Overland Trail) hacia el oeste","You chose: Stay home":"Elegiste: Quedarte en casa","Chosen, not locked in yet: Stay home":"Elegida, aún sin confirmar: Quedarte en casa","You chose: Support going to war with Mexico":"Elegiste: Apoyar la guerra con México","Chosen, not locked in yet: Support going to war with Mexico":"Elegida, aún sin confirmar: Apoyar la guerra con México","You chose: Oppose going to war with Mexico":"Elegiste: Oponerte a la guerra con México","Chosen, not locked in yet: Oppose going to war with Mexico":"Elegida, aún sin confirmar: Oponerte a la guerra con México","You chose: Ban slavery in all the new territories (the Wilmot idea)":"Elegiste: Prohibir la esclavitud en todos los territorios nuevos (la idea de Wilmot)","Chosen, not locked in yet: Ban slavery in all the new territories (the Wilmot idea)":"Elegida, aún sin confirmar: Prohibir la esclavitud en todos los territorios nuevos (la idea de Wilmot)","You chose: Let the settlers in each territory vote (popular sovereignty)":"Elegiste: Dejar que los colonos de cada territorio voten (soberanía popular)","Chosen, not locked in yet: Let the settlers in each territory vote (popular sovereignty)":"Elegida, aún sin confirmar: Dejar que los colonos de cada territorio voten (soberanía popular)","You chose: Obey the law and help":"Elegiste: Obedecer la ley y ayudar","Chosen, not locked in yet: Obey the law and help":"Elegida, aún sin confirmar: Obedecer la ley y ayudar","You chose: Refuse to follow the law":"Elegiste: Negarte a cumplir la ley","Chosen, not locked in yet: Refuse to follow the law":"Elegida, aún sin confirmar: Negarte a cumplir la ley","You chose: Secede from the Union":"Elegiste: Separarte de la Unión","Chosen, not locked in yet: Secede from the Union":"Elegida, aún sin confirmar: Separarte de la Unión","You chose: Stay in the Union":"Elegiste: Quedarte en la Unión","Chosen, not locked in yet: Stay in the Union":"Elegida, aún sin confirmar: Quedarte en la Unión"},"ar":{"Save Progress":"حفظ التقدم","Load Progress":"تحميل التقدم","Finished — Download File to Submit":"انتهيت — نزّل الملف لتسليمه","Clear all my answers":"امسح كل إجاباتي","FIRST NAME *":"الاسم الأول *","LAST NAME *":"اسم العائلة *","PERIOD *":"الحصة *","DATE (fills in when you finish)":"التاريخ (يُكتب تلقائيًا عند الانتهاء)","e.g. 3":"مثال: 3","Automatic":"تلقائي","Please type your first name, last name, and period first.":"اكتب أولًا اسمك الأول واسم العائلة والحصة.","Western Expansion and Southern Secession":"التوسع غربًا وانفصال الجنوب","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"الوحدة 3 · بيت منقسم وأُعيد بناؤه | CPUSH","The Fugitive Slave Act":"قانون العبيد الهاربين","Bleeding Kansas":"Bleeding Kansas — كانساس النازفة","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"الوحدة 3 · بيت منقسم وأعيد بناؤه | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"تم تنزيل ملف التقدم. احتفظ به في مكان آمن. استخدم «تحميل التقدم» لتكمل لاحقًا.","Progress loaded.":"تم تحميل التقدم.","Could not read that file.":"تعذّرت قراءة هذا الملف.","Treaty of Guadalupe Hidalgo":"معاهدة غوادالوبي هيدالغو (Treaty of Guadalupe Hidalgo)","Would You Rather 8 · Western Expansion and Southern Secession":"ماذا تفضّل؟ 8 · التوسع غربًا وانفصال الجنوب","Would You Rather":"ماذا تفضّل؟","Example: 3":"مثال: 3","Clear all of your answers on this page?":"هل تريد مسح كل إجاباتك في هذه الصفحة؟","That file does not look like a Would You Rather progress file. Try again.":"هذا الملف لا يبدو ملف تقدم لنشاط «ماذا تفضّل؟». حاول مرة أخرى.","Everything is done. Tap Finished to download your file.":"اكتمل كل شيء. اضغط «انتهيت» لتنزيل ملفك.","Choose one":"اختر واحدًا","Type your reason here...":"اكتب سببك هنا...","Type the other side’s best reason here...":"اكتب هنا أفضل سبب للطرف الآخر...","<b>How to work.<\/b> People in history faced hard choices. Here are five. There is no right or wrong choice. Your job is to understand why people chose what they did.":"<b>طريقة العمل.<\/b> واجه الناس في التاريخ خيارات صعبة. هنا خمسة منها. لا يوجد خيار صحيح أو خاطئ. مهمتك أن تفهم لماذا اختار الناس ما اختاروه.","Read “You are there.”":"اقرأ «أنت هناك».","Tap the choice you would make.":"اضغط على الخيار الذي ستختاره.","Write your reason. Use at least one fact from the lesson.":"اكتب سببك. استخدم معلومة واحدة على الأقل من الدرس.","Write a Counter-Argument: the best reason someone on the other side would give.":"اكتب حجة مضادة: أفضل سبب قد يقدّمه شخص من الطرف الآخر.","Tap <b>Lock in my answer<\/b> to see what really happened.":"اضغط <b>تثبيت إجابتي<\/b> لترى ما حدث فعلًا.","Your work saves on this device as you type. Use <b>Save Progress<\/b> at the bottom to download a backup file, and <b>Load Progress<\/b> to continue later.":"يُحفظ عملك على هذا الجهاز أثناء الكتابة. استخدم زر <b>حفظ التقدم<\/b> في الأسفل لتنزيل نسخة احتياطية، وزر <b>تحميل التقدم<\/b> لتكمل لاحقًا.","You are there":"أنت هناك","Would you rather...":"ماذا تفضّل؟...","Your reason":"سببك","Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”":"لماذا اخترت هذا؟ استخدم معلومة واحدة على الأقل من الدرس. جرّب: «اخترت هذا لأن... ومن المعلومات...»","Counter-Argument":"حجة مضادة","What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”":"ما أفضل سبب قد يقدّمه شخص من الطرف الآخر؟ اكتبه كما سيقوله هو. جرّب: «شخص اختار الطرف الآخر سيقول...»","Lock in my answer":"تثبيت إجابتي","Edit my answer":"تعديل إجابتي","Fill in both boxes to unlock the next step.":"املأ المربعين للانتقال إلى الخطوة التالية.","Ready. Tap Lock in to see what happened.":"جاهز. اضغط «تثبيت» لترى ما حدث.","Locked in. Read what really happened below.":"تم التثبيت. اقرأ في الأسفل ما حدث فعلًا.","What really happened":"ما حدث فعلًا","Dilemma 1 <span>of 5<\/span> · 1843":"المعضلة 1 <span>من 5<\/span> · 1843","Dilemma 2 <span>of 5<\/span> · May 1846":"المعضلة 2 <span>من 5<\/span> · مايو 1846","Dilemma 3 <span>of 5<\/span> · 1846-1848":"المعضلة 3 <span>من 5<\/span> · 1846-1848","Dilemma 4 <span>of 5<\/span> · 1850":"المعضلة 4 <span>من 5<\/span> · 1850","Dilemma 5 <span>of 5<\/span> · Winter 1860-1861":"المعضلة 5 <span>من 5<\/span> · شتاء 1860-1861","The end":"النهاية","Your choices":"اختياراتك","Here is a summary of the choices you made.":"هذا ملخص للخيارات التي اخترتها.","Not answered yet":"لم تتم الإجابة بعد","All five dilemmas are locked in. Nice work.":"تم تثبيت المعضلات الخمس. عمل جيد.","Lock in all five dilemmas to finish.":"ثبّت إجابات المعضلات الخمس لتنهي.","The Overland Trail":"الطريق البري","Go West or Stay Home?":"الذهاب غربًا أم البقاء في البيت؟","Pack up and take the Overland Trail west":"حزم الأمتعة وسلوك الطريق البري (Overland Trail) غربًا","Stay home":"البقاء في البيت","War with Mexico":"الحرب مع المكسيك","War with Mexico: Yes or No?":"الحرب مع المكسيك: نعم أم لا؟","Support going to war with Mexico":"تأييد الحرب مع المكسيك","Oppose going to war with Mexico":"معارضة الحرب مع المكسيك","Slavery in the territories":"العبودية في الأقاليم","New Lands: Ban Slavery or Let Settlers Vote?":"أراضٍ جديدة: منع العبودية أم ترك المستوطنين يصوّتون؟","Ban slavery in all the new territories (the Wilmot idea)":"منع العبودية في كل الأقاليم الجديدة (فكرة ويلمت Wilmot)","Let the settlers in each territory vote (popular sovereignty)":"ترك المستوطنين في كل إقليم يصوّتون (السيادة الشعبية)","The Fugitive Slave Act: Obey or Refuse?":"قانون العبيد الهاربين: الطاعة أم الرفض؟","Obey the law and help":"طاعة القانون والمساعدة","Refuse to follow the law":"رفض اتباع القانون","Secession":"الانفصال","After Lincoln Wins: Secede or Stay?":"بعد فوز لينكولن (Lincoln): الانفصال أم البقاء؟","Secede from the Union":"الانفصال عن الاتحاد","Stay in the Union":"البقاء في الاتحاد","It is 1843. “Oregon Fever” is spreading across the country “like any other contagion,” one journalist writes.":"نحن في عام 1843. تنتشر «حمى أوريغون» (Oregon Fever) في أنحاء البلاد «مثل أي عدوى أخرى»، كما يكتب أحد الصحفيين.","The Oregon Trail starts in Independence, Missouri. It is more than 2,000 miles long, and most people walk it beside wagons pulled by oxen or mules. The trip takes five to six months.":"يبدأ طريق أوريغون (Oregon Trail) من إندبندنس بولاية ميزوري (Independence, Missouri). طوله أكثر من 2,000 ميل، ومعظم الناس يسيرون عليه سيرًا على الأقدام بجانب عربات تجرها الثيران أو البغال. تستغرق الرحلة من خمسة إلى ستة أشهر.","Some say the trail is the road to your own land, wealth, and independence. Others point to broken wagons, dead animals, and cholera along the way.":"يقول بعضهم إن الطريق هو الطريق إلى أرضك الخاصة والثروة والاستقلال. ويشير آخرون إلى العربات المكسورة والحيوانات الميتة والكوليرا على طول الطريق.","Your family has to decide.":"على عائلتك أن تقرر.","In 1843, the move to Oregon became one of the largest voluntary overland migrations in history. Most settlers traveled in family groups. They left Missouri in late spring and tried to finish the trip by winter.":"في عام 1843، أصبح الانتقال إلى أوريغون (Oregon) من أكبر الهجرات البرية الطوعية في التاريخ. سافر معظم المستوطنين في مجموعات عائلية. غادروا ميزوري (Missouri) في أواخر الربيع وحاولوا إنهاء الرحلة قبل الشتاء.","The trip was as hard as people warned. Wagons broke down, animals died, and cholera killed many travelers. Norton says there was, on average, one grave every eighty yards along the overland trails. By 1845, about 5,000 people had settled in Oregon’s Willamette Valley. The wagon trains also tore through Native American lands and culture.":"كانت الرحلة صعبة كما حذّر الناس. تعطلت العربات، ونفقت الحيوانات، وقتلت الكوليرا كثيرًا من المسافرين. يقول كتاب نورتن (Norton) إنه كان هناك في المتوسط قبر واحد كل ثمانين ياردة على طول الطرق البرية. وبحلول عام 1845، استقر نحو 5,000 شخص في وادي ويلاميت (Willamette Valley) في أوريغون (Oregon). كما مرّت قوافل العربات عبر أراضي الأمريكيين الأصليين وثقافتهم وأضرّت بها.","Source: Norton Ch. 13, “Moving West”.":"المصدر: Norton، الفصل 13، “Moving West”.","It is May 1846. President James K. Polk learns that Mexican troops attacked U.S. soldiers along the Rio Grande and killed eleven Americans. He asks Congress to declare war.":"نحن في مايو 1846. يعلم الرئيس جيمس ك. بولك (James K. Polk) أن قوات مكسيكية هاجمت جنودًا أمريكيين على نهر ريو غراندي (Rio Grande) وقتلت أحد عشر أمريكيًا. فيطلب من الكونغرس إعلان الحرب.","But the Rio Grande is about 150 miles south of the Nueces River, which both sides had publicly named as the border. Polk had tried to push the border south to the Rio Grande. Mexico said no.":"لكن نهر ريو غراندي يقع على بعد نحو 150 ميلًا جنوب نهر نيسيس (Nueces River)، الذي سمّاه الطرفان علنًا الحدود. وكان بولك قد حاول دفع الحدود جنوبًا إلى ريو غراندي. فرفضت المكسيك.","In the South, where “expansion fever” runs high, many people want war. In the North, many Whigs and abolitionists do not. A Delaware senator says sending troops there was “as much an act of aggression on our part as is a man pointing a pistol at another’s heart.”":"في الجنوب، حيث ترتفع «حمى التوسع»، يريد كثيرون الحرب. أما في الشمال، فكثير من الويغز (Whigs) ودعاة إلغاء العبودية لا يريدونها. ويقول سيناتور من ولاية ديلاوير (Delaware) إن إرسال القوات إلى هناك كان «عملًا عدوانيًا من جانبنا، مثل رجل يوجّه مسدسًا إلى قلب رجل آخر».","You have to take a side.":"عليك أن تختار موقفًا.","Congress went along with Polk and authorized 50,000 soldiers. The war was very popular in the South. So many men volunteered that thousands had to be turned back. In the end, 112,000 White men served.":"وافق الكونغرس على طلب بولك (Polk) وأذن بتجنيد 50,000 جندي. كانت الحرب شعبية جدًا في الجنوب. وتطوّع رجال كثيرون حتى اضطر المسؤولون إلى رد الآلاف. وفي النهاية خدم 112,000 رجل من البيض.","The war lasted from March 1846 to April 1848. More than 13,000 Americans died, and 11,550 of them died from disease. In the Treaty of Guadalupe Hidalgo (1848), Mexico gave up half its territory, and the United States paid $15 million. Opponents kept speaking out. Ulysses S. Grant, who fought in the war, later called it “one of the most unjust wars ever waged by a stronger against a weaker nation.”":"استمرت الحرب من مارس 1846 إلى أبريل 1848. مات أكثر من 13,000 أمريكي، ومات 11,550 منهم بسبب الأمراض. وفي معاهدة غوادالوبي هيدالغو (Treaty of Guadalupe Hidalgo) عام 1848، تخلّت المكسيك عن نصف أراضيها، ودفعت الولايات المتحدة 15 مليون دولار. وظل المعارضون يرفعون أصواتهم. وقد وصف يوليسيس س. غرانت (Ulysses S. Grant)، الذي قاتل في الحرب، الحرب لاحقًا بأنها «واحدة من أكثر الحروب ظلمًا شنّتها أمة قوية على أمة أضعف».","Source: Norton Ch. 13, “The Mexican-American War”.":"المصدر: Norton، الفصل 13، “The Mexican-American War”.","It is 1847. The United States is fighting Mexico and may gain a lot of new land. People are asking: will slavery be allowed there?":"نحن في عام 1847. الولايات المتحدة تحارب المكسيك وقد تكسب أراضي جديدة كثيرة. ويسأل الناس: هل ستُسمح العبودية هناك؟","In August 1846, Congressman David Wilmot of Pennsylvania said slavery should be banned in any land taken from Mexico. Senator Henry Clay said he could not vote to turn free land into slave land, because Mexico had already outlawed slavery there. Some others did not want new slave states gaining power in Congress, or enslaved people competing with free workers.":"في أغسطس 1846، قال عضو الكونغرس ديفيد ويلمت (David Wilmot) من بنسلفانيا (Pennsylvania) إنه يجب منع العبودية في أي أرض تؤخذ من المكسيك. وقال السيناتور هنري كلاي (Henry Clay) إنه لا يستطيع التصويت لتحويل أرض حرة إلى أرض عبودية، لأن المكسيك كانت قد حظرت العبودية هناك. وكان آخرون لا يريدون أن تكسب ولايات عبودية جديدة نفوذًا في الكونغرس، ولا أن ينافس المستعبَدون العمال الأحرار.","Senator Lewis Cass of Michigan had a different idea. Let the citizens of each territory “regulate their own internal concerns in their own way.” He called this popular sovereignty. It appealed to many people who wanted to protect states’ rights.":"كان لدى السيناتور لويس كاس (Lewis Cass) من ميشيغان (Michigan) فكرة مختلفة: أن يُنظّم مواطنو كل إقليم «شؤونهم الداخلية بطريقتهم الخاصة». وسمّى هذا السيادة الشعبية. وقد جذبت الفكرة كثيرًا من الناس الذين أرادوا حماية حقوق الولايات.","Which plan would you back?":"أي خطة ستدعم؟","President Polk got Wilmot to hold back his amendment, but Wilmot’s idea kept shaping the debate in Congress. Abraham Lincoln later said that in his one term in Congress, he voted forty times to restrict slavery in the new territories. Senator John C. Calhoun offered a third view. He said banning slavery would take property from slaveholders, which he said broke the Fifth Amendment.":"جعل الرئيس بولك (Polk) ويلمت (Wilmot) يوقف تعديله، لكن فكرة ويلمت ظلت تشكّل النقاش في الكونغرس. وقال أبراهام لينكولن (Abraham Lincoln) لاحقًا إنه في فترته الوحيدة في الكونغرس صوّت أربعين مرة لتقييد العبودية في الأقاليم الجديدة. وقدّم السيناتور جون سي. كالهون (John C. Calhoun) رأيًا ثالثًا. قال إن منع العبودية سيأخذ ممتلكات من مالكي العبيد، وقال إن ذلك ينتهك التعديل الخامس.","A similar idea appeared in the Utah Act of 1850, which let Utah’s legislature decide on slavery, and in the Kansas-Nebraska Act of 1854. In Kansas, about 5,000 “border ruffians” from Missouri crossed the border on election day, took over polling places, and cast four times as many votes as there were residents. Then in 1857, the Dred Scott decision said Congress could not exclude slavery from a territory. If Congress could not, Norton explains, neither could a territorial government.":"ظهرت فكرة مشابهة في قانون يوتا (Utah Act) لعام 1850، الذي ترك للهيئة التشريعية في يوتا (Utah) أن تقرر بشأن العبودية، وفي قانون كانساس-نبراسكا (Kansas-Nebraska Act) لعام 1854. وفي كانساس (Kansas)، عبر نحو 5,000 من «الأوباش الحدوديين» (border ruffians) القادمين من ميزوري (Missouri) الحدود يوم الانتخابات، واستولوا على مراكز الاقتراع، وأدلوا بأصوات تعادل أربعة أضعاف عدد السكان. ثم في عام 1857، قال قرار دريد سكوت (Dred Scott) إن الكونغرس لا يستطيع منع العبودية في إقليم ما. ويشرح نورتن (Norton) أنه إذا لم يستطع الكونغرس ذلك، فلا تستطيع حكومة الإقليم ذلك أيضًا.","Source: Norton Ch. 13, “Slavery in the Territories”.":"المصدر: Norton، الفصل 13، “Slavery in the Territories”.","It is late 1850. You live in a northern city. Congress has passed the Compromise of 1850, and one part of it is a new Fugitive Slave Act.":"نحن في أواخر عام 1850. تعيش في مدينة شمالية. أقرّ الكونغرس تسوية عام 1850 (Compromise of 1850)، وأحد أجزائها قانون جديد للعبيد الهاربين (Fugitive Slave Act).","The law requires the federal government and northern states to help capture freedom seekers and return them to the South. It also requires citizens to help find and catch them. Federal commissioners hear each case. There is no jury, and the person accused cannot give testimony. A commissioner is paid $10 to send someone back to slavery and only $5 to free them.":"يُلزم القانون الحكومة الفيدرالية والولايات الشمالية بالمساعدة في القبض على الباحثين عن الحرية وإعادتهم إلى الجنوب. ويُلزم المواطنين أيضًا بالمساعدة في العثور عليهم والإمساك بهم. ينظر مفوضون فيدراليون في كل قضية. لا توجد هيئة محلفين، ولا يستطيع المتهم أن يدلي بشهادته. ويُدفع للمفوض 10 دولارات لإعادة شخص إلى العبودية و5 دولارات فقط لتحريره.","Ralph Waldo Emerson urges people to break the law. Imagine that a federal officer asks for your help in finding a freedom seeker in your town.":"يحث رالف والدو إمرسون (Ralph Waldo Emerson) الناس على مخالفة القانون. تخيّل أن ضابطًا فيدراليًا يطلب مساعدتك في العثور على شخص يبحث عن الحرية في بلدتك.","What would you do?":"ماذا ستفعل؟","Norton calls the Fugitive Slave Act the most controversial part of the Compromise of 1850. By September 20, 1850, President Millard Fillmore had signed all the parts of the Compromise into law. It tried to recover people who had already escaped, and it let slave-traders kidnap free Black people in northern states by claiming they were fugitives.":"يصف نورتن (Norton) قانون العبيد الهاربين بأنه أكثر أجزاء تسوية عام 1850 إثارة للجدل. وبحلول 20 سبتمبر 1850، كان الرئيس ميلارد فيلمور (Millard Fillmore) قد وقّع جميع أجزاء التسوية لتصبح قانونًا. حاول القانون استعادة أشخاص كانوا قد هربوا بالفعل، وسمح لتجار العبيد بخطف السود الأحرار في الولايات الشمالية بادعاء أنهم هاربون.","Abolitionists were furious. Emerson urged people to break the law. In New York, Reverend Jermain Loguen, who had himself escaped slavery, shouted: “I don’t respect this law—I don’t fear it—I won’t obey it! It outlaws me, and I outlaw it.” In late October 1850, two slave-catchers from Georgia arrived in Boston to use the act to recapture William and Ellen Craft.":"غضب دعاة إلغاء العبودية غضبًا شديدًا. وحثّ إمرسون (Emerson) الناس على مخالفة القانون. وفي نيويورك (New York)، صاح القس جيرمان لوغن (Jermain Loguen)، الذي كان قد هرب بنفسه من العبودية: «لا أحترم هذا القانون، ولا أخافه، ولن أطيعه! إنه يضعني خارج القانون، وأنا أضعه خارج القانون». وفي أواخر أكتوبر 1850، وصل صيّادان للعبيد من جورجيا (Georgia) إلى بوسطن (Boston) ليستخدما القانون لإعادة القبض على ويليام وإيلين كرافت (William and Ellen Craft).","Source: Norton Ch. 13, “The Southern Response”.":"المصدر: Norton، الفصل 13، “The Southern Response”.","It is the winter of 1860. You live in South Carolina. Republican Abraham Lincoln has won the presidency with 39 percent of the popular vote. He carried all eighteen free states and none of the slave states. The Republican Party opposes the extension of slavery into the territories.":"نحن في شتاء عام 1860. تعيش في ساوث كارولينا (South Carolina). فاز الجمهوري أبراهام لينكولن (Abraham Lincoln) بالرئاسة بنسبة 39 بالمئة من الأصوات الشعبية. فاز في الولايات الحرة الثماني عشرة كلها ولم يفز في أي ولاية من ولايات العبودية. والحزب الجمهوري يعارض امتداد العبودية إلى الأقاليم.","South Carolina’s whole congressional delegation has resigned. A convention in Charleston will vote on leaving the Union. Nearly all the delegates own enslaved people. Delegate Thomas Jefferson Withers says the “true question for us all is how shall we sustain African slavery in South Carolina from a series of annoying attacks?”":"استقال وفد ساوث كارولينا (South Carolina) في الكونغرس بأكمله. وسيصوّت مؤتمر في تشارلستون (Charleston) على الخروج من الاتحاد. ومعظم المندوبين تقريبًا يملكون أشخاصًا مستعبَدين. ويقول المندوب توماس جيفرسون ويذرز (Thomas Jefferson Withers) إن «السؤال الحقيقي لنا جميعًا هو كيف سندعم العبودية الأفريقية في ساوث كارولينا في مواجهة سلسلة من الهجمات المزعجة؟».","James L. Petigru, one of the few Unionists in Charleston, says his state “is too small to be a Republic and too large to be an insane asylum.” President James Buchanan says secession is illegal, but he also says he cannot stop it.":"يقول جيمس ل. بيتيغرو (James L. Petigru)، أحد القلائل المؤيدين للاتحاد في تشارلستون (Charleston)، إن ولايته «أصغر من أن تكون جمهورية وأكبر من أن تكون مصحة للمجانين». ويقول الرئيس جيمس بيوكانن (James Buchanan) إن الانفصال غير قانوني، لكنه يقول أيضًا إنه لا يستطيع إيقافه.","On December 20, 1860, the South Carolina convention voted unanimously for an Ordinance of Secession. By February 1, 1861, Florida, Georgia, Louisiana, and Texas had also left, and seven southern states in all seceded soon after Lincoln’s election. Their ordinances listed several complaints against the federal government, but Norton says the main reason for leaving was their determination to preserve slavery.":"في 20 ديسمبر 1860، صوّت مؤتمر ساوث كارولينا (South Carolina) بالإجماع على مرسوم الانفصال (Ordinance of Secession). وبحلول 1 فبراير 1861، كانت فلوريدا (Florida) وجورجيا (Georgia) ولويزيانا (Louisiana) وتكساس (Texas) قد غادرت أيضًا، وانفصلت سبع ولايات جنوبية في المجموع بعد وقت قصير من انتخاب لينكولن (Lincoln). ذكرت مراسيمها عدة شكاوى ضد الحكومة الفيدرالية، لكن نورتن (Norton) يقول إن السبب الرئيسي للانفصال كان إصرارها على الحفاظ على العبودية.","The new Confederacy elected Jefferson Davis of Mississippi as its president. President Buchanan, in his last weeks in office, declared secession illegal but said he lacked the power to stop it: “I can do nothing.” Armed southerners surrounded federal forts in the seceded states.":"انتخبت الكونفدرالية الجديدة جيفرسون ديفيس (Jefferson Davis) من ميسيسيبي (Mississippi) رئيسًا لها. وفي آخر أسابيعه في المنصب، أعلن الرئيس بيوكانن (Buchanan) أن الانفصال غير قانوني، لكنه قال إنه لا يملك السلطة لإيقافه: «لا أستطيع فعل شيء». وطوّق جنوبيون مسلحون الحصون الفيدرالية في الولايات المنفصلة.","What would you choose?":"ماذا ستختار؟","You chose: Pack up and take the Overland Trail west":"اخترت: حزم الأمتعة وسلوك الطريق البري (Overland Trail) غربًا","Chosen, not locked in yet: Pack up and take the Overland Trail west":"تم الاختيار ولم يتم التثبيت بعد: حزم الأمتعة وسلوك الطريق البري (Overland Trail) غربًا","You chose: Stay home":"اخترت: البقاء في البيت","Chosen, not locked in yet: Stay home":"تم الاختيار ولم يتم التثبيت بعد: البقاء في البيت","You chose: Support going to war with Mexico":"اخترت: تأييد الحرب مع المكسيك","Chosen, not locked in yet: Support going to war with Mexico":"تم الاختيار ولم يتم التثبيت بعد: تأييد الحرب مع المكسيك","You chose: Oppose going to war with Mexico":"اخترت: معارضة الحرب مع المكسيك","Chosen, not locked in yet: Oppose going to war with Mexico":"تم الاختيار ولم يتم التثبيت بعد: معارضة الحرب مع المكسيك","You chose: Ban slavery in all the new territories (the Wilmot idea)":"اخترت: منع العبودية في كل الأقاليم الجديدة (فكرة ويلمت Wilmot)","Chosen, not locked in yet: Ban slavery in all the new territories (the Wilmot idea)":"تم الاختيار ولم يتم التثبيت بعد: منع العبودية في كل الأقاليم الجديدة (فكرة ويلمت Wilmot)","You chose: Let the settlers in each territory vote (popular sovereignty)":"اخترت: ترك المستوطنين في كل إقليم يصوّتون (السيادة الشعبية)","Chosen, not locked in yet: Let the settlers in each territory vote (popular sovereignty)":"تم الاختيار ولم يتم التثبيت بعد: ترك المستوطنين في كل إقليم يصوّتون (السيادة الشعبية)","You chose: Obey the law and help":"اخترت: طاعة القانون والمساعدة","Chosen, not locked in yet: Obey the law and help":"تم الاختيار ولم يتم التثبيت بعد: طاعة القانون والمساعدة","You chose: Refuse to follow the law":"اخترت: رفض اتباع القانون","Chosen, not locked in yet: Refuse to follow the law":"تم الاختيار ولم يتم التثبيت بعد: رفض اتباع القانون","You chose: Secede from the Union":"اخترت: الانفصال عن الاتحاد","Chosen, not locked in yet: Secede from the Union":"تم الاختيار ولم يتم التثبيت بعد: الانفصال عن الاتحاد","You chose: Stay in the Union":"اخترت: البقاء في الاتحاد","Chosen, not locked in yet: Stay in the Union":"تم الاختيار ولم يتم التثبيت بعد: البقاء في الاتحاد"},"patterns":[{"re":"^Still needed: first name, last name, and period\\.$","es":"Todavía falta: nombre, apellido y período.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة."},{"re":"^(\\d+) of (\\d+) dilemmas locked in$","es":"$1 de $2 decisiones confirmadas","ar":"عدد المعضلات المثبّتة: $1 من $2"},{"re":"^Still needed: first name, last name, and period; 1 dilemma to lock in\\.$","es":"Todavía falta: nombre, apellido y período; 1 decisión por confirmar.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة؛ معضلة واحدة تحتاج إلى تثبيت."},{"re":"^Still needed: first name, last name, and period; (\\d+) dilemmas to lock in\\.$","es":"Todavía falta: nombre, apellido y período; $1 decisiones por confirmar.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة؛ عدد المعضلات التي تحتاج إلى تثبيت: $1."},{"re":"^Still needed: first name, last name, and period\\.$","es":"Todavía falta: nombre, apellido y período.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة."},{"re":"^Still needed: 1 dilemma to lock in\\.$","es":"Todavía falta: 1 decisión por confirmar.","ar":"ما زال ناقصًا: معضلة واحدة تحتاج إلى تثبيت."},{"re":"^Still needed: (\\d+) dilemmas to lock in\\.$","es":"Todavía falta: $1 decisiones por confirmar.","ar":"ما زال ناقصًا: عدد المعضلات التي تحتاج إلى تثبيت: $1."},{"re":"^Done! Your file (\\S+) downloaded\\. Upload it to Canvas\\.$","es":"¡Listo! Se descargó tu archivo $1. Súbelo a Canvas.","ar":"أحسنت! تم تنزيل هذا الملف: <bdi dir=\"ltr\" style=\"display:block\">$1<\/bdi> ارفع هذا الملف إلى Canvas."}]}</script>
+<script>
+/* Supplement language switch (English / Espanol / Arabic). Works on pages whose text is rendered by JS:
+   a MutationObserver translates text as it appears. Data: <script type="application/json" id="sp-i18n">
+   {"langs":["en","es","ar"],"default":"en","es":{englishHTML:translation},"ar":{...},"patterns":[{"re":"^(\\d+) of (\\d+)$","es":"$1 de $2","ar":"..."}]}
+   Keys are the English text exactly as it sits in the page (innerHTML, spaces collapsed).
+   Helpers: spSeen() english strings seen so far; spMissing() strings with no translation in the current language;
+   spSetLang(l); spTr(s) translate a string (used for confirm/alert); spAscii(s) plain-ASCII name for file names. */
+(function () {
+  var node = document.getElementById('sp-i18n');
+  var D = node ? JSON.parse(node.textContent) : { langs: ['en'], patterns: [] };
+  var INLINE = { B:1,I:1,EM:1,STRONG:1,SPAN:1,A:1,BR:1,SMALL:1,SUP:1,SUB:1,U:1,MARK:1,BDI:1,TSPAN:1,CODE:1 };
+  var SKIP = 'script,style,textarea,input,.sp-lang,.sp-nt,[translate="no"]';
+  var WORD = /[A-Za-z\u00C0-\u024F\u0600-\u06FF]{2}|e\.g\./;
+  var LANG = 'en', REC = new WeakMap(), SEEN = {}, MISS = {};
+  (D.patterns || []).forEach(function (p) { try { p._re = new RegExp(p.re); } catch (e) {} });
+  function norm(s) { return String(s).replace(/\s+/g, ' ').trim(); }
+  function tr(src) {
+    if (LANG === 'en') return null;
+    var t = D[LANG] && D[LANG][src];
+    if (t) return t;
+    var P = D.patterns || [];
+    for (var i = 0; i < P.length; i++) {
+      var m = P[i]._re && P[i]._re.exec(src);
+      if (m && P[i][LANG]) return P[i][LANG].replace(/\$(\d+)/g, function (_, n) { return m[+n] || ''; });
+    }
+    return null;
+  }
+  window.spTr = function (s) { var t = tr(norm(s)); return t ? t.replace(/<[^>]+>/g, '') : s; };
+  function isInline(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling)
+      if (c.nodeType === 1 && (!INLINE[c.tagName.toUpperCase()] || c.matches(SKIP))) return false;
+    return true;
+  }
+  function directText(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling) if (c.nodeType === 3 && WORD.test(c.nodeValue)) return true;
+    return false;
+  }
+  function cur(s) { return s.nodeType === 1 ? s.innerHTML : s.nodeValue; }
+  function put(s, v) { if (s.nodeType === 1) s.innerHTML = v; else s.nodeValue = v; }
+  function handle(s) {
+    var r = REC.get(s), c = cur(s);
+    if (!(r && c === r.wrote)) { r = { en: c, wrote: c }; REC.set(s, r); }
+    var src = norm(r.en), target = r.en;
+    if (WORD.test(src)) {
+      SEEN[src] = 1;
+      if (LANG !== 'en') {
+        var t = tr(src);
+        if (t) {
+          target = s.nodeType === 1 ? t : (r.en.match(/^\s*/)[0] + t + r.en.match(/\s*$/)[0]);
+          delete MISS[src];
+        } else MISS[src] = 1;
+      }
+    }
+    if (c !== target) put(s, target);
+    r.wrote = cur(s);
+  }
+  var ATTRS = ['placeholder', 'alt', 'aria-label', 'title'];
+  function attrs(root) {
+    var els = root.querySelectorAll ? root.querySelectorAll('[placeholder],[alt],[aria-label],[title]') : [];
+    var list = [].slice.call(els); if (root.matches && root.matches('[placeholder],[alt],[aria-label],[title]')) list.push(root);
+    list.forEach(function (el) {
+      if (el.closest && el.closest('.sp-lang,.sp-nt,[translate="no"],script,style')) return;
+      var rec = el.__spa || (el.__spa = {});
+      ATTRS.forEach(function (a) {
+        var v = el.getAttribute(a); if (v == null) return;
+        var r = rec[a];
+        if (!(r && v === r.wrote)) { r = rec[a] = { en: v, wrote: v }; }
+        var src = norm(r.en); if (!WORD.test(src)) return;
+        SEEN[src] = 1;
+        var t = LANG === 'en' ? null : tr(src);
+        if (LANG !== 'en' && !t) MISS[src] = 1;
+        var target = t ? t.replace(/<[^>]+>/g, '') : r.en;
+        if (v !== target) el.setAttribute(a, target);
+        r.wrote = el.getAttribute(a);
+      });
+    });
+  }
+  function walk(root) {
+    if (root.nodeType === 3) { if (WORD.test(root.nodeValue) && !(root.parentNode && root.parentNode.closest && root.parentNode.closest(SKIP))) handle(root); return; }
+    if (root.nodeType !== 1) return;
+    (function w(el) {
+      if (el.matches(SKIP)) return;
+      if (el !== document.body && directText(el) && isInline(el)) { handle(el); return; }
+      for (var c = el.firstChild; c; c = c.nextSibling) {
+        if (c.nodeType === 1) w(c); else if (c.nodeType === 3 && WORD.test(c.nodeValue)) handle(c);
+      }
+    })(root);
+    attrs(root);
+  }
+  var TITLE = { en: document.title, wrote: document.title };
+  function title() {
+    if (document.title !== TITLE.wrote) TITLE = { en: document.title, wrote: document.title };
+    var t = LANG === 'en' ? null : tr(norm(TITLE.en));
+    document.title = t ? t.replace(/<[^>]+>/g, '') : TITLE.en; TITLE.wrote = document.title;
+  }
+  function inl(e) { return e.nodeType === 1 && !!INLINE[e.tagName.toUpperCase()]; }
+  var mo = new MutationObserver(function (muts) {
+    var todo = [];
+    muts.forEach(function (m) {
+      if (m.type === 'childList') { for (var i = 0; i < m.addedNodes.length; i++) todo.push(m.addedNodes[i]); todo.push(m.target); }
+      else todo.push(m.target);
+    });
+    todo.forEach(function (n) {
+      var el = n.nodeType === 1 ? n : n.parentNode;
+      if (!el || el.nodeType !== 1 || !document.body.contains(el)) return;
+      while (el !== document.body && el.parentNode && el.parentNode.nodeType === 1 && inl(el) && inl(el.parentNode)) el = el.parentNode;
+      if (el.parentNode && el.parentNode.nodeType === 1 && inl(el.parentNode) && el.parentNode !== document.body) el = el.parentNode;
+      walk(el);
+    });
+    mo.takeRecords();
+  });
+  var AR = { 'ا':'a','أ':'a','إ':'i','آ':'a','ب':'b','ت':'t','ث':'th','ج':'j','ح':'h','خ':'kh','د':'d','ذ':'dh','ر':'r','ز':'z','س':'s','ش':'sh','ص':'s','ض':'d','ط':'t','ظ':'z','ع':'a','غ':'gh','ف':'f','ق':'q','ك':'k','ل':'l','م':'m','ن':'n','ه':'h','و':'w','ي':'y','ى':'a','ة':'a','ئ':'y','ؤ':'w' };
+  window.spAscii = function (s) {
+    s = String(s); if (s.normalize) s = s.normalize('NFD').replace(/[̀-ًͯ-ٰٟ]/g, '');
+    return s.replace(/[ء-ي]/g, function (c) { return AR[c] !== undefined ? AR[c] : ''; }).replace(/ñ/g, 'n').replace(/Ñ/g, 'N');
+  };
+  window.spSeen = function () { return Object.keys(SEEN); };
+  window.spMissing = function () { return Object.keys(MISS); };
+  window.spLang = function () { return LANG; };
+  window.spSetLang = function (l) {
+    if ((D.langs || ['en']).indexOf(l) < 0) l = 'en';
+    LANG = l; MISS = {};
+    var h = document.documentElement; h.lang = l; h.dir = l === 'ar' ? 'rtl' : 'ltr';
+    mo.disconnect(); walk(document.body); title(); mo.takeRecords();
+    mo.observe(document.body, { childList: true, subtree: true, characterData: true });
+    document.querySelectorAll('.sp-lang button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === l)); });
+    try { localStorage.setItem('sp_lang', l); } catch (e) {}
+    try { var u = new URL(location.href); if (l === 'en') u.searchParams.delete('lang'); else u.searchParams.set('lang', l); history.replaceState(null, '', u.toString()); } catch (e) {}
+    try { document.dispatchEvent(new CustomEvent('splangchange', { detail: l })); } catch (e) {}
+  };
+  var _c = window.confirm, _a = window.alert;
+  window.confirm = function (m) { return _c.call(window, window.spTr(m)); };
+  window.alert = function (m) { return _a.call(window, window.spTr(m)); };
+  document.querySelectorAll('.sp-lang button').forEach(function (b) { b.addEventListener('click', function () { window.spSetLang(b.getAttribute('data-lang')); }); });
+  var start = D['default'] || 'en';
+  try { start = new URL(location.href).searchParams.get('lang') || localStorage.getItem('sp_lang') || start; } catch (e) {}
+  window.spSetLang(start);
+})();
+
+</script><!--/sp-i18n-->
+</body></html>

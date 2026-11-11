@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Escape Room 17 · The Cold War and the Affluent Fifties</title>
+<style>
+:root{--bg:#252B31;--txt:#EEF0F1;--a1:#3E4751;--a2:#DD7A40;--hl:#E6AB89;--glass:rgba(238,240,241,.07);--glassb:rgba(238,240,241,.2);--dim:#C9CFD3;--ok:#8FD3A8}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#323B44 0%,#252B31 60%) fixed;background-color:var(--bg);color:var(--txt);font:17px/1.55 "Segoe UI",system-ui,-apple-system,Verdana,sans-serif;min-height:100vh}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px 40px}
+.glass{background:var(--glass);border:1px solid var(--glassb);border-radius:16px;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+header.hero{padding:30px 0 12px;border-bottom:3px solid var(--a2)}
+.eyebrow{font-size:13px;letter-spacing:.16em;font-weight:700;color:var(--hl)}
+h1{margin:.15em 0 .05em;font-size:clamp(28px,6vw,40px);line-height:1.12}
+.sub{margin:0;font-weight:600;color:var(--dim)}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 4px}
+.meta label{flex:1 1 170px;font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--dim)}
+input[type=text],textarea,select{display:block;width:100%;margin-top:4px;padding:10px 12px;border:1px solid var(--glassb);border-radius:10px;background:rgba(24,28,32,.55);color:var(--txt);font:inherit;font-size:16px}
+input[type=text]:focus,textarea:focus,select:focus,button:focus-visible{outline:3px solid var(--hl);outline-offset:1px}
+input.bad{border-color:var(--a2);box-shadow:0 0 0 2px var(--a2)}
+textarea{min-height:120px;resize:vertical}
+.howto{margin:14px 0;padding:14px 16px;font-size:16px}
+.howto ol{margin:6px 0 0;padding-left:22px}
+.scene{margin:14px 0;padding:8px;text-align:center}
+.scene svg{width:100%;height:auto;display:block;border-radius:12px}
+.bar{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;padding:8px 12px;margin:10px 0;font-weight:700;font-size:15px;background:rgba(37,43,49,.92);border:1px solid var(--glassb);border-radius:12px}
+.bar span b{color:var(--hl)}
+.btn{font:inherit;font-size:16px;font-weight:700;padding:11px 18px;border-radius:12px;border:2px solid var(--hl);background:transparent;color:var(--txt);cursor:pointer;min-height:44px}
+.btn:hover{background:rgba(230,171,137,.18)}
+.btn.primary{background:var(--hl);color:#252B31;border-color:var(--hl)}
+.btn.primary:hover{background:#F0C4A8}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.btn.small{padding:8px 14px;font-size:15px;min-height:40px}
+.intro{padding:20px;text-align:center}
+.intro p{margin:.4em 0}
+.lock{margin:12px 0;overflow:hidden}
+.lock>button.lh{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:12px;width:100%;padding:14px 16px;cursor:pointer}
+.lock>button.lh:focus-visible{outline:3px solid var(--hl);outline-offset:-3px}
+.lock.locked>button.lh{cursor:not-allowed;opacity:.55}
+.lk{flex:none;width:44px;height:44px}
+.lk .sh{transition:transform .5s cubic-bezier(.3,1.6,.5,1);transform-origin:center}
+.lock.solved .lk .sh{transform:translateY(-6px) rotate(-30deg);transform-origin:10px 14px}
+.lock.solved .lk .bd{fill:var(--hl)}
+.lt{flex:1}
+.lt small{display:block;font-size:12px;letter-spacing:.12em;font-weight:700;color:var(--hl)}
+.lt strong{font-size:19px}
+.dg{flex:none;min-width:42px;height:42px;border-radius:10px;border:2px solid var(--hl);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;background:rgba(24,28,32,.55)}
+.lb{padding:0 16px 16px;display:none}
+.lock.open .lb{display:block}
+.objline{font-size:14px;color:var(--dim);margin:0 0 10px}
+.card{background:rgba(238,240,241,.1);border-left:6px solid var(--a2);border-radius:10px;padding:12px 14px;margin:8px 0 12px}
+.card h4{margin:0 0 4px;font-size:13px;letter-spacing:.12em;color:var(--hl)}
+.card p{margin:.3em 0}
+.card .src{font-size:13px;color:var(--dim)}
+.prompt{font-weight:700;margin:10px 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0}
+.chip{font:inherit;font-size:16px;padding:10px 14px;border-radius:12px;border:2px solid var(--glassb);background:rgba(24,28,32,.55);color:var(--txt);cursor:pointer;min-height:44px;text-align:left}
+.chip.sel{border-color:var(--hl);background:rgba(230,171,137,.2)}
+.chip .n{display:inline-block;min-width:24px;height:24px;line-height:24px;border-radius:12px;background:var(--hl);color:#252B31;font-weight:800;text-align:center;margin-right:8px}
+.mrow{margin:8px 0}
+.mrow label{font-weight:700;display:block}
+fieldset{border:1px solid var(--glassb);border-radius:10px;margin:8px 0;padding:8px 12px}
+legend{font-weight:700;padding:0 6px}
+.opt{display:flex;align-items:center;gap:10px;padding:6px 0;min-height:40px;cursor:pointer}
+.opt input{width:22px;height:22px;accent-color:#E6AB89;flex:none}
+.cipher{font:700 24px/1.3 "Courier New",monospace;letter-spacing:.14em;background:rgba(24,28,32,.65);padding:12px;border-radius:10px;border:1px dashed var(--hl);word-break:break-word;text-align:center}
+.key{display:grid;grid-template-columns:repeat(13,1fr);gap:2px;margin:10px 0;font:700 14px/1.2 "Courier New",monospace;text-align:center}
+.key div{padding:3px 0;border-radius:4px;background:rgba(238,240,241,.08)}
+.key .c{color:var(--hl)}
+.scr{font:800 30px/1.2 "Courier New",monospace;letter-spacing:.3em;text-align:center;background:rgba(24,28,32,.65);padding:10px;border-radius:10px;border:1px dashed var(--hl)}
+.row{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0;align-items:center}
+.fb{margin:8px 0;padding:10px 12px;border-radius:10px;display:none;font-weight:600}
+.fb.show{display:block}
+.fb.nudge{background:rgba(221,122,64,.18);border:1px solid var(--a2)}
+.fb.good{background:rgba(143,211,168,.16);border:1px solid var(--ok);color:#DDF5E6}
+.hints{margin:6px 0}
+.hint{background:rgba(230,171,137,.14);border:1px dashed var(--hl);border-radius:10px;padding:8px 12px;margin:6px 0;font-size:16px}
+.hint b{color:var(--hl)}
+.exit{margin:16px 0;padding:18px;text-align:center}
+.exit.locked{opacity:.55}
+.exit h2,.esc h2,.debrief h2{margin:.1em 0 .3em}
+.codebox{display:flex;justify-content:center;gap:8px;margin:12px 0}
+.codebox input{width:52px;height:60px;text-align:center;font:800 30px "Courier New",monospace;padding:0;margin:0}
+.esc{margin:16px 0;padding:22px;text-align:center;display:none;border:2px solid var(--hl)}
+.esc.show{display:block}
+.esc .big{overflow-wrap:anywhere;font-size:clamp(30px,9vw,64px);font-weight:900;letter-spacing:.14em;color:var(--hl);text-shadow:0 0 24px rgba(230,171,137,.6);animation:pop .8s cubic-bezier(.3,1.6,.5,1)}
+.esc .time{font-size:26px;font-weight:800}
+.debrief{margin:16px 0;padding:16px}
+.actions{margin:16px 0;padding:16px}
+.status{font-weight:700;margin-bottom:10px}
+.msg{display:none;margin-top:10px;padding:10px 12px;border-radius:10px;background:rgba(143,211,168,.16);border:1px solid var(--ok)}
+.msg.err{background:rgba(221,122,64,.2);border-color:var(--a2)}
+.link{all:unset;cursor:pointer;color:var(--dim);text-decoration:underline;font-size:14px;margin-top:10px;display:inline-block}
+.link:focus-visible{outline:3px solid var(--hl)}
+footer{text-align:center;font-size:12px;letter-spacing:.1em;font-weight:700;color:var(--dim);padding:20px 8px 30px;border-top:1px solid var(--glassb);margin-top:20px}
+.ennote{margin:.4em 0 0;font-size:14px;font-weight:700;color:var(--dim)}
+.exit .ennote{text-align:center}
+.hidden{display:none!important}.lock,.exit,.esc{scroll-margin-top:64px}
+.pop{animation:pop .7s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pop{0%{transform:scale(.2);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes tap{0%,100%{transform:rotate(0)}50%{transform:rotate(9deg)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.shake{animation:shake .35s}
+.wheel{transform-box:view-box;transform-origin:276px 86px}
+.wheel.spin{animation:tap .5s ease-in-out 3}
+.plock .sh{transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
+.plock.open .sh{transform:translateY(-7px)}
+.plock.open .bd{fill:#E6AB89}
+#door{transform-origin:150px 20px;transition:transform 1.4s ease-in-out}
+.escaped #door{transform:scaleX(.1)}
+#glow{opacity:.15;transition:opacity 1.4s}
+.escaped #glow{opacity:1}
+html[dir="rtl"] .chip{text-align:right}
+html[dir="rtl"] .chip .n{margin-right:0;margin-left:8px}
+html[dir="rtl"] .card{border-left:0;border-right:6px solid var(--a2)}
+html[dir="rtl"] .howto ol{padding-left:0;padding-right:22px}
+html[dir="rtl"] .esc,html[dir="rtl"] .exit,html[dir="rtl"] .intro{text-align:center}
+html[dir="rtl"] .cipher,html[dir="rtl"] .scr,html[dir="rtl"] .key{direction:ltr}
+html[dir="rtl"] .scr{letter-spacing:.3em!important}
+html[dir="rtl"] .cipher{letter-spacing:.14em!important}
+html[dir="rtl"] .key{letter-spacing:0!important}
+html[dir="rtl"] .card .src{direction:ltr;text-align:left}
+html[dir="rtl"] .hint,html[dir="rtl"] .fb,html[dir="rtl"] .msg,html[dir="rtl"] .objline{text-align:start}
+html[dir="rtl"] .lock>button.lh{text-align:start}
+html[dir="rtl"] .lb,html[dir="rtl"] .actions{text-align:start}
+html[dir="rtl"] .bar{direction:rtl}
+html[dir="rtl"] .tt{unicode-bidi:plaintext}
+@media(max-width:520px){body{font-size:16px}.chip{width:100%}.key{font-size:12px;gap:1px}.codebox input{width:46px;height:54px}.dg{min-width:38px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{.bar,.actions button{display:none}}
+/*sp-i18n-css*/
+.sp-lang-bar{display:flex;justify-content:flex-end;padding:8px 12px 0;position:relative;z-index:5}
+.sp-lang{display:inline-flex;gap:2px;padding:3px;border-radius:10px;background:rgba(255,255,255,.88);border:1px solid rgba(0,0,0,.18);font-family:system-ui,"Segoe UI",Tahoma,Arial,sans-serif}
+.sp-lang button{border:0;background:transparent;color:#222;font:600 13px/1 system-ui,"Segoe UI",Tahoma,Arial,sans-serif;padding:7px 11px;border-radius:7px;cursor:pointer}
+.sp-lang button[aria-pressed="true"]{background:#222;color:#fff}
+.sp-lang button:focus-visible{outline:3px solid #2a6df4;outline-offset:1px}
+textarea,input,select{unicode-bidi:plaintext}
+html[lang="ar"] body,html[lang="ar"] button,html[lang="ar"] textarea,html[lang="ar"] input,html[lang="ar"] select{font-family:"Segoe UI",Tahoma,"Noto Sans Arabic","Arial",system-ui,sans-serif}
+html[lang="ar"] body{line-height:1.8}
+html[lang="ar"] *{letter-spacing:0!important}
+html[dir="rtl"] textarea,html[dir="rtl"] input{text-align:start}
+@media print{.sp-lang-bar{display:none}}
+/*/sp-i18n-css*/
+</style>
+</head>
+<body>
+<!--sp-bar--><div class="sp-lang-bar"><div class="sp-lang" role="group" aria-label="Language / Idioma / اللغة"><button type="button" data-lang="en" lang="en" aria-pressed="true">English</button><button type="button" data-lang="es" lang="es" aria-pressed="false">Español</button><button type="button" data-lang="ar" lang="ar" aria-pressed="false">العربية</button></div></div><!--/sp-bar-->
+<div class="wrap">
+<header class="hero">
+  <div class="eyebrow">1944-1960</div>
+  <h1>Escape the Projection Booth</h1>
+  <p class="sub">The Cold War and the Affluent Fifties</p>
+  <div class="meta">
+    <label>FIRST NAME *<input id="f_first" type="text" autocomplete="given-name"></label>
+    <label>LAST NAME *<input id="f_last" type="text" autocomplete="family-name"></label>
+    <label>PERIOD *<input id="f_period" type="text" inputmode="numeric" maxlength="12" placeholder="e.g. 3"></label>
+  </div>
+</header>
+
+<div class="howto glass"><b>How to escape:</b>
+<ol>
+<li>Open each lock in order. Read the <b>Clue Card</b>. The answer is in the card.</li>
+<li>Solve the puzzle to open the lock and reveal one digit.</li>
+<li>If you get stuck, press <b>Hint</b>. Hints are free, but your teacher can see how many you used.</li>
+<li>Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.</li>
+</ol></div>
+
+<div class="scene glass" id="scene">
+<svg viewBox="0 0 600 270" role="img" aria-label="A drive-in movie projection booth at night. On the left, a small window shows the movie screen and a row of parked cars, above a table with a film projector and two film reels. On the right, a clock and a strip of film hang above a cabinet with a speaker box on top. The door has a PROJECTION BOOTH sign and five padlocks in a row. Under each padlock is a window for one digit of the exit code.">
+<defs>
+<pattern id="brick" width="40" height="270" patternUnits="userSpaceOnUse"><rect width="40" height="270" fill="#1E2328"/><path d="M0 0V270" stroke="#EEF0F1" stroke-opacity=".12" fill="none"/><path d="M20 0V270" stroke="#EEF0F1" stroke-opacity=".05" fill="none"/></pattern>
+<radialGradient id="glowg" cx="50%" cy="50%" r="60%"><stop offset="0" stop-color="#EEF0F1"/><stop offset="1" stop-color="#E6AB89"/></radialGradient>
+</defs>
+<rect width="600" height="270" fill="url(#brick)"/>
+<rect y="236" width="600" height="34" fill="#20262B"/>
+<g stroke="#C9CFD3" stroke-opacity=".35" stroke-width="2"><path d="M0 248H600M0 260H600"/><path d="M60 236V248M180 236V248M300 236V248M420 236V248M540 236V248M120 248V260M240 248V260M360 248V260M480 248V260M600 248V260"/></g>
+<g stroke="#C9CFD3" stroke-opacity=".5" stroke-width="2" fill="none"><path d="M0 14Q75 30 150 18"/><path d="M450 18Q525 30 600 14"/></g>
+<g><rect x="8" y="30" width="136" height="90" rx="4" fill="#3E4751" stroke="#E6AB89" stroke-opacity=".6" stroke-width="3"/>
+<rect x="15" y="37" width="122" height="76" fill="#181C20"/>
+<rect x="38" y="44" width="76" height="38" fill="#EEF0F1" fill-opacity=".9"/>
+<path d="M60 52H92M60 60H100M60 68H84" stroke="#DD7A40" stroke-width="3" stroke-linecap="round"/>
+<g fill="#E6AB89" fill-opacity=".85"><circle cx="24" cy="48" r="1.6"/><circle cx="126" cy="44" r="1.6"/><circle cx="128" cy="70" r="1.6"/><circle cx="26" cy="72" r="1.6"/><circle cx="120" cy="56" r="1.6"/></g>
+<g fill="#C9CFD3" fill-opacity=".8"><rect x="24" y="94" width="26" height="9" rx="4"/><rect x="60" y="94" width="26" height="9" rx="4"/><rect x="96" y="94" width="26" height="9" rx="4"/></g>
+<g fill="#E6AB89"><circle cx="34" cy="103" r="2.5"/><circle cx="42" cy="103" r="2.5"/><circle cx="70" cy="103" r="2.5"/><circle cx="78" cy="103" r="2.5"/><circle cx="106" cy="103" r="2.5"/><circle cx="114" cy="103" r="2.5"/></g></g>
+<g><rect x="14" y="200" width="124" height="10" rx="3" fill="#E6AB89"/><path d="M24 210V236M128 210V236" stroke="#E6AB89" stroke-width="6"/>
+<rect x="44" y="170" width="70" height="30" rx="5" fill="#3E4751" stroke="#EEF0F1" stroke-opacity=".7" stroke-width="2"/>
+<circle cx="62" cy="154" r="20" fill="#181C20" stroke="#E6AB89" stroke-width="3"/><circle cx="62" cy="154" r="6" fill="#E6AB89"/>
+<g fill="#EEF0F1" fill-opacity=".6"><circle cx="62" cy="142" r="3"/><circle cx="62" cy="166" r="3"/><circle cx="50" cy="154" r="3"/><circle cx="74" cy="154" r="3"/></g>
+<circle cx="102" cy="154" r="20" fill="#181C20" stroke="#E6AB89" stroke-width="3"/><circle cx="102" cy="154" r="6" fill="#E6AB89"/>
+<g fill="#EEF0F1" fill-opacity=".6"><circle cx="102" cy="142" r="3"/><circle cx="102" cy="166" r="3"/><circle cx="90" cy="154" r="3"/><circle cx="114" cy="154" r="3"/></g>
+<path d="M62 174Q82 184 102 174" fill="none" stroke="#DD7A40" stroke-width="2"/>
+<rect x="114" y="178" width="22" height="14" rx="3" fill="#EEF0F1" fill-opacity=".85"/><circle cx="136" cy="185" r="6" fill="#DD7A40"/></g>
+<g fill="#EEF0F1" fill-opacity=".88" stroke="#252B31" stroke-opacity=".5"><rect x="6" y="226" width="26" height="10" rx="5"/><rect x="8" y="217" width="24" height="9" rx="4"/></g>
+<g><circle cx="500" cy="62" r="22" fill="#181C20" stroke="#E6AB89" stroke-width="3"/><circle cx="500" cy="62" r="16" fill="#EEF0F1" fill-opacity=".1"/>
+<path d="M500 48V52M500 72V76M486 62H490M510 62H514" stroke="#EEF0F1" stroke-width="2"/><path d="M500 62V52M500 62L508 66" stroke="#DD7A40" stroke-width="3" stroke-linecap="round"/><circle cx="500" cy="62" r="2.5" fill="#E6AB89"/></g>
+<g><rect x="540" y="36" width="40" height="76" fill="#181C20" stroke="#E6AB89" stroke-width="2"/>
+<g fill="#EEF0F1" fill-opacity=".85"><rect x="544" y="42" width="5" height="7"/><rect x="544" y="54" width="5" height="7"/><rect x="544" y="66" width="5" height="7"/><rect x="544" y="78" width="5" height="7"/><rect x="544" y="90" width="5" height="7"/><rect x="544" y="102" width="5" height="7"/><rect x="571" y="42" width="5" height="7"/><rect x="571" y="54" width="5" height="7"/><rect x="571" y="66" width="5" height="7"/><rect x="571" y="78" width="5" height="7"/><rect x="571" y="90" width="5" height="7"/><rect x="571" y="102" width="5" height="7"/></g>
+<rect x="553" y="42" width="14" height="18" fill="#DD7A40" fill-opacity=".8"/><rect x="553" y="64" width="14" height="18" fill="#E6AB89" fill-opacity=".6"/><rect x="553" y="86" width="14" height="18" fill="#3E4751"/></g>
+<g><rect x="470" y="150" width="98" height="86" rx="4" fill="#1E2328" stroke="#E6AB89" stroke-width="3"/><path d="M470 178H568M470 207H568" stroke="#E6AB89" stroke-opacity=".6" stroke-width="2"/>
+<rect x="508" y="160" width="22" height="6" rx="2" fill="#DD7A40"/><rect x="508" y="189" width="22" height="6" rx="2" fill="#DD7A40"/><rect x="508" y="218" width="22" height="6" rx="2" fill="#DD7A40"/>
+<rect x="484" y="108" width="54" height="42" rx="5" fill="#3E4751" stroke="#E6AB89" stroke-width="2"/>
+<circle cx="511" cy="129" r="14" fill="#181C20" stroke="#EEF0F1" stroke-opacity=".7" stroke-width="2"/><path d="M501 123H521M501 129H521M501 135H521" stroke="#E6AB89" stroke-opacity=".7" stroke-width="2"/>
+<path d="M511 108V96" stroke="#E6AB89" stroke-width="3"/><circle cx="530" cy="143" r="2.5" fill="#DD7A40"/>
+<g fill="#EEF0F1" fill-opacity=".88" stroke="#252B31" stroke-opacity=".5"><rect x="548" y="138" width="18" height="12" rx="6"/><rect x="549" y="128" width="16" height="10" rx="5"/></g></g>
+<rect id="glow" x="150" y="20" width="300" height="216" rx="10" fill="url(#glowg)"/>
+<g id="door">
+<rect x="150" y="20" width="300" height="216" rx="10" fill="#3E4751" stroke="#E6AB89" stroke-width="3"/>
+<circle cx="164" cy="34" r="4" fill="#E6AB89"/><circle cx="436" cy="34" r="4" fill="#E6AB89"/><circle cx="164" cy="222" r="4" fill="#E6AB89"/><circle cx="436" cy="222" r="4" fill="#E6AB89"/>
+<rect x="210" y="30" width="180" height="26" rx="4" fill="#181C20" stroke="#EEF0F1" stroke-opacity=".7"/>
+<text x="300" y="48" text-anchor="middle" font-size="13" letter-spacing="3" font-weight="700" fill="#EEF0F1">PROJECTION BOOTH</text>
+<rect x="262" y="90" width="76" height="8" rx="3" fill="#252B31"/>
+<circle cx="276" cy="86" r="4" fill="#EEF0F1"/>
+<g class="wheel" id="wheel"><path d="M276 86L328 80" stroke="#EEF0F1" stroke-width="4" stroke-linecap="round"/><circle cx="330" cy="80" r="6" fill="#DD7A40"/></g>
+<rect x="170" y="106" width="260" height="8" rx="3" fill="#252B31"/>
+<g id="plocks"></g>
+<text x="300" y="228" text-anchor="middle" direction="ltr" font-size="11" letter-spacing="3" font-weight="700" fill="#EEF0F1">1944 - 1960</text>
+</g>
+</svg>
+</div>
+
+<div class="intro glass" id="intro">
+  <h2 style="margin:.1em 0">You are locked in the projection booth.</h2>
+  <p>The drive-in movie theater closed for the night, and the manager locked the projection booth. Film reels, a projector, and a speaker box from the 1950s sit in the room. The door has <b>5 locks</b>. Each lock matches one big idea from Lesson 17. Solve them all to find the <b>5-digit exit code</b>.</p>
+  <p>The clock starts when you press the button. Most students finish in about 20 minutes.</p>
+  <p><button class="btn primary" id="startBtn">Enter the Projection Booth</button></p>
+</div>
+
+<div id="game" class="hidden">
+  <div class="bar" id="bar" aria-live="off"><span><span>Time</span> <b id="tm">00:00</b></span><span><span>Locks</span> <b id="lc">0</b>/5</span><span><span>Hints used</span> <b id="hc">0</b></span></div>
+  <div id="locks"></div>
+
+  <section class="exit glass locked" id="exit" aria-label="Exit door">
+    <div class="eyebrow">THE EXIT DOOR</div>
+    <h2>Type the exit code</h2>
+    <p id="exitNote">Open all 5 locks first. The digits go in order: Lock 1 first.</p>
+    <div class="codebox" id="codebox" dir="ltr"></div>
+    <p class="ennote">Type the answer in English. Use the digits 0-9.</p>
+    <div class="row" style="justify-content:center"><button class="btn primary" id="codeBtn" disabled>Open the Door</button></div>
+    <div class="fb" id="codefb"></div>
+  </section>
+
+  <section class="esc glass" id="esc" aria-live="polite">
+    <div class="big">ESCAPED</div>
+    <p class="time"><span>Your time:</span> <span id="escTime">00:00</span></p>
+    <p id="escSum"></p>
+    <p>One last step: write your Debrief below.</p>
+  </section>
+
+  <section class="debrief glass" id="debrief">
+    <div class="eyebrow">DEBRIEF</div>
+    <h2>Which lock was hardest, and what did you learn that you did not know before?</h2>
+    <p style="margin:.2em 0;color:var(--dim)">Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.</p>
+    <textarea id="debriefText" aria-label="Debrief" placeholder="Type your answer here..."></textarea>
+  </section>
+
+  <section class="actions glass" id="actions">
+    <div class="status" id="status"></div>
+    <div class="row">
+      <button class="btn" id="saveBtn">Save Progress</button>
+      <button class="btn" id="loadBtn">Load Progress</button>
+      <input type="file" id="loadFile" accept=".json,application/json" hidden>
+      <button class="btn primary" id="finishBtn">Finished — Download File to Submit</button>
+    </div>
+    <div class="msg" id="msg" role="status"></div>
+    <button class="link" id="reset">Clear all my work and start over</button>
+  </section>
+</div>
+
+<div class="actions glass hidden" id="loadOnly" style="margin-top:12px"><button class="btn" id="loadBtn0">Load Progress</button> <span style="color:var(--dim)">Have a saved file? Load it to continue.</span></div>
+
+<footer>UNIT 7 · THE AMERICAN AGE | CPUSH | DANIEL GARZA, M.A.</footer>
+</div>
+
+<script type="application/json" id="er-data">{"salt": "L17esc:", "exitHash": "f27a620ec01f69259732", "locks": [{"n": 1, "key": "lock1_film_reels", "title": "The Film Reels", "obj": "1", "objLabel": "CORE OBJECTIVES 1 AND 2", "objText": "Core Objectives 1 and 2: Explain why and how the Cold War between the United States and the Soviet Union developed after World War II. Analyze the impact of American efforts to contain the Soviet Union and the growth of global communism during Truman’s presidency.", "type": "match", "card": "<p>The Cold War was a fifty-year struggle between the United States and the Soviet Union that never became a shooting war. It grew out of a clash between democratic capitalism and authoritarian communism. At the Yalta Conference, Stalin promised free elections in Eastern Europe. Instead, the Soviets set up “puppet” governments there, and Winston Churchill warned that an “iron curtain” had been drawn down.<\/p><p>The United States answered with a policy of containment. In 1947, President Truman announced the Truman Doctrine: the United States would “support free peoples” resisting takeover, starting with $400 million for Greece and Turkey. The Marshall Plan then gave $13 billion to sixteen European nations to rebuild. In 1948, the Soviets blockaded West Berlin, and the United States and its allies flew in supplies for 321 days. In April 1949, twelve nations signed the North Atlantic Treaty and formed NATO.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 25, “Truman and the Cold War” (begins p. 1114) and “The Containment Policy” (begins p. 1117).", "prompt": "Match each term to the best description. Use the Clue Card.", "terms": [{"id": "na", "label": "NATO"}, {"id": "td", "label": "Truman Doctrine"}, {"id": "ic", "label": "Iron curtain"}, {"id": "mp", "label": "Marshall Plan"}], "descs": [{"id": "a", "label": "Churchill’s name for the wall of Soviet control that shut off Eastern Europe"}, {"id": "c", "label": "A program that gave $13 billion to sixteen European nations to rebuild their economies"}, {"id": "b", "label": "A 1947 promise to support free peoples resisting takeover, starting with $400 million for Greece and Turkey"}, {"id": "d", "label": "A 1949 alliance of twelve nations in which an attack on one is an attack on all"}], "hints": ["Two terms are about money and promises to other countries (Truman Doctrine, Marshall Plan). One is a phrase for a divided Europe (Iron curtain). One is an alliance (NATO).", "The iron curtain was Churchill’s phrase for Soviet control of Eastern Europe. The Truman Doctrine began with $400 million for Greece and Turkey. The Marshall Plan gave $13 billion to rebuild Europe. NATO is the 1949 alliance."], "nudge": "Not quite. Check each match against the Clue Card. Which one are you least sure about?", "entries": ["1dc43e53aa3f3a6dbaf58"], "id": "lock1_film_reels"}, {"n": 2, "key": "lock2_projector", "title": "The Projector", "obj": "2", "objLabel": "CORE OBJECTIVES 3 AND 4", "objText": "Core Objectives 3 and 4: Describe Truman’s efforts to expand the New Deal, and evaluate the effectiveness of his own Fair Deal agenda. Assess the major international developments during the period 1949–1950, including the outbreak of the Korean War, and explain how U.S. foreign policy changed as a result.", "type": "order", "card": "<p>Truman wanted to keep and expand the New Deal, but Republicans and conservative southern Democrats stood in his way. In early 1947, Congress passed the Taft-Hartley Labor Act over his veto to limit the power of unions. In April 1947, Jackie Robinson joined the Brooklyn Dodgers as the first African American in modern Major League baseball. In July 1948, Truman ordered an end to racial segregation in the armed forces. After his surprise win in the 1948 election, he offered the Fair Deal, but Congress rejected most of it, including national health insurance.<\/p><p>The Cold War also grew hotter. In 1949, the Communists won China’s civil war and the Soviets set off a nuclear bomb. In 1950, the report NSC-68 called for a huge military buildup. On June 25, 1950, North Korean troops invaded South Korea, and Truman fought the war through the United Nations without a declaration of war from Congress. In April 1951, he removed General MacArthur, who had publicly criticized him. An armistice was signed in July 1953, and Korea stayed divided.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 25, “Expanding the New Deal” (begins p. 1124) and “The Cold War Heats Up” (begins p. 1135; Sacking a Hero and A Cease-Fire, p. 1140).", "prompt": "Tap the four events in the order they happened. Tap an event again to take it back.", "items": [{"id": "c", "label": "North Korean troops invade South Korea"}, {"id": "a", "label": "Congress passes the Taft-Hartley Labor Act over Truman’s veto"}, {"id": "d", "label": "Truman removes General MacArthur"}, {"id": "b", "label": "Truman orders an end to racial segregation in the armed forces"}], "hints": ["Look for the dates in the Clue Card: early 1947, July 1948, June 25, 1950, and April 1951. Each event has its own date.", "The order is Taft-Hartley (1947), the order ending segregation in the armed forces (1948), the invasion of South Korea (1950), then MacArthur removed (1951)."], "nudge": "Not quite. Re-read the Clue Card and match each event to its date.", "entries": ["80ba73b45f75686fd5a60"], "id": "lock2_projector"}, {"n": 3, "key": "lock3_marquee", "title": "The Marquee Sign", "obj": "3", "objLabel": "CORE OBJECTIVES 5 AND 6", "objText": "Core Objectives 5 and 6: Examine the emergence of the Red Scare and explain its impact on American politics and society. Explain President Dwight Eisenhower’s political philosophy and domestic priorities.", "type": "fill", "card": "<p>After World War II, many Americans feared that Communists were hiding in the United States. In 1947, Truman ordered background checks of federal workers. The House Committee on Un-American Activities (HUAC) investigated Hollywood, and the Hollywood Ten, who refused to answer questions, were jailed and blacklisted from the film industry. In 1950, Senator Joseph McCarthy claimed to have a list of Communists in the State Department, but he never gave it out. He did not find even one Communist agent in the federal government, yet his accusations ruined lives and chilled free speech. This came to be called McCarthyism. A drive to remove gay people from federal jobs went along with this crusade. Norton says the Red Scare violated the civil liberties of innocent people. On December 2, 1954, the Senate voted 67–22 to condemn McCarthy.<\/p><p>President Eisenhower promised “moderate Republicanism.” He wanted a balanced budget and a smaller role for the federal government. He called his plan “dynamic conservatism”: “conservative when it comes to money and liberal when it comes to human beings.” He kept the New Deal, extended Social Security to millions more workers, and signed the Federal-Aid Highway Act (1956), which built the interstate highways.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 25, “Another Red Scare” (begins p. 1142) and Ch. 26, “Moderate Republicanism: The Eisenhower Years” (begins p. 1156; Dynamic Conservatism, p. 1158; Highways, p. 1159; Fall of McCarthy, p. 1162).", "prompt": "Fill in the blank using the Clue Card.", "sentence": "McCarthy’s charges had no proof, yet they ruined many lives and chilled free speech. This era of fear became known by one word: “________.”", "scramble": "Y  A  M  S  M  C  C  T  R  H  I", "hints": ["Read the Clue Card sentence that begins “This came to be called.” The missing word is the name for McCarthy’s campaign of unproven charges.", "The word starts with M and has 11 letters. It is the senator’s last name plus “ism.”"], "nudge": "Not quite. Re-read the Clue Card. Use the scrambled letters to check your spelling.", "entries": ["000cab0291a399c4f14a6", "004bb745e8f2a58079066", "00d1073f08a41b0fef9a2", "01bfbd00c124df92bc355", "01d7b804473dbad53c867", "01fe8401d7a2f4da37463", "02a9203023e28d63e2cd4", "02da4d428db828260a0d7", "02ec885655116180785f9", "0314934c5473f56b73f40", "036d4a616ba326e972029", "04252964231a6e0d1aff6", "044b8df9cb58eafd41699", "04f6e4340383180d62223", "053ef74c4d7c8c21c88d7", "056d378b603665975c414", "05b68b3a1f2977dd9a9e8", "05b9f1cfd4f613e59f798", "0636a9c9e2a5371837889", "071be9deb11be332e6280", "0831333dd53d1ce66ae85", "0833910aac9402a11c304", "08ad2fa14487372c03877", "090762deff9518acb1601", "094c8eb029e2ac59d4d32", "0a3c10b36bebfc5227773", "0bd6b937cec26b3be1791", "0bd93ed60467640ee61a8", "0c24c266dbf45351a9176", "0c4826d277142e0331c06", "0ce912d4416c4fba9b113", "0d3cf6797c1ed1d208fe0", "0d97b9ff284f137c25ac3", "0dbac871dba76d02b5fe7", "0ddb96f5642583faa1294", "0ed69087b6115320ec3a7", "0f7e34a73bcb74704dc43", "0fd9b79b07f12f6151c73", "1071819c0685f8bdf7f11", "11351731c0991f4b8dcd0", "12b8fb243488b5b3d35a5", "1303c357657c8c9710ef9", "130775756c6babad57378", "135666e15504c648edea9", "136af48546aaebf107269", "147dc05fde5ec3337a0a0", "1492d1ea2825be7fe8506", "149ff02eb11b6a165c690", "14aeab866213e42204673", "157b5bee84297f878fa24", "1583754ed6594c2abb186", "15e1891dfb0f186179139", "15f02b7391fd95cb3b9d3", "1644bdb4e487c2e155be5", "1688dc3683df831b35465", "17a0fc653947f088400f2", "1800b361373855fa28082", "18985080f8cb1e4a70384", "18f940818d7046e33bc72", "192e30ea6653dd5c9c714", "1a771fe07e1488dddbcc3", "1aa8d8a4951169c4ce614", "1b0f612b7a7872ddb2d84", "1baca3d8a4ff1b433ff27", "1e07b4efe1b4f3e297163", "1e374f73732cd73090b20", "1e93d1af4ba1573955576", "1eab9dca0fc25c296d167", "1ef3c1f66033f26a91639", "1fee910a70f4e4afc7502", "20259872c3f6d308ec289", "205091ae46b8314630306", "20dbf69fe2e78b65f3ed1", "20f1fdc13f792e36cc705", "21b8ea041bb710eebca64", "22035be1e8cfd0c3ac536", "2214e73144e6944950868", "224fb88f9e180b9588d93", "2288c2c809062fd98c8f7", "22a0cacb374c3f7e9fc93", "2320ce0a1581181aebf50", "23683fc9fade8542893a1", "240232ba3b2dcffd92b12", "2433afc20bf1f4a55ebd6", "25ab4916490748b79e9f4", "25bf7399d2b66771db2d3", "2613e5c526a2a36bb9db2", "26fd92e4c31ae74c1ed81", "26fe7fafd255c17092ae1", "28686712d8ebf021af293", "293484e545043b398eff0", "2956499853a1b3951ff88", "2985021b0a36834403b46", "2ad17ffc87369b4d8a769", "2b6e955bd4b34fa0a5196", "2b9e74a8afebf6137ea00", "2c30107b0d463b2171498", "2c5a47ecf1e383e4598f0", "2d70441a278a4bd091231", "2d8f4193cc0ecc3d909a8", "2e3205fa6ff48e10c1b64", "2ee00571235dbe6126a89", "2ef3ca9844a5a3a96f662", "2efead09a84643b070d93", "2eff98cea9de753c8c756", "2f251dd2e6daae27dcca1", "2f38fec682bf4d2188e13", "2fc44ded1155a95712882", "2fdd4600ef1c7c754b244", "308cb39cfae1aa7013f30", "313c8e0286335fae02e96", "317a6e416bb471a91ec66", "31a2318c89c1c32c9ed53", "31dce135e0f882e1e6ca9", "322453a8e75eb0a452b79", "32483ceab04a1edd7a0a8", "32c086168c6f4261798d9", "33555fb41c1c2a0a639c2", "3370edcf5588a54f4a714", "33e68ff482bbeb7fdbee2", "34270e3031adf5f65aeb3", "3428d04320d09e26ecd92", "343e8aa8c04c06dcd2b67", "34c91fcc504039bef1683", "353a1a92acd9e5d547556", "35dbd9b4c253b8b02d4e0", "374cfe24ccbbd3d2daf80", "3777f149faf358c4eef37", "384229f7340020321d1a9", "38a58b6a084e7737a5c53", "395a936daff037d3ce6f5", "39bedf6650a4f2ac368d3", "39ff823f65214c6104872", "3a038bdc9fca1bde85c30", "3a7d9d0cff16db7df2b15", "3b4786285988aa20a9e67", "3b49b8bd6e7373c69f9f0", "3b7559bfd8c8e0bf58fb3", "3b9df3cc9474c0faa66f3", "3bf09f5ce306039a65152", "3c50008cff056bc1559d7", "3c7edccead8dcc570beb5", "3d299480513c45b5e8e96", "3d5d09f7a9fd1e633dd75", "3d8b754aabd3cb35f5cc6", "3df5aa2a41b54230c6fa6", "3dfbe243e548244395d12", "3e2ce0939ced080faf719", "3e7fb88beb092146ff3a3", "3ec8d5e3a58146803ee29", "3eca989384479e6f49197", "3fa77b3c20baba6540493", "3fac46206ae2c90662a05", "40930cafa5d2f22e780f8", "4109f841c334106af4797", "410e3ad3e481ebc821a51", "414106fa8ee5e97a43762", "414b878745444af1f1605", "418e5eea0136f78893286", "41a1df50758b678e3afa4", "41dda4362d488f324b361", "428ae7677112c0ce23d71", "43d2e59fb6a1afa089ec1", "445081c80afad50293108", "44897e8757cb7ce58ea19", "44b45a39db9803b064e44", "454ccf47d0b25cafd3509", "45cbfb6b77a7a33c870e3", "45fcfef3d7c78554625a8", "46995067aa0675f14fd90", "46a7de156b02d8ec00825", "46d054de094ecfc09ff03", "46f109b06af29ec7dba92", "47c77c4440fb0e8f8f910", "4831f46fbc04a205f4ef4", "48578874fecfbdbf584a3", "48b66d80db4a43afd5830", "48d687d260ca7741728f8", "4918400d63f235f88cbf7", "4b853205c7646f68c8177", "4b9a0aa31e869fe511044", "4c39b6ed8e784c30c8eb2", "4c9781e7700f7f73905a8", "4d09c958eeac535790a60", "4d1d9562f735d4722a9c6", "4d669d6ac4058bedf4ad3", "4d7bbaaac2fbd65635d02", "4d8dccf5e9b44972940b9", "4dcfd783c8997cd98b606", "4ebbbf24309a99991f642", "4fc2012b48958251deec8", "50386a5a353f51f79da33", "504aace1ed06af7b2f595", "50e015a49915bc88a6109", "50fc3e2457374393062e5", "50ffa3129cb3e4d56a5a3", "5106093d614350bc3fc23", "513aa394138bb7693d812", "515b6adbd08f60fdcde07", "525e9d19239f64ca2f3f5", "52cc35bccd39e6ddbe2d0", "52e6414f40d9d42a005e7", "53bccbdfe655a02f758b6", "541f90476eb9f3827a610", "542434ad17cf99c9de9a3", "54b14820abd44e9d0bb44", "55b9fdfc5b6b54f83bc31", "55f030eed7c3a888bc248", "5611b244c38e933ae22d0", "5629cd8559b49b46361f6", "56b4670784dfb495c7a09", "57e1d47a2b067a11cc564", "57e53f6b002f19f56a8f8", "59a19fdb06d36e579e878", "5a2501c1c710d23d3e602", "5a50fa27783dff3756c64", "5a7f8f89192bcf7a8c961", "5a8c3b25408591caefd88", "5b6a0d7451497707289e1", "5c1b9670b42588c9e4944", "5ca9ad8dd1fd1bd9920f1", "5cd6fd073c7484d7a20a1", "5d584a0e05f2476491c34", "5e1deb982c6a07421a3e3", "5e2191783df12670ffca8", "5e23713ef5235d7587dd1", "5e271659563a4f0172333", "5e2eaa3f3297c034bbef7", "5e5bdf422498380c33520", "5e624fc68c3618600b2b3", "5f80cda965f29d1d216c6", "606eaca5414a52d27d021", "607341d32a660015bab38", "60ba5b53cf56660f92f78", "60fac71e2cc49e2735594", "615640ff3052e4c5d16b8", "64180050134e4fdce6f74", "643c3697c1a8746f600b8", "6440ca668136c0a0c4887", "64f0751054f6d2ef36c32", "65ecdc4c6110e92626aa1", "661e4af88b1d544447640", "6866bf4b99b8baca66fc3", "68a541c47ffd8d02f87f3", "68c63a18102f59d33c1f4", "6978c6fcb48c5adff0947", "6981d5bbbf137fb68fa61", "6998dbbdbfca0e3d458b3", "6b241075ce887fb4149d3", "6bc425bc00d58f7553627", "6c05b0539f029db9850c3", "6cf0ddb26eaccae58a015", "6d0caf6f3494a1a65e850", "6d7e98e9c676118fd2327", "6dbd59e53909878730802", "6ec1ef7a8de5fc563a4a0", "6f00f813824e77fd73584", "7046c49c457060a1dd1a3", "70cd8c3538433c9dab7e3", "70f0c4c1dc2c739f4e941", "70fe5ef13062899f6a090", "717a9a8e4759650066bd0", "71c38433ee8004ac5b2f5", "7259cea6fc8f70b5bcea1", "729346845b14ec7a34a98", "73cd29a8ee37f89385933", "73ff8fe63744000241ff7", "74a5c35152e356c1f80a1", "757f9fb255f76ee8ab8c7", "758723dfb0e4c74afa0e5", "7688a31e5a4b688eca106", "776ab1e01c1a80a281006", "77b8c17006312fe184cd0", "781cdcde27822e3f0cf48", "781ce34b4f2cdb9929e74", "794b3de47718ee71fb350", "79e6093abaae9e8047f20", "7a1585c2e5a54a5231480", "7a67857a4577f9b671730", "7a8484199a67eefc73a78", "7af8a9774f5de695072b3", "7af972bfbe0509cc97e20", "7ca969712e58672b057e7", "7cb0d78b3cac0ba494824", "7d580b3d2cafbd9f55fd2", "7db4de00b28d41ebce318", "7e51d52b27739a47196a3", "7f21876a8c5bd0f8fdae5", "8005ddc62dd87c1e7e308", "801ef13ffb9578e589bd9", "80331c67add09443bf316", "80404f32c72e7c12b7dd3", "80bb4bae6323d2aa95108", "80c774d4d7c94b8f422a6", "80d0acde0952764ca5e78", "8100d5f640327b5c3a1c7", "8127e9c2b66613bca7493", "815209ce752bbfa067ed4", "836dc7408f7cd102bd116", "83a2e8a79457309a6b5a2", "84380ec2913f75293ed49", "8453f1a5f189c18c77f58", "849810d17b8d9ba327e58", "8532b547cd4aab5beddc2", "85993717625dadfe42998", "85e954773d1f3a3804b12", "88267e10b6a4eb9912367", "8870a383dfb7e924fedb4", "8a58ef0760c3cae0c6e96", "8aa62e26e06f15313eab5", "8ac6783d61b55b1f6b734", "8b94bba71118918981849", "8b95408b7660834b257f7", "8bf0cee60192cc0c30136", "8d2bc133d4e03d35f85d0", "8d7c64aa2bc1af0832194", "8d83976fc7d0dda248795", "8ddbe5145498b71ea5bd2", "8e9b966554c44429a3627", "8faf8f639f2ef1ccd4c12", "9028d0b3cd97218410524", "9030289147eaf0d55e975", "914c86d5d007fc986a827", "91766c823394a03e2af45", "927c5da599fef897b8d40", "92f7d7d29f0d9800c51c3", "9315be46f92ff27e8efd7", "93410c71f0b043b477663", "948c5121b047a590e5277", "9496d0275cbc2404df5e6", "95d171f890eb61dc45804", "95d90a1f2ecfb8f8171e6", "95f0cf4079d9be2473449", "9668439d522c580f97f78", "97dcd5a826ef9af9d7437", "97f51012c7de50d963667", "985009163fc2a88a39954", "987d2c7fd29de6a0c1cf4", "98be99f7e04475df647b6", "99052e9fbdcedb1296fb5", "99435e3d0803538e15482", "998ed68ded0805c89ee09", "99e402393cdb983d928e6", "9a4effb204afdcb906849", "9a5776bfe165ea2a655c2", "9a586cda702cc56b64880", "9aab948340907e55783f5", "9af2279fd79a7bac83af4", "9aff6bff2179898ad6c78", "9b4b84757ec28541fbc91", "9b829752b6e085f0e2e59", "9c42ec2f3fe074361c190", "9c692e500aac13d4b0330", "9ca3d49474d20a8ae3b77", "9cfbef72070eb7d616dd5", "9d50fbf5de8f05119e167", "9dde474847f717666d461", "9ebf28a511d77282c6430", "9f01452004ffc0f32c061", "9f34acb84fb9f4ec4e168", "a069614b0dfce170b9950", "a095f6c5d4f9a14069e52", "a09f9ab590c2c28d78679", "a0ded411ba8b42e862537", "a126da1f069f411107573", "a177c371e2ac5d6a3cd88", "a1a13f281b5fd392de1a9", "a1d8041d94d2426633344", "a28a07d0cf4ea562a8a71", "a2a74df0366fe4c8d99f8", "a2eb256b4647051d854c1", "a34b1e7b281cb4529cf28", "a49f1934c0cdc8776f161", "a5319072458199c114753", "a5379ceb49cd690494792", "a54c6c4f261a050494e14", "a58b271790e260171d1a5", "a61505821e6393bf8bbd7", "a636ff99d91c2d4252ff2", "a692b507880c2a2cfe551", "a6e30bbcb594d582dc502", "a7103b246e25b09335cd8", "a7a251bd525baf1c604e5", "a8d156aad7f8c9075b999", "a9f591f188436e0764a86", "aa29df5b4d0b695e846b0", "aa3bdea4e071d1fd76955", "aa6f42f66e5439489f146", "aa97702b5583ffeae19d1", "aad9a6058428a10e7aed0", "abaae12dd5e5075758072", "ac5e3f9428c935e615b58", "acba37e3ef63d77cb2ee3", "acbb0dded3a58059177a0", "ad0f45645e5b4fcad0fb3", "ad3e3dcc59f9345f0ad23", "ae02036ebe98e2ce43888", "ae36430784d21bfc902e8", "ae70f0bc5c61102019717", "b0e185b4a17c0d9c56fc2", "b0eb48a3805e339d0cc24", "b13a40db25a246e3cb1d4", "b19c7a3cbef6d529a09b4", "b1a3899b8e38ab0163ac0", "b1dd33673be0250c1efe5", "b1df606d8c692b7db9895", "b206244dcc91c6947fbd8", "b282b9faa2e8676436167", "b47cc23e65fe283aeb8c7", "b4aa01fe2b15a1cb53ae5", "b537034d18133ffa148d7", "b54aacadda34c4efee855", "b56c1d4a0148fc11fda86", "b5b1fb567cedb64d67f57", "b5cfb39e62b95996952b4", "b5fb0ce43dfdae7f6e4d8", "b6639a01cd94a22a07c83", "b6d01ad00b21df99594f9", "b71ba2f708e83f9f68759", "b75671def64dfef757da7", "b75bf6104267c44c231b1", "b76103246853b039f3a27", "b7c2ee8556b1141cdf120", "b83ce498940e7f61ae8f6", "b8ac4a88e3b5f4a7537f8", "b8ead1b38c26bef32d198", "b911d4f14c0e3498393f5", "b91a4fab6f8bc4e1d7623", "b97c1a17be6eea56ddb98", "ba411f6a0f5aa5da48a15", "ba426031d6de924619fa5", "ba910bd0b3cc9faeb5518", "ba91c10f1a0829c11d100", "ba97e8324e71c02574559", "baf9481d53390be373be6", "bc35ee1c12c6a445b1712", "bc4c355767f7d63fb21a1", "bc4eb90c9f6d876303d66", "bc6235071044dad8beb26", "bd80fcde8fe9d79556bf0", "be7429378c7444c7c07e5", "bebc657037eb48426ced3", "bebe041be772adf7ca3d3", "bee456837138ed0df5804", "bf0e863e77b659a4a7a60", "c060ee5d27052f1336c79", "c0e91c1b366245ce16c60", "c185b055ec1503a130f62", "c1a13b7c68c4eaabe0cf3", "c1c595b812c2d86818526", "c223fb73a6923934986e5", "c23506e33797ae1f3a0e7", "c2b1a434647421f81e738", "c358d9a4a1fdd10bf1db9", "c42b556aa27b4c5003983", "c455e169ae10e2ab70985", "c517db448a22263d29d23", "c5cb89fdfcf3cecd8cf37", "c5e62c5ffec978fb33564", "c5f15e9bf073b1e8ece18", "c6042b013a40911184cf9", "c6337fe38523398b53701", "c749eb5fb327ad780cf46", "c77fdd92ec9a70df8ab69", "c7a54f9e554a4fdcca167", "c7ad271706bf3eb17ab28", "c80aa5d3db85351a15837", "c81db34d7bc70a83d1265", "c82e0e6b2996311ca3ee1", "c8350d0d9c5e1d0293a81", "c8af6522a762207112ca1", "c940116648cec89bfeea7", "ca3941710677109371673", "ca9256b1dc28f68c9d0e9", "cae6889396da94d8e6a17", "cc69210f1752d8b0beb60", "cd7ce1ca42f52040fe987", "cdb0fd046a4cbc855a705", "ce128668857de31ff0539", "ce3c50ceae52af2f78550", "ce59d513199594688f052", "cf5562bf786e66ebc36a8", "cf66b1612f6827e5b4e11", "cfa4b476bc1bce5c4bf36", "d01bbf4c7183721d8bcb7", "d0276b43e7995e61fef67", "d091921b1e5fac1644872", "d099ae10fbe8e4b090a40", "d121cd266cae2864054c0", "d126ac09df4f6726d4556", "d18992e7bebe860745e65", "d1f688fb4d65470169aa0", "d221b704b78b4cf9806d7", "d23bac939f635dd92c960", "d25cab78c235c45b1ee26", "d3d534c17b00ba29189f2", "d432b8583920f72779236", "d4aeb73225b3221d89d04", "d52bc6e12f0d3747865e8", "d53831fa1c9d1a8c25c88", "d54b946eb163e5c907aa1", "d5d83ff3229cbfb7961e1", "d5e06b1fcc44f98d3ad92", "d65f0f2c1d7d2c0ed2f84", "d6aa40f9ac04e4c2dd491", "d76a27e91bc8b035f69a0", "d7c55490a8a3eb618ef50", "d842248ba039fbdb1a343", "d921d7ed8e2211a0f4d58", "d998a09c73640e1ca67b5", "daf3adce9c1353172dd56", "dafdc36f2829d59876ec6", "dbea98fbe476334a08074", "dd8c521a08b8313fe0161", "de40ca011527810a32b86", "df146b50d9da1699bdae7", "e0723d1a18dc455ed5986", "e0935084edd0104ae8537", "e0fcd74dadc7a633d8c66", "e1b3b38907461bbeb8497", "e20eb90fc28ae95f99024", "e25e9f5da4e606865d144", "e2e13d46a24e284264ed5", "e2e8ba4c574863e9ef814", "e37163e37e3d8ff084ff7", "e3905e1dba25806ca4428", "e3f4d054fbd7ee20b74d9", "e48938d46f1d6810fb204", "e4899465bf5a0bd4d7ea6", "e527b605aed032e313121", "e528803b82cfbd3c30ac1", "e55904967e572a18a03a8", "e6038c32b053dac1620a6", "e606308e00496ba317537", "e669b7ee609bd24177105", "e6c7c0390bb9c1b94e327", "e6efddd16ac7ddedf9f14", "e741be1875244b17e6662", "e7a8044d526f23afa02b5", "e849dea85a953ff62d835", "e85f3f9d5b9e388df0768", "e8bf6b3994c19decae805", "e8fd40ed4c7c4f080e530", "e9f9463581ce612171865", "ea47887ff933e678bb369", "eb168d51e4825d7d0f430", "eb5fa061ef42c57be7044", "ebd2f90ef61709ee3d866", "ec8d898e5d522ee79ec93", "ef35e3ad306e5c3402817", "ef559e2f653681f5f7609", "f0b522075ba007a4ecbf1", "f15ab805bcbd4633a8353", "f192f2d16e4796c32c122", "f1c9f5c6420f20a7cdbb6", "f244779b88d71dd2a6da2", "f25ffc03f262fa6dcbc31", "f2e50a7b7a4de03ad2216", "f308ebd4177cc3463b0c3", "f379f6eac7e93652d16d5", "f4ab0b686898561820706", "f5677b0a4c33aed00d761", "f570652f55f9ccf0207a2", "f5b509452d9d8f65f9448", "f6103301855c16b260904", "f6ae4b0078970a1b81c56", "f6b46db976d883655b2d8", "f6e9cb899115fc0356621", "f6eb05c1915fc9b3d0206", "f74aa8376dfd914a1c229", "f75293cfdd0e2b6a5a125", "f79675ae90ee901c11687", "f7a76595f606fb5587010", "f7ce5334d240d991187d4", "f7f681fa2679797bbe423", "f97120ebdd2189771d5f9", "f9945cf5eb7bedb760981", "f9a5fc63174f09aa6a804", "faedd56503c247cf90015", "fb52fc9683e373d82ee22", "fb61ec8e7521674d26fb6", "fb8b2b12ff8029df51611", "fbcf64657f397abf9a4a0", "fc362b58e5f9ef6489612", "fca822439a78d5c0569f8", "fd36377a5fe2971a5a528", "fd584011465c802217574", "fdb0feaea0ab0c48a9aa9", "fdd7bb5eb7db7aac0dbd8", "fdfa5054cc273e5e29fd1", "fe3581ecf4e6a77887683", "fe5ca5c0c42d402195ff4", "fe98458b070aa3174dd64", "fed159166ea117db2e2e9", "ff18132428034a1954a70", "ffb84010cc1457fc210a5"], "id": "lock3_marquee"}, {"n": 4, "key": "lock4_speaker_box", "title": "The Speaker Box", "obj": "4", "objLabel": "CORE OBJECTIVES 7, 8, AND 9", "objText": "Core Objectives 7, 8, and 9: Identify the factors that contributed to America’s postwar prosperity and analyze how that prosperity benefited women and people of color. Examine the major criticisms of postwar American society and consumer culture. Evaluate the goals and major achievements of the civil rights movement during the 1950s.", "type": "decode", "shift": 7, "cipher": "IVFJVAA", "card": "<p>The 1950s brought great prosperity. War spending, the GI Bill, highways, and the arms race all helped the economy grow. About 5 million veterans bought homes with GI Bill loans, and almost 8 million went to college or job training. But racism limited these benefits. Many colleges refused Black students, and “redlining” kept Black veterans from buying homes in White neighborhoods. Of the 13 million homes built from 1948 to 1958, more than 11 million were in suburbs, and Levittown contracts excluded “members of other than the Caucasian race.” In 1950, women were 29 percent of the workforce, but most held clerical or service jobs, and women of color were mostly maids and cooks.<\/p><p>Critics said the prosperity had cracks. Economist John Kenneth Galbraith attacked the idea that growth would solve all problems, and the Beats rejected consumer culture. Poverty afflicted nearly half the African American population, compared to one-fourth of Whites.<\/p><p>In <i>Brown v. Board of Education<\/i> (May 17, 1954), the Supreme Court overturned “separate but equal” in public schools. Senator Harry Byrd called for “massive resistance,” and by 1960 only 765 of 6,676 southern school districts had desegregated. After Rosa Parks refused to give up her bus seat on December 1, 1955, African Americans in Montgomery, Alabama, organized carpools or walked instead of riding the city buses for 381 days. Led by Martin Luther King Jr., who preached nonviolent civil disobedience, they won a federal case against segregation on city buses on December 20, 1956. In 1957, King became president of the new Southern Christian Leadership Conference (SCLC).<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 26, “A People of Plenty” (begins p. 1163; GI Bill, p. 1165; Suburban Culture, pp. 1166-1167; Women, p. 1171), “Cracks in the Picture Window” (begins p. 1173), and “The Early Years of the Civil Rights Movement” (begins p. 1178; Brown, pp. 1180-1181; Montgomery, pp. 1182-1184; SCLC, p. 1186).", "prompt": "The Clue Card describes a kind of protest without naming it. A secret message names it. Each letter in the message was moved 7 steps forward in the alphabet. Decode it to name the protest.", "hints": ["The Clue Card says people in Montgomery organized carpools or walked instead of riding the city buses for 381 days. The secret word names that kind of protest. Use the decoder key to spell it, one letter at a time.", "In the message, the letter I is really B, and the letter V is really O. The word has 7 letters and starts with B."], "nudge": "Not quite. Decode one letter at a time with the key, then check your spelling.", "entries": ["002aa383bbca984c0f8f3", "00ffd9d258ab491ccddc1", "01a9acf24142bb85395d9", "02378f92f613fb9c176c9", "02aafda92a2a18447b791", "02db8959e10d18e944ab3", "03341fd5e0e08361dd889", "039fe838bff2a5b9f6e10", "047c4c3d6aba5bf22fd47", "04ff98a919a5d1897bc63", "0589a4428ebabace7b288", "05a7991e4126268b60814", "06f37a9d1d5202ef23a20", "0718db290cfb41bb9da17", "077374e047bf8026c5264", "07f3664217f1df8f10866", "0893bfcd5c46040e5dbb1", "08ac8d86c9e426b9d98c2", "08b1f2b6a19fcd3bbe7d9", "08c609ce0eaf95049fab6", "0958d0431be6113885fa8", "0978cbce256d539fed737", "0a99ebb67db87b9aefcf1", "0ae4107dd02eb8087b717", "0aea98afd6c395dfb2ce2", "0bb9e44ebee6db0d0b774", "0c819f762ccd5dde8e317", "0d496bd9aeb5abea8e2c4", "0d67cb76f74a8d373a390", "0e0a8c916d63f1e870193", "0e273f2a9b5f2cff16977", "0edec88357593884150b3", "10dd9d6b993cab12e23b2", "11310c025c96af0af9971", "11fc12b2f97b7ed9033f5", "1243b09f37666faf612b6", "13324ab8ae2ddb716a665", "1332fff600fcd427184e8", "1334e98eb7ae7ae1a4689", "13bc187ad24fb86b22d79", "1458ebb1d5deaafc543f2", "1460c59b58497bc2d5e37", "15d2c1190e560d5dbce93", "16e0097924ad9771b62c1", "177b064e65b95f3ea6753", "1818021614736f1e3aa64", "18b86d3d0db5d15afa328", "196a58d8f51d1a7911510", "19c643a52b55e2ec57620", "1be0a03d64524a82ddaf7", "1d3a9fd839c89090f3459", "1e58bde1a8ea4774657c2", "1fdd76fd7656b35ad4101", "2016f0c5c1a1444b780e5", "202007929226ee0ddf4e5", "2054ed0dd080de8d248d2", "215d57e3d376475f54561", "2178690b29926050955e8", "21dcc6e97b7fec5e51456", "228c4103d72a63a08fcc4", "22c8a4680dd9c8a9565a4", "2363c269fb9f1aa80f257", "244080dc42ad560f9e6d0", "2586f20d26ed9c61bcf17", "259b85b773824a762b908", "26495a9d039d11db0aa38", "266ac54fdfbe9c461ca81", "281ddd63e1c02d1f500f0", "28413b1a798e74ab33838", "291e5a4aad91eaaa916b0", "295baef3ffd807a0a00a3", "29f779d78278bc24ea5e7", "2a07118090858691ea855", "2ad56ec3dbb44476e0de8", "2b7a3eda05eebd7d7e0f7", "2b841db2f15302345f0c2", "2cb68a8f423459d05c779", "2e4f2673491f7c6834a99", "2ee25bcbfde8eea28a7b7", "31992f74d7d91c0042559", "3220905adfb6d8ec0e5b7", "33292480aedee95a4cb03", "3365f9e19b3f07b73ec11", "346eb4331a5a0a0732c31", "34ae94f7eeab8980268e2", "34fe55c847d48df521b81", "3530ee23c2998f4633c23", "3549f93944a27d7423285", "36aa5cb880d59792b9173", "3a059d4975b33bf658c30", "3a13d000d97593abe3448", "3ad951a47d02bbfcecde5", "3e220a04fc09610f5ea47", "3e733faa407ba33892c71", "3e8c03d7c98b50ae2c174", "3eb9c17b6b4291d033504", "3f2a06e5362add44e7241", "40e4ac55764c91d86a9f0", "40e96f60ae6774cf9b472", "41772c3e8a494f98b0a71", "424c89cf4f300d3ebf074", "445ca219237f21f07dad3", "44a0e7f4536338c9a06a6", "45be8e7b4787715f217f5", "463c5e842a92bac069034", "470797dc89da6eb1b17d9", "474ca5c3c073e5d6a3195", "4ad3480a5701f5f3d87b9", "4b07de72c0ec7942c6985", "4bf97622bc80597eb06e1", "4c6530b0480e0822cd679", "4c94724d274b80d5f06b7", "4d0243a916fad13359243", "4e0143d005924f0ad9992", "4e3c6aadf8de6d5d470d2", "4ef21783873b52b37b771", "4f030b9e5ab354245e106", "4f8059308861ec410c1b3", "4f9983b01bca34f421770", "4fcd5056bf11171528419", "51f29e05a0359fe97a4d0", "52308d3ce4b3a4953e348", "5356c26547b00cd819015", "53792ed060240c8629e22", "552cfc59d56f7129e7aa8", "554f9d6bd189b605bb431", "57fe0d53d34f5b6213c46", "5899eb116de9c270e2f45", "5a36eb47689f568c40482", "5adb733f2e38a4a98cb07", "5b53be7f88ab9020a3593", "5bf270aa8d4358c2ae1f5", "5f1388a469397e67b5467", "5fa70ea779fb3f0a7dd73", "60085ed953fdc0e6436c3", "60b612987c5a01fc4a9e4", "60e4bf5a75fc3fee31342", "611fd7de7b9b5dd594d98", "615749d5e99ba3e6141b8", "61de03638a312db416211", "632809463428807a8d176", "63c57f4e10af32d9a33e4", "63e00b69adde2b150f5a3", "63f3f073306706f43dff5", "652f1842d520ffa1a45e2", "65d01bed12041e15689f7", "66c75b4f117d422b016c2", "6713989b24aef1bb94e22", "67805ccbfcc7bab4bf3f3", "67af637aa757d5390a949", "67bb32152f3615ee58368", "685d0d1c710f7688611b0", "68a6b011caaa1398a9cd8", "68b705d462a8c96a340b1", "6937e0705e3b2936aba36", "6a8e8fd37d7633c2feb75", "6ab96008349cddb9d3f23", "6af12732d46775cb33804", "6ba09d7c815fb27652b86", "6bae7394d7fd21a2eab03", "6d7d807084dc7bd65d975", "6d8f1427c05c4a6d9da23", "6e69927206b57b3a7c175", "6e8ee582d978d3c0bbd04", "6f7d590bd3d1670cea195", "6f89df32c7a812b717881", "6f9921245bedad01027f8", "6f9afa940cb1b4014b9c9", "6ff0a5e9be3c612b16515", "70de3e18f029a77b77c19", "72300126c89437afcce96", "735f06ed1607cd40a20c7", "76aec834ceca846778ff8", "77109b958d328f2a11e10", "784ac90a5751adc3b2ba3", "78cf1d9691801da03daf5", "790a3325e374b572d9fd3", "795bff49e7ca29b8ed1d4", "7a30eec12f333cc82e5f8", "7aec0ef1c9756505f98e1", "7b187753c03a2914dc662", "7bdcff9a42c8e285eae22", "7c1fa01e7ad8ccbe5f453", "7cf5dc24f39ff8de82cb9", "7d7ca00accb6ca3037b79", "7e907f9ef8a3595442ff3", "7ea391c8abaaa81f24c66", "7f7a4b9a01c9ea1dfc606", "8067115f782ed2c943fc7", "80caddafb04f1ea81cd02", "80d8982cd2d60766637f7", "811748633ef4ef884a065", "8121dbb334a6b51cf2a37", "825cd8f4e8cabfbbbd508", "843f4b77c052a547f7d92", "848557af3c857faf22556", "84b80814c62588f6df468", "84c9c30628de412d922c5", "84fb36707e4350c0c6454", "858d4eaac687059e8a7b3", "85c9f03f154cdf7864d12", "85f0d088596316b96e834", "86168e85ccf163194bb92", "86594fd19e77c900f4dd7", "867e1c4311af186f1dca0", "8680260683bddf0f86cf5", "86be6c216e5ad997c1ab7", "87fd1142e0e9873562011", "894185ea114702c8f9438", "8966b473fdc3f5f189664", "8a00cd3eb21050faf5106", "8a526134898c7757f4278", "8ba7e07e0aea61c457fc7", "8bca2f6df3a2f814263a2", "8bf8b4458598baaf965b9", "8c3c8a7b3644fd30e38a1", "8e6ef895528accf3fd127", "8e8983382572a6ff7cd04", "8ffc6cdcdd21f73d64136", "9104cc450513a60b83056", "919b315962b2ee2ed8819", "92d62c3b2220201281209", "93187eaf130add2e959c2", "94198db20c0f3f8f69942", "943423f535fad4033a2f5", "968c81a86318082b39c09", "9749078893bc971c5c6b1", "975ca824949d70296be76", "989d0433a8a8fd17aa1c2", "98b31f3f3b69defbc5f05", "9a0133f1e46b1ed0b16e5", "9b8b469b1099266ee6c05", "9d2ae7e851353af8c30f6", "9d8865d11ec512ac014b5", "9db571a94e35ed7354e45", "9f81ec11a0dba106d3738", "a030944c374a262426464", "a09dad826b37850417bd0", "a0b316ca2af835fe42e40", "a16debec0aebd821affc7", "a1b762fd20acfbb375a56", "a3740e52fdd91db473671", "a3d0f07417ff389a89a93", "a48c707fbf6ba1fec7532", "a5e9020866093c36002e8", "a61ed5e39a76f8050a708", "a6b61d2081816b16e9273", "a7405bdbc2e7d28732f26", "a77f96a6dbf658633dcb0", "a85649e4b9184b78ac812", "a8580c832c7dc724db170", "a8bb4c949396990002298", "a8ccbec9ab9eb11d2fdc0", "a904ab9aaeee91cfd3546", "a9747c83ae8a9f6ff9ca7", "aa11ed3cd72029637ab00", "aa4e2c2cc85406e15e539", "aa537e6f3250b3fe84369", "aa9fb388b3d35971cc842", "aab356c12bbd1f0af1d60", "ab33d6b461a34e560f684", "ac43e7b065738f3e8c579", "ac541783a6cc3c6c64512", "ac7e077dcd78379662672", "ad706aadefc3bcd8a7a31", "ad7d828e03c9d177935a1", "adadc3b0c2e5d31655069", "af70e1ba3f268c6a4b241", "b070a473d7dcbb4f7e555", "b0c96b01b79c33f30a5f1", "b18c18fc3ead6e14382a4", "b1fba0928d21996da91f6", "b21fd90ba6bfaeb4918f6", "b2ec200b15ed7dfcf0659", "b329be4f8fb105e3a9218", "b40bd19304295a6ad5518", "b48de7c7e08068bd41779", "b530fe82148e6d5e08a99", "b565227860882141a5df0", "b5970bf0cd77eda153fa5", "b69777d0a2b4f2d3925a0", "b6edfcf31015451310ca7", "b7522f6b05b2c51963a89", "b8f4d978bbbbae559f417", "b9322b30b8241843b4b65", "b9857dac76e668238c7c6", "b9d0736222d59fb39d380", "bc2a25cdbf8c01284ab79", "bc3b74e6b7431e1763c98", "bc57f3e2d235a4ec8b133", "bccb96da77be9936c99e0", "bcfecc3d945353972ab78", "bda7e90b3e39d8455a255", "bef2253d53eaaeafe0a02", "c064785e0bce25a013ff1", "c1f7ab3abefdb0011d562", "c2971fa652f90978f8e22", "c3fd369c887fab2792383", "c457a6a350718fd2d6448", "c4ec03b0d3890d9224451", "c4f9824b9f269ceb0a281", "c5c22c4ceab2cca596d58", "c6c12dc9b0ab0d1274af4", "c70c8b5012a06611285f9", "c71c78c97721e12361d53", "c75f2a5606a6c57a2e656", "c7b489da28f31d75bdbc7", "c8b17fcd573d8df9da044", "c8d549c8c3f20ea98fc76", "ca85a9480782a227171b4", "cb06c6750b0d46fa625a1", "cb2e8293327f6ef9809f2", "cc9e95892fd176bf47c93", "cd46bba805ca4f2559c87", "cd579568d97349eef8df6", "cf261af9a96cb9ab38950", "cf7c1ad49465bb227feb2", "cfdaac6c7ab3a97b68825", "d00bf2155249945e1ad09", "d0e16d9cc5c408be13688", "d14bda409d00ec74071e3", "d1629e4bc7214074fdba9", "d179e8bcbe783cfa6c838", "d1a46a90cfc1584fea061", "d34af815a1c8cda962315", "d36621cb1afbc791a7490", "d3d0a2aca78dea9e94b15", "d3fbd1b48cbd569b0b775", "d6110137d289d2bce25e0", "d6b407f87b63194fc7762", "d7ccf7ba6038d7961b625", "d810447439bc0397d84f7", "d914b8eabf518d9599cb9", "d954e8d3ee1506bf6a4a9", "d9a3d9817450e34c8c5e1", "dc353f4ccb407868d1807", "dcaf9785b2108b0b1ed77", "dd8aaea7047676bddf767", "ddc3076443f5048b10d80", "ddf31683100c11e282248", "de29b6f94d250b5b833b1", "df227c820fa6390ffcb95", "df291a2722332eed82568", "df3b0998caf89ac28d809", "dfa951aef0af4e0098d53", "e04a93ed8c3eeab0b3935", "e0fa5a561af26a7ae20b2", "e10dffc4297407e9ab9b3", "e11e02b20d7ce36a002d1", "e1d1304b4a4a36ec969e8", "e21c3e100bb2e6a3ae752", "e2b5da4e6feda4ec6b9d7", "e2fdd89f6289e7695cb15", "e3f227d0443700c8b6b28", "e4dbf7ad585dfb9e315c4", "e4fe11a9ddec7d5d4dc12", "e874f3ee09576bf829124", "e89a3c6fb533b5a055eb7", "e94a5112869ebaa560355", "eadd557e738a642940b02", "eb4f65df612eddccf6e56", "eb81254b4af0e540c7295", "eb8ae65b02a1eff2019c7", "ebaeb3b653ebb62940107", "ed5596bec2bf5ef36ae71", "eeb381f49231a25ad1162", "ef86790eeb25743aecff7", "f16aed79bbfc368b1ea48", "f1bda25fdd54c7d7da156", "f20ee478ac67bda5e5810", "f27b4ccaa97ff16f1e975", "f3b83e44231492ba4a924", "f4431f831dd46ec3535c4", "f456bfc211ebb51df3163", "f4c93214e9390c66a0e16", "f53d991be24401c8dfe56", "f684bd905ecc2c4a708a4", "f7b69e656693cf79aa502", "f96062c518e7ef8941f97", "f97092a57e0c5bf1d8263", "f9a07f75b7219817129d7", "faf7663b3e311193a86b1", "fd13807605cb32b5f8309", "fd81b8cb91bf2d1ab9da5", "fdd519b282f642e427692", "ff201eb3328f3a6f09592", "ff78cc4db6ffc4e632860", "ffa8993ababb97f98d697"], "id": "lock4_speaker_box"}, {"n": 5, "key": "lock5_screen_window", "title": "The Screen Window", "obj": "5", "objLabel": "CORE OBJECTIVES 10 AND 11", "objText": "Core Objectives 10 and 11: Explain how the Eisenhower administration’s commitment to “rolling back” communism around the world shaped U.S. foreign policy. Assess the effectiveness of Eisenhower’s responses to the various foreign crises that arose during his presidency.", "type": "pick", "card": "<p>Eisenhower and Secretary of State John Foster Dulles said that containing communism was not enough. They wanted to “roll back” communism. They knew they could not win a ground war against the Soviet Union or China, so they used “massive retaliation,” the threat of nuclear war to stop Communist aggression. Norton says this strategy turned every dispute into a possible war of annihilation. At the same time, the CIA secretly used propaganda, bribery, and, in some cases, assassinations to change other nations’ politics. In Vietnam, Eisenhower explained his “falling-domino” theory. But when the British would not join, he told the French at Dien Bien Phu that U.S. military action was “politically impossible.”<\/p><p>Crises followed. In 1956, Hungarians revolted against Soviet rule, and the Soviet response stunned the world. Many Hungarians felt abandoned by the United States. That fall, Britain, France, and Israel attacked Egypt over the Suez Canal. Eisenhower demanded that they pull back or face severe economic sanctions, and they agreed to a cease-fire on November 7. On October 4, 1957, the Soviets launched <i>Sputnik<\/i>, the first artificial Earth satellite. Congress increased defense spending, boosted science education, and created NASA in 1958.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 26, “Foreign Policy in the 1950s” (begins p. 1187; Massive Retaliation and the CIA, p. 1189; Indochina, pp. 1191-1192) and “Reelection and Foreign Crises” (begins p. 1194; Suez, pp. 1195-1197; Sputnik, p. 1197).", "prompt": "Pick the correct answer for all three questions.", "qs": [{"id": "r", "q": "What was “massive retaliation”?", "opts": [{"id": "a", "label": "Sending the army to fight in every Communist country"}, {"id": "b", "label": "Using the threat of nuclear war to prevent Communist aggression"}, {"id": "c", "label": "A plan to give money to rebuild Europe"}, {"id": "d", "label": "A promise never to use nuclear weapons"}]}, {"id": "s", "q": "How did Eisenhower respond to the Suez crisis in 1956?", "opts": [{"id": "a", "label": "He sent U.S. troops to help Britain and France"}, {"id": "b", "label": "He demanded that Britain, France, and Israel pull back, or face severe economic sanctions"}, {"id": "c", "label": "He asked Congress to declare war on Egypt"}, {"id": "d", "label": "He did nothing at all"}]}, {"id": "p", "q": "What happened in the United States after the Soviets launched Sputnik?", "opts": [{"id": "a", "label": "Congress cut defense spending"}, {"id": "b", "label": "The Cold War ended"}, {"id": "c", "label": "Congress increased defense spending, boosted science education, and created NASA"}, {"id": "d", "label": "The United States joined the Soviet space program"}]}], "hints": ["Each answer is in the Clue Card. Look for what massive retaliation meant, what Eisenhower demanded at Suez, and what Congress did after Sputnik.", "Massive retaliation: the threat of nuclear war to stop Communist aggression. At Suez, Eisenhower demanded that Britain, France, and Israel pull back. After Sputnik, Congress spent more on defense and science and created NASA."], "nudge": "Not quite. At least one answer is off. Re-read the Clue Card for massive retaliation, the Suez crisis, and what happened after Sputnik.", "entries": ["0d621a68126154f270019"], "id": "lock5_screen_window"}]}</script>
+<script>
+function sha256(ascii){
+  function rightRotate(v,a){return (v>>>a)|(v<<(32-a))}
+  var mathPow=Math.pow,maxWord=mathPow(2,32),i,j,result='',words=[],bitLen=ascii.length*8;
+  var hash=sha256.h=sha256.h||[],k=sha256.k=sha256.k||[],pc=k.length,comp={};
+  for(var c=2;pc<64;c++){if(!comp[c]){for(i=0;i<313;i+=c)comp[i]=c;hash[pc]=(mathPow(c,.5)*maxWord)|0;k[pc++]=(mathPow(c,1/3)*maxWord)|0}}
+  ascii+='\x80';while(ascii.length%64-56)ascii+='\x00';
+  for(i=0;i<ascii.length;i++){j=ascii.charCodeAt(i);words[i>>2]|=j<<((3-i)%4)*8}
+  words[words.length]=((bitLen/maxWord)|0);words[words.length]=(bitLen);
+  for(j=0;j<words.length;){
+    var w=words.slice(j,j+=16),old=hash;hash=hash.slice(0,8);
+    for(i=0;i<64;i++){
+      var w15=w[i-15],w2=w[i-2],a=hash[0],e=hash[4];
+      var t1=hash[7]+(rightRotate(e,6)^rightRotate(e,11)^rightRotate(e,25))+((e&hash[5])^((~e)&hash[6]))+k[i]+(w[i]=(i<16)?w[i]:(w[i-16]+(rightRotate(w15,7)^rightRotate(w15,18)^(w15>>>3))+w[i-7]+(rightRotate(w2,17)^rightRotate(w2,19)^(w2>>>10)))|0);
+      var t2=(rightRotate(a,2)^rightRotate(a,13)^rightRotate(a,22))+((a&hash[1])^(a&hash[2])^(hash[1]&hash[2]));
+      hash=[(t1+t2)|0].concat(hash);hash[4]=(hash[4]+t1)|0;
+    }
+    for(i=0;i<8;i++)hash[i]=(hash[i]+old[i])|0;
+  }
+  for(i=0;i<8;i++)for(j=3;j+1;j--){var b=(hash[i]>>(j*8))&255;result+=((b<16)?0:'')+b.toString(16)}
+  return result;
+}
+function sha256u(s){return sha256(unescape(encodeURIComponent(s)))}
+
+(function(){
+  var PACKET='CPUSH_L17_ESCAPE';
+  var STORE='cpush_l17_escape-room_';
+  var D=JSON.parse(document.getElementById('er-data').textContent);
+  var $=function(i){return document.getElementById(i)};
+  var S;
+  var digits={};            // runtime only: lock n -> digit
+  var entries={};           // lock id -> {h20: maskedDigit}
+  var expanded={};
+  var lastTick=0,timer=null;
+
+  function squash(t){return String(t).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'')}
+  function h20(s){return sha256u(s).slice(0,20)}
+  D.locks.forEach(function(L){var m={};L.entries.forEach(function(e){m[e.slice(0,20)]=+e.slice(20)});entries[L.id]=m});
+
+  function checkLock(L,canon){
+    var salt=D.salt+L.n+':';
+    var h=h20(salt+canon),mk=entries[L.id][h];
+    if(mk===undefined)return null;
+    var m=parseInt(sha256u('m:'+salt+canon).slice(0,2),16)%10;
+    return (mk-m+10)%10;
+  }
+  function fresh(){
+    var o={first:'',last:'',period:'',started:false,elapsed:0,escaped:false,escapeMs:0,debrief:'',codeTries:0,locks:{}};
+    D.locks.forEach(function(L){o.locks[L.id]={solved:false,attempts:0,hints:0,guess:'',readable:''}});
+    return o;
+  }
+  function loadLocal(){var o=fresh();try{var r=JSON.parse(localStorage.getItem(STORE+'state')||'null');if(r)restore(o,r)}catch(e){}return o}
+  function persist(){try{localStorage.setItem(STORE+'state',JSON.stringify(snapshot()))}catch(e){}}
+
+  function totals(){
+    var t={locksSolved:0,attempts:0,hintsUsed:0,exitCodeAttempts:S.codeTries};
+    D.locks.forEach(function(L){var l=S.locks[L.id];if(l.solved)t.locksSolved++;t.attempts+=l.attempts;t.hintsUsed+=l.hints});
+    return t;
+  }
+  function fmt(ms){var s=Math.round(ms/1000),m=Math.floor(s/60);s=s%60;return (m<10?'0':'')+m+':'+(s<10?'0':'')+s}
+  function snapshot(){
+    var o={packet:PACKET,course:'CPUSH',lesson:17,assignment:'Escape Room (Lite)',version:1,saved:new Date().toISOString(),
+      student:{first:$('f_first').value.trim(),last:$('f_last').value.trim(),period:$('f_period').value.trim()},
+      status:S.escaped?'ESCAPED':'INCOMPLETE',escaped:S.escaped,
+      escapeTime:S.escaped?{ms:S.escapeMs,text:fmt(S.escapeMs)}:null,
+      totals:totals(),elapsedMs:Math.round(S.elapsed),started:S.started,locks:{},debrief:$('debriefText')?$('debriefText').value:S.debrief};
+    D.locks.forEach(function(L){var l=S.locks[L.id];
+      o.locks[L.key]={objective:L.obj,puzzleType:L.type,solved:l.solved,attempts:l.attempts,hintsUsed:l.hints,solvedWith:l.readable,solvedGuess:l.guess}});
+    return o;
+  }
+  function restore(o,r){
+    if(!r||typeof r!=='object')return false;
+    var st=r.student||{};
+    o.first=st.first||'';o.last=st.last||'';o.period=st.period||'';
+    o.started=!!r.started;o.elapsed=+r.elapsedMs||0;o.debrief=typeof r.debrief==='string'?r.debrief:'';
+    o.codeTries=(r.totals&&+r.totals.exitCodeAttempts)||0;
+    var allOk=true;
+    D.locks.forEach(function(L){
+      var src=(r.locks&&r.locks[L.key])||{},l=o.locks[L.id];
+      l.attempts=+src.attempts||0;l.hints=Math.min(+src.hintsUsed||0,L.hints.length+0);
+      if(src.hintsUsed>L.hints.length)l.hints=L.hints.length;
+      if(src.solved&&typeof src.solvedGuess==='string'){
+        var d=checkLock(L,src.solvedGuess);
+        if(d!==null){l.solved=true;l.guess=src.solvedGuess;l.readable=String(src.solvedWith||'');digits[L.n]=d}else allOk=false;
+      }else allOk=false;
+    });
+    if(r.escaped&&allOk&&r.escapeTime){o.escaped=true;o.escapeMs=+r.escapeTime.ms||0}
+    return true;
+  }
+
+  /* ---------- scene ---------- */
+  var NS='http://www.w3.org/2000/svg';
+  var XS=[210,255,300,345,390];
+  (function(){
+    var g=$('plocks'),h='';
+    XS.forEach(function(x,i){
+      h+='<g class="plock" id="pl'+(i+1)+'"><path class="sh" d="M'+(x-8)+' 124V114a8 8 0 0 1 16 0V124" fill="none" stroke="#EEF0F1" stroke-width="4"/><rect class="bd" x="'+(x-15)+'" y="124" width="30" height="24" rx="4" fill="#DD7A40"/><circle cx="'+x+'" cy="135" r="3" fill="#252B31"/></g>'+
+      '<rect x="'+(x-16)+'" y="158" width="32" height="36" rx="5" fill="#181C20" stroke="#E6AB89"/><text id="dw'+(i+1)+'" x="'+x+'" y="184" text-anchor="middle" font-size="24" font-weight="800" fill="#EEF0F1">?</text><text x="'+x+'" y="208" text-anchor="middle" font-size="11" font-weight="700" fill="#C9CFD3">LOCK '+(i+1)+'</text>';
+    });
+    g.innerHTML=h;
+  })();
+  function sceneUpdate(){
+    D.locks.forEach(function(L){
+      var open=S.locks[L.id].solved;
+      $('pl'+L.n).setAttribute('class','plock'+(open?' open':''));
+      $('dw'+L.n).textContent=open?digits[L.n]:'?';
+    });
+    $('scene').classList.toggle('escaped',S.escaped);
+  }
+
+  /* ---------- build lock cards ---------- */
+  var W={};   // widget state per lock
+  var LOCKSVG='<svg class="lk" viewBox="0 0 44 44" aria-hidden="true"><path class="sh" d="M13 20V14a9 9 0 0 1 18 0V20" fill="none" stroke="#EEF0F1" stroke-width="4"/><rect class="bd" x="8" y="20" width="28" height="20" rx="4" fill="#DD7A40"/><circle cx="22" cy="30" r="3" fill="#252B31"/></svg>';
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+  function buildLock(L){
+    var sec=document.createElement('section');sec.className='lock glass locked';sec.id='lock'+L.n;
+    var head='<button class="lh" type="button" id="lh'+L.n+'" aria-expanded="false">'+LOCKSVG+'<span class="lt"><small>LOCK '+L.n+' · '+L.objLabel+'</small><strong>'+esc(L.title)+'</strong></span><span class="dg" id="dg'+L.n+'" aria-label="digit">?</span></button>';
+    var body='<div class="lb" id="lb'+L.n+'"><p class="objline">'+esc(L.objText)+'</p>'+
+      '<div class="card"><h4>CLUE CARD</h4>'+L.card+'<p class="src">'+L.src+'</p></div>'+
+      '<div class="prompt">'+L.prompt+'</div><div id="pz'+L.n+'"></div>'+
+      '<div class="row"><button class="btn primary" type="button" id="ck'+L.n+'">Check</button><button class="btn small" type="button" id="hb'+L.n+'">Hint</button><button class="btn small" type="button" id="rs'+L.n+'">Clear</button></div>'+
+      '<div class="hints" id="hs'+L.n+'"></div><div class="fb" id="fb'+L.n+'" role="status"></div></div>';
+    sec.innerHTML=head+body;
+    $('locks').appendChild(sec);
+    buildPuzzle(L);
+    $('lh'+L.n).addEventListener('click',function(){
+      var st=lockState(L);if(st==='locked')return;
+      expanded[L.n]=!expanded[L.n];updateLocks();
+    });
+    $('ck'+L.n).addEventListener('click',function(){submit(L)});
+    $('hb'+L.n).addEventListener('click',function(){hint(L)});
+    $('rs'+L.n).addEventListener('click',function(){clearPuzzle(L)});
+  }
+  function labelOf(list,id){for(var i=0;i<list.length;i++)if(list[i].id===id)return list[i].label;return id}
+
+  function buildPuzzle(L){
+    var el=$('pz'+L.n),w=W[L.n]={};
+    if(L.type==='order'){
+      w.sel=[];el.innerHTML='<div class="chips" id="ch'+L.n+'"></div>';
+      renderOrder(L);
+    }else if(L.type==='match'){
+      var h='';
+      L.terms.forEach(function(t){
+        h+='<div class="mrow"><label for="m'+L.n+t.id+'">'+esc(t.label)+'</label><select id="m'+L.n+t.id+'"><option value="">Choose a description...</option>';
+        L.descs.forEach(function(d){h+='<option value="'+d.id+'">'+esc(d.label)+'</option>'});
+        h+='</select></div>';
+      });
+      el.innerHTML=h;
+    }else if(L.type==='pick'){
+      var h2='';
+      L.qs.forEach(function(q){
+        h2+='<fieldset><legend>'+esc(q.q)+'</legend>';
+        q.opts.forEach(function(o){h2+='<label class="opt"><input type="radio" name="q'+L.n+q.id+'" value="'+o.id+'"> <span>'+esc(o.label)+'</span></label>'});
+        h2+='</fieldset>';
+      });
+      el.innerHTML=h2;
+    }else if(L.type==='decode'){
+      var k1='',k2='';
+      for(var i=0;i<26;i++){var p=String.fromCharCode(65+i),c=String.fromCharCode(65+(i+L.shift)%26);k1+='<div class="c">'+c+'</div>';k2+='<div>'+p+'</div>'}
+      // build key in two rows of 13
+      var key='';
+      for(var r=0;r<2;r++){for(var j=0;j<13;j++){var idx=r*13+j;key+='<div class="c">'+String.fromCharCode(65+(idx+L.shift)%26)+'</div>'}for(var j2=0;j2<13;j2++){key+='<div>'+String.fromCharCode(65+r*13+j2)+'</div>'}}
+      el.innerHTML='<div class="cipher" translate="no" aria-label="Coded message">'+esc(L.cipher)+'</div><p style="margin:.6em 0 0;font-size:15px;color:var(--dim)">Decoder key: the <span style="color:var(--hl);font-weight:700">peach</span> letter is in the message. The white letter under it is the real letter.</p><div class="key" aria-hidden="true">'+key+'</div><label>Decoded answer<input type="text" id="tx'+L.n+'" autocomplete="off" autocapitalize="none" spellcheck="false"></label><p class="ennote">Type the answer in English.</p>';
+    }else if(L.type==='fill'){
+      el.innerHTML='<p style="font-size:18px;margin:.2em 0">'+esc(L.sentence)+'</p><div class="scr" translate="no" aria-label="Scrambled letters">'+esc(L.scramble)+'</div><p style="margin:.4em 0;font-size:14px;color:var(--dim)">Unscramble the letters to fill the blank.</p><label>Your answer<input type="text" id="tx'+L.n+'" autocomplete="off" autocapitalize="none" spellcheck="false"></label><p class="ennote">Type the answer in English.</p>';
+    }
+    var t=$('tx'+L.n);
+    if(t)t.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();submit(L)}});
+  }
+  function renderOrder(L){
+    var w=W[L.n],ch=$('ch'+L.n),h='';
+    L.items.forEach(function(it){
+      var pos=w.sel.indexOf(it.id);
+      h+='<button type="button" class="chip'+(pos>=0?' sel':'')+'" data-id="'+it.id+'" aria-pressed="'+(pos>=0)+'">'+(pos>=0?'<span class="n">'+(pos+1)+'</span>':'')+'<span>'+esc(it.label)+'</span></button>';
+    });
+    ch.innerHTML=h;
+    [].forEach.call(ch.querySelectorAll('.chip'),function(b){
+      b.addEventListener('click',function(){
+        if(S.locks[L.id].solved)return;
+        var id=b.getAttribute('data-id'),p=w.sel.indexOf(id);
+        if(p>=0)w.sel.splice(p,1);else w.sel.push(id);
+        renderOrder(L);
+      });
+    });
+  }
+  function clearPuzzle(L){
+    if(S.locks[L.id].solved)return;
+    var w=W[L.n];
+    if(L.type==='order'){w.sel=[];renderOrder(L)}
+    else if(L.type==='match'){L.terms.forEach(function(t){$('m'+L.n+t.id).value=''})}
+    else if(L.type==='pick'){L.qs.forEach(function(q){[].forEach.call(document.getElementsByName('q'+L.n+q.id),function(r){r.checked=false})})}
+    else{$('tx'+L.n).value=''}
+    fb(L,'','');
+  }
+  function guessOf(L){
+    // returns {canon, readable} or {err}
+    if(L.type==='order'){
+      var w=W[L.n];
+      if(w.sel.length<L.items.length)return {err:'Tap all '+L.items.length+' events first, in order.'};
+      return {canon:w.sel.join('|'),readable:w.sel.map(function(i){return labelOf(L.items,i)}).join(' > ')};
+    }
+    if(L.type==='match'){
+      var c=[],r=[];
+      for(var i=0;i<L.terms.length;i++){var t=L.terms[i],v=$('m'+L.n+t.id).value;if(!v)return {err:'Match every term first.'};c.push(v);r.push(t.label+' = '+labelOf(L.descs,v))}
+      return {canon:c.join('|'),readable:r.join('; ')};
+    }
+    if(L.type==='pick'){
+      var c2=[],r2=[];
+      for(var j=0;j<L.qs.length;j++){var q=L.qs[j],v2='';[].forEach.call(document.getElementsByName('q'+L.n+q.id),function(x){if(x.checked)v2=x.value});if(!v2)return {err:'Answer every question first.'};c2.push(v2);r2.push(labelOf(q.opts,v2))}
+      return {canon:c2.join('|'),readable:r2.join('; ')};
+    }
+    var raw=$('tx'+L.n).value.trim();
+    if(!raw)return {err:'Type your answer first.'};
+    return {canon:squash(raw),readable:raw.slice(0,80)};
+  }
+  function fb(L,cls,text){var e=$('fb'+L.n);e.className='fb'+(cls?' show '+cls:'');e.textContent=text}
+  function submit(L){
+    var l=S.locks[L.id];if(l.solved)return;
+    var g=guessOf(L);
+    if(g.err){fb(L,'nudge',g.err);return}
+    l.attempts++;
+    var d=checkLock(L,g.canon);
+    if(d===null){
+      fb(L,'nudge',L.nudge);
+      var s=$('lock'+L.n);s.classList.remove('shake');void s.offsetWidth;s.classList.add('shake');
+      persist();updateBar();return;
+    }
+    l.solved=true;l.guess=g.canon;l.readable=g.readable;digits[L.n]=d;
+    fb(L,'good','Click! Lock '+L.n+' is open. Your digit is '+d+'.');
+    var wh=$('wheel');wh.classList.remove('spin');void wh.getBoundingClientRect();wh.classList.add('spin');
+    $('dw'+L.n).classList.add('pop');
+    persist();updateAll();
+    setTimeout(function(){
+      expanded[L.n]=false;
+      var nx=nextOpen();if(nx)expanded[nx]=true;
+      updateLocks();
+      var tgt=nx?$('lock'+nx):$('exit');
+      if(tgt&&tgt.scrollIntoView)tgt.scrollIntoView({behavior:'smooth',block:'start'});
+    },1600);
+  }
+  function hint(L){
+    var l=S.locks[L.id];
+    if(l.solved)return;
+    if(l.hints<L.hints.length){l.hints++;persist();updateHints(L);updateBar()}
+    else{fb(L,'nudge','That was the last hint. Read the Clue Card slowly and try again.')}
+  }
+  function updateHints(L){
+    var l=S.locks[L.id],h='';
+    for(var i=0;i<l.hints;i++)h+='<div class="hint"><b>Hint '+(i+1)+':</b> <span>'+esc(L.hints[i])+'</span></div>';
+    $('hs'+L.n).innerHTML=h;
+  }
+  function nextOpen(){for(var i=0;i<D.locks.length;i++)if(!S.locks[D.locks[i].id].solved)return D.locks[i].n;return 0}
+  function lockState(L){
+    if(S.locks[L.id].solved)return 'solved';
+    return L.n===nextOpen()?'current':'locked';
+  }
+  function updateLocks(){
+    var cur=nextOpen();
+    D.locks.forEach(function(L){
+      var st=lockState(L),sec=$('lock'+L.n);
+      if(st==='current'&&expanded[L.n]===undefined)expanded[L.n]=true;
+      var open=(st!=='locked')&&!!expanded[L.n];
+      sec.className='lock glass '+st+(open?' open':'');
+      $('lh'+L.n).setAttribute('aria-expanded',open?'true':'false');
+      $('dg'+L.n).textContent=S.locks[L.id].solved?digits[L.n]:'?';
+      if(S.locks[L.id].solved){
+        [].forEach.call(sec.querySelectorAll('input,select,button.chip,#ck'+L.n+',#hb'+L.n+',#rs'+L.n),function(x){x.disabled=true});
+        var f=$('fb'+L.n);if(!f.classList.contains('good'))fb(L,'good','Unlocked. Your digit is '+digits[L.n]+'.'+(S.locks[L.id].readable?' Your answer: '+S.locks[L.id].readable:''));
+      }
+      updateHints(L);
+    });
+  }
+  function codeStr(){var s='';for(var i=1;i<=5;i++)s+=(digits[i]===undefined?'':digits[i]);return s}
+  function allSolved(){return D.locks.every(function(L){return S.locks[L.id].solved})}
+  function updateExit(){
+    var ok=allSolved();
+    $('exit').classList.toggle('locked',!ok);
+    $('codeBtn').disabled=!ok||S.escaped;
+    [].forEach.call($('codebox').querySelectorAll('input'),function(i){i.disabled=!ok||S.escaped});
+    $('exitNote').textContent=S.escaped?'The door is open!':(ok?'All 5 locks are open. Type the 5 digits in order, Lock 1 first.':'Open all 5 locks first. The digits go in order: Lock 1 first.');
+  }
+  function updateBar(){
+    var t=totals();
+    $('lc').textContent=t.locksSolved;$('hc').textContent=t.hintsUsed;
+    $('tm').textContent=fmt(S.escaped?S.escapeMs:S.elapsed);
+  }
+  function updateStatus(){
+    var el=$('status'),db=($('debriefText').value.trim().length);
+    if(S.escaped)el.textContent=db>=40?'You escaped and wrote your Debrief. Ready to submit.':'You escaped! Write your Debrief, then download your file to submit.';
+    else el.textContent='Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.';
+  }
+  function updateEsc(){
+    $('esc').classList.toggle('show',S.escaped);
+    if(S.escaped){var t=totals();$('escTime').textContent=fmt(S.escapeMs);$('escSum').textContent='5 of 5 locks opened with '+t.attempts+' tries and '+t.hintsUsed+' hint'+(t.hintsUsed===1?'':'s')+'.'}
+  }
+  function updateAll(){sceneUpdate();updateLocks();updateExit();updateBar();updateEsc();updateStatus();
+    $('intro').classList.toggle('hidden',S.started);$('game').classList.toggle('hidden',!S.started);$('loadOnly').classList.toggle('hidden',S.started);
+  }
+
+  /* ---------- exit code ---------- */
+  (function(){
+    var cb=$('codebox');
+    for(var i=0;i<5;i++){
+      var inp=document.createElement('input');inp.type='text';inp.inputMode='numeric';inp.maxLength=1;inp.setAttribute('aria-label','Exit code digit '+(i+1));inp.disabled=true;
+      (function(i,inp){
+        inp.addEventListener('input',function(){inp.value=inp.value.replace(/[٠-٩]/g,function(c){return c.charCodeAt(0)-1632}).replace(/[۰-۹]/g,function(c){return c.charCodeAt(0)-1776}).replace(/[^0-9]/g,'');if(inp.value&&i<4)cb.children[i+1].focus()});
+        inp.addEventListener('keydown',function(e){
+          if(e.key==='Backspace'&&!inp.value&&i>0)cb.children[i-1].focus();
+          if(e.key==='Enter'){e.preventDefault();tryCode()}
+        });
+        inp.addEventListener('paste',function(e){
+          var t=(e.clipboardData||window.clipboardData).getData('text').replace(/[٠-٩]/g,function(c){return c.charCodeAt(0)-1632}).replace(/[۰-۹]/g,function(c){return c.charCodeAt(0)-1776}).replace(/[^0-9]/g,'');
+          if(t.length>1){e.preventDefault();for(var k=0;k<5;k++)cb.children[k].value=t[k]||''}
+        });
+      })(i,inp);
+      cb.appendChild(inp);
+    }
+  })();
+  function tryCode(){
+    if(!allSolved()||S.escaped)return;
+    var v='';[].forEach.call($('codebox').querySelectorAll('input'),function(i){v+=i.value});
+    var f=$('codefb');
+    if(v.length<5){f.className='fb show nudge';f.textContent='The code has 5 digits. Fill every box.';return}
+    S.codeTries++;
+    if(h20('exit:'+D.salt+v)!==D.exitHash){
+      f.className='fb show nudge';f.textContent='The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.';
+      var ex=$('exit');ex.classList.remove('shake');void ex.offsetWidth;ex.classList.add('shake');
+      persist();return;
+    }
+    S.escaped=true;S.escapeMs=S.elapsed;
+    f.className='fb show good';f.textContent='The door swings open!';
+    persist();updateAll();
+    setTimeout(function(){$('esc').scrollIntoView({behavior:'smooth',block:'start'})},900);
+  }
+  $('codeBtn').addEventListener('click',tryCode);
+
+  /* ---------- timer ---------- */
+  function tick(){
+    var n=Date.now();
+    if(S.started&&!S.escaped){S.elapsed+=Math.min(n-lastTick,5000);$('tm').textContent=fmt(S.elapsed)}
+    lastTick=n;
+  }
+  function startTimer(){lastTick=Date.now();if(!timer)timer=setInterval(function(){tick();if(Math.round(S.elapsed/1000)%10===0)persist()},1000)}
+
+  /* ---------- files ---------- */
+  function msg(t,err){var m=$('msg');m.textContent=t;m.className='msg'+(err?' err':'');m.style.display='block'}
+  function ascii(n){return String(n).normalize('NFD').replace(/[̀-ͯ]/g,'')}
+  function clean(n){n=window.spAscii?spAscii(n):n;return ascii(n).trim().replace(/\s+/g,'_').replace(/[^A-Za-z0-9_-]/g,'')}
+  function who(){return (clean($('f_last').value)||'Last')+'_'+(clean($('f_first').value)||'First')}
+  function download(name,obj){
+    var blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;
+    document.body.appendChild(a);a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);
+  }
+  function namesOk(){
+    var ids=['f_first','f_last','f_period'],ok=true;
+    ids.forEach(function(i){var f=$(i);if(!f.value.trim()){f.classList.add('bad');ok=false}});
+    if(!ok){msg('Enter your first name, last name, and period at the top first.',true);$('f_first').scrollIntoView({block:'center'})}
+    return ok;
+  }
+  ['f_first','f_last','f_period'].forEach(function(i){$(i).addEventListener('input',function(){$(i).classList.remove('bad');S[i.slice(2)]=$(i).value;persist()})});
+  $('debriefText').addEventListener('input',function(){S.debrief=$('debriefText').value;persist();updateStatus()});
+  $('saveBtn').addEventListener('click',function(){
+    if(!namesOk())return;tick();
+    download(who()+'-'+PACKET+'-PROGRESS.json',snapshot());
+    msg('Progress file downloaded. Use Load Progress to continue later.');
+  });
+  $('finishBtn').addEventListener('click',function(){
+    if(!namesOk())return;tick();
+    var now=new Date(),o=snapshot();o.completed=S.escaped;o.submitted=now.toISOString();
+    o.student.date=now.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+    download(who()+'-'+PACKET+'.json',o);
+    msg(S.escaped?('Done! File downloaded: '+who()+'-'+PACKET+'.json. Upload it to Canvas.'):('Your file downloaded and is marked INCOMPLETE (you have not escaped). Upload it to Canvas: '+who()+'-'+PACKET+'.json'));
+  });
+  function openLoad(){$('loadFile').click()}
+  $('loadBtn').addEventListener('click',openLoad);$('loadBtn0').addEventListener('click',openLoad);
+  $('loadFile').addEventListener('change',function(e){
+    var f=e.target.files[0];if(!f)return;
+    var r=new FileReader();
+    r.onload=function(){
+      try{
+        var o=JSON.parse(r.result);
+        if(!o||o.packet!==PACKET||typeof o.locks!=='object')throw new Error('wrong');
+        digits={};var n=fresh();restore(n,o);S=n;applyToDom();
+        msg('Progress loaded. Welcome back.');
+      }catch(err){msg('That file did not work. Choose a progress file saved from this Escape Room.',true)}
+      e.target.value='';
+    };
+    r.onerror=function(){msg('The file could not be read.',true)};
+    r.readAsText(f);
+  });
+  $('reset').addEventListener('click',function(){
+    if(!confirm('Clear all your work and start over? This cannot be undone.'))return;
+    digits={};expanded={};S=fresh();
+    try{localStorage.removeItem(STORE+'state')}catch(e){}
+    $('locks').innerHTML='';D.locks.forEach(buildLock);
+    $('f_first').value=$('f_last').value=$('f_period').value='';$('debriefText').value='';
+    [].forEach.call($('codebox').querySelectorAll('input'),function(i){i.value=''});$('codefb').className='fb';
+    applyToDom();
+  });
+  function applyToDom(){
+    $('f_first').value=S.first;$('f_last').value=S.last;$('f_period').value=S.period;$('debriefText').value=S.debrief;
+    // rebuild lock widgets, then pre-fill solved ones with readable note
+    $('locks').innerHTML='';D.locks.forEach(buildLock);
+    expanded={};
+    updateAll();
+    if(S.started)startTimer();
+  }
+  $('startBtn').addEventListener('click',function(){S.started=true;persist();startTimer();updateAll();$('game').scrollIntoView({behavior:'smooth'})});
+  window.addEventListener('beforeunload',function(){tick();persist()});
+
+  S=loadLocal();
+  D.locks.forEach(buildLock);
+  applyToDom();
+})();
+</script>
+<!--sp-i18n--><script type="application/json" id="sp-i18n">{"langs":["en","es","ar"],"default":"en","es":{"Save Progress":"Guardar progreso","Load Progress":"Cargar progreso","Finished — Download File to Submit":"Terminé — Descargar el archivo para entregar","Clear all my answers":"Borrar todas mis respuestas","FIRST NAME *":"NOMBRE *","LAST NAME *":"APELLIDO *","PERIOD *":"PERÍODO *","DATE (fills in when you finish)":"FECHA (se llena cuando terminas)","e.g. 3":"p. ej., 3","Automatic":"Automática","Please type your first name, last name, and period first.":"Primero escribe tu nombre, apellido y período.","Western Expansion and Southern Secession":"Expansión hacia el oeste y secesión del sur","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — La Ley de Esclavos Fugitivos","Bleeding Kansas":"Bleeding Kansas — Kansas sangriento","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"Se descargó tu archivo de progreso. Guárdalo bien. Usa «Cargar progreso» para continuar más tarde.","Progress loaded.":"Progreso cargado.","Could not read that file.":"No se pudo leer ese archivo.","Treaty of Guadalupe Hidalgo":"Tratado de Guadalupe Hidalgo","PROJECTION BOOTH":"CABINA DE PROYECCIÓN","NATO":"OTAN","Clear":"Borrar","Type the answer in English. Use the digits 0-9.":"Escribe la respuesta en inglés. Usa los dígitos 0-9.","Match every term first.":"Primero relaciona todos los términos.","Tap all 4 events first, in order.":"Primero toca los 4 sucesos, en orden.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 26, “Foreign Policy in the 1950s” (begins p. 1187; Massive Retaliation and the CIA, p. 1189; Indochina, pp. 1191-1192) and “Reelection and Foreign Crises” (begins p. 1194; Suez, pp. 1195-1197; Sputnik, p. 1197).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 26, “Foreign Policy in the 1950s” (empieza en la pág. 1187; Massive Retaliation y la CIA, pág. 1189; Indochina, págs. 1191-1192) y “Reelection and Foreign Crises” (empieza en la pág. 1194; Suez, págs. 1195-1197; Sputnik, pág. 1197).","Congress increased defense spending, boosted science education, and created NASA":"El Congreso aumentó el gasto en defensa, impulsó la educación científica y creó la NASA","digit":"dígito","What happened in the United States after the Soviets launched Sputnik?":"¿Qué pasó en Estados Unidos después de que los soviéticos lanzaron el Sputnik?","Locks":"Candados","Open the Door":"Abrir la puerta","Massive retaliation: the threat of nuclear war to stop Communist aggression. At Suez, Eisenhower demanded that Britain, France, and Israel pull back. After Sputnik, Congress spent more on defense and science and created NASA.":"Represalia masiva: la amenaza de una guerra nuclear para detener la agresión comunista. En Suez, Eisenhower exigió que Gran Bretaña, Francia e Israel se retiraran. Después del Sputnik, el Congreso gastó más en defensa y ciencia y creó la NASA.","Hint":"Pista","Not quite. Decode one letter at a time with the key, then check your spelling.":"Casi. Decodifica una letra a la vez con la clave y luego revisa tu ortografía.","The Cold War was a fifty-year struggle between the United States and the Soviet Union that never became a shooting war. It grew out of a clash between democratic capitalism and authoritarian communism. At the Yalta Conference, Stalin promised free elections in Eastern Europe. Instead, the Soviets set up “puppet” governments there, and Winston Churchill warned that an “iron curtain” had been drawn down.":"La Guerra Fría fue una lucha de cincuenta años entre Estados Unidos y la Unión Soviética que nunca llegó a ser una guerra con disparos. Surgió del choque entre el capitalismo democrático y el comunismo autoritario. En la Conferencia de Yalta, Stalin prometió elecciones libres en Europa del Este. En cambio, los soviéticos instalaron allí gobiernos “títere”, y Winston Churchill advirtió que había caído una “cortina de hierro”.","The United States joined the Soviet space program":"Estados Unidos se unió al programa espacial soviético","President Eisenhower promised “moderate Republicanism.” He wanted a balanced budget and a smaller role for the federal government. He called his plan “dynamic conservatism”: “conservative when it comes to money and liberal when it comes to human beings.” He kept the New Deal, extended Social Security to millions more workers, and signed the Federal-Aid Highway Act (1956), which built the interstate highways.":"El presidente Eisenhower prometió un “republicanismo moderado”. Quería un presupuesto equilibrado y un papel más pequeño para el gobierno federal. Llamó a su plan “conservadurismo dinámico”: “conservador en cuestiones de dinero y liberal en cuestiones de seres humanos”. Mantuvo el New Deal, extendió el Seguro Social a millones de trabajadores más y firmó la Ley Federal de Ayuda para Carreteras (1956), que construyó las autopistas interestatales.","A promise never to use nuclear weapons":"Una promesa de nunca usar armas nucleares","The Cold War and the Affluent Fifties":"La Guerra Fría y la prosperidad de los años cincuenta","Answer every question first.":"Primero responde todas las preguntas.","How to escape:":"Cómo escapar:","Truman removes General MacArthur":"Truman destituye al general MacArthur","You escaped! Write your Debrief, then download your file to submit.":"¡Escapaste! Escribe tu Informe final y luego descarga tu archivo para entregarlo.","The Marquee Sign":"El letrero de la marquesina","A program that gave $13 billion to sixteen European nations to rebuild their economies":"Un programa que dio 13 mil millones de dólares a dieciséis naciones europeas para reconstruir sus economías","A plan to give money to rebuild Europe":"Un plan para dar dinero y reconstruir Europa","The United States answered with a policy of containment. In 1947, President Truman announced the Truman Doctrine: the United States would “support free peoples” resisting takeover, starting with $400 million for Greece and Turkey. The Marshall Plan then gave $13 billion to sixteen European nations to rebuild. In 1948, the Soviets blockaded West Berlin, and the United States and its allies flew in supplies for 321 days. In April 1949, twelve nations signed the North Atlantic Treaty and formed NATO.":"Estados Unidos respondió con una política de contención. En 1947, el presidente Truman anunció la Doctrina Truman: Estados Unidos “apoyaría a los pueblos libres” que resistían ser dominados, empezando con 400 millones de dólares para Grecia y Turquía. Luego, el Plan Marshall dio 13 mil millones de dólares a dieciséis naciones europeas para reconstruirse. En 1948, los soviéticos bloquearon Berlín Occidental, y Estados Unidos y sus aliados enviaron suministros por aire durante 321 días. En abril de 1949, doce naciones firmaron el Tratado del Atlántico Norte y formaron la OTAN.","The word starts with M and has 11 letters. It is the senator’s last name plus “ism.”":"La palabra empieza con M y tiene 11 letras. Es el apellido del senador más “ism”.","The Cold War ended":"La Guerra Fría terminó","You are locked in the projection booth.":"Estás encerrado en la cabina de proyección.","Core Objectives 1 and 2: Explain why and how the Cold War between the United States and the Soviet Union developed after World War II. Analyze the impact of American efforts to contain the Soviet Union and the growth of global communism during Truman’s presidency.":"Objetivos principales 1 y 2: Explicar por qué y cómo se desarrolló la Guerra Fría entre Estados Unidos y la Unión Soviética después de la Segunda Guerra Mundial. Analizar el impacto de los esfuerzos estadounidenses para contener a la Unión Soviética y el crecimiento del comunismo mundial durante la presidencia de Truman.","In the message, the letter I is really B, and the letter V is really O. The word has 7 letters and starts with B.":"En el mensaje, la letra I es en realidad B, y la letra V es en realidad O. La palabra tiene 7 letras y empieza con B.","All 5 locks are open. Type the 5 digits in order, Lock 1 first.":"Los 5 candados están abiertos. Escribe los 5 dígitos en orden, primero el del Candado 1.","The Screen Window":"La ventana de la pantalla","Pick the correct answer for all three questions.":"Elige la respuesta correcta para las tres preguntas.","He did nothing at all":"No hizo nada","Escape the Projection Booth":"Escapa de la cabina de proyección","The door is open!":"¡La puerta está abierta!","Truman orders an end to racial segregation in the armed forces":"Truman ordena el fin de la segregación racial en las fuerzas armadas","Decoded answer":"Respuesta decodificada","Type your answer first.":"Primero escribe tu respuesta.","Clear all my work and start over":"Borrar todo mi trabajo y empezar de nuevo","Look for the dates in the Clue Card: early 1947, July 1948, June 25, 1950, and April 1951. Each event has its own date.":"Busca las fechas en la tarjeta de indicios: principios de 1947, julio de 1948, 25 de junio de 1950 y abril de 1951. Cada suceso tiene su propia fecha.","Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.":"Escribe de 3 a 4 oraciones. Nombra el candado y usa un dato de su tarjeta de indicios. Puedes escribirlo aunque no hayas escapado.","Fill in the blank using the Clue Card.":"Llena el espacio en blanco con la tarjeta de indicios.","Which lock was hardest, and what did you learn that you did not know before?":"¿Qué candado fue el más difícil y qué aprendiste que antes no sabías?","The Projector":"El proyector","A 1947 promise to support free peoples resisting takeover, starting with $400 million for Greece and Turkey":"Una promesa de 1947 de apoyar a los pueblos libres que resistían ser dominados, empezando con 400 millones de dólares para Grecia y Turquía","Tap the four events in the order they happened. Tap an event again to take it back.":"Toca los cuatro sucesos en el orden en que ocurrieron. Toca un suceso otra vez para quitarlo.","THE EXIT DOOR":"LA PUERTA DE SALIDA","The iron curtain was Churchill’s phrase for Soviet control of Eastern Europe. The Truman Doctrine began with $400 million for Greece and Turkey. The Marshall Plan gave $13 billion to rebuild Europe. NATO is the 1949 alliance.":"La cortina de hierro fue la frase de Churchill para el control soviético de Europa del Este. La Doctrina Truman empezó con 400 millones de dólares para Grecia y Turquía. El Plan Marshall dio 13 mil millones de dólares para reconstruir Europa. La OTAN es la alianza de 1949.","If you get stuck, press <b>Hint<\/b>. Hints are free, but your teacher can see how many you used.":"Si te atoras, oprime <b>Pista<\/b>. Las pistas son gratis, pero tu maestro puede ver cuántas usaste.","Enter the Projection Booth":"Entrar a la cabina de proyección","Decoder key: the <span style=\"color:var(--hl);font-weight:700\">peach<\/span> letter is in the message. The white letter under it is the real letter.":"Clave del decodificador: la letra <span style=\"color:var(--hl);font-weight:700\">color durazno<\/span> está en el mensaje. La letra blanca que está debajo es la letra verdadera.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 25, “Truman and the Cold War” (begins p. 1114) and “The Containment Policy” (begins p. 1117).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 25, “Truman and the Cold War” (empieza en la pág. 1114) y “The Containment Policy” (empieza en la pág. 1117).","Using the threat of nuclear war to prevent Communist aggression":"Usar la amenaza de una guerra nuclear para evitar la agresión comunista","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 26, “A People of Plenty” (begins p. 1163; GI Bill, p. 1165; Suburban Culture, pp. 1166-1167; Women, p. 1171), “Cracks in the Picture Window” (begins p. 1173), and “The Early Years of the Civil Rights Movement” (begins p. 1178; Brown, pp. 1180-1181; Montgomery, pp. 1182-1184; SCLC, p. 1186).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 26, “A People of Plenty” (empieza en la pág. 1163; GI Bill, pág. 1165; Suburban Culture, págs. 1166-1167; Women, pág. 1171), “Cracks in the Picture Window” (empieza en la pág. 1173) y “The Early Years of the Civil Rights Movement” (empieza en la pág. 1178; Brown, págs. 1180-1181; Montgomery, págs. 1182-1184; SCLC, pág. 1186).","The Clue Card says people in Montgomery organized carpools or walked instead of riding the city buses for 381 days. The secret word names that kind of protest. Use the decoder key to spell it, one letter at a time.":"La tarjeta de indicios dice que en Montgomery la gente organizó viajes compartidos en auto o caminó en lugar de usar los autobuses de la ciudad durante 381 días. La palabra secreta nombra ese tipo de protesta. Usa la clave del decodificador para escribirla, una letra a la vez.","Sending the army to fight in every Communist country":"Enviar al ejército a luchar en todos los países comunistas","That was the last hint. Read the Clue Card slowly and try again.":"Esa fue la última pista. Lee la tarjeta de indicios despacio y vuelve a intentarlo.","Time":"Tiempo","Core Objectives 7, 8, and 9: Identify the factors that contributed to America’s postwar prosperity and analyze how that prosperity benefited women and people of color. Examine the major criticisms of postwar American society and consumer culture. Evaluate the goals and major achievements of the civil rights movement during the 1950s.":"Objetivos principales 7, 8 y 9: Identificar los factores que contribuyeron a la prosperidad de Estados Unidos después de la guerra y analizar cómo esa prosperidad benefició a las mujeres y a las personas de color. Examinar las principales críticas a la sociedad estadounidense de la posguerra y a la cultura de consumo. Evaluar las metas y los principales logros del movimiento por los derechos civiles durante los años cincuenta.","Enter your first name, last name, and period at the top first.":"Primero escribe tu nombre, apellido y período arriba.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 25, “Another Red Scare” (begins p. 1142) and Ch. 26, “Moderate Republicanism: The Eisenhower Years” (begins p. 1156; Dynamic Conservatism, p. 1158; Highways, p. 1159; Fall of McCarthy, p. 1162).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 25, “Another Red Scare” (empieza en la pág. 1142) y cap. 26, “Moderate Republicanism: The Eisenhower Years” (empieza en la pág. 1156; Dynamic Conservatism, pág. 1158; Highways, pág. 1159; Fall of McCarthy, pág. 1162).","The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.":"La puerta no se abrió. Revisa los dígitos debajo de cada candado y escríbelos en orden: primero el del Candado 1.","Eisenhower and Secretary of State John Foster Dulles said that containing communism was not enough. They wanted to “roll back” communism. They knew they could not win a ground war against the Soviet Union or China, so they used “massive retaliation,” the threat of nuclear war to stop Communist aggression. Norton says this strategy turned every dispute into a possible war of annihilation. At the same time, the CIA secretly used propaganda, bribery, and, in some cases, assassinations to change other nations’ politics. In Vietnam, Eisenhower explained his “falling-domino” theory. But when the British would not join, he told the French at Dien Bien Phu that U.S. military action was “politically impossible.”":"Eisenhower y el secretario de Estado John Foster Dulles dijeron que contener al comunismo no era suficiente. Querían “hacer retroceder” al comunismo. Sabían que no podían ganar una guerra terrestre contra la Unión Soviética o China, así que usaron la “represalia masiva”, la amenaza de una guerra nuclear para detener la agresión comunista. Norton dice que esta estrategia convirtió cada disputa en una posible guerra de aniquilación. Al mismo tiempo, la CIA usaba en secreto la propaganda, el soborno y, en algunos casos, los asesinatos para cambiar la política de otras naciones. En Vietnam, Eisenhower explicó su teoría del “dominó que cae”. Pero cuando los británicos no quisieron unirse, les dijo a los franceses en Dien Bien Phu que la acción militar de EE. UU. era “políticamente imposible”.","Your answer":"Tu respuesta","North Korean troops invade South Korea":"Tropas de Corea del Norte invaden Corea del Sur","The Clue Card describes a kind of protest without naming it. A secret message names it. Each letter in the message was moved 7 steps forward in the alphabet. Decode it to name the protest.":"La tarjeta de indicios describe un tipo de protesta sin nombrarla. Un mensaje secreto la nombra. Cada letra del mensaje se movió 7 pasos hacia adelante en el alfabeto. Decodifícalo para nombrar la protesta.","You escaped and wrote your Debrief. Ready to submit.":"Escapaste y escribiste tu Informe final. Listo para entregar.","Type your answer here...":"Escribe tu respuesta aquí...","Core Objectives 5 and 6: Examine the emergence of the Red Scare and explain its impact on American politics and society. Explain President Dwight Eisenhower’s political philosophy and domestic priorities.":"Objetivos principales 5 y 6: Examinar el surgimiento del Temor Rojo y explicar su impacto en la política y la sociedad estadounidenses. Explicar la filosofía política y las prioridades internas del presidente Dwight Eisenhower.","He asked Congress to declare war on Egypt":"Le pidió al Congreso que declarara la guerra a Egipto","Not quite. Re-read the Clue Card and match each event to its date.":"Casi. Vuelve a leer la tarjeta de indicios y relaciona cada hecho con su fecha.","UNIT 7 · THE AMERICAN AGE | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 7 · LA ERA ESTADOUNIDENSE | CPUSH | DANIEL GARZA, M.A.","He sent U.S. troops to help Britain and France":"Envió tropas de EE. UU. para ayudar a Gran Bretaña y Francia","Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.":"Abre los 5 candados y luego escribe el código de salida de 5 dígitos. Termina con el Informe final.","Exit door":"Puerta de salida","The drive-in movie theater closed for the night, and the manager locked the projection booth. Film reels, a projector, and a speaker box from the 1950s sit in the room. The door has <b>5 locks<\/b>. Each lock matches one big idea from Lesson 17. Solve them all to find the <b>5-digit exit code<\/b>.":"El autocine cerró por la noche y el gerente cerró con llave la cabina de proyección. En la sala hay rollos de película, un proyector y una bocina de los años cincuenta. La puerta tiene <b>5 candados<\/b>. Cada candado corresponde a una idea importante de la Lección 17. Resuélvelos todos para encontrar el <b>código de salida de 5 dígitos<\/b>.","Progress loaded. Welcome back.":"Progreso cargado. Bienvenido de nuevo.","DEBRIEF":"INFORME FINAL","Core Objectives 3 and 4: Describe Truman’s efforts to expand the New Deal, and evaluate the effectiveness of his own Fair Deal agenda. Assess the major international developments during the period 1949–1950, including the outbreak of the Korean War, and explain how U.S. foreign policy changed as a result.":"Objetivos principales 3 y 4: Describir los esfuerzos de Truman para ampliar el New Deal y evaluar la eficacia de su propio programa, el Fair Deal. Evaluar los principales acontecimientos internacionales del periodo 1949–1950, incluido el comienzo de la Guerra de Corea, y explicar cómo cambió la política exterior de EE. UU. como resultado.","Type the exit code":"Escribe el código de salida","Marshall Plan":"Plan Marshall","Unscramble the letters to fill the blank.":"Ordena las letras para llenar el espacio en blanco.","Match each term to the best description. Use the Clue Card.":"Relaciona cada término con la mejor descripción. Usa la tarjeta de indicios.","Open all 5 locks first. The digits go in order: Lock 1 first.":"Primero abre los 5 candados. Los dígitos van en orden: primero el del Candado 1.","Read the Clue Card sentence that begins “This came to be called.” The missing word is the name for McCarthy’s campaign of unproven charges.":"Lee la oración de la tarjeta de indicios que empieza con “A esto se le llamó”. La palabra que falta es el nombre de la campaña de acusaciones sin pruebas de McCarthy.","Churchill’s name for the wall of Soviet control that shut off Eastern Europe":"El nombre que Churchill dio al muro de control soviético que aisló a Europa del Este","Each answer is in the Clue Card. Look for what massive retaliation meant, what Eisenhower demanded at Suez, and what Congress did after Sputnik.":"Cada respuesta está en la tarjeta de indicios. Busca qué significaba la represalia masiva, qué exigió Eisenhower en Suez y qué hizo el Congreso después del Sputnik.","Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.":"Todavía no escapas (se marca INCOMPLETO). Aun así puedes descargar tu archivo y entregarlo.","ESCAPED":"¡ESCAPASTE!","Crises followed. In 1956, Hungarians revolted against Soviet rule, and the Soviet response stunned the world. Many Hungarians felt abandoned by the United States. That fall, Britain, France, and Israel attacked Egypt over the Suez Canal. Eisenhower demanded that they pull back or face severe economic sanctions, and they agreed to a cease-fire on November 7. On October 4, 1957, the Soviets launched <i>Sputnik<\/i>, the first artificial Earth satellite. Congress increased defense spending, boosted science education, and created NASA in 1958.":"Siguieron las crisis. En 1956, los húngaros se rebelaron contra el dominio soviético, y la respuesta soviética dejó al mundo atónito. Muchos húngaros sintieron que Estados Unidos los había abandonado. Ese otoño, Gran Bretaña, Francia e Israel atacaron Egipto por el Canal de Suez. Eisenhower exigió que se retiraran o enfrentarían duras sanciones económicas, y aceptaron un alto el fuego el 7 de noviembre. El 4 de octubre de 1957, los soviéticos lanzaron el <i>Sputnik<\/i>, el primer satélite artificial de la Tierra. El Congreso aumentó el gasto en defensa, impulsó la educación científica y creó la NASA en 1958.","Have a saved file? Load it to continue.":"¿Tienes un archivo guardado? Cárgalo para continuar.","That file did not work. Choose a progress file saved from this Escape Room.":"Ese archivo no funcionó. Elige un archivo de progreso guardado de esta sala de escape.","CLUE CARD":"TARJETA DE INDICIOS","Not quite. Check each match against the Clue Card. Which one are you least sure about?":"Casi. Revisa cada pareja con la tarjeta de indicios. ¿De cuál estás menos seguro?","Choose a description...":"Elige una descripción...","Type the answer in English.":"Escribe la respuesta en inglés.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 25, “Expanding the New Deal” (begins p. 1124) and “The Cold War Heats Up” (begins p. 1135; Sacking a Hero and A Cease-Fire, p. 1140).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 25, “Expanding the New Deal” (empieza en la pág. 1124) y “The Cold War Heats Up” (empieza en la pág. 1135; Sacking a Hero y A Cease-Fire, pág. 1140).","Core Objectives 10 and 11: Explain how the Eisenhower administration’s commitment to “rolling back” communism around the world shaped U.S. foreign policy. Assess the effectiveness of Eisenhower’s responses to the various foreign crises that arose during his presidency.":"Objetivos principales 10 y 11: Explicar cómo el compromiso del gobierno de Eisenhower de “hacer retroceder” al comunismo en todo el mundo dio forma a la política exterior de EE. UU. Evaluar la eficacia de las respuestas de Eisenhower a las distintas crisis internacionales que surgieron durante su presidencia.","Congress passes the Taft-Hartley Labor Act over Truman’s veto":"El Congreso aprueba la Ley Laboral Taft-Hartley a pesar del veto de Truman","The Cold War also grew hotter. In 1949, the Communists won China’s civil war and the Soviets set off a nuclear bomb. In 1950, the report NSC-68 called for a huge military buildup. On June 25, 1950, North Korean troops invaded South Korea, and Truman fought the war through the United Nations without a declaration of war from Congress. In April 1951, he removed General MacArthur, who had publicly criticized him. An armistice was signed in July 1953, and Korea stayed divided.":"La Guerra Fría también se volvió más intensa. En 1949, los comunistas ganaron la guerra civil de China y los soviéticos hicieron explotar una bomba nuclear. En 1950, el informe NSC-68 pidió un enorme aumento de las fuerzas militares. El 25 de junio de 1950, tropas de Corea del Norte invadieron Corea del Sur, y Truman libró la guerra por medio de las Naciones Unidas, sin una declaración de guerra del Congreso. En abril de 1951, destituyó al general MacArthur, quien lo había criticado en público. En julio de 1953 se firmó un armisticio, y Corea siguió dividida.","In <i>Brown v. Board of Education<\/i> (May 17, 1954), the Supreme Court overturned “separate but equal” in public schools. Senator Harry Byrd called for “massive resistance,” and by 1960 only 765 of 6,676 southern school districts had desegregated. After Rosa Parks refused to give up her bus seat on December 1, 1955, African Americans in Montgomery, Alabama, organized carpools or walked instead of riding the city buses for 381 days. Led by Martin Luther King Jr., who preached nonviolent civil disobedience, they won a federal case against segregation on city buses on December 20, 1956. In 1957, King became president of the new Southern Christian Leadership Conference (SCLC).":"En <i>Brown v. Board of Education<\/i> (17 de mayo de 1954), la Corte Suprema anuló la doctrina de “separados pero iguales” en las escuelas públicas. El senador Harry Byrd pidió una “resistencia masiva”, y para 1960 solo 765 de los 6,676 distritos escolares del sur habían eliminado la segregación. Después de que Rosa Parks se negó a ceder su asiento en el autobús el 1 de diciembre de 1955, los afroamericanos de Montgomery, Alabama, organizaron viajes compartidos en auto o caminaron en lugar de usar los autobuses de la ciudad durante 381 días. Dirigidos por Martin Luther King Jr., quien predicaba la desobediencia civil no violenta, ganaron un caso federal contra la segregación en los autobuses de la ciudad el 20 de diciembre de 1956. En 1957, King se convirtió en presidente de la nueva Conferencia de Liderazgo Cristiano del Sur (SCLC).","Not quite. Re-read the Clue Card. Use the scrambled letters to check your spelling.":"Casi. Vuelve a leer la tarjeta de indicios. Usa las letras desordenadas para revisar tu ortografía.","Progress file downloaded. Use Load Progress to continue later.":"Se descargó el archivo de progreso. Usa «Cargar progreso» para continuar más tarde.","After World War II, many Americans feared that Communists were hiding in the United States. In 1947, Truman ordered background checks of federal workers. The House Committee on Un-American Activities (HUAC) investigated Hollywood, and the Hollywood Ten, who refused to answer questions, were jailed and blacklisted from the film industry. In 1950, Senator Joseph McCarthy claimed to have a list of Communists in the State Department, but he never gave it out. He did not find even one Communist agent in the federal government, yet his accusations ruined lives and chilled free speech. This came to be called McCarthyism. A drive to remove gay people from federal jobs went along with this crusade. Norton says the Red Scare violated the civil liberties of innocent people. On December 2, 1954, the Senate voted 67–22 to condemn McCarthy.":"Después de la Segunda Guerra Mundial, muchos estadounidenses temían que hubiera comunistas escondidos en Estados Unidos. En 1947, Truman ordenó revisar los antecedentes de los empleados federales. El Comité de Actividades Antiestadounidenses de la Cámara de Representantes (HUAC) investigó a Hollywood, y los Diez de Hollywood, que se negaron a responder preguntas, fueron encarcelados y puestos en la lista negra de la industria del cine. En 1950, el senador Joseph McCarthy dijo tener una lista de comunistas en el Departamento de Estado, pero nunca la entregó. No encontró ni un solo agente comunista en el gobierno federal, pero sus acusaciones arruinaron vidas y frenaron la libertad de expresión. A esto se le llamó macartismo (McCarthyism). Junto con esta cruzada hubo una campaña para sacar a las personas homosexuales de los empleos federales. Norton dice que el Temor Rojo violó los derechos civiles de personas inocentes. El 2 de diciembre de 1954, el Senado votó 67 a 22 para condenar a McCarthy.","A drive-in movie projection booth at night. On the left, a small window shows the movie screen and a row of parked cars, above a table with a film projector and two film reels. On the right, a clock and a strip of film hang above a cabinet with a speaker box on top. The door has a PROJECTION BOOTH sign and five padlocks in a row. Under each padlock is a window for one digit of the exit code.":"Una cabina de proyección de un autocine, de noche. A la izquierda, una ventanita muestra la pantalla de cine y una fila de autos estacionados, sobre una mesa con un proyector de cine y dos rollos de película. A la derecha, un reloj y una tira de película cuelgan sobre un mueble de cajones con una bocina encima. La puerta tiene un letrero de CABINA DE PROYECCIÓN y cinco candados en fila. Debajo de cada candado hay una ventanita para un dígito del código de salida.","How did Eisenhower respond to the Suez crisis in 1956?":"¿Cómo respondió Eisenhower a la crisis de Suez en 1956?","The clock starts when you press the button. Most students finish in about 20 minutes.":"El reloj empieza cuando oprimes el botón. La mayoría de los estudiantes termina en unos 20 minutos.","Debrief":"Informe final","Solve the puzzle to open the lock and reveal one digit.":"Resuelve el acertijo para abrir el candado y descubrir un dígito.","The Film Reels":"Los rollos de película","The order is Taft-Hartley (1947), the order ending segregation in the armed forces (1948), the invasion of South Korea (1950), then MacArthur removed (1951).":"El orden es: Taft-Hartley (1947), la orden que puso fin a la segregación en las fuerzas armadas (1948), la invasión de Corea del Sur (1950) y, por último, la destitución de MacArthur (1951).","Your time:":"Tu tiempo:","McCarthy’s charges had no proof, yet they ruined many lives and chilled free speech. This era of fear became known by one word: “________.”":"Las acusaciones de McCarthy no tenían pruebas, pero arruinaron muchas vidas y frenaron la libertad de expresión. Esta época de miedo se conoció con una sola palabra: “________”.","What was “massive retaliation”?":"¿Qué era la “represalia masiva”?","Critics said the prosperity had cracks. Economist John Kenneth Galbraith attacked the idea that growth would solve all problems, and the Beats rejected consumer culture. Poverty afflicted nearly half the African American population, compared to one-fourth of Whites.":"Los críticos decían que la prosperidad tenía grietas. El economista John Kenneth Galbraith atacó la idea de que el crecimiento resolvería todos los problemas, y los Beats rechazaron la cultura de consumo. La pobreza afectaba a casi la mitad de la población afroamericana, frente a una cuarta parte de los blancos.","Open each lock in order. Read the <b>Clue Card<\/b>. The answer is in the card.":"Abre cada candado en orden. Lee la <b>tarjeta de indicios<\/b>. La respuesta está en la tarjeta.","The 1950s brought great prosperity. War spending, the GI Bill, highways, and the arms race all helped the economy grow. About 5 million veterans bought homes with GI Bill loans, and almost 8 million went to college or job training. But racism limited these benefits. Many colleges refused Black students, and “redlining” kept Black veterans from buying homes in White neighborhoods. Of the 13 million homes built from 1948 to 1958, more than 11 million were in suburbs, and Levittown contracts excluded “members of other than the Caucasian race.” In 1950, women were 29 percent of the workforce, but most held clerical or service jobs, and women of color were mostly maids and cooks.":"Los años cincuenta trajeron una gran prosperidad. El gasto de guerra, la Ley GI, las carreteras y la carrera armamentista ayudaron a crecer la economía. Unos 5 millones de veteranos compraron casas con préstamos de la Ley GI, y casi 8 millones fueron a la universidad o a capacitación laboral. Pero el racismo limitó estos beneficios. Muchas universidades rechazaban a estudiantes negros, y el “redlining” (negación de préstamos por zona) impedía que los veteranos negros compraran casas en barrios de blancos. De los 13 millones de casas construidas entre 1948 y 1958, más de 11 millones estaban en los suburbios, y los contratos de Levittown excluían a “miembros de otra raza que no fuera la caucásica”. En 1950, las mujeres eran el 29 por ciento de la fuerza laboral, pero la mayoría tenía empleos de oficina o de servicios, y las mujeres de color eran en su mayoría empleadas domésticas y cocineras.","The Speaker Box":"La bocina","Check":"Comprobar","A 1949 alliance of twelve nations in which an attack on one is an attack on all":"Una alianza de 1949 de doce naciones en la que un ataque contra una es un ataque contra todas","Iron curtain":"Cortina de hierro","Congress cut defense spending":"El Congreso redujo el gasto en defensa","He demanded that Britain, France, and Israel pull back, or face severe economic sanctions":"Exigió que Gran Bretaña, Francia e Israel se retiraran, o enfrentarían duras sanciones económicas","Two terms are about money and promises to other countries (Truman Doctrine, Marshall Plan). One is a phrase for a divided Europe (Iron curtain). One is an alliance (NATO).":"Dos términos tratan de dinero y promesas a otros países (Doctrina Truman, Plan Marshall). Uno es una frase sobre una Europa dividida (Cortina de hierro). Uno es una alianza (OTAN).","Not quite. At least one answer is off. Re-read the Clue Card for massive retaliation, the Suez crisis, and what happened after Sputnik.":"Casi. Al menos una respuesta no es correcta. Vuelve a leer la tarjeta de indicios para ver la represalia masiva, la crisis de Suez y lo que pasó después del Sputnik.","Truman Doctrine":"Doctrina Truman","The code has 5 digits. Fill every box.":"El código tiene 5 dígitos. Llena todas las casillas.","Truman wanted to keep and expand the New Deal, but Republicans and conservative southern Democrats stood in his way. In early 1947, Congress passed the Taft-Hartley Labor Act over his veto to limit the power of unions. In April 1947, Jackie Robinson joined the Brooklyn Dodgers as the first African American in modern Major League baseball. In July 1948, Truman ordered an end to racial segregation in the armed forces. After his surprise win in the 1948 election, he offered the Fair Deal, but Congress rejected most of it, including national health insurance.":"Truman quería mantener y ampliar el New Deal, pero los republicanos y los demócratas conservadores del sur se lo impedían. A principios de 1947, el Congreso aprobó la Ley Laboral Taft-Hartley a pesar de su veto, para limitar el poder de los sindicatos. En abril de 1947, Jackie Robinson se unió a los Dodgers de Brooklyn como el primer afroamericano en el béisbol de las Grandes Ligas de la era moderna. En julio de 1948, Truman ordenó el fin de la segregación racial en las fuerzas armadas. Después de su sorpresiva victoria en las elecciones de 1948, propuso el Fair Deal (Trato Justo), pero el Congreso rechazó la mayor parte, incluido el seguro médico nacional.","One last step: write your Debrief below.":"Un último paso: escribe tu Informe final abajo.","The door swings open!":"¡La puerta se abre de golpe!","Exit code digit 1":"Dígito 1 del código de salida","Hints used":"Pistas usadas"},"ar":{"Save Progress":"حفظ التقدم","Load Progress":"تحميل التقدم","Finished — Download File to Submit":"انتهيت — نزّل الملف لتسليمه","Clear all my answers":"امسح كل إجاباتي","FIRST NAME *":"الاسم الأول *","LAST NAME *":"اسم العائلة *","PERIOD *":"الحصة *","DATE (fills in when you finish)":"التاريخ (يُكتب تلقائيًا عند الانتهاء)","e.g. 3":"مثال: 3","Automatic":"تلقائي","Please type your first name, last name, and period first.":"اكتب أولًا اسمك الأول واسم العائلة والحصة.","Western Expansion and Southern Secession":"التوسع غربًا وانفصال الجنوب","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"الوحدة 3 · بيت منقسم وأُعيد بناؤه | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — قانون العبيد الهاربين","Bleeding Kansas":"Bleeding Kansas — كانساس النازفة","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"الوحدة 3 · بيت منقسم وأعيد بناؤه | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"تم تنزيل ملف التقدم. احتفظ به في مكان آمن. استخدم «تحميل التقدم» لتكمل لاحقًا.","Progress loaded.":"تم تحميل التقدم.","Could not read that file.":"تعذّرت قراءة هذا الملف.","Treaty of Guadalupe Hidalgo":"معاهدة غوادالوبي هيدالغو (Treaty of Guadalupe Hidalgo)","PROJECTION BOOTH":"غرفة العرض","NATO":"حلف الناتو (NATO)","Clear":"مسح","Type the answer in English. Use the digits 0-9.":"اكتب الإجابة بالإنجليزية. استخدم الأرقام 0-9.","Match every term first.":"طابق كل المصطلحات أولًا.","Tap all 4 events first, in order.":"المس الأحداث الأربعة كلها أولًا، بالترتيب.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 26, “Foreign Policy in the 1950s” (begins p. 1187; Massive Retaliation and the CIA, p. 1189; Indochina, pp. 1191-1192) and “Reelection and Foreign Crises” (begins p. 1194; Suez, pp. 1195-1197; Sputnik, p. 1197).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 26، “Foreign Policy in the 1950s” (يبدأ في ص. 1187؛ Massive Retaliation وCIA، ص. 1189؛ Indochina، ص. 1191-1192) و“Reelection and Foreign Crises” (يبدأ في ص. 1194؛ Suez، ص. 1195-1197؛ Sputnik، ص. 1197).","Congress increased defense spending, boosted science education, and created NASA":"زاد الكونغرس الإنفاق الدفاعي، وعزّز تعليم العلوم، وأنشأ وكالة ناسا (NASA)","digit":"رقم","What happened in the United States after the Soviets launched Sputnik?":"ماذا حدث في الولايات المتحدة بعد أن أطلق السوفييت سبوتنيك (Sputnik)؟","Locks":"الأقفال","Open the Door":"افتح الباب","Massive retaliation: the threat of nuclear war to stop Communist aggression. At Suez, Eisenhower demanded that Britain, France, and Israel pull back. After Sputnik, Congress spent more on defense and science and created NASA.":"الانتقام الشامل: التهديد بحرب نووية لإيقاف العدوان الشيوعي. وفي السويس، طالب أيزنهاور بريطانيا وفرنسا وإسرائيل بالانسحاب. وبعد سبوتنيك، أنفق الكونغرس أكثر على الدفاع والعلوم وأنشأ وكالة ناسا.","Hint":"تلميح","Not quite. Decode one letter at a time with the key, then check your spelling.":"ليس تمامًا. فُكّ تشفير حرف واحد في كل مرة باستخدام المفتاح، ثم تحقق من تهجئتك.","The Cold War was a fifty-year struggle between the United States and the Soviet Union that never became a shooting war. It grew out of a clash between democratic capitalism and authoritarian communism. At the Yalta Conference, Stalin promised free elections in Eastern Europe. Instead, the Soviets set up “puppet” governments there, and Winston Churchill warned that an “iron curtain” had been drawn down.":"كانت الحرب الباردة صراعًا دام خمسين عامًا بين الولايات المتحدة والاتحاد السوفيتي، ولم يتحول قط إلى حرب بإطلاق النار. وقد نشأت من الصدام بين الرأسمالية الديمقراطية والشيوعية الاستبدادية. ففي مؤتمر يالطا (Yalta)، وعد ستالين (Stalin) بإجراء انتخابات حرة في أوروبا الشرقية. لكن السوفييت أقاموا هناك حكومات «دُمى»، وحذّر ونستون تشرشل (Winston Churchill) من أن «ستارًا حديديًا» قد أُسدل.","The United States joined the Soviet space program":"انضمت الولايات المتحدة إلى البرنامج الفضائي السوفيتي","President Eisenhower promised “moderate Republicanism.” He wanted a balanced budget and a smaller role for the federal government. He called his plan “dynamic conservatism”: “conservative when it comes to money and liberal when it comes to human beings.” He kept the New Deal, extended Social Security to millions more workers, and signed the Federal-Aid Highway Act (1956), which built the interstate highways.":"وعد الرئيس أيزنهاور (Eisenhower) بـ«الجمهورية المعتدلة» (moderate Republicanism). وأراد ميزانية متوازنة ودورًا أصغر للحكومة الفيدرالية. وسمّى خطته «المحافظة الديناميكية»: «محافظ عندما يتعلق الأمر بالمال، وليبرالي عندما يتعلق الأمر بالبشر». وأبقى على «الصفقة الجديدة» (New Deal)، ووسّع الضمان الاجتماعي ليشمل ملايين العمال الآخرين، ووقّع قانون المساعدة الفيدرالية للطرق السريعة (Federal-Aid Highway Act) (1956) الذي بنى الطرق السريعة بين الولايات.","A promise never to use nuclear weapons":"وعد بعدم استخدام الأسلحة النووية أبدًا","The Cold War and the Affluent Fifties":"الحرب الباردة ورخاء الخمسينيات","Answer every question first.":"أجب عن كل الأسئلة أولًا.","How to escape:":"كيف تهرب:","Truman removes General MacArthur":"يعزل ترومان الجنرال ماك آرثر (MacArthur)","You escaped! Write your Debrief, then download your file to submit.":"لقد هربت! اكتب ملخصك الختامي، ثم نزّل ملفك لتسليمه.","The Marquee Sign":"لافتة واجهة السينما","A program that gave $13 billion to sixteen European nations to rebuild their economies":"برنامج قدّم 13 مليار دولار لست عشرة دولة أوروبية لإعادة بناء اقتصاداتها","A plan to give money to rebuild Europe":"خطة لتقديم المال لإعادة بناء أوروبا","The United States answered with a policy of containment. In 1947, President Truman announced the Truman Doctrine: the United States would “support free peoples” resisting takeover, starting with $400 million for Greece and Turkey. The Marshall Plan then gave $13 billion to sixteen European nations to rebuild. In 1948, the Soviets blockaded West Berlin, and the United States and its allies flew in supplies for 321 days. In April 1949, twelve nations signed the North Atlantic Treaty and formed NATO.":"ردّت الولايات المتحدة بسياسة الاحتواء. ففي عام 1947، أعلن الرئيس ترومان (Truman) مبدأ ترومان (Truman Doctrine): ستدعم الولايات المتحدة «الشعوب الحرة» التي تقاوم السيطرة عليها، بدءًا بمبلغ 400 مليون دولار لليونان (Greece) وتركيا (Turkey). ثم قدّمت خطة مارشال (Marshall Plan) 13 مليار دولار لست عشرة دولة أوروبية لإعادة البناء. وفي عام 1948، حاصر السوفييت برلين الغربية، فنقلت الولايات المتحدة وحلفاؤها الإمدادات جوًا مدة 321 يومًا. وفي أبريل 1949، وقّعت اثنتا عشرة دولة معاهدة شمال الأطلسي وكوّنت حلف الناتو (NATO).","The word starts with M and has 11 letters. It is the senator’s last name plus “ism.”":"تبدأ الكلمة بالحرف M ولها 11 حرفًا. وهي اسم عائلة السيناتور مضافًا إليه “ism”.","The Cold War ended":"انتهت الحرب الباردة","You are locked in the projection booth.":"أنت محبوس في غرفة العرض.","Core Objectives 1 and 2: Explain why and how the Cold War between the United States and the Soviet Union developed after World War II. Analyze the impact of American efforts to contain the Soviet Union and the growth of global communism during Truman’s presidency.":"الأهداف الأساسية 1 و2: شرح لماذا وكيف تطورت الحرب الباردة بين الولايات المتحدة والاتحاد السوفيتي بعد الحرب العالمية الثانية. تحليل أثر الجهود الأمريكية لاحتواء الاتحاد السوفيتي وانتشار الشيوعية في العالم خلال رئاسة ترومان (Truman).","In the message, the letter I is really B, and the letter V is really O. The word has 7 letters and starts with B.":"في الرسالة، الحرف I هو في الحقيقة B، والحرف V هو في الحقيقة O. وللكلمة 7 أحرف وتبدأ بالحرف B.","All 5 locks are open. Type the 5 digits in order, Lock 1 first.":"الأقفال الخمسة مفتوحة. اكتب الأرقام الخمسة بالترتيب: رقم القفل 1 أولًا.","The Screen Window":"نافذة الشاشة","Pick the correct answer for all three questions.":"اختر الإجابة الصحيحة للأسئلة الثلاثة.","He did nothing at all":"لم يفعل شيئًا على الإطلاق","Escape the Projection Booth":"اهرب من غرفة العرض","The door is open!":"الباب مفتوح!","Truman orders an end to racial segregation in the armed forces":"يأمر ترومان بإنهاء الفصل العنصري في القوات المسلحة","Decoded answer":"الإجابة بعد فك التشفير","Type your answer first.":"اكتب إجابتك أولًا.","Clear all my work and start over":"امسح كل عملي وابدأ من جديد","Look for the dates in the Clue Card: early 1947, July 1948, June 25, 1950, and April 1951. Each event has its own date.":"ابحث عن التواريخ في بطاقة القرائن: أوائل 1947، ويوليو 1948، و25 يونيو 1950، وأبريل 1951. لكل حدث تاريخه الخاص.","Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.":"اكتب من 3 إلى 4 جمل. اذكر القفل واستخدم معلومة واحدة من بطاقة القرائن الخاصة به. يمكنك كتابة هذا حتى لو لم تهرب.","Fill in the blank using the Clue Card.":"املأ الفراغ باستخدام بطاقة القرائن.","Which lock was hardest, and what did you learn that you did not know before?":"أي قفل كان الأصعب، وماذا تعلمت ولم تكن تعرفه من قبل؟","The Projector":"جهاز العرض","A 1947 promise to support free peoples resisting takeover, starting with $400 million for Greece and Turkey":"وعد في عام 1947 بدعم الشعوب الحرة التي تقاوم السيطرة عليها، بدءًا بمبلغ 400 مليون دولار لليونان (Greece) وتركيا (Turkey)","Tap the four events in the order they happened. Tap an event again to take it back.":"المس الأحداث الأربعة بالترتيب الذي وقعت به. المس الحدث مرة أخرى للتراجع عنه.","THE EXIT DOOR":"باب الخروج","The iron curtain was Churchill’s phrase for Soviet control of Eastern Europe. The Truman Doctrine began with $400 million for Greece and Turkey. The Marshall Plan gave $13 billion to rebuild Europe. NATO is the 1949 alliance.":"الستار الحديدي هو عبارة تشرشل (Churchill) عن السيطرة السوفيتية على أوروبا الشرقية. وبدأ مبدأ ترومان (Truman Doctrine) بمبلغ 400 مليون دولار لليونان (Greece) وتركيا (Turkey). وقدّمت خطة مارشال (Marshall Plan) 13 مليار دولار لإعادة بناء أوروبا. وحلف الناتو (NATO) هو تحالف عام 1949.","If you get stuck, press <b>Hint<\/b>. Hints are free, but your teacher can see how many you used.":"إذا تعثرت، اضغط <b>تلميح<\/b>. التلميحات مجانية، لكن معلمك يستطيع أن يرى كم تلميحًا استخدمت.","Enter the Projection Booth":"ادخل غرفة العرض","Decoder key: the <span style=\"color:var(--hl);font-weight:700\">peach<\/span> letter is in the message. The white letter under it is the real letter.":"مفتاح فك التشفير: الحرف <span style=\"color:var(--hl);font-weight:700\">الخوخي<\/span> هو الحرف الموجود في الرسالة. والحرف الأبيض تحته هو الحرف الحقيقي.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 25, “Truman and the Cold War” (begins p. 1114) and “The Containment Policy” (begins p. 1117).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 25، “Truman and the Cold War” (يبدأ في ص. 1114) و“The Containment Policy” (يبدأ في ص. 1117).","Using the threat of nuclear war to prevent Communist aggression":"استخدام التهديد بحرب نووية لمنع العدوان الشيوعي","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 26, “A People of Plenty” (begins p. 1163; GI Bill, p. 1165; Suburban Culture, pp. 1166-1167; Women, p. 1171), “Cracks in the Picture Window” (begins p. 1173), and “The Early Years of the Civil Rights Movement” (begins p. 1178; Brown, pp. 1180-1181; Montgomery, pp. 1182-1184; SCLC, p. 1186).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 26، “A People of Plenty” (يبدأ في ص. 1163؛ GI Bill، ص. 1165؛ Suburban Culture، ص. 1166-1167؛ Women، ص. 1171)، و“Cracks in the Picture Window” (يبدأ في ص. 1173)، و“The Early Years of the Civil Rights Movement” (يبدأ في ص. 1178؛ Brown، ص. 1180-1181؛ Montgomery، ص. 1182-1184؛ SCLC، ص. 1186).","The Clue Card says people in Montgomery organized carpools or walked instead of riding the city buses for 381 days. The secret word names that kind of protest. Use the decoder key to spell it, one letter at a time.":"تقول بطاقة القرائن إن الناس في مونتغمري (Montgomery) نظّموا رحلات مشتركة بالسيارات أو مشوا على الأقدام بدلًا من ركوب حافلات المدينة مدة 381 يومًا. والكلمة السرية تسمّي هذا النوع من الاحتجاج. استخدم مفتاح فك التشفير لتهجّيها، حرفًا حرفًا.","Sending the army to fight in every Communist country":"إرسال الجيش للقتال في كل دولة شيوعية","That was the last hint. Read the Clue Card slowly and try again.":"كان هذا آخر تلميح. اقرأ بطاقة القرائن ببطء وحاول مرة أخرى.","Time":"الوقت","Core Objectives 7, 8, and 9: Identify the factors that contributed to America’s postwar prosperity and analyze how that prosperity benefited women and people of color. Examine the major criticisms of postwar American society and consumer culture. Evaluate the goals and major achievements of the civil rights movement during the 1950s.":"الأهداف الأساسية 7 و8 و9: تحديد العوامل التي ساهمت في رخاء أمريكا بعد الحرب، وتحليل كيف استفادت النساء والملونون من هذا الرخاء. دراسة أهم الانتقادات للمجتمع الأمريكي بعد الحرب ولثقافة الاستهلاك. تقييم أهداف حركة الحقوق المدنية وأهم إنجازاتها خلال الخمسينيات.","Enter your first name, last name, and period at the top first.":"اكتب اسمك الأول واسم العائلة والحصة في الأعلى أولًا.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 25, “Another Red Scare” (begins p. 1142) and Ch. 26, “Moderate Republicanism: The Eisenhower Years” (begins p. 1156; Dynamic Conservatism, p. 1158; Highways, p. 1159; Fall of McCarthy, p. 1162).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 25، “Another Red Scare” (يبدأ في ص. 1142) والفصل 26، “Moderate Republicanism: The Eisenhower Years” (يبدأ في ص. 1156؛ Dynamic Conservatism، ص. 1158؛ Highways، ص. 1159؛ Fall of McCarthy، ص. 1162).","The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.":"لم يُفتح الباب. تحقق من الأرقام تحت كل قفل، واكتبها بالترتيب: رقم القفل 1 أولًا.","Eisenhower and Secretary of State John Foster Dulles said that containing communism was not enough. They wanted to “roll back” communism. They knew they could not win a ground war against the Soviet Union or China, so they used “massive retaliation,” the threat of nuclear war to stop Communist aggression. Norton says this strategy turned every dispute into a possible war of annihilation. At the same time, the CIA secretly used propaganda, bribery, and, in some cases, assassinations to change other nations’ politics. In Vietnam, Eisenhower explained his “falling-domino” theory. But when the British would not join, he told the French at Dien Bien Phu that U.S. military action was “politically impossible.”":"قال أيزنهاور (Eisenhower) ووزير الخارجية جون فوستر دالاس (John Foster Dulles) إن احتواء الشيوعية لا يكفي. فقد أرادا «دحر» الشيوعية. وكانا يعلمان أنهما لا يستطيعان الفوز بحرب برية ضد الاتحاد السوفيتي أو الصين، فاستخدما «الانتقام الشامل»، أي التهديد بحرب نووية لإيقاف العدوان الشيوعي. ويقول كتاب نورتون (Norton) إن هذه الاستراتيجية حوّلت كل نزاع إلى حرب إبادة محتملة. وفي الوقت نفسه، استخدمت وكالة المخابرات المركزية (CIA) سرًا الدعاية والرشوة، وفي بعض الحالات الاغتيالات، لتغيير سياسات دول أخرى. وفي فيتنام، شرح أيزنهاور «نظرية الدومينو المتساقط». لكن عندما رفض البريطانيون الانضمام، قال للفرنسيين في ديان بيان فو (Dien Bien Phu) إن العمل العسكري الأمريكي «مستحيل سياسيًا».","Your answer":"إجابتك","North Korean troops invade South Korea":"القوات الكورية الشمالية تغزو كوريا الجنوبية","The Clue Card describes a kind of protest without naming it. A secret message names it. Each letter in the message was moved 7 steps forward in the alphabet. Decode it to name the protest.":"تصف بطاقة القرائن نوعًا من الاحتجاج دون أن تسمّيه. ورسالة سرية تسمّيه. تم تحريك كل حرف في الرسالة 7 خطوات إلى الأمام في الأبجدية. فك الشيفرة لتعرف اسم الاحتجاج.","You escaped and wrote your Debrief. Ready to submit.":"لقد هربت وكتبت ملخصك الختامي. أنت جاهز للتسليم.","Type your answer here...":"اكتب إجابتك هنا...","Core Objectives 5 and 6: Examine the emergence of the Red Scare and explain its impact on American politics and society. Explain President Dwight Eisenhower’s political philosophy and domestic priorities.":"الأهداف الأساسية 5 و6: دراسة ظهور «الذعر الأحمر» (Red Scare) وشرح أثره على السياسة والمجتمع في أمريكا. شرح الفلسفة السياسية للرئيس دوايت أيزنهاور (Dwight Eisenhower) وأولوياته داخل البلاد.","He asked Congress to declare war on Egypt":"طلب من الكونغرس إعلان الحرب على مصر","Not quite. Re-read the Clue Card and match each event to its date.":"ليس تمامًا. أعد قراءة بطاقة القرائن واربط كل حدث بتاريخه.","UNIT 7 · THE AMERICAN AGE | CPUSH | DANIEL GARZA, M.A.":"الوحدة 7 · العصر الأمريكي | CPUSH | DANIEL GARZA, M.A.","He sent U.S. troops to help Britain and France":"أرسل قوات أمريكية لمساعدة بريطانيا وفرنسا","Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.":"افتح الأقفال الخمسة، ثم اكتب رمز الخروج المكوّن من 5 أرقام. أنهِ بالملخص الختامي.","Exit door":"باب الخروج","The drive-in movie theater closed for the night, and the manager locked the projection booth. Film reels, a projector, and a speaker box from the 1950s sit in the room. The door has <b>5 locks<\/b>. Each lock matches one big idea from Lesson 17. Solve them all to find the <b>5-digit exit code<\/b>.":"أُغلقت سينما السيارات في الليل، وأقفل المدير غرفة العرض. وفي الغرفة بكرات أفلام وجهاز عرض وصندوق مكبّر صوت من الخمسينيات. وللباب <b>5 أقفال<\/b>. ويرتبط كل قفل بفكرة كبيرة من الدرس 17. حلّها كلها لتجد <b>رمز الخروج المكوَّن من 5 أرقام<\/b>.","Progress loaded. Welcome back.":"تم تحميل التقدم. أهلًا بعودتك.","DEBRIEF":"الملخص الختامي","Core Objectives 3 and 4: Describe Truman’s efforts to expand the New Deal, and evaluate the effectiveness of his own Fair Deal agenda. Assess the major international developments during the period 1949–1950, including the outbreak of the Korean War, and explain how U.S. foreign policy changed as a result.":"الأهداف الأساسية 3 و4: وصف جهود ترومان (Truman) لتوسيع «الصفقة الجديدة» (New Deal)، وتقييم مدى نجاح برنامجه الخاص «الصفقة العادلة» (Fair Deal). تقييم أهم الأحداث الدولية في الفترة 1949–1950، ومنها اندلاع الحرب الكورية، وشرح كيف تغيرت السياسة الخارجية الأمريكية نتيجة لذلك.","Type the exit code":"اكتب رمز الخروج","Marshall Plan":"خطة مارشال (Marshall Plan)","Unscramble the letters to fill the blank.":"رتّب الأحرف لتملأ الفراغ.","Match each term to the best description. Use the Clue Card.":"طابق كل مصطلح مع أفضل وصف له. استخدم بطاقة القرائن.","Open all 5 locks first. The digits go in order: Lock 1 first.":"افتح الأقفال الخمسة أولًا. تُكتب الأرقام بالترتيب: رقم القفل 1 أولًا.","Read the Clue Card sentence that begins “This came to be called.” The missing word is the name for McCarthy’s campaign of unproven charges.":"اقرأ الجملة في بطاقة القرائن التي تبدأ بعبارة «صار يُطلق على ذلك اسم». الكلمة الناقصة هي اسم حملة مكارثي (McCarthy) من الاتهامات التي لا دليل عليها.","Churchill’s name for the wall of Soviet control that shut off Eastern Europe":"الاسم الذي أطلقه تشرشل (Churchill) على جدار السيطرة السوفيتية الذي عزل أوروبا الشرقية","Each answer is in the Clue Card. Look for what massive retaliation meant, what Eisenhower demanded at Suez, and what Congress did after Sputnik.":"كل إجابة موجودة في بطاقة القرائن. ابحث عن معنى الانتقام الشامل، وعمّا طالب به أيزنهاور في السويس، وعمّا فعله الكونغرس بعد سبوتنيك.","Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.":"لم تهرب بعد (يُسجَّل «غير مكتمل» INCOMPLETE). ما زال بإمكانك تنزيل ملفك وتسليمه.","ESCAPED":"لقد هربت!","Crises followed. In 1956, Hungarians revolted against Soviet rule, and the Soviet response stunned the world. Many Hungarians felt abandoned by the United States. That fall, Britain, France, and Israel attacked Egypt over the Suez Canal. Eisenhower demanded that they pull back or face severe economic sanctions, and they agreed to a cease-fire on November 7. On October 4, 1957, the Soviets launched <i>Sputnik<\/i>, the first artificial Earth satellite. Congress increased defense spending, boosted science education, and created NASA in 1958.":"تبعت ذلك أزمات. ففي عام 1956، ثار المجريون على الحكم السوفيتي، وصدمت الاستجابة السوفيتية العالم. وشعر كثير من المجريين أن الولايات المتحدة تخلّت عنهم. وفي ذلك الخريف، هاجمت بريطانيا وفرنسا وإسرائيل مصر بسبب قناة السويس (Suez Canal). وطالبهم أيزنهاور بالانسحاب وإلا واجهوا عقوبات اقتصادية شديدة، فوافقوا على وقف إطلاق النار في 7 نوفمبر. وفي 4 أكتوبر 1957، أطلق السوفييت <i>سبوتنيك<\/i> (<i>Sputnik<\/i>)، أول قمر صناعي حول الأرض. فزاد الكونغرس الإنفاق الدفاعي، وعزّز تعليم العلوم، وأنشأ وكالة ناسا (NASA) عام 1958.","Have a saved file? Load it to continue.":"هل لديك ملف محفوظ؟ حمّله لتكمل.","That file did not work. Choose a progress file saved from this Escape Room.":"لم يعمل هذا الملف. اختر ملف تقدم محفوظًا من غرفة الهروب هذه.","CLUE CARD":"بطاقة القرائن","Not quite. Check each match against the Clue Card. Which one are you least sure about?":"ليس تمامًا. تحقق من كل مطابقة باستخدام بطاقة القرائن. أي مطابقة أنت أقل تأكدًا منها؟","Choose a description...":"اختر وصفًا...","Type the answer in English.":"اكتب الإجابة بالإنجليزية.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 25, “Expanding the New Deal” (begins p. 1124) and “The Cold War Heats Up” (begins p. 1135; Sacking a Hero and A Cease-Fire, p. 1140).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 25، “Expanding the New Deal” (يبدأ في ص. 1124) و“The Cold War Heats Up” (يبدأ في ص. 1135؛ Sacking a Hero وA Cease-Fire، ص. 1140).","Core Objectives 10 and 11: Explain how the Eisenhower administration’s commitment to “rolling back” communism around the world shaped U.S. foreign policy. Assess the effectiveness of Eisenhower’s responses to the various foreign crises that arose during his presidency.":"الأهداف الأساسية 10 و11: شرح كيف شكّل التزام إدارة أيزنهاور بـ«دحر» الشيوعية في أنحاء العالم السياسةَ الخارجية الأمريكية. تقييم مدى نجاح ردود أيزنهاور على الأزمات الخارجية المختلفة التي ظهرت خلال رئاسته.","Congress passes the Taft-Hartley Labor Act over Truman’s veto":"يقرّ الكونغرس قانون تافت-هارتلي (Taft-Hartley) للعمل رغم نقض ترومان","The Cold War also grew hotter. In 1949, the Communists won China’s civil war and the Soviets set off a nuclear bomb. In 1950, the report NSC-68 called for a huge military buildup. On June 25, 1950, North Korean troops invaded South Korea, and Truman fought the war through the United Nations without a declaration of war from Congress. In April 1951, he removed General MacArthur, who had publicly criticized him. An armistice was signed in July 1953, and Korea stayed divided.":"وازدادت الحرب الباردة سخونة. ففي عام 1949، فاز الشيوعيون في الحرب الأهلية في الصين، وفجّر السوفييت قنبلة نووية. وفي عام 1950، دعا تقرير NSC-68 إلى بناء عسكري ضخم. وفي 25 يونيو 1950، غزت القوات الكورية الشمالية كوريا الجنوبية، وخاض ترومان الحرب عبر الأمم المتحدة دون إعلان حرب من الكونغرس. وفي أبريل 1951، عزل الجنرال ماك آرثر (MacArthur) الذي انتقده علنًا. ووُقّعت هدنة في يوليو 1953، وبقيت كوريا منقسمة.","In <i>Brown v. Board of Education<\/i> (May 17, 1954), the Supreme Court overturned “separate but equal” in public schools. Senator Harry Byrd called for “massive resistance,” and by 1960 only 765 of 6,676 southern school districts had desegregated. After Rosa Parks refused to give up her bus seat on December 1, 1955, African Americans in Montgomery, Alabama, organized carpools or walked instead of riding the city buses for 381 days. Led by Martin Luther King Jr., who preached nonviolent civil disobedience, they won a federal case against segregation on city buses on December 20, 1956. In 1957, King became president of the new Southern Christian Leadership Conference (SCLC).":"في قضية <i>براون ضد مجلس التعليم<\/i> (<i>Brown v. Board of Education<\/i>) (17 مايو 1954)، ألغت المحكمة العليا مبدأ «منفصلون لكن متساوون» في المدارس العامة. ودعا السيناتور هاري بيرد (Harry Byrd) إلى «المقاومة الشاملة» (massive resistance)، وبحلول عام 1960 كانت 765 فقط من 6,676 منطقة تعليمية في الجنوب قد ألغت الفصل. وبعد أن رفضت روزا باركس (Rosa Parks) التنازل عن مقعدها في الحافلة في 1 ديسمبر 1955، نظّم الأمريكيون الأفارقة في مونتغمري (Montgomery) بولاية ألاباما رحلات مشتركة بالسيارات أو مشوا على الأقدام بدلًا من ركوب حافلات المدينة مدة 381 يومًا. وبقيادة مارتن لوثر كينغ الابن (Martin Luther King Jr.) الذي دعا إلى العصيان المدني اللاعنفي، ربحوا قضية فيدرالية ضد الفصل العنصري في حافلات المدينة في 20 ديسمبر 1956. وفي عام 1957، أصبح كينغ رئيسًا لمؤتمر القيادة المسيحية الجنوبية (SCLC) الجديد.","Not quite. Re-read the Clue Card. Use the scrambled letters to check your spelling.":"ليس تمامًا. أعد قراءة بطاقة القرائن. استخدم الحروف المبعثرة للتحقق من تهجئتك.","Progress file downloaded. Use Load Progress to continue later.":"تم تنزيل ملف التقدم. استخدم «تحميل التقدم» لتكمل لاحقًا.","After World War II, many Americans feared that Communists were hiding in the United States. In 1947, Truman ordered background checks of federal workers. The House Committee on Un-American Activities (HUAC) investigated Hollywood, and the Hollywood Ten, who refused to answer questions, were jailed and blacklisted from the film industry. In 1950, Senator Joseph McCarthy claimed to have a list of Communists in the State Department, but he never gave it out. He did not find even one Communist agent in the federal government, yet his accusations ruined lives and chilled free speech. This came to be called McCarthyism. A drive to remove gay people from federal jobs went along with this crusade. Norton says the Red Scare violated the civil liberties of innocent people. On December 2, 1954, the Senate voted 67–22 to condemn McCarthy.":"بعد الحرب العالمية الثانية، خشي كثير من الأمريكيين أن يكون الشيوعيون مختبئين في الولايات المتحدة. وفي عام 1947، أمر ترومان (Truman) بإجراء فحص للخلفيات لموظفي الحكومة الفيدرالية. وحققت لجنة مجلس النواب للأنشطة المعادية لأمريكا (HUAC) مع هوليوود، فسُجن «عشرة هوليوود» (Hollywood Ten) الذين رفضوا الإجابة عن الأسئلة، ووُضعوا في القائمة السوداء ومُنعوا من العمل في صناعة السينما. وفي عام 1950، قال السيناتور جوزيف مكارثي (Joseph McCarthy) إن لديه قائمة بأسماء شيوعيين في وزارة الخارجية، لكنه لم يقدّمها أبدًا. ولم يجد ولا عميلًا شيوعيًا واحدًا في الحكومة الفيدرالية، ومع ذلك دمّرت اتهاماته حياة أناس وأضعفت حرية التعبير. وصار يُطلق على ذلك اسم المكارثية (McCarthyism). وترافقت مع هذه الحملة حملة لإبعاد المثليين عن الوظائف الفيدرالية. ويقول كتاب نورتون (Norton) إن الذعر الأحمر انتهك الحقوق المدنية لأناس أبرياء. وفي 2 ديسمبر 1954، صوّت مجلس الشيوخ بـ67 مقابل 22 على إدانة مكارثي.","A drive-in movie projection booth at night. On the left, a small window shows the movie screen and a row of parked cars, above a table with a film projector and two film reels. On the right, a clock and a strip of film hang above a cabinet with a speaker box on top. The door has a PROJECTION BOOTH sign and five padlocks in a row. Under each padlock is a window for one digit of the exit code.":"غرفة عرض في سينما للسيارات في الليل. على اليسار، نافذة صغيرة تُظهر شاشة السينما وصفًّا من السيارات الواقفة، فوق طاولة عليها جهاز عرض أفلام وبكرتان من الفيلم. وعلى اليمين، ساعة وشريط فيلم معلّقان فوق خزانة أدراج عليها صندوق مكبّر صوت. وعلى الباب لافتة «غرفة العرض» وخمسة أقفال في صف واحد. وتحت كل قفل نافذة صغيرة لرقم واحد من رمز الخروج.","How did Eisenhower respond to the Suez crisis in 1956?":"كيف ردّ أيزنهاور على أزمة السويس (Suez) عام 1956؟","The clock starts when you press the button. Most students finish in about 20 minutes.":"يبدأ العدّاد عندما تضغط الزر. يُنهي معظم الطلاب في نحو 20 دقيقة.","Debrief":"الملخص الختامي","Solve the puzzle to open the lock and reveal one digit.":"حلّ اللغز لتفتح القفل وتكشف رقمًا واحدًا.","The Film Reels":"بكرات الفيلم","The order is Taft-Hartley (1947), the order ending segregation in the armed forces (1948), the invasion of South Korea (1950), then MacArthur removed (1951).":"الترتيب هو: قانون تافت-هارتلي (1947)، ثم الأمر بإنهاء الفصل العنصري في القوات المسلحة (1948)، ثم غزو كوريا الجنوبية (1950)، ثم عزل ماك آرثر (1951).","Your time:":"وقتك:","McCarthy’s charges had no proof, yet they ruined many lives and chilled free speech. This era of fear became known by one word: “________.”":"لم تكن لاتهامات مكارثي (McCarthy) أي أدلة، ومع ذلك دمّرت حياة كثيرين وأضعفت حرية التعبير. وعُرفت فترة الخوف هذه بكلمة واحدة: «________».","What was “massive retaliation”?":"ما هو «الانتقام الشامل» (massive retaliation)؟","Critics said the prosperity had cracks. Economist John Kenneth Galbraith attacked the idea that growth would solve all problems, and the Beats rejected consumer culture. Poverty afflicted nearly half the African American population, compared to one-fourth of Whites.":"قال المنتقدون إن في هذا الرخاء شقوقًا. فقد هاجم الاقتصادي جون كينيث غالبريث (John Kenneth Galbraith) فكرة أن النمو سيحل كل المشكلات، ورفض «البيتس» (the Beats) ثقافة الاستهلاك. وأصاب الفقر نحو نصف السكان الأمريكيين الأفارقة، مقارنة بربع البيض.","Open each lock in order. Read the <b>Clue Card<\/b>. The answer is in the card.":"افتح كل قفل بالترتيب. اقرأ <b>بطاقة القرائن<\/b>. الإجابة موجودة في البطاقة.","The 1950s brought great prosperity. War spending, the GI Bill, highways, and the arms race all helped the economy grow. About 5 million veterans bought homes with GI Bill loans, and almost 8 million went to college or job training. But racism limited these benefits. Many colleges refused Black students, and “redlining” kept Black veterans from buying homes in White neighborhoods. Of the 13 million homes built from 1948 to 1958, more than 11 million were in suburbs, and Levittown contracts excluded “members of other than the Caucasian race.” In 1950, women were 29 percent of the workforce, but most held clerical or service jobs, and women of color were mostly maids and cooks.":"جلبت الخمسينيات رخاءً كبيرًا. فقد ساعد الإنفاق الحربي وقانون حقوق الجنود (GI Bill) والطرق السريعة وسباق التسلح على نمو الاقتصاد. واشترى نحو 5 ملايين من المحاربين القدامى منازل بقروض من هذا القانون، والتحق نحو 8 ملايين بالجامعة أو بالتدريب المهني. لكن العنصرية قيّدت هذه الفوائد. فقد رفضت كثير من الجامعات الطلاب السود، ومنعت ممارسة «الخط الأحمر» (redlining) المحاربين القدامى السود من شراء منازل في أحياء البيض. ومن بين 13 مليون منزل بُنيت بين 1948 و1958، كان أكثر من 11 مليونًا في الضواحي، واستبعدت عقود ليفيتاون (Levittown) «أفراد أي عرق غير القوقازي». وفي عام 1950، كانت النساء 29 بالمئة من القوى العاملة، لكن معظمهن عملن في وظائف مكتبية أو خدمية، وكانت النساء الملونات في الغالب خادمات وطاهيات.","The Speaker Box":"صندوق مكبّر الصوت","Check":"تحقق","A 1949 alliance of twelve nations in which an attack on one is an attack on all":"تحالف في عام 1949 بين اثنتي عشرة دولة، يُعدّ فيه الهجوم على إحداها هجومًا على الجميع","Iron curtain":"الستار الحديدي","Congress cut defense spending":"خفّض الكونغرس الإنفاق الدفاعي","He demanded that Britain, France, and Israel pull back, or face severe economic sanctions":"طالب بريطانيا وفرنسا وإسرائيل بالانسحاب، وإلا واجهت عقوبات اقتصادية شديدة","Two terms are about money and promises to other countries (Truman Doctrine, Marshall Plan). One is a phrase for a divided Europe (Iron curtain). One is an alliance (NATO).":"مصطلحان يتعلقان بالمال والوعود لدول أخرى (مبدأ ترومان، وخطة مارشال). ومصطلح واحد عبارة عن وصف لأوروبا المنقسمة (الستار الحديدي). ومصطلح واحد هو تحالف (حلف الناتو).","Not quite. At least one answer is off. Re-read the Clue Card for massive retaliation, the Suez crisis, and what happened after Sputnik.":"تقريبًا. إجابة واحدة على الأقل غير صحيحة. أعد قراءة بطاقة القرائن لتعرف الانتقام الشامل وأزمة السويس وما حدث بعد سبوتنيك.","Truman Doctrine":"مبدأ ترومان (Truman Doctrine)","The code has 5 digits. Fill every box.":"الرمز مكوّن من 5 أرقام. املأ كل المربعات.","Truman wanted to keep and expand the New Deal, but Republicans and conservative southern Democrats stood in his way. In early 1947, Congress passed the Taft-Hartley Labor Act over his veto to limit the power of unions. In April 1947, Jackie Robinson joined the Brooklyn Dodgers as the first African American in modern Major League baseball. In July 1948, Truman ordered an end to racial segregation in the armed forces. After his surprise win in the 1948 election, he offered the Fair Deal, but Congress rejected most of it, including national health insurance.":"أراد ترومان (Truman) أن يحافظ على «الصفقة الجديدة» (New Deal) ويوسّعها، لكن الجمهوريين والديمقراطيين الجنوبيين المحافظين وقفوا في طريقه. وفي أوائل عام 1947، أقرّ الكونغرس قانون تافت-هارتلي (Taft-Hartley) للعمل رغم نقضه، للحد من قوة النقابات. وفي أبريل 1947، انضم جاكي روبنسون (Jackie Robinson) إلى فريق بروكلين دودجرز (Brooklyn Dodgers) كأول أمريكي من أصل أفريقي في دوري البيسبول الكبير في العصر الحديث. وفي يوليو 1948، أمر ترومان بإنهاء الفصل العنصري في القوات المسلحة. وبعد فوزه المفاجئ في انتخابات 1948، قدّم «الصفقة العادلة» (Fair Deal)، لكن الكونغرس رفض معظمها، ومنها التأمين الصحي الوطني.","One last step: write your Debrief below.":"خطوة أخيرة: اكتب ملخصك الختامي أدناه.","The door swings open!":"ينفتح الباب على مصراعيه!","Exit code digit 1":"رقم رمز الخروج 1","Hints used":"التلميحات المستخدمة"},"patterns":[{"re":"^Still needed: first name, last name, and period\\.$","es":"Todavía falta: nombre, apellido y período.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة."},{"re":"^LOCK (\\d)$","es":"Cand. $1","ar":"القفل $1"},{"re":"^LOCK (\\d) · CORE OBJECTIVE (\\d+)$","es":"CANDADO $1 · OBJETIVO PRINCIPAL $2","ar":"القفل $1 · الهدف الأساسي $2"},{"re":"^Hint (\\d):$","es":"Pista $1:","ar":"تلميح $1:"},{"re":"^Exit code digit (\\d)$","es":"Dígito $1 del código de salida","ar":"رقم رمز الخروج $1"},{"re":"^Click! Lock (\\d) is open\\. Your digit is (\\d)\\.$","es":"¡Clic! El Candado $1 está abierto. Tu dígito es $2.","ar":"نقرة! القفل $1 مفتوح. رقمك هو $2."},{"re":"^5 of 5 locks opened with (\\d+) tries and (\\d+) hints\\.$","es":"Abriste 5 de 5 candados con $1 intentos y $2 pistas.","ar":"فتحت 5 أقفال من 5 بعد $1 من المحاولات و$2 من التلميحات."},{"re":"^Done! File downloaded: (.*)\\. Upload it to Canvas\\.$","es":"¡Listo! Se descargó el archivo: $1. Súbelo a Canvas.","ar":"تم! تم تنزيل الملف: $1. ارفعه إلى Canvas."},{"re":"^Your file downloaded and is marked INCOMPLETE \\(you have not escaped\\)\\. Upload it to Canvas: (.*)$","es":"Tu archivo se descargó y está marcado INCOMPLETO (todavía no escapas). Súbelo a Canvas: $1","ar":"تم تنزيل ملفك وهو مُسجَّل «غير مكتمل» INCOMPLETE (لم تهرب بعد). ارفعه إلى Canvas: $1"},{"re":"^Unlocked\\. Your digit is (\\d)\\. Your answer: (.*)$","es":"Desbloqueado. Tu dígito es $1. Tu respuesta: $2","ar":"تم الفتح. رقمك هو $1. إجابتك: $2"},{"re":"^Tap all (\\d) events first, in order\\.$","es":"Primero toca los $1 sucesos, en orden.","ar":"المس الأحداث الـ $1 كلها أولًا، بالترتيب."},{"re":"^5 of 5 locks opened with (\\d+) tries and 1 hint\\.$","es":"Abriste 5 de 5 candados con $1 intentos y 1 pista.","ar":"فتحت 5 أقفال من 5 بعد $1 من المحاولات وتلميح واحد."},{"re":"^LOCK (\\d) · CORE OBJECTIVES (\\d+) AND (\\d+)$","es":"CANDADO $1 · OBJETIVOS PRINCIPALES $2 Y $3","ar":"القفل $1 · الأهداف الأساسية $2 و$3"},{"re":"^LOCK (\\d) · CORE OBJECTIVES (\\d+), (\\d+), AND (\\d+)$","es":"CANDADO $1 · OBJETIVOS PRINCIPALES $2, $3 Y $4","ar":"القفل $1 · الأهداف الأساسية $2 و$3 و$4"}]}</script>
+<script>
+/* Supplement language switch (English / Espanol / Arabic). Works on pages whose text is rendered by JS:
+   a MutationObserver translates text as it appears. Data: <script type="application/json" id="sp-i18n">
+   {"langs":["en","es","ar"],"default":"en","es":{englishHTML:translation},"ar":{...},"patterns":[{"re":"^(\\d+) of (\\d+)$","es":"$1 de $2","ar":"..."}]}
+   Keys are the English text exactly as it sits in the page (innerHTML, spaces collapsed).
+   Helpers: spSeen() english strings seen so far; spMissing() strings with no translation in the current language;
+   spSetLang(l); spTr(s) translate a string (used for confirm/alert); spAscii(s) plain-ASCII name for file names. */
+(function () {
+  var node = document.getElementById('sp-i18n');
+  var D = node ? JSON.parse(node.textContent) : { langs: ['en'], patterns: [] };
+  var INLINE = { B:1,I:1,EM:1,STRONG:1,SPAN:1,A:1,BR:1,SMALL:1,SUP:1,SUB:1,U:1,MARK:1,BDI:1,TSPAN:1,CODE:1 };
+  var SKIP = 'script,style,textarea,input,.sp-lang,.sp-nt,[translate="no"]';
+  var WORD = /[A-Za-z\u00C0-\u024F\u0600-\u06FF]{2}|e\.g\./;
+  var LANG = 'en', REC = new WeakMap(), SEEN = {}, MISS = {};
+  (D.patterns || []).forEach(function (p) { try { p._re = new RegExp(p.re); } catch (e) {} });
+  function norm(s) { return String(s).replace(/\s+/g, ' ').trim(); }
+  function tr(src) {
+    if (LANG === 'en') return null;
+    var t = D[LANG] && D[LANG][src];
+    if (t) return t;
+    var P = D.patterns || [];
+    for (var i = 0; i < P.length; i++) {
+      var m = P[i]._re && P[i]._re.exec(src);
+      if (m && P[i][LANG]) return P[i][LANG].replace(/\$(\d+)/g, function (_, n) { return m[+n] || ''; });
+    }
+    return null;
+  }
+  window.spTr = function (s) { var t = tr(norm(s)); return t ? t.replace(/<[^>]+>/g, '') : s; };
+  function isInline(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling)
+      if (c.nodeType === 1 && (!INLINE[c.tagName.toUpperCase()] || c.matches(SKIP))) return false;
+    return true;
+  }
+  function directText(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling) if (c.nodeType === 3 && WORD.test(c.nodeValue)) return true;
+    return false;
+  }
+  function cur(s) { return s.nodeType === 1 ? s.innerHTML : s.nodeValue; }
+  function put(s, v) { if (s.nodeType === 1) s.innerHTML = v; else s.nodeValue = v; }
+  function handle(s) {
+    var r = REC.get(s), c = cur(s);
+    if (!(r && c === r.wrote)) { r = { en: c, wrote: c }; REC.set(s, r); }
+    var src = norm(r.en), target = r.en;
+    if (WORD.test(src)) {
+      SEEN[src] = 1;
+      if (LANG !== 'en') {
+        var t = tr(src);
+        if (t) {
+          target = s.nodeType === 1 ? t : (r.en.match(/^\s*/)[0] + t + r.en.match(/\s*$/)[0]);
+          delete MISS[src];
+        } else MISS[src] = 1;
+      }
+    }
+    if (c !== target) put(s, target);
+    r.wrote = cur(s);
+  }
+  var ATTRS = ['placeholder', 'alt', 'aria-label', 'title'];
+  function attrs(root) {
+    var els = root.querySelectorAll ? root.querySelectorAll('[placeholder],[alt],[aria-label],[title]') : [];
+    var list = [].slice.call(els); if (root.matches && root.matches('[placeholder],[alt],[aria-label],[title]')) list.push(root);
+    list.forEach(function (el) {
+      if (el.closest && el.closest('.sp-lang,.sp-nt,[translate="no"],script,style')) return;
+      var rec = el.__spa || (el.__spa = {});
+      ATTRS.forEach(function (a) {
+        var v = el.getAttribute(a); if (v == null) return;
+        var r = rec[a];
+        if (!(r && v === r.wrote)) { r = rec[a] = { en: v, wrote: v }; }
+        var src = norm(r.en); if (!WORD.test(src)) return;
+        SEEN[src] = 1;
+        var t = LANG === 'en' ? null : tr(src);
+        if (LANG !== 'en' && !t) MISS[src] = 1;
+        var target = t ? t.replace(/<[^>]+>/g, '') : r.en;
+        if (v !== target) el.setAttribute(a, target);
+        r.wrote = el.getAttribute(a);
+      });
+    });
+  }
+  function walk(root) {
+    if (root.nodeType === 3) { if (WORD.test(root.nodeValue) && !(root.parentNode && root.parentNode.closest && root.parentNode.closest(SKIP))) handle(root); return; }
+    if (root.nodeType !== 1) return;
+    (function w(el) {
+      if (el.matches(SKIP)) return;
+      if (el !== document.body && directText(el) && isInline(el)) { handle(el); return; }
+      for (var c = el.firstChild; c; c = c.nextSibling) {
+        if (c.nodeType === 1) w(c); else if (c.nodeType === 3 && WORD.test(c.nodeValue)) handle(c);
+      }
+    })(root);
+    attrs(root);
+  }
+  var TITLE = { en: document.title, wrote: document.title };
+  function title() {
+    if (document.title !== TITLE.wrote) TITLE = { en: document.title, wrote: document.title };
+    var t = LANG === 'en' ? null : tr(norm(TITLE.en));
+    document.title = t ? t.replace(/<[^>]+>/g, '') : TITLE.en; TITLE.wrote = document.title;
+  }
+  function inl(e) { return e.nodeType === 1 && !!INLINE[e.tagName.toUpperCase()]; }
+  var mo = new MutationObserver(function (muts) {
+    var todo = [];
+    muts.forEach(function (m) {
+      if (m.type === 'childList') { for (var i = 0; i < m.addedNodes.length; i++) todo.push(m.addedNodes[i]); todo.push(m.target); }
+      else todo.push(m.target);
+    });
+    todo.forEach(function (n) {
+      var el = n.nodeType === 1 ? n : n.parentNode;
+      if (!el || el.nodeType !== 1 || !document.body.contains(el)) return;
+      while (el !== document.body && el.parentNode && el.parentNode.nodeType === 1 && inl(el) && inl(el.parentNode)) el = el.parentNode;
+      if (el.parentNode && el.parentNode.nodeType === 1 && inl(el.parentNode) && el.parentNode !== document.body) el = el.parentNode;
+      walk(el);
+    });
+    mo.takeRecords();
+  });
+  var AR = { 'ا':'a','أ':'a','إ':'i','آ':'a','ب':'b','ت':'t','ث':'th','ج':'j','ح':'h','خ':'kh','د':'d','ذ':'dh','ر':'r','ز':'z','س':'s','ش':'sh','ص':'s','ض':'d','ط':'t','ظ':'z','ع':'a','غ':'gh','ف':'f','ق':'q','ك':'k','ل':'l','م':'m','ن':'n','ه':'h','و':'w','ي':'y','ى':'a','ة':'a','ئ':'y','ؤ':'w' };
+  window.spAscii = function (s) {
+    s = String(s); if (s.normalize) s = s.normalize('NFD').replace(/[̀-ًͯ-ٰٟ]/g, '');
+    return s.replace(/[ء-ي]/g, function (c) { return AR[c] !== undefined ? AR[c] : ''; }).replace(/ñ/g, 'n').replace(/Ñ/g, 'N');
+  };
+  window.spSeen = function () { return Object.keys(SEEN); };
+  window.spMissing = function () { return Object.keys(MISS); };
+  window.spLang = function () { return LANG; };
+  window.spSetLang = function (l) {
+    if ((D.langs || ['en']).indexOf(l) < 0) l = 'en';
+    LANG = l; MISS = {};
+    var h = document.documentElement; h.lang = l; h.dir = l === 'ar' ? 'rtl' : 'ltr';
+    mo.disconnect(); walk(document.body); title(); mo.takeRecords();
+    mo.observe(document.body, { childList: true, subtree: true, characterData: true });
+    document.querySelectorAll('.sp-lang button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === l)); });
+    try { localStorage.setItem('sp_lang', l); } catch (e) {}
+    try { var u = new URL(location.href); if (l === 'en') u.searchParams.delete('lang'); else u.searchParams.set('lang', l); history.replaceState(null, '', u.toString()); } catch (e) {}
+    try { document.dispatchEvent(new CustomEvent('splangchange', { detail: l })); } catch (e) {}
+  };
+  var _c = window.confirm, _a = window.alert;
+  window.confirm = function (m) { return _c.call(window, window.spTr(m)); };
+  window.alert = function (m) { return _a.call(window, window.spTr(m)); };
+  document.querySelectorAll('.sp-lang button').forEach(function (b) { b.addEventListener('click', function () { window.spSetLang(b.getAttribute('data-lang')); }); });
+  var start = D['default'] || 'en';
+  try { start = new URL(location.href).searchParams.get('lang') || localStorage.getItem('sp_lang') || start; } catch (e) {}
+  window.spSetLang(start);
+})();
+
+</script><!--/sp-i18n-->
+</body>
+</html>

@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Escape Room 18 · New Frontiers and a Great Society</title>
+<style>
+:root{--bg:#2C313A;--txt:#EEEFF1;--a1:#414855;--a2:#DD8840;--hl:#E6B489;--glass:rgba(238,239,241,.07);--glassb:rgba(238,239,241,.2);--dim:#CBCFD6;--ok:#8FD3A8}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#363D49 0%,#2C313A 60%) fixed;background-color:var(--bg);color:var(--txt);font:17px/1.55 "Segoe UI",system-ui,-apple-system,Verdana,sans-serif;min-height:100vh}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px 40px}
+.glass{background:var(--glass);border:1px solid var(--glassb);border-radius:16px;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+header.hero{padding:30px 0 12px;border-bottom:3px solid var(--a2)}
+.eyebrow{font-size:13px;letter-spacing:.16em;font-weight:700;color:var(--hl)}
+h1{margin:.15em 0 .05em;font-size:clamp(28px,6vw,40px);line-height:1.12}
+.sub{margin:0;font-weight:600;color:var(--dim)}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 4px}
+.meta label{flex:1 1 170px;font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--dim)}
+input[type=text],textarea,select{display:block;width:100%;margin-top:4px;padding:10px 12px;border:1px solid var(--glassb);border-radius:10px;background:rgba(29,33,40,.55);color:var(--txt);font:inherit;font-size:16px}
+input[type=text]:focus,textarea:focus,select:focus,button:focus-visible{outline:3px solid var(--hl);outline-offset:1px}
+input.bad{border-color:var(--a2);box-shadow:0 0 0 2px var(--a2)}
+textarea{min-height:120px;resize:vertical}
+.howto{margin:14px 0;padding:14px 16px;font-size:16px}
+.howto ol{margin:6px 0 0;padding-left:22px}
+.scene{margin:14px 0;padding:8px;text-align:center}
+.scene svg{width:100%;height:auto;display:block;border-radius:12px}
+.bar{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;padding:8px 12px;margin:10px 0;font-weight:700;font-size:15px;background:rgba(44,49,58,.92);border:1px solid var(--glassb);border-radius:12px}
+.bar span b{color:var(--hl)}
+.btn{font:inherit;font-size:16px;font-weight:700;padding:11px 18px;border-radius:12px;border:2px solid var(--hl);background:transparent;color:var(--txt);cursor:pointer;min-height:44px}
+.btn:hover{background:rgba(230,180,137,.18)}
+.btn.primary{background:var(--hl);color:#2C313A;border-color:var(--hl)}
+.btn.primary:hover{background:#EDC8A3}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.btn.small{padding:8px 14px;font-size:15px;min-height:40px}
+.intro{padding:20px;text-align:center}
+.intro p{margin:.4em 0}
+.lock{margin:12px 0;overflow:hidden}
+.lock>button.lh{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:12px;width:100%;padding:14px 16px;cursor:pointer}
+.lock>button.lh:focus-visible{outline:3px solid var(--hl);outline-offset:-3px}
+.lock.locked>button.lh{cursor:not-allowed;opacity:.55}
+.lk{flex:none;width:44px;height:44px}
+.lk .sh{transition:transform .5s cubic-bezier(.3,1.6,.5,1);transform-origin:center}
+.lock.solved .lk .sh{transform:translateY(-6px) rotate(-30deg);transform-origin:10px 14px}
+.lock.solved .lk .bd{fill:var(--hl)}
+.lt{flex:1}
+.lt small{display:block;font-size:12px;letter-spacing:.12em;font-weight:700;color:var(--hl)}
+.lt strong{font-size:19px}
+.dg{flex:none;min-width:42px;height:42px;border-radius:10px;border:2px solid var(--hl);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;background:rgba(29,33,40,.55)}
+.lb{padding:0 16px 16px;display:none}
+.lock.open .lb{display:block}
+.objline{font-size:14px;color:var(--dim);margin:0 0 10px}
+.card{background:rgba(238,239,241,.1);border-left:6px solid var(--a2);border-radius:10px;padding:12px 14px;margin:8px 0 12px}
+.card h4{margin:0 0 4px;font-size:13px;letter-spacing:.12em;color:var(--hl)}
+.card p{margin:.3em 0}
+.card .src{font-size:13px;color:var(--dim)}
+.prompt{font-weight:700;margin:10px 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0}
+.chip{font:inherit;font-size:16px;padding:10px 14px;border-radius:12px;border:2px solid var(--glassb);background:rgba(29,33,40,.55);color:var(--txt);cursor:pointer;min-height:44px;text-align:left}
+.chip.sel{border-color:var(--hl);background:rgba(230,180,137,.2)}
+.chip .n{display:inline-block;min-width:24px;height:24px;line-height:24px;border-radius:12px;background:var(--hl);color:#2C313A;font-weight:800;text-align:center;margin-right:8px}
+.mrow{margin:8px 0}
+.mrow label{font-weight:700;display:block}
+fieldset{border:1px solid var(--glassb);border-radius:10px;margin:8px 0;padding:8px 12px}
+legend{font-weight:700;padding:0 6px}
+.opt{display:flex;align-items:center;gap:10px;padding:6px 0;min-height:40px;cursor:pointer}
+.opt input{width:22px;height:22px;accent-color:#E6B489;flex:none}
+.cipher{font:700 24px/1.3 "Courier New",monospace;letter-spacing:.14em;background:rgba(29,33,40,.65);padding:12px;border-radius:10px;border:1px dashed var(--hl);word-break:break-word;text-align:center}
+.key{display:grid;grid-template-columns:repeat(13,1fr);gap:2px;margin:10px 0;font:700 14px/1.2 "Courier New",monospace;text-align:center}
+.key div{padding:3px 0;border-radius:4px;background:rgba(238,239,241,.08)}
+.key .c{color:var(--hl)}
+.scr{font:800 30px/1.2 "Courier New",monospace;letter-spacing:.3em;text-align:center;background:rgba(29,33,40,.65);padding:10px;border-radius:10px;border:1px dashed var(--hl)}
+.row{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0;align-items:center}
+.fb{margin:8px 0;padding:10px 12px;border-radius:10px;display:none;font-weight:600}
+.fb.show{display:block}
+.fb.nudge{background:rgba(221,136,64,.18);border:1px solid var(--a2)}
+.fb.good{background:rgba(143,211,168,.16);border:1px solid var(--ok);color:#DDF5E6}
+.hints{margin:6px 0}
+.hint{background:rgba(230,180,137,.14);border:1px dashed var(--hl);border-radius:10px;padding:8px 12px;margin:6px 0;font-size:16px}
+.hint b{color:var(--hl)}
+.exit{margin:16px 0;padding:18px;text-align:center}
+.exit.locked{opacity:.55}
+.exit h2,.esc h2,.debrief h2{margin:.1em 0 .3em}
+.codebox{display:flex;justify-content:center;gap:8px;margin:12px 0}
+.codebox input{width:52px;height:60px;text-align:center;font:800 30px "Courier New",monospace;padding:0;margin:0}
+.esc{margin:16px 0;padding:22px;text-align:center;display:none;border:2px solid var(--hl)}
+.esc.show{display:block}
+.esc .big{overflow-wrap:anywhere;font-size:clamp(30px,9vw,64px);font-weight:900;letter-spacing:.14em;color:var(--hl);text-shadow:0 0 24px rgba(230,180,137,.6);animation:pop .8s cubic-bezier(.3,1.6,.5,1)}
+.esc .time{font-size:26px;font-weight:800}
+.debrief{margin:16px 0;padding:16px}
+.actions{margin:16px 0;padding:16px}
+.status{font-weight:700;margin-bottom:10px}
+.msg{display:none;margin-top:10px;padding:10px 12px;border-radius:10px;background:rgba(143,211,168,.16);border:1px solid var(--ok)}
+.msg.err{background:rgba(221,136,64,.2);border-color:var(--a2)}
+.link{all:unset;cursor:pointer;color:var(--dim);text-decoration:underline;font-size:14px;margin-top:10px;display:inline-block}
+.link:focus-visible{outline:3px solid var(--hl)}
+footer{text-align:center;font-size:12px;letter-spacing:.1em;font-weight:700;color:var(--dim);padding:20px 8px 30px;border-top:1px solid var(--glassb);margin-top:20px}
+.ennote{margin:.4em 0 0;font-size:14px;font-weight:700;color:var(--dim)}
+.exit .ennote{text-align:center}
+.hidden{display:none!important}.lock,.exit,.esc{scroll-margin-top:64px}
+.pop{animation:pop .7s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pop{0%{transform:scale(.2);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes tap{0%,100%{transform:rotate(0)}50%{transform:rotate(9deg)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.shake{animation:shake .35s}
+.wheel{transform-box:view-box;transform-origin:276px 86px}
+.wheel.spin{animation:tap .5s ease-in-out 3}
+.plock .sh{transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
+.plock.open .sh{transform:translateY(-7px)}
+.plock.open .bd{fill:#E6B489}
+#door{transform-origin:150px 20px;transition:transform 1.4s ease-in-out}
+.escaped #door{transform:scaleX(.1)}
+#glow{opacity:.15;transition:opacity 1.4s}
+.escaped #glow{opacity:1}
+html[dir="rtl"] .chip{text-align:right}
+html[dir="rtl"] .chip .n{margin-right:0;margin-left:8px}
+html[dir="rtl"] .card{border-left:0;border-right:6px solid var(--a2)}
+html[dir="rtl"] .howto ol{padding-left:0;padding-right:22px}
+html[dir="rtl"] .esc,html[dir="rtl"] .exit,html[dir="rtl"] .intro{text-align:center}
+html[dir="rtl"] .cipher,html[dir="rtl"] .scr,html[dir="rtl"] .key{direction:ltr}
+html[dir="rtl"] .scr{letter-spacing:.3em!important}
+html[dir="rtl"] .cipher{letter-spacing:.14em!important}
+html[dir="rtl"] .key{letter-spacing:0!important}
+html[dir="rtl"] .card .src{direction:ltr;text-align:left}
+html[dir="rtl"] .hint,html[dir="rtl"] .fb,html[dir="rtl"] .msg,html[dir="rtl"] .objline{text-align:start}
+html[dir="rtl"] .lock>button.lh{text-align:start}
+html[dir="rtl"] .lb,html[dir="rtl"] .actions{text-align:start}
+html[dir="rtl"] .bar{direction:rtl}
+html[dir="rtl"] .tt{unicode-bidi:plaintext}
+@media(max-width:520px){body{font-size:16px}.chip{width:100%}.key{font-size:12px;gap:1px}.codebox input{width:46px;height:54px}.dg{min-width:38px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{.bar,.actions button{display:none}}
+/*sp-i18n-css*/
+.sp-lang-bar{display:flex;justify-content:flex-end;padding:8px 12px 0;position:relative;z-index:5}
+.sp-lang{display:inline-flex;gap:2px;padding:3px;border-radius:10px;background:rgba(255,255,255,.88);border:1px solid rgba(0,0,0,.18);font-family:system-ui,"Segoe UI",Tahoma,Arial,sans-serif}
+.sp-lang button{border:0;background:transparent;color:#222;font:600 13px/1 system-ui,"Segoe UI",Tahoma,Arial,sans-serif;padding:7px 11px;border-radius:7px;cursor:pointer}
+.sp-lang button[aria-pressed="true"]{background:#222;color:#fff}
+.sp-lang button:focus-visible{outline:3px solid #2a6df4;outline-offset:1px}
+textarea,input,select{unicode-bidi:plaintext}
+html[lang="ar"] body,html[lang="ar"] button,html[lang="ar"] textarea,html[lang="ar"] input,html[lang="ar"] select{font-family:"Segoe UI",Tahoma,"Noto Sans Arabic","Arial",system-ui,sans-serif}
+html[lang="ar"] body{line-height:1.8}
+html[lang="ar"] *{letter-spacing:0!important}
+html[dir="rtl"] textarea,html[dir="rtl"] input{text-align:start}
+@media print{.sp-lang-bar{display:none}}
+/*/sp-i18n-css*/
+</style>
+</head>
+<body>
+<!--sp-bar--><div class="sp-lang-bar"><div class="sp-lang" role="group" aria-label="Language / Idioma / اللغة"><button type="button" data-lang="en" lang="en" aria-pressed="true">English</button><button type="button" data-lang="es" lang="es" aria-pressed="false">Español</button><button type="button" data-lang="ar" lang="ar" aria-pressed="false">العربية</button></div></div><!--/sp-bar-->
+
+<div class="wrap">
+<header class="hero">
+  <div class="eyebrow">1960-1968</div>
+  <h1>Escape the Records Office</h1>
+  <p class="sub">New Frontiers and a Great Society</p>
+  <div class="meta">
+    <label>FIRST NAME *<input id="f_first" type="text" autocomplete="given-name"></label>
+    <label>LAST NAME *<input id="f_last" type="text" autocomplete="family-name"></label>
+    <label>PERIOD *<input id="f_period" type="text" inputmode="numeric" maxlength="12" placeholder="e.g. 3"></label>
+  </div>
+</header>
+
+<div class="howto glass"><b>How to escape:</b>
+<ol>
+<li>Open each lock in order. Read the <b>Clue Card</b>. The answer is in the card.</li>
+<li>Solve the puzzle to open the lock and reveal one digit.</li>
+<li>If you get stuck, press <b>Hint</b>. Hints are free, but your teacher can see how many you used.</li>
+<li>Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.</li>
+</ol></div>
+
+<div class="scene glass" id="scene">
+<svg viewBox="0 0 600 270" role="img" aria-label="A town records office at night. On the left, a window shows a city skyline behind window blinds, above a tall filing cabinet and a table with a typewriter and a sheet of paper. On the right, a clock and a bulletin board hang above a desk with a telephone and a ballot box. The door has a RECORDS OFFICE sign and five padlocks in a row. Under each padlock is a window for one digit of the exit code.">
+<defs>
+<pattern id="brick" width="40" height="270" patternUnits="userSpaceOnUse"><rect width="40" height="270" fill="#232830"/><path d="M0 0V270" stroke="#EEEFF1" stroke-opacity=".12" fill="none"/><path d="M20 0V270" stroke="#EEEFF1" stroke-opacity=".05" fill="none"/></pattern>
+<radialGradient id="glowg" cx="50%" cy="50%" r="60%"><stop offset="0" stop-color="#EEEFF1"/><stop offset="1" stop-color="#E6B489"/></radialGradient>
+</defs>
+<rect width="600" height="270" fill="url(#brick)"/>
+<rect y="236" width="600" height="34" fill="#262B33"/>
+<g stroke="#CBCFD6" stroke-opacity=".35" stroke-width="2"><path d="M0 248H600M0 260H600"/><path d="M60 236V248M180 236V248M300 236V248M420 236V248M540 236V248M120 248V260M240 248V260M360 248V260M480 248V260M600 248V260"/></g>
+<g stroke="#CBCFD6" stroke-opacity=".5" stroke-width="2" fill="none"><path d="M0 14Q75 30 150 18"/><path d="M450 18Q525 30 600 14"/></g>
+<g><rect x="10" y="30" width="124" height="86" rx="4" fill="#414855" stroke="#E6B489" stroke-opacity=".6" stroke-width="3"/>
+<rect x="17" y="37" width="110" height="72" fill="#1D2128"/>
+<g fill="#EEEFF1" fill-opacity=".75"><rect x="24" y="86" width="10" height="23"/><rect x="38" y="76" width="12" height="33"/><rect x="54" y="82" width="9" height="27"/><rect x="67" y="70" width="14" height="39"/><rect x="85" y="80" width="10" height="29"/><rect x="99" y="74" width="12" height="35"/></g>
+<g fill="#DD8840" fill-opacity=".85"><rect x="41" y="82" width="2" height="3"/><rect x="45" y="90" width="2" height="3"/><rect x="71" y="76" width="2" height="3"/><rect x="76" y="86" width="2" height="3"/><rect x="102" y="80" width="2" height="3"/></g>
+<g fill="#CBCFD6" fill-opacity=".55"><circle cx="30" cy="48" r="1.4"/><circle cx="60" cy="44" r="1.4"/><circle cx="96" cy="50" r="1.4"/><circle cx="116" cy="45" r="1.4"/></g>
+<g stroke="#E6B489" stroke-opacity=".55" stroke-width="2"><path d="M17 50H127M17 62H127M17 74H127M17 86H127M17 98H127"/></g></g>
+<g><rect x="10" y="140" width="56" height="96" rx="3" fill="#414855" stroke="#E6B489" stroke-width="3"/>
+<path d="M10 172H66M10 204H66" stroke="#E6B489" stroke-opacity=".6" stroke-width="2"/>
+<g fill="#E6B489"><rect x="30" y="154" width="16" height="5" rx="2"/><rect x="30" y="186" width="16" height="5" rx="2"/><rect x="30" y="218" width="16" height="5" rx="2"/></g>
+<g fill="#EEEFF1" fill-opacity=".85"><rect x="24" y="143" width="28" height="7" rx="1"/><rect x="24" y="175" width="28" height="7" rx="1"/><rect x="24" y="207" width="28" height="7" rx="1"/></g>
+<g><rect x="14" y="128" width="18" height="12" rx="1" fill="#E6B489" fill-opacity=".9"/><rect x="34" y="124" width="18" height="16" rx="1" fill="#DD8840" fill-opacity=".85"/></g></g>
+<g><rect x="74" y="200" width="72" height="8" rx="3" fill="#E6B489"/><path d="M82 208V236M138 208V236" stroke="#E6B489" stroke-width="6"/>
+<rect x="84" y="168" width="52" height="32" rx="5" fill="#414855" stroke="#EEEFF1" stroke-opacity=".7" stroke-width="2"/>
+<rect x="94" y="140" width="30" height="30" rx="2" fill="#EEEFF1" fill-opacity=".9"/><path d="M99 148H119M99 154H119M99 160H112" stroke="#DD8840" stroke-width="2.5" stroke-linecap="round"/>
+<g fill="#1D2128"><circle cx="94" cy="180" r="3"/><circle cx="104" cy="180" r="3"/><circle cx="114" cy="180" r="3"/><circle cx="124" cy="180" r="3"/><circle cx="99" cy="189" r="3"/><circle cx="109" cy="189" r="3"/><circle cx="119" cy="189" r="3"/></g>
+<rect x="80" y="170" width="6" height="10" rx="2" fill="#DD8840"/><rect x="134" y="170" width="6" height="10" rx="2" fill="#DD8840"/></g>
+<g><circle cx="500" cy="62" r="22" fill="#1D2128" stroke="#E6B489" stroke-width="3"/><circle cx="500" cy="62" r="16" fill="#EEEFF1" fill-opacity=".1"/>
+<path d="M500 48V52M500 72V76M486 62H490M510 62H514" stroke="#EEEFF1" stroke-width="2"/><path d="M500 62V52M500 62L508 66" stroke="#DD8840" stroke-width="3" stroke-linecap="round"/><circle cx="500" cy="62" r="2.5" fill="#E6B489"/></g>
+<g><rect x="540" y="34" width="46" height="78" rx="3" fill="#232830" stroke="#E6B489" stroke-width="2"/>
+<rect x="546" y="42" width="16" height="20" fill="#EEEFF1" fill-opacity=".85" transform="rotate(-4 554 52)"/><rect x="564" y="40" width="16" height="22" fill="#E6B489" fill-opacity=".8" transform="rotate(3 572 51)"/>
+<rect x="546" y="68" width="18" height="18" fill="#DD8840" fill-opacity=".8" transform="rotate(2 555 77)"/><rect x="566" y="70" width="14" height="22" fill="#EEEFF1" fill-opacity=".85" transform="rotate(-3 573 81)"/>
+<g stroke="#414855" stroke-width="2"><path d="M550 47H558M550 52H556M568 46H576M568 51H574M550 74H560M570 76H576M570 82H576"/></g>
+<g fill="#DD8840"><circle cx="554" cy="42" r="2"/><circle cx="572" cy="40" r="2"/><circle cx="555" cy="68" r="2"/><circle cx="573" cy="70" r="2"/></g></g>
+<g><rect x="466" y="200" width="124" height="8" rx="3" fill="#E6B489"/><path d="M474 208V236M582 208V236" stroke="#E6B489" stroke-width="6"/>
+<rect x="476" y="178" width="46" height="22" rx="6" fill="#414855" stroke="#EEEFF1" stroke-opacity=".7" stroke-width="2"/>
+<circle cx="499" cy="189" r="8" fill="#1D2128" stroke="#E6B489" stroke-width="2"/><g fill="#EEEFF1" fill-opacity=".7"><circle cx="499" cy="183" r="1.4"/><circle cx="505" cy="189" r="1.4"/><circle cx="499" cy="195" r="1.4"/><circle cx="493" cy="189" r="1.4"/></g>
+<path d="M478 176Q499 164 520 176" fill="none" stroke="#DD8840" stroke-width="5" stroke-linecap="round"/>
+<rect x="536" y="152" width="46" height="48" rx="3" fill="#232830" stroke="#E6B489" stroke-width="2.5"/>
+<rect x="548" y="158" width="22" height="4" rx="2" fill="#1D2128"/><rect x="544" y="172" width="30" height="16" rx="2" fill="#EEEFF1" fill-opacity=".85"/><path d="M549 178H569M549 183H562" stroke="#DD8840" stroke-width="2" stroke-linecap="round"/>
+</g>
+<rect id="glow" x="150" y="20" width="300" height="216" rx="10" fill="url(#glowg)"/>
+<g id="door">
+<rect x="150" y="20" width="300" height="216" rx="10" fill="#414855" stroke="#E6B489" stroke-width="3"/>
+<circle cx="164" cy="34" r="4" fill="#E6B489"/><circle cx="436" cy="34" r="4" fill="#E6B489"/><circle cx="164" cy="222" r="4" fill="#E6B489"/><circle cx="436" cy="222" r="4" fill="#E6B489"/>
+<rect x="210" y="30" width="180" height="26" rx="4" fill="#1D2128" stroke="#EEEFF1" stroke-opacity=".7"/>
+<text x="300" y="48" text-anchor="middle" font-size="13" letter-spacing="3" font-weight="700" fill="#EEEFF1">RECORDS OFFICE</text>
+<rect x="262" y="90" width="76" height="8" rx="3" fill="#2C313A"/>
+<circle cx="276" cy="86" r="4" fill="#EEEFF1"/>
+<g class="wheel" id="wheel"><path d="M276 86L328 80" stroke="#EEEFF1" stroke-width="4" stroke-linecap="round"/><circle cx="330" cy="80" r="6" fill="#DD8840"/></g>
+<rect x="170" y="106" width="260" height="8" rx="3" fill="#2C313A"/>
+<g id="plocks"></g>
+<text x="300" y="228" text-anchor="middle" direction="ltr" font-size="11" letter-spacing="3" font-weight="700" fill="#EEEFF1">1960 - 1968</text>
+</g>
+</svg>
+</div>
+
+<div class="intro glass" id="intro">
+  <h2 style="margin:.1em 0">You are locked in the records office.</h2>
+  <p>The town records office closed for the night, and the clerk locked the door. A filing cabinet, a typewriter, a rubber stamp, a desk telephone, and a ballot box from the 1960s sit in the room. The door has <b>5 locks</b>. Each lock matches one big idea from Lesson 18. Solve them all to find the <b>5-digit exit code</b>.</p>
+  <p>The clock starts when you press the button. Most students finish in about 20 minutes.</p>
+  <p><button class="btn primary" id="startBtn">Enter the Records Office</button></p>
+</div>
+
+<div id="game" class="hidden">
+  <div class="bar" id="bar" aria-live="off"><span><span>Time</span> <b id="tm">00:00</b></span><span><span>Locks</span> <b id="lc">0</b>/5</span><span><span>Hints used</span> <b id="hc">0</b></span></div>
+  <div id="locks"></div>
+
+  <section class="exit glass locked" id="exit" aria-label="Exit door">
+    <div class="eyebrow">THE EXIT DOOR</div>
+    <h2>Type the exit code</h2>
+    <p id="exitNote">Open all 5 locks first. The digits go in order: Lock 1 first.</p>
+    <div class="codebox" id="codebox" dir="ltr"></div>
+    <p class="ennote">Type the answer in English. Use the digits 0-9.</p>
+    <div class="row" style="justify-content:center"><button class="btn primary" id="codeBtn" disabled>Open the Door</button></div>
+    <div class="fb" id="codefb"></div>
+  </section>
+
+  <section class="esc glass" id="esc" aria-live="polite">
+    <div class="big">ESCAPED</div>
+    <p class="time"><span>Your time:</span> <span id="escTime">00:00</span></p>
+    <p id="escSum"></p>
+    <p>One last step: write your Debrief below.</p>
+  </section>
+
+  <section class="debrief glass" id="debrief">
+    <div class="eyebrow">DEBRIEF</div>
+    <h2>Which lock was hardest, and what did you learn that you did not know before?</h2>
+    <p style="margin:.2em 0;color:var(--dim)">Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.</p>
+    <textarea id="debriefText" aria-label="Debrief" placeholder="Type your answer here..."></textarea>
+  </section>
+
+  <section class="actions glass" id="actions">
+    <div class="status" id="status"></div>
+    <div class="row">
+      <button class="btn" id="saveBtn">Save Progress</button>
+      <button class="btn" id="loadBtn">Load Progress</button>
+      <input type="file" id="loadFile" accept=".json,application/json" hidden>
+      <button class="btn primary" id="finishBtn">Finished — Download File to Submit</button>
+    </div>
+    <div class="msg" id="msg" role="status"></div>
+    <button class="link" id="reset">Clear all my work and start over</button>
+  </section>
+</div>
+
+<div class="actions glass hidden" id="loadOnly" style="margin-top:12px"><button class="btn" id="loadBtn0">Load Progress</button> <span style="color:var(--dim)">Have a saved file? Load it to continue.</span></div>
+
+<footer>UNIT 7 · THE AMERICAN AGE | CPUSH | DANIEL GARZA, M.A.</footer>
+</div>
+
+<script type="application/json" id="er-data">{"salt": "L18esc:", "exitHash": "f143b553c02b445cd6f3", "locks": [{"n": 1, "key": "lock1_filing_cabinet", "title": "The Filing Cabinet", "obj": "1", "objLabel": "CORE OBJECTIVE 1", "objText": "Core Objective 1: Assess President John F. Kennedy’s efforts to contain communism abroad and address civil rights and other social programs at home.", "type": "fill", "card": "<p>John F. Kennedy called his program the New Frontier. He had a hard time passing it, because conservative southern Democrats joined Republicans to block federal aid to education, medical insurance for the aged, and a new department for urban affairs and housing. Kennedy was also reluctant to challenge southern Democrats on racial integration. Norton says he and his brother Robert, the attorney general, had to be dragged into supporting the civil rights movement.<\/p><p>Abroad, Kennedy faced Cold War crises. In April 1961, 1,543 Cuban exiles trained by the CIA landed at the Bay of Pigs in Cuba. Castro had 20,000 soldiers waiting, and the invasion failed. In August 1961, the Soviets began building the Berlin Wall. On October 16, 1962, spy-plane photos showed Soviet missile sites in Cuba. On October 22, Kennedy told the nation that the U.S. Navy was setting up a “quarantine” of Cuba to stop Soviet ships from bringing more weapons. The Soviets agreed to remove their missiles in return for a public U.S. pledge never to invade Cuba and a secret agreement to remove U.S. missiles from Turkey.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 27, “The New Frontier” (begins p. 1206; A Contrary Congress, p. 1209; Kennedy and Civil Rights, p. 1210; Bay of Pigs, pp. 1210–1211; Berlin Wall, p. 1211; The Cuban Missile Crisis, pp. 1213–1214).", "prompt": "Fill in the blank using the Clue Card.", "sentence": "On October 22, 1962, President Kennedy told the nation that the U.S. Navy was setting up a “________” of Cuba to stop Soviet ships from bringing more weapons.", "scramble": "Q  A  T  R  N  N  E  I  U  A", "hints": ["Read the Clue Card sentence that begins “On October 22.” The missing word is the name for the Navy’s line around Cuba.", "The word starts with Q and has 10 letters. It ends with “tine.”"], "nudge": "Not quite. Re-read the Clue Card. Use the scrambled letters to check your spelling.", "entries": ["000c66439633afd9fef45", "00a906d2047ad626075c1", "00df7c607c10a8322a6a0", "01c9ec13096c24f28b334", "02554e72e3dd98eb3ae81", "02aba63faece462721111", "03b7c3ea90061f0453296", "03f1b1f178b982e4cf970", "043cead189c5a2e796d92", "046c19da8b81fe1ee2c83", "0507e7199b136f04e34b7", "055f6ffd8dd1ee1973746", "05da963c14189b497cf11", "061b29882f90a497e3a18", "0622904638b6192b2ab90", "0652fea9f159a465fd098", "0719873b6fcef43565342", "07c2120f3130a573e83a7", "07f5611c9d4a2c06eed20", "088420c715538dc7beac3", "08e42c7f1f86cc82850c5", "0901bec1d5c01a0698f54", "09673def5268c93081540", "09f2e6b078e8a5c521610", "0a91fe483d7a6c635aca2", "0ac456dfa6ff38ae85838", "0ae8fe8d39fc968669ee8", "0bd841725be5262b92b30", "0c4b10a35f9bdec501b95", "0cb199d9eceb95a95cea9", "0cc3997d55f243b82d719", "0d0cde38f39a817fcfe14", "0defe557dd4d858c1aa97", "0e06e3e9c2a4273b33a62", "0e4c17568fc60d8211009", "0eddaef3ecbfd910235a6", "0f51a5c55d67e0b1620e5", "0fe87964e8a9e6391a400", "1072e68636049e449ec54", "10c48809c7cdf6c73a326", "119b581125063ed9eea39", "11a71c3ccba300c55fee1", "11dcf145d62f99cb01f55", "11ddaccac21035cd95780", "1208fd668718d3c2e7fa2", "1216233173f06ea9bcac7", "1240ce0ce28b8882f6210", "124dbd84b9cf0c2d58002", "12ad24785c4167030dd86", "13584ba1267a3005a1fc9", "138a62c952d01196fd512", "1398e34cbda70787812c2", "13d64e375a7c55ebcde61", "13d741b32760267e7f305", "1480b71b4cc475e3f1590", "14a0a608f2fb28d94ff47", "153627be4160b121d99e3", "1609c1f7836633b301646", "1740025a66cdcbef66b78", "183a133e3e386e9823fe1", "19083154607389cd45864", "1a0a79f36302cab80a466", "1c459d311a6b1e19104e6", "1c68cd7b6909cebf1c3e3", "1cadd88bb8904b805fe21", "1ceb8333e2d9e36f8e5e1", "1d30c971f5e128916f3b2", "1d4ef5c978b95cce30392", "1d8968c13ccdcf6333bb4", "1d8da0850bf9936745a51", "1d8ea4bc5872c9af9d276", "1db93e6612fd2da23bdd2", "1e12180842518de36cf22", "1e377b5e003c1fea6c534", "1e380699257872ac83446", "1e4731ddca00dcb327592", "1e90c297c60ca09c0ba94", "1edda3287a21502f46610", "1ef2bcbb39fabcc8cf4c3", "1f3a9fce4b501064a4342", "1f8b5c7ef0437f3507bd5", "1fad6943d5ad8798b41e0", "20aaf1d53b87db02e68a8", "219973587a1d306ad56f2", "2202e6886bc4698b69667", "223291306628aeb974331", "22a15698152ba19033e04", "2455da711d7021264ad26", "24e04a3fecb162c84e475", "2523b6e74ce0e1086be02", "25415e6bf2e720fa0eb12", "257f80b01206833146138", "25840d5373b0a0a6da934", "25e548b3ccace12fc5d64", "264d75dbb4aa840ba3222", "2685f066beb0c733e3b48", "26ab67890d25895e95937", "26ada0aa2b496acb55f10", "26d18d3f456354d486cf6", "276c1e8f75b6b30716664", "27aff7335be4e10c4e715", "29eeee32b1d6f76af1666", "2aaa1ceb8af97176638e2", "2b48f89d6be59001d3989", "2bca3f678e1b4e26e8679", "2bd38bb37dd7be506d020", "2be44f9d2e62b543d04d0", "2be982ed0d147192adfb6", "2ca2fee062ac6d7e5ca27", "2d1d46da863c67f0ef717", "2d26b7ded6df51f94c1c6", "2d288b76e0d435c4c5b82", "2e0c062e8ffaf98099cf6", "2fa2667e00af7919828d3", "314909d6b0dcfff383cb5", "314d993562de62ee0fe33", "3155633e1c2df181b9646", "31daf846ccf1527bb2a81", "33320a2ce7e13836c5857", "33403b986a7b5ef1519a5", "338804bc486f013344c08", "33a32ccb5b0329336ab26", "347e357a4d946938e6303", "34984c851892bce2bd9d4", "35df14751351fa8b7f460", "3622bbec34eb7acc505f0", "37985aa686ec152dcc720", "379f80ecde29866a6d216", "37b67cf49233f5bc3d896", "37c1b120a275b56676840", "37d1a9f17c604f13f21c0", "37f512d0b4eb896e71997", "38c80d46e3fb9b0210841", "38d37f56f19314b38ecb1", "399ab289b97dedda2a830", "3a9a61f7bf686edcb2147", "3aabe4a69a65b4fdc3249", "3ae56df4fa3809ccae947", "3b5bd281d173be4fd3cb9", "3befaae2aa99b49d25bb6", "3c1a04931e9a707e8c724", "3c35dea85505481cb1a92", "3c55ef6bc5bcb4072c758", "3cf863478724204339412", "3e38a9bb81f16649c4052", "3e5ced6cb58672eb073f9", "3ec50754a91f899c8f1f9", "3ef267ce30077690e6a01", "3ef89e268cd6b00d76d44", "3f1f8ba5bbc43c51e9c25", "3fa4beca38465ab4dcb74", "3fba14f857dc1ccd40cd2", "4043852de6e3f7e8abb24", "40d203783dc7ac30c95e4", "4224c678cfc065c517aa4", "425812ed861a7c14dc726", "42a6db64c22571ade2715", "43199b75a41e7bfcf9482", "433806558a921532b28b0", "435956a9de4b8a72b0330", "442687e62b3ff58d864b5", "4433d5d7acef74c406c94", "44863f0f3258bb58e9078", "44df760430c634b1ffbd7", "45938eee6122cfeeb2d27", "46d6295f6d15624fab849", "46eb56f5d6b3020728ce9", "472195511b45b9fa531b3", "47331dd98e51376105e24", "47d5794c371466170dfa0", "47e6a05ca3fd16be3fa89", "47f7372de19255cc1e8f3", "485fa28fb8f5f6e4e3465", "49128441148d8da951332", "49225a49e9a167c2d9791", "492bb75bad87da1638b24", "496baae2e2849374d4fb6", "49a8daac4590e5da1e700", "4a086fde72625c7b96045", "4a22904bebd8702432157", "4a5ad087471614efb1fa1", "4a78379b951990a0e84f0", "4aab65dc978ac0500a6a7", "4bda0c11158f52c5ccde8", "4bf5d45a94bfe03676413", "4c8f600b1188915a37a56", "4cb3406c67de49cd88374", "4d0c8a488411c1f80a3c5", "4d7c14f1587c2421a2640", "4da28e4900d2ede6a39b7", "4f8db68434a5a98f49c32", "4fce27845d017c792a3e3", "5024c919e66bd8ab785f6", "502da308e7f87728c1a93", "5087f0c6e7e3a20c7dcc7", "51ce3fbe9735e1f0b4368", "530c5e32f28e6dcb48436", "533594c8e6a6480cc2c65", "5347f6f7544ccc9eff253", "537d07cf1a663a6ab64c2", "5384c7d5f530f9c65b036", "539e3dcac80b492038d97", "540c16c153779f897d767", "54a9425ca2afcbbf0a2d6", "56016cc06f95e98a25292", "5662e81b9de8ae1e38393", "566e80153fbcbd64aed62", "56bddc6285235ccd4a693", "56e8516c6655bab22e6b9", "57173b781cc188d0e5df4", "5780fd2587558d8c87fe6", "57c0fa17cc43bbe451515", "5a702ee28ab167148ffb1", "5b329b2d7e0ace280f903", "5d37ca2e5a59ad3a59904", "5ded9b5583e9c28c1ece6", "5e0381ee9089a24edc2d4", "5e54734dadabf70c67c87", "5e96f2aaaae417d990604", "5eb7d3951c1809ce968c7", "5fa87974c8b9f61ed35c1", "5ff86a21f87312cf8bc38", "60a6409b164f29be2a920", "616bcbeab068a8bf5bad8", "618c584292347edf4be15", "627b5f40d0b6685fa16e3", "62a5055bf2599533769c8", "632916d801dcc9cca7783", "63fbdf21d26fc3a282640", "6440fc4c2760fc2e479c9", "64627ec08960137c47402", "64b389c9d3f53db5f3cf2", "6591db3318ab28eb2ed93", "65bdb7e34faa7243b4f01", "65e0be8f00305b66f9e83", "6672e92571287e19645b9", "66d682435e8c146aeedd2", "675de4057de1a589e4449", "67ceb2ab6ef1893d4b4a3", "6a3c057db0e7c7d7fd2c7", "6abd0b550687620b5dd36", "6b252cb2e3b361fbb4b94", "6d2bfc25400fc52343c25", "6ed43e6d51d9f75dfbcd7", "6f6621d169c0e8098e627", "718a1bba02b72b8d42e54", "71a36e55a5bf158879ae2", "72a8f36282de0b6b6f0b2", "72eb50733d15a503c1c80", "7338777bf4e31ee911cb3", "73952bcae6a94850cb574", "7413a6a673c4cd320deb5", "74173149376dbe5b52c50", "74aef01418964058da6f0", "74b0a1b5050b80d8e0f25", "74d3a85b59ab1b5117327", "765a6ce5d4c9312f295e6", "77d922fa1d593ff7bf7d9", "780e03f17f4ef9fc5cff4", "78a2ecff35b40425e3f06", "7947ae376b4d4979ae0d1", "79704e89fdca43bc0aa64", "79a33bc2646e5412dd637", "79af4616981604f0f1946", "7bcc9d9a2723ecd770df9", "7bdb98a26afbe9b7bf002", "7bdeae1726b2c3169ea45", "7c3828c984581a04c8711", "7c728ee14ad5e82f918f7", "7c729dab22e4585abe630", "7caea1a59424bf666b2e6", "7ce0d70e779e587c5fac5", "7d66f3f649857420d6df5", "7daf004947410ee0f8c16", "7f2b8b51a837d38d8d1f4", "80a9998a16cb693c88a19", "82a3ebcdd121ca229fdb9", "834f7dc75afbee807c731", "836a79e0bbe08e42adeb3", "8395c07841367e554c253", "83983812e95bc79d2a428", "843c8ee53a2df463d2e15", "849f7c5a1167a7274d020", "84fe797b76cd34e690942", "859560ab82547f90c1e99", "861649b0e0b0d17680e78", "863b6e899b03259897047", "86c8707924430655a6218", "876cddf9278d994861037", "87c250fef8eae26a6e586", "88596e582c00c1e5d05e8", "891e817343f886b324212", "89c826de91bcf002393f6", "89e0dd3cdd6e24028c6b9", "89e2d7815cea91f6f3692", "8a1dfccf3b1abfd96c200", "8b0bb82137327572d6392", "8c52c9e7a03f3f8aaaf40", "8e4920adfeeeeb7a25367", "8e70051919df81d75ef35", "8ebb475accf38d6b13639", "8fb14b19641176a849f17", "9000de2ab98c99442a6b1", "900d55467c3c3f402c325", "904525045aa2b7b18b573", "904f553f49abbb02b1281", "90fce9ff3d06a0bb8afd6", "921becf3c93b41f652579", "9289d8a3aaa4cb029c3f1", "92bbdd24ae090875f7925", "92c7d9983f3cfecb03c82", "93007646f3887b77da8c5", "932e3eaf1086be59bfc08", "937b8090c05b8e45d0d88", "9399cee86d251c9568037", "944daf5dba1291c558343", "9455f8a049e4a03e9dc95", "94817bedde92f1cd214c0", "9493dc340a70d1cb9d363", "9497a8ab88d280ad6a499", "94c0030cf67397ca31bf6", "95df71345c3de5d265fb4", "96117d79fa6ee55dff0f7", "963b0b4d61dade6d475d3", "964d6c0403a25a4df1b39", "965aaef7f2db6f785c7a5", "97858f038dec4f7bd2761", "98eea39237f43f6cc6ee7", "98f9ee81b4ce1021213c9", "99bd5bd91fd7b0049e9e5", "99c1db9b9da6204f15026", "99fc611391678bcaa7c60", "9a0c95151bd03f8defd83", "9a7cab1de4220e73b1e31", "9b86c3a46a09590325ea4", "9bc6bbbdecbb6a21db478", "9cbaeb5b94129fd9c5793", "9ce798d83cf0970869112", "9db7c8684edd727bf2fb1", "9eaf21c5f46f870a6fe57", "9eda309e762e6d7dc5090", "9f69806d35c0ea6c344c2", "a004e583c2725a4a137a5", "a00df68d571b6111ffbd0", "a07f12749a24aa14bd979", "a1c7d06dc7fa9087ed167", "a23202529a0249f852eb8", "a2db07ce4ea398461f109", "a4376d723d5ee7dfa25c3", "a43f88ef2e0313c4d8da0", "a46ad6fdaad24cd0fed63", "a4712acc034261ad2c453", "a5e0838d94e0d5a46a7e6", "a610042cac61b6afa31f4", "a62aae6d7c779dc6a8541", "a6e98ec5df4fa831a0045", "a76866b5b6152a89a5610", "a779a4d29da9ccdfa8339", "a7bc87b3b984908848186", "a86db5438ba05c4123a24", "a8b14e3c3904c79dd6f43", "a9d9ae57f61b67a312f84", "aa2b075954ae48bb3c890", "aa52eedacb137346a9fb3", "abdcad054966506e29fc9", "acd2eaa1267d696ef6378", "ad29d950db5f56dafd7d7", "ad73b9033ed18c28f19e5", "adc79bc45aede3bac3c75", "ae3ce01052d13a34a7cb0", "ae463f38461b24ce26115", "aea5bea3bd729f8c11e65", "af3594c907b1e335354e8", "af5e2f549547a51ab7cf8", "afc2b2cd49fc66bda62b7", "b02c73918aebc7c4a9e21", "b042050cf141d805b1fe8", "b10e3ff9d92e658701b64", "b173000577da70e4d5018", "b250fc625968dc82a0e06", "b263b96ef2b4d17709d57", "b2a319502ab9262ad4893", "b2c475875520f21d354b0", "b2e3cce1ba616f1016a52", "b2ef5bcece9e0604c49d9", "b48c36e629112f236fa08", "b57cf3e644616d04cbc99", "b5d76e7cd30b3fbf456a8", "b5eb5cde8247143510ce1", "b691311eed6771d406405", "b7d7a2e3897720b2c0128", "b8300dd0aba878f63e3d7", "b83bf037bf6bd2cb46af1", "b8b3fb5792cc331496c15", "b92bf0c5d3203d472ac86", "b93725a1900cdefadff46", "ba20789a53e33164b2df6", "bb25f357cb081fc239d39", "bb60fef96b668d2d75fd5", "bbf3ce5355d49fe15ce84", "be9707e076edf71cf2189", "bed798c2199bd9a752027", "bf72f1b4cb3cdd8952a12", "bfe449ab268a064e93702", "c0435cb2231489732c350", "c060ed3a0b745aa8ecdd1", "c0b5dc9209e64630dd079", "c195428ff29f054ddadc4", "c1a7991940e342b452b20", "c20ed7141cd9230b7e143", "c23fe09019bb6b2763350", "c45bc415f519f79b5d620", "c47353667f4c76bc1cd56", "c497b70e00ad14c25cd93", "c55586ee36ada0fad8170", "c646ef43d3f0f568287b7", "c64fcb725edef40e83c27", "c6b6cb72953c78a9381c2", "c734d14b619dde30b6164", "c83a90facc3aaeadaec90", "c84bd006ac8d9293c57d9", "c87396471b34dbfb14e89", "c890741a07073859b29e5", "c8c6e5b9087e551f96e39", "c92047d62bc65ccee71f6", "c9e8bd6a9709dfe8c4242", "ca2c3f7f7faf5a72c5928", "cb97121101e24c36b5b91", "cbe331bfd02b850d03968", "cbf495eae2cdd6cf997a5", "cc283985cd1b76f929362", "cce22a602de1675691d80", "cece91c77cc99775dde77", "cf0e871a555985fcd4b15", "cf5b5dfebac5a041436f9", "cfbf6bbc218c9f94eb3f4", "cfc2617faf1cfe03ddac1", "d048b67dcf37b7216c4b7", "d0f4149d9ad48fddb97b6", "d111ea864b0d9cc4dad47", "d14e30c772893da9a66d4", "d1dbcb618e83e5ca436a4", "d2391473f1a6b5049c508", "d3233a1c28637840109d5", "d3662253780edc6e87d26", "d39b01f18ac219fcd52f8", "d407fe9e80e47f34749e0", "d42d18b14df50691e90f6", "d4b2497b55e7647555b86", "d4fb64654c4e7c3ebfd14", "d574f6b18b6f103c00f22", "d57de03895436dbfc64b8", "d802dead6906c00145642", "d9ae43d6e1b8ef0192271", "d9b2567de0b56fefb8b95", "d9f77cb3c489c1541e8f2", "dac9225ba98826a3a8248", "dbe71ec1fb016fe13d4d4", "dbf393bf39bab362f67f0", "dca187943fcecea175f76", "dcd77c6be85ca26598a03", "dd19e34243cee2f2a3bc2", "dd6a3c200bb930302d624", "ddaa2247a5ba85d8f52a9", "ddaebf3389791c2b02202", "de88433f0e7dda4ffd3d4", "de8bf8491a29590de6753", "df18cf7212eb1b5e51532", "df1b01ab640a580958f80", "df6ab0fef637769271632", "dfe36a4209d9ca19135d6", "e025bc785a7334aa3e111", "e0260cee929f1b09e2473", "e07801db361165912fd07", "e138a51bb215b325f2a66", "e1692cfc04c8a046d1d83", "e18094eb7897da1c29aa1", "e240485f7e1d8b8af3273", "e30303a1313c4eba6b317", "e30f348d3a6f8b27b6892", "e39b2069199fa98aecac9", "e3c90be57c6d86f9934b3", "e45ffb201b48bc2f6fd86", "e4d1b61be775a3345b3c6", "e4fad096862ee2a78ed96", "e54db92e56e4dd5e4d466", "e552ec26e37213aba53e0", "e67dcc22be0ffd95d9365", "e6aef2312d84d3026abf9", "e6ee688e14a176c8dcd24", "e7073c92180ae83b71685", "e76f3882131ed864ef6e7", "e78373aaf54f16285b824", "e785e4665cf20d96686c4", "e7c10dc07305343718191", "e88e22eb1e15642e847b1", "e8b03b35f3676ae8cb714", "e91f465611ce01f1c8946", "e9dfe7ba81f1d0c0714f1", "ea6cd0469315ba7ab0b11", "eb05e8527c6581b4e6740", "ec3edd5e24337cc567d82", "ec979ca7d2d6c0cb3e017", "ecd7e68a83fabc69e0ab2", "ece8e81f5891ce4711bc2", "edb915464098d30dd2a39", "edf16895156b91f31e018", "ee462f5caaeb57494b505", "ee75a1c97e04e055c5f70", "ef4970a4830bb6438b2b5", "f09d56e576122edf00783", "f136b5c0050b1decfa1c4", "f182f37dc2a9b7595cec2", "f23de2f52af43102486c7", "f23f64260b42facdf3dc2", "f312babd28d75a452cc64", "f39fc8dbd596f332539f0", "f3d1ec05a9b9d675de450", "f3e904bb03bc49791fe53", "f3f6a6943887d3286da20", "f58416ef06aab078a6919", "f5d1073d111b5902357f9", "f5e07d7a9e6df3d4b8f40", "f6c894610ff7addce9349", "f6e62d6e9b49667d0e575", "f730f32f7511466e92cf5", "f78a3930bd532d7a00149", "f8e225293cde478f262c2", "f8f21c9df4cfc60e531c6", "f929bdcd3dbed632d61f5", "f9e485fc125d1c24735e6", "fa7d713aecb8d514d7f64", "fb3b92ac82a7d5cc8a512", "fbd35a86659e168341c03", "fbd89a65980e1d1949ac0", "fc004c2eced6e3d4abfe3", "fc0b0acaf478fce22e344", "fc4d03752fb39b0d10308", "fc5299efd0c77cd7befa4", "fd04c7fa87a403d7b8675", "fda34e202142367751f35", "fdc3b255552953801ecd3", "fe62c9bf2f5259ca13a11", "fedf6fd201aa3ef7a4675", "ff20e74fe241f75084b27", "ff5c849c154531c976fb4"], "id": "lock1_filing_cabinet"}, {"n": 2, "key": "lock2_typewriter", "title": "The Typewriter", "obj": "2", "objLabel": "CORE OBJECTIVE 2", "objText": "Core Objective 2: Describe the strategies and achievements of the civil rights movement in the 1960s. Explain the divisions that emerged among its activists and how their successes and failures contributed to the rise of the Black Power movement.", "type": "order", "card": "<p>In February 1960, four African American students sat down at an “all-White” lunch counter in Greensboro, North Carolina, and waited to be served. Sit-ins spread to over a hundred cities, and in April 1960 student activists formed the Student Nonviolent Coordinating Committee (SNCC). In May 1961, Freedom Riders, Black and White, boarded buses in Washington, D.C., to test a court ruling that banned segregation on buses and trains. They hoped to force the federal government to enforce the law.<\/p><p>In May 1963, thousands marched against segregation in Birmingham, Alabama. More than 3,000 demonstrators were arrested, including Martin Luther King Jr., who wrote the “Letter from Birmingham Jail” to defend nonviolent civil disobedience. Birmingham officials finally agreed to end their segregation practices. On August 28, 1963, some 250,000 Black and White Americans marched in Washington, D.C., where King gave his “I Have a Dream” speech.<\/p><p>The movement also split. By the mid-1960s, about 70 percent of African Americans lived in cities, where many struggled to find jobs and decent housing. Young Black activists asked how nonviolent protest could change their lives. “Black power” became the alternative to the nonviolent, integrationist approach of King. Malcolm X was its most visible spokesman.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 27, “Expansion of the Civil Rights Movement” (begins p. 1218; Sit-Ins, p. 1219; Freedom Rides, p. 1220; Birmingham, pp. 1223–1224; “I Have a Dream,” p. 1225; Black Power, pp. 1230–1231).", "prompt": "Tap the four events in the order they happened. Tap an event again to take it back.", "items": [{"id": "c", "label": "Thousands march in Birmingham, Alabama, and more than 3,000 are arrested"}, {"id": "a", "label": "Four students begin a sit-in at a lunch counter in Greensboro, North Carolina"}, {"id": "d", "label": "About 250,000 people join the March on Washington"}, {"id": "b", "label": "Freedom Riders board buses to test the ban on segregation in bus travel"}], "hints": ["Look for the dates in the Clue Card: February 1960, May 1961, May 1963, and August 28, 1963. Each event has its own date.", "The order is the Greensboro sit-in (1960), the Freedom Riders (1961), Birmingham (May 1963), then the March on Washington (August 1963)."], "nudge": "Not quite. Re-read the Clue Card and match each event to its date.", "entries": ["029d2e696252398caba72"], "id": "lock2_typewriter"}, {"n": 3, "key": "lock3_rubber_stamp", "title": "The Rubber Stamp", "obj": "3", "objLabel": "CORE OBJECTIVE 3", "objText": "Core Objective 3: Analyze Lyndon B. Johnson’s War on Poverty and other Great Society initiatives and evaluate their impact on American society.", "type": "match", "card": "<p>The Civil Rights Act of 1964 became law on July 2, after southern Democrats in Congress had long blocked it. It outlawed discrimination in public places such as theaters, restaurants, parks, and hotels. It also created the Equal Employment Opportunity Commission (EEOC) to fight discrimination at work. President Lyndon Johnson then declared “unconditional war on poverty.” The Economic Opportunity Act of 1964 created the Office of Economic Opportunity to run eleven new programs, including Job Corps, Upward Bound, Head Start, and a Legal Services Corporation.<\/p><p>In May 1964, Johnson described a “Great Society” that would end poverty and racial injustice. Medicare gave health insurance to Americans over age sixty-five, and Medicaid helped states pay medical costs for the poor. The Immigration and Nationality Services Act of 1965 ended national-origins quotas that had favored northern and western Europeans since 1924. The Voting Rights Act of 1965 banned literacy tests and other methods used to keep Black and Latino citizens from voting, and it let the attorney general send federal officials to register voters. Norton says the Great Society did not end poverty, partly because the Vietnam War took funding. But infant mortality dropped, college completion rose, and fewer older Americans live in poverty.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 27, “Lyndon Baines Johnson and the Great Society” (begins p. 1234; Civil Rights Act, p. 1235; War on Poverty and Economic Opportunity Act, p. 1236; Great Society and Medicare, p. 1238; Immigration Act, p. 1239; Voting Rights, p. 1241; Assessing the Great Society, p. 1242).", "prompt": "Match each law or program to the best description. Use the Clue Card.", "terms": [{"id": "eo", "label": "Economic Opportunity Act of 1964"}, {"id": "vr", "label": "Voting Rights Act of 1965"}, {"id": "cr", "label": "Civil Rights Act of 1964"}, {"id": "mc", "label": "Medicare"}], "descs": [{"id": "c", "label": "Gave health insurance to Americans over age sixty-five"}, {"id": "d", "label": "Banned literacy tests and sent federal officials to register voters"}, {"id": "a", "label": "Outlawed discrimination in public places such as restaurants, hotels, and parks, and created the EEOC"}, {"id": "b", "label": "Created the Office of Economic Opportunity and programs such as Job Corps and Head Start"}], "hints": ["Two terms are 1964 laws, one is about health, and one is about voting. Look for key words in each description, such as “literacy tests” and “over age sixty-five.”", "The Civil Rights Act outlawed discrimination in public places. The Economic Opportunity Act began the War on Poverty with Job Corps and Head Start. Medicare is for people over sixty-five. The Voting Rights Act banned literacy tests."], "nudge": "Not quite. Check each match against the Clue Card. Which one are you least sure about?", "entries": ["e0ab60dbe976ee48d2526"], "id": "lock3_rubber_stamp"}, {"n": 4, "key": "lock4_telephone", "title": "The Desk Telephone", "obj": "4", "objLabel": "CORE OBJECTIVE 4", "objText": "Core Objective 4: Explain the motivations of Presidents Kennedy and Johnson for deepening military involvement in the Vietnam War.", "type": "decode", "shift": 4, "cipher": "EHZMWIVW", "card": "<p>President Kennedy sent weapons, money, and some 16,000 military men to help South Vietnam. He gave them a name that did not sound like soldiers, so people would not think that U.S. troops were doing the fighting. Kennedy said, “If I tried to pull out, we would have another Joe McCarthy red scare on our hands.”<\/p><p>President Johnson also feared looking weak against communism. He was convinced that losing South Vietnam would “shatter my presidency.” In August 1964, Johnson said that North Vietnamese torpedo boats had attacked two American warships in the Gulf of Tonkin. Norton says his statement was later shown to be false and misleading, because the U.S. ships had fired first. Congress passed the Tonkin Gulf Resolution, which let Johnson “take all necessary measures” without a declaration of war. In 1965, Johnson said, “We are there because we have a promise to keep.” He believed that leaving Vietnam would shake the confidence of other nations in the American commitment. By the end of 1965, there were 184,000 U.S. troops in Vietnam. There were 385,000 in 1966 and 542,000 in 1969.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 27, “The New Frontier” (Kennedy and Vietnam, p. 1215) and “The Tragedy of Vietnam” (begins pp. 1242–1243; Escalation in Vietnam, pp. 1243–1244; The Stakes of War, p. 1245).", "prompt": "The Clue Card describes a name without printing it. A secret message gives the name. Each letter in the message was moved 4 steps forward in the alphabet. Decode it to find the name for the military men Kennedy sent.", "hints": ["The Clue Card says Kennedy sent about 16,000 military men with a name that did not sound like soldiers. The secret word is that name. Use the decoder key to spell it, one letter at a time.", "In the message, the letter E is really A, and the letter H is really D. The word has 8 letters and starts with A."], "nudge": "Not quite. Decode one letter at a time with the key, then check your spelling.", "entries": ["005621a100f21d21b6b84", "0058c28591365a0919a54", "008646232ad210a93b6e8", "016d50d308fac1b571284", "01c93288f3c3b4c972387", "01caeac57f5a7baab7601", "0259b6f80ffd206c59af1", "02a427e593e6c5cc2eb11", "02ff2d6eb14e6dfcc8119", "03a18c1dc0352333fb377", "03d8a937fc6c40ef2ece6", "04f0a30b560879aff8752", "05d15ce7dc0e5827a6bd9", "05d9cb88038bf67fbc871", "06f2b4bb00a7e78ebeaa1", "0793186269ffcd72e78c5", "07f0c622a62149bc3e495", "07f28b953f352d3fe3479", "082566ddeb0567e57c6d3", "08b45fb75c9092d515800", "090087227832b3adef342", "0b2b3a94d74884822d849", "0b6ac16e9d3ba5b154ef8", "0be5e75567a3c42ed74f3", "0c64b9268420c026247d6", "0c7b2bb4cbf64ed6a1bf4", "0d2493d3aadf1921bd6c3", "0fbf60d453d1182aac341", "102591a610d01e9f9cf73", "1087b816f62ab267a12a2", "112310049f3f960673535", "113d48038c937d0f0d837", "133a28ad577049aa0bcb1", "133a4e83808d3a1c8cab2", "13a26737aa5a410470ac2", "140c35e2a27a44653d642", "148e47e7669c04d019845", "1499f39fa7a82d80607a1", "1622cf514750b16cd33e6", "17957673883f1d3bbcd78", "17aca815e914ddb12a0a2", "17b7e489f1badb1672d37", "18a106620aad6377fd8d1", "18f8a7dea1516e3e4cfa0", "1921476b52f50c0b48897", "1994316c13095547e41d7", "1b50338db657f0ec722d3", "1d5bc1a4098d85bf4b8d0", "1d76ad203eba21cbf5981", "1dbb2e5a3b911a5648916", "1e0dd77ee084e9a36a560", "1f5181ca7d8d15fa55161", "1f558df2bfe58e9d78344", "1f5dbe9a8bb2e1a3cb867", "1fb4ea0d9a9f741afec68", "212470125582028a539f1", "22e52a4d902a29d64d7d7", "22ebb9be5a85685b0d521", "234d6a02f7578b51a5013", "237605d0d76f19d1029e0", "237e0913d1c2030293a24", "238ae62c8459466c2bdf7", "2494e434af1316069b918", "25b8d9bb7bea92d6eb188", "25bdcee3ab0845ae71018", "26f400e835067bb876e95", "27376084f89b870cdc189", "273ac2508507cfb5dda47", "27514d884ab9f24ce1713", "285d1d66863c67a6cbf94", "288c00f0fa24004eea2b9", "2b72f8dc57e83b3dc70f5", "2c5132f742aa51c13aeb7", "2c68fb2b7c43d35ab3150", "2d34c127a7e04db0d3cd7", "2e9d1f6145d116c5833f0", "2ed73e460e1ca1b89f8b0", "2f12c4194617a5eee65d7", "2f995363fad5675155917", "3003c33bee683646fe6e8", "307bc8b9692d200cc7528", "30ca27e22b68f7cd91359", "310448035b8c86b1bf480", "31853923f5decf232b615", "31c00f97e9a9bfdeee4b6", "31cc51fb3f7a2049dc2d7", "324f92686a4385d86de35", "32c51ccf83ececc9b6987", "330aea997a1f5519a49f6", "33d1ea991087bb476bf48", "33fb2126cd1b5e4be7867", "344d291b5fb23d61baea3", "34814715a4bd4149c2de8", "3525197c204f2df0dad60", "3568a8dcd680a1204ac05", "35b954f3ef88aa5ec1110", "369668daacc9cdfa32477", "382ee4189d4db4ba160b5", "3903758f5f9e3be0b9d33", "392cb7168af125d735d27", "3a2521f3c91beb52e0ee8", "3ab1fb306d7971250af70", "3b6d64baae0d22a8b9eb5", "3c1766ca5d59d7fb82a83", "3c418fb011627f2e283a2", "3d08cd58dec4e47a136a5", "3d415b4511e42e10b59d0", "3f9919fcc8338a5a9e894", "3fc7beec0ca50ed60a9a4", "3fc856ad8212214c6a085", "3fd69b6ba55d1f0f668e1", "4069e0d2a4ff11f3202f8", "40e0777537ce064572612", "4149ef77e10ad23122a89", "4157ad78dc63affeec941", "424b519f63bb801b6ef93", "4259865a9370207460263", "428589fe708e8a9718724", "436ed266542e41d9fa1e6", "43838e1b90ad4fb4c0ab5", "44799046444f464a8c0e8", "4606a0629e36b96c40392", "47afa7c55553428093000", "48189c4fbad998b3270f3", "486b9c0febf1aa17b0d82", "4872d81263ed38fe99a95", "488baa8c94d7a172e6182", "48d01c85ba617a08e9e79", "48d15e8ee9ecea31e8ee6", "490bb30e9f1d7c50071c4", "49b076d002806bd5827b9", "49f01a9761e985ae58435", "4a15442c22ee040e8ef09", "4adcd23b301769e0f64a3", "4b51d47213dcc6609d5e7", "4ca10fb3238a6db0a41e1", "4dd66badcf760d1fa47a7", "4e2c646ec2de0a7183715", "4e3fa832b4a7384961839", "4eafcf0d94cbbbd3bb831", "4ed6f68ed840fa17c55e1", "4f858603849d813bb3165", "4f9a07bcb7df68cee05d5", "512febd186afdca0c23e2", "513ad92101cd488413cc5", "517c87b7f0bf52ff7ac54", "519b882a2a4e80ef4a462", "51a0bc391445887aeebf1", "520d945c7ddb82a3bdc18", "52673864587ba3015ba57", "5390270eccf7d055fe0f3", "53f2265db495902820fa9", "557de626ce1d26b17d907", "55fe9d4e4e7d3d9cfe665", "571e3fdccd6f5b2636f73", "5755df9704df5b78c31c3", "5a6c4f3b2ca3aa17983e9", "5b0cb9fcc8b9bcbaf4322", "5b45a842c5b8af487c7b8", "5ba7a754a6e49280e1e95", "5baa43c50fb03d003b132", "5bd45fea05b3c28c5d045", "5c8d1e8f13ef7705080d4", "5cb01ac0e8c7e7a2e51a6", "5cdd160e4df0c19cbf333", "5cf5894c4454234698b93", "5f4597b701fd6b5b6b369", "5fc1d71282c5859bf0961", "5fcacd9fb82073918b3e4", "5ff8cb19bb69863c7cc53", "609f99eca170d760f4c86", "6112d1433ef0147b636c2", "61572d78686a610ec3f59", "618efa5cbeb4aebee5ab7", "61a1dd02a4e06ab21ceb6", "6328f0003732676e950d0", "63303ea2ca05e87265fe7", "637969fb95be9a85f2103", "64465bc3184796cf079f3", "646c9ce732bbcbf330c27", "666db044c3e2534719ff0", "67fd834309d02d2737753", "68877b480ba972e223808", "68c385ba0a321abe0b0f3", "68f4de17812266fb30669", "6af3b14ef35e38a4c61f5", "6b12d370234be147c67d7", "6b7d259dac88de33aca93", "6c2d8f3841276e442f606", "6c8a70233c8ee8efa2e65", "6db51e84e289b67ea46f9", "6dc5b682e4bece2d45dd0", "6dea4ab1b407da0643204", "6dfc4dc2bfc54baefc737", "6e0cfbebfdba20334ce69", "6e20fed62ec3286a53bb6", "6e826d814b13b020b0bb7", "6f26a2cd53a4225f7f489", "6f3617046eb5c26015109", "707444fb21bc40f9a0ef0", "72657907755b6a1e1bc43", "72750ecab1e164a414a18", "72776e456ab4679016859", "73267ebca89b727b38b70", "73d51b791bc8fefc4f166", "751542f813f64f7273ff4", "752ccf9fa81bd0f220622", "75377321560aa6faf9548", "75879b466dbcb091fe982", "767b3284d96e072383af2", "76ae0fd3b8ca5c3533983", "76e344e23e40d67ab0b96", "7717ca3305ad5dbff7df5", "7769d866e6fee61ab1ae1", "77ed391332187127bffe7", "781cdf6465f1828dddc35", "78259bbb18c845eaffd93", "78697d5e2257f1eb3e245", "790f996ce08b61050dcd3", "7baf60c6fe14cb3fe0968", "7d94dba50ef0ee1b2bb04", "7f90aec542bddf8f96858", "80616891dd8aee3c2e721", "811ec4b7e764b6e165ae4", "8218b5a9485eeee942fb6", "83036dc79a4682da8fc49", "83738f6709c8dc5b47b90", "83aca88adb3b4786f9377", "84bd91d6f9cc468205714", "85a499f61509255fe47f1", "85d5d1934f86bcaf110c4", "85e1c9110b807c3667f53", "85e49fa216ab418654848", "871cc46aafc5e69289f44", "876a9ed70faf214f97b83", "87fecc8645b155ba57183", "884636f1f64dbacb1b9f1", "88802f2ae54feba61de70", "8937a04b896c09d177474", "89afde3bd36c603653217", "8a04e02f9f93df468d510", "8b513c86925da1613eb68", "8b59f3811b099e1c92b92", "8ca23c12aa04703143a16", "8d17e0495ee1be9d37532", "8d41fa1ca89fe9a822754", "8dc1eff3b4d1d713852c1", "8e5e28cdc35ce07a2d518", "8e66ba707f936af11b237", "8e92d9048a6f747d839f2", "8f423198cb39a3df283c3", "8fb6b2aeba36205bd1fe3", "8fd5427a1008a0b91b168", "8fe45d863545ae5ca1758", "8feeb7d4dd0239ac54650", "90c98b8d3dd170b8cdad6", "919698af8f7111a895078", "92f8aa5e2476b7b9fced9", "93b438688a78212b513a4", "944410fd90aa60777fc06", "94d02a044b388d73fb895", "94f554a32c12acbc48109", "9508ca959b040d918b2c8", "95095a6afa10972f03248", "950d6d5728641865add07", "953b95d7958f0a37b5079", "96ad5b2c2ffd2ceb1a4a0", "96b7dacdf9bedefeea497", "96cd90d549ed21b461971", "96ff5638ae95451cbbf72", "981d12a922f0066933229", "991756c79cbb7a9c806e3", "9a1fa28b8bdc203dab330", "9ab573d038a2b8e81dca7", "9ac8e07e5a994f300ade8", "9b48cc25cfb9407a93be7", "9b59ec8e7933b6aa03fc5", "9c3119120ce7f95101766", "9c454f1b23212c0058795", "9e6b4b3d30b824e399963", "9f67d686e61eb106038f7", "9f6e4d600b0b46d05d193", "a08f5776b1e533eef0d52", "a14d08f531235e9a5a492", "a1631372c96d31e8ec647", "a175beca6b2d95206e127", "a1f7f6ee715ca07f8e893", "a22b3dd909ae6d18b23a6", "a38e33d6da13ae7f9ef43", "a593f3e0828cf1cffcee2", "a6834467b61b0c0dfac23", "a7523aca51cd2fa315c03", "a764c56d053183e319802", "a80c3ea4b531221f2d365", "a88123d8513ad66ebef21", "aa0ed6a95067151201356", "aab386da81314ce824593", "aaf85c7f60b5a8022e226", "ab1260dee4048c86f0704", "abcc79e70a4eca36180e2", "ac6d01029f0c9eba52a74", "acb8ea346d475e5ff2720", "ad5e656ca1b5e823a3669", "ae80c704137a5472a91e1", "aea699d7a023be5b64235", "aef74338f3c4e2f97e4a5", "af36ad84a4ed4a49fe843", "b0059bf9772be2cf653c9", "b0f3643ed644f81588092", "b2cd970c8b564ec9dde92", "b44a076b4737adb50e4d2", "b44e1a92ded08acd88176", "b5bb35f40b24ca8495211", "b5f4caa26558768739be1", "b669c182509c6be32c260", "b68793b899092499b32f8", "b7ae2429d0eed2f1e2969", "b97a68e0e9d9ab4c3bc04", "ba2c090023b7fe5a11104", "ba62a9b921a8afa06bde0", "baeda2866873dd7f788b1", "bafbf9c96d5aa6418d3b0", "bafcf4324367f0c550122", "bb6cb1c2226721cab97c1", "bb9658cacbe8db48e1938", "bbb9ca18587d4dd3a05e2", "bc3029c0ed92e41d88b54", "bc4685594a1bd570bd4b9", "bc85976f2c797a53ddd58", "bd04e24e25ce80ed6df39", "bd494713118ef89f23604", "bdc162bedb664eebb9127", "be15a70bb7b36432905e1", "be1e8e84f0f1dd0d34137", "be2950d8c9c8178b5a547", "be5503ea135a8a44c83e3", "c1421b023b9a6eaee6e95", "c14841740e602ae85b777", "c1ae5e37d0f205b32ab51", "c2209c0b37a94a2397cf2", "c33b023d5392a37924884", "c39ab1a88b555b3784a95", "c46ebb90e3f3673d88a23", "c48df6c339295521c1a29", "c4ee7ca0c60d3195bd282", "c53071f3eaf2cccf8ac09", "c53788e2334d1edac1b54", "c563f15711b90c818d7b4", "c5c06ea92c3ef6cb3fdb3", "c6a96f2128868036374a6", "c7dfb95ca7c1bd2089c98", "c82e4188559e72a855852", "c89763d9a7fb727701711", "c89b2f5646d17fba088a6", "c89f757a51bd6dab04603", "c95aca2cd250fad5077e9", "c999e56e394ec65f67629", "ca07dd273dabc7fef03b7", "ca5a1e8a0fbf76192d145", "cab60cf6b2c01c1ab37a6", "cadaaf6a0f683f2c5a1c4", "cd0c83f8869cedb98eb88", "cd7891592b43c19da39b1", "cda56fa8bbd85e526fa88", "cdf86bf9384246c53e588", "cec43b45e5b9ae3f62687", "cee95ecfe1d58da393569", "cf67bad1fae47bff318d0", "cf9b9389c10695ea5e220", "cfb2853f3088f0de58c62", "d0205eeb154ca38b691e4", "d05516b0b2ddc4fc8f817", "d086869c5759c366d2ef4", "d0d333f7e0b6623f099e3", "d0fdc91ec4d9934380475", "d19d67b3a071255dfe641", "d1db17029274f8db2ec67", "d2a0ed53477647ca823e7", "d2ca8da53ca2411b263e9", "d37cdedbce333801e8089", "d56fa3e3dd4e837788311", "d59fec9f0425c3f11ad36", "d76c163e9ed14983b87f9", "d87c502a30657df363af0", "d922b26135daebd77c9c8", "d96f5af2ade17c2069a36", "d9b86caa4b418165401c0", "d9deabf656710f2dc38e6", "da569735ed838361a1355", "daba134275d93404d03b8", "db0353f802c2726fe0c52", "db0945ca4d9745c00a9d3", "dcbd205b5501529bb1bc3", "de3fc571a30dc0fa75d22", "dee91eaa283b21f9fc636", "e0e45c1aac3f476f1cba2", "e2934d8db9b809526fc22", "e339d8bf9679ef79eeb69", "e3832b5c1fb47a779f526", "e48b11bfdf4cb22e5c594", "e51434dfd7d9c997b8aa1", "e61289113563373c96643", "e67d6c1e2ca1ef94384e2", "e6a175c03fbeaaa5d7819", "e6e04b5019edf359430b8", "e6faf5aef4c024bd07fe1", "e91ad3544c004b90dc917", "e99c6d36d68c12ef4b7d0", "e9e7ba6d86cd7c106ad23", "ea415c91de8d07cae0e03", "ea95ebbeb94ac6f2c3f99", "eacf15011e344ab6eb791", "eb0a273a1c255c129a9d0", "eb69919429d20f8d072a4", "eb7078c610799f6f83056", "ec0269eb7d86f4afc4f63", "ec02d9aff485ae99c5be1", "ec97835683b6404e49ec1", "ed11f528279c9fa174519", "ed54ca809bb9dd602da19", "ed5fd72b140c6dc72ef50", "ed78be97d3edd9fb7e981", "ed78fff307e0b889beb51", "eee0dc743b5b5438e7e59", "ef90f14f6f45bbeb78fe5", "ef9670b66f7a006263fa7", "efba0bf0429892d6af733", "f0db7e4cba48181b36718", "f2347a06aecd06deb0a54", "f26baf7042079a63f2322", "f3d78eda9ba950559ea05", "f40d84196a487c042be50", "f52877af28be079af45e0", "f5ded7d0c843ded415088", "f7c04451bcbba80a8c832", "f8eb4ce6e463e37670c83", "fa196a6af8d56d8389341", "fa485b9b8832ab6ae02c0", "fb73b226bbf71b30a8853", "fd908a17e07412f541359", "fdbeb4cb048ea8d149cf7", "fe4f4f605bf4bdb616656"], "id": "lock4_telephone"}, {"n": 5, "key": "lock5_ballot_box", "title": "The Ballot Box", "obj": "5", "objLabel": "CORE OBJECTIVE 5", "objText": "Core Objective 5: Highlight the issues that propelled Richard Nixon to victory in the 1968 presidential election.", "type": "pick", "card": "<p>Norton calls 1968 “the most traumatic year in a traumatic decade.” On January 31, the Tet offensive began: some 70,000 Viet Cong and North Vietnamese troops attacked U.S. and South Vietnamese forces across South Vietnam. The U.S. won on the battlefield, but the political effect at home was devastating. It showed that leaders’ claims that the war was nearly won were wrong. On March 31, Johnson announced a limited halt to the bombing of North Vietnam. He also shocked the country by saying he would not seek or accept his party’s nomination for another term. King’s murder stunned the world, and riots erupted in more than 100 cities. Forty-six people were killed, all but five of them African Americans.<\/p><p>In August, at the Chicago Democratic National Convention, delegates nominated Vice President Hubert Humphrey. Outside, almost 20,000 police officers and National Guardsmen confronted thousands of anti-war protesters. Richard Nixon appealed to what he called the “silent majority,” working- and middle-class Americans who viewed the street protesters with contempt. On November 5, 1968, Nixon won a narrow victory by about 500,000 votes, about 1 percentage point. The electoral vote was 301 for Nixon and 191 for Humphrey, and George Wallace won 46 votes, all in the Deep South. White wage workers, the backbone of the Democratic Party, were shifting to the Republicans.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 27, “The Tragedy of Vietnam” (The Tet Offensive, pp. 1246–1247; Johnson’s March 31 announcement, p. 1250) and “The Turmoil of the 1960s” (begins p. 1250; 1968, p. 1251; Chicago and Miami, pp. 1252–1253; Richard Nixon Triumphant, pp. 1253–1254).", "prompt": "Pick the correct answer for all three questions.", "qs": [{"id": "s", "q": "What did Nixon mean by the “silent majority”?", "opts": [{"id": "a", "label": "Soldiers who did not talk about the war"}, {"id": "b", "label": "Working- and middle-class Americans who viewed the street protesters with contempt"}, {"id": "c", "label": "Protesters who stayed quiet outside the Chicago convention"}, {"id": "d", "label": "Voters who stayed home on Election Day"}]}, {"id": "j", "q": "What did President Johnson announce on March 31, 1968?", "opts": [{"id": "a", "label": "He would send 100,000 more troops to Vietnam"}, {"id": "b", "label": "He would run for another term with Hubert Humphrey"}, {"id": "c", "label": "He limited the bombing of North Vietnam and would not seek another term as president"}, {"id": "d", "label": "The war in Vietnam had been won"}]}, {"id": "e", "q": "How did the 1968 election turn out?", "opts": [{"id": "a", "label": "Nixon won a narrow victory of about 500,000 votes, about 1 percentage point"}, {"id": "b", "label": "Humphrey won the electoral vote"}, {"id": "c", "label": "Nixon won by more than 10 million votes"}, {"id": "d", "label": "George Wallace won the election"}]}], "hints": ["Each answer is in the Clue Card. Look for the “silent majority,” what Johnson announced on March 31, and the final vote count in November.", "The silent majority were working- and middle-class Americans who disliked the street protests. On March 31 Johnson limited the bombing and said he would not run again. Nixon won by a narrow margin of about 500,000 votes."], "nudge": "Not quite. At least one answer is off. Re-read the Clue Card for the silent majority, Johnson’s March 31 announcement, and the election result.", "entries": ["ab41632e8b34e56c5e473"], "id": "lock5_ballot_box"}]}</script>
+<script>
+function sha256(ascii){
+  function rightRotate(v,a){return (v>>>a)|(v<<(32-a))}
+  var mathPow=Math.pow,maxWord=mathPow(2,32),i,j,result='',words=[],bitLen=ascii.length*8;
+  var hash=sha256.h=sha256.h||[],k=sha256.k=sha256.k||[],pc=k.length,comp={};
+  for(var c=2;pc<64;c++){if(!comp[c]){for(i=0;i<313;i+=c)comp[i]=c;hash[pc]=(mathPow(c,.5)*maxWord)|0;k[pc++]=(mathPow(c,1/3)*maxWord)|0}}
+  ascii+='\x80';while(ascii.length%64-56)ascii+='\x00';
+  for(i=0;i<ascii.length;i++){j=ascii.charCodeAt(i);words[i>>2]|=j<<((3-i)%4)*8}
+  words[words.length]=((bitLen/maxWord)|0);words[words.length]=(bitLen);
+  for(j=0;j<words.length;){
+    var w=words.slice(j,j+=16),old=hash;hash=hash.slice(0,8);
+    for(i=0;i<64;i++){
+      var w15=w[i-15],w2=w[i-2],a=hash[0],e=hash[4];
+      var t1=hash[7]+(rightRotate(e,6)^rightRotate(e,11)^rightRotate(e,25))+((e&hash[5])^((~e)&hash[6]))+k[i]+(w[i]=(i<16)?w[i]:(w[i-16]+(rightRotate(w15,7)^rightRotate(w15,18)^(w15>>>3))+w[i-7]+(rightRotate(w2,17)^rightRotate(w2,19)^(w2>>>10)))|0);
+      var t2=(rightRotate(a,2)^rightRotate(a,13)^rightRotate(a,22))+((a&hash[1])^(a&hash[2])^(hash[1]&hash[2]));
+      hash=[(t1+t2)|0].concat(hash);hash[4]=(hash[4]+t1)|0;
+    }
+    for(i=0;i<8;i++)hash[i]=(hash[i]+old[i])|0;
+  }
+  for(i=0;i<8;i++)for(j=3;j+1;j--){var b=(hash[i]>>(j*8))&255;result+=((b<16)?0:'')+b.toString(16)}
+  return result;
+}
+function sha256u(s){return sha256(unescape(encodeURIComponent(s)))}
+
+(function(){
+  var PACKET='CPUSH_L18_ESCAPE';
+  var STORE='cpush_l18_escape-room_';
+  var D=JSON.parse(document.getElementById('er-data').textContent);
+  var $=function(i){return document.getElementById(i)};
+  var S;
+  var digits={};            // runtime only: lock n -> digit
+  var entries={};           // lock id -> {h20: maskedDigit}
+  var expanded={};
+  var lastTick=0,timer=null;
+
+  function squash(t){return String(t).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'')}
+  function h20(s){return sha256u(s).slice(0,20)}
+  D.locks.forEach(function(L){var m={};L.entries.forEach(function(e){m[e.slice(0,20)]=+e.slice(20)});entries[L.id]=m});
+
+  function checkLock(L,canon){
+    var salt=D.salt+L.n+':';
+    var h=h20(salt+canon),mk=entries[L.id][h];
+    if(mk===undefined)return null;
+    var m=parseInt(sha256u('m:'+salt+canon).slice(0,2),16)%10;
+    return (mk-m+10)%10;
+  }
+  function fresh(){
+    var o={first:'',last:'',period:'',started:false,elapsed:0,escaped:false,escapeMs:0,debrief:'',codeTries:0,locks:{}};
+    D.locks.forEach(function(L){o.locks[L.id]={solved:false,attempts:0,hints:0,guess:'',readable:''}});
+    return o;
+  }
+  function loadLocal(){var o=fresh();try{var r=JSON.parse(localStorage.getItem(STORE+'state')||'null');if(r)restore(o,r)}catch(e){}return o}
+  function persist(){try{localStorage.setItem(STORE+'state',JSON.stringify(snapshot()))}catch(e){}}
+
+  function totals(){
+    var t={locksSolved:0,attempts:0,hintsUsed:0,exitCodeAttempts:S.codeTries};
+    D.locks.forEach(function(L){var l=S.locks[L.id];if(l.solved)t.locksSolved++;t.attempts+=l.attempts;t.hintsUsed+=l.hints});
+    return t;
+  }
+  function fmt(ms){var s=Math.round(ms/1000),m=Math.floor(s/60);s=s%60;return (m<10?'0':'')+m+':'+(s<10?'0':'')+s}
+  function snapshot(){
+    var o={packet:PACKET,course:'CPUSH',lesson:18,assignment:'Escape Room (Lite)',version:1,saved:new Date().toISOString(),
+      student:{first:$('f_first').value.trim(),last:$('f_last').value.trim(),period:$('f_period').value.trim()},
+      status:S.escaped?'ESCAPED':'INCOMPLETE',escaped:S.escaped,
+      escapeTime:S.escaped?{ms:S.escapeMs,text:fmt(S.escapeMs)}:null,
+      totals:totals(),elapsedMs:Math.round(S.elapsed),started:S.started,locks:{},debrief:$('debriefText')?$('debriefText').value:S.debrief};
+    D.locks.forEach(function(L){var l=S.locks[L.id];
+      o.locks[L.key]={objective:L.obj,puzzleType:L.type,solved:l.solved,attempts:l.attempts,hintsUsed:l.hints,solvedWith:l.readable,solvedGuess:l.guess}});
+    return o;
+  }
+  function restore(o,r){
+    if(!r||typeof r!=='object')return false;
+    var st=r.student||{};
+    o.first=st.first||'';o.last=st.last||'';o.period=st.period||'';
+    o.started=!!r.started;o.elapsed=+r.elapsedMs||0;o.debrief=typeof r.debrief==='string'?r.debrief:'';
+    o.codeTries=(r.totals&&+r.totals.exitCodeAttempts)||0;
+    var allOk=true;
+    D.locks.forEach(function(L){
+      var src=(r.locks&&r.locks[L.key])||{},l=o.locks[L.id];
+      l.attempts=+src.attempts||0;l.hints=Math.min(+src.hintsUsed||0,L.hints.length+0);
+      if(src.hintsUsed>L.hints.length)l.hints=L.hints.length;
+      if(src.solved&&typeof src.solvedGuess==='string'){
+        var d=checkLock(L,src.solvedGuess);
+        if(d!==null){l.solved=true;l.guess=src.solvedGuess;l.readable=String(src.solvedWith||'');digits[L.n]=d}else allOk=false;
+      }else allOk=false;
+    });
+    if(r.escaped&&allOk&&r.escapeTime){o.escaped=true;o.escapeMs=+r.escapeTime.ms||0}
+    return true;
+  }
+
+  /* ---------- scene ---------- */
+  var NS='http://www.w3.org/2000/svg';
+  var XS=[210,255,300,345,390];
+  (function(){
+    var g=$('plocks'),h='';
+    XS.forEach(function(x,i){
+      h+='<g class="plock" id="pl'+(i+1)+'"><path class="sh" d="M'+(x-8)+' 124V114a8 8 0 0 1 16 0V124" fill="none" stroke="#EEEFF1" stroke-width="4"/><rect class="bd" x="'+(x-15)+'" y="124" width="30" height="24" rx="4" fill="#DD8840"/><circle cx="'+x+'" cy="135" r="3" fill="#2C313A"/></g>'+
+      '<rect x="'+(x-16)+'" y="158" width="32" height="36" rx="5" fill="#1D2128" stroke="#E6B489"/><text id="dw'+(i+1)+'" x="'+x+'" y="184" text-anchor="middle" font-size="24" font-weight="800" fill="#EEEFF1">?</text><text x="'+x+'" y="208" text-anchor="middle" font-size="11" font-weight="700" fill="#CBCFD6">LOCK '+(i+1)+'</text>';
+    });
+    g.innerHTML=h;
+  })();
+  function sceneUpdate(){
+    D.locks.forEach(function(L){
+      var open=S.locks[L.id].solved;
+      $('pl'+L.n).setAttribute('class','plock'+(open?' open':''));
+      $('dw'+L.n).textContent=open?digits[L.n]:'?';
+    });
+    $('scene').classList.toggle('escaped',S.escaped);
+  }
+
+  /* ---------- build lock cards ---------- */
+  var W={};   // widget state per lock
+  var LOCKSVG='<svg class="lk" viewBox="0 0 44 44" aria-hidden="true"><path class="sh" d="M13 20V14a9 9 0 0 1 18 0V20" fill="none" stroke="#EEEFF1" stroke-width="4"/><rect class="bd" x="8" y="20" width="28" height="20" rx="4" fill="#DD8840"/><circle cx="22" cy="30" r="3" fill="#2C313A"/></svg>';
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+  function buildLock(L){
+    var sec=document.createElement('section');sec.className='lock glass locked';sec.id='lock'+L.n;
+    var head='<button class="lh" type="button" id="lh'+L.n+'" aria-expanded="false">'+LOCKSVG+'<span class="lt"><small>LOCK '+L.n+' · '+L.objLabel+'</small><strong>'+esc(L.title)+'</strong></span><span class="dg" id="dg'+L.n+'" aria-label="digit">?</span></button>';
+    var body='<div class="lb" id="lb'+L.n+'"><p class="objline">'+esc(L.objText)+'</p>'+
+      '<div class="card"><h4>CLUE CARD</h4>'+L.card+'<p class="src">'+L.src+'</p></div>'+
+      '<div class="prompt">'+L.prompt+'</div><div id="pz'+L.n+'"></div>'+
+      '<div class="row"><button class="btn primary" type="button" id="ck'+L.n+'">Check</button><button class="btn small" type="button" id="hb'+L.n+'">Hint</button><button class="btn small" type="button" id="rs'+L.n+'">Clear</button></div>'+
+      '<div class="hints" id="hs'+L.n+'"></div><div class="fb" id="fb'+L.n+'" role="status"></div></div>';
+    sec.innerHTML=head+body;
+    $('locks').appendChild(sec);
+    buildPuzzle(L);
+    $('lh'+L.n).addEventListener('click',function(){
+      var st=lockState(L);if(st==='locked')return;
+      expanded[L.n]=!expanded[L.n];updateLocks();
+    });
+    $('ck'+L.n).addEventListener('click',function(){submit(L)});
+    $('hb'+L.n).addEventListener('click',function(){hint(L)});
+    $('rs'+L.n).addEventListener('click',function(){clearPuzzle(L)});
+  }
+  function labelOf(list,id){for(var i=0;i<list.length;i++)if(list[i].id===id)return list[i].label;return id}
+
+  function buildPuzzle(L){
+    var el=$('pz'+L.n),w=W[L.n]={};
+    if(L.type==='order'){
+      w.sel=[];el.innerHTML='<div class="chips" id="ch'+L.n+'"></div>';
+      renderOrder(L);
+    }else if(L.type==='match'){
+      var h='';
+      L.terms.forEach(function(t){
+        h+='<div class="mrow"><label for="m'+L.n+t.id+'">'+esc(t.label)+'</label><select id="m'+L.n+t.id+'"><option value="">Choose a description...</option>';
+        L.descs.forEach(function(d){h+='<option value="'+d.id+'">'+esc(d.label)+'</option>'});
+        h+='</select></div>';
+      });
+      el.innerHTML=h;
+    }else if(L.type==='pick'){
+      var h2='';
+      L.qs.forEach(function(q){
+        h2+='<fieldset><legend>'+esc(q.q)+'</legend>';
+        q.opts.forEach(function(o){h2+='<label class="opt"><input type="radio" name="q'+L.n+q.id+'" value="'+o.id+'"> <span>'+esc(o.label)+'</span></label>'});
+        h2+='</fieldset>';
+      });
+      el.innerHTML=h2;
+    }else if(L.type==='decode'){
+      var k1='',k2='';
+      for(var i=0;i<26;i++){var p=String.fromCharCode(65+i),c=String.fromCharCode(65+(i+L.shift)%26);k1+='<div class="c">'+c+'</div>';k2+='<div>'+p+'</div>'}
+      // build key in two rows of 13
+      var key='';
+      for(var r=0;r<2;r++){for(var j=0;j<13;j++){var idx=r*13+j;key+='<div class="c">'+String.fromCharCode(65+(idx+L.shift)%26)+'</div>'}for(var j2=0;j2<13;j2++){key+='<div>'+String.fromCharCode(65+r*13+j2)+'</div>'}}
+      el.innerHTML='<div class="cipher" translate="no" aria-label="Coded message">'+esc(L.cipher)+'</div><p style="margin:.6em 0 0;font-size:15px;color:var(--dim)">Decoder key: the <span style="color:var(--hl);font-weight:700">peach</span> letter is in the message. The white letter under it is the real letter.</p><div class="key" aria-hidden="true">'+key+'</div><label>Decoded answer<input type="text" id="tx'+L.n+'" autocomplete="off" autocapitalize="none" spellcheck="false"></label><p class="ennote">Type the answer in English.</p>';
+    }else if(L.type==='fill'){
+      el.innerHTML='<p style="font-size:18px;margin:.2em 0">'+esc(L.sentence)+'</p><div class="scr" translate="no" aria-label="Scrambled letters">'+esc(L.scramble)+'</div><p style="margin:.4em 0;font-size:14px;color:var(--dim)">Unscramble the letters to fill the blank.</p><label>Your answer<input type="text" id="tx'+L.n+'" autocomplete="off" autocapitalize="none" spellcheck="false"></label><p class="ennote">Type the answer in English.</p>';
+    }
+    var t=$('tx'+L.n);
+    if(t)t.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();submit(L)}});
+  }
+  function renderOrder(L){
+    var w=W[L.n],ch=$('ch'+L.n),h='';
+    L.items.forEach(function(it){
+      var pos=w.sel.indexOf(it.id);
+      h+='<button type="button" class="chip'+(pos>=0?' sel':'')+'" data-id="'+it.id+'" aria-pressed="'+(pos>=0)+'">'+(pos>=0?'<span class="n">'+(pos+1)+'</span>':'')+'<span>'+esc(it.label)+'</span></button>';
+    });
+    ch.innerHTML=h;
+    [].forEach.call(ch.querySelectorAll('.chip'),function(b){
+      b.addEventListener('click',function(){
+        if(S.locks[L.id].solved)return;
+        var id=b.getAttribute('data-id'),p=w.sel.indexOf(id);
+        if(p>=0)w.sel.splice(p,1);else w.sel.push(id);
+        renderOrder(L);
+      });
+    });
+  }
+  function clearPuzzle(L){
+    if(S.locks[L.id].solved)return;
+    var w=W[L.n];
+    if(L.type==='order'){w.sel=[];renderOrder(L)}
+    else if(L.type==='match'){L.terms.forEach(function(t){$('m'+L.n+t.id).value=''})}
+    else if(L.type==='pick'){L.qs.forEach(function(q){[].forEach.call(document.getElementsByName('q'+L.n+q.id),function(r){r.checked=false})})}
+    else{$('tx'+L.n).value=''}
+    fb(L,'','');
+  }
+  function guessOf(L){
+    // returns {canon, readable} or {err}
+    if(L.type==='order'){
+      var w=W[L.n];
+      if(w.sel.length<L.items.length)return {err:'Tap all '+L.items.length+' events first, in order.'};
+      return {canon:w.sel.join('|'),readable:w.sel.map(function(i){return labelOf(L.items,i)}).join(' > ')};
+    }
+    if(L.type==='match'){
+      var c=[],r=[];
+      for(var i=0;i<L.terms.length;i++){var t=L.terms[i],v=$('m'+L.n+t.id).value;if(!v)return {err:'Match every term first.'};c.push(v);r.push(t.label+' = '+labelOf(L.descs,v))}
+      return {canon:c.join('|'),readable:r.join('; ')};
+    }
+    if(L.type==='pick'){
+      var c2=[],r2=[];
+      for(var j=0;j<L.qs.length;j++){var q=L.qs[j],v2='';[].forEach.call(document.getElementsByName('q'+L.n+q.id),function(x){if(x.checked)v2=x.value});if(!v2)return {err:'Answer every question first.'};c2.push(v2);r2.push(labelOf(q.opts,v2))}
+      return {canon:c2.join('|'),readable:r2.join('; ')};
+    }
+    var raw=$('tx'+L.n).value.trim();
+    if(!raw)return {err:'Type your answer first.'};
+    return {canon:squash(raw),readable:raw.slice(0,80)};
+  }
+  function fb(L,cls,text){var e=$('fb'+L.n);e.className='fb'+(cls?' show '+cls:'');e.textContent=text}
+  function submit(L){
+    var l=S.locks[L.id];if(l.solved)return;
+    var g=guessOf(L);
+    if(g.err){fb(L,'nudge',g.err);return}
+    l.attempts++;
+    var d=checkLock(L,g.canon);
+    if(d===null){
+      fb(L,'nudge',L.nudge);
+      var s=$('lock'+L.n);s.classList.remove('shake');void s.offsetWidth;s.classList.add('shake');
+      persist();updateBar();return;
+    }
+    l.solved=true;l.guess=g.canon;l.readable=g.readable;digits[L.n]=d;
+    fb(L,'good','Click! Lock '+L.n+' is open. Your digit is '+d+'.');
+    var wh=$('wheel');wh.classList.remove('spin');void wh.getBoundingClientRect();wh.classList.add('spin');
+    $('dw'+L.n).classList.add('pop');
+    persist();updateAll();
+    setTimeout(function(){
+      expanded[L.n]=false;
+      var nx=nextOpen();if(nx)expanded[nx]=true;
+      updateLocks();
+      var tgt=nx?$('lock'+nx):$('exit');
+      if(tgt&&tgt.scrollIntoView)tgt.scrollIntoView({behavior:'smooth',block:'start'});
+    },1600);
+  }
+  function hint(L){
+    var l=S.locks[L.id];
+    if(l.solved)return;
+    if(l.hints<L.hints.length){l.hints++;persist();updateHints(L);updateBar()}
+    else{fb(L,'nudge','That was the last hint. Read the Clue Card slowly and try again.')}
+  }
+  function updateHints(L){
+    var l=S.locks[L.id],h='';
+    for(var i=0;i<l.hints;i++)h+='<div class="hint"><b>Hint '+(i+1)+':</b> <span>'+esc(L.hints[i])+'</span></div>';
+    $('hs'+L.n).innerHTML=h;
+  }
+  function nextOpen(){for(var i=0;i<D.locks.length;i++)if(!S.locks[D.locks[i].id].solved)return D.locks[i].n;return 0}
+  function lockState(L){
+    if(S.locks[L.id].solved)return 'solved';
+    return L.n===nextOpen()?'current':'locked';
+  }
+  function updateLocks(){
+    var cur=nextOpen();
+    D.locks.forEach(function(L){
+      var st=lockState(L),sec=$('lock'+L.n);
+      if(st==='current'&&expanded[L.n]===undefined)expanded[L.n]=true;
+      var open=(st!=='locked')&&!!expanded[L.n];
+      sec.className='lock glass '+st+(open?' open':'');
+      $('lh'+L.n).setAttribute('aria-expanded',open?'true':'false');
+      $('dg'+L.n).textContent=S.locks[L.id].solved?digits[L.n]:'?';
+      if(S.locks[L.id].solved){
+        [].forEach.call(sec.querySelectorAll('input,select,button.chip,#ck'+L.n+',#hb'+L.n+',#rs'+L.n),function(x){x.disabled=true});
+        var f=$('fb'+L.n);if(!f.classList.contains('good'))fb(L,'good','Unlocked. Your digit is '+digits[L.n]+'.'+(S.locks[L.id].readable?' Your answer: '+S.locks[L.id].readable:''));
+      }
+      updateHints(L);
+    });
+  }
+  function codeStr(){var s='';for(var i=1;i<=5;i++)s+=(digits[i]===undefined?'':digits[i]);return s}
+  function allSolved(){return D.locks.every(function(L){return S.locks[L.id].solved})}
+  function updateExit(){
+    var ok=allSolved();
+    $('exit').classList.toggle('locked',!ok);
+    $('codeBtn').disabled=!ok||S.escaped;
+    [].forEach.call($('codebox').querySelectorAll('input'),function(i){i.disabled=!ok||S.escaped});
+    $('exitNote').textContent=S.escaped?'The door is open!':(ok?'All 5 locks are open. Type the 5 digits in order, Lock 1 first.':'Open all 5 locks first. The digits go in order: Lock 1 first.');
+  }
+  function updateBar(){
+    var t=totals();
+    $('lc').textContent=t.locksSolved;$('hc').textContent=t.hintsUsed;
+    $('tm').textContent=fmt(S.escaped?S.escapeMs:S.elapsed);
+  }
+  function updateStatus(){
+    var el=$('status'),db=($('debriefText').value.trim().length);
+    if(S.escaped)el.textContent=db>=40?'You escaped and wrote your Debrief. Ready to submit.':'You escaped! Write your Debrief, then download your file to submit.';
+    else el.textContent='Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.';
+  }
+  function updateEsc(){
+    $('esc').classList.toggle('show',S.escaped);
+    if(S.escaped){var t=totals();$('escTime').textContent=fmt(S.escapeMs);$('escSum').textContent='5 of 5 locks opened with '+t.attempts+' tries and '+t.hintsUsed+' hint'+(t.hintsUsed===1?'':'s')+'.'}
+  }
+  function updateAll(){sceneUpdate();updateLocks();updateExit();updateBar();updateEsc();updateStatus();
+    $('intro').classList.toggle('hidden',S.started);$('game').classList.toggle('hidden',!S.started);$('loadOnly').classList.toggle('hidden',S.started);
+  }
+
+  /* ---------- exit code ---------- */
+  (function(){
+    var cb=$('codebox');
+    for(var i=0;i<5;i++){
+      var inp=document.createElement('input');inp.type='text';inp.inputMode='numeric';inp.maxLength=1;inp.setAttribute('aria-label','Exit code digit '+(i+1));inp.disabled=true;
+      (function(i,inp){
+        inp.addEventListener('input',function(){inp.value=inp.value.replace(/[٠-٩]/g,function(c){return c.charCodeAt(0)-1632}).replace(/[۰-۹]/g,function(c){return c.charCodeAt(0)-1776}).replace(/[^0-9]/g,'');if(inp.value&&i<4)cb.children[i+1].focus()});
+        inp.addEventListener('keydown',function(e){
+          if(e.key==='Backspace'&&!inp.value&&i>0)cb.children[i-1].focus();
+          if(e.key==='Enter'){e.preventDefault();tryCode()}
+        });
+        inp.addEventListener('paste',function(e){
+          var t=(e.clipboardData||window.clipboardData).getData('text').replace(/[٠-٩]/g,function(c){return c.charCodeAt(0)-1632}).replace(/[۰-۹]/g,function(c){return c.charCodeAt(0)-1776}).replace(/[^0-9]/g,'');
+          if(t.length>1){e.preventDefault();for(var k=0;k<5;k++)cb.children[k].value=t[k]||''}
+        });
+      })(i,inp);
+      cb.appendChild(inp);
+    }
+  })();
+  function tryCode(){
+    if(!allSolved()||S.escaped)return;
+    var v='';[].forEach.call($('codebox').querySelectorAll('input'),function(i){v+=i.value});
+    var f=$('codefb');
+    if(v.length<5){f.className='fb show nudge';f.textContent='The code has 5 digits. Fill every box.';return}
+    S.codeTries++;
+    if(h20('exit:'+D.salt+v)!==D.exitHash){
+      f.className='fb show nudge';f.textContent='The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.';
+      var ex=$('exit');ex.classList.remove('shake');void ex.offsetWidth;ex.classList.add('shake');
+      persist();return;
+    }
+    S.escaped=true;S.escapeMs=S.elapsed;
+    f.className='fb show good';f.textContent='The door swings open!';
+    persist();updateAll();
+    setTimeout(function(){$('esc').scrollIntoView({behavior:'smooth',block:'start'})},900);
+  }
+  $('codeBtn').addEventListener('click',tryCode);
+
+  /* ---------- timer ---------- */
+  function tick(){
+    var n=Date.now();
+    if(S.started&&!S.escaped){S.elapsed+=Math.min(n-lastTick,5000);$('tm').textContent=fmt(S.elapsed)}
+    lastTick=n;
+  }
+  function startTimer(){lastTick=Date.now();if(!timer)timer=setInterval(function(){tick();if(Math.round(S.elapsed/1000)%10===0)persist()},1000)}
+
+  /* ---------- files ---------- */
+  function msg(t,err){var m=$('msg');m.textContent=t;m.className='msg'+(err?' err':'');m.style.display='block'}
+  function ascii(n){return String(n).normalize('NFD').replace(/[̀-ͯ]/g,'')}
+  function clean(n){n=window.spAscii?spAscii(n):n;return ascii(n).trim().replace(/\s+/g,'_').replace(/[^A-Za-z0-9_-]/g,'')}
+  function who(){return (clean($('f_last').value)||'Last')+'_'+(clean($('f_first').value)||'First')}
+  function download(name,obj){
+    var blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;
+    document.body.appendChild(a);a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);
+  }
+  function namesOk(){
+    var ids=['f_first','f_last','f_period'],ok=true;
+    ids.forEach(function(i){var f=$(i);if(!f.value.trim()){f.classList.add('bad');ok=false}});
+    if(!ok){msg('Enter your first name, last name, and period at the top first.',true);$('f_first').scrollIntoView({block:'center'})}
+    return ok;
+  }
+  ['f_first','f_last','f_period'].forEach(function(i){$(i).addEventListener('input',function(){$(i).classList.remove('bad');S[i.slice(2)]=$(i).value;persist()})});
+  $('debriefText').addEventListener('input',function(){S.debrief=$('debriefText').value;persist();updateStatus()});
+  $('saveBtn').addEventListener('click',function(){
+    if(!namesOk())return;tick();
+    download(who()+'-'+PACKET+'-PROGRESS.json',snapshot());
+    msg('Progress file downloaded. Use Load Progress to continue later.');
+  });
+  $('finishBtn').addEventListener('click',function(){
+    if(!namesOk())return;tick();
+    var now=new Date(),o=snapshot();o.completed=S.escaped;o.submitted=now.toISOString();
+    o.student.date=now.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+    download(who()+'-'+PACKET+'.json',o);
+    msg(S.escaped?('Done! File downloaded: '+who()+'-'+PACKET+'.json. Upload it to Canvas.'):('Your file downloaded and is marked INCOMPLETE (you have not escaped). Upload it to Canvas: '+who()+'-'+PACKET+'.json'));
+  });
+  function openLoad(){$('loadFile').click()}
+  $('loadBtn').addEventListener('click',openLoad);$('loadBtn0').addEventListener('click',openLoad);
+  $('loadFile').addEventListener('change',function(e){
+    var f=e.target.files[0];if(!f)return;
+    var r=new FileReader();
+    r.onload=function(){
+      try{
+        var o=JSON.parse(r.result);
+        if(!o||o.packet!==PACKET||typeof o.locks!=='object')throw new Error('wrong');
+        digits={};var n=fresh();restore(n,o);S=n;applyToDom();
+        msg('Progress loaded. Welcome back.');
+      }catch(err){msg('That file did not work. Choose a progress file saved from this Escape Room.',true)}
+      e.target.value='';
+    };
+    r.onerror=function(){msg('The file could not be read.',true)};
+    r.readAsText(f);
+  });
+  $('reset').addEventListener('click',function(){
+    if(!confirm('Clear all your work and start over? This cannot be undone.'))return;
+    digits={};expanded={};S=fresh();
+    try{localStorage.removeItem(STORE+'state')}catch(e){}
+    $('locks').innerHTML='';D.locks.forEach(buildLock);
+    $('f_first').value=$('f_last').value=$('f_period').value='';$('debriefText').value='';
+    [].forEach.call($('codebox').querySelectorAll('input'),function(i){i.value=''});$('codefb').className='fb';
+    applyToDom();
+  });
+  function applyToDom(){
+    $('f_first').value=S.first;$('f_last').value=S.last;$('f_period').value=S.period;$('debriefText').value=S.debrief;
+    // rebuild lock widgets, then pre-fill solved ones with readable note
+    $('locks').innerHTML='';D.locks.forEach(buildLock);
+    expanded={};
+    updateAll();
+    if(S.started)startTimer();
+  }
+  $('startBtn').addEventListener('click',function(){S.started=true;persist();startTimer();updateAll();$('game').scrollIntoView({behavior:'smooth'})});
+  window.addEventListener('beforeunload',function(){tick();persist()});
+
+  S=loadLocal();
+  D.locks.forEach(buildLock);
+  applyToDom();
+})();
+</script>
+<!--sp-i18n--><script type="application/json" id="sp-i18n">{"langs":["en","es","ar"],"default":"en","es":{"Save Progress":"Guardar progreso","Load Progress":"Cargar progreso","Finished — Download File to Submit":"Terminé — Descargar el archivo para entregar","Clear all my answers":"Borrar todas mis respuestas","FIRST NAME *":"NOMBRE *","LAST NAME *":"APELLIDO *","PERIOD *":"PERÍODO *","DATE (fills in when you finish)":"FECHA (se llena cuando terminas)","e.g. 3":"p. ej., 3","Automatic":"Automática","Please type your first name, last name, and period first.":"Primero escribe tu nombre, apellido y período.","Western Expansion and Southern Secession":"Expansión hacia el oeste y secesión del sur","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — La Ley de Esclavos Fugitivos","Bleeding Kansas":"Bleeding Kansas — Kansas sangriento","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"Se descargó tu archivo de progreso. Guárdalo bien. Usa «Cargar progreso» para continuar más tarde.","Progress loaded.":"Progreso cargado.","Could not read that file.":"No se pudo leer ese archivo.","Treaty of Guadalupe Hidalgo":"Tratado de Guadalupe Hidalgo","A town records office at night. On the left, a window shows a city skyline behind window blinds, above a tall filing cabinet and a table with a typewriter and a sheet of paper. On the right, a clock and a bulletin board hang above a desk with a telephone and a ballot box. The door has a RECORDS OFFICE sign and five padlocks in a row. Under each padlock is a window for one digit of the exit code.":"Una oficina de registros de un pueblo, de noche. A la izquierda, una ventana con persianas muestra el horizonte de una ciudad, sobre un archivero alto y una mesa con una máquina de escribir y una hoja de papel. A la derecha, un reloj y un tablero de anuncios cuelgan sobre un escritorio con un teléfono y una urna electoral. La puerta tiene un letrero de OFICINA DE REGISTROS y cinco candados en fila. Debajo de cada candado hay una ventanita para un dígito del código de salida.","About 250,000 people join the March on Washington":"Unas 250,000 personas participan en la Marcha sobre Washington","Abroad, Kennedy faced Cold War crises. In April 1961, 1,543 Cuban exiles trained by the CIA landed at the Bay of Pigs in Cuba. Castro had 20,000 soldiers waiting, and the invasion failed. In August 1961, the Soviets began building the Berlin Wall. On October 16, 1962, spy-plane photos showed Soviet missile sites in Cuba. On October 22, Kennedy told the nation that the U.S. Navy was setting up a “quarantine” of Cuba to stop Soviet ships from bringing more weapons. The Soviets agreed to remove their missiles in return for a public U.S. pledge never to invade Cuba and a secret agreement to remove U.S. missiles from Turkey.":"En el exterior, Kennedy enfrentó crisis de la Guerra Fría. En abril de 1961, 1,543 exiliados cubanos entrenados por la CIA desembarcaron en la Bahía de Cochinos, en Cuba. Castro tenía 20,000 soldados esperándolos, y la invasión fracasó. En agosto de 1961, los soviéticos empezaron a construir el Muro de Berlín. El 16 de octubre de 1962, fotos de aviones espía mostraron bases soviéticas de misiles en Cuba. El 22 de octubre, Kennedy dijo a la nación que la Marina de EE. UU. estaba estableciendo una “cuarentena” alrededor de Cuba para impedir que barcos soviéticos llevaran más armas. Los soviéticos aceptaron retirar sus misiles a cambio de una promesa pública de EE. UU. de no invadir nunca Cuba y de un acuerdo secreto para retirar misiles de EE. UU. de Turquía.","All 5 locks are open. Type the 5 digits in order, Lock 1 first.":"Los 5 candados están abiertos. Escribe los 5 dígitos en orden, primero el del Candado 1.","Answer every question first.":"Primero responde todas las preguntas.","Banned literacy tests and sent federal officials to register voters":"Prohibió las pruebas de alfabetización y envió a funcionarios federales a inscribir a los votantes","CLUE CARD":"TARJETA DE INDICIOS","Check":"Comprobar","Choose a description...":"Elige una descripción...","Civil Rights Act of 1964":"Ley de Derechos Civiles de 1964","Clear":"Borrar","Clear all my work and start over":"Borrar todo mi trabajo y empezar de nuevo","Core Objective 1: Assess President John F. Kennedy’s efforts to contain communism abroad and address civil rights and other social programs at home.":"Objetivo principal 1: Evalúa los esfuerzos del presidente John F. Kennedy por contener el comunismo en el exterior y atender los derechos civiles y otros programas sociales en el país.","Core Objective 2: Describe the strategies and achievements of the civil rights movement in the 1960s. Explain the divisions that emerged among its activists and how their successes and failures contributed to the rise of the Black Power movement.":"Objetivo principal 2: Describe las estrategias y los logros del movimiento por los derechos civiles en la década de 1960. Explica las divisiones que surgieron entre sus activistas y cómo sus éxitos y fracasos contribuyeron al surgimiento del movimiento del Poder Negro.","Core Objective 3: Analyze Lyndon B. Johnson’s War on Poverty and other Great Society initiatives and evaluate their impact on American society.":"Objetivo principal 3: Analiza la Guerra contra la Pobreza de Lyndon B. Johnson y otras iniciativas de la Gran Sociedad, y evalúa su impacto en la sociedad estadounidense.","Core Objective 4: Explain the motivations of Presidents Kennedy and Johnson for deepening military involvement in the Vietnam War.":"Objetivo principal 4: Explica los motivos de los presidentes Kennedy y Johnson para aumentar la participación militar en la guerra de Vietnam.","Core Objective 5: Highlight the issues that propelled Richard Nixon to victory in the 1968 presidential election.":"Objetivo principal 5: Destaca los asuntos que llevaron a Richard Nixon a ganar las elecciones presidenciales de 1968.","Created the Office of Economic Opportunity and programs such as Job Corps and Head Start":"Creó la Oficina de Oportunidad Económica y programas como Job Corps y Head Start","DEBRIEF":"INFORME FINAL","Debrief":"Informe final","Decoded answer":"Respuesta decodificada","Decoder key: the <span style=\"color:var(--hl);font-weight:700\">peach<\/span> letter is in the message. The white letter under it is the real letter.":"Clave del decodificador: la letra <span style=\"color:var(--hl);font-weight:700\">color durazno<\/span> está en el mensaje. La letra blanca que está debajo es la letra verdadera.","ESCAPED":"¡ESCAPASTE!","Each answer is in the Clue Card. Look for the “silent majority,” what Johnson announced on March 31, and the final vote count in November.":"Cada respuesta está en la tarjeta de indicios. Busca la “mayoría silenciosa”, lo que Johnson anunció el 31 de marzo y el conteo final de votos en noviembre.","Economic Opportunity Act of 1964":"Ley de Oportunidad Económica de 1964","Enter the Records Office":"Entrar a la oficina de registros","Enter your first name, last name, and period at the top first.":"Primero escribe tu nombre, apellido y período arriba.","Escape the Records Office":"Escapa de la oficina de registros","Exit code digit 1":"Dígito 1 del código de salida","Exit door":"Puerta de salida","Fill in the blank using the Clue Card.":"Llena el espacio en blanco con la tarjeta de indicios.","Four students begin a sit-in at a lunch counter in Greensboro, North Carolina":"Cuatro estudiantes comienzan una sentada en un mostrador de comida en Greensboro, Carolina del Norte","Freedom Riders board buses to test the ban on segregation in bus travel":"Los Viajeros de la Libertad suben a autobuses para probar la prohibición de la segregación en los viajes en autobús","Gave health insurance to Americans over age sixty-five":"Dio seguro médico a los estadounidenses mayores de 65 años","George Wallace won the election":"George Wallace ganó la elección","Have a saved file? Load it to continue.":"¿Tienes un archivo guardado? Cárgalo para continuar.","He limited the bombing of North Vietnam and would not seek another term as president":"Limitó los bombardeos a Vietnam del Norte y no buscaría otro período como presidente","He would run for another term with Hubert Humphrey":"Que se postularía para otro período con Hubert Humphrey","He would send 100,000 more troops to Vietnam":"Que enviaría 100,000 soldados más a Vietnam","Hint":"Pista","Hints used":"Pistas usadas","How did the 1968 election turn out?":"¿Cómo resultó la elección de 1968?","How to escape:":"Cómo escapar:","Humphrey won the electoral vote":"Humphrey ganó el voto electoral","If you get stuck, press <b>Hint<\/b>. Hints are free, but your teacher can see how many you used.":"Si te atoras, oprime <b>Pista<\/b>. Las pistas son gratis, pero tu maestro puede ver cuántas usaste.","In August, at the Chicago Democratic National Convention, delegates nominated Vice President Hubert Humphrey. Outside, almost 20,000 police officers and National Guardsmen confronted thousands of anti-war protesters. Richard Nixon appealed to what he called the “silent majority,” working- and middle-class Americans who viewed the street protesters with contempt. On November 5, 1968, Nixon won a narrow victory by about 500,000 votes, about 1 percentage point. The electoral vote was 301 for Nixon and 191 for Humphrey, and George Wallace won 46 votes, all in the Deep South. White wage workers, the backbone of the Democratic Party, were shifting to the Republicans.":"En agosto, en la Convención Nacional Demócrata de Chicago, los delegados nominaron al vicepresidente Hubert Humphrey. Afuera, casi 20,000 policías y soldados de la Guardia Nacional se enfrentaron a miles de manifestantes contra la guerra. Richard Nixon se dirigió a lo que llamó la “mayoría silenciosa”, estadounidenses de clase trabajadora y de clase media que veían con desprecio a los manifestantes en las calles. El 5 de noviembre de 1968, Nixon ganó por un margen estrecho de unos 500,000 votos, cerca de 1 punto porcentual. El voto electoral fue de 301 para Nixon y 191 para Humphrey, y George Wallace obtuvo 46 votos, todos en el Sur Profundo. Los trabajadores asalariados blancos, la base del Partido Demócrata, se estaban pasando a los republicanos.","In February 1960, four African American students sat down at an “all-White” lunch counter in Greensboro, North Carolina, and waited to be served. Sit-ins spread to over a hundred cities, and in April 1960 student activists formed the Student Nonviolent Coordinating Committee (SNCC). In May 1961, Freedom Riders, Black and White, boarded buses in Washington, D.C., to test a court ruling that banned segregation on buses and trains. They hoped to force the federal government to enforce the law.":"En febrero de 1960, cuatro estudiantes afroamericanos se sentaron en un mostrador de comida “solo para blancos” de Greensboro, Carolina del Norte, y esperaron a que los atendieran. Las sentadas se extendieron a más de cien ciudades, y en abril de 1960 los estudiantes activistas formaron el Comité Coordinador Estudiantil No Violento (SNCC). En mayo de 1961, los Viajeros de la Libertad, negros y blancos, subieron a autobuses en Washington, D. C., para probar un fallo judicial que prohibía la segregación en autobuses y trenes. Esperaban obligar al gobierno federal a hacer cumplir la ley.","In May 1963, thousands marched against segregation in Birmingham, Alabama. More than 3,000 demonstrators were arrested, including Martin Luther King Jr., who wrote the “Letter from Birmingham Jail” to defend nonviolent civil disobedience. Birmingham officials finally agreed to end their segregation practices. On August 28, 1963, some 250,000 Black and White Americans marched in Washington, D.C., where King gave his “I Have a Dream” speech.":"En mayo de 1963, miles de personas marcharon contra la segregación en Birmingham, Alabama. Más de 3,000 manifestantes fueron arrestados, entre ellos Martin Luther King Jr., quien escribió la “Carta desde la cárcel de Birmingham” para defender la desobediencia civil no violenta. Los funcionarios de Birmingham finalmente aceptaron poner fin a sus prácticas de segregación. El 28 de agosto de 1963, unos 250,000 estadounidenses negros y blancos marcharon en Washington, D. C., donde King pronunció su discurso “Tengo un sueño”.","In May 1964, Johnson described a “Great Society” that would end poverty and racial injustice. Medicare gave health insurance to Americans over age sixty-five, and Medicaid helped states pay medical costs for the poor. The Immigration and Nationality Services Act of 1965 ended national-origins quotas that had favored northern and western Europeans since 1924. The Voting Rights Act of 1965 banned literacy tests and other methods used to keep Black and Latino citizens from voting, and it let the attorney general send federal officials to register voters. Norton says the Great Society did not end poverty, partly because the Vietnam War took funding. But infant mortality dropped, college completion rose, and fewer older Americans live in poverty.":"En mayo de 1964, Johnson describió una “Gran Sociedad” que acabaría con la pobreza y la injusticia racial. Medicare dio seguro médico a los estadounidenses mayores de 65 años, y Medicaid ayudó a los estados a pagar los gastos médicos de los pobres. La Ley de Inmigración y Servicios de Nacionalidad de 1965 puso fin a las cuotas de orígenes nacionales que, desde 1924, favorecían a los europeos del norte y del occidente. La Ley de Derecho al Voto de 1965 prohibió las pruebas de alfabetización y otros métodos usados para impedir que los ciudadanos negros y latinos votaran, y permitió que el fiscal general enviara a funcionarios federales a inscribir a los votantes. Norton dice que la Gran Sociedad no acabó con la pobreza, en parte porque la guerra de Vietnam se llevó fondos. Pero la mortalidad infantil bajó, más personas terminaron la universidad y menos adultos mayores viven en la pobreza.","In the message, the letter E is really A, and the letter H is really D. The word has 8 letters and starts with A.":"En el mensaje, la letra E en realidad es A, y la letra H en realidad es D. La palabra tiene 8 letras y empieza con A.","John F. Kennedy called his program the New Frontier. He had a hard time passing it, because conservative southern Democrats joined Republicans to block federal aid to education, medical insurance for the aged, and a new department for urban affairs and housing. Kennedy was also reluctant to challenge southern Democrats on racial integration. Norton says he and his brother Robert, the attorney general, had to be dragged into supporting the civil rights movement.":"John F. Kennedy llamó a su programa la Nueva Frontera. Le costó mucho aprobarlo, porque los demócratas conservadores del sur se unieron a los republicanos para bloquear la ayuda federal a la educación, el seguro médico para los ancianos y un nuevo departamento de asuntos urbanos y vivienda. Kennedy también se resistía a desafiar a los demócratas del sur en el tema de la integración racial. Norton dice que él y su hermano Robert, el fiscal general, tuvieron que ser arrastrados a apoyar el movimiento por los derechos civiles.","Locks":"Candados","Look for the dates in the Clue Card: February 1960, May 1961, May 1963, and August 28, 1963. Each event has its own date.":"Busca las fechas en la tarjeta de indicios: febrero de 1960, mayo de 1961, mayo de 1963 y 28 de agosto de 1963. Cada suceso tiene su propia fecha.","Match each law or program to the best description. Use the Clue Card.":"Relaciona cada ley o programa con la mejor descripción. Usa la tarjeta de indicios.","Match every term first.":"Primero relaciona todos los términos.","Medicare":"Medicare","New Frontiers and a Great Society":"Nuevas Fronteras y una Gran Sociedad","Nixon won a narrow victory of about 500,000 votes, about 1 percentage point":"Nixon ganó por un margen estrecho de unos 500,000 votos, cerca de 1 punto porcentual","Nixon won by more than 10 million votes":"Nixon ganó por más de 10 millones de votos","Norton calls 1968 “the most traumatic year in a traumatic decade.” On January 31, the Tet offensive began: some 70,000 Viet Cong and North Vietnamese troops attacked U.S. and South Vietnamese forces across South Vietnam. The U.S. won on the battlefield, but the political effect at home was devastating. It showed that leaders’ claims that the war was nearly won were wrong. On March 31, Johnson announced a limited halt to the bombing of North Vietnam. He also shocked the country by saying he would not seek or accept his party’s nomination for another term. King’s murder stunned the world, and riots erupted in more than 100 cities. Forty-six people were killed, all but five of them African Americans.":"Norton llama a 1968 “el año más traumático de una década traumática”. El 31 de enero comenzó la ofensiva del Tet: unos 70,000 soldados del Viet Cong y de Vietnam del Norte atacaron a las fuerzas de EE. UU. y de Vietnam del Sur en todo Vietnam del Sur. EE. UU. ganó en el campo de batalla, pero el efecto político en casa fue devastador. Mostró que eran falsas las afirmaciones de los líderes de que la guerra estaba casi ganada. El 31 de marzo, Johnson anunció una suspensión limitada de los bombardeos a Vietnam del Norte. También sorprendió al país al decir que no buscaría ni aceptaría la nominación de su partido para otro período. El asesinato de King conmocionó al mundo, y estallaron disturbios en más de 100 ciudades. Murieron cuarenta y seis personas, todas menos cinco afroamericanas.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 27, “Expansion of the Civil Rights Movement” (begins p. 1218; Sit-Ins, p. 1219; Freedom Rides, p. 1220; Birmingham, pp. 1223–1224; “I Have a Dream,” p. 1225; Black Power, pp. 1230–1231).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 27, “Expansion of the Civil Rights Movement” (empieza en la pág. 1218; Sit-Ins, pág. 1219; Freedom Rides, pág. 1220; Birmingham, págs. 1223–1224; “I Have a Dream”, pág. 1225; Black Power, págs. 1230–1231).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 27, “Lyndon Baines Johnson and the Great Society” (begins p. 1234; Civil Rights Act, p. 1235; War on Poverty and Economic Opportunity Act, p. 1236; Great Society and Medicare, p. 1238; Immigration Act, p. 1239; Voting Rights, p. 1241; Assessing the Great Society, p. 1242).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 27, “Lyndon Baines Johnson and the Great Society” (empieza en la pág. 1234; Civil Rights Act, pág. 1235; War on Poverty and Economic Opportunity Act, pág. 1236; Great Society and Medicare, pág. 1238; Immigration Act, pág. 1239; Voting Rights, pág. 1241; Assessing the Great Society, pág. 1242).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 27, “The New Frontier” (Kennedy and Vietnam, p. 1215) and “The Tragedy of Vietnam” (begins pp. 1242–1243; Escalation in Vietnam, pp. 1243–1244; The Stakes of War, p. 1245).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 27, “The New Frontier” (Kennedy and Vietnam, pág. 1215) y “The Tragedy of Vietnam” (empieza en las págs. 1242–1243; Escalation in Vietnam, págs. 1243–1244; The Stakes of War, pág. 1245).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 27, “The New Frontier” (begins p. 1206; A Contrary Congress, p. 1209; Kennedy and Civil Rights, p. 1210; Bay of Pigs, pp. 1210–1211; Berlin Wall, p. 1211; The Cuban Missile Crisis, pp. 1213–1214).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 27, “The New Frontier” (empieza en la pág. 1206; A Contrary Congress, pág. 1209; Kennedy and Civil Rights, pág. 1210; Bay of Pigs, págs. 1210–1211; Berlin Wall, pág. 1211; The Cuban Missile Crisis, págs. 1213–1214).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 27, “The Tragedy of Vietnam” (The Tet Offensive, pp. 1246–1247; Johnson’s March 31 announcement, p. 1250) and “The Turmoil of the 1960s” (begins p. 1250; 1968, p. 1251; Chicago and Miami, pp. 1252–1253; Richard Nixon Triumphant, pp. 1253–1254).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 27, “The Tragedy of Vietnam” (The Tet Offensive, págs. 1246–1247; el anuncio de Johnson del 31 de marzo, pág. 1250) y “The Turmoil of the 1960s” (empieza en la pág. 1250; 1968, pág. 1251; Chicago and Miami, págs. 1252–1253; Richard Nixon Triumphant, págs. 1253–1254).","Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.":"Todavía no escapas (se marca INCOMPLETO). Aun así puedes descargar tu archivo y entregarlo.","Not quite. At least one answer is off. Re-read the Clue Card for the silent majority, Johnson’s March 31 announcement, and the election result.":"Casi. Al menos una respuesta no es correcta. Vuelve a leer la tarjeta de indicios para ver la mayoría silenciosa, el anuncio de Johnson del 31 de marzo y el resultado de la elección.","Not quite. Check each match against the Clue Card. Which one are you least sure about?":"Casi. Revisa cada pareja con la tarjeta de indicios. ¿De cuál estás menos seguro?","Not quite. Decode one letter at a time with the key, then check your spelling.":"Casi. Decodifica una letra a la vez con la clave y luego revisa tu ortografía.","Not quite. Re-read the Clue Card and match each event to its date.":"Casi. Vuelve a leer la tarjeta de indicios y relaciona cada hecho con su fecha.","Not quite. Re-read the Clue Card. Use the scrambled letters to check your spelling.":"Casi. Vuelve a leer la tarjeta de indicios. Usa las letras desordenadas para revisar tu ortografía.","On October 22, 1962, President Kennedy told the nation that the U.S. Navy was setting up a “________” of Cuba to stop Soviet ships from bringing more weapons.":"El 22 de octubre de 1962, el presidente Kennedy dijo a la nación que la Marina de EE. UU. estaba estableciendo una “________” alrededor de Cuba para impedir que barcos soviéticos llevaran más armas.","One last step: write your Debrief below.":"Un último paso: escribe tu Informe final abajo.","Open all 5 locks first. The digits go in order: Lock 1 first.":"Primero abre los 5 candados. Los dígitos van en orden: primero el del Candado 1.","Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.":"Abre los 5 candados y luego escribe el código de salida de 5 dígitos. Termina con el Informe final.","Open each lock in order. Read the <b>Clue Card<\/b>. The answer is in the card.":"Abre cada candado en orden. Lee la <b>tarjeta de indicios<\/b>. La respuesta está en la tarjeta.","Open the Door":"Abrir la puerta","Outlawed discrimination in public places such as restaurants, hotels, and parks, and created the EEOC":"Prohibió la discriminación en lugares públicos como restaurantes, hoteles y parques, y creó la EEOC","Pick the correct answer for all three questions.":"Elige la respuesta correcta para las tres preguntas.","President Johnson also feared looking weak against communism. He was convinced that losing South Vietnam would “shatter my presidency.” In August 1964, Johnson said that North Vietnamese torpedo boats had attacked two American warships in the Gulf of Tonkin. Norton says his statement was later shown to be false and misleading, because the U.S. ships had fired first. Congress passed the Tonkin Gulf Resolution, which let Johnson “take all necessary measures” without a declaration of war. In 1965, Johnson said, “We are there because we have a promise to keep.” He believed that leaving Vietnam would shake the confidence of other nations in the American commitment. By the end of 1965, there were 184,000 U.S. troops in Vietnam. There were 385,000 in 1966 and 542,000 in 1969.":"El presidente Johnson también temía parecer débil frente al comunismo. Estaba convencido de que perder Vietnam del Sur “destrozaría mi presidencia”. En agosto de 1964, Johnson dijo que lanchas torpederas norvietnamitas habían atacado dos buques de guerra estadounidenses en el Golfo de Tonkín. Norton dice que su declaración se demostró después que era falsa y engañosa, porque los barcos de EE. UU. habían disparado primero. El Congreso aprobó la Resolución del Golfo de Tonkín, que permitió a Johnson “tomar todas las medidas necesarias” sin una declaración de guerra. En 1965, Johnson dijo: “Estamos allí porque tenemos una promesa que cumplir”. Creía que irse de Vietnam debilitaría la confianza de otras naciones en el compromiso de EE. UU. A fines de 1965, había 184,000 soldados de EE. UU. en Vietnam. Hubo 385,000 en 1966 y 542,000 en 1969.","President Kennedy sent weapons, money, and some 16,000 military men to help South Vietnam. He gave them a name that did not sound like soldiers, so people would not think that U.S. troops were doing the fighting. Kennedy said, “If I tried to pull out, we would have another Joe McCarthy red scare on our hands.”":"El presidente Kennedy envió armas, dinero y unos 16,000 militares para ayudar a Vietnam del Sur. Les dio un nombre que no sonaba a soldados, para que la gente no pensara que las tropas de EE. UU. estaban peleando. Kennedy dijo: “Si intentara retirarme, tendríamos otro temor rojo como el de Joe McCarthy encima”.","Progress file downloaded. Use Load Progress to continue later.":"Se descargó el archivo de progreso. Usa «Cargar progreso» para continuar más tarde.","Progress loaded. Welcome back.":"Progreso cargado. Bienvenido de nuevo.","Protesters who stayed quiet outside the Chicago convention":"Manifestantes que guardaron silencio afuera de la convención de Chicago","RECORDS OFFICE":"OFICINA DE REGISTROS","Read the Clue Card sentence that begins “On October 22.” The missing word is the name for the Navy’s line around Cuba.":"Lee la oración de la tarjeta de indicios que empieza con “El 22 de octubre”. La palabra que falta es el nombre de la línea de la Marina alrededor de Cuba.","Soldiers who did not talk about the war":"Soldados que no hablaban de la guerra","Solve the puzzle to open the lock and reveal one digit.":"Resuelve el acertijo para abrir el candado y descubrir un dígito.","THE EXIT DOOR":"LA PUERTA DE SALIDA","Tap all 4 events first, in order.":"Primero toca los 4 sucesos, en orden.","Tap the four events in the order they happened. Tap an event again to take it back.":"Toca los cuatro sucesos en el orden en que ocurrieron. Toca un suceso otra vez para quitarlo.","That file did not work. Choose a progress file saved from this Escape Room.":"Ese archivo no funcionó. Elige un archivo de progreso guardado de esta sala de escape.","That was the last hint. Read the Clue Card slowly and try again.":"Esa fue la última pista. Lee la tarjeta de indicios despacio y vuelve a intentarlo.","The Ballot Box":"La urna electoral","The Civil Rights Act of 1964 became law on July 2, after southern Democrats in Congress had long blocked it. It outlawed discrimination in public places such as theaters, restaurants, parks, and hotels. It also created the Equal Employment Opportunity Commission (EEOC) to fight discrimination at work. President Lyndon Johnson then declared “unconditional war on poverty.” The Economic Opportunity Act of 1964 created the Office of Economic Opportunity to run eleven new programs, including Job Corps, Upward Bound, Head Start, and a Legal Services Corporation.":"La Ley de Derechos Civiles de 1964 se convirtió en ley el 2 de julio, después de que los demócratas del sur en el Congreso la bloquearan durante mucho tiempo. Prohibió la discriminación en lugares públicos como teatros, restaurantes, parques y hoteles. También creó la Comisión para la Igualdad de Oportunidades en el Empleo (EEOC) para combatir la discriminación en el trabajo. El presidente Lyndon Johnson declaró entonces una “guerra incondicional contra la pobreza”. La Ley de Oportunidad Económica de 1964 creó la Oficina de Oportunidad Económica para dirigir once programas nuevos, entre ellos Job Corps, Upward Bound, Head Start y una Corporación de Servicios Legales.","The Civil Rights Act outlawed discrimination in public places. The Economic Opportunity Act began the War on Poverty with Job Corps and Head Start. Medicare is for people over sixty-five. The Voting Rights Act banned literacy tests.":"La Ley de Derechos Civiles prohibió la discriminación en lugares públicos. La Ley de Oportunidad Económica inició la Guerra contra la Pobreza con Job Corps y Head Start. Medicare es para personas mayores de 65 años. La Ley de Derecho al Voto prohibió las pruebas de alfabetización.","The Clue Card describes a name without printing it. A secret message gives the name. Each letter in the message was moved 4 steps forward in the alphabet. Decode it to find the name for the military men Kennedy sent.":"La tarjeta de indicios describe un nombre sin escribirlo. Un mensaje secreto da ese nombre. Cada letra del mensaje se movió 4 pasos hacia adelante en el alfabeto. Decodifícalo para hallar el nombre de los militares que envió Kennedy.","The Clue Card says Kennedy sent about 16,000 military men with a name that did not sound like soldiers. The secret word is that name. Use the decoder key to spell it, one letter at a time.":"La tarjeta de indicios dice que Kennedy envió a unos 16,000 militares con un nombre que no sonaba a soldados. La palabra secreta es ese nombre. Usa la clave del decodificador para deletrearla, una letra a la vez.","The Desk Telephone":"El teléfono de escritorio","The Filing Cabinet":"El archivero","The Rubber Stamp":"El sello de goma","The Typewriter":"La máquina de escribir","The clock starts when you press the button. Most students finish in about 20 minutes.":"El reloj empieza cuando oprimes el botón. La mayoría de los estudiantes termina en unos 20 minutos.","The code has 5 digits. Fill every box.":"El código tiene 5 dígitos. Llena todas las casillas.","The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.":"La puerta no se abrió. Revisa los dígitos debajo de cada candado y escríbelos en orden: primero el del Candado 1.","The door is open!":"¡La puerta está abierta!","The door swings open!":"¡La puerta se abre de golpe!","The movement also split. By the mid-1960s, about 70 percent of African Americans lived in cities, where many struggled to find jobs and decent housing. Young Black activists asked how nonviolent protest could change their lives. “Black power” became the alternative to the nonviolent, integrationist approach of King. Malcolm X was its most visible spokesman.":"El movimiento también se dividió. A mediados de la década de 1960, cerca del 70 por ciento de los afroamericanos vivía en ciudades, donde muchos tenían dificultades para encontrar trabajo y una vivienda digna. Jóvenes activistas negros se preguntaban cómo la protesta no violenta podía cambiar sus vidas. El “Poder Negro” se volvió la alternativa al enfoque no violento e integracionista de King. Malcolm X fue su vocero más visible.","The order is the Greensboro sit-in (1960), the Freedom Riders (1961), Birmingham (May 1963), then the March on Washington (August 1963).":"El orden es: la sentada de Greensboro (1960), los Viajeros de la Libertad (1961), Birmingham (mayo de 1963) y luego la Marcha sobre Washington (agosto de 1963).","The silent majority were working- and middle-class Americans who disliked the street protests. On March 31 Johnson limited the bombing and said he would not run again. Nixon won by a narrow margin of about 500,000 votes.":"La mayoría silenciosa eran estadounidenses de clase trabajadora y de clase media a quienes no les gustaban las protestas en las calles. El 31 de marzo, Johnson limitó los bombardeos y dijo que no se postularía otra vez. Nixon ganó por un margen estrecho de unos 500,000 votos.","The town records office closed for the night, and the clerk locked the door. A filing cabinet, a typewriter, a rubber stamp, a desk telephone, and a ballot box from the 1960s sit in the room. The door has <b>5 locks<\/b>. Each lock matches one big idea from Lesson 18. Solve them all to find the <b>5-digit exit code<\/b>.":"La oficina de registros del pueblo cerró por la noche y el empleado cerró la puerta con llave. En la sala hay un archivero, una máquina de escribir, un sello de goma, un teléfono de escritorio y una urna electoral de los años sesenta. La puerta tiene <b>5 candados<\/b>. Cada candado corresponde a una idea importante de la Lección 18. Resuélvelos todos para encontrar el <b>código de salida de 5 dígitos<\/b>.","The war in Vietnam had been won":"Que la guerra de Vietnam se había ganado","The word starts with Q and has 10 letters. It ends with “tine.”":"La palabra empieza con Q y tiene 10 letras. Termina en “tine”.","Thousands march in Birmingham, Alabama, and more than 3,000 are arrested":"Miles marchan en Birmingham, Alabama, y más de 3,000 son arrestados","Time":"Tiempo","Two terms are 1964 laws, one is about health, and one is about voting. Look for key words in each description, such as “literacy tests” and “over age sixty-five.”":"Dos términos son leyes de 1964, uno trata de la salud y otro del voto. Busca palabras clave en cada descripción, como “pruebas de alfabetización” y “mayores de 65 años”.","Type the answer in English.":"Escribe la respuesta en inglés.","Type the answer in English. Use the digits 0-9.":"Escribe la respuesta en inglés. Usa los dígitos 0-9.","Type the exit code":"Escribe el código de salida","Type your answer first.":"Primero escribe tu respuesta.","Type your answer here...":"Escribe tu respuesta aquí...","UNIT 7 · THE AMERICAN AGE | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 7 · LA ERA ESTADOUNIDENSE | CPUSH | DANIEL GARZA, M.A.","Unscramble the letters to fill the blank.":"Ordena las letras para llenar el espacio en blanco.","Voters who stayed home on Election Day":"Votantes que se quedaron en casa el Día de las Elecciones","Voting Rights Act of 1965":"Ley de Derecho al Voto de 1965","What did Nixon mean by the “silent majority”?":"¿Qué quiso decir Nixon con la “mayoría silenciosa”?","What did President Johnson announce on March 31, 1968?":"¿Qué anunció el presidente Johnson el 31 de marzo de 1968?","Which lock was hardest, and what did you learn that you did not know before?":"¿Qué candado fue el más difícil y qué aprendiste que antes no sabías?","Working- and middle-class Americans who viewed the street protesters with contempt":"Estadounidenses de clase trabajadora y de clase media que veían con desprecio a los manifestantes en las calles","Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.":"Escribe de 3 a 4 oraciones. Nombra el candado y usa un dato de su tarjeta de indicios. Puedes escribirlo aunque no hayas escapado.","You are locked in the records office.":"Estás encerrado en la oficina de registros.","You escaped and wrote your Debrief. Ready to submit.":"Escapaste y escribiste tu Informe final. Listo para entregar.","You escaped! Write your Debrief, then download your file to submit.":"¡Escapaste! Escribe tu Informe final y luego descarga tu archivo para entregarlo.","Your answer":"Tu respuesta","Your time:":"Tu tiempo:","digit":"dígito","Escape Room 18 · New Frontiers and a Great Society":"Sala de escape 18 · Nuevas Fronteras y una Gran Sociedad"},"ar":{"Save Progress":"حفظ التقدم","Load Progress":"تحميل التقدم","Finished — Download File to Submit":"انتهيت — نزّل الملف لتسليمه","Clear all my answers":"امسح كل إجاباتي","FIRST NAME *":"الاسم الأول *","LAST NAME *":"اسم العائلة *","PERIOD *":"الحصة *","DATE (fills in when you finish)":"التاريخ (يُكتب تلقائيًا عند الانتهاء)","e.g. 3":"مثال: 3","Automatic":"تلقائي","Please type your first name, last name, and period first.":"اكتب أولًا اسمك الأول واسم العائلة والحصة.","Western Expansion and Southern Secession":"التوسع غربًا وانفصال الجنوب","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"الوحدة 3 · بيت منقسم وأُعيد بناؤه | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — قانون العبيد الهاربين","Bleeding Kansas":"Bleeding Kansas — كانساس النازفة","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"الوحدة 3 · بيت منقسم وأعيد بناؤه | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"تم تنزيل ملف التقدم. احتفظ به في مكان آمن. استخدم «تحميل التقدم» لتكمل لاحقًا.","Progress loaded.":"تم تحميل التقدم.","Could not read that file.":"تعذّرت قراءة هذا الملف.","Treaty of Guadalupe Hidalgo":"معاهدة غوادالوبي هيدالغو (Treaty of Guadalupe Hidalgo)","A town records office at night. On the left, a window shows a city skyline behind window blinds, above a tall filing cabinet and a table with a typewriter and a sheet of paper. On the right, a clock and a bulletin board hang above a desk with a telephone and a ballot box. The door has a RECORDS OFFICE sign and five padlocks in a row. Under each padlock is a window for one digit of the exit code.":"مكتب سجلات في بلدة في الليل. على اليسار، نافذة بستائر تُظهر أفق مدينة، فوق خزانة ملفات طويلة وطاولة عليها آلة كاتبة وورقة. وعلى اليمين، ساعة ولوحة إعلانات معلّقتان فوق مكتب عليه هاتف وصندوق اقتراع. وعلى الباب لافتة «مكتب السجلات» وخمسة أقفال في صف. وتحت كل قفل نافذة صغيرة لرقم واحد من رمز الخروج.","About 250,000 people join the March on Washington":"يشارك نحو 250,000 شخص في المسيرة إلى واشنطن (March on Washington)","Abroad, Kennedy faced Cold War crises. In April 1961, 1,543 Cuban exiles trained by the CIA landed at the Bay of Pigs in Cuba. Castro had 20,000 soldiers waiting, and the invasion failed. In August 1961, the Soviets began building the Berlin Wall. On October 16, 1962, spy-plane photos showed Soviet missile sites in Cuba. On October 22, Kennedy told the nation that the U.S. Navy was setting up a “quarantine” of Cuba to stop Soviet ships from bringing more weapons. The Soviets agreed to remove their missiles in return for a public U.S. pledge never to invade Cuba and a secret agreement to remove U.S. missiles from Turkey.":"في الخارج، واجه كينيدي (Kennedy) أزمات الحرب الباردة. في أبريل 1961، نزل 1,543 من المنفيين الكوبيين الذين دربتهم وكالة المخابرات المركزية (CIA) في خليج الخنازير (Bay of Pigs) في كوبا. وكان كاسترو (Castro) قد أعدّ 20,000 جندي في انتظارهم، وفشل الغزو. وفي أغسطس 1961، بدأ السوفييت ببناء جدار برلين (Berlin Wall). وفي 16 أكتوبر 1962، أظهرت صور طائرات التجسس مواقع صواريخ سوفييتية في كوبا. وفي 22 أكتوبر، أخبر كينيدي الأمة أن البحرية الأمريكية تقيم «حجرًا» (quarantine) حول كوبا لمنع السفن السوفييتية من جلب المزيد من الأسلحة. ووافق السوفييت على سحب صواريخهم مقابل تعهد أمريكي علني بعدم غزو كوبا أبدًا واتفاق سري على سحب صواريخ أمريكية من تركيا.","All 5 locks are open. Type the 5 digits in order, Lock 1 first.":"الأقفال الخمسة مفتوحة. اكتب الأرقام الخمسة بالترتيب: رقم القفل 1 أولًا.","Answer every question first.":"أجب عن كل الأسئلة أولًا.","Banned literacy tests and sent federal officials to register voters":"حظر اختبارات القراءة والكتابة وأرسل مسؤولين اتحاديين لتسجيل الناخبين","CLUE CARD":"بطاقة القرائن","Check":"تحقق","Choose a description...":"اختر وصفًا...","Civil Rights Act of 1964":"قانون الحقوق المدنية لعام 1964 (Civil Rights Act of 1964)","Clear":"مسح","Clear all my work and start over":"امسح كل عملي وابدأ من جديد","Core Objective 1: Assess President John F. Kennedy’s efforts to contain communism abroad and address civil rights and other social programs at home.":"الهدف الأساسي 1: قيّم جهود الرئيس جون ف. كينيدي (John F. Kennedy) لاحتواء الشيوعية في الخارج ومعالجة الحقوق المدنية والبرامج الاجتماعية الأخرى في الداخل.","Core Objective 2: Describe the strategies and achievements of the civil rights movement in the 1960s. Explain the divisions that emerged among its activists and how their successes and failures contributed to the rise of the Black Power movement.":"الهدف الأساسي 2: صِف استراتيجيات حركة الحقوق المدنية وإنجازاتها في الستينيات. اشرح الانقسامات التي ظهرت بين نشطائها وكيف أسهمت نجاحاتها وإخفاقاتها في صعود حركة «القوة السوداء» (Black Power).","Core Objective 3: Analyze Lyndon B. Johnson’s War on Poverty and other Great Society initiatives and evaluate their impact on American society.":"الهدف الأساسي 3: حلّل «الحرب على الفقر» التي أطلقها ليندون ب. جونسون (Lyndon B. Johnson) وغيرها من مبادرات «المجتمع العظيم» (Great Society)، وقيّم أثرها في المجتمع الأمريكي.","Core Objective 4: Explain the motivations of Presidents Kennedy and Johnson for deepening military involvement in the Vietnam War.":"الهدف الأساسي 4: اشرح دوافع الرئيسين كينيدي (Kennedy) وجونسون (Johnson) لتعميق التدخل العسكري في حرب فيتنام.","Core Objective 5: Highlight the issues that propelled Richard Nixon to victory in the 1968 presidential election.":"الهدف الأساسي 5: أبرز القضايا التي دفعت ريتشارد نيكسون (Richard Nixon) إلى الفوز في الانتخابات الرئاسية لعام 1968.","Created the Office of Economic Opportunity and programs such as Job Corps and Head Start":"أنشأ مكتب الفرص الاقتصادية (Office of Economic Opportunity) وبرامج مثل «جوب كورز» (Job Corps) و«هيد ستارت» (Head Start)","DEBRIEF":"الملخص الختامي","Debrief":"الملخص الختامي","Decoded answer":"الإجابة بعد فك التشفير","Decoder key: the <span style=\"color:var(--hl);font-weight:700\">peach<\/span> letter is in the message. The white letter under it is the real letter.":"مفتاح فك التشفير: الحرف <span style=\"color:var(--hl);font-weight:700\">الخوخي<\/span> هو الحرف الموجود في الرسالة. والحرف الأبيض تحته هو الحرف الحقيقي.","ESCAPED":"لقد هربت!","Each answer is in the Clue Card. Look for the “silent majority,” what Johnson announced on March 31, and the final vote count in November.":"كل إجابة موجودة في بطاقة القرائن. ابحث عن «الأغلبية الصامتة»، وعما أعلنه جونسون (Johnson) في 31 مارس، وعن عدد الأصوات النهائي في نوفمبر.","Economic Opportunity Act of 1964":"قانون الفرص الاقتصادية لعام 1964 (Economic Opportunity Act of 1964)","Enter the Records Office":"ادخل مكتب السجلات","Enter your first name, last name, and period at the top first.":"اكتب اسمك الأول واسم العائلة والحصة في الأعلى أولًا.","Escape the Records Office":"اهرب من مكتب السجلات","Exit code digit 1":"رقم رمز الخروج 1","Exit door":"باب الخروج","Fill in the blank using the Clue Card.":"املأ الفراغ باستخدام بطاقة القرائن.","Four students begin a sit-in at a lunch counter in Greensboro, North Carolina":"يبدأ أربعة طلاب اعتصامًا عند طاولة طعام في غرينزبورو (Greensboro) بولاية نورث كارولاينا","Freedom Riders board buses to test the ban on segregation in bus travel":"يركب «ركاب الحرية» (Freedom Riders) الحافلات لاختبار حظر الفصل العنصري في السفر بالحافلات","Gave health insurance to Americans over age sixty-five":"قدّم تأمينًا صحيًا للأمريكيين فوق سن 65 عامًا","George Wallace won the election":"فاز جورج والاس (George Wallace) بالانتخابات","Have a saved file? Load it to continue.":"هل لديك ملف محفوظ؟ حمّله لتكمل.","He limited the bombing of North Vietnam and would not seek another term as president":"قلّص قصف فيتنام الشمالية ولن يسعى إلى ولاية أخرى رئيسًا","He would run for another term with Hubert Humphrey":"أنه سيترشح لولاية أخرى مع هيوبرت همفري (Hubert Humphrey)","He would send 100,000 more troops to Vietnam":"أنه سيرسل 100,000 جندي إضافي إلى فيتنام","Hint":"تلميح","Hints used":"التلميحات المستخدمة","How did the 1968 election turn out?":"ما نتيجة انتخابات 1968؟","How to escape:":"كيف تهرب:","Humphrey won the electoral vote":"فاز همفري (Humphrey) بالأصوات الانتخابية","If you get stuck, press <b>Hint<\/b>. Hints are free, but your teacher can see how many you used.":"إذا تعثرت، اضغط <b>تلميح<\/b>. التلميحات مجانية، لكن معلمك يستطيع أن يرى كم تلميحًا استخدمت.","In August, at the Chicago Democratic National Convention, delegates nominated Vice President Hubert Humphrey. Outside, almost 20,000 police officers and National Guardsmen confronted thousands of anti-war protesters. Richard Nixon appealed to what he called the “silent majority,” working- and middle-class Americans who viewed the street protesters with contempt. On November 5, 1968, Nixon won a narrow victory by about 500,000 votes, about 1 percentage point. The electoral vote was 301 for Nixon and 191 for Humphrey, and George Wallace won 46 votes, all in the Deep South. White wage workers, the backbone of the Democratic Party, were shifting to the Republicans.":"وفي أغسطس، في المؤتمر الوطني الديمقراطي في شيكاغو (Chicago Democratic National Convention)، رشّح المندوبون نائب الرئيس هيوبرت همفري (Hubert Humphrey). وفي الخارج، واجه نحو 20,000 من رجال الشرطة وجنود الحرس الوطني آلاف المحتجين ضد الحرب. وخاطب ريتشارد نيكسون (Richard Nixon) من سمّاهم «الأغلبية الصامتة»، وهم أمريكيون من الطبقتين العاملة والمتوسطة كانوا ينظرون إلى المحتجين في الشوارع باحتقار. وفي 5 نوفمبر 1968، فاز نيكسون بفارق ضيق بنحو 500,000 صوت، أي نحو 1 نقطة مئوية. وكانت الأصوات الانتخابية 301 لنيكسون و191 لهمفري، وحصل جورج والاس (George Wallace) على 46 صوتًا كلها من الجنوب الأعمق (Deep South). وكان العمال البيض من أصحاب الأجور، وهم عماد الحزب الديمقراطي، يتحولون إلى الجمهوريين.","In February 1960, four African American students sat down at an “all-White” lunch counter in Greensboro, North Carolina, and waited to be served. Sit-ins spread to over a hundred cities, and in April 1960 student activists formed the Student Nonviolent Coordinating Committee (SNCC). In May 1961, Freedom Riders, Black and White, boarded buses in Washington, D.C., to test a court ruling that banned segregation on buses and trains. They hoped to force the federal government to enforce the law.":"في فبراير 1960، جلس أربعة طلاب أمريكيين من أصل أفريقي عند طاولة طعام «للبيض فقط» في غرينزبورو (Greensboro) بولاية نورث كارولاينا، وانتظروا أن يُخدموا. وانتشرت الاعتصامات إلى أكثر من مئة مدينة، وفي أبريل 1960 شكّل الطلاب الناشطون لجنة الطلاب للتنسيق اللاعنفي (Student Nonviolent Coordinating Committee - SNCC). وفي مايو 1961، ركب «ركاب الحرية» (Freedom Riders)، من السود والبيض، حافلات في واشنطن العاصمة لاختبار حكم قضائي يمنع الفصل العنصري في الحافلات والقطارات. وكانوا يأملون أن يجبروا الحكومة الاتحادية على تطبيق القانون.","In May 1963, thousands marched against segregation in Birmingham, Alabama. More than 3,000 demonstrators were arrested, including Martin Luther King Jr., who wrote the “Letter from Birmingham Jail” to defend nonviolent civil disobedience. Birmingham officials finally agreed to end their segregation practices. On August 28, 1963, some 250,000 Black and White Americans marched in Washington, D.C., where King gave his “I Have a Dream” speech.":"في مايو 1963، سار الآلاف ضد الفصل العنصري في برمنغهام (Birmingham) بولاية ألاباما. واعتُقل أكثر من 3,000 متظاهر، من بينهم مارتن لوثر كينغ الابن (Martin Luther King Jr.)، الذي كتب «رسالة من سجن برمنغهام» للدفاع عن العصيان المدني اللاعنفي. ووافق مسؤولو برمنغهام أخيرًا على إنهاء ممارسات الفصل العنصري. وفي 28 أغسطس 1963، سار نحو 250,000 أمريكي من السود والبيض في واشنطن العاصمة، حيث ألقى كينغ خطابه «لديّ حلم».","In May 1964, Johnson described a “Great Society” that would end poverty and racial injustice. Medicare gave health insurance to Americans over age sixty-five, and Medicaid helped states pay medical costs for the poor. The Immigration and Nationality Services Act of 1965 ended national-origins quotas that had favored northern and western Europeans since 1924. The Voting Rights Act of 1965 banned literacy tests and other methods used to keep Black and Latino citizens from voting, and it let the attorney general send federal officials to register voters. Norton says the Great Society did not end poverty, partly because the Vietnam War took funding. But infant mortality dropped, college completion rose, and fewer older Americans live in poverty.":"وفي مايو 1964، وصف جونسون (Johnson) «مجتمعًا عظيمًا» (Great Society) سينهي الفقر والظلم العنصري. وقدّم برنامج ميديكير (Medicare) تأمينًا صحيًا للأمريكيين فوق سن 65 عامًا، وساعد برنامج ميديكيد (Medicaid) الولايات على دفع التكاليف الطبية للفقراء. وأنهى قانون الهجرة والجنسية لعام 1965 (Immigration and Nationality Services Act of 1965) حصص الأصول القومية التي كانت تفضّل الأوروبيين الغربيين والشماليين منذ عام 1924. وحظر قانون حقوق التصويت لعام 1965 (Voting Rights Act of 1965) اختبارات القراءة والكتابة وغيرها من الأساليب المستخدمة لمنع المواطنين السود واللاتينيين من التصويت، وسمح للنائب العام بإرسال مسؤولين اتحاديين لتسجيل الناخبين. وتقول Norton إن «المجتمع العظيم» لم ينهِ الفقر، جزئيًا لأن حرب فيتنام أخذت التمويل. لكن وفيات الأطفال الرُّضّع انخفضت، وارتفع عدد من يكملون الجامعة، وقلّ عدد كبار السن الذين يعيشون في فقر.","In the message, the letter E is really A, and the letter H is really D. The word has 8 letters and starts with A.":"في الرسالة، الحرف E هو في الحقيقة A، والحرف H هو في الحقيقة D. وللكلمة 8 أحرف وتبدأ بالحرف A.","John F. Kennedy called his program the New Frontier. He had a hard time passing it, because conservative southern Democrats joined Republicans to block federal aid to education, medical insurance for the aged, and a new department for urban affairs and housing. Kennedy was also reluctant to challenge southern Democrats on racial integration. Norton says he and his brother Robert, the attorney general, had to be dragged into supporting the civil rights movement.":"سمّى جون ف. كينيدي (John F. Kennedy) برنامجه «الحدود الجديدة» (New Frontier). وواجه صعوبة في تمريره، لأن الديمقراطيين المحافظين من الجنوب انضموا إلى الجمهوريين لعرقلة المساعدات الاتحادية للتعليم والتأمين الصحي لكبار السن وإنشاء وزارة جديدة للشؤون الحضرية والإسكان. وكان كينيدي أيضًا متردّدًا في تحدّي الديمقراطيين الجنوبيين في قضية الاندماج العنصري. وتقول Norton إنه وأخاه روبرت (Robert)، النائب العام، لم يدعما حركة الحقوق المدنية إلا بعد أن دُفعا إلى ذلك دفعًا.","Locks":"الأقفال","Look for the dates in the Clue Card: February 1960, May 1961, May 1963, and August 28, 1963. Each event has its own date.":"ابحث عن التواريخ في بطاقة القرائن: فبراير 1960 ومايو 1961 ومايو 1963 و28 أغسطس 1963. لكل حدث تاريخه الخاص.","Match each law or program to the best description. Use the Clue Card.":"طابق كل قانون أو برنامج مع أفضل وصف. استخدم بطاقة القرائن.","Match every term first.":"طابق كل المصطلحات أولًا.","Medicare":"ميديكير (Medicare)","New Frontiers and a Great Society":"الحدود الجديدة والمجتمع العظيم","Nixon won a narrow victory of about 500,000 votes, about 1 percentage point":"فاز نيكسون (Nixon) بفارق ضيق بنحو 500,000 صوت، أي نحو 1 نقطة مئوية","Nixon won by more than 10 million votes":"فاز نيكسون (Nixon) بأكثر من 10 ملايين صوت","Norton calls 1968 “the most traumatic year in a traumatic decade.” On January 31, the Tet offensive began: some 70,000 Viet Cong and North Vietnamese troops attacked U.S. and South Vietnamese forces across South Vietnam. The U.S. won on the battlefield, but the political effect at home was devastating. It showed that leaders’ claims that the war was nearly won were wrong. On March 31, Johnson announced a limited halt to the bombing of North Vietnam. He also shocked the country by saying he would not seek or accept his party’s nomination for another term. King’s murder stunned the world, and riots erupted in more than 100 cities. Forty-six people were killed, all but five of them African Americans.":"تصف Norton عام 1968 بأنه «أكثر الأعوام صدمةً في عقد مليء بالصدمات». وفي 31 يناير بدأ هجوم تيت (Tet offensive): هاجم نحو 70,000 جندي من الفيتكونغ (Viet Cong) وفيتنام الشمالية القوات الأمريكية والقوات الفيتنامية الجنوبية في أنحاء فيتنام الجنوبية. وانتصرت الولايات المتحدة في ساحة المعركة، لكن الأثر السياسي في الداخل كان مدمّرًا. فقد أظهر أن ادعاءات القادة بأن الحرب قاربت على الانتصار كانت خاطئة. وفي 31 مارس، أعلن جونسون (Johnson) وقفًا محدودًا لقصف فيتنام الشمالية. كما صدم البلاد بقوله إنه لن يسعى إلى ترشيح حزبه له لولاية أخرى ولن يقبله. وصدم مقتل كينغ (King) العالم، واندلعت أعمال شغب في أكثر من 100 مدينة. وقُتل ستة وأربعون شخصًا، وكان جميعهم من الأمريكيين الأفارقة باستثناء خمسة.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 27, “Expansion of the Civil Rights Movement” (begins p. 1218; Sit-Ins, p. 1219; Freedom Rides, p. 1220; Birmingham, pp. 1223–1224; “I Have a Dream,” p. 1225; Black Power, pp. 1230–1231).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 27، “Expansion of the Civil Rights Movement” (يبدأ في ص. 1218؛ Sit-Ins، ص. 1219؛ Freedom Rides، ص. 1220؛ Birmingham، ص. 1223–1224؛ “I Have a Dream”، ص. 1225؛ Black Power، ص. 1230–1231).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 27, “Lyndon Baines Johnson and the Great Society” (begins p. 1234; Civil Rights Act, p. 1235; War on Poverty and Economic Opportunity Act, p. 1236; Great Society and Medicare, p. 1238; Immigration Act, p. 1239; Voting Rights, p. 1241; Assessing the Great Society, p. 1242).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 27، “Lyndon Baines Johnson and the Great Society” (يبدأ في ص. 1234؛ Civil Rights Act، ص. 1235؛ War on Poverty and Economic Opportunity Act، ص. 1236؛ Great Society and Medicare، ص. 1238؛ Immigration Act، ص. 1239؛ Voting Rights، ص. 1241؛ Assessing the Great Society، ص. 1242).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 27, “The New Frontier” (Kennedy and Vietnam, p. 1215) and “The Tragedy of Vietnam” (begins pp. 1242–1243; Escalation in Vietnam, pp. 1243–1244; The Stakes of War, p. 1245).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 27، “The New Frontier” (Kennedy and Vietnam، ص. 1215) و“The Tragedy of Vietnam” (يبدأ في ص. 1242–1243؛ Escalation in Vietnam، ص. 1243–1244؛ The Stakes of War، ص. 1245).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 27, “The New Frontier” (begins p. 1206; A Contrary Congress, p. 1209; Kennedy and Civil Rights, p. 1210; Bay of Pigs, pp. 1210–1211; Berlin Wall, p. 1211; The Cuban Missile Crisis, pp. 1213–1214).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 27، “The New Frontier” (يبدأ في ص. 1206؛ A Contrary Congress، ص. 1209؛ Kennedy and Civil Rights، ص. 1210؛ Bay of Pigs، ص. 1210–1211؛ Berlin Wall، ص. 1211؛ The Cuban Missile Crisis، ص. 1213–1214).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 27, “The Tragedy of Vietnam” (The Tet Offensive, pp. 1246–1247; Johnson’s March 31 announcement, p. 1250) and “The Turmoil of the 1960s” (begins p. 1250; 1968, p. 1251; Chicago and Miami, pp. 1252–1253; Richard Nixon Triumphant, pp. 1253–1254).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 27، “The Tragedy of Vietnam” (The Tet Offensive، ص. 1246–1247؛ إعلان جونسون في 31 مارس، ص. 1250) و“The Turmoil of the 1960s” (يبدأ في ص. 1250؛ 1968، ص. 1251؛ Chicago and Miami، ص. 1252–1253؛ Richard Nixon Triumphant، ص. 1253–1254).","Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.":"لم تهرب بعد (يُسجَّل «غير مكتمل» INCOMPLETE). ما زال بإمكانك تنزيل ملفك وتسليمه.","Not quite. At least one answer is off. Re-read the Clue Card for the silent majority, Johnson’s March 31 announcement, and the election result.":"ليس تمامًا. إجابة واحدة على الأقل غير صحيحة. أعد قراءة بطاقة القرائن لتعرف الأغلبية الصامتة وإعلان جونسون (Johnson) في 31 مارس ونتيجة الانتخابات.","Not quite. Check each match against the Clue Card. Which one are you least sure about?":"ليس تمامًا. تحقق من كل مطابقة باستخدام بطاقة القرائن. أي مطابقة أنت أقل تأكدًا منها؟","Not quite. Decode one letter at a time with the key, then check your spelling.":"ليس تمامًا. فُكّ تشفير حرف واحد في كل مرة باستخدام المفتاح، ثم تحقق من تهجئتك.","Not quite. Re-read the Clue Card and match each event to its date.":"ليس تمامًا. أعد قراءة بطاقة القرائن واربط كل حدث بتاريخه.","Not quite. Re-read the Clue Card. Use the scrambled letters to check your spelling.":"ليس تمامًا. أعد قراءة بطاقة القرائن. استخدم الحروف المبعثرة للتحقق من تهجئتك.","On October 22, 1962, President Kennedy told the nation that the U.S. Navy was setting up a “________” of Cuba to stop Soviet ships from bringing more weapons.":"في 22 أكتوبر 1962، قال الرئيس كينيدي (Kennedy) للأمة إن البحرية الأمريكية تقيم «________» حول كوبا لمنع السفن السوفييتية من جلب المزيد من الأسلحة.","One last step: write your Debrief below.":"خطوة أخيرة: اكتب ملخصك الختامي أدناه.","Open all 5 locks first. The digits go in order: Lock 1 first.":"افتح الأقفال الخمسة أولًا. تُكتب الأرقام بالترتيب: رقم القفل 1 أولًا.","Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.":"افتح الأقفال الخمسة، ثم اكتب رمز الخروج المكوّن من 5 أرقام. أنهِ بالملخص الختامي.","Open each lock in order. Read the <b>Clue Card<\/b>. The answer is in the card.":"افتح كل قفل بالترتيب. اقرأ <b>بطاقة القرائن<\/b>. الإجابة موجودة في البطاقة.","Open the Door":"افتح الباب","Outlawed discrimination in public places such as restaurants, hotels, and parks, and created the EEOC":"منع التمييز في الأماكن العامة مثل المطاعم والفنادق والمتنزهات، وأنشأ لجنة تكافؤ فرص العمل (EEOC)","Pick the correct answer for all three questions.":"اختر الإجابة الصحيحة للأسئلة الثلاثة.","President Johnson also feared looking weak against communism. He was convinced that losing South Vietnam would “shatter my presidency.” In August 1964, Johnson said that North Vietnamese torpedo boats had attacked two American warships in the Gulf of Tonkin. Norton says his statement was later shown to be false and misleading, because the U.S. ships had fired first. Congress passed the Tonkin Gulf Resolution, which let Johnson “take all necessary measures” without a declaration of war. In 1965, Johnson said, “We are there because we have a promise to keep.” He believed that leaving Vietnam would shake the confidence of other nations in the American commitment. By the end of 1965, there were 184,000 U.S. troops in Vietnam. There were 385,000 in 1966 and 542,000 in 1969.":"وخشي الرئيس جونسون (Johnson) أيضًا أن يبدو ضعيفًا أمام الشيوعية. وكان مقتنعًا بأن خسارة فيتنام الجنوبية ستؤدي إلى «تحطيم رئاستي». وفي أغسطس 1964، قال جونسون إن زوارق طوربيد فيتنامية شمالية هاجمت سفينتين حربيتين أمريكيتين في خليج تونكين (Gulf of Tonkin). وتقول Norton إن تصريحه تبيّن لاحقًا أنه كاذب ومضلل، لأن السفن الأمريكية هي التي أطلقت النار أولًا. ومرّر الكونغرس قرار خليج تونكين (Tonkin Gulf Resolution)، الذي سمح لجونسون «باتخاذ كل الإجراءات اللازمة» دون إعلان حرب. وفي عام 1965، قال جونسون: «نحن هناك لأن علينا وعدًا نفي به». وكان يعتقد أن ترك فيتنام سيهزّ ثقة الأمم الأخرى بالالتزام الأمريكي. وبحلول نهاية 1965، كان في فيتنام 184,000 جندي أمريكي. وبلغوا 385,000 في 1966 و542,000 في 1969.","President Kennedy sent weapons, money, and some 16,000 military men to help South Vietnam. He gave them a name that did not sound like soldiers, so people would not think that U.S. troops were doing the fighting. Kennedy said, “If I tried to pull out, we would have another Joe McCarthy red scare on our hands.”":"أرسل الرئيس كينيدي (Kennedy) أسلحة وأموالًا ونحو 16,000 عسكري لمساعدة فيتنام الجنوبية. وأعطاهم اسمًا لا يبدو كأنه اسم جنود، حتى لا يظن الناس أن القوات الأمريكية هي التي تقاتل. وقال كينيدي: «لو حاولت الانسحاب، لواجهنا ذعرًا أحمر آخر مثل ذعر جو مكارثي (Joe McCarthy)».","Progress file downloaded. Use Load Progress to continue later.":"تم تنزيل ملف التقدم. استخدم «تحميل التقدم» لتكمل لاحقًا.","Progress loaded. Welcome back.":"تم تحميل التقدم. أهلًا بعودتك.","Protesters who stayed quiet outside the Chicago convention":"محتجون ظلوا صامتين خارج مؤتمر شيكاغو (Chicago)","RECORDS OFFICE":"مكتب السجلات","Read the Clue Card sentence that begins “On October 22.” The missing word is the name for the Navy’s line around Cuba.":"اقرأ الجملة في بطاقة القرائن التي تبدأ بـ«في 22 أكتوبر». الكلمة الناقصة هي اسم الخط الذي أقامته البحرية حول كوبا.","Soldiers who did not talk about the war":"جنود لم يتحدثوا عن الحرب","Solve the puzzle to open the lock and reveal one digit.":"حلّ اللغز لتفتح القفل وتكشف رقمًا واحدًا.","THE EXIT DOOR":"باب الخروج","Tap all 4 events first, in order.":"المس الأحداث الأربعة كلها أولًا، بالترتيب.","Tap the four events in the order they happened. Tap an event again to take it back.":"المس الأحداث الأربعة بالترتيب الذي وقعت به. المس الحدث مرة أخرى للتراجع عنه.","That file did not work. Choose a progress file saved from this Escape Room.":"لم يعمل هذا الملف. اختر ملف تقدم محفوظًا من غرفة الهروب هذه.","That was the last hint. Read the Clue Card slowly and try again.":"كان هذا آخر تلميح. اقرأ بطاقة القرائن ببطء وحاول مرة أخرى.","The Ballot Box":"صندوق الاقتراع","The Civil Rights Act of 1964 became law on July 2, after southern Democrats in Congress had long blocked it. It outlawed discrimination in public places such as theaters, restaurants, parks, and hotels. It also created the Equal Employment Opportunity Commission (EEOC) to fight discrimination at work. President Lyndon Johnson then declared “unconditional war on poverty.” The Economic Opportunity Act of 1964 created the Office of Economic Opportunity to run eleven new programs, including Job Corps, Upward Bound, Head Start, and a Legal Services Corporation.":"أصبح قانون الحقوق المدنية لعام 1964 (Civil Rights Act of 1964) قانونًا في 2 يوليو، بعد أن عطّله الديمقراطيون الجنوبيون في الكونغرس طويلًا. وقد منع التمييز في الأماكن العامة مثل المسارح والمطاعم والمتنزهات والفنادق. كما أنشأ لجنة تكافؤ فرص العمل (Equal Employment Opportunity Commission - EEOC) لمكافحة التمييز في العمل. ثم أعلن الرئيس ليندون جونسون (Lyndon Johnson) «حربًا غير مشروطة على الفقر». وأنشأ قانون الفرص الاقتصادية لعام 1964 (Economic Opportunity Act of 1964) مكتب الفرص الاقتصادية لإدارة أحد عشر برنامجًا جديدًا، منها «جوب كورز» (Job Corps) و«أبوورد باوند» (Upward Bound) و«هيد ستارت» (Head Start) ومؤسسة الخدمات القانونية (Legal Services Corporation).","The Civil Rights Act outlawed discrimination in public places. The Economic Opportunity Act began the War on Poverty with Job Corps and Head Start. Medicare is for people over sixty-five. The Voting Rights Act banned literacy tests.":"منع قانون الحقوق المدنية التمييز في الأماكن العامة. وبدأ قانون الفرص الاقتصادية «الحرب على الفقر» ببرنامجي جوب كورز (Job Corps) وهيد ستارت (Head Start). وميديكير للأشخاص فوق سن 65 عامًا. وحظر قانون حقوق التصويت اختبارات القراءة والكتابة.","The Clue Card describes a name without printing it. A secret message gives the name. Each letter in the message was moved 4 steps forward in the alphabet. Decode it to find the name for the military men Kennedy sent.":"تصف بطاقة القرائن اسمًا دون أن تكتبه. وتعطي رسالة سرية هذا الاسم. تم تحريك كل حرف في الرسالة 4 خطوات إلى الأمام في الأبجدية. فك الشيفرة لتجد اسم العسكريين الذين أرسلهم كينيدي (Kennedy).","The Clue Card says Kennedy sent about 16,000 military men with a name that did not sound like soldiers. The secret word is that name. Use the decoder key to spell it, one letter at a time.":"تقول بطاقة القرائن إن كينيدي (Kennedy) أرسل نحو 16,000 عسكري باسم لا يبدو كأنه اسم جنود. والكلمة السرية هي هذا الاسم. استخدم مفتاح فك التشفير لتهجئتها حرفًا حرفًا.","The Desk Telephone":"الهاتف المكتبي","The Filing Cabinet":"خزانة الملفات","The Rubber Stamp":"الختم المطاطي","The Typewriter":"الآلة الكاتبة","The clock starts when you press the button. Most students finish in about 20 minutes.":"يبدأ العدّاد عندما تضغط الزر. يُنهي معظم الطلاب في نحو 20 دقيقة.","The code has 5 digits. Fill every box.":"الرمز مكوّن من 5 أرقام. املأ كل المربعات.","The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.":"لم يُفتح الباب. تحقق من الأرقام تحت كل قفل، واكتبها بالترتيب: رقم القفل 1 أولًا.","The door is open!":"الباب مفتوح!","The door swings open!":"ينفتح الباب على مصراعيه!","The movement also split. By the mid-1960s, about 70 percent of African Americans lived in cities, where many struggled to find jobs and decent housing. Young Black activists asked how nonviolent protest could change their lives. “Black power” became the alternative to the nonviolent, integrationist approach of King. Malcolm X was its most visible spokesman.":"وانقسمت الحركة أيضًا. ففي منتصف الستينيات، كان نحو 70 بالمئة من الأمريكيين الأفارقة يعيشون في المدن، حيث واجه كثيرون صعوبة في العثور على عمل وسكن لائق. وتساءل ناشطون سود شباب كيف يمكن للاحتجاج اللاعنفي أن يغيّر حياتهم. وأصبحت «القوة السوداء» (Black Power) البديل عن نهج كينغ (King) اللاعنفي الداعي إلى الاندماج. وكان مالكوم إكس (Malcolm X) أكثر المتحدثين باسمها ظهورًا.","The order is the Greensboro sit-in (1960), the Freedom Riders (1961), Birmingham (May 1963), then the March on Washington (August 1963).":"الترتيب هو: اعتصام غرينزبورو (Greensboro) في 1960، ثم ركاب الحرية (Freedom Riders) في 1961، ثم برمنغهام (Birmingham) في مايو 1963، ثم المسيرة إلى واشنطن (March on Washington) في أغسطس 1963.","The silent majority were working- and middle-class Americans who disliked the street protests. On March 31 Johnson limited the bombing and said he would not run again. Nixon won by a narrow margin of about 500,000 votes.":"كانت «الأغلبية الصامتة» من الأمريكيين من الطبقتين العاملة والمتوسطة الذين لم تعجبهم احتجاجات الشوارع. وفي 31 مارس قلّص جونسون (Johnson) القصف وقال إنه لن يترشح مرة أخرى. وفاز نيكسون (Nixon) بفارق ضيق بنحو 500,000 صوت.","The town records office closed for the night, and the clerk locked the door. A filing cabinet, a typewriter, a rubber stamp, a desk telephone, and a ballot box from the 1960s sit in the room. The door has <b>5 locks<\/b>. Each lock matches one big idea from Lesson 18. Solve them all to find the <b>5-digit exit code<\/b>.":"أُغلق مكتب السجلات في البلدة في الليل، وأقفل الموظف الباب. وفي الغرفة خزانة ملفات وآلة كاتبة وختم مطاطي وهاتف مكتبي وصندوق اقتراع من الستينيات. وللباب <b>5 أقفال<\/b>. ويرتبط كل قفل بفكرة كبيرة من الدرس 18. حلّها كلها لتجد <b>رمز الخروج المكوَّن من 5 أرقام<\/b>.","The war in Vietnam had been won":"أن الحرب في فيتنام انتهت بالنصر","The word starts with Q and has 10 letters. It ends with “tine.”":"تبدأ الكلمة بالحرف Q وفيها 10 أحرف. وتنتهي بـ«tine».","Thousands march in Birmingham, Alabama, and more than 3,000 are arrested":"يسير الآلاف في برمنغهام (Birmingham) بولاية ألاباما، ويُعتقل أكثر من 3,000 شخص","Time":"الوقت","Two terms are 1964 laws, one is about health, and one is about voting. Look for key words in each description, such as “literacy tests” and “over age sixty-five.”":"اثنان من المصطلحات قانونان لعام 1964، وواحد عن الصحة، وواحد عن التصويت. ابحث عن كلمات مفتاحية في كل وصف، مثل «اختبارات القراءة والكتابة» و«فوق سن 65 عامًا».","Type the answer in English.":"اكتب الإجابة بالإنجليزية.","Type the answer in English. Use the digits 0-9.":"اكتب الإجابة بالإنجليزية. استخدم الأرقام 0-9.","Type the exit code":"اكتب رمز الخروج","Type your answer first.":"اكتب إجابتك أولًا.","Type your answer here...":"اكتب إجابتك هنا...","UNIT 7 · THE AMERICAN AGE | CPUSH | DANIEL GARZA, M.A.":"الوحدة 7 · العصر الأمريكي | CPUSH | DANIEL GARZA, M.A.","Unscramble the letters to fill the blank.":"رتّب الأحرف لتملأ الفراغ.","Voters who stayed home on Election Day":"ناخبون بقوا في بيوتهم يوم الانتخابات","Voting Rights Act of 1965":"قانون حقوق التصويت لعام 1965 (Voting Rights Act of 1965)","What did Nixon mean by the “silent majority”?":"ماذا قصد نيكسون (Nixon) بـ«الأغلبية الصامتة»؟","What did President Johnson announce on March 31, 1968?":"ماذا أعلن الرئيس جونسون (Johnson) في 31 مارس 1968؟","Which lock was hardest, and what did you learn that you did not know before?":"أي قفل كان الأصعب، وماذا تعلمت ولم تكن تعرفه من قبل؟","Working- and middle-class Americans who viewed the street protesters with contempt":"أمريكيون من الطبقتين العاملة والمتوسطة كانوا ينظرون إلى المحتجين في الشوارع باحتقار","Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.":"اكتب من 3 إلى 4 جمل. اذكر القفل واستخدم معلومة واحدة من بطاقة القرائن الخاصة به. يمكنك كتابة هذا حتى لو لم تهرب.","You are locked in the records office.":"أنت محبوس في مكتب السجلات.","You escaped and wrote your Debrief. Ready to submit.":"لقد هربت وكتبت ملخصك الختامي. أنت جاهز للتسليم.","You escaped! Write your Debrief, then download your file to submit.":"لقد هربت! اكتب ملخصك الختامي، ثم نزّل ملفك لتسليمه.","Your answer":"إجابتك","Your time:":"وقتك:","digit":"رقم","Escape Room 18 · New Frontiers and a Great Society":"غرفة الهروب 18 · الحدود الجديدة والمجتمع العظيم"},"patterns":[{"re":"^Still needed: first name, last name, and period\\.$","es":"Todavía falta: nombre, apellido y período.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة."},{"re":"^LOCK (\\d)$","es":"Cand. $1","ar":"القفل $1"},{"re":"^LOCK (\\d) · CORE OBJECTIVE (\\d+)$","es":"CANDADO $1 · OBJETIVO PRINCIPAL $2","ar":"القفل $1 · الهدف الأساسي $2"},{"re":"^Hint (\\d):$","es":"Pista $1:","ar":"تلميح $1:"},{"re":"^Exit code digit (\\d)$","es":"Dígito $1 del código de salida","ar":"رقم رمز الخروج $1"},{"re":"^Click! Lock (\\d) is open\\. Your digit is (\\d)\\.$","es":"¡Clic! El Candado $1 está abierto. Tu dígito es $2.","ar":"نقرة! القفل $1 مفتوح. رقمك هو $2."},{"re":"^5 of 5 locks opened with (\\d+) tries and (\\d+) hints\\.$","es":"Abriste 5 de 5 candados con $1 intentos y $2 pistas.","ar":"فتحت 5 أقفال من 5 بعد $1 من المحاولات و$2 من التلميحات."},{"re":"^Done! File downloaded: (.*)\\. Upload it to Canvas\\.$","es":"¡Listo! Se descargó el archivo: $1. Súbelo a Canvas.","ar":"تم! تم تنزيل الملف: $1. ارفعه إلى Canvas."},{"re":"^Your file downloaded and is marked INCOMPLETE \\(you have not escaped\\)\\. Upload it to Canvas: (.*)$","es":"Tu archivo se descargó y está marcado INCOMPLETO (todavía no escapas). Súbelo a Canvas: $1","ar":"تم تنزيل ملفك وهو مُسجَّل «غير مكتمل» INCOMPLETE (لم تهرب بعد). ارفعه إلى Canvas: $1"},{"re":"^Unlocked\\. Your digit is (\\d)\\. Your answer: (.*)$","es":"Desbloqueado. Tu dígito es $1. Tu respuesta: $2","ar":"تم الفتح. رقمك هو $1. إجابتك: $2"},{"re":"^Tap all (\\d) events first, in order\\.$","es":"Primero toca los $1 sucesos, en orden.","ar":"المس الأحداث الـ $1 كلها أولًا، بالترتيب."},{"re":"^5 of 5 locks opened with (\\d+) tries and 1 hint\\.$","es":"Abriste 5 de 5 candados con $1 intentos y 1 pista.","ar":"فتحت 5 أقفال من 5 بعد $1 من المحاولات وتلميح واحد."},{"re":"^LOCK (\\d) · CORE OBJECTIVES (\\d+) AND (\\d+)$","es":"CANDADO $1 · OBJETIVOS PRINCIPALES $2 Y $3","ar":"القفل $1 · الأهداف الأساسية $2 و$3"},{"re":"^LOCK (\\d) · CORE OBJECTIVES (\\d+), (\\d+), AND (\\d+)$","es":"CANDADO $1 · OBJETIVOS PRINCIPALES $2, $3 Y $4","ar":"القفل $1 · الأهداف الأساسية $2 و$3 و$4"}]}</script>
+<script>
+/* Supplement language switch (English / Espanol / Arabic). Works on pages whose text is rendered by JS:
+   a MutationObserver translates text as it appears. Data: <script type="application/json" id="sp-i18n">
+   {"langs":["en","es","ar"],"default":"en","es":{englishHTML:translation},"ar":{...},"patterns":[{"re":"^(\\d+) of (\\d+)$","es":"$1 de $2","ar":"..."}]}
+   Keys are the English text exactly as it sits in the page (innerHTML, spaces collapsed).
+   Helpers: spSeen() english strings seen so far; spMissing() strings with no translation in the current language;
+   spSetLang(l); spTr(s) translate a string (used for confirm/alert); spAscii(s) plain-ASCII name for file names. */
+(function () {
+  var node = document.getElementById('sp-i18n');
+  var D = node ? JSON.parse(node.textContent) : { langs: ['en'], patterns: [] };
+  var INLINE = { B:1,I:1,EM:1,STRONG:1,SPAN:1,A:1,BR:1,SMALL:1,SUP:1,SUB:1,U:1,MARK:1,BDI:1,TSPAN:1,CODE:1 };
+  var SKIP = 'script,style,textarea,input,.sp-lang,.sp-nt,[translate="no"]';
+  var WORD = /[A-Za-z\u00C0-\u024F\u0600-\u06FF]{2}|e\.g\./;
+  var LANG = 'en', REC = new WeakMap(), SEEN = {}, MISS = {};
+  (D.patterns || []).forEach(function (p) { try { p._re = new RegExp(p.re); } catch (e) {} });
+  function norm(s) { return String(s).replace(/\s+/g, ' ').trim(); }
+  function tr(src) {
+    if (LANG === 'en') return null;
+    var t = D[LANG] && D[LANG][src];
+    if (t) return t;
+    var P = D.patterns || [];
+    for (var i = 0; i < P.length; i++) {
+      var m = P[i]._re && P[i]._re.exec(src);
+      if (m && P[i][LANG]) return P[i][LANG].replace(/\$(\d+)/g, function (_, n) { return m[+n] || ''; });
+    }
+    return null;
+  }
+  window.spTr = function (s) { var t = tr(norm(s)); return t ? t.replace(/<[^>]+>/g, '') : s; };
+  function isInline(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling)
+      if (c.nodeType === 1 && (!INLINE[c.tagName.toUpperCase()] || c.matches(SKIP))) return false;
+    return true;
+  }
+  function directText(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling) if (c.nodeType === 3 && WORD.test(c.nodeValue)) return true;
+    return false;
+  }
+  function cur(s) { return s.nodeType === 1 ? s.innerHTML : s.nodeValue; }
+  function put(s, v) { if (s.nodeType === 1) s.innerHTML = v; else s.nodeValue = v; }
+  function handle(s) {
+    var r = REC.get(s), c = cur(s);
+    if (!(r && c === r.wrote)) { r = { en: c, wrote: c }; REC.set(s, r); }
+    var src = norm(r.en), target = r.en;
+    if (WORD.test(src)) {
+      SEEN[src] = 1;
+      if (LANG !== 'en') {
+        var t = tr(src);
+        if (t) {
+          target = s.nodeType === 1 ? t : (r.en.match(/^\s*/)[0] + t + r.en.match(/\s*$/)[0]);
+          delete MISS[src];
+        } else MISS[src] = 1;
+      }
+    }
+    if (c !== target) put(s, target);
+    r.wrote = cur(s);
+  }
+  var ATTRS = ['placeholder', 'alt', 'aria-label', 'title'];
+  function attrs(root) {
+    var els = root.querySelectorAll ? root.querySelectorAll('[placeholder],[alt],[aria-label],[title]') : [];
+    var list = [].slice.call(els); if (root.matches && root.matches('[placeholder],[alt],[aria-label],[title]')) list.push(root);
+    list.forEach(function (el) {
+      if (el.closest && el.closest('.sp-lang,.sp-nt,[translate="no"],script,style')) return;
+      var rec = el.__spa || (el.__spa = {});
+      ATTRS.forEach(function (a) {
+        var v = el.getAttribute(a); if (v == null) return;
+        var r = rec[a];
+        if (!(r && v === r.wrote)) { r = rec[a] = { en: v, wrote: v }; }
+        var src = norm(r.en); if (!WORD.test(src)) return;
+        SEEN[src] = 1;
+        var t = LANG === 'en' ? null : tr(src);
+        if (LANG !== 'en' && !t) MISS[src] = 1;
+        var target = t ? t.replace(/<[^>]+>/g, '') : r.en;
+        if (v !== target) el.setAttribute(a, target);
+        r.wrote = el.getAttribute(a);
+      });
+    });
+  }
+  function walk(root) {
+    if (root.nodeType === 3) { if (WORD.test(root.nodeValue) && !(root.parentNode && root.parentNode.closest && root.parentNode.closest(SKIP))) handle(root); return; }
+    if (root.nodeType !== 1) return;
+    (function w(el) {
+      if (el.matches(SKIP)) return;
+      if (el !== document.body && directText(el) && isInline(el)) { handle(el); return; }
+      for (var c = el.firstChild; c; c = c.nextSibling) {
+        if (c.nodeType === 1) w(c); else if (c.nodeType === 3 && WORD.test(c.nodeValue)) handle(c);
+      }
+    })(root);
+    attrs(root);
+  }
+  var TITLE = { en: document.title, wrote: document.title };
+  function title() {
+    if (document.title !== TITLE.wrote) TITLE = { en: document.title, wrote: document.title };
+    var t = LANG === 'en' ? null : tr(norm(TITLE.en));
+    document.title = t ? t.replace(/<[^>]+>/g, '') : TITLE.en; TITLE.wrote = document.title;
+  }
+  function inl(e) { return e.nodeType === 1 && !!INLINE[e.tagName.toUpperCase()]; }
+  var mo = new MutationObserver(function (muts) {
+    var todo = [];
+    muts.forEach(function (m) {
+      if (m.type === 'childList') { for (var i = 0; i < m.addedNodes.length; i++) todo.push(m.addedNodes[i]); todo.push(m.target); }
+      else todo.push(m.target);
+    });
+    todo.forEach(function (n) {
+      var el = n.nodeType === 1 ? n : n.parentNode;
+      if (!el || el.nodeType !== 1 || !document.body.contains(el)) return;
+      while (el !== document.body && el.parentNode && el.parentNode.nodeType === 1 && inl(el) && inl(el.parentNode)) el = el.parentNode;
+      if (el.parentNode && el.parentNode.nodeType === 1 && inl(el.parentNode) && el.parentNode !== document.body) el = el.parentNode;
+      walk(el);
+    });
+    mo.takeRecords();
+  });
+  var AR = { 'ا':'a','أ':'a','إ':'i','آ':'a','ب':'b','ت':'t','ث':'th','ج':'j','ح':'h','خ':'kh','د':'d','ذ':'dh','ر':'r','ز':'z','س':'s','ش':'sh','ص':'s','ض':'d','ط':'t','ظ':'z','ع':'a','غ':'gh','ف':'f','ق':'q','ك':'k','ل':'l','م':'m','ن':'n','ه':'h','و':'w','ي':'y','ى':'a','ة':'a','ئ':'y','ؤ':'w' };
+  window.spAscii = function (s) {
+    s = String(s); if (s.normalize) s = s.normalize('NFD').replace(/[̀-ًͯ-ٰٟ]/g, '');
+    return s.replace(/[ء-ي]/g, function (c) { return AR[c] !== undefined ? AR[c] : ''; }).replace(/ñ/g, 'n').replace(/Ñ/g, 'N');
+  };
+  window.spSeen = function () { return Object.keys(SEEN); };
+  window.spMissing = function () { return Object.keys(MISS); };
+  window.spLang = function () { return LANG; };
+  window.spSetLang = function (l) {
+    if ((D.langs || ['en']).indexOf(l) < 0) l = 'en';
+    LANG = l; MISS = {};
+    var h = document.documentElement; h.lang = l; h.dir = l === 'ar' ? 'rtl' : 'ltr';
+    mo.disconnect(); walk(document.body); title(); mo.takeRecords();
+    mo.observe(document.body, { childList: true, subtree: true, characterData: true });
+    document.querySelectorAll('.sp-lang button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === l)); });
+    try { localStorage.setItem('sp_lang', l); } catch (e) {}
+    try { var u = new URL(location.href); if (l === 'en') u.searchParams.delete('lang'); else u.searchParams.set('lang', l); history.replaceState(null, '', u.toString()); } catch (e) {}
+    try { document.dispatchEvent(new CustomEvent('splangchange', { detail: l })); } catch (e) {}
+  };
+  var _c = window.confirm, _a = window.alert;
+  window.confirm = function (m) { return _c.call(window, window.spTr(m)); };
+  window.alert = function (m) { return _a.call(window, window.spTr(m)); };
+  document.querySelectorAll('.sp-lang button').forEach(function (b) { b.addEventListener('click', function () { window.spSetLang(b.getAttribute('data-lang')); }); });
+  var start = D['default'] || 'en';
+  try { start = new URL(location.href).searchParams.get('lang') || localStorage.getItem('sp_lang') || start; } catch (e) {}
+  window.spSetLang(start);
+})();
+
+</script><!--/sp-i18n-->
+</body>
+</html>

@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Escape Room 7 · The South, Slavery, and Reform</title>
+<style>
+:root{--bg:#2C3617;--txt:#F1F4EB;--a1:#5A6D31;--a2:#D25F4B;--hl:#E19A8E;--glass:rgba(241,244,235,.07);--glassb:rgba(241,244,235,.2);--dim:#C5CCB6;--ok:#8FD3A8}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#46571F 0%,#2C3617 60%) fixed;background-color:var(--bg);color:var(--txt);font:17px/1.55 "Segoe UI",system-ui,-apple-system,Verdana,sans-serif;min-height:100vh}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px 40px}
+.glass{background:var(--glass);border:1px solid var(--glassb);border-radius:16px;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+header.hero{padding:30px 0 12px;border-bottom:3px solid var(--a2)}
+.eyebrow{font-size:13px;letter-spacing:.16em;font-weight:700;color:var(--hl)}
+h1{margin:.15em 0 .05em;font-size:clamp(28px,6vw,40px);line-height:1.12}
+.sub{margin:0;font-weight:600;color:var(--dim)}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 4px}
+.meta label{flex:1 1 170px;font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--dim)}
+input[type=text],textarea,select{display:block;width:100%;margin-top:4px;padding:10px 12px;border:1px solid var(--glassb);border-radius:10px;background:rgba(20,28,10,.55);color:var(--txt);font:inherit;font-size:16px}
+input[type=text]:focus,textarea:focus,select:focus,button:focus-visible{outline:3px solid var(--hl);outline-offset:1px}
+input.bad{border-color:var(--a2);box-shadow:0 0 0 2px var(--a2)}
+textarea{min-height:120px;resize:vertical}
+.howto{margin:14px 0;padding:14px 16px;font-size:16px}
+.howto ol{margin:6px 0 0;padding-left:22px}
+.scene{margin:14px 0;padding:8px;text-align:center}
+.scene svg{width:100%;height:auto;display:block;border-radius:12px}
+.bar{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;padding:8px 12px;margin:10px 0;font-weight:700;font-size:15px;background:rgba(44,54,23,.92);border:1px solid var(--glassb);border-radius:12px}
+.bar span b{color:var(--hl)}
+.btn{font:inherit;font-size:16px;font-weight:700;padding:11px 18px;border-radius:12px;border:2px solid var(--hl);background:transparent;color:var(--txt);cursor:pointer;min-height:44px}
+.btn:hover{background:rgba(225,154,142,.18)}
+.btn.primary{background:var(--hl);color:#2C3617;border-color:var(--hl)}
+.btn.primary:hover{background:#EDB4AA}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.btn.small{padding:8px 14px;font-size:15px;min-height:40px}
+.intro{padding:20px;text-align:center}
+.intro p{margin:.4em 0}
+.lock{margin:12px 0;overflow:hidden}
+.lock>button.lh{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:12px;width:100%;padding:14px 16px;cursor:pointer}
+.lock>button.lh:focus-visible{outline:3px solid var(--hl);outline-offset:-3px}
+.lock.locked>button.lh{cursor:not-allowed;opacity:.55}
+.lk{flex:none;width:44px;height:44px}
+.lk .sh{transition:transform .5s cubic-bezier(.3,1.6,.5,1);transform-origin:center}
+.lock.solved .lk .sh{transform:translateY(-6px) rotate(-30deg);transform-origin:10px 14px}
+.lock.solved .lk .bd{fill:var(--hl)}
+.lt{flex:1}
+.lt small{display:block;font-size:12px;letter-spacing:.12em;font-weight:700;color:var(--hl)}
+.lt strong{font-size:19px}
+.dg{flex:none;min-width:42px;height:42px;border-radius:10px;border:2px solid var(--hl);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;background:rgba(20,28,10,.55)}
+.lb{padding:0 16px 16px;display:none}
+.lock.open .lb{display:block}
+.objline{font-size:14px;color:var(--dim);margin:0 0 10px}
+.card{background:rgba(241,244,235,.1);border-left:6px solid var(--a2);border-radius:10px;padding:12px 14px;margin:8px 0 12px}
+.card h4{margin:0 0 4px;font-size:13px;letter-spacing:.12em;color:var(--hl)}
+.card p{margin:.3em 0}
+.card .src{font-size:13px;color:var(--dim)}
+.prompt{font-weight:700;margin:10px 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0}
+.chip{font:inherit;font-size:16px;padding:10px 14px;border-radius:12px;border:2px solid var(--glassb);background:rgba(20,28,10,.55);color:var(--txt);cursor:pointer;min-height:44px;text-align:left}
+.chip.sel{border-color:var(--hl);background:rgba(225,154,142,.2)}
+.chip .n{display:inline-block;min-width:24px;height:24px;line-height:24px;border-radius:12px;background:var(--hl);color:#2C3617;font-weight:800;text-align:center;margin-right:8px}
+.mrow{margin:8px 0}
+.mrow label{font-weight:700;display:block}
+fieldset{border:1px solid var(--glassb);border-radius:10px;margin:8px 0;padding:8px 12px}
+legend{font-weight:700;padding:0 6px}
+.opt{display:flex;align-items:center;gap:10px;padding:6px 0;min-height:40px;cursor:pointer}
+.opt input{width:22px;height:22px;accent-color:#E19A8E;flex:none}
+.cipher{font:700 24px/1.3 "Courier New",monospace;letter-spacing:.14em;background:rgba(20,28,10,.65);padding:12px;border-radius:10px;border:1px dashed var(--hl);word-break:break-word;text-align:center}
+.key{display:grid;grid-template-columns:repeat(13,1fr);gap:2px;margin:10px 0;font:700 14px/1.2 "Courier New",monospace;text-align:center}
+.key div{padding:3px 0;border-radius:4px;background:rgba(241,244,235,.08)}
+.key .c{color:var(--hl)}
+.scr{font:800 30px/1.2 "Courier New",monospace;letter-spacing:.3em;text-align:center;background:rgba(20,28,10,.65);padding:10px;border-radius:10px;border:1px dashed var(--hl)}
+.row{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0;align-items:center}
+.fb{margin:8px 0;padding:10px 12px;border-radius:10px;display:none;font-weight:600}
+.fb.show{display:block}
+.fb.nudge{background:rgba(210,95,75,.18);border:1px solid var(--a2)}
+.fb.good{background:rgba(143,211,168,.16);border:1px solid var(--ok);color:#DDF5E6}
+.hints{margin:6px 0}
+.hint{background:rgba(225,154,142,.14);border:1px dashed var(--hl);border-radius:10px;padding:8px 12px;margin:6px 0;font-size:16px}
+.hint b{color:var(--hl)}
+.exit{margin:16px 0;padding:18px;text-align:center}
+.exit.locked{opacity:.55}
+.exit h2,.esc h2,.debrief h2{margin:.1em 0 .3em}
+.codebox{display:flex;justify-content:center;gap:8px;margin:12px 0}
+.codebox input{width:52px;height:60px;text-align:center;font:800 30px "Courier New",monospace;padding:0;margin:0}
+.esc{margin:16px 0;padding:22px;text-align:center;display:none;border:2px solid var(--hl)}
+.esc.show{display:block}
+.esc .big{overflow-wrap:anywhere;font-size:clamp(30px,9vw,64px);font-weight:900;letter-spacing:.14em;color:var(--hl);text-shadow:0 0 24px rgba(225,154,142,.6);animation:pop .8s cubic-bezier(.3,1.6,.5,1)}
+.esc .time{font-size:26px;font-weight:800}
+.debrief{margin:16px 0;padding:16px}
+.actions{margin:16px 0;padding:16px}
+.status{font-weight:700;margin-bottom:10px}
+.msg{display:none;margin-top:10px;padding:10px 12px;border-radius:10px;background:rgba(143,211,168,.16);border:1px solid var(--ok)}
+.msg.err{background:rgba(210,95,75,.2);border-color:var(--a2)}
+.ennote{margin:.4em 0 0;font-size:14px;font-weight:700;color:var(--dim)}
+.exit .ennote{text-align:center}
+.link{all:unset;cursor:pointer;color:var(--dim);text-decoration:underline;font-size:14px;margin-top:10px;display:inline-block}
+.link:focus-visible{outline:3px solid var(--hl)}
+footer{text-align:center;font-size:12px;letter-spacing:.1em;font-weight:700;color:var(--dim);padding:20px 8px 30px;border-top:1px solid var(--glassb);margin-top:20px}
+.hidden{display:none!important}.lock,.exit,.esc{scroll-margin-top:64px}
+.pop{animation:pop .7s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pop{0%{transform:scale(.2);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes flick{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.2)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.shake{animation:shake .35s}
+.flame{transform-origin:center bottom;transform-box:fill-box;animation:flick 1s infinite}
+.wheel{transform-origin:300px 62px}
+.wheel.spin{animation:spin 1s ease-in-out}
+.plock .sh{transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
+.plock.open .sh{transform:translateY(-7px)}
+.plock.open .bd{fill:#E19A8E}
+#door{transform-origin:150px 20px;transition:transform 1.4s ease-in-out}
+.escaped #door{transform:scaleX(.1)}
+#glow{opacity:.15;transition:opacity 1.4s}
+.escaped #glow{opacity:1}
+@media(max-width:520px){body{font-size:16px}.chip{width:100%}.key{font-size:12px;gap:1px}.codebox input{width:46px;height:54px}.dg{min-width:38px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{.bar,.actions button{display:none}}
+html[dir="rtl"] .chip{text-align:right}
+html[dir="rtl"] .chip .n{margin-right:0;margin-left:8px}
+html[dir="rtl"] .card{border-left:0;border-right:6px solid var(--a2)}
+html[dir="rtl"] .howto ol{padding-left:0;padding-right:22px}
+html[dir="rtl"] .esc,html[dir="rtl"] .exit,html[dir="rtl"] .intro{text-align:center}
+html[dir="rtl"] .cipher,html[dir="rtl"] .scr,html[dir="rtl"] .key{direction:ltr}
+html[dir="rtl"] .scr{letter-spacing:.3em!important}
+html[dir="rtl"] .cipher{letter-spacing:.14em!important}
+html[dir="rtl"] .key{letter-spacing:0!important}
+html[dir="rtl"] .card .src{direction:ltr;text-align:left}
+html[dir="rtl"] .hint,html[dir="rtl"] .fb,html[dir="rtl"] .msg,html[dir="rtl"] .objline{text-align:start}
+html[dir="rtl"] .lock>button.lh{text-align:start}
+html[dir="rtl"] .lb,html[dir="rtl"] .actions{text-align:start}
+html[dir="rtl"] .bar{direction:rtl}
+html[dir="rtl"] .tt{unicode-bidi:plaintext}
+/*sp-i18n-css*/
+.sp-lang-bar{display:flex;justify-content:flex-end;padding:8px 12px 0;position:relative;z-index:5}
+.sp-lang{display:inline-flex;gap:2px;padding:3px;border-radius:10px;background:rgba(255,255,255,.88);border:1px solid rgba(0,0,0,.18);font-family:system-ui,"Segoe UI",Tahoma,Arial,sans-serif}
+.sp-lang button{border:0;background:transparent;color:#222;font:600 13px/1 system-ui,"Segoe UI",Tahoma,Arial,sans-serif;padding:7px 11px;border-radius:7px;cursor:pointer}
+.sp-lang button[aria-pressed="true"]{background:#222;color:#fff}
+.sp-lang button:focus-visible{outline:3px solid #2a6df4;outline-offset:1px}
+textarea,input,select{unicode-bidi:plaintext}
+html[lang="ar"] body,html[lang="ar"] button,html[lang="ar"] textarea,html[lang="ar"] input,html[lang="ar"] select{font-family:"Segoe UI",Tahoma,"Noto Sans Arabic","Arial",system-ui,sans-serif}
+html[lang="ar"] body{line-height:1.8}
+html[lang="ar"] *{letter-spacing:0!important}
+html[dir="rtl"] textarea,html[dir="rtl"] input{text-align:start}
+@media print{.sp-lang-bar{display:none}}
+/*/sp-i18n-css*/
+</style>
+</head>
+<body>
+<!--sp-bar--><div class="sp-lang-bar"><div class="sp-lang" role="group" aria-label="Language / Idioma / اللغة"><button type="button" data-lang="en" lang="en" aria-pressed="true">English</button><button type="button" data-lang="es" lang="es" aria-pressed="false">Español</button><button type="button" data-lang="ar" lang="ar" aria-pressed="false">العربية</button></div></div><!--/sp-bar-->
+
+<div class="wrap">
+<header class="hero">
+  <div class="eyebrow">1790-1860</div>
+  <h1>Escape the Reform Meeting Hall</h1>
+  <p class="sub">The South, Slavery, and Reform</p>
+  <div class="meta">
+    <label>FIRST NAME *<input id="f_first" type="text" autocomplete="given-name"></label>
+    <label>LAST NAME *<input id="f_last" type="text" autocomplete="family-name"></label>
+    <label>PERIOD *<input id="f_period" type="text" inputmode="numeric" maxlength="12" placeholder="e.g. 3"></label>
+  </div>
+</header>
+
+<div class="howto glass"><b>How to escape:</b>
+<ol>
+<li>Open each lock in order. Read the <b>Clue Card</b>. The answer is in the card.</li>
+<li>Solve the puzzle to open the lock and reveal one digit.</li>
+<li>If you get stuck, press <b>Hint</b>. Hints are free, but your teacher can see how many you used.</li>
+<li>Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.</li>
+</ol></div>
+
+<div class="scene glass" id="scene">
+<svg viewBox="0 0 600 270" role="img" aria-label="A wooden meeting hall with a big oak door. The door has five padlocks in a row. Under each padlock is a window for one digit of the exit code.">
+<defs>
+<pattern id="brick" width="40" height="270" patternUnits="userSpaceOnUse"><rect width="40" height="270" fill="#232D12"/><path d="M0 0V270M20 0V270" stroke="#F1F4EB" stroke-opacity=".07" fill="none"/><path d="M0 0V270" stroke="#F1F4EB" stroke-opacity=".12"/></pattern>
+<radialGradient id="glowg" cx="50%" cy="50%" r="60%"><stop offset="0" stop-color="#F1F4EB"/><stop offset="1" stop-color="#E19A8E"/></radialGradient>
+</defs>
+<rect width="600" height="270" fill="url(#brick)"/>
+<rect y="236" width="600" height="34" fill="#1B2410"/>
+<rect id="glow" x="150" y="20" width="300" height="216" rx="10" fill="url(#glowg)"/>
+<g id="door">
+<rect x="150" y="20" width="300" height="216" rx="10" fill="#5A6D31" stroke="#E19A8E" stroke-width="3"/>
+<circle cx="164" cy="34" r="4" fill="#E19A8E"/><circle cx="436" cy="34" r="4" fill="#E19A8E"/><circle cx="164" cy="222" r="4" fill="#E19A8E"/><circle cx="436" cy="222" r="4" fill="#E19A8E"/>
+<g class="wheel" id="wheel"><circle cx="300" cy="62" r="30" fill="none" stroke="#F1F4EB" stroke-width="4"/><path d="M300 32V92M270 62H330M279 41L321 83M321 41L279 83" stroke="#F1F4EB" stroke-width="3"/><circle cx="300" cy="62" r="7" fill="#D25F4B"/></g>
+<rect x="170" y="106" width="260" height="8" rx="3" fill="#2C3617"/>
+<g id="plocks"></g>
+<text x="300" y="228" text-anchor="middle" font-size="11" letter-spacing="3" font-weight="700" fill="#F1F4EB">REFORM MEETING HALL</text>
+</g>
+<g><rect x="60" y="120" width="6" height="40" fill="#F1F4EB" fill-opacity=".5"/><ellipse class="flame" cx="63" cy="112" rx="8" ry="13" fill="#E19A8E"/></g>
+<g><rect x="534" y="120" width="6" height="40" fill="#F1F4EB" fill-opacity=".5"/><ellipse class="flame" cx="537" cy="112" rx="8" ry="13" fill="#E19A8E" style="animation-delay:.4s"/></g>
+</svg>
+</div>
+
+<div class="intro glass" id="intro">
+  <h2 style="margin:.1em 0">You are locked in the hall.</h2>
+  <p>The Reform Meeting Hall ran late and the caretaker locked up. The door has <b>5 locks</b>. Each lock matches one big idea from Lesson 7. Solve them all to find the <b>5-digit exit code</b>.</p>
+  <p>The clock starts when you press the button. Most students finish in about 20 minutes.</p>
+  <p><button class="btn primary" id="startBtn">Enter the Hall</button></p>
+</div>
+
+<div id="game" class="hidden">
+  <div class="bar" id="bar" aria-live="off"><span><span>Time</span> <b id="tm">00:00</b></span><span><span>Locks</span> <b id="lc">0</b>/5</span><span><span>Hints used</span> <b id="hc">0</b></span></div>
+  <div id="locks"></div>
+
+  <section class="exit glass locked" id="exit" aria-label="Exit door">
+    <div class="eyebrow">THE EXIT DOOR</div>
+    <h2>Type the exit code</h2>
+    <p id="exitNote">Open all 5 locks first. The digits go in order: Lock 1 first.</p>
+    <div class="codebox" id="codebox" dir="ltr"></div>
+    <p class="ennote">Type the answer in English. Use the digits 0-9.</p>
+    <div class="row" style="justify-content:center"><button class="btn primary" id="codeBtn" disabled>Open the Door</button></div>
+    <div class="fb" id="codefb"></div>
+  </section>
+
+  <section class="esc glass" id="esc" aria-live="polite">
+    <div class="big">ESCAPED</div>
+    <p class="time"><span>Your time:</span> <span id="escTime">00:00</span></p>
+    <p id="escSum"></p>
+    <p>One last step: write your Debrief below.</p>
+  </section>
+
+  <section class="debrief glass" id="debrief">
+    <div class="eyebrow">DEBRIEF</div>
+    <h2>Which lock was hardest, and what did you learn that you did not know before?</h2>
+    <p style="margin:.2em 0;color:var(--dim)">Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.</p>
+    <textarea id="debriefText" aria-label="Debrief" placeholder="Type your answer here..."></textarea>
+  </section>
+
+  <section class="actions glass" id="actions">
+    <div class="status" id="status"></div>
+    <div class="row">
+      <button class="btn" id="saveBtn">Save Progress</button>
+      <button class="btn" id="loadBtn">Load Progress</button>
+      <input type="file" id="loadFile" accept=".json,application/json" hidden>
+      <button class="btn primary" id="finishBtn">Finished — Download File to Submit</button>
+    </div>
+    <div class="msg" id="msg" role="status"></div>
+    <button class="link" id="reset">Clear all my work and start over</button>
+  </section>
+</div>
+
+<div class="actions glass hidden" id="loadOnly" style="margin-top:12px"><button class="btn" id="loadBtn0">Load Progress</button> <span style="color:var(--dim)">Have a saved file? Load it to continue.</span></div>
+
+<footer>UNIT 2 · AN EXPANDING NATION | CPUSH | DANIEL GARZA, M.A.</footer>
+</div>
+
+<script>
+/* i18n: placeholders with no real word (e.g. "e.g. 3") are skipped by the language runtime, so translate them here */
+(function(){
+  function fix(){
+    if(!window.spTr)return;
+    [].forEach.call(document.querySelectorAll('input[placeholder],textarea[placeholder]'),function(el){
+      if(el._enph===undefined)el._enph=el.getAttribute('placeholder');
+      if(/[A-Za-z\u00C0-\u024F]{2,}/.test(el._enph.replace(/^e\.g\./,'')))return;
+      el.setAttribute('translate','no');
+      el.setAttribute('placeholder',(window.spLang&&spLang()==='en')?el._enph:spTr(el._enph));
+    });
+  }
+  document.addEventListener('splangchange',fix);
+})();
+</script>
+<script type="application/json" id="er-data">{"salt": "L7esc:", "exitHash": "32ce81967418c97d733a", "locks": [{"n": 1, "key": "lock1_cotton_ledger", "title": "The Cotton Ledger", "obj": "1-2", "objLabel": "CORE OBJECTIVES 1-2", "objText": "Core Objectives 1-2: Explain how racial capitalism contributed to inequalities in the South, and discuss the role cotton and slavery played in the South’s economy and society.", "type": "pick", "card": "<p>During the first half of the 1800s, cotton passed rice as the most profitable cash crop in the South. Southern cotton fed the textile mills of New England and Great Britain. By 1860, southern states provided 77 percent of the cotton used in Britain’s textile mills. In the seven states of the Lower South, enslaved people made up nearly half the population by 1860. Norton says slavery was a profit-making system built on forced labor that created huge inequalities in income, wealth, power, and status. This system is called racial capitalism.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 11, “The Cotton Kingdom” (pp. 430–432) and “Racial Capitalism” (first section of Ch. 11).", "prompt": "Pick the correct answer for all three questions.", "qs": [{"id": "r", "q": "Cotton passed which crop as the South’s most profitable cash crop?", "opts": [{"id": "a", "label": "Tobacco"}, {"id": "b", "label": "Rice"}, {"id": "c", "label": "Sugar"}, {"id": "d", "label": "Wheat"}]}, {"id": "b", "q": "In 1860, about how much of the cotton used in Britain’s textile mills came from the South?", "opts": [{"id": "a", "label": "27 percent"}, {"id": "b", "label": "52 percent"}, {"id": "c", "label": "77 percent"}, {"id": "d", "label": "97 percent"}]}, {"id": "p", "q": "By 1860, enslaved people were about what share of the Lower South’s population?", "opts": [{"id": "a", "label": "Nearly half"}, {"id": "b", "label": "About one in ten"}, {"id": "c", "label": "About one in four"}, {"id": "d", "label": "Almost everyone"}]}], "hints": ["Each answer is in the Clue Card. Look for a crop, a percent, and a share of the population.", "The crop is the one cotton passed. The percent is a big one (more than 75). The share is “nearly” one of the fractions."], "nudge": "Not quite. At least one answer is off. Re-read the Clue Card for the crop, the percent, and the share.", "entries": ["2e2b57bfcc1a2ba43bf74"], "id": "lock1_cotton_ledger"}, {"n": 2, "key": "lock2_social_ladder", "title": "The Southern Social Ladder", "obj": "3-4", "objLabel": "CORE OBJECTIVES 3-4", "objText": "Core Objectives 3-4: Explain why most White Southerners supported slavery, and describe how slavery affected free and enslaved African Americans.", "type": "match", "card": "<p>A planter had to own at least twenty laborers, and only 1 out of 30 Whites in 1860 qualified. Plantation mistresses were active participants in the system of slavery. The most numerous White Southerners were plain White folk, small farmers who grew just enough to live on. Most plain White folk supported slavery for economic and racial reasons. Free persons of color were not enslaved, but they were “anything but free”: in South Carolina, after 1823, they had to have a White “guardian” and an identity card.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 11, “Whites in the South” (Enslavers, pp. 438–439; The Plantation Mistress, p. 439; “Plain White Folk,” p. 441) and “Enslaved People in the South” (“Free Persons of Color,” p. 444).", "prompt": "Match each group to the best description. Use the Clue Card.", "terms": [{"id": "ms", "label": "Plantation mistress"}, {"id": "pw", "label": "Plain White folk"}, {"id": "fp", "label": "Free persons of color"}, {"id": "pl", "label": "Planter"}], "descs": [{"id": "c", "label": "Not enslaved, but in South Carolina needed a White “guardian” and an ID card after 1823"}, {"id": "m", "label": "An active participant in the system of slavery"}, {"id": "p", "label": "Had to own at least twenty laborers; only 1 out of 30 Whites in 1860 qualified"}, {"id": "f", "label": "The most numerous White Southerners; small farmers"}], "hints": ["Two descriptions give numbers. One is about owning laborers (twenty). One is about a year (1823).", "Plain White folk are the “most numerous” group. The mistress is the one described as an “active participant.”"], "nudge": "Not quite. Check each match against the Clue Card. Which one are you least sure about?", "entries": ["ed93a3a39e0e8ddb5ec96"], "id": "lock2_social_ladder"}, {"n": 3, "key": "lock3_the_hidden_door", "title": "The Hidden Door", "obj": "5", "objLabel": "CORE OBJECTIVE 5", "objText": "Core Objective 5: Analyze how enslaved people resisted the conditions they were forced to endure.", "type": "order", "card": "<p>Enslaved people forged their own communities and found many ways to resist. Spirituals, or sacred folk songs, expressed the longing to be free, and thousands kept running away each year. In August 1831, Nat Turner, a preacher, led a rebellion in Southampton County, Virginia, that terrified Whites across the South. Virginia’s legislature then debated whether slavery should be abolished. That proposal was defeated, and instead the delegates limited the ability of enslaved people to learn to read and write and to gather for religious meetings.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 11, “Forging an Enslaved Community” (p. 453; “Nat Turner’s Rebellion,” p. 457; “After Nat Turner’s Rebellion” and “The Dream of Freedom,” p. 458).", "prompt": "Tap the four events in the order they happened. Tap an event again to take it back.", "items": [{"id": "c", "label": "The proposal to end slavery is defeated"}, {"id": "d", "label": "New limits on reading, writing, and religious meetings"}, {"id": "a", "label": "Nat Turner’s Rebellion in Virginia (August 1831)"}, {"id": "b", "label": "Virginia’s legislature debates whether to end slavery"}], "hints": ["The rebellion comes first. Everything else is what the Virginia legislature did afterward.", "Debate first. Then the vote that ended the proposal. The new limits on reading, writing, and meetings come last."], "nudge": "Not quite. Re-read the Clue Card and follow the events from the rebellion to the new limits.", "entries": ["1967ba72f4a13d81aaaf4"], "id": "lock3_the_hidden_door"}, {"n": 4, "key": "lock4_the_study", "title": "The Concord Study", "obj": "6-7", "objLabel": "CORE OBJECTIVES 6-7", "objText": "Core Objectives 6-7: Describe the major changes in religious life in the early 1800s, and examine the emergence of transcendentalism in American culture.", "type": "decode", "shift": 5, "cipher": "YWFSXHJSIJSYFQNXR", "card": "<p>Around 1800, a massive wave of religious revivals called the Second Great Awakening swept the nation. Methodists, Baptists, and Presbyterians grew fast; in 1780 there were only 50 Methodist churches, but by 1860 there were 20,000. In New England, a Romantic movement promoted radical individualism and a personal spirituality free from organized religion. Ralph Waldo Emerson became the nation’s most popular public speaker in the 1840s, urging self-reliance. His friend Henry David Thoreau lived for two years at Walden Pond to learn what nature “had to teach.”<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 12, “A More Democratic Religion” (The Second Great Awakening, p. 465) and “Romanticism in America” (Transcendentalism, p. 473; Emerson, p. 474; Thoreau, pp. 475–476).", "prompt": "The Clue Card describes a New England movement without naming it. A secret message names it. Each letter in the message was moved 5 steps forward in the alphabet. Decode it to name the movement.", "hints": ["Use the decoder key. In the message, the letter Y is really T, and the letter W is really R.", "The name starts with TRANS and ends with ISM. It is the movement of Emerson and Thoreau."], "nudge": "Not quite. Decode one letter at a time with the key, then check your spelling.", "entries": ["00796b17d434446fa7791", "00a9bc59928613c8f7a07", "00b5dac2a387ed9ff7c35", "00d1619bf482f3dc66f87", "01079e6297bcfd4df6c27", "0183617ed67282a2d59d7", "01fd9284fbd4187289b39", "01ffb244c300b3f293922", "02755aebd0d6ca02cda89", "02a76e5d1ba9cebe6b8f5", "0305e508cc4219c613d93", "030dedc2b59ee0a5879a2", "0323a9413f9b56821de60", "0348c9880ef05daddf9d8", "035e3ec0ccd5e156af610", "041680a0ce2fd855c79a8", "0426bf25bd26bdaf4dd40", "043a7c7cf281a6f125cf3", "0469ab10adc529a9aa408", "04f67c7ab38b6923a0cc7", "051303ab3179b9e9e08f4", "0608494672f2967aa88c7", "061b31b9cde0afda254f6", "070b3aaf72c2e1deaf661", "071e0e130bca5a1c58d24", "07d5fabaf378b63253574", "07dbf3cd2e40544d02816", "07f2c6cf785c5b211e1b9", "083257cfe97f5eb4588d8", "08a0d6cf8bef6f3d7be89", "08f0925c13453f3a0d428", "091042f93559e6235ac63", "092b1846e11d500254c33", "0934601093e3c4dc28cc6", "0938a9faa9217c27aa014", "09825cfc0b874a3f62456", "09b3405ef0206129b6649", "09b6f3d8c96c2cf1b95f8", "09e0341a7b795a9896291", "0a0f4330bb84a28a4d373", "0a34ee7c64eaffddfbd33", "0ab4df822a27621afbb06", "0bb2e610417ee4d064370", "0bcf145697aaf8963cea9", "0c2346f024f0aca5fede6", "0c90698f219e6db3e29f2", "0cce3f940292db3b70ce8", "0cfa61a6ecd1b2a3715f8", "0d665f9f368f2076bc239", "0e4571f0dd1537f9f9aa5", "0eba97556ed285b1ec346", "0ed1b3ef3854193d8c494", "0f1316a73e76f7101c7b7", "0f7df55840586b6ec49f4", "0f81e5cdc8719e1466077", "0f8e083ff4761b21ec2a9", "0fad1a3eec80ae86e6f04", "102ba00537b22ab729af1", "1071ada65c8c2bc7cabf2", "108d2d45989b03746b0a7", "10abd9fb783973426b4d6", "10acf3a61ff5e28532271", "1110705789eefe4b53eb7", "112da374ceab53c1f8ed4", "1141c7141caa6ea9d9985", "11b33e5e20860501667b6", "120dbbecac8bb40e98657", "123071848f998932d5583", "12a2f989da1ebea988a29", "12fd98463fbf32eb102a2", "1353c6b65af2a553f9516", "13d514a1606a6798a1323", "141c2117d2d17f817bfc6", "141d4ef30b42b27ce7ec9", "149b5c4dc7fd27f634059", "14a580bfa5ccbd01508b4", "14b25d4395fc670898e01", "14f5213487f239148c7c7", "1519f057c97ebbe177d41", "15538f3a7bb20012d1b56", "155887c4b086b85b80006", "15d3d0a6c7edd41343e14", "16350c4c8107835ec9de7", "165b74ec281cf9e748bf1", "1693962d92a293cf15857", "16e160bf0db83a11ba057", "1727877ff5c229e73a5c5", "1734e038628066c3b82a1", "1749b9a746a72ec429345", "17a2fb19c08930a207147", "17cc3c8362539ebdcf359", "17d9385b5766f6ffc5843", "17e1d31ab4501568c6d86", "181ca7b3778de51074da5", "1880b09f4def397b0b4c5", "18914e3acd0676e760f66", "196bb8e50317f1ad58cf8", "19906cff908ad0142cb09", "1993fc741f63158895ec9", "19dafd90cd59a8e51a749", "1a44dc5a400662f456737", "1a5d9837e5da484b67348", "1a906ae0981669cfb3e06", "1adebfaa5fdb2cc149ac9", "1af0539d4bc20884c2668", "1afde9c659659b9187fb0", "1b069effab6e043d456e0", "1b182deb808282e3d03f5", "1ba2fa2bb92ed9dba69f0", "1bb0e5b1945b058787347", "1bb3767b2b0300841b8e7", "1c0bf105c9ba67f03cda0", "1cc348c518f4def494764", "1cd9118fb2d18fb600718", "1cdf7e2c22b2cbd2de835", "1d16b00adea77fee5cc08", "1da0016bfe127efe608e2", "1dbfd014eed8d23808ed9", "1dd54e02dd775f9b66162", "1e037965fde31a208ea32", "1e31f706f22a12151fc97", "1f2589bb2ef97f2a12455", "1fc694c82174dc5393c05", "1fe6fefa093a50aef5f00", "1fed77270aaecc3afa136", "200ebb42a709beec1bbe8", "201b67399e66f37671d75", "2058e17b771dfabb71892", "215fd10d3261dbc309624", "21f595ef8712e436b0104", "22f5389df065e9a057d45", "235513be7fcab29bb4804", "239f9ad2c41c79a6a9180", "23f2426586c704bac0340", "242c53bc4d0a6a6ce7568", "243f29dd506d458be04f1", "25129775a900a322902a0", "25a4b06be0bab03cbc979", "2611c9de6024e8256f055", "270c538d90a23e5fabed7", "27449a169aa0d68b19ba8", "2782b31a1dee560746447", "27a3fcc45cb964c80bc15", "2851c9f5ad5171995c410", "2a8ab7de72b460c3fc233", "2a94457915785c0e6f0b7", "2ada6a666b7f19cba1033", "2ae926733b8d10653dad2", "2b34eb6ace31ad8c2ae08", "2b49ebce7fd667db41ad8", "2b8a9372b70bef1b351a8", "2bc93bc3b0d646564da92", "2bcb502811305057d9e27", "2bfe8ba819d2b1343da74", "2c36a49d4ed6d97682b29", "2c6496c1053e6eb4a40d7", "2c6936184fb4a6fa9b969", "2c82acbecd796a100a6b9", "2cb2c57df517443ba0f38", "2cd6becd37e4289071b52", "2de131f648f1d3ff5ed19", "2e37e36b1860b22889d94", "2e3dee3e8656dd4fe9638", "2eb2f0735e02b504706a8", "2ecb82f1b6d205a65a7d6", "2f0aa1c3f4befe88bd0a6", "2f14f701fc9f9ee423156", "2f8ceb3d04e82753e1193", "2f93d856f2dd84366f526", "3002091f9994889d1ed88", "30052615403b88e7769d6", "301680622612a16ec5988", "3073899b15e94a6c8c032", "3082be0df6032fc411652", "309de6ecf61304fcc57c3", "320937a2d42d4b45af6e4", "3264bd9e81ac4aa0af313", "32818f03fcfdc44e78328", "331c7661f347eb3e3d5f8", "33b539593fba80845ecc7", "343728cdd15f464b0cc67", "35250354fbffd00362005", "352e5763906dc92310f72", "35ad4a00b0caf70d19452", "3601d7cee7abedd7bd892", "36108a17783eebdd29503", "36282604759a35fa30f55", "3649ed8b017a069386ae9", "366102c1ddc529f32b184", "368fd998f30da04f931a0", "369e0532dc6d192e77565", "36b9bf662e28aca909388", "36dd3a097fa470ec98d16", "371bcceefa32033384759", "374b85f9975b129517cc8", "3773fd261abfdd3cbb4d0", "378e741ce6928af802162", "37bce46b5e4d1a7f8dec6", "37cf31dad88013a59d285", "381d9d2fa45f2db4be254", "382f9dcdfedf2c34d5952", "384fb2e9c94d4a33628d8", "38cd4f35f590aeed32c76", "39eb89af32b8e567c1ae8", "3a00595cf08661c7de152", "3a370428c9c5c272b3610", "3a9fa933749a160414b54", "3abe8d6be0b701e9badc8", "3b469a9165419496bc2d3", "3b4e121ea8c4e761d7358", "3ba0298542fabac3a0914", "3c64414e074a90de9edc7", "3c70fda54b8b2c260a5f2", "3c8260db8be07145ef929", "3ca8ba8f121ebe3f61118", "3d741fb319526dbf85ed0", "3da373dd894109db7a1c0", "3e01138c4e1d4ef32b214", "3e1857ddb69145d5c1cc5", "3e584e31cbfafeed53ca6", "3edf97e62954b8abf92f2", "3f148e11ca5457c4b48a4", "3f4c79a1e29c5a56d6c31", "3f5cdcc546beefa96c076", "3f7a39bdd61152d7fd901", "3ff49f48e3347cd287c96", "4029f307ec7abd5cbc1a6", "406a86ee5b0e3938d9d95", "4096c811d2cffb36cf681", "4153e95aca294fe34a3d6", "4165c7aae23f9e3051250", "4176ef7d5b07ae66ee088", "41c7c68e9b991f35d83b8", "41e7096cce173db0d8136", "434818450fad92b1dee11", "43ac7d0e5651a1ff24a24", "43b6b29d15a2abfc1ecb8", "445cfc9166c6e089a4f21", "448049d817c4767acce49", "450267fd6134c07cff732", "456584578d0c57f5fc7e2", "465db85a83562ed532e94", "46f63c2707b91e5366ee7", "46fe72c42124506a6ba99", "47048602a6185bf594813", "473841d1c1c9446623877", "476b317bc62e56024d245", "4790611ad0bbe20d36a73", "47a6f9e748ae4c5973b95", "47bed203595b71e4f6d26", "47fbc0242941c4e507873", "4877c39e9ed35a0fcc5a8", "48b26b529263cd2e239a4", "48c04b0022dea7c7b5f87", "49a6e8613aef10c18fbf9", "49c78ef7baef8810f4076", "4a16336d0c65bb7bdb067", "4a5a460dcae2b01e49181", "4a870dda27dc2e8763927", "4b172b6ca499ecd7d7f99", "4b36923bc80e4e68dbcd7", "4b4530a8bc8102266ef65", "4b96136e305e628376ab3", "4c00ff2baed7a5b873754", "4c3668b83836c52493ab9", "4c9eb309e14f0c0f60009", "4d0efcceb93f63cf23116", "4d2ff4ba9bc356a68bff8", "4d84aecc885f434636586", "4dba3331fdc9cdba0c9c5", "4dd0b28300d9b995e0208", "4de7917130e1be92eaad3", "4dfc03fbab4fd9ed60980", "4ea1fdb9c96741d327773", "4f13262dd6055b6c0d347", "4f417cd20943f9ad0ed84", "5022fabb58a652691aaa2", "508b1824ec0c936ba5af0", "50c0d17f0471e1d5d5754", "50cd59d1070f0d6b2f100", "50f53923018262d2ebb58", "5102069a18e242f764b65", "51351e3b61404bb8c5169", "514241b190eaf3a678f36", "51464fa0458d582b48109", "51a9038abbd10c81c9e96", "51c3af2bd9d0422563ad0", "52aa59a7f28ffb6a4d122", "52ff85e8c5dedf4aff716", "531760d054a400b7dc864", "531a57e4638a3cdf84669", "532426385998c3233eb65", "5387b15513dc9a4023c61", "53cd500df10fb30e41f41", "54ec4f6bd50a3414b3805", "55ce724ccda2fbb465410", "55d969719c70e51664750", "561d91fb3013f8fe72972", "567c75a32157c64745635", "5749bc18f8f3af1cdc6f6", "57aff4a7ae0135b3d66c0", "583476d3b9bd16617e033", "5869782de104fb8bafd71", "58803362fc0d9cddab2c8", "589235b73e07f71e22ef8", "58ed4176e14a1debc19e6", "58f00134938503ccf2562", "59331e98d2686292d32a4", "596224f0572c94251e5f8", "5a24523c4d19b1851f088", "5a8c0d4c8f5df2a17c599", "5aba12e24dc522158b219", "5b2bc6611383ff0123bb1", "5b8ea6808be5953422f81", "5ba5c9d619920083eca05", "5bcd451435a4a372d47f0", "5be3d6292db3e185f3160", "5bf194b2c675eb14c8507", "5c43636c8447b01ac49d8", "5c54e75b9e373892436c5", "5ccb3b1b21c11b2710c75", "5cf4a92c1b5a3c152ef09", "5d182d5f872e3cdfebf40", "5d53f0b8e4514aac19bc8", "5e2e8c758cebc8f8a6610", "5e539dc50f783f7f8ef61", "5e55acd2d1f418a002418", "5eafeb332e50476f9fa66", "5ecd4560814c2676e9693", "5f641981c64d5e9817227", "5fec55dbfdc0aeda885a1", "600d171fe2e819cde08f0", "6084eb8cdece2a98572b1", "60b84bf2b4c314f3e9b58", "60f4be9ebe4ef17fa8173", "614114fd66d503a389035", "625b7e246ddcf6a08e843", "63db4c4817817e9906b40", "63f94027bdbf676e37a54", "64276e6c71adf1f9884c2", "649977dc8102b85081950", "653449dae0bd8ed317119", "65976159f771bc508ef37", "65ac5c17782370721a319", "65fad3b8e5228bef16048", "65fe92e9f112aa7e55f67", "667d9ba8bf335e215a332", "670bcc964391e9b4abe03", "67614e09577dd551cb5b0", "67fe32f9ba59f36a7bf13", "681e03427a9c1391d32a2", "684b9de2152814b98b1e5", "688a3f161c8d639e6ab07", "68d9b9548b813b10116b4", "68e2b23d0f28f29f5c182", "694a11b510c31333674e6", "6a3b6465e064813a22d43", "6a85cb2e1901623142138", "6a95503a14bd3a25230f0", "6a96fb1a91dfa2dc276a6", "6aa5bf0525599852846e4", "6af027cdb26a72e764476", "6b0fdd841238da9ea7103", "6bc5233939efa534a32f5", "6cea0b27a7f35757f0dd8", "6d328f6b5f8e29ce859d7", "6d41c947641b77e1a1bb1", "6d6ab112d28812f0859d3", "6e3225018e69ba92e5815", "6eb0775ce1cdfe3b56f97", "6ebee1b7634fc46084ff5", "6ee6b0c80892f04e03b35", "6f1daf1bd010d35e45582", "6f3a0df009a9c8acdf8b7", "6fae9658debe5722f1ee0", "70d07d864fbd493c4a4c6", "71636db638179845e1c33", "71cc6dde858f529601a85", "71dd5dcf4ebae9351b714", "71e20a07cd9f531558f63", "721a82fefb9a018cb3279", "7282fe7f5548853c9f2d9", "72bae7de5a911af087687", "72d98b32023f5127874d4", "72f1e89cd47889adc0af4", "737a150c4d1b3ed3a3208", "737cbf0067527eccebdc1", "73e2d85194232eaa97877", "74092d9eb78666463cb10", "7469ac425fa665c35a971", "74d83cb17c41deb7eb2c3", "74e6822770ad6392f8ad8", "7596435aabd3e6d193276", "75d6693e2bc8aec7aa133", "763fc8a6adca893599f15", "7743e977a59b657993e78", "7745aec70b4cc6a11ca52", "776711bce5402f57e3825", "77cdfded85676985b51c6", "78026b07d713dffb590a3", "786644a109a63f5b6f1b4", "787f69464b96a406beb44", "78bb56c1816ae428df6a4", "78e818017e02319947a39", "792bbad5a8f90c83f6626", "797104d3618528f0127d3", "79b47db86127c2f33d491", "79e3712abac0f334c6aa2", "7a0a2e7a6246c2d9028c0", "7a44f6fc063a6bc11c128", "7a5de10d7ba6dd6ed70c3", "7a6e954d4de0e625b1b61", "7b327ecf25423d9aa3e42", "7b432d01dca60087c90d1", "7b6d5cffb03eb8e184de6", "7bb4fad29d8b10faf1a55", "7c447e310628f148bd9b8", "7c7033810cc1dab8083d3", "7c8cab30a333c1a2797a3", "7ce82377308910853c512", "7cef34cdd1bc04f7047a8", "7cfe48b7599dfc50304c2", "7d1df848d9ea106f38129", "7d3fe6d8171aadd9c8ac2", "7d438164cd791dedb2ba7", "7d4e28ef1d1cbc42a9b67", "7d6a72ed9587244bbf914", "7d77b781c904803cd43a0", "7d8f2f89a17d3c2b61f10", "7d9512d500ab9774ea274", "7d95c19cc38680746c1e1", "7e4d6315ed5e3e5ceaa44", "7e62f0b165e9c140eba68", "7e6dd87cbdc74d63176d1", "7ea10807b5b5cfcca40c8", "7ec1e9cddb614296d0180", "7f04a02141d771438ec15", "7f180c34a6ce8f7b012a2", "805d1e53f3463c58ab358", "806de35897c0a70e59d12", "80f0a3c8f4ca67a6a5ae9", "8100d8f15ee80de8b0008", "8145d74eb87ac01661130", "81a567046a1d6931bdaf9", "82f239e454d249132a447", "82f720267b7582a84c188", "839187215017c71dd8de5", "839d0118b6d886a594b12", "83e231382ab1eb7ee2236", "83fb667d22b2083dd21c0", "83fd74e4d41ccc2873a51", "84362a36745bc604f1170", "84dd6a44f5974aa720987", "84e119eaee150ccd59008", "8534e929296c87b23cd78", "857e3d72a152748e1db06", "85a1248bcdb21b7e57982", "85d132988cb735eb0fb16", "867de74458dac5ee398b6", "86bf026480e246ce97e03", "86cc2cbb03cf7f8e12ed0", "87047e5d329d99ae89014", "875c540231d5bd8976882", "876d3f9b1e582c23691e9", "879a3fcd98281008a0210", "881b58865736aa5cc5853", "882495e38606ea17f42d7", "883c80d8049310aa075f4", "88438f7a4ed3059681ea9", "889f9e16ec48f59b5e118", "88d8662af06b3f53872c8", "88e60d57cc79163001002", "88f380ab14513457d2844", "8924ffb476099fe014fb5", "894a445f647a2e0c8fd78", "894d4f3ff8cd3f7b4b4a2", "8956ad1c1ccdaf3a1f557", "89b35523420bca8769cf6", "89ca26d496d3eac3fadc8", "89ebf0e25effbaea6da83", "8a5ad11ebcdb8bacf0f08", "8a6aba17429a5b4479e35", "8a6b55f16767068806e73", "8b6eb0f7cc40a46ad9d99", "8b7f481a6aae9bead8de9", "8bc1eef456f0abe90d882", "8c02a8f436a5fb240c1a3", "8c06a7ce57585161dd772", "8c3a04ef79fe8b47e4cf7", "8c4e8580a3b965ae9e776", "8c73deff51e6f69c39ba6", "8cd6ecdf8588c5f7b4df3", "8d36be823fc9a66be7350", "8d5706568d8157976b032", "8e3899d369196ce6b5a20", "8e4294645239e50d569c2", "8e4670fff14de75376da4", "8ed8ae17511dd207c5833", "8ee6f650b9679da715ab4", "8f17f5289fc490f357ff0", "8f6661731e0bc66ca1338", "8f7e1c627a6874b1058f2", "8fad301b6b172c96ff9f2", "8fe3c73e7600c19b29475", "8ffc5c0b323c577eae484", "90105433a1d4b5f43f0e8", "9013d14c53f13468b8a00", "9021f3517cb420c80f599", "9040e9db83c98e58a8eb6", "90453dde8c2ca340bbe66", "90f0eab21dc8a0c660707", "9109f1fa4d6ffa1773a80", "9115f2e37579b238f5683", "917486c23ab291ea47153", "922432bf1f9200f479e90", "92305109014909a885a41", "9284b51d9726b89524c59", "928657467026e40c21cf5", "92b3b61165df7e6ea0901", "92d515258495ab7ac2c33", "950d5c0b6083637b58c15", "951f48b83ffd1cfaf8c16", "9540df70f25b784b13909", "95addb14569f5682e6c33", "96978be858ee9a0eece18", "96cf0dc773918f50c5f07", "96d09007b1d7308be8c32", "971c67b089c83f4ac34d0", "97328e2ae1470ec8510c5", "975026053b4e930bd5955", "9779402ce7d910ea70822", "97fe1cdf883c28c1b2cd6", "9858c3e29518bb22d0424", "9872932422388be9ecaf6", "9873ee5757e8b12dd7cf4", "9885df453c04f62133510", "98b7d6e6d62c57f762933", "98fb641a8e3c599efb1d4", "99124f0590f7598aaf8a7", "99300626b42c4ca434bd4", "99a8773289e99f4364ea6", "99f95fbc1f0faf46b3e09", "9a166a046911e02ca7d13", "9a5fcd29ea13829fb8322", "9aa83abfc92c9380ff2c5", "9ab0bd861221ceae5fdd1", "9b1b0fa5e6f3b90058853", "9b257221efd551e77c739", "9b53154100a4a1df46c13", "9b65dc13ab184ffb82489", "9bb6920cd60477abad364", "9be54201562de3bca4510", "9bf03ab9fc79d60e2af12", "9c51e91b2d519efc256b1", "9c60740e12ef5cb470638", "9c887b0f19fa953e915e9", "9ce36f0436d742a779460", "9d160cc14a86897acb178", "9d27fe90e4e9fa8f88c90", "9d637937961d8e2e7d7f8", "9d7062b2b26c44b89e8c4", "9ddeeb4737d6283a3aff7", "9e0e63674877ad817b455", "9f2f9b0423f5ace9a4112", "9f3c9b9db0e7ab1edb033", "9f4617a9abe3510322ef7", "9fb631f0e1251d9608d65", "9febb9a2802e575587970", "a064b5d47502dcdb162f5", "a0714a072c9c06c7b7427", "a07b1afa8c4c58d7c47b9", "a096237aac546b978d535", "a0c881db622f4ba05f140", "a0cbbb61469703b68ac76", "a105d1555f27377fbdda0", "a15bb5878b7c7db6d8f71", "a16312edc7ad39b792ca5", "a1b5807ea0be839ecc885", "a1ee91e57839409491201", "a23cd5d0b86761b5e0489", "a24daced9fdd0cc941b55", "a2645e95d438c305d4429", "a2ac0f74f98661c99f295", "a3299c92a2c5a57992673", "a3a76f7b1c2ceaaddac27", "a3e00d7c4fa6845290bb3", "a3f4722ad09edff8963a3", "a42c398966d5875430cf5", "a4a2b67dc0cafe6d123a9", "a4b6024cc9f0dac861aa7", "a5025964560a3431d6cc0", "a50d5ec9862614e55e276", "a51ff1a35c87557a635f0", "a53826ff894ba82a1a3c8", "a543fdb626948b90f1b68", "a5d38adcc423a5d4fed02", "a6a063bb67b87b4be03b0", "a6b6a3122a1638a3b81a9", "a6fedf4d5a277fd7edba1", "a71376d590f9532c3e9d5", "a73e30d3012ce0e5accd4", "a7638dc4e3837a770aa19", "a78ac034e9aa4d50ab888", "a7dfe2c1be35575d19623", "a828b8e9de39fd3facfc1", "a8772eaa03a60a651e5a0", "a8d5f0ed6fc685c7276c5", "a8d860e3ed7cbf97e1a88", "a8f9affe3cca5c9512d62", "a90a10cdeb0f11e2b60c9", "a9487d0d9d70af3583e52", "aa4accd9f23ff7b078797", "aa4cd286b6604c76d1357", "aa6213c1dd94300da1163", "aa9d4df8795186b8ad753", "aabf91a21d299b284df08", "aae70ccf660ef36da9642", "ab0cac4e8481abcc4a0c1", "ab339ca824906970a6b87", "ab4ee2aa4308b5755eb45", "ac27d7fc9d47ebc422d05", "ac6de8d69191a992bdc19", "ac88e4bacdc098c948138", "acdd6a519c39fe0c95d31", "acf5d2ee7f07463ce1738", "add30c56b0899b0aae7b5", "ade4cfdb74f1c503a5296", "ae3e5f6b3d9fc95f97559", "aead07e0e28123ce65aa4", "af15d770ad758f53bfb66", "af3c6443b50f15d968fb3", "af534f5ab118636ee2cc4", "afc5eb13f1e09c3823f33", "afe09e30c5d82a299c2a4", "aff1f6f303e95e2288545", "b0088e749a614139a7cd6", "b1095d29fb6b3214094d5", "b11a511e8b921ba8b0c07", "b11a9d1e0de1fe4fb77f1", "b14ae8bedf219262bacf9", "b14b19fbc0db6b9ef44b2", "b1cd189ca133e33809856", "b2e44a3dd1717dbebf9a1", "b3a4cbc4a4fef122dd853", "b3b8bf83530fed86397b5", "b4be8e5c08a21ca22bb58", "b4d1428a5a91ba4f28112", "b4e9a144ff920ef6c7d05", "b53fab2dda7541cec8930", "b5933abb5edafdba4bc88", "b5bb8a3fe54f9740c8c02", "b5d016d8479c46e8af7c1", "b6fcc7016d17c17fab930", "b72a9135f2b9304fa8088", "b749bb7433e39e10a5ad5", "b7a9b205ae5eb9ab12647", "b82dbff9b83fef5a24135", "b8311cb5bff46a7739ed7", "b839f54346ef0d68af4a6", "b85bcd62c7392e1bd5187", "b8eea097393352f0ceeb7", "b9726b5e1dbd4a8fa0677", "b9af343ede66057b10474", "bb10955cd44f1e550fa71", "bb19d705c41f959658a07", "bb8187052667d97e9f8a0", "bbc15aac6eb72f65ac949", "bc0955ae175cf0585bbe1", "bc24f54f78321fc2deba2", "bc77df0baad8d9e7dc9e7", "bcafca54543e424bde199", "bcddb1ca5a9e4d2846c06", "bcef77720a7faa766fb34", "bd00bef27917589c7d5c7", "bd1525e11335b282533b0", "bd28fbf3a97e5626cc890", "bd7bc3064e89035d91956", "bdf69a0a5b8cccf5cc7f2", "be3b4deae1a8ad9d585a2", "be4606ec779c21c38e376", "be4cb83bdc73f79bcab43", "be6eb4ca538d5b4ef0962", "bea87f9e610c434b730c4", "bf1560d01081c268a7fc7", "bf48b5ec29ea9e5566e49", "bf4d423fb9987d63eed14", "bfae3a5b6ce3f7ba6f0e8", "bfe28065a3cc614ea07c8", "bfe4eb4efd0963d482170", "c09d27fc39f465fcd9675", "c0b9eca8d69f19b644b72", "c1db952405bd472694f28", "c1e5a0835fdd1b419d4d1", "c1fce05da9cf491ee6063", "c268c35fa3381c9c433e5", "c2772aca3a17562bc7366", "c2903552735a7de8c2f54", "c2a984ffbbe3ff8730434", "c2d766ebcd9230c7d9a79", "c5330438fb5e0d48ac7e8", "c54c1ca0da6a1e6b4db91", "c5aa1d287d175307e5209", "c5e210def2e9444983539", "c5e71b07f92d96999ccf2", "c620db3f86d5a5a6965d7", "c62ff137c340a1910d4b4", "c6c51c22e16e23721cab7", "c6f9703059900ada2a031", "c76baf322634be9b3c353", "c7da732e32f37e504f100", "c83412d5a1249f11e4788", "c834d98e44c2661c62926", "c84e4c41f58e883e37ef7", "ca4571bca3c912d160a10", "ca521c7a698319bb7e788", "cac19b53789bffb805316", "cad597d04231eb0fe7ac0", "caf95c9dee8cd2ad0a488", "cb66dd487f719a5851e76", "cb6f6c6c88a6efb0b2b36", "cb7d0038454fc7989e274", "cc3620a2081c456222568", "cc50a374edf0ac2b28975", "cc71d47e15ae470c65c00", "cc939da128822fa4e86d7", "ccfdd267382b7ac205458", "cd4815bf5d0e639d99815", "ce01c93e9c4f9f5ef5e85", "cefb1e3033df833eda186", "cefef6164198edd38c706", "cf3e07da2e9307b447a07", "cf5c23a01a58aab8e49d9", "cf81dede9a98155a01637", "cfadcf148c15839ce6f69", "cfefd418055c14b995556", "d02ac913e98bfd6d3cd69", "d033ee2f59509fb1e6273", "d07ba869683847ba7e523", "d114fa434e1a048d190b2", "d1ce006befbea5cdfc449", "d22615f5e2112dc7ed614", "d24f5b80a6c7659f37264", "d2769a9a0fd9f6b8df8e8", "d3399aacf1d40b17a4151", "d3cf93b9f3ab7e69284e3", "d404969c09c07d33d5b03", "d425e0b63279b3b4d6ee1", "d44314aa5d03ee6af1543", "d445ee23f1102b3b732d0", "d480253648e7667ff1d40", "d50c1d7093c585e71b280", "d516c37a62841da83cd37", "d5b86b62fbdba8bda4696", "d5ff51dee4f33cb283bc1", "d6002128b57ca805087d7", "d606ec8e63b6e638e5453", "d621c8ad9e79f4a0c03b7", "d683ee745434524e9f8b8", "d75769834815e300648d5", "d77ebaf259a2cbe9aea02", "d7999aebfb976665b4c38", "d7d14f6b7a0e84857b5a8", "d803e1893920126ef7b10", "d812a38df75181a1ea6d7", "d8e77dda5338a59203fa4", "d93598f4fdde53de7d5f1", "d94d1c9b1c5ed187d56a5", "d9b659187aff9953b51c4", "da13dd538db3406964b72", "da270e32a05a146404245", "da29e3d0dc0e5ffa73e69", "db2ea2e24016ae37275c2", "db56f38bf9b8139a776e1", "db5c750b1876b68ae70c8", "db92b2571270b308e42a2", "dbb9a84c97830130a7652", "dbbec079ace7e5715df00", "dc3d6bbf6b37024be8b72", "dd907881263fdb31e4578", "ddbbf98549e5873502343", "de4390176382fd4c03587", "de6c500b53e2f8c820f42", "de8b69ca690e78fdb1d71", "de8f7949da37824bf2006", "dea4707d75bfb58821a46", "ded42c97da6402b292f46", "df5ff1b1abf5ef44054b0", "dfab0b1630801597635a5", "dfbe63da21fcb1b47d422", "e0422b3f28c9823c62719", "e055d6b4f814a3019f7d4", "e0a602711aabad8cef350", "e0eea22c8a2f4638c0cd6", "e10334e6e5d2c7759c4c3", "e11c599c68f42d46eddc5", "e1f6f1c456f41a0089321", "e25e254600cd74d58eef4", "e29d852c0f0e2e852af49", "e2ac29567498bb75b0a39", "e2ba2e72ce6549240f741", "e2c5e089be4d756632662", "e347f76af99c36c59d239", "e34ac9e283ff95649ebf0", "e39454913190f6e5f34e2", "e3bb80f30cdb5ff703842", "e3c12674c7f8d49b94567", "e414b47dd7086263cea17", "e4af9afaef47d1dc744a9", "e4f92176dc8528be489a0", "e508aad4fdb520e05eaa1", "e553f0167ea9737ceebe8", "e5c5cff6d09857210e4b6", "e62bf08d9db7ba4e048c5", "e633e3319ba711b22b9c5", "e6832cdff20cd1f0cc250", "e6c85588fbccedd24dd81", "e6cb2f592be300f0a2e78", "e6f1efff0e13fd1e3d393", "e72d646bbaf957d8287d2", "e84b33225654e2852c203", "e87d18d9b70dc9feaf264", "e8b81e043f29e0b459600", "e8ddb98501edb777f93e5", "e924c0c62d97d78c5bef2", "e93c72dd8ddb79d4a4022", "e9557deb0ac4b2765d9a7", "e9cdb609732858a76cf55", "e9ce10d281bb90955e1a4", "e9db30d46f5ad57daa1b2", "ea58c3b33facc10bd9033", "eb06fc8453ff14486f465", "eb0b980bb2f880fe1d7d4", "eb4ab19de09f95be9ac18", "ebb0b3659c75f5c55b831", "ebda2d4af8344e70358d6", "ec10f6e3a5d9f9499dca2", "ec1b96ad180bfd55eaed9", "ecb869759d6f310b3f8b0", "ecc67c52a239b6e9fa553", "ed5495c2eaf31505e3ea5", "ed76272a787ab6b4032f1", "ed7e8ec0f24da14b17f67", "eddfde4bb12cb1475cce6", "ee0caac3473cfd02e3b48", "ee288b1db69bb24e1cff3", "ee530cedbc30dd872cf35", "ee5456ae7fa9058425641", "eea88042c25da40325e05", "eeaa636eb9414c3f3b4e2", "ef2e34756e3c986d4b7f6", "ef857140fef25e9bfa281", "ef9abe65581cd600314b1", "efb2d9be45024f6d14df6", "efc88e592e5ff5e4d0e78", "efe70c8c990ec24023452", "f04eebcc58106812a8328", "f0e0b13cfd20850942f76", "f1377c0934e1a95335489", "f15e0e678c3e16b94efc6", "f18a297003a7890bb2ca4", "f32e7d2c11b0bcb3e7b15", "f38a7605607f262fc1d06", "f3fd2dde58585ce6f7a34", "f406be1939d8d7495ced0", "f43b774e2e72f663eb9d1", "f4560a59f359b40c00299", "f45b730fae11b5d3a7030", "f46345f4ec9ef9a434db4", "f49b9f5e12041401dbd21", "f4eb57161d2b9385cf141", "f5934542a90cdf191e919", "f5ae6fe7bf684950c3189", "f5afd54c7c6a05866f412", "f5b2243ce140897a133d7", "f5d9d6d5f59d7af76f353", "f5f2eb86a84aa4f8d1fa3", "f5f33fa3cfb25c5cd4365", "f6084d73badfe39608069", "f622478523e8b7d678b69", "f6f402f39edc2455b77b2", "f75cd25b90ead5c669345", "f761f39af6fd1ae6ad689", "f7804d3016d655503d547", "f79ebefb2afbaa61e46c5", "f79fb5ff0f29621130868", "f7afa0cd3284e58430a07", "f7d7fdb3f28d1fffd09e8", "f846f7888d59517966d55", "f8a2dc5c6d52063e9a166", "f8d0ef402804484b8c376", "f8d8b5650852e02aca612", "f912f1fb80fa09aa35403", "f987979895f00b80bbe50", "f9af1e28120445050dba6", "f9c9bdd8aaeafabb388a8", "faab129a0947b63f9f791", "fac06b047c79441ef5cf3", "fad3b97ea09b83f8c52a5", "fb74f42b91662aef0e2e0", "fc0bc541028d8a66b71b7", "fc6c8865ed0d24aa5a077", "fd76b123f0022fbaaf767", "fdbc931615dab0911fc63", "fe39a41552b1bceb91f91", "fe4ae98c6f204218be7d0", "fe560fccdd81c5b225f37", "fe90765916bf3716375a6", "fe98c2f5c857a797ca159", "feae9cf79a3dc0e4177a7", "ff337fec6ef72b6e8a6f7", "ff8997f152b7fe6440104", "ff8e992bb4ab88efebb03", "ffceab1f1f2fef404fb55"], "id": "lock4_the_study"}, {"n": 5, "key": "lock5_the_printing_shop", "title": "The Printing Shop", "obj": "8-9", "objLabel": "CORE OBJECTIVES 8-9", "objText": "Core Objectives 8-9: Explain why social reform movements emerged in the early 1800s, and evaluate how the anti-slavery movement grew and affected women’s rights.", "type": "fill", "card": "<p>Reformers of the early 1800s took on many causes, including temperance (giving up alcohol) and free, tax-supported public schools, led by Horace Mann. In 1831, with help from free Black northerners, William Lloyd Garrison launched an anti-slavery newspaper called <i>The Liberator<\/i>. In 1848, Elizabeth Cady Stanton and Lucretia Mott called a women’s rights convention at Seneca Falls, New York. Its Declaration of Rights and Sentiments said “all men and women are created equal.” Frederick Douglass was one of the 32 men who signed it.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 12, “The Reform Impulse” (Temperance, p. 480; Early Public Schools, pp. 482–483) and “Anti-Slavery and Women’s Rights Movements” (Garrison, pp. 489–490; Seneca Falls, pp. 494–495).", "prompt": "Fill in the blank using the Clue Card.", "sentence": "William Lloyd Garrison’s anti-slavery newspaper was called The ________.", "scramble": "I  T  O  R  L  R  E  B  A", "hints": ["Read the second sentence of the Clue Card. The newspaper’s name is in italics.", "The word starts with L and ends with R. It has 9 letters."], "nudge": "Not quite. Re-read the Clue Card for the name of the newspaper. Use the scrambled letters to check your spelling.", "entries": ["007f7637a0e4e88d1afd1", "018dd55479a9afbdfb6c1", "02acfdbbeb19bf6a69834", "0301a794e2ae2a48c4468", "03258d84394e4f0597d74", "035843abca9febe899544", "046bd7cb532bebe36bdc3", "04dc8b06a7f32b73a6582", "04fb3774156eae4630919", "056eaf7ee5ca394430966", "0574e463e59caa9640ab9", "05ea9d460455edc70a704", "063c50baba94fe8cf3018", "06b2f8942a5a652edf574", "075da4b42ace7cd61d0f9", "08646b6dacfc4bdde94d7", "0974cdf4655042b7f59e0", "09ba2c45c94acf5d680d1", "0a1434ff7de6523f64821", "0a7b65b8946dd959043a6", "0a8f06c4656703bbb8037", "0afc4028109ff3c862325", "0b5989bf67373ce8aa864", "0bd4dfdf7c08b5e589af0", "0bea806d75f8258a69bb3", "0c265b97befcf446e1ca5", "0cea83fdd4920bf850d28", "0d749afb66aa9b03cce39", "0d8d16fc77fe9282fd071", "0f26bd1fad77d68af9e27", "0f48e11fcbc169c6298a5", "0f5959d1dc9047d9321e8", "10889a9f0477d3eacf422", "10fff60d36c3b343d65f1", "12993a1d784c78b7fadc2", "13a83a420270bd11fcf81", "13d0b7e4aaa2f80e32f63", "13df2b1d030d5475312e8", "13f52c33f4f3752fd6605", "1425d5c2aadc6ed4d9394", "145cf753df09fdbdc2c37", "14b029e99650d5ecb10f6", "157351cc9680574b8a5c5", "1589465ab650f2fbdd1a4", "15a1e456295dd1e8dda82", "15d31e3cc6df513d7d1e7", "164cf25b03f830fd743d5", "16d2092c9fa15f99f53b5", "16f2cb55ac63410deb993", "178ac3b38b24c5beae799", "18947b3da947abca1d590", "18ae34b6fb96eecc5e482", "1a8f862693b7a567a2e06", "1aad7d50860b805383e73", "1ac348164dd0ce0e3f642", "1bff1d48d4d31c9a3cac7", "1c5555938227891b1d569", "1c95d3f98fa6a1df53c37", "1ca12c96cc78476cb97a0", "1d9ee64d606f74abcc5b2", "1dc3b8e4803a8705ee815", "1ddb224399586abfdb0b4", "1e41da06fcd490f3a6ad3", "1e8f5f27746bf1b7d0d45", "1effff31b839dfacf4195", "1face1acd63b2beb939c3", "205a21c0e7557916351b3", "20c6b71a8dab2f6d183a4", "20dae985851171a6bd773", "20ef0b1a82bebc4c0b523", "226ef79872a9122120c30", "235b3ae7cee6a25c22636", "2427717948e9042492230", "2522fe6c42c9740ebeef1", "255bbc6557c5284671920", "256aeaf2750f91edc5377", "25ed1084af4e2e18e3075", "2615f57acb3658c35e5b3", "263f0ea57970faa947f20", "26b9cd68933d5121fb619", "26c2955f1e40da91c9398", "271b984d247a6cd70abe0", "2775c29211a54bac14b15", "27fb652748de4771b96e5", "2930ed541937f1a5c9b66", "294d7b0203c628aff4032", "2988d12b535764c5e0f54", "298d82d3ddb10acf544e3", "29f7878573e4c263a5255", "2a3d5bc07c41f97cb1658", "2ac37e3b6991c7ec865b1", "2b9d156f7205f1b8a49e8", "2d266602a998b9f6eed45", "2d8f9fa74a4548f390fa5", "2e0c9c133e0355d070db1", "2ec88d03b8bcdb2c6fd49", "2ee6b520ed29fbb99c538", "2f7a84689caa4b39f60c5", "30118f31b35f1f0c146b0", "30bbf5695bc7f1264bcc0", "31030ef446bd17a53e163", "3419160ddac3aa9028587", "3526eba0ba317248c69e2", "36e353a1e36eb13aca6e2", "374357e7c45dffc914131", "3aaf14626f10b24647312", "3c1723e20ebedad171e55", "3e2970d6809bc5c7a5879", "3e57636250361fa7f42f1", "3f14dcd443fa833ca6b41", "40c266940216ee1791ba1", "417437d31a18276505757", "42dbbd16d0a80ed382763", "432b5b49839406d9b9732", "436f09e79bca5f197fc57", "4393a49a559b239b2a2a4", "442d49e23a59a0e7d3ae4", "44ae2df6f7112d9d3d707", "45913e5a12288df805b09", "45f8d9fda97a79b804535", "47d9de71a6d35f5ffd883", "48b9b190f073f82566bb4", "4964b3195d77e5d271d82", "498dc9af5cdbd0e7f18a1", "4a8ea648ff89a8fd09e48", "4aaa0c8f84fc2932fdcd9", "4c1f7c7b652fc0607e1b9", "4c5b51c7912f4b8e31a88", "4c81f1661258a7d011d92", "4d3197bd96089b38d0d93", "4dd22d649105f32238142", "4f294a7ab5b89e2495dd7", "4fad58195a1e434a76321", "4fb1f4608daf7186688b2", "4fed46a4c7624d5a9ce42", "50dd61d403f0ae04b61a2", "50f7d200ea02b59ba9db3", "510220ea9ab871d166f54", "52db088f76185bde511c9", "53634a54742e1d239a588", "538637e03c7e29d3cf6c4", "54c382ebe6a12232a6022", "551a0d23af87b82567187", "55c452e58ed95c23474b6", "5678894daa4915342b8e6", "572cc71aa728ae22d8548", "575e083722c26cff33d78", "57f7dc5af7dfb8c18f8e1", "57fc286f48bc682f58da3", "5814019ae3f55a45900f0", "5837d9e2b934a110e9675", "5870aff9dd1ec84f45a64", "5a4f2b368800ba26cff56", "5a9a9f1a55826774bd039", "5b0965e584704d2c9b5a4", "5b791cca80247195bc622", "5b8df740f50d3f2627944", "5b8ebea14b731ae99c513", "5bc9023f457f1e39bb1c4", "5c7b1aa3dd8c79f7f29e7", "5ca0cd4108801ba5255e5", "5e3c0b94d402d15f01232", "5eec5bd91a7c130af1b92", "5ef84fe65b72497dbd7c5", "5f837f0ff41e2195b78c0", "5fdb1d8e078254de763b9", "5fe9f4bf0e034b9af1677", "605aff6480ac58d4fb936", "60f06d9223bd5ac7fdc81", "6156537f0df2c47ef4418", "62351a8ee9f35e3ecc944", "628404c689d3313f5cc52", "62ac1adc1d558207e17f3", "62cc77f6dd9b0dbd710e2", "631a118c9a6913516d6a0", "635a6222036ddc939db12", "6366693b23781b58be329", "650c2e38b05af3b945157", "65c19fefc7de97f1f99f8", "66219eebf8c954791c8b4", "67cd5b1378de6c3a2b0d4", "67cd7b6479f1bf6403e28", "6822ca87ad51240074eb9", "691757f3e2d044f25f544", "6a1ab23132a0435a49a46", "6a4205dd7ac412188e093", "6aef61030c3eba188bf70", "6b172addf70eadbf1b5a1", "6c88ccdc41f8e6f7227e8", "6d1130911f59871d3edc8", "6dc2dfa1cf037d0ac9be0", "6e1fab2be75da08c78904", "6fd6a664b55747b4e06b0", "70941e0373df5b5165d79", "70cb5edf047e36e0a6f59", "71004a91ec4d24ec00d59", "7136603fd3f1bdf61d081", "718d40ffcd1968110e289", "719df9b3c94ff08757036", "71bf92ddb3553874e5af9", "71ed4c647186927e2c756", "729d229201c4156e28d41", "7319fb421fcf884b2fe10", "732bbdc3b74da11dc7858", "73aa9f4af7c4060bb6528", "7414864b9ca239633da19", "7423693df0c96e94f1698", "74d30540d6b795c573e38", "74db3f6fdae0549f0d062", "75123d429f994b4562913", "75cdc8243c8a23cf3cd73", "7777b0acee2331d82b128", "77c197c02f2b3e2d18263", "79469a43aa6d5b37e4cf4", "79b7f7d60e01f336a69b6", "7a72f22604c9d3b8d4f04", "7a9df0e629ecd1357b088", "7ae1393a1ad8836f2a351", "7bb0f20cb461e9bc82fb5", "7c5e7f2fc97abcf01c7a2", "7ce7e12ddc82cb6b7d764", "7cf047d09d3306f300b00", "7d18fff7d8d1232833046", "7d3ab92cd919f0b70cf24", "7ddb1b8b8614ecf93d378", "7f23b91f040437c8155f8", "7ff4c61566fdbf6984773", "804029708af101be6af31", "80448b06e8c9637493197", "807f79c3d3e64b26eb580", "81d43176bd596a3c45713", "82044e42e099d8ee79e92", "8241d18bd604e4dbb01f2", "826919f2d0b23745c2902", "82f26feae43f46f5085f4", "83e1cec642ad7f66a8603", "8498709cf281bbf344b65", "8533902dbc643739460d0", "860fba3b469d75c61ea41", "8740fd05e4f3799f42fd1", "881ca2b864749a5d8f826", "885242f28cfc47fba6de7", "8a193140f3b9dcaab3698", "8b9622c765d8bd51db9a3", "8c9d3a1da90e60c17e273", "8cb14358b3629c4ab4790", "8d4851ffd6667914bf569", "8d919565c02d1889933a1", "8dd5ea45724eb165271b3", "8efa528274159714a3280", "8f7494b2191ade5576646", "8fb2af2fc060e7116a639", "907c414b46dc5afacf991", "9084fed41345d263471f8", "90f2c3b2d67b1dd7adcc1", "910a8fbe14ee24af1a908", "913712e759e1ade819871", "9216bc35da444bea997c4", "92815582fd8fe64de91e9", "92ad630724493bf98a846", "92bb5cb2de4972128a950", "92e84adc4873f99405d14", "930acb976db4eff304875", "936c4da6c20aeade6dcd4", "9397fe85cce062bb5a1c3", "93b557280fcda66e42fa0", "93d0df1179018ab164299", "9466520e1fc8b7f7a00a1", "947378163465b493ead61", "9582843cec0343671ecc2", "959b75833e9da55e229e4", "95a4def095ab28a7ff230", "9622a343920bd95c86c90", "965467c8f5b1553e28e74", "96dfc1127229048c614f9", "96e743ca71c7d471d70f5", "97452305e47f69f2ea837", "975118385dd7f402c3d51", "9780511ecc04171e68de6", "97862959e582dece56521", "978bab3e4b26fb44dbed7", "97a96d2a9f70714da03a1", "97fe65286777ac79fa7d5", "9864283eedc75b938da97", "989ddf92eed5c3717f122", "9976071cd84488810d930", "9984025b5a0554c327f07", "99e2f5b01d055b8743e08", "9a49ff66275dbadce4009", "9a920e8c0ae88fe71c184", "9ab0114f090886851a444", "9b3dbe595ada1e660dea3", "9b8033d08ba92abac7912", "9b9be947094b4c5731de0", "9bd959b6f2404db0a4784", "9cc39feb085370a571238", "9cfd64ca9402880ba1402", "9e22cee75b559f49985d5", "9ef0b210d5f2773025650", "a0dc83991bb493b01bd47", "a13932e9c64fade2dedf9", "a1705c89584b142fd4505", "a1e240eb16be4d27d71e2", "a2645c42d829bb51a13f6", "a2fb53e30f0e77cfe0126", "a37e4620c7c1e460abf44", "a3a4f15ef1f243e985681", "a46159e57f7d779739b47", "a54cb90a15408da660bb4", "a5be5ffeeaa4436276cf5", "a60ac98ceb05339a35322", "a665fceff5376fcf9c6a9", "a7047bdf283bf58a478b6", "a77e94c9bb4365d765f44", "a7b21e8cfe78b0c4cc074", "a7f48113352561b198419", "a819fec9cdca363421bd8", "a8a4374646391d16be9c8", "a94e50726eb94f8756704", "aa64d788ad70b81991f31", "aa6dc8cc415541dde9234", "aabc5facb51e396768946", "ac52dfc339c86199b55d7", "ac5bacf0276ba65561ec6", "ac915d4ac1a54209152a3", "acb5b6133dc1e2d245949", "accebb322995da8e6d048", "adace04716f6464bd4890", "ae8dc33801169e5118f41", "af2b6e6010e4e4588a3f9", "afa38074938607d4977b9", "b02e886f0eaac8fa54714", "b06a55e97576b83eb9b98", "b197b3e9c0313e9f4fc13", "b19b95a7fc389808c9768", "b211fa4325af822f74558", "b2891dde5fc20c0ecef44", "b39239af07fa7377485e6", "b3aae93c1191a048c3e02", "b3adbdef134fd40b8d347", "b49d02c121b16157d4e39", "b4a9757e6ffb7b14dbaa8", "b5ab60c6ce61f343be4c2", "b5c563a8ae25f43804326", "b5ef9746408ac7f681949", "b65a1c3c65914b889e983", "b6da41d8539104b2df7b1", "b7527279e06cd0e498af3", "b83bb7aca5d30fdce8389", "b85259cebe8bbdc509bd7", "b887916a6482a87fd0272", "b88a969a6449129b0da47", "b8fa8dd4c8e1194677f96", "b941d971a535164c9d903", "babd64bff4bffec2dacc1", "bb0addb94ace383f74ad8", "bc53bf0fa07a2d158e073", "bc5e9cad63fd20ff8e7c0", "bce45c095076f867109f2", "bd930ccdfee76377347f8", "bdbaaf2c0137af4eb4720", "bdd3e44221ca7207be0a6", "be11e21c9f8e9288c4ca9", "bf11910a8ebd6b931f048", "bf70ad8d8ea34c54bf5d7", "c01eaafb1c679700a5191", "c099f3be205207286b853", "c0fd2a334a1a2bd7afd06", "c1f1befd549b4c7cb8eb1", "c1fb6358135b38d987d92", "c2130cc4d582b2048c1c3", "c29dc1675dfae40fc78a5", "c2ee6e57f0b963545e103", "c4bfc4a014ced658a1da0", "c4ec73096267869d11470", "c5801511793da0c1827f2", "c59eac52a3face8fbac71", "c6885fbfcd72b858c6196", "c6feb961b53cc59650de8", "c71301302111a8fbc0e13", "c77b31bb453a35cefff99", "c8632485ac49bef378b62", "c8abc3a4ba542cf2de4e8", "ca07570134c6c517b8247", "ca1596a9d2aa89fa9aca6", "cad4ae08abcddff6a2547", "cb437c4ee5f3a92ba57b2", "cb4d09c90a78687d0d097", "cba6ab7bf943a86dc03c2", "cc045fd2cb211fa6f1519", "cc42323c22e326e8b2fd3", "cc862b4daf990ad16fd89", "ccca4c310204c42ac5564", "cd1d41a19440b1989d264", "cd32b8ef1a90a4f2eba73", "cde3b3212102a8678d2d9", "ce4af35daca17e65bf7a4", "cf40be134b2096aab2851", "cf6cbe39335762dd4dd65", "cf9de438c9b56b644ba32", "cfc89b9111f116df60485", "d05f5130110a171b26490", "d096d2f64651300187cf1", "d1d4adcf56f9bc4eb2254", "d265396ba8e24f07ec226", "d27d0b02a05be4cf7ab93", "d33e320cc28a735e1c0a9", "d36b94b407c7f80e34005", "d3a023ac880a3819d8d00", "d426ed66ead82e25bbe28", "d570d6676959bd1dc2929", "d61c8e0b0f5c7be222f53", "d61c9585b53be42087572", "d65bdbf0eb2311596da09", "d66676ad99a2bff1d44e2", "d6b5d0276754fcd35e5c7", "d74097d18d28947928d79", "d783d912a6bf8cbbfa748", "d904418734f44022e3852", "d9c48dd4888715d652813", "d9ec16316bee05cac6c96", "daba44c2559e8f17a0312", "db2b32c643461928f33c8", "dbaa31dfd8943405de229", "dc673642007bc7f0efbe1", "dde64dee7cee1abcca755", "deb9edf7e749451260c50", "def9226dbe07d55f58148", "def9ce6dc64dbbc443647", "df3c7b7d33eaa38f8fca6", "df5c6de10e640a95a3862", "df7bc5e26149a7769b899", "dfc8ff96fd2b0473938a9", "dfed19072d1b977ae7461", "e00482d3c9a37f5c61007", "e020b21ec75e08af49583", "e0d4b0d843f48bd179704", "e190b330481f13117f8d5", "e24679f349c8a41664101", "e389d1758d11fe1805162", "e3be3da097f8051130475", "e4434aa67706850254698", "e606566886a1c4fd3c813", "e60e3bc5b7ffe6dd84ad3", "e66278e1b900901f9e123", "e68075874e461901e0276", "e6f2e6e82752041d3dda2", "e83fbebc0f19fca7d6e67", "e8faa9a71d836fde866b6", "e94383adc46fd3d024f37", "e97a38c8213ba8fa4b494", "ea223ebb3baa25d127714", "eaa49c1acff3ff64b95d2", "eb63772c5fe6e59352958", "eba4240c60b414cd2da18", "ebe5ef2c7bca64ffaff31", "ec706efea40cf3b14df74", "edaa9468547a0b550efe4", "ee0fa9d4986e6c5ed2fa4", "ee459b456b6b2ed371620", "ef8a7b68c9fafa474f733", "f0a1ba96722d964c5a032", "f0ce0a1b8d5629b512ab5", "f16ce7c67796960b56f69", "f1737e2a5c4c485b3cb44", "f1e1e6090be83650768f7", "f21b0664100443f29e293", "f2e5a6c6a02ed3a49fd30", "f30af3da2b7a45f8c1ae7", "f3b85ca83eed49ec94174", "f5000f2773cfba5721722", "f51fdd957dd7e9f93cc65", "f58ab355f018397408c00", "f63069f15208a62d72739", "f728595899468cc84c2f7", "f7f97995197ea93d2b980", "f91c427d46b035231e460", "f95291e54eb6691bae5a1", "fa5bd2ece3707dd19e498", "fad0c50aa40925be92ff5", "fb3ba82954e4bdd8e5437", "fb981f442efe5a08c8ff4", "fbd27ca4ee0915663baa2", "fc3b40237cb91a591f583", "fc6833e9c7a2a59d90396", "fce558cccd38eff837647", "fd192ffa61f16f8599fb9", "fdb82af949fd1e8c193e3", "fdd86cfc63463ff1e9c93", "fde01a84bff2c26a789f8", "fdff119a77dcfd55eea28", "fec9d1497e9fa83aae037", "ff3b4571311a079313c42", "ff61ae89b0eda4ad26162", "ffd7798a0026d1e418a05"], "id": "lock5_the_printing_shop"}]}</script>
+<script>
+function sha256(ascii){
+  function rightRotate(v,a){return (v>>>a)|(v<<(32-a))}
+  var mathPow=Math.pow,maxWord=mathPow(2,32),i,j,result='',words=[],bitLen=ascii.length*8;
+  var hash=sha256.h=sha256.h||[],k=sha256.k=sha256.k||[],pc=k.length,comp={};
+  for(var c=2;pc<64;c++){if(!comp[c]){for(i=0;i<313;i+=c)comp[i]=c;hash[pc]=(mathPow(c,.5)*maxWord)|0;k[pc++]=(mathPow(c,1/3)*maxWord)|0}}
+  ascii+='\x80';while(ascii.length%64-56)ascii+='\x00';
+  for(i=0;i<ascii.length;i++){j=ascii.charCodeAt(i);words[i>>2]|=j<<((3-i)%4)*8}
+  words[words.length]=((bitLen/maxWord)|0);words[words.length]=(bitLen);
+  for(j=0;j<words.length;){
+    var w=words.slice(j,j+=16),old=hash;hash=hash.slice(0,8);
+    for(i=0;i<64;i++){
+      var w15=w[i-15],w2=w[i-2],a=hash[0],e=hash[4];
+      var t1=hash[7]+(rightRotate(e,6)^rightRotate(e,11)^rightRotate(e,25))+((e&hash[5])^((~e)&hash[6]))+k[i]+(w[i]=(i<16)?w[i]:(w[i-16]+(rightRotate(w15,7)^rightRotate(w15,18)^(w15>>>3))+w[i-7]+(rightRotate(w2,17)^rightRotate(w2,19)^(w2>>>10)))|0);
+      var t2=(rightRotate(a,2)^rightRotate(a,13)^rightRotate(a,22))+((a&hash[1])^(a&hash[2])^(hash[1]&hash[2]));
+      hash=[(t1+t2)|0].concat(hash);hash[4]=(hash[4]+t1)|0;
+    }
+    for(i=0;i<8;i++)hash[i]=(hash[i]+old[i])|0;
+  }
+  for(i=0;i<8;i++)for(j=3;j+1;j--){var b=(hash[i]>>(j*8))&255;result+=((b<16)?0:'')+b.toString(16)}
+  return result;
+}
+function sha256u(s){return sha256(unescape(encodeURIComponent(s)))}
+
+(function(){
+  var PACKET='CPUSH_L7_ESCAPE';
+  var STORE='cpush_l7_escape_';
+  var D=JSON.parse(document.getElementById('er-data').textContent);
+  var $=function(i){return document.getElementById(i)};
+  var S;
+  var digits={};            // runtime only: lock n -> digit
+  var entries={};           // lock id -> {h20: maskedDigit}
+  var expanded={};
+  var lastTick=0,timer=null;
+
+  function squash(t){return String(t).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'')}
+  function h20(s){return sha256u(s).slice(0,20)}
+  D.locks.forEach(function(L){var m={};L.entries.forEach(function(e){m[e.slice(0,20)]=+e.slice(20)});entries[L.id]=m});
+
+  function checkLock(L,canon){
+    var salt=D.salt+L.n+':';
+    var h=h20(salt+canon),mk=entries[L.id][h];
+    if(mk===undefined)return null;
+    var m=parseInt(sha256u('m:'+salt+canon).slice(0,2),16)%10;
+    return (mk-m+10)%10;
+  }
+  function fresh(){
+    var o={first:'',last:'',period:'',started:false,elapsed:0,escaped:false,escapeMs:0,debrief:'',codeTries:0,locks:{}};
+    D.locks.forEach(function(L){o.locks[L.id]={solved:false,attempts:0,hints:0,guess:'',readable:''}});
+    return o;
+  }
+  function loadLocal(){var o=fresh();try{var r=JSON.parse(localStorage.getItem(STORE+'state')||'null');if(r)restore(o,r)}catch(e){}return o}
+  function persist(){try{localStorage.setItem(STORE+'state',JSON.stringify(snapshot()))}catch(e){}}
+
+  function totals(){
+    var t={locksSolved:0,attempts:0,hintsUsed:0,exitCodeAttempts:S.codeTries};
+    D.locks.forEach(function(L){var l=S.locks[L.id];if(l.solved)t.locksSolved++;t.attempts+=l.attempts;t.hintsUsed+=l.hints});
+    return t;
+  }
+  function fmt(ms){var s=Math.round(ms/1000),m=Math.floor(s/60);s=s%60;return (m<10?'0':'')+m+':'+(s<10?'0':'')+s}
+  function snapshot(){
+    var o={packet:PACKET,course:'CPUSH',lesson:7,assignment:'Escape Room (Lite)',version:1,saved:new Date().toISOString(),
+      student:{first:$('f_first').value.trim(),last:$('f_last').value.trim(),period:$('f_period').value.trim()},
+      status:S.escaped?'ESCAPED':'INCOMPLETE',escaped:S.escaped,
+      escapeTime:S.escaped?{ms:S.escapeMs,text:fmt(S.escapeMs)}:null,
+      totals:totals(),elapsedMs:Math.round(S.elapsed),started:S.started,locks:{},debrief:$('debriefText')?$('debriefText').value:S.debrief};
+    D.locks.forEach(function(L){var l=S.locks[L.id];
+      o.locks[L.key]={objective:L.obj,puzzleType:L.type,solved:l.solved,attempts:l.attempts,hintsUsed:l.hints,solvedWith:l.readable,solvedGuess:l.guess}});
+    return o;
+  }
+  function restore(o,r){
+    if(!r||typeof r!=='object')return false;
+    var st=r.student||{};
+    o.first=st.first||'';o.last=st.last||'';o.period=st.period||'';
+    o.started=!!r.started;o.elapsed=+r.elapsedMs||0;o.debrief=typeof r.debrief==='string'?r.debrief:'';
+    o.codeTries=(r.totals&&+r.totals.exitCodeAttempts)||0;
+    var allOk=true;
+    D.locks.forEach(function(L){
+      var src=(r.locks&&r.locks[L.key])||{},l=o.locks[L.id];
+      l.attempts=+src.attempts||0;l.hints=Math.min(+src.hintsUsed||0,L.hints.length+0);
+      if(src.hintsUsed>L.hints.length)l.hints=L.hints.length;
+      if(src.solved&&typeof src.solvedGuess==='string'){
+        var d=checkLock(L,src.solvedGuess);
+        if(d!==null){l.solved=true;l.guess=src.solvedGuess;l.readable=String(src.solvedWith||'');digits[L.n]=d}else allOk=false;
+      }else allOk=false;
+    });
+    if(r.escaped&&allOk&&r.escapeTime){o.escaped=true;o.escapeMs=+r.escapeTime.ms||0}
+    return true;
+  }
+
+  /* ---------- scene ---------- */
+  var NS='http://www.w3.org/2000/svg';
+  var XS=[210,255,300,345,390];
+  (function(){
+    var g=$('plocks'),h='';
+    XS.forEach(function(x,i){
+      h+='<g class="plock" id="pl'+(i+1)+'"><path class="sh" d="M'+(x-8)+' 124V114a8 8 0 0 1 16 0V124" fill="none" stroke="#F1F4EB" stroke-width="4"/><rect class="bd" x="'+(x-15)+'" y="124" width="30" height="24" rx="4" fill="#D25F4B"/><circle cx="'+x+'" cy="135" r="3" fill="#2C3617"/></g>'+
+      '<rect x="'+(x-16)+'" y="158" width="32" height="36" rx="5" fill="#161E0A" stroke="#E19A8E"/><text id="dw'+(i+1)+'" x="'+x+'" y="184" text-anchor="middle" font-size="24" font-weight="800" fill="#F1F4EB">?</text><text x="'+x+'" y="208" text-anchor="middle" font-size="11" font-weight="700" fill="#C5CCB6">LOCK '+(i+1)+'</text>';
+    });
+    g.innerHTML=h;
+  })();
+  function sceneUpdate(){
+    D.locks.forEach(function(L){
+      var open=S.locks[L.id].solved;
+      $('pl'+L.n).setAttribute('class','plock'+(open?' open':''));
+      $('dw'+L.n).textContent=open?digits[L.n]:'?';
+    });
+    $('scene').classList.toggle('escaped',S.escaped);
+  }
+
+  /* ---------- build lock cards ---------- */
+  var W={};   // widget state per lock
+  var LOCKSVG='<svg class="lk" viewBox="0 0 44 44" aria-hidden="true"><path class="sh" d="M13 20V14a9 9 0 0 1 18 0V20" fill="none" stroke="#F1F4EB" stroke-width="4"/><rect class="bd" x="8" y="20" width="28" height="20" rx="4" fill="#D25F4B"/><circle cx="22" cy="30" r="3" fill="#2C3617"/></svg>';
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+  function buildLock(L){
+    var sec=document.createElement('section');sec.className='lock glass locked';sec.id='lock'+L.n;
+    var head='<button class="lh" type="button" id="lh'+L.n+'" aria-expanded="false">'+LOCKSVG+'<span class="lt"><small>LOCK '+L.n+' · '+L.objLabel+'</small><strong>'+esc(L.title)+'</strong></span><span class="dg" id="dg'+L.n+'" aria-label="digit">?</span></button>';
+    var body='<div class="lb" id="lb'+L.n+'"><p class="objline">'+esc(L.objText)+'</p>'+
+      '<div class="card"><h4>CLUE CARD</h4>'+L.card+'<p class="src">'+L.src+'</p></div>'+
+      '<div class="prompt">'+L.prompt+'</div><div id="pz'+L.n+'"></div>'+
+      '<div class="row"><button class="btn primary" type="button" id="ck'+L.n+'">Check</button><button class="btn small" type="button" id="hb'+L.n+'">Hint</button><button class="btn small" type="button" id="rs'+L.n+'">Clear</button></div>'+
+      '<div class="hints" id="hs'+L.n+'"></div><div class="fb" id="fb'+L.n+'" role="status"></div></div>';
+    sec.innerHTML=head+body;
+    $('locks').appendChild(sec);
+    buildPuzzle(L);
+    $('lh'+L.n).addEventListener('click',function(){
+      var st=lockState(L);if(st==='locked')return;
+      expanded[L.n]=!expanded[L.n];updateLocks();
+    });
+    $('ck'+L.n).addEventListener('click',function(){submit(L)});
+    $('hb'+L.n).addEventListener('click',function(){hint(L)});
+    $('rs'+L.n).addEventListener('click',function(){clearPuzzle(L)});
+  }
+  function labelOf(list,id){for(var i=0;i<list.length;i++)if(list[i].id===id)return list[i].label;return id}
+
+  function buildPuzzle(L){
+    var el=$('pz'+L.n),w=W[L.n]={};
+    if(L.type==='order'){
+      w.sel=[];el.innerHTML='<div class="chips" id="ch'+L.n+'"></div>';
+      renderOrder(L);
+    }else if(L.type==='match'){
+      var h='';
+      L.terms.forEach(function(t){
+        h+='<div class="mrow"><label for="m'+L.n+t.id+'">'+esc(t.label)+'</label><select id="m'+L.n+t.id+'"><option value="">Choose a description...</option>';
+        L.descs.forEach(function(d){h+='<option value="'+d.id+'">'+esc(d.label)+'</option>'});
+        h+='</select></div>';
+      });
+      el.innerHTML=h;
+    }else if(L.type==='pick'){
+      var h2='';
+      L.qs.forEach(function(q){
+        h2+='<fieldset><legend>'+esc(q.q)+'</legend>';
+        q.opts.forEach(function(o){h2+='<label class="opt"><input type="radio" name="q'+L.n+q.id+'" value="'+o.id+'"> <span>'+esc(o.label)+'</span></label>'});
+        h2+='</fieldset>';
+      });
+      el.innerHTML=h2;
+    }else if(L.type==='decode'){
+      var k1='',k2='';
+      for(var i=0;i<26;i++){var p=String.fromCharCode(65+i),c=String.fromCharCode(65+(i+L.shift)%26);k1+='<div class="c">'+c+'</div>';k2+='<div>'+p+'</div>'}
+      // build key in two rows of 13
+      var key='';
+      for(var r=0;r<2;r++){for(var j=0;j<13;j++){var idx=r*13+j;key+='<div class="c">'+String.fromCharCode(65+(idx+L.shift)%26)+'</div>'}for(var j2=0;j2<13;j2++){key+='<div>'+String.fromCharCode(65+r*13+j2)+'</div>'}}
+      el.innerHTML='<div class="cipher" translate="no" aria-label="Coded message">'+esc(L.cipher)+'</div><p style="margin:.6em 0 0;font-size:15px;color:var(--dim)">Decoder key: the <span style="color:var(--hl);font-weight:700">pink</span> letter is in the message. The white letter under it is the real letter.</p><div class="key" aria-hidden="true">'+key+'</div><label>Decoded answer<input type="text" id="tx'+L.n+'" autocomplete="off" autocapitalize="none" spellcheck="false"></label><p class="ennote">Type the answer in English.</p>';
+    }else if(L.type==='fill'){
+      el.innerHTML='<p style="font-size:18px;margin:.2em 0">'+esc(L.sentence)+'</p><div class="scr" translate="no" aria-label="Scrambled letters">'+esc(L.scramble)+'</div><p style="margin:.4em 0;font-size:14px;color:var(--dim)">Unscramble the letters to fill the blank.</p><label>Your answer<input type="text" id="tx'+L.n+'" autocomplete="off" autocapitalize="none" spellcheck="false"></label><p class="ennote">Type the answer in English.</p>';
+    }
+    var t=$('tx'+L.n);
+    if(t)t.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();submit(L)}});
+  }
+  function renderOrder(L){
+    var w=W[L.n],ch=$('ch'+L.n),h='';
+    L.items.forEach(function(it){
+      var pos=w.sel.indexOf(it.id);
+      h+='<button type="button" class="chip'+(pos>=0?' sel':'')+'" data-id="'+it.id+'" aria-pressed="'+(pos>=0)+'">'+(pos>=0?'<span class="n">'+(pos+1)+'</span>':'')+'<span>'+esc(it.label)+'</span></button>';
+    });
+    ch.innerHTML=h;
+    [].forEach.call(ch.querySelectorAll('.chip'),function(b){
+      b.addEventListener('click',function(){
+        if(S.locks[L.id].solved)return;
+        var id=b.getAttribute('data-id'),p=w.sel.indexOf(id);
+        if(p>=0)w.sel.splice(p,1);else w.sel.push(id);
+        renderOrder(L);
+      });
+    });
+  }
+  function clearPuzzle(L){
+    if(S.locks[L.id].solved)return;
+    var w=W[L.n];
+    if(L.type==='order'){w.sel=[];renderOrder(L)}
+    else if(L.type==='match'){L.terms.forEach(function(t){$('m'+L.n+t.id).value=''})}
+    else if(L.type==='pick'){L.qs.forEach(function(q){[].forEach.call(document.getElementsByName('q'+L.n+q.id),function(r){r.checked=false})})}
+    else{$('tx'+L.n).value=''}
+    fb(L,'','');
+  }
+  function guessOf(L){
+    // returns {canon, readable} or {err}
+    if(L.type==='order'){
+      var w=W[L.n];
+      if(w.sel.length<L.items.length)return {err:'Tap all '+L.items.length+' places first, in order.'};
+      return {canon:w.sel.join('|'),readable:w.sel.map(function(i){return labelOf(L.items,i)}).join(' > ')};
+    }
+    if(L.type==='match'){
+      var c=[],r=[];
+      for(var i=0;i<L.terms.length;i++){var t=L.terms[i],v=$('m'+L.n+t.id).value;if(!v)return {err:'Match every term first.'};c.push(v);r.push(t.label+' = '+labelOf(L.descs,v))}
+      return {canon:c.join('|'),readable:r.join('; ')};
+    }
+    if(L.type==='pick'){
+      var c2=[],r2=[];
+      for(var j=0;j<L.qs.length;j++){var q=L.qs[j],v2='';[].forEach.call(document.getElementsByName('q'+L.n+q.id),function(x){if(x.checked)v2=x.value});if(!v2)return {err:'Answer every question first.'};c2.push(v2);r2.push(labelOf(q.opts,v2))}
+      return {canon:c2.join('|'),readable:r2.join('; ')};
+    }
+    var raw=$('tx'+L.n).value.trim();
+    if(!raw)return {err:'Type your answer first.'};
+    return {canon:squash(raw),readable:raw.slice(0,80)};
+  }
+  function fb(L,cls,text){var e=$('fb'+L.n);e.className='fb'+(cls?' show '+cls:'');e.textContent=text}
+  function submit(L){
+    var l=S.locks[L.id];if(l.solved)return;
+    var g=guessOf(L);
+    if(g.err){fb(L,'nudge',g.err);return}
+    l.attempts++;
+    var d=checkLock(L,g.canon);
+    if(d===null){
+      fb(L,'nudge',L.nudge);
+      var s=$('lock'+L.n);s.classList.remove('shake');void s.offsetWidth;s.classList.add('shake');
+      persist();updateBar();return;
+    }
+    l.solved=true;l.guess=g.canon;l.readable=g.readable;digits[L.n]=d;
+    fb(L,'good','Click! Lock '+L.n+' is open. Your digit is '+d+'.');
+    var wh=$('wheel');wh.classList.remove('spin');void wh.getBoundingClientRect();wh.classList.add('spin');
+    $('dw'+L.n).classList.add('pop');
+    persist();updateAll();
+    setTimeout(function(){
+      expanded[L.n]=false;
+      var nx=nextOpen();if(nx)expanded[nx]=true;
+      updateLocks();
+      var tgt=nx?$('lock'+nx):$('exit');
+      if(tgt&&tgt.scrollIntoView)tgt.scrollIntoView({behavior:'smooth',block:'start'});
+    },1600);
+  }
+  function hint(L){
+    var l=S.locks[L.id];
+    if(l.solved)return;
+    if(l.hints<L.hints.length){l.hints++;persist();updateHints(L);updateBar()}
+    else{fb(L,'nudge','That was the last hint. Read the Clue Card slowly and try again.')}
+  }
+  function updateHints(L){
+    var l=S.locks[L.id],h='';
+    for(var i=0;i<l.hints;i++)h+='<div class="hint"><b>Hint '+(i+1)+':</b> <span>'+esc(L.hints[i])+'</span></div>';
+    $('hs'+L.n).innerHTML=h;
+  }
+  function nextOpen(){for(var i=0;i<D.locks.length;i++)if(!S.locks[D.locks[i].id].solved)return D.locks[i].n;return 0}
+  function lockState(L){
+    if(S.locks[L.id].solved)return 'solved';
+    return L.n===nextOpen()?'current':'locked';
+  }
+  function updateLocks(){
+    var cur=nextOpen();
+    D.locks.forEach(function(L){
+      var st=lockState(L),sec=$('lock'+L.n);
+      if(st==='current'&&expanded[L.n]===undefined)expanded[L.n]=true;
+      var open=(st!=='locked')&&!!expanded[L.n];
+      sec.className='lock glass '+st+(open?' open':'');
+      $('lh'+L.n).setAttribute('aria-expanded',open?'true':'false');
+      $('dg'+L.n).textContent=S.locks[L.id].solved?digits[L.n]:'?';
+      if(S.locks[L.id].solved){
+        [].forEach.call(sec.querySelectorAll('input,select,button.chip,#ck'+L.n+',#hb'+L.n+',#rs'+L.n),function(x){x.disabled=true});
+        var f=$('fb'+L.n);if(!f.classList.contains('good'))fb(L,'good','Unlocked. Your digit is '+digits[L.n]+'.'+(S.locks[L.id].readable?' Your answer: '+S.locks[L.id].readable:''));
+      }
+      updateHints(L);
+    });
+  }
+  function codeStr(){var s='';for(var i=1;i<=5;i++)s+=(digits[i]===undefined?'':digits[i]);return s}
+  function allSolved(){return D.locks.every(function(L){return S.locks[L.id].solved})}
+  function updateExit(){
+    var ok=allSolved();
+    $('exit').classList.toggle('locked',!ok);
+    $('codeBtn').disabled=!ok||S.escaped;
+    [].forEach.call($('codebox').querySelectorAll('input'),function(i){i.disabled=!ok||S.escaped});
+    $('exitNote').textContent=S.escaped?'The door is open!':(ok?'All 5 locks are open. Type the 5 digits in order, Lock 1 first.':'Open all 5 locks first. The digits go in order: Lock 1 first.');
+  }
+  function updateBar(){
+    var t=totals();
+    $('lc').textContent=t.locksSolved;$('hc').textContent=t.hintsUsed;
+    $('tm').textContent=fmt(S.escaped?S.escapeMs:S.elapsed);
+  }
+  function updateStatus(){
+    var el=$('status'),db=($('debriefText').value.trim().length);
+    if(S.escaped)el.textContent=db>=40?'You escaped and wrote your Debrief. Ready to submit.':'You escaped! Write your Debrief, then download your file to submit.';
+    else el.textContent='Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.';
+  }
+  function updateEsc(){
+    $('esc').classList.toggle('show',S.escaped);
+    if(S.escaped){var t=totals();$('escTime').textContent=fmt(S.escapeMs);$('escSum').textContent='5 of 5 locks opened with '+t.attempts+' tries and '+t.hintsUsed+' hint'+(t.hintsUsed===1?'':'s')+'.'}
+  }
+  function updateAll(){sceneUpdate();updateLocks();updateExit();updateBar();updateEsc();updateStatus();
+    $('intro').classList.toggle('hidden',S.started);$('game').classList.toggle('hidden',!S.started);$('loadOnly').classList.toggle('hidden',S.started);
+  }
+
+  /* ---------- exit code ---------- */
+  (function(){
+    var cb=$('codebox');
+    for(var i=0;i<5;i++){
+      var inp=document.createElement('input');inp.type='text';inp.inputMode='numeric';inp.maxLength=1;inp.setAttribute('aria-label','Exit code digit '+(i+1));inp.disabled=true;
+      (function(i,inp){
+        inp.addEventListener('input',function(){inp.value=inp.value.replace(/[\u0660-\u0669]/g,function(c){return c.charCodeAt(0)-1632}).replace(/[\u06F0-\u06F9]/g,function(c){return c.charCodeAt(0)-1776}).replace(/[^0-9]/g,'');if(inp.value&&i<4)cb.children[i+1].focus()});
+        inp.addEventListener('keydown',function(e){
+          if(e.key==='Backspace'&&!inp.value&&i>0)cb.children[i-1].focus();
+          if(e.key==='Enter'){e.preventDefault();tryCode()}
+        });
+        inp.addEventListener('paste',function(e){
+          var t=(e.clipboardData||window.clipboardData).getData('text').replace(/[\u0660-\u0669]/g,function(c){return c.charCodeAt(0)-1632}).replace(/[\u06F0-\u06F9]/g,function(c){return c.charCodeAt(0)-1776}).replace(/[^0-9]/g,'');
+          if(t.length>1){e.preventDefault();for(var k=0;k<5;k++)cb.children[k].value=t[k]||''}
+        });
+      })(i,inp);
+      cb.appendChild(inp);
+    }
+  })();
+  function tryCode(){
+    if(!allSolved()||S.escaped)return;
+    var v='';[].forEach.call($('codebox').querySelectorAll('input'),function(i){v+=i.value});
+    var f=$('codefb');
+    if(v.length<5){f.className='fb show nudge';f.textContent='The code has 5 digits. Fill every box.';return}
+    S.codeTries++;
+    if(h20('exit:'+D.salt+v)!==D.exitHash){
+      f.className='fb show nudge';f.textContent='The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.';
+      var ex=$('exit');ex.classList.remove('shake');void ex.offsetWidth;ex.classList.add('shake');
+      persist();return;
+    }
+    S.escaped=true;S.escapeMs=S.elapsed;
+    f.className='fb show good';f.textContent='The door swings open!';
+    persist();updateAll();
+    setTimeout(function(){$('esc').scrollIntoView({behavior:'smooth',block:'start'})},900);
+  }
+  $('codeBtn').addEventListener('click',tryCode);
+
+  /* ---------- timer ---------- */
+  function tick(){
+    var n=Date.now();
+    if(S.started&&!S.escaped){S.elapsed+=Math.min(n-lastTick,5000);$('tm').textContent=fmt(S.elapsed)}
+    lastTick=n;
+  }
+  function startTimer(){lastTick=Date.now();if(!timer)timer=setInterval(function(){tick();if(Math.round(S.elapsed/1000)%10===0)persist()},1000)}
+
+  /* ---------- files ---------- */
+  function msg(t,err){var m=$('msg');m.textContent=t;m.className='msg'+(err?' err':'');m.style.display='block'}
+  function ascii(n){return String(n).normalize('NFD').replace(/[̀-ͯ]/g,'')}
+  function clean(n){n=window.spAscii?spAscii(n):n;return ascii(n).trim().replace(/\s+/g,'_').replace(/[^A-Za-z0-9_-]/g,'')}
+  function who(){return (clean($('f_last').value)||'Last')+'_'+(clean($('f_first').value)||'First')}
+  function download(name,obj){
+    var blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;
+    document.body.appendChild(a);a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);
+  }
+  function namesOk(){
+    var ids=['f_first','f_last','f_period'],ok=true;
+    ids.forEach(function(i){var f=$(i);if(!f.value.trim()){f.classList.add('bad');ok=false}});
+    if(!ok){msg('Enter your first name, last name, and period at the top first.',true);$('f_first').scrollIntoView({block:'center'})}
+    return ok;
+  }
+  ['f_first','f_last','f_period'].forEach(function(i){$(i).addEventListener('input',function(){$(i).classList.remove('bad');S[i.slice(2)]=$(i).value;persist()})});
+  $('debriefText').addEventListener('input',function(){S.debrief=$('debriefText').value;persist();updateStatus()});
+  $('saveBtn').addEventListener('click',function(){
+    if(!namesOk())return;tick();
+    download(who()+'-'+PACKET+'-PROGRESS.json',snapshot());
+    msg('Progress file downloaded. Use Load Progress to continue later.');
+  });
+  $('finishBtn').addEventListener('click',function(){
+    if(!namesOk())return;tick();
+    var now=new Date(),o=snapshot();o.completed=S.escaped;o.submitted=now.toISOString();
+    o.student.date=now.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+    download(who()+'-'+PACKET+'.json',o);
+    msg(S.escaped?('Done! File downloaded: '+who()+'-'+PACKET+'.json. Upload it to Canvas.'):('Your file downloaded and is marked INCOMPLETE (you have not escaped). Upload it to Canvas: '+who()+'-'+PACKET+'.json'));
+  });
+  function openLoad(){$('loadFile').click()}
+  $('loadBtn').addEventListener('click',openLoad);$('loadBtn0').addEventListener('click',openLoad);
+  $('loadFile').addEventListener('change',function(e){
+    var f=e.target.files[0];if(!f)return;
+    var r=new FileReader();
+    r.onload=function(){
+      try{
+        var o=JSON.parse(r.result);
+        if(!o||o.packet!==PACKET||typeof o.locks!=='object')throw new Error('wrong');
+        digits={};var n=fresh();restore(n,o);S=n;applyToDom();
+        msg('Progress loaded. Welcome back.');
+      }catch(err){msg('That file did not work. Choose a progress file saved from this Escape Room.',true)}
+      e.target.value='';
+    };
+    r.onerror=function(){msg('The file could not be read.',true)};
+    r.readAsText(f);
+  });
+  $('reset').addEventListener('click',function(){
+    if(!confirm('Clear all your work and start over? This cannot be undone.'))return;
+    digits={};expanded={};S=fresh();
+    try{localStorage.removeItem(STORE+'state')}catch(e){}
+    $('locks').innerHTML='';D.locks.forEach(buildLock);
+    $('f_first').value=$('f_last').value=$('f_period').value='';$('debriefText').value='';
+    [].forEach.call($('codebox').querySelectorAll('input'),function(i){i.value=''});$('codefb').className='fb';
+    applyToDom();
+  });
+  function applyToDom(){
+    $('f_first').value=S.first;$('f_last').value=S.last;$('f_period').value=S.period;$('debriefText').value=S.debrief;
+    // rebuild lock widgets, then pre-fill solved ones with readable note
+    $('locks').innerHTML='';D.locks.forEach(buildLock);
+    expanded={};
+    updateAll();
+    if(S.started)startTimer();
+  }
+  $('startBtn').addEventListener('click',function(){S.started=true;persist();startTimer();updateAll();$('game').scrollIntoView({behavior:'smooth'})});
+  window.addEventListener('beforeunload',function(){tick();persist()});
+
+  S=loadLocal();
+  D.locks.forEach(buildLock);
+  applyToDom();
+})();
+</script>
+<!--sp-i18n--><script type="application/json" id="sp-i18n">{"langs":["en","es","ar"],"default":"en","es":{"Save Progress":"Guardar progreso","Load Progress":"Cargar progreso","Finished — Download File to Submit":"Terminé — Descargar el archivo para entregar","Clear all my answers":"Borrar todas mis respuestas","FIRST NAME *":"NOMBRE *","LAST NAME *":"APELLIDO *","PERIOD *":"PERÍODO *","DATE (fills in when you finish)":"FECHA (se llena cuando terminas)","e.g. 3":"p. ej., 3","Automatic":"Automática","Please type your first name, last name, and period first.":"Primero escribe tu nombre, apellido y período.","Western Expansion and Southern Secession":"Expansión hacia el oeste y secesión del sur","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — La Ley de Esclavos Fugitivos","Bleeding Kansas":"Bleeding Kansas — Kansas sangriento","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"Se descargó tu archivo de progreso. Guárdalo bien. Usa «Cargar progreso» para continuar más tarde.","Progress loaded.":"Progreso cargado.","Could not read that file.":"No se pudo leer ese archivo.","Treaty of Guadalupe Hidalgo":"Tratado de Guadalupe Hidalgo","How to escape:":"Cómo escapar:","Open each lock in order. Read the <b>Clue Card<\/b>. The answer is in the card.":"Abre cada candado en orden. Lee la <b>tarjeta de indicios<\/b>. La respuesta está en la tarjeta.","Solve the puzzle to open the lock and reveal one digit.":"Resuelve el acertijo para abrir el candado y descubrir un dígito.","If you get stuck, press <b>Hint<\/b>. Hints are free, but your teacher can see how many you used.":"Si te atoras, oprime <b>Pista<\/b>. Las pistas son gratis, pero tu maestro puede ver cuántas usaste.","Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.":"Abre los 5 candados y luego escribe el código de salida de 5 dígitos. Termina con el Informe final.","The clock starts when you press the button. Most students finish in about 20 minutes.":"El reloj empieza cuando oprimes el botón. La mayoría de los estudiantes termina en unos 20 minutos.","Time":"Tiempo","Locks":"Candados","Hints used":"Pistas usadas","CLUE CARD":"TARJETA DE INDICIOS","Check":"Comprobar","Hint":"Pista","Clear":"Borrar","THE EXIT DOOR":"LA PUERTA DE SALIDA","Exit door":"Puerta de salida","Type the exit code":"Escribe el código de salida","Open all 5 locks first. The digits go in order: Lock 1 first.":"Primero abre los 5 candados. Los dígitos van en orden: primero el del Candado 1.","All 5 locks are open. Type the 5 digits in order, Lock 1 first.":"Los 5 candados están abiertos. Escribe los 5 dígitos en orden, primero el del Candado 1.","The door is open!":"¡La puerta está abierta!","Open the Door":"Abrir la puerta","The code has 5 digits. Fill every box.":"El código tiene 5 dígitos. Llena todas las casillas.","The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.":"La puerta no se abrió. Revisa los dígitos debajo de cada candado y escríbelos en orden: primero el del Candado 1.","The door swings open!":"¡La puerta se abre de golpe!","Type the answer in English.":"Escribe la respuesta en inglés.","Type the answer in English. Use the digits 0-9.":"Escribe la respuesta en inglés. Usa los dígitos 0-9.","ESCAPED":"¡ESCAPASTE!","Your time:":"Tu tiempo:","One last step: write your Debrief below.":"Un último paso: escribe tu Informe final abajo.","DEBRIEF":"INFORME FINAL","Which lock was hardest, and what did you learn that you did not know before?":"¿Qué candado fue el más difícil y qué aprendiste que antes no sabías?","Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.":"Escribe de 3 a 4 oraciones. Nombra el candado y usa un dato de su tarjeta de indicios. Puedes escribirlo aunque no hayas escapado.","Type your answer here...":"Escribe tu respuesta aquí...","Debrief":"Informe final","Clear all my work and start over":"Borrar todo mi trabajo y empezar de nuevo","Have a saved file? Load it to continue.":"¿Tienes un archivo guardado? Cárgalo para continuar.","Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.":"Todavía no escapas (se marca INCOMPLETO). Aun así puedes descargar tu archivo y entregarlo.","You escaped! Write your Debrief, then download your file to submit.":"¡Escapaste! Escribe tu Informe final y luego descarga tu archivo para entregarlo.","You escaped and wrote your Debrief. Ready to submit.":"Escapaste y escribiste tu Informe final. Listo para entregar.","Progress file downloaded. Use Load Progress to continue later.":"Se descargó el archivo de progreso. Usa «Cargar progreso» para continuar más tarde.","Progress loaded. Welcome back.":"Progreso cargado. Bienvenido de nuevo.","That file did not work. Choose a progress file saved from this Escape Room.":"Ese archivo no funcionó. Elige un archivo de progreso guardado de esta sala de escape.","Enter your first name, last name, and period at the top first.":"Primero escribe tu nombre, apellido y período arriba.","Tap all 4 places first, in order.":"Primero toca los 4 lugares, en orden.","Match every term first.":"Primero relaciona todos los términos.","Answer every question first.":"Primero responde todas las preguntas.","Type your answer first.":"Primero escribe tu respuesta.","That was the last hint. Read the Clue Card slowly and try again.":"Esa fue la última pista. Lee la tarjeta de indicios despacio y vuelve a intentarlo.","digit":"dígito","Exit code digit 1":"Dígito 1 del código de salida","Coded message":"Mensaje en código","Scrambled letters":"Letras desordenadas","Decoded answer":"Respuesta decodificada","Your answer":"Tu respuesta","Choose a description...":"Elige una descripción...","Unscramble the letters to fill the blank.":"Ordena las letras para llenar el espacio en blanco.","Decoder key: the <span style=\"color:var(--hl);font-weight:700\">pink<\/span> letter is in the message. The white letter under it is the real letter.":"Clave del decodificador: la letra <span style=\"color:var(--hl);font-weight:700\">rosa<\/span> está en el mensaje. La letra blanca que está debajo es la letra verdadera.","Fill in the blank using the Clue Card.":"Llena el espacio en blanco con la tarjeta de indicios.","Pick the correct answer for all three questions.":"Elige la respuesta correcta para las tres preguntas.","Not quite. Check each match against the Clue Card. Which one are you least sure about?":"Casi. Revisa cada pareja con la tarjeta de indicios. ¿De cuál estás menos seguro?","Not quite. Decode one letter at a time with the key, then check your spelling.":"Casi. Decodifica una letra a la vez con la clave y luego revisa tu ortografía.","Clear all your work and start over? This cannot be undone.":"¿Borrar todo tu trabajo y empezar de nuevo? No se puede deshacer.","Escape the Reform Meeting Hall":"Escapa del salón de reuniones de la reforma","Escape Room 7 · The South, Slavery, and Reform":"Sala de escape 7 · El Sur, la esclavitud y la reforma","The South, Slavery, and Reform":"El Sur, la esclavitud y la reforma","UNIT 2 · AN EXPANDING NATION | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 2 · UNA NACIÓN EN EXPANSIÓN | CPUSH | DANIEL GARZA, M.A.","Enter the Hall":"Entrar al salón","You are locked in the hall.":"Estás encerrado en el salón.","The Reform Meeting Hall ran late and the caretaker locked up. The door has <b>5 locks<\/b>. Each lock matches one big idea from Lesson 7. Solve them all to find the <b>5-digit exit code<\/b>.":"La reunión en el salón de la reforma se alargó y el cuidador cerró con llave. La puerta tiene <b>5 candados<\/b>. Cada candado corresponde a una idea importante de la Lección 7. Resuélvelos todos para encontrar el <b>código de salida de 5 dígitos<\/b>.","A wooden meeting hall with a big oak door. The door has five padlocks in a row. Under each padlock is a window for one digit of the exit code.":"Un salón de reuniones de madera con una gran puerta de roble. La puerta tiene cinco candados en fila. Debajo de cada candado hay una ventanita para un dígito del código de salida.","REFORM MEETING HALL":"SALÓN DE LA REFORMA","The Cotton Ledger":"El libro de cuentas del algodón","The Southern Social Ladder":"La escalera social del Sur","The Hidden Door":"La puerta oculta","The Concord Study":"El estudio de Concord","The Printing Shop":"La imprenta","Core Objectives 1-2: Explain how racial capitalism contributed to inequalities in the South, and discuss the role cotton and slavery played in the South’s economy and society.":"Objetivos principales 1-2: Explica cómo el capitalismo racial contribuyó a las desigualdades en el Sur, y analiza el papel que tuvieron el algodón y la esclavitud en la economía y la sociedad del Sur.","Core Objectives 3-4: Explain why most White Southerners supported slavery, and describe how slavery affected free and enslaved African Americans.":"Objetivos principales 3-4: Explica por qué la mayoría de los sureños blancos apoyaba la esclavitud, y describe cómo afectó la esclavitud a los afroamericanos libres y esclavizados.","Core Objective 5: Analyze how enslaved people resisted the conditions they were forced to endure.":"Objetivo principal 5: Analiza cómo las personas esclavizadas resistieron las condiciones que se les obligó a soportar.","Core Objectives 6-7: Describe the major changes in religious life in the early 1800s, and examine the emergence of transcendentalism in American culture.":"Objetivos principales 6-7: Describe los cambios importantes en la vida religiosa a principios del siglo XIX, y examina el surgimiento del trascendentalismo en la cultura estadounidense.","Core Objectives 8-9: Explain why social reform movements emerged in the early 1800s, and evaluate how the anti-slavery movement grew and affected women’s rights.":"Objetivos principales 8-9: Explica por qué surgieron los movimientos de reforma social a principios del siglo XIX, y evalúa cómo creció el movimiento contra la esclavitud y cómo afectó los derechos de las mujeres.","During the first half of the 1800s, cotton passed rice as the most profitable cash crop in the South. Southern cotton fed the textile mills of New England and Great Britain. By 1860, southern states provided 77 percent of the cotton used in Britain’s textile mills. In the seven states of the Lower South, enslaved people made up nearly half the population by 1860. Norton says slavery was a profit-making system built on forced labor that created huge inequalities in income, wealth, power, and status. This system is called racial capitalism.":"Durante la primera mitad del siglo XIX, el algodón superó al arroz como el cultivo comercial más rentable del Sur. El algodón del sur abastecía las fábricas textiles de Nueva Inglaterra y Gran Bretaña. Para 1860, los estados del sur proporcionaban el 77 por ciento del algodón que usaban las fábricas textiles de Gran Bretaña. En los siete estados del Sur Profundo, las personas esclavizadas formaban casi la mitad de la población en 1860. Norton dice que la esclavitud era un sistema que daba ganancias, basado en el trabajo forzado, y que creó enormes desigualdades de ingresos, riqueza, poder y estatus. A este sistema se le llama capitalismo racial.","A planter had to own at least twenty laborers, and only 1 out of 30 Whites in 1860 qualified. Plantation mistresses were active participants in the system of slavery. The most numerous White Southerners were plain White folk, small farmers who grew just enough to live on. Most plain White folk supported slavery for economic and racial reasons. Free persons of color were not enslaved, but they were “anything but free”: in South Carolina, after 1823, they had to have a White “guardian” and an identity card.":"Un plantador tenía que ser dueño de al menos veinte trabajadores, y en 1860 solo 1 de cada 30 blancos cumplía ese requisito. Las señoras de las plantaciones eran participantes activas en el sistema de la esclavitud. Los sureños blancos más numerosos eran los blancos comunes, pequeños agricultores que cultivaban apenas lo suficiente para vivir. La mayoría de los blancos comunes apoyaba la esclavitud por razones económicas y raciales. Las personas de color libres no eran esclavizadas, pero eran “todo menos libres”: en Carolina del Sur, después de 1823, tenían que tener un “tutor” blanco y una tarjeta de identidad.","Enslaved people forged their own communities and found many ways to resist. Spirituals, or sacred folk songs, expressed the longing to be free, and thousands kept running away each year. In August 1831, Nat Turner, a preacher, led a rebellion in Southampton County, Virginia, that terrified Whites across the South. Virginia’s legislature then debated whether slavery should be abolished. That proposal was defeated, and instead the delegates limited the ability of enslaved people to learn to read and write and to gather for religious meetings.":"Las personas esclavizadas formaron sus propias comunidades y encontraron muchas maneras de resistir. Los espirituales, o canciones populares sagradas, expresaban el deseo de ser libres, y miles seguían huyendo cada año. En agosto de 1831, Nat Turner, un predicador, encabezó una rebelión en el condado de Southampton, Virginia, que aterrorizó a los blancos de todo el Sur. Entonces la legislatura de Virginia debatió si la esclavitud debía abolirse. Esa propuesta fue derrotada y, en cambio, los delegados limitaron la capacidad de las personas esclavizadas para aprender a leer y escribir y para reunirse con fines religiosos.","Around 1800, a massive wave of religious revivals called the Second Great Awakening swept the nation. Methodists, Baptists, and Presbyterians grew fast; in 1780 there were only 50 Methodist churches, but by 1860 there were 20,000. In New England, a Romantic movement promoted radical individualism and a personal spirituality free from organized religion. Ralph Waldo Emerson became the nation’s most popular public speaker in the 1840s, urging self-reliance. His friend Henry David Thoreau lived for two years at Walden Pond to learn what nature “had to teach.”":"Alrededor de 1800, una enorme ola de avivamientos religiosos llamada el Segundo Gran Despertar recorrió la nación. Los metodistas, bautistas y presbiterianos crecieron rápido; en 1780 solo había 50 iglesias metodistas, pero para 1860 había 20,000. En Nueva Inglaterra, un movimiento romántico promovió el individualismo radical y una espiritualidad personal libre de la religión organizada. Ralph Waldo Emerson se convirtió en el orador público más popular de la nación en la década de 1840 e instaba a confiar en uno mismo. Su amigo Henry David Thoreau vivió dos años en la laguna Walden para aprender lo que la naturaleza “tenía que enseñar”.","Reformers of the early 1800s took on many causes, including temperance (giving up alcohol) and free, tax-supported public schools, led by Horace Mann. In 1831, with help from free Black northerners, William Lloyd Garrison launched an anti-slavery newspaper called <i>The Liberator<\/i>. In 1848, Elizabeth Cady Stanton and Lucretia Mott called a women’s rights convention at Seneca Falls, New York. Its Declaration of Rights and Sentiments said “all men and women are created equal.” Frederick Douglass was one of the 32 men who signed it.":"Los reformadores de principios del siglo XIX se ocuparon de muchas causas, entre ellas la templanza (dejar el alcohol) y las escuelas públicas gratuitas, pagadas con impuestos, dirigidas por Horace Mann. En 1831, con ayuda de norteños negros libres, William Lloyd Garrison lanzó un periódico contra la esclavitud llamado <i>The Liberator<\/i>. En 1848, Elizabeth Cady Stanton y Lucretia Mott convocaron una convención por los derechos de las mujeres en Seneca Falls, Nueva York. Su Declaración de Derechos y Sentimientos decía que “todos los hombres y mujeres son creados iguales”. Frederick Douglass fue uno de los 32 hombres que la firmaron.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 11, “The Cotton Kingdom” (pp. 430–432) and “Racial Capitalism” (first section of Ch. 11).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 11, “The Cotton Kingdom” (págs. 430–432) y “Racial Capitalism” (primera sección del cap. 11).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 11, “Whites in the South” (Enslavers, pp. 438–439; The Plantation Mistress, p. 439; “Plain White Folk,” p. 441) and “Enslaved People in the South” (“Free Persons of Color,” p. 444).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 11, “Whites in the South” (Enslavers, págs. 438–439; The Plantation Mistress, pág. 439; “Plain White Folk,” pág. 441) y “Enslaved People in the South” (“Free Persons of Color,” pág. 444).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 11, “Forging an Enslaved Community” (p. 453; “Nat Turner’s Rebellion,” p. 457; “After Nat Turner’s Rebellion” and “The Dream of Freedom,” p. 458).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 11, “Forging an Enslaved Community” (pág. 453; “Nat Turner’s Rebellion,” pág. 457; “After Nat Turner’s Rebellion” y “The Dream of Freedom,” pág. 458).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 12, “A More Democratic Religion” (The Second Great Awakening, p. 465) and “Romanticism in America” (Transcendentalism, p. 473; Emerson, p. 474; Thoreau, pp. 475–476).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 12, “A More Democratic Religion” (The Second Great Awakening, pág. 465) y “Romanticism in America” (Transcendentalism, pág. 473; Emerson, pág. 474; Thoreau, págs. 475–476).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 12, “The Reform Impulse” (Temperance, p. 480; Early Public Schools, pp. 482–483) and “Anti-Slavery and Women’s Rights Movements” (Garrison, pp. 489–490; Seneca Falls, pp. 494–495).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 12, “The Reform Impulse” (Temperance, pág. 480; Early Public Schools, págs. 482–483) y “Anti-Slavery and Women’s Rights Movements” (Garrison, págs. 489–490; Seneca Falls, págs. 494–495).","Match each group to the best description. Use the Clue Card.":"Relaciona cada grupo con la mejor descripción. Usa la tarjeta de indicios.","Tap the four events in the order they happened. Tap an event again to take it back.":"Toca los cuatro sucesos en el orden en que ocurrieron. Toca un suceso otra vez para quitarlo.","The Clue Card describes a New England movement without naming it. A secret message names it. Each letter in the message was moved 5 steps forward in the alphabet. Decode it to name the movement.":"La tarjeta de indicios describe un movimiento de Nueva Inglaterra sin decir su nombre. Un mensaje secreto lo nombra. Cada letra del mensaje se movió 5 pasos hacia adelante en el alfabeto. Decodifícalo para nombrar el movimiento.","William Lloyd Garrison’s anti-slavery newspaper was called The ________.":"El periódico contra la esclavitud de William Lloyd Garrison se llamaba The ________.","Each answer is in the Clue Card. Look for a crop, a percent, and a share of the population.":"Cada respuesta está en la tarjeta de indicios. Busca un cultivo, un porcentaje y una parte de la población.","The crop is the one cotton passed. The percent is a big one (more than 75). The share is “nearly” one of the fractions.":"El cultivo es el que el algodón superó. El porcentaje es uno grande (más de 75). La parte es “casi” una de las fracciones.","Not quite. At least one answer is off. Re-read the Clue Card for the crop, the percent, and the share.":"Casi. Al menos una respuesta está mal. Vuelve a leer la tarjeta de indicios para ver el cultivo, el porcentaje y la parte.","Two descriptions give numbers. One is about owning laborers (twenty). One is about a year (1823).":"Dos descripciones dan números. Una trata de tener trabajadores (veinte). Otra trata de un año (1823).","Plain White folk are the “most numerous” group. The mistress is the one described as an “active participant.”":"Los blancos comunes son el grupo “más numeroso”. La señora de la plantación es la descrita como “participante activa”.","The rebellion comes first. Everything else is what the Virginia legislature did afterward.":"La rebelión va primero. Todo lo demás es lo que hizo la legislatura de Virginia después.","Debate first. Then the vote that ended the proposal. The new limits on reading, writing, and meetings come last.":"Primero el debate. Luego la votación que acabó con la propuesta. Los nuevos límites a la lectura, la escritura y las reuniones van al final.","Not quite. Re-read the Clue Card and follow the events from the rebellion to the new limits.":"Casi. Vuelve a leer la tarjeta de indicios y sigue los sucesos desde la rebelión hasta los nuevos límites.","Use the decoder key. In the message, the letter Y is really T, and the letter W is really R.":"Usa la clave del decodificador. En el mensaje, la letra Y es en realidad T, y la letra W es en realidad R.","The name starts with TRANS and ends with ISM. It is the movement of Emerson and Thoreau.":"El nombre empieza con TRANS y termina con ISM. Es el movimiento de Emerson y Thoreau.","Read the second sentence of the Clue Card. The newspaper’s name is in italics.":"Lee la segunda oración de la tarjeta de indicios. El nombre del periódico está en cursiva.","The word starts with L and ends with R. It has 9 letters.":"La palabra (en inglés) empieza con L y termina con R. Tiene 9 letras.","Not quite. Re-read the Clue Card for the name of the newspaper. Use the scrambled letters to check your spelling.":"Casi. Vuelve a leer la tarjeta de indicios para ver el nombre del periódico. Usa las letras desordenadas para revisar tu ortografía.","Cotton passed which crop as the South’s most profitable cash crop?":"¿A qué cultivo superó el algodón como el cultivo comercial más rentable del Sur?","In 1860, about how much of the cotton used in Britain’s textile mills came from the South?":"En 1860, ¿aproximadamente cuánto del algodón que usaban las fábricas textiles de Gran Bretaña venía del Sur?","By 1860, enslaved people were about what share of the Lower South’s population?":"Para 1860, ¿qué parte de la población del Sur Profundo representaban aproximadamente las personas esclavizadas?","Tobacco":"Tabaco","Rice":"Arroz","Sugar":"Azúcar","Wheat":"Trigo","27 percent":"27 por ciento","52 percent":"52 por ciento","77 percent":"77 por ciento","97 percent":"97 por ciento","Nearly half":"Casi la mitad","About one in ten":"Aproximadamente uno de cada diez","About one in four":"Aproximadamente uno de cada cuatro","Almost everyone":"Casi todos","Planter":"Plantador","Plantation mistress":"Señora de la plantación","Plain White folk":"Blancos comunes","Free persons of color":"Personas de color libres","Had to own at least twenty laborers; only 1 out of 30 Whites in 1860 qualified":"Tenía que ser dueño de al menos veinte trabajadores; en 1860 solo 1 de cada 30 blancos cumplía","An active participant in the system of slavery":"Una participante activa en el sistema de la esclavitud","The most numerous White Southerners; small farmers":"Los sureños blancos más numerosos; pequeños agricultores","Not enslaved, but in South Carolina needed a White “guardian” and an ID card after 1823":"No eran esclavizados, pero en Carolina del Sur, después de 1823, necesitaban un “tutor” blanco y una tarjeta de identidad","Nat Turner’s Rebellion in Virginia (August 1831)":"La rebelión de Nat Turner en Virginia (agosto de 1831)","Virginia’s legislature debates whether to end slavery":"La legislatura de Virginia debate si se debe terminar con la esclavitud","The proposal to end slavery is defeated":"La propuesta para terminar con la esclavitud es derrotada","New limits on reading, writing, and religious meetings":"Nuevos límites a la lectura, la escritura y las reuniones religiosas"},"ar":{"Save Progress":"حفظ التقدم","Load Progress":"تحميل التقدم","Finished — Download File to Submit":"انتهيت — نزّل الملف لتسليمه","Clear all my answers":"امسح كل إجاباتي","FIRST NAME *":"الاسم الأول *","LAST NAME *":"اسم العائلة *","PERIOD *":"الحصة *","DATE (fills in when you finish)":"التاريخ (يُكتب تلقائيًا عند الانتهاء)","e.g. 3":"مثال: 3","Automatic":"تلقائي","Please type your first name, last name, and period first.":"اكتب أولًا اسمك الأول واسم العائلة والحصة.","Western Expansion and Southern Secession":"التوسع غربًا وانفصال الجنوب","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"الوحدة 3 · بيت منقسم وأُعيد بناؤه | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — قانون العبيد الهاربين","Bleeding Kansas":"Bleeding Kansas — كانساس النازفة","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"الوحدة 3 · بيت منقسم وأعيد بناؤه | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"تم تنزيل ملف التقدم. احتفظ به في مكان آمن. استخدم «تحميل التقدم» لتكمل لاحقًا.","Progress loaded.":"تم تحميل التقدم.","Could not read that file.":"تعذّرت قراءة هذا الملف.","Treaty of Guadalupe Hidalgo":"معاهدة غوادالوبي هيدالغو (Treaty of Guadalupe Hidalgo)","How to escape:":"كيف تهرب:","Open each lock in order. Read the <b>Clue Card<\/b>. The answer is in the card.":"افتح كل قفل بالترتيب. اقرأ <b>بطاقة القرائن<\/b>. الإجابة موجودة في البطاقة.","Solve the puzzle to open the lock and reveal one digit.":"حلّ اللغز لتفتح القفل وتكشف رقمًا واحدًا.","If you get stuck, press <b>Hint<\/b>. Hints are free, but your teacher can see how many you used.":"إذا تعثرت، اضغط <b>تلميح<\/b>. التلميحات مجانية، لكن معلمك يستطيع أن يرى كم تلميحًا استخدمت.","Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.":"افتح الأقفال الخمسة، ثم اكتب رمز الخروج المكوّن من 5 أرقام. أنهِ بالملخص الختامي.","The clock starts when you press the button. Most students finish in about 20 minutes.":"يبدأ العدّاد عندما تضغط الزر. يُنهي معظم الطلاب في نحو 20 دقيقة.","Time":"الوقت","Locks":"الأقفال","Hints used":"التلميحات المستخدمة","CLUE CARD":"بطاقة القرائن","Check":"تحقق","Hint":"تلميح","Clear":"مسح","THE EXIT DOOR":"باب الخروج","Exit door":"باب الخروج","Type the exit code":"اكتب رمز الخروج","Open all 5 locks first. The digits go in order: Lock 1 first.":"افتح الأقفال الخمسة أولًا. تُكتب الأرقام بالترتيب: رقم القفل 1 أولًا.","All 5 locks are open. Type the 5 digits in order, Lock 1 first.":"الأقفال الخمسة مفتوحة. اكتب الأرقام الخمسة بالترتيب: رقم القفل 1 أولًا.","The door is open!":"الباب مفتوح!","Open the Door":"افتح الباب","The code has 5 digits. Fill every box.":"الرمز مكوّن من 5 أرقام. املأ كل المربعات.","The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.":"لم يُفتح الباب. تحقق من الأرقام تحت كل قفل، واكتبها بالترتيب: رقم القفل 1 أولًا.","The door swings open!":"ينفتح الباب على مصراعيه!","Type the answer in English.":"اكتب الإجابة بالإنجليزية.","Type the answer in English. Use the digits 0-9.":"اكتب الإجابة بالإنجليزية. استخدم الأرقام 0-9.","ESCAPED":"لقد هربت!","Your time:":"وقتك:","One last step: write your Debrief below.":"خطوة أخيرة: اكتب ملخصك الختامي أدناه.","DEBRIEF":"الملخص الختامي","Which lock was hardest, and what did you learn that you did not know before?":"أي قفل كان الأصعب، وماذا تعلمت ولم تكن تعرفه من قبل؟","Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.":"اكتب من 3 إلى 4 جمل. اذكر القفل واستخدم معلومة واحدة من بطاقة القرائن الخاصة به. يمكنك كتابة هذا حتى لو لم تهرب.","Type your answer here...":"اكتب إجابتك هنا...","Debrief":"الملخص الختامي","Clear all my work and start over":"امسح كل عملي وابدأ من جديد","Have a saved file? Load it to continue.":"هل لديك ملف محفوظ؟ حمّله لتكمل.","Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.":"لم تهرب بعد (يُسجَّل «غير مكتمل» INCOMPLETE). ما زال بإمكانك تنزيل ملفك وتسليمه.","You escaped! Write your Debrief, then download your file to submit.":"لقد هربت! اكتب ملخصك الختامي، ثم نزّل ملفك لتسليمه.","You escaped and wrote your Debrief. Ready to submit.":"لقد هربت وكتبت ملخصك الختامي. أنت جاهز للتسليم.","Progress file downloaded. Use Load Progress to continue later.":"تم تنزيل ملف التقدم. استخدم «تحميل التقدم» لتكمل لاحقًا.","Progress loaded. Welcome back.":"تم تحميل التقدم. أهلًا بعودتك.","That file did not work. Choose a progress file saved from this Escape Room.":"لم يعمل هذا الملف. اختر ملف تقدم محفوظًا من غرفة الهروب هذه.","Enter your first name, last name, and period at the top first.":"اكتب اسمك الأول واسم العائلة والحصة في الأعلى أولًا.","Tap all 4 places first, in order.":"المس الأماكن الأربعة أولًا، بالترتيب.","Match every term first.":"طابق كل المصطلحات أولًا.","Answer every question first.":"أجب عن كل الأسئلة أولًا.","Type your answer first.":"اكتب إجابتك أولًا.","That was the last hint. Read the Clue Card slowly and try again.":"كان هذا آخر تلميح. اقرأ بطاقة القرائن ببطء وحاول مرة أخرى.","digit":"رقم","Exit code digit 1":"رقم رمز الخروج 1","Coded message":"الرسالة المشفرة","Scrambled letters":"أحرف مبعثرة","Decoded answer":"الإجابة بعد فك التشفير","Your answer":"إجابتك","Choose a description...":"اختر وصفًا...","Unscramble the letters to fill the blank.":"رتّب الأحرف لتملأ الفراغ.","Decoder key: the <span style=\"color:var(--hl);font-weight:700\">pink<\/span> letter is in the message. The white letter under it is the real letter.":"مفتاح فك التشفير: الحرف <span style=\"color:var(--hl);font-weight:700\">الوردي<\/span> هو الحرف الموجود في الرسالة. والحرف الأبيض تحته هو الحرف الحقيقي.","Fill in the blank using the Clue Card.":"املأ الفراغ باستخدام بطاقة القرائن.","Pick the correct answer for all three questions.":"اختر الإجابة الصحيحة للأسئلة الثلاثة.","Not quite. Check each match against the Clue Card. Which one are you least sure about?":"ليس تمامًا. تحقق من كل مطابقة باستخدام بطاقة القرائن. أي مطابقة أنت أقل تأكدًا منها؟","Not quite. Decode one letter at a time with the key, then check your spelling.":"ليس تمامًا. فُكّ تشفير حرف واحد في كل مرة باستخدام المفتاح، ثم تحقق من تهجئتك.","Clear all your work and start over? This cannot be undone.":"هل تريد مسح كل عملك والبدء من جديد؟ لا يمكن التراجع عن ذلك.","Escape the Reform Meeting Hall":"اهرب من قاعة اجتماعات الإصلاح","Escape Room 7 · The South, Slavery, and Reform":"غرفة الهروب 7 · الجنوب والعبودية والإصلاح","The South, Slavery, and Reform":"الجنوب والعبودية والإصلاح","UNIT 2 · AN EXPANDING NATION | CPUSH | DANIEL GARZA, M.A.":"الوحدة 2 · أمة تتوسع | CPUSH | DANIEL GARZA, M.A.","Enter the Hall":"ادخل القاعة","You are locked in the hall.":"أنت محبوس داخل القاعة.","The Reform Meeting Hall ran late and the caretaker locked up. The door has <b>5 locks<\/b>. Each lock matches one big idea from Lesson 7. Solve them all to find the <b>5-digit exit code<\/b>.":"امتدّ اجتماع قاعة الإصلاح وأقفل الحارس الأبواب. في الباب <b>5 أقفال<\/b>. كل قفل يرتبط بفكرة كبيرة واحدة من الدرس 7. حلّها كلها لتجد <b>رمز الخروج المكوّن من 5 أرقام<\/b>.","A wooden meeting hall with a big oak door. The door has five padlocks in a row. Under each padlock is a window for one digit of the exit code.":"قاعة اجتماعات خشبية فيها باب كبير من خشب البلوط. على الباب خمسة أقفال في صف واحد. تحت كل قفل نافذة صغيرة لرقم واحد من رمز الخروج.","REFORM MEETING HALL":"قاعة اجتماعات الإصلاح","The Cotton Ledger":"دفتر حسابات القطن","The Southern Social Ladder":"السلّم الاجتماعي في الجنوب","The Hidden Door":"الباب الخفي","The Concord Study":"غرفة الدراسة في كونكورد (Concord)","The Printing Shop":"المطبعة","Core Objectives 1-2: Explain how racial capitalism contributed to inequalities in the South, and discuss the role cotton and slavery played in the South’s economy and society.":"الأهداف الأساسية 1-2: اشرح كيف أسهمت الرأسمالية العنصرية في عدم المساواة في الجنوب، وناقش الدور الذي أدّاه القطن والعبودية في اقتصاد الجنوب ومجتمعه.","Core Objectives 3-4: Explain why most White Southerners supported slavery, and describe how slavery affected free and enslaved African Americans.":"الأهداف الأساسية 3-4: اشرح لماذا أيّد معظم البيض في الجنوب العبودية، وصف كيف أثّرت العبودية في الأمريكيين الأفارقة الأحرار والمستعبَدين.","Core Objective 5: Analyze how enslaved people resisted the conditions they were forced to endure.":"الهدف الأساسي 5: حلّل كيف قاوم الأشخاص المستعبَدون الظروف التي أُجبروا على تحمّلها.","Core Objectives 6-7: Describe the major changes in religious life in the early 1800s, and examine the emergence of transcendentalism in American culture.":"الأهداف الأساسية 6-7: صف التغيرات الكبرى في الحياة الدينية في أوائل القرن التاسع عشر، وافحص ظهور الفلسفة المتعالية (transcendentalism) في الثقافة الأمريكية.","Core Objectives 8-9: Explain why social reform movements emerged in the early 1800s, and evaluate how the anti-slavery movement grew and affected women’s rights.":"الأهداف الأساسية 8-9: اشرح لماذا ظهرت حركات الإصلاح الاجتماعي في أوائل القرن التاسع عشر، وقيّم كيف نمت حركة مناهضة العبودية وكيف أثّرت في حقوق المرأة.","During the first half of the 1800s, cotton passed rice as the most profitable cash crop in the South. Southern cotton fed the textile mills of New England and Great Britain. By 1860, southern states provided 77 percent of the cotton used in Britain’s textile mills. In the seven states of the Lower South, enslaved people made up nearly half the population by 1860. Norton says slavery was a profit-making system built on forced labor that created huge inequalities in income, wealth, power, and status. This system is called racial capitalism.":"خلال النصف الأول من القرن التاسع عشر، تفوّق القطن على الأرز ليصبح المحصول النقدي الأكثر ربحًا في الجنوب. وكان قطن الجنوب يغذّي مصانع النسيج في نيو إنغلاند (New England) وبريطانيا العظمى. وبحلول عام 1860، كانت الولايات الجنوبية تزوّد 77 بالمئة من القطن الذي تستخدمه مصانع النسيج في بريطانيا. وفي الولايات السبع في الجنوب الأدنى (Lower South)، شكّل الأشخاص المستعبَدون ما يقارب نصف السكان بحلول عام 1860. ويقول نورتون (Norton) إن العبودية كانت نظامًا يحقق الأرباح قائمًا على العمل القسري، وإنه خلق تفاوتًا هائلًا في الدخل والثروة والسلطة والمكانة. ويسمى هذا النظام الرأسمالية العنصرية.","A planter had to own at least twenty laborers, and only 1 out of 30 Whites in 1860 qualified. Plantation mistresses were active participants in the system of slavery. The most numerous White Southerners were plain White folk, small farmers who grew just enough to live on. Most plain White folk supported slavery for economic and racial reasons. Free persons of color were not enslaved, but they were “anything but free”: in South Carolina, after 1823, they had to have a White “guardian” and an identity card.":"كان على صاحب المزرعة الكبيرة (planter) أن يملك ما لا يقل عن عشرين عاملًا، ولم يكن يستوفي ذلك في عام 1860 سوى 1 من كل 30 من البيض. وكانت سيدات المزارع مشاركات فاعلات في نظام العبودية. وكان أكثر البيض الجنوبيين عددًا هم البيض العاديون (plain White folk)، وهم مزارعون صغار يزرعون ما يكفي لعيشهم فقط. وأيّد معظم البيض العاديين العبودية لأسباب اقتصادية وعنصرية. أما الأشخاص الملوّنون الأحرار (free persons of color) فلم يكونوا مستعبَدين، لكنهم كانوا «أي شيء إلا أحرارًا»: ففي ساوث كارولينا (South Carolina)، بعد عام 1823، كان عليهم أن يكون لهم «وصيّ» أبيض وبطاقة هوية.","Enslaved people forged their own communities and found many ways to resist. Spirituals, or sacred folk songs, expressed the longing to be free, and thousands kept running away each year. In August 1831, Nat Turner, a preacher, led a rebellion in Southampton County, Virginia, that terrified Whites across the South. Virginia’s legislature then debated whether slavery should be abolished. That proposal was defeated, and instead the delegates limited the ability of enslaved people to learn to read and write and to gather for religious meetings.":"كوّن الأشخاص المستعبَدون مجتمعاتهم الخاصة ووجدوا طرقًا كثيرة للمقاومة. وعبّرت الأناشيد الروحية (spirituals)، وهي أغانٍ شعبية مقدسة، عن التوق إلى الحرية، وظل الآلاف يهربون كل عام. وفي أغسطس 1831، قاد نات تيرنر (Nat Turner)، وهو واعظ، تمردًا في مقاطعة ساوثهامبتون (Southampton County) بولاية فرجينيا (Virginia)، أرعب البيض في أنحاء الجنوب. ثم ناقش المجلس التشريعي لولاية فرجينيا ما إذا كان ينبغي إلغاء العبودية. وهُزم هذا المقترح، وبدلًا من ذلك قيّد المندوبون قدرة الأشخاص المستعبَدين على تعلّم القراءة والكتابة وعلى التجمع للاجتماعات الدينية.","Around 1800, a massive wave of religious revivals called the Second Great Awakening swept the nation. Methodists, Baptists, and Presbyterians grew fast; in 1780 there were only 50 Methodist churches, but by 1860 there were 20,000. In New England, a Romantic movement promoted radical individualism and a personal spirituality free from organized religion. Ralph Waldo Emerson became the nation’s most popular public speaker in the 1840s, urging self-reliance. His friend Henry David Thoreau lived for two years at Walden Pond to learn what nature “had to teach.”":"حوالي عام 1800، اجتاحت الأمة موجة ضخمة من الصحوات الدينية سُميت «الصحوة الكبرى الثانية» (Second Great Awakening). ونما المنهجيون (Methodists) والمعمدانيون (Baptists) والمشيخيون (Presbyterians) بسرعة؛ ففي عام 1780 لم يكن هناك سوى 50 كنيسة منهجية، لكن بحلول عام 1860 صار عددها 20,000. وفي نيو إنغلاند (New England)، روّجت حركة رومانسية للفردية الجذرية وللروحانية الشخصية الحرة من الدين المنظّم. وأصبح رالف والدو إمرسون (Ralph Waldo Emerson) أشهر خطيب عام في الأمة في أربعينيات القرن التاسع عشر، وكان يحثّ على الاعتماد على النفس. وعاش صديقه هنري ديفيد ثورو (Henry David Thoreau) سنتين عند بركة والدن (Walden Pond) ليتعلم ما كانت الطبيعة «تريد أن تعلّمه».","Reformers of the early 1800s took on many causes, including temperance (giving up alcohol) and free, tax-supported public schools, led by Horace Mann. In 1831, with help from free Black northerners, William Lloyd Garrison launched an anti-slavery newspaper called <i>The Liberator<\/i>. In 1848, Elizabeth Cady Stanton and Lucretia Mott called a women’s rights convention at Seneca Falls, New York. Its Declaration of Rights and Sentiments said “all men and women are created equal.” Frederick Douglass was one of the 32 men who signed it.":"تناول المصلحون في أوائل القرن التاسع عشر قضايا كثيرة، منها الاعتدال (temperance) أي الإقلاع عن الكحول، والمدارس العامة المجانية الممولة من الضرائب، بقيادة هوراس مان (Horace Mann). وفي عام 1831، أطلق ويليام لويد غاريسون (William Lloyd Garrison) بمساعدة سود أحرار من الشمال صحيفة مناهضة للعبودية اسمها <i>The Liberator<\/i>. وفي عام 1848، دعت إليزابيث كادي ستانتون (Elizabeth Cady Stanton) ولوكريشيا موت (Lucretia Mott) إلى مؤتمر لحقوق المرأة في سينيكا فولز (Seneca Falls) بولاية نيويورك. وجاء في إعلان الحقوق والمشاعر (Declaration of Rights and Sentiments) أن «جميع الرجال والنساء خُلقوا متساوين». وكان فريدريك دوغلاس (Frederick Douglass) أحد الرجال الاثنين والثلاثين الذين وقّعوا عليه.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 11, “The Cotton Kingdom” (pp. 430–432) and “Racial Capitalism” (first section of Ch. 11).":"Norton, <i>America: The Essential Learning Edition<\/i>, الفصل 11, “The Cotton Kingdom” (ص. 430–432) و“Racial Capitalism” (القسم الأول من الفصل 11).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 11, “Whites in the South” (Enslavers, pp. 438–439; The Plantation Mistress, p. 439; “Plain White Folk,” p. 441) and “Enslaved People in the South” (“Free Persons of Color,” p. 444).":"Norton, <i>America: The Essential Learning Edition<\/i>, الفصل 11, “Whites in the South” (Enslavers, ص. 438–439; The Plantation Mistress, ص. 439; “Plain White Folk,” ص. 441) و“Enslaved People in the South” (“Free Persons of Color,” ص. 444).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 11, “Forging an Enslaved Community” (p. 453; “Nat Turner’s Rebellion,” p. 457; “After Nat Turner’s Rebellion” and “The Dream of Freedom,” p. 458).":"Norton, <i>America: The Essential Learning Edition<\/i>, الفصل 11, “Forging an Enslaved Community” (ص. 453; “Nat Turner’s Rebellion,” ص. 457; “After Nat Turner’s Rebellion” و“The Dream of Freedom,” ص. 458).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 12, “A More Democratic Religion” (The Second Great Awakening, p. 465) and “Romanticism in America” (Transcendentalism, p. 473; Emerson, p. 474; Thoreau, pp. 475–476).":"Norton, <i>America: The Essential Learning Edition<\/i>, الفصل 12, “A More Democratic Religion” (The Second Great Awakening, ص. 465) و“Romanticism in America” (Transcendentalism, ص. 473; Emerson, ص. 474; Thoreau, ص. 475–476).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 12, “The Reform Impulse” (Temperance, p. 480; Early Public Schools, pp. 482–483) and “Anti-Slavery and Women’s Rights Movements” (Garrison, pp. 489–490; Seneca Falls, pp. 494–495).":"Norton, <i>America: The Essential Learning Edition<\/i>, الفصل 12, “The Reform Impulse” (Temperance, ص. 480; Early Public Schools, ص. 482–483) و“Anti-Slavery and Women’s Rights Movements” (Garrison, ص. 489–490; Seneca Falls, ص. 494–495).","Match each group to the best description. Use the Clue Card.":"طابق كل مجموعة مع أفضل وصف لها. استخدم بطاقة القرائن.","Tap the four events in the order they happened. Tap an event again to take it back.":"المس الأحداث الأربعة بالترتيب الذي وقعت به. المس الحدث مرة أخرى للتراجع عنه.","The Clue Card describes a New England movement without naming it. A secret message names it. Each letter in the message was moved 5 steps forward in the alphabet. Decode it to name the movement.":"تصف بطاقة القرائن حركة في نيو إنغلاند (New England) دون أن تذكر اسمها. ورسالة سرية تذكر اسمها. كل حرف في الرسالة تحرّك 5 خطوات إلى الأمام في الأبجدية. فُكّ تشفيرها لتعرف اسم الحركة.","William Lloyd Garrison’s anti-slavery newspaper was called The ________.":"كانت صحيفة ويليام لويد غاريسون (William Lloyd Garrison) المناهضة للعبودية تسمى The ________.","Each answer is in the Clue Card. Look for a crop, a percent, and a share of the population.":"كل إجابة موجودة في بطاقة القرائن. ابحث عن محصول ونسبة مئوية وحصة من السكان.","The crop is the one cotton passed. The percent is a big one (more than 75). The share is “nearly” one of the fractions.":"المحصول هو الذي تفوّق عليه القطن. والنسبة المئوية كبيرة (أكثر من 75). والحصة هي «ما يقارب» أحد الكسور.","Not quite. At least one answer is off. Re-read the Clue Card for the crop, the percent, and the share.":"ليس تمامًا. إجابة واحدة على الأقل خاطئة. أعد قراءة بطاقة القرائن لتجد المحصول والنسبة المئوية والحصة.","Two descriptions give numbers. One is about owning laborers (twenty). One is about a year (1823).":"وصفان يذكران أرقامًا. أحدهما عن امتلاك العمال (عشرين). والآخر عن سنة (1823).","Plain White folk are the “most numerous” group. The mistress is the one described as an “active participant.”":"البيض العاديون هم المجموعة «الأكثر عددًا». وسيدة المزرعة هي التي وُصفت بأنها «مشاركة فاعلة».","The rebellion comes first. Everything else is what the Virginia legislature did afterward.":"يأتي التمرد أولًا. وكل ما عداه هو ما فعله المجلس التشريعي لولاية فرجينيا (Virginia) بعد ذلك.","Debate first. Then the vote that ended the proposal. The new limits on reading, writing, and meetings come last.":"النقاش أولًا. ثم التصويت الذي أنهى المقترح. وتأتي القيود الجديدة على القراءة والكتابة والاجتماعات أخيرًا.","Not quite. Re-read the Clue Card and follow the events from the rebellion to the new limits.":"ليس تمامًا. أعد قراءة بطاقة القرائن وتتبّع الأحداث من التمرد إلى القيود الجديدة.","Use the decoder key. In the message, the letter Y is really T, and the letter W is really R.":"استخدم مفتاح فك التشفير. في الرسالة، الحرف Y هو في الحقيقة T، والحرف W هو في الحقيقة R.","The name starts with TRANS and ends with ISM. It is the movement of Emerson and Thoreau.":"يبدأ الاسم بـ TRANS وينتهي بـ ISM. إنها حركة إمرسون (Emerson) وثورو (Thoreau).","Read the second sentence of the Clue Card. The newspaper’s name is in italics.":"اقرأ الجملة الثانية في بطاقة القرائن. اسم الصحيفة مكتوب بالخط المائل.","The word starts with L and ends with R. It has 9 letters.":"تبدأ الكلمة (بالإنجليزية) بالحرف L وتنتهي بالحرف R. وهي مكوّنة من 9 أحرف.","Not quite. Re-read the Clue Card for the name of the newspaper. Use the scrambled letters to check your spelling.":"ليس تمامًا. أعد قراءة بطاقة القرائن لتجد اسم الصحيفة. استخدم الأحرف المبعثرة لتتحقق من تهجئتك.","Cotton passed which crop as the South’s most profitable cash crop?":"أي محصول تفوّق عليه القطن ليصبح المحصول النقدي الأكثر ربحًا في الجنوب؟","In 1860, about how much of the cotton used in Britain’s textile mills came from the South?":"في عام 1860، كم تقريبًا من القطن الذي تستخدمه مصانع النسيج في بريطانيا (Britain) جاء من الجنوب؟","By 1860, enslaved people were about what share of the Lower South’s population?":"بحلول عام 1860، ما الحصة التقريبية للأشخاص المستعبَدين من سكان الجنوب الأدنى (Lower South)؟","Tobacco":"التبغ","Rice":"الأرز","Sugar":"السكر","Wheat":"القمح","27 percent":"27 بالمئة","52 percent":"52 بالمئة","77 percent":"77 بالمئة","97 percent":"97 بالمئة","Nearly half":"ما يقارب النصف","About one in ten":"نحو واحد من كل عشرة","About one in four":"نحو واحد من كل أربعة","Almost everyone":"تقريبًا الجميع","Planter":"صاحب مزرعة كبيرة (Planter)","Plantation mistress":"سيدة المزرعة (Plantation mistress)","Plain White folk":"البيض العاديون (Plain White folk)","Free persons of color":"الأشخاص الملوّنون الأحرار (Free persons of color)","Had to own at least twenty laborers; only 1 out of 30 Whites in 1860 qualified":"كان عليه أن يملك ما لا يقل عن عشرين عاملًا؛ ولم يكن يستوفي ذلك في عام 1860 سوى 1 من كل 30 من البيض","An active participant in the system of slavery":"مشاركة فاعلة في نظام العبودية","The most numerous White Southerners; small farmers":"أكثر البيض الجنوبيين عددًا؛ مزارعون صغار","Not enslaved, but in South Carolina needed a White “guardian” and an ID card after 1823":"لم يكونوا مستعبَدين، لكنهم في ساوث كارولينا (South Carolina) كانوا بحاجة إلى «وصيّ» أبيض وبطاقة هوية بعد عام 1823","Nat Turner’s Rebellion in Virginia (August 1831)":"تمرد نات تيرنر (Nat Turner) في ولاية فرجينيا (أغسطس 1831)","Virginia’s legislature debates whether to end slavery":"المجلس التشريعي لولاية فرجينيا (Virginia) يناقش هل تُنهى العبودية","The proposal to end slavery is defeated":"يُهزم مقترح إنهاء العبودية","New limits on reading, writing, and religious meetings":"قيود جديدة على القراءة والكتابة والاجتماعات الدينية"},"patterns":[{"re":"^Still needed: first name, last name, and period\\.$","es":"Todavía falta: nombre, apellido y período.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة."},{"re":"^LOCK (\\d)$","es":"Cand. $1","ar":"القفل $1"},{"re":"^LOCK (\\d) · CORE OBJECTIVE (\\d)$","es":"CANDADO $1 · OBJETIVO PRINCIPAL $2","ar":"القفل $1 · الهدف الأساسي $2"},{"re":"^Hint (\\d):$","es":"Pista $1:","ar":"تلميح $1:"},{"re":"^Exit code digit (\\d)$","es":"Dígito $1 del código de salida","ar":"رقم رمز الخروج $1"},{"re":"^Click! Lock (\\d) is open\\. Your digit is (\\d)\\.$","es":"¡Clic! El Candado $1 está abierto. Tu dígito es $2.","ar":"نقرة! القفل $1 مفتوح. رقمك هو $2."},{"re":"^5 of 5 locks opened with (\\d+) tries and 1 hint\\.$","es":"Abriste 5 de 5 candados con $1 intentos y 1 pista.","ar":"فتحت 5 أقفال من 5 بعد $1 محاولة وتلميح واحد."},{"re":"^5 of 5 locks opened with (\\d+) tries and (\\d+) hints\\.$","es":"Abriste 5 de 5 candados con $1 intentos y $2 pistas.","ar":"فتحت 5 أقفال من 5 بعد $1 محاولة و$2 تلميحات."},{"re":"^Tap all (\\d) places first, in order\\.$","es":"Primero toca los $1 lugares, en orden.","ar":"المس الأماكن الـ $1 أولًا، بالترتيب."},{"re":"^Done! File downloaded: (.*)\\. Upload it to Canvas\\.$","es":"¡Listo! Se descargó el archivo: $1. Súbelo a Canvas.","ar":"تم! تم تنزيل الملف: $1. ارفعه إلى Canvas."},{"re":"^Your file downloaded and is marked INCOMPLETE \\(you have not escaped\\)\\. Upload it to Canvas: (.*)$","es":"Tu archivo se descargó y está marcado INCOMPLETO (todavía no escapas). Súbelo a Canvas: $1","ar":"تم تنزيل ملفك وهو مُسجَّل «غير مكتمل» INCOMPLETE (لم تهرب بعد). ارفعه إلى Canvas: $1"},{"re":"^Unlocked\\. Your digit is (\\d)\\. Your answer: (.*)$","es":"Desbloqueado. Tu dígito es $1. Tu respuesta: $2","ar":"تم الفتح. رقمك هو $1. إجابتك: $2"},{"re":"^Unlocked\\. Your digit is (\\d)\\.$","es":"Desbloqueado. Tu dígito es $1.","ar":"تم الفتح. رقمك هو $1."},{"re":"^LOCK (\\d) · CORE OBJECTIVES (\\d)-(\\d)$","es":"CANDADO $1 · OBJETIVOS PRINCIPALES $2-$3","ar":"القفل $1 · الأهداف الأساسية $2-$3"}]}</script>
+<script>
+/* Supplement language switch (English / Espanol / Arabic). Works on pages whose text is rendered by JS:
+   a MutationObserver translates text as it appears. Data: <script type="application/json" id="sp-i18n">
+   {"langs":["en","es","ar"],"default":"en","es":{englishHTML:translation},"ar":{...},"patterns":[{"re":"^(\\d+) of (\\d+)$","es":"$1 de $2","ar":"..."}]}
+   Keys are the English text exactly as it sits in the page (innerHTML, spaces collapsed).
+   Helpers: spSeen() english strings seen so far; spMissing() strings with no translation in the current language;
+   spSetLang(l); spTr(s) translate a string (used for confirm/alert); spAscii(s) plain-ASCII name for file names. */
+(function () {
+  var node = document.getElementById('sp-i18n');
+  var D = node ? JSON.parse(node.textContent) : { langs: ['en'], patterns: [] };
+  var INLINE = { B:1,I:1,EM:1,STRONG:1,SPAN:1,A:1,BR:1,SMALL:1,SUP:1,SUB:1,U:1,MARK:1,BDI:1,TSPAN:1,CODE:1 };
+  var SKIP = 'script,style,textarea,input,.sp-lang,.sp-nt,[translate="no"]';
+  var WORD = /[A-Za-z\u00C0-\u024F\u0600-\u06FF]{2}|e\.g\./;
+  var LANG = 'en', REC = new WeakMap(), SEEN = {}, MISS = {};
+  (D.patterns || []).forEach(function (p) { try { p._re = new RegExp(p.re); } catch (e) {} });
+  function norm(s) { return String(s).replace(/\s+/g, ' ').trim(); }
+  function tr(src) {
+    if (LANG === 'en') return null;
+    var t = D[LANG] && D[LANG][src];
+    if (t) return t;
+    var P = D.patterns || [];
+    for (var i = 0; i < P.length; i++) {
+      var m = P[i]._re && P[i]._re.exec(src);
+      if (m && P[i][LANG]) return P[i][LANG].replace(/\$(\d+)/g, function (_, n) { return m[+n] || ''; });
+    }
+    return null;
+  }
+  window.spTr = function (s) { var t = tr(norm(s)); return t ? t.replace(/<[^>]+>/g, '') : s; };
+  function isInline(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling)
+      if (c.nodeType === 1 && (!INLINE[c.tagName.toUpperCase()] || c.matches(SKIP))) return false;
+    return true;
+  }
+  function directText(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling) if (c.nodeType === 3 && WORD.test(c.nodeValue)) return true;
+    return false;
+  }
+  function cur(s) { return s.nodeType === 1 ? s.innerHTML : s.nodeValue; }
+  function put(s, v) { if (s.nodeType === 1) s.innerHTML = v; else s.nodeValue = v; }
+  function handle(s) {
+    var r = REC.get(s), c = cur(s);
+    if (!(r && c === r.wrote)) { r = { en: c, wrote: c }; REC.set(s, r); }
+    var src = norm(r.en), target = r.en;
+    if (WORD.test(src)) {
+      SEEN[src] = 1;
+      if (LANG !== 'en') {
+        var t = tr(src);
+        if (t) {
+          target = s.nodeType === 1 ? t : (r.en.match(/^\s*/)[0] + t + r.en.match(/\s*$/)[0]);
+          delete MISS[src];
+        } else MISS[src] = 1;
+      }
+    }
+    if (c !== target) put(s, target);
+    r.wrote = cur(s);
+  }
+  var ATTRS = ['placeholder', 'alt', 'aria-label', 'title'];
+  function attrs(root) {
+    var els = root.querySelectorAll ? root.querySelectorAll('[placeholder],[alt],[aria-label],[title]') : [];
+    var list = [].slice.call(els); if (root.matches && root.matches('[placeholder],[alt],[aria-label],[title]')) list.push(root);
+    list.forEach(function (el) {
+      if (el.closest && el.closest('.sp-lang,.sp-nt,[translate="no"],script,style')) return;
+      var rec = el.__spa || (el.__spa = {});
+      ATTRS.forEach(function (a) {
+        var v = el.getAttribute(a); if (v == null) return;
+        var r = rec[a];
+        if (!(r && v === r.wrote)) { r = rec[a] = { en: v, wrote: v }; }
+        var src = norm(r.en); if (!WORD.test(src)) return;
+        SEEN[src] = 1;
+        var t = LANG === 'en' ? null : tr(src);
+        if (LANG !== 'en' && !t) MISS[src] = 1;
+        var target = t ? t.replace(/<[^>]+>/g, '') : r.en;
+        if (v !== target) el.setAttribute(a, target);
+        r.wrote = el.getAttribute(a);
+      });
+    });
+  }
+  function walk(root) {
+    if (root.nodeType === 3) { if (WORD.test(root.nodeValue) && !(root.parentNode && root.parentNode.closest && root.parentNode.closest(SKIP))) handle(root); return; }
+    if (root.nodeType !== 1) return;
+    (function w(el) {
+      if (el.matches(SKIP)) return;
+      if (el !== document.body && directText(el) && isInline(el)) { handle(el); return; }
+      for (var c = el.firstChild; c; c = c.nextSibling) {
+        if (c.nodeType === 1) w(c); else if (c.nodeType === 3 && WORD.test(c.nodeValue)) handle(c);
+      }
+    })(root);
+    attrs(root);
+  }
+  var TITLE = { en: document.title, wrote: document.title };
+  function title() {
+    if (document.title !== TITLE.wrote) TITLE = { en: document.title, wrote: document.title };
+    var t = LANG === 'en' ? null : tr(norm(TITLE.en));
+    document.title = t ? t.replace(/<[^>]+>/g, '') : TITLE.en; TITLE.wrote = document.title;
+  }
+  function inl(e) { return e.nodeType === 1 && !!INLINE[e.tagName.toUpperCase()]; }
+  var mo = new MutationObserver(function (muts) {
+    var todo = [];
+    muts.forEach(function (m) {
+      if (m.type === 'childList') { for (var i = 0; i < m.addedNodes.length; i++) todo.push(m.addedNodes[i]); todo.push(m.target); }
+      else todo.push(m.target);
+    });
+    todo.forEach(function (n) {
+      var el = n.nodeType === 1 ? n : n.parentNode;
+      if (!el || el.nodeType !== 1 || !document.body.contains(el)) return;
+      while (el !== document.body && el.parentNode && el.parentNode.nodeType === 1 && inl(el) && inl(el.parentNode)) el = el.parentNode;
+      if (el.parentNode && el.parentNode.nodeType === 1 && inl(el.parentNode) && el.parentNode !== document.body) el = el.parentNode;
+      walk(el);
+    });
+    mo.takeRecords();
+  });
+  var AR = { 'ا':'a','أ':'a','إ':'i','آ':'a','ب':'b','ت':'t','ث':'th','ج':'j','ح':'h','خ':'kh','د':'d','ذ':'dh','ر':'r','ز':'z','س':'s','ش':'sh','ص':'s','ض':'d','ط':'t','ظ':'z','ع':'a','غ':'gh','ف':'f','ق':'q','ك':'k','ل':'l','م':'m','ن':'n','ه':'h','و':'w','ي':'y','ى':'a','ة':'a','ئ':'y','ؤ':'w' };
+  window.spAscii = function (s) {
+    s = String(s); if (s.normalize) s = s.normalize('NFD').replace(/[̀-ًͯ-ٰٟ]/g, '');
+    return s.replace(/[ء-ي]/g, function (c) { return AR[c] !== undefined ? AR[c] : ''; }).replace(/ñ/g, 'n').replace(/Ñ/g, 'N');
+  };
+  window.spSeen = function () { return Object.keys(SEEN); };
+  window.spMissing = function () { return Object.keys(MISS); };
+  window.spLang = function () { return LANG; };
+  window.spSetLang = function (l) {
+    if ((D.langs || ['en']).indexOf(l) < 0) l = 'en';
+    LANG = l; MISS = {};
+    var h = document.documentElement; h.lang = l; h.dir = l === 'ar' ? 'rtl' : 'ltr';
+    mo.disconnect(); walk(document.body); title(); mo.takeRecords();
+    mo.observe(document.body, { childList: true, subtree: true, characterData: true });
+    document.querySelectorAll('.sp-lang button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === l)); });
+    try { localStorage.setItem('sp_lang', l); } catch (e) {}
+    try { var u = new URL(location.href); if (l === 'en') u.searchParams.delete('lang'); else u.searchParams.set('lang', l); history.replaceState(null, '', u.toString()); } catch (e) {}
+    try { document.dispatchEvent(new CustomEvent('splangchange', { detail: l })); } catch (e) {}
+  };
+  var _c = window.confirm, _a = window.alert;
+  window.confirm = function (m) { return _c.call(window, window.spTr(m)); };
+  window.alert = function (m) { return _a.call(window, window.spTr(m)); };
+  document.querySelectorAll('.sp-lang button').forEach(function (b) { b.addEventListener('click', function () { window.spSetLang(b.getAttribute('data-lang')); }); });
+  var start = D['default'] || 'en';
+  try { start = new URL(location.href).searchParams.get('lang') || localStorage.getItem('sp_lang') || start; } catch (e) {}
+  window.spSetLang(start);
+})();
+
+</script><!--/sp-i18n-->
+</body>
+</html>

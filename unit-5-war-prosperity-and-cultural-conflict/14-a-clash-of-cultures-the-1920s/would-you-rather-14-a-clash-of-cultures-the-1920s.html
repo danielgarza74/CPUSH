@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Would You Rather 14 · A Clash of Cultures - The 1920s</title>
+<style>
+:root{--bg:#F6EEF0;--paper:#FDFBFB;--maroon:#481E27;--ink:#36161D;--brown:#692D3A;--red:#4BCAD2;--rose:#8EDCE1;
+--redink:#2D797E;--rule:#DACDD0;--line:#BBA7AC;--ok:#3F6B3A;--frost:#F4EBED;
+--serif:Georgia,"Times New Roman",serif;--sans:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
+--glass:color-mix(in srgb,var(--paper) 70%,transparent);--glass-strong:color-mix(in srgb,var(--paper) 90%,transparent);
+--edge:color-mix(in srgb,#fff 70%,transparent);
+--hi:inset 0 1px 0 color-mix(in srgb,#fff 85%,transparent);
+--depth:0 1px 1px rgba(54,22,29,.05),0 3px 6px -2px rgba(54,22,29,.08),0 18px 40px -16px rgba(54,22,29,.30)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:
+radial-gradient(42vmax 42vmax at 8% 6%,rgba(72,30,39,.28),transparent 70%),
+radial-gradient(38vmax 38vmax at 96% 22%,rgba(75,202,210,.22),transparent 70%),
+radial-gradient(46vmax 40vmax at 70% 104%,rgba(72,30,39,.18),transparent 70%),
+radial-gradient(30vmax 30vmax at 20% 88%,rgba(142,220,225,.22),transparent 70%)}
+.wrap{max-width:860px;margin:0 auto;padding:0 18px 60px}
+h1,h2,h3{font-family:var(--serif);text-wrap:balance}
+.eyebrow{font-size:12.5px;letter-spacing:.16em;font-weight:700;text-transform:uppercase}
+header.hero{padding:26px 0 0}
+.hero-band{position:relative;overflow:hidden;border-radius:16px;padding:34px 34px 30px;color:var(--frost);background:linear-gradient(110deg,#481E27 40%,#692D3A);
+box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 30px 60px -24px rgba(72,30,39,.75)}
+.hero-band::before{content:"";position:absolute;left:0;top:0;bottom:0;width:8px;background:var(--red)}
+.hero-band .eyebrow{color:var(--rose)}
+.hero-band h1{color:#fff;font-size:clamp(32px,6vw,50px);line-height:1.08;margin:.2em 0 .2em}
+.hero-band .sub{margin:0;font-size:17px;color:var(--frost);font-weight:600}
+.hero-num{position:absolute;right:20px;bottom:-30px;font:700 180px/1 var(--serif);color:#fff;opacity:.12;pointer-events:none}
+.panel{background:var(--glass);border:1px solid var(--edge);border-radius:14px;box-shadow:var(--hi),var(--depth);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3)}
+.meta{display:flex;flex-wrap:wrap;gap:14px;margin:18px 0 0;padding:16px 20px}
+.meta label{flex:1 1 170px;font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--brown)}
+.meta input{display:block;width:100%;margin-top:5px;padding:12px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);font:inherit;font-size:17px;min-height:48px}
+.meta input[readonly]{background:#EEE2E7;color:var(--brown)}
+.howto{margin:16px 0;padding:14px 20px;font-size:16px}
+.howto ol{margin:.4em 0 .2em 1.2em;padding:0}
+.howto li{margin:.2em 0}
+.bar{position:sticky;top:0;z-index:5;padding:9px 14px;margin:0 -14px;background:rgba(246,238,240,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--rule)}
+.bar .row{display:flex;align-items:center;gap:12px;font-size:14px;font-weight:700;color:var(--brown)}
+.track{flex:1;height:10px;border-radius:6px;background:#E3D5DB;overflow:hidden}
+.fill{height:100%;width:0;background:linear-gradient(90deg,var(--rose),var(--red));transition:width .3s}
+.card{margin:26px 0;padding:22px 24px 24px;scroll-margin-top:70px}
+.kick{font-size:12.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--redink)}
+.kick span{color:var(--brown)}
+.card h2{margin:.15em 0 .4em;font-size:clamp(24px,4.5vw,32px);line-height:1.15;color:var(--maroon)}
+.there{background:var(--glass-strong);border:1px solid var(--edge);border-radius:12px;padding:6px 20px 8px;margin:10px 0 18px;border-left:6px solid var(--red)}
+.there .lab{display:inline-block;margin:12px 0 0;font:800 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:#fff;background:var(--maroon);padding:6px 11px 5px;border-radius:999px}
+.there p{font:18.5px/1.65 var(--serif);margin:.7em 0}
+.rather{font:700 22px/1.2 var(--serif);color:var(--maroon);margin:4px 0 12px}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.choice{display:flex;align-items:center;gap:14px;text-align:left;width:100%;min-height:84px;padding:16px 18px;border-radius:14px;border:2px solid var(--maroon);background:#fff;color:var(--maroon);font:700 19px/1.3 var(--sans);cursor:pointer;touch-action:manipulation;transition:transform .15s,box-shadow .15s,background-color .15s}
+.choice .ltr{flex:0 0 auto;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--maroon);color:#fff;font:800 20px/1 var(--serif)}
+.choice:hover{transform:translateY(-2px);box-shadow:0 10px 20px -10px rgba(72,30,39,.5)}
+.choice[aria-pressed="true"]{background:var(--maroon);color:#fff;border-color:var(--maroon);box-shadow:0 0 0 4px rgba(75,202,210,.55)}
+.choice[aria-pressed="true"] .ltr{background:var(--red);color:var(--maroon)}
+.choice[aria-pressed="true"]::after{content:"\2713";margin-left:auto;font-size:26px;color:#fff}
+.choice:disabled{cursor:default;transform:none;box-shadow:none}
+.choice:disabled[aria-pressed="false"]{opacity:.55}
+.choice:disabled[aria-pressed="true"]{box-shadow:0 0 0 4px rgba(75,202,210,.55)}
+.choice:focus-visible,.btn:focus-visible,textarea:focus-visible,input:focus-visible,.link:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.work{display:none;margin-top:20px}
+.card.chosen .work{display:block}
+.field{background:color-mix(in srgb,var(--rose) 14%,var(--paper));border:1px solid color-mix(in srgb,var(--red) 28%,var(--rule));border-radius:12px;padding:14px 18px;margin:12px 0}
+.field label{display:block;font:700 19px/1.25 var(--serif);color:var(--maroon)}
+.field .hint{display:block;font:400 14.5px/1.4 var(--sans);color:var(--brown);margin:3px 0 8px}
+textarea{width:100%;min-height:96px;padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);font:inherit;font-size:17px;line-height:1.5;resize:vertical}
+textarea:read-only{background:#F6EEF0;color:#2C1520}
+.row2{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:12px}
+.btn{border:2px solid var(--maroon);background:#fff;color:var(--maroon);padding:12px 20px;border-radius:10px;font:700 16px/1.2 var(--sans);cursor:pointer;min-height:48px;touch-action:manipulation}
+.btn:hover:not(:disabled){background:var(--maroon);color:#fff}
+.btn.primary{background:var(--maroon);color:#fff}
+.btn.primary:disabled{background:#7A4A5E;border-color:#7A4A5E;color:#fff;cursor:not-allowed;opacity:.8}
+.cstat{font-size:14.5px;font-weight:600;color:var(--brown)}
+.reveal{display:none;margin-top:16px;background:#fff;border:1px solid var(--rule);border-left:6px solid var(--maroon);border-radius:12px;padding:6px 20px 10px}
+.card.locked .reveal{display:block}
+.reveal .lab{display:inline-block;margin:12px 0 0;font:800 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--maroon);box-shadow:inset 0 0 0 1.5px var(--maroon);padding:6px 11px 5px;border-radius:999px}
+.reveal p{font:18px/1.62 var(--serif);margin:.7em 0}
+.reveal .cite{font:13px/1.5 var(--sans);color:var(--brown)}
+.link{background:none;border:0;color:var(--brown);text-decoration:underline;cursor:pointer;font:inherit;font-size:15px;padding:10px 4px;min-height:44px}
+.card.locked .lockBtn{display:none}
+.card:not(.locked) .editBtn{display:none}
+.tally{padding:20px 24px;margin:26px 0}
+.tally h2{margin:.1em 0 .3em;font-size:28px;color:var(--maroon)}
+.tally ol{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:8px}
+.tally li{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;background:#fff;border:1px solid var(--rule);border-radius:10px;padding:10px 14px}
+.tally .tn{grid-row:1/3;align-self:center;width:34px;height:34px;border-radius:50%;background:var(--maroon);color:#fff;display:grid;place-items:center;font:800 16px/1 var(--serif)}
+.tally .tq{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--brown)}
+.tally .ta{font-weight:700;color:var(--maroon);overflow-wrap:anywhere}
+.tally li.none .ta{color:#692D3A;font-weight:600;font-style:italic}
+.tally li.none .tn{background:#8A5D70}
+.tally .sum{margin:12px 0 0;font-weight:600;color:var(--brown)}
+.finish{text-align:center;margin:26px 0;padding:22px 20px}
+.status{font-size:15px;font-weight:700;color:var(--brown);margin-bottom:12px;overflow-wrap:anywhere}
+.btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.msg{display:none;margin:14px auto 0;padding:10px 14px;border-radius:8px;background:#EAF3E6;border:1px solid var(--ok);color:var(--ok);font-weight:700;max-width:620px;overflow-wrap:anywhere}
+.msg.err{background:#FDEDEB;border-color:#B3261E;color:#8C1D18}
+input.bad{border-color:#B3261E;background:#FFF1EF}
+footer{margin-top:34px;padding-top:12px;border-top:1px solid var(--rule);font-size:12px;letter-spacing:.05em;color:var(--maroon);font-weight:600}
+@media (max-width:720px){.choices{grid-template-columns:1fr}.hero-band{padding:26px 20px 24px}.hero-num{font-size:120px}.card{padding:18px 16px 20px}.there{padding:4px 14px 6px}.there p{font-size:18px}.btn.primary,.btns .btn{width:100%}.bar{margin:0 -18px;padding:9px 18px}}
+html[dir=rtl] .hero-band::before{left:auto;right:0}
+html[dir=rtl] .hero-num{right:auto;left:20px}
+html[dir=rtl] .there{border-left:1px solid var(--edge);border-right:6px solid var(--red)}
+html[dir=rtl] .reveal{border-left:1px solid var(--rule);border-right:6px solid var(--maroon)}
+html[dir=rtl] .choice{text-align:right}
+html[dir=rtl] .choice[aria-pressed="true"]::after{margin-left:0;margin-right:auto}
+html[dir=rtl] .howto ol{margin:.4em 1.2em .2em 0}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+@media print{body::before{display:none}.bar,.finish,.btn,.msg,.choice:disabled[aria-pressed=false]{display:none!important}.panel{backdrop-filter:none;box-shadow:none;background:#fff}.card{break-inside:avoid}}
+/*sp-i18n-css*/
+.sp-lang-bar{display:flex;justify-content:flex-end;padding:8px 12px 0;position:relative;z-index:5}
+.sp-lang{display:inline-flex;gap:2px;padding:3px;border-radius:10px;background:rgba(255,255,255,.88);border:1px solid rgba(0,0,0,.18);font-family:system-ui,"Segoe UI",Tahoma,Arial,sans-serif}
+.sp-lang button{border:0;background:transparent;color:#222;font:600 13px/1 system-ui,"Segoe UI",Tahoma,Arial,sans-serif;padding:7px 11px;border-radius:7px;cursor:pointer}
+.sp-lang button[aria-pressed="true"]{background:#222;color:#fff}
+.sp-lang button:focus-visible{outline:3px solid #2a6df4;outline-offset:1px}
+textarea,input,select{unicode-bidi:plaintext}
+html[lang="ar"] body,html[lang="ar"] button,html[lang="ar"] textarea,html[lang="ar"] input,html[lang="ar"] select{font-family:"Segoe UI",Tahoma,"Noto Sans Arabic","Arial",system-ui,sans-serif}
+html[lang="ar"] body{line-height:1.8}
+html[lang="ar"] *{letter-spacing:0!important}
+html[dir="rtl"] textarea,html[dir="rtl"] input{text-align:start}
+@media print{.sp-lang-bar{display:none}}
+/*/sp-i18n-css*/
+</style></head><body>
+<!--sp-bar--><div class="sp-lang-bar"><div class="sp-lang" role="group" aria-label="Language / Idioma / اللغة"><button type="button" data-lang="en" lang="en" aria-pressed="true">English</button><button type="button" data-lang="es" lang="es" aria-pressed="false">Español</button><button type="button" data-lang="ar" lang="ar" aria-pressed="false">العربية</button></div></div><!--/sp-bar--><div class="wrap">
+<header class="hero"><div class="hero-band"><div class="eyebrow">1903-1928</div>
+<h1>Would You Rather</h1><p class="sub">A Clash of Cultures - The 1920s</p><span class="hero-num" aria-hidden="true">14</span></div>
+<div class="meta panel">
+<label>FIRST NAME *<input id="f_first" type="text" autocomplete="given-name"></label>
+<label>LAST NAME *<input id="f_last" type="text" autocomplete="family-name"></label>
+<label>PERIOD *<input id="f_period" type="text" inputmode="numeric" maxlength="12" placeholder="e.g. 3"></label>
+<label>DATE (fills in when you finish)<input id="f_date" type="text" readonly tabindex="-1" placeholder="Automatic"></label>
+</div></header>
+<div class="howto panel"><div><b>How to work.</b> People in history faced hard choices. Here are five. There is no right or wrong choice. Your job is to understand why people chose what they did.</div>
+<ol><li>Read “You are there.”</li><li>Tap the choice you would make.</li><li>Write your reason. Use at least one fact from the lesson.</li><li>Write a Counter-Argument: the best reason someone on the other side would give.</li><li>Tap <b>Lock in my answer</b> to see what really happened.</li></ol>
+<div>Your work saves on this device as you type. Use <b>Save Progress</b> at the bottom to download a backup file, and <b>Load Progress</b> to continue later.</div></div>
+<div class="bar"><div class="row"><span id="pct">0 of 5 dilemmas locked in</span><div class="track"><div class="fill" id="fill"></div></div></div></div>
+
+<section class="card panel" id="d1" data-n="1" data-a="Buy the car now and pay for it later in installments" data-b="Save up and wait until you can pay for the car in full" data-short="Buy Now or Save" aria-labelledby="h1">
+<div class="kick">Dilemma 1 <span>of 5</span> · 1925</div>
+<h2 id="h1">1925: Buy Now, Pay Later?</h2>
+<div class="there"><span class="lab">You are there</span><p>It is 1925. The economy is booming. Jobs are plentiful, and wage workers are earning more. Your family wants a car.</p><p>Henry Ford’s Model T cost $850 when it first appeared in 1908. By 1924, Ford sold the same car for $290.</p><p>Stores now offer layaway plans and installment buying. Ads say “buy now, pay later.” Business owners call the new consumer culture a marvel of modern life. Critics say it threatens old virtues like hard work, plain living, and careful money management.</p><p>What would you choose?</p></div>
+<p class="rather">Would you rather...</p>
+<div class="choices" role="group" aria-label="Choose one">
+<button type="button" class="choice" data-o="A" aria-pressed="false"><span class="ltr">A</span><span>Buy the car now and pay for it later in installments</span></button>
+<button type="button" class="choice" data-o="B" aria-pressed="false"><span class="ltr">B</span><span>Save up and wait until you can pay for the car in full</span></button>
+</div>
+<div class="work">
+<div class="field"><label for="d1_reason">Your reason</label><span class="hint">Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”</span>
+<textarea id="d1_reason" data-k="reason" placeholder="Type your reason here..."></textarea></div>
+<div class="field"><label for="d1_counter">Counter-Argument</label><span class="hint">What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”</span>
+<textarea id="d1_counter" data-k="counter" placeholder="Type the other side’s best reason here..."></textarea></div>
+<div class="row2"><button type="button" class="btn primary lockBtn" disabled>Lock in my answer</button>
+<button type="button" class="btn editBtn">Edit my answer</button><span class="cstat" aria-live="polite"></span></div>
+<div class="reveal" aria-live="polite"><span class="lab">What really happened</span><p>Many Americans chose to buy now and pay later. Norton says consumer debt almost tripled during the 1920s. Advertising kept driving demand anyway.</p><p>Car ownership grew fast. More than 8 million cars were registered in 1920. By 1929, there were more than 23 million. The auto industry created tens of thousands of new jobs.</p><p>But Norton says the new conveniences of modern life were enjoyed mainly by the urban middle and upper classes. Rural and working-class Americans had to wait many more years.</p><p class="cite">Source: Norton Ch. 22, “A ‘New Era’ of Consumption,” A Growing Consumer Culture and The Car Culture, pp. 949-952.</p></div>
+</div>
+</section>
+<section class="card panel" id="d2" data-n="2" data-a="Try the new fashions and freedoms of the 1920s" data-b="Keep to traditional ways and expectations" data-short="New Ways or Old Ways" aria-labelledby="h2">
+<div class="kick">Dilemma 2 <span>of 5</span> · 1925</div>
+<h2 id="h2">A Young Woman in 1925: New Ways or Old Ways?</h2>
+<div class="there"><span class="lab">You are there</span><p>It is 1925. You are a young woman in a big American city. Women have won the right to vote.</p><p>Many young women around you are trying new things. They are cutting their hair short, which is called “bobbing.” They wear shorter skirts. They drive cars. They dance the Charleston to jazz music. People call these young women “flappers.” They want more out of life than marriage and motherhood.</p><p>Many other people are shocked. A Catholic priest in Brooklyn complains of a “pandemonium of powder, a riot of rouge, and a moral anarchy of dress.” Most women around you still live traditional lives.</p><p>What would you choose?</p></div>
+<p class="rather">Would you rather...</p>
+<div class="choices" role="group" aria-label="Choose one">
+<button type="button" class="choice" data-o="A" aria-pressed="false"><span class="ltr">A</span><span>Try the new fashions and freedoms of the 1920s</span></button>
+<button type="button" class="choice" data-o="B" aria-pressed="false"><span class="ltr">B</span><span>Keep to traditional ways and expectations</span></button>
+</div>
+<div class="work">
+<div class="field"><label for="d2_reason">Your reason</label><span class="hint">Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”</span>
+<textarea id="d2_reason" data-k="reason" placeholder="Type your reason here..."></textarea></div>
+<div class="field"><label for="d2_counter">Counter-Argument</label><span class="hint">What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”</span>
+<textarea id="d2_counter" data-k="counter" placeholder="Type the other side’s best reason here..."></textarea></div>
+<div class="row2"><button type="button" class="btn primary lockBtn" disabled>Lock in my answer</button>
+<button type="button" class="btn editBtn">Edit my answer</button><span class="cstat" aria-live="polite"></span></div>
+<div class="reveal" aria-live="polite"><span class="lab">What really happened</span><p>Both kinds of women were real. Young women who tried the new freedoms got a lot of attention. By 1927, skirts were at the knee. In 1919, they had been six inches above the ground. Their “carefree version of feminism” also aroused furious criticism.</p><p>But Norton says most women in the 1920s were not rebels like flappers. Most people still led traditional lives. Fewer college-educated women pursued careers outside the home. Most women who worked outside the home had unskilled, low-paying jobs. Only 4 percent of working women were salaried professionals.</p><p class="cite">Source: Norton Ch. 22, “The ‘Jazz Age,’” Women in the 1920s, p. 957, and Not-So-‘New’ Women, p. 959.</p></div>
+</div>
+</section>
+<section class="card panel" id="d3" data-n="3" data-a="Break the old rules and try new ways of making art, even if it shocks people" data-b="Keep the old rules and standards of good taste in art" data-short="New Art or Old Rules" aria-labelledby="h3">
+<div class="kick">Dilemma 3 <span>of 5</span> · 1913</div>
+<h2 id="h3">1913: The Armory Show and Modern Art</h2>
+<div class="there"><span class="lab">You are there</span><p>It is 1913. You are in New York City. A huge art show called the Armory Show has opened. It brings modern art from Europe to Americans.</p><p>Modernism began in European capitals like Paris and London in the 1890s. Now it has reached New York and Chicago. Modern artists break the old rules on purpose. One modernist painter said, “Art is meant to disturb.”</p><p>Many visitors are upset. A well-known art critic says modernism “is nothing else than the total destruction of the art of painting.”</p><p>What would you choose?</p></div>
+<p class="rather">Would you rather...</p>
+<div class="choices" role="group" aria-label="Choose one">
+<button type="button" class="choice" data-o="A" aria-pressed="false"><span class="ltr">A</span><span>Break the old rules and try new ways of making art, even if it shocks people</span></button>
+<button type="button" class="choice" data-o="B" aria-pressed="false"><span class="ltr">B</span><span>Keep the old rules and standards of good taste in art</span></button>
+</div>
+<div class="work">
+<div class="field"><label for="d3_reason">Your reason</label><span class="hint">Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”</span>
+<textarea id="d3_reason" data-k="reason" placeholder="Type your reason here..."></textarea></div>
+<div class="field"><label for="d3_counter">Counter-Argument</label><span class="hint">What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”</span>
+<textarea id="d3_counter" data-k="counter" placeholder="Type the other side’s best reason here..."></textarea></div>
+<div class="row2"><button type="button" class="btn primary lockBtn" disabled>Lock in my answer</button>
+<button type="button" class="btn editBtn">Edit my answer</button><span class="cstat" aria-live="polite"></span></div>
+<div class="reveal" aria-live="polite"><span class="lab">What really happened</span><p>Americans did not agree. Norton calls the Armory Show the most controversial event in the history of American art. For many people who toured it, modern art became the thing they “loved to hate.”</p><p>Modernism kept spreading anyway. Norton says it reflected a sense that Western civilization was going through bewildering changes. New technology, new transportation and communication, and new scientific discoveries were changing everyday life. The poet Ezra Pound gave modernism its slogan: “Make It New!”</p><p>By the 1920s, modernists and their traditional critics were clashing in passionate defense of their views. The author Willa Cather said, “The world broke in two in 1922 or thereabouts.”</p><p class="cite">Source: Norton Ch. 22, “The Modernist Revolt,” pp. 965-969.</p></div>
+</div>
+</section>
+<section class="card panel" id="d4" data-n="4" data-a="Let a state ban the teaching of evolution in its public schools" data-b="Let teachers teach evolution in public schools" data-short="Teaching Evolution" aria-labelledby="h4">
+<div class="kick">Dilemma 4 <span>of 5</span> · 1925</div>
+<h2 id="h4">July 1925: The Scopes Trial</h2>
+<div class="there"><span class="lab">You are there</span><p>It is July 1925. You are in Dayton, Tennessee, a small town. Tennessee has passed a law that bans the teaching of evolution in public schools and colleges.</p><p>Town leaders wanted publicity. They asked John T. Scopes, a 24-year-old high-school science teacher, to be a test case. He taught from a textbook on evolution, and police arrested him. Hundreds of reporters have come to town for the trial.</p><p>William Jennings Bryan believes the Bible is literally true. He has volunteered to help the prosecution. He says the trial is about a state’s right to decide what is taught in its public schools. Clarence Darrow, a famous trial lawyer, has offered to defend Scopes and the theory of evolution. Darrow says, “Scopes is not on trial. Civilization is on trial.”</p><p>Many Americans are watching. Most American Christians fall somewhere between the two sides.</p><p>What would you choose?</p></div>
+<p class="rather">Would you rather...</p>
+<div class="choices" role="group" aria-label="Choose one">
+<button type="button" class="choice" data-o="A" aria-pressed="false"><span class="ltr">A</span><span>Let a state ban the teaching of evolution in its public schools</span></button>
+<button type="button" class="choice" data-o="B" aria-pressed="false"><span class="ltr">B</span><span>Let teachers teach evolution in public schools</span></button>
+</div>
+<div class="work">
+<div class="field"><label for="d4_reason">Your reason</label><span class="hint">Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”</span>
+<textarea id="d4_reason" data-k="reason" placeholder="Type your reason here..."></textarea></div>
+<div class="field"><label for="d4_counter">Counter-Argument</label><span class="hint">What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”</span>
+<textarea id="d4_counter" data-k="counter" placeholder="Type the other side’s best reason here..."></textarea></div>
+<div class="row2"><button type="button" class="btn primary lockBtn" disabled>Lock in my answer</button>
+<button type="button" class="btn editBtn">Edit my answer</button><span class="cstat" aria-live="polite"></span></div>
+<div class="reveal" aria-live="polite"><span class="lab">What really happened</span><p>The trial began on July 10, 1925, and lasted twelve days. The judge ruled that the only question for the jury was whether Scopes had taught evolution. No one denied that he had. The jury found Scopes guilty.</p><p>The Tennessee Supreme Court upheld the anti-evolution law. But it waived Scopes’s $100 fine on a technicality. Both sides claimed victory.</p><p>Five days after the trial ended, Bryan died. Norton says the Scopes Trial only sharpened the national debate between fundamentalism and evolution. That debate continues today.</p><p class="cite">Source: Norton Ch. 22, “The Reactionary Twenties,” Fundamentalism and The Scopes Trial, pp. 976-979.</p></div>
+</div>
+</section>
+<section class="card panel" id="d5" data-n="5" data-a="Cut taxes and government spending, and let business lead the economy" data-b="Keep the government active in regulating business" data-short="Taxes and Regulation" aria-labelledby="h5">
+<div class="kick">Dilemma 5 <span>of 5</span> · 1921</div>
+<h2 id="h5">1921: Cut Taxes or Keep Regulating Business?</h2>
+<div class="there"><span class="lab">You are there</span><p>It is 1921. Warren Harding has won the presidency by a wide margin, 16 million votes to 9 million for James Cox. He promised “normalcy.” Republicans have also gained seats in both houses of Congress.</p><p>Before the war, progressives pushed for tighter rules on business. They are still strong in state and local governments, where they work on public schools, public health, and social-welfare programs. But in Washington, conservative Republicans are back in power.</p><p>Treasury Secretary Andrew Mellon wants to cut federal spending, lower tax rates, and raise tariffs on imported goods. This year, the top income tax rate is 73 percent. He says these steps will help the economy grow.</p><p>Progressives say the national government should stay active and keep regulating business.</p><p>What would you choose for the national government?</p></div>
+<p class="rather">Would you rather...</p>
+<div class="choices" role="group" aria-label="Choose one">
+<button type="button" class="choice" data-o="A" aria-pressed="false"><span class="ltr">A</span><span>Cut taxes and government spending, and let business lead the economy</span></button>
+<button type="button" class="choice" data-o="B" aria-pressed="false"><span class="ltr">B</span><span>Keep the government active in regulating business</span></button>
+</div>
+<div class="work">
+<div class="field"><label for="d5_reason">Your reason</label><span class="hint">Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”</span>
+<textarea id="d5_reason" data-k="reason" placeholder="Type your reason here..."></textarea></div>
+<div class="field"><label for="d5_counter">Counter-Argument</label><span class="hint">What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”</span>
+<textarea id="d5_counter" data-k="counter" placeholder="Type the other side’s best reason here..."></textarea></div>
+<div class="row2"><button type="button" class="btn primary lockBtn" disabled>Lock in my answer</button>
+<button type="button" class="btn editBtn">Edit my answer</button><span class="cstat" aria-live="polite"></span></div>
+<div class="reveal" aria-live="polite"><span class="lab">What really happened</span><p>In the 1920s, the national government chose A. Mellon convinced Congress to cut the top income tax rate from 73 percent in 1921 to 24 percent by 1929. Government spending and the national debt fell. Unemployment dropped to 2.4 percent in 1923. President Coolidge later said, “The chief business of the American people is business.”</p><p>Harding and his team also dismantled or neutralized many progressive regulatory laws and agencies. The Court led by Taft struck down a federal child-labor law and a minimum-wage law for women.</p><p>Unions lost ground. Employers asked new workers to sign “yellow-dog” contracts, which forced them to promise not to join a union. Union membership fell from about 5 million in 1920 to 3.5 million in 1929. Norton says the “new economy” was not helping enough working-class Americans to last.</p><p class="cite">Source: Norton Ch. 22, “Republican Resurgence,” pp. 983-987 and 991.</p></div>
+</div>
+</section>
+<section class="tally panel" id="tally"><div class="kick">The end</div><h2>Your choices</h2><p style="margin:0">Here is a summary of the choices you made.</p>
+<ol id="tallyList"></ol><p class="sum" id="tallySum"></p></section>
+<div class="finish panel" id="actions"><div class="status" id="status"></div>
+<div class="btns"><button class="btn" id="saveBtn" type="button">Save Progress</button><button class="btn" id="loadBtn" type="button">Load Progress</button>
+<input type="file" id="loadFile" accept=".json,application/json" hidden>
+<button class="btn primary" id="finishBtn" type="button" disabled>Finished — Download File to Submit</button></div>
+<div class="msg" id="msg" role="status"></div><button class="link" id="reset" type="button">Clear all my answers</button></div>
+<footer>UNIT 5 · WAR, PROSPERITY, AND CULTURAL CONFLICT | CPUSH | DANIEL GARZA, M.A.</footer>
+</div>
+<script>
+(function(){
+  var PACKET='CPUSH_L14_WYR';
+  var STORE='cpush_l14_would-you-rather_student';
+  var $=function(i){return document.getElementById(i)};
+  var first=$('f_first'),last=$('f_last'),period=$('f_period'),dateF=$('f_date');
+  var cards=[].slice.call(document.querySelectorAll('.card'));
+  var MIN=15;
+  var data={meta:{},cards:{}};
+  function load(){try{var d=JSON.parse(localStorage.getItem(STORE)||'null');if(d&&d.cards)data=d}catch(e){}}
+  function persist(){try{localStorage.setItem(STORE,JSON.stringify(data))}catch(e){}}
+  function cs(n){return data.cards[n]||(data.cards[n]={choice:'',reason:'',counter:'',locked:false})}
+  function msg(t,err){var m=$('msg');m.textContent=t;m.className='msg'+(err?' err':'');m.style.display='block'}
+  function clean(n){n=window.spAscii?spAscii(n):n;return String(n).normalize('NFD').replace(/[̀-ͯ]/g,'').trim().replace(/\s+/g,'_').replace(/[^A-Za-z0-9_-]/g,'')}
+  function who(){return (clean(last.value)||'Last')+'_'+(clean(first.value)||'First')}
+  function named(){return !!(first.value.trim()&&last.value.trim()&&period.value.trim())}
+  function optText(c,o){return o==='A'?c.getAttribute('data-a'):o==='B'?c.getAttribute('data-b'):''}
+  function render(){
+    var locked=0;
+    cards.forEach(function(c){
+      var n=c.getAttribute('data-n'),s=cs(n);
+      c.classList.toggle('chosen',!!s.choice);
+      c.classList.toggle('locked',!!s.locked);
+      [].forEach.call(c.querySelectorAll('.choice'),function(b){
+        b.setAttribute('aria-pressed',b.getAttribute('data-o')===s.choice?'true':'false');
+        b.disabled=!!s.locked;
+      });
+      var r=c.querySelector('[data-k=reason]'),k=c.querySelector('[data-k=counter]');
+      if(r.value!==s.reason)r.value=s.reason;
+      if(k.value!==s.counter)k.value=s.counter;
+      r.readOnly=k.readOnly=!!s.locked;
+      var ok=s.choice&&s.reason.trim().length>=MIN&&s.counter.trim().length>=MIN;
+      c.querySelector('.lockBtn').disabled=!ok;
+      var st=c.querySelector('.cstat');
+      st.textContent=s.locked?'Locked in. Read what really happened below.':(ok?'Ready. Tap Lock in to see what happened.':'Fill in both boxes to unlock the next step.');
+      if(s.locked)locked++;
+    });
+    var tot=cards.length;
+    $('pct').textContent=locked+' of '+tot+' dilemmas locked in';
+    $('fill').style.width=(100*locked/tot)+'%';
+    var ol=$('tallyList');ol.innerHTML='';
+    cards.forEach(function(c){
+      var n=c.getAttribute('data-n'),s=cs(n),li=document.createElement('li');
+      var txt=s.choice?optText(c,s.choice):'';
+      li.className=(s.locked&&s.choice)?'':'none';
+      li.innerHTML='<span class="tn"></span><span class="tq"></span><span class="ta"></span>';
+      li.querySelector('.tn').textContent=n;
+      li.querySelector('.tq').textContent=c.getAttribute('data-short');
+      li.querySelector('.ta').textContent=(s.locked&&s.choice)?('You chose: '+txt):(s.choice?('Chosen, not locked in yet: '+txt):'Not answered yet');
+      ol.appendChild(li);
+    });
+    $('tallySum').textContent=locked===tot?'All five dilemmas are locked in. Nice work.':'Lock in all five dilemmas to finish.';
+    var miss=[];
+    if(!named())miss.push('first name, last name, and period');
+    if(locked<tot)miss.push((tot-locked)+' dilemma'+(tot-locked===1?'':'s')+' to lock in');
+    var all=named()&&locked===tot;
+    $('status').textContent=all?'Everything is done. Tap Finished to download your file.':'Still needed: '+miss.join('; ')+'.';
+    $('finishBtn').disabled=!all;
+    return all;
+  }
+  function sync(){
+    data.meta={first:first.value,last:last.value,period:period.value,date:dateF.value};
+    persist();render();
+  }
+  function snapshot(){
+    var o={packet:PACKET,course:'CPUSH',lesson:14,assignment:'Would You Rather',version:1,saved:new Date().toISOString(),
+      student:{first:first.value.trim(),last:last.value.trim(),period:period.value.trim(),date:dateF.value.trim()},answers:{}};
+    cards.forEach(function(c){
+      var n=c.getAttribute('data-n'),s=cs(n),p='dilemma_'+n+'_';
+      o.answers[p+'topic']=c.getAttribute('data-short');
+      o.answers[p+'choice']=s.choice;
+      o.answers[p+'choice_text']=optText(c,s.choice);
+      o.answers[p+'reason']=s.reason;
+      o.answers[p+'counter_argument']=s.counter;
+      o.answers[p+'locked_in']=!!s.locked;
+    });
+    return o;
+  }
+  function download(name,obj){
+    var blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;
+    document.body.appendChild(a);a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);
+  }
+  load();
+  var m=data.meta||{};first.value=m.first||'';last.value=m.last||'';period.value=m.period||'';dateF.value=m.date||'';
+  [first,last,period].forEach(function(f){f.addEventListener('input',function(){f.classList.remove('bad');sync()})});
+  cards.forEach(function(c){
+    var n=c.getAttribute('data-n');
+    [].forEach.call(c.querySelectorAll('.choice'),function(b){b.addEventListener('click',function(){var s=cs(n);if(s.locked)return;s.choice=b.getAttribute('data-o');sync()})});
+    c.querySelector('[data-k=reason]').addEventListener('input',function(e){cs(n).reason=e.target.value;sync()});
+    c.querySelector('[data-k=counter]').addEventListener('input',function(e){cs(n).counter=e.target.value;sync()});
+    c.querySelector('.lockBtn').addEventListener('click',function(){var s=cs(n);if(!s.choice||s.reason.trim().length<MIN||s.counter.trim().length<MIN)return;s.locked=true;sync();var r=c.querySelector('.reveal');if(r.scrollIntoView)r.scrollIntoView({block:'nearest',behavior:'smooth'})});
+    c.querySelector('.editBtn').addEventListener('click',function(){cs(n).locked=false;sync()});
+  });
+  $('saveBtn').addEventListener('click',function(){
+    if(!named()){[first,last,period].forEach(function(f){if(!f.value.trim())f.classList.add('bad')});msg('Please type your first name, last name, and period first.',true);first.scrollIntoView({block:'center'});return}
+    download(who()+'-'+PACKET+'-PROGRESS.json',snapshot());msg('Progress file downloaded. Keep it safe. Use Load Progress to continue later.');
+  });
+  $('loadBtn').addEventListener('click',function(){$('loadFile').click()});
+  $('loadFile').addEventListener('change',function(ev){
+    var f=ev.target.files[0];if(!f)return;
+    var r=new FileReader();
+    r.onload=function(){
+      try{
+        var o=JSON.parse(r.result);
+        if(!o||o.packet!==PACKET||typeof o.answers!=='object')throw new Error('wrong');
+        var st=o.student||{};first.value=st.first||'';last.value=st.last||'';period.value=st.period||'';dateF.value=(o.completed?st.date:'')||'';
+        data.cards={};
+        cards.forEach(function(c){var n=c.getAttribute('data-n'),p='dilemma_'+n+'_',a=o.answers;
+          data.cards[n]={choice:(a[p+'choice']==='A'||a[p+'choice']==='B')?a[p+'choice']:'',reason:String(a[p+'reason']||''),counter:String(a[p+'counter_argument']||''),locked:!!a[p+'locked_in']};});
+        sync();msg('Progress loaded.');
+      }catch(err){msg('That file does not look like a Would You Rather progress file. Try again.',true)}
+      ev.target.value='';
+    };
+    r.onerror=function(){msg('Could not read that file.',true)};
+    r.readAsText(f);
+  });
+  $('finishBtn').addEventListener('click',function(){
+    if(!render())return;
+    var now=new Date();dateF.value=now.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});sync();
+    var o=snapshot();o.completed=true;o.submitted=now.toISOString();
+    var fn=who()+'-'+PACKET+'.json';download(fn,o);
+    msg('Done! Your file '+fn+' downloaded. Upload it to Canvas.');
+  });
+  $('reset').addEventListener('click',function(){
+    if(!confirm('Clear all of your answers on this page?'))return;
+    data={meta:{},cards:{}};first.value=last.value=period.value=dateF.value='';persist();render();
+  });
+  render();
+})();
+</script><!--sp-i18n--><script type="application/json" id="sp-i18n">{"langs":["en","es","ar"],"default":"en","es":{"Save Progress":"Guardar progreso","Load Progress":"Cargar progreso","Finished — Download File to Submit":"Terminé — Descargar el archivo para entregar","Clear all my answers":"Borrar todas mis respuestas","FIRST NAME *":"NOMBRE *","LAST NAME *":"APELLIDO *","PERIOD *":"PERÍODO *","DATE (fills in when you finish)":"FECHA (se llena cuando terminas)","e.g. 3":"p. ej., 3","Automatic":"Automática","Please type your first name, last name, and period first.":"Primero escribe tu nombre, apellido y período.","Western Expansion and Southern Secession":"Expansión hacia el oeste y secesión del sur","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — La Ley de Esclavos Fugitivos","Bleeding Kansas":"Bleeding Kansas — Kansas sangriento","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"Se descargó tu archivo de progreso. Guárdalo bien. Usa «Cargar progreso» para continuar más tarde.","Progress loaded.":"Progreso cargado.","Could not read that file.":"No se pudo leer ese archivo.","Treaty of Guadalupe Hidalgo":"Tratado de Guadalupe Hidalgo","1913: The Armory Show and Modern Art":"1913: el Armory Show y el arte moderno","1921: Cut Taxes or Keep Regulating Business?":"1921: ¿bajar los impuestos o seguir regulando a las empresas?","1925: Buy Now, Pay Later?":"1925: ¿Comprar ahora y pagar después?","<b>How to work.<\/b> People in history faced hard choices. Here are five. There is no right or wrong choice. Your job is to understand why people chose what they did.":"<b>Cómo trabajar.<\/b> Las personas en la historia enfrentaron decisiones difíciles. Aquí hay cinco. No hay una opción correcta ni incorrecta. Tu trabajo es entender por qué las personas eligieron lo que eligieron.","A Clash of Cultures - The 1920s":"Un choque de culturas - Los años veinte","A Young Woman in 1925: New Ways or Old Ways?":"Una joven en 1925: ¿costumbres nuevas o costumbres de siempre?","All five dilemmas are locked in. Nice work.":"Las cinco decisiones están confirmadas. Buen trabajo.","Americans did not agree. Norton calls the Armory Show the most controversial event in the history of American art. For many people who toured it, modern art became the thing they “loved to hate.”":"Los estadounidenses no estuvieron de acuerdo. Norton llama al Armory Show el evento más controvertido en la historia del arte estadounidense. Para muchas personas que lo visitaron, el arte moderno se convirtió en lo que “amaban odiar”.","Before the war, progressives pushed for tighter rules on business. They are still strong in state and local governments, where they work on public schools, public health, and social-welfare programs. But in Washington, conservative Republicans are back in power.":"Antes de la guerra, los progresistas impulsaron reglas más estrictas para las empresas. Todavía son fuertes en los gobiernos estatales y locales, donde trabajan en las escuelas públicas, la salud pública y los programas de bienestar social. Pero en Washington, los republicanos conservadores han vuelto al poder.","Both kinds of women were real. Young women who tried the new freedoms got a lot of attention. By 1927, skirts were at the knee. In 1919, they had been six inches above the ground. Their “carefree version of feminism” also aroused furious criticism.":"Los dos tipos de mujeres existieron de verdad. Las jóvenes que probaron las nuevas libertades recibieron mucha atención. Para 1927, las faldas llegaban a la rodilla. En 1919, estaban seis pulgadas arriba del suelo. Su “versión despreocupada del feminismo” también provocó críticas furiosas.","Break the old rules and try new ways of making art, even if it shocks people":"Romper las reglas de siempre y probar nuevas formas de hacer arte, aunque escandalice a la gente","But Norton says most women in the 1920s were not rebels like flappers. Most people still led traditional lives. Fewer college-educated women pursued careers outside the home. Most women who worked outside the home had unskilled, low-paying jobs. Only 4 percent of working women were salaried professionals.":"Pero Norton dice que la mayoría de las mujeres de los años veinte no eran rebeldes como las flappers. La mayoría de la gente seguía una vida tradicional. Menos mujeres con estudios universitarios siguieron carreras fuera de casa. La mayoría de las mujeres que trabajaban fuera de casa tenían empleos no calificados y mal pagados. Solo el 4 por ciento de las mujeres trabajadoras eran profesionales asalariadas.","But Norton says the new conveniences of modern life were enjoyed mainly by the urban middle and upper classes. Rural and working-class Americans had to wait many more years.":"Pero Norton dice que las nuevas comodidades de la vida moderna las disfrutaban sobre todo las clases media y alta de las ciudades. Los estadounidenses del campo y de la clase trabajadora tuvieron que esperar muchos años más.","Buy Now or Save":"Comprar ahora o ahorrar","Buy the car now and pay for it later in installments":"Comprar el carro ahora y pagarlo después a plazos","By the 1920s, modernists and their traditional critics were clashing in passionate defense of their views. The author Willa Cather said, “The world broke in two in 1922 or thereabouts.”":"Para los años veinte, los modernistas y sus críticos tradicionales chocaban defendiendo con pasión sus puntos de vista. La autora Willa Cather dijo: “El mundo se partió en dos en 1922 o por ahí”.","Car ownership grew fast. More than 8 million cars were registered in 1920. By 1929, there were more than 23 million. The auto industry created tens of thousands of new jobs.":"La cantidad de personas con carro creció rápido. En 1920 había más de 8 millones de carros registrados. Para 1929, había más de 23 millones. La industria automotriz creó decenas de miles de empleos nuevos.","Choose one":"Elige uno","Counter-Argument":"Contraargumento","Cut taxes and government spending, and let business lead the economy":"Bajar los impuestos y el gasto del gobierno, y dejar que las empresas dirijan la economía","Dilemma 1 <span>of 5<\/span> · 1925":"Dilema 1 <span>de 5<\/span> · 1925","Dilemma 2 <span>of 5<\/span> · 1925":"Dilema 2 <span>de 5<\/span> · 1925","Dilemma 3 <span>of 5<\/span> · 1913":"Dilema 3 <span>de 5<\/span> · 1913","Dilemma 4 <span>of 5<\/span> · 1925":"Dilema 4 <span>de 5<\/span> · 1925","Dilemma 5 <span>of 5<\/span> · 1921":"Dilema 5 <span>de 5<\/span> · 1921","Edit my answer":"Cambiar mi respuesta","Everything is done. Tap Finished to download your file.":"Todo está listo. Toca «Terminé» para descargar tu archivo.","Fill in both boxes to unlock the next step.":"Llena las dos casillas para pasar al siguiente paso.","Five days after the trial ended, Bryan died. Norton says the Scopes Trial only sharpened the national debate between fundamentalism and evolution. That debate continues today.":"Cinco días después de que terminó el juicio, Bryan murió. Norton dice que el juicio de Scopes solo hizo más fuerte el debate nacional entre el fundamentalismo y la evolución. Ese debate continúa hoy.","Harding and his team also dismantled or neutralized many progressive regulatory laws and agencies. The Court led by Taft struck down a federal child-labor law and a minimum-wage law for women.":"Harding y su equipo también desmantelaron o neutralizaron muchas leyes y agencias progresistas que regulaban a las empresas. La Corte dirigida por Taft anuló una ley federal contra el trabajo infantil y una ley de salario mínimo para mujeres.","Henry Ford’s Model T cost $850 when it first appeared in 1908. By 1924, Ford sold the same car for $290.":"El Modelo T de Henry Ford costaba 850 dólares cuando apareció en 1908. Para 1924, Ford vendía el mismo carro por 290 dólares.","Here is a summary of the choices you made.":"Este es un resumen de las elecciones que hiciste.","In the 1920s, the national government chose A. Mellon convinced Congress to cut the top income tax rate from 73 percent in 1921 to 24 percent by 1929. Government spending and the national debt fell. Unemployment dropped to 2.4 percent in 1923. President Coolidge later said, “The chief business of the American people is business.”":"En los años veinte, el gobierno nacional eligió la opción A. Mellon convenció al Congreso de bajar la tasa más alta del impuesto sobre la renta del 73 por ciento en 1921 al 24 por ciento para 1929. El gasto del gobierno y la deuda nacional bajaron. El desempleo cayó al 2.4 por ciento en 1923. El presidente Coolidge dijo más tarde: “El negocio principal del pueblo estadounidense son los negocios”.","It is 1913. You are in New York City. A huge art show called the Armory Show has opened. It brings modern art from Europe to Americans.":"Es 1913. Estás en la Ciudad de Nueva York. Se ha abierto una enorme exposición de arte llamada el Armory Show. Trae arte moderno de Europa para los estadounidenses.","It is 1921. Warren Harding has won the presidency by a wide margin, 16 million votes to 9 million for James Cox. He promised “normalcy.” Republicans have also gained seats in both houses of Congress.":"Es 1921. Warren Harding ganó la presidencia por un amplio margen, 16 millones de votos contra 9 millones para James Cox. Prometió “normalidad”. Los republicanos también ganaron escaños en las dos cámaras del Congreso.","It is 1925. The economy is booming. Jobs are plentiful, and wage workers are earning more. Your family wants a car.":"Es 1925. La economía está en auge. Hay muchos empleos y los trabajadores con salario ganan más. Tu familia quiere un carro.","It is 1925. You are a young woman in a big American city. Women have won the right to vote.":"Es 1925. Eres una joven en una gran ciudad de Estados Unidos. Las mujeres han ganado el derecho al voto.","It is July 1925. You are in Dayton, Tennessee, a small town. Tennessee has passed a law that bans the teaching of evolution in public schools and colleges.":"Es julio de 1925. Estás en Dayton, Tennessee, un pueblo pequeño. Tennessee aprobó una ley que prohíbe enseñar la evolución en las escuelas públicas y las universidades.","July 1925: The Scopes Trial":"Julio de 1925: el juicio de Scopes","Keep the government active in regulating business":"Mantener al gobierno activo en la regulación de las empresas","Keep the old rules and standards of good taste in art":"Mantener las reglas de siempre y las normas de buen gusto en el arte","Keep to traditional ways and expectations":"Seguir las costumbres y expectativas tradicionales","Let a state ban the teaching of evolution in its public schools":"Permitir que un estado prohíba enseñar la evolución en sus escuelas públicas","Let teachers teach evolution in public schools":"Permitir que los maestros enseñen la evolución en las escuelas públicas","Lock in all five dilemmas to finish.":"Confirma las cinco decisiones para terminar.","Lock in my answer":"Confirmar mi respuesta","Locked in. Read what really happened below.":"Confirmada. Lee abajo lo que realmente pasó.","Many Americans are watching. Most American Christians fall somewhere between the two sides.":"Muchos estadounidenses están mirando. La mayoría de los cristianos estadounidenses están en algún punto entre los dos lados.","Many Americans chose to buy now and pay later. Norton says consumer debt almost tripled during the 1920s. Advertising kept driving demand anyway.":"Muchos estadounidenses eligieron comprar ahora y pagar después. Norton dice que la deuda de los consumidores casi se triplicó durante los años veinte. Aun así, la publicidad siguió impulsando la demanda.","Many other people are shocked. A Catholic priest in Brooklyn complains of a “pandemonium of powder, a riot of rouge, and a moral anarchy of dress.” Most women around you still live traditional lives.":"Muchas otras personas están escandalizadas. Un sacerdote católico de Brooklyn se queja de un “pandemonio de polvos, un alboroto de colorete y una anarquía moral en el vestir”. La mayoría de las mujeres a tu alrededor todavía llevan una vida tradicional.","Many visitors are upset. A well-known art critic says modernism “is nothing else than the total destruction of the art of painting.”":"Muchos visitantes están molestos. Un crítico de arte muy conocido dice que el modernismo “no es otra cosa que la destrucción total del arte de la pintura”.","Many young women around you are trying new things. They are cutting their hair short, which is called “bobbing.” They wear shorter skirts. They drive cars. They dance the Charleston to jazz music. People call these young women “flappers.” They want more out of life than marriage and motherhood.":"Muchas jóvenes a tu alrededor están probando cosas nuevas. Se cortan el pelo corto, lo que se llama “bobbing”. Usan faldas más cortas. Manejan carros. Bailan el Charleston con música de jazz. A estas jóvenes se les llama “flappers”. Quieren más de la vida que casarse y ser madres.","Modernism began in European capitals like Paris and London in the 1890s. Now it has reached New York and Chicago. Modern artists break the old rules on purpose. One modernist painter said, “Art is meant to disturb.”":"El modernismo comenzó en capitales europeas como París y Londres en la década de 1890. Ahora ha llegado a Nueva York y Chicago. Los artistas modernos rompen las reglas de siempre a propósito. Un pintor modernista dijo: “El arte está hecho para perturbar”.","Modernism kept spreading anyway. Norton says it reflected a sense that Western civilization was going through bewildering changes. New technology, new transportation and communication, and new scientific discoveries were changing everyday life. The poet Ezra Pound gave modernism its slogan: “Make It New!”":"Aun así, el modernismo siguió extendiéndose. Norton dice que reflejaba la sensación de que la civilización occidental pasaba por cambios desconcertantes. La nueva tecnología, el nuevo transporte y las nuevas comunicaciones, y los nuevos descubrimientos científicos estaban cambiando la vida diaria. El poeta Ezra Pound dio al modernismo su lema: “¡Hazlo nuevo!”.","New Art or Old Rules":"Arte nuevo o reglas de siempre","New Ways or Old Ways":"Costumbres nuevas o de siempre","Not answered yet":"Aún sin responder","Progressives say the national government should stay active and keep regulating business.":"Los progresistas dicen que el gobierno nacional debe seguir activo y seguir regulando a las empresas.","Read “You are there.”":"Lee «Tú estás allí».","Ready. Tap Lock in to see what happened.":"Listo. Toca «Confirmar» para ver lo que pasó.","Save up and wait until you can pay for the car in full":"Ahorrar y esperar hasta poder pagar el carro completo","Source: Norton Ch. 22, “A ‘New Era’ of Consumption,” A Growing Consumer Culture and The Car Culture, pp. 949-952.":"Fuente: Norton, cap. 22, “A ‘New Era’ of Consumption,” A Growing Consumer Culture and The Car Culture, págs. 949-952.","Source: Norton Ch. 22, “Republican Resurgence,” pp. 983-987 and 991.":"Fuente: Norton, cap. 22, “Republican Resurgence,” págs. 983-987 y 991.","Source: Norton Ch. 22, “The Modernist Revolt,” pp. 965-969.":"Fuente: Norton, cap. 22, “The Modernist Revolt,” págs. 965-969.","Source: Norton Ch. 22, “The Reactionary Twenties,” Fundamentalism and The Scopes Trial, pp. 976-979.":"Fuente: Norton, cap. 22, “The Reactionary Twenties,” Fundamentalism and The Scopes Trial, págs. 976-979.","Source: Norton Ch. 22, “The ‘Jazz Age,’” Women in the 1920s, p. 957, and Not-So-‘New’ Women, p. 959.":"Fuente: Norton, cap. 22, “The ‘Jazz Age,’” Women in the 1920s, pág. 957, y Not-So-‘New’ Women, pág. 959.","Stores now offer layaway plans and installment buying. Ads say “buy now, pay later.” Business owners call the new consumer culture a marvel of modern life. Critics say it threatens old virtues like hard work, plain living, and careful money management.":"Ahora las tiendas ofrecen planes de apartado y compras a plazos. Los anuncios dicen: “compra ahora y paga después”. Los dueños de negocios llaman a la nueva cultura de consumo una maravilla de la vida moderna. Los críticos dicen que amenaza viejas virtudes como el trabajo duro, la vida sencilla y el manejo cuidadoso del dinero.","Tap <b>Lock in my answer<\/b> to see what really happened.":"Toca <b>Confirmar mi respuesta<\/b> para ver lo que realmente pasó.","Tap the choice you would make.":"Toca la opción que tú elegirías.","Taxes and Regulation":"Impuestos y regulación","Teaching Evolution":"Enseñar la evolución","That file does not look like a Would You Rather progress file. Try again.":"Ese archivo no parece un archivo de progreso de «¿Qué preferirías?». Inténtalo de nuevo.","The Tennessee Supreme Court upheld the anti-evolution law. But it waived Scopes’s $100 fine on a technicality. Both sides claimed victory.":"La Corte Suprema de Tennessee mantuvo la ley contra la evolución. Pero le perdonó a Scopes la multa de 100 dólares por un tecnicismo. Los dos lados dijeron que habían ganado.","The end":"El final","The trial began on July 10, 1925, and lasted twelve days. The judge ruled that the only question for the jury was whether Scopes had taught evolution. No one denied that he had. The jury found Scopes guilty.":"El juicio comenzó el 10 de julio de 1925 y duró doce días. El juez decidió que la única pregunta para el jurado era si Scopes había enseñado la evolución. Nadie negó que lo hizo. El jurado declaró culpable a Scopes.","Town leaders wanted publicity. They asked John T. Scopes, a 24-year-old high-school science teacher, to be a test case. He taught from a textbook on evolution, and police arrested him. Hundreds of reporters have come to town for the trial.":"Los líderes del pueblo querían publicidad. Le pidieron a John T. Scopes, un maestro de ciencias de preparatoria de 24 años, que fuera un caso de prueba. Él enseñó con un libro de texto sobre la evolución y la policía lo arrestó. Cientos de reporteros han llegado al pueblo para el juicio.","Treasury Secretary Andrew Mellon wants to cut federal spending, lower tax rates, and raise tariffs on imported goods. This year, the top income tax rate is 73 percent. He says these steps will help the economy grow.":"El secretario del Tesoro Andrew Mellon quiere reducir el gasto federal, bajar las tasas de impuestos y subir los aranceles a los productos importados. Este año, la tasa más alta del impuesto sobre la renta es del 73 por ciento. Él dice que estas medidas ayudarán a que la economía crezca.","Try the new fashions and freedoms of the 1920s":"Probar las nuevas modas y libertades de los años veinte","Type the other side’s best reason here...":"Escribe aquí la mejor razón del otro lado...","Type your reason here...":"Escribe tu razón aquí...","UNIT 5 · WAR, PROSPERITY, AND CULTURAL CONFLICT | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 5 · GUERRA, PROSPERIDAD Y CONFLICTO CULTURAL | CPUSH | DANIEL GARZA, M.A.","Unions lost ground. Employers asked new workers to sign “yellow-dog” contracts, which forced them to promise not to join a union. Union membership fell from about 5 million in 1920 to 3.5 million in 1929. Norton says the “new economy” was not helping enough working-class Americans to last.":"Los sindicatos perdieron terreno. Los empleadores pedían a los trabajadores nuevos que firmaran contratos “yellow-dog”, que los obligaban a prometer no unirse a un sindicato. La cantidad de miembros de sindicatos bajó de unos 5 millones en 1920 a 3.5 millones en 1929. Norton dice que la “nueva economía” no ayudaba a suficientes estadounidenses de clase trabajadora para poder durar.","What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”":"¿Cuál es la mejor razón que daría alguien del OTRO lado? Escríbela como la diría esa persona. Prueba: «Alguien que eligió el otro lado diría...»","What really happened":"Lo que realmente pasó","What would you choose for the national government?":"¿Qué elegirías para el gobierno nacional?","What would you choose?":"¿Qué elegirías?","Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”":"¿Por qué elegiste esto? Usa al menos un dato de la lección. Prueba: «Elegí esto porque... Un dato es...»","William Jennings Bryan believes the Bible is literally true. He has volunteered to help the prosecution. He says the trial is about a state’s right to decide what is taught in its public schools. Clarence Darrow, a famous trial lawyer, has offered to defend Scopes and the theory of evolution. Darrow says, “Scopes is not on trial. Civilization is on trial.”":"William Jennings Bryan cree que la Biblia es verdad al pie de la letra. Se ofreció para ayudar a la fiscalía. Dice que el juicio trata sobre el derecho de un estado a decidir lo que se enseña en sus escuelas públicas. Clarence Darrow, un famoso abogado de juicios, se ofreció a defender a Scopes y la teoría de la evolución. Darrow dice: “Scopes no está siendo juzgado. La civilización está siendo juzgada”.","Would You Rather":"¿Qué preferirías?","Would you rather...":"¿Qué preferirías?...","Write a Counter-Argument: the best reason someone on the other side would give.":"Escribe un contraargumento: la mejor razón que daría alguien del otro lado.","Write your reason. Use at least one fact from the lesson.":"Escribe tu razón. Usa al menos un dato de la lección.","You are there":"Tú estás allí","Your choices":"Tus elecciones","Your reason":"Tu razón","Your work saves on this device as you type. Use <b>Save Progress<\/b> at the bottom to download a backup file, and <b>Load Progress<\/b> to continue later.":"Tu trabajo se guarda en este dispositivo mientras escribes. Usa <b>Guardar progreso<\/b> al final para descargar una copia de respaldo, y <b>Cargar progreso<\/b> para continuar más tarde.","Chosen, not locked in yet: Break the old rules and try new ways of making art, even if it shocks people":"Elegida, aún sin confirmar: Romper las reglas de siempre y probar nuevas formas de hacer arte, aunque escandalice a la gente","Chosen, not locked in yet: Buy the car now and pay for it later in installments":"Elegida, aún sin confirmar: Comprar el carro ahora y pagarlo después a plazos","Chosen, not locked in yet: Cut taxes and government spending, and let business lead the economy":"Elegida, aún sin confirmar: Bajar los impuestos y el gasto del gobierno, y dejar que las empresas dirijan la economía","Chosen, not locked in yet: Keep the government active in regulating business":"Elegida, aún sin confirmar: Mantener al gobierno activo en la regulación de las empresas","Chosen, not locked in yet: Keep the old rules and standards of good taste in art":"Elegida, aún sin confirmar: Mantener las reglas de siempre y las normas de buen gusto en el arte","Chosen, not locked in yet: Keep to traditional ways and expectations":"Elegida, aún sin confirmar: Seguir las costumbres y expectativas tradicionales","Chosen, not locked in yet: Let a state ban the teaching of evolution in its public schools":"Elegida, aún sin confirmar: Permitir que un estado prohíba enseñar la evolución en sus escuelas públicas","Chosen, not locked in yet: Let teachers teach evolution in public schools":"Elegida, aún sin confirmar: Permitir que los maestros enseñen la evolución en las escuelas públicas","Chosen, not locked in yet: Save up and wait until you can pay for the car in full":"Elegida, aún sin confirmar: Ahorrar y esperar hasta poder pagar el carro completo","Chosen, not locked in yet: Try the new fashions and freedoms of the 1920s":"Elegida, aún sin confirmar: Probar las nuevas modas y libertades de los años veinte","You chose: Break the old rules and try new ways of making art, even if it shocks people":"Elegiste: Romper las reglas de siempre y probar nuevas formas de hacer arte, aunque escandalice a la gente","You chose: Buy the car now and pay for it later in installments":"Elegiste: Comprar el carro ahora y pagarlo después a plazos","You chose: Cut taxes and government spending, and let business lead the economy":"Elegiste: Bajar los impuestos y el gasto del gobierno, y dejar que las empresas dirijan la economía","You chose: Keep the government active in regulating business":"Elegiste: Mantener al gobierno activo en la regulación de las empresas","You chose: Keep the old rules and standards of good taste in art":"Elegiste: Mantener las reglas de siempre y las normas de buen gusto en el arte","You chose: Keep to traditional ways and expectations":"Elegiste: Seguir las costumbres y expectativas tradicionales","You chose: Let a state ban the teaching of evolution in its public schools":"Elegiste: Permitir que un estado prohíba enseñar la evolución en sus escuelas públicas","You chose: Let teachers teach evolution in public schools":"Elegiste: Permitir que los maestros enseñen la evolución en las escuelas públicas","You chose: Save up and wait until you can pay for the car in full":"Elegiste: Ahorrar y esperar hasta poder pagar el carro completo","You chose: Try the new fashions and freedoms of the 1920s":"Elegiste: Probar las nuevas modas y libertades de los años veinte","Would You Rather 14 · A Clash of Cultures - The 1920s":"¿Qué preferirías? 14 · Un choque de culturas - Los años veinte","Clear all of your answers on this page?":"¿Borrar todas tus respuestas en esta página?"},"ar":{"Save Progress":"حفظ التقدم","Load Progress":"تحميل التقدم","Finished — Download File to Submit":"انتهيت — نزّل الملف لتسليمه","Clear all my answers":"امسح كل إجاباتي","FIRST NAME *":"الاسم الأول *","LAST NAME *":"اسم العائلة *","PERIOD *":"الحصة *","DATE (fills in when you finish)":"التاريخ (يُكتب تلقائيًا عند الانتهاء)","e.g. 3":"مثال: 3","Automatic":"تلقائي","Please type your first name, last name, and period first.":"اكتب أولًا اسمك الأول واسم العائلة والحصة.","Western Expansion and Southern Secession":"التوسع غربًا وانفصال الجنوب","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"الوحدة 3 · بيت منقسم وأُعيد بناؤه | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — قانون العبيد الهاربين","Bleeding Kansas":"Bleeding Kansas — كانساس النازفة","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"الوحدة 3 · بيت منقسم وأعيد بناؤه | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"تم تنزيل ملف التقدم. احتفظ به في مكان آمن. استخدم «تحميل التقدم» لتكمل لاحقًا.","Progress loaded.":"تم تحميل التقدم.","Could not read that file.":"تعذّرت قراءة هذا الملف.","Treaty of Guadalupe Hidalgo":"معاهدة غوادالوبي هيدالغو (Treaty of Guadalupe Hidalgo)","1913: The Armory Show and Modern Art":"1913: معرض أرموري (Armory Show) والفن الحديث","1921: Cut Taxes or Keep Regulating Business?":"1921: خفض الضرائب أم الاستمرار في تنظيم الشركات؟","1925: Buy Now, Pay Later?":"1925: اشترِ الآن وادفع لاحقًا؟","<b>How to work.<\/b> People in history faced hard choices. Here are five. There is no right or wrong choice. Your job is to understand why people chose what they did.":"<b>طريقة العمل.<\/b> واجه الناس في التاريخ خيارات صعبة. هنا خمسة منها. لا يوجد خيار صحيح أو خاطئ. مهمتك أن تفهم لماذا اختار الناس ما اختاروه.","A Clash of Cultures - The 1920s":"صدام الثقافات - عشرينيات القرن العشرين","A Young Woman in 1925: New Ways or Old Ways?":"شابة في عام 1925: طرق جديدة أم طرق قديمة؟","All five dilemmas are locked in. Nice work.":"تم تثبيت المعضلات الخمس. عمل جيد.","Americans did not agree. Norton calls the Armory Show the most controversial event in the history of American art. For many people who toured it, modern art became the thing they “loved to hate.”":"لم يتفق الأمريكيون. يصف نورتن (Norton) معرض أرموري (Armory Show) بأنه أكثر حدث مثير للجدل في تاريخ الفن الأمريكي. وبالنسبة لكثير ممن زاروه، صار الفن الحديث هو الشيء الذي «يحبون أن يكرهوه».","Before the war, progressives pushed for tighter rules on business. They are still strong in state and local governments, where they work on public schools, public health, and social-welfare programs. But in Washington, conservative Republicans are back in power.":"قبل الحرب، دفع التقدميون نحو قواعد أكثر صرامة على الشركات. وما زالوا أقوياء في حكومات الولايات والحكومات المحلية، حيث يعملون على المدارس العامة والصحة العامة وبرامج الرعاية الاجتماعية. لكن في واشنطن (Washington) عاد الجمهوريون المحافظون إلى الحكم.","Both kinds of women were real. Young women who tried the new freedoms got a lot of attention. By 1927, skirts were at the knee. In 1919, they had been six inches above the ground. Their “carefree version of feminism” also aroused furious criticism.":"كلا النوعين من النساء كان حقيقيًا. حظيت الشابات اللواتي جربن الحريات الجديدة باهتمام كبير. وبحلول عام 1927 صارت التنانير عند الركبة. وفي عام 1919 كانت ترتفع ست بوصات عن الأرض. كما أثارت «نسختهن الخالية من الهموم من النسوية» انتقادات غاضبة.","Break the old rules and try new ways of making art, even if it shocks people":"كسر القواعد القديمة وتجربة طرق جديدة لصنع الفن، حتى لو صدم ذلك الناس","But Norton says most women in the 1920s were not rebels like flappers. Most people still led traditional lives. Fewer college-educated women pursued careers outside the home. Most women who worked outside the home had unskilled, low-paying jobs. Only 4 percent of working women were salaried professionals.":"لكن نورتن (Norton) يقول إن معظم النساء في العشرينيات لم يكنّ متمردات مثل الفلابرز (flappers). وكان معظم الناس ما زالوا يعيشون حياة تقليدية. وقلّ عدد خريجات الجامعات اللواتي عملن في مهن خارج البيت. وعملت معظم النساء العاملات خارج البيت في وظائف لا تحتاج مهارة وأجرها منخفض. ولم تكن سوى 4 بالمئة من النساء العاملات صاحبات مهن يتقاضين رواتب.","But Norton says the new conveniences of modern life were enjoyed mainly by the urban middle and upper classes. Rural and working-class Americans had to wait many more years.":"لكن نورتن (Norton) يقول إن وسائل الراحة الجديدة في الحياة الحديثة كان يتمتع بها أساسًا أبناء الطبقتين المتوسطة والعليا في المدن. أما الأمريكيون في الريف وأبناء الطبقة العاملة فكان عليهم أن ينتظروا سنوات أطول بكثير.","Buy Now or Save":"الشراء الآن أم الادخار","Buy the car now and pay for it later in installments":"شراء السيارة الآن ودفع ثمنها لاحقًا بالتقسيط","By the 1920s, modernists and their traditional critics were clashing in passionate defense of their views. The author Willa Cather said, “The world broke in two in 1922 or thereabouts.”":"وبحلول العشرينيات كان الحداثيون ومنتقدوهم التقليديون يتصادمون دفاعًا متحمسًا عن آرائهم. وقالت الكاتبة ويلا كاثر (Willa Cather): «انقسم العالم إلى نصفين في عام 1922 أو نحو ذلك».","Car ownership grew fast. More than 8 million cars were registered in 1920. By 1929, there were more than 23 million. The auto industry created tens of thousands of new jobs.":"نما عدد من يملكون سيارات بسرعة. في عام 1920 كان أكثر من 8 ملايين سيارة مسجلة. وبحلول عام 1929 صار هناك أكثر من 23 مليون سيارة. وأوجدت صناعة السيارات عشرات الآلاف من الوظائف الجديدة.","Choose one":"اختر واحدًا","Counter-Argument":"حجة مضادة","Cut taxes and government spending, and let business lead the economy":"خفض الضرائب والإنفاق الحكومي، وترك الشركات تقود الاقتصاد","Dilemma 1 <span>of 5<\/span> · 1925":"المعضلة 1 <span>من 5<\/span> · 1925","Dilemma 2 <span>of 5<\/span> · 1925":"المعضلة 2 <span>من 5<\/span> · 1925","Dilemma 3 <span>of 5<\/span> · 1913":"المعضلة 3 <span>من 5<\/span> · 1913","Dilemma 4 <span>of 5<\/span> · 1925":"المعضلة 4 <span>من 5<\/span> · 1925","Dilemma 5 <span>of 5<\/span> · 1921":"المعضلة 5 <span>من 5<\/span> · 1921","Edit my answer":"تعديل إجابتي","Everything is done. Tap Finished to download your file.":"اكتمل كل شيء. اضغط «انتهيت» لتنزيل ملفك.","Fill in both boxes to unlock the next step.":"املأ المربعين للانتقال إلى الخطوة التالية.","Five days after the trial ended, Bryan died. Norton says the Scopes Trial only sharpened the national debate between fundamentalism and evolution. That debate continues today.":"بعد خمسة أيام من انتهاء المحاكمة توفي برايان (Bryan). ويقول نورتن (Norton) إن محاكمة سكوبس (Scopes Trial) زادت حدة الجدل الوطني بين الأصولية ونظرية التطور. وهذا الجدل مستمر حتى اليوم.","Harding and his team also dismantled or neutralized many progressive regulatory laws and agencies. The Court led by Taft struck down a federal child-labor law and a minimum-wage law for women.":"كما فكّك هاردينغ (Harding) وفريقه أو عطّلوا كثيرًا من القوانين والهيئات التقدمية التي تنظّم الشركات. وألغت المحكمة العليا برئاسة تافت (Taft) قانونًا فيدراليًا ضد عمل الأطفال وقانونًا للحد الأدنى لأجور النساء.","Henry Ford’s Model T cost $850 when it first appeared in 1908. By 1924, Ford sold the same car for $290.":"كانت سيارة «موديل تي» (Model T) من هنري فورد (Henry Ford) تكلّف 850 دولارًا عندما ظهرت عام 1908. وبحلول عام 1924 صار فورد يبيع السيارة نفسها بـ 290 دولارًا.","Here is a summary of the choices you made.":"هذا ملخص للخيارات التي اخترتها.","In the 1920s, the national government chose A. Mellon convinced Congress to cut the top income tax rate from 73 percent in 1921 to 24 percent by 1929. Government spending and the national debt fell. Unemployment dropped to 2.4 percent in 1923. President Coolidge later said, “The chief business of the American people is business.”":"في العشرينيات اختارت الحكومة الوطنية الخيار A. أقنع ميلون (Mellon) الكونغرس بخفض أعلى معدل لضريبة الدخل من 73 بالمئة في عام 1921 إلى 24 بالمئة بحلول عام 1929. وانخفض الإنفاق الحكومي والدين الوطني. وهبطت البطالة إلى 2.4 بالمئة عام 1923. وقال الرئيس كوليدج (Coolidge) لاحقًا: «العمل الأساسي للشعب الأمريكي هو الأعمال التجارية».","It is 1913. You are in New York City. A huge art show called the Armory Show has opened. It brings modern art from Europe to Americans.":"نحن في عام 1913. أنت في مدينة نيويورك. افتُتح معرض فني ضخم اسمه معرض أرموري (Armory Show). وهو يقدم للأمريكيين فنًا حديثًا من أوروبا.","It is 1921. Warren Harding has won the presidency by a wide margin, 16 million votes to 9 million for James Cox. He promised “normalcy.” Republicans have also gained seats in both houses of Congress.":"نحن في عام 1921. فاز وارن هاردينغ (Warren Harding) بالرئاسة بفارق كبير، 16 مليون صوت مقابل 9 ملايين لجيمس كوكس (James Cox). ووعد بـ«الحياة الطبيعية». كما كسب الجمهوريون مقاعد في مجلسي الكونغرس.","It is 1925. The economy is booming. Jobs are plentiful, and wage workers are earning more. Your family wants a car.":"نحن في عام 1925. الاقتصاد في ازدهار. الوظائف كثيرة، والعمال بأجر يكسبون أكثر. تريد عائلتك شراء سيارة.","It is 1925. You are a young woman in a big American city. Women have won the right to vote.":"نحن في عام 1925. أنت شابة في مدينة أمريكية كبيرة. حصلت النساء على حق التصويت.","It is July 1925. You are in Dayton, Tennessee, a small town. Tennessee has passed a law that bans the teaching of evolution in public schools and colleges.":"نحن في يوليو 1925. أنت في دايتون (Dayton) بولاية تينيسي (Tennessee)، وهي بلدة صغيرة. أصدرت تينيسي قانونًا يمنع تدريس نظرية التطور في المدارس والكليات العامة.","July 1925: The Scopes Trial":"يوليو 1925: محاكمة سكوبس (Scopes Trial)","Keep the government active in regulating business":"إبقاء الحكومة نشطة في تنظيم الشركات","Keep the old rules and standards of good taste in art":"الحفاظ على القواعد القديمة ومعايير الذوق الجيد في الفن","Keep to traditional ways and expectations":"التمسك بالطرق والتوقعات التقليدية","Let a state ban the teaching of evolution in its public schools":"السماح لأي ولاية بمنع تدريس نظرية التطور في مدارسها العامة","Let teachers teach evolution in public schools":"السماح للمعلمين بتدريس نظرية التطور في المدارس العامة","Lock in all five dilemmas to finish.":"ثبّت إجابات المعضلات الخمس لتنهي.","Lock in my answer":"تثبيت إجابتي","Locked in. Read what really happened below.":"تم التثبيت. اقرأ في الأسفل ما حدث فعلًا.","Many Americans are watching. Most American Christians fall somewhere between the two sides.":"كثير من الأمريكيين يتابعون ما يحدث. ومعظم المسيحيين الأمريكيين يقفون في مكان ما بين الطرفين.","Many Americans chose to buy now and pay later. Norton says consumer debt almost tripled during the 1920s. Advertising kept driving demand anyway.":"اختار كثير من الأمريكيين أن يشتروا الآن ويدفعوا لاحقًا. ويقول نورتن (Norton) إن ديون المستهلكين تضاعفت تقريبًا ثلاث مرات خلال العشرينيات. ومع ذلك استمر الإعلان في تحفيز الطلب.","Many other people are shocked. A Catholic priest in Brooklyn complains of a “pandemonium of powder, a riot of rouge, and a moral anarchy of dress.” Most women around you still live traditional lives.":"كثير من الناس الآخرين مصدومون. يشكو كاهن كاثوليكي في بروكلين (Brooklyn) من «فوضى من البودرة، وشغب من أحمر الخدود، وفوضى أخلاقية في اللباس». ومعظم النساء حولك ما زلن يعشن حياة تقليدية.","Many visitors are upset. A well-known art critic says modernism “is nothing else than the total destruction of the art of painting.”":"كثير من الزوار منزعجون. ويقول ناقد فني مشهور إن الحداثة «ليست سوى الدمار الكامل لفن الرسم».","Many young women around you are trying new things. They are cutting their hair short, which is called “bobbing.” They wear shorter skirts. They drive cars. They dance the Charleston to jazz music. People call these young women “flappers.” They want more out of life than marriage and motherhood.":"كثير من الشابات حولك يجربن أشياء جديدة. يقصصن شعرهن قصيرًا، وهذا يسمى «البوبنغ» (bobbing). يلبسن تنانير أقصر. يقدن السيارات. يرقصن التشارلستون (Charleston) على موسيقى الجاز. ويُطلق الناس على هؤلاء الشابات اسم «الفلابرز» (flappers). يردن من الحياة أكثر من الزواج والأمومة.","Modernism began in European capitals like Paris and London in the 1890s. Now it has reached New York and Chicago. Modern artists break the old rules on purpose. One modernist painter said, “Art is meant to disturb.”":"بدأت الحداثة (modernism) في عواصم أوروبية مثل باريس ولندن في تسعينيات القرن التاسع عشر. والآن وصلت إلى نيويورك وشيكاغو. ويكسر الفنانون الحداثيون القواعد القديمة عن قصد. وقال رسام حداثي: «الفن وُجد ليُزعج».","Modernism kept spreading anyway. Norton says it reflected a sense that Western civilization was going through bewildering changes. New technology, new transportation and communication, and new scientific discoveries were changing everyday life. The poet Ezra Pound gave modernism its slogan: “Make It New!”":"ومع ذلك استمرت الحداثة في الانتشار. ويقول نورتن (Norton) إنها عكست شعورًا بأن الحضارة الغربية تمر بتغيرات محيّرة. كانت التكنولوجيا الجديدة، ووسائل النقل والاتصال الجديدة، والاكتشافات العلمية الجديدة تغيّر الحياة اليومية. وقدّم الشاعر إزرا باوند (Ezra Pound) شعار الحداثة: «اجعله جديدًا!»","New Art or Old Rules":"فن جديد أم قواعد قديمة","New Ways or Old Ways":"طرق جديدة أم قديمة","Not answered yet":"لم تتم الإجابة بعد","Progressives say the national government should stay active and keep regulating business.":"يقول التقدميون إن الحكومة الوطنية يجب أن تبقى نشطة وتستمر في تنظيم الشركات.","Read “You are there.”":"اقرأ «أنت هناك».","Ready. Tap Lock in to see what happened.":"جاهز. اضغط «تثبيت» لترى ما حدث.","Save up and wait until you can pay for the car in full":"الادخار والانتظار حتى تستطيع دفع ثمن السيارة كاملًا","Source: Norton Ch. 22, “A ‘New Era’ of Consumption,” A Growing Consumer Culture and The Car Culture, pp. 949-952.":"المصدر: Norton، الفصل 22، <bdi dir=\"ltr\">“A ‘New Era’ of Consumption,” A Growing Consumer Culture and The Car Culture<\/bdi>، ص. 949-952.","Source: Norton Ch. 22, “Republican Resurgence,” pp. 983-987 and 991.":"المصدر: Norton، الفصل 22، <bdi dir=\"ltr\">“Republican Resurgence,”<\/bdi> ص. 983-987 و991.","Source: Norton Ch. 22, “The Modernist Revolt,” pp. 965-969.":"المصدر: Norton، الفصل 22، <bdi dir=\"ltr\">“The Modernist Revolt,”<\/bdi> ص. 965-969.","Source: Norton Ch. 22, “The Reactionary Twenties,” Fundamentalism and The Scopes Trial, pp. 976-979.":"المصدر: Norton، الفصل 22، <bdi dir=\"ltr\">“The Reactionary Twenties,” Fundamentalism and The Scopes Trial<\/bdi>، ص. 976-979.","Source: Norton Ch. 22, “The ‘Jazz Age,’” Women in the 1920s, p. 957, and Not-So-‘New’ Women, p. 959.":"المصدر: Norton، الفصل 22، <bdi dir=\"ltr\">“The ‘Jazz Age,’” Women in the 1920s<\/bdi>، ص. 957، و<bdi dir=\"ltr\">Not-So-‘New’ Women<\/bdi>، ص. 959.","Stores now offer layaway plans and installment buying. Ads say “buy now, pay later.” Business owners call the new consumer culture a marvel of modern life. Critics say it threatens old virtues like hard work, plain living, and careful money management.":"تعرض المتاجر الآن خطط «الحجز» والشراء بالتقسيط. وتقول الإعلانات: «اشترِ الآن وادفع لاحقًا». ويصف أصحاب الأعمال ثقافة الاستهلاك الجديدة بأنها أعجوبة من أعاجيب الحياة الحديثة. ويقول المنتقدون إنها تهدد فضائل قديمة مثل العمل الجاد والعيش البسيط والإدارة الحذرة للمال.","Tap <b>Lock in my answer<\/b> to see what really happened.":"اضغط <b>تثبيت إجابتي<\/b> لترى ما حدث فعلًا.","Tap the choice you would make.":"اضغط على الخيار الذي ستختاره.","Taxes and Regulation":"الضرائب والتنظيم","Teaching Evolution":"تدريس نظرية التطور","That file does not look like a Would You Rather progress file. Try again.":"هذا الملف لا يبدو ملف تقدم لنشاط «ماذا تفضّل؟». حاول مرة أخرى.","The Tennessee Supreme Court upheld the anti-evolution law. But it waived Scopes’s $100 fine on a technicality. Both sides claimed victory.":"أبقت المحكمة العليا في تينيسي (Tennessee) على قانون منع التطور. لكنها ألغت غرامة سكوبس (Scopes) البالغة 100 دولار لسبب إجرائي. وادّعى الطرفان النصر.","The end":"النهاية","The trial began on July 10, 1925, and lasted twelve days. The judge ruled that the only question for the jury was whether Scopes had taught evolution. No one denied that he had. The jury found Scopes guilty.":"بدأت المحاكمة في 10 يوليو 1925 واستمرت اثني عشر يومًا. قرر القاضي أن السؤال الوحيد أمام هيئة المحلفين هو هل درّس سكوبس (Scopes) نظرية التطور. ولم ينكر أحد أنه فعل ذلك. ووجدت هيئة المحلفين أن سكوبس مذنب.","Town leaders wanted publicity. They asked John T. Scopes, a 24-year-old high-school science teacher, to be a test case. He taught from a textbook on evolution, and police arrested him. Hundreds of reporters have come to town for the trial.":"أراد قادة البلدة الشهرة. فطلبوا من جون ت. سكوبس (John T. Scopes)، معلم علوم في المدرسة الثانوية عمره 24 عامًا، أن يكون قضية اختبار. درّس من كتاب مدرسي عن نظرية التطور، فاعتقلته الشرطة. وجاء مئات الصحفيين إلى البلدة لتغطية المحاكمة.","Treasury Secretary Andrew Mellon wants to cut federal spending, lower tax rates, and raise tariffs on imported goods. This year, the top income tax rate is 73 percent. He says these steps will help the economy grow.":"يريد وزير الخزانة أندرو ميلون (Andrew Mellon) خفض الإنفاق الفيدرالي وتخفيض معدلات الضرائب ورفع الرسوم الجمركية على السلع المستوردة. وفي هذا العام يبلغ أعلى معدل لضريبة الدخل 73 بالمئة. ويقول إن هذه الخطوات ستساعد الاقتصاد على النمو.","Try the new fashions and freedoms of the 1920s":"تجربة الموضات والحريات الجديدة في العشرينيات","Type the other side’s best reason here...":"اكتب هنا أفضل سبب للطرف الآخر...","Type your reason here...":"اكتب سببك هنا...","UNIT 5 · WAR, PROSPERITY, AND CULTURAL CONFLICT | CPUSH | DANIEL GARZA, M.A.":"الوحدة 5 · الحرب والازدهار والصراع الثقافي | CPUSH | DANIEL GARZA, M.A.","Unions lost ground. Employers asked new workers to sign “yellow-dog” contracts, which forced them to promise not to join a union. Union membership fell from about 5 million in 1920 to 3.5 million in 1929. Norton says the “new economy” was not helping enough working-class Americans to last.":"خسرت النقابات مواقعها. فقد طلب أصحاب العمل من العمال الجدد توقيع عقود «الكلب الأصفر» (yellow-dog) التي أجبرتهم على الوعد بعدم الانضمام إلى نقابة. وانخفض عدد أعضاء النقابات من نحو 5 ملايين في عام 1920 إلى 3.5 ملايين في عام 1929. ويقول نورتن (Norton) إن «الاقتصاد الجديد» لم يكن يفيد عددًا كافيًا من أبناء الطبقة العاملة الأمريكية ليستمر.","What is the best reason someone on the OTHER side would give? Write it the way they would say it. Try: “Someone who chose the other side would say...”":"ما أفضل سبب قد يقدّمه شخص من الطرف الآخر؟ اكتبه كما سيقوله هو. جرّب: «شخص اختار الطرف الآخر سيقول...»","What really happened":"ما حدث فعلًا","What would you choose for the national government?":"ماذا ستختار للحكومة الوطنية؟","What would you choose?":"ماذا ستختار؟","Why did you choose this? Use at least one fact from the lesson. Try: “I chose this because... One fact is...”":"لماذا اخترت هذا؟ استخدم معلومة واحدة على الأقل من الدرس. جرّب: «اخترت هذا لأن... ومن المعلومات...»","William Jennings Bryan believes the Bible is literally true. He has volunteered to help the prosecution. He says the trial is about a state’s right to decide what is taught in its public schools. Clarence Darrow, a famous trial lawyer, has offered to defend Scopes and the theory of evolution. Darrow says, “Scopes is not on trial. Civilization is on trial.”":"يؤمن ويليام جينينغز برايان (William Jennings Bryan) بأن الكتاب المقدس صحيح حرفيًا. وقد تطوع لمساعدة الادعاء. ويقول إن المحاكمة تتعلق بحق الولاية في تحديد ما يُدرَّس في مدارسها العامة. أما كلارنس دارو (Clarence Darrow)، وهو محامٍ مشهور في المحاكمات، فقد عرض الدفاع عن سكوبس (Scopes) وعن نظرية التطور. ويقول دارو: «سكوبس ليس هو من يُحاكَم. الحضارة هي التي تُحاكَم».","Would You Rather":"ماذا تفضّل؟","Would you rather...":"ماذا تفضّل؟...","Write a Counter-Argument: the best reason someone on the other side would give.":"اكتب حجة مضادة: أفضل سبب قد يقدّمه شخص من الطرف الآخر.","Write your reason. Use at least one fact from the lesson.":"اكتب سببك. استخدم معلومة واحدة على الأقل من الدرس.","You are there":"أنت هناك","Your choices":"اختياراتك","Your reason":"سببك","Your work saves on this device as you type. Use <b>Save Progress<\/b> at the bottom to download a backup file, and <b>Load Progress<\/b> to continue later.":"يُحفظ عملك على هذا الجهاز أثناء الكتابة. استخدم زر <b>حفظ التقدم<\/b> في الأسفل لتنزيل نسخة احتياطية، وزر <b>تحميل التقدم<\/b> لتكمل لاحقًا.","Chosen, not locked in yet: Break the old rules and try new ways of making art, even if it shocks people":"تم الاختيار ولم يتم التثبيت بعد: كسر القواعد القديمة وتجربة طرق جديدة لصنع الفن، حتى لو صدم ذلك الناس","Chosen, not locked in yet: Buy the car now and pay for it later in installments":"تم الاختيار ولم يتم التثبيت بعد: شراء السيارة الآن ودفع ثمنها لاحقًا بالتقسيط","Chosen, not locked in yet: Cut taxes and government spending, and let business lead the economy":"تم الاختيار ولم يتم التثبيت بعد: خفض الضرائب والإنفاق الحكومي، وترك الشركات تقود الاقتصاد","Chosen, not locked in yet: Keep the government active in regulating business":"تم الاختيار ولم يتم التثبيت بعد: إبقاء الحكومة نشطة في تنظيم الشركات","Chosen, not locked in yet: Keep the old rules and standards of good taste in art":"تم الاختيار ولم يتم التثبيت بعد: الحفاظ على القواعد القديمة ومعايير الذوق الجيد في الفن","Chosen, not locked in yet: Keep to traditional ways and expectations":"تم الاختيار ولم يتم التثبيت بعد: التمسك بالطرق والتوقعات التقليدية","Chosen, not locked in yet: Let a state ban the teaching of evolution in its public schools":"تم الاختيار ولم يتم التثبيت بعد: السماح لأي ولاية بمنع تدريس نظرية التطور في مدارسها العامة","Chosen, not locked in yet: Let teachers teach evolution in public schools":"تم الاختيار ولم يتم التثبيت بعد: السماح للمعلمين بتدريس نظرية التطور في المدارس العامة","Chosen, not locked in yet: Save up and wait until you can pay for the car in full":"تم الاختيار ولم يتم التثبيت بعد: الادخار والانتظار حتى تستطيع دفع ثمن السيارة كاملًا","Chosen, not locked in yet: Try the new fashions and freedoms of the 1920s":"تم الاختيار ولم يتم التثبيت بعد: تجربة الموضات والحريات الجديدة في العشرينيات","You chose: Break the old rules and try new ways of making art, even if it shocks people":"اخترت: كسر القواعد القديمة وتجربة طرق جديدة لصنع الفن، حتى لو صدم ذلك الناس","You chose: Buy the car now and pay for it later in installments":"اخترت: شراء السيارة الآن ودفع ثمنها لاحقًا بالتقسيط","You chose: Cut taxes and government spending, and let business lead the economy":"اخترت: خفض الضرائب والإنفاق الحكومي، وترك الشركات تقود الاقتصاد","You chose: Keep the government active in regulating business":"اخترت: إبقاء الحكومة نشطة في تنظيم الشركات","You chose: Keep the old rules and standards of good taste in art":"اخترت: الحفاظ على القواعد القديمة ومعايير الذوق الجيد في الفن","You chose: Keep to traditional ways and expectations":"اخترت: التمسك بالطرق والتوقعات التقليدية","You chose: Let a state ban the teaching of evolution in its public schools":"اخترت: السماح لأي ولاية بمنع تدريس نظرية التطور في مدارسها العامة","You chose: Let teachers teach evolution in public schools":"اخترت: السماح للمعلمين بتدريس نظرية التطور في المدارس العامة","You chose: Save up and wait until you can pay for the car in full":"اخترت: الادخار والانتظار حتى تستطيع دفع ثمن السيارة كاملًا","You chose: Try the new fashions and freedoms of the 1920s":"اخترت: تجربة الموضات والحريات الجديدة في العشرينيات","Would You Rather 14 · A Clash of Cultures - The 1920s":"ماذا تفضّل؟ 14 · صدام الثقافات - عشرينيات القرن العشرين","Clear all of your answers on this page?":"هل تريد مسح كل إجاباتك في هذه الصفحة؟"},"patterns":[{"re":"^Still needed: first name, last name, and period\\.$","es":"Todavía falta: nombre, apellido y período.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة."},{"re":"^(\\d+) of (\\d+) dilemmas locked in$","es":"$1 de $2 decisiones confirmadas","ar":"عدد المعضلات المثبّتة: $1 من $2"},{"re":"^Still needed: first name, last name, and period; 1 dilemma to lock in\\.$","es":"Todavía falta: nombre, apellido y período; 1 decisión por confirmar.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة؛ معضلة واحدة تحتاج إلى تثبيت."},{"re":"^Still needed: first name, last name, and period; (\\d+) dilemmas to lock in\\.$","es":"Todavía falta: nombre, apellido y período; $1 decisiones por confirmar.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة؛ عدد المعضلات التي تحتاج إلى تثبيت: $1."},{"re":"^Still needed: first name, last name, and period\\.$","es":"Todavía falta: nombre, apellido y período.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة."},{"re":"^Still needed: 1 dilemma to lock in\\.$","es":"Todavía falta: 1 decisión por confirmar.","ar":"ما زال ناقصًا: معضلة واحدة تحتاج إلى تثبيت."},{"re":"^Still needed: (\\d+) dilemmas to lock in\\.$","es":"Todavía falta: $1 decisiones por confirmar.","ar":"ما زال ناقصًا: عدد المعضلات التي تحتاج إلى تثبيت: $1."},{"re":"^Done! Your file (\\S+) downloaded\\. Upload it to Canvas\\.$","es":"¡Listo! Se descargó tu archivo $1. Súbelo a Canvas.","ar":"أحسنت! تم تنزيل هذا الملف: <bdi dir=\"ltr\" style=\"display:block\">$1<\/bdi> ارفع هذا الملف إلى Canvas."}]}</script>
+<script>
+/* Supplement language switch (English / Espanol / Arabic). Works on pages whose text is rendered by JS:
+   a MutationObserver translates text as it appears. Data: <script type="application/json" id="sp-i18n">
+   {"langs":["en","es","ar"],"default":"en","es":{englishHTML:translation},"ar":{...},"patterns":[{"re":"^(\\d+) of (\\d+)$","es":"$1 de $2","ar":"..."}]}
+   Keys are the English text exactly as it sits in the page (innerHTML, spaces collapsed).
+   Helpers: spSeen() english strings seen so far; spMissing() strings with no translation in the current language;
+   spSetLang(l); spTr(s) translate a string (used for confirm/alert); spAscii(s) plain-ASCII name for file names. */
+(function () {
+  var node = document.getElementById('sp-i18n');
+  var D = node ? JSON.parse(node.textContent) : { langs: ['en'], patterns: [] };
+  var INLINE = { B:1,I:1,EM:1,STRONG:1,SPAN:1,A:1,BR:1,SMALL:1,SUP:1,SUB:1,U:1,MARK:1,BDI:1,TSPAN:1,CODE:1 };
+  var SKIP = 'script,style,textarea,input,.sp-lang,.sp-nt,[translate="no"]';
+  var WORD = /[A-Za-z\u00C0-\u024F\u0600-\u06FF]{2}|e\.g\./;
+  var LANG = 'en', REC = new WeakMap(), SEEN = {}, MISS = {};
+  (D.patterns || []).forEach(function (p) { try { p._re = new RegExp(p.re); } catch (e) {} });
+  function norm(s) { return String(s).replace(/\s+/g, ' ').trim(); }
+  function tr(src) {
+    if (LANG === 'en') return null;
+    var t = D[LANG] && D[LANG][src];
+    if (t) return t;
+    var P = D.patterns || [];
+    for (var i = 0; i < P.length; i++) {
+      var m = P[i]._re && P[i]._re.exec(src);
+      if (m && P[i][LANG]) return P[i][LANG].replace(/\$(\d+)/g, function (_, n) { return m[+n] || ''; });
+    }
+    return null;
+  }
+  window.spTr = function (s) { var t = tr(norm(s)); return t ? t.replace(/<[^>]+>/g, '') : s; };
+  function isInline(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling)
+      if (c.nodeType === 1 && (!INLINE[c.tagName.toUpperCase()] || c.matches(SKIP))) return false;
+    return true;
+  }
+  function directText(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling) if (c.nodeType === 3 && WORD.test(c.nodeValue)) return true;
+    return false;
+  }
+  function cur(s) { return s.nodeType === 1 ? s.innerHTML : s.nodeValue; }
+  function put(s, v) { if (s.nodeType === 1) s.innerHTML = v; else s.nodeValue = v; }
+  function handle(s) {
+    var r = REC.get(s), c = cur(s);
+    if (!(r && c === r.wrote)) { r = { en: c, wrote: c }; REC.set(s, r); }
+    var src = norm(r.en), target = r.en;
+    if (WORD.test(src)) {
+      SEEN[src] = 1;
+      if (LANG !== 'en') {
+        var t = tr(src);
+        if (t) {
+          target = s.nodeType === 1 ? t : (r.en.match(/^\s*/)[0] + t + r.en.match(/\s*$/)[0]);
+          delete MISS[src];
+        } else MISS[src] = 1;
+      }
+    }
+    if (c !== target) put(s, target);
+    r.wrote = cur(s);
+  }
+  var ATTRS = ['placeholder', 'alt', 'aria-label', 'title'];
+  function attrs(root) {
+    var els = root.querySelectorAll ? root.querySelectorAll('[placeholder],[alt],[aria-label],[title]') : [];
+    var list = [].slice.call(els); if (root.matches && root.matches('[placeholder],[alt],[aria-label],[title]')) list.push(root);
+    list.forEach(function (el) {
+      if (el.closest && el.closest('.sp-lang,.sp-nt,[translate="no"],script,style')) return;
+      var rec = el.__spa || (el.__spa = {});
+      ATTRS.forEach(function (a) {
+        var v = el.getAttribute(a); if (v == null) return;
+        var r = rec[a];
+        if (!(r && v === r.wrote)) { r = rec[a] = { en: v, wrote: v }; }
+        var src = norm(r.en); if (!WORD.test(src)) return;
+        SEEN[src] = 1;
+        var t = LANG === 'en' ? null : tr(src);
+        if (LANG !== 'en' && !t) MISS[src] = 1;
+        var target = t ? t.replace(/<[^>]+>/g, '') : r.en;
+        if (v !== target) el.setAttribute(a, target);
+        r.wrote = el.getAttribute(a);
+      });
+    });
+  }
+  function walk(root) {
+    if (root.nodeType === 3) { if (WORD.test(root.nodeValue) && !(root.parentNode && root.parentNode.closest && root.parentNode.closest(SKIP))) handle(root); return; }
+    if (root.nodeType !== 1) return;
+    (function w(el) {
+      if (el.matches(SKIP)) return;
+      if (el !== document.body && directText(el) && isInline(el)) { handle(el); return; }
+      for (var c = el.firstChild; c; c = c.nextSibling) {
+        if (c.nodeType === 1) w(c); else if (c.nodeType === 3 && WORD.test(c.nodeValue)) handle(c);
+      }
+    })(root);
+    attrs(root);
+  }
+  var TITLE = { en: document.title, wrote: document.title };
+  function title() {
+    if (document.title !== TITLE.wrote) TITLE = { en: document.title, wrote: document.title };
+    var t = LANG === 'en' ? null : tr(norm(TITLE.en));
+    document.title = t ? t.replace(/<[^>]+>/g, '') : TITLE.en; TITLE.wrote = document.title;
+  }
+  function inl(e) { return e.nodeType === 1 && !!INLINE[e.tagName.toUpperCase()]; }
+  var mo = new MutationObserver(function (muts) {
+    var todo = [];
+    muts.forEach(function (m) {
+      if (m.type === 'childList') { for (var i = 0; i < m.addedNodes.length; i++) todo.push(m.addedNodes[i]); todo.push(m.target); }
+      else todo.push(m.target);
+    });
+    todo.forEach(function (n) {
+      var el = n.nodeType === 1 ? n : n.parentNode;
+      if (!el || el.nodeType !== 1 || !document.body.contains(el)) return;
+      while (el !== document.body && el.parentNode && el.parentNode.nodeType === 1 && inl(el) && inl(el.parentNode)) el = el.parentNode;
+      if (el.parentNode && el.parentNode.nodeType === 1 && inl(el.parentNode) && el.parentNode !== document.body) el = el.parentNode;
+      walk(el);
+    });
+    mo.takeRecords();
+  });
+  var AR = { 'ا':'a','أ':'a','إ':'i','آ':'a','ب':'b','ت':'t','ث':'th','ج':'j','ح':'h','خ':'kh','د':'d','ذ':'dh','ر':'r','ز':'z','س':'s','ش':'sh','ص':'s','ض':'d','ط':'t','ظ':'z','ع':'a','غ':'gh','ف':'f','ق':'q','ك':'k','ل':'l','م':'m','ن':'n','ه':'h','و':'w','ي':'y','ى':'a','ة':'a','ئ':'y','ؤ':'w' };
+  window.spAscii = function (s) {
+    s = String(s); if (s.normalize) s = s.normalize('NFD').replace(/[̀-ًͯ-ٰٟ]/g, '');
+    return s.replace(/[ء-ي]/g, function (c) { return AR[c] !== undefined ? AR[c] : ''; }).replace(/ñ/g, 'n').replace(/Ñ/g, 'N');
+  };
+  window.spSeen = function () { return Object.keys(SEEN); };
+  window.spMissing = function () { return Object.keys(MISS); };
+  window.spLang = function () { return LANG; };
+  window.spSetLang = function (l) {
+    if ((D.langs || ['en']).indexOf(l) < 0) l = 'en';
+    LANG = l; MISS = {};
+    var h = document.documentElement; h.lang = l; h.dir = l === 'ar' ? 'rtl' : 'ltr';
+    mo.disconnect(); walk(document.body); title(); mo.takeRecords();
+    mo.observe(document.body, { childList: true, subtree: true, characterData: true });
+    document.querySelectorAll('.sp-lang button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === l)); });
+    try { localStorage.setItem('sp_lang', l); } catch (e) {}
+    try { var u = new URL(location.href); if (l === 'en') u.searchParams.delete('lang'); else u.searchParams.set('lang', l); history.replaceState(null, '', u.toString()); } catch (e) {}
+    try { document.dispatchEvent(new CustomEvent('splangchange', { detail: l })); } catch (e) {}
+  };
+  var _c = window.confirm, _a = window.alert;
+  window.confirm = function (m) { return _c.call(window, window.spTr(m)); };
+  window.alert = function (m) { return _a.call(window, window.spTr(m)); };
+  document.querySelectorAll('.sp-lang button').forEach(function (b) { b.addEventListener('click', function () { window.spSetLang(b.getAttribute('data-lang')); }); });
+  var start = D['default'] || 'en';
+  try { start = new URL(location.href).searchParams.get('lang') || localStorage.getItem('sp_lang') || start; } catch (e) {}
+  window.spSetLang(start);
+})();
+
+</script><!--/sp-i18n-->
+</body></html>

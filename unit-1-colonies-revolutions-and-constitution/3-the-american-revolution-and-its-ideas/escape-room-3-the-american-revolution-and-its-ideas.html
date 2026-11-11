@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Escape Room 3 · The American Revolution and Its Ideas</title>
+<style>
+:root{--bg:#13392F;--txt:#EBF4F2;--a1:#2A755F;--a2:#D29E4B;--hl:#E1C18E;--glass:rgba(235,244,242,.07);--glassb:rgba(235,244,242,.2);--dim:#D3E3DF;--ok:#8FD3A8}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#1F5E4C 0%,#13392F 60%) fixed;background-color:var(--bg);color:var(--txt);font:17px/1.55 "Segoe UI",system-ui,-apple-system,Verdana,sans-serif;min-height:100vh}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px 40px}
+.glass{background:var(--glass);border:1px solid var(--glassb);border-radius:16px;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+header.hero{padding:30px 0 12px;border-bottom:3px solid var(--a2)}
+.eyebrow{font-size:13px;letter-spacing:.16em;font-weight:700;color:var(--hl)}
+h1{margin:.15em 0 .05em;font-size:clamp(28px,6vw,40px);line-height:1.12}
+.sub{margin:0;font-weight:600;color:var(--dim)}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 4px}
+.meta label{flex:1 1 170px;font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--dim)}
+input[type=text],textarea,select{display:block;width:100%;margin-top:4px;padding:10px 12px;border:1px solid var(--glassb);border-radius:10px;background:rgba(12,37,31,.55);color:var(--txt);font:inherit;font-size:16px}
+input[type=text]:focus,textarea:focus,select:focus,button:focus-visible{outline:3px solid var(--hl);outline-offset:1px}
+input.bad{border-color:var(--a2);box-shadow:0 0 0 2px var(--a2)}
+textarea{min-height:120px;resize:vertical}
+.howto{margin:14px 0;padding:14px 16px;font-size:16px}
+.howto ol{margin:6px 0 0;padding-left:22px}
+.scene{margin:14px 0;padding:8px;text-align:center}
+.scene svg{width:100%;height:auto;display:block;border-radius:12px}
+.bar{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;padding:8px 12px;margin:10px 0;font-weight:700;font-size:15px;background:rgba(19,57,47,.92);border:1px solid var(--glassb);border-radius:12px}
+.bar span b{color:var(--hl)}
+.btn{font:inherit;font-size:16px;font-weight:700;padding:11px 18px;border-radius:12px;border:2px solid var(--hl);background:transparent;color:var(--txt);cursor:pointer;min-height:44px}
+.btn:hover{background:rgba(225,193,142,.18)}
+.btn.primary{background:var(--hl);color:#13392F;border-color:var(--hl)}
+.btn.primary:hover{background:#F0DDB5}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.btn.small{padding:8px 14px;font-size:15px;min-height:40px}
+.intro{padding:20px;text-align:center}
+.intro p{margin:.4em 0}
+.lock{margin:12px 0;overflow:hidden}
+.lock>button.lh{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:12px;width:100%;padding:14px 16px;cursor:pointer}
+.lock>button.lh:focus-visible{outline:3px solid var(--hl);outline-offset:-3px}
+.lock.locked>button.lh{cursor:not-allowed;opacity:.55}
+.lk{flex:none;width:44px;height:44px}
+.lk .sh{transition:transform .5s cubic-bezier(.3,1.6,.5,1);transform-origin:center}
+.lock.solved .lk .sh{transform:translateY(-6px) rotate(-30deg);transform-origin:10px 14px}
+.lock.solved .lk .bd{fill:var(--hl)}
+.lt{flex:1}
+.lt small{display:block;font-size:12px;letter-spacing:.12em;font-weight:700;color:var(--hl)}
+.lt strong{font-size:19px}
+.dg{flex:none;min-width:42px;height:42px;border-radius:10px;border:2px solid var(--hl);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;background:rgba(12,37,31,.55)}
+.lb{padding:0 16px 16px;display:none}
+.lock.open .lb{display:block}
+.objline{font-size:14px;color:var(--dim);margin:0 0 10px}
+.card{background:rgba(235,244,242,.1);border-left:6px solid var(--a2);border-radius:10px;padding:12px 14px;margin:8px 0 12px}
+.card h4{margin:0 0 4px;font-size:13px;letter-spacing:.12em;color:var(--hl)}
+.card p{margin:.3em 0}
+.card .src{font-size:13px;color:var(--dim)}
+.prompt{font-weight:700;margin:10px 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0}
+.chip{font:inherit;font-size:16px;padding:10px 14px;border-radius:12px;border:2px solid var(--glassb);background:rgba(12,37,31,.55);color:var(--txt);cursor:pointer;min-height:44px;text-align:left}
+.chip.sel{border-color:var(--hl);background:rgba(225,193,142,.2)}
+.chip .n{display:inline-block;min-width:24px;height:24px;line-height:24px;border-radius:12px;background:var(--hl);color:#13392F;font-weight:800;text-align:center;margin-right:8px}
+.mrow{margin:8px 0}
+.mrow label{font-weight:700;display:block}
+fieldset{border:1px solid var(--glassb);border-radius:10px;margin:8px 0;padding:8px 12px}
+legend{font-weight:700;padding:0 6px}
+.opt{display:flex;align-items:center;gap:10px;padding:6px 0;min-height:40px;cursor:pointer}
+.opt input{width:22px;height:22px;accent-color:#E1C18E;flex:none}
+.cipher{font:700 24px/1.3 "Courier New",monospace;letter-spacing:.14em;background:rgba(12,37,31,.65);padding:12px;border-radius:10px;border:1px dashed var(--hl);word-break:break-word;text-align:center}
+.key{display:grid;grid-template-columns:repeat(13,1fr);gap:2px;margin:10px 0;font:700 14px/1.2 "Courier New",monospace;text-align:center}
+.key div{padding:3px 0;border-radius:4px;background:rgba(235,244,242,.08)}
+.key .c{color:var(--hl)}
+.scr{font:800 30px/1.2 "Courier New",monospace;letter-spacing:.3em;text-align:center;background:rgba(12,37,31,.65);padding:10px;border-radius:10px;border:1px dashed var(--hl)}
+.row{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0;align-items:center}
+.fb{margin:8px 0;padding:10px 12px;border-radius:10px;display:none;font-weight:600}
+.fb.show{display:block}
+.fb.nudge{background:rgba(210,158,75,.18);border:1px solid var(--a2)}
+.fb.good{background:rgba(143,211,168,.16);border:1px solid var(--ok);color:#DDF5E6}
+.hints{margin:6px 0}
+.hint{background:rgba(225,193,142,.14);border:1px dashed var(--hl);border-radius:10px;padding:8px 12px;margin:6px 0;font-size:16px}
+.hint b{color:var(--hl)}
+.exit{margin:16px 0;padding:18px;text-align:center}
+.exit.locked{opacity:.55}
+.exit h2,.esc h2,.debrief h2{margin:.1em 0 .3em}
+.codebox{display:flex;justify-content:center;gap:8px;margin:12px 0}
+.codebox input{width:52px;height:60px;text-align:center;font:800 30px "Courier New",monospace;padding:0;margin:0}
+.esc{margin:16px 0;padding:22px;text-align:center;display:none;border:2px solid var(--hl)}
+.esc.show{display:block}
+.esc .big{overflow-wrap:anywhere;font-size:clamp(30px,9vw,64px);font-weight:900;letter-spacing:.14em;color:var(--hl);text-shadow:0 0 24px rgba(225,193,142,.6);animation:pop .8s cubic-bezier(.3,1.6,.5,1)}
+.esc .time{font-size:26px;font-weight:800}
+.debrief{margin:16px 0;padding:16px}
+.actions{margin:16px 0;padding:16px}
+.status{font-weight:700;margin-bottom:10px}
+.msg{display:none;margin-top:10px;padding:10px 12px;border-radius:10px;background:rgba(143,211,168,.16);border:1px solid var(--ok)}
+.msg.err{background:rgba(210,158,75,.2);border-color:var(--a2)}
+.link{all:unset;cursor:pointer;color:var(--dim);text-decoration:underline;font-size:14px;margin-top:10px;display:inline-block}
+.link:focus-visible{outline:3px solid var(--hl)}
+footer{text-wrap:balance;text-align:center;font-size:12px;letter-spacing:.1em;font-weight:700;color:var(--dim);padding:20px 8px 30px;border-top:1px solid var(--glassb);margin-top:20px}
+.ennote{margin:.4em 0 0;font-size:14px;font-weight:700;color:var(--dim)}
+.exit .ennote{text-align:center}
+.hidden{display:none!important}.lock,.exit,.esc{scroll-margin-top:64px}
+.pop{animation:pop .7s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pop{0%{transform:scale(.2);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes tap{0%,100%{transform:rotate(0)}50%{transform:rotate(9deg)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.shake{animation:shake .35s}
+.wheel{transform-box:view-box;transform-origin:276px 86px}
+.wheel.spin{animation:tap .5s ease-in-out 3}
+.plock .sh{transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
+.plock.open .sh{transform:translateY(-7px)}
+.plock.open .bd{fill:#E1C18E}
+#door{transform-origin:150px 20px;transition:transform 1.4s ease-in-out}
+.escaped #door{transform:scaleX(.1)}
+#glow{opacity:.15;transition:opacity 1.4s}
+.escaped #glow{opacity:1}
+html[dir="rtl"] .chip{text-align:right}
+html[dir="rtl"] .chip .n{margin-right:0;margin-left:8px}
+html[dir="rtl"] .card{border-left:0;border-right:6px solid var(--a2)}
+html[dir="rtl"] .howto ol{padding-left:0;padding-right:22px}
+html[dir="rtl"] .esc,html[dir="rtl"] .exit,html[dir="rtl"] .intro{text-align:center}
+html[dir="rtl"] .cipher,html[dir="rtl"] .scr,html[dir="rtl"] .key{direction:ltr}
+html[dir="rtl"] .scr{letter-spacing:.3em!important}
+html[dir="rtl"] .cipher{letter-spacing:.14em!important}
+html[dir="rtl"] .key{letter-spacing:0!important}
+html[dir="rtl"] .card .src{direction:ltr;text-align:left}
+html[dir="rtl"] .hint,html[dir="rtl"] .fb,html[dir="rtl"] .msg,html[dir="rtl"] .objline{text-align:start}
+html[dir="rtl"] .lock>button.lh{text-align:start}
+html[dir="rtl"] .lb,html[dir="rtl"] .actions{text-align:start}
+html[dir="rtl"] .bar{direction:rtl}
+html[dir="rtl"] .tt{unicode-bidi:plaintext}
+@media(max-width:520px){body{font-size:16px}.chip{width:100%}.key{font-size:12px;gap:1px}.codebox input{width:46px;height:54px}.dg{min-width:38px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{.bar,.actions button{display:none}}
+/*sp-i18n-css*/
+.sp-lang-bar{display:flex;justify-content:flex-end;padding:8px 12px 0;position:relative;z-index:5}
+.sp-lang{display:inline-flex;gap:2px;padding:3px;border-radius:10px;background:rgba(255,255,255,.88);border:1px solid rgba(0,0,0,.18);font-family:system-ui,"Segoe UI",Tahoma,Arial,sans-serif}
+.sp-lang button{border:0;background:transparent;color:#222;font:600 13px/1 system-ui,"Segoe UI",Tahoma,Arial,sans-serif;padding:7px 11px;border-radius:7px;cursor:pointer}
+.sp-lang button[aria-pressed="true"]{background:#222;color:#fff}
+.sp-lang button:focus-visible{outline:3px solid #2a6df4;outline-offset:1px}
+textarea,input,select{unicode-bidi:plaintext}
+html[lang="ar"] body,html[lang="ar"] button,html[lang="ar"] textarea,html[lang="ar"] input,html[lang="ar"] select{font-family:"Segoe UI",Tahoma,"Noto Sans Arabic","Arial",system-ui,sans-serif}
+html[lang="ar"] body{line-height:1.8}
+html[lang="ar"] *{letter-spacing:0!important}
+html[dir="rtl"] textarea,html[dir="rtl"] input{text-align:start}
+@media print{.sp-lang-bar{display:none}}
+/*/sp-i18n-css*/
+</style>
+</head>
+<body>
+<!--sp-bar--><div class="sp-lang-bar"><div class="sp-lang" role="group" aria-label="Language / Idioma / اللغة"><button type="button" data-lang="en" lang="en" aria-pressed="true">English</button><button type="button" data-lang="es" lang="es" aria-pressed="false">Español</button><button type="button" data-lang="ar" lang="ar" aria-pressed="false">العربية</button></div></div><!--/sp-bar-->
+<div class="wrap">
+<header class="hero">
+  <div class="eyebrow">1776-1786</div>
+  <h1>Escape the Captain’s Cabin</h1>
+  <p class="sub">The American Revolution and Its Ideas</p>
+  <div class="meta">
+    <label>FIRST NAME *<input id="f_first" type="text" autocomplete="given-name"></label>
+    <label>LAST NAME *<input id="f_last" type="text" autocomplete="family-name"></label>
+    <label>PERIOD *<input id="f_period" type="text" inputmode="numeric" maxlength="12" placeholder="e.g. 3"></label>
+  </div>
+</header>
+
+<div class="howto glass"><b>How to escape:</b>
+<ol>
+<li>Open each lock in order. Read the <b>Clue Card</b>. The answer is in the card.</li>
+<li>Solve the puzzle to open the lock and reveal one digit.</li>
+<li>If you get stuck, press <b>Hint</b>. Hints are free, but your teacher can see how many you used.</li>
+<li>Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.</li>
+</ol></div>
+
+<div class="scene glass" id="scene">
+<svg viewBox="0 0 600 270" role="img" aria-label="A ship’s cabin at night. On the left, a round porthole showing a crescent moon, stars, and waves, above a sea chest with metal bands. On the right, a ship’s bell, a coil of rope hanging on a peg, and a wooden barrel. The door has a CAPTAIN’S CABIN sign and five padlocks in a row. Under each padlock is a window for one digit of the exit code.">
+<defs>
+<pattern id="brick" width="40" height="270" patternUnits="userSpaceOnUse"><rect width="40" height="270" fill="#0F2D24"/><path d="M0 0V270" stroke="#EBF4F2" stroke-opacity=".12" fill="none"/><path d="M20 0V270" stroke="#EBF4F2" stroke-opacity=".05" fill="none"/></pattern>
+<radialGradient id="glowg" cx="50%" cy="50%" r="60%"><stop offset="0" stop-color="#EBF4F2"/><stop offset="1" stop-color="#E1C18E"/></radialGradient>
+</defs>
+<rect width="600" height="270" fill="url(#brick)"/>
+<rect y="236" width="600" height="34" fill="#103128"/>
+<g stroke="#D3E3DF" stroke-opacity=".35" stroke-width="2"><path d="M0 248H600M0 260H600"/><path d="M60 236V248M180 236V248M300 236V248M420 236V248M540 236V248M120 248V260M240 248V260M360 248V260M480 248V260M600 248V260"/></g>
+<g>
+<circle cx="70" cy="66" r="42" fill="#2A755F" stroke="#E1C18E" stroke-width="5"/><circle cx="70" cy="66" r="33" fill="#0A201B" stroke="#E1C18E" stroke-width="2"/>
+<circle cx="60" cy="52" r="10" fill="#E1C18E"/><circle cx="65" cy="48" r="9" fill="#0A201B"/>
+<g fill="#EBF4F2"><circle cx="84" cy="48" r="1.6"/><circle cx="92" cy="62" r="1.3"/><circle cx="76" cy="60" r="1.2"/><circle cx="50" cy="70" r="1.4"/></g>
+<path d="M42 80Q50 74 58 80T74 80T90 80T98 78" stroke="#EBF4F2" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+<path d="M44 90Q52 85 60 90T76 90T92 90" stroke="#EBF4F2" stroke-opacity=".6" stroke-width="2" fill="none" stroke-linecap="round"/>
+<g fill="#E1C18E"><circle cx="70" cy="22" r="2.6"/><circle cx="70" cy="110" r="2.6"/><circle cx="26" cy="66" r="2.6"/><circle cx="114" cy="66" r="2.6"/></g></g>
+<g><rect x="10" y="226" width="124" height="8" rx="3" fill="#E1C18E"/>
+<path d="M18 172Q18 142 70 142Q122 142 122 172Z" fill="#0C251F" stroke="#E1C18E" stroke-width="3" stroke-linejoin="round"/>
+<rect x="18" y="172" width="104" height="54" rx="4" fill="#2A755F" stroke="#E1C18E" stroke-width="3"/>
+<path d="M40 148V226M100 148V226" stroke="#E1C18E" stroke-width="5"/>
+<rect x="62" y="166" width="16" height="20" rx="3" fill="#D29E4B" stroke="#E1C18E" stroke-width="2"/><circle cx="70" cy="177" r="2.6" fill="#0A201B"/></g>
+<g><path d="M468 30H584" stroke="#E1C18E" stroke-width="5" stroke-linecap="round"/><path d="M526 30V40" stroke="#E1C18E" stroke-width="3"/><circle cx="526" cy="44" r="4" fill="none" stroke="#E1C18E" stroke-width="2.5"/>
+<path d="M510 80Q510 52 526 52Q542 52 542 80L552 92H500Z" fill="#D29E4B" stroke="#E1C18E" stroke-width="2.5" stroke-linejoin="round"/>
+<path d="M514 66Q518 56 526 56" stroke="#EBF4F2" stroke-opacity=".7" stroke-width="2" fill="none"/><circle cx="526" cy="98" r="5" fill="#0C251F" stroke="#E1C18E" stroke-width="2"/></g>
+<g><rect x="518" y="116" width="16" height="6" rx="2" fill="#E1C18E"/>
+<circle cx="526" cy="150" r="26" fill="none" stroke="#D29E4B" stroke-width="6" stroke-dasharray="7 3"/><circle cx="526" cy="150" r="18" fill="none" stroke="#D29E4B" stroke-width="6" stroke-dasharray="6 3"/><circle cx="526" cy="150" r="10" fill="none" stroke="#D29E4B" stroke-width="6" stroke-dasharray="5 3"/><path d="M552 150Q566 160 560 176" stroke="#D29E4B" stroke-width="5" fill="none" stroke-linecap="round"/>
+<path d="M526 124V118" stroke="#E1C18E" stroke-width="3"/></g>
+<g><path d="M482 192Q472 214 482 234H572Q582 214 572 192Z" fill="#2A755F" stroke="#E1C18E" stroke-width="3" stroke-linejoin="round"/>
+<ellipse cx="527" cy="192" rx="45" ry="8" fill="#0C251F" stroke="#E1C18E" stroke-width="3"/>
+<path d="M477 206Q527 216 577 206M476 224Q527 234 578 224" stroke="#E1C18E" stroke-width="3" fill="none"/></g>
+<rect id="glow" x="150" y="20" width="300" height="216" rx="10" fill="url(#glowg)"/>
+<g id="door">
+<rect x="150" y="20" width="300" height="216" rx="10" fill="#2A755F" stroke="#E1C18E" stroke-width="3"/>
+<circle cx="164" cy="34" r="4" fill="#E1C18E"/><circle cx="436" cy="34" r="4" fill="#E1C18E"/><circle cx="164" cy="222" r="4" fill="#E1C18E"/><circle cx="436" cy="222" r="4" fill="#E1C18E"/>
+<rect x="210" y="30" width="180" height="26" rx="4" fill="#0C251F" stroke="#EBF4F2" stroke-opacity=".7"/>
+<text x="300" y="48" text-anchor="middle" font-size="12" letter-spacing="2" font-weight="700" fill="#EBF4F2">CAPTAIN’S CABIN</text>
+<rect x="262" y="90" width="76" height="8" rx="3" fill="#13392F"/>
+<circle cx="276" cy="86" r="4" fill="#EBF4F2"/>
+<g class="wheel" id="wheel"><path d="M276 86L328 80" stroke="#EBF4F2" stroke-width="4" stroke-linecap="round"/><circle cx="330" cy="80" r="6" fill="#D29E4B"/></g>
+<rect x="170" y="106" width="260" height="8" rx="3" fill="#13392F"/>
+<g id="plocks"></g>
+<text x="300" y="228" text-anchor="middle" direction="ltr" font-size="11" letter-spacing="3" font-weight="700" fill="#EBF4F2">1776 - 1786</text>
+</g>
+</svg>
+</div>
+
+<div class="intro glass" id="intro">
+  <h2 style="margin:.1em 0">You are locked in the captain’s cabin.</h2>
+  <p>The ship’s captain locked the cabin door for the night. A round porthole, a sea chest, a ship’s bell, a coil of rope, and a wooden barrel sit in the room. The door has <b>5 locks</b>. Each lock matches one big idea from Lesson 3. Solve them all to find the <b>5-digit exit code</b>.</p>
+  <p>The clock starts when you press the button. Most students finish in about 20 minutes.</p>
+  <p><button class="btn primary" id="startBtn">Enter the Cabin</button></p>
+</div>
+
+<div id="game" class="hidden">
+  <div class="bar" id="bar" aria-live="off"><span><span>Time</span> <b id="tm">00:00</b></span><span><span>Locks</span> <b id="lc">0</b>/5</span><span><span>Hints used</span> <b id="hc">0</b></span></div>
+  <div id="locks"></div>
+
+  <section class="exit glass locked" id="exit" aria-label="Exit door">
+    <div class="eyebrow">THE EXIT DOOR</div>
+    <h2>Type the exit code</h2>
+    <p id="exitNote">Open all 5 locks first. The digits go in order: Lock 1 first.</p>
+    <div class="codebox" id="codebox" dir="ltr"></div>
+    <p class="ennote">Type the answer in English. Use the digits 0-9.</p>
+    <div class="row" style="justify-content:center"><button class="btn primary" id="codeBtn" disabled>Open the Door</button></div>
+    <div class="fb" id="codefb"></div>
+  </section>
+
+  <section class="esc glass" id="esc" aria-live="polite">
+    <div class="big">ESCAPED</div>
+    <p class="time"><span>Your time:</span> <span id="escTime">00:00</span></p>
+    <p id="escSum"></p>
+    <p>One last step: write your Debrief below.</p>
+  </section>
+
+  <section class="debrief glass" id="debrief">
+    <div class="eyebrow">DEBRIEF</div>
+    <h2>Which lock was hardest, and what did you learn that you did not know before?</h2>
+    <p style="margin:.2em 0;color:var(--dim)">Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.</p>
+    <textarea id="debriefText" aria-label="Debrief" placeholder="Type your answer here..."></textarea>
+  </section>
+
+  <section class="actions glass" id="actions">
+    <div class="status" id="status"></div>
+    <div class="row">
+      <button class="btn" id="saveBtn">Save Progress</button>
+      <button class="btn" id="loadBtn">Load Progress</button>
+      <input type="file" id="loadFile" accept=".json,application/json" hidden>
+      <button class="btn primary" id="finishBtn">Finished — Download File to Submit</button>
+    </div>
+    <div class="msg" id="msg" role="status"></div>
+    <button class="link" id="reset">Clear all my work and start over</button>
+  </section>
+</div>
+
+<div class="actions glass hidden" id="loadOnly" style="margin-top:12px"><button class="btn" id="loadBtn0">Load Progress</button> <span style="color:var(--dim)">Have a saved file? Load it to continue.</span></div>
+
+<footer>UNIT 1 · COLONIES, REVOLUTION, AND CONSTITUTION | CPUSH | DANIEL GARZA, M.A.</footer>
+</div>
+
+<script type="application/json" id="er-data">{"salt": "L3esc:", "exitHash": "bbe41564b803cd60588d", "locks": [{"n": 1, "key": "lock1_porthole", "title": "The Porthole", "obj": "1", "objLabel": "CORE OBJECTIVE 1", "objText": "Core Objective 1: Describe the ways in which the American Revolution was also a civil war.", "type": "match", "card": "<p>The American Revolution was also a civil war. It split families, friends, towns, and cities. Benjamin Franklin’s son William, the royal governor of New Jersey, was a Loyalist. His Patriot father removed him from his will and cut off contact. Loyalists, also called Tories, saw the Revolution as treason, and many lived in seaport cities and the Carolinas. Patriots wanted to separate from Britain to protect their liberty and to become citizens instead of subjects of a king. A middle group tried to stay neutral, but most were eventually pushed to choose a side. Some Americans switched sides four or five times.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 5, “American Society at War” (the opening, Loyalists, and Patriots).", "prompt": "Match each person or group to the best description. Use the Clue Card.", "hints": ["Look for who sided with Britain, who wanted to be citizens, who stayed neutral, and the father and son.", "Loyalists sided with Britain. Patriots wanted to be citizens, not subjects. The middle group tried to stay neutral. William Franklin was the governor whose father cut off contact."], "nudge": "Not quite. Check each match against the Clue Card. Which one are you least sure about?", "terms": [{"id": "loy", "label": "Loyalists (Tories)"}, {"id": "pat", "label": "Patriots"}, {"id": "wf", "label": "William Franklin"}, {"id": "mid", "label": "The middle group"}], "descs": [{"id": "d", "label": "A Loyalist governor whose Patriot father, Benjamin Franklin, cut off contact"}, {"id": "a", "label": "Sided with Britain and saw the Revolution as treason"}, {"id": "c", "label": "Tried to stay neutral but were eventually pushed to choose"}, {"id": "b", "label": "Wanted to be citizens, not subjects of a king"}], "entries": ["a68ddca94da71ffbe2972"], "id": "lock1_porthole"}, {"n": 2, "key": "lock2_sea_chest", "title": "The Sea Chest", "obj": "2", "objLabel": "CORE OBJECTIVE 2", "objText": "Core Objective 2: Explain the challenges faced by both British and American military leaders in fighting the Revolutionary War.", "type": "pick", "card": "<p>Both sides faced big challenges in fighting the war. Britain sent 35,000 soldiers and half of its huge navy, and 30,000 German soldiers also served in its armies. Most were from Hesse-Cassel, so Americans called them Hessians. The British government also lacked a steady war strategy. The Americans had to build an army and a navy from scratch. Militiamen were at times unreliable, so Washington convinced Congress to create a Continental Army of full-time soldiers. Congress could not tax, so it could only ask the states for money, and the states rarely paid their share. Both sides asked Indigenous people to fight, but the British were more successful because they had long-standing ties and promised to protect Indigenous lands.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 5, “Mobilizing for War” (the opening, British Military Power, The Continental Army, Problems of Finance and Supply, and Indigenous Americans and the Revolution).", "prompt": "Pick the correct answer for all four questions.", "qs": [{"id": "h", "q": "Why did Americans call the German soldiers hired by Britain “Hessians”?", "opts": [{"id": "a", "label": "Most came from the German state of Hesse-Cassel"}, {"id": "b", "label": "They all fought for the king of France"}, {"id": "c", "label": "They were hired from Spain"}, {"id": "d", "label": "They were born in the colonies"}]}, {"id": "c", "q": "How could Congress get money for the war?", "opts": [{"id": "a", "label": "It collected taxes from every colonist"}, {"id": "b", "label": "It could only ask the states for money"}, {"id": "c", "label": "It sold land to France"}, {"id": "d", "label": "It charged a tax on all trade"}]}, {"id": "m", "q": "Why did Washington want a Continental Army?", "opts": [{"id": "a", "label": "Militiamen were already well trained for years"}, {"id": "b", "label": "Britain asked him to build one"}, {"id": "c", "label": "Militiamen alone could not win the war"}, {"id": "d", "label": "The army would cost the states nothing"}]}, {"id": "i", "q": "Which side was more successful at getting Indigenous people to fight for it?", "opts": [{"id": "a", "label": "The Americans"}, {"id": "b", "label": "Neither side tried"}, {"id": "c", "label": "Both sides were equally successful"}, {"id": "d", "label": "The British"}]}], "hints": ["Each answer is in the Clue Card. Look for the Hessians, how Congress got money, why Washington wanted a Continental Army, and which side won Indigenous allies.", "Most Hessians came from Hesse-Cassel. Congress could only ask the states. Militiamen alone could not win the war. The British were more successful with Indigenous allies."], "nudge": "Not quite. At least one answer is off. Re-read the Clue Card for the Hessians, Congress’s money, the Continental Army, and Indigenous allies.", "entries": ["a5e3505a9d49187db1e54"], "id": "lock2_sea_chest"}, {"n": 3, "key": "lock3_ships_bell", "title": "The Ship’s Bell", "obj": "3", "objLabel": "CORE OBJECTIVE 3", "objText": "Core Objective 3: Identify key turning points in the Revolutionary War, and explain how they changed the direction of the war.", "type": "order", "card": "<p>By December 1776, the Revolution was near collapse. On Christmas night, Washington led about 2,400 men across the icy Delaware River and surprised 1,500 Hessians at Trenton. Norton says this victory helped save the cause and shifted the war’s momentum. On October 17, 1777, the British general Burgoyne surrendered at Saratoga. This turning point led to a Treaty of Alliance with France. On October 17, 1781, Cornwallis surrendered at Yorktown after French warships and troops helped the Americans surround his army. On September 3, 1783, the Treaty of Paris recognized the independence of the thirteen former colonies. Indigenous Americans had no role in the peace talks, and the treaty gave away their ancestral lands.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 5, “A Desperate Gamble” and “Setbacks for the British (1777–1781)” (The Campaign of 1777, The Crucial Alliance with France, Yorktown and the Final Campaigns, The Treaty of Paris).", "prompt": "Tap the four events in the order they happened. Tap an event again to take it back.", "items": [{"id": "c", "label": "Cornwallis surrenders at Yorktown"}, {"id": "a", "label": "Washington crosses the Delaware and wins at Trenton"}, {"id": "d", "label": "The Treaty of Paris is signed"}, {"id": "b", "label": "The British surrender at Saratoga"}], "hints": ["Look for the years in the Clue Card: 1776, 1777, 1781, and 1783.", "The order is Trenton (1776), Saratoga (1777), Yorktown (1781), then the Treaty of Paris (1783)."], "nudge": "Not quite. Re-read the Clue Card and match each event to its year.", "entries": ["4d8f2b7644f748dfb5609"], "id": "lock3_ships_bell"}, {"n": 4, "key": "lock4_barrel", "title": "The Barrel", "obj": "4", "objLabel": "CORE OBJECTIVE 4", "objText": "Core Objective 4: Examine how the Revolutionary War was an “engine” for political and social change.", "type": "fill", "card": "<p>The war was an engine for political change. Americans chose a republican ideology instead of kings and nobles. The United States was a <b>representative democracy<\/b>, where voters elect legislators to decide for them. At first, only property-holding White men governed. The new state constitutions had elected governors and a bill of rights. After 1776, rules about property for voting were lowered. In four states, any male taxpayer could vote. The Articles of Confederation, approved in 1781, had no president and no power to tax. In 1786, the Virginia Statute of Religious Freedom said that no one could be forced to support any religion. Norton adds that the war did not greatly change the status of enslaved Black people or Indigenous Americans.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 5, “War as an Engine of Change” (Republican Ideology, The Articles of Confederation, Expansion of Political Participation, and Freedom of Religion).", "prompt": "Fill in the blank using the Clue Card.", "sentence": "In a ________ democracy, voters elect legislators to make decisions for them.", "scramble": "I  V  E  T  E  R  E  E  N  S  P  T  A  R", "hints": ["Look for the word in bold in the Clue Card. It names the kind of democracy the United States had.", "The word starts with R and has 14 letters. It ends with “tive.”"], "nudge": "Not quite. Re-read the Clue Card. Use the scrambled letters to check your spelling.", "entries": ["0088fad8d94a55eb3afc6", "00a908d5a447ac1a630f5", "010497bdfbdbd316059d6", "01eca80ed9b041cf51cd2", "023bd6362cbc5c00e6cd7", "02846c5af2b9316810a55", "029982b457cc7b5ee6750", "029b3e589e8ba150e7a60", "02d59f958ceffa9722cc9", "02f0e9e418c68acc7c617", "04646cdc9eeb085a722d1", "04fd3b272fbb446027017", "05595d7ca355f265fa4f4", "05bac9a93b0cab41eb9d5", "060411cf2943533e58712", "060cc42e1f9aab06724f4", "06415308ba1fae84d6b46", "067068c5b9016e4dc4e99", "06f8153a7ada805df8034", "073a88d213d6cb07154b1", "076b365677a3c5e967c59", "0786041fae05ddc88b8c8", "07a13322d606559c75283", "07afe71f0a7f107e57472", "07b35257ea827d74f0417", "07c0224fe3be5530456e8", "07d4b5581849945a5c520", "07ea698b2f427f90972a0", "0871976afac116e953ea4", "088c24abb06564f7777e3", "08e6bccede7e2544367d4", "0904a0f38f774e75f9058", "090c5b4e8687092d9e192", "09282bb4b3f81dd3e0cf6", "0984a06ea1e04ebdbe446", "09b4bb503c4c52e3f8d22", "09ede86c2ba47d7396527", "0a9aec7777a1084650464", "0aa24a1787e13da77eb47", "0b37be55748d87cabca46", "0bb9c09ae268100bc7e46", "0bf750bc9cfb08cafcd06", "0c40da7b7f053e0f994f4", "0d690c0fdc5e62526b052", "0d7c108f24b83cee5ec44", "0d9a35acbf11542b35074", "0dd43ebfedfe56f6887f1", "0e1e725dd4260ee390cc1", "0e77c1f3f366282383468", "0ea21cb05ab55a8dd9c16", "0eb1f3c064cdf29f51817", "0f7f81647668058787c14", "0fa0f63491aa43caf3dd8", "0fc1ad35e58a4871f4495", "10b33e71ee811a493bfb7", "10d605eb6eed47eea8574", "10fa5c8f2e8e740819f54", "1132e99eacd6edb8eac94", "1165e9abbe3a358122193", "116de968fb8ccffce86b9", "11742d5e4eb1b88250dd8", "12e77b1e5deb580d13914", "137084676a961ab60a242", "13e1182519fab18917f73", "140c7cd2fd2be72f048f5", "147826fe1343817217670", "14857edd3a7233ac572f2", "14aeb0aa9c5462522edf7", "14ca25eba567a16ed9a36", "151ed40212104c04b5193", "1606fea9e8158ac7cca42", "164e0746c6e2ec9f6d8f7", "165c14f4826527bca1523", "16b05ad125f2c1f1b1102", "16cf084bddc86289e8e81", "1767baa6128d833a4fae8", "179f8bfcfe7414a34a0b8", "17abace3ac0542d29a356", "1810f1727adc03dfe7c12", "18b566312f51646ecc5c5", "19b476ca5aaa3e2b90ae3", "1a02e2ccc99a40165c322", "1a99f75e6d434d2d797f3", "1aa622867f253dcc69e07", "1ceec12c5078430af3879", "1d48362a395d7958aeec9", "1dd9587862cb9ec3c30e7", "1e62377114e8fec7d98b5", "1ed976edd808139a319c1", "1ee0e26face89b97adb79", "1f0f1941e9cba1ec03ad6", "1f1a178a4fecf801cc841", "204ecf0d51c18a2df2a89", "20ec1165ac7c3eb966b80", "212a47e33cbcd85dd1927", "212f2539b8786096bd151", "215c500f80330bc4f1c05", "217677993ff93396bbe93", "218a42105f0766f9687a7", "22202b503da2abfe04798", "223bc1710a115c20a1911", "22549d1821da6ed87ab69", "22d8978f36d64ae076c37", "23177dff2b75a41fd41f7", "2321e27e530521fa7c5f2", "23616de4c8e426b3dfe00", "240bf9f1053647af07fe6", "2451aba346384ef48ab01", "2457c2e92ba99ab8c6162", "2460219004180582d8ec9", "2480b1aab0bdaac0ee9a4", "24f448c18fb34c4d451d2", "2677ae52d7d64757fd812", "2693a301e093f5040ed55", "26c49b4d4dbcd3de055e3", "27f5deb79300160816259", "2803cd9ff8690da6bf7b1", "2877f0e2b09aec0ed1232", "288b8e31172a0858d93f8", "28f06bed7c91f38a09881", "2a73fd854af093fac6824", "2b521da5a7398a551cc56", "2b778f5c4aba7cca13fe6", "2bb49ee75fe344d538051", "2be22fd968c1f5bd472d3", "2dfd7c65c6cc07d518502", "2e65f6cf01031853aba14", "2e90461d6b7bb38256a83", "2e98ebe9ff587799bd354", "2f882b2e24f25d9d07530", "2f8f7323d204fbef6a3c7", "2fb716ba6e63ec062fb47", "3046e669379289a712679", "30e1fc4d0b49d73dedb84", "30e74f29098e609bd3b86", "321491a6fed9aacb34b64", "32302d3a690649de185c7", "324073be559cf8f2b7d41", "32831711cbfb47ecd3ed9", "32cc68644702ba58c57b6", "32e1ed49ef40487970eb5", "32f7a195a18cb35c375f3", "33cb87d6b40786c1666b6", "33db38d541a3c519a71f6", "346f3bbb712350dfc6826", "348f7686525dbafde9486", "34b2faa681f1686c70d67", "34eca2a06152a609b5115", "3513cb07971597eca54e5", "353a53ee91e2c52e41a60", "355f30374f6c1725c2f99", "356c13cf63c1080f044b6", "358ca5cfe920a1560d7a7", "358eb7c0ddb5382b80830", "3592afa719a242f70cc33", "360125d1ba5d41a740141", "3625a970009835d9b7648", "363906d58f2b7b060a228", "3710a857f1f0c9885fef9", "3743d48545bf63d644c01", "3758dbf659b1ca39e29f2", "377eedd312c143305b472", "38337f6ab29b57c849b76", "387c73f18dbe2ced499f8", "38bcc3afbb568a7e45031", "39430c7d0d0039a82c696", "39c801048090825014f54", "3b4279c6c2043a41e5f10", "3c0cd37d563956a364829", "3c58c9ace6a6c44c13bb3", "3c63e324d3c98c05babf2", "3c916940e5c1607689c63", "3cb5a127bf18b9d908e50", "3ccebf5e18f491b394cc6", "3d3ff694c3fff33125ff2", "3dc150a76b683f7a77194", "3dc1b815e53bdac193a78", "3dce3e77d6b6befd6f541", "3e052397229afc36bcda2", "3ea05f6c66604473fdf98", "3ef103bbe2cf574ab72a0", "3f196bcc937177fe3ac67", "3f2a6acffe2bf085c9fc5", "3f43c969b377629ea2718", "3f896c6786aed688913a9", "3f8dd825f713c54e0cf31", "3f93829f8097dde9d60b8", "3faed3551bab890c56783", "406f7c4538585de5ea198", "40b024b45f6a1920c2ea6", "40dcaa1eb3fa30d02ec11", "40f56a51acfd47ddb33a4", "40fe6bd93dbba07518e09", "41acbdd3c85c5f18d6860", "41d971b19576d6fa80ec2", "41e00edc9b1db6be6f5e8", "41f0314ff16729db4eaa2", "42102feec2dad93da9b96", "42596d14213453d305fc8", "426218e3d53c81fa04c94", "428ca71193af9ee1e5d41", "42c98d4b0f247d00a3156", "434aa599278a8d30411f4", "43c29cf398d66f487e880", "446302a692d950bd4c990", "44ab43e04ee2f27a974b3", "45cd3a01cebfbf02330b3", "45d97efcc5a3fd8dac718", "465fc6255410557351a62", "46d78ca6d5c2d62183727", "470a46d8fb29dd37c6425", "48022cf1851493fc0e8a0", "481552ed14cfc8fbf9911", "4879c625db42c3ff8fb41", "49a57175b65c781afcb51", "49db86323706daeccb7d3", "4a054c9a2233138b8ff01", "4abcff0e6e834d7e64d98", "4ae6d876813d8f7dc6c11", "4b66c38cd53d32af86539", "4c01af45b351383f1bd90", "4c04846b1e6d799278936", "4c555405c139405da4135", "4c79b515c4e098821e084", "4cce67da3375805ba6478", "4cdd76bf39693d592ccc6", "4d85abef9d744314e8842", "4da3bee5e049d9cd2b204", "4dc9141482d35adf9ab31", "4e122f3de1974d9638f48", "4e5c96f9f300f505c99a6", "4e5fe39901e67712bd2f5", "4ee4f991ded03d744e567", "4f13015e0692572f35d48", "4f5d3f98c435cf127dd19", "4f7c08f172edd159d2e21", "4f7dabd231e31fcab51f7", "4fb6f72a62e6c5955bd77", "51d6828ef026e53e0a604", "5215130c6e0f831611080", "531382bbb580b37111dc9", "536b4cbd847ddc80b5376", "539e1f5f7fd2763378b01", "53b8248ac5bc330b5a4f4", "5405a73be2c79a89863e5", "545f7150bb2d643f5a433", "54a6c7ebe5d3827003b71", "54ae6f277ef6a59d381c9", "54e3067b69b70b72dda25", "553396089b33cd0ab50d4", "557828faf1b768f414664", "565120f12d96cbd32a102", "56658659df0f1a9952229", "567c2dc7d4efecd5969f5", "56b395140fb2aad824cf8", "56ef637ddb0374f55cfc9", "572046f4e9f139ddd57a5", "57507f84b296625fa1cb6", "5788542b957a1a8ac1924", "57ce30e7fc819927863a7", "581a21f2c7a0ab1f0f860", "586c934687c9efad09c38", "589dc529955e811d87c23", "58af37f58228481c762e7", "58f29165115576e018962", "590f1339295cb4b47e614", "5a414509512af6136b695", "5a8bed245581145a0a630", "5aabad5a5220d8a612386", "5afda46bfdc115d1a81c0", "5bd2ed6c41f06a51bb6c8", "5c2386a44bf61589804b8", "5c792c51d2bc2267126e1", "5c9dcf678e242cf6e8048", "5cd1815f71abf39562eb8", "5cd544cf3b4ceba624796", "5cfd0662f0ae3e3c42456", "5d4614f3a67afd1d6f7b4", "5d5732f84e93464217003", "5dee1f01c1fb174e44b70", "5e8c87f3654fe05aa3aa3", "5e93bdef3d8902a6190a8", "5ead987c4bcf6291bbc97", "5eeaa8bdc840425095ba1", "5f22edb73fbff7ace2a56", "5f5dec9aec26025cb40e3", "5f769b5dc984ed603ba32", "5f8d27eb3874967fc0c30", "5f9b9b542b309e837e368", "5fef01f08e12828117487", "6028ffca3ab8ee6cd2fb2", "60948d897a7ed133b7ca5", "60d1f2bc0607dcdd7bef5", "60d62c383cc7f37a6caf2", "60eb24b28db5bd8dbd4d7", "613e00ea0efb063fd9537", "618dee2ee778b605151f8", "6201cb5b069363ba96424", "6208460cf9becfcdbb9d0", "62250b5b0bf47b9faadf5", "63141486a5aaba9f4cd75", "632bc1bf3bd600c7d8ab4", "6339222001a56092d29d9", "634869cc8114804880028", "639b4ab68978ff2fdaa58", "63bfdec9e06acfec664e8", "6488b3f5b2f37a4571224", "64e0f8a59bb7c4eeec415", "65061b91cd1be2507bf79", "6542df407ce6a7a2d6ac3", "6548c1db8632c2c021aa8", "656da01c7874247b48f07", "6597228ccf280e416ee47", "65c7008101275b2eeffa8", "665b1bc4907259ea96c63", "666206c84dfa7771311d4", "669cdd85b4814764231f9", "66a18217724bd667fb897", "66a75bccb208e8986bcb1", "67d0be5ee87a36a673e60", "680b10b4759174a45f906", "682da7bb862180e2b2511", "68750815b6d1c654320a7", "689fd107e405173cbe6c4", "68c8f83ee12acb10b7763", "68cdd7666faa041be3732", "69000f98db630ddddcb77", "6a43418f228cf854f0429", "6aef1bbf728861d08b743", "6b276e070363b67e62519", "6c3d428ae378285d9db29", "6c6668324742e1f6ed4b1", "6c95543720800a176e007", "6d6959efc0a815d484ea9", "6ed209bd586bd12872fa7", "6ef5c99d33ec164357044", "6f461e899d9faadcabe14", "6f61361ecfc89e60afe24", "6f75ea3038cc3166324f9", "701dddd430e2a6c35c726", "70420350b5c75b1c640f1", "705716f2ae9f0fbb94e68", "70a5d974c505d399a17e6", "70c4fd3da071a5178f8f6", "70ca1337a96b1547e7ad5", "70fc5b89e99d8d8561dc6", "712c32a24a81f704f5ed4", "717c884462c8c8a4685a2", "7193a61cbedfd8ba76ec6", "71aa683af0c8875df3180", "732ec9aa802e8a3e529f4", "73a0bb159888933919550", "73e0896f24322a8eef667", "73ec529f77129512f1ce0", "740fbbede55fefd765b67", "743e6d67ca2e213c51a31", "74481bc4a605d45fa8e93", "7488172dcdd1c4195a413", "74d402fcb4855b2286172", "74dd579f64522183acd15", "74dff11aec51344ee7171", "755a40ecfd4301b7e4987", "75950f78204b8b74fda49", "765cdfb2d031e4ce69d05", "769709c6b42fbc2bcb2b3", "76ac52ac3769a6327da18", "76c9b1f5a692fe15ee476", "778d74a40efe4b8762d27", "783750bbec99c3e43c116", "78a2c225576d39d16e759", "798aa008650e2e2d30af9", "7a298662e94680caef839", "7a7f163fb5792585ea4b8", "7abd9e9d47e75b75a4bc1", "7af42a145cc5ed83ed452", "7b11177adb54a4bfbf999", "7bb9c58661e80aaae0915", "7bdcc3549479a4a978467", "7c278f580d4beaea9d987", "7c6033fd8600fc2bdd958", "7cac978233e55a57a3527", "7d1b804bb8fa9c231f233", "7db5c46dc98336ebe0381", "7e1db3616311e770880f7", "7e37f8b3839655af453e0", "7e719ce100ba2bf776d78", "7f35d5c4cd8afb5916183", "7f517168d603575f5a137", "7fe407c77fabe7397bdf9", "802b85b3d4f12572da7a0", "80567caa0ccd43da5eb80", "80e855b01817e77eb49f1", "81373372b0fed45ebf9c6", "81659d020d7390fd7d1f8", "819d55987c7aee6a26e12", "81a8d92b9c00ebf0463e8", "81c9ee21e7dcc33ef3fa3", "825132de86fbd42305655", "8278235b813b23c96d5a7", "82b7f890569162b0a7b46", "83389d8cb163ec1c71e90", "836051a5a6aee43ab3c00", "8390a8421058eb235ad25", "8466755420f116bffed35", "848c5c76a2561ce76cda1", "84a26aa2f62a1a9bb48a3", "84c30f4ea2927bb26d020", "84fb985086a15c8436685", "856e036347ffdd2a645b2", "85743b8a867d9b2c67801", "858b63204c3b7559891f6", "85e349e16288584ae5ef4", "866133df2c201e7d2f9a6", "867ccd455275bb0714e61", "868f3675185e2f8867732", "86a9eb179c875439a7f13", "86ca415df1b3541706690", "875a7537f4a30411c9fc1", "88148b2b4d3c68897ddf2", "88405f82470abe2a54b83", "884332a11a95b9b3ac2d9", "88445d594ba883ffa40a4", "888744bc4d0f84ecea024", "88c333e110d94b9bc46d9", "89909436ba945b2f21833", "89f20cb8f8a15c0c9d981", "8aaf61ed83c92c0029b68", "8b16b6ed9530831fdce89", "8b9d1e0ceb04d5719c2e3", "8cd566c713a051bbf93b2", "8d56b21760d8b19850a39", "8d6f4cefd455f0136ecc3", "8e1be8f8b906e2a4b7ed3", "8e30a0a1acfc27dee5707", "8e347eeedf018c8c24958", "8eb8943fa3cbf91ac74f3", "8ec84dfbc422be85ff103", "90645c42e9ab32707fa36", "915a05838bc9d0321b759", "918472964052d8d119650", "91b6f94633b1e72c3da17", "9217dbc6fe3331d6491d9", "927916c76e5d973812a84", "92c31b12f6c2eadd94828", "92ca922a5b8677ce2e5b2", "93068b20269293496a1e7", "93347cd15983c4179e0b3", "9356896b6218c782d1fd4", "937f449cb9cbf78a47231", "93941f7cf43380ad97855", "93b5b6f72eaa9429a7994", "94d76132f976b9eadab42", "95935b8f23d9233835a67", "95ff8d4dfdc92f8946a61", "96407e0609c8aa13af309", "9671a98637927e0092796", "975b2639a758b8f2f0292", "975baa31275ab85009473", "976e34e18fc583c3a7018", "97b5a92fa0bbfcddae875", "97b9e81ae7051470f1a29", "97f549f24816a8a2a7e78", "987b918aa1c64bbc911c6", "987d9e0a0ce3a079e4353", "98915fa8a7802ab296974", "98c33a46220d2d5acb508", "9915b62e6c704bb0d2ac7", "999569bfff3fd5b844122", "99cd4dbc30af67a50f948", "9a19119bc061ced2b6767", "9a7a6843643800d704b04", "9a7bbbf335213e4423488", "9a7e28836e2c975907b98", "9aaf700e9ed1a07c85c02", "9abafcef275021c7019b6", "9ac3d6c06995ee2adb752", "9b6e157f721b5fd97b388", "9c163f9b785dc59754b36", "9c4ef67072b21865baea7", "9c5c5fc251ec34447d953", "9c9b7aa9b0c759e989a24", "9cbbb3e7f9cd4c26acb98", "9cdeb294136bf76c24ad3", "9cf8922e1c498bd1f86b9", "9dc9d1f16ca4a9d499366", "9de5f077a1024b53d73d5", "9e1f919fbb24563802c47", "9e5ae8d936faa4160e6f6", "a002e4fc382f12f007232", "a010a1d5007a938d21755", "a022640e6ef73a4455a80", "a022accce73cdccb6ef44", "a05e583160edac95f51e3", "a0fc7420d2cf121fcc4f3", "a10e451d5935ff47d8d04", "a1e7666e28af29d6b02b7", "a21c09406161825bb3686", "a25e686ca9d2f183155e7", "a2694e3b315e912afb028", "a2878743dffb1c1f13fc8", "a2f0119ac1d6900f34c90", "a31bf39729f99c487e3c5", "a366df26adea5527afbd5", "a369f429f7d6d4f5aba99", "a5c7a56e6079d6ea468b6", "a5fe68cf376e3ca60a269", "a628a6231dabee1755f67", "a64bf7dda9be8a73c3bf2", "a690dc02ba244a8409397", "a70ae97fa2fc8a62012b2", "a7495f3e6a48293a842b0", "a7623eae35e10ff3be527", "a7de8d498de35c11454e9", "a82590a47f45c556b31e1", "a830af798d3d63e9c3a44", "a9e6bb60e3fdc639fc7b4", "aa4891015b179a54f7695", "aa49f9b29fc3b27fb5a40", "aaf8a1c68ad19b0d07f81", "ab59a582277fabd25ed03", "ab7d331d17192bb95df70", "ab8218a89cc970fbaf621", "ab836b72df5aa5f864cb4", "ac6dea754995f24c43c87", "ace0bd02c1bbed850f2a7", "add8b56f5d1c376bf4455", "ae132b4caa4bd565fb7e0", "ae63e6989fd54539a9760", "aea68ef8c662eb51e6d45", "af6bb4f8732f16bd659f0", "af92644705871cb97d228", "afc5d19150e3ff4416f37", "b0483d1f6e4193daf4513", "b049b0ab6496dcdc86972", "b065b27323f35ef30b5c2", "b1010d6b46238f99a3f65", "b2fffecb731550b5446c6", "b31933478df72c987d038", "b33b87fdb12e6e5f55980", "b3cf97f3091befb4937c3", "b4494261cc95678e548b9", "b4a0f4670836d4e21b9b3", "b4a41e02e3ec3e0d5dcd5", "b596e77e0ac13b5d79d18", "b5ad6958360ac0f014691", "b5b9750751becc5b82e61", "b65b7e8117a2c8ed1a422", "b68b0c48558d269f1dab6", "b6f9a2e862fa5934a5db0", "b707f4015ced511600603", "b763ccc79edf509c83779", "b78787e693e9cf5003a25", "b7b849d4b07faed8ad2f8", "b8b1f37a2af64518d22b8", "b8f7dbea7ec2a294d03e9", "b964ddd2b3a4a9cf88106", "ba5958423ff74822e90f3", "ba630ecabc99fa5e28973", "bab3834e2a7079a3d7c87", "baef34d4dc396a1a71226", "bb00481bc7be778604c79", "bb10215b47271d8e92692", "bba4aee4f60a7352cde52", "bc166b6d98eba9a035684", "bc3aa921519c455514e46", "bc5e7d158b01197b73857", "bd4efe47f3b45182956f8", "bdb10bfd95ff1c5f61358", "bdc75ecf81566189e4236", "bdf179abcbdef04cbf6a2", "bebe23b55c82e4b746ff6", "bec670115e74e0fcc7678", "bf0f7ce407d91013ea953", "bf2eff3200365c69a87f5", "bf701aa1f5905a65b61f4", "bfbaba1c1eeabcdb79820", "c0b2af57cccf217684c86", "c0dab73a55bd64757cf47", "c0dcfb964226f1c20d987", "c10ca286aa12c7f319536", "c154863a063a3e1f1aac3", "c15d8c3aa946fc6ef7755", "c180b5992bca7cd752ed4", "c21873c286b9eeec8e245", "c284ef047982c82cfaa24", "c3164ddf9ad0fb35e9a03", "c325711a7827d17e13e12", "c3307ea34faaf44275041", "c33997fdaaf8e661edb05", "c3480b9904086f3a118d6", "c375fc7f9d6c4c48e5ce9", "c377fd8d494a91d0a4c25", "c39a3c1b6fb08127ba9f9", "c4b97c4fb6a503bb9c5b0", "c50b2d5769238190913b5", "c529b8d650e00ba263b41", "c53667d6fd82580713ff5", "c5386bbe393ed081769d0", "c65979890ea5c8a28ac04", "c65cfbb03bddfdebe3313", "c6a6eb4d40169f2e4f753", "c779c4dcb7954f1567a11", "c7905e6abf704fb85c282", "c7b1256865ed3ac2c1b94", "c7f92e641710c3b88b7d0", "c864d3baee141b9246b58", "c98fcd9d0b2cb45d62a63", "c99a16d6e9a1e15ab9c55", "c9a267eeabe6346befc32", "c9fd6c3918bed46a632d2", "cbbc4b79ea4d8fd3564c7", "cc31601665572954db130", "cc4220bf5a2d59db4e1b2", "cc4304242df029d490c73", "ccf19408c78aff4e20805", "cd1c7936b129d78fd0fe0", "cda4e0d845bcb71585675", "cdd4086f1696e673e1709", "cf0de67724cb23f2c9830", "cf87e27325dfdb0dfa0b5", "cf899e2045687d0a5a059", "d008def03ee0cce316ee9", "d0c72116e11ec8373d3c1", "d0f388fa871ef328c2582", "d13810adee3bbbddb8409", "d144fddd3a794845bf629", "d18236e50c87956df67d1", "d1e0431b036b7750329a6", "d2179d0b4b855b1472b67", "d22e968afcfe3e828c302", "d2c522a6cb2bd429806e9", "d30b8a045d97d146a7fe0", "d319b7d5b78e1bdfda845", "d33233e57697c0bf931d9", "d3b68ca6c9d93bed39702", "d45216863320899a4e375", "d48c529b4b67ec9826857", "d4979b56ecdbf91ddd184", "d4ab4b4a2eb365cc69a29", "d569a53259b94c4257fb2", "d5a33d00ad4a665ff3501", "d5a7e9f4234153d919369", "d5de110c4f93ebed80953", "d63453706bf564106cbc8", "d763d1081b895deeb86a6", "d76a1384a87e391bca527", "d7d9cb3d2a1cd8f8c17d9", "d7f7ebd273bb75e7fb8c2", "d8575eaa8a9eaade95a28", "d8e392fe3b613cf9ff4a7", "d91fff4c1e9b81be65ae6", "da26ce10abba43b3b1951", "da8ac8f6bc3a7d59d7af5", "db4907cabfeca9ca02c92", "db67ed1ab276fc90a3473", "dcf1368d27a92ca9190f1", "dd8a2440fbf27b37a1990", "dd9320db059467392b362", "dddc017a36962fd830a54", "dde7e6f8f9735b572e380", "ddfa0b2331c89850ef9b0", "dec2718469c6ecda1cb43", "df71b808d461e6cf09646", "dfa9941f5fac8964e6834", "dfbd7df84c06730ea5849", "dfc303fa6b0782a047365", "e04d5ab5d356dba8e4e40", "e136362e264d2b968ad53", "e153553f98a21e30e9165", "e199cb72b46de02b44972", "e2127fba008ba34cb2b58", "e23797c5f66ba79700a61", "e2cfaa36c768c43d661a7", "e3215c6c448edd155cf48", "e343f8b8589390e1e5df4", "e470b6aa45c6d0a83a0a7", "e51ed96d45bd4dfceb2e9", "e53456dc2689b8ef8bc18", "e58fa9828e31e4ff5ff54", "e5bf51c5066972d9eb911", "e5fc36926b1dba15603f8", "e6218cbafe037fae965b7", "e6b39671932a57b718f12", "e6df296bc5ea2f283d865", "e734c0ddc85ece609fdc9", "e7830c18fd47f40e86dc0", "e87a861666648d0339835", "e88c39529b29858c28ba9", "e8977772ec59cd9ca43d7", "e9267040a123e65dc92a3", "ea8ce424c30716dcf68b9", "ea97e12932ceae6f8e4c5", "ea982407637f9c38c6a44", "eaeb0946ab3804ee7e184", "eb2bcecccfac98b792f95", "eb2f6d2d7e93423f48194", "eb72e14efdc447ffddf83", "eb95d04189becdbef45d4", "ebe505bee773271ab3ba9", "ec763999e647669368c85", "edcd70287e6f9c8afa285", "edd431656d20b9bbf3d33", "edde7ac47ca7a73785fe9", "ee5ead8ae014f757e5002", "ee6a45a749eea54f8a498", "eead880c045838ac423c8", "eee5fce0d972e8f54cb15", "f054892b06962e47e75f4", "f0567d7d6f18f70898a03", "f092ccd469b6b976d8993", "f0c92d3e57cf50cadd820", "f111dd9d80b375cc78920", "f114a686bfeadaca1a708", "f1158d343a03e7fde6e45", "f16ad81c6ae875ccf91f3", "f207035fbd25e16398ad4", "f2177ffaca47406ffa925", "f2b8f9521c5b577f5f602", "f3127606c1a04e5743cd5", "f338fb6a3a4dd18d41fe7", "f3a9cc9f142217b6a7b46", "f3afebbaa615d0d7f7b19", "f3e964e6e3fb7220eae06", "f3efc90076bc0d688dd66", "f479f8e699027f243b037", "f498d9593058bbb540c08", "f552b67e28d4b88600c87", "f5effda4c4cc904f35e42", "f5f8d3ba3b2cd6ef67b96", "f7bf11f172ff824604b33", "f87e33a8b7ba82a4bbe16", "f8b6b7acf95ab04989932", "f8e6b2694611180552331", "faa387ae059985fa12e25", "fb243d15e1244fdf15c13", "fb438599e710b5eb6d8c3", "fb61ad861ce70d87e15c8", "fbe41f0c6f6b11f39e976", "fc6f6b4f0f74ba6aa3212", "fcdf00dd0e05bdc15ce44", "fd0a348becd148925a586", "fd135ed7a838c47c60802", "fd2c1499136a7ea770cd5", "fd4d4adf76fd7040f89b1", "fd6206b933449e8dc4165", "fde9e9135cbfe1f419b79", "fe098b2fbc7b27d3dcdf1", "fe30ca5376430d7525e78", "fe452fa32169565a1adc7", "fe91361e5bf6b2a42e9d1", "feab9e66e186a725a8dc6", "ff24b08f6333cc883b7d8", "ff6577efc585a0b83d663", "fff294a2a80a1cb327781"], "id": "lock4_barrel"}, {"n": 5, "key": "lock5_rope_coil", "title": "The Rope Coil", "obj": "5", "objLabel": "CORE OBJECTIVE 5", "objText": "Core Objective 5: Compare the impact of the Revolutionary War on people of African descent, women, people of Hispanic descent, and Indigenous Americans.", "type": "decode", "shift": 3, "cipher": "ORUG GXQPRUH", "card": "<p>The war changed life in different ways for different people. In November 1775, Virginia’s royal governor, who owned fifty-seven enslaved people himself, announced that enslaved people who joined British troops would be free. Norton calls this the sharpest irony of the Revolution. About 5,000 African Americans fought on the Patriot side, 15,000 to 20,000 people of African descent were with the British, and several hundred thousand enslaved people seized their freedom. Women could not vote or hold office, but the war let them manage farms, handle supplies, and serve as messengers or spies. The Spanish governor Bernardo de Gálvez led a multicultural force that took Mobile and Pensacola from the British. Many White Americans used the war to destroy and displace Indigenous people, and the Treaty of Paris gave away their lands.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 5, “Equality and Its Limits” (The Paradox of Slavery, Southern Backlash, The Status of Women, Indigenous Americans Are Besieged) and “The Spanish Alliance.”", "prompt": "The Clue Card tells about a royal governor of Virginia who offered freedom to enslaved people who joined British troops. A secret message gives his title and last name. Each letter in the message was moved 3 steps forward in the alphabet. Decode it.", "hints": ["The secret message names the governor in the Clue Card. Use the decoder key to spell it, one letter at a time. His title is the first word.", "In the message, the letter G is really D, and the letter X is really U. The first word has 4 letters and starts with L. The last name has 7 letters and starts with D."], "nudge": "Not quite. Decode one letter at a time with the key, then check your spelling.", "entries": ["0010bcf80671b84e6f852", "032c221cd4a6c4faf9250", "0344e7c7573dc0ca49903", "0346de5d9cc4837750d47", "03cc9129a618a131172d5", "03eb7067bfd91e81ffa38", "0400c08e546012de57dc1", "042d3ef5960622dcfd548", "042d431c28b0e382439e6", "04f013052769f15d52738", "05fb896f1c07239cc28d0", "075b37a2d03d268348f94", "07f89384227f61067f674", "08e13ab061b984d6c47a8", "096c26f3d79a55122cd68", "09fc7aa7802178eb4b9c7", "0a4b81eeb13440e383b08", "0a8b87313cdd7a6f9d381", "0b0bc3345c4538dfbca05", "0bc30ef41a6c847d837e1", "0bd10c47e18846dc47a53", "0d5a99f8659e87407d504", "100a2557bc4e8c50c17e6", "1126dc7947d8f3509cd33", "133e20042c0733587fd93", "140238e0c8c5a8caf6281", "146c1576654fe7dea7122", "152544ec727db6e142541", "1559963407551c31e9748", "16aa277056e962e583bb6", "16c835c0e3dba3585f2c8", "1718a80605272b49206e5", "181769099a77c16a8f321", "194ee0ed9e28557f4e1c0", "1a0d7c5f50632fc7b1709", "1a3b85c56ecce31b61243", "1b49d283a76a89f5d4949", "1c45703d56d6c9d120e66", "1c6e329bf3f16bc7a0871", "1c6e527ce2586d19f3856", "1cc74519976a942e3b539", "1ce7cb85b8f80e8492c00", "1ceaf952ec50f63d0b1f2", "1cfc8e72c0205e9ca8977", "1ec2f549040dc3b6bf791", "214e9cf0642ca048f3137", "217a0f245018851a2dc04", "21be408d08f4131d7a802", "21d9b348bb222c91b3708", "228e1b6dbab6420de3998", "23cd296f58445e96f14e8", "2443395f74d30db965b53", "26175d8cd61da22d756f1", "26476140166f47e382809", "265db53f7a7772dfd8c82", "26acc25cef876b3d05324", "26af07762aa1ddfdca2c2", "2774306bbe057fcd2a207", "27cbb08b00edc15cfc8c9", "27e6e9f20f7352021d3b4", "28076dc3076f9baa5efa8", "284e974829a874d4aa328", "29131e57a22bfea824b06", "298a4c144b1a0bca8f3c0", "29ec209b4a8a8c1df8002", "2b86c816bca9e0dd1cbc4", "2bcc126023dad3eec7a15", "2c85e949a6d6eecc480b1", "2f3035795f86920c992f3", "2f6297dc8194db5705504", "2f8244124b6c9b94957b4", "30e622136155a98d53560", "32f139584952bfd7015a6", "34964d6f2f392d3d366e6", "3498ec1f769ef28d082d3", "35adf2a836c40f66e5777", "35e73e5e1dac8afe8da74", "36400ad89142c3cf35d51", "36ed4acb97c4cad7b47c6", "37a9b71d5aa11e2bd53d7", "38e5683ad802bb843ed36", "3a2d9896fc107b29ce6f9", "3a69de195f5692618bdd5", "3b98f90ac3a9558fc1e08", "3d788686c3d5c75ecde43", "3ed44de443fee14652ea6", "3eeebd25512ea2bc4b3b0", "3f2f805d25f719ffb6454", "40f1a6b1ec2ecebc74266", "41784035da9bfcbf0e196", "41cf02709e54365721322", "42c0166296fb595435511", "42d0998dca844152f2694", "43030b855dd775749e815", "430ee7e642fa14ac86b09", "4349aec093136d625be38", "43d8a0f0e97c4759239e7", "442a5a4e74e32ed964cc3", "44781413754cc24fffd22", "44b2e509824b90f9570e2", "45cd708dd3a71beb8ca26", "45cda5ffbd7e8c4b27d09", "460cc98e83d04593f0ed3", "4696db741cdaf32947e15", "46cef8d6ec456b7223675", "46ee038155511f80039d7", "498e619b9ca421f3cb261", "4ac70a98a1560d40c31b1", "4b55339faca57ffe780e3", "4b9878da27cc1645c4b17", "4c7a330ba9eb56df12973", "4dc1c40e5a967f1193d85", "4e5a9a2242148a593b4b9", "50d517c8b70876691c4f0", "517ab64b6f6bd47bc68d1", "520553bf38248ac695554", "52bcd7a6a396c96ec9460", "530f49e1c839f30adafd8", "53e08311b375af134f925", "54283a112834fda3c7041", "547724bd4a70f91661338", "55752c911aec695fc5d30", "56ab944f341ef425100f5", "570415fd5bfe974aca034", "570f70e23cd1c316e3594", "591ec248ab4a2701c1cd4", "59211e5e5150271104862", "59235e1c960e6a877e927", "5bab4eec06ddfca747246", "5c0565dc74187b5ac8246", "5c571354b7d3e83a03ba6", "5cc4f9471477427ccd5b4", "5dc7ef1f8680d7286e834", "5e42548fd9e02f546a719", "5ee08527d8b6785590561", "5f14da9a22be94c9f9627", "62a4038a3c99663d6c856", "632684a2f44bdd92fe2a7", "63886f719c6fd4c59bc66", "668e630c0fdf7b0e29e50", "67100fa0b98e44ed6a445", "674ba86d1002adb44a4f3", "6787e472a29206bee2378", "67e3a149b8ea466037666", "68019a9a8c2aacae6cc92", "68039ea297cbac9bb91b9", "6966ad75573ba68ba6c77", "6ae97140e679d4d56ec67", "6d59fe612bfedbc574084", "6d7b56e5cbb45ed8fc747", "6dcbb700d1a688157adc1", "6f794c8806bf6d8cc6846", "6fbebe354f55aab54d993", "6fc49673e601d375030b4", "6fd5a838a53eb20a2fca8", "6ffae3d0cc58a5944d402", "7097381137cb877dd7df1", "70e0aec39614def7796d1", "7116746664c498748ac81", "718bee01b0c79819fb9e1", "7223d73ec216bc78f7428", "72264d6160576a7832048", "72748475e021a0eadb798", "737609b61e5a38b0e7070", "738554560812d52da9f31", "73cca65c05a7bd2569df9", "73cda4fc566a97fc3c8c4", "753479413401e3f04f9b8", "7569c8d1ea5bb09855f58", "7573f29f468a73b5e44d2", "769bdd20a2d694f5d2c50", "76ea8e1ab98e73b2d7ef1", "76fc493a3b1a6ee667044", "773d1ee2356cbe210f384", "775b6b570a492ffc2ec88", "7801602053abc4d770741", "7827e9a180f2add7d9d01", "7a966e6824f0a43dcf553", "7afe6b62853dfc642ba95", "7b897cacd062eb05b60d9", "7c503b2e601ff0916dd52", "7cc618269756af05a4eb8", "7dabb891989a01bf354a2", "7dc637dcb9244d48f54d7", "7de7f050125a884adc083", "7def1caad1e108af04d80", "7e8b559956a2051a12224", "7e8ec2e76b78d30341e83", "8082c30392cda889d76c5", "8091345992c17e6de56d3", "80ae3ac012b8c7d722760", "80f3f9bfa5c240824e272", "815eb641ec311439e1fa5", "81f95b521cc75ea815a47", "834e7de7dccca7af52712", "8383a0c490e6838566df9", "83ea5c92b28e2ea448301", "84c9f615e6a12aec66da0", "84e4198fa287cb6053511", "86418224f1a33852cc3f7", "8686bb48c2b95775122c9", "86a798deb6b4403602d22", "86bf0c49426ade1012a79", "87814b7cccd324e789922", "87d1cbd446c5a38eb3271", "87fdb56ef039b252a7b27", "88c392fb535712ebdac45", "89180ecb2f5dfbe6510f4", "896d6885ab60ba4bb6dd7", "89762ba087ff8351dded0", "89cefcbe0ad02465d4d57", "8b2080d25446a8b69dc00", "8d4015fb93f086e64dfd1", "8e3ef10d8d6bd333c75c2", "8e415cae850b70d92b8a7", "8ecacb07616fd8e2168c5", "8fb15cc0a2b808a0de5a4", "911bff290da109ba87af0", "92946f4cd7b833c6446d3", "92e5435ff0ac14fa59891", "942cce6325f0d72f1b2c3", "9442e3e9005bab2b57469", "94e09a8aa3a77412c8202", "9535da8d42cf3d4da5065", "9547a83e59278b0f36da3", "954aae3fdfacac6be7037", "958aa43014b8ebb15a658", "95905def8b2e47c5f58d4", "96976991d1b0de6c86441", "974932a068ab4b8f0ac70", "97598c6474b220df68b20", "987670f13ca8a11add374", "99395efb1c43a9e25f244", "9a7e691d58c8354c82993", "9ac93e9c82319e6c35a55", "9d5fbedd8dc06cc20dcc0", "9dc62eaec691780b07651", "9dce5b340dc84cb14e2e6", "9dd204cc574cf08aed806", "9e0bc740fdb6dbab1f0b4", "9eb4895980bab6e14a495", "9fcb3769a214529ee2055", "9fe3ce015a82bb0b9af16", "9ff5960cd1e6f062c45a2", "a0c8c5ebab82137586861", "a259e71514ea36774fbf2", "a3bf6fe8369ea13aa32a4", "a46141e8a3d6ea86acc67", "a48bfb870d291b8f55741", "a4e21c55262e660dc0895", "a4f2f00a89247abef0334", "a506e3bf0827fe9f18b77", "a589fc45de086a6c6e335", "a5a05dc2ee8642c1c2812", "a626ceb6442576a3e8b73", "a72637f40cfefc3bfc714", "a89efb62c33ea82ebde70", "aa8375b6fe4232fe34967", "ab08de022787bc96705f4", "ab9f69c866e72bb83a0a1", "ac05e5642ab25d7711c98", "ae187147acdd644ef1199", "af0f7b7153701315b7328", "b279976e1116646000ae2", "b48f7ff8968b75a7637c6", "b4f69d5619d47ceab01a8", "b4fcd649b6fd62c82f1a8", "b59d7a084e1e6b56dc089", "b5e013331dc232c8cc202", "b928ed325c195747e7009", "b97662b9701a7ce5a1279", "b9781786b7dd400b71d47", "b9847f3a5faea90feec79", "ba4169d735a6a595baf60", "ba5db666e5e20ed1ed803", "bb03473ba3a42ef426bf8", "bb71ab2487fffc6d8f136", "bb8ef19690225c229b364", "bd7ae75f4502d83a6f909", "bda6899662d3f07ebd021", "bdc85d327faa54f137924", "beb7d3ae80295cf0e22b3", "befaa4acee4e08fae6b05", "bf8e0df8f1982e61f7641", "bfa2cb7146269c35fa6b6", "bfc13f54425e4ae98bea9", "c22825bd203712d9f01e2", "c2cef2c06505418932cb2", "c2e0420013aa05779b7d8", "c2e398f92d871fc895916", "c3fb8aaf05d6244f6b562", "c4ba1893c71f4d23c0150", "c4c54fabf3387af1493f1", "c6afe89c08cb6861315f9", "c6da494ac0f5612afeca7", "c954db28c29ced3bf7835", "caa9f8d0f7617261bf769", "caf25d7554a204a7f6585", "cb0874ed403f5e26b2399", "cb52b47a1da607d6b7685", "cbb88705b25ac889d7024", "cbda279f920051794c6c1", "cbf305b2c92c3fbda38a4", "cc4c35d72bdbd6692d590", "ccfaf5bdfbc69a384d223", "cd1ca80336bcce0f8bc37", "cd32a0bd4a992c374aba1", "cde8a7d57d0c5b8e9d068", "ce7a8df2c66bf711eaa80", "cea117e1751ca6c8c7ee6", "cf661047bfb39b0f84546", "cf796f335b5b28dcdd024", "d00de764dc02d4f941c85", "d2140f8b54e01f0388372", "d27f047663832822856a6", "d30d947acfd649bca8ff1", "d32374b2d5beb4d8dcc83", "d3ae4c1c42efe4bdac196", "d59eec87e4705030253c8", "d5c78a46ae26a1f45d346", "d6004ae649addea234852", "d74c9034ef0cd7a9468c8", "d7cdb8c387582f9bb4a74", "d8e0c548d282f26721af5", "da2ccc6f9c243bce73947", "da3ed78a085d01aa643b9", "da943950c2e919c7e0889", "daa9cb1b31ac3790c44a3", "dab42ee2344478ac2c7f2", "db695311e43f1c91921e6", "db94f7a6006e38bff8cc4", "dd53a40d52e9820db6f11", "dd7b574c43aa621845301", "dda00f501141f0e081ea9", "ddfbc278d52fb8d45bf91", "def36ec1f6d8fa85e69c4", "df653da4e3f70d75c27b0", "dfc1048c5a904209b2162", "dffd5afe99e032741c0f1", "e1ae1920cce638d128db1", "e1c31fe96270d5a776340", "e29976164e08c00cb3801", "e2e14c7df40ab402fe975", "e328f98035d4418f87d56", "e396461ae8d574e7ae7e6", "e3e229d75903c7ed8ce66", "e402c5b4bd23c0a459cd7", "e40ea47d1533f451f1a88", "e415693c2d7650bbd4130", "e49584ae353bf41d25d97", "e4c99bd641b10fef8e7c1", "e5f11219e50f59a371f95", "e62eaca4fd60169e64da6", "e6717ff696c7a87d202d1", "e69c1be066e7fd4e27923", "e6cb0380b5a456f7e8be2", "e93987ed2a91f0e0f3451", "ea69e671371c9e37cbb64", "eb76d68b3bcaa21d254f2", "eb8ce27faf13888832a46", "ebee5d7f58aa21bc4e363", "eda1f6f87320400007314", "eec6d113f4b61b2c3b727", "eefdecb983053f17f0c73", "ef4dc692e692c191ba210", "ef749359b47913ddd6a81", "f02952fe769dd5b8bdda1", "f02b83a05aebc41c26566", "f16314d5c8bbd1a374467", "f18b4f0e47f2a88c89f48", "f26ae8177f96afafcc830", "f2cde542fb0d21d5ea6a3", "f3655cada2bac8fbb5351", "f4b03a9d354a548ed7fc1", "f57c8696dea94632fb2d4", "f6046bd782d51734f09e5", "f745998d27832ef7ba0f2", "f774da0ad586f02a4d316", "f829cfd654a88a1779766", "f8a34e738097918d0a0f3", "f8f1867d474489e9702f3", "f96032e4ad9082fd2a965", "fa18d1d7d885b0fa53892", "fad1f5d54d4534f8165b4", "fb879c86547f462dce5e8", "fca90e0af788392e0f421", "fda34d6f38ce9e4930285", "fdacb75a1618c79710f63", "fea4b56c670b27f37a6b7", "ffc75b609c2c6cd55aa62", "fff2465c929a3d86968f7"], "id": "lock5_rope_coil"}]}</script>
+<script>
+function sha256(ascii){
+  function rightRotate(v,a){return (v>>>a)|(v<<(32-a))}
+  var mathPow=Math.pow,maxWord=mathPow(2,32),i,j,result='',words=[],bitLen=ascii.length*8;
+  var hash=sha256.h=sha256.h||[],k=sha256.k=sha256.k||[],pc=k.length,comp={};
+  for(var c=2;pc<64;c++){if(!comp[c]){for(i=0;i<313;i+=c)comp[i]=c;hash[pc]=(mathPow(c,.5)*maxWord)|0;k[pc++]=(mathPow(c,1/3)*maxWord)|0}}
+  ascii+='\x80';while(ascii.length%64-56)ascii+='\x00';
+  for(i=0;i<ascii.length;i++){j=ascii.charCodeAt(i);words[i>>2]|=j<<((3-i)%4)*8}
+  words[words.length]=((bitLen/maxWord)|0);words[words.length]=(bitLen);
+  for(j=0;j<words.length;){
+    var w=words.slice(j,j+=16),old=hash;hash=hash.slice(0,8);
+    for(i=0;i<64;i++){
+      var w15=w[i-15],w2=w[i-2],a=hash[0],e=hash[4];
+      var t1=hash[7]+(rightRotate(e,6)^rightRotate(e,11)^rightRotate(e,25))+((e&hash[5])^((~e)&hash[6]))+k[i]+(w[i]=(i<16)?w[i]:(w[i-16]+(rightRotate(w15,7)^rightRotate(w15,18)^(w15>>>3))+w[i-7]+(rightRotate(w2,17)^rightRotate(w2,19)^(w2>>>10)))|0);
+      var t2=(rightRotate(a,2)^rightRotate(a,13)^rightRotate(a,22))+((a&hash[1])^(a&hash[2])^(hash[1]&hash[2]));
+      hash=[(t1+t2)|0].concat(hash);hash[4]=(hash[4]+t1)|0;
+    }
+    for(i=0;i<8;i++)hash[i]=(hash[i]+old[i])|0;
+  }
+  for(i=0;i<8;i++)for(j=3;j+1;j--){var b=(hash[i]>>(j*8))&255;result+=((b<16)?0:'')+b.toString(16)}
+  return result;
+}
+function sha256u(s){return sha256(unescape(encodeURIComponent(s)))}
+
+(function(){
+  var PACKET='CPUSH_L3_ESCAPE';
+  var STORE='cpush_l3_escape-room_';
+  var D=JSON.parse(document.getElementById('er-data').textContent);
+  var $=function(i){return document.getElementById(i)};
+  var S;
+  var digits={};            // runtime only: lock n -> digit
+  var entries={};           // lock id -> {h20: maskedDigit}
+  var expanded={};
+  var lastTick=0,timer=null;
+
+  function squash(t){return String(t).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'')}
+  function h20(s){return sha256u(s).slice(0,20)}
+  D.locks.forEach(function(L){var m={};L.entries.forEach(function(e){m[e.slice(0,20)]=+e.slice(20)});entries[L.id]=m});
+
+  function checkLock(L,canon){
+    var salt=D.salt+L.n+':';
+    var h=h20(salt+canon),mk=entries[L.id][h];
+    if(mk===undefined)return null;
+    var m=parseInt(sha256u('m:'+salt+canon).slice(0,2),16)%10;
+    return (mk-m+10)%10;
+  }
+  function fresh(){
+    var o={first:'',last:'',period:'',started:false,elapsed:0,escaped:false,escapeMs:0,debrief:'',codeTries:0,locks:{}};
+    D.locks.forEach(function(L){o.locks[L.id]={solved:false,attempts:0,hints:0,guess:'',readable:''}});
+    return o;
+  }
+  function loadLocal(){var o=fresh();try{var r=JSON.parse(localStorage.getItem(STORE+'state')||'null');if(r)restore(o,r)}catch(e){}return o}
+  function persist(){try{localStorage.setItem(STORE+'state',JSON.stringify(snapshot()))}catch(e){}}
+
+  function totals(){
+    var t={locksSolved:0,attempts:0,hintsUsed:0,exitCodeAttempts:S.codeTries};
+    D.locks.forEach(function(L){var l=S.locks[L.id];if(l.solved)t.locksSolved++;t.attempts+=l.attempts;t.hintsUsed+=l.hints});
+    return t;
+  }
+  function fmt(ms){var s=Math.round(ms/1000),m=Math.floor(s/60);s=s%60;return (m<10?'0':'')+m+':'+(s<10?'0':'')+s}
+  function snapshot(){
+    var o={packet:PACKET,course:'CPUSH',lesson:3,assignment:'Escape Room (Lite)',version:1,saved:new Date().toISOString(),
+      student:{first:$('f_first').value.trim(),last:$('f_last').value.trim(),period:$('f_period').value.trim()},
+      status:S.escaped?'ESCAPED':'INCOMPLETE',escaped:S.escaped,
+      escapeTime:S.escaped?{ms:S.escapeMs,text:fmt(S.escapeMs)}:null,
+      totals:totals(),elapsedMs:Math.round(S.elapsed),started:S.started,locks:{},debrief:$('debriefText')?$('debriefText').value:S.debrief};
+    D.locks.forEach(function(L){var l=S.locks[L.id];
+      o.locks[L.key]={objective:L.obj,puzzleType:L.type,solved:l.solved,attempts:l.attempts,hintsUsed:l.hints,solvedWith:l.readable,solvedGuess:l.guess}});
+    return o;
+  }
+  function restore(o,r){
+    if(!r||typeof r!=='object')return false;
+    var st=r.student||{};
+    o.first=st.first||'';o.last=st.last||'';o.period=st.period||'';
+    o.started=!!r.started;o.elapsed=+r.elapsedMs||0;o.debrief=typeof r.debrief==='string'?r.debrief:'';
+    o.codeTries=(r.totals&&+r.totals.exitCodeAttempts)||0;
+    var allOk=true;
+    D.locks.forEach(function(L){
+      var src=(r.locks&&r.locks[L.key])||{},l=o.locks[L.id];
+      l.attempts=+src.attempts||0;l.hints=Math.min(+src.hintsUsed||0,L.hints.length+0);
+      if(src.hintsUsed>L.hints.length)l.hints=L.hints.length;
+      if(src.solved&&typeof src.solvedGuess==='string'){
+        var d=checkLock(L,src.solvedGuess);
+        if(d!==null){l.solved=true;l.guess=src.solvedGuess;l.readable=String(src.solvedWith||'');digits[L.n]=d}else allOk=false;
+      }else allOk=false;
+    });
+    if(r.escaped&&allOk&&r.escapeTime){o.escaped=true;o.escapeMs=+r.escapeTime.ms||0}
+    return true;
+  }
+
+  /* ---------- scene ---------- */
+  var NS='http://www.w3.org/2000/svg';
+  var XS=[210,255,300,345,390];
+  (function(){
+    var g=$('plocks'),h='';
+    XS.forEach(function(x,i){
+      h+='<g class="plock" id="pl'+(i+1)+'"><path class="sh" d="M'+(x-8)+' 124V114a8 8 0 0 1 16 0V124" fill="none" stroke="#EBF4F2" stroke-width="4"/><rect class="bd" x="'+(x-15)+'" y="124" width="30" height="24" rx="4" fill="#D29E4B"/><circle cx="'+x+'" cy="135" r="3" fill="#13392F"/></g>'+
+      '<rect x="'+(x-16)+'" y="158" width="32" height="36" rx="5" fill="#0C251F" stroke="#E1C18E"/><text id="dw'+(i+1)+'" x="'+x+'" y="184" text-anchor="middle" font-size="24" font-weight="800" fill="#EBF4F2">?</text><text x="'+x+'" y="208" text-anchor="middle" font-size="11" font-weight="700" fill="#D3E3DF">LOCK '+(i+1)+'</text>';
+    });
+    g.innerHTML=h;
+  })();
+  function sceneUpdate(){
+    D.locks.forEach(function(L){
+      var open=S.locks[L.id].solved;
+      $('pl'+L.n).setAttribute('class','plock'+(open?' open':''));
+      $('dw'+L.n).textContent=open?digits[L.n]:'?';
+    });
+    $('scene').classList.toggle('escaped',S.escaped);
+  }
+
+  /* ---------- build lock cards ---------- */
+  var W={};   // widget state per lock
+  var LOCKSVG='<svg class="lk" viewBox="0 0 44 44" aria-hidden="true"><path class="sh" d="M13 20V14a9 9 0 0 1 18 0V20" fill="none" stroke="#EBF4F2" stroke-width="4"/><rect class="bd" x="8" y="20" width="28" height="20" rx="4" fill="#D29E4B"/><circle cx="22" cy="30" r="3" fill="#13392F"/></svg>';
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+  function buildLock(L){
+    var sec=document.createElement('section');sec.className='lock glass locked';sec.id='lock'+L.n;
+    var head='<button class="lh" type="button" id="lh'+L.n+'" aria-expanded="false">'+LOCKSVG+'<span class="lt"><small>LOCK '+L.n+' · '+L.objLabel+'</small><strong>'+esc(L.title)+'</strong></span><span class="dg" id="dg'+L.n+'" aria-label="digit">?</span></button>';
+    var body='<div class="lb" id="lb'+L.n+'"><p class="objline">'+esc(L.objText)+'</p>'+
+      '<div class="card"><h4>CLUE CARD</h4>'+L.card+'<p class="src">'+L.src+'</p></div>'+
+      '<div class="prompt">'+L.prompt+'</div><div id="pz'+L.n+'"></div>'+
+      '<div class="row"><button class="btn primary" type="button" id="ck'+L.n+'">Check</button><button class="btn small" type="button" id="hb'+L.n+'">Hint</button><button class="btn small" type="button" id="rs'+L.n+'">Clear</button></div>'+
+      '<div class="hints" id="hs'+L.n+'"></div><div class="fb" id="fb'+L.n+'" role="status"></div></div>';
+    sec.innerHTML=head+body;
+    $('locks').appendChild(sec);
+    buildPuzzle(L);
+    $('lh'+L.n).addEventListener('click',function(){
+      var st=lockState(L);if(st==='locked')return;
+      expanded[L.n]=!expanded[L.n];updateLocks();
+    });
+    $('ck'+L.n).addEventListener('click',function(){submit(L)});
+    $('hb'+L.n).addEventListener('click',function(){hint(L)});
+    $('rs'+L.n).addEventListener('click',function(){clearPuzzle(L)});
+  }
+  function labelOf(list,id){for(var i=0;i<list.length;i++)if(list[i].id===id)return list[i].label;return id}
+
+  function buildPuzzle(L){
+    var el=$('pz'+L.n),w=W[L.n]={};
+    if(L.type==='order'){
+      w.sel=[];el.innerHTML='<div class="chips" id="ch'+L.n+'"></div>';
+      renderOrder(L);
+    }else if(L.type==='match'){
+      var h='';
+      L.terms.forEach(function(t){
+        h+='<div class="mrow"><label for="m'+L.n+t.id+'">'+esc(t.label)+'</label><select id="m'+L.n+t.id+'"><option value="">Choose a description...</option>';
+        L.descs.forEach(function(d){h+='<option value="'+d.id+'">'+esc(d.label)+'</option>'});
+        h+='</select></div>';
+      });
+      el.innerHTML=h;
+    }else if(L.type==='pick'){
+      var h2='';
+      L.qs.forEach(function(q){
+        h2+='<fieldset><legend>'+esc(q.q)+'</legend>';
+        q.opts.forEach(function(o){h2+='<label class="opt"><input type="radio" name="q'+L.n+q.id+'" value="'+o.id+'"> <span>'+esc(o.label)+'</span></label>'});
+        h2+='</fieldset>';
+      });
+      el.innerHTML=h2;
+    }else if(L.type==='decode'){
+      var k1='',k2='';
+      for(var i=0;i<26;i++){var p=String.fromCharCode(65+i),c=String.fromCharCode(65+(i+L.shift)%26);k1+='<div class="c">'+c+'</div>';k2+='<div>'+p+'</div>'}
+      // build key in two rows of 13
+      var key='';
+      for(var r=0;r<2;r++){for(var j=0;j<13;j++){var idx=r*13+j;key+='<div class="c">'+String.fromCharCode(65+(idx+L.shift)%26)+'</div>'}for(var j2=0;j2<13;j2++){key+='<div>'+String.fromCharCode(65+r*13+j2)+'</div>'}}
+      el.innerHTML='<div class="cipher" translate="no" aria-label="Coded message">'+esc(L.cipher)+'</div><p style="margin:.6em 0 0;font-size:15px;color:var(--dim)">Decoder key: the <span style="color:var(--hl);font-weight:700">gold</span> letter is in the message. The white letter under it is the real letter.</p><div class="key" aria-hidden="true">'+key+'</div><label>Decoded answer<input type="text" id="tx'+L.n+'" autocomplete="off" autocapitalize="none" spellcheck="false"></label><p class="ennote">Type the answer in English.</p>';
+    }else if(L.type==='fill'){
+      el.innerHTML='<p style="font-size:18px;margin:.2em 0">'+esc(L.sentence)+'</p><div class="scr" translate="no" aria-label="Scrambled letters">'+esc(L.scramble)+'</div><p style="margin:.4em 0;font-size:14px;color:var(--dim)">Unscramble the letters to fill the blank.</p><label>Your answer<input type="text" id="tx'+L.n+'" autocomplete="off" autocapitalize="none" spellcheck="false"></label><p class="ennote">Type the answer in English.</p>';
+    }
+    var t=$('tx'+L.n);
+    if(t)t.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();submit(L)}});
+  }
+  function renderOrder(L){
+    var w=W[L.n],ch=$('ch'+L.n),h='';
+    L.items.forEach(function(it){
+      var pos=w.sel.indexOf(it.id);
+      h+='<button type="button" class="chip'+(pos>=0?' sel':'')+'" data-id="'+it.id+'" aria-pressed="'+(pos>=0)+'">'+(pos>=0?'<span class="n">'+(pos+1)+'</span>':'')+'<span>'+esc(it.label)+'</span></button>';
+    });
+    ch.innerHTML=h;
+    [].forEach.call(ch.querySelectorAll('.chip'),function(b){
+      b.addEventListener('click',function(){
+        if(S.locks[L.id].solved)return;
+        var id=b.getAttribute('data-id'),p=w.sel.indexOf(id);
+        if(p>=0)w.sel.splice(p,1);else w.sel.push(id);
+        renderOrder(L);
+      });
+    });
+  }
+  function clearPuzzle(L){
+    if(S.locks[L.id].solved)return;
+    var w=W[L.n];
+    if(L.type==='order'){w.sel=[];renderOrder(L)}
+    else if(L.type==='match'){L.terms.forEach(function(t){$('m'+L.n+t.id).value=''})}
+    else if(L.type==='pick'){L.qs.forEach(function(q){[].forEach.call(document.getElementsByName('q'+L.n+q.id),function(r){r.checked=false})})}
+    else{$('tx'+L.n).value=''}
+    fb(L,'','');
+  }
+  function guessOf(L){
+    // returns {canon, readable} or {err}
+    if(L.type==='order'){
+      var w=W[L.n];
+      if(w.sel.length<L.items.length)return {err:'Tap all '+L.items.length+' events first, in order.'};
+      return {canon:w.sel.join('|'),readable:w.sel.map(function(i){return labelOf(L.items,i)}).join(' > ')};
+    }
+    if(L.type==='match'){
+      var c=[],r=[];
+      for(var i=0;i<L.terms.length;i++){var t=L.terms[i],v=$('m'+L.n+t.id).value;if(!v)return {err:'Match every term first.'};c.push(v);r.push(t.label+' = '+labelOf(L.descs,v))}
+      return {canon:c.join('|'),readable:r.join('; ')};
+    }
+    if(L.type==='pick'){
+      var c2=[],r2=[];
+      for(var j=0;j<L.qs.length;j++){var q=L.qs[j],v2='';[].forEach.call(document.getElementsByName('q'+L.n+q.id),function(x){if(x.checked)v2=x.value});if(!v2)return {err:'Answer every question first.'};c2.push(v2);r2.push(labelOf(q.opts,v2))}
+      return {canon:c2.join('|'),readable:r2.join('; ')};
+    }
+    var raw=$('tx'+L.n).value.trim();
+    if(!raw)return {err:'Type your answer first.'};
+    return {canon:squash(raw),readable:raw.slice(0,80)};
+  }
+  function fb(L,cls,text){var e=$('fb'+L.n);e.className='fb'+(cls?' show '+cls:'');e.textContent=text}
+  function submit(L){
+    var l=S.locks[L.id];if(l.solved)return;
+    var g=guessOf(L);
+    if(g.err){fb(L,'nudge',g.err);return}
+    l.attempts++;
+    var d=checkLock(L,g.canon);
+    if(d===null){
+      fb(L,'nudge',L.nudge);
+      var s=$('lock'+L.n);s.classList.remove('shake');void s.offsetWidth;s.classList.add('shake');
+      persist();updateBar();return;
+    }
+    l.solved=true;l.guess=g.canon;l.readable=g.readable;digits[L.n]=d;
+    fb(L,'good','Click! Lock '+L.n+' is open. Your digit is '+d+'.');
+    var wh=$('wheel');wh.classList.remove('spin');void wh.getBoundingClientRect();wh.classList.add('spin');
+    $('dw'+L.n).classList.add('pop');
+    persist();updateAll();
+    setTimeout(function(){
+      expanded[L.n]=false;
+      var nx=nextOpen();if(nx)expanded[nx]=true;
+      updateLocks();
+      var tgt=nx?$('lock'+nx):$('exit');
+      if(tgt&&tgt.scrollIntoView)tgt.scrollIntoView({behavior:'smooth',block:'start'});
+    },1600);
+  }
+  function hint(L){
+    var l=S.locks[L.id];
+    if(l.solved)return;
+    if(l.hints<L.hints.length){l.hints++;persist();updateHints(L);updateBar()}
+    else{fb(L,'nudge','That was the last hint. Read the Clue Card slowly and try again.')}
+  }
+  function updateHints(L){
+    var l=S.locks[L.id],h='';
+    for(var i=0;i<l.hints;i++)h+='<div class="hint"><b>Hint '+(i+1)+':</b> <span>'+esc(L.hints[i])+'</span></div>';
+    $('hs'+L.n).innerHTML=h;
+  }
+  function nextOpen(){for(var i=0;i<D.locks.length;i++)if(!S.locks[D.locks[i].id].solved)return D.locks[i].n;return 0}
+  function lockState(L){
+    if(S.locks[L.id].solved)return 'solved';
+    return L.n===nextOpen()?'current':'locked';
+  }
+  function updateLocks(){
+    var cur=nextOpen();
+    D.locks.forEach(function(L){
+      var st=lockState(L),sec=$('lock'+L.n);
+      if(st==='current'&&expanded[L.n]===undefined)expanded[L.n]=true;
+      var open=(st!=='locked')&&!!expanded[L.n];
+      sec.className='lock glass '+st+(open?' open':'');
+      $('lh'+L.n).setAttribute('aria-expanded',open?'true':'false');
+      $('dg'+L.n).textContent=S.locks[L.id].solved?digits[L.n]:'?';
+      if(S.locks[L.id].solved){
+        [].forEach.call(sec.querySelectorAll('input,select,button.chip,#ck'+L.n+',#hb'+L.n+',#rs'+L.n),function(x){x.disabled=true});
+        var f=$('fb'+L.n);if(!f.classList.contains('good'))fb(L,'good','Unlocked. Your digit is '+digits[L.n]+'.'+(S.locks[L.id].readable?' Your answer: '+S.locks[L.id].readable:''));
+      }
+      updateHints(L);
+    });
+  }
+  function codeStr(){var s='';for(var i=1;i<=5;i++)s+=(digits[i]===undefined?'':digits[i]);return s}
+  function allSolved(){return D.locks.every(function(L){return S.locks[L.id].solved})}
+  function updateExit(){
+    var ok=allSolved();
+    $('exit').classList.toggle('locked',!ok);
+    $('codeBtn').disabled=!ok||S.escaped;
+    [].forEach.call($('codebox').querySelectorAll('input'),function(i){i.disabled=!ok||S.escaped});
+    $('exitNote').textContent=S.escaped?'The door is open!':(ok?'All 5 locks are open. Type the 5 digits in order, Lock 1 first.':'Open all 5 locks first. The digits go in order: Lock 1 first.');
+  }
+  function updateBar(){
+    var t=totals();
+    $('lc').textContent=t.locksSolved;$('hc').textContent=t.hintsUsed;
+    $('tm').textContent=fmt(S.escaped?S.escapeMs:S.elapsed);
+  }
+  function updateStatus(){
+    var el=$('status'),db=($('debriefText').value.trim().length);
+    if(S.escaped)el.textContent=db>=40?'You escaped and wrote your Debrief. Ready to submit.':'You escaped! Write your Debrief, then download your file to submit.';
+    else el.textContent='Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.';
+  }
+  function updateEsc(){
+    $('esc').classList.toggle('show',S.escaped);
+    if(S.escaped){var t=totals();$('escTime').textContent=fmt(S.escapeMs);$('escSum').textContent='5 of 5 locks opened with '+t.attempts+' tries and '+t.hintsUsed+' hint'+(t.hintsUsed===1?'':'s')+'.'}
+  }
+  function updateAll(){sceneUpdate();updateLocks();updateExit();updateBar();updateEsc();updateStatus();
+    $('intro').classList.toggle('hidden',S.started);$('game').classList.toggle('hidden',!S.started);$('loadOnly').classList.toggle('hidden',S.started);
+  }
+
+  /* ---------- exit code ---------- */
+  (function(){
+    var cb=$('codebox');
+    for(var i=0;i<5;i++){
+      var inp=document.createElement('input');inp.type='text';inp.inputMode='numeric';inp.maxLength=1;inp.setAttribute('aria-label','Exit code digit '+(i+1));inp.disabled=true;
+      (function(i,inp){
+        inp.addEventListener('input',function(){inp.value=inp.value.replace(/[٠-٩]/g,function(c){return c.charCodeAt(0)-1632}).replace(/[۰-۹]/g,function(c){return c.charCodeAt(0)-1776}).replace(/[^0-9]/g,'');if(inp.value&&i<4)cb.children[i+1].focus()});
+        inp.addEventListener('keydown',function(e){
+          if(e.key==='Backspace'&&!inp.value&&i>0)cb.children[i-1].focus();
+          if(e.key==='Enter'){e.preventDefault();tryCode()}
+        });
+        inp.addEventListener('paste',function(e){
+          var t=(e.clipboardData||window.clipboardData).getData('text').replace(/[٠-٩]/g,function(c){return c.charCodeAt(0)-1632}).replace(/[۰-۹]/g,function(c){return c.charCodeAt(0)-1776}).replace(/[^0-9]/g,'');
+          if(t.length>1){e.preventDefault();for(var k=0;k<5;k++)cb.children[k].value=t[k]||''}
+        });
+      })(i,inp);
+      cb.appendChild(inp);
+    }
+  })();
+  function tryCode(){
+    if(!allSolved()||S.escaped)return;
+    var v='';[].forEach.call($('codebox').querySelectorAll('input'),function(i){v+=i.value});
+    var f=$('codefb');
+    if(v.length<5){f.className='fb show nudge';f.textContent='The code has 5 digits. Fill every box.';return}
+    S.codeTries++;
+    if(h20('exit:'+D.salt+v)!==D.exitHash){
+      f.className='fb show nudge';f.textContent='The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.';
+      var ex=$('exit');ex.classList.remove('shake');void ex.offsetWidth;ex.classList.add('shake');
+      persist();return;
+    }
+    S.escaped=true;S.escapeMs=S.elapsed;
+    f.className='fb show good';f.textContent='The door swings open!';
+    persist();updateAll();
+    setTimeout(function(){$('esc').scrollIntoView({behavior:'smooth',block:'start'})},900);
+  }
+  $('codeBtn').addEventListener('click',tryCode);
+
+  /* ---------- timer ---------- */
+  function tick(){
+    var n=Date.now();
+    if(S.started&&!S.escaped){S.elapsed+=Math.min(n-lastTick,5000);$('tm').textContent=fmt(S.elapsed)}
+    lastTick=n;
+  }
+  function startTimer(){lastTick=Date.now();if(!timer)timer=setInterval(function(){tick();if(Math.round(S.elapsed/1000)%10===0)persist()},1000)}
+
+  /* ---------- files ---------- */
+  function msg(t,err){var m=$('msg');m.textContent=t;m.className='msg'+(err?' err':'');m.style.display='block'}
+  function ascii(n){return String(n).normalize('NFD').replace(/[̀-ͯ]/g,'')}
+  function clean(n){n=window.spAscii?spAscii(n):n;return ascii(n).trim().replace(/\s+/g,'_').replace(/[^A-Za-z0-9_-]/g,'')}
+  function who(){return (clean($('f_last').value)||'Last')+'_'+(clean($('f_first').value)||'First')}
+  function download(name,obj){
+    var blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;
+    document.body.appendChild(a);a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);
+  }
+  function namesOk(){
+    var ids=['f_first','f_last','f_period'],ok=true;
+    ids.forEach(function(i){var f=$(i);if(!f.value.trim()){f.classList.add('bad');ok=false}});
+    if(!ok){msg('Enter your first name, last name, and period at the top first.',true);$('f_first').scrollIntoView({block:'center'})}
+    return ok;
+  }
+  ['f_first','f_last','f_period'].forEach(function(i){$(i).addEventListener('input',function(){$(i).classList.remove('bad');S[i.slice(2)]=$(i).value;persist()})});
+  $('debriefText').addEventListener('input',function(){S.debrief=$('debriefText').value;persist();updateStatus()});
+  $('saveBtn').addEventListener('click',function(){
+    if(!namesOk())return;tick();
+    download(who()+'-'+PACKET+'-PROGRESS.json',snapshot());
+    msg('Progress file downloaded. Use Load Progress to continue later.');
+  });
+  $('finishBtn').addEventListener('click',function(){
+    if(!namesOk())return;tick();
+    var now=new Date(),o=snapshot();o.completed=S.escaped;o.submitted=now.toISOString();
+    o.student.date=now.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+    download(who()+'-'+PACKET+'.json',o);
+    msg(S.escaped?('Done! File downloaded: '+who()+'-'+PACKET+'.json. Upload it to Canvas.'):('Your file downloaded and is marked INCOMPLETE (you have not escaped). Upload it to Canvas: '+who()+'-'+PACKET+'.json'));
+  });
+  function openLoad(){$('loadFile').click()}
+  $('loadBtn').addEventListener('click',openLoad);$('loadBtn0').addEventListener('click',openLoad);
+  $('loadFile').addEventListener('change',function(e){
+    var f=e.target.files[0];if(!f)return;
+    var r=new FileReader();
+    r.onload=function(){
+      try{
+        var o=JSON.parse(r.result);
+        if(!o||o.packet!==PACKET||typeof o.locks!=='object')throw new Error('wrong');
+        digits={};var n=fresh();restore(n,o);S=n;applyToDom();
+        msg('Progress loaded. Welcome back.');
+      }catch(err){msg('That file did not work. Choose a progress file saved from this Escape Room.',true)}
+      e.target.value='';
+    };
+    r.onerror=function(){msg('The file could not be read.',true)};
+    r.readAsText(f);
+  });
+  $('reset').addEventListener('click',function(){
+    if(!confirm('Clear all your work and start over? This cannot be undone.'))return;
+    digits={};expanded={};S=fresh();
+    try{localStorage.removeItem(STORE+'state')}catch(e){}
+    $('locks').innerHTML='';D.locks.forEach(buildLock);
+    $('f_first').value=$('f_last').value=$('f_period').value='';$('debriefText').value='';
+    [].forEach.call($('codebox').querySelectorAll('input'),function(i){i.value=''});$('codefb').className='fb';
+    applyToDom();
+  });
+  function applyToDom(){
+    $('f_first').value=S.first;$('f_last').value=S.last;$('f_period').value=S.period;$('debriefText').value=S.debrief;
+    // rebuild lock widgets, then pre-fill solved ones with readable note
+    $('locks').innerHTML='';D.locks.forEach(buildLock);
+    expanded={};
+    updateAll();
+    if(S.started)startTimer();
+  }
+  $('startBtn').addEventListener('click',function(){S.started=true;persist();startTimer();updateAll();$('game').scrollIntoView({behavior:'smooth'})});
+  window.addEventListener('beforeunload',function(){tick();persist()});
+
+  S=loadLocal();
+  D.locks.forEach(buildLock);
+  applyToDom();
+})();
+</script>
+<!--sp-i18n--><script type="application/json" id="sp-i18n">{"langs":["en","es","ar"],"default":"en","es":{"Save Progress":"Guardar progreso","Load Progress":"Cargar progreso","Finished — Download File to Submit":"Terminé — Descargar el archivo para entregar","Clear all my answers":"Borrar todas mis respuestas","FIRST NAME *":"NOMBRE *","LAST NAME *":"APELLIDO *","PERIOD *":"PERÍODO *","DATE (fills in when you finish)":"FECHA (se llena cuando terminas)","e.g. 3":"p. ej., 3","Automatic":"Automática","Please type your first name, last name, and period first.":"Primero escribe tu nombre, apellido y período.","Western Expansion and Southern Secession":"Expansión hacia el oeste y secesión del sur","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — La Ley de Esclavos Fugitivos","Bleeding Kansas":"Bleeding Kansas — Kansas sangriento","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"Se descargó tu archivo de progreso. Guárdalo bien. Usa «Cargar progreso» para continuar más tarde.","Progress loaded.":"Progreso cargado.","Could not read that file.":"No se pudo leer ese archivo.","Treaty of Guadalupe Hidalgo":"Tratado de Guadalupe Hidalgo","A Loyalist governor whose Patriot father, Benjamin Franklin, cut off contact":"Un gobernador leal cuyo padre patriota, Benjamin Franklin, cortó el contacto con él","A ship’s cabin at night. On the left, a round porthole showing a crescent moon, stars, and waves, above a sea chest with metal bands. On the right, a ship’s bell, a coil of rope hanging on a peg, and a wooden barrel. The door has a CAPTAIN’S CABIN sign and five padlocks in a row. Under each padlock is a window for one digit of the exit code.":"Un camarote de barco de noche. A la izquierda, una ventanilla redonda que muestra una luna creciente, estrellas y olas, sobre un baúl de marinero con bandas de metal. A la derecha, una campana de barco, un rollo de soga colgado de un gancho y un barril de madera. La puerta tiene un letrero de CAMAROTE DEL CAPITÁN y cinco candados en fila. Debajo de cada candado hay una ventanita para un dígito del código de salida.","All 5 locks are open. Type the 5 digits in order, Lock 1 first.":"Los 5 candados están abiertos. Escribe los 5 dígitos en orden, primero el del Candado 1.","Answer every question first.":"Primero responde todas las preguntas.","Both sides faced big challenges in fighting the war. Britain sent 35,000 soldiers and half of its huge navy, and 30,000 German soldiers also served in its armies. Most were from Hesse-Cassel, so Americans called them Hessians. The British government also lacked a steady war strategy. The Americans had to build an army and a navy from scratch. Militiamen were at times unreliable, so Washington convinced Congress to create a Continental Army of full-time soldiers. Congress could not tax, so it could only ask the states for money, and the states rarely paid their share. Both sides asked Indigenous people to fight, but the British were more successful because they had long-standing ties and promised to protect Indigenous lands.":"Los dos bandos enfrentaron grandes retos al pelear la guerra. Gran Bretaña envió 35,000 soldados y la mitad de su enorme armada, y 30,000 soldados alemanes también sirvieron en sus ejércitos. La mayoría venía de Hesse-Cassel, por eso los estadounidenses los llamaron hessianos. El gobierno británico tampoco tenía una estrategia de guerra constante. Los estadounidenses tuvieron que formar un ejército y una armada desde cero. A veces los milicianos no eran confiables, así que Washington convenció al Congreso de crear un Ejército Continental de soldados de tiempo completo. El Congreso no podía cobrar impuestos, así que solo podía pedirles dinero a los estados, y los estados rara vez pagaban su parte. Los dos bandos les pidieron a los pueblos indígenas que pelearan, pero los británicos tuvieron más éxito porque tenían lazos de muchos años y prometieron proteger las tierras indígenas.","Both sides were equally successful":"Los dos bandos tuvieron el mismo éxito","Britain asked him to build one":"Gran Bretaña le pidió que formara uno","By December 1776, the Revolution was near collapse. On Christmas night, Washington led about 2,400 men across the icy Delaware River and surprised 1,500 Hessians at Trenton. Norton says this victory helped save the cause and shifted the war’s momentum. On October 17, 1777, the British general Burgoyne surrendered at Saratoga. This turning point led to a Treaty of Alliance with France. On October 17, 1781, Cornwallis surrendered at Yorktown after French warships and troops helped the Americans surround his army. On September 3, 1783, the Treaty of Paris recognized the independence of the thirteen former colonies. Indigenous Americans had no role in the peace talks, and the treaty gave away their ancestral lands.":"En diciembre de 1776, la Revolución estaba a punto de derrumbarse. En la noche de Navidad, Washington llevó a unos 2,400 hombres a través del helado río Delaware y sorprendió a 1,500 hessianos en Trenton. Norton dice que esta victoria ayudó a salvar la causa y cambió el impulso de la guerra. El 17 de octubre de 1777, el general británico Burgoyne se rindió en Saratoga. Este punto de inflexión llevó a un Tratado de Alianza con Francia. El 17 de octubre de 1781, Cornwallis se rindió en Yorktown después de que barcos de guerra y tropas francesas ayudaron a los estadounidenses a rodear a su ejército. El 3 de septiembre de 1783, el Tratado de París reconoció la independencia de las trece antiguas colonias. Los indígenas americanos no tuvieron ningún papel en las conversaciones de paz, y el tratado regaló sus tierras ancestrales.","CAPTAIN’S CABIN":"CAMAROTE DEL CAPITÁN","CLUE CARD":"TARJETA DE INDICIOS","Check":"Comprobar","Choose a description...":"Elige una descripción...","Clear":"Borrar","Clear all my work and start over":"Borrar todo mi trabajo y empezar de nuevo","Clear all your work and start over? This cannot be undone.":"¿Borrar todo tu trabajo y empezar de nuevo? Esto no se puede deshacer.","Core Objective 1: Describe the ways in which the American Revolution was also a civil war.":"Objetivo principal 1: Describe las formas en que la Revolución estadounidense también fue una guerra civil.","Core Objective 2: Explain the challenges faced by both British and American military leaders in fighting the Revolutionary War.":"Objetivo principal 2: Explica los retos que enfrentaron los jefes militares británicos y estadounidenses al pelear la Guerra de Independencia.","Core Objective 3: Identify key turning points in the Revolutionary War, and explain how they changed the direction of the war.":"Objetivo principal 3: Identifica los puntos de inflexión clave de la Guerra de Independencia y explica cómo cambiaron el rumbo de la guerra.","Core Objective 4: Examine how the Revolutionary War was an “engine” for political and social change.":"Objetivo principal 4: Examina cómo la Guerra de Independencia fue un “motor” de cambio político y social.","Core Objective 5: Compare the impact of the Revolutionary War on people of African descent, women, people of Hispanic descent, and Indigenous Americans.":"Objetivo principal 5: Compara el impacto de la Guerra de Independencia en las personas de ascendencia africana, las mujeres, las personas de ascendencia hispana y los indígenas americanos.","Cornwallis surrenders at Yorktown":"Cornwallis se rinde en Yorktown","DEBRIEF":"INFORME FINAL","Debrief":"Informe final","Decoded answer":"Respuesta decodificada","Decoder key: the <span style=\"color:var(--hl);font-weight:700\">gold<\/span> letter is in the message. The white letter under it is the real letter.":"Clave del decodificador: la letra <span style=\"color:var(--hl);font-weight:700\">dorada<\/span> está en el mensaje. La letra blanca que está debajo es la letra verdadera.","ESCAPED":"¡ESCAPASTE!","Each answer is in the Clue Card. Look for the Hessians, how Congress got money, why Washington wanted a Continental Army, and which side won Indigenous allies.":"Cada respuesta está en la tarjeta de indicios. Busca a los hessianos, cómo conseguía dinero el Congreso, por qué Washington quería un Ejército Continental y qué bando consiguió aliados indígenas.","Enter the Cabin":"Entrar al camarote","Enter your first name, last name, and period at the top first.":"Primero escribe tu nombre, apellido y período arriba.","Escape Room 3 · The American Revolution and Its Ideas":"Sala de escape 3 · La Revolución estadounidense y sus ideas","Escape the Captain’s Cabin":"Escapa del camarote del capitán","Exit code digit 1":"Dígito 1 del código de salida","Exit door":"Puerta de salida","Fill in the blank using the Clue Card.":"Llena el espacio en blanco con la tarjeta de indicios.","Have a saved file? Load it to continue.":"¿Tienes un archivo guardado? Cárgalo para continuar.","Hint":"Pista","Hints used":"Pistas usadas","How could Congress get money for the war?":"¿Cómo podía conseguir dinero el Congreso para la guerra?","How to escape:":"Cómo escapar:","If you get stuck, press <b>Hint<\/b>. Hints are free, but your teacher can see how many you used.":"Si te atoras, oprime <b>Pista<\/b>. Las pistas son gratis, pero tu maestro puede ver cuántas usaste.","In a ________ democracy, voters elect legislators to make decisions for them.":"En una democracia ________, los votantes eligen a legisladores para que tomen decisiones por ellos.","In the message, the letter G is really D, and the letter X is really U. The first word has 4 letters and starts with L. The last name has 7 letters and starts with D.":"En el mensaje, la letra G en realidad es D, y la letra X en realidad es U. La primera palabra tiene 4 letras y empieza con L. El apellido tiene 7 letras y empieza con D.","It charged a tax on all trade":"Cobraba un impuesto a todo el comercio","It collected taxes from every colonist":"Cobraba impuestos a cada colono","It could only ask the states for money":"Solo podía pedirles dinero a los estados","It sold land to France":"Vendía tierras a Francia","Locks":"Candados","Look for the word in bold in the Clue Card. It names the kind of democracy the United States had.":"Busca en la tarjeta de indicios la palabra en negrita. Nombra el tipo de democracia que tenía Estados Unidos.","Look for the years in the Clue Card: 1776, 1777, 1781, and 1783.":"Busca los años en la tarjeta de indicios: 1776, 1777, 1781 y 1783.","Look for who sided with Britain, who wanted to be citizens, who stayed neutral, and the father and son.":"Busca quiénes se pusieron del lado de Gran Bretaña, quiénes querían ser ciudadanos, quiénes se mantuvieron neutrales y al padre y al hijo.","Loyalists (Tories)":"Leales (tories)","Loyalists sided with Britain. Patriots wanted to be citizens, not subjects. The middle group tried to stay neutral. William Franklin was the governor whose father cut off contact.":"Los leales se pusieron del lado de Gran Bretaña. Los patriotas querían ser ciudadanos, no súbditos. El grupo intermedio trató de mantenerse neutral. William Franklin era el gobernador cuyo padre cortó el contacto con él.","Match each person or group to the best description. Use the Clue Card.":"Relaciona cada persona o grupo con la mejor descripción. Usa la tarjeta de indicios.","Match each term to the best description. Use the Clue Card.":"Relaciona cada término con la mejor descripción. Usa la tarjeta de indicios.","Match every term first.":"Primero relaciona todos los términos.","Militiamen alone could not win the war":"Los milicianos solos no podían ganar la guerra","Militiamen were already well trained for years":"Los milicianos ya llevaban años bien entrenados","Most Hessians came from Hesse-Cassel. Congress could only ask the states. Militiamen alone could not win the war. The British were more successful with Indigenous allies.":"La mayoría de los hessianos venía de Hesse-Cassel. El Congreso solo podía pedirles a los estados. Los milicianos solos no podían ganar la guerra. Los británicos tuvieron más éxito con los aliados indígenas.","Most came from the German state of Hesse-Cassel":"La mayoría venía del estado alemán de Hesse-Cassel","Neither side tried":"Ninguno de los dos bandos lo intentó","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 5, “A Desperate Gamble” and “Setbacks for the British (1777–1781)” (The Campaign of 1777, The Crucial Alliance with France, Yorktown and the Final Campaigns, The Treaty of Paris).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 5, “A Desperate Gamble” y “Setbacks for the British (1777–1781)” (The Campaign of 1777, The Crucial Alliance with France, Yorktown and the Final Campaigns, The Treaty of Paris).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 5, “American Society at War” (the opening, Loyalists, and Patriots).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 5, “American Society at War” (the opening, Loyalists, y Patriots).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 5, “Equality and Its Limits” (The Paradox of Slavery, Southern Backlash, The Status of Women, Indigenous Americans Are Besieged) and “The Spanish Alliance.”":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 5, “Equality and Its Limits” (The Paradox of Slavery, Southern Backlash, The Status of Women, Indigenous Americans Are Besieged) y “The Spanish Alliance.”","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 5, “Mobilizing for War” (the opening, British Military Power, The Continental Army, Problems of Finance and Supply, and Indigenous Americans and the Revolution).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 5, “Mobilizing for War” (the opening, British Military Power, The Continental Army, Problems of Finance and Supply, y Indigenous Americans and the Revolution).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 5, “War as an Engine of Change” (Republican Ideology, The Articles of Confederation, Expansion of Political Participation, and Freedom of Religion).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 5, “War as an Engine of Change” (Republican Ideology, The Articles of Confederation, Expansion of Political Participation, y Freedom of Religion).","Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.":"Todavía no escapas (se marca INCOMPLETO). Aun así puedes descargar tu archivo y entregarlo.","Not quite. At least one answer is off. Re-read the Clue Card for the Hessians, Congress’s money, the Continental Army, and Indigenous allies.":"No exactamente. Al menos una respuesta no es correcta. Vuelve a leer la tarjeta de indicios sobre los hessianos, el dinero del Congreso, el Ejército Continental y los aliados indígenas.","Not quite. Check each match against the Clue Card. Which one are you least sure about?":"Casi. Revisa cada pareja con la tarjeta de indicios. ¿De cuál estás menos seguro?","Not quite. Decode one letter at a time with the key, then check your spelling.":"Casi. Decodifica una letra a la vez con la clave y luego revisa tu ortografía.","Not quite. Re-read the Clue Card and match each event to its year.":"Casi. Vuelve a leer la tarjeta de indicios y une cada suceso con su año.","Not quite. Re-read the Clue Card. Use the scrambled letters to check your spelling.":"Casi. Vuelve a leer la tarjeta de indicios. Usa las letras desordenadas para revisar tu ortografía.","One last step: write your Debrief below.":"Un último paso: escribe tu Informe final abajo.","Open all 5 locks first. The digits go in order: Lock 1 first.":"Primero abre los 5 candados. Los dígitos van en orden: primero el del Candado 1.","Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.":"Abre los 5 candados y luego escribe el código de salida de 5 dígitos. Termina con el Informe final.","Open each lock in order. Read the <b>Clue Card<\/b>. The answer is in the card.":"Abre cada candado en orden. Lee la <b>tarjeta de indicios<\/b>. La respuesta está en la tarjeta.","Open the Door":"Abrir la puerta","Patriots":"Patriotas","Pick the correct answer for all four questions.":"Elige la respuesta correcta en las cuatro preguntas.","Progress file downloaded. Use Load Progress to continue later.":"Se descargó el archivo de progreso. Usa «Cargar progreso» para continuar más tarde.","Progress loaded. Welcome back.":"Progreso cargado. Bienvenido de nuevo.","Sided with Britain and saw the Revolution as treason":"Se puso del lado de Gran Bretaña y veía la Revolución como traición","Solve the puzzle to open the lock and reveal one digit.":"Resuelve el acertijo para abrir el candado y descubrir un dígito.","THE EXIT DOOR":"LA PUERTA DE SALIDA","Tap all 4 events first, in order.":"Primero toca los 4 sucesos, en orden.","Tap the four events in the order they happened. Tap an event again to take it back.":"Toca los cuatro sucesos en el orden en que ocurrieron. Toca un suceso otra vez para quitarlo.","That file did not work. Choose a progress file saved from this Escape Room.":"Ese archivo no funcionó. Elige un archivo de progreso guardado de esta sala de escape.","That was the last hint. Read the Clue Card slowly and try again.":"Esa fue la última pista. Lee la tarjeta de indicios despacio y vuelve a intentarlo.","The American Revolution and Its Ideas":"La Revolución estadounidense y sus ideas","The American Revolution was also a civil war. It split families, friends, towns, and cities. Benjamin Franklin’s son William, the royal governor of New Jersey, was a Loyalist. His Patriot father removed him from his will and cut off contact. Loyalists, also called Tories, saw the Revolution as treason, and many lived in seaport cities and the Carolinas. Patriots wanted to separate from Britain to protect their liberty and to become citizens instead of subjects of a king. A middle group tried to stay neutral, but most were eventually pushed to choose a side. Some Americans switched sides four or five times.":"La Revolución estadounidense también fue una guerra civil. Dividió a familias, amigos, pueblos y ciudades. William, el hijo de Benjamin Franklin y gobernador real de Nueva Jersey, era un leal. Su padre patriota lo sacó de su testamento y cortó el contacto con él. Los leales, también llamados tories, veían la Revolución como traición, y muchos vivían en las ciudades portuarias y en las Carolinas. Los patriotas querían separarse de Gran Bretaña para proteger su libertad y para ser ciudadanos en lugar de súbditos de un rey. Un grupo intermedio trató de mantenerse neutral, pero a la mayoría al final la empujaron a elegir un bando. Algunos estadounidenses cambiaron de bando cuatro o cinco veces.","The Americans":"Los estadounidenses","The Barrel":"El barril","The British":"Los británicos","The British surrender at Saratoga":"Los británicos se rinden en Saratoga","The Clue Card tells about a royal governor of Virginia who offered freedom to enslaved people who joined British troops. A secret message gives his title and last name. Each letter in the message was moved 3 steps forward in the alphabet. Decode it.":"La tarjeta de indicios habla de un gobernador real de Virginia que ofreció la libertad a las personas esclavizadas que se unieran a las tropas británicas. Un mensaje secreto da su título y su apellido. Cada letra del mensaje se movió 3 lugares hacia adelante en el alfabeto. Descífralo.","The Porthole":"La ventanilla","The Rope Coil":"El rollo de soga","The Sea Chest":"El baúl de marinero","The Ship’s Bell":"La campana del barco","The Treaty of Paris is signed":"Se firma el Tratado de París","The army would cost the states nothing":"El ejército no les costaría nada a los estados","The clock starts when you press the button. Most students finish in about 20 minutes.":"El reloj empieza cuando oprimes el botón. La mayoría de los estudiantes termina en unos 20 minutos.","The code has 5 digits. Fill every box.":"El código tiene 5 dígitos. Llena todas las casillas.","The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.":"La puerta no se abrió. Revisa los dígitos debajo de cada candado y escríbelos en orden: primero el del Candado 1.","The door is open!":"¡La puerta está abierta!","The door swings open!":"¡La puerta se abre de golpe!","The middle group":"El grupo intermedio","The order is Trenton (1776), Saratoga (1777), Yorktown (1781), then the Treaty of Paris (1783).":"El orden es Trenton (1776), Saratoga (1777), Yorktown (1781) y luego el Tratado de París (1783).","The secret message names the governor in the Clue Card. Use the decoder key to spell it, one letter at a time. His title is the first word.":"El mensaje secreto nombra al gobernador de la tarjeta de indicios. Usa la clave del decodificador para escribirlo, una letra a la vez. Su título es la primera palabra.","The ship’s captain locked the cabin door for the night. A round porthole, a sea chest, a ship’s bell, a coil of rope, and a wooden barrel sit in the room. The door has <b>5 locks<\/b>. Each lock matches one big idea from Lesson 3. Solve them all to find the <b>5-digit exit code<\/b>.":"El capitán del barco cerró con llave la puerta del camarote para la noche. En el cuarto hay una ventanilla redonda, un baúl de marinero, una campana de barco, un rollo de soga y un barril de madera. La puerta tiene <b>5 candados<\/b>. Cada candado corresponde a una idea importante de la Lección 3. Resuélvelos todos para encontrar el <b>código de salida de 5 dígitos<\/b>.","The war changed life in different ways for different people. In November 1775, Virginia’s royal governor, who owned fifty-seven enslaved people himself, announced that enslaved people who joined British troops would be free. Norton calls this the sharpest irony of the Revolution. About 5,000 African Americans fought on the Patriot side, 15,000 to 20,000 people of African descent were with the British, and several hundred thousand enslaved people seized their freedom. Women could not vote or hold office, but the war let them manage farms, handle supplies, and serve as messengers or spies. The Spanish governor Bernardo de Gálvez led a multicultural force that took Mobile and Pensacola from the British. Many White Americans used the war to destroy and displace Indigenous people, and the Treaty of Paris gave away their lands.":"La guerra cambió la vida de maneras distintas para personas distintas. En noviembre de 1775, el gobernador real de Virginia, que él mismo era dueño de cincuenta y siete personas esclavizadas, anunció que las personas esclavizadas que se unieran a las tropas británicas serían libres. Norton llama a esto la ironía más grande de la Revolución. Unos 5,000 afroamericanos pelearon del lado patriota, entre 15,000 y 20,000 personas de ascendencia africana estuvieron con los británicos, y varios cientos de miles de personas esclavizadas tomaron su libertad. Las mujeres no podían votar ni ocupar cargos, pero la guerra les permitió administrar granjas, manejar los suministros y servir como mensajeras o espías. El gobernador español Bernardo de Gálvez dirigió una fuerza multicultural que les quitó Mobile y Pensacola a los británicos. Muchos estadounidenses blancos usaron la guerra para destruir y desplazar a los pueblos indígenas, y el Tratado de París regaló sus tierras.","The war was an engine for political change. Americans chose a republican ideology instead of kings and nobles. The United States was a <b>representative democracy<\/b>, where voters elect legislators to decide for them. At first, only property-holding White men governed. The new state constitutions had elected governors and a bill of rights. After 1776, rules about property for voting were lowered. In four states, any male taxpayer could vote. The Articles of Confederation, approved in 1781, had no president and no power to tax. In 1786, the Virginia Statute of Religious Freedom said that no one could be forced to support any religion. Norton adds that the war did not greatly change the status of enslaved Black people or Indigenous Americans.":"La guerra fue un motor de cambio político. Los estadounidenses eligieron una ideología republicana en lugar de reyes y nobles. Estados Unidos era una <b>democracia representativa<\/b>, donde los votantes eligen a legisladores para que decidan por ellos. Al principio, solo gobernaban los hombres blancos dueños de propiedades. Las nuevas constituciones estatales tenían gobernadores elegidos y una declaración de derechos. Después de 1776, se redujeron las reglas de propiedad para votar. En cuatro estados, cualquier hombre que pagara impuestos podía votar. Los Artículos de la Confederación, aprobados en 1781, no tenían presidente ni poder para cobrar impuestos. En 1786, el Estatuto de Virginia para la Libertad Religiosa dijo que a nadie se le podía obligar a apoyar ninguna religión. Norton agrega que la guerra no cambió mucho la condición de las personas negras esclavizadas ni de los indígenas americanos.","The word starts with R and has 14 letters. It ends with “tive.”":"La palabra empieza con R y tiene 14 letras. Termina en “tive”.","They all fought for the king of France":"Todos peleaban por el rey de Francia","They were born in the colonies":"Habían nacido en las colonias","They were hired from Spain":"Los contrataron en España","Time":"Tiempo","Tried to stay neutral but were eventually pushed to choose":"Trató de mantenerse neutral, pero al final la empujaron a elegir","Type the answer in English.":"Escribe la respuesta en inglés.","Type the answer in English. Use the digits 0-9.":"Escribe la respuesta en inglés. Usa los dígitos 0-9.","Type the exit code":"Escribe el código de salida","Type your answer first.":"Primero escribe tu respuesta.","Type your answer here...":"Escribe tu respuesta aquí...","UNIT 1 · COLONIES, REVOLUTION, AND CONSTITUTION | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 1 · COLONIAS, REVOLUCIÓN Y CONSTITUCIÓN | CPUSH | DANIEL GARZA, M.A.","Unscramble the letters to fill the blank.":"Ordena las letras para llenar el espacio en blanco.","Wanted to be citizens, not subjects of a king":"Querían ser ciudadanos, no súbditos de un rey","Washington crosses the Delaware and wins at Trenton":"Washington cruza el Delaware y gana en Trenton","Which lock was hardest, and what did you learn that you did not know before?":"¿Qué candado fue el más difícil y qué aprendiste que antes no sabías?","Which side was more successful at getting Indigenous people to fight for it?":"¿Qué bando tuvo más éxito en lograr que los pueblos indígenas pelearan por él?","Why did Americans call the German soldiers hired by Britain “Hessians”?":"¿Por qué los estadounidenses llamaban “hessianos” a los soldados alemanes contratados por Gran Bretaña?","Why did Washington want a Continental Army?":"¿Por qué quería Washington un Ejército Continental?","William Franklin":"William Franklin","Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.":"Escribe de 3 a 4 oraciones. Nombra el candado y usa un dato de su tarjeta de indicios. Puedes escribirlo aunque no hayas escapado.","You are locked in the captain’s cabin.":"Estás encerrado en el camarote del capitán.","You escaped and wrote your Debrief. Ready to submit.":"Escapaste y escribiste tu Informe final. Listo para entregar.","You escaped! Write your Debrief, then download your file to submit.":"¡Escapaste! Escribe tu Informe final y luego descarga tu archivo para entregarlo.","Your answer":"Tu respuesta","Your time:":"Tu tiempo:","digit":"dígito","Unlocked. Your digit is 2. Your answer: Loyalists (Tories) = Sided with Britain and saw the Revolution as treason; Patriots = Wanted to be citizens, not subjects of a king; William Franklin = A Loyalist governor whose Patriot father, Benjamin Franklin, cut off contact; The middle group = Tried to stay neutral but were eventually pushed to choose":"Desbloqueado. Tu dígito es 2. Tu respuesta: Leales (tories) = Se puso del lado de Gran Bretaña y veía la Revolución como traición; Patriotas = Querían ser ciudadanos, no súbditos de un rey; William Franklin = Un gobernador leal cuyo padre patriota, Benjamin Franklin, cortó el contacto con él; El grupo intermedio = Trató de mantenerse neutral, pero al final la empujaron a elegir","Unlocked. Your digit is 4. Your answer: Most came from the German state of Hesse-Cassel; It could only ask the states for money; Militiamen alone could not win the war; The British":"Desbloqueado. Tu dígito es 4. Tu respuesta: La mayoría venía del estado alemán de Hesse-Cassel; Solo podía pedirles dinero a los estados; Los milicianos solos no podían ganar la guerra; Los británicos","Unlocked. Your digit is 8. Your answer: Washington crosses the Delaware and wins at Trenton &gt; The British surrender at Saratoga &gt; Cornwallis surrenders at Yorktown &gt; The Treaty of Paris is signed":"Desbloqueado. Tu dígito es 8. Tu respuesta: Washington cruza el Delaware y gana en Trenton &gt; Los británicos se rinden en Saratoga &gt; Cornwallis se rinde en Yorktown &gt; Se firma el Tratado de París"},"ar":{"Save Progress":"حفظ التقدم","Load Progress":"تحميل التقدم","Finished — Download File to Submit":"انتهيت — نزّل الملف لتسليمه","Clear all my answers":"امسح كل إجاباتي","FIRST NAME *":"الاسم الأول *","LAST NAME *":"اسم العائلة *","PERIOD *":"الحصة *","DATE (fills in when you finish)":"التاريخ (يُكتب تلقائيًا عند الانتهاء)","e.g. 3":"مثال: 3","Automatic":"تلقائي","Please type your first name, last name, and period first.":"اكتب أولًا اسمك الأول واسم العائلة والحصة.","Western Expansion and Southern Secession":"التوسع غربًا وانفصال الجنوب","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"الوحدة 3 · بيت منقسم وأُعيد بناؤه | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — قانون العبيد الهاربين","Bleeding Kansas":"Bleeding Kansas — كانساس النازفة","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"الوحدة 3 · بيت منقسم وأعيد بناؤه | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"تم تنزيل ملف التقدم. احتفظ به في مكان آمن. استخدم «تحميل التقدم» لتكمل لاحقًا.","Progress loaded.":"تم تحميل التقدم.","Could not read that file.":"تعذّرت قراءة هذا الملف.","Treaty of Guadalupe Hidalgo":"معاهدة غوادالوبي هيدالغو (Treaty of Guadalupe Hidalgo)","A Loyalist governor whose Patriot father, Benjamin Franklin, cut off contact":"حاكم من الموالين قطع والده الوطني، بنجامين فرانكلين (Benjamin Franklin)، الاتصال به","A ship’s cabin at night. On the left, a round porthole showing a crescent moon, stars, and waves, above a sea chest with metal bands. On the right, a ship’s bell, a coil of rope hanging on a peg, and a wooden barrel. The door has a CAPTAIN’S CABIN sign and five padlocks in a row. Under each padlock is a window for one digit of the exit code.":"مقصورة سفينة في الليل. على اليسار كوّة دائرية تُظهر هلالًا ونجومًا وأمواجًا، فوق صندوق بحّار بشرائط معدنية. وعلى اليمين جرس سفينة، ولفّة حبل معلّقة على وتد، وبرميل خشبي. على الباب لافتة «مقصورة القبطان» وخمسة أقفال في صف. تحت كل قفل نافذة صغيرة لرقم واحد من رمز الخروج.","All 5 locks are open. Type the 5 digits in order, Lock 1 first.":"الأقفال الخمسة مفتوحة. اكتب الأرقام الخمسة بالترتيب: رقم القفل 1 أولًا.","Answer every question first.":"أجب عن كل الأسئلة أولًا.","Both sides faced big challenges in fighting the war. Britain sent 35,000 soldiers and half of its huge navy, and 30,000 German soldiers also served in its armies. Most were from Hesse-Cassel, so Americans called them Hessians. The British government also lacked a steady war strategy. The Americans had to build an army and a navy from scratch. Militiamen were at times unreliable, so Washington convinced Congress to create a Continental Army of full-time soldiers. Congress could not tax, so it could only ask the states for money, and the states rarely paid their share. Both sides asked Indigenous people to fight, but the British were more successful because they had long-standing ties and promised to protect Indigenous lands.":"واجه الطرفان تحديات كبيرة في القتال. أرسلت بريطانيا 35,000 جندي ونصف أسطولها الضخم، كما خدم 30,000 جندي ألماني في جيوشها. وكان معظمهم من هيسن-كاسل (Hesse-Cassel)، فسمّاهم الأمريكيون الهيسيين (Hessians). كما لم تكن لدى الحكومة البريطانية استراتيجية حرب ثابتة. وكان على الأمريكيين أن يبنوا جيشًا وأسطولًا من الصفر. وكان رجال الميليشيا غير موثوقين أحيانًا، فأقنع واشنطن (Washington) الكونغرس بإنشاء جيش قاري من جنود متفرغين. ولم يكن الكونغرس يستطيع فرض الضرائب، فكان يطلب المال من الولايات فقط، ونادرًا ما دفعت الولايات حصتها. وطلب الطرفان من السكان الأصليين أن يقاتلوا، لكن البريطانيين كانوا أكثر نجاحًا لأن لهم علاقات قديمة ووعدوا بحماية أراضي السكان الأصليين.","Both sides were equally successful":"كان الطرفان ناجحين بالقدر نفسه","Britain asked him to build one":"طلبت منه بريطانيا أن يبنيه","By December 1776, the Revolution was near collapse. On Christmas night, Washington led about 2,400 men across the icy Delaware River and surprised 1,500 Hessians at Trenton. Norton says this victory helped save the cause and shifted the war’s momentum. On October 17, 1777, the British general Burgoyne surrendered at Saratoga. This turning point led to a Treaty of Alliance with France. On October 17, 1781, Cornwallis surrendered at Yorktown after French warships and troops helped the Americans surround his army. On September 3, 1783, the Treaty of Paris recognized the independence of the thirteen former colonies. Indigenous Americans had no role in the peace talks, and the treaty gave away their ancestral lands.":"بحلول ديسمبر 1776، كانت الثورة على وشك الانهيار. وفي ليلة عيد الميلاد، قاد واشنطن (Washington) نحو 2,400 رجل عبر نهر ديلاوير (Delaware) المتجمد، وفاجأ 1,500 جندي هيسي (Hessians) في ترينتون (Trenton). ويقول نورتون (Norton) إن هذا النصر ساعد على إنقاذ القضية وغيّر زخم الحرب. وفي 17 أكتوبر 1777، استسلم الجنرال البريطاني بيرغوين (Burgoyne) في ساراتوغا (Saratoga). وأدّت نقطة التحول هذه إلى معاهدة التحالف (Treaty of Alliance) مع فرنسا. وفي 17 أكتوبر 1781، استسلم كورنواليس (Cornwallis) في يوركتاون (Yorktown) بعد أن ساعدت السفن الحربية والقوات الفرنسية الأمريكيين على محاصرة جيشه. وفي 3 سبتمبر 1783، اعترفت معاهدة باريس (Treaty of Paris) باستقلال المستعمرات الثلاث عشرة السابقة. ولم يكن للأمريكيين الأصليين أي دور في محادثات السلام، وأعطت المعاهدة أراضيهم الأجدادية لغيرهم.","CAPTAIN’S CABIN":"مقصورة القبطان","CLUE CARD":"بطاقة القرائن","Check":"تحقق","Choose a description...":"اختر وصفًا...","Clear":"مسح","Clear all my work and start over":"امسح كل عملي وابدأ من جديد","Clear all your work and start over? This cannot be undone.":"هل تريد مسح كل عملك والبدء من جديد؟ لا يمكن التراجع عن هذا.","Core Objective 1: Describe the ways in which the American Revolution was also a civil war.":"الهدف الأساسي 1: صِف الطرق التي كانت بها الثورة الأمريكية حربًا أهلية أيضًا.","Core Objective 2: Explain the challenges faced by both British and American military leaders in fighting the Revolutionary War.":"الهدف الأساسي 2: اشرح التحديات التي واجهها القادة العسكريون البريطانيون والأمريكيون في خوض حرب الثورة.","Core Objective 3: Identify key turning points in the Revolutionary War, and explain how they changed the direction of the war.":"الهدف الأساسي 3: حدّد نقاط التحول الرئيسية في حرب الثورة، واشرح كيف غيّرت اتجاه الحرب.","Core Objective 4: Examine how the Revolutionary War was an “engine” for political and social change.":"الهدف الأساسي 4: افحص كيف كانت حرب الثورة «محرّكًا» للتغيير السياسي والاجتماعي.","Core Objective 5: Compare the impact of the Revolutionary War on people of African descent, women, people of Hispanic descent, and Indigenous Americans.":"الهدف الأساسي 5: قارن أثر حرب الثورة في الأشخاص من أصل أفريقي، والنساء، والأشخاص من أصل إسباني (هسباني)، والأمريكيين الأصليين.","Cornwallis surrenders at Yorktown":"كورنواليس (Cornwallis) يستسلم في يوركتاون (Yorktown)","DEBRIEF":"الملخص الختامي","Debrief":"الملخص الختامي","Decoded answer":"الإجابة بعد فك التشفير","Decoder key: the <span style=\"color:var(--hl);font-weight:700\">gold<\/span> letter is in the message. The white letter under it is the real letter.":"مفتاح فك التشفير: الحرف <span style=\"color:var(--hl);font-weight:700\">الذهبي<\/span> هو الحرف الموجود في الرسالة. والحرف الأبيض تحته هو الحرف الحقيقي.","ESCAPED":"لقد هربت!","Each answer is in the Clue Card. Look for the Hessians, how Congress got money, why Washington wanted a Continental Army, and which side won Indigenous allies.":"كل إجابة موجودة في بطاقة القرائن. ابحث عن الهيسيين (Hessians)، وكيف حصل الكونغرس على المال، ولماذا أراد واشنطن (Washington) جيشًا قاريًا، وأي طرف كسب حلفاء من السكان الأصليين.","Enter the Cabin":"ادخل المقصورة","Enter your first name, last name, and period at the top first.":"اكتب اسمك الأول واسم العائلة والحصة في الأعلى أولًا.","Escape Room 3 · The American Revolution and Its Ideas":"غرفة الهروب 3 · الثورة الأمريكية وأفكارها","Escape the Captain’s Cabin":"اهرب من مقصورة القبطان","Exit code digit 1":"رقم رمز الخروج 1","Exit door":"باب الخروج","Fill in the blank using the Clue Card.":"املأ الفراغ باستخدام بطاقة القرائن.","Have a saved file? Load it to continue.":"هل لديك ملف محفوظ؟ حمّله لتكمل.","Hint":"تلميح","Hints used":"التلميحات المستخدمة","How could Congress get money for the war?":"كيف كان الكونغرس يحصل على المال للحرب؟","How to escape:":"كيف تهرب:","If you get stuck, press <b>Hint<\/b>. Hints are free, but your teacher can see how many you used.":"إذا تعثرت، اضغط <b>تلميح<\/b>. التلميحات مجانية، لكن معلمك يستطيع أن يرى كم تلميحًا استخدمت.","In a ________ democracy, voters elect legislators to make decisions for them.":"في الديمقراطية ________، ينتخب الناخبون المشرّعين ليتخذوا القرارات نيابةً عنهم.","In the message, the letter G is really D, and the letter X is really U. The first word has 4 letters and starts with L. The last name has 7 letters and starts with D.":"في الرسالة، الحرف G هو في الحقيقة D، والحرف X هو في الحقيقة U. الكلمة الأولى من 4 أحرف وتبدأ بحرف L. واسم العائلة من 7 أحرف ويبدأ بحرف D.","It charged a tax on all trade":"كان يفرض ضريبة على كل التجارة","It collected taxes from every colonist":"كان يجمع الضرائب من كل مستعمِر","It could only ask the states for money":"كان يستطيع فقط أن يطلب المال من الولايات","It sold land to France":"كان يبيع الأراضي لفرنسا","Locks":"الأقفال","Look for the word in bold in the Clue Card. It names the kind of democracy the United States had.":"ابحث في بطاقة القرائن عن الكلمة المكتوبة بخط عريض. إنها تسمّي نوع الديمقراطية الذي كان في الولايات المتحدة.","Look for the years in the Clue Card: 1776, 1777, 1781, and 1783.":"ابحث عن السنوات في بطاقة القرائن: 1776 و1777 و1781 و1783.","Look for who sided with Britain, who wanted to be citizens, who stayed neutral, and the father and son.":"ابحث عمّن وقف مع بريطانيا، ومن أراد أن يكون مواطنًا، ومن بقي محايدًا، والأب وابنه.","Loyalists (Tories)":"الموالون (التوريون)","Loyalists sided with Britain. Patriots wanted to be citizens, not subjects. The middle group tried to stay neutral. William Franklin was the governor whose father cut off contact.":"وقف الموالون مع بريطانيا. وأراد الوطنيون أن يكونوا مواطنين لا رعايا. وحاولت المجموعة الوسطى أن تبقى محايدة. وكان ويليام فرانكلين (William Franklin) هو الحاكم الذي قطع والده الاتصال به.","Match each person or group to the best description. Use the Clue Card.":"اربط كل شخص أو مجموعة بأفضل وصف له. استخدم بطاقة القرائن.","Match each term to the best description. Use the Clue Card.":"اربط كل مصطلح بأفضل وصف له. استخدم بطاقة القرائن.","Match every term first.":"طابق كل المصطلحات أولًا.","Militiamen alone could not win the war":"لم يكن رجال الميليشيا وحدهم قادرين على كسب الحرب","Militiamen were already well trained for years":"كان رجال الميليشيا مدرَّبين جيدًا منذ سنوات","Most Hessians came from Hesse-Cassel. Congress could only ask the states. Militiamen alone could not win the war. The British were more successful with Indigenous allies.":"جاء معظم الهيسيين (Hessians) من هيسن-كاسل (Hesse-Cassel). وكان الكونغرس يستطيع فقط أن يطلب من الولايات. ولم يكن رجال الميليشيا وحدهم قادرين على كسب الحرب. وكان البريطانيون أكثر نجاحًا مع الحلفاء من السكان الأصليين.","Most came from the German state of Hesse-Cassel":"جاء معظمهم من ولاية هيسن-كاسل (Hesse-Cassel) الألمانية","Neither side tried":"لم يحاول أي من الطرفين","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 5, “A Desperate Gamble” and “Setbacks for the British (1777–1781)” (The Campaign of 1777, The Crucial Alliance with France, Yorktown and the Final Campaigns, The Treaty of Paris).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 5، “A Desperate Gamble” و“Setbacks for the British (1777–1781)” (The Campaign of 1777، The Crucial Alliance with France، Yorktown and the Final Campaigns، The Treaty of Paris).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 5, “American Society at War” (the opening, Loyalists, and Patriots).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 5، “American Society at War” (the opening، Loyalists، وPatriots).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 5, “Equality and Its Limits” (The Paradox of Slavery, Southern Backlash, The Status of Women, Indigenous Americans Are Besieged) and “The Spanish Alliance.”":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 5، “Equality and Its Limits” (The Paradox of Slavery، Southern Backlash، The Status of Women، Indigenous Americans Are Besieged) و“The Spanish Alliance.”","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 5, “Mobilizing for War” (the opening, British Military Power, The Continental Army, Problems of Finance and Supply, and Indigenous Americans and the Revolution).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 5، “Mobilizing for War” (the opening، British Military Power، The Continental Army، Problems of Finance and Supply، وIndigenous Americans and the Revolution).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 5, “War as an Engine of Change” (Republican Ideology, The Articles of Confederation, Expansion of Political Participation, and Freedom of Religion).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 5، “War as an Engine of Change” (Republican Ideology، The Articles of Confederation، Expansion of Political Participation، وFreedom of Religion).","Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.":"لم تهرب بعد (يُسجَّل «غير مكتمل» INCOMPLETE). ما زال بإمكانك تنزيل ملفك وتسليمه.","Not quite. At least one answer is off. Re-read the Clue Card for the Hessians, Congress’s money, the Continental Army, and Indigenous allies.":"ليس تمامًا. إجابة واحدة على الأقل غير صحيحة. أعد قراءة بطاقة القرائن عن الهيسيين (Hessians) ومال الكونغرس والجيش القاري والحلفاء من السكان الأصليين.","Not quite. Check each match against the Clue Card. Which one are you least sure about?":"ليس تمامًا. تحقق من كل مطابقة باستخدام بطاقة القرائن. أي مطابقة أنت أقل تأكدًا منها؟","Not quite. Decode one letter at a time with the key, then check your spelling.":"ليس تمامًا. فُكّ تشفير حرف واحد في كل مرة باستخدام المفتاح، ثم تحقق من تهجئتك.","Not quite. Re-read the Clue Card and match each event to its year.":"ليس تمامًا. أعد قراءة بطاقة القرائن وطابق كل حدث مع سنته.","Not quite. Re-read the Clue Card. Use the scrambled letters to check your spelling.":"ليس تمامًا. أعد قراءة بطاقة القرائن. استخدم الحروف المبعثرة للتحقق من تهجئتك.","One last step: write your Debrief below.":"خطوة أخيرة: اكتب ملخصك الختامي أدناه.","Open all 5 locks first. The digits go in order: Lock 1 first.":"افتح الأقفال الخمسة أولًا. تُكتب الأرقام بالترتيب: رقم القفل 1 أولًا.","Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.":"افتح الأقفال الخمسة، ثم اكتب رمز الخروج المكوّن من 5 أرقام. أنهِ بالملخص الختامي.","Open each lock in order. Read the <b>Clue Card<\/b>. The answer is in the card.":"افتح كل قفل بالترتيب. اقرأ <b>بطاقة القرائن<\/b>. الإجابة موجودة في البطاقة.","Open the Door":"افتح الباب","Patriots":"الوطنيون","Pick the correct answer for all four questions.":"اختر الإجابة الصحيحة للأسئلة الأربعة كلها.","Progress file downloaded. Use Load Progress to continue later.":"تم تنزيل ملف التقدم. استخدم «تحميل التقدم» لتكمل لاحقًا.","Progress loaded. Welcome back.":"تم تحميل التقدم. أهلًا بعودتك.","Sided with Britain and saw the Revolution as treason":"وقفوا مع بريطانيا ورأوا أن الثورة خيانة","Solve the puzzle to open the lock and reveal one digit.":"حلّ اللغز لتفتح القفل وتكشف رقمًا واحدًا.","THE EXIT DOOR":"باب الخروج","Tap all 4 events first, in order.":"المس الأحداث الأربعة كلها أولًا، بالترتيب.","Tap the four events in the order they happened. Tap an event again to take it back.":"المس الأحداث الأربعة بالترتيب الذي وقعت به. المس الحدث مرة أخرى للتراجع عنه.","That file did not work. Choose a progress file saved from this Escape Room.":"لم يعمل هذا الملف. اختر ملف تقدم محفوظًا من غرفة الهروب هذه.","That was the last hint. Read the Clue Card slowly and try again.":"كان هذا آخر تلميح. اقرأ بطاقة القرائن ببطء وحاول مرة أخرى.","The American Revolution and Its Ideas":"الثورة الأمريكية وأفكارها","The American Revolution was also a civil war. It split families, friends, towns, and cities. Benjamin Franklin’s son William, the royal governor of New Jersey, was a Loyalist. His Patriot father removed him from his will and cut off contact. Loyalists, also called Tories, saw the Revolution as treason, and many lived in seaport cities and the Carolinas. Patriots wanted to separate from Britain to protect their liberty and to become citizens instead of subjects of a king. A middle group tried to stay neutral, but most were eventually pushed to choose a side. Some Americans switched sides four or five times.":"كانت الثورة الأمريكية حربًا أهلية أيضًا. فقد فرّقت بين العائلات والأصدقاء والبلدات والمدن. وكان ويليام (William)، ابن بنجامين فرانكلين (Benjamin Franklin) والحاكم الملكي لنيوجيرسي (New Jersey)، من الموالين (Loyalists). فحذفه أبوه الوطني (Patriot) من وصيته وقطع الاتصال به. ورأى الموالون، ويُسمَّون أيضًا التوريين (Tories)، أن الثورة خيانة، وكان كثير منهم يعيشون في مدن الموانئ وفي الكارولينا (Carolinas). وأراد الوطنيون الانفصال عن بريطانيا لحماية حريتهم ولكي يصبحوا مواطنين بدل أن يكونوا رعايا لملك. وحاولت مجموعة وسطى أن تبقى محايدة، لكن معظمها دُفع في النهاية إلى اختيار جانب. وبدّل بعض الأمريكيين جانبهم أربع أو خمس مرات.","The Americans":"الأمريكيون","The Barrel":"البرميل","The British":"البريطانيون","The British surrender at Saratoga":"البريطانيون يستسلمون في ساراتوغا (Saratoga)","The Clue Card tells about a royal governor of Virginia who offered freedom to enslaved people who joined British troops. A secret message gives his title and last name. Each letter in the message was moved 3 steps forward in the alphabet. Decode it.":"تحكي بطاقة القرائن عن حاكم ملكي لفرجينيا (Virginia) عرض الحرية على المستعبَدين الذين ينضمون إلى القوات البريطانية. وتعطي رسالة سرية لقبه واسم عائلته. كل حرف في الرسالة نُقل 3 خطوات إلى الأمام في الأبجدية. فكّ تشفيرها.","The Porthole":"الكوّة","The Rope Coil":"لفّة الحبل","The Sea Chest":"صندوق البحّار","The Ship’s Bell":"جرس السفينة","The Treaty of Paris is signed":"توقيع معاهدة باريس (Treaty of Paris)","The army would cost the states nothing":"لن يكلّف الجيش الولايات شيئًا","The clock starts when you press the button. Most students finish in about 20 minutes.":"يبدأ العدّاد عندما تضغط الزر. يُنهي معظم الطلاب في نحو 20 دقيقة.","The code has 5 digits. Fill every box.":"الرمز مكوّن من 5 أرقام. املأ كل المربعات.","The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.":"لم يُفتح الباب. تحقق من الأرقام تحت كل قفل، واكتبها بالترتيب: رقم القفل 1 أولًا.","The door is open!":"الباب مفتوح!","The door swings open!":"ينفتح الباب على مصراعيه!","The middle group":"المجموعة الوسطى","The order is Trenton (1776), Saratoga (1777), Yorktown (1781), then the Treaty of Paris (1783).":"الترتيب هو ترينتون (Trenton) (1776)، ثم ساراتوغا (Saratoga) (1777)، ثم يوركتاون (Yorktown) (1781)، ثم معاهدة باريس (Treaty of Paris) (1783).","The secret message names the governor in the Clue Card. Use the decoder key to spell it, one letter at a time. His title is the first word.":"الرسالة السرية تسمّي الحاكم المذكور في بطاقة القرائن. استخدم مفتاح فك التشفير لتهجئته حرفًا حرفًا. ولقبه هو الكلمة الأولى.","The ship’s captain locked the cabin door for the night. A round porthole, a sea chest, a ship’s bell, a coil of rope, and a wooden barrel sit in the room. The door has <b>5 locks<\/b>. Each lock matches one big idea from Lesson 3. Solve them all to find the <b>5-digit exit code<\/b>.":"أقفل قبطان السفينة باب المقصورة للّيل. وفي الغرفة كوّة دائرية، وصندوق بحّار، وجرس سفينة، ولفّة حبل، وبرميل خشبي. وللباب <b>5 أقفال<\/b>. كل قفل يرتبط بفكرة كبيرة واحدة من الدرس 3. حُلّها كلها لتجد <b>رمز الخروج المكوّن من 5 أرقام<\/b>.","The war changed life in different ways for different people. In November 1775, Virginia’s royal governor, who owned fifty-seven enslaved people himself, announced that enslaved people who joined British troops would be free. Norton calls this the sharpest irony of the Revolution. About 5,000 African Americans fought on the Patriot side, 15,000 to 20,000 people of African descent were with the British, and several hundred thousand enslaved people seized their freedom. Women could not vote or hold office, but the war let them manage farms, handle supplies, and serve as messengers or spies. The Spanish governor Bernardo de Gálvez led a multicultural force that took Mobile and Pensacola from the British. Many White Americans used the war to destroy and displace Indigenous people, and the Treaty of Paris gave away their lands.":"غيّرت الحرب الحياة بطرق مختلفة لأشخاص مختلفين. ففي نوفمبر 1775، أعلن الحاكم الملكي لفرجينيا (Virginia)، وكان هو نفسه مالكًا لسبعة وخمسين شخصًا مستعبَدًا، أن المستعبَدين الذين ينضمون إلى القوات البريطانية سيصبحون أحرارًا. ويصف نورتون (Norton) هذا بأنه أشد مفارقات الثورة حدّة. وقاتل نحو 5,000 أمريكي من أصل أفريقي في صف الوطنيين، وكان مع البريطانيين من 15,000 إلى 20,000 شخص من أصل أفريقي، وانتزع عدة مئات الآلاف من المستعبَدين حريتهم. ولم تكن النساء يستطعن التصويت أو تولّي المناصب، لكن الحرب أتاحت لهن إدارة المزارع وتدبير الإمدادات والعمل رسولات أو جاسوسات. وقاد الحاكم الإسباني برناردو دي غالفيز (Bernardo de Gálvez) قوة متعددة الثقافات أخذت موبايل (Mobile) وبينساكولا (Pensacola) من البريطانيين. واستغل كثير من الأمريكيين البيض الحرب لتدمير السكان الأصليين وتهجيرهم، وأعطت معاهدة باريس (Treaty of Paris) أراضيهم لغيرهم.","The war was an engine for political change. Americans chose a republican ideology instead of kings and nobles. The United States was a <b>representative democracy<\/b>, where voters elect legislators to decide for them. At first, only property-holding White men governed. The new state constitutions had elected governors and a bill of rights. After 1776, rules about property for voting were lowered. In four states, any male taxpayer could vote. The Articles of Confederation, approved in 1781, had no president and no power to tax. In 1786, the Virginia Statute of Religious Freedom said that no one could be forced to support any religion. Norton adds that the war did not greatly change the status of enslaved Black people or Indigenous Americans.":"كانت الحرب محرّكًا للتغيير السياسي. فاختار الأمريكيون أيديولوجيا جمهورية بدل الملوك والنبلاء. وكانت الولايات المتحدة <b>ديمقراطية تمثيلية<\/b>، ينتخب فيها الناخبون المشرّعين ليقرروا نيابةً عنهم. وفي البداية، كان الحكم للرجال البيض الذين يملكون ممتلكات فقط. وكانت للدساتير الجديدة للولايات حكّام منتخبون ووثيقة حقوق. وبعد عام 1776، خُفّضت قواعد الملكية الخاصة بالتصويت. وفي أربع ولايات، كان يحق لأي رجل يدفع الضرائب أن يصوّت. أما مواد الكونفدرالية (Articles of Confederation)، التي أُقرّت عام 1781، فلم يكن فيها رئيس ولا سلطة لفرض الضرائب. وفي عام 1786، نصّ قانون فرجينيا للحرية الدينية (Virginia Statute of Religious Freedom) على أنه لا يجوز إجبار أحد على دعم أي دين. ويضيف نورتون (Norton) أن الحرب لم تغيّر كثيرًا وضع السود المستعبَدين أو الأمريكيين الأصليين.","The word starts with R and has 14 letters. It ends with “tive.”":"تبدأ الكلمة بحرف R وفيها 14 حرفًا. وتنتهي بـ “tive”.","They all fought for the king of France":"كانوا جميعًا يقاتلون من أجل ملك فرنسا","They were born in the colonies":"وُلدوا في المستعمرات","They were hired from Spain":"تم استئجارهم من إسبانيا","Time":"الوقت","Tried to stay neutral but were eventually pushed to choose":"حاولوا البقاء على الحياد لكنهم دُفعوا في النهاية إلى الاختيار","Type the answer in English.":"اكتب الإجابة بالإنجليزية.","Type the answer in English. Use the digits 0-9.":"اكتب الإجابة بالإنجليزية. استخدم الأرقام 0-9.","Type the exit code":"اكتب رمز الخروج","Type your answer first.":"اكتب إجابتك أولًا.","Type your answer here...":"اكتب إجابتك هنا...","UNIT 1 · COLONIES, REVOLUTION, AND CONSTITUTION | CPUSH | DANIEL GARZA, M.A.":"الوحدة 1 · المستعمرات والثورة والدستور | CPUSH | DANIEL GARZA, M.A.","Unscramble the letters to fill the blank.":"رتّب الأحرف لتملأ الفراغ.","Wanted to be citizens, not subjects of a king":"أرادوا أن يكونوا مواطنين لا رعايا لملك","Washington crosses the Delaware and wins at Trenton":"واشنطن (Washington) يعبر نهر ديلاوير (Delaware) ويفوز في ترينتون (Trenton)","Which lock was hardest, and what did you learn that you did not know before?":"أي قفل كان الأصعب، وماذا تعلمت ولم تكن تعرفه من قبل؟","Which side was more successful at getting Indigenous people to fight for it?":"أي طرف كان أكثر نجاحًا في إقناع السكان الأصليين بالقتال إلى جانبه؟","Why did Americans call the German soldiers hired by Britain “Hessians”?":"لماذا سمّى الأمريكيون الجنود الألمان الذين استأجرتهم بريطانيا «الهيسيين (Hessians)»؟","Why did Washington want a Continental Army?":"لماذا أراد واشنطن (Washington) جيشًا قاريًا؟","William Franklin":"ويليام فرانكلين (William Franklin)","Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.":"اكتب من 3 إلى 4 جمل. اذكر القفل واستخدم معلومة واحدة من بطاقة القرائن الخاصة به. يمكنك كتابة هذا حتى لو لم تهرب.","You are locked in the captain’s cabin.":"أنت محبوس في مقصورة القبطان.","You escaped and wrote your Debrief. Ready to submit.":"لقد هربت وكتبت ملخصك الختامي. أنت جاهز للتسليم.","You escaped! Write your Debrief, then download your file to submit.":"لقد هربت! اكتب ملخصك الختامي، ثم نزّل ملفك لتسليمه.","Your answer":"إجابتك","Your time:":"وقتك:","digit":"رقم","Unlocked. Your digit is 2. Your answer: Loyalists (Tories) = Sided with Britain and saw the Revolution as treason; Patriots = Wanted to be citizens, not subjects of a king; William Franklin = A Loyalist governor whose Patriot father, Benjamin Franklin, cut off contact; The middle group = Tried to stay neutral but were eventually pushed to choose":"تم الفتح. رقمك هو 2. إجابتك: الموالون (التوريون) = وقفوا مع بريطانيا ورأوا أن الثورة خيانة; الوطنيون = أرادوا أن يكونوا مواطنين لا رعايا لملك; ويليام فرانكلين (William Franklin) = حاكم من الموالين قطع والده الوطني، بنجامين فرانكلين (Benjamin Franklin)، الاتصال به; المجموعة الوسطى = حاولوا البقاء على الحياد لكنهم دُفعوا في النهاية إلى الاختيار","Unlocked. Your digit is 4. Your answer: Most came from the German state of Hesse-Cassel; It could only ask the states for money; Militiamen alone could not win the war; The British":"تم الفتح. رقمك هو 4. إجابتك: جاء معظمهم من ولاية هيسن-كاسل (Hesse-Cassel) الألمانية; كان يستطيع فقط أن يطلب المال من الولايات; لم يكن رجال الميليشيا وحدهم قادرين على كسب الحرب; البريطانيون","Unlocked. Your digit is 8. Your answer: Washington crosses the Delaware and wins at Trenton &gt; The British surrender at Saratoga &gt; Cornwallis surrenders at Yorktown &gt; The Treaty of Paris is signed":"تم الفتح. رقمك هو 8. إجابتك: واشنطن (Washington) يعبر نهر ديلاوير (Delaware) ويفوز في ترينتون (Trenton) &gt; البريطانيون يستسلمون في ساراتوغا (Saratoga) &gt; كورنواليس (Cornwallis) يستسلم في يوركتاون (Yorktown) &gt; توقيع معاهدة باريس (Treaty of Paris)"},"patterns":[{"re":"^Still needed: first name, last name, and period\\.$","es":"Todavía falta: nombre, apellido y período.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة."},{"re":"^LOCK (\\d)$","es":"Cand. $1","ar":"القفل $1"},{"re":"^LOCK (\\d) · CORE OBJECTIVE (\\d)$","es":"CANDADO $1 · OBJETIVO PRINCIPAL $2","ar":"القفل $1 · الهدف الأساسي $2"},{"re":"^Hint (\\d):$","es":"Pista $1:","ar":"تلميح $1:"},{"re":"^Exit code digit (\\d)$","es":"Dígito $1 del código de salida","ar":"رقم رمز الخروج $1"},{"re":"^Click! Lock (\\d) is open\\. Your digit is (\\d)\\.$","es":"¡Clic! El Candado $1 está abierto. Tu dígito es $2.","ar":"نقرة! القفل $1 مفتوح. رقمك هو $2."},{"re":"^5 of 5 locks opened with (\\d+) tries and (\\d+) hints\\.$","es":"Abriste 5 de 5 candados con $1 intentos y $2 pistas.","ar":"فتحت 5 أقفال من 5 بعد $1 من المحاولات و$2 من التلميحات."},{"re":"^Done! File downloaded: (.*)\\. Upload it to Canvas\\.$","es":"¡Listo! Se descargó el archivo: $1. Súbelo a Canvas.","ar":"تم! تم تنزيل الملف: $1. ارفعه إلى Canvas."},{"re":"^Your file downloaded and is marked INCOMPLETE \\(you have not escaped\\)\\. Upload it to Canvas: (.*)$","es":"Tu archivo se descargó y está marcado INCOMPLETO (todavía no escapas). Súbelo a Canvas: $1","ar":"تم تنزيل ملفك وهو مُسجَّل «غير مكتمل» INCOMPLETE (لم تهرب بعد). ارفعه إلى Canvas: $1"},{"re":"^Unlocked\\. Your digit is (\\d)\\. Your answer: (.*)$","es":"Desbloqueado. Tu dígito es $1. Tu respuesta: $2","ar":"تم الفتح. رقمك هو $1. إجابتك: $2"},{"re":"^LOCK (\\d) · CORE OBJECTIVE (\\d+)$","es":"CANDADO $1 · OBJETIVO PRINCIPAL $2","ar":"القفل $1 · الهدف الأساسي $2"},{"re":"^LOCK (\\d) · CORE OBJECTIVES (\\d+) AND (\\d+)$","es":"CANDADO $1 · OBJETIVOS PRINCIPALES $2 Y $3","ar":"القفل $1 · الأهداف الأساسية $2 و$3"},{"re":"^Tap all (\\d) events first, in order\\.$","es":"Primero toca los $1 sucesos, en orden.","ar":"المس الأحداث الـ $1 كلها أولًا، بالترتيب."}]}</script>
+<script>
+/* Supplement language switch (English / Espanol / Arabic). Works on pages whose text is rendered by JS:
+   a MutationObserver translates text as it appears. Data: <script type="application/json" id="sp-i18n">
+   {"langs":["en","es","ar"],"default":"en","es":{englishHTML:translation},"ar":{...},"patterns":[{"re":"^(\\d+) of (\\d+)$","es":"$1 de $2","ar":"..."}]}
+   Keys are the English text exactly as it sits in the page (innerHTML, spaces collapsed).
+   Helpers: spSeen() english strings seen so far; spMissing() strings with no translation in the current language;
+   spSetLang(l); spTr(s) translate a string (used for confirm/alert); spAscii(s) plain-ASCII name for file names. */
+(function () {
+  var node = document.getElementById('sp-i18n');
+  var D = node ? JSON.parse(node.textContent) : { langs: ['en'], patterns: [] };
+  var INLINE = { B:1,I:1,EM:1,STRONG:1,SPAN:1,A:1,BR:1,SMALL:1,SUP:1,SUB:1,U:1,MARK:1,BDI:1,TSPAN:1,CODE:1 };
+  var SKIP = 'script,style,textarea,input,.sp-lang,.sp-nt,[translate="no"]';
+  var WORD = /[A-Za-z\u00C0-\u024F\u0600-\u06FF]{2}|e\.g\./;
+  var LANG = 'en', REC = new WeakMap(), SEEN = {}, MISS = {};
+  (D.patterns || []).forEach(function (p) { try { p._re = new RegExp(p.re); } catch (e) {} });
+  function norm(s) { return String(s).replace(/\s+/g, ' ').trim(); }
+  function tr(src) {
+    if (LANG === 'en') return null;
+    var t = D[LANG] && D[LANG][src];
+    if (t) return t;
+    var P = D.patterns || [];
+    for (var i = 0; i < P.length; i++) {
+      var m = P[i]._re && P[i]._re.exec(src);
+      if (m && P[i][LANG]) return P[i][LANG].replace(/\$(\d+)/g, function (_, n) { return m[+n] || ''; });
+    }
+    return null;
+  }
+  window.spTr = function (s) { var t = tr(norm(s)); return t ? t.replace(/<[^>]+>/g, '') : s; };
+  function isInline(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling)
+      if (c.nodeType === 1 && (!INLINE[c.tagName.toUpperCase()] || c.matches(SKIP))) return false;
+    return true;
+  }
+  function directText(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling) if (c.nodeType === 3 && WORD.test(c.nodeValue)) return true;
+    return false;
+  }
+  function cur(s) { return s.nodeType === 1 ? s.innerHTML : s.nodeValue; }
+  function put(s, v) { if (s.nodeType === 1) s.innerHTML = v; else s.nodeValue = v; }
+  function handle(s) {
+    var r = REC.get(s), c = cur(s);
+    if (!(r && c === r.wrote)) { r = { en: c, wrote: c }; REC.set(s, r); }
+    var src = norm(r.en), target = r.en;
+    if (WORD.test(src)) {
+      SEEN[src] = 1;
+      if (LANG !== 'en') {
+        var t = tr(src);
+        if (t) {
+          target = s.nodeType === 1 ? t : (r.en.match(/^\s*/)[0] + t + r.en.match(/\s*$/)[0]);
+          delete MISS[src];
+        } else MISS[src] = 1;
+      }
+    }
+    if (c !== target) put(s, target);
+    r.wrote = cur(s);
+  }
+  var ATTRS = ['placeholder', 'alt', 'aria-label', 'title'];
+  function attrs(root) {
+    var els = root.querySelectorAll ? root.querySelectorAll('[placeholder],[alt],[aria-label],[title]') : [];
+    var list = [].slice.call(els); if (root.matches && root.matches('[placeholder],[alt],[aria-label],[title]')) list.push(root);
+    list.forEach(function (el) {
+      if (el.closest && el.closest('.sp-lang,.sp-nt,[translate="no"],script,style')) return;
+      var rec = el.__spa || (el.__spa = {});
+      ATTRS.forEach(function (a) {
+        var v = el.getAttribute(a); if (v == null) return;
+        var r = rec[a];
+        if (!(r && v === r.wrote)) { r = rec[a] = { en: v, wrote: v }; }
+        var src = norm(r.en); if (!WORD.test(src)) return;
+        SEEN[src] = 1;
+        var t = LANG === 'en' ? null : tr(src);
+        if (LANG !== 'en' && !t) MISS[src] = 1;
+        var target = t ? t.replace(/<[^>]+>/g, '') : r.en;
+        if (v !== target) el.setAttribute(a, target);
+        r.wrote = el.getAttribute(a);
+      });
+    });
+  }
+  function walk(root) {
+    if (root.nodeType === 3) { if (WORD.test(root.nodeValue) && !(root.parentNode && root.parentNode.closest && root.parentNode.closest(SKIP))) handle(root); return; }
+    if (root.nodeType !== 1) return;
+    (function w(el) {
+      if (el.matches(SKIP)) return;
+      if (el !== document.body && directText(el) && isInline(el)) { handle(el); return; }
+      for (var c = el.firstChild; c; c = c.nextSibling) {
+        if (c.nodeType === 1) w(c); else if (c.nodeType === 3 && WORD.test(c.nodeValue)) handle(c);
+      }
+    })(root);
+    attrs(root);
+  }
+  var TITLE = { en: document.title, wrote: document.title };
+  function title() {
+    if (document.title !== TITLE.wrote) TITLE = { en: document.title, wrote: document.title };
+    var t = LANG === 'en' ? null : tr(norm(TITLE.en));
+    document.title = t ? t.replace(/<[^>]+>/g, '') : TITLE.en; TITLE.wrote = document.title;
+  }
+  function inl(e) { return e.nodeType === 1 && !!INLINE[e.tagName.toUpperCase()]; }
+  var mo = new MutationObserver(function (muts) {
+    var todo = [];
+    muts.forEach(function (m) {
+      if (m.type === 'childList') { for (var i = 0; i < m.addedNodes.length; i++) todo.push(m.addedNodes[i]); todo.push(m.target); }
+      else todo.push(m.target);
+    });
+    todo.forEach(function (n) {
+      var el = n.nodeType === 1 ? n : n.parentNode;
+      if (!el || el.nodeType !== 1 || !document.body.contains(el)) return;
+      while (el !== document.body && el.parentNode && el.parentNode.nodeType === 1 && inl(el) && inl(el.parentNode)) el = el.parentNode;
+      if (el.parentNode && el.parentNode.nodeType === 1 && inl(el.parentNode) && el.parentNode !== document.body) el = el.parentNode;
+      walk(el);
+    });
+    mo.takeRecords();
+  });
+  var AR = { 'ا':'a','أ':'a','إ':'i','آ':'a','ب':'b','ت':'t','ث':'th','ج':'j','ح':'h','خ':'kh','د':'d','ذ':'dh','ر':'r','ز':'z','س':'s','ش':'sh','ص':'s','ض':'d','ط':'t','ظ':'z','ع':'a','غ':'gh','ف':'f','ق':'q','ك':'k','ل':'l','م':'m','ن':'n','ه':'h','و':'w','ي':'y','ى':'a','ة':'a','ئ':'y','ؤ':'w' };
+  window.spAscii = function (s) {
+    s = String(s); if (s.normalize) s = s.normalize('NFD').replace(/[̀-ًͯ-ٰٟ]/g, '');
+    return s.replace(/[ء-ي]/g, function (c) { return AR[c] !== undefined ? AR[c] : ''; }).replace(/ñ/g, 'n').replace(/Ñ/g, 'N');
+  };
+  window.spSeen = function () { return Object.keys(SEEN); };
+  window.spMissing = function () { return Object.keys(MISS); };
+  window.spLang = function () { return LANG; };
+  window.spSetLang = function (l) {
+    if ((D.langs || ['en']).indexOf(l) < 0) l = 'en';
+    LANG = l; MISS = {};
+    var h = document.documentElement; h.lang = l; h.dir = l === 'ar' ? 'rtl' : 'ltr';
+    mo.disconnect(); walk(document.body); title(); mo.takeRecords();
+    mo.observe(document.body, { childList: true, subtree: true, characterData: true });
+    document.querySelectorAll('.sp-lang button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === l)); });
+    try { localStorage.setItem('sp_lang', l); } catch (e) {}
+    try { var u = new URL(location.href); if (l === 'en') u.searchParams.delete('lang'); else u.searchParams.set('lang', l); history.replaceState(null, '', u.toString()); } catch (e) {}
+    try { document.dispatchEvent(new CustomEvent('splangchange', { detail: l })); } catch (e) {}
+  };
+  var _c = window.confirm, _a = window.alert;
+  window.confirm = function (m) { return _c.call(window, window.spTr(m)); };
+  window.alert = function (m) { return _a.call(window, window.spTr(m)); };
+  document.querySelectorAll('.sp-lang button').forEach(function (b) { b.addEventListener('click', function () { window.spSetLang(b.getAttribute('data-lang')); }); });
+  var start = D['default'] || 'en';
+  try { start = new URL(location.href).searchParams.get('lang') || localStorage.getItem('sp_lang') || start; } catch (e) {}
+  window.spSetLang(start);
+})();
+
+</script><!--/sp-i18n-->
+</body>
+</html>

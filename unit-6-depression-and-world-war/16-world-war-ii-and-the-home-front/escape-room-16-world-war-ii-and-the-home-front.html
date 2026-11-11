@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Escape Room 16 · World War II and the Home Front</title>
+<style>
+:root{--bg:#47361F;--txt:#F4F0EB;--a1:#68502F;--a2:#4B90D2;--hl:#8EB8E1;--glass:rgba(244,240,235,.07);--glassb:rgba(244,240,235,.2);--dim:#D6CCBD;--ok:#8FD3A8}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#5B4528 0%,#47361F 60%) fixed;background-color:var(--bg);color:var(--txt);font:17px/1.55 "Segoe UI",system-ui,-apple-system,Verdana,sans-serif;min-height:100vh}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px 40px}
+.glass{background:var(--glass);border:1px solid var(--glassb);border-radius:16px;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+header.hero{padding:30px 0 12px;border-bottom:3px solid var(--a2)}
+.eyebrow{font-size:13px;letter-spacing:.16em;font-weight:700;color:var(--hl)}
+h1{margin:.15em 0 .05em;font-size:clamp(28px,6vw,40px);line-height:1.12}
+.sub{margin:0;font-weight:600;color:var(--dim)}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 4px}
+.meta label{flex:1 1 170px;font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--dim)}
+input[type=text],textarea,select{display:block;width:100%;margin-top:4px;padding:10px 12px;border:1px solid var(--glassb);border-radius:10px;background:rgba(37,28,16,.55);color:var(--txt);font:inherit;font-size:16px}
+input[type=text]:focus,textarea:focus,select:focus,button:focus-visible{outline:3px solid var(--hl);outline-offset:1px}
+input.bad{border-color:var(--a2);box-shadow:0 0 0 2px var(--a2)}
+textarea{min-height:120px;resize:vertical}
+.howto{margin:14px 0;padding:14px 16px;font-size:16px}
+.howto ol{margin:6px 0 0;padding-left:22px}
+.scene{margin:14px 0;padding:8px;text-align:center}
+.scene svg{width:100%;height:auto;display:block;border-radius:12px}
+.bar{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;padding:8px 12px;margin:10px 0;font-weight:700;font-size:15px;background:rgba(71,54,31,.92);border:1px solid var(--glassb);border-radius:12px}
+.bar span b{color:var(--hl)}
+.btn{font:inherit;font-size:16px;font-weight:700;padding:11px 18px;border-radius:12px;border:2px solid var(--hl);background:transparent;color:var(--txt);cursor:pointer;min-height:44px}
+.btn:hover{background:rgba(142,184,225,.18)}
+.btn.primary{background:var(--hl);color:#47361F;border-color:var(--hl)}
+.btn.primary:hover{background:#B4CFEA}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.btn.small{padding:8px 14px;font-size:15px;min-height:40px}
+.intro{padding:20px;text-align:center}
+.intro p{margin:.4em 0}
+.lock{margin:12px 0;overflow:hidden}
+.lock>button.lh{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:12px;width:100%;padding:14px 16px;cursor:pointer}
+.lock>button.lh:focus-visible{outline:3px solid var(--hl);outline-offset:-3px}
+.lock.locked>button.lh{cursor:not-allowed;opacity:.55}
+.lk{flex:none;width:44px;height:44px}
+.lk .sh{transition:transform .5s cubic-bezier(.3,1.6,.5,1);transform-origin:center}
+.lock.solved .lk .sh{transform:translateY(-6px) rotate(-30deg);transform-origin:10px 14px}
+.lock.solved .lk .bd{fill:var(--hl)}
+.lt{flex:1}
+.lt small{display:block;font-size:12px;letter-spacing:.12em;font-weight:700;color:var(--hl)}
+.lt strong{font-size:19px}
+.dg{flex:none;min-width:42px;height:42px;border-radius:10px;border:2px solid var(--hl);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;background:rgba(37,28,16,.55)}
+.lb{padding:0 16px 16px;display:none}
+.lock.open .lb{display:block}
+.objline{font-size:14px;color:var(--dim);margin:0 0 10px}
+.card{background:rgba(244,240,235,.1);border-left:6px solid var(--a2);border-radius:10px;padding:12px 14px;margin:8px 0 12px}
+.card h4{margin:0 0 4px;font-size:13px;letter-spacing:.12em;color:var(--hl)}
+.card p{margin:.3em 0}
+.card .src{font-size:13px;color:var(--dim)}
+.prompt{font-weight:700;margin:10px 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0}
+.chip{font:inherit;font-size:16px;padding:10px 14px;border-radius:12px;border:2px solid var(--glassb);background:rgba(37,28,16,.55);color:var(--txt);cursor:pointer;min-height:44px;text-align:left}
+.chip.sel{border-color:var(--hl);background:rgba(142,184,225,.2)}
+.chip .n{display:inline-block;min-width:24px;height:24px;line-height:24px;border-radius:12px;background:var(--hl);color:#47361F;font-weight:800;text-align:center;margin-right:8px}
+.mrow{margin:8px 0}
+.mrow label{font-weight:700;display:block}
+fieldset{border:1px solid var(--glassb);border-radius:10px;margin:8px 0;padding:8px 12px}
+legend{font-weight:700;padding:0 6px}
+.opt{display:flex;align-items:center;gap:10px;padding:6px 0;min-height:40px;cursor:pointer}
+.opt input{width:22px;height:22px;accent-color:#8EB8E1;flex:none}
+.cipher{font:700 24px/1.3 "Courier New",monospace;letter-spacing:.14em;background:rgba(37,28,16,.65);padding:12px;border-radius:10px;border:1px dashed var(--hl);word-break:break-word;text-align:center}
+.key{display:grid;grid-template-columns:repeat(13,1fr);gap:2px;margin:10px 0;font:700 14px/1.2 "Courier New",monospace;text-align:center}
+.key div{padding:3px 0;border-radius:4px;background:rgba(244,240,235,.08)}
+.key .c{color:var(--hl)}
+.scr{font:800 30px/1.2 "Courier New",monospace;letter-spacing:.3em;text-align:center;background:rgba(37,28,16,.65);padding:10px;border-radius:10px;border:1px dashed var(--hl)}
+.row{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0;align-items:center}
+.fb{margin:8px 0;padding:10px 12px;border-radius:10px;display:none;font-weight:600}
+.fb.show{display:block}
+.fb.nudge{background:rgba(75,144,210,.18);border:1px solid var(--a2)}
+.fb.good{background:rgba(143,211,168,.16);border:1px solid var(--ok);color:#DDF5E6}
+.hints{margin:6px 0}
+.hint{background:rgba(142,184,225,.14);border:1px dashed var(--hl);border-radius:10px;padding:8px 12px;margin:6px 0;font-size:16px}
+.hint b{color:var(--hl)}
+.exit{margin:16px 0;padding:18px;text-align:center}
+.exit.locked{opacity:.55}
+.exit h2,.esc h2,.debrief h2{margin:.1em 0 .3em}
+.codebox{display:flex;justify-content:center;gap:8px;margin:12px 0}
+.codebox input{width:52px;height:60px;text-align:center;font:800 30px "Courier New",monospace;padding:0;margin:0}
+.esc{margin:16px 0;padding:22px;text-align:center;display:none;border:2px solid var(--hl)}
+.esc.show{display:block}
+.esc .big{overflow-wrap:anywhere;font-size:clamp(30px,9vw,64px);font-weight:900;letter-spacing:.14em;color:var(--hl);text-shadow:0 0 24px rgba(142,184,225,.6);animation:pop .8s cubic-bezier(.3,1.6,.5,1)}
+.esc .time{font-size:26px;font-weight:800}
+.debrief{margin:16px 0;padding:16px}
+.actions{margin:16px 0;padding:16px}
+.status{font-weight:700;margin-bottom:10px}
+.msg{display:none;margin-top:10px;padding:10px 12px;border-radius:10px;background:rgba(143,211,168,.16);border:1px solid var(--ok)}
+.msg.err{background:rgba(75,144,210,.2);border-color:var(--a2)}
+.link{all:unset;cursor:pointer;color:var(--dim);text-decoration:underline;font-size:14px;margin-top:10px;display:inline-block}
+.link:focus-visible{outline:3px solid var(--hl)}
+footer{text-align:center;font-size:12px;letter-spacing:.1em;font-weight:700;color:var(--dim);padding:20px 8px 30px;border-top:1px solid var(--glassb);margin-top:20px}
+.ennote{margin:.4em 0 0;font-size:14px;font-weight:700;color:var(--dim)}
+.exit .ennote{text-align:center}
+.hidden{display:none!important}.lock,.exit,.esc{scroll-margin-top:64px}
+.pop{animation:pop .7s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pop{0%{transform:scale(.2);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes tap{0%,100%{transform:rotate(0)}50%{transform:rotate(9deg)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.shake{animation:shake .35s}
+.wheel{transform-box:view-box;transform-origin:276px 86px}
+.wheel.spin{animation:tap .5s ease-in-out 3}
+.plock .sh{transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
+.plock.open .sh{transform:translateY(-7px)}
+.plock.open .bd{fill:#8EB8E1}
+#door{transform-origin:150px 20px;transition:transform 1.4s ease-in-out}
+.escaped #door{transform:scaleX(.1)}
+#glow{opacity:.15;transition:opacity 1.4s}
+.escaped #glow{opacity:1}
+html[dir="rtl"] .chip{text-align:right}
+html[dir="rtl"] .chip .n{margin-right:0;margin-left:8px}
+html[dir="rtl"] .card{border-left:0;border-right:6px solid var(--a2)}
+html[dir="rtl"] .howto ol{padding-left:0;padding-right:22px}
+html[dir="rtl"] .esc,html[dir="rtl"] .exit,html[dir="rtl"] .intro{text-align:center}
+html[dir="rtl"] .cipher,html[dir="rtl"] .scr,html[dir="rtl"] .key{direction:ltr}
+html[dir="rtl"] .scr{letter-spacing:.3em!important}
+html[dir="rtl"] .cipher{letter-spacing:.14em!important}
+html[dir="rtl"] .key{letter-spacing:0!important}
+html[dir="rtl"] .card .src{direction:ltr;text-align:left}
+html[dir="rtl"] .hint,html[dir="rtl"] .fb,html[dir="rtl"] .msg,html[dir="rtl"] .objline{text-align:start}
+html[dir="rtl"] .lock>button.lh{text-align:start}
+html[dir="rtl"] .lb,html[dir="rtl"] .actions{text-align:start}
+html[dir="rtl"] .bar{direction:rtl}
+html[dir="rtl"] .tt{unicode-bidi:plaintext}
+@media(max-width:520px){body{font-size:16px}.chip{width:100%}.key{font-size:12px;gap:1px}.codebox input{width:46px;height:54px}.dg{min-width:38px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{.bar,.actions button{display:none}}
+/*sp-i18n-css*/
+.sp-lang-bar{display:flex;justify-content:flex-end;padding:8px 12px 0;position:relative;z-index:5}
+.sp-lang{display:inline-flex;gap:2px;padding:3px;border-radius:10px;background:rgba(255,255,255,.88);border:1px solid rgba(0,0,0,.18);font-family:system-ui,"Segoe UI",Tahoma,Arial,sans-serif}
+.sp-lang button{border:0;background:transparent;color:#222;font:600 13px/1 system-ui,"Segoe UI",Tahoma,Arial,sans-serif;padding:7px 11px;border-radius:7px;cursor:pointer}
+.sp-lang button[aria-pressed="true"]{background:#222;color:#fff}
+.sp-lang button:focus-visible{outline:3px solid #2a6df4;outline-offset:1px}
+textarea,input,select{unicode-bidi:plaintext}
+html[lang="ar"] body,html[lang="ar"] button,html[lang="ar"] textarea,html[lang="ar"] input,html[lang="ar"] select{font-family:"Segoe UI",Tahoma,"Noto Sans Arabic","Arial",system-ui,sans-serif}
+html[lang="ar"] body{line-height:1.8}
+html[lang="ar"] *{letter-spacing:0!important}
+html[dir="rtl"] textarea,html[dir="rtl"] input{text-align:start}
+@media print{.sp-lang-bar{display:none}}
+/*/sp-i18n-css*/
+</style>
+</head>
+<body>
+<!--sp-bar--><div class="sp-lang-bar"><div class="sp-lang" role="group" aria-label="Language / Idioma / اللغة"><button type="button" data-lang="en" lang="en" aria-pressed="true">English</button><button type="button" data-lang="es" lang="es" aria-pressed="false">Español</button><button type="button" data-lang="ar" lang="ar" aria-pressed="false">العربية</button></div></div><!--/sp-bar-->
+<div class="wrap">
+<header class="hero">
+  <div class="eyebrow">1933-1946</div>
+  <h1>Escape the Map Room</h1>
+  <p class="sub">World War II and the Home Front</p>
+  <div class="meta">
+    <label>FIRST NAME *<input id="f_first" type="text" autocomplete="given-name"></label>
+    <label>LAST NAME *<input id="f_last" type="text" autocomplete="family-name"></label>
+    <label>PERIOD *<input id="f_period" type="text" inputmode="numeric" maxlength="12" placeholder="e.g. 3"></label>
+  </div>
+</header>
+
+<div class="howto glass"><b>How to escape:</b>
+<ol>
+<li>Open each lock in order. Read the <b>Clue Card</b>. The answer is in the card.</li>
+<li>Solve the puzzle to open the lock and reveal one digit.</li>
+<li>If you get stuck, press <b>Hint</b>. Hints are free, but your teacher can see how many you used.</li>
+<li>Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.</li>
+</ol></div>
+
+<div class="scene glass" id="scene">
+<svg viewBox="0 0 600 270" role="img" aria-label="A map room from the war years at night. On the left, a wall map with pins and a dotted route hangs above a table with a globe on a stand, and rolled maps sit on the floor. On the right, a clock and a framed compass rose hang above a chest of map drawers with a radio set on top. The door has a MAP ROOM sign and five padlocks in a row. Under each padlock is a window for one digit of the exit code.">
+<defs>
+<pattern id="brick" width="40" height="270" patternUnits="userSpaceOnUse"><rect width="40" height="270" fill="#372A18"/><path d="M0 0V270" stroke="#F4F0EB" stroke-opacity=".12" fill="none"/><path d="M20 0V270" stroke="#F4F0EB" stroke-opacity=".05" fill="none"/></pattern>
+<radialGradient id="glowg" cx="50%" cy="50%" r="60%"><stop offset="0" stop-color="#F4F0EB"/><stop offset="1" stop-color="#8EB8E1"/></radialGradient>
+</defs>
+<rect width="600" height="270" fill="url(#brick)"/>
+<rect y="236" width="600" height="34" fill="#2C2113"/>
+<g stroke="#D6CCBD" stroke-opacity=".35" stroke-width="2"><path d="M0 248H600M0 260H600"/><path d="M60 236V248M180 236V248M300 236V248M420 236V248M540 236V248M120 248V260M240 248V260M360 248V260M480 248V260M600 248V260"/></g>
+<g stroke="#D6CCBD" stroke-opacity=".5" stroke-width="2" fill="none"><path d="M0 14Q75 30 150 18"/><path d="M450 18Q525 30 600 14"/></g>
+<g><rect x="8" y="30" width="136" height="90" rx="4" fill="#68502F" stroke="#8EB8E1" stroke-opacity=".6" stroke-width="3"/>
+<rect x="15" y="37" width="122" height="76" fill="#8EB8E1" fill-opacity=".22"/>
+<path d="M24 50Q34 42 52 46Q64 52 58 64Q50 72 40 70Q30 74 26 64Z" fill="#F4F0EB" fill-opacity=".85"/>
+<path d="M70 44Q90 38 104 46Q112 54 100 60Q92 70 80 66Q72 58 70 44Z" fill="#F4F0EB" fill-opacity=".85"/>
+<path d="M92 78Q108 72 128 80Q134 92 120 100Q104 104 94 96Q88 88 92 78Z" fill="#F4F0EB" fill-opacity=".85"/>
+<path d="M36 94Q46 86 58 92Q62 102 50 106Q38 106 36 94Z" fill="#F4F0EB" fill-opacity=".85"/>
+<path d="M46 58L88 52L106 90" fill="none" stroke="#47361F" stroke-opacity=".6" stroke-width="2" stroke-dasharray="4 3"/>
+<circle cx="46" cy="58" r="4" fill="#4B90D2"/><circle cx="88" cy="52" r="4" fill="#4B90D2"/><circle cx="106" cy="90" r="4" fill="#4B90D2"/><circle cx="48" cy="98" r="4" fill="#4B90D2"/></g>
+<g><rect x="24" y="196" width="112" height="10" rx="3" fill="#8EB8E1"/><path d="M34 206V236M126 206V236" stroke="#8EB8E1" stroke-width="6"/>
+<path d="M80 190V196" stroke="#F4F0EB" stroke-width="5"/><rect x="62" y="190" width="36" height="6" rx="2" fill="#251C10" stroke="#F4F0EB" stroke-opacity=".7"/>
+<circle cx="80" cy="160" r="30" fill="#4B90D2" fill-opacity=".55" stroke="#8EB8E1" stroke-width="3"/>
+<ellipse cx="80" cy="160" rx="12" ry="30" fill="none" stroke="#F4F0EB" stroke-opacity=".5" stroke-width="2"/><path d="M50 160H110M54 146H106M54 174H106" stroke="#F4F0EB" stroke-opacity=".4" stroke-width="2"/>
+<path d="M64 140Q74 132 84 138Q88 148 78 152Q68 154 64 140Z" fill="#F4F0EB" fill-opacity=".85"/><path d="M86 164Q98 160 102 170Q98 180 88 178Q82 172 86 164Z" fill="#F4F0EB" fill-opacity=".85"/>
+<path d="M52 136Q44 160 56 186" fill="none" stroke="#8EB8E1" stroke-width="3" stroke-linecap="round"/></g>
+<g fill="#F4F0EB" fill-opacity=".88" stroke="#47361F" stroke-opacity=".5"><rect x="6" y="226" width="26" height="10" rx="5"/><rect x="8" y="217" width="24" height="9" rx="4"/><rect x="7" y="208" width="26" height="9" rx="4"/></g>
+<g><circle cx="500" cy="62" r="22" fill="#251C10" stroke="#8EB8E1" stroke-width="3"/><circle cx="500" cy="62" r="16" fill="#F4F0EB" fill-opacity=".1"/>
+<path d="M500 48V52M500 72V76M486 62H490M510 62H514" stroke="#F4F0EB" stroke-width="2"/><path d="M500 62V52M500 62L508 66" stroke="#4B90D2" stroke-width="3" stroke-linecap="round"/><circle cx="500" cy="62" r="2.5" fill="#8EB8E1"/></g>
+<g><rect x="536" y="38" width="52" height="66" fill="#F4F0EB" fill-opacity=".9" stroke="#8EB8E1" stroke-width="2"/><circle cx="562" cy="71" r="20" fill="none" stroke="#47361F" stroke-opacity=".6" stroke-width="2"/><path d="M562 47L568 71L562 95L556 71Z" fill="#4B90D2" fill-opacity=".8"/><path d="M538 71L562 65L586 71L562 77Z" fill="#47361F" fill-opacity=".55"/><circle cx="562" cy="71" r="3" fill="#F4F0EB"/></g>
+<g><rect x="470" y="150" width="98" height="86" rx="4" fill="#372A18" stroke="#8EB8E1" stroke-width="3"/><path d="M470 178H568M470 207H568" stroke="#8EB8E1" stroke-opacity=".6" stroke-width="2"/>
+<rect x="508" y="160" width="22" height="6" rx="2" fill="#4B90D2"/><rect x="508" y="189" width="22" height="6" rx="2" fill="#4B90D2"/><rect x="508" y="218" width="22" height="6" rx="2" fill="#4B90D2"/>
+<rect x="480" y="108" width="62" height="42" rx="5" fill="#68502F" stroke="#8EB8E1" stroke-width="2"/>
+<circle cx="498" cy="129" r="12" fill="#251C10" stroke="#F4F0EB" stroke-opacity=".7" stroke-width="2"/><path d="M498 129L504 123" stroke="#4B90D2" stroke-width="3" stroke-linecap="round"/><path d="M490 122H494M490 136H494M502 140H506" stroke="#F4F0EB" stroke-opacity=".5" stroke-width="1.5"/>
+<path d="M518 118H536M518 124H536M518 130H536M518 136H536" stroke="#251C10" stroke-width="2.5" stroke-linecap="round"/><circle cx="526" cy="144" r="2.5" fill="#8EB8E1"/><circle cx="534" cy="144" r="2.5" fill="#8EB8E1"/>
+<g fill="#F4F0EB" fill-opacity=".88" stroke="#47361F" stroke-opacity=".5"><rect x="548" y="138" width="18" height="12" rx="6"/><rect x="549" y="128" width="16" height="10" rx="5"/></g></g>
+<rect id="glow" x="150" y="20" width="300" height="216" rx="10" fill="url(#glowg)"/>
+<g id="door">
+<rect x="150" y="20" width="300" height="216" rx="10" fill="#68502F" stroke="#8EB8E1" stroke-width="3"/>
+<circle cx="164" cy="34" r="4" fill="#8EB8E1"/><circle cx="436" cy="34" r="4" fill="#8EB8E1"/><circle cx="164" cy="222" r="4" fill="#8EB8E1"/><circle cx="436" cy="222" r="4" fill="#8EB8E1"/>
+<rect x="210" y="30" width="180" height="26" rx="4" fill="#251C10" stroke="#F4F0EB" stroke-opacity=".7"/>
+<text x="300" y="48" text-anchor="middle" font-size="13" letter-spacing="3" font-weight="700" fill="#F4F0EB">MAP ROOM</text>
+<rect x="262" y="90" width="76" height="8" rx="3" fill="#47361F"/>
+<circle cx="276" cy="86" r="4" fill="#F4F0EB"/>
+<g class="wheel" id="wheel"><path d="M276 86L328 80" stroke="#F4F0EB" stroke-width="4" stroke-linecap="round"/><circle cx="330" cy="80" r="6" fill="#4B90D2"/></g>
+<rect x="170" y="106" width="260" height="8" rx="3" fill="#47361F"/>
+<g id="plocks"></g>
+<text x="300" y="228" text-anchor="middle" direction="ltr" font-size="11" letter-spacing="3" font-weight="700" fill="#F4F0EB">1933 - 1946</text>
+</g>
+</svg>
+</div>
+
+<div class="intro glass" id="intro">
+  <h2 style="margin:.1em 0">You are locked in the map room.</h2>
+  <p>The map room closed for the night, and the officer on duty locked the door. Wall maps, a globe, and a radio from the war years sit in the room. The door has <b>5 locks</b>. Each lock matches one big idea from Lesson 16. Solve them all to find the <b>5-digit exit code</b>.</p>
+  <p>The clock starts when you press the button. Most students finish in about 20 minutes.</p>
+  <p><button class="btn primary" id="startBtn">Enter the Map Room</button></p>
+</div>
+
+<div id="game" class="hidden">
+  <div class="bar" id="bar" aria-live="off"><span><span>Time</span> <b id="tm">00:00</b></span><span><span>Locks</span> <b id="lc">0</b>/5</span><span><span>Hints used</span> <b id="hc">0</b></span></div>
+  <div id="locks"></div>
+
+  <section class="exit glass locked" id="exit" aria-label="Exit door">
+    <div class="eyebrow">THE EXIT DOOR</div>
+    <h2>Type the exit code</h2>
+    <p id="exitNote">Open all 5 locks first. The digits go in order: Lock 1 first.</p>
+    <div class="codebox" id="codebox" dir="ltr"></div>
+    <p class="ennote">Type the answer in English. Use the digits 0-9.</p>
+    <div class="row" style="justify-content:center"><button class="btn primary" id="codeBtn" disabled>Open the Door</button></div>
+    <div class="fb" id="codefb"></div>
+  </section>
+
+  <section class="esc glass" id="esc" aria-live="polite">
+    <div class="big">ESCAPED</div>
+    <p class="time"><span>Your time:</span> <span id="escTime">00:00</span></p>
+    <p id="escSum"></p>
+    <p>One last step: write your Debrief below.</p>
+  </section>
+
+  <section class="debrief glass" id="debrief">
+    <div class="eyebrow">DEBRIEF</div>
+    <h2>Which lock was hardest, and what did you learn that you did not know before?</h2>
+    <p style="margin:.2em 0;color:var(--dim)">Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.</p>
+    <textarea id="debriefText" aria-label="Debrief" placeholder="Type your answer here..."></textarea>
+  </section>
+
+  <section class="actions glass" id="actions">
+    <div class="status" id="status"></div>
+    <div class="row">
+      <button class="btn" id="saveBtn">Save Progress</button>
+      <button class="btn" id="loadBtn">Load Progress</button>
+      <input type="file" id="loadFile" accept=".json,application/json" hidden>
+      <button class="btn primary" id="finishBtn">Finished — Download File to Submit</button>
+    </div>
+    <div class="msg" id="msg" role="status"></div>
+    <button class="link" id="reset">Clear all my work and start over</button>
+  </section>
+</div>
+
+<div class="actions glass hidden" id="loadOnly" style="margin-top:12px"><button class="btn" id="loadBtn0">Load Progress</button> <span style="color:var(--dim)">Have a saved file? Load it to continue.</span></div>
+
+<footer>UNIT 6 · DEPRESSION AND WORLD WAR | CPUSH | DANIEL GARZA, M.A.</footer>
+</div>
+
+<script type="application/json" id="er-data">{"salt": "L16esc:", "exitHash": "2db4237ab3967db3661c", "locks": [{"n": 1, "key": "lock1_wall_map", "title": "The Wall Map", "obj": "1", "objLabel": "CORE OBJECTIVE 1", "objText": "Core Objective 1: Explain what gave rise to fascism and assess how authoritarian leaders were able to gain control in Germany, Italy, Spain, and Japan.", "type": "pick", "card": "<p>After 1919, democracy was in retreat. Fascism was a Far-Right form of government in which a dictator gained power through emotional appeals to nationalism and by demonizing political enemies, the press, and other groups. In 1922, Benito Mussolini and 40,000 black-shirted supporters seized control of Italy. Adolf Hitler was appointed chancellor of Germany on January 30, 1933, and his movement built on claims of racial superiority and on anger over Germany’s defeat in the Great War. In Asia, the Japanese government fell under the control of military expansionists who wanted to conquer China. In Spain, General Francisco Franco’s side, helped by Hitler and Mussolini, won a civil war that ended in March 1939. By 1941, only a dozen or so democratic nations were left in the world.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 24, “The Rise of Fascism in Europe” (pp. 1050-1053).", "prompt": "Pick the correct answer for all three questions.", "qs": [{"id": "f", "q": "What was fascism?", "opts": [{"id": "a", "label": "A form of government in which citizens vote on every law"}, {"id": "b", "label": "A Far-Right form of government in which a dictator gained power through emotional appeals to nationalism"}, {"id": "c", "label": "A plan to end unemployment with public works"}, {"id": "d", "label": "A peace treaty that ended the Great War"}]}, {"id": "g", "q": "What did the Nazi movement in Germany build on?", "opts": [{"id": "a", "label": "Claims of racial superiority and anger over Germany’s defeat in the Great War"}, {"id": "b", "label": "A wish to share power with other parties"}, {"id": "c", "label": "Respect for the Treaty of Versailles"}, {"id": "d", "label": "Help from the United States"}]}, {"id": "s", "q": "What happened in the Spanish Civil War?", "opts": [{"id": "a", "label": "The Spanish Republic won and Spain stayed a democracy"}, {"id": "b", "label": "The war ended in a tie"}, {"id": "c", "label": "General Franco’s side won, and Spain became another dictatorship in Europe"}, {"id": "d", "label": "Mussolini took over Spain"}]}], "hints": ["Each answer is in the Clue Card. Look for the meaning of fascism, what the Nazi movement built on, and who won in Spain.", "Fascism: a Far-Right form of government with a dictator. The Nazis built on claims of racial superiority and anger over defeat in the Great War. In Spain, Franco’s side won."], "nudge": "Not quite. At least one answer is off. Re-read the Clue Card for what fascism was, what the Nazi movement built on, and who won in Spain.", "entries": ["69897c51d2e57c7ce43d7"], "id": "lock1_wall_map"}, {"n": 2, "key": "lock2_radio_set", "title": "The Radio Set", "obj": "2", "objLabel": "CORE OBJECTIVE 2", "objText": "Core Objective 2: Evaluate how President Franklin Roosevelt and Congress responded to the events leading to the outbreak and early stages of wars in Europe and Asia between 1933 and 1941.", "type": "order", "card": "<p>Most Americans wanted to stay out of another war. The Neutrality Act of 1935 banned American companies from selling weapons to nations at war, and in 1936 Congress also banned loans to them. On September 1, 1939, German troops invaded Poland, and Great Britain and France declared war on Germany two days later. After France fell in 1940, Roosevelt promised Great Britain “all aid short of war.” In March 1941, Congress approved the Lend-Lease Act, which let the president lend or lease military equipment to any country whose defense he judged vital to the defense of the United States. On Sunday, December 7, 1941, Japanese warplanes attacked the U.S. fleet at Pearl Harbor. The next day, Roosevelt asked for a declaration of war, and Congress approved it within minutes.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 24, “From Isolationism to Intervention” (pp. 1053-1068).", "prompt": "Tap the four events in the order they happened. Tap an event again to take it back.", "items": [{"id": "c", "label": "Congress approves the Lend-Lease Act"}, {"id": "d", "label": "Japan attacks Pearl Harbor"}, {"id": "a", "label": "Congress passes the Neutrality Act of 1935"}, {"id": "b", "label": "German troops invade Poland"}], "hints": ["Look for the dates in the Clue Card: 1935, September 1, 1939, March 1941, and December 7, 1941. Each event has its own date.", "The order is the Neutrality Act of 1935, the invasion of Poland, the Lend-Lease Act, then the attack on Pearl Harbor."], "nudge": "Not quite. Re-read the Clue Card and match each event to its date.", "entries": ["01cc0942ec5a690726ff0"], "id": "lock2_radio_set"}, {"n": 3, "key": "lock3_map_chest", "title": "The Map Chest", "obj": "3", "objLabel": "CORE OBJECTIVE 3", "objText": "Core Objective 3: Analyze the effects of World War II on American civilians.", "type": "match", "card": "<p>The war changed life at home. By the end of 1942, U.S. war production had doubled the combined output of Germany, Japan, and Italy, and some 24 million Americans moved to take new jobs. More than 6 million women entered the civilian workforce, and the government used the story of “Rosie the Riveter” to help recruit them. African Americans faced prejudice at work and in the military, yet the Tuskegee Airmen, the first African American military pilots, flew more than 15,000 missions. In 1942, the bracero program brought seasonal farmworkers from Mexico to U.S. farms. After Pearl Harbor, President Roosevelt issued Executive Order 9066 on February 19, 1942. Soldiers forced more than 120,000 Japanese-descended people, about 80,000 of them U.S. citizens, from their homes to ten war relocation camps, although no case of spying by Japanese Americans was proved. In 1988, Congress formally apologized.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 24, “Mobilization at Home” (pp. 1069-1076).", "prompt": "Match each term to the best description. Use the Clue Card.", "terms": [{"id": "eo", "label": "Executive Order 9066"}, {"id": "rr", "label": "Rosie the Riveter"}, {"id": "tu", "label": "Tuskegee Airmen"}, {"id": "br", "label": "Bracero program"}], "descs": [{"id": "a", "label": "A government campaign that told the story of a woman riveter to help recruit women workers"}, {"id": "d", "label": "The February 1942 order that began the incarceration of Japanese Americans"}, {"id": "b", "label": "The first African American military pilots, who flew more than 15,000 missions"}, {"id": "c", "label": "A 1942 program in which Mexico agreed to provide seasonal farmworkers for U.S. farms"}], "hints": ["Two terms are about workers (Rosie the Riveter, the Bracero program). One is about pilots (Tuskegee Airmen). One is an order from the president (Executive Order 9066).", "Rosie the Riveter was a campaign to recruit women. The Tuskegee Airmen were pilots. The bracero program was for farmworkers from Mexico. Executive Order 9066 began the incarceration of Japanese Americans."], "nudge": "Not quite. Check each match against the Clue Card. Which one are you least sure about?", "entries": ["d6e36bfb3038195740e87"], "id": "lock3_map_chest"}, {"n": 4, "key": "lock4_code_desk", "title": "The Code Desk", "obj": "4", "objLabel": "CORE OBJECTIVE 4", "objText": "Core Objective 4: Explain how the United States and its allies collaborated to win the war in Europe.", "type": "decode", "shift": 7, "cipher": "BUJVUKPAPVUHS", "card": "<p>The Allies worked together to win in Europe. At the Casablanca Conference in 1943, Roosevelt announced, with Churchill’s approval, that the war would end only when all enemy nations gave up completely. This was meant to ease Soviet fears that the Americans and British might make a separate peace with Hitler. Later in 1943, at Tehran, Roosevelt, Churchill, and Stalin met for the first time, planned the invasion of France, and agreed to create the United Nations. On D-Day, June 6, 1944, some 5,300 Allied ships carried 370,000 soldiers and sailors to Normandy, while the Soviet army pushed the Germans back from the east. When the war in Europe ended, the world learned the full horror of the Holocaust, in which the Nazis killed at least 6 million Jews and many more non-Jewish people. The Nuremberg Trials, which began in November 1945, put the surviving Nazi leaders on trial.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 24, “War Aims and Strategy” (pp. 1077-1089).", "prompt": "The Clue Card describes a kind of surrender without naming it. A secret message names it. Each letter in the message was moved 7 steps forward in the alphabet. Decode it to name the idea.", "hints": ["The Clue Card describes the idea (the war would end only when the enemy gave up completely) but does not name it. Use the decoder key to spell the name, one letter at a time.", "In the message, the letter B is really U, and the letter U is really N. The word has 13 letters and starts with U."], "nudge": "Not quite. Decode one letter at a time with the key, then check your spelling.", "entries": ["0047f1b59b728fb75bcc4", "00da33c92a8c1ecba8d43", "014bbae9ba5f203a96f82", "017e403602d48a72d82f1", "01a753037ac895f0efcc9", "01dfe4b041cdf4c682765", "023ebfd1ce24b9c8064e2", "02eb8b7386fecf8c3dd46", "03b825c13dc34e5258c58", "03e434a0646497311c759", "0421496fb9ec9186d29b8", "046fcff699d87cb5d6c62", "04996764ccb9b2faa5202", "05454f88c66f6ae9789b6", "055d4a79f19ee413e5869", "05908ebf415332e758063", "06b85d25686a7fe9edc90", "06c85918777164f126608", "072efab7b08b53508e3b7", "07602c4899a028b9967f6", "07cf0975e478cb3985f27", "085a487f8a06840f92830", "089530ddacfd27e32e395", "09716990e36b07c7250b6", "0a09edade37d6dbec2cb8", "0ac32ba629b6e68f2df41", "0ad1819b7532b5372bc66", "0b60061d8d5af931d8dc1", "0c54d7cc406490e4ce658", "0c9965008c59be03da235", "0d9f85714075573f86457", "0ddcb9d5db133b8d848d4", "0e263cac37d4034ed36f4", "0ec6c8e1498e22067bf89", "0ecb309bd8d7a28053e51", "0f3e6bafbb7ff50af2fe3", "10d545de79df3df64bf03", "10e2e62fa8307a77ece60", "10ed7d43affd58cf36d31", "10fde7f8865a783049b30", "11a70f23583417805dfd4", "1229826adfde398d39296", "130700f285420ba8afd47", "13097e925d83853e5af67", "1313315b46d67b2966a81", "1398f7c49f8bba9554099", "13ca283260a0a6b2eb2c3", "13dbf716645630dd94c37", "13f765bd96071f6679b23", "1404b9037767d0c1e17d3", "146e83c714afa05b6ed97", "1495ab46c367938690a00", "15ded4785d17cc164e932", "16076f08d9745577726d0", "162354b8de143332b0716", "16b2291357e2f1215f226", "17b5c725c713a1fe299d9", "17e3e9e05f44e533a4cd8", "1829933556bb705e085a2", "18709457d97b8093355b5", "19bcf0634501cb3dd32f6", "1a5b02bc2f61d64d13bd9", "1b07565f7ca2d96d70153", "1b0aacd672135b6e2c035", "1b4edb91bd07fe7894fb5", "1bcc376e84149e61df931", "1bfed6328757f7d56a5d3", "1c3a8feafe0b2fdaa4482", "1c6c1c05a8af13a82a8b5", "1d3c139552a6bd2e68961", "1e4ef43ad67d7f396d463", "1e925a85a26bf4c40d122", "1ecc5e24093c74ad48274", "1ef1a8f05c599fb111de3", "1f6db9fe6a1055da9b364", "2026dc4901eb60495c180", "207c0beb4e31e6056e1c5", "2094a249b381312009ab1", "20dc87ebec7e08a4d0898", "20f056006805c1588e453", "21715d8f440674e016753", "2187a24a850498dd06732", "2285e7dff73429be7e133", "2291817aaf6f0e252a261", "22b4b3640c3ad472e8fb7", "22e6975d4347329ba3909", "2423b3b7d77b1851d0440", "24a96c475b0271dacc237", "24af8e1c2a2f516007d17", "25d634075447f5b1823c9", "2710e0ddd6b2e55c855a0", "274d29a670e04e4346061", "275a7258869474db9e946", "27c35834a40f7b0950a95", "27f4370ce9ff59cf10491", "2825797cba44e75256e24", "283ce3cba8b842cb8ce95", "285e9df0b2f600b402853", "2881886ef3c4dc567c414", "289ff3d976f83cd83fbc1", "297c49c87ec77f3d65b77", "29bb8f6b5786e360a05f0", "2a7eaab91321158ffced8", "2a7fe223db016d30c3b64", "2c0969bd8e4fee0524c28", "2c8f024d04af0da8685c8", "2d001d5e6deb078cfa188", "2dcdc0afb93ab8a4e7448", "2dd86b18f4c165439c838", "2dd955a91a4bec3bce792", "2e3ccd5ab43c231a31cd5", "2e9a280bb4e0e25d89777", "2eb82af666f83cda366d7", "2ec5e3d46135077e27d21", "30e03c5c8f50844eaed86", "312869a77e8f5dd1cedd7", "3137afa5c18dc475d54d2", "31ca18c93732594739481", "3267feaa53bf867009702", "32bc9cf94ae62336aa2c0", "33210509baff276b58408", "334861057ee84c0fb0386", "33aac374436e4e7020147", "33cde2d58f15271485623", "33e6fa55e674a63ed6e98", "343e7e85bc007cbcec7a5", "34866887d3d57bc468fd5", "348ea0a8dee0a7af50951", "366df05d8b952c2d8c717", "36889141090dc8bc0a198", "377e608d30fa585bd3144", "383175f5bb2f0f92793e1", "38a078a4ada5818de0e80", "39711fec6fdb23c9737f5", "39dc2e614e93d874c5042", "39e3b5095628e53678456", "3a05ccea1df27cba9c2e6", "3a373bb7d5fb8fabb6253", "3a8cdc230ac59b6bb9d13", "3ab731ff3e22746fb63a3", "3b0bc9837f39b25f53440", "3b590516dbddb7cff9be8", "3befea2fb8124dbf2b023", "3c746ad45cf625c7e2567", "3cc3c47e4c97fb3ef9f78", "3d23e710d5c73d763b585", "3d25ad6c5e26aec3a27f0", "3d44b57902cf6787e24f1", "3d92c4b74d8701c1a1f97", "3da801668bb91fa707d23", "3dc3b527583f6e90500d8", "3e009bca42e37f57d7718", "3e27082a0573b0e3ea627", "3e408ec8473dc6505b108", "3e4aaa05c8a5161c8c160", "3e6520b570ddbaf0361a4", "3e7b022c80e969daffbb0", "3f3e67f0d579e0b7ee310", "3f3e77b639eab34a63440", "3f729d8f751fcfb50dbc7", "3f887c40fc05f6707b004", "3fdfa5c9765ecd8f23f64", "4113289f007d0fd729323", "414d66b9aa15ec64d8bf0", "414f6dc03c9ef71e868c6", "41a324aa133ef9685e182", "41f0fcc22081a8f52f902", "420160c4343d82c8be384", "4261185ce6660c9ff18b3", "42c06e15d2cb2a397a9a5", "43324ce63de91db36bcc6", "43790cb6a7e537ac2b706", "43b6a4223a9d80393a391", "44056495a88cff50c7fe7", "44aa43220c7004be0d411", "452130cdc1c6273dad937", "45c5ca5d50e12d6503349", "4668ebd3489743dcc8de0", "4668f156cf88bc5c5d9e4", "46868ea5a295daa3a3360", "469c868532627e4945ca9", "46b92659eab45ed771744", "46f0f2532677e4aa653c0", "4725fdaccc2be7fe7b046", "472a96f3b6d038dbf67f9", "48d5c6b8e42669db33c99", "490086f463a9cd05dfbe7", "49c9175fed689b1495357", "49d68c4a0b658f65659f3", "4aecfb646727592ef24b1", "4b06e7029432958bca584", "4b7594edc217588ac0346", "4cc59efc6e0b53ccb9cf6", "4d369bfff732a8f140807", "4d422cd6d472ee5257e60", "4d673e50eca77384b2825", "4d69d634771cc2887be51", "4e08b1e65597af4641682", "4e5481f442d91fbf8ede9", "4e5fad29cd282666dc246", "4e6f6c1d8052e45f58b37", "4e98689ece850835b63d2", "4e9c07150f12991a3e998", "4ef6dfdf1f1635625cfa6", "4f24e3e894d57730df274", "4fbf4c1a1e5aa44f5d910", "5061954330492155c0072", "5073dd4a2166c8abc4759", "50c1747442a204f13f654", "51ed1d60ba45a54abdf03", "5237e34ec8fc5f6125e94", "52abbeeecbe9368483ed7", "52ce48ccfd9433d9bd778", "5363f73168f4a15817208", "5411ff25dd84c08f49121", "54249364b903708a7d6d9", "55ebf49c44209278099f6", "569e5556dc36ddc527562", "56e9e67472ee2fbfabbf2", "58134db49473f36499337", "583c09ecf68b57338f4b9", "585372e9bcb3d0aa2bdd2", "5946a0b5f4dd8bc585377", "59b38c1d9d8f8210bf7b2", "5a4176adcb11dd0593fb7", "5a42d3c28bb1e984c22a0", "5a65e0fc16d7e4f1563b2", "5abd4a817a4339d3fe539", "5b25bc3a5d0b8209904c0", "5bb5e90e148975e34fa97", "5bdc3b3131cf36fce5c72", "5bff02a8b910b3fe7d5e6", "5c0e624ddbf316bc268c3", "5c52e64b6a5a7cb107470", "5c6a103bfe6a90b44a097", "5c8b1e08e537224d61fe7", "5cbd9effcf550209f0368", "5cffc6b167e95e3a8b6b9", "5d341021e16f3325318d3", "5d81bdb3d59712d89c714", "5d845a7e6c40979c5acc9", "5d868b20ecc25fdaea2a8", "5e27c00acc827ce912dc1", "5e46951e0405fc0fcdc78", "5e66f32bb0368c0584f92", "5e7f010abfe520014fa09", "5e9056ad38cdd3b27adf5", "5ecb4a73be5f1ba9a3bf7", "5edb31681fc36a5d5e512", "5efe1b90a9828397a2b23", "5f0f0a017bac8e6e5db52", "5f6114eb3b616adbd59d3", "5f876a07cb98bac849cb8", "5f889f9f23354de6d1284", "5fc89721d1b3515e35c25", "608aa1cf94e639bb85811", "60957ad59df94f25479f1", "60b736c25fb7c0f1d9f50", "61ba51c44bca1f5ef4d08", "61de6cedc5bc3d6838f07", "61fcd8b512ecf0635e0b9", "6205ecfa8a0d9b5ee6072", "620e413dab92d30691d58", "62d8962355d7964c4d9d0", "631f13465c39eac42ef33", "63727a115524d69912b93", "637591082d01eafe34c87", "63c2a378bd6a0f53b6192", "6404f67b46038ce9451f4", "64130839cf0e75b5643f7", "64486926c9f18ce4a99e3", "645d869d93b9417694282", "64be5c07fa87a812282f3", "65a5192b2788ae66933e5", "660c7a8e5ba1762464db0", "66316534cc5e506653046", "664574f901d7ca2282f31", "66d4f2b53be2ff47675c9", "66dc5995765143452e692", "66e1f4c7838a9690513f9", "674ea6a7db748c64ffcd1", "677e3c13001b48456d943", "6784a337d4674d71f1e08", "681271fe01450b5cd3df4", "686994457900c957652b0", "68bf6659324337213c7e4", "69c906a2ad43e61840ec9", "6a2846dbb63fc44164728", "6a36a0270846ae40c8180", "6a47a1b476137ab2107b9", "6a80458f5a4f41391a4a0", "6ab091a2e9d065a4bf073", "6b3f099145b975229f538", "6b5ab1d0933f35b716918", "6c61010feae378f566527", "6e4aed4c6226f0c1686c5", "6efb3c702435c249c02e3", "6f0914a78cf171a270634", "6f25bdb1154e9493f3319", "6f272bb69a13df4893984", "6f37332cf3d0ff2dc4ea2", "6f5963d792992e389ed65", "6fb6885389dac204011d3", "6fd83d17db0f92ed56161", "6fd8aa6ab3c0e23f81df6", "6fdf90f5c9f7a0395ac19", "701fc77138ea922e08180", "7026415e64b84aa2e9549", "702a57a6301ee36974c34", "7063502b41cbcbd572995", "70dd34c5c8ed8720e1f77", "717278f396ac94f60d018", "7172dceb6b402161017b8", "71c54416c012d5e346244", "71c708a285e6ca0bc5658", "71e965952dcc774ac5bd3", "724eb33cac60fcfc76b10", "725e48ed22d3470a035e3", "726dafccc56e89a7fc1c6", "734f3fce7449ed7ccf6d3", "735f25e1cd9c65a86c404", "73e0066e5da3c57daaa19", "74188ae345befc4475016", "744d2f15030efd9ff8290", "7467544bbb4972d26c3a2", "7492c56602a147f7c7286", "74a55f75a714ef9d78965", "754f948057b143d0bdf60", "75a37ed832e8d25488301", "75b5824d59d0b5394ee90", "76aeb14ba28141b9071a2", "76c12e77e2b25ce533d65", "777509436ea7b6bc30939", "7783314ca35674d428e08", "779c34b9a6ab3599a3281", "7822239d3af0acb9cb450", "78650f3780f696e1d7897", "78c6ab4a3a6b05d9ccd13", "7901306b63b68331d8994", "792ba7b5d26fe5e4f3816", "7945779f611d4f564dc21", "796ad6c8832ca383a1bd8", "798f41d055be7f4302f55", "79e8995127785c8ebc475", "79f7f8a53ec9a81a06c10", "7ac56162b179440761261", "7adccd366f5b142ca7802", "7b0908ae76701d76824d0", "7b7541c340fbe7c9f0d61", "7b977c9617ae278854c51", "7c4571fb1d90186d3ee53", "7c58bc4e8e47ad1f11fa4", "7ce29ebc5d5ba3e1a1d41", "7d5776234d776d405c031", "7ea03fc92927d921d7e01", "7eabf8f5da52b280020b0", "7ebb1b9366e8c21f70107", "7ed8b8d75ee4a1b003681", "7f0550a925e4b16651195", "7f35e86b6fce8100cb376", "803c99a2521228cc58613", "807410a4c4435727ea517", "8092a8b7a0604b2293e71", "8093fbc2b67234f430bc6", "80990fe81c99e59f01f24", "80d224dc651d57523ced1", "80ffd89135cf1e9d682a9", "81f57d9d157696cdc49b4", "820e449fbf3f7d670d9e2", "82f205c930b94ef1bfd71", "835bc2304590ac5902db4", "835ce5d085b3ca85e2ff9", "83862d827af11ce12f0b7", "83f29d67778a3ef9cd8e5", "84ceb7c33688837c6ad66", "8522b870bd38f43f7dea8", "8633be7f37af5f8e61b31", "86cf4f26824c8abc84d66", "86d258fb9218ae7177927", "86ed8841cef4465d2b566", "87e25edebd02cf95fd161", "87f6c5ede21e4c8e51a84", "884057602298b56a0f075", "8843d276e402fa14819b8", "88c7f8c93f820c95867f8", "8b2f5f6977db874100d85", "8b56df2ff8f303310def0", "8b636a21ba6df0eb4f133", "8b698f83be66c5b6b6d60", "8b92a6bf538a82b3ae2f3", "8c4ed9a9132ee5f7b5f25", "8c761f6b294182482f9f8", "8d409db9915f905c45db5", "8d84534038f831e9a54f8", "8d98cbb8fe130e2b55264", "8e7f314a3c985fb1e7bb2", "8f0c0f1fe9fdad9343ef1", "8f3e57593d96975eafb58", "8fc4f724587fad70cf0f8", "90a2b9bdf36eeefaf0d28", "90c3e7ff8a3d4a0495118", "90df7f59ed7d48cf8ae06", "911c5eda306a423dc18e4", "9131ee34ef2b4bb359471", "91d3117ba64688cd075a3", "91e0e315f400426cc5b51", "92065eb7eee728f45a927", "922d09ab19f5f259c7634", "923df07eeea624de52064", "92771dcd2f687f46c3639", "92a13e5a51acc17a9a7b1", "92c0a8ca69c833c87e877", "93a6188bc25e62aa3f4b6", "94d619d78cb093a220479", "95004e35c7d2bb7615560", "9510a2750519c5660b883", "9609f96056e5ae4b8e202", "96105e1cff93e86e78932", "9632c9c77627ad594f818", "968ab5790b9fe1694d574", "96a7e6166ca57b40f1ed4", "96e9003f545cb827424c7", "9730edfc846e22b2fadd2", "973db699b2cad2c650833", "975ae5afef9a2539b9305", "977f6ac90c78810b4f8d4", "9858e5f5c3c682713dfc8", "994ed3a9214099a612d17", "9a662b5b9b76c66f04751", "9a84168551d8259ed3589", "9aa774cacf713c2d038d3", "9ab0f01557e4d2c4e8989", "9ab77f9ef5bee2b3f01e3", "9ac431aef04cbcd0c9492", "9bc14bb2baaf20605c192", "9c14ec6c9794eb6da6b54", "9ca27501252c9b7baab50", "9ced287b253bd1111a7e0", "9cff9797478033d49b258", "9d60c55afff611f6e8f75", "9d9e7934a89a5f3654e46", "9e728b11e03d1186a0c62", "9f77ab987f63a1fdbb287", "9fe2b022381e0ac9716a1", "a1aed5abe7547eea06546", "a1ba23c2121858d2561d5", "a294c43b26409c0797f44", "a2a537f419079107948d7", "a2aeb71c5e08feb294133", "a2ec9f83d68faecfd6ae5", "a321006c367b08e918ae8", "a3e94a213b3a263411a57", "a406d6d3af86bdefdc322", "a4d1745f1c493a37d5840", "a54c2396dd14db8ad0f87", "a5fc2aadaf1a74194bf26", "a5fd93cf288853b0e3ab4", "a61f18c8615a6ed6aabb7", "a667839759f3ef751ed35", "a667999e176f2d61434a8", "a75c95aab53fb0c43ff12", "a789b8f2d06300f091700", "a79552481e38602f63542", "a79a0485054ddcc9e09c8", "a8710717b55cf9fb625d4", "a99c62be25d62c5e81176", "a9a9b8989779d21eadae9", "a9e3069a563f9dd41d821", "aa93cd7a494b9268d83c7", "ab7e86a01638f163b63c7", "abc800325812f4ba11b43", "abe9956cbb22d22eeb050", "ac1f804bb81786c3f8a77", "acbafe39fb9b88ffd6859", "ad4c9bfe8359a8cab5065", "ae031b8ead0e83051d943", "ae361691eb1db40c598f7", "aeadc09faa656c72ec209", "aeeb367f05f16359085a4", "af10e784d1ac0160cf085", "b0169ada4e2cb03553925", "b01eb2ff50c2dcdd1f324", "b06e829b26f0fb49f0012", "b09f15b2838bef52e2d62", "b0eb85dab1ba71a548253", "b11b3b592b9458efa0bf1", "b21551c1391df040fb911", "b23ca878090483e291012", "b31fee93706e03995fb13", "b32741ea1f471861bc326", "b36a6c3e63a4e664d6bb0", "b459b04ad3bc292d64651", "b4b0f24b8fc16156d5cc1", "b4bf0343e7ac2bb6b73f5", "b51aee51c72ba36c68d55", "b53e26cbbbb7df0003021", "b57df1624bb010794f701", "b59d458eb3f9da7c191a7", "b6096dd5d927d22fa0ca9", "b64041fc3576f842ffaf7", "b6cb2f838dc7dc0eff855", "b6e5f01e428a07a5c5d18", "b73e57d66089d5a7223d6", "b7a04f026c78f4dc3eca7", "b80949f3fb26d9ad7a727", "b80fcfd84db3cd7777738", "b8412481416395d0f8c21", "b88cd96fee27957cdf2b0", "b8b91008042d189981ba5", "b8e465ba9f41ca56936c6", "b9e2040450a43b438b072", "ba3b55acc293ae9aed0e8", "ba8d9f4f8f5ff4a637401", "bb3fb7c988b29f9c7c3c8", "bb442da6bd0e826e6ced8", "bba2472cdad33a257a8e8", "bbb1c1edfa6f82473fee6", "bc372c929f4fe8462cf20", "bcd53246894654ce99895", "bcd67baee63cd8cc4d002", "be02b772f52ba36dc0be2", "be1c0c74363b796e95564", "bebf8ab84e3bf9443b0f7", "bf0be678fcd2a41f8ce02", "bf0dcf6d275477f1aba03", "bf5a8ab52b70588f02538", "c146bd867958f505cf147", "c1d605fba9d28472a5a19", "c229abd37818468df17a0", "c24ebb32e93d4b97e9de7", "c26626d9de86f43c642f1", "c2a8a88123aa366cdba38", "c343d2b582cbbf70a16a2", "c3b4c64497849eeb4e555", "c4086a2eb847153bc7cc7", "c441c7a6aa0670856f231", "c47c8bffc5bbccb8bfe58", "c4d9b4225e1360c6e48e4", "c52ae3a5762535a6e19b7", "c582b9147b4c73f15ad12", "c5d87aae4000e280a62d8", "c5dcb635a063e5f38d984", "c6267eca7f455eebb7f13", "c67b92f4cbdd3a2224b75", "c6c8dce518281dffb27b6", "c73489e54e7d505355ac1", "c75023c43a808285e3eb0", "c7c30173b15c1bde42532", "c7edec3bf0fc7a2bb8e37", "c83e3fa66edd5ee2f32a6", "c895585eae1aa0f6987c7", "c94da5cad7b254b04b761", "c95ae0beb6cf9e2f0fb83", "ca358b3963fd61f11dbd5", "ca417b9d77eecb7749795", "ca80b830bccda73f56526", "caad78d2cf50da3ef5df0", "cb611107306757fee7bf5", "cb78c2fe53d7574712235", "cb797f4ad1e891766e808", "cbd26410e5b4d2d7faea2", "cbdf20fd387ebbedca2b5", "cc7ad345cea32d2323bb8", "ccb01e12da9c2110482b0", "cdbc0cf8542b3a2535003", "ce95fb705ce16d3a3f926", "cee03b6d1b948ac96c270", "cf15851ef484b2e905d29", "cfab1cfc1f0ae8d850d02", "d01697bea750e6559d5a9", "d04e8af48ecfc580de7b1", "d175878ef737c0e122462", "d23eb34209bad0e2a0b83", "d288951e94e6af6025a72", "d28fc68388ab04a944b33", "d2bcdc7edf47f7aca0c01", "d2fc3dd48337f1d4adb40", "d355671af83d28e7a9704", "d360c878e834712aa5b82", "d3a7f8f152c32f6a51c16", "d3bda474ca97ad0c69213", "d3cc58587bbaf5307ebb1", "d40ef43049400b17677c3", "d47c4b632b177a48a9cf6", "d4e1f479c8977d78edfd1", "d50dc51f06171b14e39a2", "d51cd3e0bc8e31e50d5c4", "d52768806571bc6361fb1", "d58dbad32979e4bd04715", "d656cd91340b106015868", "d65a5d00dfcfbd0b62901", "d71ad5524a65beaec3e23", "d71cb9d7a1263c0d19112", "d77ed9c71280ea53504a3", "d7e7286566021a35bc873", "d7ee7cc658e4559b08b07", "d89e1a6be5cb765d8b567", "d90bf5fe13d3467905dc2", "d9e76f92acfad6e839514", "da1b22628aff2d79d62d5", "db0b7283cc6d3d9c171a3", "db45a97ad726b55e41289", "dc50b70552e9ba4231732", "dc65bf95fe9202b04dfb1", "dc67150722513b6fd34e2", "de4c7f33f158ab94bc305", "df441fc4486c92f260851", "df52d0938ff6e009a07f7", "df76638ba1c06b505add6", "df8ce817c95f07f517af9", "e04011522fe924a560164", "e17d786fd9ed8fa9275b0", "e18d8fb7d364f20ad7427", "e26a24ea0f9a21b216cc1", "e2908c2af1d855565d2b3", "e30f5877f34115c1e08b5", "e34484cc95e33def63d28", "e3f27b56fbfacabd0f9f7", "e41083be6c8f5666f6a04", "e44f8c9e623e4cbc74bc8", "e4c184984d447fe017ba5", "e4ed064484913bfc5a9f1", "e523f0dc6308bf27bfcd0", "e5a7b9517b177374333b0", "e5b2e534c903be4d2d228", "e5bf18effba5997d4d875", "e5f0468b008e31bbc0557", "e689dbf788535b3e870f6", "e6c05a214b9a164b05b71", "e6eb6a547c1c69893b338", "e71bcdc23ea06930e9336", "e75c1c4227fb75ca51249", "e78733fd14c275fd658e1", "e7c76a7227079b8e03e93", "e7c85b40e253c9f02e343", "e7cfaf14dedb3632ed486", "e7e7bc95dc3c3ed9f0939", "e805b4d05d7049c94a451", "e876161735c53fbb01065", "e8b839da65462ff042a52", "e9360bb848a756d8b8ca4", "ea70cc505b5d6da42b138", "eaae864eb7dd443270b29", "eacc5b0cf49ad940fb218", "eb30d188a23f8897ac957", "eb59068128f930b451ff5", "eb7a9dbf5a141342ca8c8", "ebb9e993da22dbaaad0b9", "ec05dc60dd052ce42e7b1", "ec12132f8024c3da89a49", "ec57a349eddca27b327d0", "ec8dc37dc554c55193119", "ecc165b0c88669a4b2896", "ecdb76224b8ef0da883d7", "edceea9084a62231ec192", "ee1b023a6c8e89c8ce622", "ee79a72091c5c1eedf8d8", "ef9b6134a446e02dca2a2", "efbfa0281165b865959a2", "efc07b6a277c19ff16629", "f069e705c6f64768f12e6", "f0b8cfa46c2a08ef5e9b3", "f15645a243b20b870a2a0", "f16665e780fced81c8f32", "f1899c70a7532b04ca206", "f1f662098f5acd792a719", "f1fc30522d0c9252b0a86", "f2320e0cf6824d6060902", "f2687ad1175b0143d1d56", "f2cbf96e267c41a0df122", "f47ba3ebde627a48f98f1", "f48dcb0b3d390e60b9581", "f4c382b205582aa997ec4", "f5c6df6ab08d863a47296", "f5e95bcaa7656c66933d4", "f67dbf3517c2599bdb1d2", "f6ca5790673a35a44fd96", "f6de079ec72b0609749a5", "f753b28948790ee3c6ec8", "f77b020f603d5e4b65c53", "f7a82b7c864cbd1cbc088", "f82524184caaa26cee563", "f85216aa5236c9eb04b52", "f9b2b1726d881552a0fd0", "fa4adcfe3ff160bb4d035", "fa859f5ddcf874ad5ce47", "fad039e88ec4f7377d8a0", "fb0f1910c65f028ed6e24", "fb256c867d78b446fb4f1", "fb2dd58ebf7108bb4c962", "fb54dbdfc7e630d2062b0", "fba619f66f604bec8b9c4", "fbbaa75cc36fc9fd3f8c1", "fc0ccd7a0d6585fc11b81", "fc4c316359dbe3272da12", "fc965b44d3584ec247b60", "fd1672cc2ed49e1898fa2", "fda2d8f06aad1cc5c2137", "fe51732bbe07e43e64901", "fee66a5b67cfb203afcc8", "ff6e9d0eda10a4327a665", "ffc2ceb5d7ff1c132dfa8"], "id": "lock4_code_desk"}, {"n": 5, "key": "lock5_globe", "title": "The Globe", "obj": "5", "objLabel": "CORE OBJECTIVES 5 AND 6", "objText": "Core Objectives 5 and 6: Describe how the Allies adapted their European strategy to fight a different enemy, under different conditions, in the Pacific. Evaluate the efforts of President Roosevelt and the Allies to shape the postwar world.", "type": "fill", "card": "<p>After Pearl Harbor, Japan won fast victories across the Pacific. At the Battle of Midway on June 4, 1942, American planes sank four of the six Japanese aircraft carriers that had attacked Pearl Harbor, and Midway became a turning point of the Pacific war. Because the fighting was so brutal, General MacArthur and Admiral Nimitz adopted a “leapfrogging,” or island-hopping, strategy. They freed the most important islands and bypassed the others. On August 6, 1945, an atomic bomb was dropped on Hiroshima, and another fell on Nagasaki on August 9. Norton calls the decision to use these bombs highly controversial, and Japan formally surrendered on September 2, 1945.<\/p><p>World War II was the deadliest war in history. Norton says American industry and the Soviet Union’s ability to absorb the German invasion turned the tide of the war. The war ended the Great Depression, and the United States and the Soviet Union emerged as the two superpowers. At Yalta in 1945, Roosevelt wanted the Soviets to join the new United Nations, but Stalin refused to let Poland become a self-governing democracy.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 24, “The Pacific War” (pp. 1089-1095), “War Aims and Strategy” (Yalta, p. 1085), and “A New Age Is Born” (pp. 1095-1097).", "prompt": "Fill in the blank using the Clue Card.", "sentence": "In the Pacific, MacArthur and Nimitz used a “________” strategy. They freed the most important islands and bypassed the others.", "scramble": "G  I  A  G  L  P  E  O  F  N  G  R", "hints": ["Read the third sentence of the Clue Card. The missing word names the strategy of jumping past some islands.", "The word starts with L and has 12 letters. Norton also calls it “island-hopping,” and that answer works too."], "nudge": "Not quite. Re-read the third sentence of the Clue Card. Use the scrambled letters to check your spelling.", "entries": ["0016f82ba2b5cd8d16eb8", "001b2da30dc469702b162", "0062b922a74b776217456", "0075f99efac9b036b6299", "00e09c562e973bcf40ee8", "01424fa4597063381a669", "02136fca06887dc9dc479", "0258e55bef446f85f39c2", "02fc6d69b809ba444d241", "03348dc7ef79d5b67bb52", "034f36d7071f1ec518db1", "03a5e07624b44395586f1", "03f043e6bc79979d96c67", "0423b52ca53bafe967752", "04604dff15189712c7019", "04799c2f76c98cb32e1f9", "04a4bfa5c5f3c10813386", "054929fca0f3bcab4a280", "05545aa6831230e308f53", "06038f8eecbaeb93af882", "0630adf2cd47e73397289", "06aee4f4072498bf57418", "06c10e4ca76330c1a63d0", "0749db025c19d55a25d87", "07c13769a4db4909e00f0", "07eb643b75b72948bbdc3", "083a66ad309ad6db7ac31", "08b7e2c853b12884da635", "09c028dc91805857e66d1", "0a051c8a4ff51a3deb294", "0a24f60abfc2385fdccb1", "0a4f8e8fe05f931f2a5a7", "0a606e7c10ddf75b85ed4", "0a61103a64952cab21111", "0a8330cfc3e08ce9f2be3", "0a8739b264b967d5ff748", "0aa6c934d1e9d8b141206", "0b54526a4f9d61c32bc15", "0cbe5eb2123dd968f3bf6", "0ce893c3bfd4b11171f95", "0d2d3d81a585563bdf850", "0d4c5990c90f7f1c2d512", "0d60b92d93b8e4819a269", "0e3458f0b77de1ac54281", "0e5274e59f4833d9ea999", "0e5fb02a6c8f614aca043", "0f49acc7a2125ce3d6034", "0f9905c526b0b274e8c37", "0fcd99acdc1173225e437", "0ff381b46875cae93e2e7", "1027a09fd5ca902c8de79", "10343cbf25df7b3f76af5", "10485046426c9356e3c27", "10a77d640f23f59fd28d9", "10e4ceb9b836387bec722", "1138b076f1a3200741cd0", "11cdac79b074802432976", "1288f400b5857bc207180", "13146228fc1df09d9bfc9", "144386cfe07ef59dfef78", "161f79d1ed6d965c70550", "166d19174a4aa04899682", "17278600ed52c610e86e8", "173082b0b7aa0ac9d87d2", "17baa2cf4922aa371cfb7", "17c98c001ab381d762fa1", "189970be66b78fef36c26", "18f86e1c18258f62fa6b6", "197ac620dea7a7d72ffd2", "197bd4505b8bb7e87bfe6", "19bf6b742852b0170ee18", "19ec3503c86df0c7c4413", "1a31ffa02b67de6b79178", "1a52c1c2a46310416da88", "1a82c5fd32771fc5fb9f3", "1ac6dbeb6d2931eca5414", "1b72348f8b1e04abf83e4", "1c5d3b027c2b1162db191", "1c9a6e0aa16590c14e230", "1ca3155843c09211f6c99", "1cb5daa5092b124aa0368", "1cbcab2e4019612951f32", "1cc5dcfa626070f6cd864", "1cfbc439ae1bbbfdcd072", "1d4948d2028d36053a997", "1d69546e0fe52e8e5d617", "1d9d4f172a4bb6ea65bd6", "1decf7692a2ec599844a7", "1e2d1f3c07b6599fe0713", "1e913ef03cd780cafeb62", "1f0a5d354fb8cd77dc391", "1f1a776f277e4532df613", "2086747cdd0f06cebabe4", "21bbe04a0315e4e1e4442", "21dc71ef1170d48723779", "220b2531450957913dbe3", "22e896c5350282f6af1b7", "22ea640eab445534b7657", "2390c1f918c8b92459b36", "2402d10b45afe59b79515", "2559754872bb0306c9f19", "2578e6534a6ec95873857", "25906252e92809be348a7", "25c965911934bbe0b45e0", "26032ef37b52a040a2e60", "26bf3e7ec55c5d2612716", "26d2ac7e4a678d75bdde5", "274b7d877b1c0f6781246", "2801797a4620b6ca23702", "28d9f48dbf8fef7fefa73", "28eb21938d27fadf89267", "2aea26f8d02677cc89df9", "2bb54e313a0ba1611bbb3", "2bed28286b7e30cd5bf84", "2c04ba6dbe7f87c569385", "2c639b4c1da22d32954a6", "2d814249b50f328df0fe6", "2da6a7e1635b534bfb5a5", "2dc4a87c0f3b2832c9529", "2e8976ef2a04427b582f0", "2ef45947b095592ba6688", "2f4c472cf00460cd50a21", "2f69641dddce228ea96a9", "2fa000d37c6958a1e8fd6", "300c4a13310211d1a6035", "307026d3f3139598d0e65", "30945c3c23990ab117133", "3103ca76c8e122a8e2c76", "310b6d846e7bb571e0656", "31e78823148474482e515", "329d06ef6b3de7b7c7191", "32c2549fdf41b20ec7a76", "32fa0fa468013fcbe8904", "32fbf96ddc1eac5061786", "330da9135b4d66e59ddb5", "338fd29a5340fea9d13d6", "343130b7a6da0b45cb432", "3495e1dd6e4cfebd83e73", "3534fa3aae9f92a3e7760", "35413fe9f8aee0c9dc0f5", "3548b3e42b9089374e396", "355c821522f5dec862017", "380545dec75785a2826b2", "3839ea254b90f5d714ae6", "38e208d2490110af7ab08", "3a0bfcdf0cede20df0c89", "3a4be5f00b967fa5b7c71", "3a64b446742621ee938c7", "3aab66fb74fbc80da00a0", "3ad1522ac40447598b9b5", "3cd07c49389fc20e86163", "3ceb7d16de24492f73517", "3d94d254c2b67f6417205", "3dc426097c507c3e0ea63", "3dde588451fce884b2ea4", "3dfb2c19e677d43890692", "3e13bd1996b5d4354f3b9", "3e2762a71dbee3ea9da48", "3ea245060fa5cad6f0629", "3f6873194221808c19167", "3fafcedf85571f6396bb8", "3fe3035264893892ad288", "405dbbcf1cce31d1ddf16", "4065d5e04d436878310a3", "40a5f3207d650f18510f3", "415781cb4097b39ac5ea2", "416b4eb300859bd1a8762", "41e6a9604f38d596bd7a6", "42ba0641d1a7c237c43f0", "4304f750720637a3146a7", "43feaa852eaa7b1a44ac5", "440ad5358b99085cd7534", "4444ee0f02403c614ef72", "446dcb49aaf972d4b6e30", "4495b71edb4b4049ac473", "44e7055324d0672182217", "452449835146a9cdce4a9", "47ba803b5710b280327c2", "47cf2f8d35a9a74a07fa5", "48a9dd9eb5a46f869ceb7", "4900c2514c623953bd494", "49630339fd4d69d3e99d5", "49990c6714d373a3b53b0", "4a260fea70fd314fadf98", "4a2ad43039c2b7943faf4", "4a9b3f7ae0215c4c6ad90", "4ad4d1db9e37be264cfc8", "4ad5f5cfe4959e3adbfd8", "4b01999dc31484316b672", "4b12c8e66d91b89fcc6a3", "4bf2a661e80c08a02b4f8", "4c0c40200a1a240f1f7a9", "4c1e13386fe1cc1419a76", "4e09ceb80e170ae775485", "4e0edf1a166a633593364", "4f691cda2ac77b6c816b3", "5070d3097f8f80af19245", "50cee15baed9a4d618f01", "513225559da79f368ada8", "51531b8d99bf73a28a658", "516569bd8b1ffcbed6102", "51813aee630552163de85", "5265a5c91848c05e7a6a7", "5344d91ca36a9b39c0510", "53b1f88145bbc22957fa9", "54bad8959473bcec329f9", "54f2eef37969d7937f936", "5506ed1c96b18e75aa561", "550e1c3a8a9afa2594e89", "5512b41e79b192dbae270", "554ab23866ca23ff74487", "5702489cfb7bee463c7f6", "57e1a200a36c746d2fe37", "58706bd8aded50baa45f3", "58c983c6a8328dcca7945", "58cb276c963b2a0398558", "59aadd245033efe71e472", "59d08ee4f85435ad2bf49", "59e75dbad8482e29e0fe8", "5a9dbe2bb1aedd48cdff9", "5b4f0313cc1394561fc48", "5c24281c03f771c8be2e1", "5c393e8c3cedd44df4477", "5ca2d053e8ff65a3ac4c8", "5e70a2eb94e70cab69981", "5e8ee4cc19c1296af8bd7", "5efb21bdeb31526f0b722", "5f24d5bb7744ae0255549", "609d41f034cd0dd5e0505", "60bdd38af5d3d566fffe3", "6201578906c8e96388466", "62100edbe66e51aa89651", "622151506588cf180bef0", "6233c0afedbecc5f1b741", "629a8189b5d7843da0ec7", "62daf3ac344551d38be50", "62e5daa45205854fc1d78", "62eada57414615b5abf52", "62f04edbd3d9734b8a834", "6321fb98ff3585008a683", "6470577cd3d1cf4c16ea4", "64be60d2a0ad729cfedd6", "64eeb4d6febed589b08d4", "6640d549dac7411826e27", "6688058338404af75a8d5", "66c74dd293c1b4e0a05f0", "67737e80cd5f864631168", "67a3621a83b587888f5c4", "682dc4382ca160b85a0b4", "687a68106d4010353e170", "6946bd02575c36d49fd34", "69713c69d33d3a3a6dab9", "6aa0046ff5f12ae4170d7", "6b1c06ef4f072305e2240", "6b34de552df95d9619803", "6bc696ac20df0374cf659", "6d2cb7831b5546863aa90", "6d39d8f7d15a6f755de44", "6da699a023fccc4e4c651", "6dc2558080341187c3bb8", "6e1519fb1e27234608dc9", "6e4e031b94b4eecde7500", "6f72db877a047bd0e1c75", "6fd65e07eb6e2a3860ba9", "70e672085fcd1b24e8942", "716790e7d0d196b53f244", "72008de4a5d422f3065e0", "721c9e946773b83e035e2", "722ec181ab4bcd01ae551", "723627667d491bb25c817", "723691c5f96a4ba47f365", "726fe2a589ca70b90f422", "73bad5840c08453c14e87", "73f4b4e71e99bbb3d8980", "746956181e93c755ba916", "757eadbcf4b783b01b2d1", "75868b4d012846aed4306", "75b476774bdd734149952", "75b7c23b07f63c181f349", "7618f06b30aa68a00a9f3", "761b14fa587296bcc6e23", "76c0ccbc90012c610b657", "76c55115c957208a5e381", "772eea63cb6ff85a99bb5", "77e53b84b2b017d5f3df9", "7872f57f5d02fe733e816", "78d1958d778e88cda9417", "79977eed7047648a38138", "79a5367e8c3fe4bfe8fe7", "79fc4d51e8db4687e3877", "7a963de2b12c8343fb570", "7ade40694035bc22113b8", "7bb603ee7eea9ee254611", "7c5f7072d057baf78c026", "7c9019b1b60679086ac38", "7d4670de77fac95a7ee62", "7dc4fc7304700f5455864", "7e0c67a155cbea12f3744", "7e33ce955a68dd9b0e636", "7ec24ccfbc9119357b5a2", "7ed865518f9ee22df4112", "7efc4b9abf60f48a46e19", "7f292f96b3fe9baa730b2", "7f5093485ae83db19dd94", "7f6d3360b8921559a0388", "80147dd690e85384e6c21", "8098094677385eb66a197", "809a4e5d17733c398bca9", "80f69cc92c04134f6f6e8", "8153cfef5c3fbcc215290", "818b0236489522271a7b1", "81b7cf07548ef2feccb97", "826705749ff68d64f3393", "827232f3edacf19027272", "82bd433cb90e4f19e8ad0", "833837794c36a009661e3", "834212a1b73fe54fb17d5", "83cfb78a40b5db99a23d3", "83f18d4ea13d561bc1a21", "847ca2f0aee9e7c13a098", "848f7f069db3c46157c91", "849fc88855db118495179", "858ec85903e002a2212e9", "85ca90198b5d4ef45fab9", "85cb41f8ab5431cd9a656", "868f9a28720c67a47a745", "86a86b4509ee0689dd089", "86b7862a6245376ed9507", "86f654c0c2b58a4c00d88", "872a43e8c9693fa60b8f0", "88849729220838bed39c8", "8951fe0f3f7919d9d03b8", "89c13093019657fc4c934", "8a884f32786023b36ad92", "8b3e6a44ac5295cbb4ab3", "8b4ca0218ec43c61cb5a4", "8b6b0c52e35e0360ae734", "8c54c29e2e95184b19142", "8c647997d967fa94ad465", "8c7e31e77b3a7066fb589", "8cc9d039741aa3662ed17", "8d372643a21affba9d886", "8d7b61d15c3c3caea9604", "8dab6bbb454cef8792c21", "8e38f4b1891536c5af431", "8efa8b285a9a6995154b7", "8f53ab634fe953fa21a47", "903076dd1779ec60bf524", "9049ae1ba7348f06aa7c8", "907a1d880a203a0119565", "90d18c08cb1d1bce76da4", "91411c41b5263b1858dd5", "91c09bfbf14583671ba02", "91dc7f56ed4e317072d13", "9278854e645257a158973", "92813e7bb4547a5241fe2", "929c1ca7d8c94cf65dd97", "92cd3c074337454858f52", "938210b11b547e2038389", "93cdfbfedb99004ac2932", "93fdefd5767d373590679", "940715db814965d3a5346", "9418f7659c4cfd22e6302", "94f4329d1aa8dbd88f4b6", "955fe487f7a151bfacaa0", "962f2900f17db1005d943", "9635fd6b7bd8c38316695", "96716646830e8e1b827d3", "96ade75bac8be46f4f077", "972fcbb628a591fe2e3b3", "976495f2aa97427455c38", "9783dc4193ca04e5f4af5", "97a0289db2e8065ff9ce2", "97a3998c5b173f61f5a27", "97e6ffeeaf74d32639116", "9840b0695a85455cda3c6", "9845e8fdbef3be3aa3941", "98843d7c1934e8d89ccd8", "989ff98e5e1ecc7151311", "990d0d90748df6b31f334", "995f3b85fac937b9693b2", "999e3c47cc6d755ee61b1", "9a6b2736f9885b7443ba3", "9ab4f96d75a00ca65ee40", "9ac608f465de9cddfcdb8", "9b7137c16c04cb5ee6726", "9bde6cac51dd6ca999408", "9bfbbc99fa084943e8db3", "9c227949beb77e6059146", "9cc8228747c3097aff036", "9cffe0479f9cc15645311", "9dbe1571ed5405ad08966", "9ded52791ed855b0e9906", "9e0619a9c6004f307d3f9", "9e1115d2f80cef92edaf2", "9e2ad0ae077272aea8714", "9f27f33a6afdac2992bd6", "9f4377396be3e6a6aa0c0", "9f5ef595b4ce993ef6769", "a009245a48e98a204a772", "a0622174740274de7a652", "a11c2d892efe76ed3eb74", "a147256efd104aa278cd3", "a169cb7f43fcc0a726305", "a1885fb4435e19040e843", "a1c006f119b2ec8f8a692", "a2ace35b09f7819bb91f7", "a334654826579a889cd28", "a34f468f2af1d7ad912b1", "a40854b02f83e9b949b76", "a4b4ed3eece89408faa61", "a647badb61cd9d5cf5346", "a67d85fe13c82144d4727", "a6b2b15c5d74175afde23", "a6b750b9e5702580ef432", "a71396f4f80c5e799f2b4", "a72d27261a1573048f8c9", "a7501f5226aee501bf7e8", "a81ad67791c6db2c8d463", "a840f464e9c03b83c0366", "a8d89b8891766da7a93c7", "a938a3e87565791aafe33", "a95a90ad9023b38ea6f69", "a983be427db854fac57c4", "aa00076146ad48a1587d4", "aac0db8bf9317bcf39336", "aaeccad9565033e7081d5", "ab62a58a2f997045249d0", "abe6c90f0118e674ffc41", "ac0a9561f6bb65938f8d6", "ac6d77e3abffa6045d409", "ad27cc9b97f9ca2b83077", "ad5e1b498df65a9d064c5", "ad902ccaa419e1c535cb7", "adb4ec5101e17e44a0506", "ae386c170b1cdb0b38ad4", "ae8fa8a16dd3f40689de3", "aeba4c2ff70736849d6e3", "aefe304407c7564c95cc3", "afa612f58b19a8274d5d6", "b07255de62ac492a26a85", "b0a17ac11fba31ad73bd2", "b0af1905ceed28444c4d9", "b3091a5e1a7107c002df4", "b32f5ff44fe2d1be15ad4", "b38a2cb675cfd00ee81c4", "b396254634fe19894b855", "b3f1cc100370227ccd697", "b472aa31eb37ce0f4f622", "b4f26567765d13c890cb9", "b5dcac7b4836378166414", "b5e13534eee506c960f91", "b5ec4be4d172906d988e4", "b66888e1f664870375206", "b6f63a0c82b2b7f6ae630", "b7b932f4243a91d33e567", "b81830cbc3569b3d99e60", "b82edf1eeb202c6abadb2", "b8db97859dbf1082ca971", "b91baf9b32922309e9b85", "b94aa12849ba24c985128", "b9745ca161d8bf82cf470", "ba9b7d8f19a8a9bccd752", "babd84a1c3e141677d0f3", "bbb6b947db1ab80394d90", "bc6945e47db9749439846", "bcbb838b6f894232c2863", "be580ede16742c2efdf87", "be5c2ff4e35cfb93f1d31", "bf30428548c6e3eef8d50", "bfe0011f5253f18c8ead1", "c03681183d090dccc1c89", "c069b5e953d9890746d04", "c07017a8e5ad3c976f682", "c0d4c2df0e7c4dcaecb89", "c0fcfd6c2f42b4ac51f81", "c11ad3000528b2e0c9508", "c14733a3c3e19019cbd85", "c1a13285664e7900ef9c4", "c21166e369c7b70c2d1c2", "c2474a8d6535234df33f5", "c257823a7630c3b6a2085", "c2a8e92420da10cc72085", "c2ff5f05bf2ad49c9eb16", "c376c7e0adffd3555a8d6", "c3906c98667f9cb1f01c9", "c3c6d291221e03f6b1741", "c3d8453dca05e155032e9", "c3ed65f88f4f29b1c1809", "c447250a244d957e77f22", "c44d535156162ce644dd0", "c4afa431079ed677f6584", "c5271ca1aeed6daf6f3f8", "c58e1107d15bb77247bf8", "c5ebc0897527372a1bcc0", "c6808de8b12e12f1a6846", "c6b19f35fe9212924ce96", "c7785382c7c2f213c1291", "c8462c6bf1cacd36371a9", "c8b034eb86129cc9da1d0", "c900e9cdc048c8c5b76c9", "c936da3b176244cbecb22", "c94463b08bdac1159a743", "c97eadc0754c23004f567", "c9d916ace1ccf44a59368", "ca1864d0fa0d2235c8849", "cb4c4c023dd39a199e260", "cb4fad82298da4b277450", "cb652b4c36c36bb07bc90", "cbc0ace7e4713faa52940", "cbd87f6e66aeae68d9756", "cc9c77ff3e1c969006b42", "cce5411b0b4da3904d451", "cd866c0b686b340963f49", "cd901a904d7bb62d64172", "cddcb78a805cfd04ef9b9", "ce17233e04913931dd5d9", "ce31724f3060e72515fd3", "ce4d60ff5801d52f456c3", "ce59172f05f943fc46b38", "ce9ed6bd0473068c21013", "cf9786b6dffebbac86f92", "cffebf41385039e334567", "d090b1f98ec520d9e3e23", "d1364eef46e7231a46b16", "d1409e53e88c133ffd702", "d145f50022478157c0299", "d1c1a9c8d12e4ad7fcfa8", "d1c97e22049460080da32", "d1ca60c7c7c808e5eac73", "d1eaabe62012219e48359", "d2b4ebebb3521b6395c78", "d3a5d8aa6d702983f5f86", "d3c9f1c282f3177aff620", "d43ddf6cd1cbab79069f7", "d4e21ce8b1f08eb6670d3", "d4e327822b52943c94d73", "d5b48306e5377300cf429", "d5b8a122684440a512552", "d5ea1e1e639e7b4ac7376", "d6ddb7b85c841ad015551", "d71aecbf54f3266d3ac75", "d75d2f33c1ca37f8397a2", "d789873ebc91c63106d96", "d7c21e54897503215f0d8", "d7c45bf083054fa808aa0", "d7dff4dffe57792946286", "d84af25234bdd94dd4870", "d84dc10a77495991d8c45", "d8514b4207611761ac093", "d91d1e167b084b5d12776", "d938028dc3df9660f34a2", "d973450d7fb5e63a1f545", "daa84ef6b841c6a689ab5", "db4b0e1ced7ff36b8d3a9", "dbe27932888bbdc6e4839", "dbfe6169076861bc8d3c9", "dc4476bb7913f343fd3b4", "dd034b1760e044a27f291", "dd2c492d37f08aebf48a8", "dd6fca47234e193b3aba5", "dded5080c7bff3ea767e2", "de9bbeb16b47abfd1a128", "df30f998c35437aa64265", "df5520c4e754df661a7a2", "df71c39bc5d9212c99d81", "dfa32f5c57df746addb77", "dfb85ad028296851b4975", "e01abbec850b49c8b44e5", "e03580823059f12c7a826", "e0da666104a42e666de91", "e1047a3b5b17519103ee9", "e158b108d8b23d3f25b71", "e1695ff50c23183d1e9b3", "e1e03a2a554ae3df5f152", "e2415466ed601cbe2d110", "e2582ff3f2bd924c05170", "e25ee398428817ba8c205", "e26e8bc9759b55e411c74", "e2d009d2f1eb0e3ecd7c5", "e4162ad3e7fabdefd5677", "e4263a6377e090bb724a6", "e4263c5b17aca8c223934", "e44aa9e5b399531e22628", "e53454bae899bc7b2dfc9", "e5373e9220f8c10c5d584", "e59e44404dd5a1003b532", "e5b5f3c83a7b0b8a88d33", "e6b0e5ffe37f9469c34e7", "e751a4a6919da32a3f8a4", "e7601274668424fd8b555", "e7758265480ce22d23f63", "e787e4b95402af11073a9", "e91be3fa5cdcdbe578a22", "e9f57ffa0300c519418a3", "ea5ac2dae8c062236cc43", "eb3ebc3561ab3645d27e0", "eb3faf0f1069907e7b1f3", "eb8701203d63de265f6e7", "ec61cf25e3238a458cf23", "ecbb08e4f49b313e5bfb9", "ed946ffe3ae4744fa06a3", "edc211f156270e857c7e6", "eddbcdea6d7743570b4f8", "ef07ecbf6c1aaaef42173", "efbc5e8625e480f11db90", "efcfe465ccfde5e4a8ec7", "f02869aaff993e24b89d7", "f05c98613030b06c2ee49", "f0b585d6398846414c522", "f26aaf155a46b16927e67", "f2a191b6b2a86121bc8e1", "f2a214f2fb110de6ffbf4", "f2a267f216f69ce03ba67", "f2f21bd8dd21678486fb8", "f3877c3fc4cae430ce104", "f39f28e1ed811baf01b81", "f3cfe4f8ce400b47a53d1", "f3e48389f07eaea80d6c4", "f40276a73c4324a389387", "f409da857cf87135a77c5", "f453b63d7ab5487dc92d4", "f455a70a87f8de93369d0", "f60111e6ae548f6728889", "f64065442c72d43bd48e3", "f709e9d778dd1516d9f26", "f745c706f964b4b6798b6", "f78608554742d582ff7b5", "f7a70edd924f56a1a3987", "f7d6befcde79258d6f2d8", "f832fa4c081bc13eff135", "f87468c83a24b0b1315c6", "f878daf1b7754586b6d13", "fa1528f0dbf7174985449", "faa8d25bf693f73f1da13", "fabf8ded81447c8a277f0", "faec240446d89c4ac1e72", "fb01b98ec7ca2e694dad5", "fb13c87fe69653ce21dd3", "fb39da2009d55282a9148", "fb9bc352ea8b959aed818", "fca52e9abec40b12a00d8", "fcd26d5514510918ccd58", "fcd2897d284a487fb1a07", "fd55c3f2865f09ecfafd7", "fd9f0a4164f043cec4249", "fddb90ff9828bcd0523c0", "fde91fded02e4e60b0907", "fe9d09c015a6ee90647d2"], "id": "lock5_globe"}]}</script>
+<script>
+function sha256(ascii){
+  function rightRotate(v,a){return (v>>>a)|(v<<(32-a))}
+  var mathPow=Math.pow,maxWord=mathPow(2,32),i,j,result='',words=[],bitLen=ascii.length*8;
+  var hash=sha256.h=sha256.h||[],k=sha256.k=sha256.k||[],pc=k.length,comp={};
+  for(var c=2;pc<64;c++){if(!comp[c]){for(i=0;i<313;i+=c)comp[i]=c;hash[pc]=(mathPow(c,.5)*maxWord)|0;k[pc++]=(mathPow(c,1/3)*maxWord)|0}}
+  ascii+='\x80';while(ascii.length%64-56)ascii+='\x00';
+  for(i=0;i<ascii.length;i++){j=ascii.charCodeAt(i);words[i>>2]|=j<<((3-i)%4)*8}
+  words[words.length]=((bitLen/maxWord)|0);words[words.length]=(bitLen);
+  for(j=0;j<words.length;){
+    var w=words.slice(j,j+=16),old=hash;hash=hash.slice(0,8);
+    for(i=0;i<64;i++){
+      var w15=w[i-15],w2=w[i-2],a=hash[0],e=hash[4];
+      var t1=hash[7]+(rightRotate(e,6)^rightRotate(e,11)^rightRotate(e,25))+((e&hash[5])^((~e)&hash[6]))+k[i]+(w[i]=(i<16)?w[i]:(w[i-16]+(rightRotate(w15,7)^rightRotate(w15,18)^(w15>>>3))+w[i-7]+(rightRotate(w2,17)^rightRotate(w2,19)^(w2>>>10)))|0);
+      var t2=(rightRotate(a,2)^rightRotate(a,13)^rightRotate(a,22))+((a&hash[1])^(a&hash[2])^(hash[1]&hash[2]));
+      hash=[(t1+t2)|0].concat(hash);hash[4]=(hash[4]+t1)|0;
+    }
+    for(i=0;i<8;i++)hash[i]=(hash[i]+old[i])|0;
+  }
+  for(i=0;i<8;i++)for(j=3;j+1;j--){var b=(hash[i]>>(j*8))&255;result+=((b<16)?0:'')+b.toString(16)}
+  return result;
+}
+function sha256u(s){return sha256(unescape(encodeURIComponent(s)))}
+
+(function(){
+  var PACKET='CPUSH_L16_ESCAPE';
+  var STORE='cpush_l16_escape-room_';
+  var D=JSON.parse(document.getElementById('er-data').textContent);
+  var $=function(i){return document.getElementById(i)};
+  var S;
+  var digits={};            // runtime only: lock n -> digit
+  var entries={};           // lock id -> {h20: maskedDigit}
+  var expanded={};
+  var lastTick=0,timer=null;
+
+  function squash(t){return String(t).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'')}
+  function h20(s){return sha256u(s).slice(0,20)}
+  D.locks.forEach(function(L){var m={};L.entries.forEach(function(e){m[e.slice(0,20)]=+e.slice(20)});entries[L.id]=m});
+
+  function checkLock(L,canon){
+    var salt=D.salt+L.n+':';
+    var h=h20(salt+canon),mk=entries[L.id][h];
+    if(mk===undefined)return null;
+    var m=parseInt(sha256u('m:'+salt+canon).slice(0,2),16)%10;
+    return (mk-m+10)%10;
+  }
+  function fresh(){
+    var o={first:'',last:'',period:'',started:false,elapsed:0,escaped:false,escapeMs:0,debrief:'',codeTries:0,locks:{}};
+    D.locks.forEach(function(L){o.locks[L.id]={solved:false,attempts:0,hints:0,guess:'',readable:''}});
+    return o;
+  }
+  function loadLocal(){var o=fresh();try{var r=JSON.parse(localStorage.getItem(STORE+'state')||'null');if(r)restore(o,r)}catch(e){}return o}
+  function persist(){try{localStorage.setItem(STORE+'state',JSON.stringify(snapshot()))}catch(e){}}
+
+  function totals(){
+    var t={locksSolved:0,attempts:0,hintsUsed:0,exitCodeAttempts:S.codeTries};
+    D.locks.forEach(function(L){var l=S.locks[L.id];if(l.solved)t.locksSolved++;t.attempts+=l.attempts;t.hintsUsed+=l.hints});
+    return t;
+  }
+  function fmt(ms){var s=Math.round(ms/1000),m=Math.floor(s/60);s=s%60;return (m<10?'0':'')+m+':'+(s<10?'0':'')+s}
+  function snapshot(){
+    var o={packet:PACKET,course:'CPUSH',lesson:16,assignment:'Escape Room (Lite)',version:1,saved:new Date().toISOString(),
+      student:{first:$('f_first').value.trim(),last:$('f_last').value.trim(),period:$('f_period').value.trim()},
+      status:S.escaped?'ESCAPED':'INCOMPLETE',escaped:S.escaped,
+      escapeTime:S.escaped?{ms:S.escapeMs,text:fmt(S.escapeMs)}:null,
+      totals:totals(),elapsedMs:Math.round(S.elapsed),started:S.started,locks:{},debrief:$('debriefText')?$('debriefText').value:S.debrief};
+    D.locks.forEach(function(L){var l=S.locks[L.id];
+      o.locks[L.key]={objective:L.obj,puzzleType:L.type,solved:l.solved,attempts:l.attempts,hintsUsed:l.hints,solvedWith:l.readable,solvedGuess:l.guess}});
+    return o;
+  }
+  function restore(o,r){
+    if(!r||typeof r!=='object')return false;
+    var st=r.student||{};
+    o.first=st.first||'';o.last=st.last||'';o.period=st.period||'';
+    o.started=!!r.started;o.elapsed=+r.elapsedMs||0;o.debrief=typeof r.debrief==='string'?r.debrief:'';
+    o.codeTries=(r.totals&&+r.totals.exitCodeAttempts)||0;
+    var allOk=true;
+    D.locks.forEach(function(L){
+      var src=(r.locks&&r.locks[L.key])||{},l=o.locks[L.id];
+      l.attempts=+src.attempts||0;l.hints=Math.min(+src.hintsUsed||0,L.hints.length+0);
+      if(src.hintsUsed>L.hints.length)l.hints=L.hints.length;
+      if(src.solved&&typeof src.solvedGuess==='string'){
+        var d=checkLock(L,src.solvedGuess);
+        if(d!==null){l.solved=true;l.guess=src.solvedGuess;l.readable=String(src.solvedWith||'');digits[L.n]=d}else allOk=false;
+      }else allOk=false;
+    });
+    if(r.escaped&&allOk&&r.escapeTime){o.escaped=true;o.escapeMs=+r.escapeTime.ms||0}
+    return true;
+  }
+
+  /* ---------- scene ---------- */
+  var NS='http://www.w3.org/2000/svg';
+  var XS=[210,255,300,345,390];
+  (function(){
+    var g=$('plocks'),h='';
+    XS.forEach(function(x,i){
+      h+='<g class="plock" id="pl'+(i+1)+'"><path class="sh" d="M'+(x-8)+' 124V114a8 8 0 0 1 16 0V124" fill="none" stroke="#F4F0EB" stroke-width="4"/><rect class="bd" x="'+(x-15)+'" y="124" width="30" height="24" rx="4" fill="#4B90D2"/><circle cx="'+x+'" cy="135" r="3" fill="#47361F"/></g>'+
+      '<rect x="'+(x-16)+'" y="158" width="32" height="36" rx="5" fill="#251C10" stroke="#8EB8E1"/><text id="dw'+(i+1)+'" x="'+x+'" y="184" text-anchor="middle" font-size="24" font-weight="800" fill="#F4F0EB">?</text><text x="'+x+'" y="208" text-anchor="middle" font-size="11" font-weight="700" fill="#D6CCBD">LOCK '+(i+1)+'</text>';
+    });
+    g.innerHTML=h;
+  })();
+  function sceneUpdate(){
+    D.locks.forEach(function(L){
+      var open=S.locks[L.id].solved;
+      $('pl'+L.n).setAttribute('class','plock'+(open?' open':''));
+      $('dw'+L.n).textContent=open?digits[L.n]:'?';
+    });
+    $('scene').classList.toggle('escaped',S.escaped);
+  }
+
+  /* ---------- build lock cards ---------- */
+  var W={};   // widget state per lock
+  var LOCKSVG='<svg class="lk" viewBox="0 0 44 44" aria-hidden="true"><path class="sh" d="M13 20V14a9 9 0 0 1 18 0V20" fill="none" stroke="#F4F0EB" stroke-width="4"/><rect class="bd" x="8" y="20" width="28" height="20" rx="4" fill="#4B90D2"/><circle cx="22" cy="30" r="3" fill="#47361F"/></svg>';
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+  function buildLock(L){
+    var sec=document.createElement('section');sec.className='lock glass locked';sec.id='lock'+L.n;
+    var head='<button class="lh" type="button" id="lh'+L.n+'" aria-expanded="false">'+LOCKSVG+'<span class="lt"><small>LOCK '+L.n+' · '+L.objLabel+'</small><strong>'+esc(L.title)+'</strong></span><span class="dg" id="dg'+L.n+'" aria-label="digit">?</span></button>';
+    var body='<div class="lb" id="lb'+L.n+'"><p class="objline">'+esc(L.objText)+'</p>'+
+      '<div class="card"><h4>CLUE CARD</h4>'+L.card+'<p class="src">'+L.src+'</p></div>'+
+      '<div class="prompt">'+L.prompt+'</div><div id="pz'+L.n+'"></div>'+
+      '<div class="row"><button class="btn primary" type="button" id="ck'+L.n+'">Check</button><button class="btn small" type="button" id="hb'+L.n+'">Hint</button><button class="btn small" type="button" id="rs'+L.n+'">Clear</button></div>'+
+      '<div class="hints" id="hs'+L.n+'"></div><div class="fb" id="fb'+L.n+'" role="status"></div></div>';
+    sec.innerHTML=head+body;
+    $('locks').appendChild(sec);
+    buildPuzzle(L);
+    $('lh'+L.n).addEventListener('click',function(){
+      var st=lockState(L);if(st==='locked')return;
+      expanded[L.n]=!expanded[L.n];updateLocks();
+    });
+    $('ck'+L.n).addEventListener('click',function(){submit(L)});
+    $('hb'+L.n).addEventListener('click',function(){hint(L)});
+    $('rs'+L.n).addEventListener('click',function(){clearPuzzle(L)});
+  }
+  function labelOf(list,id){for(var i=0;i<list.length;i++)if(list[i].id===id)return list[i].label;return id}
+
+  function buildPuzzle(L){
+    var el=$('pz'+L.n),w=W[L.n]={};
+    if(L.type==='order'){
+      w.sel=[];el.innerHTML='<div class="chips" id="ch'+L.n+'"></div>';
+      renderOrder(L);
+    }else if(L.type==='match'){
+      var h='';
+      L.terms.forEach(function(t){
+        h+='<div class="mrow"><label for="m'+L.n+t.id+'">'+esc(t.label)+'</label><select id="m'+L.n+t.id+'"><option value="">Choose a description...</option>';
+        L.descs.forEach(function(d){h+='<option value="'+d.id+'">'+esc(d.label)+'</option>'});
+        h+='</select></div>';
+      });
+      el.innerHTML=h;
+    }else if(L.type==='pick'){
+      var h2='';
+      L.qs.forEach(function(q){
+        h2+='<fieldset><legend>'+esc(q.q)+'</legend>';
+        q.opts.forEach(function(o){h2+='<label class="opt"><input type="radio" name="q'+L.n+q.id+'" value="'+o.id+'"> <span>'+esc(o.label)+'</span></label>'});
+        h2+='</fieldset>';
+      });
+      el.innerHTML=h2;
+    }else if(L.type==='decode'){
+      var k1='',k2='';
+      for(var i=0;i<26;i++){var p=String.fromCharCode(65+i),c=String.fromCharCode(65+(i+L.shift)%26);k1+='<div class="c">'+c+'</div>';k2+='<div>'+p+'</div>'}
+      // build key in two rows of 13
+      var key='';
+      for(var r=0;r<2;r++){for(var j=0;j<13;j++){var idx=r*13+j;key+='<div class="c">'+String.fromCharCode(65+(idx+L.shift)%26)+'</div>'}for(var j2=0;j2<13;j2++){key+='<div>'+String.fromCharCode(65+r*13+j2)+'</div>'}}
+      el.innerHTML='<div class="cipher" translate="no" aria-label="Coded message">'+esc(L.cipher)+'</div><p style="margin:.6em 0 0;font-size:15px;color:var(--dim)">Decoder key: the <span style="color:var(--hl);font-weight:700">blue</span> letter is in the message. The white letter under it is the real letter.</p><div class="key" aria-hidden="true">'+key+'</div><label>Decoded answer<input type="text" id="tx'+L.n+'" autocomplete="off" autocapitalize="none" spellcheck="false"></label><p class="ennote">Type the answer in English.</p>';
+    }else if(L.type==='fill'){
+      el.innerHTML='<p style="font-size:18px;margin:.2em 0">'+esc(L.sentence)+'</p><div class="scr" translate="no" aria-label="Scrambled letters">'+esc(L.scramble)+'</div><p style="margin:.4em 0;font-size:14px;color:var(--dim)">Unscramble the letters to fill the blank.</p><label>Your answer<input type="text" id="tx'+L.n+'" autocomplete="off" autocapitalize="none" spellcheck="false"></label><p class="ennote">Type the answer in English.</p>';
+    }
+    var t=$('tx'+L.n);
+    if(t)t.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();submit(L)}});
+  }
+  function renderOrder(L){
+    var w=W[L.n],ch=$('ch'+L.n),h='';
+    L.items.forEach(function(it){
+      var pos=w.sel.indexOf(it.id);
+      h+='<button type="button" class="chip'+(pos>=0?' sel':'')+'" data-id="'+it.id+'" aria-pressed="'+(pos>=0)+'">'+(pos>=0?'<span class="n">'+(pos+1)+'</span>':'')+'<span>'+esc(it.label)+'</span></button>';
+    });
+    ch.innerHTML=h;
+    [].forEach.call(ch.querySelectorAll('.chip'),function(b){
+      b.addEventListener('click',function(){
+        if(S.locks[L.id].solved)return;
+        var id=b.getAttribute('data-id'),p=w.sel.indexOf(id);
+        if(p>=0)w.sel.splice(p,1);else w.sel.push(id);
+        renderOrder(L);
+      });
+    });
+  }
+  function clearPuzzle(L){
+    if(S.locks[L.id].solved)return;
+    var w=W[L.n];
+    if(L.type==='order'){w.sel=[];renderOrder(L)}
+    else if(L.type==='match'){L.terms.forEach(function(t){$('m'+L.n+t.id).value=''})}
+    else if(L.type==='pick'){L.qs.forEach(function(q){[].forEach.call(document.getElementsByName('q'+L.n+q.id),function(r){r.checked=false})})}
+    else{$('tx'+L.n).value=''}
+    fb(L,'','');
+  }
+  function guessOf(L){
+    // returns {canon, readable} or {err}
+    if(L.type==='order'){
+      var w=W[L.n];
+      if(w.sel.length<L.items.length)return {err:'Tap all '+L.items.length+' events first, in order.'};
+      return {canon:w.sel.join('|'),readable:w.sel.map(function(i){return labelOf(L.items,i)}).join(' > ')};
+    }
+    if(L.type==='match'){
+      var c=[],r=[];
+      for(var i=0;i<L.terms.length;i++){var t=L.terms[i],v=$('m'+L.n+t.id).value;if(!v)return {err:'Match every term first.'};c.push(v);r.push(t.label+' = '+labelOf(L.descs,v))}
+      return {canon:c.join('|'),readable:r.join('; ')};
+    }
+    if(L.type==='pick'){
+      var c2=[],r2=[];
+      for(var j=0;j<L.qs.length;j++){var q=L.qs[j],v2='';[].forEach.call(document.getElementsByName('q'+L.n+q.id),function(x){if(x.checked)v2=x.value});if(!v2)return {err:'Answer every question first.'};c2.push(v2);r2.push(labelOf(q.opts,v2))}
+      return {canon:c2.join('|'),readable:r2.join('; ')};
+    }
+    var raw=$('tx'+L.n).value.trim();
+    if(!raw)return {err:'Type your answer first.'};
+    return {canon:squash(raw),readable:raw.slice(0,80)};
+  }
+  function fb(L,cls,text){var e=$('fb'+L.n);e.className='fb'+(cls?' show '+cls:'');e.textContent=text}
+  function submit(L){
+    var l=S.locks[L.id];if(l.solved)return;
+    var g=guessOf(L);
+    if(g.err){fb(L,'nudge',g.err);return}
+    l.attempts++;
+    var d=checkLock(L,g.canon);
+    if(d===null){
+      fb(L,'nudge',L.nudge);
+      var s=$('lock'+L.n);s.classList.remove('shake');void s.offsetWidth;s.classList.add('shake');
+      persist();updateBar();return;
+    }
+    l.solved=true;l.guess=g.canon;l.readable=g.readable;digits[L.n]=d;
+    fb(L,'good','Click! Lock '+L.n+' is open. Your digit is '+d+'.');
+    var wh=$('wheel');wh.classList.remove('spin');void wh.getBoundingClientRect();wh.classList.add('spin');
+    $('dw'+L.n).classList.add('pop');
+    persist();updateAll();
+    setTimeout(function(){
+      expanded[L.n]=false;
+      var nx=nextOpen();if(nx)expanded[nx]=true;
+      updateLocks();
+      var tgt=nx?$('lock'+nx):$('exit');
+      if(tgt&&tgt.scrollIntoView)tgt.scrollIntoView({behavior:'smooth',block:'start'});
+    },1600);
+  }
+  function hint(L){
+    var l=S.locks[L.id];
+    if(l.solved)return;
+    if(l.hints<L.hints.length){l.hints++;persist();updateHints(L);updateBar()}
+    else{fb(L,'nudge','That was the last hint. Read the Clue Card slowly and try again.')}
+  }
+  function updateHints(L){
+    var l=S.locks[L.id],h='';
+    for(var i=0;i<l.hints;i++)h+='<div class="hint"><b>Hint '+(i+1)+':</b> <span>'+esc(L.hints[i])+'</span></div>';
+    $('hs'+L.n).innerHTML=h;
+  }
+  function nextOpen(){for(var i=0;i<D.locks.length;i++)if(!S.locks[D.locks[i].id].solved)return D.locks[i].n;return 0}
+  function lockState(L){
+    if(S.locks[L.id].solved)return 'solved';
+    return L.n===nextOpen()?'current':'locked';
+  }
+  function updateLocks(){
+    var cur=nextOpen();
+    D.locks.forEach(function(L){
+      var st=lockState(L),sec=$('lock'+L.n);
+      if(st==='current'&&expanded[L.n]===undefined)expanded[L.n]=true;
+      var open=(st!=='locked')&&!!expanded[L.n];
+      sec.className='lock glass '+st+(open?' open':'');
+      $('lh'+L.n).setAttribute('aria-expanded',open?'true':'false');
+      $('dg'+L.n).textContent=S.locks[L.id].solved?digits[L.n]:'?';
+      if(S.locks[L.id].solved){
+        [].forEach.call(sec.querySelectorAll('input,select,button.chip,#ck'+L.n+',#hb'+L.n+',#rs'+L.n),function(x){x.disabled=true});
+        var f=$('fb'+L.n);if(!f.classList.contains('good'))fb(L,'good','Unlocked. Your digit is '+digits[L.n]+'.'+(S.locks[L.id].readable?' Your answer: '+S.locks[L.id].readable:''));
+      }
+      updateHints(L);
+    });
+  }
+  function codeStr(){var s='';for(var i=1;i<=5;i++)s+=(digits[i]===undefined?'':digits[i]);return s}
+  function allSolved(){return D.locks.every(function(L){return S.locks[L.id].solved})}
+  function updateExit(){
+    var ok=allSolved();
+    $('exit').classList.toggle('locked',!ok);
+    $('codeBtn').disabled=!ok||S.escaped;
+    [].forEach.call($('codebox').querySelectorAll('input'),function(i){i.disabled=!ok||S.escaped});
+    $('exitNote').textContent=S.escaped?'The door is open!':(ok?'All 5 locks are open. Type the 5 digits in order, Lock 1 first.':'Open all 5 locks first. The digits go in order: Lock 1 first.');
+  }
+  function updateBar(){
+    var t=totals();
+    $('lc').textContent=t.locksSolved;$('hc').textContent=t.hintsUsed;
+    $('tm').textContent=fmt(S.escaped?S.escapeMs:S.elapsed);
+  }
+  function updateStatus(){
+    var el=$('status'),db=($('debriefText').value.trim().length);
+    if(S.escaped)el.textContent=db>=40?'You escaped and wrote your Debrief. Ready to submit.':'You escaped! Write your Debrief, then download your file to submit.';
+    else el.textContent='Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.';
+  }
+  function updateEsc(){
+    $('esc').classList.toggle('show',S.escaped);
+    if(S.escaped){var t=totals();$('escTime').textContent=fmt(S.escapeMs);$('escSum').textContent='5 of 5 locks opened with '+t.attempts+' tries and '+t.hintsUsed+' hint'+(t.hintsUsed===1?'':'s')+'.'}
+  }
+  function updateAll(){sceneUpdate();updateLocks();updateExit();updateBar();updateEsc();updateStatus();
+    $('intro').classList.toggle('hidden',S.started);$('game').classList.toggle('hidden',!S.started);$('loadOnly').classList.toggle('hidden',S.started);
+  }
+
+  /* ---------- exit code ---------- */
+  (function(){
+    var cb=$('codebox');
+    for(var i=0;i<5;i++){
+      var inp=document.createElement('input');inp.type='text';inp.inputMode='numeric';inp.maxLength=1;inp.setAttribute('aria-label','Exit code digit '+(i+1));inp.disabled=true;
+      (function(i,inp){
+        inp.addEventListener('input',function(){inp.value=inp.value.replace(/[٠-٩]/g,function(c){return c.charCodeAt(0)-1632}).replace(/[۰-۹]/g,function(c){return c.charCodeAt(0)-1776}).replace(/[^0-9]/g,'');if(inp.value&&i<4)cb.children[i+1].focus()});
+        inp.addEventListener('keydown',function(e){
+          if(e.key==='Backspace'&&!inp.value&&i>0)cb.children[i-1].focus();
+          if(e.key==='Enter'){e.preventDefault();tryCode()}
+        });
+        inp.addEventListener('paste',function(e){
+          var t=(e.clipboardData||window.clipboardData).getData('text').replace(/[٠-٩]/g,function(c){return c.charCodeAt(0)-1632}).replace(/[۰-۹]/g,function(c){return c.charCodeAt(0)-1776}).replace(/[^0-9]/g,'');
+          if(t.length>1){e.preventDefault();for(var k=0;k<5;k++)cb.children[k].value=t[k]||''}
+        });
+      })(i,inp);
+      cb.appendChild(inp);
+    }
+  })();
+  function tryCode(){
+    if(!allSolved()||S.escaped)return;
+    var v='';[].forEach.call($('codebox').querySelectorAll('input'),function(i){v+=i.value});
+    var f=$('codefb');
+    if(v.length<5){f.className='fb show nudge';f.textContent='The code has 5 digits. Fill every box.';return}
+    S.codeTries++;
+    if(h20('exit:'+D.salt+v)!==D.exitHash){
+      f.className='fb show nudge';f.textContent='The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.';
+      var ex=$('exit');ex.classList.remove('shake');void ex.offsetWidth;ex.classList.add('shake');
+      persist();return;
+    }
+    S.escaped=true;S.escapeMs=S.elapsed;
+    f.className='fb show good';f.textContent='The door swings open!';
+    persist();updateAll();
+    setTimeout(function(){$('esc').scrollIntoView({behavior:'smooth',block:'start'})},900);
+  }
+  $('codeBtn').addEventListener('click',tryCode);
+
+  /* ---------- timer ---------- */
+  function tick(){
+    var n=Date.now();
+    if(S.started&&!S.escaped){S.elapsed+=Math.min(n-lastTick,5000);$('tm').textContent=fmt(S.elapsed)}
+    lastTick=n;
+  }
+  function startTimer(){lastTick=Date.now();if(!timer)timer=setInterval(function(){tick();if(Math.round(S.elapsed/1000)%10===0)persist()},1000)}
+
+  /* ---------- files ---------- */
+  function msg(t,err){var m=$('msg');m.textContent=t;m.className='msg'+(err?' err':'');m.style.display='block'}
+  function ascii(n){return String(n).normalize('NFD').replace(/[̀-ͯ]/g,'')}
+  function clean(n){n=window.spAscii?spAscii(n):n;return ascii(n).trim().replace(/\s+/g,'_').replace(/[^A-Za-z0-9_-]/g,'')}
+  function who(){return (clean($('f_last').value)||'Last')+'_'+(clean($('f_first').value)||'First')}
+  function download(name,obj){
+    var blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;
+    document.body.appendChild(a);a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);
+  }
+  function namesOk(){
+    var ids=['f_first','f_last','f_period'],ok=true;
+    ids.forEach(function(i){var f=$(i);if(!f.value.trim()){f.classList.add('bad');ok=false}});
+    if(!ok){msg('Enter your first name, last name, and period at the top first.',true);$('f_first').scrollIntoView({block:'center'})}
+    return ok;
+  }
+  ['f_first','f_last','f_period'].forEach(function(i){$(i).addEventListener('input',function(){$(i).classList.remove('bad');S[i.slice(2)]=$(i).value;persist()})});
+  $('debriefText').addEventListener('input',function(){S.debrief=$('debriefText').value;persist();updateStatus()});
+  $('saveBtn').addEventListener('click',function(){
+    if(!namesOk())return;tick();
+    download(who()+'-'+PACKET+'-PROGRESS.json',snapshot());
+    msg('Progress file downloaded. Use Load Progress to continue later.');
+  });
+  $('finishBtn').addEventListener('click',function(){
+    if(!namesOk())return;tick();
+    var now=new Date(),o=snapshot();o.completed=S.escaped;o.submitted=now.toISOString();
+    o.student.date=now.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+    download(who()+'-'+PACKET+'.json',o);
+    msg(S.escaped?('Done! File downloaded: '+who()+'-'+PACKET+'.json. Upload it to Canvas.'):('Your file downloaded and is marked INCOMPLETE (you have not escaped). Upload it to Canvas: '+who()+'-'+PACKET+'.json'));
+  });
+  function openLoad(){$('loadFile').click()}
+  $('loadBtn').addEventListener('click',openLoad);$('loadBtn0').addEventListener('click',openLoad);
+  $('loadFile').addEventListener('change',function(e){
+    var f=e.target.files[0];if(!f)return;
+    var r=new FileReader();
+    r.onload=function(){
+      try{
+        var o=JSON.parse(r.result);
+        if(!o||o.packet!==PACKET||typeof o.locks!=='object')throw new Error('wrong');
+        digits={};var n=fresh();restore(n,o);S=n;applyToDom();
+        msg('Progress loaded. Welcome back.');
+      }catch(err){msg('That file did not work. Choose a progress file saved from this Escape Room.',true)}
+      e.target.value='';
+    };
+    r.onerror=function(){msg('The file could not be read.',true)};
+    r.readAsText(f);
+  });
+  $('reset').addEventListener('click',function(){
+    if(!confirm('Clear all your work and start over? This cannot be undone.'))return;
+    digits={};expanded={};S=fresh();
+    try{localStorage.removeItem(STORE+'state')}catch(e){}
+    $('locks').innerHTML='';D.locks.forEach(buildLock);
+    $('f_first').value=$('f_last').value=$('f_period').value='';$('debriefText').value='';
+    [].forEach.call($('codebox').querySelectorAll('input'),function(i){i.value=''});$('codefb').className='fb';
+    applyToDom();
+  });
+  function applyToDom(){
+    $('f_first').value=S.first;$('f_last').value=S.last;$('f_period').value=S.period;$('debriefText').value=S.debrief;
+    // rebuild lock widgets, then pre-fill solved ones with readable note
+    $('locks').innerHTML='';D.locks.forEach(buildLock);
+    expanded={};
+    updateAll();
+    if(S.started)startTimer();
+  }
+  $('startBtn').addEventListener('click',function(){S.started=true;persist();startTimer();updateAll();$('game').scrollIntoView({behavior:'smooth'})});
+  window.addEventListener('beforeunload',function(){tick();persist()});
+
+  S=loadLocal();
+  D.locks.forEach(buildLock);
+  applyToDom();
+})();
+</script>
+<!--sp-i18n--><script type="application/json" id="sp-i18n">{"langs":["en","es","ar"],"default":"en","es":{"Save Progress":"Guardar progreso","Load Progress":"Cargar progreso","Finished — Download File to Submit":"Terminé — Descargar el archivo para entregar","Clear all my answers":"Borrar todas mis respuestas","FIRST NAME *":"NOMBRE *","LAST NAME *":"APELLIDO *","PERIOD *":"PERÍODO *","DATE (fills in when you finish)":"FECHA (se llena cuando terminas)","e.g. 3":"p. ej., 3","Automatic":"Automática","Please type your first name, last name, and period first.":"Primero escribe tu nombre, apellido y período.","Western Expansion and Southern Secession":"Expansión hacia el oeste y secesión del sur","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — La Ley de Esclavos Fugitivos","Bleeding Kansas":"Bleeding Kansas — Kansas sangriento","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"Se descargó tu archivo de progreso. Guárdalo bien. Usa «Cargar progreso» para continuar más tarde.","Progress loaded.":"Progreso cargado.","Could not read that file.":"No se pudo leer ese archivo.","Treaty of Guadalupe Hidalgo":"Tratado de Guadalupe Hidalgo","A 1942 program in which Mexico agreed to provide seasonal farmworkers for U.S. farms":"Un programa de 1942 en el que México aceptó proporcionar trabajadores agrícolas de temporada para las granjas de Estados Unidos","A Far-Right form of government in which a dictator gained power through emotional appeals to nationalism":"Una forma de gobierno de extrema derecha en la que un dictador ganaba poder con llamados emocionales al nacionalismo","A form of government in which citizens vote on every law":"Una forma de gobierno en la que los ciudadanos votan cada ley","A government campaign that told the story of a woman riveter to help recruit women workers":"Una campaña del gobierno que contó la historia de una mujer remachadora para ayudar a reclutar trabajadoras","A map room from the war years at night. On the left, a wall map with pins and a dotted route hangs above a table with a globe on a stand, and rolled maps sit on the floor. On the right, a clock and a framed compass rose hang above a chest of map drawers with a radio set on top. The door has a MAP ROOM sign and five padlocks in a row. Under each padlock is a window for one digit of the exit code.":"Una sala de mapas de los años de la guerra, de noche. A la izquierda, un mapa de pared con alfileres y una ruta de puntos cuelga sobre una mesa con un globo terráqueo en su soporte, y hay mapas enrollados en el piso. A la derecha, un reloj y una rosa de los vientos enmarcada cuelgan sobre un mueble de cajones para mapas con una radio encima. La puerta tiene un letrero de SALA DE MAPAS y cinco candados en fila. Debajo de cada candado hay una ventanita para un dígito del código de salida.","A peace treaty that ended the Great War":"Un tratado de paz que puso fin a la Gran Guerra","A plan to end unemployment with public works":"Un plan para acabar con el desempleo con obras públicas","A wish to share power with other parties":"El deseo de compartir el poder con otros partidos","After 1919, democracy was in retreat. Fascism was a Far-Right form of government in which a dictator gained power through emotional appeals to nationalism and by demonizing political enemies, the press, and other groups. In 1922, Benito Mussolini and 40,000 black-shirted supporters seized control of Italy. Adolf Hitler was appointed chancellor of Germany on January 30, 1933, and his movement built on claims of racial superiority and on anger over Germany’s defeat in the Great War. In Asia, the Japanese government fell under the control of military expansionists who wanted to conquer China. In Spain, General Francisco Franco’s side, helped by Hitler and Mussolini, won a civil war that ended in March 1939. By 1941, only a dozen or so democratic nations were left in the world.":"Después de 1919, la democracia estaba en retroceso. El fascismo era una forma de gobierno de extrema derecha en la que un dictador ganaba poder con llamados emocionales al nacionalismo y presentando como malvados a sus enemigos políticos, a la prensa y a otros grupos. En 1922, Benito Mussolini y 40,000 seguidores de camisa negra tomaron el control de Italia. Adolf Hitler fue nombrado canciller de Alemania el 30 de enero de 1933, y su movimiento se basó en afirmaciones de superioridad racial y en el enojo por la derrota de Alemania en la Gran Guerra. En Asia, el gobierno japonés quedó bajo el control de expansionistas militares que querían conquistar China. En España, el bando del general Francisco Franco, con la ayuda de Hitler y Mussolini, ganó una guerra civil que terminó en marzo de 1939. Para 1941, solo quedaban unas doce naciones democráticas en el mundo.","After Pearl Harbor, Japan won fast victories across the Pacific. At the Battle of Midway on June 4, 1942, American planes sank four of the six Japanese aircraft carriers that had attacked Pearl Harbor, and Midway became a turning point of the Pacific war. Because the fighting was so brutal, General MacArthur and Admiral Nimitz adopted a “leapfrogging,” or island-hopping, strategy. They freed the most important islands and bypassed the others. On August 6, 1945, an atomic bomb was dropped on Hiroshima, and another fell on Nagasaki on August 9. Norton calls the decision to use these bombs highly controversial, and Japan formally surrendered on September 2, 1945.":"Después de Pearl Harbor, Japón logró victorias rápidas en todo el Pacífico. En la Batalla de Midway, el 4 de junio de 1942, aviones estadounidenses hundieron cuatro de los seis portaaviones japoneses que habían atacado Pearl Harbor, y Midway se convirtió en un punto de inflexión de la guerra del Pacífico. Como los combates eran tan brutales, el general MacArthur y el almirante Nimitz adoptaron una estrategia de “salto de rana” (leapfrogging), o de salto de isla en isla (island-hopping). Liberaron las islas más importantes y esquivaron las demás. El 6 de agosto de 1945 se lanzó una bomba atómica sobre Hiroshima, y otra cayó sobre Nagasaki el 9 de agosto. Norton dice que la decisión de usar estas bombas fue muy controvertida, y Japón se rindió formalmente el 2 de septiembre de 1945.","All 5 locks are open. Type the 5 digits in order, Lock 1 first.":"Los 5 candados están abiertos. Escribe los 5 dígitos en orden, primero el del Candado 1.","Answer every question first.":"Primero responde todas las preguntas.","Bracero program":"Programa bracero","CLUE CARD":"TARJETA DE INDICIOS","Check":"Comprobar","Choose a description...":"Elige una descripción...","Claims of racial superiority and anger over Germany’s defeat in the Great War":"Afirmaciones de superioridad racial y el enojo por la derrota de Alemania en la Gran Guerra","Clear":"Borrar","Clear all my work and start over":"Borrar todo mi trabajo y empezar de nuevo","Congress approves the Lend-Lease Act":"El Congreso aprueba la Ley de Préstamo y Arriendo","Congress passes the Neutrality Act of 1935":"El Congreso aprueba la Ley de Neutralidad de 1935","Core Objective 1: Explain what gave rise to fascism and assess how authoritarian leaders were able to gain control in Germany, Italy, Spain, and Japan.":"Objetivo principal 1: Explicar qué dio origen al fascismo y evaluar cómo los líderes autoritarios lograron tomar el control en Alemania, Italia, España y Japón.","Core Objective 2: Evaluate how President Franklin Roosevelt and Congress responded to the events leading to the outbreak and early stages of wars in Europe and Asia between 1933 and 1941.":"Objetivo principal 2: Evaluar cómo respondieron el presidente Franklin Roosevelt y el Congreso a los hechos que llevaron al estallido y a las primeras etapas de las guerras en Europa y Asia entre 1933 y 1941.","Core Objective 3: Analyze the effects of World War II on American civilians.":"Objetivo principal 3: Analizar los efectos de la Segunda Guerra Mundial en los civiles estadounidenses.","Core Objective 4: Explain how the United States and its allies collaborated to win the war in Europe.":"Objetivo principal 4: Explicar cómo colaboraron Estados Unidos y sus aliados para ganar la guerra en Europa.","Core Objectives 5 and 6: Describe how the Allies adapted their European strategy to fight a different enemy, under different conditions, in the Pacific. Evaluate the efforts of President Roosevelt and the Allies to shape the postwar world.":"Objetivos principales 5 y 6: Describir cómo adaptaron los Aliados su estrategia europea para combatir a un enemigo diferente, en condiciones diferentes, en el Pacífico. Evaluar los esfuerzos del presidente Roosevelt y de los Aliados para dar forma al mundo de la posguerra.","DEBRIEF":"INFORME FINAL","Debrief":"Informe final","Decoded answer":"Respuesta decodificada","Decoder key: the <span style=\"color:var(--hl);font-weight:700\">blue<\/span> letter is in the message. The white letter under it is the real letter.":"Clave del decodificador: la letra <span style=\"color:var(--hl);font-weight:700\">azul<\/span> está en el mensaje. La letra blanca que está debajo es la letra verdadera.","ESCAPED":"¡ESCAPASTE!","Each answer is in the Clue Card. Look for the meaning of fascism, what the Nazi movement built on, and who won in Spain.":"Cada respuesta está en la tarjeta de indicios. Busca el significado del fascismo, en qué se basó el movimiento nazi y quién ganó en España.","Enter the Map Room":"Entrar a la sala de mapas","Enter your first name, last name, and period at the top first.":"Primero escribe tu nombre, apellido y período arriba.","Escape the Map Room":"Escapa de la sala de mapas","Executive Order 9066":"Orden Ejecutiva 9066","Exit code digit 1":"Dígito 1 del código de salida","Exit door":"Puerta de salida","Fascism: a Far-Right form of government with a dictator. The Nazis built on claims of racial superiority and anger over defeat in the Great War. In Spain, Franco’s side won.":"Fascismo: una forma de gobierno de extrema derecha con un dictador. Los nazis se basaron en afirmaciones de superioridad racial y en el enojo por la derrota en la Gran Guerra. En España, ganó el bando de Franco.","Fill in the blank using the Clue Card.":"Llena el espacio en blanco con la tarjeta de indicios.","General Franco’s side won, and Spain became another dictatorship in Europe":"El bando del general Franco ganó, y España se convirtió en otra dictadura en Europa","German troops invade Poland":"Tropas alemanas invaden Polonia","Have a saved file? Load it to continue.":"¿Tienes un archivo guardado? Cárgalo para continuar.","Help from the United States":"La ayuda de Estados Unidos","Hint":"Pista","Hints used":"Pistas usadas","How to escape:":"Cómo escapar:","If you get stuck, press <b>Hint<\/b>. Hints are free, but your teacher can see how many you used.":"Si te atoras, oprime <b>Pista<\/b>. Las pistas son gratis, pero tu maestro puede ver cuántas usaste.","In the Pacific, MacArthur and Nimitz used a “________” strategy. They freed the most important islands and bypassed the others.":"En el Pacífico, MacArthur y Nimitz usaron una estrategia de “________”. Liberaron las islas más importantes y esquivaron las demás.","In the message, the letter B is really U, and the letter U is really N. The word has 13 letters and starts with U.":"En el mensaje, la letra B en realidad es U, y la letra U en realidad es N. La palabra tiene 13 letras y empieza con U.","Japan attacks Pearl Harbor":"Japón ataca Pearl Harbor","LOCK 5 · CORE OBJECTIVES 5 AND 6":"CANDADO 5 · OBJETIVOS PRINCIPALES 5 Y 6","Locks":"Candados","Look for the dates in the Clue Card: 1935, September 1, 1939, March 1941, and December 7, 1941. Each event has its own date.":"Busca las fechas en la tarjeta de indicios: 1935, 1 de septiembre de 1939, marzo de 1941 y 7 de diciembre de 1941. Cada suceso tiene su propia fecha.","MAP ROOM":"SALA DE MAPAS","Match each term to the best description. Use the Clue Card.":"Relaciona cada término con la mejor descripción. Usa la tarjeta de indicios.","Match every term first.":"Primero relaciona todos los términos.","Most Americans wanted to stay out of another war. The Neutrality Act of 1935 banned American companies from selling weapons to nations at war, and in 1936 Congress also banned loans to them. On September 1, 1939, German troops invaded Poland, and Great Britain and France declared war on Germany two days later. After France fell in 1940, Roosevelt promised Great Britain “all aid short of war.” In March 1941, Congress approved the Lend-Lease Act, which let the president lend or lease military equipment to any country whose defense he judged vital to the defense of the United States. On Sunday, December 7, 1941, Japanese warplanes attacked the U.S. fleet at Pearl Harbor. The next day, Roosevelt asked for a declaration of war, and Congress approved it within minutes.":"La mayoría de los estadounidenses quería mantenerse fuera de otra guerra. La Ley de Neutralidad de 1935 prohibió a las empresas estadounidenses vender armas a naciones en guerra, y en 1936 el Congreso también prohibió los préstamos a esas naciones. El 1 de septiembre de 1939, tropas alemanas invadieron Polonia, y Gran Bretaña y Francia le declararon la guerra a Alemania dos días después. Después de la caída de Francia en 1940, Roosevelt le prometió a Gran Bretaña “toda la ayuda salvo la guerra”. En marzo de 1941, el Congreso aprobó la Ley de Préstamo y Arriendo (Lend-Lease Act), que permitió al presidente prestar o arrendar equipo militar a cualquier país cuya defensa él considerara vital para la defensa de Estados Unidos. El domingo 7 de diciembre de 1941, aviones de guerra japoneses atacaron la flota estadounidense en Pearl Harbor. Al día siguiente, Roosevelt pidió una declaración de guerra, y el Congreso la aprobó en cuestión de minutos.","Mussolini took over Spain":"Mussolini se apoderó de España","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 24, “From Isolationism to Intervention” (pp. 1053-1068).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 24, “From Isolationism to Intervention” (págs. 1053-1068).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 24, “Mobilization at Home” (pp. 1069-1076).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 24, “Mobilization at Home” (págs. 1069-1076).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 24, “The Pacific War” (pp. 1089-1095), “War Aims and Strategy” (Yalta, p. 1085), and “A New Age Is Born” (pp. 1095-1097).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 24, “The Pacific War” (págs. 1089-1095), “War Aims and Strategy” (Yalta, pág. 1085) y “A New Age Is Born” (págs. 1095-1097).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 24, “The Rise of Fascism in Europe” (pp. 1050-1053).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 24, “The Rise of Fascism in Europe” (págs. 1050-1053).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 24, “War Aims and Strategy” (pp. 1077-1089).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 24, “War Aims and Strategy” (págs. 1077-1089).","Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.":"Todavía no escapas (se marca INCOMPLETO). Aun así puedes descargar tu archivo y entregarlo.","Not quite. At least one answer is off. Re-read the Clue Card for what fascism was, what the Nazi movement built on, and who won in Spain.":"Casi. Al menos una respuesta no es correcta. Vuelve a leer la tarjeta de indicios para ver qué era el fascismo, en qué se basó el movimiento nazi y quién ganó en España.","Not quite. Check each match against the Clue Card. Which one are you least sure about?":"Casi. Revisa cada pareja con la tarjeta de indicios. ¿De cuál estás menos seguro?","Not quite. Decode one letter at a time with the key, then check your spelling.":"Casi. Decodifica una letra a la vez con la clave y luego revisa tu ortografía.","Not quite. Re-read the Clue Card and match each event to its date.":"Casi. Vuelve a leer la tarjeta de indicios y relaciona cada hecho con su fecha.","Not quite. Re-read the third sentence of the Clue Card. Use the scrambled letters to check your spelling.":"Casi. Vuelve a leer la tercera oración de la tarjeta de indicios. Usa las letras desordenadas para revisar tu ortografía.","One last step: write your Debrief below.":"Un último paso: escribe tu Informe final abajo.","Open all 5 locks first. The digits go in order: Lock 1 first.":"Primero abre los 5 candados. Los dígitos van en orden: primero el del Candado 1.","Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.":"Abre los 5 candados y luego escribe el código de salida de 5 dígitos. Termina con el Informe final.","Open each lock in order. Read the <b>Clue Card<\/b>. The answer is in the card.":"Abre cada candado en orden. Lee la <b>tarjeta de indicios<\/b>. La respuesta está en la tarjeta.","Open the Door":"Abrir la puerta","Pick the correct answer for all three questions.":"Elige la respuesta correcta para las tres preguntas.","Progress file downloaded. Use Load Progress to continue later.":"Se descargó el archivo de progreso. Usa «Cargar progreso» para continuar más tarde.","Progress loaded. Welcome back.":"Progreso cargado. Bienvenido de nuevo.","Read the third sentence of the Clue Card. The missing word names the strategy of jumping past some islands.":"Lee la tercera oración de la tarjeta de indicios. La palabra que falta nombra la estrategia de saltar por encima de algunas islas.","Respect for the Treaty of Versailles":"El respeto por el Tratado de Versalles","Rosie the Riveter":"Rosie la Remachadora","Rosie the Riveter was a campaign to recruit women. The Tuskegee Airmen were pilots. The bracero program was for farmworkers from Mexico. Executive Order 9066 began the incarceration of Japanese Americans.":"Rosie la Remachadora fue una campaña para reclutar mujeres. Los Aviadores de Tuskegee fueron pilotos. El programa bracero era para trabajadores agrícolas de México. La Orden Ejecutiva 9066 dio inicio al encarcelamiento de japoneses americanos.","Solve the puzzle to open the lock and reveal one digit.":"Resuelve el acertijo para abrir el candado y descubrir un dígito.","THE EXIT DOOR":"LA PUERTA DE SALIDA","Tap all 4 events first, in order.":"Primero toca los 4 sucesos, en orden.","Tap the four events in the order they happened. Tap an event again to take it back.":"Toca los cuatro sucesos en el orden en que ocurrieron. Toca un suceso otra vez para quitarlo.","That file did not work. Choose a progress file saved from this Escape Room.":"Ese archivo no funcionó. Elige un archivo de progreso guardado de esta sala de escape.","That was the last hint. Read the Clue Card slowly and try again.":"Esa fue la última pista. Lee la tarjeta de indicios despacio y vuelve a intentarlo.","The Allies worked together to win in Europe. At the Casablanca Conference in 1943, Roosevelt announced, with Churchill’s approval, that the war would end only when all enemy nations gave up completely. This was meant to ease Soviet fears that the Americans and British might make a separate peace with Hitler. Later in 1943, at Tehran, Roosevelt, Churchill, and Stalin met for the first time, planned the invasion of France, and agreed to create the United Nations. On D-Day, June 6, 1944, some 5,300 Allied ships carried 370,000 soldiers and sailors to Normandy, while the Soviet army pushed the Germans back from the east. When the war in Europe ended, the world learned the full horror of the Holocaust, in which the Nazis killed at least 6 million Jews and many more non-Jewish people. The Nuremberg Trials, which began in November 1945, put the surviving Nazi leaders on trial.":"Los Aliados trabajaron juntos para ganar en Europa. En la Conferencia de Casablanca de 1943, Roosevelt anunció, con la aprobación de Churchill, que la guerra solo terminaría cuando todas las naciones enemigas se rindieran por completo. Esto buscaba calmar el temor de los soviéticos de que los estadounidenses y los británicos hicieran una paz por separado con Hitler. Más tarde, en 1943, en Teherán, Roosevelt, Churchill y Stalin se reunieron por primera vez, planearon la invasión de Francia y acordaron crear las Naciones Unidas. El Día D, el 6 de junio de 1944, unos 5,300 barcos aliados llevaron a 370,000 soldados y marineros a Normandía, mientras el ejército soviético hacía retroceder a los alemanes desde el este. Cuando terminó la guerra en Europa, el mundo conoció el horror total del Holocausto, en el que los nazis mataron al menos a 6 millones de judíos y a muchas más personas no judías. Los Juicios de Núremberg, que empezaron en noviembre de 1945, llevaron ante la justicia a los líderes nazis sobrevivientes.","The Clue Card describes a kind of surrender without naming it. A secret message names it. Each letter in the message was moved 7 steps forward in the alphabet. Decode it to name the idea.":"La tarjeta de indicios describe un tipo de rendición sin nombrarla. Un mensaje secreto la nombra. Cada letra del mensaje se movió 7 pasos hacia adelante en el alfabeto. Decodifícalo para nombrar la idea.","The Clue Card describes the idea (the war would end only when the enemy gave up completely) but does not name it. Use the decoder key to spell the name, one letter at a time.":"La tarjeta de indicios describe la idea (la guerra solo terminaría cuando el enemigo se rindiera por completo), pero no la nombra. Usa la clave del decodificador para escribir el nombre, una letra a la vez.","The Code Desk":"El escritorio de códigos","The February 1942 order that began the incarceration of Japanese Americans":"La orden de febrero de 1942 que dio inicio al encarcelamiento de japoneses americanos","The Globe":"El globo terráqueo","The Map Chest":"El mueble de mapas","The Radio Set":"La radio","The Spanish Republic won and Spain stayed a democracy":"La República Española ganó y España siguió siendo una democracia","The Wall Map":"El mapa de pared","The clock starts when you press the button. Most students finish in about 20 minutes.":"El reloj empieza cuando oprimes el botón. La mayoría de los estudiantes termina en unos 20 minutos.","The code has 5 digits. Fill every box.":"El código tiene 5 dígitos. Llena todas las casillas.","The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.":"La puerta no se abrió. Revisa los dígitos debajo de cada candado y escríbelos en orden: primero el del Candado 1.","The door is open!":"¡La puerta está abierta!","The door swings open!":"¡La puerta se abre de golpe!","The first African American military pilots, who flew more than 15,000 missions":"Los primeros pilotos militares afroamericanos, que volaron más de 15,000 misiones","The map room closed for the night, and the officer on duty locked the door. Wall maps, a globe, and a radio from the war years sit in the room. The door has <b>5 locks<\/b>. Each lock matches one big idea from Lesson 16. Solve them all to find the <b>5-digit exit code<\/b>.":"La sala de mapas cerró por la noche y el oficial de guardia cerró la puerta con llave. En la sala hay mapas de pared, un globo terráqueo y una radio de los años de la guerra. La puerta tiene <b>5 candados<\/b>. Cada candado corresponde a una idea importante de la Lección 16. Resuélvelos todos para encontrar el <b>código de salida de 5 dígitos<\/b>.","The order is the Neutrality Act of 1935, the invasion of Poland, the Lend-Lease Act, then the attack on Pearl Harbor.":"El orden es la Ley de Neutralidad de 1935, la invasión de Polonia, la Ley de Préstamo y Arriendo y luego el ataque a Pearl Harbor.","The war changed life at home. By the end of 1942, U.S. war production had doubled the combined output of Germany, Japan, and Italy, and some 24 million Americans moved to take new jobs. More than 6 million women entered the civilian workforce, and the government used the story of “Rosie the Riveter” to help recruit them. African Americans faced prejudice at work and in the military, yet the Tuskegee Airmen, the first African American military pilots, flew more than 15,000 missions. In 1942, the bracero program brought seasonal farmworkers from Mexico to U.S. farms. After Pearl Harbor, President Roosevelt issued Executive Order 9066 on February 19, 1942. Soldiers forced more than 120,000 Japanese-descended people, about 80,000 of them U.S. citizens, from their homes to ten war relocation camps, although no case of spying by Japanese Americans was proved. In 1988, Congress formally apologized.":"La guerra cambió la vida en casa. Para fines de 1942, la producción de guerra de Estados Unidos había duplicado la producción combinada de Alemania, Japón e Italia, y unos 24 millones de estadounidenses se mudaron para tomar nuevos empleos. Más de 6 millones de mujeres entraron a la fuerza laboral civil, y el gobierno usó la historia de “Rosie la Remachadora” para ayudar a reclutarlas. Los afroamericanos enfrentaron prejuicios en el trabajo y en el ejército, pero los Aviadores de Tuskegee, los primeros pilotos militares afroamericanos, volaron más de 15,000 misiones. En 1942, el programa bracero trajo trabajadores agrícolas de temporada de México a las granjas de Estados Unidos. Después de Pearl Harbor, el presidente Roosevelt emitió la Orden Ejecutiva 9066 el 19 de febrero de 1942. Los soldados sacaron a la fuerza de sus hogares a más de 120,000 personas de ascendencia japonesa, unas 80,000 de ellas ciudadanos estadounidenses, y las llevaron a diez “campos de reubicación de guerra”, aunque no se comprobó ningún caso de espionaje por parte de japoneses americanos. En 1988, el Congreso pidió perdón oficialmente.","The war ended in a tie":"La guerra terminó en empate","The word starts with L and has 12 letters. Norton also calls it “island-hopping,” and that answer works too.":"La palabra empieza con L y tiene 12 letras. Norton también la llama “island-hopping”, y esa respuesta también sirve.","Time":"Tiempo","Tuskegee Airmen":"Aviadores de Tuskegee","Two terms are about workers (Rosie the Riveter, the Bracero program). One is about pilots (Tuskegee Airmen). One is an order from the president (Executive Order 9066).":"Dos términos tratan de trabajadores (Rosie la Remachadora, el programa bracero). Uno trata de pilotos (Aviadores de Tuskegee). Uno es una orden del presidente (Orden Ejecutiva 9066).","Type the answer in English.":"Escribe la respuesta en inglés.","Type the answer in English. Use the digits 0-9.":"Escribe la respuesta en inglés. Usa los dígitos 0-9.","Type the exit code":"Escribe el código de salida","Type your answer first.":"Primero escribe tu respuesta.","Type your answer here...":"Escribe tu respuesta aquí...","UNIT 6 · DEPRESSION AND WORLD WAR | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 6 · DEPRESIÓN Y GUERRA MUNDIAL | CPUSH | DANIEL GARZA, M.A.","Unlocked. Your digit is 1. Your answer: Executive Order 9066 = The February 1942 order that began the incarceration of Japanese Americans; Rosie the Riveter = A government campaign that told the story of a woman riveter to help recruit women workers; Tuskegee Airmen = The first African American military pilots, who flew more than 15,000 missions; Bracero program = A 1942 program in which Mexico agreed to provide seasonal farmworkers for U.S. farms":"Desbloqueado. Tu dígito es 1. Tu respuesta: Orden Ejecutiva 9066 = La orden de febrero de 1942 que dio inicio al encarcelamiento de japoneses americanos; Rosie la Remachadora = Una campaña del gobierno que contó la historia de una mujer remachadora para ayudar a reclutar trabajadoras; Aviadores de Tuskegee = Los primeros pilotos militares afroamericanos, que volaron más de 15,000 misiones; Programa bracero = Un programa de 1942 en el que México aceptó proporcionar trabajadores agrícolas de temporada para las granjas de Estados Unidos","Unlocked. Your digit is 6. Your answer: Congress passes the Neutrality Act of 1935 &gt; German troops invade Poland &gt; Congress approves the Lend-Lease Act &gt; Japan attacks Pearl Harbor":"Desbloqueado. Tu dígito es 6. Tu respuesta: El Congreso aprueba la Ley de Neutralidad de 1935 &gt; Tropas alemanas invaden Polonia &gt; El Congreso aprueba la Ley de Préstamo y Arriendo &gt; Japón ataca Pearl Harbor","Unlocked. Your digit is 9. Your answer: A Far-Right form of government in which a dictator gained power through emotional appeals to nationalism; Claims of racial superiority and anger over Germany’s defeat in the Great War; General Franco’s side won, and Spain became another dictatorship in Europe":"Desbloqueado. Tu dígito es 9. Tu respuesta: Una forma de gobierno de extrema derecha en la que un dictador ganaba poder con llamados emocionales al nacionalismo; Afirmaciones de superioridad racial y el enojo por la derrota de Alemania en la Gran Guerra; El bando del general Franco ganó, y España se convirtió en otra dictadura en Europa","Unscramble the letters to fill the blank.":"Ordena las letras para llenar el espacio en blanco.","What did the Nazi movement in Germany build on?":"¿En qué se basó el movimiento nazi en Alemania?","What happened in the Spanish Civil War?":"¿Qué pasó en la Guerra Civil Española?","What was fascism?":"¿Qué era el fascismo?","Which lock was hardest, and what did you learn that you did not know before?":"¿Qué candado fue el más difícil y qué aprendiste que antes no sabías?","World War II and the Home Front":"La Segunda Guerra Mundial y el frente interno","World War II was the deadliest war in history. Norton says American industry and the Soviet Union’s ability to absorb the German invasion turned the tide of the war. The war ended the Great Depression, and the United States and the Soviet Union emerged as the two superpowers. At Yalta in 1945, Roosevelt wanted the Soviets to join the new United Nations, but Stalin refused to let Poland become a self-governing democracy.":"La Segunda Guerra Mundial fue la guerra más mortífera de la historia. Norton dice que la industria estadounidense y la capacidad de la Unión Soviética para resistir la invasión alemana cambiaron el rumbo de la guerra. La guerra puso fin a la Gran Depresión, y Estados Unidos y la Unión Soviética surgieron como las dos superpotencias. En Yalta, en 1945, Roosevelt quería que los soviéticos se unieran a las nuevas Naciones Unidas, pero Stalin se negó a dejar que Polonia se convirtiera en una democracia con gobierno propio.","Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.":"Escribe de 3 a 4 oraciones. Nombra el candado y usa un dato de su tarjeta de indicios. Puedes escribirlo aunque no hayas escapado.","You are locked in the map room.":"Estás encerrado en la sala de mapas.","You escaped and wrote your Debrief. Ready to submit.":"Escapaste y escribiste tu Informe final. Listo para entregar.","You escaped! Write your Debrief, then download your file to submit.":"¡Escapaste! Escribe tu Informe final y luego descarga tu archivo para entregarlo.","Your answer":"Tu respuesta","Your time:":"Tu tiempo:","digit":"dígito","Escape Room 16 · World War II and the Home Front":"Sala de escape 16 · La Segunda Guerra Mundial y el frente interno","Clear all your work and start over? This cannot be undone.":"¿Borrar todo tu trabajo y empezar de nuevo? Esto no se puede deshacer."},"ar":{"Save Progress":"حفظ التقدم","Load Progress":"تحميل التقدم","Finished — Download File to Submit":"انتهيت — نزّل الملف لتسليمه","Clear all my answers":"امسح كل إجاباتي","FIRST NAME *":"الاسم الأول *","LAST NAME *":"اسم العائلة *","PERIOD *":"الحصة *","DATE (fills in when you finish)":"التاريخ (يُكتب تلقائيًا عند الانتهاء)","e.g. 3":"مثال: 3","Automatic":"تلقائي","Please type your first name, last name, and period first.":"اكتب أولًا اسمك الأول واسم العائلة والحصة.","Western Expansion and Southern Secession":"التوسع غربًا وانفصال الجنوب","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"الوحدة 3 · بيت منقسم وأُعيد بناؤه | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — قانون العبيد الهاربين","Bleeding Kansas":"Bleeding Kansas — كانساس النازفة","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"الوحدة 3 · بيت منقسم وأعيد بناؤه | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"تم تنزيل ملف التقدم. احتفظ به في مكان آمن. استخدم «تحميل التقدم» لتكمل لاحقًا.","Progress loaded.":"تم تحميل التقدم.","Could not read that file.":"تعذّرت قراءة هذا الملف.","Treaty of Guadalupe Hidalgo":"معاهدة غوادالوبي هيدالغو (Treaty of Guadalupe Hidalgo)","A 1942 program in which Mexico agreed to provide seasonal farmworkers for U.S. farms":"برنامج عام 1942 وافقت فيه المكسيك على توفير عمال زراعيين موسميين للمزارع الأمريكية","A Far-Right form of government in which a dictator gained power through emotional appeals to nationalism":"شكل من أشكال الحكم اليميني المتطرف يكسب فيه دكتاتور السلطة عن طريق إثارة مشاعر القومية","A form of government in which citizens vote on every law":"شكل من أشكال الحكم يصوّت فيه المواطنون على كل قانون","A government campaign that told the story of a woman riveter to help recruit women workers":"حملة حكومية روت قصة امرأة برّامة للمساعدة في جذب العاملات","A map room from the war years at night. On the left, a wall map with pins and a dotted route hangs above a table with a globe on a stand, and rolled maps sit on the floor. On the right, a clock and a framed compass rose hang above a chest of map drawers with a radio set on top. The door has a MAP ROOM sign and five padlocks in a row. Under each padlock is a window for one digit of the exit code.":"غرفة خرائط من سنوات الحرب في الليل. على اليسار، خريطة جدارية عليها دبابيس ومسار منقّط معلّقة فوق طاولة عليها كرة أرضية على حامل، وعلى الأرض خرائط ملفوفة. وعلى اليمين، ساعة ووردة بوصلة مؤطرة معلّقتان فوق خزانة أدراج للخرائط عليها مذياع. وعلى الباب لافتة «غرفة الخرائط» وخمسة أقفال في صف واحد. وتحت كل قفل نافذة صغيرة لرقم واحد من رمز الخروج.","A peace treaty that ended the Great War":"معاهدة سلام أنهت الحرب العظمى","A plan to end unemployment with public works":"خطة لإنهاء البطالة بالأشغال العامة","A wish to share power with other parties":"الرغبة في تقاسم السلطة مع أحزاب أخرى","After 1919, democracy was in retreat. Fascism was a Far-Right form of government in which a dictator gained power through emotional appeals to nationalism and by demonizing political enemies, the press, and other groups. In 1922, Benito Mussolini and 40,000 black-shirted supporters seized control of Italy. Adolf Hitler was appointed chancellor of Germany on January 30, 1933, and his movement built on claims of racial superiority and on anger over Germany’s defeat in the Great War. In Asia, the Japanese government fell under the control of military expansionists who wanted to conquer China. In Spain, General Francisco Franco’s side, helped by Hitler and Mussolini, won a civil war that ended in March 1939. By 1941, only a dozen or so democratic nations were left in the world.":"بعد عام 1919، كانت الديمقراطية في تراجع. وكانت الفاشية شكلًا من أشكال الحكم اليميني المتطرف، يكسب فيه دكتاتور السلطة عن طريق إثارة مشاعر القومية وتصوير الخصوم السياسيين والصحافة وجماعات أخرى على أنهم أشرار. وفي عام 1922، استولى بينيتو موسوليني (Benito Mussolini) و40,000 من أنصاره ذوي القمصان السوداء على الحكم في إيطاليا. وعُيّن أدولف هتلر (Adolf Hitler) مستشارًا لألمانيا في 30 يناير 1933، واعتمدت حركته على ادعاءات التفوق العرقي وعلى الغضب من هزيمة ألمانيا في الحرب العظمى. وفي آسيا، وقعت الحكومة اليابانية تحت سيطرة توسعيين عسكريين أرادوا غزو الصين. وفي إسبانيا، فاز جانب الجنرال فرانسيسكو فرانكو (Francisco Franco)، بمساعدة هتلر وموسوليني، في حرب أهلية انتهت في مارس 1939. وبحلول عام 1941، لم يبق في العالم سوى نحو اثنتي عشرة دولة ديمقراطية.","After Pearl Harbor, Japan won fast victories across the Pacific. At the Battle of Midway on June 4, 1942, American planes sank four of the six Japanese aircraft carriers that had attacked Pearl Harbor, and Midway became a turning point of the Pacific war. Because the fighting was so brutal, General MacArthur and Admiral Nimitz adopted a “leapfrogging,” or island-hopping, strategy. They freed the most important islands and bypassed the others. On August 6, 1945, an atomic bomb was dropped on Hiroshima, and another fell on Nagasaki on August 9. Norton calls the decision to use these bombs highly controversial, and Japan formally surrendered on September 2, 1945.":"بعد بيرل هاربر (Pearl Harbor)، حققت اليابان انتصارات سريعة في أنحاء المحيط الهادئ. وفي معركة ميدواي (Midway) في 4 يونيو 1942، أغرقت الطائرات الأمريكية أربعًا من حاملات الطائرات اليابانية الست التي هاجمت بيرل هاربر، وصارت ميدواي نقطة تحول في حرب المحيط الهادئ. ولأن القتال كان وحشيًا جدًا، اعتمد الجنرال ماك آرثر (MacArthur) والأدميرال نيميتز (Nimitz) استراتيجية «القفز المتتالي» (leapfrogging)، أو القفز من جزيرة إلى جزيرة (island-hopping). فقد حرّرا أهم الجزر وتجاوزا الجزر الأخرى. وفي 6 أغسطس 1945، أُلقيت قنبلة ذرية على هيروشيما (Hiroshima)، وسقطت قنبلة أخرى على ناغازاكي (Nagasaki) في 9 أغسطس. ويصف نورتون (Norton) قرار استخدام هاتين القنبلتين بأنه مثير للجدل بشدة، واستسلمت اليابان رسميًا في 2 سبتمبر 1945.","All 5 locks are open. Type the 5 digits in order, Lock 1 first.":"الأقفال الخمسة مفتوحة. اكتب الأرقام الخمسة بالترتيب: رقم القفل 1 أولًا.","Answer every question first.":"أجب عن كل الأسئلة أولًا.","Bracero program":"برنامج البراسيرو (bracero program)","CLUE CARD":"بطاقة القرائن","Check":"تحقق","Choose a description...":"اختر وصفًا...","Claims of racial superiority and anger over Germany’s defeat in the Great War":"ادعاءات التفوق العرقي والغضب من هزيمة ألمانيا في الحرب العظمى","Clear":"مسح","Clear all my work and start over":"امسح كل عملي وابدأ من جديد","Congress approves the Lend-Lease Act":"يوافق الكونغرس على قانون الإعارة والتأجير (Lend-Lease Act)","Congress passes the Neutrality Act of 1935":"يقرّ الكونغرس قانون الحياد (Neutrality Act) لعام 1935","Core Objective 1: Explain what gave rise to fascism and assess how authoritarian leaders were able to gain control in Germany, Italy, Spain, and Japan.":"الهدف الأساسي 1: شرح أسباب ظهور الفاشية، وتقييم كيف تمكّن القادة المستبدون من السيطرة في ألمانيا وإيطاليا وإسبانيا واليابان.","Core Objective 2: Evaluate how President Franklin Roosevelt and Congress responded to the events leading to the outbreak and early stages of wars in Europe and Asia between 1933 and 1941.":"الهدف الأساسي 2: تقييم كيف استجاب الرئيس فرانكلين روزفلت (Franklin Roosevelt) والكونغرس للأحداث التي أدت إلى اندلاع الحروب في أوروبا وآسيا ومراحلها الأولى بين 1933 و1941.","Core Objective 3: Analyze the effects of World War II on American civilians.":"الهدف الأساسي 3: تحليل آثار الحرب العالمية الثانية على المدنيين الأمريكيين.","Core Objective 4: Explain how the United States and its allies collaborated to win the war in Europe.":"الهدف الأساسي 4: شرح كيف تعاونت الولايات المتحدة وحلفاؤها للفوز بالحرب في أوروبا.","Core Objectives 5 and 6: Describe how the Allies adapted their European strategy to fight a different enemy, under different conditions, in the Pacific. Evaluate the efforts of President Roosevelt and the Allies to shape the postwar world.":"الأهداف الأساسية 5 و6: وصف كيف كيّف الحلفاء استراتيجيتهم الأوروبية لقتال عدو مختلف في ظروف مختلفة في المحيط الهادئ. تقييم جهود الرئيس روزفلت (Roosevelt) والحلفاء لتشكيل عالم ما بعد الحرب.","DEBRIEF":"الملخص الختامي","Debrief":"الملخص الختامي","Decoded answer":"الإجابة بعد فك التشفير","Decoder key: the <span style=\"color:var(--hl);font-weight:700\">blue<\/span> letter is in the message. The white letter under it is the real letter.":"مفتاح فك التشفير: الحرف <span style=\"color:var(--hl);font-weight:700\">الأزرق<\/span> هو الحرف الموجود في الرسالة. والحرف الأبيض تحته هو الحرف الحقيقي.","ESCAPED":"لقد هربت!","Each answer is in the Clue Card. Look for the meaning of fascism, what the Nazi movement built on, and who won in Spain.":"كل إجابة موجودة في بطاقة الأدلة. ابحث عن معنى الفاشية، وعن الشيء الذي اعتمدت عليه الحركة النازية، وعمّن فاز في إسبانيا.","Enter the Map Room":"ادخل غرفة الخرائط","Enter your first name, last name, and period at the top first.":"اكتب اسمك الأول واسم العائلة والحصة في الأعلى أولًا.","Escape the Map Room":"اهرب من غرفة الخرائط","Executive Order 9066":"الأمر التنفيذي 9066 (Executive Order 9066)","Exit code digit 1":"رقم رمز الخروج 1","Exit door":"باب الخروج","Fascism: a Far-Right form of government with a dictator. The Nazis built on claims of racial superiority and anger over defeat in the Great War. In Spain, Franco’s side won.":"الفاشية: شكل من أشكال الحكم اليميني المتطرف يحكمه دكتاتور. اعتمد النازيون على ادعاءات التفوق العرقي وعلى الغضب من الهزيمة في الحرب العظمى. وفي إسبانيا، فاز جانب فرانكو (Franco).","Fill in the blank using the Clue Card.":"املأ الفراغ باستخدام بطاقة القرائن.","General Franco’s side won, and Spain became another dictatorship in Europe":"فاز جانب الجنرال فرانكو (Franco)، وأصبحت إسبانيا دكتاتورية أخرى في أوروبا","German troops invade Poland":"القوات الألمانية تغزو بولندا (Poland)","Have a saved file? Load it to continue.":"هل لديك ملف محفوظ؟ حمّله لتكمل.","Help from the United States":"مساعدة من الولايات المتحدة","Hint":"تلميح","Hints used":"التلميحات المستخدمة","How to escape:":"كيف تهرب:","If you get stuck, press <b>Hint<\/b>. Hints are free, but your teacher can see how many you used.":"إذا تعثرت، اضغط <b>تلميح<\/b>. التلميحات مجانية، لكن معلمك يستطيع أن يرى كم تلميحًا استخدمت.","In the Pacific, MacArthur and Nimitz used a “________” strategy. They freed the most important islands and bypassed the others.":"في المحيط الهادئ، استخدم ماك آرثر (MacArthur) ونيميتز (Nimitz) استراتيجية «________». فقد حرّرا أهم الجزر وتجاوزا الجزر الأخرى.","In the message, the letter B is really U, and the letter U is really N. The word has 13 letters and starts with U.":"في الرسالة، الحرف B هو في الحقيقة U، والحرف U هو في الحقيقة N. تتكون الكلمة من 13 حرفًا وتبدأ بالحرف U.","Japan attacks Pearl Harbor":"اليابان تهاجم بيرل هاربر (Pearl Harbor)","LOCK 5 · CORE OBJECTIVES 5 AND 6":"القفل 5 · الأهداف الأساسية 5 و6","Locks":"الأقفال","Look for the dates in the Clue Card: 1935, September 1, 1939, March 1941, and December 7, 1941. Each event has its own date.":"ابحث عن التواريخ في بطاقة الأدلة: 1935، و1 سبتمبر 1939، ومارس 1941، و7 ديسمبر 1941. لكل حدث تاريخه الخاص.","MAP ROOM":"غرفة الخرائط","Match each term to the best description. Use the Clue Card.":"طابق كل مصطلح مع أفضل وصف له. استخدم بطاقة القرائن.","Match every term first.":"طابق كل المصطلحات أولًا.","Most Americans wanted to stay out of another war. The Neutrality Act of 1935 banned American companies from selling weapons to nations at war, and in 1936 Congress also banned loans to them. On September 1, 1939, German troops invaded Poland, and Great Britain and France declared war on Germany two days later. After France fell in 1940, Roosevelt promised Great Britain “all aid short of war.” In March 1941, Congress approved the Lend-Lease Act, which let the president lend or lease military equipment to any country whose defense he judged vital to the defense of the United States. On Sunday, December 7, 1941, Japanese warplanes attacked the U.S. fleet at Pearl Harbor. The next day, Roosevelt asked for a declaration of war, and Congress approved it within minutes.":"كان معظم الأمريكيين يريدون البقاء بعيدًا عن حرب أخرى. ومنع قانون الحياد (Neutrality Act) لعام 1935 الشركات الأمريكية من بيع الأسلحة للدول التي في حالة حرب، وفي عام 1936 منع الكونغرس أيضًا القروض لها. وفي 1 سبتمبر 1939، غزت القوات الألمانية بولندا (Poland)، وبعد يومين أعلنت بريطانيا العظمى وفرنسا الحرب على ألمانيا. وبعد سقوط فرنسا عام 1940، وعد روزفلت (Roosevelt) بريطانيا العظمى بـ«كل مساعدة ما عدا الحرب». وفي مارس 1941، وافق الكونغرس على قانون الإعارة والتأجير (Lend-Lease Act)، الذي سمح للرئيس بأن يُعير أو يؤجّر المعدات العسكرية لأي بلد يرى أن الدفاع عنه حيوي للدفاع عن الولايات المتحدة. وفي يوم الأحد 7 ديسمبر 1941، هاجمت طائرات حربية يابانية الأسطول الأمريكي في بيرل هاربر (Pearl Harbor). وفي اليوم التالي، طلب روزفلت إعلان الحرب، ووافق عليه الكونغرس خلال دقائق.","Mussolini took over Spain":"استولى موسوليني (Mussolini) على إسبانيا","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 24, “From Isolationism to Intervention” (pp. 1053-1068).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 24، “From Isolationism to Intervention” (ص. 1053-1068).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 24, “Mobilization at Home” (pp. 1069-1076).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 24، “Mobilization at Home” (ص. 1069-1076).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 24, “The Pacific War” (pp. 1089-1095), “War Aims and Strategy” (Yalta, p. 1085), and “A New Age Is Born” (pp. 1095-1097).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 24، “The Pacific War” (ص. 1089-1095)، و“War Aims and Strategy” (يالطا (Yalta)، ص. 1085)، و“A New Age Is Born” (ص. 1095-1097).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 24, “The Rise of Fascism in Europe” (pp. 1050-1053).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 24، “The Rise of Fascism in Europe” (ص. 1050-1053).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 24, “War Aims and Strategy” (pp. 1077-1089).":"Norton، <i>America: The Essential Learning Edition<\/i>، الفصل 24، “War Aims and Strategy” (ص. 1077-1089).","Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.":"لم تهرب بعد (يُسجَّل «غير مكتمل» INCOMPLETE). ما زال بإمكانك تنزيل ملفك وتسليمه.","Not quite. At least one answer is off. Re-read the Clue Card for what fascism was, what the Nazi movement built on, and who won in Spain.":"تقريبًا. إجابة واحدة على الأقل غير صحيحة. أعد قراءة بطاقة الأدلة لتعرف ما هي الفاشية، وعلى ماذا اعتمدت الحركة النازية، ومن فاز في إسبانيا.","Not quite. Check each match against the Clue Card. Which one are you least sure about?":"ليس تمامًا. تحقق من كل مطابقة باستخدام بطاقة القرائن. أي مطابقة أنت أقل تأكدًا منها؟","Not quite. Decode one letter at a time with the key, then check your spelling.":"ليس تمامًا. فُكّ تشفير حرف واحد في كل مرة باستخدام المفتاح، ثم تحقق من تهجئتك.","Not quite. Re-read the Clue Card and match each event to its date.":"ليس تمامًا. أعد قراءة بطاقة القرائن واربط كل حدث بتاريخه.","Not quite. Re-read the third sentence of the Clue Card. Use the scrambled letters to check your spelling.":"تقريبًا. أعد قراءة الجملة الثالثة في بطاقة الأدلة. استخدم الحروف المبعثرة للتحقق من تهجئتك.","One last step: write your Debrief below.":"خطوة أخيرة: اكتب ملخصك الختامي أدناه.","Open all 5 locks first. The digits go in order: Lock 1 first.":"افتح الأقفال الخمسة أولًا. تُكتب الأرقام بالترتيب: رقم القفل 1 أولًا.","Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.":"افتح الأقفال الخمسة، ثم اكتب رمز الخروج المكوّن من 5 أرقام. أنهِ بالملخص الختامي.","Open each lock in order. Read the <b>Clue Card<\/b>. The answer is in the card.":"افتح كل قفل بالترتيب. اقرأ <b>بطاقة القرائن<\/b>. الإجابة موجودة في البطاقة.","Open the Door":"افتح الباب","Pick the correct answer for all three questions.":"اختر الإجابة الصحيحة للأسئلة الثلاثة.","Progress file downloaded. Use Load Progress to continue later.":"تم تنزيل ملف التقدم. استخدم «تحميل التقدم» لتكمل لاحقًا.","Progress loaded. Welcome back.":"تم تحميل التقدم. أهلًا بعودتك.","Read the third sentence of the Clue Card. The missing word names the strategy of jumping past some islands.":"اقرأ الجملة الثالثة في بطاقة الأدلة. الكلمة الناقصة تسمّي استراتيجية القفز فوق بعض الجزر.","Respect for the Treaty of Versailles":"احترام معاهدة فرساي (Treaty of Versailles)","Rosie the Riveter":"روزي البرّامة (Rosie the Riveter)","Rosie the Riveter was a campaign to recruit women. The Tuskegee Airmen were pilots. The bracero program was for farmworkers from Mexico. Executive Order 9066 began the incarceration of Japanese Americans.":"كانت روزي البرّامة (Rosie the Riveter) حملة لجذب النساء. وكان طيارو توسكيجي (Tuskegee Airmen) طيارين. وكان برنامج البراسيرو (bracero program) للعمال الزراعيين من المكسيك. وبدأ الأمر التنفيذي 9066 (Executive Order 9066) احتجاز الأمريكيين اليابانيين.","Solve the puzzle to open the lock and reveal one digit.":"حلّ اللغز لتفتح القفل وتكشف رقمًا واحدًا.","THE EXIT DOOR":"باب الخروج","Tap all 4 events first, in order.":"المس الأحداث الأربعة كلها أولًا، بالترتيب.","Tap the four events in the order they happened. Tap an event again to take it back.":"المس الأحداث الأربعة بالترتيب الذي وقعت به. المس الحدث مرة أخرى للتراجع عنه.","That file did not work. Choose a progress file saved from this Escape Room.":"لم يعمل هذا الملف. اختر ملف تقدم محفوظًا من غرفة الهروب هذه.","That was the last hint. Read the Clue Card slowly and try again.":"كان هذا آخر تلميح. اقرأ بطاقة القرائن ببطء وحاول مرة أخرى.","The Allies worked together to win in Europe. At the Casablanca Conference in 1943, Roosevelt announced, with Churchill’s approval, that the war would end only when all enemy nations gave up completely. This was meant to ease Soviet fears that the Americans and British might make a separate peace with Hitler. Later in 1943, at Tehran, Roosevelt, Churchill, and Stalin met for the first time, planned the invasion of France, and agreed to create the United Nations. On D-Day, June 6, 1944, some 5,300 Allied ships carried 370,000 soldiers and sailors to Normandy, while the Soviet army pushed the Germans back from the east. When the war in Europe ended, the world learned the full horror of the Holocaust, in which the Nazis killed at least 6 million Jews and many more non-Jewish people. The Nuremberg Trials, which began in November 1945, put the surviving Nazi leaders on trial.":"عمل الحلفاء معًا للفوز في أوروبا. وفي مؤتمر الدار البيضاء (Casablanca) عام 1943، أعلن روزفلت (Roosevelt)، بموافقة تشرشل (Churchill)، أن الحرب لن تنتهي إلا عندما تستسلم كل الدول المعادية استسلامًا كاملًا. وكان القصد من ذلك تهدئة مخاوف السوفييت من أن يعقد الأمريكيون والبريطانيون سلامًا منفصلًا مع هتلر (Hitler). وفي وقت لاحق من عام 1943، في طهران (Tehran)، التقى روزفلت وتشرشل وستالين (Stalin) للمرة الأولى، وخططوا لغزو فرنسا، واتفقوا على إنشاء الأمم المتحدة. وفي يوم الإنزال (D-Day)، 6 يونيو 1944، نقلت نحو 5,300 سفينة حليفة 370,000 جندي وبحار إلى نورماندي (Normandy)، بينما كان الجيش السوفيتي يدفع الألمان إلى الوراء من الشرق. وعندما انتهت الحرب في أوروبا، عرف العالم كل فظاعة الهولوكوست، الذي قتل فيه النازيون ما لا يقل عن 6 ملايين يهودي والعديد من غير اليهود. وبدأت محاكمات نورمبرغ (Nuremberg Trials) في نوفمبر 1945، وفيها حوكم القادة النازيون الذين بقوا أحياء.","The Clue Card describes a kind of surrender without naming it. A secret message names it. Each letter in the message was moved 7 steps forward in the alphabet. Decode it to name the idea.":"تصف بطاقة الأدلة نوعًا من الاستسلام دون أن تسمّيه. ورسالة سرية تسمّيه. تم تحريك كل حرف في الرسالة 7 خطوات إلى الأمام في الأبجدية. فك الشيفرة لتعرف اسم الفكرة.","The Clue Card describes the idea (the war would end only when the enemy gave up completely) but does not name it. Use the decoder key to spell the name, one letter at a time.":"تصف بطاقة الأدلة الفكرة (الحرب لن تنتهي إلا عندما يستسلم العدو استسلامًا كاملًا) لكنها لا تسمّيها. استخدم مفتاح فك التشفير لتهجّي الاسم، حرفًا حرفًا.","The Code Desk":"مكتب الشيفرة","The February 1942 order that began the incarceration of Japanese Americans":"الأمر الصادر في فبراير 1942 الذي بدأ احتجاز الأمريكيين اليابانيين","The Globe":"الكرة الأرضية","The Map Chest":"خزانة الخرائط","The Radio Set":"المذياع","The Spanish Republic won and Spain stayed a democracy":"فازت الجمهورية الإسبانية وبقيت إسبانيا ديمقراطية","The Wall Map":"الخريطة الجدارية","The clock starts when you press the button. Most students finish in about 20 minutes.":"يبدأ العدّاد عندما تضغط الزر. يُنهي معظم الطلاب في نحو 20 دقيقة.","The code has 5 digits. Fill every box.":"الرمز مكوّن من 5 أرقام. املأ كل المربعات.","The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.":"لم يُفتح الباب. تحقق من الأرقام تحت كل قفل، واكتبها بالترتيب: رقم القفل 1 أولًا.","The door is open!":"الباب مفتوح!","The door swings open!":"ينفتح الباب على مصراعيه!","The first African American military pilots, who flew more than 15,000 missions":"أول الطيارين العسكريين من الأمريكيين الأفارقة، الذين قاموا بأكثر من 15,000 مهمة","The map room closed for the night, and the officer on duty locked the door. Wall maps, a globe, and a radio from the war years sit in the room. The door has <b>5 locks<\/b>. Each lock matches one big idea from Lesson 16. Solve them all to find the <b>5-digit exit code<\/b>.":"أُغلقت غرفة الخرائط في الليل، وأقفل الضابط المناوب الباب. وفي الغرفة خرائط جدارية وكرة أرضية ومذياع من سنوات الحرب. وللباب <b>5 أقفال<\/b>. ويرتبط كل قفل بفكرة كبيرة من الدرس 16. حلّها كلها لتجد <b>رمز الخروج المكوَّن من 5 أرقام<\/b>.","The order is the Neutrality Act of 1935, the invasion of Poland, the Lend-Lease Act, then the attack on Pearl Harbor.":"الترتيب هو: قانون الحياد (Neutrality Act) لعام 1935، ثم غزو بولندا (Poland)، ثم قانون الإعارة والتأجير (Lend-Lease Act)، ثم الهجوم على بيرل هاربر (Pearl Harbor).","The war changed life at home. By the end of 1942, U.S. war production had doubled the combined output of Germany, Japan, and Italy, and some 24 million Americans moved to take new jobs. More than 6 million women entered the civilian workforce, and the government used the story of “Rosie the Riveter” to help recruit them. African Americans faced prejudice at work and in the military, yet the Tuskegee Airmen, the first African American military pilots, flew more than 15,000 missions. In 1942, the bracero program brought seasonal farmworkers from Mexico to U.S. farms. After Pearl Harbor, President Roosevelt issued Executive Order 9066 on February 19, 1942. Soldiers forced more than 120,000 Japanese-descended people, about 80,000 of them U.S. citizens, from their homes to ten war relocation camps, although no case of spying by Japanese Americans was proved. In 1988, Congress formally apologized.":"غيّرت الحرب الحياة في الداخل. وبحلول نهاية 1942، ضاعف الإنتاج الحربي الأمريكي الإنتاج المشترك لألمانيا واليابان وإيطاليا، وانتقل نحو 24 مليون أمريكي للحصول على وظائف جديدة. ودخلت أكثر من 6 ملايين امرأة سوق العمل المدني، واستخدمت الحكومة قصة «روزي البرّامة» (Rosie the Riveter) للمساعدة في جذبهن. وواجه الأمريكيون الأفارقة التحيز في العمل وفي الجيش، ومع ذلك قام طيارو توسكيجي (Tuskegee Airmen)، وهم أول الطيارين العسكريين من الأمريكيين الأفارقة، بأكثر من 15,000 مهمة. وفي عام 1942، جلب برنامج البراسيرو (bracero program) عمالًا زراعيين موسميين من المكسيك إلى المزارع الأمريكية. وبعد بيرل هاربر (Pearl Harbor)، أصدر الرئيس روزفلت (Roosevelt) الأمر التنفيذي 9066 (Executive Order 9066) في 19 فبراير 1942. وأخرج الجنود بالقوة من بيوتهم أكثر من 120,000 شخص من أصل ياباني، كان نحو 80,000 منهم مواطنين أمريكيين، إلى عشرة «معسكرات إعادة توطين حربية»، مع أنه لم تثبت أي حالة تجسس من أمريكيين يابانيين. وفي عام 1988، اعتذر الكونغرس رسميًا.","The war ended in a tie":"انتهت الحرب بالتعادل","The word starts with L and has 12 letters. Norton also calls it “island-hopping,” and that answer works too.":"تبدأ الكلمة بالحرف L وتتكون من 12 حرفًا. ويسمّيها نورتون (Norton) أيضًا “island-hopping”، وهذه الإجابة صحيحة أيضًا.","Time":"الوقت","Tuskegee Airmen":"طيارو توسكيجي (Tuskegee Airmen)","Two terms are about workers (Rosie the Riveter, the Bracero program). One is about pilots (Tuskegee Airmen). One is an order from the president (Executive Order 9066).":"مصطلحان عن العمال (روزي البرّامة (Rosie the Riveter)، وبرنامج البراسيرو (bracero program)). ومصطلح واحد عن الطيارين (طيارو توسكيجي (Tuskegee Airmen)). ومصطلح واحد عن أمر من الرئيس (الأمر التنفيذي 9066 (Executive Order 9066)).","Type the answer in English.":"اكتب الإجابة بالإنجليزية.","Type the answer in English. Use the digits 0-9.":"اكتب الإجابة بالإنجليزية. استخدم الأرقام 0-9.","Type the exit code":"اكتب رمز الخروج","Type your answer first.":"اكتب إجابتك أولًا.","Type your answer here...":"اكتب إجابتك هنا...","UNIT 6 · DEPRESSION AND WORLD WAR | CPUSH | DANIEL GARZA, M.A.":"الوحدة 6 · الكساد والحرب العالمية | CPUSH | DANIEL GARZA, M.A.","Unlocked. Your digit is 1. Your answer: Executive Order 9066 = The February 1942 order that began the incarceration of Japanese Americans; Rosie the Riveter = A government campaign that told the story of a woman riveter to help recruit women workers; Tuskegee Airmen = The first African American military pilots, who flew more than 15,000 missions; Bracero program = A 1942 program in which Mexico agreed to provide seasonal farmworkers for U.S. farms":"تم الفتح. رقمك هو 1. إجابتك: الأمر التنفيذي 9066 (Executive Order 9066) = الأمر الصادر في فبراير 1942 الذي بدأ احتجاز الأمريكيين اليابانيين؛ روزي البرّامة (Rosie the Riveter) = حملة حكومية روت قصة امرأة برّامة للمساعدة في جذب العاملات؛ طيارو توسكيجي (Tuskegee Airmen) = أول الطيارين العسكريين من الأمريكيين الأفارقة، الذين قاموا بأكثر من 15,000 مهمة؛ برنامج البراسيرو (bracero program) = برنامج عام 1942 وافقت فيه المكسيك على توفير عمال زراعيين موسميين للمزارع الأمريكية","Unlocked. Your digit is 6. Your answer: Congress passes the Neutrality Act of 1935 &gt; German troops invade Poland &gt; Congress approves the Lend-Lease Act &gt; Japan attacks Pearl Harbor":"تم الفتح. رقمك هو 6. إجابتك: يقرّ الكونغرس قانون الحياد (Neutrality Act) لعام 1935 &gt; القوات الألمانية تغزو بولندا (Poland) &gt; يوافق الكونغرس على قانون الإعارة والتأجير (Lend-Lease Act) &gt; اليابان تهاجم بيرل هاربر (Pearl Harbor)","Unlocked. Your digit is 9. Your answer: A Far-Right form of government in which a dictator gained power through emotional appeals to nationalism; Claims of racial superiority and anger over Germany’s defeat in the Great War; General Franco’s side won, and Spain became another dictatorship in Europe":"تم الفتح. رقمك هو 9. إجابتك: شكل من أشكال الحكم اليميني المتطرف يكسب فيه دكتاتور السلطة عن طريق إثارة مشاعر القومية؛ ادعاءات التفوق العرقي والغضب من هزيمة ألمانيا في الحرب العظمى؛ فاز جانب الجنرال فرانكو (Franco)، وأصبحت إسبانيا دكتاتورية أخرى في أوروبا","Unscramble the letters to fill the blank.":"رتّب الأحرف لتملأ الفراغ.","What did the Nazi movement in Germany build on?":"على ماذا اعتمدت الحركة النازية في ألمانيا؟","What happened in the Spanish Civil War?":"ماذا حدث في الحرب الأهلية الإسبانية؟","What was fascism?":"ما هي الفاشية؟","Which lock was hardest, and what did you learn that you did not know before?":"أي قفل كان الأصعب، وماذا تعلمت ولم تكن تعرفه من قبل؟","World War II and the Home Front":"الحرب العالمية الثانية والجبهة الداخلية","World War II was the deadliest war in history. Norton says American industry and the Soviet Union’s ability to absorb the German invasion turned the tide of the war. The war ended the Great Depression, and the United States and the Soviet Union emerged as the two superpowers. At Yalta in 1945, Roosevelt wanted the Soviets to join the new United Nations, but Stalin refused to let Poland become a self-governing democracy.":"كانت الحرب العالمية الثانية أكثر الحروب فتكًا في التاريخ. ويقول نورتون (Norton) إن الصناعة الأمريكية وقدرة الاتحاد السوفيتي على امتصاص الغزو الألماني قلبتا مجرى الحرب. وأنهت الحرب الكساد الكبير، وبرزت الولايات المتحدة والاتحاد السوفيتي بوصفهما القوتين العظميين. وفي يالطا (Yalta) عام 1945، أراد روزفلت (Roosevelt) أن ينضم السوفييت إلى الأمم المتحدة الجديدة، لكن ستالين (Stalin) رفض أن تصبح بولندا ديمقراطية تحكم نفسها.","Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.":"اكتب من 3 إلى 4 جمل. اذكر القفل واستخدم معلومة واحدة من بطاقة القرائن الخاصة به. يمكنك كتابة هذا حتى لو لم تهرب.","You are locked in the map room.":"أنت محبوس في غرفة الخرائط.","You escaped and wrote your Debrief. Ready to submit.":"لقد هربت وكتبت ملخصك الختامي. أنت جاهز للتسليم.","You escaped! Write your Debrief, then download your file to submit.":"لقد هربت! اكتب ملخصك الختامي، ثم نزّل ملفك لتسليمه.","Your answer":"إجابتك","Your time:":"وقتك:","digit":"رقم","Escape Room 16 · World War II and the Home Front":"غرفة الهروب 16 · الحرب العالمية الثانية والجبهة الداخلية","Clear all your work and start over? This cannot be undone.":"هل تريد مسح كل عملك والبدء من جديد؟ لا يمكن التراجع عن ذلك."},"patterns":[{"re":"^Still needed: first name, last name, and period\\.$","es":"Todavía falta: nombre, apellido y período.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة."},{"re":"^LOCK (\\d)$","es":"Cand. $1","ar":"القفل $1"},{"re":"^LOCK (\\d) · CORE OBJECTIVE (\\d+)$","es":"CANDADO $1 · OBJETIVO PRINCIPAL $2","ar":"القفل $1 · الهدف الأساسي $2"},{"re":"^Hint (\\d):$","es":"Pista $1:","ar":"تلميح $1:"},{"re":"^Exit code digit (\\d)$","es":"Dígito $1 del código de salida","ar":"رقم رمز الخروج $1"},{"re":"^Click! Lock (\\d) is open\\. Your digit is (\\d)\\.$","es":"¡Clic! El Candado $1 está abierto. Tu dígito es $2.","ar":"نقرة! القفل $1 مفتوح. رقمك هو $2."},{"re":"^5 of 5 locks opened with (\\d+) tries and (\\d+) hints\\.$","es":"Abriste 5 de 5 candados con $1 intentos y $2 pistas.","ar":"فتحت 5 أقفال من 5 بعد $1 من المحاولات و$2 من التلميحات."},{"re":"^Done! File downloaded: (.*)\\. Upload it to Canvas\\.$","es":"¡Listo! Se descargó el archivo: $1. Súbelo a Canvas.","ar":"تم! تم تنزيل الملف: $1. ارفعه إلى Canvas."},{"re":"^Your file downloaded and is marked INCOMPLETE \\(you have not escaped\\)\\. Upload it to Canvas: (.*)$","es":"Tu archivo se descargó y está marcado INCOMPLETO (todavía no escapas). Súbelo a Canvas: $1","ar":"تم تنزيل ملفك وهو مُسجَّل «غير مكتمل» INCOMPLETE (لم تهرب بعد). ارفعه إلى Canvas: $1"},{"re":"^Unlocked\\. Your digit is (\\d)\\. Your answer: (.*)$","es":"Desbloqueado. Tu dígito es $1. Tu respuesta: $2","ar":"تم الفتح. رقمك هو $1. إجابتك: $2"},{"re":"^Tap all (\\d) events first, in order\\.$","es":"Primero toca los $1 sucesos, en orden.","ar":"المس الأحداث الـ $1 كلها أولًا، بالترتيب."},{"re":"^5 of 5 locks opened with (\\d+) tries and 1 hint\\.$","es":"Abriste 5 de 5 candados con $1 intentos y 1 pista.","ar":"فتحت 5 أقفال من 5 بعد $1 من المحاولات وتلميح واحد."}]}</script>
+<script>
+/* Supplement language switch (English / Espanol / Arabic). Works on pages whose text is rendered by JS:
+   a MutationObserver translates text as it appears. Data: <script type="application/json" id="sp-i18n">
+   {"langs":["en","es","ar"],"default":"en","es":{englishHTML:translation},"ar":{...},"patterns":[{"re":"^(\\d+) of (\\d+)$","es":"$1 de $2","ar":"..."}]}
+   Keys are the English text exactly as it sits in the page (innerHTML, spaces collapsed).
+   Helpers: spSeen() english strings seen so far; spMissing() strings with no translation in the current language;
+   spSetLang(l); spTr(s) translate a string (used for confirm/alert); spAscii(s) plain-ASCII name for file names. */
+(function () {
+  var node = document.getElementById('sp-i18n');
+  var D = node ? JSON.parse(node.textContent) : { langs: ['en'], patterns: [] };
+  var INLINE = { B:1,I:1,EM:1,STRONG:1,SPAN:1,A:1,BR:1,SMALL:1,SUP:1,SUB:1,U:1,MARK:1,BDI:1,TSPAN:1,CODE:1 };
+  var SKIP = 'script,style,textarea,input,.sp-lang,.sp-nt,[translate="no"]';
+  var WORD = /[A-Za-z\u00C0-\u024F\u0600-\u06FF]{2}|e\.g\./;
+  var LANG = 'en', REC = new WeakMap(), SEEN = {}, MISS = {};
+  (D.patterns || []).forEach(function (p) { try { p._re = new RegExp(p.re); } catch (e) {} });
+  function norm(s) { return String(s).replace(/\s+/g, ' ').trim(); }
+  function tr(src) {
+    if (LANG === 'en') return null;
+    var t = D[LANG] && D[LANG][src];
+    if (t) return t;
+    var P = D.patterns || [];
+    for (var i = 0; i < P.length; i++) {
+      var m = P[i]._re && P[i]._re.exec(src);
+      if (m && P[i][LANG]) return P[i][LANG].replace(/\$(\d+)/g, function (_, n) { return m[+n] || ''; });
+    }
+    return null;
+  }
+  window.spTr = function (s) { var t = tr(norm(s)); return t ? t.replace(/<[^>]+>/g, '') : s; };
+  function isInline(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling)
+      if (c.nodeType === 1 && (!INLINE[c.tagName.toUpperCase()] || c.matches(SKIP))) return false;
+    return true;
+  }
+  function directText(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling) if (c.nodeType === 3 && WORD.test(c.nodeValue)) return true;
+    return false;
+  }
+  function cur(s) { return s.nodeType === 1 ? s.innerHTML : s.nodeValue; }
+  function put(s, v) { if (s.nodeType === 1) s.innerHTML = v; else s.nodeValue = v; }
+  function handle(s) {
+    var r = REC.get(s), c = cur(s);
+    if (!(r && c === r.wrote)) { r = { en: c, wrote: c }; REC.set(s, r); }
+    var src = norm(r.en), target = r.en;
+    if (WORD.test(src)) {
+      SEEN[src] = 1;
+      if (LANG !== 'en') {
+        var t = tr(src);
+        if (t) {
+          target = s.nodeType === 1 ? t : (r.en.match(/^\s*/)[0] + t + r.en.match(/\s*$/)[0]);
+          delete MISS[src];
+        } else MISS[src] = 1;
+      }
+    }
+    if (c !== target) put(s, target);
+    r.wrote = cur(s);
+  }
+  var ATTRS = ['placeholder', 'alt', 'aria-label', 'title'];
+  function attrs(root) {
+    var els = root.querySelectorAll ? root.querySelectorAll('[placeholder],[alt],[aria-label],[title]') : [];
+    var list = [].slice.call(els); if (root.matches && root.matches('[placeholder],[alt],[aria-label],[title]')) list.push(root);
+    list.forEach(function (el) {
+      if (el.closest && el.closest('.sp-lang,.sp-nt,[translate="no"],script,style')) return;
+      var rec = el.__spa || (el.__spa = {});
+      ATTRS.forEach(function (a) {
+        var v = el.getAttribute(a); if (v == null) return;
+        var r = rec[a];
+        if (!(r && v === r.wrote)) { r = rec[a] = { en: v, wrote: v }; }
+        var src = norm(r.en); if (!WORD.test(src)) return;
+        SEEN[src] = 1;
+        var t = LANG === 'en' ? null : tr(src);
+        if (LANG !== 'en' && !t) MISS[src] = 1;
+        var target = t ? t.replace(/<[^>]+>/g, '') : r.en;
+        if (v !== target) el.setAttribute(a, target);
+        r.wrote = el.getAttribute(a);
+      });
+    });
+  }
+  function walk(root) {
+    if (root.nodeType === 3) { if (WORD.test(root.nodeValue) && !(root.parentNode && root.parentNode.closest && root.parentNode.closest(SKIP))) handle(root); return; }
+    if (root.nodeType !== 1) return;
+    (function w(el) {
+      if (el.matches(SKIP)) return;
+      if (el !== document.body && directText(el) && isInline(el)) { handle(el); return; }
+      for (var c = el.firstChild; c; c = c.nextSibling) {
+        if (c.nodeType === 1) w(c); else if (c.nodeType === 3 && WORD.test(c.nodeValue)) handle(c);
+      }
+    })(root);
+    attrs(root);
+  }
+  var TITLE = { en: document.title, wrote: document.title };
+  function title() {
+    if (document.title !== TITLE.wrote) TITLE = { en: document.title, wrote: document.title };
+    var t = LANG === 'en' ? null : tr(norm(TITLE.en));
+    document.title = t ? t.replace(/<[^>]+>/g, '') : TITLE.en; TITLE.wrote = document.title;
+  }
+  function inl(e) { return e.nodeType === 1 && !!INLINE[e.tagName.toUpperCase()]; }
+  var mo = new MutationObserver(function (muts) {
+    var todo = [];
+    muts.forEach(function (m) {
+      if (m.type === 'childList') { for (var i = 0; i < m.addedNodes.length; i++) todo.push(m.addedNodes[i]); todo.push(m.target); }
+      else todo.push(m.target);
+    });
+    todo.forEach(function (n) {
+      var el = n.nodeType === 1 ? n : n.parentNode;
+      if (!el || el.nodeType !== 1 || !document.body.contains(el)) return;
+      while (el !== document.body && el.parentNode && el.parentNode.nodeType === 1 && inl(el) && inl(el.parentNode)) el = el.parentNode;
+      if (el.parentNode && el.parentNode.nodeType === 1 && inl(el.parentNode) && el.parentNode !== document.body) el = el.parentNode;
+      walk(el);
+    });
+    mo.takeRecords();
+  });
+  var AR = { 'ا':'a','أ':'a','إ':'i','آ':'a','ب':'b','ت':'t','ث':'th','ج':'j','ح':'h','خ':'kh','د':'d','ذ':'dh','ر':'r','ز':'z','س':'s','ش':'sh','ص':'s','ض':'d','ط':'t','ظ':'z','ع':'a','غ':'gh','ف':'f','ق':'q','ك':'k','ل':'l','م':'m','ن':'n','ه':'h','و':'w','ي':'y','ى':'a','ة':'a','ئ':'y','ؤ':'w' };
+  window.spAscii = function (s) {
+    s = String(s); if (s.normalize) s = s.normalize('NFD').replace(/[̀-ًͯ-ٰٟ]/g, '');
+    return s.replace(/[ء-ي]/g, function (c) { return AR[c] !== undefined ? AR[c] : ''; }).replace(/ñ/g, 'n').replace(/Ñ/g, 'N');
+  };
+  window.spSeen = function () { return Object.keys(SEEN); };
+  window.spMissing = function () { return Object.keys(MISS); };
+  window.spLang = function () { return LANG; };
+  window.spSetLang = function (l) {
+    if ((D.langs || ['en']).indexOf(l) < 0) l = 'en';
+    LANG = l; MISS = {};
+    var h = document.documentElement; h.lang = l; h.dir = l === 'ar' ? 'rtl' : 'ltr';
+    mo.disconnect(); walk(document.body); title(); mo.takeRecords();
+    mo.observe(document.body, { childList: true, subtree: true, characterData: true });
+    document.querySelectorAll('.sp-lang button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === l)); });
+    try { localStorage.setItem('sp_lang', l); } catch (e) {}
+    try { var u = new URL(location.href); if (l === 'en') u.searchParams.delete('lang'); else u.searchParams.set('lang', l); history.replaceState(null, '', u.toString()); } catch (e) {}
+    try { document.dispatchEvent(new CustomEvent('splangchange', { detail: l })); } catch (e) {}
+  };
+  var _c = window.confirm, _a = window.alert;
+  window.confirm = function (m) { return _c.call(window, window.spTr(m)); };
+  window.alert = function (m) { return _a.call(window, window.spTr(m)); };
+  document.querySelectorAll('.sp-lang button').forEach(function (b) { b.addEventListener('click', function () { window.spSetLang(b.getAttribute('data-lang')); }); });
+  var start = D['default'] || 'en';
+  try { start = new URL(location.href).searchParams.get('lang') || localStorage.getItem('sp_lang') || start; } catch (e) {}
+  window.spSetLang(start);
+})();
+
+</script><!--/sp-i18n-->
+</body>
+</html>

@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Escape Room 9 · Civil War and Reconstruction</title>
+<style>
+:root{--bg:#202946;--txt:#EBEDF4;--a1:#303E66;--a2:#D24F4B;--hl:#E1908E;--glass:rgba(235,237,244,.07);--glassb:rgba(235,237,244,.2);--dim:#B9BFD1;--ok:#8FD3A8}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#2E3B6B 0%,#202946 60%) fixed;background-color:var(--bg);color:var(--txt);font:17px/1.55 "Segoe UI",system-ui,-apple-system,Verdana,sans-serif;min-height:100vh}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px 40px}
+.glass{background:var(--glass);border:1px solid var(--glassb);border-radius:16px;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+header.hero{padding:30px 0 12px;border-bottom:3px solid var(--a2)}
+.eyebrow{font-size:13px;letter-spacing:.16em;font-weight:700;color:var(--hl)}
+h1{margin:.15em 0 .05em;font-size:clamp(28px,6vw,40px);line-height:1.12}
+.sub{margin:0;font-weight:600;color:var(--dim)}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 4px}
+.meta label{flex:1 1 170px;font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--dim)}
+input[type=text],textarea,select{display:block;width:100%;margin-top:4px;padding:10px 12px;border:1px solid var(--glassb);border-radius:10px;background:rgba(10,14,30,.55);color:var(--txt);font:inherit;font-size:16px}
+input[type=text]:focus,textarea:focus,select:focus,button:focus-visible{outline:3px solid var(--hl);outline-offset:1px}
+input.bad{border-color:var(--a2);box-shadow:0 0 0 2px var(--a2)}
+textarea{min-height:120px;resize:vertical}
+.howto{margin:14px 0;padding:14px 16px;font-size:16px}
+.howto ol{margin:6px 0 0;padding-left:22px}
+.scene{margin:14px 0;padding:8px;text-align:center}
+.scene svg{width:100%;height:auto;display:block;border-radius:12px}
+.bar{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;padding:8px 12px;margin:10px 0;font-weight:700;font-size:15px;background:rgba(32,41,70,.92);border:1px solid var(--glassb);border-radius:12px}
+.bar span b{color:var(--hl)}
+.btn{font:inherit;font-size:16px;font-weight:700;padding:11px 18px;border-radius:12px;border:2px solid var(--hl);background:transparent;color:var(--txt);cursor:pointer;min-height:44px}
+.btn:hover{background:rgba(225,144,142,.18)}
+.btn.primary{background:var(--hl);color:#202946;border-color:var(--hl)}
+.btn.primary:hover{background:#EBB0AE}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.btn.small{padding:8px 14px;font-size:15px;min-height:40px}
+.intro{padding:20px;text-align:center}
+.intro p{margin:.4em 0}
+.lock{margin:12px 0;overflow:hidden}
+.lock>button.lh{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:12px;width:100%;padding:14px 16px;cursor:pointer}
+.lock>button.lh:focus-visible{outline:3px solid var(--hl);outline-offset:-3px}
+.lock.locked>button.lh{cursor:not-allowed;opacity:.55}
+.lk{flex:none;width:44px;height:44px}
+.lk .sh{transition:transform .5s cubic-bezier(.3,1.6,.5,1);transform-origin:center}
+.lock.solved .lk .sh{transform:translateY(-6px) rotate(-30deg);transform-origin:10px 14px}
+.lock.solved .lk .bd{fill:var(--hl)}
+.lt{flex:1}
+.lt small{display:block;font-size:12px;letter-spacing:.12em;font-weight:700;color:var(--hl)}
+.lt strong{font-size:19px}
+.dg{flex:none;min-width:42px;height:42px;border-radius:10px;border:2px solid var(--hl);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;background:rgba(10,14,30,.55)}
+.lb{padding:0 16px 16px;display:none}
+.lock.open .lb{display:block}
+.objline{font-size:14px;color:var(--dim);margin:0 0 10px}
+.card{background:rgba(235,237,244,.1);border-left:6px solid var(--a2);border-radius:10px;padding:12px 14px;margin:8px 0 12px}
+.card h4{margin:0 0 4px;font-size:13px;letter-spacing:.12em;color:var(--hl)}
+.card p{margin:.3em 0}
+.card .src{font-size:13px;color:var(--dim)}
+.prompt{font-weight:700;margin:10px 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0}
+.chip{font:inherit;font-size:16px;padding:10px 14px;border-radius:12px;border:2px solid var(--glassb);background:rgba(10,14,30,.55);color:var(--txt);cursor:pointer;min-height:44px;text-align:left}
+.chip.sel{border-color:var(--hl);background:rgba(225,144,142,.2)}
+.chip .n{display:inline-block;min-width:24px;height:24px;line-height:24px;border-radius:12px;background:var(--hl);color:#202946;font-weight:800;text-align:center;margin-right:8px}
+.mrow{margin:8px 0}
+.mrow label{font-weight:700;display:block}
+fieldset{border:1px solid var(--glassb);border-radius:10px;margin:8px 0;padding:8px 12px}
+legend{font-weight:700;padding:0 6px}
+.opt{display:flex;align-items:center;gap:10px;padding:6px 0;min-height:40px;cursor:pointer}
+.opt input{width:22px;height:22px;accent-color:#E1908E;flex:none}
+.cipher{font:700 24px/1.3 "Courier New",monospace;letter-spacing:.14em;background:rgba(10,14,30,.65);padding:12px;border-radius:10px;border:1px dashed var(--hl);word-break:break-word;text-align:center}
+.key{display:grid;grid-template-columns:repeat(13,1fr);gap:2px;margin:10px 0;font:700 14px/1.2 "Courier New",monospace;text-align:center}
+.key div{padding:3px 0;border-radius:4px;background:rgba(235,237,244,.08)}
+.key .c{color:var(--hl)}
+.scr{font:800 30px/1.2 "Courier New",monospace;letter-spacing:.3em;text-align:center;background:rgba(10,14,30,.65);padding:10px;border-radius:10px;border:1px dashed var(--hl)}
+.row{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0;align-items:center}
+.fb{margin:8px 0;padding:10px 12px;border-radius:10px;display:none;font-weight:600}
+.fb.show{display:block}
+.fb.nudge{background:rgba(210,79,75,.18);border:1px solid var(--a2)}
+.fb.good{background:rgba(143,211,168,.16);border:1px solid var(--ok);color:#DDF5E6}
+.hints{margin:6px 0}
+.hint{background:rgba(225,144,142,.14);border:1px dashed var(--hl);border-radius:10px;padding:8px 12px;margin:6px 0;font-size:16px}
+.hint b{color:var(--hl)}
+.exit{margin:16px 0;padding:18px;text-align:center}
+.exit.locked{opacity:.55}
+.exit h2,.esc h2,.debrief h2{margin:.1em 0 .3em}
+.codebox{display:flex;justify-content:center;gap:8px;margin:12px 0}
+.codebox input{width:52px;height:60px;text-align:center;font:800 30px "Courier New",monospace;padding:0;margin:0}
+.esc{margin:16px 0;padding:22px;text-align:center;display:none;border:2px solid var(--hl)}
+.esc.show{display:block}
+.esc .big{overflow-wrap:anywhere;font-size:clamp(30px,9vw,64px);font-weight:900;letter-spacing:.14em;color:var(--hl);text-shadow:0 0 24px rgba(225,144,142,.6);animation:pop .8s cubic-bezier(.3,1.6,.5,1)}
+.esc .time{font-size:26px;font-weight:800}
+.debrief{margin:16px 0;padding:16px}
+.actions{margin:16px 0;padding:16px}
+.status{font-weight:700;margin-bottom:10px}
+.msg{display:none;margin-top:10px;padding:10px 12px;border-radius:10px;background:rgba(143,211,168,.16);border:1px solid var(--ok)}
+.msg.err{background:rgba(210,79,75,.2);border-color:var(--a2)}
+.link{all:unset;cursor:pointer;color:var(--dim);text-decoration:underline;font-size:14px;margin-top:10px;display:inline-block}
+.link:focus-visible{outline:3px solid var(--hl)}
+footer{text-align:center;font-size:12px;letter-spacing:.1em;font-weight:700;color:var(--dim);padding:20px 8px 30px;border-top:1px solid var(--glassb);margin-top:20px}
+.ennote{margin:.4em 0 0;font-size:14px;font-weight:700;color:var(--dim)}
+.exit .ennote{text-align:center}
+.hidden{display:none!important}.lock,.exit,.esc{scroll-margin-top:64px}
+.pop{animation:pop .7s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pop{0%{transform:scale(.2);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes tap{0%,100%{transform:rotate(0)}50%{transform:rotate(9deg)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.shake{animation:shake .35s}
+.wheel{transform-box:view-box;transform-origin:276px 86px}
+.wheel.spin{animation:tap .5s ease-in-out 3}
+.plock .sh{transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
+.plock.open .sh{transform:translateY(-7px)}
+.plock.open .bd{fill:#E1908E}
+#door{transform-origin:150px 20px;transition:transform 1.4s ease-in-out}
+.escaped #door{transform:scaleX(.1)}
+#glow{opacity:.15;transition:opacity 1.4s}
+.escaped #glow{opacity:1}
+html[dir="rtl"] .chip{text-align:right}
+html[dir="rtl"] .chip .n{margin-right:0;margin-left:8px}
+html[dir="rtl"] .card{border-left:0;border-right:6px solid var(--a2)}
+html[dir="rtl"] .howto ol{padding-left:0;padding-right:22px}
+html[dir="rtl"] .esc,html[dir="rtl"] .exit,html[dir="rtl"] .intro{text-align:center}
+html[dir="rtl"] .cipher,html[dir="rtl"] .scr,html[dir="rtl"] .key{direction:ltr}
+html[dir="rtl"] .scr{letter-spacing:.3em!important}
+html[dir="rtl"] .cipher{letter-spacing:.14em!important}
+html[dir="rtl"] .key{letter-spacing:0!important}
+html[dir="rtl"] .card .src{direction:ltr;text-align:left}
+html[dir="rtl"] .hint,html[dir="rtl"] .fb,html[dir="rtl"] .msg,html[dir="rtl"] .objline{text-align:start}
+html[dir="rtl"] .lock>button.lh{text-align:start}
+html[dir="rtl"] .lb,html[dir="rtl"] .actions{text-align:start}
+html[dir="rtl"] .bar{direction:rtl}
+html[dir="rtl"] .tt{unicode-bidi:plaintext}
+@media(max-width:520px){body{font-size:16px}.chip{width:100%}.key{font-size:12px;gap:1px}.codebox input{width:46px;height:54px}.dg{min-width:38px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{.bar,.actions button{display:none}}
+/*sp-i18n-css*/
+.sp-lang-bar{display:flex;justify-content:flex-end;padding:8px 12px 0;position:relative;z-index:5}
+.sp-lang{display:inline-flex;gap:2px;padding:3px;border-radius:10px;background:rgba(255,255,255,.88);border:1px solid rgba(0,0,0,.18);font-family:system-ui,"Segoe UI",Tahoma,Arial,sans-serif}
+.sp-lang button{border:0;background:transparent;color:#222;font:600 13px/1 system-ui,"Segoe UI",Tahoma,Arial,sans-serif;padding:7px 11px;border-radius:7px;cursor:pointer}
+.sp-lang button[aria-pressed="true"]{background:#222;color:#fff}
+.sp-lang button:focus-visible{outline:3px solid #2a6df4;outline-offset:1px}
+textarea,input,select{unicode-bidi:plaintext}
+html[lang="ar"] body,html[lang="ar"] button,html[lang="ar"] textarea,html[lang="ar"] input,html[lang="ar"] select{font-family:"Segoe UI",Tahoma,"Noto Sans Arabic","Arial",system-ui,sans-serif}
+html[lang="ar"] body{line-height:1.8}
+html[lang="ar"] *{letter-spacing:0!important}
+html[dir="rtl"] textarea,html[dir="rtl"] input{text-align:start}
+@media print{.sp-lang-bar{display:none}}
+/*/sp-i18n-css*/
+</style>
+</head>
+<body>
+<!--sp-bar--><div class="sp-lang-bar"><div class="sp-lang" role="group" aria-label="Language / Idioma / اللغة"><button type="button" data-lang="en" lang="en" aria-pressed="true">English</button><button type="button" data-lang="es" lang="es" aria-pressed="false">Español</button><button type="button" data-lang="ar" lang="ar" aria-pressed="false">العربية</button></div></div><!--/sp-bar-->
+
+<div class="wrap">
+<header class="hero">
+  <div class="eyebrow">1861-1877</div>
+  <h1>Escape the Telegraph Office</h1>
+  <p class="sub">Civil War and Reconstruction</p>
+  <div class="meta">
+    <label>FIRST NAME *<input id="f_first" type="text" autocomplete="given-name"></label>
+    <label>LAST NAME *<input id="f_last" type="text" autocomplete="family-name"></label>
+    <label>PERIOD *<input id="f_period" type="text" inputmode="numeric" maxlength="12" placeholder="e.g. 3"></label>
+  </div>
+</header>
+
+<div class="howto glass"><b>How to escape:</b>
+<ol>
+<li>Open each lock in order. Read the <b>Clue Card</b>. The answer is in the card.</li>
+<li>Solve the puzzle to open the lock and reveal one digit.</li>
+<li>If you get stuck, press <b>Hint</b>. Hints are free, but your teacher can see how many you used.</li>
+<li>Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.</li>
+</ol></div>
+
+<div class="scene glass" id="scene">
+<svg viewBox="0 0 600 270" role="img" aria-label="A telegraph office at night. A wall map and a clock hang on the walls, wires run along the ceiling, and a desk lamp glows on a desk. The office door has five padlocks in a row. Under each padlock is a window for one digit of the exit code.">
+<defs>
+<pattern id="brick" width="40" height="270" patternUnits="userSpaceOnUse"><rect width="40" height="270" fill="#1A2038"/><path d="M0 0V270M20 0V270" stroke="#EBEDF4" stroke-opacity=".07" fill="none"/><path d="M0 0V270" stroke="#EBEDF4" stroke-opacity=".12"/></pattern>
+<radialGradient id="glowg" cx="50%" cy="50%" r="60%"><stop offset="0" stop-color="#EBEDF4"/><stop offset="1" stop-color="#E1908E"/></radialGradient>
+</defs>
+<rect width="600" height="270" fill="url(#brick)"/>
+<rect y="236" width="600" height="34" fill="#131A2E"/>
+<path d="M0 10Q150 30 300 12T600 10" stroke="#B9BFD1" stroke-width="2" fill="none"/>
+<path d="M0 22Q150 42 300 24T600 22" stroke="#B9BFD1" stroke-opacity=".6" stroke-width="2" fill="none"/>
+<rect x="146" y="14" width="8" height="12" rx="2" fill="#E1908E"/><rect x="446" y="14" width="8" height="12" rx="2" fill="#E1908E"/>
+<g><rect x="30" y="52" width="100" height="76" rx="4" fill="#0E1426" stroke="#E1908E" stroke-width="3"/>
+<path d="M42 66L70 62L96 70L118 66L112 96L118 116L84 118L60 112L46 118Z" fill="#303E66" stroke="#EBEDF4" stroke-opacity=".6"/>
+<path d="M70 62L66 90L84 118M96 70L90 94L112 96" stroke="#B9BFD1" stroke-opacity=".7" fill="none" stroke-dasharray="3 3"/>
+<circle cx="66" cy="90" r="3" fill="#D24F4B"/><circle cx="90" cy="94" r="3" fill="#D24F4B"/></g>
+<g><circle cx="520" cy="82" r="30" fill="#0E1426" stroke="#E1908E" stroke-width="3"/>
+<g stroke="#EBEDF4" stroke-width="2"><path d="M520 58V64M520 100V106M496 82H502M538 82H544"/></g>
+<path d="M520 82V64" stroke="#EBEDF4" stroke-width="3" stroke-linecap="round"/><path d="M520 82L534 90" stroke="#E1908E" stroke-width="3" stroke-linecap="round"/><circle cx="520" cy="82" r="3" fill="#D24F4B"/></g>
+<g><rect x="30" y="196" width="110" height="10" rx="2" fill="#303E66"/><rect x="38" y="206" width="8" height="30" fill="#303E66"/><rect x="124" y="206" width="8" height="30" fill="#303E66"/>
+<path d="M62 196V176L82 160" stroke="#EBEDF4" stroke-width="3" fill="none"/><path d="M72 150L100 162L92 172L66 158Z" fill="#E1908E"/><ellipse cx="96" cy="186" rx="14" ry="5" fill="#EBEDF4" fill-opacity=".18"/></g>
+<g><circle cx="540" cy="204" r="26" fill="#303E66" stroke="#E1908E" stroke-width="3"/><circle cx="540" cy="204" r="9" fill="#0E1426"/><path d="M540 178V230M514 204H566M522 186L558 222M558 186L522 222" stroke="#EBEDF4" stroke-opacity=".5" stroke-width="2"/></g>
+<rect id="glow" x="150" y="20" width="300" height="216" rx="10" fill="url(#glowg)"/>
+<g id="door">
+<rect x="150" y="20" width="300" height="216" rx="10" fill="#303E66" stroke="#E1908E" stroke-width="3"/>
+<circle cx="164" cy="34" r="4" fill="#E1908E"/><circle cx="436" cy="34" r="4" fill="#E1908E"/><circle cx="164" cy="222" r="4" fill="#E1908E"/><circle cx="436" cy="222" r="4" fill="#E1908E"/>
+<rect x="220" y="30" width="160" height="26" rx="4" fill="#0E1426" stroke="#EBEDF4" stroke-opacity=".7"/>
+<text x="300" y="48" text-anchor="middle" font-size="13" letter-spacing="3" font-weight="700" fill="#EBEDF4">TELEGRAPH OFFICE</text>
+<rect x="262" y="90" width="76" height="8" rx="3" fill="#202946"/>
+<circle cx="276" cy="86" r="4" fill="#EBEDF4"/>
+<g class="wheel" id="wheel"><path d="M276 86L328 80" stroke="#EBEDF4" stroke-width="4" stroke-linecap="round"/><circle cx="330" cy="80" r="6" fill="#D24F4B"/></g>
+<rect x="170" y="106" width="260" height="8" rx="3" fill="#202946"/>
+<g id="plocks"></g>
+<text x="300" y="228" text-anchor="middle" font-size="11" letter-spacing="3" font-weight="700" fill="#EBEDF4">1861 - 1877</text>
+</g>
+</svg>
+</div>
+
+<div class="intro glass" id="intro">
+  <h2 style="margin:.1em 0">You are locked in the telegraph office.</h2>
+  <p>The telegraph office closed for the night and the clerk locked up. Old messages from 1861 to 1877 are still on the wires. The door has <b>5 locks</b>. Each lock matches one big idea from Lesson 9. Solve them all to find the <b>5-digit exit code</b>.</p>
+  <p>The clock starts when you press the button. Most students finish in about 20 minutes.</p>
+  <p><button class="btn primary" id="startBtn">Enter the Office</button></p>
+</div>
+
+<div id="game" class="hidden">
+  <div class="bar" id="bar" aria-live="off"><span><span>Time</span> <b id="tm">00:00</b></span><span><span>Locks</span> <b id="lc">0</b>/5</span><span><span>Hints used</span> <b id="hc">0</b></span></div>
+  <div id="locks"></div>
+
+  <section class="exit glass locked" id="exit" aria-label="Exit door">
+    <div class="eyebrow">THE EXIT DOOR</div>
+    <h2>Type the exit code</h2>
+    <p id="exitNote">Open all 5 locks first. The digits go in order: Lock 1 first.</p>
+    <div class="codebox" id="codebox" dir="ltr"></div>
+    <p class="ennote">Type the answer in English. Use the digits 0-9.</p>
+    <div class="row" style="justify-content:center"><button class="btn primary" id="codeBtn" disabled>Open the Door</button></div>
+    <div class="fb" id="codefb"></div>
+  </section>
+
+  <section class="esc glass" id="esc" aria-live="polite">
+    <div class="big">ESCAPED</div>
+    <p class="time"><span>Your time:</span> <span id="escTime">00:00</span></p>
+    <p id="escSum"></p>
+    <p>One last step: write your Debrief below.</p>
+  </section>
+
+  <section class="debrief glass" id="debrief">
+    <div class="eyebrow">DEBRIEF</div>
+    <h2>Which lock was hardest, and what did you learn that you did not know before?</h2>
+    <p style="margin:.2em 0;color:var(--dim)">Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.</p>
+    <textarea id="debriefText" aria-label="Debrief" placeholder="Type your answer here..."></textarea>
+  </section>
+
+  <section class="actions glass" id="actions">
+    <div class="status" id="status"></div>
+    <div class="row">
+      <button class="btn" id="saveBtn">Save Progress</button>
+      <button class="btn" id="loadBtn">Load Progress</button>
+      <input type="file" id="loadFile" accept=".json,application/json" hidden>
+      <button class="btn primary" id="finishBtn">Finished — Download File to Submit</button>
+    </div>
+    <div class="msg" id="msg" role="status"></div>
+    <button class="link" id="reset">Clear all my work and start over</button>
+  </section>
+</div>
+
+<div class="actions glass hidden" id="loadOnly" style="margin-top:12px"><button class="btn" id="loadBtn0">Load Progress</button> <span style="color:var(--dim)">Have a saved file? Load it to continue.</span></div>
+
+<footer>UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.</footer>
+</div>
+
+<script type="application/json" id="er-data">{"salt": "L9esc:", "exitHash": "f610160bf563ce98ef43", "locks": [{"n": 1, "key": "lock1_war_map", "title": "The War Map", "obj": "1, 4", "objLabel": "CORE OBJECTIVES 1 AND 4", "objText": "Core Objectives 1 and 4: Identify the advantages of the North and South as the war began and how they shaped each side’s strategy, and describe the military turning points in 1863 and 1864.", "type": "pick", "card": "<p>The Union had about 22 million people and the Confederacy about 9 million. The Union states also made 97 percent of the nation’s firearms. The Union’s Anaconda Plan used a navy blockade of Southern ports and pushes down the Mississippi, Tennessee, and Cumberland Rivers to slowly trap the Confederacy. The Confederacy hoped to hold out long enough to wear down Northern support for the war. In July 1863, the Union victories at Vicksburg and Gettysburg were a major turning point; with Vicksburg, Union forces cut the Confederacy in two.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 14, “Mobilizing Forces in the North and South” (“Regional Advantages”; “The Union’s ‘Anaconda’ Plan,” key term p. 577; “Confederate Strategy”) and the Ch. 14 chapter review (“The Winning Union Strategy”; Vicksburg, key term p. 609; Gettysburg, key term p. 610).", "prompt": "Pick the correct answer for all three questions.", "qs": [{"id": "f", "q": "What share of the nation’s firearms did the Union states make?", "opts": [{"id": "a", "label": "7 percent"}, {"id": "b", "label": "30 percent"}, {"id": "c", "label": "80 percent"}, {"id": "d", "label": "97 percent"}]}, {"id": "n", "q": "Under the Anaconda Plan, what was the job of the Union navy?", "opts": [{"id": "a", "label": "Blockade Southern ports"}, {"id": "b", "label": "Defend the city of Richmond"}, {"id": "c", "label": "Sail to Great Britain for help"}, {"id": "d", "label": "Carry troops to Texas"}]}, {"id": "t", "q": "Which two Union victories in July 1863 were a major turning point?", "opts": [{"id": "a", "label": "Bull Run and Antietam"}, {"id": "b", "label": "Vicksburg and Gettysburg"}, {"id": "c", "label": "Shiloh and Perryville"}, {"id": "d", "label": "Fredericksburg and Chancellorsville"}]}], "hints": ["Each answer is in the Clue Card. Look for a percent, a job for the navy, and two battles in July 1863.", "The percent is a big one (more than 90). The navy’s job is to close the ports. One battle name starts with V and the other starts with G."], "nudge": "Not quite. At least one answer is off. Re-read the Clue Card for the percent, the navy’s job, and the two July 1863 victories.", "entries": ["99627f1861b2676439269"], "id": "lock1_war_map"}, {"n": 2, "key": "lock2_proclamation_dispatch", "title": "The Proclamation Dispatch", "obj": "2", "objLabel": "CORE OBJECTIVE 2", "objText": "Core Objective 2: Evaluate Abraham Lincoln’s decision to issue the Emancipation Proclamation and its impact on the war.", "type": "match", "card": "<p>On September 22, 1862, five days after the Battle of Antietam, Lincoln issued the preliminary Emancipation Proclamation. It warned that all enslaved people under Confederate control would be made “forever free” on January 1, 1863. Antietam convinced Lincoln to turn the war into a fight to end slavery, not only a fight to restore the Union. Lincoln called the Proclamation a “military necessity,” a use of his presidential “war powers.” More than 180,000 Black men enlisted in the Union army; at first they were not allowed in combat, but the need to win the war changed that.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 14, “Emancipation” (“Antietam: A Turning Point,” Antietam key term p. 591; “Emancipation Proclamation,” key term p. 593; “Black Soldiers and Sailors”).", "prompt": "Match each term to the best description. Use the Clue Card.", "terms": [{"id": "ep", "label": "Emancipation Proclamation"}, {"id": "bs", "label": "Black soldiers in the Union army"}, {"id": "an", "label": "Battle of Antietam"}, {"id": "mn", "label": "“Military necessity”"}], "descs": [{"id": "a", "label": "Convinced Lincoln to make the war a fight to end slavery"}, {"id": "e", "label": "Promised freedom to enslaved people in areas under Confederate control, starting January 1, 1863"}, {"id": "m", "label": "How Lincoln explained his use of presidential war powers"}, {"id": "s", "label": "More than 180,000 enlisted in the Union army; at first not allowed in combat"}], "hints": ["Two descriptions give numbers: one has a date (January 1, 1863) and one has a count (180,000).", "Antietam is the battle that changed Lincoln’s goal. “Military necessity” is the reason Lincoln gave."], "nudge": "Not quite. Check each match against the Clue Card. Which one are you least sure about?", "entries": ["6e7b2fc719ad32d2cd254"], "id": "lock2_proclamation_dispatch"}, {"n": 3, "key": "lock3_home_front_wire", "title": "The Home Front Wire", "obj": "3, 5", "objLabel": "CORE OBJECTIVES 3 AND 5", "objText": "Core Objectives 3 and 5: Analyze how the war affected social and economic life in the North and South, and explain how the Civil War changed the nation.", "type": "decode", "shift": 4, "cipher": "MRJPEXMSR", "card": "<p>The North paid for the war with taxes, tariffs, bonds, and paper money, and its government handled the costs better than the Confederacy did. The North also passed the Homestead Act (1862), which gave 160 acres of public land to each settler who would work it for five years, and the National Banking Act (1863). In the South, the government printed so much paper money that the prices of everyday goods kept rising faster and faster, which led to unrest. When the war ended, slavery had been abolished and no state could leave the Union. Political power had shifted from the South to the North.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 14, “The War behind the Lines” (“Confederate Finances”; “Wartime Government,” Homestead Act and National Banking Act, key term p. 603; section summary) and “A Transformational War” (“The Union Preserved”).", "prompt": "The Clue Card describes a money problem in the South without naming it. A secret message names it. Each letter in the message was moved 4 steps forward in the alphabet. Decode it to name the problem.", "hints": ["The problem is what happens when too much money is printed and prices keep going up. Use the decoder key to spell it.", "In the message, the letter M is really I, and the letter R is really N. The word has 9 letters and ends with ATION."], "nudge": "Not quite. Decode one letter at a time with the key, then check your spelling.", "entries": ["0017b04d1a1cb0b95c090", "00cc48f37ebfd26503773", "011eedafaddc4ba624c23", "019543c8a075fe0301511", "0202d1bf44bdc1fdec0d3", "02b80484555a2aa5ac836", "03318c00501e3024db7c5", "0353c616abb9f8e218442", "03561af8e284becd0bb15", "035cc25a821be24fc1e40", "04ada0212f010d3158471", "051f05aa9480cdce72a38", "0524c0de82a5adb500011", "052554fb53aac1d9b0616", "0525be55d7045ff151552", "061d7f25075f384561ab1", "06df0269b2386c240e288", "06e6a419909802926f921", "06f372c0c88ed81cb0650", "06f75707a25cf391a78d1", "07d9c26a163d6a4055418", "07e6fa49a2513b474f3f3", "084a89d509c07b23e1512", "088afb77d499afe8924d9", "088c35205630a94abb000", "09737a3ad528047ee5811", "0987b907f31480af8b423", "0a0a4280739df8ee08449", "0a8faa4596043511cf9f7", "0a9c738bc89ca9555a224", "0b173ebeebe45b441c1b4", "0b92917557fa6a49fcd35", "0bf523c0634add8cbf9e0", "0d3c63e43ad1a490bc991", "0d7da198320570642efa3", "0d9580957669515a548b3", "0dcb7163d78a9c3a25ba3", "0e04619854ca09aef7a61", "0f766a1e448d23b8c1da6", "0f9678fde78101693b500", "0f99178fde3a032ac8bf4", "0fea2df4e02d2dbf0be24", "0ffa8a932cdd277bb8a60", "10263d879103b36085159", "10f3524193c4359e10b18", "13d0653b63c4a409fe797", "142d5c2e40ccd72a09a80", "14625d4833e983dcc9122", "14b6d78376a74ce94d597", "14bfe06b1cdfd96d37277", "15a46f9fffff5029fd613", "162d1e0fe4598970d3866", "1725f854c75e7ad8362e0", "190e93e9a4cf8d47ef694", "1945be5edb7e2b4152ca5", "19568d81865f7854085b1", "195e5fe89e57c5f2b4f49", "196e04bea94d432639269", "198229c25f98cd06a5452", "1a56a31797d4829b55158", "1a80589cc3734c510f4a3", "1bee8235a500c52931576", "1ccd2664b9df24dbe7084", "1d5cdc188dd7e6db64ce2", "1d75f4c4104ada4f4dce2", "1dd53497fe61f0e026d29", "1e2e5252cbac4b2450d93", "1e37c1ee59539086d89f6", "1f94193586a7b1acbd648", "1fe6d57e3f3d1a5821155", "2193394a35b7cce17f3e4", "21955d755d447e2b78d57", "2209b4e7d36e2efc19e46", "22232599e5b6024582c85", "22850a887a746fae92a66", "22c2d2ad4ce7b45060756", "233c72be77e9b05951511", "236c4372ca2e12ed99904", "24622cc5c90ccdf4aab25", "25f4cd6067414a1482023", "26f27e930125f6dd9fdd5", "2775c6d43a7cb619d5395", "280cd0a632169f5540db9", "2876614f294f95eade856", "2876ed7b8c015d1560243", "28dbf74808996dba9d407", "2987f56d5c034f54431c3", "2a2d4c36171a25190e5e9", "2ae3214ed32894dfb3d95", "2b91766568e41ae229b50", "2c96bb43eb9b6cff79049", "2cb550866191e7ec3a740", "2d58b637638ee3eba35b5", "2d5d0da71a3bd01750e70", "2db421b513904b7df16a9", "2dd8642e6367d66a429c3", "2e48146b60789a80dbef0", "2e52c76cc171c705dbce2", "2f8e7a105242d228c58c5", "2ff9cd99f20744200b7d7", "30a6ee8c67ad7b60eed94", "313ce516c8200e7ee9b42", "3248db3fc94d757aff6f0", "341966bdc523d1c2283b3", "348547607ca720fc75353", "359e30b11cf219db79135", "35f5f6f609141a1233133", "3699c1c2d38fa73114558", "37490c12f1fdd71ec5566", "3759b9609db5c3b283842", "377f362a430edfd198d06", "38d76223d622ebc4bf757", "391a1641bd60012d54392", "3a5fbdbda19a5b49b2ae2", "3b91c632f0e5317717570", "3c1de35f8773e18184b92", "3c7ac8303579f915d3c59", "3ca48f412c33a59b676d9", "3d61c1544d66af5a75944", "3e0ed39652642d020b4c5", "3e9815c3a87786fe8a050", "3ed195ecb0b345adbc7b6", "3eea9ef36e3248ef3fd28", "3fc1cc526694f170ce505", "407fab27c850c2fe31c55", "40b164b101e8139f0cac9", "41dae352824ca7c408617", "4221d271acd8dd279da70", "422c54590754a489a0761", "42eef6464cf85c87a9508", "4376e13343c9e2ae18a67", "440e8f184fbb3cc6591f6", "44cb8b0866bd65b10ec28", "44ef8b2bdad06c602f5c6", "4568cbe2955900cd1fd16", "4667e05f6b0b82148aee9", "486bb2008c74fdd175b20", "48b1f37fa9208c24c6b00", "4905e330ca1a0d9dfe417", "49a0dd230973a1bf1e287", "49ba1581f027cacf039c7", "4aadd15273bf890dc1869", "4bbe069eaeb9a7a70ba30", "4beae800890a723230e78", "4cf553c7a67f52f344447", "4d27935989348cda2a7a1", "4d5982dda00f0a6dca015", "4d6d86ea4ee05ba5e61e7", "4f10ed05847ceed72eec3", "4fad2369d3c69d690c002", "501d8c14df031e34bdcf7", "5022a88906166ea662b00", "51aec21a575cc2ee15919", "544dba55b9f884e083a98", "54865e8bf9f17fbbc0265", "55ec936543e1fd2ea1695", "564fddf79fd647d5797a8", "56603d431038e6bea5a00", "5758d0c153d49a72922c7", "57e8ab1888d9d3d667197", "58603942d79cec043ebf6", "5892ffd8a6af3816fef04", "592ee4bbd0a3be8f39967", "5a474f442c0e084953ef9", "5a90aa73a29e39f33c8e6", "5ab42a8554ffdc0a31574", "5aed652c8e307769ced85", "5b4073cdcf56fc4a92e76", "5b4709be3dfe6f6ef1a55", "5b925e28725e89fc0c7c3", "5ba932b195f020a3aeed6", "5c3df1287f453afcd4bd4", "5c57eb550e2be3daeec92", "5d1e1552630f7e8e6fc29", "5dc5fabbd4a6a515b1358", "5e80904d28e9a789bc469", "5e8239e2b7a12f1823b54", "5f1b565ccb3a7f1c3cda4", "5f1e0ae3ebbabaec42679", "5f543dc3de81c8d611f16", "5fee170f0fde9284d1ed8", "6023a131a9a47e8b56589", "60280722d4e80dc7b1ae8", "60c7c5a41b8a506436675", "61e83dfaca20a499e0656", "63c05d73d2b79fe27e0b0", "642e85a2fd701713a8c16", "646300e39eca3a6f3d4f5", "6644764912ef920447b05", "665f1d3e72724b71fb068", "66a848bb3e83f51a57494", "6768b501ac8dc6798a397", "679cc964ebf51b253a4e4", "680f458177bfd7931c880", "6818b42b4bce940b4b183", "6859977f05cb2090bb252", "688446083737c7cb26259", "68a6c873b0268ad044b81", "690dab08bd1cb1148aa10", "6b000a058fc50a8ae2521", "6b487c02ec3041bb59783", "6c44c92f77babf8425166", "6cc58ab7234629b0e37a8", "6cf241a885803dacd04e1", "6def94170036960a5d971", "6df35b2eeb1a9f86a2013", "6e01813dc7f64a2e826f2", "6f1f6e3f6df788e134127", "6faa5d2a4a64ff0421543", "7042bb615b72945fd9682", "709f64476b109ab695125", "714fa641a0006fb10cb75", "71a7a342b9cc3cb84ca79", "72724d626c87858b68137", "7295708777c068de58534", "72a69302587fd41025106", "73670384e6dc5c4d12608", "73da95800c5d111f56384", "746cb7f5be532b158c1b2", "7512bc3b5c71f0b019572", "758626048722263b90cf4", "75f6f381aef91b1de5425", "776bac0004cb41f250e98", "77938a0a1c45f4856aa35", "7887acf3f10377c3d11f5", "78a5665fe341bdae13e99", "78da54d99ec2781e39ae6", "7a00924c6030ce55b3f66", "7a0ca862b11ac11839c81", "7a7718f98fd9dd8affb04", "7bc48d905dc2ce413de23", "7be5aaf4d8b2cc8d22434", "7c66a363f7b640c2d2169", "7cfee188c87bad372dc58", "7d7b25d3fc1b15ac14e46", "7db74edb11574998af588", "7ef862a9afd7af481b1f7", "809ff40c2a23ed6b80c12", "80c1574062dfbe1b2c5b8", "80d4db963c65d4f8f92d5", "8101799d93deeee5517a1", "8155c46db66b77a64e967", "817389bd688c3db0d33b5", "81dc55a5f2ef49de8b296", "82b12f16b3055624873f5", "82f7f702c2b320b0d3250", "83fa06bdecba7aa09c576", "848e8ebf50e870811a694", "850d17049a26bb0b43af4", "8533d683057a4b2dcfae8", "855a10173ccfb0b17d2f0", "85ae4d48079479f595fa6", "869f436bdf0000daff045", "87922c28a848bb4012c41", "895b431ac71ff620b3f04", "89ff6de28597be5106178", "8ab35aa34fb68f89017d1", "8dfc687dfdd1abde74236", "8e384331a41a98f459304", "8e3fdb5badb297945e5a9", "901fa9ab774f478b8acc5", "90a844d0adf4747bec508", "90b30494b7c84668e4c69", "929d6ee054d27cd854989", "92a03408a383c1bd3ed02", "93a0e72c7c7d557be18a0", "93d1305eb489b1e3dbcf7", "9490bfe3edb797b584a05", "9556279212d27bfc55329", "95a356744ac09bd16a512", "95e560cd2aa84de8d7dd0", "969926c9c5dbc5e5312c8", "96fa9ca9893ca7fcce3d4", "972af79007c1fb7e1ca99", "984eaf7ab227557eaa979", "98a68e548c8dbdf6e2e26", "98ac7bfe6af4ab44e4a68", "98f3bd0c09b32a4f3b887", "99bf74dcc418630d36de5", "9a1e236e97acbfaa7d014", "9a23e85dea07b6cdc0321", "9a341b1ec005dab94c863", "9a87923a2889f955fbf03", "9ab145beaf17c6a8876b9", "9b0cd6cb3184870597dc3", "9b2a3ff2aac04cc045c10", "9b9f68761d18caef806a1", "9beaf1b22329d1fa7bcf1", "9dee4868054ba6fb89ef6", "9e97d97e586edde96aa04", "9ed283fefd37bbc411560", "9ed31fe8d03fc3dd77d50", "9ff50135e1c1eca666726", "a0ef30fea8340a0a89ee3", "a1a0d04e789758bcc0a75", "a1dff3bb975cae36d5be3", "a24b58254e5f984dee018", "a27b4d94547ac396ba2a8", "a2e0000b03a5dbab9ad25", "a3743709a672d90517d08", "a38578191fb1bdcb4ffa2", "a3d5df2274daac026f883", "a4bf24058de10d164c5d6", "a5045a5ff643dd84e4876", "a513f97aede09ecd78388", "a5820a94b1c40fb156615", "a60dafe8717fc79763403", "a67d7b6f710042029edc5", "a6843406a4022ed994222", "a68d3d2c55aae92463c44", "a68faae151717320e8aa9", "a69a6deffa4d6bd3284d0", "a69eb7814414fbaaba879", "a6dc16cc4da977a5eaea4", "a6f70a912de50b7d81128", "a73271909d7af7f72fe63", "a760499d76c06ab808333", "a77f52d47ac9c8a181908", "a7cc6556c582fa7ad8b44", "a7f3652de3d8e48e8c348", "a88ad910b8675c2dae657", "a9f3bf38933d284c75056", "aa815207c4128aff66865", "ac0392977726f1da44308", "ac8126d8d8d2b41a20e18", "ad200fb60857302907106", "ae47f7b9376bf4fcafae2", "ae915774d54911c1807a2", "afbadffb3f28c1dd125e3", "afe9b934132b22c6feab7", "b0e4516c1e99b50d67512", "b240b03d9efb6416254f1", "b27c09a94ba693fe68b92", "b28a7fe5cafccca9994d1", "b32cf5e66f209eb83c3f2", "b361d722d9e1b36a12b28", "b3972c223dd9264f45c21", "b3c8ccdc81bb877897b86", "b3d087f8ae3a76bae5430", "b42451ad18d076ee1b0f3", "b4598f8c267ec3ffa6269", "b462b12439f5b7517b555", "b48e2022086103f96ea87", "b4a9664d9420b8ef101a8", "b4f8daa75617cf8b40b54", "b4fc9e9ce1e036c795973", "b5f609ef234ca606e9751", "b63443c4f666f07007535", "b71790ab334f693af9d88", "b8d0805d8d39065e62a26", "b91eac0923dbb07a0d3c5", "b96028aafc174880621e1", "ba5a9f2987f742a4da2b3", "babcf21df57064e3eecc7", "bb57b1d190a432f8cfc55", "bb66176fa62b9645b17d2", "bb683ce8dc2c636e9c9d4", "bbb814363ead9f2123a32", "bd620cd93ee22a73cf3a5", "bddbc4e33d65de2e1f995", "be86037144cebcc429e43", "bf5a0c486dd2f97fc4f93", "bf63f6f12644efde56217", "bf9c5dea581f57e7587a9", "bfc6815aeaab3066e6544", "c097ca4d9daa84432be58", "c0f83a371fdc6b25b0ae0", "c21a132fdc8c441f640a0", "c23529cb6dbf72646dc67", "c285bf528ce916a687045", "c2a73e6b54a9d4a5bbd83", "c2cb1a1f56c9836c249b1", "c2cdef36c4cedad4651c3", "c45d89608f082d67cd822", "c56e384f8e60dc1699343", "c576e2f5780ea20bc0274", "c6d2034d8419c13ae5492", "c719315d11434eadfdd93", "c7678d6a4a9a45c88c0a0", "c89d371728a6b2ef52453", "c94b1029ddc712d7fb241", "c979558855d34c29e7f90", "c9afd96fbe0ac975bd3b6", "ca476e8922e21b6968414", "cab81bd7b49da02c34856", "cad4f1e5546b57ed627a2", "caf65950aec48c23eaa36", "cb9ac38d0c5a975b55909", "cc6f49eb02ad142e9a200", "cc9f217cf654a3681aec4", "cd77da08068dc70882745", "cdc9543e2a86486602bf4", "cde58b3b6e98aa09e9984", "cdf8160ef3b765d11a322", "ce2d8a4ba354eea862ea6", "ce8b50d039cf42cbe9733", "cea97a5dcfb5c33f37bd5", "d10f187e34b66a9b505d9", "d158d55de811efdd89663", "d1d497268362d78db9418", "d1f6fec178e0a9f959b73", "d1fb4ad8b7eae417a4b42", "d26884a79817bb5c5e5d8", "d4e0f6aca7364dde0e2d3", "d5b057f7dd29d7df6fd01", "d74dd7b2f0c8b82cec4d9", "d8df8afe7a744f3a60d76", "d911f40352f10a34713d7", "da53a1cda8ad17b662a23", "da7b9efdcb53ae048bdd8", "da988d85cb9bf32340bb7", "daea2f3b5fd257d896399", "db05cc24071f6938f9ce7", "db357a39a6f17dcec76d6", "dce639d5c40ba1c1a8898", "dcfea8bcf1aaa14859837", "dd254253ee4394a86ca35", "dd3b440e75e331e8e67e7", "dd3ba00babca1a376bc86", "ddd23b83df042a7525a21", "deef821326f6794a09ed1", "df2e4080adc97b023a179", "dfa7f603372b370e361b8", "e049f2f417981e282fce8", "e06a94c03c785bc435656", "e0bea1594622f06d6b184", "e11b6e3c06e3677e1f1a9", "e27501a210fa355d89fd5", "e27a82e6280d380181f64", "e2b59a78d75da75b8d568", "e33d835adb68e0acc55d9", "e3e1943d598bdd4ff69a8", "e4087e2c941662a1bec63", "e43b8aac5c5533356a439", "e4529d3b2e09c611450a0", "e45c8075d92ba32fc2c80", "e48af57cb01b832f2e987", "e55bddc03faf6fd064e04", "e5877a1df9e50a44acaf1", "e5d0bdca49bd77ae8cb91", "e5e47aaee16bb0f6884c5", "e7f03a50ca9ccb97cff55", "e82d242c866a7e3b6f5b6", "e9865dc9b898a454cf9f1", "e9fa41570a8cffcf35503", "ea03afddba3e782d73496", "eb8754ac95a2931c29ea2", "ebb480f28c20bcf787e56", "ebd1543738e8a9c5a0f59", "ec1d22f03472ca15f9332", "ec6a92176aa02e8b23810", "ecd188f0e69c272eccb01", "ecd8031c40b9b4b9e18c5", "ed5acebbed8ea72a78a93", "eea39d8c95722657e16b0", "eeabe76aea48d3a07ff41", "eec5fdaf1f550a6115a95", "eecd79b8c2180ca49c7f3", "eeed0672776d9f5fe1568", "ef24db182b3e0ae42fbc8", "ef546e6e465b09b366d61", "ef6f38ca8e55d69e85a41", "ef7ab027f133188b2a4b1", "efe41173979e429d69e46", "f09da2ce9b17683e26005", "f0b55f022eafe52acdfd7", "f0ea41d7e1e10efc38a15", "f15e3a6141c75f8505a75", "f20b563b5792a1365fc61", "f27a52f46fb7f18163c70", "f2b2b652090f4c50f73a1", "f2d5d3d8748c36a5b1f41", "f3a32eddbc2d59f640a95", "f3ded6331bcfb3f79dbe2", "f3f4199ec712acfa97281", "f416f974d802124890338", "f46915086548363897726", "f48540c8f1ccdac5066a5", "f4b399206b00bec962f14", "f5c5072c6aaea7f141ca6", "f6ab5316957dd8ea287d7", "f76e44a5d55dceee8bb85", "f828d2380f1e39280af32", "f8c8ebc8e973106a6ef63", "fa78ced0f595dddeaf0d9", "fa91cac51b0361e0ca093", "fb0d4a0ccfc2ddaaaa206", "fb26fae4f2ea7de4def51", "fbedb4dc7f0cb449cf989", "fc207a6e9a60b2019af69", "fc76c1b231a9d1db74ab4", "fddcf2e3b40e57e38bf96", "fe9fb3cb63b2ed1c1d6c7", "febccdc216ddcbdd9f8d4", "ff0d32683797a809a2565"], "id": "lock3_home_front_wire"}, {"n": 4, "key": "lock4_reconstruction_cable", "title": "The Reconstruction Cable", "obj": "6-7", "objLabel": "CORE OBJECTIVES 6-7", "objText": "Core Objectives 6-7: Identify the federal government’s major challenges in reconstructing the South, and describe how and why Reconstruction policies changed over time.", "type": "order", "card": "<p>Lincoln and Andrew Johnson wanted a lenient plan called Presidential Reconstruction, but Radical Republicans wanted a plan that would transform the South. The Thirteenth Amendment, which abolished slavery, became law in December 1865. In 1866, Congress passed the Fourteenth Amendment, which extended federal civil rights protections to African Americans. Next, Congress took charge: the Military Reconstruction Act placed ten of the eleven former Confederate states under army generals in five military districts (Tennessee was left out because it had already ratified the Fourteenth Amendment). In 1870, Virginia, Mississippi, and Texas were readmitted only after they ratified the Fifteenth Amendment, which protected the voting rights of African American men.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 15, chapter review (“Reconstruction over Time”) and “Battles over Political Reconstruction” (“The Freedmen’s Bureau,” key term p. 633; “Congress Takes Charge of Reconstruction,” key term p. 646; “Expanding Voting Rights,” key term p. 648); Ch. 14, “Thirteenth Amendment” (A Transformational War).", "prompt": "Tap the four events in the order they happened. Tap an event again to take it back.", "items": [{"id": "c", "label": "The Military Reconstruction Act puts ten states under army generals"}, {"id": "a", "label": "The Thirteenth Amendment becomes law (December 1865)"}, {"id": "d", "label": "Virginia, Mississippi, and Texas must ratify the Fifteenth Amendment to rejoin (1870)"}, {"id": "b", "label": "Congress passes the Fourteenth Amendment (1866)"}], "hints": ["Look for the years in the Clue Card: 1865, 1866, and 1870. One event has no year, but it comes after the Fourteenth Amendment.", "The order is Thirteenth, Fourteenth, army districts (Military Reconstruction Act), then the Fifteenth Amendment in 1870."], "nudge": "Not quite. Re-read the Clue Card and follow the years and the word “next.”", "entries": ["08a75f2b24a027af81785"], "id": "lock4_reconstruction_cable"}, {"n": 5, "key": "lock5_final_telegram", "title": "The Final Telegram", "obj": "8-10", "objLabel": "CORE OBJECTIVES 8-10", "objText": "Core Objectives 8-10: Assess how White and Black Southerners viewed Reconstruction, analyze the factors that ended Reconstruction in 1877, and explain the significance of Reconstruction to the nation’s future.", "type": "fill", "card": "<p>Many freedpeople became sharecroppers: they rented land and paid the owner a share of the crop, and most ended up deep in debt. New Black voters helped elect nearly 800 Black state legislators, two U.S. senators, and fourteen members of the U.S. House. The Panic of 1873 caused a deep depression, and 3 million workers lost their jobs. By 1877, many White Americans no longer wanted to pay the price of protecting Black rights, and in the Compromise of 1877, Republicans promised that if Rutherford B. Hayes were named president, he would remove the last federal troops from the South. Even so, the Fourteenth and Fifteenth Amendments stayed in the Constitution as a base for later civil rights gains.<\/p>", "src": "Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 15, “Black Society under Reconstruction” (“Sharecropping,” key term p. 654; “African American Political Leadership”), “The Grant Administration” (“Financial Panic,” key term p. 664; “The End of Reconstruction”; “The Contested Election of 1876,” Compromise of 1877, key term p. 669), and the Ch. 15 chapter review (“The Significance of Reconstruction”).", "prompt": "Fill in the blank using the Clue Card.", "sentence": "In the Compromise of 1877, Republicans promised that if Rutherford B. ________ were named president, he would remove the last federal troops from the South.", "scramble": "S  H  A  Y  E", "hints": ["Read the fourth sentence of the Clue Card. The president’s last name is in it.", "The word starts with H and ends with S. It has 5 letters."], "nudge": "Not quite. Re-read the Clue Card for the president named in the Compromise of 1877. Use the scrambled letters to check your spelling.", "entries": ["0082e413ccbf8178c0bc2", "0084fcea43309e11f92e5", "00f7143acb59df27ebf49", "015a859a704f0343bf506", "020f0875a0d3b435f7a89", "0223e477b832406cac069", "02a75d7eb8187e7b96065", "034928d4ac416c5265e52", "03e01acfcdb1474c62524", "04b52877a177b29a03cb9", "04d5df1651862bd7879b1", "04e25482032e34b2c44e5", "0580e8358f238591a9ed1", "05dbfdbc1c4ff52a7a581", "06cdb49d9b33fc417ad43", "06cff37667f711cdf1d81", "074a6d586cc1ded89b923", "0994e5ad4ab905d13aef3", "0a68b1b9d5f55c9018619", "0a9731bdbcfc097d759f6", "0ad5cbfff057c022839a7", "0b113597d444ea8882338", "0bf5683e5f3477eca07b9", "0d0f9603a0b8c43ba26a3", "0d4964e4f8481207379e7", "0e089c486be506da8a5a5", "0f7a64371babd87fec5d9", "0fa00186f12fd9337e4b8", "12240777b31f788d5d253", "12febc8805ee749a1d505", "1361a2dd44e528b3e7713", "13620ba9294db39cf7cd2", "138fc3e105af5447b7089", "15d00637a093dc4bf3d88", "1741c92a49316f4a0e0f8", "18047c7dacd27e5a2b748", "18b4d92b3d3af43ba6a86", "18d22ed6eae6fbf774ec0", "1a7284a79d807c4be23f2", "1b7c7bd94ad48f74e5cf8", "1ca0b78c359ceee02e628", "1cf55f18f98c74a1d95e7", "1d4197f205ef7d45d6c58", "1d6cb431d1bf89ecf9e28", "1d8abf0c4d00bb8539671", "1dcf822d370acbfa0d136", "1dec2729a9948aa24c7a6", "1e41b6902eb4c8e5238f0", "1e42abdf99fe278e5d110", "20cdf426b6ffdd5e255e9", "20d19a214562fb74ae7e1", "2150bbdb7a070bc290d11", "22b34a3514a1309cbf7b4", "2470253bc357fb4cd5a74", "25395aa91b329777f01f0", "26ee7f23a5046d26978d0", "27992e95c6e10474d0022", "27ff7578df358b1b12343", "29b0a74538971c6a21726", "29b239f25086787b80164", "29cd38d6c4541eb527399", "2a118ad6354e6ff2dd584", "2b77f1f2ab629afe16271", "2b9b3e533ef30eb5517f9", "2c0417411fad09ec48b37", "2d1fa20e0e085d631a457", "2dfef82e864dd30c3d816", "30a477f09db7fb58cd2e6", "315f7866a33bb96da1cf3", "31ed59d9277ab9f4a7201", "324384341e6f76f1c95f0", "33c2ec66a2df29071cde3", "34799fa379f33b9d70135", "34836d8ed439f925111c5", "34b6106ec0d5d37b94309", "3629f95dc2b41144d5279", "364a66c9cfa35e84c7ca6", "364d0fd0cd2cc5d0ff127", "36d879cbe088463917f31", "374771a8755a678e39d04", "386bffc935055aee81e54", "386d17356f1bf5ad7fe44", "38ec181cd4257f42818c0", "3927bbe6138c4a3338f17", "3a09e4462cd83377bd152", "3a95b9a0b27770cb610a7", "3df92dd3c39e0d45bf407", "3eef0b8fbfd715c40f649", "3fd693f52b78bea6c5a44", "3fe9efaf843acc3742920", "401ad8dd555dd25d22e17", "42137c8d11c2f549a3600", "43bf2f9f28086fbfdd8c8", "44637d4ff7b6c546b22b4", "44df6dec9f1a9dcaf01b8", "46c342bb4ffa244905c94", "480ee744598485e94a2d2", "49ce6ab8ad133ce6838f0", "4a06a1bbfe6856a3242b7", "4a16084e9981138d3bfc7", "4a8bada4c53fcb96fc475", "4c24b84036d0326e9bd23", "4e0a758b6f256b867e6d5", "4e0f9b124bd9e7dd1fb68", "5007dc6c23e12ee79bda2", "5027fa717652624d25db7", "507e88c25c3e21d200de8", "51a0dfcbc651ab0d38cc9", "529f7de9fa77102649927", "52b39c65882c4d0d29fb0", "53e5b85784f144de19271", "58ed1beb72b3a1a478621", "58fa2a65c1ca99f514555", "5a5bcac54fb70f6349238", "5a773348bad43054a6566", "5abbc807dfcd57cfd5a84", "5cb1dc4ca9d4c9e37ad92", "5d1fc18879e147b367523", "5d80e04079d72db3ebc35", "5e715bc444bae411f0eb5", "5eb67e3b76c226310fdb3", "5ecc610954f946fe294b4", "60b45dd7adc655e99fcc4", "611216a9b85a391bde364", "61db50599cb49472af7f0", "64be06aebdf0a41afdae2", "64cb650eb03f5d5d2a472", "69507a86d35ae64002b23", "6af0b0ee54a27b9b17528", "6b05cc0a814777acb6119", "6c7781177998aa4716909", "6d52e736d129ddf376499", "6e0500fc636ee5c3e39e2", "6e3b8eb44d2d1ae0726f7", "6ecd7bf62a96caaada0d2", "6faa455a3406cfc396450", "70d08abb4aa17bdc8b376", "719eb487b6104180d28b2", "7245acf2ffba09ed724b0", "740aaf173a4d564a51410", "75168f30dd21481e97827", "75fdb5d2632e70c6a0ee8", "764c549fbd9cfef97a344", "76d0e74dfe28538e368a2", "78091c550e2f5bfe8ed07", "789172d11dde458e4b9a7", "790652911bd3163abde02", "794541d29b87f5773fc73", "79eedbc5103d4bc496bc0", "7d44b6be05ac83c83c5b5", "7daf7922d6f94b3c6a749", "805b8a8a9ef8af78185d8", "809de9ca584bd06f7d7f4", "810c556dbb366ddf097f8", "81ded4dd7d82a6d2db9f6", "81ed9c135f38d41f76800", "83d88dc7991166c0624b6", "8401907dd703e3fc28864", "85002f611ced5e28deeb4", "8645284b6515ace6e24d1", "87756a6592927ddc49b93", "884f93ca01cef8bf7e586", "889b02427d01b0a4eac90", "89258845dd17a2320dbd1", "8a5e6a721fd72a6b84ce1", "8b9a2eadc4b73fbe55c56", "8d22690346bb2dff6e0e0", "8d6d73c8b77f0305f9373", "8d736d3352103953d0ee5", "8e33b9f41e9a9c0b11167", "8e35d7e955da234da0917", "92feaca2db9cb6a0c39c9", "93e16d6c8646ff4814e44", "941e5200db4aced3c7156", "94779808d7917920be4b0", "94cc61e49b55106aeab65", "94db756845ccc7218caa8", "94e2ef74e8af75bbe8a42", "94f0f950ceac5a3835934", "956aa0c120ec36cb271b6", "96aeeea94e925f4dbd423", "97c069e71df3db14d13b3", "983a822ed91882292f780", "990cffdec79490de9bd59", "9a9f7d9315abe7052dc58", "9c3e1060ab6591f4569d1", "9e4f567790e44dc3f2083", "9e550df72f0caa3481ee4", "9f6847f6c0338575d8011", "9fd38d0124cfbba9cd147", "a126da1dfc0d52cd55920", "a12a79bbe789dff720e01", "a40278423959471f53016", "a4c17984d725f45194c75", "a63781d2383962deac1b5", "a6cdb5c9dab7ab3c61417", "a75b2d9ff7dff11919c85", "a7723f1edea4882966aa1", "a8d736f71cd71ef6a9314", "a980270b292f9ccd38756", "a994ca2c84f5fbcdc4fc8", "ab2b08370dc2746e48723", "ab4a4eed2f06164831a16", "abe7cbbe8d7e7883fe650", "acb3fe39821b66a674d63", "af57997b637c402d2d0a3", "b0a11723e4ef496738565", "b0be1daa6ffd1e5877d64", "b1ae1cc978c7fe921e470", "b376a3c39305692584bb7", "b480492d61aca1dfd82c4", "b48746246c0b957e17e06", "b4c62cb7f274f82334eb9", "b57e9b5700cc7456ac2b0", "b5e2ce837a04b62b84d22", "b5f4502a9ece3aa0d28f3", "b7a6ea462be73977dfdb5", "b9c5e2490b3fbb741c8f5", "b9fdac1c698e1f114d6e3", "ba4b5d77d3f404888ffe6", "ba700dd129684f9e4fc56", "baced87edaa43fcfdc6d0", "bbddd46f2ab2c8de2f438", "c1b58f694321851eac806", "c1cc654e5454f4245bc25", "c1e345fac8fbdcf196ec6", "c47e28fb663fdb7035848", "c5549cbca027d2c44da59", "c5636aa809e96b0d4f281", "c7dcf1e50042fbc100e07", "c9d70d74eb95c2b111988", "cb87c7058fee9d72dba99", "ccd7c73061832910c8886", "cd483abb308bd532691c4", "cec6bd844f74ad388a6f7", "d0d4a656c31182da42271", "d14dbc01e359fc3e920e5", "d417ff90cd65e5af6cca3", "d44cc8d33f96d79710c62", "d4e82df86af616f391ba8", "d5156b24002d410dfc005", "d58e0b2d061ef6c24e408", "d705209c4f77230ff48b2", "d74e8e2e493023a6b6e33", "d84ffe2522bdb39e3b5c6", "d899d879da3f11048f763", "da3c7426f573914144b52", "dab0e72535314ae818343", "db89df83cd6f0b436bfd3", "dc5b11de4dd54477f8d55", "dd5c50214ca2d4c8c2ef1", "e12648a1812adfb9a30e6", "e1f74cfc4a0e7d73be203", "e26fb76c2ac8e0edd4642", "e3cc8a157b0f403060dc8", "e425164c8b9eecb97bce2", "e5b8fd3abc6756cbfb522", "e79a0607565c5b483f051", "e7d5ccc7eaa5ac900e027", "e8c8554e1630fdc96ef01", "e9fbcbb85ecf547f45fd3", "ea4b48d76cbc382ca56f9", "eadbfb329ff95d80be5c1", "eaf7a738b2763fec9c376", "eb0b76fc58c325aeb8105", "eb162b02739db6f827b19", "eb7b1da4235e453a53868", "eb85a0700c78810a64511", "ebc852425f4ec0e593c79", "ed7131229a262f3b074b0", "eeed1b9e8940788e56dc9", "ef265704da1951077b250", "ef5fdd33a4ff2a2eb5062", "efc996bbaff1d56b73bc7", "efd56c072da6c243392d0", "f04ea45844513b7aa2820", "f2ecdee8742b45e75a4d5", "f4bb0ee92b2b1310f7163", "f66db61e0797e1c7ab7f1", "f6cb97a16bc21abd266e3", "f760a05b0ec3c03337b69", "f782d3840c40e7a9d1d10", "fa3cee991233e34bc24f9", "fb2ab390f26b0acced0f7", "fb83c2f8fc56b54891e97", "fb8f4f7bab88032fa6d60", "fc65279153017ed6512d4", "feda2f5259a99cc4ebad3", "ff1f5ad9fca62d0ec7048"], "id": "lock5_final_telegram"}]}</script>
+<script>
+function sha256(ascii){
+  function rightRotate(v,a){return (v>>>a)|(v<<(32-a))}
+  var mathPow=Math.pow,maxWord=mathPow(2,32),i,j,result='',words=[],bitLen=ascii.length*8;
+  var hash=sha256.h=sha256.h||[],k=sha256.k=sha256.k||[],pc=k.length,comp={};
+  for(var c=2;pc<64;c++){if(!comp[c]){for(i=0;i<313;i+=c)comp[i]=c;hash[pc]=(mathPow(c,.5)*maxWord)|0;k[pc++]=(mathPow(c,1/3)*maxWord)|0}}
+  ascii+='\x80';while(ascii.length%64-56)ascii+='\x00';
+  for(i=0;i<ascii.length;i++){j=ascii.charCodeAt(i);words[i>>2]|=j<<((3-i)%4)*8}
+  words[words.length]=((bitLen/maxWord)|0);words[words.length]=(bitLen);
+  for(j=0;j<words.length;){
+    var w=words.slice(j,j+=16),old=hash;hash=hash.slice(0,8);
+    for(i=0;i<64;i++){
+      var w15=w[i-15],w2=w[i-2],a=hash[0],e=hash[4];
+      var t1=hash[7]+(rightRotate(e,6)^rightRotate(e,11)^rightRotate(e,25))+((e&hash[5])^((~e)&hash[6]))+k[i]+(w[i]=(i<16)?w[i]:(w[i-16]+(rightRotate(w15,7)^rightRotate(w15,18)^(w15>>>3))+w[i-7]+(rightRotate(w2,17)^rightRotate(w2,19)^(w2>>>10)))|0);
+      var t2=(rightRotate(a,2)^rightRotate(a,13)^rightRotate(a,22))+((a&hash[1])^(a&hash[2])^(hash[1]&hash[2]));
+      hash=[(t1+t2)|0].concat(hash);hash[4]=(hash[4]+t1)|0;
+    }
+    for(i=0;i<8;i++)hash[i]=(hash[i]+old[i])|0;
+  }
+  for(i=0;i<8;i++)for(j=3;j+1;j--){var b=(hash[i]>>(j*8))&255;result+=((b<16)?0:'')+b.toString(16)}
+  return result;
+}
+function sha256u(s){return sha256(unescape(encodeURIComponent(s)))}
+
+(function(){
+  var PACKET='CPUSH_L9_ESCAPE';
+  var STORE='cpush_l9_escape_';
+  var D=JSON.parse(document.getElementById('er-data').textContent);
+  var $=function(i){return document.getElementById(i)};
+  var S;
+  var digits={};            // runtime only: lock n -> digit
+  var entries={};           // lock id -> {h20: maskedDigit}
+  var expanded={};
+  var lastTick=0,timer=null;
+
+  function squash(t){return String(t).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'')}
+  function h20(s){return sha256u(s).slice(0,20)}
+  D.locks.forEach(function(L){var m={};L.entries.forEach(function(e){m[e.slice(0,20)]=+e.slice(20)});entries[L.id]=m});
+
+  function checkLock(L,canon){
+    var salt=D.salt+L.n+':';
+    var h=h20(salt+canon),mk=entries[L.id][h];
+    if(mk===undefined)return null;
+    var m=parseInt(sha256u('m:'+salt+canon).slice(0,2),16)%10;
+    return (mk-m+10)%10;
+  }
+  function fresh(){
+    var o={first:'',last:'',period:'',started:false,elapsed:0,escaped:false,escapeMs:0,debrief:'',codeTries:0,locks:{}};
+    D.locks.forEach(function(L){o.locks[L.id]={solved:false,attempts:0,hints:0,guess:'',readable:''}});
+    return o;
+  }
+  function loadLocal(){var o=fresh();try{var r=JSON.parse(localStorage.getItem(STORE+'state')||'null');if(r)restore(o,r)}catch(e){}return o}
+  function persist(){try{localStorage.setItem(STORE+'state',JSON.stringify(snapshot()))}catch(e){}}
+
+  function totals(){
+    var t={locksSolved:0,attempts:0,hintsUsed:0,exitCodeAttempts:S.codeTries};
+    D.locks.forEach(function(L){var l=S.locks[L.id];if(l.solved)t.locksSolved++;t.attempts+=l.attempts;t.hintsUsed+=l.hints});
+    return t;
+  }
+  function fmt(ms){var s=Math.round(ms/1000),m=Math.floor(s/60);s=s%60;return (m<10?'0':'')+m+':'+(s<10?'0':'')+s}
+  function snapshot(){
+    var o={packet:PACKET,course:'CPUSH',lesson:9,assignment:'Escape Room (Lite)',version:1,saved:new Date().toISOString(),
+      student:{first:$('f_first').value.trim(),last:$('f_last').value.trim(),period:$('f_period').value.trim()},
+      status:S.escaped?'ESCAPED':'INCOMPLETE',escaped:S.escaped,
+      escapeTime:S.escaped?{ms:S.escapeMs,text:fmt(S.escapeMs)}:null,
+      totals:totals(),elapsedMs:Math.round(S.elapsed),started:S.started,locks:{},debrief:$('debriefText')?$('debriefText').value:S.debrief};
+    D.locks.forEach(function(L){var l=S.locks[L.id];
+      o.locks[L.key]={objective:L.obj,puzzleType:L.type,solved:l.solved,attempts:l.attempts,hintsUsed:l.hints,solvedWith:l.readable,solvedGuess:l.guess}});
+    return o;
+  }
+  function restore(o,r){
+    if(!r||typeof r!=='object')return false;
+    var st=r.student||{};
+    o.first=st.first||'';o.last=st.last||'';o.period=st.period||'';
+    o.started=!!r.started;o.elapsed=+r.elapsedMs||0;o.debrief=typeof r.debrief==='string'?r.debrief:'';
+    o.codeTries=(r.totals&&+r.totals.exitCodeAttempts)||0;
+    var allOk=true;
+    D.locks.forEach(function(L){
+      var src=(r.locks&&r.locks[L.key])||{},l=o.locks[L.id];
+      l.attempts=+src.attempts||0;l.hints=Math.min(+src.hintsUsed||0,L.hints.length+0);
+      if(src.hintsUsed>L.hints.length)l.hints=L.hints.length;
+      if(src.solved&&typeof src.solvedGuess==='string'){
+        var d=checkLock(L,src.solvedGuess);
+        if(d!==null){l.solved=true;l.guess=src.solvedGuess;l.readable=String(src.solvedWith||'');digits[L.n]=d}else allOk=false;
+      }else allOk=false;
+    });
+    if(r.escaped&&allOk&&r.escapeTime){o.escaped=true;o.escapeMs=+r.escapeTime.ms||0}
+    return true;
+  }
+
+  /* ---------- scene ---------- */
+  var NS='http://www.w3.org/2000/svg';
+  var XS=[210,255,300,345,390];
+  (function(){
+    var g=$('plocks'),h='';
+    XS.forEach(function(x,i){
+      h+='<g class="plock" id="pl'+(i+1)+'"><path class="sh" d="M'+(x-8)+' 124V114a8 8 0 0 1 16 0V124" fill="none" stroke="#EBEDF4" stroke-width="4"/><rect class="bd" x="'+(x-15)+'" y="124" width="30" height="24" rx="4" fill="#D24F4B"/><circle cx="'+x+'" cy="135" r="3" fill="#202946"/></g>'+
+      '<rect x="'+(x-16)+'" y="158" width="32" height="36" rx="5" fill="#0E1426" stroke="#E1908E"/><text id="dw'+(i+1)+'" x="'+x+'" y="184" text-anchor="middle" font-size="24" font-weight="800" fill="#EBEDF4">?</text><text x="'+x+'" y="208" text-anchor="middle" font-size="11" font-weight="700" fill="#B9BFD1">LOCK '+(i+1)+'</text>';
+    });
+    g.innerHTML=h;
+  })();
+  function sceneUpdate(){
+    D.locks.forEach(function(L){
+      var open=S.locks[L.id].solved;
+      $('pl'+L.n).setAttribute('class','plock'+(open?' open':''));
+      $('dw'+L.n).textContent=open?digits[L.n]:'?';
+    });
+    $('scene').classList.toggle('escaped',S.escaped);
+  }
+
+  /* ---------- build lock cards ---------- */
+  var W={};   // widget state per lock
+  var LOCKSVG='<svg class="lk" viewBox="0 0 44 44" aria-hidden="true"><path class="sh" d="M13 20V14a9 9 0 0 1 18 0V20" fill="none" stroke="#EBEDF4" stroke-width="4"/><rect class="bd" x="8" y="20" width="28" height="20" rx="4" fill="#D24F4B"/><circle cx="22" cy="30" r="3" fill="#202946"/></svg>';
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+  function buildLock(L){
+    var sec=document.createElement('section');sec.className='lock glass locked';sec.id='lock'+L.n;
+    var head='<button class="lh" type="button" id="lh'+L.n+'" aria-expanded="false">'+LOCKSVG+'<span class="lt"><small>LOCK '+L.n+' · '+L.objLabel+'</small><strong>'+esc(L.title)+'</strong></span><span class="dg" id="dg'+L.n+'" aria-label="digit">?</span></button>';
+    var body='<div class="lb" id="lb'+L.n+'"><p class="objline">'+esc(L.objText)+'</p>'+
+      '<div class="card"><h4>CLUE CARD</h4>'+L.card+'<p class="src">'+L.src+'</p></div>'+
+      '<div class="prompt">'+L.prompt+'</div><div id="pz'+L.n+'"></div>'+
+      '<div class="row"><button class="btn primary" type="button" id="ck'+L.n+'">Check</button><button class="btn small" type="button" id="hb'+L.n+'">Hint</button><button class="btn small" type="button" id="rs'+L.n+'">Clear</button></div>'+
+      '<div class="hints" id="hs'+L.n+'"></div><div class="fb" id="fb'+L.n+'" role="status"></div></div>';
+    sec.innerHTML=head+body;
+    $('locks').appendChild(sec);
+    buildPuzzle(L);
+    $('lh'+L.n).addEventListener('click',function(){
+      var st=lockState(L);if(st==='locked')return;
+      expanded[L.n]=!expanded[L.n];updateLocks();
+    });
+    $('ck'+L.n).addEventListener('click',function(){submit(L)});
+    $('hb'+L.n).addEventListener('click',function(){hint(L)});
+    $('rs'+L.n).addEventListener('click',function(){clearPuzzle(L)});
+  }
+  function labelOf(list,id){for(var i=0;i<list.length;i++)if(list[i].id===id)return list[i].label;return id}
+
+  function buildPuzzle(L){
+    var el=$('pz'+L.n),w=W[L.n]={};
+    if(L.type==='order'){
+      w.sel=[];el.innerHTML='<div class="chips" id="ch'+L.n+'"></div>';
+      renderOrder(L);
+    }else if(L.type==='match'){
+      var h='';
+      L.terms.forEach(function(t){
+        h+='<div class="mrow"><label for="m'+L.n+t.id+'">'+esc(t.label)+'</label><select id="m'+L.n+t.id+'"><option value="">Choose a description...</option>';
+        L.descs.forEach(function(d){h+='<option value="'+d.id+'">'+esc(d.label)+'</option>'});
+        h+='</select></div>';
+      });
+      el.innerHTML=h;
+    }else if(L.type==='pick'){
+      var h2='';
+      L.qs.forEach(function(q){
+        h2+='<fieldset><legend>'+esc(q.q)+'</legend>';
+        q.opts.forEach(function(o){h2+='<label class="opt"><input type="radio" name="q'+L.n+q.id+'" value="'+o.id+'"> <span>'+esc(o.label)+'</span></label>'});
+        h2+='</fieldset>';
+      });
+      el.innerHTML=h2;
+    }else if(L.type==='decode'){
+      var k1='',k2='';
+      for(var i=0;i<26;i++){var p=String.fromCharCode(65+i),c=String.fromCharCode(65+(i+L.shift)%26);k1+='<div class="c">'+c+'</div>';k2+='<div>'+p+'</div>'}
+      // build key in two rows of 13
+      var key='';
+      for(var r=0;r<2;r++){for(var j=0;j<13;j++){var idx=r*13+j;key+='<div class="c">'+String.fromCharCode(65+(idx+L.shift)%26)+'</div>'}for(var j2=0;j2<13;j2++){key+='<div>'+String.fromCharCode(65+r*13+j2)+'</div>'}}
+      el.innerHTML='<div class="cipher" translate="no" aria-label="Coded message">'+esc(L.cipher)+'</div><p style="margin:.6em 0 0;font-size:15px;color:var(--dim)">Decoder key: the <span style="color:var(--hl);font-weight:700">pink</span> letter is in the message. The white letter under it is the real letter.</p><div class="key" aria-hidden="true">'+key+'</div><label>Decoded answer<input type="text" id="tx'+L.n+'" autocomplete="off" autocapitalize="none" spellcheck="false"></label><p class="ennote">Type the answer in English.</p>';
+    }else if(L.type==='fill'){
+      el.innerHTML='<p style="font-size:18px;margin:.2em 0">'+esc(L.sentence)+'</p><div class="scr" translate="no" aria-label="Scrambled letters">'+esc(L.scramble)+'</div><p style="margin:.4em 0;font-size:14px;color:var(--dim)">Unscramble the letters to fill the blank.</p><label>Your answer<input type="text" id="tx'+L.n+'" autocomplete="off" autocapitalize="none" spellcheck="false"></label><p class="ennote">Type the answer in English.</p>';
+    }
+    var t=$('tx'+L.n);
+    if(t)t.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();submit(L)}});
+  }
+  function renderOrder(L){
+    var w=W[L.n],ch=$('ch'+L.n),h='';
+    L.items.forEach(function(it){
+      var pos=w.sel.indexOf(it.id);
+      h+='<button type="button" class="chip'+(pos>=0?' sel':'')+'" data-id="'+it.id+'" aria-pressed="'+(pos>=0)+'">'+(pos>=0?'<span class="n">'+(pos+1)+'</span>':'')+'<span>'+esc(it.label)+'</span></button>';
+    });
+    ch.innerHTML=h;
+    [].forEach.call(ch.querySelectorAll('.chip'),function(b){
+      b.addEventListener('click',function(){
+        if(S.locks[L.id].solved)return;
+        var id=b.getAttribute('data-id'),p=w.sel.indexOf(id);
+        if(p>=0)w.sel.splice(p,1);else w.sel.push(id);
+        renderOrder(L);
+      });
+    });
+  }
+  function clearPuzzle(L){
+    if(S.locks[L.id].solved)return;
+    var w=W[L.n];
+    if(L.type==='order'){w.sel=[];renderOrder(L)}
+    else if(L.type==='match'){L.terms.forEach(function(t){$('m'+L.n+t.id).value=''})}
+    else if(L.type==='pick'){L.qs.forEach(function(q){[].forEach.call(document.getElementsByName('q'+L.n+q.id),function(r){r.checked=false})})}
+    else{$('tx'+L.n).value=''}
+    fb(L,'','');
+  }
+  function guessOf(L){
+    // returns {canon, readable} or {err}
+    if(L.type==='order'){
+      var w=W[L.n];
+      if(w.sel.length<L.items.length)return {err:'Tap all '+L.items.length+' places first, in order.'};
+      return {canon:w.sel.join('|'),readable:w.sel.map(function(i){return labelOf(L.items,i)}).join(' > ')};
+    }
+    if(L.type==='match'){
+      var c=[],r=[];
+      for(var i=0;i<L.terms.length;i++){var t=L.terms[i],v=$('m'+L.n+t.id).value;if(!v)return {err:'Match every term first.'};c.push(v);r.push(t.label+' = '+labelOf(L.descs,v))}
+      return {canon:c.join('|'),readable:r.join('; ')};
+    }
+    if(L.type==='pick'){
+      var c2=[],r2=[];
+      for(var j=0;j<L.qs.length;j++){var q=L.qs[j],v2='';[].forEach.call(document.getElementsByName('q'+L.n+q.id),function(x){if(x.checked)v2=x.value});if(!v2)return {err:'Answer every question first.'};c2.push(v2);r2.push(labelOf(q.opts,v2))}
+      return {canon:c2.join('|'),readable:r2.join('; ')};
+    }
+    var raw=$('tx'+L.n).value.trim();
+    if(!raw)return {err:'Type your answer first.'};
+    return {canon:squash(raw),readable:raw.slice(0,80)};
+  }
+  function fb(L,cls,text){var e=$('fb'+L.n);e.className='fb'+(cls?' show '+cls:'');e.textContent=text}
+  function submit(L){
+    var l=S.locks[L.id];if(l.solved)return;
+    var g=guessOf(L);
+    if(g.err){fb(L,'nudge',g.err);return}
+    l.attempts++;
+    var d=checkLock(L,g.canon);
+    if(d===null){
+      fb(L,'nudge',L.nudge);
+      var s=$('lock'+L.n);s.classList.remove('shake');void s.offsetWidth;s.classList.add('shake');
+      persist();updateBar();return;
+    }
+    l.solved=true;l.guess=g.canon;l.readable=g.readable;digits[L.n]=d;
+    fb(L,'good','Click! Lock '+L.n+' is open. Your digit is '+d+'.');
+    var wh=$('wheel');wh.classList.remove('spin');void wh.getBoundingClientRect();wh.classList.add('spin');
+    $('dw'+L.n).classList.add('pop');
+    persist();updateAll();
+    setTimeout(function(){
+      expanded[L.n]=false;
+      var nx=nextOpen();if(nx)expanded[nx]=true;
+      updateLocks();
+      var tgt=nx?$('lock'+nx):$('exit');
+      if(tgt&&tgt.scrollIntoView)tgt.scrollIntoView({behavior:'smooth',block:'start'});
+    },1600);
+  }
+  function hint(L){
+    var l=S.locks[L.id];
+    if(l.solved)return;
+    if(l.hints<L.hints.length){l.hints++;persist();updateHints(L);updateBar()}
+    else{fb(L,'nudge','That was the last hint. Read the Clue Card slowly and try again.')}
+  }
+  function updateHints(L){
+    var l=S.locks[L.id],h='';
+    for(var i=0;i<l.hints;i++)h+='<div class="hint"><b>Hint '+(i+1)+':</b> <span>'+esc(L.hints[i])+'</span></div>';
+    $('hs'+L.n).innerHTML=h;
+  }
+  function nextOpen(){for(var i=0;i<D.locks.length;i++)if(!S.locks[D.locks[i].id].solved)return D.locks[i].n;return 0}
+  function lockState(L){
+    if(S.locks[L.id].solved)return 'solved';
+    return L.n===nextOpen()?'current':'locked';
+  }
+  function updateLocks(){
+    var cur=nextOpen();
+    D.locks.forEach(function(L){
+      var st=lockState(L),sec=$('lock'+L.n);
+      if(st==='current'&&expanded[L.n]===undefined)expanded[L.n]=true;
+      var open=(st!=='locked')&&!!expanded[L.n];
+      sec.className='lock glass '+st+(open?' open':'');
+      $('lh'+L.n).setAttribute('aria-expanded',open?'true':'false');
+      $('dg'+L.n).textContent=S.locks[L.id].solved?digits[L.n]:'?';
+      if(S.locks[L.id].solved){
+        [].forEach.call(sec.querySelectorAll('input,select,button.chip,#ck'+L.n+',#hb'+L.n+',#rs'+L.n),function(x){x.disabled=true});
+        var f=$('fb'+L.n);if(!f.classList.contains('good'))fb(L,'good','Unlocked. Your digit is '+digits[L.n]+'.'+(S.locks[L.id].readable?' Your answer: '+S.locks[L.id].readable:''));
+      }
+      updateHints(L);
+    });
+  }
+  function codeStr(){var s='';for(var i=1;i<=5;i++)s+=(digits[i]===undefined?'':digits[i]);return s}
+  function allSolved(){return D.locks.every(function(L){return S.locks[L.id].solved})}
+  function updateExit(){
+    var ok=allSolved();
+    $('exit').classList.toggle('locked',!ok);
+    $('codeBtn').disabled=!ok||S.escaped;
+    [].forEach.call($('codebox').querySelectorAll('input'),function(i){i.disabled=!ok||S.escaped});
+    $('exitNote').textContent=S.escaped?'The door is open!':(ok?'All 5 locks are open. Type the 5 digits in order, Lock 1 first.':'Open all 5 locks first. The digits go in order: Lock 1 first.');
+  }
+  function updateBar(){
+    var t=totals();
+    $('lc').textContent=t.locksSolved;$('hc').textContent=t.hintsUsed;
+    $('tm').textContent=fmt(S.escaped?S.escapeMs:S.elapsed);
+  }
+  function updateStatus(){
+    var el=$('status'),db=($('debriefText').value.trim().length);
+    if(S.escaped)el.textContent=db>=40?'You escaped and wrote your Debrief. Ready to submit.':'You escaped! Write your Debrief, then download your file to submit.';
+    else el.textContent='Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.';
+  }
+  function updateEsc(){
+    $('esc').classList.toggle('show',S.escaped);
+    if(S.escaped){var t=totals();$('escTime').textContent=fmt(S.escapeMs);$('escSum').textContent='5 of 5 locks opened with '+t.attempts+' tries and '+t.hintsUsed+' hint'+(t.hintsUsed===1?'':'s')+'.'}
+  }
+  function updateAll(){sceneUpdate();updateLocks();updateExit();updateBar();updateEsc();updateStatus();
+    $('intro').classList.toggle('hidden',S.started);$('game').classList.toggle('hidden',!S.started);$('loadOnly').classList.toggle('hidden',S.started);
+  }
+
+  /* ---------- exit code ---------- */
+  (function(){
+    var cb=$('codebox');
+    for(var i=0;i<5;i++){
+      var inp=document.createElement('input');inp.type='text';inp.inputMode='numeric';inp.maxLength=1;inp.setAttribute('aria-label','Exit code digit '+(i+1));inp.disabled=true;
+      (function(i,inp){
+        inp.addEventListener('input',function(){inp.value=inp.value.replace(/[٠-٩]/g,function(c){return c.charCodeAt(0)-1632}).replace(/[۰-۹]/g,function(c){return c.charCodeAt(0)-1776}).replace(/[^0-9]/g,'');if(inp.value&&i<4)cb.children[i+1].focus()});
+        inp.addEventListener('keydown',function(e){
+          if(e.key==='Backspace'&&!inp.value&&i>0)cb.children[i-1].focus();
+          if(e.key==='Enter'){e.preventDefault();tryCode()}
+        });
+        inp.addEventListener('paste',function(e){
+          var t=(e.clipboardData||window.clipboardData).getData('text').replace(/[٠-٩]/g,function(c){return c.charCodeAt(0)-1632}).replace(/[۰-۹]/g,function(c){return c.charCodeAt(0)-1776}).replace(/[^0-9]/g,'');
+          if(t.length>1){e.preventDefault();for(var k=0;k<5;k++)cb.children[k].value=t[k]||''}
+        });
+      })(i,inp);
+      cb.appendChild(inp);
+    }
+  })();
+  function tryCode(){
+    if(!allSolved()||S.escaped)return;
+    var v='';[].forEach.call($('codebox').querySelectorAll('input'),function(i){v+=i.value});
+    var f=$('codefb');
+    if(v.length<5){f.className='fb show nudge';f.textContent='The code has 5 digits. Fill every box.';return}
+    S.codeTries++;
+    if(h20('exit:'+D.salt+v)!==D.exitHash){
+      f.className='fb show nudge';f.textContent='The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.';
+      var ex=$('exit');ex.classList.remove('shake');void ex.offsetWidth;ex.classList.add('shake');
+      persist();return;
+    }
+    S.escaped=true;S.escapeMs=S.elapsed;
+    f.className='fb show good';f.textContent='The door swings open!';
+    persist();updateAll();
+    setTimeout(function(){$('esc').scrollIntoView({behavior:'smooth',block:'start'})},900);
+  }
+  $('codeBtn').addEventListener('click',tryCode);
+
+  /* ---------- timer ---------- */
+  function tick(){
+    var n=Date.now();
+    if(S.started&&!S.escaped){S.elapsed+=Math.min(n-lastTick,5000);$('tm').textContent=fmt(S.elapsed)}
+    lastTick=n;
+  }
+  function startTimer(){lastTick=Date.now();if(!timer)timer=setInterval(function(){tick();if(Math.round(S.elapsed/1000)%10===0)persist()},1000)}
+
+  /* ---------- files ---------- */
+  function msg(t,err){var m=$('msg');m.textContent=t;m.className='msg'+(err?' err':'');m.style.display='block'}
+  function ascii(n){return String(n).normalize('NFD').replace(/[̀-ͯ]/g,'')}
+  function clean(n){n=window.spAscii?spAscii(n):n;return ascii(n).trim().replace(/\s+/g,'_').replace(/[^A-Za-z0-9_-]/g,'')}
+  function who(){return (clean($('f_last').value)||'Last')+'_'+(clean($('f_first').value)||'First')}
+  function download(name,obj){
+    var blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;
+    document.body.appendChild(a);a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);
+  }
+  function namesOk(){
+    var ids=['f_first','f_last','f_period'],ok=true;
+    ids.forEach(function(i){var f=$(i);if(!f.value.trim()){f.classList.add('bad');ok=false}});
+    if(!ok){msg('Enter your first name, last name, and period at the top first.',true);$('f_first').scrollIntoView({block:'center'})}
+    return ok;
+  }
+  ['f_first','f_last','f_period'].forEach(function(i){$(i).addEventListener('input',function(){$(i).classList.remove('bad');S[i.slice(2)]=$(i).value;persist()})});
+  $('debriefText').addEventListener('input',function(){S.debrief=$('debriefText').value;persist();updateStatus()});
+  $('saveBtn').addEventListener('click',function(){
+    if(!namesOk())return;tick();
+    download(who()+'-'+PACKET+'-PROGRESS.json',snapshot());
+    msg('Progress file downloaded. Use Load Progress to continue later.');
+  });
+  $('finishBtn').addEventListener('click',function(){
+    if(!namesOk())return;tick();
+    var now=new Date(),o=snapshot();o.completed=S.escaped;o.submitted=now.toISOString();
+    o.student.date=now.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+    download(who()+'-'+PACKET+'.json',o);
+    msg(S.escaped?('Done! File downloaded: '+who()+'-'+PACKET+'.json. Upload it to Canvas.'):('Your file downloaded and is marked INCOMPLETE (you have not escaped). Upload it to Canvas: '+who()+'-'+PACKET+'.json'));
+  });
+  function openLoad(){$('loadFile').click()}
+  $('loadBtn').addEventListener('click',openLoad);$('loadBtn0').addEventListener('click',openLoad);
+  $('loadFile').addEventListener('change',function(e){
+    var f=e.target.files[0];if(!f)return;
+    var r=new FileReader();
+    r.onload=function(){
+      try{
+        var o=JSON.parse(r.result);
+        if(!o||o.packet!==PACKET||typeof o.locks!=='object')throw new Error('wrong');
+        digits={};var n=fresh();restore(n,o);S=n;applyToDom();
+        msg('Progress loaded. Welcome back.');
+      }catch(err){msg('That file did not work. Choose a progress file saved from this Escape Room.',true)}
+      e.target.value='';
+    };
+    r.onerror=function(){msg('The file could not be read.',true)};
+    r.readAsText(f);
+  });
+  $('reset').addEventListener('click',function(){
+    if(!confirm('Clear all your work and start over? This cannot be undone.'))return;
+    digits={};expanded={};S=fresh();
+    try{localStorage.removeItem(STORE+'state')}catch(e){}
+    $('locks').innerHTML='';D.locks.forEach(buildLock);
+    $('f_first').value=$('f_last').value=$('f_period').value='';$('debriefText').value='';
+    [].forEach.call($('codebox').querySelectorAll('input'),function(i){i.value=''});$('codefb').className='fb';
+    applyToDom();
+  });
+  function applyToDom(){
+    $('f_first').value=S.first;$('f_last').value=S.last;$('f_period').value=S.period;$('debriefText').value=S.debrief;
+    // rebuild lock widgets, then pre-fill solved ones with readable note
+    $('locks').innerHTML='';D.locks.forEach(buildLock);
+    expanded={};
+    updateAll();
+    if(S.started)startTimer();
+  }
+  $('startBtn').addEventListener('click',function(){S.started=true;persist();startTimer();updateAll();$('game').scrollIntoView({behavior:'smooth'})});
+  window.addEventListener('beforeunload',function(){tick();persist()});
+
+  S=loadLocal();
+  D.locks.forEach(buildLock);
+  applyToDom();
+})();
+</script>
+<!--sp-i18n--><script type="application/json" id="sp-i18n">{"langs":["en","es","ar"],"default":"en","es":{"Save Progress":"Guardar progreso","Load Progress":"Cargar progreso","Finished — Download File to Submit":"Terminé — Descargar el archivo para entregar","Clear all my answers":"Borrar todas mis respuestas","FIRST NAME *":"NOMBRE *","LAST NAME *":"APELLIDO *","PERIOD *":"PERÍODO *","DATE (fills in when you finish)":"FECHA (se llena cuando terminas)","e.g. 3":"p. ej., 3","Automatic":"Automática","Please type your first name, last name, and period first.":"Primero escribe tu nombre, apellido y período.","Western Expansion and Southern Secession":"Expansión hacia el oeste y secesión del sur","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — La Ley de Esclavos Fugitivos","Bleeding Kansas":"Bleeding Kansas — Kansas sangriento","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"UNIDAD 3 · UNA CASA DIVIDIDA Y RECONSTRUIDA | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"Se descargó tu archivo de progreso. Guárdalo bien. Usa «Cargar progreso» para continuar más tarde.","Progress loaded.":"Progreso cargado.","Could not read that file.":"No se pudo leer ese archivo.","Treaty of Guadalupe Hidalgo":"Tratado de Guadalupe Hidalgo","Civil War and Reconstruction":"La Guerra Civil y la Reconstrucción","Escape Room 9 · Civil War and Reconstruction":"Sala de escape 9 · La Guerra Civil y la Reconstrucción","Escape the Telegraph Office":"Escapa de la oficina de telégrafos","You are locked in the telegraph office.":"Estás encerrado en la oficina de telégrafos.","The telegraph office closed for the night and the clerk locked up. Old messages from 1861 to 1877 are still on the wires. The door has <b>5 locks<\/b>. Each lock matches one big idea from Lesson 9. Solve them all to find the <b>5-digit exit code<\/b>.":"La oficina de telégrafos cerró por la noche y el empleado echó llave. Todavía hay mensajes antiguos de 1861 a 1877 en los cables. La puerta tiene <b>5 candados<\/b>. Cada candado corresponde a una idea importante de la Lección 9. Resuélvelos todos para encontrar el <b>código de salida de 5 dígitos<\/b>.","Enter the Office":"Entrar a la oficina","TELEGRAPH OFFICE":"OFICINA DE TELÉGRAFOS","A telegraph office at night. A wall map and a clock hang on the walls, wires run along the ceiling, and a desk lamp glows on a desk. The office door has five padlocks in a row. Under each padlock is a window for one digit of the exit code.":"Una oficina de telégrafos de noche. Un mapa y un reloj cuelgan de las paredes, unos cables recorren el techo y una lámpara brilla sobre un escritorio. La puerta de la oficina tiene cinco candados en fila. Debajo de cada candado hay una ventanita para un dígito del código de salida.","The file could not be read.":"No se pudo leer el archivo.","The War Map":"El mapa de la guerra","The Proclamation Dispatch":"El despacho de la Proclamación","The Home Front Wire":"El cable del frente interno","The Reconstruction Cable":"El cable de la Reconstrucción","The Final Telegram":"El telegrama final","Core Objectives 1 and 4: Identify the advantages of the North and South as the war began and how they shaped each side’s strategy, and describe the military turning points in 1863 and 1864.":"Objetivos principales 1 y 4: Identifica las ventajas del Norte y del Sur al comenzar la guerra y cómo dieron forma a la estrategia de cada bando, y describe los puntos de inflexión militares de 1863 y 1864.","Core Objective 2: Evaluate Abraham Lincoln’s decision to issue the Emancipation Proclamation and its impact on the war.":"Objetivo principal 2: Evalúa la decisión de Abraham Lincoln de emitir la Proclamación de Emancipación y su impacto en la guerra.","Core Objectives 3 and 5: Analyze how the war affected social and economic life in the North and South, and explain how the Civil War changed the nation.":"Objetivos principales 3 y 5: Analiza cómo afectó la guerra la vida social y económica en el Norte y el Sur, y explica cómo cambió la Guerra Civil a la nación.","Core Objectives 6-7: Identify the federal government’s major challenges in reconstructing the South, and describe how and why Reconstruction policies changed over time.":"Objetivos principales 6-7: Identifica los principales desafíos del gobierno federal al reconstruir el Sur, y describe cómo y por qué cambiaron las políticas de la Reconstrucción con el tiempo.","Core Objectives 8-10: Assess how White and Black Southerners viewed Reconstruction, analyze the factors that ended Reconstruction in 1877, and explain the significance of Reconstruction to the nation’s future.":"Objetivos principales 8-10: Evalúa cómo veían la Reconstrucción los sureños blancos y negros, analiza los factores que pusieron fin a la Reconstrucción en 1877, y explica la importancia de la Reconstrucción para el futuro de la nación.","The Union had about 22 million people and the Confederacy about 9 million. The Union states also made 97 percent of the nation’s firearms. The Union’s Anaconda Plan used a navy blockade of Southern ports and pushes down the Mississippi, Tennessee, and Cumberland Rivers to slowly trap the Confederacy. The Confederacy hoped to hold out long enough to wear down Northern support for the war. In July 1863, the Union victories at Vicksburg and Gettysburg were a major turning point; with Vicksburg, Union forces cut the Confederacy in two.":"La Unión tenía unos 22 millones de habitantes y la Confederación unos 9 millones. Los estados de la Unión también fabricaban el 97 por ciento de las armas de fuego del país. El Plan Anaconda de la Unión usaba un bloqueo naval de los puertos del Sur y avances por los ríos Misisipi, Tennessee y Cumberland para atrapar poco a poco a la Confederación. La Confederación esperaba resistir el tiempo suficiente para desgastar el apoyo del Norte a la guerra. En julio de 1863, las victorias de la Unión en Vicksburg y Gettysburg fueron un punto de inflexión importante; con Vicksburg, las fuerzas de la Unión partieron la Confederación en dos.","On September 22, 1862, five days after the Battle of Antietam, Lincoln issued the preliminary Emancipation Proclamation. It warned that all enslaved people under Confederate control would be made “forever free” on January 1, 1863. Antietam convinced Lincoln to turn the war into a fight to end slavery, not only a fight to restore the Union. Lincoln called the Proclamation a “military necessity,” a use of his presidential “war powers.” More than 180,000 Black men enlisted in the Union army; at first they were not allowed in combat, but the need to win the war changed that.":"El 22 de septiembre de 1862, cinco días después de la batalla de Antietam, Lincoln emitió la Proclamación de Emancipación preliminar. Advertía que todas las personas esclavizadas bajo control confederado quedarían “libres para siempre” el 1 de enero de 1863. Antietam convenció a Lincoln de convertir la guerra en una lucha para acabar con la esclavitud, no solo en una lucha para restaurar la Unión. Lincoln llamó a la Proclamación una “necesidad militar”, un uso de sus “poderes de guerra” presidenciales. Más de 180,000 hombres negros se alistaron en el ejército de la Unión; al principio no se les permitía combatir, pero la necesidad de ganar la guerra cambió eso.","The North paid for the war with taxes, tariffs, bonds, and paper money, and its government handled the costs better than the Confederacy did. The North also passed the Homestead Act (1862), which gave 160 acres of public land to each settler who would work it for five years, and the National Banking Act (1863). In the South, the government printed so much paper money that the prices of everyday goods kept rising faster and faster, which led to unrest. When the war ended, slavery had been abolished and no state could leave the Union. Political power had shifted from the South to the North.":"El Norte pagó la guerra con impuestos, aranceles, bonos y papel moneda, y su gobierno manejó los costos mejor que la Confederación. El Norte también aprobó la Ley de Heredad Rural (Homestead Act) de 1862, que daba 160 acres de tierra pública a cada colono que la trabajara durante cinco años, y la Ley Bancaria Nacional (National Banking Act) de 1863. En el Sur, el gobierno imprimió tanto papel moneda que los precios de los bienes de uso diario seguían subiendo cada vez más rápido, lo que provocó disturbios. Cuando terminó la guerra, la esclavitud había sido abolida y ningún estado podía abandonar la Unión. El poder político había pasado del Sur al Norte.","Lincoln and Andrew Johnson wanted a lenient plan called Presidential Reconstruction, but Radical Republicans wanted a plan that would transform the South. The Thirteenth Amendment, which abolished slavery, became law in December 1865. In 1866, Congress passed the Fourteenth Amendment, which extended federal civil rights protections to African Americans. Next, Congress took charge: the Military Reconstruction Act placed ten of the eleven former Confederate states under army generals in five military districts (Tennessee was left out because it had already ratified the Fourteenth Amendment). In 1870, Virginia, Mississippi, and Texas were readmitted only after they ratified the Fifteenth Amendment, which protected the voting rights of African American men.":"Lincoln y Andrew Johnson querían un plan indulgente llamado Reconstrucción Presidencial, pero los republicanos radicales querían un plan que transformara el Sur. La Decimotercera Enmienda, que abolió la esclavitud, se convirtió en ley en diciembre de 1865. En 1866, el Congreso aprobó la Decimocuarta Enmienda, que extendió a los afroamericanos las protecciones federales de los derechos civiles. Después, el Congreso tomó el mando: la Ley de Reconstrucción Militar puso a diez de los once estados confederados anteriores bajo generales del ejército en cinco distritos militares (Tennessee quedó fuera porque ya había ratificado la Decimocuarta Enmienda). En 1870, Virginia, Misisipi y Texas fueron readmitidos solo después de ratificar la Decimoquinta Enmienda, que protegía el derecho al voto de los hombres afroamericanos.","Many freedpeople became sharecroppers: they rented land and paid the owner a share of the crop, and most ended up deep in debt. New Black voters helped elect nearly 800 Black state legislators, two U.S. senators, and fourteen members of the U.S. House. The Panic of 1873 caused a deep depression, and 3 million workers lost their jobs. By 1877, many White Americans no longer wanted to pay the price of protecting Black rights, and in the Compromise of 1877, Republicans promised that if Rutherford B. Hayes were named president, he would remove the last federal troops from the South. Even so, the Fourteenth and Fifteenth Amendments stayed in the Constitution as a base for later civil rights gains.":"Muchos libertos se hicieron aparceros: alquilaban tierra y pagaban al dueño una parte de la cosecha, y la mayoría terminó muy endeudada. Los nuevos votantes negros ayudaron a elegir a casi 800 legisladores estatales negros, dos senadores de Estados Unidos y catorce miembros de la Cámara de Representantes. El Pánico de 1873 causó una profunda depresión, y 3 millones de trabajadores perdieron su empleo. Para 1877, muchos estadounidenses blancos ya no querían pagar el precio de proteger los derechos de los negros, y en el Compromiso de 1877 los republicanos prometieron que si Rutherford B. Hayes era nombrado presidente, retiraría las últimas tropas federales del Sur. Aun así, la Decimocuarta y la Decimoquinta Enmienda permanecieron en la Constitución como base para avances posteriores en los derechos civiles.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 14, “Mobilizing Forces in the North and South” (“Regional Advantages”; “The Union’s ‘Anaconda’ Plan,” key term p. 577; “Confederate Strategy”) and the Ch. 14 chapter review (“The Winning Union Strategy”; Vicksburg, key term p. 609; Gettysburg, key term p. 610).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 14, “Mobilizing Forces in the North and South” (“Regional Advantages”; “The Union’s ‘Anaconda’ Plan,” término clave, pág. 577; “Confederate Strategy”) y el repaso del cap. 14 (“The Winning Union Strategy”; Vicksburg, término clave, pág. 609; Gettysburg, término clave, pág. 610).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 14, “Emancipation” (“Antietam: A Turning Point,” Antietam key term p. 591; “Emancipation Proclamation,” key term p. 593; “Black Soldiers and Sailors”).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 14, “Emancipation” (“Antietam: A Turning Point,” Antietam, término clave, pág. 591; “Emancipation Proclamation,” término clave, pág. 593; “Black Soldiers and Sailors”).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 14, “The War behind the Lines” (“Confederate Finances”; “Wartime Government,” Homestead Act and National Banking Act, key term p. 603; section summary) and “A Transformational War” (“The Union Preserved”).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 14, “The War behind the Lines” (“Confederate Finances”; “Wartime Government,” Homestead Act y National Banking Act, término clave, pág. 603; resumen de la sección) y “A Transformational War” (“The Union Preserved”).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 15, chapter review (“Reconstruction over Time”) and “Battles over Political Reconstruction” (“The Freedmen’s Bureau,” key term p. 633; “Congress Takes Charge of Reconstruction,” key term p. 646; “Expanding Voting Rights,” key term p. 648); Ch. 14, “Thirteenth Amendment” (A Transformational War).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 15, repaso del capítulo (“Reconstruction over Time”) y “Battles over Political Reconstruction” (“The Freedmen’s Bureau,” término clave, pág. 633; “Congress Takes Charge of Reconstruction,” término clave, pág. 646; “Expanding Voting Rights,” término clave, pág. 648); cap. 14, “Thirteenth Amendment” (A Transformational War).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 15, “Black Society under Reconstruction” (“Sharecropping,” key term p. 654; “African American Political Leadership”), “The Grant Administration” (“Financial Panic,” key term p. 664; “The End of Reconstruction”; “The Contested Election of 1876,” Compromise of 1877, key term p. 669), and the Ch. 15 chapter review (“The Significance of Reconstruction”).":"Norton, <i>America: The Essential Learning Edition<\/i>, cap. 15, “Black Society under Reconstruction” (“Sharecropping,” término clave, pág. 654; “African American Political Leadership”), “The Grant Administration” (“Financial Panic,” término clave, pág. 664; “The End of Reconstruction”; “The Contested Election of 1876,” Compromise of 1877, término clave, pág. 669) y el repaso del cap. 15 (“The Significance of Reconstruction”).","What share of the nation’s firearms did the Union states make?":"¿Qué parte de las armas de fuego del país fabricaron los estados de la Unión?","7 percent":"7 por ciento","30 percent":"30 por ciento","80 percent":"80 por ciento","Under the Anaconda Plan, what was the job of the Union navy?":"Según el Plan Anaconda, ¿cuál era la tarea de la armada de la Unión?","Blockade Southern ports":"Bloquear los puertos del Sur","Defend the city of Richmond":"Defender la ciudad de Richmond","Sail to Great Britain for help":"Navegar a Gran Bretaña para pedir ayuda","Carry troops to Texas":"Llevar tropas a Texas","Which two Union victories in July 1863 were a major turning point?":"¿Cuáles dos victorias de la Unión en julio de 1863 fueron un punto de inflexión importante?","Bull Run and Antietam":"Bull Run y Antietam","Vicksburg and Gettysburg":"Vicksburg y Gettysburg","Shiloh and Perryville":"Shiloh y Perryville","Fredericksburg and Chancellorsville":"Fredericksburg y Chancellorsville","Each answer is in the Clue Card. Look for a percent, a job for the navy, and two battles in July 1863.":"Cada respuesta está en la tarjeta de indicios. Busca un porcentaje, una tarea de la armada y dos batallas de julio de 1863.","The percent is a big one (more than 90). The navy’s job is to close the ports. One battle name starts with V and the other starts with G.":"El porcentaje es muy alto (más de 90). La tarea de la armada es cerrar los puertos. El nombre (en inglés) de una batalla empieza con V y el de la otra empieza con G.","Not quite. At least one answer is off. Re-read the Clue Card for the percent, the navy’s job, and the two July 1863 victories.":"Casi. Al menos una respuesta está mal. Vuelve a leer la tarjeta de indicios para ver el porcentaje, la tarea de la armada y las dos victorias de julio de 1863.","Unlocked. Your digit is 3. Your answer: 97 percent; Blockade Southern ports; Vicksburg and Gettysburg":"Desbloqueado. Tu dígito es 3. Tu respuesta: 97 por ciento; Bloquear los puertos del Sur; Vicksburg y Gettysburg","Emancipation Proclamation":"Proclamación de Emancipación","Black soldiers in the Union army":"Soldados negros en el ejército de la Unión","Battle of Antietam":"Batalla de Antietam","“Military necessity”":"“Necesidad militar”","Convinced Lincoln to make the war a fight to end slavery":"Convenció a Lincoln de convertir la guerra en una lucha para acabar con la esclavitud","Promised freedom to enslaved people in areas under Confederate control, starting January 1, 1863":"Prometió la libertad a las personas esclavizadas en las zonas bajo control confederado, a partir del 1 de enero de 1863","How Lincoln explained his use of presidential war powers":"Cómo explicó Lincoln su uso de los poderes de guerra presidenciales","More than 180,000 enlisted in the Union army; at first not allowed in combat":"Más de 180,000 se alistaron en el ejército de la Unión; al principio no se les permitía combatir","Two descriptions give numbers: one has a date (January 1, 1863) and one has a count (180,000).":"Dos descripciones dan números: una tiene una fecha (1 de enero de 1863) y otra tiene una cantidad (180,000).","Antietam is the battle that changed Lincoln’s goal. “Military necessity” is the reason Lincoln gave.":"Antietam es la batalla que cambió el objetivo de Lincoln. “Necesidad militar” es la razón que dio Lincoln.","Unlocked. Your digit is 9. Your answer: Emancipation Proclamation = Promised freedom to enslaved people in areas under Confederate control, starting January 1, 1863; Black soldiers in the Union army = More than 180,000 enlisted in the Union army; at first not allowed in combat; Battle of Antietam = Convinced Lincoln to make the war a fight to end slavery; “Military necessity” = How Lincoln explained his use of presidential war powers":"Desbloqueado. Tu dígito es 9. Tu respuesta: Proclamación de Emancipación = Prometió la libertad a las personas esclavizadas en las zonas bajo control confederado, a partir del 1 de enero de 1863; Soldados negros en el ejército de la Unión = Más de 180,000 se alistaron en el ejército de la Unión; al principio no se les permitía combatir; Batalla de Antietam = Convenció a Lincoln de convertir la guerra en una lucha para acabar con la esclavitud; “Necesidad militar” = Cómo explicó Lincoln su uso de los poderes de guerra presidenciales","The Clue Card describes a money problem in the South without naming it. A secret message names it. Each letter in the message was moved 4 steps forward in the alphabet. Decode it to name the problem.":"La tarjeta de indicios describe un problema de dinero en el Sur sin decir su nombre. Un mensaje secreto lo nombra. Cada letra del mensaje se movió 4 pasos hacia adelante en el alfabeto. Decodifícalo para nombrar el problema.","The problem is what happens when too much money is printed and prices keep going up. Use the decoder key to spell it.":"El problema es lo que pasa cuando se imprime demasiado dinero y los precios siguen subiendo. Usa la clave del decodificador para escribirlo.","In the message, the letter M is really I, and the letter R is really N. The word has 9 letters and ends with ATION.":"En el mensaje, la letra M es en realidad I, y la letra R es en realidad N. La palabra (en inglés) tiene 9 letras y termina en ATION.","The Thirteenth Amendment becomes law (December 1865)":"La Decimotercera Enmienda se convierte en ley (diciembre de 1865)","Congress passes the Fourteenth Amendment (1866)":"El Congreso aprueba la Decimocuarta Enmienda (1866)","The Military Reconstruction Act puts ten states under army generals":"La Ley de Reconstrucción Militar pone a diez estados bajo generales del ejército","Virginia, Mississippi, and Texas must ratify the Fifteenth Amendment to rejoin (1870)":"Virginia, Misisipi y Texas deben ratificar la Decimoquinta Enmienda para reincorporarse (1870)","Look for the years in the Clue Card: 1865, 1866, and 1870. One event has no year, but it comes after the Fourteenth Amendment.":"Busca los años en la tarjeta de indicios: 1865, 1866 y 1870. Un suceso no tiene año, pero ocurre después de la Decimocuarta Enmienda.","The order is Thirteenth, Fourteenth, army districts (Military Reconstruction Act), then the Fifteenth Amendment in 1870.":"El orden es Decimotercera, Decimocuarta, distritos del ejército (Ley de Reconstrucción Militar) y luego la Decimoquinta Enmienda en 1870.","Not quite. Re-read the Clue Card and follow the years and the word “next.”":"Casi. Vuelve a leer la tarjeta de indicios y sigue los años y la palabra “después”.","Unlocked. Your digit is 8. Your answer: The Thirteenth Amendment becomes law (December 1865) &gt; Congress passes the Fourteenth Amendment (1866) &gt; The Military Reconstruction Act puts ten states under army generals &gt; Virginia, Mississippi, and Texas must ratify the Fifteenth Amendment to rejoin (1870)":"Desbloqueado. Tu dígito es 8. Tu respuesta: La Decimotercera Enmienda se convierte en ley (diciembre de 1865) &gt; El Congreso aprueba la Decimocuarta Enmienda (1866) &gt; La Ley de Reconstrucción Militar pone a diez estados bajo generales del ejército &gt; Virginia, Misisipi y Texas deben ratificar la Decimoquinta Enmienda para reincorporarse (1870)","In the Compromise of 1877, Republicans promised that if Rutherford B. ________ were named president, he would remove the last federal troops from the South.":"En el Compromiso de 1877, los republicanos prometieron que si Rutherford B. ________ era nombrado presidente, retiraría las últimas tropas federales del Sur.","Read the fourth sentence of the Clue Card. The president’s last name is in it.":"Lee la cuarta oración de la tarjeta de indicios. Ahí está el apellido del presidente.","The word starts with H and ends with S. It has 5 letters.":"La palabra (en inglés) empieza con H y termina con S. Tiene 5 letras.","Not quite. Re-read the Clue Card for the president named in the Compromise of 1877. Use the scrambled letters to check your spelling.":"Casi. Vuelve a leer la tarjeta de indicios para ver el presidente que se nombra en el Compromiso de 1877. Usa las letras desordenadas para revisar tu ortografía.","97 percent":"97 por ciento","All 5 locks are open. Type the 5 digits in order, Lock 1 first.":"Los 5 candados están abiertos. Escribe los 5 dígitos en orden, primero el del Candado 1.","Answer every question first.":"Primero responde todas las preguntas.","CLUE CARD":"TARJETA DE INDICIOS","Check":"Comprobar","Choose a description...":"Elige una descripción...","Clear":"Borrar","Clear all my work and start over":"Borrar todo mi trabajo y empezar de nuevo","DEBRIEF":"INFORME FINAL","Debrief":"Informe final","Decoded answer":"Respuesta decodificada","Decoder key: the <span style=\"color:var(--hl);font-weight:700\">pink<\/span> letter is in the message. The white letter under it is the real letter.":"Clave del decodificador: la letra <span style=\"color:var(--hl);font-weight:700\">rosa<\/span> está en el mensaje. La letra blanca que está debajo es la letra verdadera.","ESCAPED":"¡ESCAPASTE!","Enter your first name, last name, and period at the top first.":"Primero escribe tu nombre, apellido y período arriba.","Exit door":"Puerta de salida","Fill in the blank using the Clue Card.":"Llena el espacio en blanco con la tarjeta de indicios.","Have a saved file? Load it to continue.":"¿Tienes un archivo guardado? Cárgalo para continuar.","Hint":"Pista","Hints used":"Pistas usadas","How to escape:":"Cómo escapar:","If you get stuck, press <b>Hint<\/b>. Hints are free, but your teacher can see how many you used.":"Si te atoras, oprime <b>Pista<\/b>. Las pistas son gratis, pero tu maestro puede ver cuántas usaste.","Locks":"Candados","Match each term to the best description. Use the Clue Card.":"Relaciona cada término con la mejor descripción. Usa la tarjeta de indicios.","Match every term first.":"Primero relaciona todos los términos.","Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.":"Todavía no escapas (se marca INCOMPLETO). Aun así puedes descargar tu archivo y entregarlo.","Not quite. Check each match against the Clue Card. Which one are you least sure about?":"Casi. Revisa cada pareja con la tarjeta de indicios. ¿De cuál estás menos seguro?","Not quite. Decode one letter at a time with the key, then check your spelling.":"Casi. Decodifica una letra a la vez con la clave y luego revisa tu ortografía.","One last step: write your Debrief below.":"Un último paso: escribe tu Informe final abajo.","Open all 5 locks first. The digits go in order: Lock 1 first.":"Primero abre los 5 candados. Los dígitos van en orden: primero el del Candado 1.","Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.":"Abre los 5 candados y luego escribe el código de salida de 5 dígitos. Termina con el Informe final.","Open each lock in order. Read the <b>Clue Card<\/b>. The answer is in the card.":"Abre cada candado en orden. Lee la <b>tarjeta de indicios<\/b>. La respuesta está en la tarjeta.","Open the Door":"Abrir la puerta","Pick the correct answer for all three questions.":"Elige la respuesta correcta para las tres preguntas.","Progress file downloaded. Use Load Progress to continue later.":"Se descargó el archivo de progreso. Usa «Cargar progreso» para continuar más tarde.","Progress loaded. Welcome back.":"Progreso cargado. Bienvenido de nuevo.","Solve the puzzle to open the lock and reveal one digit.":"Resuelve el acertijo para abrir el candado y descubrir un dígito.","THE EXIT DOOR":"LA PUERTA DE SALIDA","Tap the four events in the order they happened. Tap an event again to take it back.":"Toca los cuatro sucesos en el orden en que ocurrieron. Toca un suceso otra vez para quitarlo.","That file did not work. Choose a progress file saved from this Escape Room.":"Ese archivo no funcionó. Elige un archivo de progreso guardado de esta sala de escape.","That was the last hint. Read the Clue Card slowly and try again.":"Esa fue la última pista. Lee la tarjeta de indicios despacio y vuelve a intentarlo.","The clock starts when you press the button. Most students finish in about 20 minutes.":"El reloj empieza cuando oprimes el botón. La mayoría de los estudiantes termina en unos 20 minutos.","The code has 5 digits. Fill every box.":"El código tiene 5 dígitos. Llena todas las casillas.","The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.":"La puerta no se abrió. Revisa los dígitos debajo de cada candado y escríbelos en orden: primero el del Candado 1.","The door is open!":"¡La puerta está abierta!","The door swings open!":"¡La puerta se abre de golpe!","Time":"Tiempo","Type the answer in English.":"Escribe la respuesta en inglés.","Type the answer in English. Use the digits 0-9.":"Escribe la respuesta en inglés. Usa los dígitos 0-9.","Type the exit code":"Escribe el código de salida","Type your answer first.":"Primero escribe tu respuesta.","Type your answer here...":"Escribe tu respuesta aquí...","Unscramble the letters to fill the blank.":"Ordena las letras para llenar el espacio en blanco.","Which lock was hardest, and what did you learn that you did not know before?":"¿Qué candado fue el más difícil y qué aprendiste que antes no sabías?","Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.":"Escribe de 3 a 4 oraciones. Nombra el candado y usa un dato de su tarjeta de indicios. Puedes escribirlo aunque no hayas escapado.","You escaped and wrote your Debrief. Ready to submit.":"Escapaste y escribiste tu Informe final. Listo para entregar.","You escaped! Write your Debrief, then download your file to submit.":"¡Escapaste! Escribe tu Informe final y luego descarga tu archivo para entregarlo.","Your answer":"Tu respuesta","Your time:":"Tu tiempo:","digit":"dígito","Coded message":"Mensaje en código","Scrambled letters":"Letras desordenadas","Clear all your work and start over? This cannot be undone.":"¿Borrar todo tu trabajo y empezar de nuevo? No se puede deshacer.","Abraham Lincoln":"Abraham Lincoln"},"ar":{"Save Progress":"حفظ التقدم","Load Progress":"تحميل التقدم","Finished — Download File to Submit":"انتهيت — نزّل الملف لتسليمه","Clear all my answers":"امسح كل إجاباتي","FIRST NAME *":"الاسم الأول *","LAST NAME *":"اسم العائلة *","PERIOD *":"الحصة *","DATE (fills in when you finish)":"التاريخ (يُكتب تلقائيًا عند الانتهاء)","e.g. 3":"مثال: 3","Automatic":"تلقائي","Please type your first name, last name, and period first.":"اكتب أولًا اسمك الأول واسم العائلة والحصة.","Western Expansion and Southern Secession":"التوسع غربًا وانفصال الجنوب","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH":"الوحدة 3 · بيت منقسم وأُعيد بناؤه | CPUSH","The Fugitive Slave Act":"The Fugitive Slave Act — قانون العبيد الهاربين","Bleeding Kansas":"Bleeding Kansas — كانساس النازفة","UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH | DANIEL GARZA, M.A.":"الوحدة 3 · بيت منقسم وأعيد بناؤه | CPUSH | DANIEL GARZA, M.A.","Progress file downloaded. Keep it safe. Use Load Progress to continue later.":"تم تنزيل ملف التقدم. احتفظ به في مكان آمن. استخدم «تحميل التقدم» لتكمل لاحقًا.","Progress loaded.":"تم تحميل التقدم.","Could not read that file.":"تعذّرت قراءة هذا الملف.","Treaty of Guadalupe Hidalgo":"معاهدة غوادالوبي هيدالغو (Treaty of Guadalupe Hidalgo)","Civil War and Reconstruction":"الحرب الأهلية وإعادة الإعمار","Escape Room 9 · Civil War and Reconstruction":"غرفة الهروب 9 · الحرب الأهلية وإعادة الإعمار","Escape the Telegraph Office":"اهرب من مكتب التلغراف","You are locked in the telegraph office.":"أنت محبوس في مكتب التلغراف.","The telegraph office closed for the night and the clerk locked up. Old messages from 1861 to 1877 are still on the wires. The door has <b>5 locks<\/b>. Each lock matches one big idea from Lesson 9. Solve them all to find the <b>5-digit exit code<\/b>.":"أُغلق مكتب التلغراف في المساء وأقفل الموظف الباب. ما زالت رسائل قديمة من عام 1861 إلى عام 1877 على الأسلاك. في الباب <b>5 أقفال<\/b>. كل قفل يرتبط بفكرة كبيرة واحدة من الدرس 9. حلّها كلها لتجد <b>رمز الخروج المكوّن من 5 أرقام<\/b>.","Enter the Office":"ادخل المكتب","TELEGRAPH OFFICE":"مكتب التلغراف","A telegraph office at night. A wall map and a clock hang on the walls, wires run along the ceiling, and a desk lamp glows on a desk. The office door has five padlocks in a row. Under each padlock is a window for one digit of the exit code.":"مكتب تلغراف في الليل. تتدلى خريطة وساعة على الجدران، وتمتد الأسلاك على السقف، ويتوهج مصباح مكتب على طاولة. في باب المكتب خمسة أقفال في صف واحد. تحت كل قفل نافذة صغيرة لرقم واحد من رمز الخروج.","The file could not be read.":"تعذّرت قراءة الملف.","The War Map":"خريطة الحرب","The Proclamation Dispatch":"برقية الإعلان","The Home Front Wire":"برقية الجبهة الداخلية","The Reconstruction Cable":"برقية إعادة الإعمار","The Final Telegram":"البرقية الأخيرة","Core Objectives 1 and 4: Identify the advantages of the North and South as the war began and how they shaped each side’s strategy, and describe the military turning points in 1863 and 1864.":"الأهداف الأساسية 1 و4: حدّد مزايا الشمال والجنوب عند بدء الحرب وكيف شكّلت استراتيجية كل طرف، وصف نقاط التحول العسكرية في عامي 1863 و1864.","Core Objective 2: Evaluate Abraham Lincoln’s decision to issue the Emancipation Proclamation and its impact on the war.":"الهدف الأساسي 2: قيّم قرار أبراهام لينكولن (Abraham Lincoln) إصدار إعلان التحرير (Emancipation Proclamation) وتأثيره في الحرب.","Core Objectives 3 and 5: Analyze how the war affected social and economic life in the North and South, and explain how the Civil War changed the nation.":"الأهداف الأساسية 3 و5: حلّل كيف أثّرت الحرب في الحياة الاجتماعية والاقتصادية في الشمال والجنوب، واشرح كيف غيّرت الحرب الأهلية (Civil War) الأمة.","Core Objectives 6-7: Identify the federal government’s major challenges in reconstructing the South, and describe how and why Reconstruction policies changed over time.":"الأهداف الأساسية 6-7: حدّد التحديات الكبرى التي واجهتها الحكومة الاتحادية في إعادة إعمار الجنوب، وصف كيف ولماذا تغيّرت سياسات إعادة الإعمار (Reconstruction) مع الوقت.","Core Objectives 8-10: Assess how White and Black Southerners viewed Reconstruction, analyze the factors that ended Reconstruction in 1877, and explain the significance of Reconstruction to the nation’s future.":"الأهداف الأساسية 8-10: قيّم كيف نظر أهل الجنوب من البيض والسود إلى إعادة الإعمار (Reconstruction)، وحلّل العوامل التي أنهت إعادة الإعمار عام 1877، واشرح أهمية إعادة الإعمار لمستقبل الأمة.","The Union had about 22 million people and the Confederacy about 9 million. The Union states also made 97 percent of the nation’s firearms. The Union’s Anaconda Plan used a navy blockade of Southern ports and pushes down the Mississippi, Tennessee, and Cumberland Rivers to slowly trap the Confederacy. The Confederacy hoped to hold out long enough to wear down Northern support for the war. In July 1863, the Union victories at Vicksburg and Gettysburg were a major turning point; with Vicksburg, Union forces cut the Confederacy in two.":"كان عدد سكان الاتحاد (Union) نحو 22 مليون نسمة، وعدد سكان الكونفدرالية (Confederacy) نحو 9 ملايين. كما صنعت ولايات الاتحاد 97 بالمئة من الأسلحة النارية في البلاد. واستخدمت خطة الأناكوندا (Anaconda Plan) التابعة للاتحاد حصارًا بحريًا لموانئ الجنوب وتقدمًا على طول أنهار المسيسيبي (Mississippi) وتينيسي (Tennessee) وكمبرلاند (Cumberland) لتطويق الكونفدرالية شيئًا فشيئًا. وكانت الكونفدرالية تأمل أن تصمد وقتًا كافيًا لإضعاف تأييد الشمال للحرب. وفي يوليو 1863، كان انتصار الاتحاد في فيكسبيرغ (Vicksburg) وغيتيسبرغ (Gettysburg) نقطة تحول كبرى؛ وبعد فيكسبيرغ شطرت قوات الاتحاد الكونفدرالية إلى نصفين.","On September 22, 1862, five days after the Battle of Antietam, Lincoln issued the preliminary Emancipation Proclamation. It warned that all enslaved people under Confederate control would be made “forever free” on January 1, 1863. Antietam convinced Lincoln to turn the war into a fight to end slavery, not only a fight to restore the Union. Lincoln called the Proclamation a “military necessity,” a use of his presidential “war powers.” More than 180,000 Black men enlisted in the Union army; at first they were not allowed in combat, but the need to win the war changed that.":"في 22 سبتمبر 1862، بعد خمسة أيام من معركة أنتيتام (Antietam)، أصدر لينكولن (Lincoln) إعلان التحرير (Emancipation Proclamation) الأولي. وحذّر من أن جميع الأشخاص المستعبَدين الخاضعين لسيطرة الكونفدرالية (Confederate) سيصبحون «أحرارًا إلى الأبد» في 1 يناير 1863. وأقنعت أنتيتام لينكولن بتحويل الحرب إلى قتال لإنهاء العبودية، وليس قتالًا لاستعادة الاتحاد (Union) فقط. ووصف لينكولن الإعلان بأنه «ضرورة عسكرية»، أي استخدام لـ«سلطات الحرب» الرئاسية. وانضم أكثر من 180,000 رجل أسود إلى جيش الاتحاد؛ ولم يُسمح لهم في البداية بالقتال، لكن الحاجة إلى كسب الحرب غيّرت ذلك.","The North paid for the war with taxes, tariffs, bonds, and paper money, and its government handled the costs better than the Confederacy did. The North also passed the Homestead Act (1862), which gave 160 acres of public land to each settler who would work it for five years, and the National Banking Act (1863). In the South, the government printed so much paper money that the prices of everyday goods kept rising faster and faster, which led to unrest. When the war ended, slavery had been abolished and no state could leave the Union. Political power had shifted from the South to the North.":"دفع الشمال تكاليف الحرب بالضرائب والتعريفات الجمركية والسندات والأوراق النقدية، وتعاملت حكومته مع التكاليف أفضل مما فعلت الكونفدرالية (Confederacy). كما أصدر الشمال قانون المزارع (Homestead Act) عام 1862، الذي منح 160 فدانًا من الأراضي العامة لكل مستوطن يعمل فيها خمس سنوات، وقانون البنوك الوطنية (National Banking Act) عام 1863. وفي الجنوب، طبعت الحكومة كمية كبيرة جدًا من الأوراق النقدية حتى ظلت أسعار السلع اليومية ترتفع أسرع فأسرع، مما أدى إلى اضطرابات. وعندما انتهت الحرب، كانت العبودية قد أُلغيت ولم يعد بإمكان أي ولاية مغادرة الاتحاد (Union). وانتقلت القوة السياسية من الجنوب إلى الشمال.","Lincoln and Andrew Johnson wanted a lenient plan called Presidential Reconstruction, but Radical Republicans wanted a plan that would transform the South. The Thirteenth Amendment, which abolished slavery, became law in December 1865. In 1866, Congress passed the Fourteenth Amendment, which extended federal civil rights protections to African Americans. Next, Congress took charge: the Military Reconstruction Act placed ten of the eleven former Confederate states under army generals in five military districts (Tennessee was left out because it had already ratified the Fourteenth Amendment). In 1870, Virginia, Mississippi, and Texas were readmitted only after they ratified the Fifteenth Amendment, which protected the voting rights of African American men.":"أراد لينكولن (Lincoln) وأندرو جونسون (Andrew Johnson) خطة متساهلة تُسمى إعادة الإعمار الرئاسية (Presidential Reconstruction)، لكن الجمهوريين الراديكاليين (Radical Republicans) أرادوا خطة تُغيّر الجنوب تغييرًا جذريًا. وأصبح التعديل الثالث عشر (Thirteenth Amendment)، الذي ألغى العبودية، قانونًا في ديسمبر 1865. وفي عام 1866، أقرّ الكونغرس التعديل الرابع عشر (Fourteenth Amendment)، الذي وسّع حماية الحقوق المدنية الاتحادية لتشمل الأمريكيين الأفارقة. ثم تولّى الكونغرس زمام الأمور: فقد وضع قانون إعادة الإعمار العسكري (Military Reconstruction Act) عشرًا من الولايات الكونفدرالية السابقة الإحدى عشرة تحت قيادة جنرالات الجيش في خمس مناطق عسكرية (وتُركت تينيسي (Tennessee) خارج ذلك لأنها كانت قد صادقت على التعديل الرابع عشر). وفي عام 1870، أُعيد قبول فرجينيا (Virginia) وميسيسيبي (Mississippi) وتكساس (Texas) فقط بعد أن صادقت على التعديل الخامس عشر (Fifteenth Amendment)، الذي حمى حق التصويت للرجال الأمريكيين الأفارقة.","Many freedpeople became sharecroppers: they rented land and paid the owner a share of the crop, and most ended up deep in debt. New Black voters helped elect nearly 800 Black state legislators, two U.S. senators, and fourteen members of the U.S. House. The Panic of 1873 caused a deep depression, and 3 million workers lost their jobs. By 1877, many White Americans no longer wanted to pay the price of protecting Black rights, and in the Compromise of 1877, Republicans promised that if Rutherford B. Hayes were named president, he would remove the last federal troops from the South. Even so, the Fourteenth and Fifteenth Amendments stayed in the Constitution as a base for later civil rights gains.":"أصبح كثير من الأشخاص المحرَّرين مزارعين بالمشاركة (sharecroppers): كانوا يستأجرون الأرض ويدفعون لمالكها حصة من المحصول، وانتهى الأمر بمعظمهم إلى ديون ثقيلة. وساعد الناخبون السود الجدد في انتخاب نحو 800 عضو أسود في المجالس التشريعية للولايات، وعضوين في مجلس الشيوخ الأمريكي، وأربعة عشر عضوًا في مجلس النواب الأمريكي. وتسبب الذعر المالي عام 1873 (Panic of 1873) في كساد عميق، وفقد 3 ملايين عامل وظائفهم. وبحلول عام 1877، لم يعد كثير من الأمريكيين البيض يريدون دفع ثمن حماية حقوق السود، وفي تسوية عام 1877 (Compromise of 1877) وعد الجمهوريون بأنه إذا عُيّن رذرفورد ب. هايز (Rutherford B. Hayes) رئيسًا فسيسحب آخر القوات الاتحادية من الجنوب. ومع ذلك، بقي التعديلان الرابع عشر والخامس عشر في الدستور أساسًا لمكاسب الحقوق المدنية اللاحقة.","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 14, “Mobilizing Forces in the North and South” (“Regional Advantages”; “The Union’s ‘Anaconda’ Plan,” key term p. 577; “Confederate Strategy”) and the Ch. 14 chapter review (“The Winning Union Strategy”; Vicksburg, key term p. 609; Gettysburg, key term p. 610).":"Norton, <i>America: The Essential Learning Edition<\/i>، الفصل 14، “Mobilizing Forces in the North and South” (“Regional Advantages”; “The Union’s ‘Anaconda’ Plan,” المصطلح الرئيسي، ص. 577; “Confederate Strategy”) ومراجعة الفصل 14 (“The Winning Union Strategy”; Vicksburg، المصطلح الرئيسي، ص. 609; Gettysburg، المصطلح الرئيسي، ص. 610).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 14, “Emancipation” (“Antietam: A Turning Point,” Antietam key term p. 591; “Emancipation Proclamation,” key term p. 593; “Black Soldiers and Sailors”).":"Norton, <i>America: The Essential Learning Edition<\/i>، الفصل 14، “Emancipation” (“Antietam: A Turning Point,” Antietam، المصطلح الرئيسي، ص. 591; “Emancipation Proclamation,” المصطلح الرئيسي، ص. 593; “Black Soldiers and Sailors”).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 14, “The War behind the Lines” (“Confederate Finances”; “Wartime Government,” Homestead Act and National Banking Act, key term p. 603; section summary) and “A Transformational War” (“The Union Preserved”).":"Norton, <i>America: The Essential Learning Edition<\/i>، الفصل 14، “The War behind the Lines” (“Confederate Finances”; “Wartime Government,” Homestead Act وNational Banking Act، المصطلح الرئيسي، ص. 603; ملخص القسم) و“A Transformational War” (“The Union Preserved”).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 15, chapter review (“Reconstruction over Time”) and “Battles over Political Reconstruction” (“The Freedmen’s Bureau,” key term p. 633; “Congress Takes Charge of Reconstruction,” key term p. 646; “Expanding Voting Rights,” key term p. 648); Ch. 14, “Thirteenth Amendment” (A Transformational War).":"Norton, <i>America: The Essential Learning Edition<\/i>، الفصل 15، مراجعة الفصل (“Reconstruction over Time”) و“Battles over Political Reconstruction” (“The Freedmen’s Bureau,” المصطلح الرئيسي، ص. 633; “Congress Takes Charge of Reconstruction,” المصطلح الرئيسي، ص. 646; “Expanding Voting Rights,” المصطلح الرئيسي، ص. 648)؛ الفصل 14، “Thirteenth Amendment” (A Transformational War).","Norton, <i>America: The Essential Learning Edition<\/i>, Ch. 15, “Black Society under Reconstruction” (“Sharecropping,” key term p. 654; “African American Political Leadership”), “The Grant Administration” (“Financial Panic,” key term p. 664; “The End of Reconstruction”; “The Contested Election of 1876,” Compromise of 1877, key term p. 669), and the Ch. 15 chapter review (“The Significance of Reconstruction”).":"Norton, <i>America: The Essential Learning Edition<\/i>، الفصل 15، “Black Society under Reconstruction” (“Sharecropping,” المصطلح الرئيسي، ص. 654; “African American Political Leadership”)، و“The Grant Administration” (“Financial Panic,” المصطلح الرئيسي، ص. 664; “The End of Reconstruction”; “The Contested Election of 1876,” Compromise of 1877، المصطلح الرئيسي، ص. 669)، ومراجعة الفصل 15 (“The Significance of Reconstruction”).","What share of the nation’s firearms did the Union states make?":"ما نسبة الأسلحة النارية في البلاد التي صنعتها ولايات الاتحاد (Union)؟","7 percent":"7 بالمئة","30 percent":"30 بالمئة","80 percent":"80 بالمئة","Under the Anaconda Plan, what was the job of the Union navy?":"في خطة الأناكوندا (Anaconda Plan)، ما مهمة البحرية الاتحادية؟","Blockade Southern ports":"محاصرة موانئ الجنوب","Defend the city of Richmond":"الدفاع عن مدينة ريتشموند (Richmond)","Sail to Great Britain for help":"الإبحار إلى بريطانيا العظمى (Great Britain) لطلب المساعدة","Carry troops to Texas":"نقل القوات إلى تكساس (Texas)","Which two Union victories in July 1863 were a major turning point?":"أي انتصارين للاتحاد (Union) في يوليو 1863 كانا نقطة تحول كبرى؟","Bull Run and Antietam":"بول ران (Bull Run) وأنتيتام (Antietam)","Vicksburg and Gettysburg":"فيكسبيرغ (Vicksburg) وغيتيسبرغ (Gettysburg)","Shiloh and Perryville":"شيلوه (Shiloh) وبيريفيل (Perryville)","Fredericksburg and Chancellorsville":"فريدريكسبيرغ (Fredericksburg) وتشانسلرزفيل (Chancellorsville)","Each answer is in the Clue Card. Look for a percent, a job for the navy, and two battles in July 1863.":"كل إجابة موجودة في بطاقة القرائن. ابحث عن نسبة مئوية، ومهمة للبحرية، ومعركتين في يوليو 1863.","The percent is a big one (more than 90). The navy’s job is to close the ports. One battle name starts with V and the other starts with G.":"النسبة المئوية كبيرة (أكثر من 90). مهمة البحرية هي إغلاق الموانئ. اسم إحدى المعركتين (بالإنجليزية) يبدأ بالحرف V واسم الأخرى يبدأ بالحرف G.","Not quite. At least one answer is off. Re-read the Clue Card for the percent, the navy’s job, and the two July 1863 victories.":"ليس تمامًا. إجابة واحدة على الأقل خاطئة. أعد قراءة بطاقة القرائن لتجد النسبة المئوية ومهمة البحرية والانتصارين في يوليو 1863.","Unlocked. Your digit is 3. Your answer: 97 percent; Blockade Southern ports; Vicksburg and Gettysburg":"تم الفتح. رقمك هو 3. إجابتك: 97 بالمئة؛ محاصرة موانئ الجنوب؛ فيكسبيرغ (Vicksburg) وغيتيسبرغ (Gettysburg)","Emancipation Proclamation":"إعلان التحرير (Emancipation Proclamation)","Black soldiers in the Union army":"الجنود السود في جيش الاتحاد (Union)","Battle of Antietam":"معركة أنتيتام (Antietam)","“Military necessity”":"«الضرورة العسكرية»","Convinced Lincoln to make the war a fight to end slavery":"أقنع لينكولن (Lincoln) بتحويل الحرب إلى قتال لإنهاء العبودية","Promised freedom to enslaved people in areas under Confederate control, starting January 1, 1863":"وعد الأشخاص المستعبَدين في المناطق الخاضعة لسيطرة الكونفدرالية (Confederate) بالحرية، ابتداءً من 1 يناير 1863","How Lincoln explained his use of presidential war powers":"كيف شرح لينكولن (Lincoln) استخدامه لسلطات الحرب الرئاسية","More than 180,000 enlisted in the Union army; at first not allowed in combat":"أكثر من 180,000 انضموا إلى جيش الاتحاد (Union)؛ ولم يُسمح لهم في البداية بالقتال","Two descriptions give numbers: one has a date (January 1, 1863) and one has a count (180,000).":"وصفان يذكران أرقامًا: أحدهما فيه تاريخ (1 يناير 1863) والآخر فيه عدد (180,000).","Antietam is the battle that changed Lincoln’s goal. “Military necessity” is the reason Lincoln gave.":"أنتيتام (Antietam) هي المعركة التي غيّرت هدف لينكولن (Lincoln). و«الضرورة العسكرية» هي السبب الذي ذكره لينكولن.","Unlocked. Your digit is 9. Your answer: Emancipation Proclamation = Promised freedom to enslaved people in areas under Confederate control, starting January 1, 1863; Black soldiers in the Union army = More than 180,000 enlisted in the Union army; at first not allowed in combat; Battle of Antietam = Convinced Lincoln to make the war a fight to end slavery; “Military necessity” = How Lincoln explained his use of presidential war powers":"تم الفتح. رقمك هو 9. إجابتك: إعلان التحرير (Emancipation Proclamation) = وعد الأشخاص المستعبَدين في المناطق الخاضعة لسيطرة الكونفدرالية (Confederate) بالحرية، ابتداءً من 1 يناير 1863؛ الجنود السود في جيش الاتحاد (Union) = أكثر من 180,000 انضموا إلى جيش الاتحاد (Union)؛ ولم يُسمح لهم في البداية بالقتال؛ معركة أنتيتام (Antietam) = أقنع لينكولن (Lincoln) بتحويل الحرب إلى قتال لإنهاء العبودية؛ «الضرورة العسكرية» = كيف شرح لينكولن (Lincoln) استخدامه لسلطات الحرب الرئاسية","The Clue Card describes a money problem in the South without naming it. A secret message names it. Each letter in the message was moved 4 steps forward in the alphabet. Decode it to name the problem.":"تصف بطاقة القرائن مشكلة مالية في الجنوب دون أن تذكر اسمها. ورسالة سرية تذكر اسمها. كل حرف في الرسالة تحرّك 4 خطوات إلى الأمام في الأبجدية. فُكّ تشفيرها لتعرف اسم المشكلة.","The problem is what happens when too much money is printed and prices keep going up. Use the decoder key to spell it.":"المشكلة هي ما يحدث عندما تُطبع أموال كثيرة جدًا وتستمر الأسعار في الارتفاع. استخدم مفتاح فك التشفير لتهجئتها.","In the message, the letter M is really I, and the letter R is really N. The word has 9 letters and ends with ATION.":"في الرسالة، الحرف M هو في الحقيقة I، والحرف R هو في الحقيقة N. تتكوّن الكلمة (بالإنجليزية) من 9 أحرف وتنتهي بـ ATION.","The Thirteenth Amendment becomes law (December 1865)":"يصبح التعديل الثالث عشر (Thirteenth Amendment) قانونًا (ديسمبر 1865)","Congress passes the Fourteenth Amendment (1866)":"يقرّ الكونغرس التعديل الرابع عشر (Fourteenth Amendment) (1866)","The Military Reconstruction Act puts ten states under army generals":"يضع قانون إعادة الإعمار العسكري (Military Reconstruction Act) عشر ولايات تحت قيادة جنرالات الجيش","Virginia, Mississippi, and Texas must ratify the Fifteenth Amendment to rejoin (1870)":"يجب على فرجينيا (Virginia) وميسيسيبي (Mississippi) وتكساس (Texas) أن تصادق على التعديل الخامس عشر (Fifteenth Amendment) لتعود (1870)","Look for the years in the Clue Card: 1865, 1866, and 1870. One event has no year, but it comes after the Fourteenth Amendment.":"ابحث عن السنوات في بطاقة القرائن: 1865 و1866 و1870. حدث واحد ليس له سنة، لكنه يأتي بعد التعديل الرابع عشر (Fourteenth Amendment).","The order is Thirteenth, Fourteenth, army districts (Military Reconstruction Act), then the Fifteenth Amendment in 1870.":"الترتيب هو: الثالث عشر، ثم الرابع عشر، ثم مناطق الجيش (Military Reconstruction Act)، ثم التعديل الخامس عشر عام 1870.","Not quite. Re-read the Clue Card and follow the years and the word “next.”":"ليس تمامًا. أعد قراءة بطاقة القرائن وتتبّع السنوات وكلمة «ثم».","Unlocked. Your digit is 8. Your answer: The Thirteenth Amendment becomes law (December 1865) &gt; Congress passes the Fourteenth Amendment (1866) &gt; The Military Reconstruction Act puts ten states under army generals &gt; Virginia, Mississippi, and Texas must ratify the Fifteenth Amendment to rejoin (1870)":"تم الفتح. رقمك هو 8. إجابتك: يصبح التعديل الثالث عشر (Thirteenth Amendment) قانونًا (ديسمبر 1865) &gt; يقرّ الكونغرس التعديل الرابع عشر (Fourteenth Amendment) (1866) &gt; يضع قانون إعادة الإعمار العسكري (Military Reconstruction Act) عشر ولايات تحت قيادة جنرالات الجيش &gt; يجب على فرجينيا (Virginia) وميسيسيبي (Mississippi) وتكساس (Texas) أن تصادق على التعديل الخامس عشر (Fifteenth Amendment) لتعود (1870)","In the Compromise of 1877, Republicans promised that if Rutherford B. ________ were named president, he would remove the last federal troops from the South.":"في تسوية عام 1877 (Compromise of 1877)، وعد الجمهوريون بأنه إذا عُيّن رذرفورد ب. (Rutherford B.) ________ رئيسًا فسيسحب آخر القوات الاتحادية من الجنوب.","Read the fourth sentence of the Clue Card. The president’s last name is in it.":"اقرأ الجملة الرابعة في بطاقة القرائن. فيها اسم عائلة الرئيس.","The word starts with H and ends with S. It has 5 letters.":"تبدأ الكلمة (بالإنجليزية) بالحرف H وتنتهي بالحرف S. وهي مكوّنة من 5 أحرف.","Not quite. Re-read the Clue Card for the president named in the Compromise of 1877. Use the scrambled letters to check your spelling.":"ليس تمامًا. أعد قراءة بطاقة القرائن لتجد الرئيس المذكور في تسوية عام 1877 (Compromise of 1877). استخدم الأحرف المبعثرة لتتحقق من تهجئتك.","97 percent":"97 بالمئة","All 5 locks are open. Type the 5 digits in order, Lock 1 first.":"الأقفال الخمسة مفتوحة. اكتب الأرقام الخمسة بالترتيب: رقم القفل 1 أولًا.","Answer every question first.":"أجب عن كل الأسئلة أولًا.","CLUE CARD":"بطاقة القرائن","Check":"تحقق","Choose a description...":"اختر وصفًا...","Clear":"مسح","Clear all my work and start over":"امسح كل عملي وابدأ من جديد","DEBRIEF":"الملخص الختامي","Debrief":"الملخص الختامي","Decoded answer":"الإجابة بعد فك التشفير","Decoder key: the <span style=\"color:var(--hl);font-weight:700\">pink<\/span> letter is in the message. The white letter under it is the real letter.":"مفتاح فك التشفير: الحرف <span style=\"color:var(--hl);font-weight:700\">الوردي<\/span> هو الحرف الموجود في الرسالة. والحرف الأبيض تحته هو الحرف الحقيقي.","ESCAPED":"لقد هربت!","Enter your first name, last name, and period at the top first.":"اكتب اسمك الأول واسم العائلة والحصة في الأعلى أولًا.","Exit door":"باب الخروج","Fill in the blank using the Clue Card.":"املأ الفراغ باستخدام بطاقة القرائن.","Have a saved file? Load it to continue.":"هل لديك ملف محفوظ؟ حمّله لتكمل.","Hint":"تلميح","Hints used":"التلميحات المستخدمة","How to escape:":"كيف تهرب:","If you get stuck, press <b>Hint<\/b>. Hints are free, but your teacher can see how many you used.":"إذا تعثرت، اضغط <b>تلميح<\/b>. التلميحات مجانية، لكن معلمك يستطيع أن يرى كم تلميحًا استخدمت.","Locks":"الأقفال","Match each term to the best description. Use the Clue Card.":"طابق كل مصطلح مع أفضل وصف له. استخدم بطاقة القرائن.","Match every term first.":"طابق كل المصطلحات أولًا.","Not escaped yet (marked INCOMPLETE). You can still download your file and submit it.":"لم تهرب بعد (يُسجَّل «غير مكتمل» INCOMPLETE). ما زال بإمكانك تنزيل ملفك وتسليمه.","Not quite. Check each match against the Clue Card. Which one are you least sure about?":"ليس تمامًا. تحقق من كل مطابقة باستخدام بطاقة القرائن. أي مطابقة أنت أقل تأكدًا منها؟","Not quite. Decode one letter at a time with the key, then check your spelling.":"ليس تمامًا. فُكّ تشفير حرف واحد في كل مرة باستخدام المفتاح، ثم تحقق من تهجئتك.","One last step: write your Debrief below.":"خطوة أخيرة: اكتب ملخصك الختامي أدناه.","Open all 5 locks first. The digits go in order: Lock 1 first.":"افتح الأقفال الخمسة أولًا. تُكتب الأرقام بالترتيب: رقم القفل 1 أولًا.","Open all 5 locks, then type the 5-digit exit code. Finish with the Debrief.":"افتح الأقفال الخمسة، ثم اكتب رمز الخروج المكوّن من 5 أرقام. أنهِ بالملخص الختامي.","Open each lock in order. Read the <b>Clue Card<\/b>. The answer is in the card.":"افتح كل قفل بالترتيب. اقرأ <b>بطاقة القرائن<\/b>. الإجابة موجودة في البطاقة.","Open the Door":"افتح الباب","Pick the correct answer for all three questions.":"اختر الإجابة الصحيحة للأسئلة الثلاثة.","Progress file downloaded. Use Load Progress to continue later.":"تم تنزيل ملف التقدم. استخدم «تحميل التقدم» لتكمل لاحقًا.","Progress loaded. Welcome back.":"تم تحميل التقدم. أهلًا بعودتك.","Solve the puzzle to open the lock and reveal one digit.":"حلّ اللغز لتفتح القفل وتكشف رقمًا واحدًا.","THE EXIT DOOR":"باب الخروج","Tap the four events in the order they happened. Tap an event again to take it back.":"المس الأحداث الأربعة بالترتيب الذي وقعت به. المس الحدث مرة أخرى للتراجع عنه.","That file did not work. Choose a progress file saved from this Escape Room.":"لم يعمل هذا الملف. اختر ملف تقدم محفوظًا من غرفة الهروب هذه.","That was the last hint. Read the Clue Card slowly and try again.":"كان هذا آخر تلميح. اقرأ بطاقة القرائن ببطء وحاول مرة أخرى.","The clock starts when you press the button. Most students finish in about 20 minutes.":"يبدأ العدّاد عندما تضغط الزر. يُنهي معظم الطلاب في نحو 20 دقيقة.","The code has 5 digits. Fill every box.":"الرمز مكوّن من 5 أرقام. املأ كل المربعات.","The door did not open. Check the digits under each lock, and type them in order: Lock 1 first.":"لم يُفتح الباب. تحقق من الأرقام تحت كل قفل، واكتبها بالترتيب: رقم القفل 1 أولًا.","The door is open!":"الباب مفتوح!","The door swings open!":"ينفتح الباب على مصراعيه!","Time":"الوقت","Type the answer in English.":"اكتب الإجابة بالإنجليزية.","Type the answer in English. Use the digits 0-9.":"اكتب الإجابة بالإنجليزية. استخدم الأرقام 0-9.","Type the exit code":"اكتب رمز الخروج","Type your answer first.":"اكتب إجابتك أولًا.","Type your answer here...":"اكتب إجابتك هنا...","Unscramble the letters to fill the blank.":"رتّب الأحرف لتملأ الفراغ.","Which lock was hardest, and what did you learn that you did not know before?":"أي قفل كان الأصعب، وماذا تعلمت ولم تكن تعرفه من قبل؟","Write 3-4 sentences. Name the lock and use one fact from its Clue Card. You can write this even if you did not escape.":"اكتب من 3 إلى 4 جمل. اذكر القفل واستخدم معلومة واحدة من بطاقة القرائن الخاصة به. يمكنك كتابة هذا حتى لو لم تهرب.","You escaped and wrote your Debrief. Ready to submit.":"لقد هربت وكتبت ملخصك الختامي. أنت جاهز للتسليم.","You escaped! Write your Debrief, then download your file to submit.":"لقد هربت! اكتب ملخصك الختامي، ثم نزّل ملفك لتسليمه.","Your answer":"إجابتك","Your time:":"وقتك:","digit":"رقم","Coded message":"الرسالة المشفرة","Scrambled letters":"أحرف مبعثرة","Clear all your work and start over? This cannot be undone.":"هل تريد مسح كل عملك والبدء من جديد؟ لا يمكن التراجع عن ذلك.","Abraham Lincoln":"أبراهام لينكولن (Abraham Lincoln)"},"patterns":[{"re":"^Still needed: first name, last name, and period\\.$","es":"Todavía falta: nombre, apellido y período.","ar":"ما زال ناقصًا: الاسم الأول واسم العائلة والحصة."},{"re":"^LOCK (\\d)$","es":"Cand. $1","ar":"القفل $1"},{"re":"^LOCK (\\d) · CORE OBJECTIVE (\\d+)$","es":"CANDADO $1 · OBJETIVO PRINCIPAL $2","ar":"القفل $1 · الهدف الأساسي $2"},{"re":"^LOCK (\\d) · CORE OBJECTIVES (\\d+)-(\\d+)$","es":"CANDADO $1 · OBJETIVOS PRINCIPALES $2-$3","ar":"القفل $1 · الأهداف الأساسية $2-$3"},{"re":"^LOCK (\\d) · CORE OBJECTIVES (\\d+) AND (\\d+)$","es":"CANDADO $1 · OBJETIVOS PRINCIPALES $2 Y $3","ar":"القفل $1 · الأهداف الأساسية $2 و$3"},{"re":"^Hint (\\d):$","es":"Pista $1:","ar":"تلميح $1:"},{"re":"^Exit code digit (\\d)$","es":"Dígito $1 del código de salida","ar":"رقم رمز الخروج $1"},{"re":"^Click! Lock (\\d) is open\\. Your digit is (\\d)\\.$","es":"¡Clic! El Candado $1 está abierto. Tu dígito es $2.","ar":"نقرة! القفل $1 مفتوح. رقمك هو $2."},{"re":"^5 of 5 locks opened with (\\d+) tries and 1 hint\\.$","es":"Abriste 5 de 5 candados con $1 intentos y 1 pista.","ar":"فتحت 5 أقفال من 5 بعد $1 محاولة وتلميح واحد."},{"re":"^5 of 5 locks opened with (\\d+) tries and (\\d+) hints\\.$","es":"Abriste 5 de 5 candados con $1 intentos y $2 pistas.","ar":"فتحت 5 أقفال من 5 بعد $1 محاولة و$2 تلميحات."},{"re":"^Tap all (\\d) places first, in order\\.$","es":"Primero toca los $1 lugares, en orden.","ar":"المس الأماكن الـ $1 أولًا، بالترتيب."},{"re":"^Done! File downloaded: (.*)\\. Upload it to Canvas\\.$","es":"¡Listo! Se descargó el archivo: $1. Súbelo a Canvas.","ar":"تم! تم تنزيل الملف: $1. ارفعه إلى Canvas."},{"re":"^Your file downloaded and is marked INCOMPLETE \\(you have not escaped\\)\\. Upload it to Canvas: (.*)$","es":"Tu archivo se descargó y está marcado INCOMPLETO (todavía no escapas). Súbelo a Canvas: $1","ar":"تم تنزيل ملفك وهو مُسجَّل «غير مكتمل» INCOMPLETE (لم تهرب بعد). ارفعه إلى Canvas: $1"},{"re":"^Unlocked\\. Your digit is (\\d)\\. Your answer: (.*)$","es":"Desbloqueado. Tu dígito es $1. Tu respuesta: $2","ar":"تم الفتح. رقمك هو $1. إجابتك: $2"},{"re":"^Unlocked\\. Your digit is (\\d)\\.$","es":"Desbloqueado. Tu dígito es $1.","ar":"تم الفتح. رقمك هو $1."}]}</script>
+<script>
+/* Supplement language switch (English / Espanol / Arabic). Works on pages whose text is rendered by JS:
+   a MutationObserver translates text as it appears. Data: <script type="application/json" id="sp-i18n">
+   {"langs":["en","es","ar"],"default":"en","es":{englishHTML:translation},"ar":{...},"patterns":[{"re":"^(\\d+) of (\\d+)$","es":"$1 de $2","ar":"..."}]}
+   Keys are the English text exactly as it sits in the page (innerHTML, spaces collapsed).
+   Helpers: spSeen() english strings seen so far; spMissing() strings with no translation in the current language;
+   spSetLang(l); spTr(s) translate a string (used for confirm/alert); spAscii(s) plain-ASCII name for file names. */
+(function () {
+  var node = document.getElementById('sp-i18n');
+  var D = node ? JSON.parse(node.textContent) : { langs: ['en'], patterns: [] };
+  var INLINE = { B:1,I:1,EM:1,STRONG:1,SPAN:1,A:1,BR:1,SMALL:1,SUP:1,SUB:1,U:1,MARK:1,BDI:1,TSPAN:1,CODE:1 };
+  var SKIP = 'script,style,textarea,input,.sp-lang,.sp-nt,[translate="no"]';
+  var WORD = /[A-Za-z\u00C0-\u024F\u0600-\u06FF]{2}|e\.g\./;
+  var LANG = 'en', REC = new WeakMap(), SEEN = {}, MISS = {};
+  (D.patterns || []).forEach(function (p) { try { p._re = new RegExp(p.re); } catch (e) {} });
+  function norm(s) { return String(s).replace(/\s+/g, ' ').trim(); }
+  function tr(src) {
+    if (LANG === 'en') return null;
+    var t = D[LANG] && D[LANG][src];
+    if (t) return t;
+    var P = D.patterns || [];
+    for (var i = 0; i < P.length; i++) {
+      var m = P[i]._re && P[i]._re.exec(src);
+      if (m && P[i][LANG]) return P[i][LANG].replace(/\$(\d+)/g, function (_, n) { return m[+n] || ''; });
+    }
+    return null;
+  }
+  window.spTr = function (s) { var t = tr(norm(s)); return t ? t.replace(/<[^>]+>/g, '') : s; };
+  function isInline(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling)
+      if (c.nodeType === 1 && (!INLINE[c.tagName.toUpperCase()] || c.matches(SKIP))) return false;
+    return true;
+  }
+  function directText(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling) if (c.nodeType === 3 && WORD.test(c.nodeValue)) return true;
+    return false;
+  }
+  function cur(s) { return s.nodeType === 1 ? s.innerHTML : s.nodeValue; }
+  function put(s, v) { if (s.nodeType === 1) s.innerHTML = v; else s.nodeValue = v; }
+  function handle(s) {
+    var r = REC.get(s), c = cur(s);
+    if (!(r && c === r.wrote)) { r = { en: c, wrote: c }; REC.set(s, r); }
+    var src = norm(r.en), target = r.en;
+    if (WORD.test(src)) {
+      SEEN[src] = 1;
+      if (LANG !== 'en') {
+        var t = tr(src);
+        if (t) {
+          target = s.nodeType === 1 ? t : (r.en.match(/^\s*/)[0] + t + r.en.match(/\s*$/)[0]);
+          delete MISS[src];
+        } else MISS[src] = 1;
+      }
+    }
+    if (c !== target) put(s, target);
+    r.wrote = cur(s);
+  }
+  var ATTRS = ['placeholder', 'alt', 'aria-label', 'title'];
+  function attrs(root) {
+    var els = root.querySelectorAll ? root.querySelectorAll('[placeholder],[alt],[aria-label],[title]') : [];
+    var list = [].slice.call(els); if (root.matches && root.matches('[placeholder],[alt],[aria-label],[title]')) list.push(root);
+    list.forEach(function (el) {
+      if (el.closest && el.closest('.sp-lang,.sp-nt,[translate="no"],script,style')) return;
+      var rec = el.__spa || (el.__spa = {});
+      ATTRS.forEach(function (a) {
+        var v = el.getAttribute(a); if (v == null) return;
+        var r = rec[a];
+        if (!(r && v === r.wrote)) { r = rec[a] = { en: v, wrote: v }; }
+        var src = norm(r.en); if (!WORD.test(src)) return;
+        SEEN[src] = 1;
+        var t = LANG === 'en' ? null : tr(src);
+        if (LANG !== 'en' && !t) MISS[src] = 1;
+        var target = t ? t.replace(/<[^>]+>/g, '') : r.en;
+        if (v !== target) el.setAttribute(a, target);
+        r.wrote = el.getAttribute(a);
+      });
+    });
+  }
+  function walk(root) {
+    if (root.nodeType === 3) { if (WORD.test(root.nodeValue) && !(root.parentNode && root.parentNode.closest && root.parentNode.closest(SKIP))) handle(root); return; }
+    if (root.nodeType !== 1) return;
+    (function w(el) {
+      if (el.matches(SKIP)) return;
+      if (el !== document.body && directText(el) && isInline(el)) { handle(el); return; }
+      for (var c = el.firstChild; c; c = c.nextSibling) {
+        if (c.nodeType === 1) w(c); else if (c.nodeType === 3 && WORD.test(c.nodeValue)) handle(c);
+      }
+    })(root);
+    attrs(root);
+  }
+  var TITLE = { en: document.title, wrote: document.title };
+  function title() {
+    if (document.title !== TITLE.wrote) TITLE = { en: document.title, wrote: document.title };
+    var t = LANG === 'en' ? null : tr(norm(TITLE.en));
+    document.title = t ? t.replace(/<[^>]+>/g, '') : TITLE.en; TITLE.wrote = document.title;
+  }
+  function inl(e) { return e.nodeType === 1 && !!INLINE[e.tagName.toUpperCase()]; }
+  var mo = new MutationObserver(function (muts) {
+    var todo = [];
+    muts.forEach(function (m) {
+      if (m.type === 'childList') { for (var i = 0; i < m.addedNodes.length; i++) todo.push(m.addedNodes[i]); todo.push(m.target); }
+      else todo.push(m.target);
+    });
+    todo.forEach(function (n) {
+      var el = n.nodeType === 1 ? n : n.parentNode;
+      if (!el || el.nodeType !== 1 || !document.body.contains(el)) return;
+      while (el !== document.body && el.parentNode && el.parentNode.nodeType === 1 && inl(el) && inl(el.parentNode)) el = el.parentNode;
+      if (el.parentNode && el.parentNode.nodeType === 1 && inl(el.parentNode) && el.parentNode !== document.body) el = el.parentNode;
+      walk(el);
+    });
+    mo.takeRecords();
+  });
+  var AR = { 'ا':'a','أ':'a','إ':'i','آ':'a','ب':'b','ت':'t','ث':'th','ج':'j','ح':'h','خ':'kh','د':'d','ذ':'dh','ر':'r','ز':'z','س':'s','ش':'sh','ص':'s','ض':'d','ط':'t','ظ':'z','ع':'a','غ':'gh','ف':'f','ق':'q','ك':'k','ل':'l','م':'m','ن':'n','ه':'h','و':'w','ي':'y','ى':'a','ة':'a','ئ':'y','ؤ':'w' };
+  window.spAscii = function (s) {
+    s = String(s); if (s.normalize) s = s.normalize('NFD').replace(/[̀-ًͯ-ٰٟ]/g, '');
+    return s.replace(/[ء-ي]/g, function (c) { return AR[c] !== undefined ? AR[c] : ''; }).replace(/ñ/g, 'n').replace(/Ñ/g, 'N');
+  };
+  window.spSeen = function () { return Object.keys(SEEN); };
+  window.spMissing = function () { return Object.keys(MISS); };
+  window.spLang = function () { return LANG; };
+  window.spSetLang = function (l) {
+    if ((D.langs || ['en']).indexOf(l) < 0) l = 'en';
+    LANG = l; MISS = {};
+    var h = document.documentElement; h.lang = l; h.dir = l === 'ar' ? 'rtl' : 'ltr';
+    mo.disconnect(); walk(document.body); title(); mo.takeRecords();
+    mo.observe(document.body, { childList: true, subtree: true, characterData: true });
+    document.querySelectorAll('.sp-lang button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === l)); });
+    try { localStorage.setItem('sp_lang', l); } catch (e) {}
+    try { var u = new URL(location.href); if (l === 'en') u.searchParams.delete('lang'); else u.searchParams.set('lang', l); history.replaceState(null, '', u.toString()); } catch (e) {}
+    try { document.dispatchEvent(new CustomEvent('splangchange', { detail: l })); } catch (e) {}
+  };
+  var _c = window.confirm, _a = window.alert;
+  window.confirm = function (m) { return _c.call(window, window.spTr(m)); };
+  window.alert = function (m) { return _a.call(window, window.spTr(m)); };
+  document.querySelectorAll('.sp-lang button').forEach(function (b) { b.addEventListener('click', function () { window.spSetLang(b.getAttribute('data-lang')); }); });
+  var start = D['default'] || 'en';
+  try { start = new URL(location.href).searchParams.get('lang') || localStorage.getItem('sp_lang') || start; } catch (e) {}
+  window.spSetLang(start);
+})();
+
+</script><!--/sp-i18n-->
+</body>
+</html>
