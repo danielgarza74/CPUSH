@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Liberty or Control? · Source Detective 2</title>
+<style>
+:root{--bg:#194C4D;--text:#EBF4F4;--a1:#276E6F;--a2:#D2B64B;--hl:#E1D08E;--page:#E3EFEF;--paper:#F9FCFC;--ink:#13393A;--rule:#D4E2E2;--gold:#82712E;--keybg:#FAF8ED;--voice:#8A4B2A;--ok:#2E6B3E}
+@media (prefers-color-scheme:dark){:root{--page:#0C2626;--paper:#143D3E;--ink:#EBF4F4;--rule:#477071;--keybg:#2B5A5B;--gold:#E1D08E}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font:17px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+.wrap{max-width:820px;margin:0 auto;padding:0 14px 40px}
+.hero{background:var(--bg);color:var(--text);padding:26px 14px 22px;text-align:center;border-bottom:5px solid var(--a2)}
+.hero .eyebrow{letter-spacing:.18em;font-weight:700;font-size:.8rem;color:var(--hl)}
+.hero h1{margin:.2em 0 .1em;font-size:2rem;line-height:1.15}
+.hero .sub{opacity:.92}
+.langbar{display:flex;gap:8px;justify-content:center;align-items:center;margin:14px 0;flex-wrap:wrap}
+.langbar button{border:2px solid var(--a1);background:var(--paper);color:var(--ink);padding:8px 16px;border-radius:999px;font:inherit;font-weight:700;cursor:pointer;min-height:44px}
+.langbar button[aria-pressed=true]{background:var(--a1);color:#fff}
+.box{background:var(--paper);border:1px solid var(--rule);border-radius:12px;padding:14px 16px;margin:14px 0}
+.bq{background:var(--keybg);border:2px solid var(--a2);border-radius:12px;padding:14px 16px;margin:14px 0}
+.bq b{color:var(--gold);letter-spacing:.06em}
+.bq .q{font-size:1.12rem;font-weight:700;margin-top:4px}
+h2{color:var(--a1);margin:26px 0 6px;font-size:1.25rem}
+@media (prefers-color-scheme:dark){h2{color:var(--hl)}}
+.how ol{margin:6px 0 0;padding-inline-start:22px}
+.names{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.names label{display:block;font-weight:700;font-size:.85rem}
+.names input{width:100%;padding:10px;border:2px solid var(--rule);border-radius:8px;font:inherit;background:var(--paper);color:var(--ink)}
+.names input.bad{border-color:#B3261E;background:#FDECEA;color:#000}
+.names input[readonly]{background:var(--keybg)}
+.meter{margin:14px 0} .meter .bar{height:12px;background:var(--rule);border-radius:99px;overflow:hidden}
+.meter .fill{height:100%;width:0;background:var(--a2);transition:width .3s}
+.meter .t{font-weight:700;margin-top:4px}
+.card{background:var(--paper);border:1px solid var(--rule);border-inline-start:8px solid var(--rule);border-radius:12px;padding:14px 16px;margin:16px 0}
+.card.done{border-inline-start-color:var(--bg)} .card.done.isS{border-inline-start-color:var(--a2)} .card.done.isV{border-inline-start-color:var(--voice)}
+.chip{display:inline-block;background:var(--bg);color:var(--text);border-radius:99px;padding:2px 12px;font-weight:700;font-size:.9rem}
+.cnum{margin-inline-start:8px;color:var(--gold);font-weight:700;font-size:.9rem}
+.meta{margin:8px 0 2px;font-size:.95rem} .meta b{color:var(--a1)}
+@media (prefers-color-scheme:dark){.meta b{color:var(--hl)}}
+blockquote{margin:10px 0;padding:12px 14px;background:var(--keybg);border-inline-start:5px solid var(--a2);border-radius:6px;font-style:italic;font-size:1.02rem}
+.orig{display:none;direction:ltr;text-align:left;font-size:.9rem;opacity:.9;margin:4px 0}
+html[lang=ar] .orig,html[lang=es] .orig{display:block}
+.orig i{font-style:italic}
+.cite{direction:ltr;text-align:left;font-size:.82rem;opacity:.85;margin:6px 0}
+.help,.hint{font-size:.93rem;margin:6px 0}
+.want{font-weight:700;margin:10px 0 6px}
+.stances{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.stances button{text-align:start;border:2px solid var(--rule);background:var(--paper);color:var(--ink);border-radius:10px;padding:10px;font:inherit;cursor:pointer;min-height:64px}
+.stances button b{display:block;font-size:1rem} .stances button small{display:block;font-size:.78rem;opacity:.85;line-height:1.25}
+.stances button[aria-pressed=true]{background:var(--bg);color:var(--text);border-color:var(--bg)}
+.stances button[data-v=S][aria-pressed=true]{background:var(--a2);color:#10312C;border-color:var(--a2)}
+.stances button[data-v=V][aria-pressed=true]{background:var(--voice);color:#fff;border-color:var(--voice)}
+.stances button:focus-visible,.btns button:focus-visible,select:focus-visible,textarea:focus-visible,input:focus-visible,.langbar button:focus-visible{outline:3px solid var(--a2);outline-offset:2px}
+@media (max-width:620px){.stances{grid-template-columns:1fr} .names{grid-template-columns:1fr 1fr} .hero h1{font-size:1.6rem}}
+textarea,select{width:100%;margin-top:8px;padding:10px;border:2px solid var(--rule);border-radius:8px;font:inherit;background:var(--paper);color:var(--ink);unicode-bidi:plaintext}
+textarea{min-height:84px}
+.fin label.l{display:block;font-weight:700;margin-top:12px}
+.chk{display:flex;gap:8px;align-items:flex-start;margin:8px 0} .chk input{width:22px;height:22px;margin-top:3px}
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 6px}
+.btns button{border:0;border-radius:10px;padding:12px 18px;font:inherit;font-weight:700;cursor:pointer;min-height:48px;background:var(--a1);color:#fff}
+.btns button#fin{background:var(--bg);color:var(--text);border:2px solid var(--a2)}
+.btns button:disabled{background:#9AA9A7;color:#fff;border-color:#9AA9A7;cursor:not-allowed}
+#todo{font-weight:700;margin:6px 0} #msg{margin:6px 0;min-height:1.4em} #msg.err{color:#B3261E} #msg.ok{color:var(--ok)}
+footer{background:var(--bg);color:var(--text);text-align:center;padding:14px;font-size:.78rem;letter-spacing:.08em;border-top:5px solid var(--a2);margin-top:30px}
+footer div+div{opacity:.9;margin-top:2px}
+</style></head><body>
+<header class="hero"><div class="eyebrow" data-t="eyebrow"></div><h1 data-t="title"></h1><div class="sub" data-t="sub"></div></header>
+<div class="wrap">
+<div class="langbar" role="group" aria-label="Language"><button type="button" data-lang="en" aria-pressed="true">English</button><button type="button" data-lang="es" aria-pressed="false">Español</button><button type="button" data-lang="ar" aria-pressed="false">العربية</button></div>
+<div class="bq"><b data-t="bqlabel"></b><div class="q" data-t="bq"></div><div style="margin-top:8px" data-t="job"></div></div>
+<div class="box how"><b data-t="howh"></b><ol><li data-t="how1"></li><li data-t="how2"></li><li data-t="how3"></li><li data-t="how4"></li></ol></div>
+<div class="box names">
+ <div><label for="first" data-t="first"></label><input id="first" autocomplete="given-name"></div>
+ <div><label for="last" data-t="last"></label><input id="last" autocomplete="family-name"></div>
+ <div><label for="period" data-t="period"></label><input id="period" inputmode="numeric"></div>
+ <div><label for="date" data-t="date"></label><input id="date" readonly data-tp="dateph"></div>
+</div>
+<div class="meter"><div class="bar"><div class="fill" id="fill"></div></div><div class="t" id="progt"></div></div>
+<h2 data-t="p1"></h2>
+
+<section class="card" id="card1" data-i="1">
+ <span class="chip" data-year="1">1660</span><span class="cnum" data-chip="1"></span>
+ <div class="meta"><b data-t="who">Who:</b> <span data-c="who" data-i="1"></span> · <b data-t="kind">Document:</b> <span data-c="kind" data-i="1"></span></div>
+ <div class="meta" data-c="intro" data-i="1"></div>
+ <blockquote data-c="quote" data-i="1" dir="auto"></blockquote>
+ <div class="orig" data-orig="1"></div>
+ <div class="cite" dir="ltr">“The Navigation Act of 1660,” in Danby Pickering, ed., <i>The Statutes at Large, from the Thirty-ninth Year of Q. Elizabeth, to the Twelfth Year of K. Charles II, inclusive</i>, vol. 7 (Cambridge: J. Bentham, 1763), 452ff., in Norton, <i>History Source Collection</i> (Primary and Secondary Source Collection for <i>America: The Essential Learning Edition</i>), Part 1. Spelling is the original's.</div>
+ <div class="help"><b data-t="help">Word help:</b> <span data-c="help" data-i="1"></span></div>
+ <div class="hint"><b data-t="hint">Hint:</b> <span data-c="hint" data-i="1"></span></div>
+ <div class="want" data-t="want">What does the author want?</div>
+ <div class="stances" role="group" aria-label="stance 1">
+  <button type="button" data-v="N" aria-pressed="false"><b data-t="sN"></b><small data-t="sNs"></small></button>
+  <button type="button" data-v="S" aria-pressed="false"><b data-t="sS"></b><small data-t="sSs"></small></button>
+  <button type="button" data-v="V" aria-pressed="false"><b data-t="sV"></b><small data-t="sVs"></small></button>
+ </div>
+ <textarea data-id="note1" data-tp="noteph" rows="3"></textarea>
+</section>
+<section class="card" id="card2" data-i="2">
+ <span class="chip" data-year="2">1721</span><span class="cnum" data-chip="2"></span>
+ <div class="meta"><b data-t="who">Who:</b> <span data-c="who" data-i="2"></span> · <b data-t="kind">Document:</b> <span data-c="kind" data-i="2"></span></div>
+ <div class="meta" data-c="intro" data-i="2"></div>
+ <blockquote data-c="quote" data-i="2" dir="auto"></blockquote>
+ <div class="orig" data-orig="2"></div>
+ <div class="cite" dir="ltr">Thomas Gordon, “The Right and Capacity of the People to judge of Government,” <i>Cato’s Letters</i>, No. 38, July 22, 1721, in John Trenchard and Thomas Gordon, <i>Cato’s Letters</i>, in David L. Jacobson, ed., <i>The English Libertarian Heritage</i> (Indianapolis: Bobbs-Merrill, 1965), 93–95, 96, 99–101, in Norton, <i>History Source Collection</i> (Primary and Secondary Source Collection for <i>America: The Essential Learning Edition</i>), Part 2. Spelling and capital letters are the original's.</div>
+ <div class="help"><b data-t="help">Word help:</b> <span data-c="help" data-i="2"></span></div>
+ <div class="hint"><b data-t="hint">Hint:</b> <span data-c="hint" data-i="2"></span></div>
+ <div class="want" data-t="want">What does the author want?</div>
+ <div class="stances" role="group" aria-label="stance 2">
+  <button type="button" data-v="N" aria-pressed="false"><b data-t="sN"></b><small data-t="sNs"></small></button>
+  <button type="button" data-v="S" aria-pressed="false"><b data-t="sS"></b><small data-t="sSs"></small></button>
+  <button type="button" data-v="V" aria-pressed="false"><b data-t="sV"></b><small data-t="sVs"></small></button>
+ </div>
+ <textarea data-id="note2" data-tp="noteph" rows="3"></textarea>
+</section>
+<section class="card" id="card3" data-i="3">
+ <span class="chip" data-year="3">1773</span><span class="cnum" data-chip="3"></span>
+ <div class="meta"><b data-t="who">Who:</b> <span data-c="who" data-i="3"></span> · <b data-t="kind">Document:</b> <span data-c="kind" data-i="3"></span></div>
+ <div class="meta" data-c="intro" data-i="3"></div>
+ <blockquote data-c="quote" data-i="3" dir="auto"></blockquote>
+ <div class="orig" data-orig="3"></div>
+ <div class="cite" dir="ltr">“The Association of the Sons of Liberty of New York,” 1773, in Hezekiah Niles, ed., <i>Principles and Acts of the Revolution in America</i> (Baltimore: W. O. Niles, 1822), in Norton, <i>History Source Collection</i> (Primary and Secondary Source Collection for <i>America: The Essential Learning Edition</i>), Part 2.</div>
+ <div class="help"><b data-t="help">Word help:</b> <span data-c="help" data-i="3"></span></div>
+ <div class="hint"><b data-t="hint">Hint:</b> <span data-c="hint" data-i="3"></span></div>
+ <div class="want" data-t="want">What does the author want?</div>
+ <div class="stances" role="group" aria-label="stance 3">
+  <button type="button" data-v="N" aria-pressed="false"><b data-t="sN"></b><small data-t="sNs"></small></button>
+  <button type="button" data-v="S" aria-pressed="false"><b data-t="sS"></b><small data-t="sSs"></small></button>
+  <button type="button" data-v="V" aria-pressed="false"><b data-t="sV"></b><small data-t="sVs"></small></button>
+ </div>
+ <textarea data-id="note3" data-tp="noteph" rows="3"></textarea>
+</section>
+<section class="card" id="card4" data-i="4">
+ <span class="chip" data-year="4">1774</span><span class="cnum" data-chip="4"></span>
+ <div class="meta"><b data-t="who">Who:</b> <span data-c="who" data-i="4"></span> · <b data-t="kind">Document:</b> <span data-c="kind" data-i="4"></span></div>
+ <div class="meta" data-c="intro" data-i="4"></div>
+ <blockquote data-c="quote" data-i="4" dir="auto"></blockquote>
+ <div class="orig" data-orig="4"></div>
+ <div class="cite" dir="ltr">Phillis Wheatley, Letter to Reverend Samson Occom, February 11, 1774, in National Constitution Center, “Letter to Reverend Samuel Occum (1774),” Historic Document Library, constitutioncenter.org. Spelling and capital letters are the original's; the first word’s capital is changed.</div>
+ <div class="help"><b data-t="help">Word help:</b> <span data-c="help" data-i="4"></span></div>
+ <div class="hint"><b data-t="hint">Hint:</b> <span data-c="hint" data-i="4"></span></div>
+ <div class="want" data-t="want">What does the author want?</div>
+ <div class="stances" role="group" aria-label="stance 4">
+  <button type="button" data-v="N" aria-pressed="false"><b data-t="sN"></b><small data-t="sNs"></small></button>
+  <button type="button" data-v="S" aria-pressed="false"><b data-t="sS"></b><small data-t="sSs"></small></button>
+  <button type="button" data-v="V" aria-pressed="false"><b data-t="sV"></b><small data-t="sVs"></small></button>
+ </div>
+ <textarea data-id="note4" data-tp="noteph" rows="3"></textarea>
+</section>
+<section class="card" id="card5" data-i="5">
+ <span class="chip" data-year="5">1775</span><span class="cnum" data-chip="5"></span>
+ <div class="meta"><b data-t="who">Who:</b> <span data-c="who" data-i="5"></span> · <b data-t="kind">Document:</b> <span data-c="kind" data-i="5"></span></div>
+ <div class="meta" data-c="intro" data-i="5"></div>
+ <blockquote data-c="quote" data-i="5" dir="auto"></blockquote>
+ <div class="orig" data-orig="5"></div>
+ <div class="cite" dir="ltr">John Murray, Earl of Dunmore, “Lord Dunmore’s Proclamation,” November 7, 1775, in Norton, <i>History Source Collection</i> (Primary and Secondary Source Collection for <i>America: The Essential Learning Edition</i>), Part 2. Spelling and capital letters are the original's.</div>
+ <div class="help"><b data-t="help">Word help:</b> <span data-c="help" data-i="5"></span></div>
+ <div class="hint"><b data-t="hint">Hint:</b> <span data-c="hint" data-i="5"></span></div>
+ <div class="want" data-t="want">What does the author want?</div>
+ <div class="stances" role="group" aria-label="stance 5">
+  <button type="button" data-v="N" aria-pressed="false"><b data-t="sN"></b><small data-t="sNs"></small></button>
+  <button type="button" data-v="S" aria-pressed="false"><b data-t="sS"></b><small data-t="sSs"></small></button>
+  <button type="button" data-v="V" aria-pressed="false"><b data-t="sV"></b><small data-t="sVs"></small></button>
+ </div>
+ <textarea data-id="note5" data-tp="noteph" rows="3"></textarea>
+</section>
+<h2 data-t="p2"></h2>
+<div class="box fin">
+ <div class="bq" style="margin:0"><b data-t="bqlabel"></b><div class="q" data-t="bq"></div></div>
+ <label class="l" for="best" data-t="closeq"></label>
+ <select id="best" data-id="best"><option value="" data-t="bestph"></option><option value="1" data-opt="1"></option><option value="2" data-opt="2"></option><option value="3" data-opt="3"></option><option value="4" data-opt="4"></option><option value="5" data-opt="5"></option></select>
+ <label class="l" for="why" data-t="whyl"></label><textarea id="why" data-id="why" data-tp="whyph" rows="3"></textarea>
+ <label class="l" for="counter" data-t="ctrl"></label><textarea id="counter" data-id="counter" data-tp="ctrph" rows="4"></textarea>
+ <div class="chk"><input type="checkbox" id="chk1"><label for="chk1" data-t="chk1"></label></div>
+ <div class="chk"><input type="checkbox" id="chk2"><label for="chk2" data-t="chk2"></label></div>
+</div>
+<div class="btns"><button type="button" id="save" data-t="save"></button><button type="button" id="load" data-t="load"></button><button type="button" id="fin" disabled data-t="fin"></button></div>
+<input type="file" id="file" accept=".json,application/json" hidden>
+<div id="todo" aria-live="polite"></div><div id="msg" role="status" aria-live="polite"></div>
+</div>
+<footer><div>UNIT 1 · COLONIES, REVOLUTION, AND CONSTITUTION | CPUSH</div><div>DANIEL GARZA, M.A.</div></footer>
+<script>
+var PACKET='L2_Source_Detective',STORE='cpush_l2_source_detective',COURSE='CPUSH';
+var I18N={"en": {"eyebrow": "SOURCE DETECTIVE 2", "title": "Liberty or Control?", "sub": "Colonial Society and the Road to Independence · Crack the Case", "bqlabel": "BIG QUESTION:", "bq": "Was colonial America a land of freedom—or only freedom for some?", "job": "Your job: read five real documents from this time period. For each one, decide what the author wants. Then close the case.", "howh": "How to play", "how1": "Read the case file.", "how2": "Tap what the author wants: ★ LIBERTY, ◆ CONTROL, or ● A VOICE.", "how3": "Copy clue words from the document. Then write what the author wants.", "how4": "After five case files, close the case.", "first": "First name", "last": "Last name", "period": "Period", "date": "Date", "dateph": "Fills in when you finish", "p1": "Part 1 · The Case Files", "p2": "Part 2 · Case Closed", "prog": "{n} of 5 case files cracked", "chip": "Case file {i} of 5", "who": "Who:", "kind": "Document:", "help": "Word help:", "hint": "Hint:", "want": "What does the author want?", "sN": "★ LIBERTY", "sNs": "wants people to be free to speak, choose, or govern themselves.", "sS": "◆ CONTROL", "sSs": "uses power to rule, limit, or take from others.", "sV": "● A VOICE", "sVs": "wants to be heard or to be free (has no power to decide).", "noteph": "“clue words” — The author wants…", "closeq": "Which source best answers the big question?", "bestph": "Choose one…", "whyl": "Why is it the best? Use one fact or quote.", "whyph": "Write 1–2 sentences.", "ctrl": "Counter-Argument: which other source would someone on the other side pick? What would they say? Then answer them.", "ctrph": "Write 2–3 sentences.", "chk1": "I picked a source and used a fact or quote.", "chk2": "I answered the Counter-Argument.", "save": "Save Progress", "load": "Load Progress", "fin": "Finished — Download File to Submit", "todo": "Still to do: {x}", "t_names": "first name, last name, and period", "t_case": "case file {i} (tap a button and write a clue)", "t_best": "choose the best source", "t_why": "explain why", "t_ctr": "write the Counter-Argument", "t_chk": "check both boxes", "allset": "Everything is done. Tap Finished.", "m_saved": "Saved. Keep that file. Use Load Progress later. Do not upload it to Canvas until you are finished.", "m_loaded": "Progress loaded.", "m_loaderr": "That file does not work here. Load the -PROGRESS file you saved from this assignment.", "m_fin": "Done! Your file {f} downloaded. Upload that file to Canvas.", "m_notfin": "Not finished yet. Read the line below the buttons.", "m_names": "Type your first name, last name, and period first.", "lang": "Language"}, "es": {"eyebrow": "DETECTIVE DE FUENTES 2", "title": "¿Libertad o control?", "sub": "La sociedad colonial y el camino hacia la independencia · Resuelve el caso", "bqlabel": "PREGUNTA CLAVE:", "bq": "¿Fue la América colonial una tierra de libertad, o solo de libertad para algunos?", "job": "Tu trabajo: lee cinco documentos reales de este período. En cada uno, decide qué quiere el autor. Luego cierra el caso.", "howh": "Cómo jugar", "how1": "Lee el expediente.", "how2": "Toca lo que quiere el autor: ★ LIBERTAD, ◆ CONTROL o ● UNA VOZ.", "how3": "Copia palabras clave del documento. Luego escribe lo que quiere el autor.", "how4": "Después de cinco expedientes, cierra el caso.", "first": "Nombre", "last": "Apellido", "period": "Período", "date": "Fecha", "dateph": "Se llena al terminar", "p1": "Parte 1 · Los expedientes", "p2": "Parte 2 · Caso cerrado", "prog": "{n} de 5 expedientes resueltos", "chip": "Expediente {i} de 5", "who": "Quién:", "kind": "Documento:", "help": "Ayuda con palabras:", "hint": "Pista:", "want": "¿Qué quiere el autor?", "sN": "★ LIBERTAD", "sNs": "quiere que las personas sean libres de hablar, elegir o gobernarse.", "sS": "◆ CONTROL", "sSs": "usa el poder para mandar, limitar o quitar a otras personas.", "sV": "● UNA VOZ", "sVs": "quiere ser escuchado o ser libre (no tiene poder para decidir).", "noteph": "“palabras clave” — El autor quiere…", "closeq": "¿Qué fuente responde mejor a la pregunta clave?", "bestph": "Elige una…", "whyl": "¿Por qué es la mejor? Usa un dato o una cita.", "whyph": "Escribe 1–2 oraciones.", "ctrl": "Contraargumento: ¿qué otra fuente elegiría alguien del otro lado? ¿Qué diría? Luego respóndele.", "ctrph": "Escribe 2–3 oraciones.", "chk1": "Elegí una fuente y usé un dato o una cita.", "chk2": "Respondí al contraargumento.", "save": "Guardar progreso", "load": "Cargar progreso", "fin": "Terminado — Descargar archivo para entregar", "todo": "Falta: {x}", "t_names": "nombre, apellido y período", "t_case": "expediente {i} (toca un botón y escribe una pista)", "t_best": "elegir la mejor fuente", "t_why": "explicar por qué", "t_ctr": "escribir el contraargumento", "t_chk": "marcar las dos casillas", "allset": "Todo está listo. Toca Terminado.", "m_saved": "Guardado. Conserva ese archivo. Usa Cargar progreso más tarde. No lo subas a Canvas hasta terminar.", "m_loaded": "Progreso cargado.", "m_loaderr": "Ese archivo no sirve aquí. Carga el archivo -PROGRESS que guardaste de esta tarea.", "m_fin": "¡Listo! Se descargó tu archivo {f}. Sube ese archivo a Canvas.", "m_notfin": "Todavía no terminas. Lee la línea debajo de los botones.", "m_names": "Primero escribe tu nombre, apellido y período.", "lang": "Idioma"}, "ar": {"eyebrow": "المحقّق في المصادر 2", "title": "الحرية أم السيطرة؟", "sub": "المجتمع الاستعماري والطريق إلى الاستقلال (Colonial Society and the Road to Independence) · حلّ القضية", "bqlabel": "السؤال الكبير:", "bq": "هل كانت أمريكا الاستعمارية أرضَ حرية، أم حرية لبعض الناس فقط؟", "job": "مهمتك: اقرأ خمس وثائق حقيقية من هذه الفترة. في كل وثيقة قرّر ماذا يريد الكاتب. ثم أغلق القضية.", "howh": "طريقة اللعب", "how1": "اقرأ ملف القضية.", "how2": "اضغط على ما يريده الكاتب: ★ الحرية، ◆ السيطرة، أو ● صوت.", "how3": "انسخ كلمات الدليل من الوثيقة. ثم اكتب ماذا يريد الكاتب.", "how4": "بعد خمسة ملفات، أغلق القضية.", "first": "الاسم الأول", "last": "اسم العائلة", "period": "الحصة", "date": "التاريخ", "dateph": "يُملأ عند الانتهاء", "p1": "الجزء 1 · ملفات القضية", "p2": "الجزء 2 · القضية مغلقة", "prog": "تم حلّ {n} من 5 ملفات", "chip": "ملف القضية {i} من 5", "who": "من:", "kind": "الوثيقة:", "help": "مساعدة في الكلمات:", "hint": "تلميح:", "want": "ماذا يريد الكاتب؟", "sN": "★ الحرية", "sNs": "يريد أن يكون الناس أحرارًا في الكلام أو الاختيار أو حكم أنفسهم.", "sS": "◆ السيطرة", "sSs": "يستخدم السلطة ليحكم الآخرين أو يقيّدهم أو يأخذ منهم.", "sV": "● صوت", "sVs": "يريد أن يُسمع صوته أو أن يكون حرًا (لا يملك سلطة القرار).", "noteph": "«كلمات الدليل» — الكاتب يريد…", "closeq": "أي مصدر يجيب عن السؤال الكبير بأفضل شكل؟", "bestph": "اختر واحدًا…", "whyl": "لماذا هو الأفضل؟ استخدم معلومة أو اقتباسًا.", "whyph": "اكتب جملة أو جملتين.", "ctrl": "الحجة المضادة (Counter-Argument): أي مصدر آخر سيختاره شخص من الجانب الآخر؟ ماذا سيقول؟ ثم ردّ عليه.", "ctrph": "اكتب 2–3 جمل.", "chk1": "اخترت مصدرًا واستخدمت معلومة أو اقتباسًا.", "chk2": "أجبت عن الحجة المضادة.", "save": "حفظ التقدّم", "load": "تحميل التقدّم", "fin": "انتهيت — نزّل الملف للتسليم", "todo": "المتبقي: {x}", "t_names": "الاسم الأول واسم العائلة والحصة", "t_case": "ملف القضية {i} (اضغط زرًّا واكتب دليلًا)", "t_best": "اختيار أفضل مصدر", "t_why": "شرح السبب", "t_ctr": "كتابة الحجة المضادة", "t_chk": "تحديد المربعين", "allset": "كل شيء جاهز. اضغط «انتهيت».", "m_saved": "تم الحفظ. احتفظ بهذا الملف. استخدم «تحميل التقدّم» لاحقًا. لا ترفعه إلى Canvas حتى تنتهي.", "m_loaded": "تم تحميل التقدّم.", "m_loaderr": "هذا الملف لا يعمل هنا. حمّل ملف -PROGRESS الذي حفظته من هذا الواجب.", "m_fin": "تم! نُزّل ملفك {f}. ارفع هذا الملف إلى Canvas.", "m_notfin": "لم تنتهِ بعد. اقرأ السطر تحت الأزرار.", "m_names": "اكتب أولًا اسمك الأول واسم العائلة والحصة.", "lang": "اللغة"}};
+var CASES={"1": {"en": {"who": "The English Parliament and King Charles II", "kind": "Law about colonial trade", "intro": "England makes a law about where the colonies can sell what they grow.", "quote": "no sugars, tobacco, cotton-wool, indicoes, ginger, fustick, or other dying wood, of the growth, production or manufacture of any English plantations in America, Asia or Africa, shall be shipped, carried, conveyed or transported from any of the said English plantations to any land . . . other than to such other English plantations as do belong to his Majesty", "help": "plantations = colonies · cotton-wool = raw cotton · indicoes = indigo (a blue dye) · conveyed = moved · dying wood = wood used to make dye", "hint": "Look at who is allowed to receive the colonies’ goods. Who decides?", "short": "Navigation Act (1660)"}, "es": {"who": "El Parlamento inglés y el rey Carlos II", "kind": "Ley sobre el comercio colonial", "intro": "Inglaterra hace una ley sobre dónde pueden vender las colonias lo que producen.", "quote": "ningún azúcar, tabaco, algodón en rama, índigo, jengibre, palo de tinte ni otra madera para teñir, de lo cultivado, producido o fabricado en cualquiera de las plantaciones inglesas de América, Asia o África, será embarcado, llevado, transportado ni trasladado desde ninguna de dichas plantaciones inglesas a ninguna tierra . . . que no sean otras plantaciones inglesas que pertenezcan a Su Majestad", "help": "plantaciones = colonias · algodón en rama = algodón sin procesar · índigo = un tinte azul · trasladar = mover de un lugar a otro", "hint": "Mira quién puede recibir los productos de las colonias. ¿Quién decide?", "short": "Ley de Navegación (1660)"}, "ar": {"who": "البرلمان الإنجليزي والملك تشارلز الثاني (King Charles II)", "kind": "قانون عن التجارة الاستعمارية", "intro": "تضع إنجلترا قانونًا عن الأماكن التي يُسمح للمستعمرات أن تبيع فيها ما تزرعه.", "quote": "لا يجوز شحن السكر والتبغ والقطن الخام والنيلة والزنجبيل والخشب الصباغي أو غيره من الخشب المستخدم للصباغة، مما تنتجه أو تصنعه أو تزرعه أي مستعمرة إنجليزية في أمريكا أو آسيا أو أفريقيا، أو نقله أو توصيله من أي من تلك المستعمرات الإنجليزية إلى أي أرض . . . غير المستعمرات الإنجليزية الأخرى التي تتبع جلالته", "help": "المستعمرات = المزارع التابعة لإنجلترا · القطن الخام = القطن قبل التصنيع · النيلة = صبغة زرقاء · يُنقل = يُحمل من مكان إلى آخر", "hint": "انظر من يُسمح له باستلام بضائع المستعمرات. ومن الذي يقرر؟", "short": "قانون الملاحة (1660)"}, "year": "1660"}, "2": {"en": {"who": "Thomas Gordon, writing as “Cato” (English essayist read by many colonists)", "kind": "Essay on government", "intro": "A popular English writer says why liberty and the truth belong together.", "quote": "In most Parts of the Earth there is neither Light nor Liberty; and even in the best Parts of it they are but little encouraged, and coldly maintained . . . They are the two greatest Civil Blessings, inseparable in their Interests, and the mutual Support of each other; and whoever would destroy one of them, must destroy both. . . . Whereever Truth is dangerous, Liberty is precarious.", "help": "precarious = in danger · inseparable = cannot be split apart · Civil Blessings = good things for a society · destroy = wipe out", "hint": "Which two things does the writer say go together? Which one does he want to protect?", "short": "Cato’s Letters (1721)"}, "es": {"who": "Thomas Gordon, que escribía como «Catón» (ensayista inglés leído por muchos colonos)", "kind": "Ensayo sobre el gobierno", "intro": "Un escritor inglés muy leído explica por qué la libertad y la verdad van juntas.", "quote": "En la mayor parte de la Tierra no hay ni Luz ni Libertad; y aun en las mejores partes están poco alentadas y débilmente sostenidas . . . Son las dos mayores Bendiciones Civiles, inseparables en sus intereses y apoyo mutuo la una de la otra; y quien quiera destruir una de ellas debe destruir ambas. . . . Dondequiera que la Verdad es peligrosa, la Libertad está en riesgo.", "help": "en riesgo = en peligro · inseparables = que no se pueden separar · Bendiciones Civiles = cosas buenas para una sociedad · destruir = acabar con algo", "hint": "¿Qué dos cosas dice el escritor que van juntas? ¿Cuál quiere proteger?", "short": "Cartas de Catón (1721)"}, "ar": {"who": "توماس غوردون (Thomas Gordon) الذي كتب باسم «كاتو» (Cato)، وهو كاتب إنجليزي قرأ له كثير من المستعمرين", "kind": "مقال عن الحكم", "intro": "كاتب إنجليزي مشهور يشرح لماذا ترتبط الحرية بالحقيقة.", "quote": "في معظم بقاع الأرض لا يوجد نور ولا حرية؛ وحتى في أفضل بقاعها لا تلقيان إلا تشجيعًا قليلًا ودعمًا فاترًا . . . إنهما أعظم نعمتين مدنيتين، لا تنفصلان في مصلحتهما، وتسند كل منهما الأخرى؛ ومن أراد هدم إحداهما وجب عليه هدمهما معًا. . . . حيثما تكون الحقيقة خطرة، تكون الحرية مهدَّدة.", "help": "مهدَّدة = في خطر · لا تنفصلان = لا يمكن فصلهما · نعمتان مدنيتان = شيئان جيدان للمجتمع · هدم = القضاء على الشيء", "hint": "ما الشيئان اللذان يقول الكاتب إنهما مرتبطان؟ وأيهما يريد حمايته؟", "short": "رسائل كاتو (1721)"}, "year": "1721"}, "3": {"en": {"who": "The Sons of Liberty of New York (craftsmen, sailors, and merchants)", "kind": "Protest agreement", "intro": "New Yorkers join together to protest a tax on tea.", "quote": "It is essential to the freedom and security of a free people, that no taxes be imposed upon them but by their own consent, or their representatives. For “What property have they in that which another may, by right, take when he pleases to himself?” The former is the undoubted right of Englishmen, to secure which they expended millions and sacrificed the lives of thousands.", "help": "imposed = forced on someone · consent = say yes · representatives = people chosen to speak for you · undoubted = for sure · sacrificed = gave up", "hint": "Who must say yes before a tax is fair? Who has NOT been asked?", "short": "Sons of Liberty (1773)"}, "es": {"who": "Los Hijos de la Libertad de Nueva York (artesanos, marineros y comerciantes)", "kind": "Acuerdo de protesta", "intro": "Unos neoyorquinos se unen para protestar contra un impuesto al té.", "quote": "Es esencial para la libertad y la seguridad de un pueblo libre que no se le impongan impuestos sino por su propio consentimiento o el de sus representantes. Pues «¿Qué propiedad tienen sobre aquello que otro puede, por derecho, tomar cuando le plazca?» Lo primero es el indudable derecho de los ingleses, y para asegurarlo gastaron millones y sacrificaron las vidas de miles.", "help": "imponer = obligar a alguien · consentimiento = decir que sí · representantes = personas elegidas para hablar por ti · indudable = seguro · sacrificar = renunciar a algo", "hint": "¿Quién debe decir que sí antes de que un impuesto sea justo? ¿A quién NO le preguntaron?", "short": "Hijos de la Libertad (1773)"}, "ar": {"who": "أبناء الحرية في نيويورك (Sons of Liberty of New York) — حرفيون وبحّارة وتجّار", "kind": "اتفاق احتجاج", "intro": "يتّحد سكان نيويورك للاحتجاج على ضريبة الشاي.", "quote": "من الضروري لحرية شعب حر وأمنه ألّا تُفرض عليه ضرائب إلا بموافقته هو أو بموافقة ممثليه. فـ«أي ملكية لهم في ما يحق لغيرهم أن يأخذه متى شاء؟» والأول حقٌّ لا شك فيه للإنجليز، ومن أجل صونه أنفقوا الملايين وضحّوا بحياة الآلاف.", "help": "تُفرض = تُجبَر عليه · موافقة = قول نعم · ممثلون = أشخاص يُنتخبون ليتحدثوا باسمك · ضحّوا = تخلّوا عن شيء ثمين", "hint": "من يجب أن يوافق قبل أن تكون الضريبة عادلة؟ ومن لم يُسأل؟", "short": "أبناء الحرية (1773)"}, "year": "1773"}, "4": {"en": {"who": "Phillis Wheatley, an enslaved poet in Boston", "kind": "Letter to a minister", "intro": "A young woman who is enslaved writes about freedom to a Native minister.", "quote": "[I]n every human Breast, God has implanted a Principle, which we call Love of Freedom; it is impatient of Oppression, and pants for Deliverance, and by the leave of our Modern Egyptians I will assert, that the same Principle lives in us. God grant deliverance in his own Way and Time, and get him honor upon all those whose Avarice impels them to countenance and help forward the Calamities of their Fellow Creatures.", "help": "implanted = put inside · Oppression = being held down by force · Deliverance = rescue, being set free · Avarice = greed · Calamities = great suffering", "hint": "Who are “our Modern Egyptians”? What does she say lives “in us”?", "short": "Wheatley’s letter (1774)"}, "es": {"who": "Phillis Wheatley, una poeta esclavizada en Boston", "kind": "Carta a un ministro religioso", "intro": "Una joven esclavizada escribe sobre la libertad a un ministro indígena.", "quote": "Porque en todo pecho humano Dios ha puesto un Principio que llamamos Amor a la Libertad; es impaciente ante la Opresión y ansía la Liberación, y con permiso de nuestros Egipcios Modernos afirmaré que el mismo Principio vive en nosotros. Que Dios conceda la liberación a su manera y a su tiempo, y se glorifique sobre todos aquellos cuya Avaricia los impulsa a apoyar y fomentar las Calamidades de sus Semejantes.", "help": "opresión = ser sometido por la fuerza · liberación = ser rescatado, quedar libre · avaricia = codicia · calamidades = grandes sufrimientos", "hint": "¿Quiénes son «nuestros Egipcios Modernos»? ¿Qué dice que vive «en nosotros»?", "short": "Carta de Wheatley (1774)"}, "ar": {"who": "فيليس ويتلي (Phillis Wheatley)، شاعرة مستعبَدة في بوسطن", "kind": "رسالة إلى قسّ", "intro": "شابة مستعبَدة تكتب عن الحرية إلى قسّ من السكان الأصليين.", "quote": "لأنه في كل صدر إنساني زرع الله مبدأً نسميه حب الحرية؛ لا يطيق الظلم ويتوق إلى الخلاص، وبإذن «مصريّينا المعاصرين» أؤكد أن المبدأ نفسه يعيش فينا. فليمنح الله الخلاص بطريقته وفي وقته، وليُظهر مجده على كل من يدفعهم الطمع إلى تأييد مصائب إخوانهم من البشر ومساعدتها على الانتشار.", "help": "الظلم = القهر بالقوة · الخلاص = أن يُنقَذ المرء ويصير حرًا · الطمع = حب المال والمكاسب · مصائب = معاناة كبيرة", "hint": "من هم «مصريّونا المعاصرون»؟ وماذا تقول إنه يعيش «فينا»؟", "short": "رسالة ويتلي (1774)"}, "year": "1774"}, "5": {"en": {"who": "Lord Dunmore, the royal governor of Virginia", "kind": "Proclamation (official announcement)", "intro": "The British governor, on a ship, announces rules for Virginia during the war.", "quote": "I do, in Virtue of the Power and Authority to ME given, by his MAJESTY, determine to execute Martial Law, and cause the same to be executed throughout this Colony . . . . And I do hereby farther declare all indentured Servants, Negroes, or others, (appertaining to Rebels,) free that are able and willing to bear Arms, they joining his MAJESTY’S Troops as soon as may be", "help": "Martial Law = rule by the army · indentured Servants = workers bound by contract · appertaining to = belonging to · Rebels = colonists fighting the King · bear Arms = fight", "hint": "Count the two things he does: one is an order, one is an offer. Who gets the offer, and what must they do for it?", "short": "Dunmore’s Proclamation (1775)"}, "es": {"who": "Lord Dunmore, gobernador real de Virginia", "kind": "Proclama (anuncio oficial)", "intro": "El gobernador británico, desde un barco, anuncia reglas para Virginia durante la guerra.", "quote": "Yo, en virtud del Poder y la Autoridad que me ha dado Su Majestad, resuelvo ejecutar la Ley Marcial y hacer que se ejecute en toda esta Colonia . . . . Y por la presente declaro además libres a todos los Sirvientes por contrato, Negros u otros (pertenecientes a Rebeldes) que puedan y quieran portar Armas, uniéndose a las Tropas de Su Majestad lo antes posible", "help": "Ley Marcial = gobierno del ejército · sirvientes por contrato = trabajadores obligados por un contrato · pertenecientes a = que son propiedad de · Rebeldes = colonos que luchaban contra el Rey · portar Armas = combatir", "hint": "Cuenta las dos cosas que hace: una es una orden y otra es una oferta. ¿Quién recibe la oferta y qué debe hacer?", "short": "Proclama de Dunmore (1775)"}, "ar": {"who": "اللورد دانمور (Lord Dunmore)، الحاكم الملكي لفرجينيا", "kind": "إعلان رسمي", "intro": "يعلن الحاكم البريطاني، من على متن سفينة، قواعد جديدة لفرجينيا أثناء الحرب.", "quote": "أنا، بحكم السلطة التي منحني إياها جلالته، أقرّر تطبيق الأحكام العرفية وجعلها تُنفَّذ في جميع أنحاء هذه المستعمرة . . . . وأعلن بموجب هذا أن جميع الخدم بعقود والسود وغيرهم (ممن يتبعون المتمردين) أحرار، إن كانوا قادرين وراغبين في حمل السلاح، بشرط أن ينضموا إلى قوات جلالته في أقرب وقت ممكن", "help": "الأحكام العرفية = حكم الجيش · الخدم بعقود = عمال مرتبطون بعقد · المتمردون = المستعمرون الذين يحاربون الملك · حمل السلاح = القتال", "hint": "عدّ الأمرين اللذين يفعلهما: أحدهما أمر والآخر عرض. من يحصل على العرض، وماذا عليه أن يفعل؟", "short": "إعلان دانمور (1775)"}, "year": "1775"}};
+var SIDES={"1": "S", "2": "N", "3": "N", "4": "V", "5": "S"};
+var CN=[1,2,3,4,5],lang='en',sides={},msgKey=null,msgVars=null;
+function $(s,r){return (r||document).querySelector(s)}function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+function T(k,v){var s=(I18N[lang]&&I18N[lang][k])||I18N.en[k]||k;if(v)for(var x in v)s=s.split('{'+x+'}').join(v[x]);return s}
+function setMsg(k,v,cls){msgKey=k;msgVars=v;var m=$('#msg');m.className=cls||'';m.textContent=T(k,v)}
+function setLang(l,keep){
+ lang=l;document.documentElement.lang=l;document.documentElement.dir=(l==='ar'?'rtl':'ltr');
+ $$('[data-t]').forEach(function(e){e.textContent=T(e.getAttribute('data-t'))});
+ $$('[data-tp]').forEach(function(e){e.placeholder=T(e.getAttribute('data-tp'))});
+ CN.forEach(function(i){var d=CASES[i][l]||CASES[i].en;
+  $$('[data-c][data-i="'+i+'"]').forEach(function(e){e.textContent=d[e.getAttribute('data-c')]});
+  $('[data-chip="'+i+'"]').textContent=T('chip',{i:i});
+  var o=$('[data-orig="'+i+'"]');o.textContent=(l==='en'?'':'English original: '+CASES[i].en.quote);
+  var op=$('[data-opt="'+i+'"]');op.textContent=CASES[i].year+' · '+d.short;
+ });
+ $$('.langbar button').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-lang')===l?'true':'false')});
+ try{localStorage.setItem(STORE+'_lang',l)}catch(e){}
+ if(msgKey)$('#msg').textContent=T(msgKey,msgVars);
+ refresh();
+}
+function val(id){var e=document.getElementById(id);return e?e.value.trim():''}
+function field(n){var e=$('[data-id="'+n+'"]');return e?e.value:''}
+function state(){
+ var a={};CN.forEach(function(i){a['note'+i]=field('note'+i)});a.best=field('best');a.why=field('why');a.counter=field('counter');
+ var t={national:0,state:0,voice:0};CN.forEach(function(i){var s=sides[i];if(s==='N')t.national++;if(s==='S')t.state++;if(s==='V')t.voice++});
+ return {packet:PACKET,course:COURSE,version:1,saved:new Date().toISOString(),completed:false,
+  student:{first:val('first'),last:val('last'),period:val('period'),date:val('date')},
+  sides:JSON.parse(JSON.stringify(sides)),answers:a,
+  checks:{chk1:$('#chk1').checked,chk2:$('#chk2').checked},tally:t};
+}
+function missing(){
+ var m=[],s=state();
+ if(!s.student.first||!s.student.last||!s.student.period)m.push(T('t_names'));
+ CN.forEach(function(i){if(!sides[i]||!s.answers['note'+i].trim())m.push(T('t_case',{i:i}))});
+ if(!s.answers.best)m.push(T('t_best'));if(!s.answers.why.trim())m.push(T('t_why'));if(!s.answers.counter.trim())m.push(T('t_ctr'));
+ if(!(s.checks.chk1&&s.checks.chk2))m.push(T('t_chk'));
+ return m;
+}
+function refresh(){
+ var done=0;CN.forEach(function(i){var c=$('#card'+i),ok=!!sides[i]&&field('note'+i).trim()!=='';if(ok)done++;
+  c.classList.toggle('done',ok);c.classList.toggle('isS',sides[i]==='S');c.classList.toggle('isV',sides[i]==='V');
+  $$('.stances button',c).forEach(function(b){b.setAttribute('aria-pressed',sides[i]===b.getAttribute('data-v')?'true':'false')})});
+ $('#fill').style.width=(done*20)+'%';$('#progt').textContent=T('prog',{n:done});
+ var m=missing();$('#todo').textContent=m.length?T('todo',{x:m.join(lang==='ar'?'؛ ':'; ')}):T('allset');
+ $('#fin').disabled=m.length>0;
+}
+function persist(){try{localStorage.setItem(STORE,JSON.stringify(state()))}catch(e){}}
+function apply(s){
+ $('#first').value=s.student.first||'';$('#last').value=s.student.last||'';$('#period').value=s.student.period||'';$('#date').value=s.student.date||'';
+ sides={};for(var k in (s.sides||{}))sides[k]=s.sides[k];
+ var a=s.answers||{};CN.forEach(function(i){$('[data-id="note'+i+'"]').value=a['note'+i]||''});
+ $('#best').value=a.best||'';$('#why').value=a.why||'';$('#counter').value=a.counter||'';
+ $('#chk1').checked=!!(s.checks&&s.checks.chk1);$('#chk2').checked=!!(s.checks&&s.checks.chk2);refresh();
+}
+function fname(s){var n=(s.student.last+'_'+s.student.first).normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^A-Za-z0-9_\-]+/g,'_');return n||'Student'}
+function dl(name,obj){var b=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(u);a.remove()},500)}
+function namesOk(){var ok=true;['first','last','period'].forEach(function(id){var e=$('#'+id),bad=!e.value.trim();e.classList.toggle('bad',bad);if(bad)ok=false});return ok}
+document.addEventListener('click',function(e){
+ var b=e.target.closest('.stances button');if(b){var i=+b.closest('.card').getAttribute('data-i');sides[i]=b.getAttribute('data-v');refresh();persist();return}
+ var lb=e.target.closest('.langbar button');if(lb){setLang(lb.getAttribute('data-lang'))}
+});
+document.addEventListener('input',function(){refresh();persist();$$('.names input.bad').forEach(function(x){if(x.value.trim())x.classList.remove('bad')})});
+document.addEventListener('change',function(){refresh();persist()});
+$('#save').onclick=function(){if(!namesOk()){setMsg('m_names',null,'err');return}var s=state();dl(fname(s)+'-'+PACKET+'-PROGRESS.json',s);setMsg('m_saved',null,'ok')};
+$('#load').onclick=function(){$('#file').click()};
+$('#file').onchange=function(ev){var f=ev.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(){try{var s=JSON.parse(r.result);if(!s||s.packet!==PACKET)throw 0;apply(s);persist();setMsg('m_loaded',null,'ok')}catch(x){setMsg('m_loaderr',null,'err')}};r.readAsText(f);ev.target.value=''};
+$('#fin').onclick=function(){
+ if(!namesOk()||missing().length){setMsg('m_notfin',null,'err');return}
+ var d=new Date(),p=function(n){return (n<10?'0':'')+n};$('#date').value=(d.getMonth()+1)+'/'+d.getDate()+'/'+d.getFullYear();
+ var s=state();s.completed=true;var f=fname(s)+'-'+PACKET+'.json';dl(f,s);persist();setMsg('m_fin',{f:f},'ok');
+};
+(function init(){
+ var l='en';try{var q=new URLSearchParams(location.search).get('lang');if(q==='es'||q==='ar')l=q;else{var sv=localStorage.getItem(STORE+'_lang');if(sv==='es'||sv==='ar')l=sv}}catch(e){}
+ setLang(l);
+ try{var raw=localStorage.getItem(STORE);if(raw){var s=JSON.parse(raw);if(s&&s.packet===PACKET)apply(s)}}catch(e){}
+ refresh();
+})();
+</script></body></html>

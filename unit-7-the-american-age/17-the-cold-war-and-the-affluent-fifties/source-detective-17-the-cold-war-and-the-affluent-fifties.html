@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Protect or Limit? · Source Detective 17</title>
+<style>
+:root{--bg:#252B31;--text:#EEF0F1;--a1:#3E4751;--a2:#DD7A40;--hl:#E6AB89;--page:#E7E9EB;--paper:#FAFAFB;--ink:#1C2025;--rule:#D8DADC;--gold:#894C28;--keybg:#FCF2EC;--voice:#8A4B2A;--ok:#2E6B3E}
+@media (prefers-color-scheme:dark){:root{--page:#121618;--paper:#1E2227;--ink:#EEF0F1;--rule:#51555A;--keybg:#363C41;--gold:#E6AB89}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font:17px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+.wrap{max-width:820px;margin:0 auto;padding:0 14px 40px}
+.hero{background:var(--bg);color:var(--text);padding:26px 14px 22px;text-align:center;border-bottom:5px solid var(--a2)}
+.hero .eyebrow{letter-spacing:.18em;font-weight:700;font-size:.8rem;color:var(--hl)}
+.hero h1{margin:.2em 0 .1em;font-size:2rem;line-height:1.15}
+.hero .sub{opacity:.92}
+.langbar{display:flex;gap:8px;justify-content:center;align-items:center;margin:14px 0;flex-wrap:wrap}
+.langbar button{border:2px solid var(--a1);background:var(--paper);color:var(--ink);padding:8px 16px;border-radius:999px;font:inherit;font-weight:700;cursor:pointer;min-height:44px}
+.langbar button[aria-pressed=true]{background:var(--a1);color:#fff}
+.box{background:var(--paper);border:1px solid var(--rule);border-radius:12px;padding:14px 16px;margin:14px 0}
+.bq{background:var(--keybg);border:2px solid var(--a2);border-radius:12px;padding:14px 16px;margin:14px 0}
+.bq b{color:var(--gold);letter-spacing:.06em}
+.bq .q{font-size:1.12rem;font-weight:700;margin-top:4px}
+h2{color:var(--a1);margin:26px 0 6px;font-size:1.25rem}
+@media (prefers-color-scheme:dark){h2{color:var(--hl)}}
+.how ol{margin:6px 0 0;padding-inline-start:22px}
+.names{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.names label{display:block;font-weight:700;font-size:.85rem}
+.names input{width:100%;padding:10px;border:2px solid var(--rule);border-radius:8px;font:inherit;background:var(--paper);color:var(--ink)}
+.names input.bad{border-color:#B3261E;background:#FDECEA;color:#000}
+.names input[readonly]{background:var(--keybg)}
+.meter{margin:14px 0} .meter .bar{height:12px;background:var(--rule);border-radius:99px;overflow:hidden}
+.meter .fill{height:100%;width:0;background:var(--a2);transition:width .3s}
+.meter .t{font-weight:700;margin-top:4px}
+.card{background:var(--paper);border:1px solid var(--rule);border-inline-start:8px solid var(--rule);border-radius:12px;padding:14px 16px;margin:16px 0}
+.card.done{border-inline-start-color:var(--bg)} .card.done.isS{border-inline-start-color:var(--a2)} .card.done.isV{border-inline-start-color:var(--voice)}
+.chip{display:inline-block;background:var(--bg);color:var(--text);border-radius:99px;padding:2px 12px;font-weight:700;font-size:.9rem}
+.cnum{margin-inline-start:8px;color:var(--gold);font-weight:700;font-size:.9rem}
+.meta{margin:8px 0 2px;font-size:.95rem} .meta b{color:var(--a1)}
+@media (prefers-color-scheme:dark){.meta b{color:var(--hl)}}
+blockquote{margin:10px 0;padding:12px 14px;background:var(--keybg);border-inline-start:5px solid var(--a2);border-radius:6px;font-style:italic;font-size:1.02rem}
+.orig{display:none;direction:ltr;text-align:left;font-size:.9rem;opacity:.9;margin:4px 0}
+html[lang=ar] .orig,html[lang=es] .orig{display:block}
+.orig i{font-style:italic}
+.cite{direction:ltr;text-align:left;font-size:.82rem;opacity:.85;margin:6px 0}
+.help,.hint{font-size:.93rem;margin:6px 0}
+.want{font-weight:700;margin:10px 0 6px}
+.stances{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.stances button{text-align:start;border:2px solid var(--rule);background:var(--paper);color:var(--ink);border-radius:10px;padding:10px;font:inherit;cursor:pointer;min-height:64px}
+.stances button b{display:block;font-size:1rem} .stances button small{display:block;font-size:.78rem;opacity:.85;line-height:1.25}
+.stances button[aria-pressed=true]{background:var(--bg);color:var(--text);border-color:var(--bg)}
+.stances button[data-v=S][aria-pressed=true]{background:var(--a2);color:#10312C;border-color:var(--a2)}
+.stances button[data-v=V][aria-pressed=true]{background:var(--voice);color:#fff;border-color:var(--voice)}
+.stances button:focus-visible,.btns button:focus-visible,select:focus-visible,textarea:focus-visible,input:focus-visible,.langbar button:focus-visible{outline:3px solid var(--a2);outline-offset:2px}
+@media (max-width:620px){.stances{grid-template-columns:1fr} .names{grid-template-columns:1fr 1fr} .hero h1{font-size:1.6rem}}
+textarea,select{width:100%;margin-top:8px;padding:10px;border:2px solid var(--rule);border-radius:8px;font:inherit;background:var(--paper);color:var(--ink);unicode-bidi:plaintext}
+textarea{min-height:84px}
+.fin label.l{display:block;font-weight:700;margin-top:12px}
+.chk{display:flex;gap:8px;align-items:flex-start;margin:8px 0} .chk input{width:22px;height:22px;margin-top:3px}
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 6px}
+.btns button{border:0;border-radius:10px;padding:12px 18px;font:inherit;font-weight:700;cursor:pointer;min-height:48px;background:var(--a1);color:#fff}
+.btns button#fin{background:var(--bg);color:var(--text);border:2px solid var(--a2)}
+.btns button:disabled{background:#9AA9A7;color:#fff;border-color:#9AA9A7;cursor:not-allowed}
+#todo{font-weight:700;margin:6px 0} #msg{margin:6px 0;min-height:1.4em} #msg.err{color:#B3261E} #msg.ok{color:var(--ok)}
+footer{background:var(--bg);color:var(--text);text-align:center;padding:14px;font-size:.78rem;letter-spacing:.08em;border-top:5px solid var(--a2);margin-top:30px}
+footer div+div{opacity:.9;margin-top:2px}
+</style></head><body>
+<header class="hero"><div class="eyebrow" data-t="eyebrow"></div><h1 data-t="title"></h1><div class="sub" data-t="sub"></div></header>
+<div class="wrap">
+<div class="langbar" role="group" aria-label="Language"><button type="button" data-lang="en" aria-pressed="true">English</button><button type="button" data-lang="es" aria-pressed="false">Español</button><button type="button" data-lang="ar" aria-pressed="false">العربية</button></div>
+<div class="bq"><b data-t="bqlabel"></b><div class="q" data-t="bq"></div><div style="margin-top:8px" data-t="job"></div></div>
+<div class="box how"><b data-t="howh"></b><ol><li data-t="how1"></li><li data-t="how2"></li><li data-t="how3"></li><li data-t="how4"></li></ol></div>
+<div class="box names">
+ <div><label for="first" data-t="first"></label><input id="first" autocomplete="given-name"></div>
+ <div><label for="last" data-t="last"></label><input id="last" autocomplete="family-name"></div>
+ <div><label for="period" data-t="period"></label><input id="period" inputmode="numeric"></div>
+ <div><label for="date" data-t="date"></label><input id="date" readonly data-tp="dateph"></div>
+</div>
+<div class="meter"><div class="bar"><div class="fill" id="fill"></div></div><div class="t" id="progt"></div></div>
+<h2 data-t="p1"></h2>
+
+<section class="card" id="card1" data-i="1">
+ <span class="chip" data-year="1">1950</span><span class="cnum" data-chip="1"></span>
+ <div class="meta"><b data-t="who">Who:</b> <span data-c="who" data-i="1"></span> · <b data-t="kind">Document:</b> <span data-c="kind" data-i="1"></span></div>
+ <div class="meta" data-c="intro" data-i="1"></div>
+ <blockquote data-c="quote" data-i="1" dir="auto"></blockquote>
+ <div class="orig" data-orig="1"></div>
+ <div class="cite" dir="ltr">National Security Council, “NSC-68: United States Objectives and Programs for National Security,” April 14, 1950, History and Public Policy Program Digital Archive, U.S. National Archives, in Norton, <i>History Source Collection</i> (Primary and Secondary Source Collection for <i>America: The Essential Learning Edition</i>), Part 8.</div>
+ <div class="help"><b data-t="help">Word help:</b> <span data-c="help" data-i="1"></span></div>
+ <div class="hint"><b data-t="hint">Hint:</b> <span data-c="hint" data-i="1"></span></div>
+ <div class="want" data-t="want">What does the author want?</div>
+ <div class="stances" role="group" aria-label="stance 1">
+  <button type="button" data-v="N" aria-pressed="false"><b data-t="sN"></b><small data-t="sNs"></small></button>
+  <button type="button" data-v="S" aria-pressed="false"><b data-t="sS"></b><small data-t="sSs"></small></button>
+  <button type="button" data-v="V" aria-pressed="false"><b data-t="sV"></b><small data-t="sVs"></small></button>
+ </div>
+ <textarea data-id="note1" data-tp="noteph" rows="3"></textarea>
+</section>
+<section class="card" id="card2" data-i="2">
+ <span class="chip" data-year="2">1952</span><span class="cnum" data-chip="2"></span>
+ <div class="meta"><b data-t="who">Who:</b> <span data-c="who" data-i="2"></span> · <b data-t="kind">Document:</b> <span data-c="kind" data-i="2"></span></div>
+ <div class="meta" data-c="intro" data-i="2"></div>
+ <blockquote data-c="quote" data-i="2" dir="auto"></blockquote>
+ <div class="orig" data-orig="2"></div>
+ <div class="cite" dir="ltr">A. Philip Randolph, “Letter from A. Philip Randolph to President Truman,” 1952, HST-OFF: Official Files (Truman Administration), National Archives Collection, Independence, Missouri, in Norton, <i>History Source Collection</i> (Primary and Secondary Source Collection for <i>America: The Essential Learning Edition</i>), Part 9. Spelling (“McCarron”) is the original’s.</div>
+ <div class="help"><b data-t="help">Word help:</b> <span data-c="help" data-i="2"></span></div>
+ <div class="hint"><b data-t="hint">Hint:</b> <span data-c="hint" data-i="2"></span></div>
+ <div class="want" data-t="want">What does the author want?</div>
+ <div class="stances" role="group" aria-label="stance 2">
+  <button type="button" data-v="N" aria-pressed="false"><b data-t="sN"></b><small data-t="sNs"></small></button>
+  <button type="button" data-v="S" aria-pressed="false"><b data-t="sS"></b><small data-t="sSs"></small></button>
+  <button type="button" data-v="V" aria-pressed="false"><b data-t="sV"></b><small data-t="sVs"></small></button>
+ </div>
+ <textarea data-id="note2" data-tp="noteph" rows="3"></textarea>
+</section>
+<section class="card" id="card3" data-i="3">
+ <span class="chip" data-year="3">1953</span><span class="cnum" data-chip="3"></span>
+ <div class="meta"><b data-t="who">Who:</b> <span data-c="who" data-i="3"></span> · <b data-t="kind">Document:</b> <span data-c="kind" data-i="3"></span></div>
+ <div class="meta" data-c="intro" data-i="3"></div>
+ <blockquote data-c="quote" data-i="3" dir="auto"></blockquote>
+ <div class="orig" data-orig="3"></div>
+ <div class="cite" dir="ltr">Donald N. Wilber, “Appendix A: Initial Operational Plan for TPAJAX as Cabled from Nicosia to Headquarters on 1 June 1953” (Washington, D.C.: National Security Archive), 1–10, in Norton, <i>History Source Collection</i> (Primary and Secondary Source Collection for <i>America: The Essential Learning Edition</i>), Part 9. Numbered list items are run together.</div>
+ <div class="help"><b data-t="help">Word help:</b> <span data-c="help" data-i="3"></span></div>
+ <div class="hint"><b data-t="hint">Hint:</b> <span data-c="hint" data-i="3"></span></div>
+ <div class="want" data-t="want">What does the author want?</div>
+ <div class="stances" role="group" aria-label="stance 3">
+  <button type="button" data-v="N" aria-pressed="false"><b data-t="sN"></b><small data-t="sNs"></small></button>
+  <button type="button" data-v="S" aria-pressed="false"><b data-t="sS"></b><small data-t="sSs"></small></button>
+  <button type="button" data-v="V" aria-pressed="false"><b data-t="sV"></b><small data-t="sVs"></small></button>
+ </div>
+ <textarea data-id="note3" data-tp="noteph" rows="3"></textarea>
+</section>
+<section class="card" id="card4" data-i="4">
+ <span class="chip" data-year="4">1954</span><span class="cnum" data-chip="4"></span>
+ <div class="meta"><b data-t="who">Who:</b> <span data-c="who" data-i="4"></span> · <b data-t="kind">Document:</b> <span data-c="kind" data-i="4"></span></div>
+ <div class="meta" data-c="intro" data-i="4"></div>
+ <blockquote data-c="quote" data-i="4" dir="auto"></blockquote>
+ <div class="orig" data-orig="4"></div>
+ <div class="cite" dir="ltr"><i>Brown v. Board of Education of Topeka</i>, 347 U.S. 483 (1954), opinion of May 17, 1954, Records of the Supreme Court of the United States, Record Group 267, National Archives, in Norton, <i>History Source Collection</i> (Primary and Secondary Source Collection for <i>America: The Essential Learning Edition</i>), Part 9.</div>
+ <div class="help"><b data-t="help">Word help:</b> <span data-c="help" data-i="4"></span></div>
+ <div class="hint"><b data-t="hint">Hint:</b> <span data-c="hint" data-i="4"></span></div>
+ <div class="want" data-t="want">What does the author want?</div>
+ <div class="stances" role="group" aria-label="stance 4">
+  <button type="button" data-v="N" aria-pressed="false"><b data-t="sN"></b><small data-t="sNs"></small></button>
+  <button type="button" data-v="S" aria-pressed="false"><b data-t="sS"></b><small data-t="sSs"></small></button>
+  <button type="button" data-v="V" aria-pressed="false"><b data-t="sV"></b><small data-t="sVs"></small></button>
+ </div>
+ <textarea data-id="note4" data-tp="noteph" rows="3"></textarea>
+</section>
+<section class="card" id="card5" data-i="5">
+ <span class="chip" data-year="5">1956</span><span class="cnum" data-chip="5"></span>
+ <div class="meta"><b data-t="who">Who:</b> <span data-c="who" data-i="5"></span> · <b data-t="kind">Document:</b> <span data-c="kind" data-i="5"></span></div>
+ <div class="meta" data-c="intro" data-i="5"></div>
+ <blockquote data-c="quote" data-i="5" dir="auto"></blockquote>
+ <div class="orig" data-orig="5"></div>
+ <div class="cite" dir="ltr">“Southern Manifesto” (“Declaration of Constitutional Principles”), March 12, 1956, <i>Congressional Record</i>, 84th Cong., 2nd sess., vol. 102, pt. 4 (Washington, D.C.: Government Printing Office, 1956), 4459–60, in Norton, <i>History Source Collection</i> (Primary and Secondary Source Collection for <i>America: The Essential Learning Edition</i>), Part 9.</div>
+ <div class="help"><b data-t="help">Word help:</b> <span data-c="help" data-i="5"></span></div>
+ <div class="hint"><b data-t="hint">Hint:</b> <span data-c="hint" data-i="5"></span></div>
+ <div class="want" data-t="want">What does the author want?</div>
+ <div class="stances" role="group" aria-label="stance 5">
+  <button type="button" data-v="N" aria-pressed="false"><b data-t="sN"></b><small data-t="sNs"></small></button>
+  <button type="button" data-v="S" aria-pressed="false"><b data-t="sS"></b><small data-t="sSs"></small></button>
+  <button type="button" data-v="V" aria-pressed="false"><b data-t="sV"></b><small data-t="sVs"></small></button>
+ </div>
+ <textarea data-id="note5" data-tp="noteph" rows="3"></textarea>
+</section>
+<h2 data-t="p2"></h2>
+<div class="box fin">
+ <div class="bq" style="margin:0"><b data-t="bqlabel"></b><div class="q" data-t="bq"></div></div>
+ <label class="l" for="best" data-t="closeq"></label>
+ <select id="best" data-id="best"><option value="" data-t="bestph"></option><option value="1" data-opt="1"></option><option value="2" data-opt="2"></option><option value="3" data-opt="3"></option><option value="4" data-opt="4"></option><option value="5" data-opt="5"></option></select>
+ <label class="l" for="why" data-t="whyl"></label><textarea id="why" data-id="why" data-tp="whyph" rows="3"></textarea>
+ <label class="l" for="counter" data-t="ctrl"></label><textarea id="counter" data-id="counter" data-tp="ctrph" rows="4"></textarea>
+ <div class="chk"><input type="checkbox" id="chk1"><label for="chk1" data-t="chk1"></label></div>
+ <div class="chk"><input type="checkbox" id="chk2"><label for="chk2" data-t="chk2"></label></div>
+</div>
+<div class="btns"><button type="button" id="save" data-t="save"></button><button type="button" id="load" data-t="load"></button><button type="button" id="fin" disabled data-t="fin"></button></div>
+<input type="file" id="file" accept=".json,application/json" hidden>
+<div id="todo" aria-live="polite"></div><div id="msg" role="status" aria-live="polite"></div>
+</div>
+<footer><div>UNIT 7 · THE AMERICAN AGE | CPUSH</div><div>DANIEL GARZA, M.A.</div></footer>
+<script>
+var PACKET='L17_Source_Detective',STORE='cpush_l17_source_detective',COURSE='CPUSH';
+var I18N={"en": {"eyebrow": "SOURCE DETECTIVE 17", "title": "Protect or Limit?", "sub": "The Cold War and the Affluent Fifties · Crack the Case", "bqlabel": "BIG QUESTION:", "bq": "From 1944 to 1960, did the United States do more to protect freedom or more to limit it?", "job": "Your job: read five real documents from this time period. For each one, decide what the author wants. Then close the case.", "howh": "How to play", "how1": "Read the case file.", "how2": "Tap what the author wants: ★ PROTECT, ◆ LIMIT, or ● A VOICE.", "how3": "Copy clue words from the document. Then write what the author wants.", "how4": "After five case files, close the case.", "first": "First name", "last": "Last name", "period": "Period", "date": "Date", "dateph": "Fills in when you finish", "p1": "Part 1 · The Case Files", "p2": "Part 2 · Case Closed", "prog": "{n} of 5 case files cracked", "chip": "Case file {i} of 5", "who": "Who:", "kind": "Document:", "help": "Word help:", "hint": "Hint:", "want": "What does the author want?", "sN": "★ PROTECT", "sNs": "wants to protect freedom or rights (at home or abroad).", "sS": "◆ LIMIT", "sSs": "limits the freedom, rights, or choices of others.", "sV": "● A VOICE", "sVs": "wants to be heard or to be free (has no power to decide).", "noteph": "“clue words” — The author wants…", "closeq": "Which source best answers the big question?", "bestph": "Choose one…", "whyl": "Why is it the best? Use one fact or quote.", "whyph": "Write 1–2 sentences.", "ctrl": "Counter-Argument: which other source would someone on the other side pick? What would they say? Then answer them.", "ctrph": "Write 2–3 sentences.", "chk1": "I picked a source and used a fact or quote.", "chk2": "I answered the Counter-Argument.", "save": "Save Progress", "load": "Load Progress", "fin": "Finished — Download File to Submit", "todo": "Still to do: {x}", "t_names": "first name, last name, and period", "t_case": "case file {i} (tap a button and write a clue)", "t_best": "choose the best source", "t_why": "explain why", "t_ctr": "write the Counter-Argument", "t_chk": "check both boxes", "allset": "Everything is done. Tap Finished.", "m_saved": "Saved. Keep that file. Use Load Progress later. Do not upload it to Canvas until you are finished.", "m_loaded": "Progress loaded.", "m_loaderr": "That file does not work here. Load the -PROGRESS file you saved from this assignment.", "m_fin": "Done! Your file {f} downloaded. Upload that file to Canvas.", "m_notfin": "Not finished yet. Read the line below the buttons.", "m_names": "Type your first name, last name, and period first.", "lang": "Language"}, "es": {"eyebrow": "DETECTIVE DE FUENTES 17", "title": "¿Proteger o limitar?", "sub": "La Guerra Fría y los años cincuenta de prosperidad · Resuelve el caso", "bqlabel": "PREGUNTA CLAVE:", "bq": "De 1944 a 1960, ¿Estados Unidos hizo más por proteger la libertad o más por limitarla?", "job": "Tu trabajo: lee cinco documentos reales de este período. En cada uno, decide qué quiere el autor. Luego cierra el caso.", "howh": "Cómo jugar", "how1": "Lee el expediente.", "how2": "Toca lo que quiere el autor: ★ PROTEGER, ◆ LIMITAR o ● UNA VOZ.", "how3": "Copia palabras clave del documento. Luego escribe lo que quiere el autor.", "how4": "Después de cinco expedientes, cierra el caso.", "first": "Nombre", "last": "Apellido", "period": "Período", "date": "Fecha", "dateph": "Se llena al terminar", "p1": "Parte 1 · Los expedientes", "p2": "Parte 2 · Caso cerrado", "prog": "{n} de 5 expedientes resueltos", "chip": "Expediente {i} de 5", "who": "Quién:", "kind": "Documento:", "help": "Ayuda con palabras:", "hint": "Pista:", "want": "¿Qué quiere el autor?", "sN": "★ PROTEGER", "sNs": "quiere proteger la libertad o los derechos (en casa o en el extranjero).", "sS": "◆ LIMITAR", "sSs": "limita la libertad, los derechos o las decisiones de otras personas.", "sV": "● UNA VOZ", "sVs": "quiere ser escuchado o ser libre (no tiene poder para decidir).", "noteph": "“palabras clave” — El autor quiere…", "closeq": "¿Qué fuente responde mejor a la pregunta clave?", "bestph": "Elige una…", "whyl": "¿Por qué es la mejor? Usa un dato o una cita.", "whyph": "Escribe 1–2 oraciones.", "ctrl": "Contraargumento: ¿qué otra fuente elegiría alguien del otro lado? ¿Qué diría? Luego respóndele.", "ctrph": "Escribe 2–3 oraciones.", "chk1": "Elegí una fuente y usé un dato o una cita.", "chk2": "Respondí al contraargumento.", "save": "Guardar progreso", "load": "Cargar progreso", "fin": "Terminado — Descargar archivo para entregar", "todo": "Falta: {x}", "t_names": "nombre, apellido y período", "t_case": "expediente {i} (toca un botón y escribe una pista)", "t_best": "elegir la mejor fuente", "t_why": "explicar por qué", "t_ctr": "escribir el contraargumento", "t_chk": "marcar las dos casillas", "allset": "Todo está listo. Toca Terminado.", "m_saved": "Guardado. Conserva ese archivo. Usa Cargar progreso más tarde. No lo subas a Canvas hasta terminar.", "m_loaded": "Progreso cargado.", "m_loaderr": "Ese archivo no sirve aquí. Carga el archivo -PROGRESS que guardaste de esta tarea.", "m_fin": "¡Listo! Se descargó tu archivo {f}. Sube ese archivo a Canvas.", "m_notfin": "Todavía no terminas. Lee la línea debajo de los botones.", "m_names": "Primero escribe tu nombre, apellido y período.", "lang": "Idioma"}, "ar": {"eyebrow": "المحقّق في المصادر 17", "title": "الحماية أم التقييد؟", "sub": "الحرب الباردة وخمسينيات الرخاء (The Cold War and the Affluent Fifties) · حلّ القضية", "bqlabel": "السؤال الكبير:", "bq": "من عام 1944 إلى عام 1960، هل فعلت الولايات المتحدة أكثر لحماية الحرية أم لتقييدها؟", "job": "مهمتك: اقرأ خمس وثائق حقيقية من هذه الفترة. في كل وثيقة قرّر ماذا يريد الكاتب. ثم أغلق القضية.", "howh": "طريقة اللعب", "how1": "اقرأ ملف القضية.", "how2": "اضغط على ما يريده الكاتب: ★ حماية، ◆ تقييد، أو ● صوت.", "how3": "انسخ كلمات الدليل من الوثيقة. ثم اكتب ماذا يريد الكاتب.", "how4": "بعد خمسة ملفات، أغلق القضية.", "first": "الاسم الأول", "last": "اسم العائلة", "period": "الحصة", "date": "التاريخ", "dateph": "يُملأ عند الانتهاء", "p1": "الجزء 1 · ملفات القضية", "p2": "الجزء 2 · القضية مغلقة", "prog": "تم حلّ {n} من 5 ملفات", "chip": "ملف القضية {i} من 5", "who": "من:", "kind": "الوثيقة:", "help": "مساعدة في الكلمات:", "hint": "تلميح:", "want": "ماذا يريد الكاتب؟", "sN": "★ حماية", "sNs": "يريد حماية الحرية أو الحقوق (في الداخل أو الخارج).", "sS": "◆ تقييد", "sSs": "يقيّد حرية الآخرين أو حقوقهم أو خياراتهم.", "sV": "● صوت", "sVs": "يريد أن يُسمع صوته أو أن يكون حرًا (لا يملك سلطة القرار).", "noteph": "«كلمات الدليل» — الكاتب يريد…", "closeq": "أي مصدر يجيب عن السؤال الكبير بأفضل شكل؟", "bestph": "اختر واحدًا…", "whyl": "لماذا هو الأفضل؟ استخدم معلومة أو اقتباسًا.", "whyph": "اكتب جملة أو جملتين.", "ctrl": "الحجة المضادة (Counter-Argument): أي مصدر آخر سيختاره شخص من الجانب الآخر؟ ماذا سيقول؟ ثم ردّ عليه.", "ctrph": "اكتب 2–3 جمل.", "chk1": "اخترت مصدرًا واستخدمت معلومة أو اقتباسًا.", "chk2": "أجبت عن الحجة المضادة.", "save": "حفظ التقدّم", "load": "تحميل التقدّم", "fin": "انتهيت — نزّل الملف للتسليم", "todo": "المتبقي: {x}", "t_names": "الاسم الأول واسم العائلة والحصة", "t_case": "ملف القضية {i} (اضغط زرًّا واكتب دليلًا)", "t_best": "اختيار أفضل مصدر", "t_why": "شرح السبب", "t_ctr": "كتابة الحجة المضادة", "t_chk": "تحديد المربعين", "allset": "كل شيء جاهز. اضغط «انتهيت».", "m_saved": "تم الحفظ. احتفظ بهذا الملف. استخدم «تحميل التقدّم» لاحقًا. لا ترفعه إلى Canvas حتى تنتهي.", "m_loaded": "تم تحميل التقدّم.", "m_loaderr": "هذا الملف لا يعمل هنا. حمّل ملف -PROGRESS الذي حفظته من هذا الواجب.", "m_fin": "تم! نُزّل ملفك {f}. ارفع هذا الملف إلى Canvas.", "m_notfin": "لم تنتهِ بعد. اقرأ السطر تحت الأزرار.", "m_names": "اكتب أولًا اسمك الأول واسم العائلة والحصة.", "lang": "اللغة"}};
+var CASES={"1": {"en": {"who": "The National Security Council (President Truman’s top advisers)", "kind": "Secret government report", "intro": "Advisers tell the President what the United States is trying to do in the Cold War.", "quote": "In essence, the fundamental purpose is to assure the integrity and vitality of our free society, which is founded upon the dignity and worth of the individual. Three realities emerge as a consequence of this purpose: Our determination to maintain the essential elements of individual freedom, as set forth in the Constitution and Bill of Rights; our determination to create conditions under which our free and democratic system can live and prosper; and our determination to fight if necessary to defend our way of life . . . .", "help": "integrity = being whole and strong · vitality = strength to live and grow · dignity = worth and respect · Bill of Rights = the first ten amendments", "hint": "What does the report say the United States must keep safe?", "short": "NSC-68 (1950)"}, "es": {"who": "El Consejo de Seguridad Nacional (los principales asesores del presidente Truman)", "kind": "Informe secreto del gobierno", "intro": "Los asesores le dicen al presidente qué intenta lograr Estados Unidos en la Guerra Fría.", "quote": "En esencia, el propósito fundamental es asegurar la integridad y la vitalidad de nuestra sociedad libre, que se funda en la dignidad y el valor del individuo. Tres realidades surgen como consecuencia de este propósito: nuestra determinación de mantener los elementos esenciales de la libertad individual, tal como se establecen en la Constitución y la Declaración de Derechos; nuestra determinación de crear las condiciones bajo las cuales nuestro sistema libre y democrático pueda vivir y prosperar; y nuestra determinación de luchar, si es necesario, para defender nuestra forma de vida . . . .", "help": "integridad = estar completo y fuerte · vitalidad = fuerza para vivir y crecer · dignidad = valor y respeto · Declaración de Derechos = las primeras diez enmiendas", "hint": "¿Qué dice el informe que Estados Unidos debe mantener a salvo?", "short": "NSC-68 (1950)"}, "ar": {"who": "مجلس الأمن القومي (National Security Council) — كبار مستشاري الرئيس ترومان", "kind": "تقرير حكومي سري", "intro": "يخبر المستشارون الرئيس ما الذي تحاول الولايات المتحدة تحقيقه في الحرب الباردة.", "quote": "في جوهر الأمر، الغاية الأساسية هي ضمان سلامة مجتمعنا الحر وحيويته، وهو مجتمع قائم على كرامة الفرد وقيمته. وتنبثق من هذه الغاية ثلاث حقائق: عزمنا على الحفاظ على العناصر الأساسية للحرية الفردية كما نص عليها الدستور ووثيقة الحقوق؛ وعزمنا على تهيئة الظروف التي يستطيع فيها نظامنا الحر والديمقراطي أن يعيش ويزدهر؛ وعزمنا على القتال، إذا لزم الأمر، دفاعًا عن أسلوب حياتنا . . . .", "help": "سلامة = أن يكون كاملًا وقويًا · حيوية = قوة الحياة والنمو · كرامة = قيمة واحترام · وثيقة الحقوق = التعديلات العشرة الأولى", "hint": "ماذا يقول التقرير إن على الولايات المتحدة أن تحميه؟", "short": "وثيقة NSC-68 (1950)"}, "year": "1950"}, "2": {"en": {"who": "A. Philip Randolph, leader of the Brotherhood of Sleeping Car Porters", "kind": "Letter to President Truman", "intro": "A labor leader with no vote in Congress asks the President to stop a new immigration law.", "quote": "I want to request and urge that you veto the McCarron bill, S-2550, on the grounds that it violates and nullifies all of the principles your Civil Rights Committee set forth in its report in the interest of the abolition of discrimination and segregation in various areas of our national life, because of race, color, religion, national origin or ancestry. . . . This McCarran bill, by striking a sinister blow at civil rights and the doctrine of racial democracy and racial equality, thereby constitutes a grave threat to the vitality and strength of our American democratic system . . . .", "help": "veto = when the President stops a bill · discrimination = unfair treatment because of who you are · segregation = forced separation by race · abolition = ending something", "hint": "He is asking the President to do something. What?", "short": "Randolph’s letter (1952)"}, "es": {"who": "A. Philip Randolph, líder de la Hermandad de Porteros de Coches Cama", "kind": "Carta al presidente Truman", "intro": "Un líder sindical sin voto en el Congreso le pide al presidente que detenga una nueva ley de inmigración.", "quote": "Quiero solicitar e instar que usted vete el proyecto McCarron, S-2550, con el argumento de que viola y anula todos los principios que su Comité de Derechos Civiles expuso en su informe en favor de la abolición de la discriminación y la segregación en diversas áreas de nuestra vida nacional, por motivos de raza, color, religión, origen nacional o ascendencia. . . . Este proyecto McCarran, al asestar un golpe siniestro a los derechos civiles y a la doctrina de la democracia racial y la igualdad racial, constituye así una grave amenaza para la vitalidad y la fuerza de nuestro sistema democrático estadounidense . . . .", "help": "vetar = que el presidente detenga un proyecto de ley · discriminación = trato injusto por quién eres · segregación = separación forzada por raza · abolición = acabar con algo", "hint": "Le pide algo al presidente. ¿Qué?", "short": "Carta de Randolph (1952)"}, "ar": {"who": "أ. فيليب راندولف (A. Philip Randolph)، قائد اتحاد عمال عربات النوم (Brotherhood of Sleeping Car Porters)", "kind": "رسالة إلى الرئيس ترومان", "intro": "قائد نقابي ليس له صوت في الكونغرس يطلب من الرئيس إيقاف قانون هجرة جديد.", "quote": "أريد أن أطلب وأحثّ على أن تستخدم حق النقض ضد مشروع قانون ماكارون، S-2550، لأنه ينتهك وينقض جميع المبادئ التي وضعتها لجنتكم للحقوق المدنية في تقريرها من أجل إلغاء التمييز والفصل في مجالات مختلفة من حياتنا الوطنية، بسبب العِرق أو اللون أو الدين أو الأصل القومي أو النسب. . . . إن مشروع قانون ماكاران هذا، بتوجيهه ضربة خبيثة إلى الحقوق المدنية وإلى مبدأ الديمقراطية العرقية والمساواة العرقية، يشكل بذلك تهديدًا خطيرًا لحيوية نظامنا الديمقراطي الأمريكي وقوته . . . .", "help": "حق النقض = أن يوقف الرئيس مشروع قانون · التمييز = معاملة ظالمة بسبب من أنت · الفصل العنصري = فصل إجباري بسبب العِرق · إلغاء = إنهاء الشيء", "hint": "إنه يطلب شيئًا من الرئيس. ماذا؟", "short": "رسالة راندولف (1952)"}, "year": "1952"}, "3": {"en": {"who": "The CIA and British intelligence (secret agents)", "kind": "Secret plan cabled to headquarters", "intro": "American and British spies plan how to remove the leader of Iran.", "quote": "(2) Major issue is to maintain independence Iran and keep from the Soviet orbit. To do this Mossadeq must be removed. . . . (5) Mossadeq must go. . . . (1) You must take leadership in overthrow Mossadeq. (2) If not, you bear responsibility for collapse of country. (3) If not, Shah’s dynasty will fall and US-UK backing of you will cease.", "help": "Mossadeq = Iran’s prime minister · Shah = Iran’s king · Soviet orbit = under Soviet influence · overthrow = push someone out of power", "hint": "In this plan, who decides who leads Iran?", "short": "TPAJAX plan (1953)"}, "es": {"who": "La CIA y los servicios secretos británicos (agentes secretos)", "kind": "Plan secreto enviado por cable a la central", "intro": "Espías de Estados Unidos y Gran Bretaña planean cómo sacar al líder de Irán.", "quote": "(2) El asunto principal es mantener la independencia de Irán y evitar que caiga en la órbita soviética. Para lograrlo hay que destituir a Mossadeq. . . . (5) Mossadeq tiene que irse. . . . (1) Usted debe asumir el liderazgo en el derrocamiento de Mossadeq. (2) Si no, usted es responsable del colapso del país. (3) Si no, la dinastía del Shah caerá y cesará el respaldo de EE. UU. y el Reino Unido hacia usted.", "help": "Mossadeq = el primer ministro de Irán · Shah = el rey de Irán · órbita soviética = bajo la influencia soviética · derrocar = sacar a alguien del poder", "hint": "En este plan, ¿quién decide quién dirige Irán?", "short": "Plan TPAJAX (1953)"}, "ar": {"who": "وكالة المخابرات المركزية (CIA) والمخابرات البريطانية — عملاء سريون", "kind": "خطة سرية أُرسلت ببرقية إلى المقر", "intro": "جواسيس من الولايات المتحدة وبريطانيا يخططون لإزاحة زعيم إيران.", "quote": "(2) القضية الرئيسية هي الحفاظ على استقلال إيران ومنعها من الوقوع في فلك الاتحاد السوفييتي. ولتحقيق ذلك يجب عزل مصدق. . . . (5) يجب أن يرحل مصدق. . . . (1) عليك أن تتولى القيادة في الإطاحة بمصدق. (2) وإلا فأنت تتحمل مسؤولية انهيار البلاد. (3) وإلا فستسقط أسرة الشاه وسيتوقف دعم الولايات المتحدة وبريطانيا لك.", "help": "مصدق = رئيس وزراء إيران · الشاه = ملك إيران · فلك سوفييتي = تحت النفوذ السوفييتي · الإطاحة = إزاحة شخص عن الحكم", "hint": "في هذه الخطة، من يقرر من يحكم إيران؟", "short": "خطة TPAJAX (1953)"}, "year": "1953"}, "4": {"en": {"who": "The U.S. Supreme Court (Chief Justice Earl Warren wrote the opinion)", "kind": "Court decision", "intro": "The nation’s highest court rules on separate public schools for Black and white children.", "quote": "We conclude that, in the field of public education, the doctrine of “separate but equal” has no place. Separate educational facilities are inherently unequal. Therefore, we hold that the plaintiffs and others similarly situated for whom the actions have been brought are, by reason of the segregation complained of, deprived of the equal protection of the laws guaranteed by the Fourteenth Amendment.", "help": "doctrine = rule · plaintiffs = people who bring the case · equal protection = the same rights under the law · Fourteenth Amendment = the 1868 amendment on equal rights", "hint": "What does the Court say about separate schools?", "short": "Brown v. Board of Education (1954)"}, "es": {"who": "La Corte Suprema de EE. UU. (el presidente de la Corte, Earl Warren, escribió la opinión)", "kind": "Decisión judicial", "intro": "El tribunal más alto del país decide sobre las escuelas públicas separadas para niños negros y blancos.", "quote": "Concluimos que, en el campo de la educación pública, la doctrina de “separados pero iguales” no tiene lugar. Las instalaciones educativas separadas son intrínsecamente desiguales. Por lo tanto, sostenemos que los demandantes y otros en situación similar, para quienes se presentaron las demandas, por razón de la segregación de la que se quejan, están privados de la igual protección de las leyes garantizada por la Decimocuarta Enmienda.", "help": "doctrina = regla · demandantes = quienes presentan el caso · igual protección = los mismos derechos ante la ley · Decimocuarta Enmienda = enmienda de 1868 sobre derechos iguales", "hint": "¿Qué dice el tribunal sobre las escuelas separadas?", "short": "Brown contra el Consejo de Educación (1954)"}, "ar": {"who": "المحكمة العليا الأمريكية (U.S. Supreme Court) — كتب رأي المحكمة رئيسها إيرل وارن (Earl Warren)", "kind": "حكم قضائي", "intro": "أعلى محكمة في البلاد تحكم في المدارس العامة المنفصلة للأطفال السود والبيض.", "quote": "نخلص إلى أنه في مجال التعليم العام لا مكان لمبدأ «منفصلون لكن متساوون». فالمرافق التعليمية المنفصلة غير متساوية بطبيعتها. ولذلك نقضي بأن المدّعين ومن هم في وضع مماثل ممن رُفعت الدعاوى من أجلهم، بسبب الفصل الذي يشتكون منه، محرومون من الحماية المتساوية للقوانين التي يضمنها التعديل الرابع عشر.", "help": "مبدأ = قاعدة · المدّعون = من رفعوا القضية · الحماية المتساوية = الحقوق نفسها أمام القانون · التعديل الرابع عشر = تعديل عام 1868 عن الحقوق المتساوية", "hint": "ماذا تقول المحكمة عن المدارس المنفصلة؟", "short": "براون ضد مجلس التعليم (1954)"}, "year": "1954"}, "5": {"en": {"who": "Southern members of Congress (19 senators and 77 House members)", "kind": "Public statement read in the Senate", "intro": "Southern lawmakers answer the Brown decision.", "quote": "We regard the decisions of the Supreme Court in the school cases as a clear abuse of judicial power. . . . We decry the Supreme Court’s encroachment on the rights reserved to the States and to the people, contrary to established law, and to the Constitution. We commend the motives of those States which have declared the intention to resist forced integration by any lawful means.", "help": "judicial = about judges and courts · encroachment = stepping in where one does not belong · reserved = kept for · integration = bringing groups together", "hint": "What do they say States should do about the Court’s decision?", "short": "Southern Manifesto (1956)"}, "es": {"who": "Legisladores del Sur en el Congreso (19 senadores y 77 representantes)", "kind": "Declaración pública leída en el Senado", "intro": "Legisladores del Sur responden a la decisión del caso Brown.", "quote": "Consideramos que las decisiones de la Corte Suprema en los casos escolares son un claro abuso del poder judicial. . . . Deploramos la intromisión de la Corte Suprema en los derechos reservados a los Estados y al pueblo, contraria a la ley establecida y a la Constitución. Elogiamos los motivos de aquellos Estados que han declarado su intención de resistir la integración forzada por cualquier medio legal.", "help": "judicial = de los jueces y tribunales · intromisión = meterse donde no corresponde · reservados = guardados para · integración = unir a los grupos", "hint": "¿Qué dicen que deben hacer los Estados ante la decisión de la Corte?", "short": "Manifiesto Sureño (1956)"}, "ar": {"who": "المشرّعون الجنوبيون في الكونغرس — 19 عضوًا في مجلس الشيوخ و77 عضوًا في مجلس النواب", "kind": "بيان علني قُرئ في مجلس الشيوخ", "intro": "مشرّعون من الجنوب يردّون على حكم براون.", "quote": "نعدّ قرارات المحكمة العليا في قضايا المدارس إساءة واضحة لاستخدام السلطة القضائية. . . . نستنكر تعدّي المحكمة العليا على الحقوق المحفوظة للولايات وللشعب، بما يخالف القانون المستقر والدستور. ونثني على دوافع تلك الولايات التي أعلنت عزمها مقاومة الدمج القسري بكل وسيلة قانونية.", "help": "قضائي = متعلق بالقضاة والمحاكم · تعدٍّ = التدخل فيما ليس من حقه · محفوظة = مخصصة لـ · دمج = جمع المجموعات معًا", "hint": "ماذا يقولون إن على الولايات أن تفعل تجاه حكم المحكمة؟", "short": "البيان الجنوبي (1956)"}, "year": "1956"}};
+var SIDES={"1": "N", "2": "V", "3": "S", "4": "N", "5": "S"};
+var CN=[1,2,3,4,5],lang='en',sides={},msgKey=null,msgVars=null;
+function $(s,r){return (r||document).querySelector(s)}function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+function T(k,v){var s=(I18N[lang]&&I18N[lang][k])||I18N.en[k]||k;if(v)for(var x in v)s=s.split('{'+x+'}').join(v[x]);return s}
+function setMsg(k,v,cls){msgKey=k;msgVars=v;var m=$('#msg');m.className=cls||'';m.textContent=T(k,v)}
+function setLang(l,keep){
+ lang=l;document.documentElement.lang=l;document.documentElement.dir=(l==='ar'?'rtl':'ltr');
+ $$('[data-t]').forEach(function(e){e.textContent=T(e.getAttribute('data-t'))});
+ $$('[data-tp]').forEach(function(e){e.placeholder=T(e.getAttribute('data-tp'))});
+ CN.forEach(function(i){var d=CASES[i][l]||CASES[i].en;
+  $$('[data-c][data-i="'+i+'"]').forEach(function(e){e.textContent=d[e.getAttribute('data-c')]});
+  $('[data-chip="'+i+'"]').textContent=T('chip',{i:i});
+  var o=$('[data-orig="'+i+'"]');o.textContent=(l==='en'?'':'English original: '+CASES[i].en.quote);
+  var op=$('[data-opt="'+i+'"]');op.textContent=CASES[i].year+' · '+d.short;
+ });
+ $$('.langbar button').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-lang')===l?'true':'false')});
+ try{localStorage.setItem(STORE+'_lang',l)}catch(e){}
+ if(msgKey)$('#msg').textContent=T(msgKey,msgVars);
+ refresh();
+}
+function val(id){var e=document.getElementById(id);return e?e.value.trim():''}
+function field(n){var e=$('[data-id="'+n+'"]');return e?e.value:''}
+function state(){
+ var a={};CN.forEach(function(i){a['note'+i]=field('note'+i)});a.best=field('best');a.why=field('why');a.counter=field('counter');
+ var t={national:0,state:0,voice:0};CN.forEach(function(i){var s=sides[i];if(s==='N')t.national++;if(s==='S')t.state++;if(s==='V')t.voice++});
+ return {packet:PACKET,course:COURSE,version:1,saved:new Date().toISOString(),completed:false,
+  student:{first:val('first'),last:val('last'),period:val('period'),date:val('date')},
+  sides:JSON.parse(JSON.stringify(sides)),answers:a,
+  checks:{chk1:$('#chk1').checked,chk2:$('#chk2').checked},tally:t};
+}
+function missing(){
+ var m=[],s=state();
+ if(!s.student.first||!s.student.last||!s.student.period)m.push(T('t_names'));
+ CN.forEach(function(i){if(!sides[i]||!s.answers['note'+i].trim())m.push(T('t_case',{i:i}))});
+ if(!s.answers.best)m.push(T('t_best'));if(!s.answers.why.trim())m.push(T('t_why'));if(!s.answers.counter.trim())m.push(T('t_ctr'));
+ if(!(s.checks.chk1&&s.checks.chk2))m.push(T('t_chk'));
+ return m;
+}
+function refresh(){
+ var done=0;CN.forEach(function(i){var c=$('#card'+i),ok=!!sides[i]&&field('note'+i).trim()!=='';if(ok)done++;
+  c.classList.toggle('done',ok);c.classList.toggle('isS',sides[i]==='S');c.classList.toggle('isV',sides[i]==='V');
+  $$('.stances button',c).forEach(function(b){b.setAttribute('aria-pressed',sides[i]===b.getAttribute('data-v')?'true':'false')})});
+ $('#fill').style.width=(done*20)+'%';$('#progt').textContent=T('prog',{n:done});
+ var m=missing();$('#todo').textContent=m.length?T('todo',{x:m.join(lang==='ar'?'؛ ':'; ')}):T('allset');
+ $('#fin').disabled=m.length>0;
+}
+function persist(){try{localStorage.setItem(STORE,JSON.stringify(state()))}catch(e){}}
+function apply(s){
+ $('#first').value=s.student.first||'';$('#last').value=s.student.last||'';$('#period').value=s.student.period||'';$('#date').value=s.student.date||'';
+ sides={};for(var k in (s.sides||{}))sides[k]=s.sides[k];
+ var a=s.answers||{};CN.forEach(function(i){$('[data-id="note'+i+'"]').value=a['note'+i]||''});
+ $('#best').value=a.best||'';$('#why').value=a.why||'';$('#counter').value=a.counter||'';
+ $('#chk1').checked=!!(s.checks&&s.checks.chk1);$('#chk2').checked=!!(s.checks&&s.checks.chk2);refresh();
+}
+function fname(s){var n=(s.student.last+'_'+s.student.first).normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^A-Za-z0-9_\-]+/g,'_');return n||'Student'}
+function dl(name,obj){var b=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(u);a.remove()},500)}
+function namesOk(){var ok=true;['first','last','period'].forEach(function(id){var e=$('#'+id),bad=!e.value.trim();e.classList.toggle('bad',bad);if(bad)ok=false});return ok}
+document.addEventListener('click',function(e){
+ var b=e.target.closest('.stances button');if(b){var i=+b.closest('.card').getAttribute('data-i');sides[i]=b.getAttribute('data-v');refresh();persist();return}
+ var lb=e.target.closest('.langbar button');if(lb){setLang(lb.getAttribute('data-lang'))}
+});
+document.addEventListener('input',function(){refresh();persist();$$('.names input.bad').forEach(function(x){if(x.value.trim())x.classList.remove('bad')})});
+document.addEventListener('change',function(){refresh();persist()});
+$('#save').onclick=function(){if(!namesOk()){setMsg('m_names',null,'err');return}var s=state();dl(fname(s)+'-'+PACKET+'-PROGRESS.json',s);setMsg('m_saved',null,'ok')};
+$('#load').onclick=function(){$('#file').click()};
+$('#file').onchange=function(ev){var f=ev.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(){try{var s=JSON.parse(r.result);if(!s||s.packet!==PACKET)throw 0;apply(s);persist();setMsg('m_loaded',null,'ok')}catch(x){setMsg('m_loaderr',null,'err')}};r.readAsText(f);ev.target.value=''};
+$('#fin').onclick=function(){
+ if(!namesOk()||missing().length){setMsg('m_notfin',null,'err');return}
+ var d=new Date(),p=function(n){return (n<10?'0':'')+n};$('#date').value=(d.getMonth()+1)+'/'+d.getDate()+'/'+d.getFullYear();
+ var s=state();s.completed=true;var f=fname(s)+'-'+PACKET+'.json';dl(f,s);persist();setMsg('m_fin',{f:f},'ok');
+};
+(function init(){
+ var l='en';try{var q=new URLSearchParams(location.search).get('lang');if(q==='es'||q==='ar')l=q;else{var sv=localStorage.getItem(STORE+'_lang');if(sv==='es'||sv==='ar')l=sv}}catch(e){}
+ setLang(l);
+ try{var raw=localStorage.getItem(STORE);if(raw){var s=JSON.parse(raw);if(s&&s.packet===PACKET)apply(s)}}catch(e){}
+ refresh();
+})();
+</script></body></html>

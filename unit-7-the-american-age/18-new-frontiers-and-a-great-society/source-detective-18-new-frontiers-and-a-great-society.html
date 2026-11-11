@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Progress or Division? · Source Detective 18</title>
+<style>
+:root{--bg:#2C313A;--text:#EEEFF1;--a1:#414855;--a2:#DD8840;--hl:#E6B489;--page:#E7E8EB;--paper:#FAFAFB;--ink:#21252C;--rule:#D9DADD;--gold:#895428;--keybg:#FCF3EC;--voice:#8A4B2A;--ok:#2E6B3E}
+@media (prefers-color-scheme:dark){:root{--page:#16181D;--paper:#23272E;--ink:#EEEFF1;--rule:#565A61;--keybg:#3D414A;--gold:#E6B489}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font:17px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+.wrap{max-width:820px;margin:0 auto;padding:0 14px 40px}
+.hero{background:var(--bg);color:var(--text);padding:26px 14px 22px;text-align:center;border-bottom:5px solid var(--a2)}
+.hero .eyebrow{letter-spacing:.18em;font-weight:700;font-size:.8rem;color:var(--hl)}
+.hero h1{margin:.2em 0 .1em;font-size:2rem;line-height:1.15}
+.hero .sub{opacity:.92}
+.langbar{display:flex;gap:8px;justify-content:center;align-items:center;margin:14px 0;flex-wrap:wrap}
+.langbar button{border:2px solid var(--a1);background:var(--paper);color:var(--ink);padding:8px 16px;border-radius:999px;font:inherit;font-weight:700;cursor:pointer;min-height:44px}
+.langbar button[aria-pressed=true]{background:var(--a1);color:#fff}
+.box{background:var(--paper);border:1px solid var(--rule);border-radius:12px;padding:14px 16px;margin:14px 0}
+.bq{background:var(--keybg);border:2px solid var(--a2);border-radius:12px;padding:14px 16px;margin:14px 0}
+.bq b{color:var(--gold);letter-spacing:.06em}
+.bq .q{font-size:1.12rem;font-weight:700;margin-top:4px}
+h2{color:var(--a1);margin:26px 0 6px;font-size:1.25rem}
+@media (prefers-color-scheme:dark){h2{color:var(--hl)}}
+.how ol{margin:6px 0 0;padding-inline-start:22px}
+.names{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.names label{display:block;font-weight:700;font-size:.85rem}
+.names input{width:100%;padding:10px;border:2px solid var(--rule);border-radius:8px;font:inherit;background:var(--paper);color:var(--ink)}
+.names input.bad{border-color:#B3261E;background:#FDECEA;color:#000}
+.names input[readonly]{background:var(--keybg)}
+.meter{margin:14px 0} .meter .bar{height:12px;background:var(--rule);border-radius:99px;overflow:hidden}
+.meter .fill{height:100%;width:0;background:var(--a2);transition:width .3s}
+.meter .t{font-weight:700;margin-top:4px}
+.card{background:var(--paper);border:1px solid var(--rule);border-inline-start:8px solid var(--rule);border-radius:12px;padding:14px 16px;margin:16px 0}
+.card.done{border-inline-start-color:var(--bg)} .card.done.isS{border-inline-start-color:var(--a2)} .card.done.isV{border-inline-start-color:var(--voice)}
+.chip{display:inline-block;background:var(--bg);color:var(--text);border-radius:99px;padding:2px 12px;font-weight:700;font-size:.9rem}
+.cnum{margin-inline-start:8px;color:var(--gold);font-weight:700;font-size:.9rem}
+.meta{margin:8px 0 2px;font-size:.95rem} .meta b{color:var(--a1)}
+@media (prefers-color-scheme:dark){.meta b{color:var(--hl)}}
+blockquote{margin:10px 0;padding:12px 14px;background:var(--keybg);border-inline-start:5px solid var(--a2);border-radius:6px;font-style:italic;font-size:1.02rem}
+.orig{display:none;direction:ltr;text-align:left;font-size:.9rem;opacity:.9;margin:4px 0}
+html[lang=ar] .orig,html[lang=es] .orig{display:block}
+.orig i{font-style:italic}
+.cite{direction:ltr;text-align:left;font-size:.82rem;opacity:.85;margin:6px 0}
+.help,.hint{font-size:.93rem;margin:6px 0}
+.want{font-weight:700;margin:10px 0 6px}
+.stances{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.stances button{text-align:start;border:2px solid var(--rule);background:var(--paper);color:var(--ink);border-radius:10px;padding:10px;font:inherit;cursor:pointer;min-height:64px}
+.stances button b{display:block;font-size:1rem} .stances button small{display:block;font-size:.78rem;opacity:.85;line-height:1.25}
+.stances button[aria-pressed=true]{background:var(--bg);color:var(--text);border-color:var(--bg)}
+.stances button[data-v=S][aria-pressed=true]{background:var(--a2);color:#10312C;border-color:var(--a2)}
+.stances button[data-v=V][aria-pressed=true]{background:var(--voice);color:#fff;border-color:var(--voice)}
+.stances button:focus-visible,.btns button:focus-visible,select:focus-visible,textarea:focus-visible,input:focus-visible,.langbar button:focus-visible{outline:3px solid var(--a2);outline-offset:2px}
+@media (max-width:620px){.stances{grid-template-columns:1fr} .names{grid-template-columns:1fr 1fr} .hero h1{font-size:1.6rem}}
+textarea,select{width:100%;margin-top:8px;padding:10px;border:2px solid var(--rule);border-radius:8px;font:inherit;background:var(--paper);color:var(--ink);unicode-bidi:plaintext}
+textarea{min-height:84px}
+.fin label.l{display:block;font-weight:700;margin-top:12px}
+.chk{display:flex;gap:8px;align-items:flex-start;margin:8px 0} .chk input{width:22px;height:22px;margin-top:3px}
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 6px}
+.btns button{border:0;border-radius:10px;padding:12px 18px;font:inherit;font-weight:700;cursor:pointer;min-height:48px;background:var(--a1);color:#fff}
+.btns button#fin{background:var(--bg);color:var(--text);border:2px solid var(--a2)}
+.btns button:disabled{background:#9AA9A7;color:#fff;border-color:#9AA9A7;cursor:not-allowed}
+#todo{font-weight:700;margin:6px 0} #msg{margin:6px 0;min-height:1.4em} #msg.err{color:#B3261E} #msg.ok{color:var(--ok)}
+footer{background:var(--bg);color:var(--text);text-align:center;padding:14px;font-size:.78rem;letter-spacing:.08em;border-top:5px solid var(--a2);margin-top:30px}
+footer div+div{opacity:.9;margin-top:2px}
+</style></head><body>
+<header class="hero"><div class="eyebrow" data-t="eyebrow"></div><h1 data-t="title"></h1><div class="sub" data-t="sub"></div></header>
+<div class="wrap">
+<div class="langbar" role="group" aria-label="Language"><button type="button" data-lang="en" aria-pressed="true">English</button><button type="button" data-lang="es" aria-pressed="false">Español</button><button type="button" data-lang="ar" aria-pressed="false">العربية</button></div>
+<div class="bq"><b data-t="bqlabel"></b><div class="q" data-t="bq"></div><div style="margin-top:8px" data-t="job"></div></div>
+<div class="box how"><b data-t="howh"></b><ol><li data-t="how1"></li><li data-t="how2"></li><li data-t="how3"></li><li data-t="how4"></li></ol></div>
+<div class="box names">
+ <div><label for="first" data-t="first"></label><input id="first" autocomplete="given-name"></div>
+ <div><label for="last" data-t="last"></label><input id="last" autocomplete="family-name"></div>
+ <div><label for="period" data-t="period"></label><input id="period" inputmode="numeric"></div>
+ <div><label for="date" data-t="date"></label><input id="date" readonly data-tp="dateph"></div>
+</div>
+<div class="meter"><div class="bar"><div class="fill" id="fill"></div></div><div class="t" id="progt"></div></div>
+<h2 data-t="p1"></h2>
+
+<section class="card" id="card1" data-i="1">
+ <span class="chip" data-year="1">1960</span><span class="cnum" data-chip="1"></span>
+ <div class="meta"><b data-t="who">Who:</b> <span data-c="who" data-i="1"></span> · <b data-t="kind">Document:</b> <span data-c="kind" data-i="1"></span></div>
+ <div class="meta" data-c="intro" data-i="1"></div>
+ <blockquote data-c="quote" data-i="1" dir="auto"></blockquote>
+ <div class="orig" data-orig="1"></div>
+ <div class="cite" dir="ltr">“An Appeal for Human Rights” (Atlanta: Committee for the Appeal for Human Rights, 1960), March 9, 1960, in Norton, <i>History Source Collection</i> (Primary and Secondary Source Collection for <i>America: The Essential Learning Edition</i>), Part 9.</div>
+ <div class="help"><b data-t="help">Word help:</b> <span data-c="help" data-i="1"></span></div>
+ <div class="hint"><b data-t="hint">Hint:</b> <span data-c="hint" data-i="1"></span></div>
+ <div class="want" data-t="want">What does the author want?</div>
+ <div class="stances" role="group" aria-label="stance 1">
+  <button type="button" data-v="N" aria-pressed="false"><b data-t="sN"></b><small data-t="sNs"></small></button>
+  <button type="button" data-v="S" aria-pressed="false"><b data-t="sS"></b><small data-t="sSs"></small></button>
+  <button type="button" data-v="V" aria-pressed="false"><b data-t="sV"></b><small data-t="sVs"></small></button>
+ </div>
+ <textarea data-id="note1" data-tp="noteph" rows="3"></textarea>
+</section>
+<section class="card" id="card2" data-i="2">
+ <span class="chip" data-year="2">1962</span><span class="cnum" data-chip="2"></span>
+ <div class="meta"><b data-t="who">Who:</b> <span data-c="who" data-i="2"></span> · <b data-t="kind">Document:</b> <span data-c="kind" data-i="2"></span></div>
+ <div class="meta" data-c="intro" data-i="2"></div>
+ <blockquote data-c="quote" data-i="2" dir="auto"></blockquote>
+ <div class="orig" data-orig="2"></div>
+ <div class="cite" dir="ltr">Ross Barnett, “Governor Barnett’s Declaration to the People of Mississippi,” radio and television broadcast, September 13, 1962, in John F. Kennedy Presidential Library and Museum, “Ole Miss: The Controversy” (microsites.jfklibrary.org/olemiss/controversy/doc2.html). Not from Norton, whose Part 9 has no source like it.</div>
+ <div class="help"><b data-t="help">Word help:</b> <span data-c="help" data-i="2"></span></div>
+ <div class="hint"><b data-t="hint">Hint:</b> <span data-c="hint" data-i="2"></span></div>
+ <div class="want" data-t="want">What does the author want?</div>
+ <div class="stances" role="group" aria-label="stance 2">
+  <button type="button" data-v="N" aria-pressed="false"><b data-t="sN"></b><small data-t="sNs"></small></button>
+  <button type="button" data-v="S" aria-pressed="false"><b data-t="sS"></b><small data-t="sSs"></small></button>
+  <button type="button" data-v="V" aria-pressed="false"><b data-t="sV"></b><small data-t="sVs"></small></button>
+ </div>
+ <textarea data-id="note2" data-tp="noteph" rows="3"></textarea>
+</section>
+<section class="card" id="card3" data-i="3">
+ <span class="chip" data-year="3">1963</span><span class="cnum" data-chip="3"></span>
+ <div class="meta"><b data-t="who">Who:</b> <span data-c="who" data-i="3"></span> · <b data-t="kind">Document:</b> <span data-c="kind" data-i="3"></span></div>
+ <div class="meta" data-c="intro" data-i="3"></div>
+ <blockquote data-c="quote" data-i="3" dir="auto"></blockquote>
+ <div class="orig" data-orig="3"></div>
+ <div class="cite" dir="ltr">George C. Wallace, Inaugural Address, Montgomery, Alabama, January 14, 1963 (excerpt), in “(1963) George Wallace, ‘Segregation Now, Segregation Forever,’” BlackPast.org, from Jill Karson, ed., <i>Great Speeches in History</i> (Farmington Hills, Mich.: Greenhaven Press, 2003). Not from Norton, whose Part 9 has no source like it. The ellipses in the last sentence are in the speech as printed.</div>
+ <div class="help"><b data-t="help">Word help:</b> <span data-c="help" data-i="3"></span></div>
+ <div class="hint"><b data-t="hint">Hint:</b> <span data-c="hint" data-i="3"></span></div>
+ <div class="want" data-t="want">What does the author want?</div>
+ <div class="stances" role="group" aria-label="stance 3">
+  <button type="button" data-v="N" aria-pressed="false"><b data-t="sN"></b><small data-t="sNs"></small></button>
+  <button type="button" data-v="S" aria-pressed="false"><b data-t="sS"></b><small data-t="sSs"></small></button>
+  <button type="button" data-v="V" aria-pressed="false"><b data-t="sV"></b><small data-t="sVs"></small></button>
+ </div>
+ <textarea data-id="note3" data-tp="noteph" rows="3"></textarea>
+</section>
+<section class="card" id="card4" data-i="4">
+ <span class="chip" data-year="4">1964</span><span class="cnum" data-chip="4"></span>
+ <div class="meta"><b data-t="who">Who:</b> <span data-c="who" data-i="4"></span> · <b data-t="kind">Document:</b> <span data-c="kind" data-i="4"></span></div>
+ <div class="meta" data-c="intro" data-i="4"></div>
+ <blockquote data-c="quote" data-i="4" dir="auto"></blockquote>
+ <div class="orig" data-orig="4"></div>
+ <div class="cite" dir="ltr">Civil Rights Act of 1964, July 2, 1964, <i>Enrolled Acts and Resolutions of Congress, 1789–2011</i>, General Records of the United States Government, Record Group 11, National Archives, in Norton, <i>History Source Collection</i> (Primary and Secondary Source Collection for <i>America: The Essential Learning Edition</i>), Part 9.</div>
+ <div class="help"><b data-t="help">Word help:</b> <span data-c="help" data-i="4"></span></div>
+ <div class="hint"><b data-t="hint">Hint:</b> <span data-c="hint" data-i="4"></span></div>
+ <div class="want" data-t="want">What does the author want?</div>
+ <div class="stances" role="group" aria-label="stance 4">
+  <button type="button" data-v="N" aria-pressed="false"><b data-t="sN"></b><small data-t="sNs"></small></button>
+  <button type="button" data-v="S" aria-pressed="false"><b data-t="sS"></b><small data-t="sSs"></small></button>
+  <button type="button" data-v="V" aria-pressed="false"><b data-t="sV"></b><small data-t="sVs"></small></button>
+ </div>
+ <textarea data-id="note4" data-tp="noteph" rows="3"></textarea>
+</section>
+<section class="card" id="card5" data-i="5">
+ <span class="chip" data-year="5">1968</span><span class="cnum" data-chip="5"></span>
+ <div class="meta"><b data-t="who">Who:</b> <span data-c="who" data-i="5"></span> · <b data-t="kind">Document:</b> <span data-c="kind" data-i="5"></span></div>
+ <div class="meta" data-c="intro" data-i="5"></div>
+ <blockquote data-c="quote" data-i="5" dir="auto"></blockquote>
+ <div class="orig" data-orig="5"></div>
+ <div class="cite" dir="ltr">National Advisory Commission on Civil Disorders, <i>Report of the National Advisory Commission on Civil Disorders</i>, Introduction, February 29, 1968, ed. Peter C. Myers, Teaching American History (Ashbrook Center), teachingamericanhistory.org. Not from Norton, whose Part 9 has no source like it.</div>
+ <div class="help"><b data-t="help">Word help:</b> <span data-c="help" data-i="5"></span></div>
+ <div class="hint"><b data-t="hint">Hint:</b> <span data-c="hint" data-i="5"></span></div>
+ <div class="want" data-t="want">What does the author want?</div>
+ <div class="stances" role="group" aria-label="stance 5">
+  <button type="button" data-v="N" aria-pressed="false"><b data-t="sN"></b><small data-t="sNs"></small></button>
+  <button type="button" data-v="S" aria-pressed="false"><b data-t="sS"></b><small data-t="sSs"></small></button>
+  <button type="button" data-v="V" aria-pressed="false"><b data-t="sV"></b><small data-t="sVs"></small></button>
+ </div>
+ <textarea data-id="note5" data-tp="noteph" rows="3"></textarea>
+</section>
+<h2 data-t="p2"></h2>
+<div class="box fin">
+ <div class="bq" style="margin:0"><b data-t="bqlabel"></b><div class="q" data-t="bq"></div></div>
+ <label class="l" for="best" data-t="closeq"></label>
+ <select id="best" data-id="best"><option value="" data-t="bestph"></option><option value="1" data-opt="1"></option><option value="2" data-opt="2"></option><option value="3" data-opt="3"></option><option value="4" data-opt="4"></option><option value="5" data-opt="5"></option></select>
+ <label class="l" for="why" data-t="whyl"></label><textarea id="why" data-id="why" data-tp="whyph" rows="3"></textarea>
+ <label class="l" for="counter" data-t="ctrl"></label><textarea id="counter" data-id="counter" data-tp="ctrph" rows="4"></textarea>
+ <div class="chk"><input type="checkbox" id="chk1"><label for="chk1" data-t="chk1"></label></div>
+ <div class="chk"><input type="checkbox" id="chk2"><label for="chk2" data-t="chk2"></label></div>
+</div>
+<div class="btns"><button type="button" id="save" data-t="save"></button><button type="button" id="load" data-t="load"></button><button type="button" id="fin" disabled data-t="fin"></button></div>
+<input type="file" id="file" accept=".json,application/json" hidden>
+<div id="todo" aria-live="polite"></div><div id="msg" role="status" aria-live="polite"></div>
+</div>
+<footer><div>UNIT 7 · THE AMERICAN AGE | CPUSH</div><div>DANIEL GARZA, M.A.</div></footer>
+<script>
+var PACKET='L18_Source_Detective',STORE='cpush_l18_source_detective',COURSE='CPUSH';
+var I18N={"en": {"eyebrow": "SOURCE DETECTIVE 18", "title": "Progress or Division?", "sub": "New Frontiers and a Great Society · Crack the Case", "bqlabel": "BIG QUESTION:", "bq": "Were the 1960s mainly a decade of progress for Americans, or mainly a decade of division?", "job": "Your job: read five real documents from this time period. For each one, decide what the author wants. Then close the case.", "howh": "How to play", "how1": "Read the case file.", "how2": "Tap what the author wants: ★ PROGRESS, ◆ DIVISION, or ● A VOICE.", "how3": "Copy clue words from the document. Then write what the author wants.", "how4": "After five case files, close the case.", "first": "First name", "last": "Last name", "period": "Period", "date": "Date", "dateph": "Fills in when you finish", "p1": "Part 1 · The Case Files", "p2": "Part 2 · Case Closed", "prog": "{n} of 5 case files cracked", "chip": "Case file {i} of 5", "who": "Who:", "kind": "Document:", "help": "Word help:", "hint": "Hint:", "want": "What does the author want?", "sN": "★ PROGRESS", "sNs": "wants new rights, laws, or help so the country moves forward.", "sS": "◆ DIVISION", "sSs": "pushes groups apart or fights to keep things as they are.", "sV": "● A VOICE", "sVs": "wants to be heard or to be free (has no power to decide).", "noteph": "“clue words” — The author wants…", "closeq": "Which source best answers the big question?", "bestph": "Choose one…", "whyl": "Why is it the best? Use one fact or quote.", "whyph": "Write 1–2 sentences.", "ctrl": "Counter-Argument: which other source would someone on the other side pick? What would they say? Then answer them.", "ctrph": "Write 2–3 sentences.", "chk1": "I picked a source and used a fact or quote.", "chk2": "I answered the Counter-Argument.", "save": "Save Progress", "load": "Load Progress", "fin": "Finished — Download File to Submit", "todo": "Still to do: {x}", "t_names": "first name, last name, and period", "t_case": "case file {i} (tap a button and write a clue)", "t_best": "choose the best source", "t_why": "explain why", "t_ctr": "write the Counter-Argument", "t_chk": "check both boxes", "allset": "Everything is done. Tap Finished.", "m_saved": "Saved. Keep that file. Use Load Progress later. Do not upload it to Canvas until you are finished.", "m_loaded": "Progress loaded.", "m_loaderr": "That file does not work here. Load the -PROGRESS file you saved from this assignment.", "m_fin": "Done! Your file {f} downloaded. Upload that file to Canvas.", "m_notfin": "Not finished yet. Read the line below the buttons.", "m_names": "Type your first name, last name, and period first.", "lang": "Language"}, "es": {"eyebrow": "DETECTIVE DE FUENTES 18", "title": "¿Progreso o división?", "sub": "Nuevas fronteras y una gran sociedad · Resuelve el caso", "bqlabel": "PREGUNTA CLAVE:", "bq": "¿Fueron los años sesenta principalmente una década de progreso para los estadounidenses, o principalmente una década de división?", "job": "Tu trabajo: lee cinco documentos reales de este período. En cada uno, decide qué quiere el autor. Luego cierra el caso.", "howh": "Cómo jugar", "how1": "Lee el expediente.", "how2": "Toca lo que quiere el autor: ★ PROGRESO, ◆ DIVISIÓN o ● UNA VOZ.", "how3": "Copia palabras clave del documento. Luego escribe lo que quiere el autor.", "how4": "Después de cinco expedientes, cierra el caso.", "first": "Nombre", "last": "Apellido", "period": "Período", "date": "Fecha", "dateph": "Se llena al terminar", "p1": "Parte 1 · Los expedientes", "p2": "Parte 2 · Caso cerrado", "prog": "{n} de 5 expedientes resueltos", "chip": "Expediente {i} de 5", "who": "Quién:", "kind": "Documento:", "help": "Ayuda con palabras:", "hint": "Pista:", "want": "¿Qué quiere el autor?", "sN": "★ PROGRESO", "sNs": "quiere nuevos derechos, leyes o ayuda para que el país avance.", "sS": "◆ DIVISIÓN", "sSs": "separa a los grupos o lucha por mantener las cosas como están.", "sV": "● UNA VOZ", "sVs": "quiere ser escuchado o ser libre (no tiene poder para decidir).", "noteph": "“palabras clave” — El autor quiere…", "closeq": "¿Qué fuente responde mejor a la pregunta clave?", "bestph": "Elige una…", "whyl": "¿Por qué es la mejor? Usa un dato o una cita.", "whyph": "Escribe 1–2 oraciones.", "ctrl": "Contraargumento: ¿qué otra fuente elegiría alguien del otro lado? ¿Qué diría? Luego respóndele.", "ctrph": "Escribe 2–3 oraciones.", "chk1": "Elegí una fuente y usé un dato o una cita.", "chk2": "Respondí al contraargumento.", "save": "Guardar progreso", "load": "Cargar progreso", "fin": "Terminado — Descargar archivo para entregar", "todo": "Falta: {x}", "t_names": "nombre, apellido y período", "t_case": "expediente {i} (toca un botón y escribe una pista)", "t_best": "elegir la mejor fuente", "t_why": "explicar por qué", "t_ctr": "escribir el contraargumento", "t_chk": "marcar las dos casillas", "allset": "Todo está listo. Toca Terminado.", "m_saved": "Guardado. Conserva ese archivo. Usa Cargar progreso más tarde. No lo subas a Canvas hasta terminar.", "m_loaded": "Progreso cargado.", "m_loaderr": "Ese archivo no sirve aquí. Carga el archivo -PROGRESS que guardaste de esta tarea.", "m_fin": "¡Listo! Se descargó tu archivo {f}. Sube ese archivo a Canvas.", "m_notfin": "Todavía no terminas. Lee la línea debajo de los botones.", "m_names": "Primero escribe tu nombre, apellido y período.", "lang": "Idioma"}, "ar": {"eyebrow": "المحقّق في المصادر 18", "title": "التقدم أم الانقسام؟", "sub": "حدود جديدة ومجتمع عظيم (New Frontiers and a Great Society) · حلّ القضية", "bqlabel": "السؤال الكبير:", "bq": "هل كانت الستينيات عقد تقدم للأمريكيين في الأساس، أم عقد انقسام في الأساس؟", "job": "مهمتك: اقرأ خمس وثائق حقيقية من هذه الفترة. في كل وثيقة قرّر ماذا يريد الكاتب. ثم أغلق القضية.", "howh": "طريقة اللعب", "how1": "اقرأ ملف القضية.", "how2": "اضغط على ما يريده الكاتب: ★ التقدم، ◆ الانقسام، أو ● صوت.", "how3": "انسخ كلمات الدليل من الوثيقة. ثم اكتب ماذا يريد الكاتب.", "how4": "بعد خمسة ملفات، أغلق القضية.", "first": "الاسم الأول", "last": "اسم العائلة", "period": "الحصة", "date": "التاريخ", "dateph": "يُملأ عند الانتهاء", "p1": "الجزء 1 · ملفات القضية", "p2": "الجزء 2 · القضية مغلقة", "prog": "تم حلّ {n} من 5 ملفات", "chip": "ملف القضية {i} من 5", "who": "من:", "kind": "الوثيقة:", "help": "مساعدة في الكلمات:", "hint": "تلميح:", "want": "ماذا يريد الكاتب؟", "sN": "★ التقدم", "sNs": "يريد حقوقًا أو قوانين أو مساعدة جديدة ليتقدم البلد.", "sS": "◆ الانقسام", "sSs": "يفرّق بين الجماعات أو يقاتل ليبقى كل شيء على حاله.", "sV": "● صوت", "sVs": "يريد أن يُسمع صوته أو أن يكون حرًا (لا يملك سلطة القرار).", "noteph": "«كلمات الدليل» — الكاتب يريد…", "closeq": "أي مصدر يجيب عن السؤال الكبير بأفضل شكل؟", "bestph": "اختر واحدًا…", "whyl": "لماذا هو الأفضل؟ استخدم معلومة أو اقتباسًا.", "whyph": "اكتب جملة أو جملتين.", "ctrl": "الحجة المضادة (Counter-Argument): أي مصدر آخر سيختاره شخص من الجانب الآخر؟ ماذا سيقول؟ ثم ردّ عليه.", "ctrph": "اكتب 2–3 جمل.", "chk1": "اخترت مصدرًا واستخدمت معلومة أو اقتباسًا.", "chk2": "أجبت عن الحجة المضادة.", "save": "حفظ التقدّم", "load": "تحميل التقدّم", "fin": "انتهيت — نزّل الملف للتسليم", "todo": "المتبقي: {x}", "t_names": "الاسم الأول واسم العائلة والحصة", "t_case": "ملف القضية {i} (اضغط زرًّا واكتب دليلًا)", "t_best": "اختيار أفضل مصدر", "t_why": "شرح السبب", "t_ctr": "كتابة الحجة المضادة", "t_chk": "تحديد المربعين", "allset": "كل شيء جاهز. اضغط «انتهيت».", "m_saved": "تم الحفظ. احتفظ بهذا الملف. استخدم «تحميل التقدّم» لاحقًا. لا ترفعه إلى Canvas حتى تنتهي.", "m_loaded": "تم تحميل التقدّم.", "m_loaderr": "هذا الملف لا يعمل هنا. حمّل ملف -PROGRESS الذي حفظته من هذا الواجب.", "m_fin": "تم! نُزّل ملفك {f}. ارفع هذا الملف إلى Canvas.", "m_notfin": "لم تنتهِ بعد. اقرأ السطر تحت الأزرار.", "m_names": "اكتب أولًا اسمك الأول واسم العائلة والحصة.", "lang": "اللغة"}};
+var CASES={"1": {"en": {"who": "Student leaders from six Atlanta colleges (the Atlanta University Center)", "kind": "Public statement", "intro": "Black college students in Atlanta tell the public what they will no longer accept.", "quote": "We do not intend to wait placidly for those rights which are already legally and morally ours to be meted out to us at a time. Today’s youth will not sit by submissively, while being denied all of the rights, privileges, and joys of life. We want to state clearly and unequivocally that we cannot tolerate, in a nation professing democracy and among people professing Christianity, the discriminatory conditions under which the Negro is living today in Atlanta Georgia—supposedly one of the most progressive cities in the South.", "help": "placidly = calmly, without acting · meted out = handed out a little at a time · unequivocally = with no doubt · the Negro = the 1960 word for Black Americans", "hint": "They say they will not “wait.” What do they want?", "short": "Appeal for Human Rights (1960)"}, "es": {"who": "Estudiantes de seis colegios universitarios de Atlanta (el Centro Universitario de Atlanta)", "kind": "Declaración pública", "intro": "Estudiantes universitarios negros de Atlanta dicen al público lo que ya no aceptarán.", "quote": "No pensamos esperar con calma a que nos entreguen poco a poco los derechos que ya son nuestros según la ley y la moral. La juventud de hoy no se quedará sentada con sumisión mientras se le niegan todos los derechos, privilegios y alegrías de la vida. Queremos afirmar con claridad y sin dudas que no podemos tolerar, en una nación que se proclama democrática y entre personas que se proclaman cristianas, las condiciones discriminatorias en que vive hoy el negro en Atlanta, Georgia, supuestamente una de las ciudades más progresistas del Sur.", "help": "esperar con calma = esperar sin actuar · entregar poco a poco = dar de a poquito · sin dudas = con total claridad · el negro = la palabra de 1960 para los afroamericanos", "hint": "Dicen que no van a “esperar”. ¿Qué quieren?", "short": "Llamado por los derechos humanos (1960)"}, "ar": {"who": "طلاب ست كليات في أتلانتا (Atlanta University Center)", "kind": "بيان علني", "intro": "طلاب جامعيون سود في أتلانتا يقولون للجمهور ما لن يقبلوه بعد اليوم.", "quote": "لا ننوي أن ننتظر بهدوء حتى تُمنح لنا، متى شاء الآخرون، حقوق هي لنا أصلًا بحكم القانون والأخلاق. إن شباب اليوم لن يجلسوا خاضعين بينما تُحجب عنهم كل حقوق الحياة وامتيازاتها ومباهجها. ونريد أن نقول بوضوح وبلا لبس إننا لا نستطيع أن نتحمل، في أمة تدّعي الديمقراطية وبين أناس يدّعون المسيحية، الأوضاع التمييزية التي يعيش فيها «الزنجي» اليوم في أتلانتا بجورجيا، التي يُفترض أنها من أكثر مدن الجنوب تقدمًا.", "help": "بهدوء = دون تحرك · تُمنح = تُعطى شيئًا فشيئًا · بلا لبس = بلا شك · الزنجي = الكلمة التي كانت تُستخدم عام 1960 للأمريكيين السود", "hint": "يقولون إنهم لن «ينتظروا». ماذا يريدون؟", "short": "نداء من أجل حقوق الإنسان (1960)"}, "year": "1960"}, "2": {"en": {"who": "Ross Barnett, Governor of Mississippi", "kind": "Radio and TV speech to the people of Mississippi", "intro": "A governor speaks about the University of Mississippi and his state’s schools.", "quote": "I have said in every county in Mississippi that no school in our state will be integrated while I am your Governor. I shall do everything in my power to prevent integration in our schools. I assure you that the schools will not be closed if this can possibly be avoided, but they will not be integrated if I can prevent it.", "help": "integrated = open to all races together · governor = the leader of a state · prevent = stop from happening · avoided = kept from happening", "hint": "What will the governor do about school integration?", "short": "Barnett’s speech (1962)"}, "es": {"who": "Ross Barnett, gobernador de Misisipi", "kind": "Discurso por radio y televisión al pueblo de Misisipi", "intro": "Un gobernador habla sobre la Universidad de Misisipi y las escuelas de su estado.", "quote": "He dicho en cada condado de Misisipi que ninguna escuela de nuestro estado será integrada mientras yo sea su gobernador. Haré todo lo que esté a mi alcance para impedir la integración en nuestras escuelas. Les aseguro que las escuelas no se cerrarán si es posible evitarlo, pero no serán integradas si puedo impedirlo.", "help": "integrada = abierta a todas las razas juntas · gobernador = líder de un estado · impedir = no dejar que ocurra · evitar = que no suceda", "hint": "¿Qué hará el gobernador con la integración escolar?", "short": "Discurso de Barnett (1962)"}, "ar": {"who": "روس بارنيت (Ross Barnett)، حاكم ولاية ميسيسيبي", "kind": "خطاب عبر الإذاعة والتلفزيون إلى شعب ميسيسيبي", "intro": "حاكم يتحدث عن جامعة ميسيسيبي ومدارس ولايته.", "quote": "لقد قلت في كل مقاطعة في ميسيسيبي إنه لن تُدمَج أي مدرسة في ولايتنا ما دمتُ حاكمكم. وسأبذل كل ما في وسعي لمنع الدمج في مدارسنا. وأؤكد لكم أن المدارس لن تُغلق إن أمكن تجنب ذلك، لكنها لن تُدمَج إن استطعت منع ذلك.", "help": "الدمج = جمع الأعراق معًا في مكان واحد · الحاكم = قائد الولاية · منع = عدم السماح بحدوث الشيء · تجنب = الابتعاد عن حدوثه", "hint": "ماذا سيفعل الحاكم بشأن دمج المدارس؟", "short": "خطاب بارنيت (1962)"}, "year": "1962"}, "3": {"en": {"who": "George Wallace, new Governor of Alabama", "kind": "Inauguration speech", "intro": "A new governor makes a promise to Alabama on his first day in office.", "quote": "Today I have stood, where once Jefferson Davis stood, and took an oath to my people. . . . In the name of the greatest people that have ever trod this earth, I draw the line in the dust and toss the gauntlet before the feet of tyranny . . . and I say . . . segregation today . . . segregation tomorrow . . . segregation forever.", "help": "oath = a serious promise · gauntlet = a challenge · tyranny = harsh, unfair power · segregation = forced separation by race · Jefferson Davis = president of the Confederacy", "hint": "What does he promise to keep forever?", "short": "Wallace’s speech (1963)"}, "es": {"who": "George Wallace, nuevo gobernador de Alabama", "kind": "Discurso de toma de posesión", "intro": "Un nuevo gobernador hace una promesa a Alabama en su primer día en el cargo.", "quote": "Hoy me he parado donde una vez estuvo Jefferson Davis y presté juramento ante mi pueblo. . . . En nombre del pueblo más grande que jamás ha pisado esta tierra, trazo la línea en el polvo y arrojo el guante ante los pies de la tiranía . . . y digo . . . segregación hoy . . . segregación mañana . . . segregación para siempre.", "help": "juramento = promesa seria · guante = un reto · tiranía = poder duro e injusto · segregación = separación forzada por raza · Jefferson Davis = presidente de la Confederación", "hint": "¿Qué promete mantener para siempre?", "short": "Discurso de Wallace (1963)"}, "ar": {"who": "جورج والاس (George Wallace)، الحاكم الجديد لولاية ألاباما", "kind": "خطاب التنصيب", "intro": "حاكم جديد يقطع وعدًا لألاباما في أول يوم له في المنصب.", "quote": "اليوم وقفتُ حيث وقف جيفرسون ديفيس يومًا، وأقسمتُ اليمين أمام شعبي. . . . باسم أعظم شعب وطئ هذه الأرض، أرسم الخط في التراب وألقي القفاز أمام أقدام الطغيان . . . وأقول . . . الفصل اليوم . . . الفصل غدًا . . . الفصل إلى الأبد.", "help": "اليمين = وعد جاد · القفاز = تحدٍّ · الطغيان = سلطة قاسية وظالمة · الفصل العنصري = فصل إجباري بسبب العِرق · جيفرسون ديفيس = رئيس الكونفدرالية", "hint": "ماذا يعد بالإبقاء عليه إلى الأبد؟", "short": "خطاب والاس (1963)"}, "year": "1963"}, "4": {"en": {"who": "Congress and President Johnson (a new law)", "kind": "Law (Title II)", "intro": "Congress passes a law about restaurants, hotels, and theaters.", "quote": "SEC. 201. (a) All persons shall be entitled to the full and equal enjoyment of the goods, services, facilities, and privileges, advantages, and accommodations of any place of public accommodation, as defined in this section, without discrimination or segregation on the ground of race, color, religion, or national origin. . . . (2) any restaurant, cafeteria, lunchroom, lunch counter, soda fountain, or other facility principally engaged in selling food for consumption on the premises . . . .", "help": "entitled = having the right to · accommodation = a place or service open to the public · segregation = forced separation by race · commerce = trade", "hint": "Who has the right to use these places?", "short": "Civil Rights Act (1964)"}, "es": {"who": "El Congreso y el presidente Johnson (una ley nueva)", "kind": "Ley (Título II)", "intro": "El Congreso aprueba una ley sobre restaurantes, hoteles y teatros.", "quote": "SEC. 201. (a) Todas las personas tendrán derecho al pleno e igual disfrute de los bienes, servicios, instalaciones, privilegios, ventajas y comodidades de cualquier lugar abierto al público, según se define en esta sección, sin discriminación ni segregación por motivos de raza, color, religión u origen nacional. . . . (2) cualquier restaurante, cafetería, comedor, mostrador de comidas, fuente de sodas u otro establecimiento dedicado principalmente a vender comida para consumo en el local . . . .", "help": "tener derecho = poder hacer algo por ley · lugar abierto al público = sitio y servicio para todos · segregación = separación forzada por raza · comercio = compra y venta", "hint": "¿Quién tiene derecho a usar estos lugares?", "short": "Ley de Derechos Civiles (1964)"}, "ar": {"who": "الكونغرس الأمريكي والرئيس جونسون (قانون جديد)", "kind": "قانون (الباب الثاني)", "intro": "يُقرّ الكونغرس قانونًا بشأن المطاعم والفنادق ودور العرض.", "quote": "المادة 201. (أ) يحق لجميع الأشخاص التمتع الكامل والمتساوي بالبضائع والخدمات والمرافق والامتيازات والمزايا والتسهيلات في أي مكان من أماكن الخدمة العامة، كما هو معرّف في هذه المادة، دون تمييز أو فصل على أساس العِرق أو اللون أو الدين أو الأصل القومي. . . . (2) أي مطعم أو كافتيريا أو قاعة غداء أو منضدة غداء أو مقصف مشروبات أو أي منشأة تعمل أساسًا في بيع الطعام للاستهلاك داخل المكان . . . .", "help": "يحق = له الحق في · أماكن الخدمة العامة = أماكن وخدمات مفتوحة للجمهور · الفصل = فصل إجباري بسبب العِرق · التجارة = البيع والشراء", "hint": "من له الحق في استخدام هذه الأماكن؟", "short": "قانون الحقوق المدنية (1964)"}, "year": "1964"}, "5": {"en": {"who": "The Kerner Commission (a group President Johnson set up)", "kind": "Government report", "intro": "After riots in many cities, a commission tells the nation what it found.", "quote": "This is our basic conclusion: Our nation is moving toward two societies, one black, one white—separate and unequal. Reaction to last summer’s disorders has quickened the movement and deepened the division. Discrimination and segregation have long permeated much of American life; they now threaten the future of every American. This deepening racial division is not inevitable. The movement apart can be reversed.", "help": "disorders = riots and street violence · permeated = spread through everything · inevitable = sure to happen · reversed = turned around", "hint": "Does the author like the split, or is the author trying to stop it?", "short": "Kerner Commission report (1968)"}, "es": {"who": "La Comisión Kerner (un grupo creado por el presidente Johnson)", "kind": "Informe del gobierno", "intro": "Tras los disturbios en muchas ciudades, una comisión dice a la nación lo que encontró.", "quote": "Esta es nuestra conclusión básica: nuestra nación se encamina hacia dos sociedades, una negra y otra blanca, separadas y desiguales. La reacción a los disturbios del verano pasado ha acelerado el movimiento y profundizado la división. La discriminación y la segregación han permeado durante mucho tiempo gran parte de la vida estadounidense; ahora amenazan el futuro de todos los estadounidenses. Esta creciente división racial no es inevitable. El movimiento de separación puede revertirse.", "help": "disturbios = peleas y violencia en las calles · permear = extenderse por todas partes · inevitable = seguro que ocurrirá · revertir = darle la vuelta", "hint": "¿Al autor le gusta la división o intenta detenerla?", "short": "Informe Kerner (1968)"}, "ar": {"who": "لجنة كيرنر (Kerner Commission) — مجموعة شكّلها الرئيس جونسون", "kind": "تقرير حكومي", "intro": "بعد أعمال الشغب في مدن كثيرة، تخبر لجنة الأمة بما وجدته.", "quote": "هذا هو استنتاجنا الأساسي: أمتنا تتجه نحو مجتمعين، أحدهما أسود والآخر أبيض، منفصلين وغير متساويين. وقد عجّل رد الفعل على اضطرابات الصيف الماضي هذا الاتجاه وعمّق الانقسام. لقد تغلغل التمييز والفصل في جزء كبير من الحياة الأمريكية منذ زمن طويل؛ وهما الآن يهددان مستقبل كل أمريكي. وهذا الانقسام العرقي المتعمق ليس حتميًا. ويمكن عكس هذا الابتعاد.", "help": "اضطرابات = شغب وعنف في الشوارع · تغلغل = انتشر في كل مكان · حتمي = لا بد أن يحدث · يعكس = يعيد في الاتجاه المضاد", "hint": "هل يرضى الكاتب عن الانقسام أم يحاول إيقافه؟", "short": "تقرير كيرنر (1968)"}, "year": "1968"}};
+var SIDES={"1": "V", "2": "S", "3": "S", "4": "N", "5": "N"};
+var CN=[1,2,3,4,5],lang='en',sides={},msgKey=null,msgVars=null;
+function $(s,r){return (r||document).querySelector(s)}function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+function T(k,v){var s=(I18N[lang]&&I18N[lang][k])||I18N.en[k]||k;if(v)for(var x in v)s=s.split('{'+x+'}').join(v[x]);return s}
+function setMsg(k,v,cls){msgKey=k;msgVars=v;var m=$('#msg');m.className=cls||'';m.textContent=T(k,v)}
+function setLang(l,keep){
+ lang=l;document.documentElement.lang=l;document.documentElement.dir=(l==='ar'?'rtl':'ltr');
+ $$('[data-t]').forEach(function(e){e.textContent=T(e.getAttribute('data-t'))});
+ $$('[data-tp]').forEach(function(e){e.placeholder=T(e.getAttribute('data-tp'))});
+ CN.forEach(function(i){var d=CASES[i][l]||CASES[i].en;
+  $$('[data-c][data-i="'+i+'"]').forEach(function(e){e.textContent=d[e.getAttribute('data-c')]});
+  $('[data-chip="'+i+'"]').textContent=T('chip',{i:i});
+  var o=$('[data-orig="'+i+'"]');o.textContent=(l==='en'?'':'English original: '+CASES[i].en.quote);
+  var op=$('[data-opt="'+i+'"]');op.textContent=CASES[i].year+' · '+d.short;
+ });
+ $$('.langbar button').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-lang')===l?'true':'false')});
+ try{localStorage.setItem(STORE+'_lang',l)}catch(e){}
+ if(msgKey)$('#msg').textContent=T(msgKey,msgVars);
+ refresh();
+}
+function val(id){var e=document.getElementById(id);return e?e.value.trim():''}
+function field(n){var e=$('[data-id="'+n+'"]');return e?e.value:''}
+function state(){
+ var a={};CN.forEach(function(i){a['note'+i]=field('note'+i)});a.best=field('best');a.why=field('why');a.counter=field('counter');
+ var t={national:0,state:0,voice:0};CN.forEach(function(i){var s=sides[i];if(s==='N')t.national++;if(s==='S')t.state++;if(s==='V')t.voice++});
+ return {packet:PACKET,course:COURSE,version:1,saved:new Date().toISOString(),completed:false,
+  student:{first:val('first'),last:val('last'),period:val('period'),date:val('date')},
+  sides:JSON.parse(JSON.stringify(sides)),answers:a,
+  checks:{chk1:$('#chk1').checked,chk2:$('#chk2').checked},tally:t};
+}
+function missing(){
+ var m=[],s=state();
+ if(!s.student.first||!s.student.last||!s.student.period)m.push(T('t_names'));
+ CN.forEach(function(i){if(!sides[i]||!s.answers['note'+i].trim())m.push(T('t_case',{i:i}))});
+ if(!s.answers.best)m.push(T('t_best'));if(!s.answers.why.trim())m.push(T('t_why'));if(!s.answers.counter.trim())m.push(T('t_ctr'));
+ if(!(s.checks.chk1&&s.checks.chk2))m.push(T('t_chk'));
+ return m;
+}
+function refresh(){
+ var done=0;CN.forEach(function(i){var c=$('#card'+i),ok=!!sides[i]&&field('note'+i).trim()!=='';if(ok)done++;
+  c.classList.toggle('done',ok);c.classList.toggle('isS',sides[i]==='S');c.classList.toggle('isV',sides[i]==='V');
+  $$('.stances button',c).forEach(function(b){b.setAttribute('aria-pressed',sides[i]===b.getAttribute('data-v')?'true':'false')})});
+ $('#fill').style.width=(done*20)+'%';$('#progt').textContent=T('prog',{n:done});
+ var m=missing();$('#todo').textContent=m.length?T('todo',{x:m.join(lang==='ar'?'؛ ':'; ')}):T('allset');
+ $('#fin').disabled=m.length>0;
+}
+function persist(){try{localStorage.setItem(STORE,JSON.stringify(state()))}catch(e){}}
+function apply(s){
+ $('#first').value=s.student.first||'';$('#last').value=s.student.last||'';$('#period').value=s.student.period||'';$('#date').value=s.student.date||'';
+ sides={};for(var k in (s.sides||{}))sides[k]=s.sides[k];
+ var a=s.answers||{};CN.forEach(function(i){$('[data-id="note'+i+'"]').value=a['note'+i]||''});
+ $('#best').value=a.best||'';$('#why').value=a.why||'';$('#counter').value=a.counter||'';
+ $('#chk1').checked=!!(s.checks&&s.checks.chk1);$('#chk2').checked=!!(s.checks&&s.checks.chk2);refresh();
+}
+function fname(s){var n=(s.student.last+'_'+s.student.first).normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^A-Za-z0-9_\-]+/g,'_');return n||'Student'}
+function dl(name,obj){var b=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(u);a.remove()},500)}
+function namesOk(){var ok=true;['first','last','period'].forEach(function(id){var e=$('#'+id),bad=!e.value.trim();e.classList.toggle('bad',bad);if(bad)ok=false});return ok}
+document.addEventListener('click',function(e){
+ var b=e.target.closest('.stances button');if(b){var i=+b.closest('.card').getAttribute('data-i');sides[i]=b.getAttribute('data-v');refresh();persist();return}
+ var lb=e.target.closest('.langbar button');if(lb){setLang(lb.getAttribute('data-lang'))}
+});
+document.addEventListener('input',function(){refresh();persist();$$('.names input.bad').forEach(function(x){if(x.value.trim())x.classList.remove('bad')})});
+document.addEventListener('change',function(){refresh();persist()});
+$('#save').onclick=function(){if(!namesOk()){setMsg('m_names',null,'err');return}var s=state();dl(fname(s)+'-'+PACKET+'-PROGRESS.json',s);setMsg('m_saved',null,'ok')};
+$('#load').onclick=function(){$('#file').click()};
+$('#file').onchange=function(ev){var f=ev.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(){try{var s=JSON.parse(r.result);if(!s||s.packet!==PACKET)throw 0;apply(s);persist();setMsg('m_loaded',null,'ok')}catch(x){setMsg('m_loaderr',null,'err')}};r.readAsText(f);ev.target.value=''};
+$('#fin').onclick=function(){
+ if(!namesOk()||missing().length){setMsg('m_notfin',null,'err');return}
+ var d=new Date(),p=function(n){return (n<10?'0':'')+n};$('#date').value=(d.getMonth()+1)+'/'+d.getDate()+'/'+d.getFullYear();
+ var s=state();s.completed=true;var f=fname(s)+'-'+PACKET+'.json';dl(f,s);persist();setMsg('m_fin',{f:f},'ok');
+};
+(function init(){
+ var l='en';try{var q=new URLSearchParams(location.search).get('lang');if(q==='es'||q==='ar')l=q;else{var sv=localStorage.getItem(STORE+'_lang');if(sv==='es'||sv==='ar')l=sv}}catch(e){}
+ setLang(l);
+ try{var raw=localStorage.getItem(STORE);if(raw){var s=JSON.parse(raw);if(s&&s.packet===PACKET)apply(s)}}catch(e){}
+ refresh();
+})();
+</script></body></html>

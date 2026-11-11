@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Union or Division? · Source Detective 6</title>
+<style>
+:root{--bg:#2E471F;--text:#EFF4EB;--a1:#45682F;--a2:#D2774B;--hl:#E1A98E;--page:#E8EEE3;--paper:#FAFCF9;--ink:#223517;--rule:#DAE1D5;--gold:#824A2E;--keybg:#FAF1ED;--voice:#5B3A8A;--ok:#2E6B3E}
+@media (prefers-color-scheme:dark){:root{--page:#172410;--paper:#253919;--ink:#EFF4EB;--rule:#586C4C;--keybg:#3F5631;--gold:#E1A98E}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font:17px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+.wrap{max-width:820px;margin:0 auto;padding:0 14px 40px}
+.hero{background:var(--bg);color:var(--text);padding:26px 14px 22px;text-align:center;border-bottom:5px solid var(--a2)}
+.hero .eyebrow{letter-spacing:.18em;font-weight:700;font-size:.8rem;color:var(--hl)}
+.hero h1{margin:.2em 0 .1em;font-size:2rem;line-height:1.15}
+.hero .sub{opacity:.92}
+.langbar{display:flex;gap:8px;justify-content:center;align-items:center;margin:14px 0;flex-wrap:wrap}
+.langbar button{border:2px solid var(--a1);background:var(--paper);color:var(--ink);padding:8px 16px;border-radius:999px;font:inherit;font-weight:700;cursor:pointer;min-height:44px}
+.langbar button[aria-pressed=true]{background:var(--a1);color:#fff}
+.box{background:var(--paper);border:1px solid var(--rule);border-radius:12px;padding:14px 16px;margin:14px 0}
+.bq{background:var(--keybg);border:2px solid var(--a2);border-radius:12px;padding:14px 16px;margin:14px 0}
+.bq b{color:var(--gold);letter-spacing:.06em}
+.bq .q{font-size:1.12rem;font-weight:700;margin-top:4px}
+h2{color:var(--a1);margin:26px 0 6px;font-size:1.25rem}
+@media (prefers-color-scheme:dark){h2{color:var(--hl)}}
+.how ol{margin:6px 0 0;padding-inline-start:22px}
+.names{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.names label{display:block;font-weight:700;font-size:.85rem}
+.names input{width:100%;padding:10px;border:2px solid var(--rule);border-radius:8px;font:inherit;background:var(--paper);color:var(--ink)}
+.names input.bad{border-color:#B3261E;background:#FDECEA;color:#000}
+.names input[readonly]{background:var(--keybg)}
+.meter{margin:14px 0} .meter .bar{height:12px;background:var(--rule);border-radius:99px;overflow:hidden}
+.meter .fill{height:100%;width:0;background:var(--a2);transition:width .3s}
+.meter .t{font-weight:700;margin-top:4px}
+.card{background:var(--paper);border:1px solid var(--rule);border-inline-start:8px solid var(--rule);border-radius:12px;padding:14px 16px;margin:16px 0}
+.card.done{border-inline-start-color:var(--bg)} .card.done.isS{border-inline-start-color:var(--a2)} .card.done.isV{border-inline-start-color:var(--voice)}
+.chip{display:inline-block;background:var(--bg);color:var(--text);border-radius:99px;padding:2px 12px;font-weight:700;font-size:.9rem}
+.cnum{margin-inline-start:8px;color:var(--gold);font-weight:700;font-size:.9rem}
+.meta{margin:8px 0 2px;font-size:.95rem} .meta b{color:var(--a1)}
+@media (prefers-color-scheme:dark){.meta b{color:var(--hl)}}
+blockquote{margin:10px 0;padding:12px 14px;background:var(--keybg);border-inline-start:5px solid var(--a2);border-radius:6px;font-style:italic;font-size:1.02rem}
+.orig{display:none;direction:ltr;text-align:left;font-size:.9rem;opacity:.9;margin:4px 0}
+html[lang=ar] .orig,html[lang=es] .orig{display:block}
+.orig i{font-style:italic}
+.cite{direction:ltr;text-align:left;font-size:.82rem;opacity:.85;margin:6px 0}
+.help,.hint{font-size:.93rem;margin:6px 0}
+.want{font-weight:700;margin:10px 0 6px}
+.stances{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.stances button{text-align:start;border:2px solid var(--rule);background:var(--paper);color:var(--ink);border-radius:10px;padding:10px;font:inherit;cursor:pointer;min-height:64px}
+.stances button b{display:block;font-size:1rem} .stances button small{display:block;font-size:.78rem;opacity:.85;line-height:1.25}
+.stances button[aria-pressed=true]{background:var(--bg);color:var(--text);border-color:var(--bg)}
+.stances button[data-v=S][aria-pressed=true]{background:var(--a2);color:#10312C;border-color:var(--a2)}
+.stances button[data-v=V][aria-pressed=true]{background:var(--voice);color:#fff;border-color:var(--voice)}
+.stances button:focus-visible,.btns button:focus-visible,select:focus-visible,textarea:focus-visible,input:focus-visible,.langbar button:focus-visible{outline:3px solid var(--a2);outline-offset:2px}
+@media (max-width:620px){.stances{grid-template-columns:1fr} .names{grid-template-columns:1fr 1fr} .hero h1{font-size:1.6rem}}
+textarea,select{width:100%;margin-top:8px;padding:10px;border:2px solid var(--rule);border-radius:8px;font:inherit;background:var(--paper);color:var(--ink);unicode-bidi:plaintext}
+textarea{min-height:84px}
+.fin label.l{display:block;font-weight:700;margin-top:12px}
+.chk{display:flex;gap:8px;align-items:flex-start;margin:8px 0} .chk input{width:22px;height:22px;margin-top:3px}
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 6px}
+.btns button{border:0;border-radius:10px;padding:12px 18px;font:inherit;font-weight:700;cursor:pointer;min-height:48px;background:var(--a1);color:#fff}
+.btns button#fin{background:var(--bg);color:var(--text);border:2px solid var(--a2)}
+.btns button:disabled{background:#9AA9A7;color:#fff;border-color:#9AA9A7;cursor:not-allowed}
+#todo{font-weight:700;margin:6px 0} #msg{margin:6px 0;min-height:1.4em} #msg.err{color:#B3261E} #msg.ok{color:var(--ok)}
+footer{background:var(--bg);color:var(--text);text-align:center;padding:14px;font-size:.78rem;letter-spacing:.08em;border-top:5px solid var(--a2);margin-top:30px}
+footer div+div{opacity:.9;margin-top:2px}
+</style></head><body>
+<header class="hero"><div class="eyebrow" data-t="eyebrow"></div><h1 data-t="title"></h1><div class="sub" data-t="sub"></div></header>
+<div class="wrap">
+<div class="langbar" role="group" aria-label="Language"><button type="button" data-lang="en" aria-pressed="true">English</button><button type="button" data-lang="es" aria-pressed="false">Español</button><button type="button" data-lang="ar" aria-pressed="false">العربية</button></div>
+<div class="bq"><b data-t="bqlabel"></b><div class="q" data-t="bq"></div><div style="margin-top:8px" data-t="job"></div></div>
+<div class="box how"><b data-t="howh"></b><ol><li data-t="how1"></li><li data-t="how2"></li><li data-t="how3"></li><li data-t="how4"></li></ol></div>
+<div class="box names">
+ <div><label for="first" data-t="first"></label><input id="first" autocomplete="given-name"></div>
+ <div><label for="last" data-t="last"></label><input id="last" autocomplete="family-name"></div>
+ <div><label for="period" data-t="period"></label><input id="period" inputmode="numeric"></div>
+ <div><label for="date" data-t="date"></label><input id="date" readonly data-tp="dateph"></div>
+</div>
+<div class="meter"><div class="bar"><div class="fill" id="fill"></div></div><div class="t" id="progt"></div></div>
+<h2 data-t="p1"></h2>
+
+<section class="card" id="card1" data-i="1">
+ <span class="chip" data-year="1">1819</span><span class="cnum" data-chip="1"></span>
+ <div class="meta"><b data-t="who">Who:</b> <span data-c="who" data-i="1"></span> · <b data-t="kind">Document:</b> <span data-c="kind" data-i="1"></span></div>
+ <div class="meta" data-c="intro" data-i="1"></div>
+ <blockquote data-c="quote" data-i="1" dir="auto"></blockquote>
+ <div class="orig" data-orig="1"></div>
+ <div class="cite" dir="ltr">John Marshall, opinion in <i>McCulloch v. Maryland</i>, 1819 (Washington, D.C.: National Archives, 2022), https://www.archives.gov/milestone-documents/mcculloch-v-maryland, in Norton, <i>History Source Collection</i> (Primary and Secondary Source Collection for <i>America: The Essential Learning Edition</i>), Part 3.</div>
+ <div class="help"><b data-t="help">Word help:</b> <span data-c="help" data-i="1"></span></div>
+ <div class="hint"><b data-t="hint">Hint:</b> <span data-c="hint" data-i="1"></span></div>
+ <div class="want" data-t="want">What does the author want?</div>
+ <div class="stances" role="group" aria-label="stance 1">
+  <button type="button" data-v="N" aria-pressed="false"><b data-t="sN"></b><small data-t="sNs"></small></button>
+  <button type="button" data-v="S" aria-pressed="false"><b data-t="sS"></b><small data-t="sSs"></small></button>
+  <button type="button" data-v="V" aria-pressed="false"><b data-t="sV"></b><small data-t="sVs"></small></button>
+ </div>
+ <textarea data-id="note1" data-tp="noteph" rows="3"></textarea>
+</section>
+<section class="card" id="card2" data-i="2">
+ <span class="chip" data-year="2">1820</span><span class="cnum" data-chip="2"></span>
+ <div class="meta"><b data-t="who">Who:</b> <span data-c="who" data-i="2"></span> · <b data-t="kind">Document:</b> <span data-c="kind" data-i="2"></span></div>
+ <div class="meta" data-c="intro" data-i="2"></div>
+ <blockquote data-c="quote" data-i="2" dir="auto"></blockquote>
+ <div class="orig" data-orig="2"></div>
+ <div class="cite" dir="ltr">Thomas Jefferson to John Holmes, letter, April 22, 1820, Library of Congress, https://www.loc.gov/exhibits/jefferson/159.html, in Norton, <i>History Source Collection</i> (Primary and Secondary Source Collection for <i>America: The Essential Learning Edition</i>), Part 3. Jefferson’s lowercase sentence openings are kept as in the source.</div>
+ <div class="help"><b data-t="help">Word help:</b> <span data-c="help" data-i="2"></span></div>
+ <div class="hint"><b data-t="hint">Hint:</b> <span data-c="hint" data-i="2"></span></div>
+ <div class="want" data-t="want">What does the author want?</div>
+ <div class="stances" role="group" aria-label="stance 2">
+  <button type="button" data-v="N" aria-pressed="false"><b data-t="sN"></b><small data-t="sNs"></small></button>
+  <button type="button" data-v="S" aria-pressed="false"><b data-t="sS"></b><small data-t="sSs"></small></button>
+  <button type="button" data-v="V" aria-pressed="false"><b data-t="sV"></b><small data-t="sVs"></small></button>
+ </div>
+ <textarea data-id="note2" data-tp="noteph" rows="3"></textarea>
+</section>
+<section class="card" id="card3" data-i="3">
+ <span class="chip" data-year="3">1830</span><span class="cnum" data-chip="3"></span>
+ <div class="meta"><b data-t="who">Who:</b> <span data-c="who" data-i="3"></span> · <b data-t="kind">Document:</b> <span data-c="kind" data-i="3"></span></div>
+ <div class="meta" data-c="intro" data-i="3"></div>
+ <blockquote data-c="quote" data-i="3" dir="auto"></blockquote>
+ <div class="orig" data-orig="3"></div>
+ <div class="cite" dir="ltr">“Memorial of the Cherokee Legislature,” <i>Cherokee Phoenix</i>, April 14, 1830, 1, in Norton, <i>History Source Collection</i> (Primary and Secondary Source Collection for <i>America: The Essential Learning Edition</i>), Part 3.</div>
+ <div class="help"><b data-t="help">Word help:</b> <span data-c="help" data-i="3"></span></div>
+ <div class="hint"><b data-t="hint">Hint:</b> <span data-c="hint" data-i="3"></span></div>
+ <div class="want" data-t="want">What does the author want?</div>
+ <div class="stances" role="group" aria-label="stance 3">
+  <button type="button" data-v="N" aria-pressed="false"><b data-t="sN"></b><small data-t="sNs"></small></button>
+  <button type="button" data-v="S" aria-pressed="false"><b data-t="sS"></b><small data-t="sSs"></small></button>
+  <button type="button" data-v="V" aria-pressed="false"><b data-t="sV"></b><small data-t="sVs"></small></button>
+ </div>
+ <textarea data-id="note3" data-tp="noteph" rows="3"></textarea>
+</section>
+<section class="card" id="card4" data-i="4">
+ <span class="chip" data-year="4">1832</span><span class="cnum" data-chip="4"></span>
+ <div class="meta"><b data-t="who">Who:</b> <span data-c="who" data-i="4"></span> · <b data-t="kind">Document:</b> <span data-c="kind" data-i="4"></span></div>
+ <div class="meta" data-c="intro" data-i="4"></div>
+ <blockquote data-c="quote" data-i="4" dir="auto"></blockquote>
+ <div class="orig" data-orig="4"></div>
+ <div class="cite" dir="ltr">“South Carolina’s Ordinance of Nullification,” 1832, in Paul Leicester Ford, ed., <i>The Federalist: A Commentary on the Constitution of the United States by Alexander Hamilton, James Madison and John Jay</i> (New York: Henry Holt and Company, 1898), 690–92, in Norton, <i>History Source Collection</i> (Primary and Secondary Source Collection for <i>America: The Essential Learning Edition</i>), Part 3.</div>
+ <div class="help"><b data-t="help">Word help:</b> <span data-c="help" data-i="4"></span></div>
+ <div class="hint"><b data-t="hint">Hint:</b> <span data-c="hint" data-i="4"></span></div>
+ <div class="want" data-t="want">What does the author want?</div>
+ <div class="stances" role="group" aria-label="stance 4">
+  <button type="button" data-v="N" aria-pressed="false"><b data-t="sN"></b><small data-t="sNs"></small></button>
+  <button type="button" data-v="S" aria-pressed="false"><b data-t="sS"></b><small data-t="sSs"></small></button>
+  <button type="button" data-v="V" aria-pressed="false"><b data-t="sV"></b><small data-t="sVs"></small></button>
+ </div>
+ <textarea data-id="note4" data-tp="noteph" rows="3"></textarea>
+</section>
+<section class="card" id="card5" data-i="5">
+ <span class="chip" data-year="5">1832</span><span class="cnum" data-chip="5"></span>
+ <div class="meta"><b data-t="who">Who:</b> <span data-c="who" data-i="5"></span> · <b data-t="kind">Document:</b> <span data-c="kind" data-i="5"></span></div>
+ <div class="meta" data-c="intro" data-i="5"></div>
+ <blockquote data-c="quote" data-i="5" dir="auto"></blockquote>
+ <div class="orig" data-orig="5"></div>
+ <div class="cite" dir="ltr">Andrew Jackson, “Proclamation Regarding Nullification,” 1832, in Paul Leicester Ford, ed., <i>The Federalist: A Commentary on the Constitution of the United States by Alexander Hamilton, James Madison and John Jay</i> (New York: Henry Holt and Company, 1898), 692–708, in Norton, <i>History Source Collection</i> (Primary and Secondary Source Collection for <i>America: The Essential Learning Edition</i>), Part 3.</div>
+ <div class="help"><b data-t="help">Word help:</b> <span data-c="help" data-i="5"></span></div>
+ <div class="hint"><b data-t="hint">Hint:</b> <span data-c="hint" data-i="5"></span></div>
+ <div class="want" data-t="want">What does the author want?</div>
+ <div class="stances" role="group" aria-label="stance 5">
+  <button type="button" data-v="N" aria-pressed="false"><b data-t="sN"></b><small data-t="sNs"></small></button>
+  <button type="button" data-v="S" aria-pressed="false"><b data-t="sS"></b><small data-t="sSs"></small></button>
+  <button type="button" data-v="V" aria-pressed="false"><b data-t="sV"></b><small data-t="sVs"></small></button>
+ </div>
+ <textarea data-id="note5" data-tp="noteph" rows="3"></textarea>
+</section>
+<h2 data-t="p2"></h2>
+<div class="box fin">
+ <div class="bq" style="margin:0"><b data-t="bqlabel"></b><div class="q" data-t="bq"></div></div>
+ <label class="l" for="best" data-t="closeq"></label>
+ <select id="best" data-id="best"><option value="" data-t="bestph"></option><option value="1" data-opt="1"></option><option value="2" data-opt="2"></option><option value="3" data-opt="3"></option><option value="4" data-opt="4"></option><option value="5" data-opt="5"></option></select>
+ <label class="l" for="why" data-t="whyl"></label><textarea id="why" data-id="why" data-tp="whyph" rows="3"></textarea>
+ <label class="l" for="counter" data-t="ctrl"></label><textarea id="counter" data-id="counter" data-tp="ctrph" rows="4"></textarea>
+ <div class="chk"><input type="checkbox" id="chk1"><label for="chk1" data-t="chk1"></label></div>
+ <div class="chk"><input type="checkbox" id="chk2"><label for="chk2" data-t="chk2"></label></div>
+</div>
+<div class="btns"><button type="button" id="save" data-t="save"></button><button type="button" id="load" data-t="load"></button><button type="button" id="fin" disabled data-t="fin"></button></div>
+<input type="file" id="file" accept=".json,application/json" hidden>
+<div id="todo" aria-live="polite"></div><div id="msg" role="status" aria-live="polite"></div>
+</div>
+<footer><div>UNIT 2 · AN EXPANDING NATION | CPUSH</div><div>DANIEL GARZA, M.A.</div></footer>
+<script>
+var PACKET='L6_Source_Detective',STORE='cpush_l6_source_detective',COURSE='CPUSH';
+var I18N={"en": {"eyebrow": "SOURCE DETECTIVE 6", "title": "Union or Division?", "sub": "Nationalism, Sectionalism, and Jacksonian Democracy · Crack the Case", "bqlabel": "BIG QUESTION:", "bq": "From 1815 to 1840, did the United States grow more united and democratic, or more divided and unequal?", "job": "Your job: read five real documents from this time period. For each one, decide what the author wants. Then close the case.", "howh": "How to play", "how1": "Read the case file.", "how2": "Tap what the author wants: ★ UNION, ◆ DIVISION, or ● A VOICE.", "how3": "Copy clue words from the document. Then write what the author wants.", "how4": "After five case files, close the case.", "first": "First name", "last": "Last name", "period": "Period", "date": "Date", "dateph": "Fills in when you finish", "p1": "Part 1 · The Case Files", "p2": "Part 2 · Case Closed", "prog": "{n} of 5 case files cracked", "chip": "Case file {i} of 5", "who": "Who:", "kind": "Document:", "help": "Word help:", "hint": "Hint:", "want": "What does the author want?", "sN": "★ UNION", "sNs": "holds the nation together under one government.", "sS": "◆ DIVISION", "sSs": "splits the nation or leaves some people out.", "sV": "● A VOICE", "sVs": "wants to be heard or to be free (has no power to decide).", "noteph": "“clue words” — The author wants…", "closeq": "Which source best answers the big question?", "bestph": "Choose one…", "whyl": "Why is it the best? Use one fact or quote.", "whyph": "Write 1–2 sentences.", "ctrl": "Counter-Argument: which other source would someone on the other side pick? What would they say? Then answer them.", "ctrph": "Write 2–3 sentences.", "chk1": "I picked a source and used a fact or quote.", "chk2": "I answered the Counter-Argument.", "save": "Save Progress", "load": "Load Progress", "fin": "Finished — Download File to Submit", "todo": "Still to do: {x}", "t_names": "first name, last name, and period", "t_case": "case file {i} (tap a button and write a clue)", "t_best": "choose the best source", "t_why": "explain why", "t_ctr": "write the Counter-Argument", "t_chk": "check both boxes", "allset": "Everything is done. Tap Finished.", "m_saved": "Saved. Keep that file. Use Load Progress later. Do not upload it to Canvas until you are finished.", "m_loaded": "Progress loaded.", "m_loaderr": "That file does not work here. Load the -PROGRESS file you saved from this assignment.", "m_fin": "Done! Your file {f} downloaded. Upload that file to Canvas.", "m_notfin": "Not finished yet. Read the line below the buttons.", "m_names": "Type your first name, last name, and period first.", "lang": "Language"}, "es": {"eyebrow": "DETECTIVE DE FUENTES 6", "title": "¿Unión o división?", "sub": "Nacionalismo, regionalismo y la democracia jacksoniana · Resuelve el caso", "bqlabel": "PREGUNTA CLAVE:", "bq": "Entre 1815 y 1840, ¿Estados Unidos se volvió más unido y democrático, o más dividido y desigual?", "job": "Tu trabajo: lee cinco documentos reales de este período. En cada uno, decide qué quiere el autor. Luego cierra el caso.", "howh": "Cómo jugar", "how1": "Lee el expediente.", "how2": "Toca lo que quiere el autor: ★ UNIÓN, ◆ DIVISIÓN o ● UNA VOZ.", "how3": "Copia palabras clave del documento. Luego escribe lo que quiere el autor.", "how4": "Después de cinco expedientes, cierra el caso.", "first": "Nombre", "last": "Apellido", "period": "Período", "date": "Fecha", "dateph": "Se llena al terminar", "p1": "Parte 1 · Los expedientes", "p2": "Parte 2 · Caso cerrado", "prog": "{n} de 5 expedientes resueltos", "chip": "Expediente {i} de 5", "who": "Quién:", "kind": "Documento:", "help": "Ayuda con palabras:", "hint": "Pista:", "want": "¿Qué quiere el autor?", "sN": "★ UNIÓN", "sNs": "mantiene a la nación unida bajo un solo gobierno.", "sS": "◆ DIVISIÓN", "sSs": "divide a la nación o deja a algunas personas fuera.", "sV": "● UNA VOZ", "sVs": "quiere ser escuchado o ser libre (no tiene poder para decidir).", "noteph": "“palabras clave” — El autor quiere…", "closeq": "¿Qué fuente responde mejor a la pregunta clave?", "bestph": "Elige una…", "whyl": "¿Por qué es la mejor? Usa un dato o una cita.", "whyph": "Escribe 1–2 oraciones.", "ctrl": "Contraargumento: ¿qué otra fuente elegiría alguien del otro lado? ¿Qué diría? Luego respóndele.", "ctrph": "Escribe 2–3 oraciones.", "chk1": "Elegí una fuente y usé un dato o una cita.", "chk2": "Respondí al contraargumento.", "save": "Guardar progreso", "load": "Cargar progreso", "fin": "Terminado — Descargar archivo para entregar", "todo": "Falta: {x}", "t_names": "nombre, apellido y período", "t_case": "expediente {i} (toca un botón y escribe una pista)", "t_best": "elegir la mejor fuente", "t_why": "explicar por qué", "t_ctr": "escribir el contraargumento", "t_chk": "marcar las dos casillas", "allset": "Todo está listo. Toca Terminado.", "m_saved": "Guardado. Conserva ese archivo. Usa Cargar progreso más tarde. No lo subas a Canvas hasta terminar.", "m_loaded": "Progreso cargado.", "m_loaderr": "Ese archivo no sirve aquí. Carga el archivo -PROGRESS que guardaste de esta tarea.", "m_fin": "¡Listo! Se descargó tu archivo {f}. Sube ese archivo a Canvas.", "m_notfin": "Todavía no terminas. Lee la línea debajo de los botones.", "m_names": "Primero escribe tu nombre, apellido y período.", "lang": "Idioma"}, "ar": {"eyebrow": "المحقّق في المصادر 6", "title": "الاتحاد أم الانقسام؟", "sub": "القومية والإقليمية وديمقراطية جاكسون (Nationalism, Sectionalism, and Jacksonian Democracy) · حلّ القضية", "bqlabel": "السؤال الكبير:", "bq": "بين عامي 1815 و1840، هل أصبحت الولايات المتحدة أكثر اتحادًا وديمقراطية، أم أكثر انقسامًا وعدم مساواة؟", "job": "مهمتك: اقرأ خمس وثائق حقيقية من هذه الفترة. في كل وثيقة قرّر ماذا يريد الكاتب. ثم أغلق القضية.", "howh": "طريقة اللعب", "how1": "اقرأ ملف القضية.", "how2": "اضغط على ما يريده الكاتب: ★ الاتحاد، ◆ الانقسام، أو ● صوت.", "how3": "انسخ كلمات الدليل من الوثيقة. ثم اكتب ماذا يريد الكاتب.", "how4": "بعد خمسة ملفات، أغلق القضية.", "first": "الاسم الأول", "last": "اسم العائلة", "period": "الحصة", "date": "التاريخ", "dateph": "يُملأ عند الانتهاء", "p1": "الجزء 1 · ملفات القضية", "p2": "الجزء 2 · القضية مغلقة", "prog": "تم حلّ {n} من 5 ملفات", "chip": "ملف القضية {i} من 5", "who": "من:", "kind": "الوثيقة:", "help": "مساعدة في الكلمات:", "hint": "تلميح:", "want": "ماذا يريد الكاتب؟", "sN": "★ الاتحاد", "sNs": "يُبقي الأمة موحّدة تحت حكومة واحدة.", "sS": "◆ الانقسام", "sSs": "يقسّم الأمة أو يُقصي بعض الناس.", "sV": "● صوت", "sVs": "يريد أن يُسمع صوته أو أن يكون حرًا (لا يملك سلطة القرار).", "noteph": "«كلمات الدليل» — الكاتب يريد…", "closeq": "أي مصدر يجيب عن السؤال الكبير بأفضل شكل؟", "bestph": "اختر واحدًا…", "whyl": "لماذا هو الأفضل؟ استخدم معلومة أو اقتباسًا.", "whyph": "اكتب جملة أو جملتين.", "ctrl": "الحجة المضادة (Counter-Argument): أي مصدر آخر سيختاره شخص من الجانب الآخر؟ ماذا سيقول؟ ثم ردّ عليه.", "ctrph": "اكتب 2–3 جمل.", "chk1": "اخترت مصدرًا واستخدمت معلومة أو اقتباسًا.", "chk2": "أجبت عن الحجة المضادة.", "save": "حفظ التقدّم", "load": "تحميل التقدّم", "fin": "انتهيت — نزّل الملف للتسليم", "todo": "المتبقي: {x}", "t_names": "الاسم الأول واسم العائلة والحصة", "t_case": "ملف القضية {i} (اضغط زرًّا واكتب دليلًا)", "t_best": "اختيار أفضل مصدر", "t_why": "شرح السبب", "t_ctr": "كتابة الحجة المضادة", "t_chk": "تحديد المربعين", "allset": "كل شيء جاهز. اضغط «انتهيت».", "m_saved": "تم الحفظ. احتفظ بهذا الملف. استخدم «تحميل التقدّم» لاحقًا. لا ترفعه إلى Canvas حتى تنتهي.", "m_loaded": "تم تحميل التقدّم.", "m_loaderr": "هذا الملف لا يعمل هنا. حمّل ملف -PROGRESS الذي حفظته من هذا الواجب.", "m_fin": "تم! نُزّل ملفك {f}. ارفع هذا الملف إلى Canvas.", "m_notfin": "لم تنتهِ بعد. اقرأ السطر تحت الأزرار.", "m_names": "اكتب أولًا اسمك الأول واسم العائلة والحصة.", "lang": "اللغة"}};
+var CASES={"1": {"en": {"who": "Chief Justice John Marshall, writing for the Supreme Court", "kind": "Court opinion", "intro": "The nation’s highest court explains where the power of the national government comes from.", "quote": "The constitution, when thus adopted, was of complete obligation, and bound the State sovereignties. . . . The Government of the Union then (whatever may be the influence of this fact on the case) is, emphatically, and truly, a government of the people. In form and in substance it emanates from them. Its powers are granted by them, and are to be exercised directly on them, and for their benefit.", "help": "obligation = a duty that must be followed · sovereignties = states with ruling power · emanates = comes from · exercised = put to use", "hint": "Who does the Court say the national government comes from?", "short": "McCulloch v. Maryland (1819)"}, "es": {"who": "El presidente de la Corte, John Marshall, escribiendo por la Corte Suprema", "kind": "Opinión de la Corte", "intro": "El tribunal más alto del país explica de dónde viene el poder del gobierno nacional.", "quote": "La Constitución, una vez adoptada, tuvo plena obligatoriedad y obligó a las soberanías de los estados. . . . El Gobierno de la Unión, entonces (sea cual sea la influencia de este hecho en el caso), es, enfática y verdaderamente, un gobierno del pueblo. En forma y en fondo emana de él. Sus poderes son concedidos por el pueblo y se ejercen directamente sobre él y para su beneficio.", "help": "obligatoriedad = un deber que hay que cumplir · soberanías = estados con poder de gobierno · emana = viene de · ejercer = poner en práctica", "hint": "¿De quién dice la Corte que viene el gobierno nacional?", "short": "McCulloch contra Maryland (1819)"}, "ar": {"who": "رئيس القضاة جون مارشال (John Marshall)، يكتب باسم المحكمة العليا", "kind": "رأي المحكمة", "intro": "أعلى محكمة في البلاد تشرح من أين تأتي سلطة الحكومة الوطنية.", "quote": "إن الدستور، حين اعتُمد على هذا النحو، كان واجب الإلزام تمامًا، وقيّد سيادات الولايات. . . . إن حكومة الاتحاد إذن (مهما كان تأثير هذه الحقيقة في القضية) هي، بوضوح وحق، حكومة الشعب. فهي في الشكل والمضمون تنبع منه. وسلطاتها منحها إياها الشعب، وتُمارَس مباشرة عليه ولمصلحته.", "help": "واجب الإلزام = يجب الالتزام به · سيادات = ولايات لها سلطة الحكم · تنبع = تأتي من · تُمارَس = تُستخدم", "hint": "ممّن تقول المحكمة إن الحكومة الوطنية تأتي؟", "short": "ماكولوك ضد ماريلاند (1819)"}, "year": "1819"}, "2": {"en": {"who": "Thomas Jefferson, a retired ex-President", "kind": "Letter to Congressman John Holmes", "intro": "Jefferson reacts to the fight over letting Missouri join the Union as a slave state.", "quote": "[T]his momentous question, like a fire bell in the night, awakened and filled me with terror. I considered it at once as the knell of the Union. it is hushed indeed for the moment. but this is a reprieve only, not a final sentence. a geographical line, coinciding with a marked principle, moral and political, once conceived and held up to the angry passions of men, will never be obliterated; and every new irritation will mark it deeper and deeper.", "help": "momentous = very important · knell = a bell that rings for an ending · reprieve = a short delay · obliterated = wiped out", "hint": "He compares the Missouri question to a fire bell. What does he fear will happen to the Union?", "short": "Jefferson on Missouri (1820)"}, "es": {"who": "Thomas Jefferson, un expresidente retirado", "kind": "Carta al congresista John Holmes", "intro": "Jefferson reacciona a la pelea sobre si Missouri debe entrar a la Unión como estado esclavista.", "quote": "[E]sta cuestión trascendental, como una campana de incendio en la noche, me despertó y me llenó de terror. La consideré de inmediato como el toque de difuntos de la Unión. Por ahora se ha acallado, pero esto es solo una prórroga, no una sentencia final. Una línea geográfica que coincide con un principio marcado, moral y político, una vez concebida y presentada a las pasiones airadas de los hombres, nunca será borrada; y cada nueva irritación la marcará más y más hondo.", "help": "trascendental = muy importante · toque de difuntos = campanas que anuncian un final · prórroga = un retraso corto · borrada = eliminada", "hint": "Compara la cuestión de Missouri con una campana de incendio. ¿Qué teme que le pase a la Unión?", "short": "Jefferson sobre Missouri (1820)"}, "ar": {"who": "توماس جيفرسون (Thomas Jefferson)، رئيس سابق متقاعد", "kind": "رسالة إلى عضو الكونغرس جون هولمز", "intro": "جيفرسون يردّ على الخلاف حول انضمام ميزوري إلى الاتحاد كولاية تسمح بالعبودية.", "quote": "[إن] هذه المسألة الخطيرة، كجرس إنذار حريق في الليل، أيقظتني وملأتني رعبًا. اعتبرتها على الفور ناقوس موت الاتحاد. لقد سكتت الآن إلى حين، لكن هذا مجرد إمهال لا حكم نهائي. إن خطًّا جغرافيًّا يتطابق مع مبدأ واضح، أخلاقي وسياسي، متى نشأ وعُرض على أهواء الناس الغاضبة فلن يُمحى أبدًا؛ وكل استفزاز جديد سيزيده عمقًا.", "help": "خطيرة = مهمة جدًا · ناقوس = جرس يُقرع عند نهاية · إمهال = تأجيل قصير · يُمحى = يُزال", "hint": "يشبّه مسألة ميزوري بجرس إنذار حريق. ماذا يخشى أن يحدث للاتحاد؟", "short": "جيفرسون عن ميزوري (1820)"}, "year": "1820"}, "3": {"en": {"who": "The Cherokee Legislature (leaders of the Cherokee Nation)", "kind": "Memorial (petition) to Congress", "intro": "Cherokee leaders ask Congress to keep its promises as pressure grows to remove them.", "quote": "It is with reluctant and painful feelings that circumstances have at length compelled us to seek from you the promised protection, for the preservation of our rights & privileges. This resort, to us is a last one, and nothing short of the threatening evils and dangers that beset us, could have forced it upon the Nation. But it is a right we surely have, and in which we cannot be mistaken, that of appealing for justice and humanity to the United States . . . .", "help": "memorial = a formal petition · compelled = forced · resort = a last choice · beset = surround and attack", "hint": "Who are they asking for help? What do they want kept safe?", "short": "Cherokee Memorial (1830)"}, "es": {"who": "La Legislatura Cherokee (líderes de la Nación Cherokee)", "kind": "Memorial (petición) al Congreso", "intro": "Líderes cherokees piden al Congreso que cumpla sus promesas mientras crece la presión para sacarlos de sus tierras.", "quote": "Es con sentimientos de renuencia y dolor que las circunstancias nos han obligado por fin a pedirles la protección prometida, para la preservación de nuestros derechos y privilegios. Este recurso es para nosotros el último, y nada menos que los males y peligros que nos amenazan podría haberlo impuesto a la Nación. Pero es un derecho que sin duda tenemos, y en el cual no podemos equivocarnos, el de apelar a la justicia y a la humanidad de los Estados Unidos . . . .", "help": "memorial = una petición formal · obligado = forzado · recurso = una última opción · amenazan = rodean y atacan", "hint": "¿A quién piden ayuda? ¿Qué quieren que se mantenga a salvo?", "short": "Memorial cherokee (1830)"}, "ar": {"who": "المجلس التشريعي للشيروكي (قادة أمة الشيروكي Cherokee)", "kind": "عريضة إلى الكونغرس", "intro": "قادة الشيروكي يطلبون من الكونغرس الوفاء بوعوده مع تزايد الضغط لإبعادهم.", "quote": "إننا بمشاعر كارهة وأليمة اضطرتنا الظروف أخيرًا إلى أن نطلب منكم الحماية الموعودة، من أجل صون حقوقنا وامتيازاتنا. وهذا الملاذ بالنسبة إلينا هو الأخير، ولم يكن لشيء أقل من الشرور والأخطار المهدِّدة التي تحيط بنا أن يفرضه على الأمة. لكنه حق لنا بلا شك، ولا نُخطئ فيه، حق مناشدة العدل والإنسانية لدى الولايات المتحدة . . . .", "help": "عريضة = طلب رسمي · اضطرتنا = أجبرتنا · ملاذ = خيار أخير · تحيط = تحاصر وتهاجم", "hint": "مَن يطلبون منه المساعدة؟ وما الذي يريدون حمايته؟", "short": "عريضة الشيروكي (1830)"}, "year": "1830"}, "4": {"en": {"who": "South Carolina’s convention (state leaders)", "kind": "State law (ordinance)", "intro": "South Carolina answers a federal tariff by saying it has no force inside the state.", "quote": "We, therefore, the people of the State of South Carolina, in convention assembled, do declare and ordain . . . that the several acts and parts of acts of the Congress of the United States, purporting to be laws for the imposing of duties and imposts on the importation of foreign commodities, . . . are unauthorized by the constitution of the United States, and violate the true meaning and intent thereof and are null, void, and no law, nor binding upon this State, its officers . . . .", "help": "ordain = to order officially · imposts = taxes on imported goods · unauthorized = not allowed · null and void = no legal force", "hint": "What does South Carolina say about the tariff laws of Congress?", "short": "Nullification ordinance (1832)"}, "es": {"who": "La convención de Carolina del Sur (líderes del estado)", "kind": "Ley estatal (ordenanza)", "intro": "Carolina del Sur responde a un arancel federal diciendo que no tiene fuerza dentro del estado.", "quote": "Nosotros, por lo tanto, el pueblo del estado de Carolina del Sur, reunido en convención, declaramos y ordenamos . . . que las diversas leyes y partes de leyes del Congreso de los Estados Unidos, que pretenden ser leyes para imponer derechos e impuestos a la importación de mercancías extranjeras, . . . no están autorizadas por la constitución de los Estados Unidos, violan su verdadero sentido e intención y son nulas, sin valor y no son ley, ni obligan a este estado, a sus funcionarios . . . .", "help": "ordenar = mandar oficialmente · impuestos = dinero que se cobra por mercancías importadas · no autorizadas = no permitidas · nulas = sin fuerza legal", "hint": "¿Qué dice Carolina del Sur sobre las leyes de aranceles del Congreso?", "short": "Ordenanza de anulación (1832)"}, "ar": {"who": "مؤتمر ولاية ساوث كارولاينا (South Carolina)، قادة الولاية", "kind": "قانون الولاية (مرسوم)", "intro": "ساوث كارولاينا ترد على تعرفة جمركية اتحادية بقولها إنها بلا قوة داخل الولاية.", "quote": "نحن إذن، شعب ولاية ساوث كارولاينا، المجتمعين في مؤتمر، نعلن ونأمر . . . بأن القوانين وأجزاء القوانين المتعددة الصادرة عن كونغرس الولايات المتحدة، التي يُزعم أنها قوانين لفرض رسوم وضرائب على استيراد السلع الأجنبية، . . . غير مخوَّلة بموجب دستور الولايات المتحدة، وتخالف معناه الحقيقي وقصده، وهي باطلة ولاغية وليست قانونًا، ولا تُلزم هذه الولاية ولا موظفيها . . . .", "help": "نأمر = نصدر أمرًا رسميًا · ضرائب = أموال على السلع المستوردة · غير مخوَّلة = غير مسموح بها · باطلة = بلا قوة قانونية", "hint": "ماذا تقول ساوث كارولاينا عن قوانين التعرفة الصادرة عن الكونغرس؟", "short": "مرسوم الإبطال (1832)"}, "year": "1832"}, "5": {"en": {"who": "President Andrew Jackson", "kind": "Proclamation to South Carolina", "intro": "The President answers South Carolina and says no state can cancel a national law.", "quote": "The Constitution of the United States, then, forms a government, not a league . . . . [E]ach State having expressly parted with so many powers as to constitute jointly with the other States a single nation, cannot from that period possess any right to secede, because such secession does not break a league, but destroys the unity of a nation . . . .", "help": "league = a loose friendship pact · secede = leave the nation · constitute = make up · unity = being one", "hint": "Does Jackson say the Constitution is a league or a government? Can a state leave?", "short": "Jackson’s Proclamation (1832)"}, "es": {"who": "El presidente Andrew Jackson", "kind": "Proclama a Carolina del Sur", "intro": "El presidente responde a Carolina del Sur y dice que ningún estado puede anular una ley nacional.", "quote": "La Constitución de los Estados Unidos, entonces, forma un gobierno, no una liga . . . . [C]ada estado, habiendo cedido expresamente tantos poderes como para constituir junto con los otros estados una sola nación, no puede desde ese momento tener ningún derecho a separarse, porque tal separación no rompe una liga, sino que destruye la unidad de una nación . . . .", "help": "liga = un pacto flexible entre amigos · separarse = salirse de la nación · constituir = formar · unidad = ser uno", "hint": "¿Dice Jackson que la Constitución es una liga o un gobierno? ¿Puede un estado irse?", "short": "Proclama de Jackson (1832)"}, "ar": {"who": "الرئيس أندرو جاكسون (Andrew Jackson)", "kind": "إعلان إلى ساوث كارولاينا", "intro": "الرئيس يردّ على ساوث كارولاينا ويقول إن لا ولاية تستطيع إلغاء قانون وطني.", "quote": "إن دستور الولايات المتحدة إذن يُنشئ حكومة، لا رابطة . . . . [و]كل ولاية، بعد أن تخلّت صراحةً عن سلطات كثيرة لتكوّن مع الولايات الأخرى أمة واحدة، لا يمكن أن يكون لها منذ ذلك الحين أي حق في الانفصال، لأن هذا الانفصال لا يكسر رابطة، بل يهدم وحدة أمة . . . .", "help": "رابطة = اتفاق فضفاض بين أصدقاء · ينفصل = يترك الأمة · تكوّن = تُشكّل · وحدة = كونهم واحدًا", "hint": "هل يقول جاكسون إن الدستور رابطة أم حكومة؟ وهل يستطيع أن ينفصل؟", "short": "إعلان جاكسون (1832)"}, "year": "1832"}};
+var SIDES={"1": "N", "2": "S", "3": "V", "4": "S", "5": "N"};
+var CN=[1,2,3,4,5],lang='en',sides={},msgKey=null,msgVars=null;
+function $(s,r){return (r||document).querySelector(s)}function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+function T(k,v){var s=(I18N[lang]&&I18N[lang][k])||I18N.en[k]||k;if(v)for(var x in v)s=s.split('{'+x+'}').join(v[x]);return s}
+function setMsg(k,v,cls){msgKey=k;msgVars=v;var m=$('#msg');m.className=cls||'';m.textContent=T(k,v)}
+function setLang(l,keep){
+ lang=l;document.documentElement.lang=l;document.documentElement.dir=(l==='ar'?'rtl':'ltr');
+ $$('[data-t]').forEach(function(e){e.textContent=T(e.getAttribute('data-t'))});
+ $$('[data-tp]').forEach(function(e){e.placeholder=T(e.getAttribute('data-tp'))});
+ CN.forEach(function(i){var d=CASES[i][l]||CASES[i].en;
+  $$('[data-c][data-i="'+i+'"]').forEach(function(e){e.textContent=d[e.getAttribute('data-c')]});
+  $('[data-chip="'+i+'"]').textContent=T('chip',{i:i});
+  var o=$('[data-orig="'+i+'"]');o.textContent=(l==='en'?'':'English original: '+CASES[i].en.quote);
+  var op=$('[data-opt="'+i+'"]');op.textContent=CASES[i].year+' · '+d.short;
+ });
+ $$('.langbar button').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-lang')===l?'true':'false')});
+ try{localStorage.setItem(STORE+'_lang',l)}catch(e){}
+ if(msgKey)$('#msg').textContent=T(msgKey,msgVars);
+ refresh();
+}
+function val(id){var e=document.getElementById(id);return e?e.value.trim():''}
+function field(n){var e=$('[data-id="'+n+'"]');return e?e.value:''}
+function state(){
+ var a={};CN.forEach(function(i){a['note'+i]=field('note'+i)});a.best=field('best');a.why=field('why');a.counter=field('counter');
+ var t={national:0,state:0,voice:0};CN.forEach(function(i){var s=sides[i];if(s==='N')t.national++;if(s==='S')t.state++;if(s==='V')t.voice++});
+ return {packet:PACKET,course:COURSE,version:1,saved:new Date().toISOString(),completed:false,
+  student:{first:val('first'),last:val('last'),period:val('period'),date:val('date')},
+  sides:JSON.parse(JSON.stringify(sides)),answers:a,
+  checks:{chk1:$('#chk1').checked,chk2:$('#chk2').checked},tally:t};
+}
+function missing(){
+ var m=[],s=state();
+ if(!s.student.first||!s.student.last||!s.student.period)m.push(T('t_names'));
+ CN.forEach(function(i){if(!sides[i]||!s.answers['note'+i].trim())m.push(T('t_case',{i:i}))});
+ if(!s.answers.best)m.push(T('t_best'));if(!s.answers.why.trim())m.push(T('t_why'));if(!s.answers.counter.trim())m.push(T('t_ctr'));
+ if(!(s.checks.chk1&&s.checks.chk2))m.push(T('t_chk'));
+ return m;
+}
+function refresh(){
+ var done=0;CN.forEach(function(i){var c=$('#card'+i),ok=!!sides[i]&&field('note'+i).trim()!=='';if(ok)done++;
+  c.classList.toggle('done',ok);c.classList.toggle('isS',sides[i]==='S');c.classList.toggle('isV',sides[i]==='V');
+  $$('.stances button',c).forEach(function(b){b.setAttribute('aria-pressed',sides[i]===b.getAttribute('data-v')?'true':'false')})});
+ $('#fill').style.width=(done*20)+'%';$('#progt').textContent=T('prog',{n:done});
+ var m=missing();$('#todo').textContent=m.length?T('todo',{x:m.join(lang==='ar'?'؛ ':'; ')}):T('allset');
+ $('#fin').disabled=m.length>0;
+}
+function persist(){try{localStorage.setItem(STORE,JSON.stringify(state()))}catch(e){}}
+function apply(s){
+ $('#first').value=s.student.first||'';$('#last').value=s.student.last||'';$('#period').value=s.student.period||'';$('#date').value=s.student.date||'';
+ sides={};for(var k in (s.sides||{}))sides[k]=s.sides[k];
+ var a=s.answers||{};CN.forEach(function(i){$('[data-id="note'+i+'"]').value=a['note'+i]||''});
+ $('#best').value=a.best||'';$('#why').value=a.why||'';$('#counter').value=a.counter||'';
+ $('#chk1').checked=!!(s.checks&&s.checks.chk1);$('#chk2').checked=!!(s.checks&&s.checks.chk2);refresh();
+}
+function fname(s){var n=(s.student.last+'_'+s.student.first).normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^A-Za-z0-9_\-]+/g,'_');return n||'Student'}
+function dl(name,obj){var b=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(u);a.remove()},500)}
+function namesOk(){var ok=true;['first','last','period'].forEach(function(id){var e=$('#'+id),bad=!e.value.trim();e.classList.toggle('bad',bad);if(bad)ok=false});return ok}
+document.addEventListener('click',function(e){
+ var b=e.target.closest('.stances button');if(b){var i=+b.closest('.card').getAttribute('data-i');sides[i]=b.getAttribute('data-v');refresh();persist();return}
+ var lb=e.target.closest('.langbar button');if(lb){setLang(lb.getAttribute('data-lang'))}
+});
+document.addEventListener('input',function(){refresh();persist();$$('.names input.bad').forEach(function(x){if(x.value.trim())x.classList.remove('bad')})});
+document.addEventListener('change',function(){refresh();persist()});
+$('#save').onclick=function(){if(!namesOk()){setMsg('m_names',null,'err');return}var s=state();dl(fname(s)+'-'+PACKET+'-PROGRESS.json',s);setMsg('m_saved',null,'ok')};
+$('#load').onclick=function(){$('#file').click()};
+$('#file').onchange=function(ev){var f=ev.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(){try{var s=JSON.parse(r.result);if(!s||s.packet!==PACKET)throw 0;apply(s);persist();setMsg('m_loaded',null,'ok')}catch(x){setMsg('m_loaderr',null,'err')}};r.readAsText(f);ev.target.value=''};
+$('#fin').onclick=function(){
+ if(!namesOk()||missing().length){setMsg('m_notfin',null,'err');return}
+ var d=new Date(),p=function(n){return (n<10?'0':'')+n};$('#date').value=(d.getMonth()+1)+'/'+d.getDate()+'/'+d.getFullYear();
+ var s=state();s.completed=true;var f=fname(s)+'-'+PACKET+'.json';dl(f,s);persist();setMsg('m_fin',{f:f},'ok');
+};
+(function init(){
+ var l='en';try{var q=new URLSearchParams(location.search).get('lang');if(q==='es'||q==='ar')l=q;else{var sv=localStorage.getItem(STORE+'_lang');if(sv==='es'||sv==='ar')l=sv}}catch(e){}
+ setLang(l);
+ try{var raw=localStorage.getItem(STORE);if(raw){var s=JSON.parse(raw);if(s&&s.packet===PACKET)apply(s)}}catch(e){}
+ refresh();
+})();
+</script></body></html>

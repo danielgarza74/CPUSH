@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rights or Control? · Source Detective 9</title>
+<style>
+:root{--bg:#202946;--text:#EBEDF4;--a1:#303E66;--a2:#D24F4B;--hl:#E1908E;--page:#E4E6EE;--paper:#F9FAFC;--ink:#181F34;--rule:#D6D8E0;--gold:#82312E;--keybg:#FAEDED;--voice:#8A4B2A;--ok:#2E6B3E}
+@media (prefers-color-scheme:dark){:root{--page:#101423;--paper:#1A2138;--ink:#EBEDF4;--rule:#4D546B;--keybg:#323A55;--gold:#E1908E}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font:17px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+.wrap{max-width:820px;margin:0 auto;padding:0 14px 40px}
+.hero{background:var(--bg);color:var(--text);padding:26px 14px 22px;text-align:center;border-bottom:5px solid var(--a2)}
+.hero .eyebrow{letter-spacing:.18em;font-weight:700;font-size:.8rem;color:var(--hl)}
+.hero h1{margin:.2em 0 .1em;font-size:2rem;line-height:1.15}
+.hero .sub{opacity:.92}
+.langbar{display:flex;gap:8px;justify-content:center;align-items:center;margin:14px 0;flex-wrap:wrap}
+.langbar button{border:2px solid var(--a1);background:var(--paper);color:var(--ink);padding:8px 16px;border-radius:999px;font:inherit;font-weight:700;cursor:pointer;min-height:44px}
+.langbar button[aria-pressed=true]{background:var(--a1);color:#fff}
+.box{background:var(--paper);border:1px solid var(--rule);border-radius:12px;padding:14px 16px;margin:14px 0}
+.bq{background:var(--keybg);border:2px solid var(--a2);border-radius:12px;padding:14px 16px;margin:14px 0}
+.bq b{color:var(--gold);letter-spacing:.06em}
+.bq .q{font-size:1.12rem;font-weight:700;margin-top:4px}
+h2{color:var(--a1);margin:26px 0 6px;font-size:1.25rem}
+@media (prefers-color-scheme:dark){h2{color:var(--hl)}}
+.how ol{margin:6px 0 0;padding-inline-start:22px}
+.names{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.names label{display:block;font-weight:700;font-size:.85rem}
+.names input{width:100%;padding:10px;border:2px solid var(--rule);border-radius:8px;font:inherit;background:var(--paper);color:var(--ink)}
+.names input.bad{border-color:#B3261E;background:#FDECEA;color:#000}
+.names input[readonly]{background:var(--keybg)}
+.meter{margin:14px 0} .meter .bar{height:12px;background:var(--rule);border-radius:99px;overflow:hidden}
+.meter .fill{height:100%;width:0;background:var(--a2);transition:width .3s}
+.meter .t{font-weight:700;margin-top:4px}
+.card{background:var(--paper);border:1px solid var(--rule);border-inline-start:8px solid var(--rule);border-radius:12px;padding:14px 16px;margin:16px 0}
+.card.done{border-inline-start-color:var(--bg)} .card.done.isS{border-inline-start-color:var(--a2)} .card.done.isV{border-inline-start-color:var(--voice)}
+.chip{display:inline-block;background:var(--bg);color:var(--text);border-radius:99px;padding:2px 12px;font-weight:700;font-size:.9rem}
+.cnum{margin-inline-start:8px;color:var(--gold);font-weight:700;font-size:.9rem}
+.meta{margin:8px 0 2px;font-size:.95rem} .meta b{color:var(--a1)}
+@media (prefers-color-scheme:dark){.meta b{color:var(--hl)}}
+blockquote{margin:10px 0;padding:12px 14px;background:var(--keybg);border-inline-start:5px solid var(--a2);border-radius:6px;font-style:italic;font-size:1.02rem}
+.orig{display:none;direction:ltr;text-align:left;font-size:.9rem;opacity:.9;margin:4px 0}
+html[lang=ar] .orig,html[lang=es] .orig{display:block}
+.orig i{font-style:italic}
+.cite{direction:ltr;text-align:left;font-size:.82rem;opacity:.85;margin:6px 0}
+.help,.hint{font-size:.93rem;margin:6px 0}
+.want{font-weight:700;margin:10px 0 6px}
+.stances{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.stances button{text-align:start;border:2px solid var(--rule);background:var(--paper);color:var(--ink);border-radius:10px;padding:10px;font:inherit;cursor:pointer;min-height:64px}
+.stances button b{display:block;font-size:1rem} .stances button small{display:block;font-size:.78rem;opacity:.85;line-height:1.25}
+.stances button[aria-pressed=true]{background:var(--bg);color:var(--text);border-color:var(--bg)}
+.stances button[data-v=S][aria-pressed=true]{background:var(--a2);color:#10312C;border-color:var(--a2)}
+.stances button[data-v=V][aria-pressed=true]{background:var(--voice);color:#fff;border-color:var(--voice)}
+.stances button:focus-visible,.btns button:focus-visible,select:focus-visible,textarea:focus-visible,input:focus-visible,.langbar button:focus-visible{outline:3px solid var(--a2);outline-offset:2px}
+@media (max-width:620px){.stances{grid-template-columns:1fr} .names{grid-template-columns:1fr 1fr} .hero h1{font-size:1.6rem}}
+textarea,select{width:100%;margin-top:8px;padding:10px;border:2px solid var(--rule);border-radius:8px;font:inherit;background:var(--paper);color:var(--ink);unicode-bidi:plaintext}
+textarea{min-height:84px}
+.fin label.l{display:block;font-weight:700;margin-top:12px}
+.chk{display:flex;gap:8px;align-items:flex-start;margin:8px 0} .chk input{width:22px;height:22px;margin-top:3px}
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 6px}
+.btns button{border:0;border-radius:10px;padding:12px 18px;font:inherit;font-weight:700;cursor:pointer;min-height:48px;background:var(--a1);color:#fff}
+.btns button#fin{background:var(--bg);color:var(--text);border:2px solid var(--a2)}
+.btns button:disabled{background:#9AA9A7;color:#fff;border-color:#9AA9A7;cursor:not-allowed}
+#todo{font-weight:700;margin:6px 0} #msg{margin:6px 0;min-height:1.4em} #msg.err{color:#B3261E} #msg.ok{color:var(--ok)}
+footer{background:var(--bg);color:var(--text);text-align:center;padding:14px;font-size:.78rem;letter-spacing:.08em;border-top:5px solid var(--a2);margin-top:30px}
+footer div+div{opacity:.9;margin-top:2px}
+</style></head><body>
+<header class="hero"><div class="eyebrow" data-t="eyebrow"></div><h1 data-t="title"></h1><div class="sub" data-t="sub"></div></header>
+<div class="wrap">
+<div class="langbar" role="group" aria-label="Language"><button type="button" data-lang="en" aria-pressed="true">English</button><button type="button" data-lang="es" aria-pressed="false">Español</button><button type="button" data-lang="ar" aria-pressed="false">العربية</button></div>
+<div class="bq"><b data-t="bqlabel"></b><div class="q" data-t="bq"></div><div style="margin-top:8px" data-t="job"></div></div>
+<div class="box how"><b data-t="howh"></b><ol><li data-t="how1"></li><li data-t="how2"></li><li data-t="how3"></li><li data-t="how4"></li></ol></div>
+<div class="box names">
+ <div><label for="first" data-t="first"></label><input id="first" autocomplete="given-name"></div>
+ <div><label for="last" data-t="last"></label><input id="last" autocomplete="family-name"></div>
+ <div><label for="period" data-t="period"></label><input id="period" inputmode="numeric"></div>
+ <div><label for="date" data-t="date"></label><input id="date" readonly data-tp="dateph"></div>
+</div>
+<div class="meter"><div class="bar"><div class="fill" id="fill"></div></div><div class="t" id="progt"></div></div>
+<h2 data-t="p1"></h2>
+
+<section class="card" id="card1" data-i="1">
+ <span class="chip" data-year="1">1863–1864</span><span class="cnum" data-chip="1"></span>
+ <div class="meta"><b data-t="who">Who:</b> <span data-c="who" data-i="1"></span> · <b data-t="kind">Document:</b> <span data-c="kind" data-i="1"></span></div>
+ <div class="meta" data-c="intro" data-i="1"></div>
+ <blockquote data-c="quote" data-i="1" dir="auto"></blockquote>
+ <div class="orig" data-orig="1"></div>
+ <div class="cite" dir="ltr">Susie King Taylor, <i>Reminiscences of My Life in Camp</i> (1902; New York: Arno Press and The New York Times, 1968), 15–17, 22–27, 29–30, 42–44, 50–51, in Norton, <i>History Source Collection</i> (Primary and Secondary Source Collection for <i>America: The Essential Learning Edition</i>), Part 5.</div>
+ <div class="help"><b data-t="help">Word help:</b> <span data-c="help" data-i="1"></span></div>
+ <div class="hint"><b data-t="hint">Hint:</b> <span data-c="hint" data-i="1"></span></div>
+ <div class="want" data-t="want">What does the author want?</div>
+ <div class="stances" role="group" aria-label="stance 1">
+  <button type="button" data-v="N" aria-pressed="false"><b data-t="sN"></b><small data-t="sNs"></small></button>
+  <button type="button" data-v="S" aria-pressed="false"><b data-t="sS"></b><small data-t="sSs"></small></button>
+  <button type="button" data-v="V" aria-pressed="false"><b data-t="sV"></b><small data-t="sVs"></small></button>
+ </div>
+ <textarea data-id="note1" data-tp="noteph" rows="3"></textarea>
+</section>
+<section class="card" id="card2" data-i="2">
+ <span class="chip" data-year="2">1865</span><span class="cnum" data-chip="2"></span>
+ <div class="meta"><b data-t="who">Who:</b> <span data-c="who" data-i="2"></span> · <b data-t="kind">Document:</b> <span data-c="kind" data-i="2"></span></div>
+ <div class="meta" data-c="intro" data-i="2"></div>
+ <blockquote data-c="quote" data-i="2" dir="auto"></blockquote>
+ <div class="orig" data-orig="2"></div>
+ <div class="cite" dir="ltr">Special Field Orders, No. 15, Headquarters Military Division of the Mississippi, January 16, 1865, Orders and Circulars, series 44, Adjutant General’s Office, Record Group 94, National Archives, from the Freedmen and Southern Society Project, University of Maryland, in Norton, <i>History Source Collection</i> (Primary and Secondary Source Collection for <i>America: The Essential Learning Edition</i>), Part 5.</div>
+ <div class="help"><b data-t="help">Word help:</b> <span data-c="help" data-i="2"></span></div>
+ <div class="hint"><b data-t="hint">Hint:</b> <span data-c="hint" data-i="2"></span></div>
+ <div class="want" data-t="want">What does the author want?</div>
+ <div class="stances" role="group" aria-label="stance 2">
+  <button type="button" data-v="N" aria-pressed="false"><b data-t="sN"></b><small data-t="sNs"></small></button>
+  <button type="button" data-v="S" aria-pressed="false"><b data-t="sS"></b><small data-t="sSs"></small></button>
+  <button type="button" data-v="V" aria-pressed="false"><b data-t="sV"></b><small data-t="sVs"></small></button>
+ </div>
+ <textarea data-id="note2" data-tp="noteph" rows="3"></textarea>
+</section>
+<section class="card" id="card3" data-i="3">
+ <span class="chip" data-year="3">1866</span><span class="cnum" data-chip="3"></span>
+ <div class="meta"><b data-t="who">Who:</b> <span data-c="who" data-i="3"></span> · <b data-t="kind">Document:</b> <span data-c="kind" data-i="3"></span></div>
+ <div class="meta" data-c="intro" data-i="3"></div>
+ <blockquote data-c="quote" data-i="3" dir="auto"></blockquote>
+ <div class="orig" data-orig="3"></div>
+ <div class="cite" dir="ltr">Andrew Johnson, veto message on the Civil Rights Bill, 1866, <i>Congressional Globe</i>, Senate, 39th Congress, 1st Session, 1679–1680, Library of Congress, in Norton, <i>History Source Collection</i> (Primary and Secondary Source Collection for <i>America: The Essential Learning Edition</i>), Part 5.</div>
+ <div class="help"><b data-t="help">Word help:</b> <span data-c="help" data-i="3"></span></div>
+ <div class="hint"><b data-t="hint">Hint:</b> <span data-c="hint" data-i="3"></span></div>
+ <div class="want" data-t="want">What does the author want?</div>
+ <div class="stances" role="group" aria-label="stance 3">
+  <button type="button" data-v="N" aria-pressed="false"><b data-t="sN"></b><small data-t="sNs"></small></button>
+  <button type="button" data-v="S" aria-pressed="false"><b data-t="sS"></b><small data-t="sSs"></small></button>
+  <button type="button" data-v="V" aria-pressed="false"><b data-t="sV"></b><small data-t="sVs"></small></button>
+ </div>
+ <textarea data-id="note3" data-tp="noteph" rows="3"></textarea>
+</section>
+<section class="card" id="card4" data-i="4">
+ <span class="chip" data-year="4">1868</span><span class="cnum" data-chip="4"></span>
+ <div class="meta"><b data-t="who">Who:</b> <span data-c="who" data-i="4"></span> · <b data-t="kind">Document:</b> <span data-c="kind" data-i="4"></span></div>
+ <div class="meta" data-c="intro" data-i="4"></div>
+ <blockquote data-c="quote" data-i="4" dir="auto"></blockquote>
+ <div class="orig" data-orig="4"></div>
+ <div class="cite" dir="ltr">Howell Cobb, “Howell Cobb to J. D. Hoover, Jan 4, 1868,” in <i>Annual Report of the American Historical Association for the Year 1911</i>, vol. 2 (Washington, DC: U.S. Government Printing Office, 1913), 691–693, in Norton, <i>History Source Collection</i> (Primary and Secondary Source Collection for <i>America: The Essential Learning Edition</i>), Part 5.</div>
+ <div class="help"><b data-t="help">Word help:</b> <span data-c="help" data-i="4"></span></div>
+ <div class="hint"><b data-t="hint">Hint:</b> <span data-c="hint" data-i="4"></span></div>
+ <div class="want" data-t="want">What does the author want?</div>
+ <div class="stances" role="group" aria-label="stance 4">
+  <button type="button" data-v="N" aria-pressed="false"><b data-t="sN"></b><small data-t="sNs"></small></button>
+  <button type="button" data-v="S" aria-pressed="false"><b data-t="sS"></b><small data-t="sSs"></small></button>
+  <button type="button" data-v="V" aria-pressed="false"><b data-t="sV"></b><small data-t="sVs"></small></button>
+ </div>
+ <textarea data-id="note4" data-tp="noteph" rows="3"></textarea>
+</section>
+<section class="card" id="card5" data-i="5">
+ <span class="chip" data-year="5">1868</span><span class="cnum" data-chip="5"></span>
+ <div class="meta"><b data-t="who">Who:</b> <span data-c="who" data-i="5"></span> · <b data-t="kind">Document:</b> <span data-c="kind" data-i="5"></span></div>
+ <div class="meta" data-c="intro" data-i="5"></div>
+ <blockquote data-c="quote" data-i="5" dir="auto"></blockquote>
+ <div class="orig" data-orig="5"></div>
+ <div class="cite" dir="ltr">United States Constitution, Amendment XIV, Section 1, 1868, in Norton, <i>History Source Collection</i> (Primary and Secondary Source Collection for <i>America: The Essential Learning Edition</i>), Part 5.</div>
+ <div class="help"><b data-t="help">Word help:</b> <span data-c="help" data-i="5"></span></div>
+ <div class="hint"><b data-t="hint">Hint:</b> <span data-c="hint" data-i="5"></span></div>
+ <div class="want" data-t="want">What does the author want?</div>
+ <div class="stances" role="group" aria-label="stance 5">
+  <button type="button" data-v="N" aria-pressed="false"><b data-t="sN"></b><small data-t="sNs"></small></button>
+  <button type="button" data-v="S" aria-pressed="false"><b data-t="sS"></b><small data-t="sSs"></small></button>
+  <button type="button" data-v="V" aria-pressed="false"><b data-t="sV"></b><small data-t="sVs"></small></button>
+ </div>
+ <textarea data-id="note5" data-tp="noteph" rows="3"></textarea>
+</section>
+<h2 data-t="p2"></h2>
+<div class="box fin">
+ <div class="bq" style="margin:0"><b data-t="bqlabel"></b><div class="q" data-t="bq"></div></div>
+ <label class="l" for="best" data-t="closeq"></label>
+ <select id="best" data-id="best"><option value="" data-t="bestph"></option><option value="1" data-opt="1"></option><option value="2" data-opt="2"></option><option value="3" data-opt="3"></option><option value="4" data-opt="4"></option><option value="5" data-opt="5"></option></select>
+ <label class="l" for="why" data-t="whyl"></label><textarea id="why" data-id="why" data-tp="whyph" rows="3"></textarea>
+ <label class="l" for="counter" data-t="ctrl"></label><textarea id="counter" data-id="counter" data-tp="ctrph" rows="4"></textarea>
+ <div class="chk"><input type="checkbox" id="chk1"><label for="chk1" data-t="chk1"></label></div>
+ <div class="chk"><input type="checkbox" id="chk2"><label for="chk2" data-t="chk2"></label></div>
+</div>
+<div class="btns"><button type="button" id="save" data-t="save"></button><button type="button" id="load" data-t="load"></button><button type="button" id="fin" disabled data-t="fin"></button></div>
+<input type="file" id="file" accept=".json,application/json" hidden>
+<div id="todo" aria-live="polite"></div><div id="msg" role="status" aria-live="polite"></div>
+</div>
+<footer><div>UNIT 3 · A HOUSE DIVIDED AND REBUILT | CPUSH</div><div>DANIEL GARZA, M.A.</div></footer>
+<script>
+var PACKET='L9_Source_Detective',STORE='cpush_l9_source_detective',COURSE='CPUSH';
+var I18N={"en": {"eyebrow": "SOURCE DETECTIVE 9", "title": "Rights or Control?", "sub": "Civil War and Reconstruction · Crack the Case", "bqlabel": "BIG QUESTION:", "bq": "Did the Civil War and Reconstruction bring real freedom to African Americans?", "job": "Your job: read five real documents from this time period. For each one, decide what the author wants. Then close the case.", "howh": "How to play", "how1": "Read the case file.", "how2": "Tap what the author wants: ★ RIGHTS, ◆ CONTROL, or ● A VOICE.", "how3": "Copy clue words from the document. Then write what the author wants.", "how4": "After five case files, close the case.", "first": "First name", "last": "Last name", "period": "Period", "date": "Date", "dateph": "Fills in when you finish", "p1": "Part 1 · The Case Files", "p2": "Part 2 · Case Closed", "prog": "{n} of 5 case files cracked", "chip": "Case file {i} of 5", "who": "Who:", "kind": "Document:", "help": "Word help:", "hint": "Hint:", "want": "What does the author want?", "sN": "★ RIGHTS", "sNs": "wants equal rights and real freedom for Black Americans.", "sS": "◆ CONTROL", "sSs": "wants to limit or control the freedom of Black Americans.", "sV": "● A VOICE", "sVs": "wants to be heard or to be free (has no power to decide).", "noteph": "“clue words” — The author wants…", "closeq": "Which source best answers the big question?", "bestph": "Choose one…", "whyl": "Why is it the best? Use one fact or quote.", "whyph": "Write 1–2 sentences.", "ctrl": "Counter-Argument: which other source would someone on the other side pick? What would they say? Then answer them.", "ctrph": "Write 2–3 sentences.", "chk1": "I picked a source and used a fact or quote.", "chk2": "I answered the Counter-Argument.", "save": "Save Progress", "load": "Load Progress", "fin": "Finished — Download File to Submit", "todo": "Still to do: {x}", "t_names": "first name, last name, and period", "t_case": "case file {i} (tap a button and write a clue)", "t_best": "choose the best source", "t_why": "explain why", "t_ctr": "write the Counter-Argument", "t_chk": "check both boxes", "allset": "Everything is done. Tap Finished.", "m_saved": "Saved. Keep that file. Use Load Progress later. Do not upload it to Canvas until you are finished.", "m_loaded": "Progress loaded.", "m_loaderr": "That file does not work here. Load the -PROGRESS file you saved from this assignment.", "m_fin": "Done! Your file {f} downloaded. Upload that file to Canvas.", "m_notfin": "Not finished yet. Read the line below the buttons.", "m_names": "Type your first name, last name, and period first.", "lang": "Language"}, "es": {"eyebrow": "DETECTIVE DE FUENTES 9", "title": "¿Derechos o control?", "sub": "Guerra Civil y Reconstrucción · Resuelve el caso", "bqlabel": "PREGUNTA CLAVE:", "bq": "¿La Guerra Civil y la Reconstrucción trajeron libertad real a los afroamericanos?", "job": "Tu trabajo: lee cinco documentos reales de este período. En cada uno, decide qué quiere el autor. Luego cierra el caso.", "howh": "Cómo jugar", "how1": "Lee el expediente.", "how2": "Toca lo que quiere el autor: ★ DERECHOS, ◆ CONTROL o ● UNA VOZ.", "how3": "Copia palabras clave del documento. Luego escribe lo que quiere el autor.", "how4": "Después de cinco expedientes, cierra el caso.", "first": "Nombre", "last": "Apellido", "period": "Período", "date": "Fecha", "dateph": "Se llena al terminar", "p1": "Parte 1 · Los expedientes", "p2": "Parte 2 · Caso cerrado", "prog": "{n} de 5 expedientes resueltos", "chip": "Expediente {i} de 5", "who": "Quién:", "kind": "Documento:", "help": "Ayuda con palabras:", "hint": "Pista:", "want": "¿Qué quiere el autor?", "sN": "★ DERECHOS", "sNs": "quiere derechos iguales y libertad real para los afroamericanos.", "sS": "◆ CONTROL", "sSs": "quiere limitar o controlar la libertad de los afroamericanos.", "sV": "● UNA VOZ", "sVs": "quiere ser escuchado o ser libre (no tiene poder para decidir).", "noteph": "“palabras clave” — El autor quiere…", "closeq": "¿Qué fuente responde mejor a la pregunta clave?", "bestph": "Elige una…", "whyl": "¿Por qué es la mejor? Usa un dato o una cita.", "whyph": "Escribe 1–2 oraciones.", "ctrl": "Contraargumento: ¿qué otra fuente elegiría alguien del otro lado? ¿Qué diría? Luego respóndele.", "ctrph": "Escribe 2–3 oraciones.", "chk1": "Elegí una fuente y usé un dato o una cita.", "chk2": "Respondí al contraargumento.", "save": "Guardar progreso", "load": "Cargar progreso", "fin": "Terminado — Descargar archivo para entregar", "todo": "Falta: {x}", "t_names": "nombre, apellido y período", "t_case": "expediente {i} (toca un botón y escribe una pista)", "t_best": "elegir la mejor fuente", "t_why": "explicar por qué", "t_ctr": "escribir el contraargumento", "t_chk": "marcar las dos casillas", "allset": "Todo está listo. Toca Terminado.", "m_saved": "Guardado. Conserva ese archivo. Usa Cargar progreso más tarde. No lo subas a Canvas hasta terminar.", "m_loaded": "Progreso cargado.", "m_loaderr": "Ese archivo no sirve aquí. Carga el archivo -PROGRESS que guardaste de esta tarea.", "m_fin": "¡Listo! Se descargó tu archivo {f}. Sube ese archivo a Canvas.", "m_notfin": "Todavía no terminas. Lee la línea debajo de los botones.", "m_names": "Primero escribe tu nombre, apellido y período.", "lang": "Idioma"}, "ar": {"eyebrow": "المحقّق في المصادر 9", "title": "الحقوق أم السيطرة؟", "sub": "الحرب الأهلية وإعادة الإعمار (Civil War and Reconstruction) · حلّ القضية", "bqlabel": "السؤال الكبير:", "bq": "هل جلبت الحرب الأهلية وإعادة الإعمار حرية حقيقية للأمريكيين الأفارقة؟", "job": "مهمتك: اقرأ خمس وثائق حقيقية من هذه الفترة. في كل وثيقة قرّر ماذا يريد الكاتب. ثم أغلق القضية.", "howh": "طريقة اللعب", "how1": "اقرأ ملف القضية.", "how2": "اضغط على ما يريده الكاتب: ★ الحقوق، ◆ السيطرة، أو ● صوت.", "how3": "انسخ كلمات الدليل من الوثيقة. ثم اكتب ماذا يريد الكاتب.", "how4": "بعد خمسة ملفات، أغلق القضية.", "first": "الاسم الأول", "last": "اسم العائلة", "period": "الحصة", "date": "التاريخ", "dateph": "يُملأ عند الانتهاء", "p1": "الجزء 1 · ملفات القضية", "p2": "الجزء 2 · القضية مغلقة", "prog": "تم حلّ {n} من 5 ملفات", "chip": "ملف القضية {i} من 5", "who": "من:", "kind": "الوثيقة:", "help": "مساعدة في الكلمات:", "hint": "تلميح:", "want": "ماذا يريد الكاتب؟", "sN": "★ الحقوق", "sNs": "يريد حقوقًا متساوية وحرية حقيقية للأمريكيين الأفارقة.", "sS": "◆ السيطرة", "sSs": "يريد تقييد حرية الأمريكيين الأفارقة أو السيطرة عليها.", "sV": "● صوت", "sVs": "يريد أن يُسمع صوته أو أن يكون حرًّا (لا يملك سلطة القرار).", "noteph": "«كلمات الدليل» — الكاتب يريد…", "closeq": "أي مصدر يجيب عن السؤال الكبير بأفضل شكل؟", "bestph": "اختر واحدًا…", "whyl": "لماذا هو الأفضل؟ استخدم معلومة أو اقتباسًا.", "whyph": "اكتب جملة أو جملتين.", "ctrl": "الحجة المضادة (Counter-Argument): أي مصدر آخر سيختاره شخص من الجانب الآخر؟ ماذا سيقول؟ ثم ردّ عليه.", "ctrph": "اكتب 2–3 جمل.", "chk1": "اخترت مصدرًا واستخدمت معلومة أو اقتباسًا.", "chk2": "أجبت عن الحجة المضادة.", "save": "حفظ التقدّم", "load": "تحميل التقدّم", "fin": "انتهيت — نزّل الملف للتسليم", "todo": "المتبقي: {x}", "t_names": "الاسم الأول واسم العائلة والحصة", "t_case": "ملف القضية {i} (اضغط زرًّا واكتب دليلًا)", "t_best": "اختيار أفضل مصدر", "t_why": "شرح السبب", "t_ctr": "كتابة الحجة المضادة", "t_chk": "تحديد المربعين", "allset": "كل شيء جاهز. اضغط «انتهيت».", "m_saved": "تم الحفظ. احتفظ بهذا الملف. استخدم «تحميل التقدّم» لاحقًا. لا ترفعه إلى Canvas حتى تنتهي.", "m_loaded": "تم تحميل التقدّم.", "m_loaderr": "هذا الملف لا يعمل هنا. حمّل ملف -PROGRESS الذي حفظته من هذا الواجب.", "m_fin": "تم! نُزّل ملفك {f}. ارفع هذا الملف إلى Canvas.", "m_notfin": "لم تنتهِ بعد. اقرأ السطر تحت الأزرار.", "m_names": "اكتب أولًا اسمك الأول واسم العائلة والحصة.", "lang": "اللغة"}};
+var CASES={"1": {"en": {"who": "Susie King Taylor, a young woman who escaped slavery and served a Black regiment as a laundress", "kind": "Memoir (written in 1902)", "intro": "A Black army worker remembers how the first Black soldiers were paid.", "quote": "The first colored troops did not receive any pay for eighteen months . . . Finally, in 1863, the government decided to give them half pay, but the men would not accept this. They wanted “full pay” or nothing. They preferred rather to give their services to the state, which they did until 1864, when the government granted them full pay, with all the back pay due.", "help": "colored troops = Black soldiers (the words used then) · services = work and duty · back pay = pay owed for past work · accept = agree to take", "hint": "What did the soldiers say they wanted?", "short": "Susie King Taylor memoir (1863–1864)"}, "es": {"who": "Susie King Taylor, una joven que escapó de la esclavitud y trabajó como lavandera en un regimiento negro", "kind": "Memorias (escritas en 1902)", "intro": "Una trabajadora negra del ejército recuerda cómo se pagaba a los primeros soldados negros.", "quote": "Las primeras tropas de color no recibieron ningún pago durante dieciocho meses . . . Finalmente, en 1863, el gobierno decidió darles la mitad del pago, pero los hombres no lo aceptaron. Querían el «pago completo» o nada. Preferían dar sus servicios al estado, lo cual hicieron hasta 1864, cuando el gobierno les concedió el pago completo, con todo el pago atrasado que se les debía.", "help": "tropas de color = soldados negros (las palabras de entonces) · servicios = trabajo y deber · pago atrasado = pago que se debe por trabajo pasado · aceptar = estar de acuerdo en recibir", "hint": "¿Qué dijeron los soldados que querían?", "short": "Memorias de Susie King Taylor (1863–1864)"}, "ar": {"who": "سوزي كينغ تايلور (Susie King Taylor) — شابة نجت من العبودية وعملت غسّالة في فوج من الجنود السود", "kind": "مذكرات (كُتبت عام 1902)", "intro": "عاملة سوداء في الجيش تتذكر كيف كان يُدفع للجنود السود الأوائل.", "quote": "لم يتلقَّ الجنود الملوّنون الأوائل أي أجر لمدة ثمانية عشر شهرًا . . . وأخيرًا، في عام 1863، قررت الحكومة أن تعطيهم نصف الأجر، لكن الرجال لم يقبلوا ذلك. أرادوا «الأجر الكامل» أو لا شيء. وفضّلوا أن يقدّموا خدماتهم للولاية، وهذا ما فعلوه حتى عام 1864، حين منحتهم الحكومة الأجر الكامل مع كل الأجور المتأخرة المستحقة لهم.", "help": "الجنود الملوّنون = الجنود السود (العبارة المستخدمة آنذاك) · الخدمات = العمل والواجب · الأجور المتأخرة = أجر مستحق عن عمل سابق · يقبل = يوافق على الأخذ", "hint": "ماذا قال الجنود إنهم يريدون؟", "short": "مذكرات سوزي كينغ تايلور (1863–1864)"}, "year": "1863–1864"}, "2": {"en": {"who": "General William T. Sherman (Union Army)", "kind": "Military order (Special Field Orders, No. 15)", "intro": "A Union general sets aside coastal land for people freed from slavery.", "quote": "The islands from Charleston, south, the abandoned rice fields along the rivers for thirty miles back from the sea, and the country bordering the St. Johns river, Florida, are reserved and set apart for the settlement of the negroes now made free by the acts of war and the proclamation of the President of the United States. . . . the sole and exclusive management of affairs will be left to the freed people themselves, subject only to the United States military authority and the acts of Congress.", "help": "reserved = kept for one purpose · settlement = a place to live and farm · exclusive = only · management = running things", "hint": "Who gets the land? Who runs things there?", "short": "Sherman’s Field Order 15 (1865)"}, "es": {"who": "El general William T. Sherman (Ejército de la Unión)", "kind": "Orden militar (Órdenes de Campo Especiales, n.º 15)", "intro": "Un general de la Unión reserva tierras de la costa para las personas liberadas de la esclavitud.", "quote": "Las islas desde Charleston hacia el sur, los arrozales abandonados a lo largo de los ríos hasta treinta millas desde el mar, y la región junto al río St. Johns, en Florida, quedan reservados y apartados para el asentamiento de los negros ahora hechos libres por los actos de guerra y la proclamación del Presidente de los Estados Unidos. . . . la administración única y exclusiva de los asuntos quedará en manos de los propios libertos, sujeta solamente a la autoridad militar de los Estados Unidos y a las leyes del Congreso.", "help": "reservado = guardado para un solo fin · asentamiento = un lugar para vivir y cultivar · exclusiva = solo de ellos · administración = dirigir las cosas", "hint": "¿Quién recibe la tierra? ¿Quién manda allí?", "short": "Orden de Campo n.º 15 de Sherman (1865)"}, "ar": {"who": "الجنرال ويليام ت. شيرمان (William T. Sherman) — جيش الاتحاد", "kind": "أمر عسكري (أوامر ميدانية خاصة رقم 15)", "intro": "جنرال في جيش الاتحاد يخصّص أرضًا ساحلية للأشخاص الذين تحرروا من العبودية.", "quote": "الجزر الممتدة من تشارلستون جنوبًا، وحقول الأرز المهجورة على طول الأنهار لمسافة ثلاثين ميلًا من البحر، والأراضي المجاورة لنهر سانت جونز في فلوريدا، محجوزة ومخصّصة لاستيطان الزنوج الذين أصبحوا الآن أحرارًا بأعمال الحرب وبإعلان رئيس الولايات المتحدة. . . . وستُترك الإدارة الكاملة والحصرية للشؤون للأشخاص المحرَّرين أنفسهم، مع خضوعهم فقط للسلطة العسكرية للولايات المتحدة ولقوانين الكونغرس.", "help": "محجوزة = محفوظة لغرض واحد · استيطان = مكان للعيش والزراعة · الحصرية = لهم وحدهم · الإدارة = تسيير الأمور", "hint": "من يحصل على الأرض؟ ومن يدير الأمور هناك؟", "short": "أمر شيرمان الميداني 15 (1865)"}, "year": "1865"}, "3": {"en": {"who": "President Andrew Johnson", "kind": "Veto message (Civil Rights Bill of 1866)", "intro": "The President refuses to sign a bill that would make Black Americans citizens.", "quote": "This bill, in effect, proposes discrimination against large numbers of intelligent, worthy, and patriotic foreigners, and in favor of the negro, to whom, after long years of bondage, the avenues to freedom and intelligence have now been suddenly opened. He must, of necessity, from his previous unfortunate condition of servitude, be less informed as to the nature and character of our institutions than he who, coming from abroad, has to some extent at least, familiarized himself with the principles of a Government . . . .", "help": "veto = refuse to sign a bill · discrimination = unfair treatment of a group · bondage = slavery · servitude = being forced to work for others", "hint": "Who does Johnson say the bill treats unfairly? What does the bill do for Black Americans?", "short": "Johnson’s veto (1866)"}, "es": {"who": "El presidente Andrew Johnson", "kind": "Mensaje de veto (Ley de Derechos Civiles de 1866)", "intro": "El Presidente se niega a firmar un proyecto de ley que haría ciudadanos a los afroamericanos.", "quote": "Este proyecto de ley, en efecto, propone discriminación contra un gran número de extranjeros inteligentes, dignos y patriotas, y a favor del negro, a quien, después de largos años de esclavitud, se le han abierto de repente los caminos hacia la libertad y la instrucción. Por fuerza, debido a su anterior y desafortunada condición de servidumbre, debe de estar menos informado sobre la naturaleza y el carácter de nuestras instituciones que quien, viniendo del extranjero, se ha familiarizado, al menos en cierta medida, con los principios de un Gobierno . . . .", "help": "veto = negarse a firmar una ley · discriminación = trato injusto a un grupo · esclavitud = ser propiedad de otro · servidumbre = ser obligado a trabajar para otros", "hint": "¿A quién dice Johnson que trata injustamente la ley? ¿Qué hace la ley por los afroamericanos?", "short": "Veto de Johnson (1866)"}, "ar": {"who": "الرئيس أندرو جونسون (Andrew Johnson)", "kind": "رسالة نقض (قانون الحقوق المدنية لعام 1866)", "intro": "الرئيس يرفض التوقيع على مشروع قانون كان سيجعل الأمريكيين السود مواطنين.", "quote": "إن مشروع القانون هذا يقترح فعليًا التمييز ضد أعداد كبيرة من الأجانب الأذكياء والجديرين والوطنيين، ولصالح الزنجي، الذي فُتحت أمامه فجأة، بعد سنوات طويلة من الاستعباد، سبل الحرية والمعرفة. ولا بد أن يكون، بسبب حالة الخضوع المؤسفة التي كان فيها، أقل اطّلاعًا على طبيعة مؤسساتنا وروحها ممن جاء من الخارج وألمّ، إلى حدٍّ ما على الأقل، بمبادئ حكومة . . . .", "help": "النقض = رفض التوقيع على قانون · التمييز = معاملة غير عادلة لجماعة · الاستعباد = العبودية · الخضوع = الإجبار على العمل للآخرين", "hint": "من يقول جونسون إن القانون يظلمه؟ وماذا يفعل القانون للأمريكيين السود؟", "short": "نقض جونسون (1866)"}, "year": "1866"}, "4": {"en": {"who": "Howell Cobb, a former Confederate officer and Georgia politician", "kind": "Private letter", "intro": "A former Confederate leader writes to a friend about Congress’s plan for the South.", "quote": "They . . . are now struggling by all the means in their power both legal and illegal, constitutional and unconstitutional, to make our former slaves our masters, bringing these Southern states under the power of negro supremacy. To these efforts we have opposed appeals, protests, and every other means of resistance in our power, and shall continue to do so to the bitter end.", "help": "constitutional = allowed by the Constitution · supremacy = being in charge · resistance = fighting against something · bitter end = until the very end", "hint": "What does Cobb say he will do about what Congress is doing?", "short": "Howell Cobb letter (1868)"}, "es": {"who": "Howell Cobb, antiguo oficial confederado y político de Georgia", "kind": "Carta privada", "intro": "Un antiguo líder confederado le escribe a un amigo sobre el plan del Congreso para el Sur.", "quote": "Ellos . . . están luchando ahora con todos los medios a su alcance, tanto legales como ilegales, constitucionales e inconstitucionales, para hacer de nuestros antiguos esclavos nuestros amos, poniendo a estos estados del Sur bajo el poder de la supremacía negra. A estos esfuerzos hemos opuesto apelaciones, protestas y todos los demás medios de resistencia a nuestro alcance, y seguiremos haciéndolo hasta el amargo final.", "help": "constitucional = permitido por la Constitución · supremacía = estar al mando · resistencia = luchar contra algo · hasta el final = hasta el último momento", "hint": "¿Qué dice Cobb que hará frente a lo que hace el Congreso?", "short": "Carta de Howell Cobb (1868)"}, "ar": {"who": "هاوِل كوب (Howell Cobb) — ضابط كونفدرالي سابق وسياسي من جورجيا", "kind": "رسالة خاصة", "intro": "قائد كونفدرالي سابق يكتب إلى صديق عن خطة الكونغرس للجنوب.", "quote": "إنهم . . . يناضلون الآن بكل الوسائل التي في وسعهم، القانونية وغير القانونية، الدستورية وغير الدستورية، ليجعلوا عبيدنا السابقين أسيادنا، وليضعوا هذه الولايات الجنوبية تحت سلطة سيادة الزنوج. وقد قابلنا هذه الجهود بالمناشدات والاحتجاجات وبكل وسيلة مقاومة أخرى في وسعنا، وسنستمر في ذلك حتى النهاية المرّة.", "help": "دستوري = يسمح به الدستور · السيادة = أن تكون صاحب الأمر · المقاومة = القتال ضد شيء · النهاية المرّة = حتى آخر لحظة", "hint": "ماذا يقول كوب إنه سيفعل تجاه ما يفعله الكونغرس؟", "short": "رسالة هاوِل كوب (1868)"}, "year": "1868"}, "5": {"en": {"who": "Congress and the states (the U.S. Constitution)", "kind": "Constitutional amendment", "intro": "A new part of the Constitution says who is a citizen and what states cannot do.", "quote": "All persons born or naturalized in the United States, and subject to the jurisdiction thereof, are citizens of the United States and of the State wherein they reside. No State shall make or enforce any law which shall abridge the privileges or immunities of citizens of the United States; nor shall any State deprive any person of life, liberty, or property, without due process of law; nor deny to any person within its jurisdiction the equal protection of the laws.", "help": "naturalized = made a citizen by law · jurisdiction = legal power over a place · abridge = cut back or take away · due process = fair legal steps", "hint": "Who counts as a citizen? What can a state not do?", "short": "14th Amendment (1868)"}, "es": {"who": "El Congreso y los estados (la Constitución de EE. UU.)", "kind": "Enmienda constitucional", "intro": "Una nueva parte de la Constitución dice quién es ciudadano y qué no pueden hacer los estados.", "quote": "Todas las personas nacidas o naturalizadas en los Estados Unidos, y sujetas a su jurisdicción, son ciudadanos de los Estados Unidos y del Estado en que residen. Ningún Estado hará ni aplicará ley alguna que limite los privilegios o inmunidades de los ciudadanos de los Estados Unidos; ni ningún Estado privará a persona alguna de la vida, la libertad o la propiedad sin el debido proceso legal; ni negará a persona alguna dentro de su jurisdicción la igual protección de las leyes.", "help": "naturalizadas = hechas ciudadanas por ley · jurisdicción = poder legal sobre un lugar · limitar = reducir o quitar · debido proceso = pasos legales justos", "hint": "¿Quién cuenta como ciudadano? ¿Qué no puede hacer un estado?", "short": "Enmienda 14 (1868)"}, "ar": {"who": "الكونغرس والولايات (دستور الولايات المتحدة)", "kind": "تعديل دستوري", "intro": "جزء جديد من الدستور يحدّد من هو المواطن وما الذي لا تستطيع الولايات فعله.", "quote": "كل الأشخاص المولودين أو المجنَّسين في الولايات المتحدة، والخاضعين لسلطتها، هم مواطنون في الولايات المتحدة وفي الولاية التي يقيمون فيها. ولا يجوز لأي ولاية أن تسنّ أو تنفّذ أي قانون ينتقص من امتيازات مواطني الولايات المتحدة أو حصاناتهم؛ ولا أن تحرم أي شخص من الحياة أو الحرية أو الملكية دون إجراءات قانونية عادلة؛ ولا أن تنكر على أي شخص خاضع لسلطتها الحماية المتساوية للقوانين.", "help": "المجنَّسون = من صاروا مواطنين بالقانون · السلطة القضائية = السلطة القانونية على مكان · ينتقص = يقلّل أو يأخذ · الإجراءات القانونية العادلة = خطوات قانونية منصفة", "hint": "من يُعدّ مواطنًا؟ وما الذي لا تستطيع الولاية فعله؟", "short": "التعديل 14 (1868)"}, "year": "1868"}};
+var SIDES={"1": "V", "2": "N", "3": "S", "4": "S", "5": "N"};
+var CN=[1,2,3,4,5],lang='en',sides={},msgKey=null,msgVars=null;
+function $(s,r){return (r||document).querySelector(s)}function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+function T(k,v){var s=(I18N[lang]&&I18N[lang][k])||I18N.en[k]||k;if(v)for(var x in v)s=s.split('{'+x+'}').join(v[x]);return s}
+function setMsg(k,v,cls){msgKey=k;msgVars=v;var m=$('#msg');m.className=cls||'';m.textContent=T(k,v)}
+function setLang(l,keep){
+ lang=l;document.documentElement.lang=l;document.documentElement.dir=(l==='ar'?'rtl':'ltr');
+ $$('[data-t]').forEach(function(e){e.textContent=T(e.getAttribute('data-t'))});
+ $$('[data-tp]').forEach(function(e){e.placeholder=T(e.getAttribute('data-tp'))});
+ CN.forEach(function(i){var d=CASES[i][l]||CASES[i].en;
+  $$('[data-c][data-i="'+i+'"]').forEach(function(e){e.textContent=d[e.getAttribute('data-c')]});
+  $('[data-chip="'+i+'"]').textContent=T('chip',{i:i});
+  var o=$('[data-orig="'+i+'"]');o.textContent=(l==='en'?'':'English original: '+CASES[i].en.quote);
+  var op=$('[data-opt="'+i+'"]');op.textContent=CASES[i].year+' · '+d.short;
+ });
+ $$('.langbar button').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-lang')===l?'true':'false')});
+ try{localStorage.setItem(STORE+'_lang',l)}catch(e){}
+ if(msgKey)$('#msg').textContent=T(msgKey,msgVars);
+ refresh();
+}
+function val(id){var e=document.getElementById(id);return e?e.value.trim():''}
+function field(n){var e=$('[data-id="'+n+'"]');return e?e.value:''}
+function state(){
+ var a={};CN.forEach(function(i){a['note'+i]=field('note'+i)});a.best=field('best');a.why=field('why');a.counter=field('counter');
+ var t={national:0,state:0,voice:0};CN.forEach(function(i){var s=sides[i];if(s==='N')t.national++;if(s==='S')t.state++;if(s==='V')t.voice++});
+ return {packet:PACKET,course:COURSE,version:1,saved:new Date().toISOString(),completed:false,
+  student:{first:val('first'),last:val('last'),period:val('period'),date:val('date')},
+  sides:JSON.parse(JSON.stringify(sides)),answers:a,
+  checks:{chk1:$('#chk1').checked,chk2:$('#chk2').checked},tally:t};
+}
+function missing(){
+ var m=[],s=state();
+ if(!s.student.first||!s.student.last||!s.student.period)m.push(T('t_names'));
+ CN.forEach(function(i){if(!sides[i]||!s.answers['note'+i].trim())m.push(T('t_case',{i:i}))});
+ if(!s.answers.best)m.push(T('t_best'));if(!s.answers.why.trim())m.push(T('t_why'));if(!s.answers.counter.trim())m.push(T('t_ctr'));
+ if(!(s.checks.chk1&&s.checks.chk2))m.push(T('t_chk'));
+ return m;
+}
+function refresh(){
+ var done=0;CN.forEach(function(i){var c=$('#card'+i),ok=!!sides[i]&&field('note'+i).trim()!=='';if(ok)done++;
+  c.classList.toggle('done',ok);c.classList.toggle('isS',sides[i]==='S');c.classList.toggle('isV',sides[i]==='V');
+  $$('.stances button',c).forEach(function(b){b.setAttribute('aria-pressed',sides[i]===b.getAttribute('data-v')?'true':'false')})});
+ $('#fill').style.width=(done*20)+'%';$('#progt').textContent=T('prog',{n:done});
+ var m=missing();$('#todo').textContent=m.length?T('todo',{x:m.join(lang==='ar'?'؛ ':'; ')}):T('allset');
+ $('#fin').disabled=m.length>0;
+}
+function persist(){try{localStorage.setItem(STORE,JSON.stringify(state()))}catch(e){}}
+function apply(s){
+ $('#first').value=s.student.first||'';$('#last').value=s.student.last||'';$('#period').value=s.student.period||'';$('#date').value=s.student.date||'';
+ sides={};for(var k in (s.sides||{}))sides[k]=s.sides[k];
+ var a=s.answers||{};CN.forEach(function(i){$('[data-id="note'+i+'"]').value=a['note'+i]||''});
+ $('#best').value=a.best||'';$('#why').value=a.why||'';$('#counter').value=a.counter||'';
+ $('#chk1').checked=!!(s.checks&&s.checks.chk1);$('#chk2').checked=!!(s.checks&&s.checks.chk2);refresh();
+}
+function fname(s){var n=(s.student.last+'_'+s.student.first).normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^A-Za-z0-9_\-]+/g,'_');return n||'Student'}
+function dl(name,obj){var b=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(u);a.remove()},500)}
+function namesOk(){var ok=true;['first','last','period'].forEach(function(id){var e=$('#'+id),bad=!e.value.trim();e.classList.toggle('bad',bad);if(bad)ok=false});return ok}
+document.addEventListener('click',function(e){
+ var b=e.target.closest('.stances button');if(b){var i=+b.closest('.card').getAttribute('data-i');sides[i]=b.getAttribute('data-v');refresh();persist();return}
+ var lb=e.target.closest('.langbar button');if(lb){setLang(lb.getAttribute('data-lang'))}
+});
+document.addEventListener('input',function(){refresh();persist();$$('.names input.bad').forEach(function(x){if(x.value.trim())x.classList.remove('bad')})});
+document.addEventListener('change',function(){refresh();persist()});
+$('#save').onclick=function(){if(!namesOk()){setMsg('m_names',null,'err');return}var s=state();dl(fname(s)+'-'+PACKET+'-PROGRESS.json',s);setMsg('m_saved',null,'ok')};
+$('#load').onclick=function(){$('#file').click()};
+$('#file').onchange=function(ev){var f=ev.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(){try{var s=JSON.parse(r.result);if(!s||s.packet!==PACKET)throw 0;apply(s);persist();setMsg('m_loaded',null,'ok')}catch(x){setMsg('m_loaderr',null,'err')}};r.readAsText(f);ev.target.value=''};
+$('#fin').onclick=function(){
+ if(!namesOk()||missing().length){setMsg('m_notfin',null,'err');return}
+ var d=new Date(),p=function(n){return (n<10?'0':'')+n};$('#date').value=(d.getMonth()+1)+'/'+d.getDate()+'/'+d.getFullYear();
+ var s=state();s.completed=true;var f=fname(s)+'-'+PACKET+'.json';dl(f,s);persist();setMsg('m_fin',{f:f},'ok');
+};
+(function init(){
+ var l='en';try{var q=new URLSearchParams(location.search).get('lang');if(q==='es'||q==='ar')l=q;else{var sv=localStorage.getItem(STORE+'_lang');if(sv==='es'||sv==='ar')l=sv}}catch(e){}
+ setLang(l);
+ try{var raw=localStorage.getItem(STORE);if(raw){var s=JSON.parse(raw);if(s&&s.packet===PACKET)apply(s)}}catch(e){}
+ refresh();
+})();
+</script></body></html>
