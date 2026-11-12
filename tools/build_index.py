@@ -15,13 +15,15 @@ ROOT = Path(__file__).resolve().parent.parent
 UNITS = {
     "unit-1-colonies-revolutions-and-constitution": ("Unit 1", "Colonies, Revolutions, and Constitution", "#16413B", "#D2AA4B"),
     "unit-2-an-expanding-nation": ("Unit 2", "An Expanding Nation", "#2D3D1A", "#D26B4B"),
-    "unit-3-4-bridge": ("Units 3–4 Bridge", "Constitution to Reconstruction", "#362337", "#A6871D"),
     "unit-3-a-house-divided-and-rebuilt": ("Unit 3", "A House Divided and Rebuilt", "#1B283C", "#D24B54"),
     "unit-4-industry-empire-and-reform": ("Unit 4", "Industry, Empire, and Reform", "#2C1D3A", "#D2A14B"),
     "unit-5-war-prosperity-and-cultural-conflict": ("Unit 5", "War, Prosperity, and Cultural Conflict", "#3E1926", "#4BD2CE"),
     "unit-6-depression-and-world-war": ("Unit 6", "Depression and World War", "#3D291A", "#4B9CD2"),
     "unit-7-the-american-age": ("Unit 7", "The American Age", "#252B31", "#DD7A40"),
 }
+
+# Unit folders left off the hub (temporary units). Their pages stay in the repo.
+EXCLUDE = {"unit-3-4-bridge"}
 
 # filename prefix -> (key, label, short blurb, icon), in display order.
 ACTIVITIES = [
@@ -109,7 +111,7 @@ def build():
     units_html, nav_html = [], []
     total_pages = total_chapters = 0
     unit_dirs = [ROOT / name for name in UNITS if (ROOT / name).is_dir()]
-    unknown = sorted(d.name for d in ROOT.glob("unit-*") if d.is_dir() and d.name not in UNITS)
+    unknown = sorted(d.name for d in ROOT.glob("unit-*") if d.is_dir() and d.name not in UNITS and d.name not in EXCLUDE)
     for name in unknown:
         UNITS[name] = (name.replace("-", " ").title(), "", "#2A3340", "#C9A347")
         unit_dirs.append(ROOT / name)
@@ -165,7 +167,7 @@ def build():
     }.items():
         out = out.replace(k, v)
     (ROOT / "index.html").write_text(out, encoding="utf-8")
-    print(f"index.html: {total_pages} pages, {total_chapters} chapters/lessons")
+    print(f"index.html: {total_pages} pages, {total_chapters} chapters")
 
 
 TEMPLATE = r"""<!DOCTYPE html>
@@ -273,7 +275,7 @@ footer{border-top:1px solid var(--rule);color:var(--dim);font-size:13px;padding:
     <p class="lede">Every interactive reading, source investigation, and review game for the course, organized by unit and chapter. Pick a unit to jump in.</p>
     <ul class="stats">
       <li><b>{{UNITCOUNT}}</b> units</li>
-      <li><b>{{CHAPTERS}}</b> chapters &amp; lessons</li>
+      <li><b>{{CHAPTERS}}</b> chapters</li>
       <li><b>{{PAGES}}</b> activities</li>
     </ul>
     <nav class="unit-nav" aria-label="Units">{{NAV}}</nav>
