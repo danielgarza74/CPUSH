@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Viewing Guide · Poisoned Dreams</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;0,800;1,400;1,500&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;0,800;1,400&display=swap">
+<style>
+:root{
+  --bg:#F1F1F3; --paper:#FCFCFC; --maroon:#2C313A; --ink:#21252C; --brown:#414855;
+  --keybg:#FAF0E7; --keyline:#DD8840; --rule:#D1D2D5; --line:#AEB0B4; --ok:#3F6B3A;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Segoe UI",system-ui,-apple-system,Verdana,sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:0 18px 60px}
+header.hero{padding:34px 0 14px;border-bottom:3px solid #DD8840}
+.eyebrow{font-size:12px;letter-spacing:.14em;font-weight:700;color:#9B5F2D}
+h1{margin:.15em 0 .05em;font-size:34px;line-height:1.15;color:var(--maroon)}
+.sub{margin:0;font-weight:600;color:var(--brown)}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 4px}
+.meta label{flex:1 1 180px;font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--brown)}
+.meta input[readonly]{background:#E2E3E5;color:var(--brown);cursor:not-allowed}
+.meta input{display:block;width:100%;margin-top:3px;padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--paper);color:var(--ink);font:inherit}
+.bigq,.howto{background:var(--paper);border:1px solid var(--line);border-left:6px solid #DD8840;border-radius:6px;padding:12px 16px;margin:18px 0}
+.bigq p,.howto p{margin:.3em 0}
+.bigq .how{font-size:14px;color:var(--brown)}
+.howto{font-size:14.5px}
+.bar{position:sticky;top:0;z-index:5;background:var(--bg);padding:8px 0;border-bottom:1px solid var(--rule)}
+.bar .row{display:flex;align-items:center;gap:12px;font-size:13px;font-weight:600;color:var(--brown)}
+.track{flex:1;height:10px;border-radius:6px;background:#D8D9DB;overflow:hidden}
+.fill{height:100%;width:0;background:#DD8840;transition:width .3s}
+.btn{border:1px solid var(--maroon);background:var(--paper);color:var(--maroon);padding:5px 12px;border-radius:6px;font:inherit;font-size:13px;font-weight:600;cursor:pointer}
+.btn:hover{background:var(--maroon);color:#fff}
+h2.part{margin:38px 0 10px;font-size:21px;color:var(--maroon);border-bottom:1px solid var(--rule);padding-bottom:4px}
+.obj{background:#F8EDE4;border-radius:6px;padding:12px 16px;margin:12px 0;font-size:14.5px}
+.obj p{margin:.35em 0}
+.obj .im{color:var(--maroon)}
+.reading,.source,.visual{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:14px 18px;margin:16px 0}
+.rtitle{font-weight:800;letter-spacing:.04em;color:var(--maroon);font-size:15px;margin-bottom:6px}
+.rtitle span{color:var(--line);margin:0 4px}
+.reading p{margin:.55em 0}
+.sub{font-size:13px;color:var(--brown);margin:8px 0 3px}
+.note{font-size:14px;color:var(--brown);font-style:italic;align-self:center}
+.tintro{margin:18px 0 -6px;font-size:15px}
+.help{font-size:13.5px;color:var(--brown);background:var(--keybg);border-radius:5px;padding:6px 10px}
+.cite{font-size:12.5px;color:var(--brown);font-style:normal;margin:.5em 0 0}
+.intro{font-style:italic;font-size:14.5px}
+blockquote{margin:10px 0;padding:8px 16px;border-left:4px solid var(--maroon);background:#FAF3ED;font-size:16.5px}
+figure{margin:12px 0;text-align:center}
+figure img{max-width:min(100%,600px);height:auto;border:1px solid var(--line);border-radius:4px;cursor:zoom-in}
+figure.zoom img{max-width:100%;cursor:zoom-out}
+figcaption{text-align:left;margin-top:8px}
+.tbl{border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:16px 0;background:var(--paper)}
+.thead{background:var(--maroon);color:#fff;font-weight:700;padding:8px 14px;font-size:14px}
+.trow{display:grid;grid-template-columns:minmax(150px,32%) 1fr;gap:14px;padding:12px 14px;border-top:1px solid var(--rule)}
+.tl .qp{font-size:13.5px;color:var(--brown);margin-top:2px}
+.ask,.cer{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px 16px;margin:16px 0}
+.cer{display:grid;grid-template-columns:minmax(120px,22%) 1fr;gap:14px;margin:10px 0}
+.cl b{display:block;color:var(--maroon)}
+.cl span{font-size:13px;color:var(--brown)}
+textarea{width:100%;min-height:74px;padding:9px 11px;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--ink);font:inherit;resize:vertical;line-height:1.5}
+textarea:focus,input:focus{outline:2px solid var(--maroon);outline-offset:1px}
+textarea.done{border-color:var(--ok);background:#FBFFF8}
+.key{background:var(--keybg);border-left:4px solid var(--keyline);border-radius:4px;padding:8px 12px;margin-top:8px;font-size:14.5px;color:#9B5F2D}
+.checks{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px 16px;margin:16px 0;display:grid;gap:6px}
+.chk{display:flex;gap:8px;align-items:flex-start;cursor:pointer}
+.chk input{margin-top:6px;accent-color:var(--maroon)}
+.finish{text-align:center;margin:26px 0}
+.status{font-size:14px;font-weight:600;color:var(--brown);margin-bottom:10px}
+.btns{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.btn.primary{background:var(--maroon);color:#fff}
+.btn.primary:disabled{background:#B3B4B7;border-color:#B3B4B7;color:#fff;cursor:not-allowed}
+.btn.primary:disabled:hover{background:#B3B4B7}
+.link{background:none;border:0;color:var(--brown);text-decoration:underline;cursor:pointer;font:inherit;font-size:13px;margin-top:14px}
+input.bad{border-color:#B3261E;background:#FFF1EF}
+.msg{display:none;margin:12px auto;padding:10px 14px;border-radius:6px;background:#EDF5E8;border:1px solid var(--ok);color:var(--ok);font-weight:600;max-width:600px}
+.msg.err{background:#FFF1EF;border-color:#B3261E;color:#8C1D18}
+footer{margin-top:34px;padding-top:10px;border-top:1px solid var(--rule);font-size:12px;letter-spacing:.04em;color:var(--maroon);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+@media (max-width:620px){.trow,.cer{grid-template-columns:1fr;gap:6px}h1{font-size:27px}}
+@media print{
+  body{background:#fff;font-size:12.5px}.bar,.finish,.btn,.msg{display:none!important}
+  .reading,.source,.visual,.tbl,.ask,.cer,.obj,.checks{break-inside:avoid}
+  textarea{border:1px solid #bbb;min-height:60px}
+}
+
+/* ---- paged layout ---- */
+.layout{display:grid;grid-template-columns:270px minmax(0,1fr);max-width:1200px;margin:0 auto}
+.layout .wrap{max-width:900px;width:100%;padding:0 30px 60px}
+.side{position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;padding:26px 16px 30px 18px;background:#F4E4D6;border-right:1px solid var(--rule)}
+.side-head{padding-bottom:12px;margin-bottom:12px;border-bottom:3px solid #0F6B66}
+.side-title{font-size:18px;line-height:1.25;font-weight:800;color:var(--maroon);margin-top:2px}
+.toc,.toc ul{list-style:none;margin:0;padding:0}
+.toc>li{margin:0 0 10px}
+.toc-part{display:grid;grid-template-columns:1fr auto;gap:2px 8px;padding:9px 10px;border-radius:7px;border:1px solid transparent;color:var(--ink);text-decoration:none}
+.toc-part:hover{background:var(--paper);border-color:var(--rule)}
+.toc-part .pn{font-size:11.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--maroon)}
+.toc-part .pt{grid-column:1/2;font-size:14.5px;font-weight:600;line-height:1.3}
+.toc-part .cnt{grid-row:1/3;grid-column:2;align-self:center;font-size:12px;font-weight:700;color:var(--brown);background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:1px 8px;white-space:nowrap}
+.toc li.complete .cnt{background:var(--ok);border-color:var(--ok);color:#fff}
+.toc li.active>.toc-part{background:var(--maroon);border-color:var(--maroon)}
+.toc li.active>.toc-part .pn,.toc li.active>.toc-part .pt{color:#fff}
+.toc-sub{margin:4px 0 0 12px!important;border-left:2px solid var(--rule)}
+.toc-sub a{display:block;padding:4px 8px 4px 12px;font-size:13px;line-height:1.3;color:var(--brown);text-decoration:none;border-radius:0 5px 5px 0}
+.toc-sub a b{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--maroon)}
+.toc-sub a:hover{background:var(--paper)}
+.toc li.active .toc-sub{border-left-color:var(--maroon)}
+section.page{display:none;scroll-margin-top:200px}
+section.page.active{display:block}
+section.page>h2.part:first-child{margin-top:26px}
+.reading,.source,.visual{scroll-margin-top:64px}
+.pager{display:flex;justify-content:space-between;gap:12px;margin:34px 0 0;padding-top:16px;border-top:1px solid var(--rule)}
+.pager a{flex:0 1 48%;display:block;padding:10px 14px;border:1px solid var(--maroon);border-radius:7px;background:var(--paper);color:var(--maroon);text-decoration:none;font-size:14px;font-weight:600;line-height:1.3}
+.pager a small{display:block;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--brown)}
+.pager a:hover{background:var(--maroon);color:#fff}
+.pager a:hover small{color:#fff}
+.pager a.next{margin-left:auto;text-align:right}
+@media (max-width:900px){
+  .layout{display:block}
+  .layout .wrap{padding:0 18px 60px}
+  .side{position:static;height:auto;overflow:visible;padding:14px 18px 10px;border-right:0;border-bottom:1px solid var(--rule)}
+  .side-head{display:none}
+  .toc{display:flex;flex-wrap:wrap;gap:8px}
+  .toc>li{margin:0;flex:1 1 150px}
+  .toc-part{height:100%;background:var(--paper);border-color:var(--rule)}
+  .toc-sub{display:none}
+}
+@media print{
+  .side,.pager{display:none!important}
+  .layout{display:block}
+  section.page{display:block!important}
+}
+/* ---- Interactive Reading design layer ----
+   Layout: sidebar of Parts + one Part per page; readings set like a book (serif),
+   student work set like a workbook (sans, tinted "Your turn" zones). */
+:root{
+  --accent2:#DD8840;
+  --serif:"Alegreya",Georgia,"Times New Roman",serif;
+  --sans:"Alegreya Sans","Segoe UI",system-ui,-apple-system,sans-serif;
+  --accent-ink:color-mix(in srgb,var(--accent2) 62%,var(--ink));
+  --tint:color-mix(in srgb,var(--accent2) 7%,var(--paper));
+  --tint-line:color-mix(in srgb,var(--accent2) 28%,var(--rule));
+  --soft:color-mix(in srgb,var(--maroon) 5%,var(--bg));
+  --shadow:0 1px 2px color-mix(in srgb,var(--ink) 6%,transparent),0 8px 24px -12px color-mix(in srgb,var(--ink) 22%,transparent);
+}
+body{font:17px/1.6 var(--sans);font-variant-numeric:lining-nums;-webkit-font-smoothing:antialiased}
+.cnt,#pct{font-variant-numeric:lining-nums tabular-nums}
+h1,h2,.side-title,.toc-part .pt,.pager a{font-family:var(--serif)}
+h1,h2{text-wrap:balance}
+
+/* hero */
+header.hero{padding:28px 0 0;border:0}
+.hero-band{position:relative;overflow:hidden;border-radius:16px;padding:34px 34px 30px;color:#fff;
+  background-color:var(--maroon);
+  background-image:linear-gradient(100deg,color-mix(in srgb,var(--maroon) 97%,transparent) 35%,color-mix(in srgb,var(--maroon) 72%,transparent)),var(--hero-img,none);
+  background-size:cover;background-position:center}
+.hero-band .eyebrow{color:color-mix(in srgb,#fff 82%,var(--maroon));font-size:13px;letter-spacing:.18em}
+.hero-band h1{color:#fff;font-size:clamp(32px,5vw,48px);font-weight:700;line-height:1.08;margin:.2em 0 .25em;max-width:15em}
+.hero-band .sub{color:color-mix(in srgb,#fff 88%,var(--maroon));font-size:16px;font-weight:500;margin:0;max-width:40em}
+.hero-num{position:absolute;right:22px;bottom:-34px;font:700 190px/1 var(--serif);color:#fff;opacity:.16;pointer-events:none;user-select:none}
+.meta{gap:14px;margin:18px 0 0;padding:18px 20px;background:var(--paper);border:1px solid var(--rule);border-radius:12px}
+.meta label{font-size:12px;letter-spacing:.1em}
+.meta input{border-radius:8px;padding:9px 11px;margin-top:5px}
+
+/* sticky progress bar */
+.bar{top:0;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:10px 0}
+.track{height:8px;background:color-mix(in srgb,var(--rule) 55%,var(--paper))}
+.fill{background:var(--accent2)}
+.btn{border-radius:8px;font-family:var(--sans);font-size:14px}
+
+/* big question + how to work */
+.bigq{border:0;border-radius:14px;background:var(--tint);padding:20px 24px;margin:22px 0 14px}
+.bigq .eyebrow{color:var(--accent-ink)}
+.bigq>p:not(.how){font:500 22px/1.4 var(--serif);color:var(--ink);margin:.35em 0}
+.bigq .how{font-size:15px}
+.howto{border:1px dashed var(--line);border-radius:12px;background:transparent;font-size:15px;color:var(--brown);padding:12px 18px}
+
+/* part opener */
+.parthead{margin:30px 0 14px;padding-bottom:12px;border-bottom:1px solid var(--rule)}
+section.page>.parthead:first-child{margin-top:26px}
+.pkicker{font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-ink)}
+.pkicker span{color:var(--brown);opacity:.65;font-weight:700}
+h2.part{margin:.1em 0 0;padding:0;border:0;font-size:clamp(28px,4vw,36px);line-height:1.15;color:var(--maroon)}
+.obj{background:var(--soft);border:1px solid var(--rule);border-radius:12px;padding:14px 20px;font-size:15.5px}
+.eyebrow{font-size:12px}
+
+/* readings, sources, visuals: the "book" */
+.reading,.source,.visual{border:1px solid var(--rule);border-radius:14px;padding:24px 30px 20px;margin:22px 0;box-shadow:var(--shadow)}
+.rtitle{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;margin-bottom:12px;letter-spacing:0}
+.rtitle .rlabel{margin:0;font:800 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:#fff;background:var(--maroon);padding:6px 10px 5px;border-radius:999px;transform:translateY(-3px)}
+.source .rtitle .rlabel{background:var(--accent-ink)}
+.visual .rtitle .rlabel{background:transparent;color:var(--maroon);box-shadow:inset 0 0 0 1.5px var(--maroon)}
+.rtitle .rname{margin:0;font:700 24px/1.2 var(--serif);color:var(--ink)}
+.reading p{font:19px/1.68 var(--serif);max-width:68ch}
+.reading p.help{font:14.5px/1.5 var(--sans)}
+.reading p.cite{font:13px/1.5 var(--sans)}
+.reading p,.rname,blockquote,.intro,h1,h2,.bigq>p{font-variant-numeric:lining-nums}
+.intro{font:italic 17px/1.55 var(--serif);color:var(--brown)}
+blockquote{position:relative;margin:16px 0;padding:6px 6px 6px 50px;border:0;background:transparent;font:italic 21px/1.55 var(--serif);color:var(--ink)}
+blockquote::before{content:"\201C";position:absolute;left:0;top:-14px;font:700 76px/1 var(--serif);color:var(--accent2);opacity:.85}
+.help{border-radius:8px;font-size:14.5px;padding:8px 12px}
+.cite{font-size:13px;color:var(--line);color:color-mix(in srgb,var(--brown) 80%,var(--paper))}
+figure img{max-width:100%;border-radius:8px;box-shadow:var(--shadow);border-color:var(--rule)}
+
+/* student work: the "workbook" */
+.tintro{margin:28px 0 -8px;font-size:16px}
+.tintro::before,.ask::before{content:"Your turn";display:block;font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-ink);margin-bottom:4px}
+.tbl{border:1px solid var(--tint-line);border-radius:14px;background:var(--tint);box-shadow:none}
+.thead{background:transparent;color:var(--ink);border-bottom:1px solid var(--tint-line);font-size:15px;padding:12px 18px}
+.trow{padding:14px 18px;border-top:0}
+.trow+.trow{border-top:1px solid color-mix(in srgb,var(--tint-line) 60%,transparent)}
+.tl b{font-size:16px}
+.ask{background:var(--tint);border:1px solid var(--tint-line);border-radius:14px;padding:16px 20px}
+.ask>p{margin:0 0 10px}
+.cer{background:var(--tint);border:1px solid var(--tint-line);border-radius:12px;padding:14px 18px}
+.cl b{font:700 19px/1.2 var(--serif)}
+textarea{border-radius:10px;border-color:color-mix(in srgb,var(--line) 70%,var(--paper));background:#fff;font-size:16.5px;padding:10px 12px;transition:border-color .15s,box-shadow .15s}
+textarea:focus,input:focus{outline:none;border-color:var(--accent2);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent2) 22%,transparent)}
+textarea.done{border-color:color-mix(in srgb,var(--ok) 60%,var(--paper));background:#fff;box-shadow:inset 3px 0 0 var(--ok)}
+.checks{background:var(--tint);border:1px solid var(--tint-line);border-radius:14px;padding:16px 20px}
+.finish{background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:22px 20px;box-shadow:var(--shadow)}
+.btn.primary{padding:8px 16px}
+a:focus-visible,.btn:focus-visible,button:focus-visible{outline:3px solid color-mix(in srgb,var(--accent2) 55%,transparent);outline-offset:2px}
+
+/* sidebar polish */
+.side{background:var(--soft)}
+.side-head{border-bottom-color:var(--accent2)}
+.side-title{font-size:21px}
+.toc-part .pt{font-size:16px;font-weight:700}
+.pager a{font-size:16px}
+.pager a small{font-family:var(--sans)}
+
+@media (max-width:620px){
+  .hero-band{padding:24px 20px 22px;border-radius:12px}
+  .hero-num{font-size:130px;bottom:-22px;right:10px}
+  .reading,.source,.visual{padding:18px 18px 14px;border-radius:12px}
+  .reading p{font-size:18px}
+  .rtitle .rname{font-size:21px}
+  blockquote{padding-left:36px;font-size:19px}
+  blockquote::before{font-size:60px;top:-10px}
+}
+@media (prefers-reduced-motion:reduce){textarea{transition:none}html{scroll-behavior:auto}}
+@media print{
+  .hero-band{background:none!important;color:var(--ink);padding:0}
+  .hero-band h1,.hero-band .eyebrow,.hero-band .sub{color:var(--ink)}
+  .hero-num{display:none}
+  .reading,.source,.visual,.finish{box-shadow:none}
+}
+
+/* ---- glass + depth layer ----
+   A fixed wash of the chapter's colors sits behind everything; panels are frosted
+   glass over it. Reading text stays on a near-solid surface for legibility. */
+:root{
+  --glass:color-mix(in srgb,var(--paper) 62%,transparent);
+  --glass-strong:color-mix(in srgb,var(--paper) 86%,transparent);
+  --glass-tint:color-mix(in srgb,var(--tint) 66%,transparent);
+  --glass-edge:color-mix(in srgb,#fff 70%,transparent);
+  --glass-hi:inset 0 1px 0 color-mix(in srgb,#fff 85%,transparent),inset 0 -1px 0 color-mix(in srgb,var(--ink) 5%,transparent);
+  --depth:0 1px 1px color-mix(in srgb,var(--ink) 5%,transparent),0 3px 6px -2px color-mix(in srgb,var(--ink) 8%,transparent),0 18px 40px -16px color-mix(in srgb,var(--ink) 30%,transparent);
+  --depth-up:0 2px 2px color-mix(in srgb,var(--ink) 6%,transparent),0 8px 14px -4px color-mix(in srgb,var(--ink) 12%,transparent),0 28px 56px -18px color-mix(in srgb,var(--ink) 38%,transparent);
+}
+body{background:var(--bg)}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(42vmax 42vmax at 8% 6%,color-mix(in srgb,var(--maroon) 30%,transparent),transparent 70%),
+    radial-gradient(38vmax 38vmax at 96% 22%,color-mix(in srgb,var(--accent2) 26%,transparent),transparent 70%),
+    radial-gradient(46vmax 40vmax at 70% 104%,color-mix(in srgb,var(--maroon) 20%,transparent),transparent 70%),
+    radial-gradient(30vmax 30vmax at 20% 88%,color-mix(in srgb,var(--accent2) 16%,transparent),transparent 70%)}
+.glassy,.side,.bar,.meta,.reading,.source,.visual,.obj,.howto,.tbl,.ask,.cer,.checks,.finish,.pager a,.bigq{
+  border:1px solid var(--glass-edge)!important}
+.side{background:var(--glass);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);border-width:0 1px 0 0!important;box-shadow:var(--glass-hi)}
+.bar{background:color-mix(in srgb,var(--bg) 55%,transparent);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border-width:0 0 1px!important;border-radius:0 0 14px 14px;padding-inline:14px;margin-inline:-14px}
+.meta,.obj,.howto,.checks,.finish{background:var(--glass);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);box-shadow:var(--glass-hi),var(--depth)}
+.howto{border-style:solid!important}
+.bigq{background:var(--glass-tint);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);box-shadow:var(--glass-hi),var(--depth)}
+.reading,.source,.visual{background:var(--glass-strong);backdrop-filter:blur(20px) saturate(1.2);-webkit-backdrop-filter:blur(20px) saturate(1.2);box-shadow:var(--glass-hi),var(--depth)}
+.tbl,.ask,.cer{background:var(--glass-tint);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);box-shadow:var(--glass-hi),var(--depth)}
+.thead{border-bottom-color:var(--glass-edge)}
+.trow+.trow{border-top-color:var(--glass-edge)}
+/* answer boxes sit "pressed into" the glass */
+textarea,.meta input{background:color-mix(in srgb,#fff 82%,transparent);border-color:color-mix(in srgb,var(--line) 45%,transparent);box-shadow:inset 0 2px 4px color-mix(in srgb,var(--ink) 10%,transparent),inset 0 0 0 1px color-mix(in srgb,#fff 50%,transparent)}
+.meta input[readonly]{background:color-mix(in srgb,var(--rule) 45%,transparent)}
+textarea:focus,.meta input:focus{background:#fff;box-shadow:inset 0 2px 4px color-mix(in srgb,var(--ink) 8%,transparent),0 0 0 3px color-mix(in srgb,var(--accent2) 25%,transparent)}
+textarea.done{background:color-mix(in srgb,#fff 90%,transparent);box-shadow:inset 3px 0 0 var(--ok),inset 0 2px 4px color-mix(in srgb,var(--ink) 8%,transparent)}
+/* raised, tactile controls */
+.toc-part,.pager a,.btn{transition:transform .18s ease,box-shadow .18s ease,background-color .18s ease}
+.toc-part:hover{background:var(--glass-strong);border-color:var(--glass-edge);box-shadow:var(--glass-hi),var(--depth);transform:translateY(-1px)}
+.toc li.active>.toc-part{background:linear-gradient(180deg,color-mix(in srgb,var(--maroon) 88%,#fff),var(--maroon));box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 35%,transparent),0 10px 22px -10px color-mix(in srgb,var(--maroon) 80%,transparent);transform:translateY(-1px)}
+.toc-part .cnt{background:var(--glass-strong);border-color:var(--glass-edge);box-shadow:var(--glass-hi)}
+.pager a{background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:var(--glass-hi),var(--depth)}
+.pager a:hover{transform:translateY(-3px);box-shadow:var(--glass-hi),var(--depth-up)}
+.btn{background:var(--glass-strong);box-shadow:var(--glass-hi),0 2px 6px -2px color-mix(in srgb,var(--ink) 20%,transparent)}
+.btn:hover{transform:translateY(-1px)}
+.btn.primary{background:linear-gradient(180deg,color-mix(in srgb,var(--maroon) 85%,#fff),var(--maroon));box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 35%,transparent),0 8px 18px -8px color-mix(in srgb,var(--maroon) 85%,transparent)}
+.btn:active{transform:translateY(1px)}
+.rtitle .rlabel{box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 35%,transparent),0 3px 8px -3px color-mix(in srgb,var(--ink) 45%,transparent)}
+.visual .rtitle .rlabel{box-shadow:inset 0 0 0 1.5px var(--maroon)}
+.fill{background:linear-gradient(90deg,color-mix(in srgb,var(--accent2) 70%,#fff),var(--accent2));box-shadow:0 0 12px color-mix(in srgb,var(--accent2) 55%,transparent)}
+.track{box-shadow:inset 0 1px 2px color-mix(in srgb,var(--ink) 15%,transparent)}
+/* 3D title band: tilts toward the pointer, with a moving sheen */
+.hero-stage{perspective:1100px}
+.hero-band{transform-style:preserve-3d;transition:transform .5s cubic-bezier(.2,.7,.2,1);box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 30%,transparent),0 2px 4px color-mix(in srgb,var(--ink) 10%,transparent),0 30px 60px -24px color-mix(in srgb,var(--maroon) 75%,transparent);transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))}
+.hero-band::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(600px circle at var(--mx,70%) var(--my,0%),color-mix(in srgb,#fff 22%,transparent),transparent 45%)}
+.hero-band>*{transform:translateZ(36px)}
+.hero-band .hero-num{transform:translateZ(14px);opacity:.2;text-shadow:0 1px 0 color-mix(in srgb,#fff 40%,transparent),0 18px 30px color-mix(in srgb,#000 35%,transparent)}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  :root{--glass:color-mix(in srgb,var(--paper) 94%,transparent);--glass-tint:var(--tint)}
+}
+@media (prefers-reduced-motion:reduce){
+  .hero-band{transform:none!important;transition:none}
+  .toc-part,.pager a,.btn{transition:none}
+  .pager a:hover,.toc-part:hover,.btn:hover{transform:none}
+}
+@media (max-width:900px){.side{border-width:0 0 1px!important}.bar{margin-inline:0;border-radius:0}}
+@media print{
+  body::before{display:none}
+  .side,.bar,.meta,.reading,.source,.visual,.obj,.howto,.tbl,.ask,.cer,.checks,.finish,.bigq{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:#fff!important;box-shadow:none!important;border-color:#ccc!important}
+  .hero-band{transform:none!important;box-shadow:none}
+  .hero-band::after{display:none}
+}
+.msg,.status{overflow-wrap:anywhere}
+
+/* ---- teacher answer key ---- */
+.key{border:0;border-left:4px solid var(--keyline);border-radius:8px;background:color-mix(in srgb,var(--keybg) 85%,transparent);color:var(--ink);font:15px/1.5 var(--sans);padding:9px 13px;margin-top:8px}
+.key b{color:var(--accent-ink);letter-spacing:.06em}
+.key-mode .cnt,.key-mode #pct,.key-mode .track{display:none}
+.key-mode .hero-band .eyebrow{color:#fff}
+.cl span{display:block;line-height:1.4;margin-top:4px}
+
+/* ---- viewing guide: multiple choice + documentary link ---- */
+.opts{display:grid;gap:8px;margin-top:8px}
+.opt{display:flex;gap:10px;align-items:flex-start;padding:9px 13px;border:1px solid var(--line);border-radius:10px;background:color-mix(in srgb,var(--paper) 78%,transparent);cursor:pointer;transition:background .15s,border-color .15s,box-shadow .15s}
+.opt:hover{border-color:var(--maroon);background:color-mix(in srgb,var(--maroon) 6%,var(--paper))}
+.opt input{margin-top:6px;accent-color:var(--maroon);flex:none}
+.opt .ol{font-weight:800;color:var(--maroon);min-width:1.3em}
+.opt:has(input:checked){border-color:var(--maroon);background:color-mix(in srgb,var(--maroon) 11%,var(--paper));box-shadow:inset 4px 0 0 var(--maroon)}
+.key-mode .opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 13%,var(--paper));box-shadow:inset 4px 0 0 var(--ok)}
+.watchbox{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:16px 0}
+.watchbox span{font-size:13.5px;color:var(--brown)}
+a.watch{display:inline-block;padding:11px 20px;border-radius:10px;background:var(--maroon);color:#fff;font-weight:800;letter-spacing:.03em;text-decoration:none;box-shadow:0 2px 0 color-mix(in srgb,var(--maroon) 60%,#000)}
+a.watch:hover{background:var(--brown)}
+.side a.watch{display:block;text-align:center;margin:16px 4px 4px;font-size:14px}
+.bigq.about p{font-size:15.5px}
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="side" aria-label="Sections">
+<div class="side-head"><div class="eyebrow">VIEWING GUIDE · LESSON 18</div><div class="side-title">Poisoned Dreams</div></div>
+<ol class="toc">
+<li><a class="toc-part" href="#part-1"><span class="pn">Part 1</span><span class="pt">The New Frontier (1960-1961)</span><span class="cnt"></span></a></li>
+<li><a class="toc-part" href="#part-2"><span class="pn">Part 2</span><span class="pt">Breaking Jim Crow (1961-1963)</span><span class="cnt"></span></a></li>
+<li><a class="toc-part" href="#part-3"><span class="pn">Part 3</span><span class="pt">Tragedy &amp; Legacy (1963-1964)</span><span class="cnt"></span></a></li>
+</ol>
+<a class="watch" href="https://youtu.be/93iBar-VrqA?si=w7BOq-0fObLNpeKk" target="_blank" rel="noopener">&#9654; Watch the documentary</a>
+</nav>
+<div class="wrap">
+<div class="bar"><div class="row"><span id="pct">0 of 0 answered</span><div class="track"><div class="fill" id="fill"></div></div><button class="btn" onclick="window.print()">Print</button></div></div>
+
+<section class="page" id="part-1" aria-label="Part 1">
+<header class="hero">
+  <div class="hero-stage"><div class="hero-band"><div class="eyebrow">VIEWING GUIDE · LESSON 18</div>
+  <h1>Poisoned Dreams</h1>
+  <p class="sub">The Century: America’s Time | 1960–1964</p><span class="hero-num" aria-hidden="true">18</span></div></div>
+  <div class="meta">
+    <label>FIRST NAME *<input id="f_first" type="text" autocomplete="given-name"></label>
+    <label>LAST NAME *<input id="f_last" type="text" autocomplete="family-name"></label>
+    <label>PERIOD *<input id="f_period" type="text" inputmode="numeric" maxlength="12" placeholder="e.g. 3"></label>
+    <label>DATE (fills in when you finish)<input id="f_date" type="text" readonly tabindex="-1" placeholder="Automatic"></label>
+  </div>
+</header>
+
+<div class="howto"><b>How to work:</b> Watch the documentary with the button below (it opens in a new tab), and answer each question as you go. Pick one answer for every question. Your work saves on this device as you click. Use <b>Save Progress</b> at the bottom of the last Part to download a backup file, and <b>Load Progress</b> to continue later. Enter your first name, last name, and period; the date fills in by itself when you finish. The <b>Finished</b> button unlocks only when every question is answered and all three required fields are done.</div>
+<div class="watchbox"><a class="watch" href="https://youtu.be/93iBar-VrqA?si=w7BOq-0fObLNpeKk" target="_blank" rel="noopener">&#9654; Watch the documentary</a><span>Opens in a new tab. Keep this page open to answer.</span></div>
+<div class="bigq about"><div class="eyebrow">ABOUT THIS EPISODE</div><p>This documentary explores the early 1960s, a decade that began with youthful optimism and the "New Frontier" but was soon tested by the harrowing struggle for Civil Rights and the high-stakes brinkmanship of the Cold War.</p></div>
+
+<header class="parthead"><div class="pkicker">Part 1 <span>of 3</span></div><h2 class="part">The New Frontier (1960-1961)</h2></header>
+<div class="ask mc"><p><b>1.</b> The 1960 election between John F. Kennedy and Richard Nixon featured the first ever _______, which many believe swayed the election in JFK's favor.</p><div class="opts" role="radiogroup" aria-label="Question 1"><label class="opt"><input type="radio" name="q1" value="A" data-mc="1"><span class="ol">A</span><span class="ot">Radio-only addresses</span></label><label class="opt"><input type="radio" name="q1" value="B" data-mc="1"><span class="ol">B</span><span class="ot">Televised presidential debate</span></label><label class="opt"><input type="radio" name="q1" value="C" data-mc="1"><span class="ol">C</span><span class="ot">National whistle-stop tour</span></label><label class="opt"><input type="radio" name="q1" value="D" data-mc="1"><span class="ol">D</span><span class="ot">Direct primary vote</span></label></div></div>
+<div class="ask mc"><p><b>2.</b> In his inaugural address, Kennedy famously challenged Americans to "ask not what your country can do for you, ask..."</p><div class="opts" role="radiogroup" aria-label="Question 2"><label class="opt"><input type="radio" name="q2" value="A" data-mc="1"><span class="ol">A</span><span class="ot">"...how you can profit from your liberty."</span></label><label class="opt"><input type="radio" name="q2" value="B" data-mc="1"><span class="ol">B</span><span class="ot">"...when the Cold War will end."</span></label><label class="opt"><input type="radio" name="q2" value="C" data-mc="1"><span class="ol">C</span><span class="ot">"...what you can do for your country."</span></label><label class="opt"><input type="radio" name="q2" value="D" data-mc="1"><span class="ol">D</span><span class="ot">"...where the new frontier leads."</span></label></div></div>
+<div class="ask mc"><p><b>3.</b> What was the name of Kennedy's domestic program that aimed to expand space exploration, improve education, and provide medical care for the elderly?</p><div class="opts" role="radiogroup" aria-label="Question 3"><label class="opt"><input type="radio" name="q3" value="A" data-mc="1"><span class="ol">A</span><span class="ot">The Great Society</span></label><label class="opt"><input type="radio" name="q3" value="B" data-mc="1"><span class="ol">B</span><span class="ot">The New Frontier</span></label><label class="opt"><input type="radio" name="q3" value="C" data-mc="1"><span class="ol">C</span><span class="ot">The Fair Deal</span></label><label class="opt"><input type="radio" name="q3" value="D" data-mc="1"><span class="ol">D</span><span class="ot">The Square Deal</span></label></div></div>
+<div class="ask mc"><p><b>4.</b> What 1961 event, aimed at overthrowing Fidel Castro, ended in a disastrous military defeat and international embarrassment for the Kennedy administration?</p><div class="opts" role="radiogroup" aria-label="Question 4"><label class="opt"><input type="radio" name="q4" value="A" data-mc="1"><span class="ol">A</span><span class="ot">Operation Mongoose</span></label><label class="opt"><input type="radio" name="q4" value="B" data-mc="1"><span class="ol">B</span><span class="ot">The Bay of Pigs Invasion</span></label><label class="opt"><input type="radio" name="q4" value="C" data-mc="1"><span class="ol">C</span><span class="ot">The Gulf of Tonkin Incident</span></label><label class="opt"><input type="radio" name="q4" value="D" data-mc="1"><span class="ol">D</span><span class="ot">The Cuban Airlift</span></label></div></div>
+<div class="ask mc"><p><b>5.</b> Following the 1961 Vienna Summit, the Soviet Union began construction of what structure to stop citizens from fleeing to the West?</p><div class="opts" role="radiogroup" aria-label="Question 5"><label class="opt"><input type="radio" name="q5" value="A" data-mc="1"><span class="ol">A</span><span class="ot">The Iron Curtain</span></label><label class="opt"><input type="radio" name="q5" value="B" data-mc="1"><span class="ol">B</span><span class="ot">The Checkpoint Charlie Gate</span></label><label class="opt"><input type="radio" name="q5" value="C" data-mc="1"><span class="ol">C</span><span class="ot">The Berlin Wall</span></label><label class="opt"><input type="radio" name="q5" value="D" data-mc="1"><span class="ol">D</span><span class="ot">The Moscow Barrier</span></label></div></div>
+<nav class="pager" aria-label="Page navigation"><a class="next" href="#part-2"><small>Next &rarr;</small>Part 2 · Breaking Jim Crow (1961-1963)</a></nav>
+</section>
+<section class="page" id="part-2" aria-label="Part 2">
+<header class="parthead"><div class="pkicker">Part 2 <span>of 3</span></div><h2 class="part">Breaking Jim Crow (1961-1963)</h2></header>
+<div class="ask mc"><p><b>6.</b> Who were the civil rights activists who rode interstate buses into the segregated Southern United States to challenge the non-enforcement of Supreme Court decisions?</p><div class="opts" role="radiogroup" aria-label="Question 6"><label class="opt"><input type="radio" name="q6" value="A" data-mc="1"><span class="ol">A</span><span class="ot">The Little Rock Nine</span></label><label class="opt"><input type="radio" name="q6" value="B" data-mc="1"><span class="ol">B</span><span class="ot">The Freedom Riders</span></label><label class="opt"><input type="radio" name="q6" value="C" data-mc="1"><span class="ol">C</span><span class="ot">The Black Panthers</span></label><label class="opt"><input type="radio" name="q6" value="D" data-mc="1"><span class="ol">D</span><span class="ot">The Greensboro Four</span></label></div></div>
+<div class="ask mc"><p><b>7.</b> In 1963, Police Commissioner "Bull" Connor used fire hoses and attack dogs against peaceful protesters in which city, horrifying the nation via television?</p><div class="opts" role="radiogroup" aria-label="Question 7"><label class="opt"><input type="radio" name="q7" value="A" data-mc="1"><span class="ol">A</span><span class="ot">Selma, AL</span></label><label class="opt"><input type="radio" name="q7" value="B" data-mc="1"><span class="ol">B</span><span class="ot">Birmingham, AL</span></label><label class="opt"><input type="radio" name="q7" value="C" data-mc="1"><span class="ol">C</span><span class="ot">Montgomery, AL</span></label><label class="opt"><input type="radio" name="q7" value="D" data-mc="1"><span class="ol">D</span><span class="ot">Jackson, MS</span></label></div></div>
+<div class="ask mc"><p><b>8.</b> During the massive March on Washington in August 1963, Martin Luther King Jr. delivered which iconic speech from the steps of the Lincoln Memorial?</p><div class="opts" role="radiogroup" aria-label="Question 8"><label class="opt"><input type="radio" name="q8" value="A" data-mc="1"><span class="ol">A</span><span class="ot">"The Great Society Speech"</span></label><label class="opt"><input type="radio" name="q8" value="B" data-mc="1"><span class="ol">B</span><span class="ot">"I Have a Dream"</span></label><label class="opt"><input type="radio" name="q8" value="C" data-mc="1"><span class="ol">C</span><span class="ot">"Letter from Birmingham Jail"</span></label><label class="opt"><input type="radio" name="q8" value="D" data-mc="1"><span class="ol">D</span><span class="ot">"The Ballot or the Bullet"</span></label></div></div>
+<div class="ask mc"><p><b>9.</b> Which project, championed by JFK, sent young American volunteers to developing nations to help with education, health, and agriculture?</p><div class="opts" role="radiogroup" aria-label="Question 9"><label class="opt"><input type="radio" name="q9" value="A" data-mc="1"><span class="ol">A</span><span class="ot">AmeriCorps</span></label><label class="opt"><input type="radio" name="q9" value="B" data-mc="1"><span class="ol">B</span><span class="ot">The Peace Corps</span></label><label class="opt"><input type="radio" name="q9" value="C" data-mc="1"><span class="ol">C</span><span class="ot">Vista Volunteers</span></label><label class="opt"><input type="radio" name="q9" value="D" data-mc="1"><span class="ol">D</span><span class="ot">The Job Corps</span></label></div></div>
+<div class="ask mc"><p><b>10.</b> What 13-day October 1962 event was the closest the world ever came to a full-scale nuclear exchange between the US and the USSR?</p><div class="opts" role="radiogroup" aria-label="Question 10"><label class="opt"><input type="radio" name="q10" value="A" data-mc="1"><span class="ol">A</span><span class="ot">The Berlin Blockade</span></label><label class="opt"><input type="radio" name="q10" value="B" data-mc="1"><span class="ol">B</span><span class="ot">The U-2 Incident</span></label><label class="opt"><input type="radio" name="q10" value="C" data-mc="1"><span class="ol">C</span><span class="ot">The Cuban Missile Crisis</span></label><label class="opt"><input type="radio" name="q10" value="D" data-mc="1"><span class="ol">D</span><span class="ot">The SALT Treaty Crisis</span></label></div></div>
+<nav class="pager" aria-label="Page navigation"><a class="prev" href="#part-1"><small>&larr; Previous</small>Part 1 · The New Frontier (1960-1961)</a><a class="next" href="#part-3"><small>Next &rarr;</small>Part 3 · Tragedy &amp; Legacy (1963-1964)</a></nav>
+</section>
+<section class="page" id="part-3" aria-label="Part 3">
+<header class="parthead"><div class="pkicker">Part 3 <span>of 3</span></div><h2 class="part">Tragedy &amp; Legacy (1963-1964)</h2></header>
+<div class="ask mc"><p><b>11.</b> On November 22, 1963, President Kennedy was assassinated while riding in a motorcade in which city?</p><div class="opts" role="radiogroup" aria-label="Question 11"><label class="opt"><input type="radio" name="q11" value="A" data-mc="1"><span class="ol">A</span><span class="ot">Houston, TX</span></label><label class="opt"><input type="radio" name="q11" value="B" data-mc="1"><span class="ol">B</span><span class="ot">Austin, TX</span></label><label class="opt"><input type="radio" name="q11" value="C" data-mc="1"><span class="ol">C</span><span class="ot">Dallas, TX</span></label><label class="opt"><input type="radio" name="q11" value="D" data-mc="1"><span class="ol">D</span><span class="ot">San Antonio, TX</span></label></div></div>
+<div class="ask mc"><p><b>12.</b> Who was the Vice President who was sworn in as President aboard Air Force One immediately following JFK's death?</p><div class="opts" role="radiogroup" aria-label="Question 12"><label class="opt"><input type="radio" name="q12" value="A" data-mc="1"><span class="ol">A</span><span class="ot">Richard Nixon</span></label><label class="opt"><input type="radio" name="q12" value="B" data-mc="1"><span class="ol">B</span><span class="ot">Hubert Humphrey</span></label><label class="opt"><input type="radio" name="q12" value="C" data-mc="1"><span class="ol">C</span><span class="ot">Lyndon B. Johnson</span></label><label class="opt"><input type="radio" name="q12" value="D" data-mc="1"><span class="ol">D</span><span class="ot">Robert Kennedy</span></label></div></div>
+<div class="ask mc"><p><b>13.</b> The Warren Commission, appointed to investigate the assassination, concluded that the shots were fired by a lone gunman named:</p><div class="opts" role="radiogroup" aria-label="Question 13"><label class="opt"><input type="radio" name="q13" value="A" data-mc="1"><span class="ol">A</span><span class="ot">Jack Ruby</span></label><label class="opt"><input type="radio" name="q13" value="B" data-mc="1"><span class="ol">B</span><span class="ot">Lee Harvey Oswald</span></label><label class="opt"><input type="radio" name="q13" value="C" data-mc="1"><span class="ol">C</span><span class="ot">James Earl Ray</span></label><label class="opt"><input type="radio" name="q13" value="D" data-mc="1"><span class="ol">D</span><span class="ot">Sirhan Sirhan</span></label></div></div>
+<div class="ask mc"><p><b>14.</b> What major civil rights legislation, originally proposed by JFK, was finally passed by LBJ in 1964 to end segregation in public places?</p><div class="opts" role="radiogroup" aria-label="Question 14"><label class="opt"><input type="radio" name="q14" value="A" data-mc="1"><span class="ol">A</span><span class="ot">The Voting Rights Act</span></label><label class="opt"><input type="radio" name="q14" value="B" data-mc="1"><span class="ol">B</span><span class="ot">The Civil Rights Act of 1964</span></label><label class="opt"><input type="radio" name="q14" value="C" data-mc="1"><span class="ol">C</span><span class="ot">The Emancipation Proclamation</span></label><label class="opt"><input type="radio" name="q14" value="D" data-mc="1"><span class="ol">D</span><span class="ot">The Fair Housing Act</span></label></div></div>
+<div class="ask mc"><p><b>15.</b> The "Poisoned Dreams" of the early 60s represented a shift from the _______ of the 1950s to the disillusionment of the late 1960s.</p><div class="opts" role="radiogroup" aria-label="Question 15"><label class="opt"><input type="radio" name="q15" value="A" data-mc="1"><span class="ol">A</span><span class="ot">Economic depression</span></label><label class="opt"><input type="radio" name="q15" value="B" data-mc="1"><span class="ol">B</span><span class="ot">Cold War isolation</span></label><label class="opt"><input type="radio" name="q15" value="C" data-mc="1"><span class="ol">C</span><span class="ot">Suburban optimism and innocence</span></label><label class="opt"><input type="radio" name="q15" value="D" data-mc="1"><span class="ol">D</span><span class="ot">Military build-up</span></label></div></div>
+<div class="finish" id="actions">
+  <div class="status" id="status"></div>
+  <div class="btns">
+    <button class="btn" id="saveBtn">Save Progress</button>
+    <button class="btn" id="loadBtn">Load Progress</button>
+    <input type="file" id="loadFile" accept=".json,application/json" hidden>
+    <button class="btn primary" id="finishBtn" disabled>Finished — Download File to Submit</button>
+  </div>
+  <div class="msg" id="msg"></div>
+  <button class="link" id="reset">Clear all my answers</button>
+</div>
+
+<nav class="pager" aria-label="Page navigation"><a class="prev" href="#part-2"><small>&larr; Previous</small>Part 2 · Breaking Jim Crow (1961-1963)</a></nav>
+</section>
+<footer><span>UNIT 7 · THE AMERICAN AGE | CPUSH</span><span>DANIEL GARZA, M.A.</span></footer>
+</div>
+</div>
+
+<script>
+(function(){
+  var pages=[].slice.call(document.querySelectorAll('section.page'));
+  var items=[].slice.call(document.querySelectorAll('.toc>li'));
+  var KEY='rp_page_'+location.pathname;
+  var current=-1;
+  function show(i,targetId){
+    i=Math.max(0,Math.min(pages.length-1,i|0));
+    var changed=i!==current;
+    if(changed){
+      pages.forEach(function(p,n){p.classList.toggle('active',n===i)});
+      items.forEach(function(li,n){
+        li.classList.toggle('active',n===i);
+        var a=li.querySelector('.toc-part');
+        if(n===i)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');
+      });
+      current=i;
+      try{localStorage.setItem(KEY,String(i))}catch(e){}
+    }
+    var h='';try{h=decodeURIComponent(location.hash.slice(1))}catch(e){}
+    var he=h&&document.getElementById(h);
+    if(!he||!pages[i].contains(he)){try{history.replaceState(null,'','#'+pages[i].id)}catch(e){}}
+    var el=targetId&&document.getElementById(targetId);
+    if(el)el.scrollIntoView({block:'start',behavior:changed?'instant':'smooth'});
+    else window.scrollTo({top:0,left:0,behavior:'instant'});
+  }
+  window.rpShow=show;
+  function route(){
+    var h='';try{h=decodeURIComponent(location.hash.slice(1))}catch(e){}
+    var el=h&&document.getElementById(h);
+    var page=el&&el.closest('section.page');
+    if(page){show(pages.indexOf(page),el===page?null:h);return}
+    var saved=0;try{saved=parseInt(localStorage.getItem(KEY),10)||0}catch(e){}
+    show(saved);
+  }
+  window.addEventListener('hashchange',route);
+  function count(){
+    pages.forEach(function(p,n){
+      var t=[].slice.call(p.querySelectorAll('textarea[data-q]'));
+      var d=t.filter(function(x){return x.value.trim().length>=3}).length;
+      var g={};[].slice.call(p.querySelectorAll('input[data-mc]')).forEach(function(r){g[r.name]=g[r.name]||r.checked});
+      var gk=Object.keys(g);gk.forEach(function(k){if(g[k])d++});
+      var tl=t.length+gk.length;
+      var c=items[n]&&items[n].querySelector('.cnt');
+      if(c)c.textContent=d+'/'+tl;
+      if(items[n])items[n].classList.toggle('complete',tl>0&&d===tl);
+    });
+  }
+  window.rpCount=count;
+  var band=document.querySelector('.hero-band'),pic=document.querySelector('figure img');
+  if(band&&pic)band.style.setProperty('--hero-img','url("'+pic.src+'")');
+  if(band&&window.matchMedia&&matchMedia('(hover:hover) and (pointer:fine)').matches&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
+    band.addEventListener('pointermove',function(e){
+      var r=band.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
+      band.style.setProperty('--ry',((x-.5)*7).toFixed(2)+'deg');band.style.setProperty('--rx',((.5-y)*6).toFixed(2)+'deg');
+      band.style.setProperty('--mx',(x*100).toFixed(1)+'%');band.style.setProperty('--my',(y*100).toFixed(1)+'%');
+    });
+    band.addEventListener('pointerleave',function(){['--rx','--ry','--mx','--my'].forEach(function(k){band.style.removeProperty(k)})});
+  }
+  document.addEventListener('input',count);document.addEventListener('change',count);
+  route();
+  setTimeout(count,0);
+})();
+</script>
+<script>
+(function(){
+  var KEY_MODE=false;
+  var PACKET='VG_18_poisoned_dreams';
+  var STORE='cpush_vg_poisoned_dreams_'+(KEY_MODE?'key':'student');
+  var qs=[].slice.call(document.querySelectorAll('textarea[data-q]'));
+  var cks=[].slice.call(document.querySelectorAll('input[data-c]'));
+  var mcs=[];[].slice.call(document.querySelectorAll('input[data-mc]')).forEach(function(r){if(mcs.indexOf(r.name)<0)mcs.push(r.name)});
+  function mcVal(n){var r=document.querySelector('input[data-mc][name="'+n+'"]:checked');return r?r.value:''}
+  function mcEach(n,f){[].slice.call(document.querySelectorAll('input[data-mc][name="'+n+'"]')).forEach(f)}
+  var metaIds=['f_first','f_last','f_period','f_date'];
+  var meta=metaIds.map(function(i){return document.getElementById(i)});
+  var first=document.getElementById('f_first'), last=document.getElementById('f_last');
+  var data={};
+  var $=function(i){return document.getElementById(i)};
+  function load(){try{data=JSON.parse(localStorage.getItem(STORE)||'{}')}catch(e){data={}}}
+  function persist(){try{localStorage.setItem(STORE,JSON.stringify(data))}catch(e){}}
+  function msg(t,err){var m=$('msg');m.textContent=t;m.className='msg'+(err?' err':'');m.style.display='block'}
+  function clean(n){return n.trim().replace(/\s+/g,'_').replace(/[^A-Za-z0-9_À-ɏ-]/g,'')}
+  function state(){
+    var answered=0;qs.forEach(function(t){var d=t.value.trim().length>=3;t.classList.toggle('done',d);if(d)answered++});
+    mcs.forEach(function(n){if(mcVal(n))answered++});
+    var checked=cks.filter(function(c){return c.checked}).length;
+    var named=first.value.trim()&&last.value.trim()&&$('f_period').value.trim();
+    var all=answered===qs.length+mcs.length&&checked===cks.length&&!!named;
+    return {answered:answered,checked:checked,named:!!named,all:all};
+  }
+  function refresh(){
+    var s=state(),tot=qs.length+mcs.length;
+    $('pct').textContent=s.answered+' of '+tot+' answered';
+    $('fill').style.width=(100*s.answered/tot)+'%';
+    var missing=[];
+    if(!s.named)missing.push('first name, last name, and period');
+    if(s.answered<tot)missing.push((tot-s.answered)+' unanswered box'+(tot-s.answered===1?'':'es'));
+    if(s.checked<cks.length)missing.push('CER checklist');
+    $('status').textContent=s.all?'Everything is complete. You can submit now.':'Still needed: '+missing.join(', ')+'.';
+    $('finishBtn').disabled=!s.all;
+  }
+  function snapshot(){
+    var o={packet:PACKET,course:'CPUSH',version:1,saved:new Date().toISOString(),
+      student:{first:first.value.trim(),last:last.value.trim(),period:$('f_period').value.trim(),date:KEY_MODE?'':$('f_date').value.trim()},
+      answers:{},checklist:{}};
+    qs.forEach(function(t){o.answers[t.id]=t.value});
+    mcs.forEach(function(n){o.answers[n]=mcVal(n)});
+    cks.forEach(function(c){o.checklist[c.id]=c.checked});
+    return o;
+  }
+  function download(name,obj){
+    var blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;
+    document.body.appendChild(a);a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);
+  }
+  function who(){return (clean(last.value)||'Last')+'_'+(clean(first.value)||'First')}
+  function apply(o){
+    var st=o.student||{};
+    first.value=st.first||'';last.value=st.last||'';$('f_period').value=st.period||'';$('f_date').value=(o.completed?st.date:'')||'';
+    qs.forEach(function(t){t.value=(o.answers&&o.answers[t.id])||''});
+    mcs.forEach(function(n){var v=(o.answers&&o.answers[n])||'';mcEach(n,function(r){r.checked=(r.value===v)})});
+    cks.forEach(function(c){c.checked=!!(o.checklist&&o.checklist[c.id])});
+    sync();
+  }
+  function sync(){
+    metaIds.forEach(function(id,i){data[id]=meta[i].value});
+    qs.forEach(function(t){data[t.id]=t.value});
+    mcs.forEach(function(n){data[n]=mcVal(n)});
+    cks.forEach(function(c){data[c.id]=c.checked});
+    persist();refresh();if(window.rpCount)rpCount();
+  }
+  load();
+  meta.forEach(function(m){if(data[m.id])m.value=data[m.id];m.addEventListener('input',function(){m.classList.remove('bad');sync()})});
+  qs.forEach(function(t){if(data[t.id])t.value=data[t.id];t.addEventListener('input',sync)});
+  mcs.forEach(function(n){mcEach(n,function(r){if(data[n]===r.value)r.checked=true;r.addEventListener('change',sync)})});
+  cks.forEach(function(c){if(data[c.id])c.checked=true;c.addEventListener('change',sync)});
+
+  $('saveBtn').addEventListener('click',function(){
+    if(!first.value.trim()||!last.value.trim()||!$('f_period').value.trim()){
+      [first,last,$('f_period')].forEach(function(f){if(!f.value.trim())f.classList.add('bad')});
+      msg('Type your first name, last name, and period at the top before saving.',true);(window.rpShow&&rpShow(0)),first.scrollIntoView({block:'center'});return}
+    download(who()+'-'+PACKET+'-PROGRESS.json',snapshot());
+    msg('Progress saved. Keep that file. Use Load Progress later to continue. Do not upload it to Canvas until you are finished.');
+  });
+  $('loadBtn').addEventListener('click',function(){$('loadFile').click()});
+  $('loadFile').addEventListener('change',function(e){
+    var f=e.target.files[0];if(!f)return;
+    var r=new FileReader();
+    r.onload=function(){
+      try{
+        var o=JSON.parse(r.result);
+        if(o&&o.responses&&!o.answers){var nm=String(o.studentName||'').trim().split(/\s+/);o={packet:PACKET,answers:o.responses,student:{first:nm[0]||'',last:nm.slice(1).join(' '),period:o.studentPeriod||'',date:''}}}
+        if(!o||o.packet!==PACKET||typeof o.answers!=='object')throw new Error('wrong');
+        apply(o);msg('Progress loaded. Pick up where you left off.');
+      }catch(err){msg('That file is not a saved progress file for this assignment. Choose the .json file you saved from this assignment.',true)}
+      e.target.value='';
+    };
+    r.onerror=function(){msg('Could not read that file. Try again.',true)};
+    r.readAsText(f);
+  });
+  $('finishBtn').addEventListener('click',function(){
+    var s=state();
+    if(!s.all){refresh();return}
+    var now=new Date();$('f_date').value=now.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});sync();
+    var o=snapshot();o.completed=true;o.submitted=now.toISOString();
+    download(who()+'-'+PACKET+'.json',o);
+    msg('Finished! Your file "'+who()+'-'+PACKET+'.json" downloaded. Upload that file to Canvas.');
+  });
+  $('reset').addEventListener('click',function(){
+    if(!confirm('Clear everything you typed? This cannot be undone.'))return;
+    qs.forEach(function(t){t.value=''});[].slice.call(document.querySelectorAll('input[data-mc]')).forEach(function(r){r.checked=false});cks.forEach(function(c){c.checked=false});meta.forEach(function(m){m.value=''});
+    data={};sync();
+  });
+  [].forEach.call(document.querySelectorAll('figure'),function(fig){var im=fig.querySelector('img');if(im)im.addEventListener('click',function(){fig.classList.toggle('zoom')})});
+  if(KEY_MODE)$('actions').style.display='none';
+  refresh();if(window.rpCount)rpCount();
+})();
+</script>
+</body>
+</html>
