@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Bellringer 1.3 · John Smith and Jamestown</title><style>
+
+:root{--bg:#EDF5F4;--paper:#FAFCFB;--navy:#16413B;--ink:#10312C;--slate:#256960;--red:#D2AA4B;--red-ink:#6B5514;--salmon:#E1C88E;--frost:#EBF4F3;--rule:#C4D8D5;--line:#9DB8B3;--ok:#2F6B3A}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;color:var(--ink);background:var(--bg);font:17px/1.55 "Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(42vmax 42vmax at 8% 6%,rgba(22,65,59,.22),transparent 70%),radial-gradient(38vmax 38vmax at 96% 22%,rgba(210,170,75,.18),transparent 70%),radial-gradient(46vmax 40vmax at 70% 104%,rgba(22,65,59,.14),transparent 70%)}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px 56px}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;margin:0}
+.hero{padding:22px 0 0}
+.band{position:relative;overflow:hidden;border-radius:16px;padding:30px 28px 26px;color:var(--frost);background:linear-gradient(120deg,#16413B 40%,#256960);box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 28px 50px -24px rgba(22,65,59,.8)}
+.eyebrow{font-size:12.5px;letter-spacing:.18em;font-weight:700;color:var(--salmon)}
+.band h1{color:#fff;font-size:clamp(30px,6vw,46px);line-height:1.1;margin:.2em 0 .2em}
+.band .sub{margin:0;font-size:16px;color:var(--frost)}
+.band .num{position:absolute;right:16px;bottom:-30px;font:700 170px/1 Georgia,serif;color:#fff;opacity:.1;pointer-events:none}
+.band .stripe{display:inline-block;margin-top:14px;font-size:13px;font-weight:700;letter-spacing:.08em;padding:5px 10px;border-radius:999px;background:var(--salmon);color:var(--navy)}
+.glass{background:rgba(250,252,251,.82);border:1px solid rgba(255,255,255,.7);border-radius:14px;box-shadow:inset 0 1px 0 rgba(255,255,255,.85),0 3px 6px -2px rgba(16,49,44,.1),0 18px 40px -18px rgba(16,49,44,.3);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.meta{display:flex;flex-wrap:wrap;gap:12px;margin:16px 0 0;padding:16px}
+.meta label{flex:1 1 170px;font-size:12px;font-weight:700;letter-spacing:.09em;color:var(--slate)}
+input[type=text],textarea,select{display:block;width:100%;margin-top:4px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);font:inherit;box-shadow:inset 0 2px 4px rgba(16,49,44,.08)}
+input[readonly]{background:#DAE9E6;color:var(--slate)}
+input.bad,select.bad,textarea.bad{border-color:#B3261E;background:#FFF1EF}
+textarea{min-height:84px;resize:vertical;line-height:1.5}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 3px rgba(210,170,75,.25)}
+.how{margin:16px 0;padding:14px 18px;font-size:15.5px}
+.how .hp{margin:0}
+.how ol{margin:.4em 0 .5em;padding-inline-start:1.3em}
+.how li{margin:.25em 0}
+.bar{position:sticky;top:0;z-index:10;margin:0 -16px;padding:9px 16px 8px;background:rgba(235,244,243,.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--rule)}
+.bar .row{display:flex;align-items:center;gap:12px;font-size:14px;font-weight:700;color:var(--slate)}
+.track{flex:1;height:9px;border-radius:6px;background:#CFE3DF;overflow:hidden}
+.fill{height:100%;width:0;background:linear-gradient(90deg,#E1C88E,#D2AA4B);transition:width .3s}
+.dots{display:flex;gap:6px;margin-top:7px;flex-wrap:wrap}
+.dots a{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;text-decoration:none;color:var(--navy);background:#fff;border:2px solid var(--line)}
+.dots a.done{background:var(--red-ink);border-color:var(--red-ink);color:#fff}
+.dots a.miss{border-color:var(--red);color:var(--red-ink)}
+.card{position:relative;margin:22px 0;padding:20px 20px 18px;scroll-margin-top:96px}
+.card .top{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin-bottom:6px}
+.pill{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:5px 10px 4px;border-radius:999px;background:var(--navy);color:#fff}
+.pill.o{background:transparent;color:var(--slate);box-shadow:inset 0 0 0 1.5px var(--slate)}
+.card h2{font-size:23px;line-height:1.2;margin:4px 0 4px}
+.q{margin:.2em 0 10px;font-weight:700;color:var(--slate);font-size:15px}
+.stm{display:block;position:relative;margin:9px 0;cursor:pointer}
+.stm input{position:absolute;opacity:0;pointer-events:none}
+.stm .box{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border:2px solid var(--rule);border-radius:12px;background:#fff;transition:border-color .15s,background .15s,transform .15s}
+.stm .L{flex:0 0 auto;width:32px;height:32px;border-radius:50%;background:var(--navy);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.stm .t{flex:1;min-width:0;overflow-wrap:anywhere}
+.stm:hover .box{border-color:var(--slate)}
+.stm input:checked+.box{border-color:var(--red);background:#FBF3DE;box-shadow:0 0 0 3px rgba(210,170,75,.2)}
+.stm input:checked+.box .L{background:var(--red-ink)}
+.stm input:focus-visible+.box{outline:3px solid rgba(37,105,96,.6);outline-offset:2px}
+.step{margin:14px 0 0;padding:14px 16px;border-radius:12px;background:rgba(210,170,75,.07);border:1px solid rgba(210,170,75,.28)}
+.step b.n{display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--red-ink);margin-bottom:2px}
+.step p{margin:.1em 0 .4em;font-size:15px;color:var(--slate)}
+.actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:14px}
+.btn{border:1px solid var(--navy);background:#fff;color:var(--navy);padding:9px 16px;border-radius:10px;font:inherit;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 2px 6px -2px rgba(16,49,44,.25)}
+.btn:hover{background:var(--navy);color:#fff}
+.btn.primary{background:linear-gradient(180deg,#38857C,#16413B);color:#fff}
+.btn.primary:disabled{background:#4F746E;border-color:#4F746E;cursor:not-allowed;box-shadow:none}
+.btn.red{background:linear-gradient(180deg,#6B5514,#6B5514);border-color:#6B5514;color:#fff}
+.btn:focus-visible{outline:3px solid rgba(210,170,75,.6);outline-offset:2px}
+.cmsg{font-size:14.5px;font-weight:600;color:var(--slate);flex:1 1 200px}
+.cmsg.err{color:#9A1F18}
+.stamp{display:none;position:absolute;right:14px;top:46px;z-index:3;pointer-events:none;border:5px solid var(--red-ink);color:var(--red-ink);border-radius:10px;padding:2px 14px;font:900 clamp(26px,7vw,40px)/1.1 Impact,"Arial Black",system-ui,sans-serif;letter-spacing:.06em;transform:rotate(-9deg);background:rgba(255,255,255,.88);text-align:center}
+.stamp small{display:block;font:700 12px/1.2 system-ui,sans-serif;letter-spacing:.1em}
+.stamp.on{display:block;animation:slam .35s cubic-bezier(.2,1.6,.4,1)}
+.stamp.miss{border-color:var(--slate);color:var(--slate)}
+@keyframes slam{0%{transform:rotate(-9deg) scale(2.2);opacity:0}100%{transform:rotate(-9deg) scale(1);opacity:1}}
+.finish{margin:26px 0;padding:22px 18px;text-align:center}
+.status{font-size:15px;font-weight:700;color:var(--slate);margin-bottom:12px;overflow-wrap:anywhere}
+.btns{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.msg{display:none;margin:12px auto 0;padding:10px 14px;border-radius:8px;background:#EDF5E8;border:1px solid var(--ok);color:#1F4F28;font-weight:700;max-width:600px;overflow-wrap:anywhere}
+.msg.err{background:#FFF1EF;border-color:#B3261E;color:#8C1D18}
+.link{background:none;border:0;color:var(--slate);text-decoration:underline;cursor:pointer;font:inherit;font-size:14px;margin-top:14px}
+footer{margin-top:30px;padding-top:10px;border-top:1px solid var(--rule);font-size:12px;letter-spacing:.04em;color:var(--navy);display:flex;justify-content:space-between;gap:6px 14px;flex-wrap:wrap}
+@media (max-width:560px){.card{padding:16px 14px}.stamp{position:static;display:none;margin:12px auto 0;width:max-content;max-width:100%}.stamp.on{display:block}.band{padding:24px 20px 20px}.band .num{font-size:120px}}
+/* right-to-left (Arabic) */
+html[dir=rtl] .band .num{right:auto;left:16px}
+html[dir=rtl] .stamp{right:auto;left:14px}
+@media (max-width:560px){html[dir=rtl] .stamp{left:auto}}
+@media (prefers-reduced-motion:reduce){.stamp.on{animation:none}.fill,.stm .box{transition:none}html{scroll-behavior:auto}}
+@media print{body::before{display:none}.bar,.finish{display:none}.glass{backdrop-filter:none;box-shadow:none}.card{break-inside:avoid}}
+/* teacher key */
+.key{margin-top:12px;padding:10px 14px;border-left:5px solid var(--red);background:#FBF3DE;border-radius:8px;font-size:15px}
+.key b{color:var(--red-ink)}
+.key p{margin:.35em 0}
+.stm.lie .box{border-color:var(--red);background:#FBF3DE}
+.stm.lie .L{background:var(--red-ink)}
+.stm.tru .box{border-color:#9FC3A5;background:#F4FAF5}
+.tag{font-size:11.5px;font-weight:800;letter-spacing:.12em;padding:3px 8px;border-radius:999px;margin-left:8px;color:#fff;vertical-align:middle}
+.tag.l{background:var(--red-ink)}.tag.t{background:var(--ok)}
+.src{font-size:13.5px;color:var(--slate);margin:4px 0 0}
+table.g{border-collapse:collapse;width:100%;font-size:15px;table-layout:fixed}table.g td,table.g th{overflow-wrap:anywhere}@media (max-width:560px){table.g{font-size:13px}table.g td,table.g th{padding:5px 6px}}table.g td,table.g th{border:1px solid var(--rule);padding:7px 10px;text-align:left;vertical-align:top}table.g th{background:var(--navy);color:#fff}
+/*sp-i18n-css*/
+.sp-lang-bar{display:flex;justify-content:flex-end;padding:8px 12px 0;position:relative;z-index:5}
+.sp-lang{display:inline-flex;gap:2px;padding:3px;border-radius:10px;background:rgba(255,255,255,.88);border:1px solid rgba(0,0,0,.18);font-family:system-ui,"Segoe UI",Tahoma,Arial,sans-serif}
+.sp-lang button{border:0;background:transparent;color:#222;font:600 13px/1 system-ui,"Segoe UI",Tahoma,Arial,sans-serif;padding:7px 11px;border-radius:7px;cursor:pointer}
+.sp-lang button[aria-pressed="true"]{background:#222;color:#fff}
+.sp-lang button:focus-visible{outline:3px solid #2a6df4;outline-offset:1px}
+textarea,input,select{unicode-bidi:plaintext}
+html[lang="ar"] body,html[lang="ar"] button,html[lang="ar"] textarea,html[lang="ar"] input,html[lang="ar"] select{font-family:"Segoe UI",Tahoma,"Noto Sans Arabic","Arial",system-ui,sans-serif}
+html[lang="ar"] body{line-height:1.8}
+html[lang="ar"] *{letter-spacing:0!important}
+html[dir="rtl"] textarea,html[dir="rtl"] input{text-align:start}
+@media print{.sp-lang-bar{display:none}}
+/*/sp-i18n-css*/
+
+
+.vid{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000;margin:8px 0 4px}
+.vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+a.btn{text-decoration:none;display:inline-block}
+select{cursor:pointer}
+.actions .stamp{position:static;margin-inline-start:auto;transform:rotate(-4deg);font-size:24px;padding:2px 12px;border-width:4px;right:auto;left:auto;top:auto}
+.actions .stamp small{font-size:11px}
+</style></head><body>
+<!--sp-bar--><div class="sp-lang-bar"><div class="sp-lang" role="group" aria-label="Language / Idioma / اللغة"><button type="button" data-lang="en" lang="en" aria-pressed="true">English</button><button type="button" data-lang="es" lang="es" aria-pressed="false">Español</button><button type="button" data-lang="ar" lang="ar" aria-pressed="false">العربية</button></div></div><!--/sp-bar--><div class="wrap">
+<header class="hero"><div class="band"><div class="eyebrow">BELLRINGER 1.3</div><h1>John Smith and Jamestown</h1><p class="sub">Founding the English Colonies</p><span class="stripe">WATCH · THINK · WRITE</span><span class="num" aria-hidden="true">1</span></div></header>
+<div class="meta glass">
+ <label>FIRST NAME *<input id="f_first" type="text" autocomplete="given-name"></label>
+ <label>LAST NAME *<input id="f_last" type="text" autocomplete="family-name"></label>
+ <label>PERIOD *<input id="f_period" type="text" inputmode="numeric" maxlength="12" placeholder="e.g. 3"></label>
+ <label>DATE (fills in when you finish)<input id="f_date" type="text" readonly tabindex="-1" placeholder="Automatic"></label>
+</div>
+<div class="how glass"><p class="hp"><b>How this works:</b> Watch the short video, then answer 5 questions. You can pause or replay the video as many times as you need. Tip: press <b>CC</b> to turn on captions.</p>
+<ol><li>Watch the video.</li><li>Answer all 5 questions and press the button on each card.</li><li>Press <b>Finished</b> and upload your file to Canvas.</li></ol>
+<p class="hp">Your work saves on this device as you go. Use <b>Save Progress</b> to download a backup file, and <b>Load Progress</b> to continue later. Plan on about 10 minutes.</p></div>
+<div class="bar"><div class="row"><span id="pct">0 of 5 questions done</span><div class="track"><div class="fill" id="fill"></div></div></div><div class="dots" aria-label="Question tracker"><a href="#card01" id="dot_q1" aria-label="Go to question 1">1</a><a href="#card02" id="dot_q2" aria-label="Go to question 2">2</a><a href="#card03" id="dot_q3" aria-label="Go to question 3">3</a><a href="#card04" id="dot_q4" aria-label="Go to question 4">4</a><a href="#card05" id="dot_q5" aria-label="Go to question 5">5</a></div></div>
+<section class="card glass" id="video" aria-label="Video"><div class="top"><span class="pill">Watch</span><span class="pill o">About 5 minutes</span></div><h2>John Smith and Jamestown</h2><p class="q">Video by The Daily Bellringer</p>
+<div class="vid"><iframe src="https://www.youtube-nocookie.com/embed/vpb3jUvjsq8?rel=0" title="John Smith and Jamestown video" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+<div class="actions"><span class="cmsg">Video not loading?</span><a class="btn" href="https://youtu.be/vpb3jUvjsq8" target="_blank" rel="noopener">Watch on YouTube</a></div></section>
+<section class="card glass" id="card01" data-id="q1" aria-label="Question 1"><div class="top"><span class="pill">Question 1 of 5</span><span class="pill o">Key term</span></div><h2>What is a mercenary?</h2><p class="q">Pick the best answer.</p><label class="stm"><input type="radio" name="q1_pick" value="A"><span class="box"><span class="L">A</span><span class="t">A hired soldier who fights for whoever pays.</span></span></label><label class="stm"><input type="radio" name="q1_pick" value="B"><span class="box"><span class="L">B</span><span class="t">A sailor who explores new lands.</span></span></label><label class="stm"><input type="radio" name="q1_pick" value="C"><span class="box"><span class="L">C</span><span class="t">A leader chosen by a colony.</span></span></label><div class="actions"><button class="btn primary" type="button" data-save="q1">Check my answer</button><span class="cmsg" id="q1_msg"></span><div class="stamp" id="q1_stamp"></div></div></section>
+<section class="card glass" id="card02" data-id="q2" aria-label="Question 2"><div class="top"><span class="pill">Question 2 of 5</span><span class="pill o">Main idea</span></div><h2>What famous rule did John Smith set for Jamestown?</h2><p class="q">Pick the best answer.</p><label class="stm"><input type="radio" name="q2_pick" value="A"><span class="box"><span class="L">A</span><span class="t">“Every colonist must search for gold.”</span></span></label><label class="stm"><input type="radio" name="q2_pick" value="B"><span class="box"><span class="L">B</span><span class="t">“No one may leave the fort.”</span></span></label><label class="stm"><input type="radio" name="q2_pick" value="C"><span class="box"><span class="L">C</span><span class="t">“He that will not work shall not eat.”</span></span></label><div class="actions"><button class="btn primary" type="button" data-save="q2">Check my answer</button><span class="cmsg" id="q2_msg"></span><div class="stamp" id="q2_stamp"></div></div></section>
+<section class="card glass" id="card03" data-id="q3" aria-label="Question 3"><div class="top"><span class="pill">Question 3 of 5</span><span class="pill o">Why it matters</span></div><h2>How did John Smith help Jamestown survive?</h2><p class="q">Write 1 or 2 full sentences.</p><textarea id="q3_t" rows="3" placeholder="John Smith helped by…" aria-label="Your answer"></textarea><div class="actions"><button class="btn primary" type="button" data-save="q3">Save my answer</button><span class="cmsg" id="q3_msg"></span><div class="stamp" id="q3_stamp"></div></div></section>
+<section class="card glass" id="card04" data-id="q4" aria-label="Question 4"><div class="top"><span class="pill">Question 4 of 5</span><span class="pill o">Cause and effect</span></div><h2>Why is the Pocahontas rescue story hard to trust?</h2><p class="q">Pick the best answer.</p><label class="stm"><input type="radio" name="q4_pick" value="A"><span class="box"><span class="L">A</span><span class="t">Smith wrote it himself, years later, and often exaggerated.</span></span></label><label class="stm"><input type="radio" name="q4_pick" value="B"><span class="box"><span class="L">B</span><span class="t">Pocahontas wrote a letter that says it never happened.</span></span></label><label class="stm"><input type="radio" name="q4_pick" value="C"><span class="box"><span class="L">C</span><span class="t">The story was banned in England.</span></span></label><div class="actions"><button class="btn primary" type="button" data-save="q4">Check my answer</button><span class="cmsg" id="q4_msg"></span><div class="stamp" id="q4_stamp"></div></div></section>
+<section class="card glass" id="card05" data-id="q5" aria-label="Question 5"><div class="top"><span class="pill">Question 5 of 5</span><span class="pill o">Your claim</span></div><h2>Should historians trust a story that the hero wrote about himself? Why or why not?</h2><p class="q">Write 1 or 2 full sentences.</p><textarea id="q5_t" rows="3" placeholder="Historians should (or should not) trust it because…" aria-label="Your answer"></textarea><div class="actions"><button class="btn primary" type="button" data-save="q5">Save my answer</button><span class="cmsg" id="q5_msg"></span><div class="stamp" id="q5_stamp"></div></div></section>
+<div class="finish glass" id="actions">
+ <div class="status" id="status"></div>
+ <div class="btns">
+  <button class="btn" id="saveBtn" type="button">Save Progress</button>
+  <button class="btn" id="loadBtn" type="button">Load Progress</button>
+  <input type="file" id="loadFile" accept=".json,application/json" hidden>
+  <button class="btn primary" id="finishBtn" type="button" disabled>Finished — Download File to Submit</button>
+ </div>
+ <div class="msg" id="msg" role="status"></div>
+ <button class="link" id="reset" type="button">Clear all my answers</button>
+</div>
+<footer><span>UNIT 1 · COLONIES, REVOLUTION, AND CONSTITUTION | CPUSH</span><span>DANIEL GARZA, M.A.</span></footer>
+</div>
+<script type="application/json" id="sp-i18n">{"langs": ["en", "es", "ar"], "default": "en", "es": {"BELLRINGER 1.1": "CALENTAMIENTO 1.1", "Lost Roanoke Colony": "La colonia perdida de Roanoke", "WATCH · THINK · WRITE": "MIRA · PIENSA · ESCRIBE", "<b>How this works:</b> Watch the short video, then answer 5 questions. You can pause or replay the video as many times as you need. Tip: press <b>CC</b> to turn on captions.": "<b>Cómo funciona:</b> Mira el video corto y luego contesta 5 preguntas. Puedes pausar o repetir el video las veces que necesites. Consejo: presiona <b>CC</b> para activar los subtítulos.", "Watch the video.": "Mira el video.", "Answer all 5 questions and press the button on each card.": "Contesta las 5 preguntas y presiona el botón de cada tarjeta.", "Press <b>Finished</b> and upload your file to Canvas.": "Presiona <b>Terminé</b> y sube tu archivo a Canvas.", "Your work saves on this device as you go. Use <b>Save Progress</b> to download a backup file, and <b>Load Progress</b> to continue later. Plan on about 10 minutes.": "Tu trabajo se guarda en este dispositivo mientras avanzas. Usa <b>Guardar progreso</b> para descargar un archivo de respaldo y <b>Cargar progreso</b> para continuar después. Calcula unos 10 minutos.", "Watch": "Mira", "Video": "Video", "About 6 minutes": "Unos 6 minutos", "Video by The Daily Bellringer": "Video de The Daily Bellringer", "Lost Roanoke Colony video": "Video: La colonia perdida de Roanoke", "Video not loading?": "¿No carga el video?", "Watch on YouTube": "Míralo en YouTube", "Key term": "Término clave", "Why Raleigh kept going": "Por qué Raleigh siguió", "Cause and effect": "Causa y efecto", "Looking ahead": "Mirando hacia adelante", "Your claim": "Tu afirmación", "What is a colony?": "¿Qué es una colonia?", "Pick the best answer.": "Elige la mejor respuesta.", "Write 1 or 2 full sentences.": "Escribe 1 o 2 oraciones completas.", "Pick the best answer. Then explain.": "Elige la mejor respuesta. Luego explica.", "Pick a theory. Then prove it.": "Elige una teoría. Luego pruébala.", "A group of people who settle in a place far from home but still answer to their home country.": "Un grupo de personas que se establece en un lugar lejos de su hogar pero sigue bajo el control de su país de origen.", "A group of soldiers who fight a war for their king.": "Un grupo de soldados que pelea una guerra por su rey.", "A ship that carries supplies across the ocean.": "Un barco que lleva provisiones a través del océano.", "A town that makes its own laws and has its own king.": "Un pueblo que hace sus propias leyes y tiene su propio rey.", "What rumor made Sir Walter Raleigh want to keep exploring?": "¿Qué rumor hizo que Sir Walter Raleigh quisiera seguir explorando?", "Rumors of gold farther inland.": "Rumores de oro más adentro de la tierra.", "Rumors of a river that led straight to China.": "Rumores de un río que llevaba directo a China.", "Rumors of a spring that kept people young.": "Rumores de una fuente que mantenía joven a la gente.", "Rumors that Spanish treasure ships had been left behind.": "Rumores de que se habían dejado atrás barcos españoles con tesoros.", "Why couldn’t John White return to Roanoke Island for three years?": "¿Por qué John White no pudo regresar a la isla Roanoke durante tres años?", "John White could not return because…": "John White no pudo regresar porque…", "A colony started in 1607 may be part of the mystery. Which one?": "Una colonia fundada en 1607 puede ser parte del misterio. ¿Cuál?", "Plymouth": "Plymouth", "Jamestown": "Jamestown", "Massachusetts Bay": "Bahía de Massachusetts", "New Amsterdam": "Nueva Ámsterdam", "Explain. How might this colony have led to the Roanoke colonists disappearing?": "Explica. ¿Cómo pudo esta colonia haber causado la desaparición de los colonos de Roanoke?", "This colony might have caused trouble because…": "Esta colonia pudo haber causado problemas porque…", "What do you think happened to the Roanoke colonists?": "¿Qué crees que les pasó a los colonos de Roanoke?", "Pick the theory you find most believable.": "Elige la teoría que te parezca más creíble.", "Pick a theory…": "Elige una teoría…", "Some went to Croatoan Island, and some went north to the Chesapeake Bay.": "Algunos fueron a la isla Croatoan y otros fueron al norte, a la bahía de Chesapeake.", "They joined a Native American community inland.": "Se unieron a una comunidad indígena en el interior.", "Native American tribes attacked them before they could leave.": "Tribus indígenas los atacaron antes de que pudieran irse.", "They tried to sail back to England, and their ship sank.": "Intentaron navegar de regreso a Inglaterra y su barco se hundió.", "They went to the Chesapeake Bay and were killed around 1607, when Jamestown began.": "Fueron a la bahía de Chesapeake y los mataron alrededor de 1607, cuando comenzó Jamestown.", "Prove it. Use one clue from the video.": "Pruébalo. Usa una pista del video.", "One clue from the video is…": "Una pista del video es…", "Your answer": "Tu respuesta", "Your theory": "Tu teoría", "Check my answer": "Revisar mi respuesta", "Check my answers": "Revisar mis respuestas", "Save my answer": "Guardar mi respuesta", "Bellringer 1.1 · Lost Roanoke Colony": "Calentamiento 1.1 · La colonia perdida de Roanoke", "GOT IT!<small>Nice work</small>": "¡BIEN!<small>Buen trabajo</small>", "SAVED<small>Answer recorded</small>": "GUARDADA<small>Respuesta registrada</small>", "Correct! Nice work.": "¡Correcto! Buen trabajo.", "Not quite. Look again, change your answer, and try once more.": "Casi. Mira otra vez, cambia tu respuesta e inténtalo una vez más.", "Answer saved.": "Respuesta guardada.", "Pick an answer first.": "Primero elige una respuesta.", "Pick a theory first.": "Primero elige una teoría.", "Please write a full sentence in the box.": "Escribe una oración completa en el cuadro.", "Question tracker": "Progreso de las preguntas", "Progress loaded. Welcome back!": "Progreso cargado. ¡Qué bueno verte otra vez!", "Save Progress": "Guardar progreso", "Load Progress": "Cargar progreso", "Finished — Download File to Submit": "Terminé — Descargar el archivo para entregar", "Clear all my answers": "Borrar todas mis respuestas", "FIRST NAME *": "NOMBRE *", "LAST NAME *": "APELLIDO *", "PERIOD *": "PERÍODO *", "DATE (fills in when you finish)": "FECHA (se llena cuando terminas)", "e.g. 3": "p. ej., 3", "Automatic": "Automática", "Please type your first name, last name, and period first.": "Primero escribe tu nombre, apellido y período.", "All done! Press Finished to download your file.": "¡Todo listo! Presiona «Terminé» para descargar tu archivo.", "Progress file downloaded. Keep it safe, and use Load Progress to continue later.": "Se descargó el archivo de progreso. Guárdalo bien y usa «Cargar progreso» para continuar más tarde.", "That file does not work here. Choose the progress file you downloaded from this assignment.": "Ese archivo no sirve aquí. Elige el archivo de progreso que descargaste de esta tarea.", "Could not read that file. Try again.": "No se pudo leer ese archivo. Inténtalo de nuevo.", "Clear all your answers on this page? This cannot be undone.": "¿Borrar todas tus respuestas de esta página? No se puede deshacer.", "FILED<small>Your teacher will check this one</small>": "REGISTRADA<small>Tu maestro revisará esta tarjeta</small>", "NOT QUITE<small>Look again</small>": "NO ES ESA<small>Mira otra vez</small>", "Your teacher will check this one": "Tu maestro revisará esta tarjeta", "Look again": "Mira otra vez", "DANIEL GARZA, M.A.": "DANIEL GARZA, M.A.", "Founding the English Colonies": "La fundación de las colonias inglesas", "UNIT 1 · COLONIES, REVOLUTION, AND CONSTITUTION | CPUSH": "UNIDAD 1 · COLONIAS, REVOLUCIÓN Y CONSTITUCIÓN | CPUSH", "John Smith and Jamestown": "John Smith y Jamestown", "About 5 minutes": "Unos 5 minutos", "BELLRINGER 1.3": "CALENTAMIENTO 1.3", "John Smith and Jamestown video": "Video: John Smith y Jamestown", "Bellringer 1.3 · John Smith and Jamestown": "Calentamiento 1.3 · John Smith y Jamestown", "What is a mercenary?": "¿Qué es un mercenario?", "A hired soldier who fights for whoever pays.": "Un soldado contratado que pelea por quien le pague.", "A sailor who explores new lands.": "Un marinero que explora tierras nuevas.", "A leader chosen by a colony.": "Un líder elegido por una colonia.", "Main idea": "Idea principal", "What famous rule did John Smith set for Jamestown?": "¿Qué regla famosa puso John Smith en Jamestown?", "“Every colonist must search for gold.”": "“Todo colono debe buscar oro.”", "“No one may leave the fort.”": "“Nadie puede salir del fuerte.”", "“He that will not work shall not eat.”": "“El que no trabaje, no comerá.”", "Why it matters": "Por qué importa", "How did John Smith help Jamestown survive?": "¿Cómo ayudó John Smith a que Jamestown sobreviviera?", "John Smith helped by…": "John Smith ayudó…", "Why is the Pocahontas rescue story hard to trust?": "¿Por qué es difícil confiar en la historia del rescate de Pocahontas?", "Smith wrote it himself, years later, and often exaggerated.": "Smith la escribió él mismo, años después, y a menudo exageraba.", "Pocahontas wrote a letter that says it never happened.": "Pocahontas escribió una carta que dice que nunca pasó.", "The story was banned in England.": "La historia estaba prohibida en Inglaterra.", "Should historians trust a story that the hero wrote about himself? Why or why not?": "¿Deben los historiadores confiar en una historia que el héroe escribió sobre sí mismo? ¿Por qué sí o por qué no?", "Historians should (or should not) trust it because…": "Los historiadores deben (o no deben) confiar porque…"}, "ar": {"BELLRINGER 1.1": "نشاط البداية 1.1", "Lost Roanoke Colony": "مستعمرة رونوك (Roanoke) المفقودة", "WATCH · THINK · WRITE": "شاهد · فكّر · اكتب", "<b>How this works:</b> Watch the short video, then answer 5 questions. You can pause or replay the video as many times as you need. Tip: press <b>CC</b> to turn on captions.": "<b>كيف يعمل هذا:</b> شاهد الفيديو القصير ثم أجب عن 5 أسئلة. يمكنك إيقاف الفيديو مؤقتًا أو إعادته كلما احتجت. نصيحة: اضغط <b>CC</b> لتشغيل الترجمة.", "Watch the video.": "شاهد الفيديو.", "Answer all 5 questions and press the button on each card.": "أجب عن الأسئلة الخمسة واضغط الزر في كل بطاقة.", "Press <b>Finished</b> and upload your file to Canvas.": "اضغط <b>انتهيت</b> وارفع ملفك إلى Canvas.", "Your work saves on this device as you go. Use <b>Save Progress</b> to download a backup file, and <b>Load Progress</b> to continue later. Plan on about 10 minutes.": "يُحفظ عملك على هذا الجهاز أثناء تقدمك. استخدم <b>حفظ التقدم</b> لتنزيل ملف احتياطي، و<b>تحميل التقدم</b> للمتابعة لاحقًا. خصّص حوالي 10 دقائق.", "Watch": "شاهد", "Video": "فيديو", "About 6 minutes": "حوالي 6 دقائق", "Video by The Daily Bellringer": "فيديو من قناة The Daily Bellringer", "Lost Roanoke Colony video": "فيديو: مستعمرة رونوك المفقودة", "Video not loading?": "الفيديو لا يعمل؟", "Watch on YouTube": "شاهده على YouTube", "Key term": "مصطلح مهم", "Why Raleigh kept going": "لماذا واصل رالي (Raleigh) الاستكشاف", "Cause and effect": "السبب والنتيجة", "Looking ahead": "نظرة إلى ما سيأتي", "Your claim": "رأيك", "What is a colony?": "ما المستعمرة؟", "Pick the best answer.": "اختر أفضل إجابة.", "Write 1 or 2 full sentences.": "اكتب جملة أو جملتين كاملتين.", "Pick the best answer. Then explain.": "اختر أفضل إجابة. ثم اشرح.", "Pick a theory. Then prove it.": "اختر نظرية. ثم أثبتها.", "A group of people who settle in a place far from home but still answer to their home country.": "مجموعة من الناس تستقر في مكان بعيد عن وطنها لكنها تظل تابعة لبلدها الأصلي.", "A group of soldiers who fight a war for their king.": "مجموعة من الجنود تقاتل في حرب من أجل ملكها.", "A ship that carries supplies across the ocean.": "سفينة تنقل المؤن عبر المحيط.", "A town that makes its own laws and has its own king.": "بلدة تضع قوانينها الخاصة ولها ملكها الخاص.", "What rumor made Sir Walter Raleigh want to keep exploring?": "ما الشائعة التي جعلت السير والتر رالي (Walter Raleigh) يريد مواصلة الاستكشاف؟", "Rumors of gold farther inland.": "شائعات عن وجود ذهب في أعماق الأرض الداخلية.", "Rumors of a river that led straight to China.": "شائعات عن نهر يؤدي مباشرة إلى الصين.", "Rumors of a spring that kept people young.": "شائعات عن ينبوع يُبقي الناس شبابًا.", "Rumors that Spanish treasure ships had been left behind.": "شائعات عن سفن إسبانية محمّلة بالكنوز تُركت هناك.", "Why couldn’t John White return to Roanoke Island for three years?": "لماذا لم يستطع جون وايت (John White) العودة إلى جزيرة رونوك (Roanoke) لمدة ثلاث سنوات؟", "John White could not return because…": "لم يستطع جون وايت العودة لأن…", "A colony started in 1607 may be part of the mystery. Which one?": "قد تكون مستعمرة بدأت عام 1607 جزءًا من اللغز. أيّ مستعمرة هي؟", "Plymouth": "بليموث (Plymouth)", "Jamestown": "جيمستاون (Jamestown)", "Massachusetts Bay": "خليج ماساتشوستس (Massachusetts Bay)", "New Amsterdam": "نيو أمستردام (New Amsterdam)", "Explain. How might this colony have led to the Roanoke colonists disappearing?": "اشرح. كيف يمكن أن تكون هذه المستعمرة قد أدّت إلى اختفاء مستعمري رونوك؟", "This colony might have caused trouble because…": "ربما سببت هذه المستعمرة مشكلة لأن…", "What do you think happened to the Roanoke colonists?": "ماذا تظن أنه حدث لمستعمري رونوك؟", "Pick the theory you find most believable.": "اختر النظرية التي تراها أكثر إقناعًا.", "Pick a theory…": "اختر نظرية…", "Some went to Croatoan Island, and some went north to the Chesapeake Bay.": "ذهب بعضهم إلى جزيرة كروتوان (Croatoan) وذهب آخرون شمالًا إلى خليج تشيسابيك (Chesapeake).", "They joined a Native American community inland.": "انضموا إلى مجتمع من السكان الأصليين في الداخل.", "Native American tribes attacked them before they could leave.": "هاجمتهم قبائل السكان الأصليين قبل أن يتمكنوا من المغادرة.", "They tried to sail back to England, and their ship sank.": "حاولوا الإبحار عائدين إلى إنجلترا (England) فغرقت سفينتهم.", "They went to the Chesapeake Bay and were killed around 1607, when Jamestown began.": "ذهبوا إلى خليج تشيسابيك وقُتلوا حوالي عام 1607 عندما بدأت جيمستاون.", "Prove it. Use one clue from the video.": "أثبت ذلك. استخدم دليلًا واحدًا من الفيديو.", "One clue from the video is…": "أحد الأدلة في الفيديو هو…", "Your answer": "إجابتك", "Your theory": "نظريتك", "Check my answer": "تحقق من إجابتي", "Check my answers": "تحقق من إجاباتي", "Save my answer": "احفظ إجابتي", "Bellringer 1.1 · Lost Roanoke Colony": "نشاط البداية 1.1 · مستعمرة رونوك المفقودة", "GOT IT!<small>Nice work</small>": "أحسنت!<small>عمل رائع</small>", "SAVED<small>Answer recorded</small>": "تم الحفظ<small>سُجّلت إجابتك</small>", "Correct! Nice work.": "صحيح! عمل رائع.", "Not quite. Look again, change your answer, and try once more.": "ليست تمامًا. انظر مرة أخرى، وغيّر إجابتك، وحاول مرة أخرى.", "Answer saved.": "تم حفظ الإجابة.", "Pick an answer first.": "اختر إجابة أولًا.", "Pick a theory first.": "اختر نظرية أولًا.", "Please write a full sentence in the box.": "اكتب جملة كاملة في المربع.", "Question tracker": "متابعة الأسئلة", "Progress loaded. Welcome back!": "تم تحميل تقدمك. أهلًا بعودتك!", "Save Progress": "حفظ التقدم", "Load Progress": "تحميل التقدم", "Finished — Download File to Submit": "انتهيت — نزّل الملف لتسليمه", "Clear all my answers": "امسح كل إجاباتي", "FIRST NAME *": "الاسم الأول *", "LAST NAME *": "اسم العائلة *", "PERIOD *": "الحصة *", "DATE (fills in when you finish)": "التاريخ (يُكتب تلقائيًا عند الانتهاء)", "e.g. 3": "مثال: 3", "Automatic": "تلقائي", "Please type your first name, last name, and period first.": "اكتب اسمك الأول واسم العائلة والحصة أولًا.", "All done! Press Finished to download your file.": "اكتمل كل شيء! اضغط «انتهيت» لتنزيل ملفك.", "Progress file downloaded. Keep it safe, and use Load Progress to continue later.": "تم تنزيل ملف التقدم. احتفظ به في مكان آمن، واستخدم «تحميل التقدم» لتكمل لاحقًا.", "That file does not work here. Choose the progress file you downloaded from this assignment.": "هذا الملف لا يصلح هنا. اختر ملف التقدم الذي نزّلته من هذه المهمة.", "Could not read that file. Try again.": "تعذّرت قراءة هذا الملف. حاول مرة أخرى.", "Clear all your answers on this page? This cannot be undone.": "هل تريد مسح كل إجاباتك في هذه الصفحة؟ لا يمكن التراجع عن ذلك.", "FILED<small>Your teacher will check this one</small>": "تم التسجيل<small>سيراجع معلمك هذه البطاقة</small>", "NOT QUITE<small>Look again</small>": "ليست هذه<small>انظر مرة أخرى</small>", "Your teacher will check this one": "سيراجع معلمك هذه البطاقة", "Look again": "انظر مرة أخرى", "DANIEL GARZA, M.A.": "DANIEL GARZA, M.A.", "Founding the English Colonies": "تأسيس المستعمرات الإنجليزية", "UNIT 1 · COLONIES, REVOLUTION, AND CONSTITUTION | CPUSH": "الوحدة 1 · المستعمرات والثورة والدستور | CPUSH", "John Smith and Jamestown": "جون سميث (John Smith) وجيمستاون", "About 5 minutes": "حوالي 5 دقائق", "BELLRINGER 1.3": "نشاط البداية 1.3", "John Smith and Jamestown video": "فيديو: جون سميث (John Smith) وجيمستاون", "Bellringer 1.3 · John Smith and Jamestown": "نشاط البداية 1.3 · جون سميث (John Smith) وجيمستاون", "What is a mercenary?": "من المرتزق؟", "A hired soldier who fights for whoever pays.": "جندي مأجور يقاتل لمن يدفع له.", "A sailor who explores new lands.": "بحّار يستكشف أراضي جديدة.", "A leader chosen by a colony.": "قائد تختاره المستعمرة.", "Main idea": "الفكرة الأساسية", "What famous rule did John Smith set for Jamestown?": "ما القاعدة الشهيرة التي وضعها جون سميث في جيمستاون؟", "“Every colonist must search for gold.”": "«على كل مستعمر أن يبحث عن الذهب.»", "“No one may leave the fort.”": "«لا يجوز لأحد مغادرة الحصن.»", "“He that will not work shall not eat.”": "«من لا يعمل لا يأكل.»", "Why it matters": "لماذا هذا مهم", "How did John Smith help Jamestown survive?": "كيف ساعد جون سميث جيمستاون على البقاء؟", "John Smith helped by…": "ساعد جون سميث…", "Why is the Pocahontas rescue story hard to trust?": "لماذا يصعب تصديق قصة إنقاذ بوكاهونتاس (Pocahontas)؟", "Smith wrote it himself, years later, and often exaggerated.": "كتبها سميث بنفسه بعد سنوات، وكان يبالغ كثيرًا.", "Pocahontas wrote a letter that says it never happened.": "كتبت بوكاهونتاس رسالة تقول إن ذلك لم يحدث.", "The story was banned in England.": "كانت القصة ممنوعة في إنجلترا.", "Should historians trust a story that the hero wrote about himself? Why or why not?": "هل يجب على المؤرخين تصديق قصة كتبها البطل عن نفسه؟ لماذا أو لماذا لا؟", "Historians should (or should not) trust it because…": "يجب (أو لا يجب) على المؤرخين تصديقها لأن…"}, "patterns": [{"re": "^Question (\\d+) of 5$", "es": "Pregunta $1 de 5", "ar": "السؤال $1 من 5"}, {"re": "^Go to question (\\d+)$", "es": "Ir a la pregunta $1", "ar": "اذهب إلى السؤال $1"}, {"re": "^Question (\\d+)$", "es": "Pregunta $1", "ar": "السؤال $1"}, {"re": "^(\\d+) of 5 questions done$", "es": "$1 de 5 preguntas listas", "ar": "تم إنجاز $1 من 5 أسئلة"}, {"re": "^Not quite\\. The correct answer is ([A-D])\\. Your teacher will go over it with you\\.$", "es": "Casi. La respuesta correcta es la $1. Tu maestro la repasará contigo.", "ar": "ليست تمامًا. الإجابة الصحيحة هي <bdi dir=\"ltr\">$1</bdi>. سيراجعها معلمك معك."}, {"re": "^Still needed: your first name, last name, and period\\.$", "es": "Todavía falta: tu nombre, apellido y período.", "ar": "ما زال ناقصًا: اسمك الأول واسم العائلة والحصة."}, {"re": "^Still needed: 1 more question to save\\.$", "es": "Todavía falta: guardar 1 pregunta.", "ar": "ما زال ناقصًا: حفظ سؤال واحد."}, {"re": "^Still needed: 2 more questions to save\\.$", "es": "Todavía falta: guardar 2 preguntas.", "ar": "ما زال ناقصًا: حفظ سؤالين."}, {"re": "^Still needed: ([3-5]) more questions to save\\.$", "es": "Todavía falta: guardar $1 preguntas.", "ar": "ما زال ناقصًا: حفظ $1 أسئلة."}, {"re": "^Still needed: your first name, last name, and period, and 1 more question to save\\.$", "es": "Todavía falta: tu nombre, apellido y período, y guardar 1 pregunta.", "ar": "ما زال ناقصًا: اسمك الأول واسم العائلة والحصة، وحفظ سؤال واحد."}, {"re": "^Still needed: your first name, last name, and period, and 2 more questions to save\\.$", "es": "Todavía falta: tu nombre, apellido y período, y guardar 2 preguntas.", "ar": "ما زال ناقصًا: اسمك الأول واسم العائلة والحصة، وحفظ سؤالين."}, {"re": "^Still needed: your first name, last name, and period, and ([3-5]) more questions to save\\.$", "es": "Todavía falta: tu nombre, apellido y período, y guardar $1 preguntas.", "ar": "ما زال ناقصًا: اسمك الأول واسم العائلة والحصة، وحفظ $1 أسئلة."}, {"re": "^Done! Your file ([A-Za-z0-9_.\\-]+) downloaded\\. Upload it to Canvas\\.$", "es": "¡Listo! Se descargó tu archivo $1. Sube ese archivo a Canvas.", "ar": "تم! نُزّل ملفك <bdi dir=\"ltr\">$1</bdi>. ارفع هذا الملف إلى Canvas."}]}</script>
+<script>
+(function(){
+var PACKET='CPUSH_BELLRINGER_1_3', FILE='Bellringer_1.3_John_Smith_and_Jamestown', STORE='cpush_bellringer_1_3_student';
+var CFG=[{"id": "q1", "mc": true, "sel": false, "t": false}, {"id": "q2", "mc": true, "sel": false, "t": false}, {"id": "q3", "mc": false, "sel": false, "t": true}, {"id": "q4", "mc": true, "sel": false, "t": false}, {"id": "q5", "mc": false, "sel": false, "t": true}], INFO={"q1": {"question": "What is a mercenary?", "options": {"A": "A hired soldier who fights for whoever pays.", "B": "A sailor who explores new lands.", "C": "A leader chosen by a colony."}}, "q2": {"question": "What famous rule did John Smith set for Jamestown?", "options": {"A": "\u201cEvery colonist must search for gold.\u201d", "B": "\u201cNo one may leave the fort.\u201d", "C": "\u201cHe that will not work shall not eat.\u201d"}}, "q3": {"question": "How did John Smith help Jamestown survive?", "options": null}, "q4": {"question": "Why is the Pocahontas rescue story hard to trust?", "options": {"A": "Smith wrote it himself, years later, and often exaggerated.", "B": "Pocahontas wrote a letter that says it never happened.", "C": "The story was banned in England."}}, "q5": {"question": "Should historians trust a story that the hero wrote about himself? Why or why not?", "options": null}}, ANS={"q1": "a6ea41a467369acf31896ab736203045da1aa9e302376cad8ea4a2a385c916d5", "q2": "172ce4afb85889dff7dad59863a8f36681b457899db310bf40b2a4cec20d404c", "q4": "b360cf9e306a58da6d347cd5f481309230c66f95ee197ca1d8690ddfb19e4045"}, SALT='CPUSH_BR_1_3|', TOTAL=CFG.length, MINLEN=15;
+var VIDEO='https://youtu.be/vpb3jUvjsq8';
+function $(i){return document.getElementById(i)}
+function sha256(str){
+  var utf=unescape(encodeURIComponent(str));var m=[],i,l=utf.length;
+  for(i=0;i<l;i++){m[i>>2]|=utf.charCodeAt(i)<<(24-(i%4)*8)}
+  m[l>>2]|=0x80<<(24-(l%4)*8);m[(((l+8)>>6)+1)*16-1]=l*8;
+  var P=[],c=2,j;
+  while(P.length<64){var pr=true;for(j=0;j<P.length;j++){if(c%P[j]===0){pr=false;break}}if(pr)P.push(c);c++}
+  var kk=[];for(i=0;i<64;i++){kk.push(Math.floor((Math.pow(P[i],1/3)%1)*4294967296)|0)}
+  var h=[];for(i=0;i<8;i++){h.push(Math.floor((Math.pow(P[i],0.5)%1)*4294967296)|0)}
+  function rr(x,n){return (x>>>n)|(x<<(32-n))}
+  for(var o=0;o<m.length;o+=16){
+    var w=[];for(i=0;i<64;i++){
+      if(i<16){w[i]=m[o+i]|0}else{
+        var s0=rr(w[i-15],7)^rr(w[i-15],18)^(w[i-15]>>>3),s1=rr(w[i-2],17)^rr(w[i-2],19)^(w[i-2]>>>10);
+        w[i]=(w[i-16]+s0+w[i-7]+s1)|0}}
+    var a=h[0],b=h[1],cc=h[2],d=h[3],e=h[4],f=h[5],g=h[6],hh=h[7];
+    for(i=0;i<64;i++){
+      var S1=rr(e,6)^rr(e,11)^rr(e,25),ch=(e&f)^(~e&g),t1=(hh+S1+ch+kk[i]+w[i])|0;
+      var S0=rr(a,2)^rr(a,13)^rr(a,22),mj=(a&b)^(a&cc)^(b&cc),t2=(S0+mj)|0;
+      hh=g;g=f;f=e;e=(d+t1)|0;d=cc;cc=b;b=a;a=(t1+t2)|0}
+    h[0]=(h[0]+a)|0;h[1]=(h[1]+b)|0;h[2]=(h[2]+cc)|0;h[3]=(h[3]+d)|0;h[4]=(h[4]+e)|0;h[5]=(h[5]+f)|0;h[6]=(h[6]+g)|0;h[7]=(h[7]+hh)|0}
+  var out='';for(i=0;i<8;i++){out+=('00000000'+(h[i]>>>0).toString(16)).slice(-8)}return out}
+function right(id,l){return sha256(SALT+id+'|'+l)===ANS[id]}
+var first=$('f_first'),last=$('f_last'),period=$('f_period'),dateF=$('f_date');
+var data={c:{},meta:{}};
+function blank(){return {pick:'',sel:'',text:'',attempts:0,correct:false,saved:false,result:''}}
+CFG.forEach(function(k){data.c[k.id]=blank()});
+function load(){try{var d=JSON.parse(localStorage.getItem(STORE)||'null');if(d&&d.c){CFG.forEach(function(k){if(d.c[k.id])data.c[k.id]=d.c[k.id]});data.meta=d.meta||{}}}catch(e){}}
+function persist(){try{data.meta={first:first.value,last:last.value,period:period.value,date:dateF.value};localStorage.setItem(STORE,JSON.stringify(data))}catch(e){}}
+function clean(n){n=window.spAscii?spAscii(n):n;return String(n).normalize('NFD').replace(/[̀-ͯ]/g,'').trim().replace(/\s+/g,'_').replace(/[^A-Za-z0-9_-]/g,'')}
+function who(){return (clean(last.value)||'Last')+'_'+(clean(first.value)||'First')}
+function msg(t,err){var m=$('msg');m.textContent=t;m.className='msg'+(err?' err':'');m.style.display='block'}
+function cmsg(id,t,err){var m=$(id+'_msg');m.textContent=t;m.className='cmsg'+(err?' err':'')}
+function paint(k){
+  var id=k.id,c=data.c[id];
+  if(k.mc)[].forEach.call(document.getElementsByName(id+'_pick'),function(r){r.checked=(r.value===c.pick)});
+  if(k.sel)$(id+'_sel').value=c.sel;
+  if(k.t)$(id+'_t').value=c.text;
+  var s=$(id+'_stamp');
+  if(c.result==='correct'){s.className='stamp on';s.innerHTML='GOT IT!<small>Nice work</small>'}
+  else if(c.result==='saved'){s.className='stamp on';s.innerHTML='SAVED<small>Answer recorded</small>'}
+  else if(c.result==='filed'){s.className='stamp on miss';s.innerHTML='FILED<small>Your teacher will check this one</small>'}
+  else if(c.result==='miss'){s.className='stamp on miss';s.innerHTML='NOT QUITE<small>Look again</small>'}
+  else{s.className='stamp';s.innerHTML=''}
+  var d=$('dot_'+id);d.className=c.saved?'done':(c.result==='miss'?'miss':'');
+}
+function refresh(){
+  var done=0;CFG.forEach(function(k){if(data.c[k.id].saved)done++});
+  $('pct').textContent=done+' of '+TOTAL+' questions done';
+  $('fill').style.width=(100*done/TOTAL)+'%';
+  var named=first.value.trim()&&last.value.trim()&&period.value.trim();
+  var left=TOTAL-done,all=named&&!left,txt;
+  if(all)txt='All done! Press Finished to download your file.';
+  else{var q=left?(left+' more '+(left===1?'question':'questions')+' to save'):'';
+    if(!named&&!left)txt='Still needed: your first name, last name, and period.';
+    else if(named)txt='Still needed: '+q+'.';
+    else txt='Still needed: your first name, last name, and period, and '+q+'.'}
+  $('status').textContent=txt;
+  $('finishBtn').disabled=!all;
+  return all;
+}
+function sync(){persist();refresh()}
+function paintAll(){CFG.forEach(paint);refresh()}
+function snapshot(){
+  var o={packet:PACKET,course:'CPUSH',lesson:1,bellringer:'1.3',title:"John Smith and Jamestown",video:VIDEO,version:1,saved:new Date().toISOString(),
+    student:{first:first.value.trim(),last:last.value.trim(),period:period.value.trim(),date:dateF.value.trim()},answers:{},summary:{}};
+  var saved=0,ok=0,mc=0;
+  CFG.forEach(function(k){var c=data.c[k.id],a={question:INFO[k.id].question};
+    if(c.saved)saved++;
+    if(k.mc){mc++;a.picked=c.pick;a.picked_text=c.pick?INFO[k.id].options[c.pick]:'';a.correct=c.correct;a.attempts=c.attempts;if(c.correct)ok++}
+    if(k.sel)a.theory=c.sel;
+    if(k.t)a[k.mc?'explanation':(k.sel?'evidence':'answer')]=c.text;
+    a.saved=c.saved;o.answers[k.id]=a});
+  o.summary={questions_saved:saved,multiple_choice_correct:ok,multiple_choice_total:mc,total_questions:TOTAL};
+  return o}
+function download(name,obj){
+  var blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'});
+  var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;
+  document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500)}
+function saveCard(k){
+  var id=k.id,c=data.c[id],box=k.t?$(id+'_t'):null;
+  if(k.mc&&!c.pick){cmsg(id,'Pick an answer first.',true);return}
+  if(k.sel&&!c.sel){cmsg(id,'Pick a theory first.',true);$(id+'_sel').classList.add('bad');return}
+  if(k.t&&c.text.trim().length<MINLEN){cmsg(id,'Please write a full sentence in the box.',true);box.classList.add('bad');return}
+  if(k.mc){
+    c.attempts++;c.correct=right(id,c.pick);
+    if(c.correct){c.saved=true;c.result='correct';cmsg(id,'Correct! Nice work.')}
+    else if(c.attempts>=2){c.saved=true;c.result='filed';cmsg(id,'Not quite. The correct answer is '+{"q1": "A", "q2": "C", "q4": "A"}[id]+'. Your teacher will go over it with you.')}
+    else{c.saved=false;c.result='miss';cmsg(id,'Not quite. Look again, change your answer, and try once more.',true)}
+  }else{c.saved=true;c.result='saved';cmsg(id,'Answer saved.')}
+  paint(k);sync()}
+document.querySelectorAll('[data-save]').forEach(function(b){b.addEventListener('click',function(){
+  var id=b.getAttribute('data-save');CFG.forEach(function(k){if(k.id===id)saveCard(k)})})});
+CFG.forEach(function(k){var id=k.id;
+  function edited(){var c=data.c[id];c.saved=false;c.correct=false;c.result='';cmsg(id,'');var s=$(id+'_stamp');s.className='stamp';s.innerHTML='';$('dot_'+id).className=''}
+  if(k.mc)[].forEach.call(document.getElementsByName(id+'_pick'),function(r){r.addEventListener('change',function(){data.c[id].pick=r.value;edited();sync()})});
+  if(k.sel)$(id+'_sel').addEventListener('change',function(){data.c[id].sel=this.value;this.classList.remove('bad');edited();sync()});
+  if(k.t)$(id+'_t').addEventListener('input',function(){data.c[id].text=this.value;this.classList.remove('bad');edited();sync()});
+});
+[first,last,period].forEach(function(m){m.addEventListener('input',function(){m.classList.remove('bad');sync()})});
+load();
+if(data.meta){first.value=data.meta.first||'';last.value=data.meta.last||'';period.value=data.meta.period||'';dateF.value=data.meta.date||''}
+paintAll();
+$('saveBtn').addEventListener('click',function(){
+  if(!first.value.trim()||!last.value.trim()||!period.value.trim()){
+    [first,last,period].forEach(function(f){if(!f.value.trim())f.classList.add('bad')});
+    msg('Please type your first name, last name, and period first.',true);first.scrollIntoView({block:'center'});return}
+  download(who()+'-'+FILE+'-PROGRESS.json',snapshot());msg('Progress file downloaded. Keep it safe, and use Load Progress to continue later.')});
+$('loadBtn').addEventListener('click',function(){$('loadFile').click()});
+$('loadFile').addEventListener('change',function(e){
+  var f=e.target.files[0];if(!f)return;var r=new FileReader();
+  r.onload=function(){try{
+    var o=JSON.parse(r.result);if(!o||o.packet!==PACKET||typeof o.answers!=='object')throw new Error('wrong');
+    var st=o.student||{};first.value=st.first||'';last.value=st.last||'';period.value=st.period||'';dateF.value=(o.completed?st.date:'')||'';
+    CFG.forEach(function(k){var a=o.answers[k.id]||{},c=blank();
+      c.pick=a.picked||'';c.sel=a.theory||'';c.text=a.explanation||a.evidence||a.answer||'';c.attempts=a.attempts||0;c.saved=!!a.saved;
+      if(k.mc){c.correct=c.pick?right(k.id,c.pick):false;c.result=c.saved?(c.correct?'correct':'filed'):(c.attempts?'miss':'')}
+      else c.result=c.saved?'saved':'';
+      data.c[k.id]=c});
+    paintAll();persist();msg('Progress loaded. Welcome back!')}catch(err){msg('That file does not work here. Choose the progress file you downloaded from this assignment.',true)}
+    e.target.value=''};
+  r.onerror=function(){msg('Could not read that file. Try again.',true)};r.readAsText(f)});
+$('finishBtn').addEventListener('click',function(){
+  if(!refresh())return;
+  var now=new Date();dateF.value=now.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});persist();
+  var o=snapshot();o.completed=true;o.submitted=now.toISOString();
+  var nm=who()+'-'+FILE+'.json';download(nm,o);msg('Done! Your file '+nm+' downloaded. Upload it to Canvas.')});
+$('reset').addEventListener('click',function(){
+  if(!confirm('Clear all your answers on this page? This cannot be undone.'))return;
+  CFG.forEach(function(k){data.c[k.id]=blank();cmsg(k.id,'')});[first,last,period,dateF].forEach(function(m){m.value=''});
+  paintAll();persist()});
+})();
+</script>
+<script>
+/* Supplement language switch (English / Espanol / Arabic). Works on pages whose text is rendered by JS:
+   a MutationObserver translates text as it appears. Data: <script type="application/json" id="sp-i18n">
+   {"langs":["en","es","ar"],"default":"en","es":{englishHTML:translation},"ar":{...},"patterns":[{"re":"^(\\d+) of (\\d+)$","es":"$1 de $2","ar":"..."}]}
+   Keys are the English text exactly as it sits in the page (innerHTML, spaces collapsed).
+   Helpers: spSeen() english strings seen so far; spMissing() strings with no translation in the current language;
+   spSetLang(l); spTr(s) translate a string (used for confirm/alert); spAscii(s) plain-ASCII name for file names. */
+(function () {
+  var node = document.getElementById('sp-i18n');
+  var D = node ? JSON.parse(node.textContent) : { langs: ['en'], patterns: [] };
+  var INLINE = { B:1,I:1,EM:1,STRONG:1,SPAN:1,A:1,BR:1,SMALL:1,SUP:1,SUB:1,U:1,MARK:1,BDI:1,TSPAN:1,CODE:1 };
+  var SKIP = 'script,style,textarea,input,.sp-lang,.sp-nt,[translate="no"]';
+  var WORD = /[A-Za-z\u00C0-\u024F\u0600-\u06FF]{2}|e\.g\./;
+  var LANG = 'en', REC = new WeakMap(), SEEN = {}, MISS = {};
+  (D.patterns || []).forEach(function (p) { try { p._re = new RegExp(p.re); } catch (e) {} });
+  function norm(s) { return String(s).replace(/\s+/g, ' ').trim(); }
+  function tr(src) {
+    if (LANG === 'en') return null;
+    var t = D[LANG] && D[LANG][src];
+    if (t) return t;
+    var P = D.patterns || [];
+    for (var i = 0; i < P.length; i++) {
+      var m = P[i]._re && P[i]._re.exec(src);
+      if (m && P[i][LANG]) return P[i][LANG].replace(/\$(\d+)/g, function (_, n) { return m[+n] || ''; });
+    }
+    return null;
+  }
+  window.spTr = function (s) { var t = tr(norm(s)); return t ? t.replace(/<[^>]+>/g, '') : s; };
+  function isInline(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling)
+      if (c.nodeType === 1 && (!INLINE[c.tagName.toUpperCase()] || c.matches(SKIP))) return false;
+    return true;
+  }
+  function directText(el) {
+    for (var c = el.firstChild; c; c = c.nextSibling) if (c.nodeType === 3 && WORD.test(c.nodeValue)) return true;
+    return false;
+  }
+  function cur(s) { return s.nodeType === 1 ? s.innerHTML : s.nodeValue; }
+  function put(s, v) { if (s.nodeType === 1) s.innerHTML = v; else s.nodeValue = v; }
+  function handle(s) {
+    var r = REC.get(s), c = cur(s);
+    if (!(r && c === r.wrote)) { r = { en: c, wrote: c }; REC.set(s, r); }
+    var src = norm(r.en), target = r.en;
+    if (WORD.test(src)) {
+      SEEN[src] = 1;
+      if (LANG !== 'en') {
+        var t = tr(src);
+        if (t) {
+          target = s.nodeType === 1 ? t : (r.en.match(/^\s*/)[0] + t + r.en.match(/\s*$/)[0]);
+          delete MISS[src];
+        } else MISS[src] = 1;
+      }
+    }
+    if (c !== target) put(s, target);
+    r.wrote = cur(s);
+  }
+  var ATTRS = ['placeholder', 'alt', 'aria-label', 'title'];
+  function attrs(root) {
+    var els = root.querySelectorAll ? root.querySelectorAll('[placeholder],[alt],[aria-label],[title]') : [];
+    var list = [].slice.call(els); if (root.matches && root.matches('[placeholder],[alt],[aria-label],[title]')) list.push(root);
+    list.forEach(function (el) {
+      if (el.closest && el.closest('.sp-lang,.sp-nt,[translate="no"],script,style')) return;
+      var rec = el.__spa || (el.__spa = {});
+      ATTRS.forEach(function (a) {
+        var v = el.getAttribute(a); if (v == null) return;
+        var r = rec[a];
+        if (!(r && v === r.wrote)) { r = rec[a] = { en: v, wrote: v }; }
+        var src = norm(r.en); if (!WORD.test(src)) return;
+        SEEN[src] = 1;
+        var t = LANG === 'en' ? null : tr(src);
+        if (LANG !== 'en' && !t) MISS[src] = 1;
+        var target = t ? t.replace(/<[^>]+>/g, '') : r.en;
+        if (v !== target) el.setAttribute(a, target);
+        r.wrote = el.getAttribute(a);
+      });
+    });
+  }
+  function walk(root) {
+    if (root.nodeType === 3) { if (WORD.test(root.nodeValue) && !(root.parentNode && root.parentNode.closest && root.parentNode.closest(SKIP))) handle(root); return; }
+    if (root.nodeType !== 1) return;
+    (function w(el) {
+      if (el.matches(SKIP)) return;
+      if (el !== document.body && directText(el) && isInline(el)) { handle(el); return; }
+      for (var c = el.firstChild; c; c = c.nextSibling) {
+        if (c.nodeType === 1) w(c); else if (c.nodeType === 3 && WORD.test(c.nodeValue)) handle(c);
+      }
+    })(root);
+    attrs(root);
+  }
+  var TITLE = { en: document.title, wrote: document.title };
+  function title() {
+    if (document.title !== TITLE.wrote) TITLE = { en: document.title, wrote: document.title };
+    var t = LANG === 'en' ? null : tr(norm(TITLE.en));
+    document.title = t ? t.replace(/<[^>]+>/g, '') : TITLE.en; TITLE.wrote = document.title;
+  }
+  function inl(e) { return e.nodeType === 1 && !!INLINE[e.tagName.toUpperCase()]; }
+  var mo = new MutationObserver(function (muts) {
+    var todo = [];
+    muts.forEach(function (m) {
+      if (m.type === 'childList') { for (var i = 0; i < m.addedNodes.length; i++) todo.push(m.addedNodes[i]); todo.push(m.target); }
+      else todo.push(m.target);
+    });
+    todo.forEach(function (n) {
+      var el = n.nodeType === 1 ? n : n.parentNode;
+      if (!el || el.nodeType !== 1 || !document.body.contains(el)) return;
+      while (el !== document.body && el.parentNode && el.parentNode.nodeType === 1 && inl(el) && inl(el.parentNode)) el = el.parentNode;
+      if (el.parentNode && el.parentNode.nodeType === 1 && inl(el.parentNode) && el.parentNode !== document.body) el = el.parentNode;
+      walk(el);
+    });
+    mo.takeRecords();
+  });
+  var AR = { 'ا':'a','أ':'a','إ':'i','آ':'a','ب':'b','ت':'t','ث':'th','ج':'j','ح':'h','خ':'kh','د':'d','ذ':'dh','ر':'r','ز':'z','س':'s','ش':'sh','ص':'s','ض':'d','ط':'t','ظ':'z','ع':'a','غ':'gh','ف':'f','ق':'q','ك':'k','ل':'l','م':'m','ن':'n','ه':'h','و':'w','ي':'y','ى':'a','ة':'a','ئ':'y','ؤ':'w' };
+  window.spAscii = function (s) {
+    s = String(s); if (s.normalize) s = s.normalize('NFD').replace(/[̀-ًͯ-ٰٟ]/g, '');
+    return s.replace(/[ء-ي]/g, function (c) { return AR[c] !== undefined ? AR[c] : ''; }).replace(/ñ/g, 'n').replace(/Ñ/g, 'N');
+  };
+  window.spSeen = function () { return Object.keys(SEEN); };
+  window.spMissing = function () { return Object.keys(MISS); };
+  window.spLang = function () { return LANG; };
+  window.spSetLang = function (l) {
+    if ((D.langs || ['en']).indexOf(l) < 0) l = 'en';
+    LANG = l; MISS = {};
+    var h = document.documentElement; h.lang = l; h.dir = l === 'ar' ? 'rtl' : 'ltr';
+    mo.disconnect(); walk(document.body); title(); mo.takeRecords();
+    mo.observe(document.body, { childList: true, subtree: true, characterData: true });
+    document.querySelectorAll('.sp-lang button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === l)); });
+    try { localStorage.setItem('sp_lang', l); } catch (e) {}
+    try { var u = new URL(location.href); if (l === 'en') u.searchParams.delete('lang'); else u.searchParams.set('lang', l); history.replaceState(null, '', u.toString()); } catch (e) {}
+    try { document.dispatchEvent(new CustomEvent('splangchange', { detail: l })); } catch (e) {}
+  };
+  var _c = window.confirm, _a = window.alert;
+  window.confirm = function (m) { return _c.call(window, window.spTr(m)); };
+  window.alert = function (m) { return _a.call(window, window.spTr(m)); };
+  document.querySelectorAll('.sp-lang button').forEach(function (b) { b.addEventListener('click', function () { window.spSetLang(b.getAttribute('data-lang')); }); });
+  var start = D['default'] || 'en';
+  try { start = new URL(location.href).searchParams.get('lang') || localStorage.getItem('sp_lang') || start; } catch (e) {}
+  window.spSetLang(start);
+})();
+
+</script>
+</body></html>
